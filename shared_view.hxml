@@ -1,0 +1,8 @@
+-cp src
+-D lua-5.1
+-D luajit
+-D lua-vanilla
+-D addonName=testAddon
+-main Main
+--lua lua/sharednotgenereate.lua
+--no-output

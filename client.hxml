@@ -1,0 +1,12 @@
+-cp src
+-D lua-5.1
+-D luajit
+-D lua-vanilla
+-D client
+-dce full
+-D gamemode=deceptinfect
+-D addonName=deceptinfect
+--macro gmod.macros.InitMacro.init()
+-main Main
+--lua lua/client.lua
+
