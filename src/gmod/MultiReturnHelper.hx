@@ -28,9 +28,9 @@ private extern class MyMultiReturn {
 
 
 
-private class MyMultiReturnTest {
-    public function derka():MultiReturnHelper<MyMultiReturn> {
+// private class MyMultiReturnTest {
+//     public function derka():MultiReturnHelper<MyMultiReturn> {
         
          
-    }
-}
+//     }
+// }

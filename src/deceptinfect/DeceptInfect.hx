@@ -1,19 +1,41 @@
 package deceptinfect;
 
-import lua.TableTools;
 import gmod.libs.MathLib;
 import gmod.types.Vector;
 import gmod.libs.EntsLib;
 import gmod.gclass.Player;
 import gmod.types.Entity;
 using gmod.PairTools;
-using lua.TableTools;
 using gmod.TableTools;
 
 @:build(gmod.macros.GamemodeMacro.build())
 class DeceptInfect extends gmod.hooks.Gm {
     
+    public var currentState:GAME_STATE = WAIT;
+    public var shouldAllowInfection:Bool = false;
+
+    
+
+    
+    
+
     #if server
+
+
+    override function PlayerDeath(victim:Player, inflictor:Entity, attacker:Entity) {
+        
+    }
+
+    override function PlayerInitialSpawn(player:Player, transition:Bool) {
+        new DI_Player(player);
+        switch (currentState) {
+            case PLAY(_):
+                player.KillSilent();
+                GAMEMODE.PlayerSpawnAsSpectator(player);
+            default:
+        }
+
+    }
 
     override function PlayerDeathThink(ply:Player):Bool {
         return super.PlayerDeathThink(ply);
@@ -52,8 +74,13 @@ class DeceptInfect extends gmod.hooks.Gm {
     
 }
 
+
 enum GAME_STATE {
     WAIT;
-    PLAY;
+    PLAY(st:PLAY_STATE);
+}
+
+enum PLAY_STATE {
+    NORMAL;
     EVAC;
 }

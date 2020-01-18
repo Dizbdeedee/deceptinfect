@@ -25,19 +25,24 @@ interface FormComponent {
 
 enum Form {
     INFECTED(a:FormComponent);
-    HUMAN(a:FormComponent);
+    HUMAN(d:FormComponent);
 
 }
 interface CanChangeForm {
     var form:Form;
 }
 
-interface InfectedComponent {
-    var infection:Float;
+// interface InfectionComponent {
+//     var infection:Float;
+//     var rate:Float;
+
+//     public function handleInfection():Void;
+
     
-    var rate:Float;
-}
+// }
 
 interface ContaminationComponent {
 
+
 }
+

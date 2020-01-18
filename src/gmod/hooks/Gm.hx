@@ -9,8 +9,6 @@ package gmod.hooks;
 	 
 **/
 class Gm {
-	
-	public static var x(default,null):Int;
 
     /**
         Executes when a player connects to the server. Called before the player has been assigned a UserID and entity. See the player_connect gameevent for a version of this hook called after the player entity has been created. 

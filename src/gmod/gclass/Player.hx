@@ -4170,7 +4170,7 @@ extern class Player extends Entity {
 		
     **/
     
-    public function SetObserverMode(mode:Float):Void;
+    public function SetObserverMode(mode:OBS_MODE):Void;
     
     
     /**
@@ -4872,4 +4872,36 @@ var a:Vector;
 var b:Vector;
 
 }
+/**
+	Hallo
 
+**/
+@:native("_G")
+extern enum abstract OBS_MODE(Int) {
+	/**
+		Not spectating
+	**/
+	var OBS_MODE_NONE;
+	var OBS_MODE_DEATHCAM;
+	/**
+		TF2-like freezecam
+	**/
+	var OBS_MODE_FREEZECAM;
+	/**
+		 Same as OBS_MODE_CHASE, but you can't rotate the view 
+	**/
+	var OBS_MODE_FIXED;
+	/**
+		First person cam 
+	**/
+	var OBS_MODE_IN_EYE;
+	/**
+		Chase cam, 3rd person cam, free rotation around the spectated target 
+	**/
+	var OBS_MODE_CHASE;
+	/**
+		Free roam/noclip-alike. Does not work from GM:PlayerDeath
+	**/
+	var OBS_MODE_ROAMING;
+
+}

@@ -14,7 +14,7 @@ extern class IRestore {
         Reads next bytes from the restore object as an integer number. 
 		
 		
-		**Returns:** The read integer number.
+		/**Returns:** The read integer number.
 		
 		
     **/

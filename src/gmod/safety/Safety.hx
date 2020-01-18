@@ -18,11 +18,11 @@ class Safety {
 		return !GlobalLib.IsValid(value) ? defaultValue : @:nullSafety(Off) (value : T);
 	}
 
-	static public function valid<T:CanCheckValid>(value:T):Option<T> {
+	static public function valid<T:CanCheckValid>(value:T):ValidObject<T> {
 		if (GlobalLib.IsValid(value)) {
-			return Some(value);
+			return VALID(value);
 		} else {
-			return None;
+			return INVALID;
 		}
 	}
 
@@ -55,4 +55,9 @@ class Safety {
 	}
 
 	
+}
+
+enum ValidObject<T> {
+    INVALID;
+    VALID(ob:T);
 }

@@ -11,7 +11,7 @@ class Main {
     public static function main() {
         var myEnt = EntsLib.GetByIndex(0);
         var ents = EntsLib.GetAll();   
-
+        PlayerLib.GetByID(0).SetObserverMode(OBS_MODE_CHASE);
     }
 }
 
