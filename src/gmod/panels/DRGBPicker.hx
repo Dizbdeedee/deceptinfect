@@ -6,16 +6,13 @@ package gmod.panels;
 	
 	See DColorCube for a color picker which controls brightness and saturation. 
 	
-	 See DColorMixer for a color picker that allows control over hue, saturation, and brightness at once. 
-	
-	 
+	 See DColorMixer for a color picker that allows control over hue, saturation, and brightness at once.
 **/
 extern class DRGBPicker extends DPanel {
     /**
-        Returns the color currently set on the color picker. 
+        Returns the color currently set on the color picker.
 		
-		
-		**Returns:** The color set on the color picker, see Color structure.
+		`**Returns:** The color set on the color picker, see Color structure.
 		
 		___
 		### Lua Examples
@@ -32,17 +29,14 @@ extern class DRGBPicker extends DPanel {
 		**Output:**
 		
 		255 255 255 255
-		
-		
     **/
     
      
-    public function GetRGB():AnyTable;
+    public function GetRGB():Color;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns the color at given position on the internal texture. 
-		
+		Returns the color at given position on the internal texture.
 		
 		Name | Description
 		--- | ---
@@ -55,16 +49,14 @@ extern class DRGBPicker extends DPanel {
 		`a` | Color structure
 		`b` | The X-coordinate clamped to the texture's width.
 		`c` | The Y-coordinate clamped to the texture's height.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetPosColor(x:Float, y:Float):DRGBPickerGetPosColorReturn;
     /**
-        Sets the color stored in the color picker. 
+        Sets the color stored in the color picker.
 		
+		**Note:** This function is meant to be called internally and will not update the position of the color picker line or call DRGBPicker:OnChange
 		
 		Name | Description
 		--- | ---
@@ -122,15 +114,12 @@ extern class DRGBPicker extends DPanel {
 		    
 		end)
 		```
-		
-		
     **/
     
      
-    public function SetRGB(color:AnyTable):Void;
+    public function SetRGB(color:Color):Void;
     /**
-        Function which is called when the cursor is clicked and/or moved on the color picker. Meant to be overridden. 
-		
+        Function which is called when the cursor is clicked and/or moved on the color picker. Meant to be overridden.
 		
 		Name | Description
 		--- | ---
@@ -167,18 +156,16 @@ extern class DRGBPicker extends DPanel {
 		    
 		end
 		```
-		
-		
     **/
     
     @:hook 
-    public function OnChange(col:AnyTable):Void;
+    public function OnChange(col:Color):Void;
     
 }
 
 
 @:multiReturn extern class DRGBPickerGetPosColorReturn {
-var a:AnyTable;
+var a:Color;
 var b:Float;
 var c:Float;
 

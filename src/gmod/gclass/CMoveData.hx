@@ -4,46 +4,39 @@ package gmod.gclass;
 /**
     A class used to store the inputs from CUserCmd and other information related to the current movement simulation, such as velocity, position and so on. 
 	
-	This can only be accessed during GM:SetupMove , GM:Move , GM:PlayerTick and GM:FinishMove. 
-	
-	 
+	This can only be accessed during GM:SetupMove , GM:Move , GM:PlayerTick and GM:FinishMove.
 **/
 extern class CMoveData {
     
     /**
-        Returns whether the key is down or not 
-		
+        Returns whether the key is down or not
 		
 		Name | Description
 		--- | ---
 		`key` | The key to test, see IN_ Enums
 		
 		
-		**Returns:** Is the key down or not
-		
-		
+		`**Returns:** Is the key down or not
     **/
     
-    public function KeyDown(key:Float):Bool;
+    public function KeyDown(key:IN):Bool;
     
     
     /**
-        Returns the vertical speed of the player. ( Z axis of CMoveData:GetVelocity ) 
+        Returns the vertical speed of the player. ( Z axis of CMoveData:GetVelocity )
 		
-		
-		**Returns:** Vertical speed
-		
-		
+		`**Returns:** Vertical speed
     **/
     
     public function GetUpSpeed():Float;
     
     
     /**
-        Gets the players velocity. 
+        Gets the players velocity.
 		
+		**Bug:** BUG This will return Vector(0,0,0) sometimes when walking on props. Issue Tracker: #3413
 		
-		**Returns:** The players velocity
+		`**Returns:** The players velocity
 		
 		___
 		### Lua Examples
@@ -55,16 +48,13 @@ extern class CMoveData {
 		    print( movedata:GetVelocity() )
 		end
 		```
-		
-		
     **/
     
     public function GetVelocity():Vector;
     
     
     /**
-        Sets the player's velocity 
-		
+        Sets the player's velocity
 		
 		Name | Description
 		--- | ---
@@ -81,18 +71,15 @@ extern class CMoveData {
 		    movedata:SetVelocity( VectorRand() * 800 )
 		end
 		```
-		
-		
     **/
     
     public function SetVelocity(velocity:Vector):Void;
     
     
     /**
-        Gets the player's position. 
+        Gets the player's position.
 		
-		
-		**Returns:** The player's position.
+		`**Returns:** The player's position.
 		
 		___
 		### Lua Examples
@@ -104,55 +91,42 @@ extern class CMoveData {
 		    print( movedata:GetOrigin() )
 		end
 		```
-		
-		
     **/
     
     public function GetOrigin():Vector;
     
     
     /**
-        Gets the aim angle. On client is the same as Entity:GetAngles. 
+        Gets the aim angle. On client is the same as Entity:GetAngles.
 		
-		
-		**Returns:** Aiming angle
-		
-		
+		`**Returns:** Aiming angle
     **/
     
     public function GetAngles():Angle;
     
     
     /**
-        Gets the number passed to "impulse" console command 
+        Gets the number passed to "impulse" console command
 		
-		
-		**Returns:** The impulse
-		
-		
+		`**Returns:** The impulse
     **/
     
     public function GetImpulseCommand():Float;
     
     
     /**
-        Sets the pressed buttons on the move data 
-		
+        Sets the pressed buttons on the move data
 		
 		Name | Description
 		--- | ---
 		`buttons` | A number representing which buttons are down, see IN_ Enums
-		
-		
-		
     **/
     
-    public function SetButtons(buttons:Float):Void;
+    public function SetButtons(buttons:IN):Void;
     
     
     /**
-        Sets the players position. 
-		
+        Sets the players position.
 		
 		Name | Description
 		--- | ---
@@ -169,231 +143,179 @@ extern class CMoveData {
 		    movedata:SetOrigin( vector_origin )
 		end
 		```
-		
-		
     **/
     
     public function SetOrigin(pos:Vector):Void;
     
     
     /**
-        Returns whether the key was down or not. Unlike CMoveData:KeyDown, it will return false if CMoveData:KeyPressed is true and it will return true if CMoveData:KeyReleased is true. 
-		
+        Returns whether the key was down or not. Unlike CMoveData:KeyDown, it will return false if CMoveData:KeyPressed is true and it will return true if CMoveData:KeyReleased is true.
 		
 		Name | Description
 		--- | ---
 		`key` | The key to test, seee IN_ Enums
 		
 		
-		**Returns:** Was the key down or not
-		
-		
+		`**Returns:** Was the key down or not
     **/
     
-    public function KeyWasDown(key:Float):Bool;
+    public function KeyWasDown(key:IN):Bool;
     
     
     /**
-        Returns the strafe speed of the player. 
+        Returns the strafe speed of the player.
 		
-		
-		**Returns:** speed
-		
-		
+		`**Returns:** speed
     **/
     
     public function GetSideSpeed():Float;
     
     
     /**
-        Sets the 'old' pressed buttons on the move data. These buttons are used to work out which buttons have been released, which have just been pressed and which are being held down. 
-		
+        Sets the 'old' pressed buttons on the move data. These buttons are used to work out which buttons have been released, which have just been pressed and which are being held down.
 		
 		Name | Description
 		--- | ---
 		`buttons` | A number representing which buttons were down, see IN_ Enums
-		
-		
-		
     **/
     
-    public function SetOldButtons(buttons:Float):Void;
+    public function SetOldButtons(buttons:IN):Void;
     
     
     /**
-        Returns the angle the player is moving at. For more info, see CMoveData:SetMoveAngles. 
+        Returns the angle the player is moving at. For more info, see CMoveData:SetMoveAngles.
 		
-		
-		**Returns:** The move direction
-		
-		
+		`**Returns:** The move direction
     **/
     
     public function GetMoveAngles():Angle;
     
     
     /**
-        Returns the maximum client speed of the player 
+        Returns the maximum client speed of the player
 		
-		
-		**Returns:** The maximum client speed
-		
-		
+		`**Returns:** The maximum client speed
     **/
     
     public function GetMaxClientSpeed():Float;
     
     
     /**
-        Sets the radius that constrains the players movement. It is unknown what this function does as changing its values doesn't affect player movement. 
-		
+        Sets the radius that constrains the players movement. It is unknown what this function does as changing its values doesn't affect player movement.
 		
 		Name | Description
 		--- | ---
 		`radius` | The new constraint radius
-		
-		
-		
     **/
     
     public function SetConstraintRadius(radius:Float):Void;
     
     
     /**
-        Sets players forward speed. 
-		
+        Sets players forward speed.
 		
 		Name | Description
 		--- | ---
 		`speed` | New forward speed
-		
-		
-		
     **/
     
     public function SetForwardSpeed(speed:Float):Void;
     
     
     /**
-        Sets the impulse command. This isn't actually utilised in the engine anywhere. 
-		
+        Sets the impulse command. This isn't actually utilised in the engine anywhere.
 		
 		Name | Description
 		--- | ---
 		`impulse` | The impulse to set
-		
-		
-		
     **/
     
     public function SetImpulseCommand(impulse:Float):Void;
     
     
     /**
-        Sets the serverside move angles, making the movement keys act as if player was facing that direction. 
+        Sets the serverside move angles, making the movement keys act as if player was facing that direction.
 		
+		**Bug:** BUG This does nothing clientside. Issue Tracker: #1181
 		
 		Name | Description
 		--- | ---
 		`dir` | The aim direction.
-		
-		
-		
     **/
     
     public function SetMoveAngles(dir:Angle):Void;
     
     
     /**
-        Gets which buttons are down 
+        Gets which buttons are down
 		
-		
-		**Returns:** An integer representing which buttons are down, see IN_ Enums
-		
-		
+		`**Returns:** An integer representing which buttons are down, see IN_ Enums
     **/
     
-    public function GetButtons():Float;
+    public function GetButtons():IN;
     
     
     /**
-        Sets angles. 
+        Sets angles.
 		
+		**Bug:** BUG This function does nothing. Issue Tracker: #2382
 		
 		Name | Description
 		--- | ---
 		`ang` | The angles.
-		
-		
-		
     **/
     
     public function SetAngles(ang:Angle):Void;
     
     
     /**
-        Sets players strafe speed. 
-		
+        Sets players strafe speed.
 		
 		Name | Description
 		--- | ---
 		`speed` | Strafe speed
-		
-		
-		
     **/
     
     public function SetSideSpeed(speed:Float):Void;
     
     
     /**
-        Sets absolute move angles.( ? ) Doesn't seem to do anything. 
-		
+        Sets absolute move angles.( ? ) Doesn't seem to do anything.
 		
 		Name | Description
 		--- | ---
 		`ang` | New absolute move angles
-		
-		
-		
     **/
     
     public function SetAbsMoveAngles(ang:Angle):Void;
     
     
     /**
-        Sets the maximum speed of the player. This must match with CMoveData:SetMaxClientSpeed both, on server and client. Doesn't seem to be doing anything on it's own, use CMoveData:SetMaxClientSpeed instead. 
-		
+        Sets the maximum speed of the player. This must match with CMoveData:SetMaxClientSpeed both, on server and client. Doesn't seem to be doing anything on it's own, use CMoveData:SetMaxClientSpeed instead.
 		
 		Name | Description
 		--- | ---
 		`maxSpeed` | The new maximum speed
-		
-		
-		
     **/
     
     public function SetMaxSpeed(maxSpeed:Float):Void;
     
     
     /**
-        Sets vertical speed of the player. ( Z axis of CMoveData:SetVelocity ) 
-		
+        Sets vertical speed of the player. ( Z axis of CMoveData:SetVelocity )
 		
 		Name | Description
 		--- | ---
 		`speed` | Vertical speed to set
-		
-		
-		
     **/
     
     public function SetUpSpeed(speed:Float):Void;
     
     
     /**
-        Sets the maximum player speed. Player won't be able to run or sprint faster then this value. This also automatically sets CMoveData:SetMaxSpeed when used in the GM:SetupMove hook. You must set it manually in the GM:Move hook. This must be called on both client and server to avoid prediction errors. This will not reduce speed in air. 
+        Sets the maximum player speed. Player won't be able to run or sprint faster then this value. This also automatically sets CMoveData:SetMaxSpeed when used in the GM:SetupMove hook. You must set it manually in the GM:Move hook. This must be called on both client and server to avoid prediction errors. This will not reduce speed in air.
 		
+		**Note:** Setting this to 0 will not make the player stationary. It won't do anything.
 		
 		Name | Description
 		--- | ---
@@ -421,144 +343,110 @@ extern class CMoveData {
 		    mv:SetMaxClientSpeed( speed )
 		end )
 		```
-		
-		
     **/
     
     public function SetMaxClientSpeed(maxSpeed:Float):Void;
     
     
     /**
-        Returns the maximum speed of the player. 
+        Returns the maximum speed of the player.
 		
-		
-		**Returns:** The maximum speed
-		
-		
+		`**Returns:** The maximum speed
     **/
     
     public function GetMaxSpeed():Float;
     
     
     /**
-        Gets the aim angle. Only works clientside, server returns same as CMoveData:GetAngles. 
+        Gets the aim angle. Only works clientside, server returns same as CMoveData:GetAngles.
 		
-		
-		**Returns:** The aim angle
-		
-		
+		`**Returns:** The aim angle
     **/
     
     public function GetOldAngles():Angle;
     
     
     /**
-        Returns whether the key was released 
-		
+        Returns whether the key was released
 		
 		Name | Description
 		--- | ---
 		`key` | A key to test, see IN_ Enums
 		
 		
-		**Returns:** Was the key released or not.
-		
-		
+		`**Returns:** Was the key released or not.
     **/
     
-    public function KeyReleased(key:Float):Bool;
+    public function KeyReleased(key:IN):Bool;
     
     
     /**
-        Adds keys to the move data, as if player pressed them. 
-		
+        Adds keys to the move data, as if player pressed them.
 		
 		Name | Description
 		--- | ---
 		`keys` | Keys to add, see IN_ Enums
-		
-		
-		
     **/
     
-    public function AddKey(keys:Float):Void;
+    public function AddKey(keys:IN):Void;
     
     
     /**
-        Gets the aim angle. Seems to be same as CMoveData:GetAngles. 
+        Gets the aim angle. Seems to be same as CMoveData:GetAngles.
 		
-		
-		**Returns:** Aiming angle
-		
-		
+		`**Returns:** Aiming angle
     **/
     
     public function GetAbsMoveAngles():Angle;
     
     
     /**
-        Get which buttons were down last frame 
+        Get which buttons were down last frame
 		
-		
-		**Returns:** An integer representing which buttons were down, see IN_ Enums
-		
-		
+		`**Returns:** An integer representing which buttons were down, see IN_ Enums
     **/
     
-    public function GetOldButtons():Float;
+    public function GetOldButtons():IN;
     
     
     /**
-        Returns whether the key was pressed. If you want to check if the key is held down, try CMoveData:KeyDown 
-		
+        Returns whether the key was pressed. If you want to check if the key is held down, try CMoveData:KeyDown
 		
 		Name | Description
 		--- | ---
 		`key` | The key to test, see IN_ Enums
 		
 		
-		**Returns:** Was the key pressed or not.
-		
-		
+		`**Returns:** Was the key pressed or not.
     **/
     
-    public function KeyPressed(key:Float):Bool;
+    public function KeyPressed(key:IN):Bool;
     
     
     /**
-        Returns the players forward speed. 
+        Returns the players forward speed.
 		
-		
-		**Returns:** speed
-		
-		
+		`**Returns:** speed
     **/
     
     public function GetForwardSpeed():Float;
     
     
     /**
-        Sets old aim angles. ( ? ) Doesn't seem to be doing anything. 
-		
+        Sets old aim angles. ( ? ) Doesn't seem to be doing anything.
 		
 		Name | Description
 		--- | ---
 		`aimAng` | The old angles
-		
-		
-		
     **/
     
     public function SetOldAngles(aimAng:Angle):Void;
     
     
     /**
-        Returns the radius that constrains the players movement. 
+        Returns the radius that constrains the players movement.
 		
-		
-		**Returns:** The constraint radius
-		
-		
+		`**Returns:** The constraint radius
     **/
     
     public function GetConstraintRadius():Float;

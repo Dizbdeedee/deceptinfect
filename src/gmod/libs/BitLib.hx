@@ -2,49 +2,40 @@ package gmod.libs;
 
 
 /**
-    The bitwise library contains useful functions for bitwise operations. Make sure you're familiar with Bitwise Operators 
-	
-	
+    The bitwise library contains useful functions for bitwise operations. Make sure you're familiar with Bitwise Operators
 **/
 @:native("bit")extern class BitLib {
     
     /**
-        Returns the bitwise not of the value. 
-		
+        Returns the bitwise not of the value.
 		
 		Name | Description
 		--- | ---
 		`value` | The value to be inverted.
 		
 		
-		**Returns:** bitwiseNot
-		
-		
+		`**Returns:** bitwiseNot
     **/
     
     public static function bnot(value:Float):Float;
     
     
     /**
-        Swaps the byte order. 
-		
+        Swaps the byte order.
 		
 		Name | Description
 		--- | ---
 		`value` | The value to be byte swapped.
 		
 		
-		**Returns:** swapped
-		
-		
+		`**Returns:** swapped
     **/
     
     public static function bswap(value:Float):Float;
     
     
     /**
-        Returns the bitwise xor of all values specified. 
-		
+        Returns the bitwise xor of all values specified.
 		
 		Name | Description
 		--- | ---
@@ -52,17 +43,14 @@ package gmod.libs;
 		`otherValues` | Values bit xor with. Optional.
 		
 		
-		**Returns:** bitwiseXOr
-		
-		
+		`**Returns:** bitwiseXOr
     **/
     
     public static function bxor(value:Float, ?otherValues:Float):Float;
     
     
     /**
-        Returns the right shifted value. 
-		
+        Returns the right shifted value.
 		
 		Name | Description
 		--- | ---
@@ -70,34 +58,28 @@ package gmod.libs;
 		`shiftCount` | Amounts of bits to shift right by.
 		
 		
-		**Returns:** shiftedValue
-		
-		
+		`**Returns:** shiftedValue
     **/
     
     public static function rshift(value:Float, shiftCount:Float):Float;
     
     
     /**
-        Normalizes the specified value and clamps it in the range of a signed 32bit integer. 
-		
+        Normalizes the specified value and clamps it in the range of a signed 32bit integer.
 		
 		Name | Description
 		--- | ---
 		`value` | The value to be normalized.
 		
 		
-		**Returns:** swapped
-		
-		
+		`**Returns:** swapped
     **/
     
     public static function tobit(value:Float):Float;
     
     
     /**
-        Returns the arithmetically shifted value. 
-		
+        Returns the arithmetically shifted value.
 		
 		Name | Description
 		--- | ---
@@ -105,17 +87,14 @@ package gmod.libs;
 		`shiftCount` | Amounts of bits to shift.
 		
 		
-		**Returns:** shiftedValue
-		
-		
+		`**Returns:** shiftedValue
     **/
     
     public static function arshift(value:Float, shiftCount:Float):Float;
     
     
     /**
-        Returns the left shifted value. 
-		
+        Returns the left shifted value.
 		
 		Name | Description
 		--- | ---
@@ -123,17 +102,14 @@ package gmod.libs;
 		`shiftCount` | Amounts of bits to shift left by.
 		
 		
-		**Returns:** shiftedValue
-		
-		
+		`**Returns:** shiftedValue
     **/
     
     public static function lshift(value:Float, shiftCount:Float):Float;
     
     
     /**
-        Returns the left rotated value. 
-		
+        Returns the left rotated value.
 		
 		Name | Description
 		--- | ---
@@ -141,17 +117,14 @@ package gmod.libs;
 		`shiftCount` | Amounts of bits to rotate left by.
 		
 		
-		**Returns:** shiftedValue
-		
-		
+		`**Returns:** shiftedValue
     **/
     
     public static function rol(value:Float, shiftCount:Float):Float;
     
     
     /**
-        Returns the hexadecimal representation of the number with the specified digits. 
-		
+        Returns the hexadecimal representation of the number with the specified digits.
 		
 		Name | Description
 		--- | ---
@@ -159,17 +132,14 @@ package gmod.libs;
 		`digits` | The number of digits. Optional
 		
 		
-		**Returns:** hexString
-		
-		
+		`**Returns:** hexString
     **/
     
     public static function tohex(value:Float, ?digits:Float):String;
     
     
     /**
-        Returns the right rotated value. 
-		
+        Returns the right rotated value.
 		
 		Name | Description
 		--- | ---
@@ -177,17 +147,14 @@ package gmod.libs;
 		`shiftCount` | Amounts of bits to rotate right by.
 		
 		
-		**Returns:** shiftedValue
-		
-		
+		`**Returns:** shiftedValue
     **/
     
     public static function ror(value:Float, shiftCount:Float):Float;
     
     
     /**
-        Performs the bitwise "and" for all values specified. 
-		
+        Performs the bitwise "and" for all values specified.
 		
 		Name | Description
 		--- | ---
@@ -195,7 +162,7 @@ package gmod.libs;
 		`otherValues` | Values bit to perform bitwise "and" with. Optional.
 		
 		
-		**Returns:** Result of bitwise "and" operation.
+		`**Returns:** Result of bitwise "and" operation.
 		
 		___
 		### Lua Examples
@@ -210,16 +177,13 @@ package gmod.libs;
 		**Output:**
 		
 		130 (10000010 in binary form)
-		
-		
     **/
     
     public static function band(value:Float, ?otherValues:Float):Float;
     
     
     /**
-        Returns the bitwise OR of all values specified. 
-		
+        Returns the bitwise OR of all values specified.
 		
 		Name | Description
 		--- | ---
@@ -227,7 +191,7 @@ package gmod.libs;
 		`...` | Extra values to be evaluated. (must all be numbers)
 		
 		
-		**Returns:** The bitwise OR result between all numbers.
+		`**Returns:** The bitwise OR result between all numbers.
 		
 		___
 		### Lua Examples
@@ -251,8 +215,6 @@ package gmod.libs;
 		```lua 
 		NPC:CapabilitiesAdd( bit.bor( CAP_MOVE_GROUND, CAP_ANIMATEDFACE, CAP_TURN_HEAD ) )
 		```
-		
-		
     **/
     
     public static function bor(value1:Float, vargs:Rest<Dynamic>):Float;

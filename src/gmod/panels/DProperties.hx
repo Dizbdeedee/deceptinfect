@@ -2,46 +2,37 @@ package gmod.panels;
 #if client
 
 /**
-    A grid for editing the properties of something using names and values. Properties can be categorized and strongly typed. 
-	
-	
+    A grid for editing the properties of something using names and values. Properties can be categorized and strongly typed.
 **/
 extern class DProperties extends Panel {
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Returns (or creates) a category of properties. 
 		
-		See DProperties:CreateRow for adding actual properties. 
+		See DProperties:CreateRow for adding actual properties.
 		
-		 
 		Name | Description
 		--- | ---
 		`name` | Name of the category
 		`create` | Create a new category if it doesn't exist.
 		
 		
-		**Returns:** An internal panel.
-		
-		
+		`**Returns:** An internal panel.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetCategory(name:String, create:Bool):Panel;
     /**
-        Returns the DScrollPanel all the properties panels are attached to. 
+        Returns the DScrollPanel all the properties panels are attached to.
 		
-		
-		**Returns:** A DScrollPanel canvas
-		
-		
+		`**Returns:** A DScrollPanel canvas
     **/
     
      
     public function GetCanvas():Panel;
     /**
-        Creates a row in the properties panel. 
-		
+        Creates a row in the properties panel.
 		
 		Name | Description
 		--- | ---
@@ -49,9 +40,7 @@ extern class DProperties extends Panel {
 		`name` | The label of this row
 		
 		
-		**Returns:** An internal Row panel.
-		
-		
+		`**Returns:** An internal Row panel.
     **/
     
      

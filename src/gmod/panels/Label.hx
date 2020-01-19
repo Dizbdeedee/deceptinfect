@@ -2,36 +2,28 @@ package gmod.panels;
 #if client
 
 /**
-    A basic label or "single line text area" that is non-editable. 
-	
-	
+    A basic label or "single line text area" that is non-editable.
 **/
 extern class Label extends Panel {
     /**
-        Sets the alignment of the contents. 
-		
+        Sets the alignment of the contents.
 		
 		Name | Description
 		--- | ---
 		`alignment` | The direction of the content, based on the number pad. 7: top-left 8: top-center 9: top-right 4: middle-left 5: center 6: middle-right 1: bottom-left 2: bottom-center 3: bottom-right
-		
-		
-		
     **/
     
      
     public function SetContentAlignment(alignment:Float):Void;
     /**
-        Gets the size of the text within a Label derived panel. 
+        Gets the size of the text within a Label derived panel.
 		
+		**Bug:** BUG This can return 0 incorrectly. Issue Tracker: #2576
 		
 		Name | Description
 		--- | ---
 		`a` | The width of the text in the DLabel.
 		`b` | The height of the text in the DLabel.
-		
-		
-		
     **/
     
      
@@ -39,9 +31,8 @@ extern class Label extends Panel {
     /**
         Gets the size of the content/children within a panel object. 
 		
-		Only works with Label derived panels by default such as DLabel. Will also work on any panel that manually implements this method. 
+		Only works with Label derived panels by default such as DLabel. Will also work on any panel that manually implements this method.
 		
-		 
 		Name | Description
 		--- | ---
 		`a` | The content width of the object.
@@ -76,15 +67,12 @@ extern class Label extends Panel {
 		txt:SizeToContentsX( 5 ) -- Must be called after setting the text
 		txt:SizeToContentsY( 5 ) -- These two functions will not have effect on a normal DTextEntry
 		```
-		
-		
     **/
     
      
     public function GetContentSize():LabelGetContentSizeReturn;
     /**
-        Sets whether text wrapping should be enabled or disabled on Label and DLabel panels. Use DLabel:SetAutoStretchVertical to automatically correct vertical size; Panel:SizeToContents will not set the correct height. 
-		
+        Sets whether text wrapping should be enabled or disabled on Label and DLabel panels. Use DLabel:SetAutoStretchVertical to automatically correct vertical size; Panel:SizeToContents will not set the correct height.
 		
 		Name | Description
 		--- | ---
@@ -121,38 +109,28 @@ extern class Label extends Panel {
 		
 		lbl_wrap:SetWrap(true)
 		```
-		
-		
     **/
     
      
     public function SetWrap(wrap:Bool):Void;
     /**
-        Sets the left and top text margins of a text-based panel object, such as a DButton or DLabel. 
-		
+        Sets the left and top text margins of a text-based panel object, such as a DButton or DLabel.
 		
 		Name | Description
 		--- | ---
 		`insetX` | The left margin for the text, in pixels. This will only affect centered text if the margin is greater than its x-coordinate.
 		`insetY` | The top margin for the text, in pixels.
-		
-		
-		
     **/
     
      
     public function SetTextInset(insetX:Float, insetY:Float):Void;
     /**
-        Gets the left and top text margins of a text-based panel object, such as a DButton or DLabel. This is set with Panel:SetTextInset. 
-		
+        Gets the left and top text margins of a text-based panel object, such as a DButton or DLabel. This is set with Panel:SetTextInset.
 		
 		Name | Description
 		--- | ---
 		`a` | The left margin of the text, in pixels.
 		`b` | The top margin of the text, in pixels.
-		
-		
-		
     **/
     
      
@@ -160,9 +138,8 @@ extern class Label extends Panel {
     /**
         Sets the font used to render this panel's text. 
 		
-		To retrieve the font used by a panel, call Panel:GetFont. 
+		To retrieve the font used by a panel, call Panel:GetFont.
 		
-		 
 		Name | Description
 		--- | ---
 		`fontName` | The name of the font. See here for a list of existing fonts. Alternatively, use surface. CreateFont to create your own custom font.
@@ -196,30 +173,25 @@ extern class Label extends Panel {
 		    
 		end
 		```
-		
-		
     **/
     
      
     public function SetFontInternal(fontName:String):Void;
     /**
-        Adds a shadow falling to the bottom right corner of the panel's text. This has no effect on panels that do not derive from Label. 
-		
+        Adds a shadow falling to the bottom right corner of the panel's text. This has no effect on panels that do not derive from Label.
 		
 		Name | Description
 		--- | ---
 		`distance` | The distance of the shadow from the panel.
 		`Color` | The color of the shadow. Uses the Color structure.
-		
-		
-		
     **/
     
      
-    public function SetExpensiveShadow(distance:Float, Color:AnyTable):Void;
+    public function SetExpensiveShadow(distance:Float, Color:Color):Void;
     /**
-        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton. 
+        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
+		**Warning:** When used on a Label or its derivatives ( DLabel and DButton ), it will automatically call Panel:InvalidateLayout, meaning that you should avoid running this function every frame on these panels to avoid unnecessary performance loss.
 		
 		Name | Description
 		--- | ---
@@ -245,8 +217,6 @@ extern class Label extends Panel {
 		-- Set the text to the message you get when VAC banned
 		richtext:SetText("#VAC_ConnectionRefusedDetail")
 		```
-		
-		
     **/
     
      

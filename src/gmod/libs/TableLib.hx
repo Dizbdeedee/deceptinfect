@@ -6,22 +6,19 @@ package gmod.libs;
 	
 	The table library is a standard Lua library which provides functions to manipulate tables. In Garry's Mod there are several extra useful functions added to this library. 
 	
-	 This category lists the functions available in the table library. 
-	
-	 
+	 This category lists the functions available in the table library.
 **/
 @:native("table")extern class TableLib {
     
     /**
-        Returns a key of the supplied table with the highest number value. 
-		
+        Returns a key of the supplied table with the highest number value.
 		
 		Name | Description
 		--- | ---
 		`inputTable` | The table to search in.
 		
 		
-		**Returns:** winningKey
+		`**Returns:** winningKey
 		
 		___
 		### Lua Examples
@@ -46,16 +43,13 @@ package gmod.libs;
 		**Output:**
 		
 		banana
-		
-		
     **/
     
-    public static function GetWinningKey(inputTable:AnyTable):Any;
+    public static function GetWinningKey(inputTable:AnyTable):Dynamic;
     
     
     /**
-        Inserts a value in to the given table even if the table is non-existent 
-		
+        Inserts a value in to the given table even if the table is non-existent
 		
 		Name | Description
 		--- | ---
@@ -63,79 +57,65 @@ package gmod.libs;
 		`value` | Value to insert
 		
 		
-		**Returns:** The supplied or created table
-		
-		
+		`**Returns:** The supplied or created table
     **/
     
-    public static function ForceInsert(?tab:AnyTable, value:Any):AnyTable;
+    public static function ForceInsert(?tab:AnyTable, value:Dynamic):AnyTable;
     
     
     /**
-        Converts a table that has been sanitised with table.Sanitise back to its original form 
-		
+        Converts a table that has been sanitised with table.Sanitise back to its original form
 		
 		Name | Description
 		--- | ---
 		`tbl` | Table to be de-sanitised
 		
 		
-		**Returns:** De-sanitised table
-		
-		
+		`**Returns:** De-sanitised table
     **/
     
     public static function DeSanitise(tbl:AnyTable):AnyTable;
     
     
     /**
-        ***Deprecated:**   Instead, index the table with a key of 1. Non-numerically indexed tables are not ordered and do not have a first key.
+        ***Deprecated:** Instead, index the table with a key of 1. Non-numerically indexed tables are not ordered and do not have a first key.
 		
-		Returns the first value found in the given table 
-		
+		Returns the first value found in the given table
 		
 		Name | Description
 		--- | ---
 		`tab` | Table to retrieve value from
 		
 		
-		**Returns:** Value
-		
-		
+		`**Returns:** Value
     **/
-    @:deprecated
-    public static function GetFirstValue(tab:AnyTable):Any;
+    @:deprecated("Instead, index the table with a key of 1. Non-numerically indexed tables are not ordered and do not have a first key.")
+    public static function GetFirstValue(tab:AnyTable):Dynamic;
     
     
     /**
-        Sorts a table in reverse order from table.sort 
-		
+        Sorts a table in reverse order from table.sort
 		
 		Name | Description
 		--- | ---
 		`tbl` | The table to sort in descending order.
 		
 		
-		**Returns:** sorted
-		
-		
+		`**Returns:** sorted
     **/
     
     public static function SortDesc(tbl:AnyTable):AnyTable;
     
     
     /**
-        Returns a copy of the input table with all string keys converted to be lowercase recursively 
-		
+        Returns a copy of the input table with all string keys converted to be lowercase recursively
 		
 		Name | Description
 		--- | ---
 		`tbl` | Table to convert
 		
 		
-		**Returns:** New table
-		
-		
+		`**Returns:** New table
     **/
     
     public static function LowerKeyNames(tbl:AnyTable):AnyTable;
@@ -144,16 +124,15 @@ package gmod.libs;
     /**
         Adds the contents from one table into another. The target table will be modified. 
 		
-		See also table.Inherit and table.Merge. 
+		See also table.Inherit and table.Merge.
 		
-		 
 		Name | Description
 		--- | ---
 		`target` | The table to insert the new values into.
 		`source` | The table to retrieve the values from.
 		
 		
-		**Returns:** The target table.
+		`**Returns:** The target table.
 		
 		___
 		### Lua Examples
@@ -169,16 +148,17 @@ package gmod.libs;
 		**Output:**
 		
 		One Two Three Four Four Five Six
-		
-		
     **/
     
     public static function Add(target:AnyTable, source:AnyTable):AnyTable;
     
     
     /**
-        Checks if a table has a value. 
+        Checks if a table has a value.
 		
+		**Warning:** This function is very inefficient for large tables (O(n)) and should probably not be called in things that run each frame. Instead, consider a table structure such as example 2 below.
+		
+		**Note:** For optimization, functions that look for a value by sorting the table should never be needed if you work on a table that you built yourself.
 		
 		Name | Description
 		--- | ---
@@ -186,7 +166,7 @@ package gmod.libs;
 		`value` | Value to search for
 		
 		
-		**Returns:** Returns true if the table has that value, false otherwise
+		`**Returns:** Returns true if the table has that value, false otherwise
 		
 		___
 		### Lua Examples
@@ -211,25 +191,22 @@ package gmod.libs;
 		**Output:**
 		
 		nil true
-		
-		
     **/
     
-    public static function HasValue(tbl:AnyTable, value:Any):Bool;
+    public static function HasValue(tbl:AnyTable, value:Dynamic):Bool;
     
     
     /**
         Counts the amount of keys in a table. This should only be used when a table is not numerically and sequentially indexed. For those tables, consider the length (#) operator. 
 		
-		If you only want to test if the table is empty or not, use table.IsEmpty instead as it is a lot faster. 
+		If you only want to test if the table is empty or not, use table.IsEmpty instead as it is a lot faster.
 		
-		 
 		Name | Description
 		--- | ---
 		`tbl` | The table to count the keys of.
 		
 		
-		**Returns:** The number of keyvalue pairs. This includes non-numeric and non-sequential keys, unlike the length ( #) operator.
+		`**Returns:** The number of keyvalue pairs. This includes non-numeric and non-sequential keys, unlike the length ( #) operator.
 		
 		___
 		### Lua Examples
@@ -260,16 +237,13 @@ package gmod.libs;
 		-- the new value is non sequential ( there is nothing at index 4 )
 		print( table.Count( Table2 ), #Table2 )
 		```
-		
-		
     **/
     
     public static function Count(tbl:AnyTable):Float;
     
     
     /**
-        Sorts a table by a named member 
-		
+        Sorts a table by a named member
 		
 		Name | Description
 		--- | ---
@@ -298,23 +272,20 @@ package gmod.libs;
 		**Output:**
 		
 		Jill Bill Phil
-		
-		
     **/
     
-    public static function SortByMember(tab:AnyTable, memberKey:Any, ?ascending:Bool):Void;
+    public static function SortByMember(tab:AnyTable, memberKey:Dynamic, ?ascending:Bool):Void;
     
     
     /**
-        Returns the highest numerical key. 
-		
+        Returns the highest numerical key.
 		
 		Name | Description
 		--- | ---
 		`tbl` | The table to search.
 		
 		
-		**Returns:** The highest numerical key.
+		`**Returns:** The highest numerical key.
 		
 		___
 		### Lua Examples
@@ -338,45 +309,41 @@ package gmod.libs;
 		2
 		42
 		 Whereas the length operator ( #) returns the highest sequential index, this returns the value of the highest numeric index.
-		
-		
     **/
     
     public static function maxn(tbl:AnyTable):Float;
     
     
     /**
-        ***Deprecated:**   Instead, use the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
+        ***Deprecated:** Instead, use the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
 		
-		Returns the last key found in the given table 
-		
+		Returns the last key found in the given table
 		
 		Name | Description
 		--- | ---
 		`tab` | Table to retrieve key from
 		
 		
-		**Returns:** Key
-		
-		
+		`**Returns:** Key
     **/
-    @:deprecated
-    public static function GetLastKey(tab:AnyTable):Any;
+    @:deprecated("Instead, use the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.")
+    public static function GetLastKey(tab:AnyTable):Dynamic;
     
     
     /**
         Copies any missing data from base to target, and sets the target's BaseClass member to the base table's pointer. 
 		
-		See table.Merge, which overrides existing values and doesn't add a BaseClass member. See also table.Add, which simply adds values of one table to another. 
+		See table.Merge, which overrides existing values and doesn't add a BaseClass member. See also table.Add, which simply adds values of one table to another.
 		
-		 
+		**Bug:** BUG Sub-tables aren't inherited. The target's table value will take priority. Pull Request: #1304
+		
 		Name | Description
 		--- | ---
 		`target` | Table to copy data to
 		`base` | Table to copy data from
 		
 		
-		**Returns:** Target
+		`**Returns:** Target
 		
 		___
 		### Lua Examples
@@ -389,23 +356,20 @@ package gmod.libs;
 		table.Inherit( table1, table2 )
 		PrintTable( table1 )
 		```
-		
-		
     **/
     
     public static function Inherit(target:AnyTable, base:AnyTable):AnyTable;
     
     
     /**
-        Returns all keys of a table. 
-		
+        Returns all keys of a table.
 		
 		Name | Description
 		--- | ---
 		`tabl` | The table to get keys of
 		
 		
-		**Returns:** Table of keys
+		`**Returns:** Table of keys
 		
 		___
 		### Lua Examples
@@ -423,23 +387,20 @@ package gmod.libs;
 		
 		1	=	one
 		2	=	two
-		
-		
     **/
     
     public static function GetKeys(tabl:AnyTable):AnyTable;
     
     
     /**
-        Converts Vectors, Angles and booleans to be able to be converted to and from key-values. table.DeSanitise does the opposite 
-		
+        Converts Vectors, Angles and booleans to be able to be converted to and from key-values. table.DeSanitise does the opposite
 		
 		Name | Description
 		--- | ---
 		`tab` | Table to sanitise
 		
 		
-		**Returns:** Sanitised table
+		`**Returns:** Sanitised table
 		
 		___
 		### Lua Examples
@@ -451,23 +412,20 @@ package gmod.libs;
 		
 		PrintTable( table.Sanitise( table1 ) )
 		```
-		
-		
     **/
     
     public static function Sanitise(tab:AnyTable):AnyTable;
     
     
     /**
-        Returns a reversed copy of a sequential table. Any non-sequential and non-numeric keyvalue pairs will not be copied. 
-		
+        Returns a reversed copy of a sequential table. Any non-sequential and non-numeric keyvalue pairs will not be copied.
 		
 		Name | Description
 		--- | ---
 		`tbl` | Table to reverse.
 		
 		
-		**Returns:** A reversed copy of the table.
+		`**Returns:** A reversed copy of the table.
 		
 		___
 		### Lua Examples
@@ -492,16 +450,15 @@ package gmod.libs;
 		1	=	Three
 		2	=	Two
 		3	=	One
-		
-		
     **/
     
     public static function Reverse(tbl:AnyTable):AnyTable;
     
     
     /**
-        Returns a random value from the supplied table. 
+        Returns a random value from the supplied table.
 		
+		**Note:** This function iterates over the given table twice, therefore with sequential tables you should instead use following: mytable[ math.random( #mytable ) ]
 		
 		Name | Description
 		--- | ---
@@ -539,18 +496,15 @@ package gmod.libs;
 		**Output:**
 		
 		I think the best website ever is google.com.
-		
-		
     **/
     
     public static function Random(haystack:AnyTable):TableLibRandomReturn;
     
     
     /**
-        ***Deprecated:**   Instead, iterate your table with ipairs, storing the previous value and checking for the target. Non-numerically indexed tables are not ordered.
+        ***Deprecated:** Instead, iterate your table with ipairs, storing the previous value and checking for the target. Non-numerically indexed tables are not ordered.
 		
-		Returns the value positioned before the supplied value in a table. If it isn't found then the last element in the table is returned 
-		
+		Returns the value positioned before the supplied value in a table. If it isn't found then the last element in the table is returned
 		
 		Name | Description
 		--- | ---
@@ -558,7 +512,7 @@ package gmod.libs;
 		`value` | Value to return element before
 		
 		
-		**Returns:** Found element
+		`**Returns:** Found element
 		
 		___
 		### Lua Examples
@@ -573,26 +527,23 @@ package gmod.libs;
 		**Output:**
 		
 		a in console
-		
-		
     **/
-    @:deprecated
-    public static function FindPrev(tbl:AnyTable, value:Any):Any;
+    @:deprecated("Instead, iterate your table with ipairs, storing the previous value and checking for the target. Non-numerically indexed tables are not ordered.")
+    public static function FindPrev(tbl:AnyTable, value:Dynamic):Dynamic;
     
     
     /**
         Returns a list of keys sorted based on values of those keys. 
 		
-		For normal sorting see table.sort. 
+		For normal sorting see table.sort.
 		
-		 
 		Name | Description
 		--- | ---
 		`tab` | Table to sort. All values of this table must be of same type.
 		`descending` | Should the order be descending?
 		
 		
-		**Returns:** A table of keys sorted by values from supplied table.
+		`**Returns:** A table of keys sorted by values from supplied table.
 		
 		___
 		### Lua Examples
@@ -615,23 +566,20 @@ package gmod.libs;
 		3 = h 1 = h
 		2 = x
 		3 = a
-		
-		
     **/
     
     public static function SortByKey(tab:AnyTable, ?descending:Bool):AnyTable;
     
     
     /**
-        Collapses a table with keyvalue structure 
-		
+        Collapses a table with keyvalue structure
 		
 		Name | Description
 		--- | ---
 		`input` | Input table
 		
 		
-		**Returns:** Output table
+		`**Returns:** Output table
 		
 		___
 		### Lua Examples
@@ -652,16 +600,13 @@ package gmod.libs;
 			[ 123 ] = 1345,
 			[ 1345 ] = "myvalue1",
 		}
-		
-		
     **/
     
     public static function CollapseKeyValue(input:AnyTable):AnyTable;
     
     
     /**
-        Concatenates the contents of a table to a string. 
-		
+        Concatenates the contents of a table to a string.
 		
 		Name | Description
 		--- | ---
@@ -671,7 +616,7 @@ package gmod.libs;
 		`endPos` | The key to end at
 		
 		
-		**Returns:** Concatenated values
+		`**Returns:** Concatenated values
 		
 		___
 		### Lua Examples
@@ -689,35 +634,29 @@ package gmod.libs;
 		Asimpletable.concattest
 		A simple table.concat test
 		table.concat test
-		
-		
     **/
     
     public static function concat(tbl:AnyTable, ?concatenator:String, ?startPos:Float, ?endPos:Float):String;
     
     
     /**
-        Returns whether or not the table's keys are sequential 
-		
+        Returns whether or not the table's keys are sequential
 		
 		Name | Description
 		--- | ---
 		`tab` | Table to check
 		
 		
-		**Returns:** Is sequential
-		
-		
+		`**Returns:** Is sequential
     **/
     
     public static function IsSequential(tab:AnyTable):Bool;
     
     
     /**
-        ***Deprecated:**   Instead, iterate the table using ipairs or increment from the previous index using next. Non-numerically indexed tables are not ordered.
+        ***Deprecated:** Instead, iterate the table using ipairs or increment from the previous index using next. Non-numerically indexed tables are not ordered.
 		
-		Returns the value positioned after the supplied value in a table. If it isn't found then the first element in the table is returned 
-		
+		Returns the value positioned after the supplied value in a table. If it isn't found then the first element in the table is returned
 		
 		Name | Description
 		--- | ---
@@ -725,7 +664,7 @@ package gmod.libs;
 		`value` | Value to return element after
 		
 		
-		**Returns:** Found element
+		`**Returns:** Found element
 		
 		___
 		### Lua Examples
@@ -740,32 +679,27 @@ package gmod.libs;
 		**Output:**
 		
 		c in console
-		
-		
     **/
-    @:deprecated
-    public static function FindNext(tbl:AnyTable, value:Any):Any;
+    @:deprecated("Instead, iterate the table using ipairs or increment from the previous index using next. Non-numerically indexed tables are not ordered.")
+    public static function FindNext(tbl:AnyTable, value:Dynamic):Dynamic;
     
     
     /**
-        ***Deprecated:**   You should use pairs() instead.
+        ***Deprecated:** You should use pairs() instead.
 		
-		Iterates over a table and calls the given function for each key and value found. Unlike . , this ignores the value returned by the function.     
+		Iterates over a table and calls the given function for each key and value found. Unlike [table](https://wiki.garrysmod.com/page/Category:table). [foreach](https://wiki.garrysmod.com/page/table/foreach), this ignores the value returned by the function.
+		
 		Name | Description
 		--- | ---
 		`tab` | Table to iterate over.
 		`callback` | Function to call for every key-value pair. Arguments passed are: any key any value
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should use pairs() instead.")
     public static function ForEach(tab:AnyTable, callback:Function):Void;
     
     
     /**
-        Removes the first instance of a given value from the specified table with table.remove, then returns the key that the value was found at. 
-		
+        Removes the first instance of a given value from the specified table with table.remove, then returns the key that the value was found at.
 		
 		Name | Description
 		--- | ---
@@ -773,17 +707,14 @@ package gmod.libs;
 		`val` | The value to find within the table.
 		
 		
-		**Returns:** The key at which the value was found, or false if the value was not found.
-		
-		
+		`**Returns:** The key at which the value was found, or false if the value was not found.
     **/
     
-    public static function RemoveByValue(tbl:AnyTable, val:Any):Any;
+    public static function RemoveByValue(tbl:AnyTable, val:Dynamic):Dynamic;
     
     
     /**
-        Removes all values from a table. 
-		
+        Removes all values from a table.
 		
 		Name | Description
 		--- | ---
@@ -803,53 +734,43 @@ package gmod.libs;
 		**Output:**
 		
 		0
-		
-		
     **/
     
     public static function Empty(tbl:AnyTable):Void;
     
     
     /**
-        ***Deprecated:**   This was deprecated in Lua 5.1 and removed in 5.2. You should use ipairs() instead.
+        ***Deprecated:** This was deprecated in Lua 5.1 and removed in 5.2. You should use ipairs() instead.
 		
-		Iterates for each numeric index in the table in order. This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see here. You should use ipairs() instead. 
-		
+		Iterates for each numeric index in the table in order. This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see here. You should use ipairs() instead.
 		
 		Name | Description
 		--- | ---
 		`table` | The table to iterate over.
 		`func` | The function to run for each index.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("This was deprecated in Lua 5.1 and removed in 5.2. You should use ipairs() instead.")
     public static function foreachi(table:AnyTable, func:Function):Void;
     
     
     /**
-        ***Deprecated:**   Instead, expect the first key to be 1. Non-numerically indexed tables are not ordered and do not have a first key.
+        ***Deprecated:** Instead, expect the first key to be 1. Non-numerically indexed tables are not ordered and do not have a first key.
 		
-		Returns the first key found in the given table 
-		
+		Returns the first key found in the given table
 		
 		Name | Description
 		--- | ---
 		`tab` | Table to retrieve key from
 		
 		
-		**Returns:** Key
-		
-		
+		`**Returns:** Key
     **/
-    @:deprecated
-    public static function GetFirstKey(tab:AnyTable):Any;
+    @:deprecated("Instead, expect the first key to be 1. Non-numerically indexed tables are not ordered and do not have a first key.")
+    public static function GetFirstKey(tab:AnyTable):Dynamic;
     
     
     /**
-        Returns the first key found to be containing the supplied value 
-		
+        Returns the first key found to be containing the supplied value
 		
 		Name | Description
 		--- | ---
@@ -857,17 +778,14 @@ package gmod.libs;
 		`value` | Value to search for
 		
 		
-		**Returns:** Key
-		
-		
+		`**Returns:** Key
     **/
     
-    public static function KeyFromValue(tab:AnyTable, value:Any):Any;
+    public static function KeyFromValue(tab:AnyTable, value:Dynamic):Dynamic;
     
     
     /**
-        Removes a value from a table and shifts any other values down to fill the gap. 
-		
+        Removes a value from a table and shifts any other values down to fill the gap.
 		
 		Name | Description
 		--- | ---
@@ -875,7 +793,7 @@ package gmod.libs;
 		`index` | The index of the value to remove.
 		
 		
-		**Returns:** The value that was removed.
+		`**Returns:** The value that was removed.
 		
 		___
 		### Lua Examples
@@ -888,45 +806,39 @@ package gmod.libs;
 		print( table.remove( sentence, 2 ) )
 		PrintTable( sentence )
 		```
-		
-		
     **/
     
-    public static function remove(tbl:AnyTable, ?index:Float):Any;
+    public static function remove(tbl:AnyTable, ?index:Float):Dynamic;
     
     
     /**
-        ***Deprecated:**   Instead, index the table with the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
+        ***Deprecated:** Instead, index the table with the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.
 		
-		Returns the last value found in the given table 
-		
+		Returns the last value found in the given table
 		
 		Name | Description
 		--- | ---
 		`tab` | Table to retrieve value from
 		
 		
-		**Returns:** Value
-		
-		
+		`**Returns:** Value
     **/
-    @:deprecated
-    public static function GetLastValue(tab:AnyTable):Any;
+    @:deprecated("Instead, index the table with the result of the length (#) operator, ensuring it is not zero. Non-numerically indexed tables are not ordered and do not have a last key.")
+    public static function GetLastValue(tab:AnyTable):Dynamic;
     
     
     /**
         Merges the contents of the second table with the content in the first one. 
 		
-		See table.Inherit, which doesn't override existing values. See also table.Add, which simply adds values of one table to another. 
+		See table.Inherit, which doesn't override existing values. See also table.Add, which simply adds values of one table to another.
 		
-		 
 		Name | Description
 		--- | ---
 		`destination` | The table you want the source table to merge with
 		`source` | The table you want to merge with the destination table
 		
 		
-		**Returns:** Destination table
+		`**Returns:** Destination table
 		
 		___
 		### Lua Examples
@@ -939,16 +851,13 @@ package gmod.libs;
 		table.Merge( destination, source )
 		PrintTable( destination )
 		```
-		
-		
     **/
     
     public static function Merge(destination:AnyTable, source:AnyTable):AnyTable;
     
     
     /**
-        Empties the target table, and merges all values from the source table into it. 
-		
+        Empties the target table, and merges all values from the source table into it.
 		
 		Name | Description
 		--- | ---
@@ -970,16 +879,13 @@ package gmod.libs;
 		**Output:**
 		
 		1 = Numeric keys 2 = Table 2
-		
-		
     **/
     
     public static function CopyFromTo(source:AnyTable, target:AnyTable):Void;
     
     
     /**
-        Inserts a value into a table at the end of the table or at the given position. 
-		
+        Inserts a value into a table at the end of the table or at the given position.
 		
 		Name | Description
 		--- | ---
@@ -988,7 +894,7 @@ package gmod.libs;
 		`value` | The variable to insert into the table.
 		
 		
-		**Returns:** The index the object was placed at.
+		`**Returns:** The index the object was placed at.
 		
 		___
 		### Lua Examples
@@ -1012,33 +918,29 @@ package gmod.libs;
 		6	=	not
 		7	=	drakehawke
 		8	=	lol
-		
-		
     **/
     
-    public static function insert(tbl:AnyTable, position:Float, value:Any):Float;
+    public static function insert(tbl:AnyTable, position:Float, value:Dynamic):Float;
     
     
     /**
         Returns whether or not the given table is empty. 
 		
-		This works on both sequential and non-sequential tables, and is a lot faster to use than 
+		This works on both sequential and non-sequential tables, and is a lot faster to use than
+		
 		Name | Description
 		--- | ---
 		`tab` | Table to check
 		
 		
-		**Returns:** Is empty
-		
-		
+		`**Returns:** Is empty
     **/
     
     public static function IsEmpty(tab:AnyTable):Bool;
     
     
     /**
-        Changes all keys to sequential integers. This creates a new table object and does not affect the original. 
-		
+        Changes all keys to sequential integers. This creates a new table object and does not affect the original.
 		
 		Name | Description
 		--- | ---
@@ -1046,7 +948,7 @@ package gmod.libs;
 		`saveKeys` | Save the keys within each member table. This will insert a new field __key into each value, and should not be used if the table contains non-table values.
 		
 		
-		**Returns:** Table with integer keys.
+		`**Returns:** Table with integer keys.
 		
 		___
 		### Lua Examples
@@ -1102,23 +1004,22 @@ package gmod.libs;
 				Age	=	42
 				Name	=	Jane Doe
 				__key	=	SecondMember
-		
-		
     **/
     
     public static function ClearKeys(table:AnyTable, ?saveKeys:Bool):AnyTable;
     
     
     /**
-        Creates a deep copy and returns that copy. 
+        Creates a deep copy and returns that copy.
 		
+		**Warning:** This function does NOT copy userdata, such as Vectors and Angles!
 		
 		Name | Description
 		--- | ---
 		`originalTable` | The table to be copied.
 		
 		
-		**Returns:** A deep copy of the original table
+		`**Returns:** A deep copy of the original table
 		
 		___
 		### Lua Examples
@@ -1128,18 +1029,15 @@ package gmod.libs;
 		```lua 
 		B = table.Copy(A)
 		```
-		
-		
     **/
     
     public static function Copy(originalTable:AnyTable):AnyTable;
     
     
     /**
-        ***Deprecated:**   This was deprecated in Lua 5.1 and removed in 5.2. You should use pairs() instead.
+        ***Deprecated:** This was deprecated in Lua 5.1 and removed in 5.2. You should use pairs() instead.
 		
-		Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken. This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see here. You should use pairs() instead. The GLua interpretation of this is table.ForEach. 
-		
+		Iterates for each key-value pair in the table, calling the function with the key and value of the pair. If the function returns anything, the loop is broken. This is inherited from the original Lua implementation and is deprecated in Lua as of 5.1; see here. You should use pairs() instead. The GLua interpretation of this is table.ForEach.
 		
 		Name | Description
 		--- | ---
@@ -1179,16 +1077,13 @@ package gmod.libs;
 		
 		1    One
 		2    Two
-		
-		
     **/
-    @:deprecated
+    @:deprecated("This was deprecated in Lua 5.1 and removed in 5.2. You should use pairs() instead.")
     public static function foreach(tbl:AnyTable, callback:Function):Void;
     
     
     /**
-        Returns a table of keys containing the supplied value 
-		
+        Returns a table of keys containing the supplied value
 		
 		Name | Description
 		--- | ---
@@ -1196,34 +1091,30 @@ package gmod.libs;
 		`value` | Value to search for
 		
 		
-		**Returns:** Keys
-		
-		
+		`**Returns:** Keys
     **/
     
-    public static function KeysFromValue(tab:AnyTable, value:Any):AnyTable;
+    public static function KeysFromValue(tab:AnyTable, value:Dynamic):AnyTable;
     
     
     /**
-        ***Deprecated:**   This function was deprecated in Lua 5.1 and is removed in 5.2. Use the length (#) operator instead.
+        ***Deprecated:** This function was deprecated in Lua 5.1 and is removed in 5.2. Use the length (#) operator instead.
 		
-		Returns the length of the table.     
+		Returns the length of the table.
+		
 		Name | Description
 		--- | ---
 		`tbl` | The table to check.
 		
 		
-		**Returns:** Sequential length.
-		
-		
+		`**Returns:** Sequential length.
     **/
-    @:deprecated
+    @:deprecated("This function was deprecated in Lua 5.1 and is removed in 5.2. Use the length (#) operator instead.")
     public static function getn(tbl:AnyTable):Float;
     
     
     /**
-        Sorts a table either ascending or by the given sort function. 
-		
+        Sorts a table either ascending or by the given sort function.
 		
 		Name | Description
 		--- | ---
@@ -1261,16 +1152,13 @@ package gmod.libs;
 		**Output:**
 		
 		Player table sorted by score going from highest to lowest
-		
-		
     **/
     
     public static function sort(tbl:AnyTable, sorter:Function):Void;
     
     
     /**
-        Converts a table into a string 
-		
+        Converts a table into a string
 		
 		Name | Description
 		--- | ---
@@ -1279,7 +1167,7 @@ package gmod.libs;
 		`niceFormatting` | Adds new lines and tabs to the string.
 		
 		
-		**Returns:** The table formatted as a string.
+		`**Returns:** The table formatted as a string.
 		
 		___
 		### Lua Examples
@@ -1298,8 +1186,6 @@ package gmod.libs;
 				Green	=	"Celery",
 				Yellow	=	"Banana",
 		}
-		
-		
     **/
     
     public static function ToString(tbl:AnyTable, displayName:String, niceFormatting:Bool):String;
@@ -1310,8 +1196,8 @@ package gmod.libs;
 
 
 @:multiReturn extern class TableLibRandomReturn {
-var a:Any;
-var b:Any;
+var a:Dynamic;
+var b:Dynamic;
 
 }
 

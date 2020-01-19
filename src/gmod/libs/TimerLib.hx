@@ -2,67 +2,60 @@ package gmod.libs;
 
 
 /**
-    The timer library is a very useful set of functions which allow you to run a function periodically or after a given delay. 
-	
-	
+    The timer library is a very useful set of functions which allow you to run a function periodically or after a given delay.
 **/
 @:native("timer")extern class TimerLib {
     
     /**
-        Stops and removes a timer created by timer.Create. 
-		
+        Stops and removes a timer created by timer.Create.
 		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer to remove.
-		
-		
-		
     **/
     
     public static function Remove(identifier:String):Void;
     
     
     /**
-        Returns amount of time left (in seconds) before the timer executes its function. 
+        Returns amount of time left (in seconds) before the timer executes its function.
 		
+		**Note:** If the timer is paused, the amount will be negative.
 		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer.
 		
 		
-		**Returns:** The amount of time left (in seconds).
-		
-		
+		`**Returns:** The amount of time left (in seconds).
     **/
     
-    public static function TimeLeft(identifier:Any):Float;
+    public static function TimeLeft(identifier:Dynamic):Float;
     
     
     /**
-        Unpauses the timer. 
-		
+        Unpauses the timer.
 		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer.
 		
 		
-		**Returns:** false if the timer didn't exist or was already running, true otherwise.
-		
-		
+		`**Returns:** false if the timer didn't exist or was already running, true otherwise.
     **/
     
-    public static function UnPause(identifier:Any):Bool;
+    public static function UnPause(identifier:Dynamic):Bool;
     
     
     /**
         Creates a simple timer that runs the given function after a specified delay. 
 		
-		For a more advanced version that you can control after creation, see timer.Create. 
+		For a more advanced version that you can control after creation, see timer.Create.
 		
-		 
+		**Warning:** Timers won't advance while the client is timing out from the server.
+		
+		**Note:** Timers use CurTime for timing.
+		
 		Name | Description
 		--- | ---
 		`delay` | How long until the function should be ran (in seconds). Use 0 to have the function run in the next GM: Think.
@@ -96,34 +89,33 @@ package gmod.libs;
 		**Output:**
 		
 		--11 seconds into game 1st zombie disappears --12 seconds into game 2nd zombie disappears etc.
-		
-		
     **/
     
     public static function Simple(delay:Float, func:Function):Void;
     
     
     /**
-        ***Deprecated:**   You should be using timer. Remove instead.
+        ***Deprecated:** You should be using timer. Remove instead.
 		
-		Stops and destroys the given timer. Alias of . .   
+		Stops and destroys the given timer. Alias of [timer](https://wiki.garrysmod.com/page/Category:timer). [Remove](https://wiki.garrysmod.com/page/timer/Remove).
+		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer to destroy.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should be using timer. Remove instead.")
     public static function Destroy(identifier:String):Void;
     
     
     /**
         Creates a new timer that will repeat its function given amount of times. This function also requires the timer to be named, which allows you to control it after it was created via the timer library. 
 		
-		For a simple one-time timer with no identifiers, see timer.Simple. 
+		For a simple one-time timer with no identifiers, see timer.Simple.
 		
-		 
+		**Warning:** Timers won't advance while the client is timing out from the server.
+		
+		**Note:** Timers use CurTime for timing.
+		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer to create. Must be unique. If a timer already exists with the same identifier, that timer will be updated to the new settings and reset.
@@ -182,84 +174,75 @@ package gmod.libs;
 		**Output:**
 		
 		Timer Iteration #1 had a delay of 0.014999389648438 Timer Iteration #2 had a delay of 0.014999389648438 Timer Iteration #3 had a delay of 0.014999389648438 Timer Iteration #4 had a delay of 0.0150146484375 Timer Iteration #5 had a delay of 0.014999389648438 Timer Iteration #6 had a delay of 0.014999389648438 Timer Iteration #7 had a delay of 0.014999389648438 Timer Iteration #8 had a delay of 0.014999389648438 Timer Iteration #9 had a delay of 0.014999389648438
-		
-		
     **/
     
     public static function Create(identifier:String, delay:Float, repetitions:Float, func:Function):Void;
     
     
     /**
-        Pauses the given timer. 
-		
-		
-		Name | Description
-		--- | ---
-		`identifier` | Identifier of the timer.
-		
-		
-		**Returns:** false if the timer didn't exist or was already paused, true otherwise.
-		
-		
-    **/
-    
-    public static function Pause(identifier:String):Bool;
-    
-    
-    /**
-        Restarts the given timer. 
-		
+        Pauses the given timer.
 		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer.
 		
 		
-		**Returns:** true if the timer exists, false if it doesn't.
-		
-		
+		`**Returns:** false if the timer didn't exist or was already paused, true otherwise.
     **/
     
-    public static function Start(identifier:Any):Bool;
+    public static function Pause(identifier:Dynamic):Bool;
     
     
     /**
-        Returns amount of repetitions/executions left before the timer destroys itself. 
+        Restarts the given timer.
 		
+		**Warning:** Timers won't advance while the client is timing out from the server.
+		
+		**Note:** Timers use CurTime for timing.
 		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer.
 		
 		
-		**Returns:** The amount of executions left.
-		
-		
+		`**Returns:** true if the timer exists, false if it doesn't.
     **/
     
-    public static function RepsLeft(identifier:Any):Float;
+    public static function Start(identifier:Dynamic):Bool;
     
     
     /**
-        ***Deprecated:**  
+        Returns amount of repetitions/executions left before the timer destroys itself.
 		
-		This function does nothing. 
+		Name | Description
+		--- | ---
+		`identifier` | Identifier of the timer.
 		
+		
+		`**Returns:** The amount of executions left.
     **/
-    @:deprecated
+    
+    public static function RepsLeft(identifier:Dynamic):Float;
+    
+    
+    /**
+        ***Deprecated:** 
+		
+		This function does nothing.
+    **/
+    @:deprecated("")
     public static function Check():Void;
     
     
     /**
-        Returns whenever the given timer exists or not. 
-		
+        Returns whenever the given timer exists or not.
 		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer.
 		
 		
-		**Returns:** Returns true if the timer exists, false if it doesn't
+		`**Returns:** Returns true if the timer exists, false if it doesn't
 		
 		___
 		### Lua Examples
@@ -283,16 +266,13 @@ package gmod.libs;
 		**Output:**
 		
 		The timer does not exist! I'm a Timer I'm a Timer I'm a Timer I'm a Timer
-		
-		
     **/
     
     public static function Exists(identifier:String):Bool;
     
     
     /**
-        Adjusts the timer if the timer with the given identifier exists. 
-		
+        Adjusts the timer if the timer with the given identifier exists.
 		
 		Name | Description
 		--- | ---
@@ -302,46 +282,38 @@ package gmod.libs;
 		`func` | The new function.
 		
 		
-		**Returns:** true if succeeded
-		
-		
+		`**Returns:** true if succeeded
     **/
     
-    public static function Adjust(identifier:Any, delay:Float, repetitions:Float, func:Function):Bool;
+    public static function Adjust(identifier:Dynamic, delay:Float, repetitions:Float, func:Function):Bool;
     
     
     /**
-        Runs either timer.Pause or timer.UnPause based on the timer's current status. 
-		
+        Runs either timer.Pause or timer.UnPause based on the timer's current status.
 		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer.
 		
 		
-		**Returns:** status of the timer.
-		
-		
+		`**Returns:** status of the timer.
     **/
     
-    public static function Toggle(identifier:Any):Bool;
+    public static function Toggle(identifier:Dynamic):Bool;
     
     
     /**
-        Stops the given timer and rewinds it. 
-		
+        Stops the given timer and rewinds it.
 		
 		Name | Description
 		--- | ---
 		`identifier` | Identifier of the timer.
 		
 		
-		**Returns:** false if the timer didn't exist or was already stopped, true otherwise.
-		
-		
+		`**Returns:** false if the timer didn't exist or was already stopped, true otherwise.
     **/
     
-    public static function Stop(identifier:Any):Bool;
+    public static function Stop(identifier:Dynamic):Bool;
     
     
 

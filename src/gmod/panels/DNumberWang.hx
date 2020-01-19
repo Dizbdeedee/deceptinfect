@@ -2,28 +2,21 @@ package gmod.panels;
 #if client
 
 /**
-    DNumberWang is a VGUI element that allows you to input a numeric value using up and down arrows or direct entry. 
-	
-	
+    DNumberWang is a VGUI element that allows you to input a numeric value using up and down arrows or direct entry.
 **/
 extern class DNumberWang extends DTextEntry {
     /**
-        Sets the minimum numeric value allowed by the number selector. 
-		
+        Sets the minimum numeric value allowed by the number selector.
 		
 		Name | Description
 		--- | ---
 		`min` | The minimum value.
-		
-		
-		
     **/
     
      
     public function SetMin(min:Float):Void;
     /**
-        Internal function which is called when the number selector value is changed. This function is empty by default so it needs to be overridden in order to provide functionality. 
-		
+        Internal function which is called when the number selector value is changed. This function is empty by default so it needs to be overridden in order to provide functionality.
 		
 		Name | Description
 		--- | ---
@@ -87,51 +80,42 @@ extern class DNumberWang extends DTextEntry {
 		    TalkSound(Sound("vo/npc/female01/answer"..string.format("%02d", val)..".wav"))
 		end
 		```
-		
-		
     **/
     
     @:hook 
     public function OnValueChanged(val:Float):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Returns whatever is set by DNumberWang:SetFloatValue or 0. 
+		Returns whatever is set by DNumberWang:SetFloatValue or 0.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetFloatValue():Float;
     /**
-        Resizes the panel so that its width and height fit all of the content inside. 
+        Resizes the panel so that its width and height fit all of the content inside.
 		
+		**Warning:** You must call this function AFTER setting text/font, adjusting child panels or otherwise altering the panel.
 		
-		
+		**Note:** Only works on Label derived panels such as DLabel by default, and on any panel that manually implemented the Panel:SizeToContents method, such as DNumberWang and DImage.
     **/
     
      
     public function SizeToContents():Void;
     /**
-        Sets the maximum numeric value allowed by the number selector. 
-		
+        Sets the maximum numeric value allowed by the number selector.
 		
 		Name | Description
 		--- | ---
 		`max` | The maximum value.
-		
-		
-		
     **/
     
      
     public function SetMax(max:Float):Void;
     /**
-        Sets the value of the number selector based on the given fraction number. 
-		
+        Sets the value of the number selector based on the given fraction number.
 		
 		Name | Description
 		--- | ---
@@ -164,99 +148,73 @@ extern class DNumberWang extends DTextEntry {
 		125
 		250
 		375
-		
-		
     **/
     
      
     public function SetFraction(val:Float):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		This function returns the panel it is used on. 
+		This function returns the panel it is used on.
 		
-		
-		**Returns:** self
-		
-		
+		`**Returns:** self
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetTextArea():Panel;
     /**
-        Sets the value of the DNumberWang and triggers DNumberWang:OnValueChanged 
-		
+        Sets the value of the DNumberWang and triggers DNumberWang:OnValueChanged
 		
 		Name | Description
 		--- | ---
 		`val` | The value to set.
-		
-		
-		
     **/
     
      
     public function SetValue(val:Float):Void;
     /**
-        Sets the minimum and maximum value allowed by the number selector. 
-		
+        Sets the minimum and maximum value allowed by the number selector.
 		
 		Name | Description
 		--- | ---
 		`min` | The minimum value.
 		`max` | The maximum value.
-		
-		
-		
     **/
     
      
     public function SetMinMax(min:Float, max:Float):Void;
     /**
-        Returns the minimum numeric value allowed by the number selector. 
+        Returns the minimum numeric value allowed by the number selector.
 		
-		
-		**Returns:** The minimum number.
-		
-		
+		`**Returns:** The minimum number.
     **/
     
      
     public function GetMin():Float;
     /**
-        Hides the number selector arrows. 
-		
-		
-		
+        Hides the number selector arrows.
     **/
     
      
     public function HideWang():Void;
     /**
-        Returns the maximum numeric value allowed by the number selector. 
+        Returns the maximum numeric value allowed by the number selector.
 		
-		
-		**Returns:** The maximum value.
-		
-		
+		`**Returns:** The maximum value.
     **/
     
      
     public function GetMax():Float;
     /**
-        Returns the amount of decimal places allowed in the number selector, set by DNumberWang:SetDecimals 
+        Returns the amount of decimal places allowed in the number selector, set by DNumberWang:SetDecimals
 		
-		
-		**Returns:** The amount of decimal places allowed in the number selector.
-		
-		
+		`**Returns:** The amount of decimal places allowed in the number selector.
     **/
     
      
     public function GetDecimals():Float;
     /**
-        Returns a fraction representing the current number selector value to number selector min/max range ratio. If argument val is supplied, that number will be computed instead. 
-		
+        Returns a fraction representing the current number selector value to number selector min/max range ratio. If argument val is supplied, that number will be computed instead.
 		
 		Name | Description
 		--- | ---
@@ -288,42 +246,32 @@ extern class DNumberWang extends DTextEntry {
 		0.50196078431373
 		0.75294117647059
 		1
-		
-		
     **/
     
      
     public function GetFraction(val:Float):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Appears to do nothing. 
-		
+		Appears to do nothing.
 		
 		Name | Description
 		--- | ---
 		`val` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetFloatValue(val:Float):Void;
     /**
-        Returns the numeric value inside the number selector. 
+        Returns the numeric value inside the number selector.
 		
-		
-		**Returns:** The numeric value.
-		
-		
+		`**Returns:** The numeric value.
     **/
     
      
     public function GetValue():Float;
     /**
-        Sets the amount of decimal places allowed in the number selector. 
-		
+        Sets the amount of decimal places allowed in the number selector.
 		
 		Name | Description
 		--- | ---
@@ -343,8 +291,6 @@ extern class DNumberWang extends DTextEntry {
 		
 		numinput:SetValue(math.random())
 		```
-		
-		
     **/
     
      

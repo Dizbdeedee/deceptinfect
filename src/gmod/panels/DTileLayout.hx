@@ -8,15 +8,14 @@ package gmod.panels;
 	
 	 The base size defines the smallest a tile can be, and it will resize vertically to accommodate all child panels. The number of elements in each row is determinded by the base size and width. 
 	
-	 It also optionally permits the rearrangement of these tiles. To enable this functionality, call DDragBase:MakeDroppable on the DTileLayout with a unique identifier. All panels added following this will be moveable. 
-	
-	 
+	 It also optionally permits the rearrangement of these tiles. To enable this functionality, call DDragBase:MakeDroppable on the DTileLayout with a unique identifier. All panels added following this will be moveable.
 **/
 extern class DTileLayout extends DDragBase {
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Determines if a group of tiles is vacant.           
+		Determines if a group of tiles is vacant.
+		
 		Name | Description
 		--- | ---
 		`x` | The x coordinate of the first tile.
@@ -25,102 +24,82 @@ extern class DTileLayout extends DDragBase {
 		`h` | The height needed.
 		
 		
-		**Returns:** Whether or not this group is available for occupation.
-		
-		
+		`**Returns:** Whether or not this group is available for occupation.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function FitsInTile(x:Float, y:Float, w:Float, h:Float):Bool;
     /**
-        Sets the spacing between 2 elements in the DTileLayout on the X axis. 
-		
+        Sets the spacing between 2 elements in the DTileLayout on the X axis.
 		
 		Name | Description
 		--- | ---
 		`spacingX` | 
-		
-		
-		
     **/
     
      
     public function SetSpaceX(spacingX:Float):Void;
     /**
-        Returns the border spacing set by DTileLayout:SetBorder. 
+        Returns the border spacing set by DTileLayout:SetBorder.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetBorder():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called by :  to arrange and lay out the child panels, if it has changed in size. 
-		
+		Called by [PANEL](https://wiki.garrysmod.com/page/Category:PANEL_Hooks): [PerformLayout](https://wiki.garrysmod.com/page/PANEL/PerformLayout) to arrange and lay out the child panels, if it has changed in size.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function LayoutTiles():Void;
     /**
-        Called when anything is dropped on or rearranged within the DTileLayout. 
-		
-		
-		
+        Called when anything is dropped on or rearranged within the DTileLayout.
     **/
     
     @:hook 
     public function OnModified():Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Gets the occupied state of a tile.       
+		Gets the occupied state of a tile.
+		
 		Name | Description
 		--- | ---
 		`x` | The x coordinate of the tile.
 		`y` | The y coordinate of the tile.
 		
 		
-		**Returns:** The occupied state of the tile, normally 1 or nil.
-		
-		
+		`**Returns:** The occupied state of the tile, normally 1 or nil.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
-    public function GetTile(x:Float, y:Float):Any;
+    public function GetTile(x:Float, y:Float):Dynamic;
     /**
-        Sets the spacing between the border/edge of the DTileLayout and all the elements inside. 
-		
+        Sets the spacing between the border/edge of the DTileLayout and all the elements inside.
 		
 		Name | Description
 		--- | ---
 		`border` | 
-		
-		
-		
     **/
     
      
     public function SetBorder(border:Float):Void;
     /**
-        Returns the X axis spacing between 2 elements set by DTileLayout:SetSpaceX. 
+        Returns the X axis spacing between 2 elements set by DTileLayout:SetSpaceX.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetSpaceX():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Finds the coordinates of the first group of free tiles that fit the given size.             
+		Finds the coordinates of the first group of free tiles that fit the given size.
+		
 		Name | Description
 		--- | ---
 		`x` | The x coordinate to start looking from.
@@ -133,146 +112,111 @@ extern class DTileLayout extends DDragBase {
 		--- | ---
 		`a` | The x coordinate of the found available space.
 		`b` | The y coordinate of the found available space.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function FindFreeTile(x:Float, y:Float, w:Float, h:Float):DTileLayoutFindFreeTileReturn;
     /**
-        Returns the size of each single tile, set with DTileLayout:SetBaseSize. 
+        Returns the size of each single tile, set with DTileLayout:SetBaseSize.
 		
-		
-		**Returns:** Base tile size.
-		
-		
+		`**Returns:** Base tile size.
     **/
     
      
     public function GetBaseSize():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called to designate a range of tiles as occupied by a panel.         
+		Called to designate a range of tiles as occupied by a panel.
+		
 		Name | Description
 		--- | ---
 		`x` | The x coordinate of the top-left corner of the panel.
 		`y` | The y coordinate of the top-left corner of the panel.
 		`w` | The panel's width.
 		`h` | The panel's height.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function ConsumeTiles(x:Float, y:Float, w:Float, h:Float):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Clears the panel's tile table. Used by : . 
-		
+		Clears the panel's tile table. Used by [DTileLayout](https://wiki.garrysmod.com/page/Category:DTileLayout): [LayoutTiles](https://wiki.garrysmod.com/page/DTileLayout/LayoutTiles).
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function ClearTiles():Void;
     /**
-        Creates copies of all the children from the given panel object and parents them to this one. 
-		
+        Creates copies of all the children from the given panel object and parents them to this one.
 		
 		Name | Description
 		--- | ---
 		`source` | The source panel from which to copy all children.
-		
-		
-		
     **/
     
      
     public function CopyContents(source:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called to set the occupied state of a tile.       
+		Called to set the occupied state of a tile.
+		
 		Name | Description
 		--- | ---
 		`x` | The x coordinate of the tile.
 		`y` | The y coordinate of the tile.
 		`state` | The new state of the tile, normally 1 or nil.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
-    public function SetTile(x:Float, y:Float, state:Any):Void;
+    public function SetTile(x:Float, y:Float, state:Dynamic):Void;
     /**
-        Sets the spacing between 2 elements in the DTileLayout on the Y axis. 
-		
+        Sets the spacing between 2 elements in the DTileLayout on the Y axis.
 		
 		Name | Description
 		--- | ---
 		`spaceY` | 
-		
-		
-		
     **/
     
      
     public function SetSpaceY(spaceY:Float):Void;
     /**
-        Creates and returns an exact copy of the DTileLayout. 
+        Creates and returns an exact copy of the DTileLayout.
 		
-		
-		**Returns:** The created copy.
-		
-		
+		`**Returns:** The created copy.
     **/
     
      
     public function Copy():Panel;
     /**
-        Determines the minimum height the DTileLayout will resize to. This is useful if child panels will be added/removed often. 
-		
+        Determines the minimum height the DTileLayout will resize to. This is useful if child panels will be added/removed often.
 		
 		Name | Description
 		--- | ---
 		`minH` | The minimum height the panel can shrink to.
-		
-		
-		
     **/
     
      
     public function SetMinHeight(minH:Float):Void;
     /**
-        Returns the Y axis spacing between 2 elements set by DTileLayout:SetSpaceY. 
+        Returns the Y axis spacing between 2 elements set by DTileLayout:SetSpaceY.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetSpaceY():Float;
     /**
-        Returns the minimum height the DTileLayout can resize to. 
+        Returns the minimum height the DTileLayout can resize to.
 		
-		
-		**Returns:** The minimum height the panel can shrink to.
-		
-		
+		`**Returns:** The minimum height the panel can shrink to.
     **/
     
      
     public function GetMinHeight():Float;
     /**
-        Resets the last width/height info, and invalidates the panel's layout, causing it to recalculate all child positions. It is called whenever a child is added or removed, and can be called to refresh the panel. 
-		
-		
-		
+        Resets the last width/height info, and invalidates the panel's layout, causing it to recalculate all child positions. It is called whenever a child is added or removed, and can be called to refresh the panel.
     **/
     
      
@@ -280,15 +224,11 @@ extern class DTileLayout extends DDragBase {
     /**
         Sets the size of a single tile. If a child panel is larger than this size, it will occupy several tiles. 
 		
-		If you are setting the size of the children properly then you probably don't need to change this. 
+		If you are setting the size of the children properly then you probably don't need to change this.
 		
-		 
 		Name | Description
 		--- | ---
 		`size` | The size of each tile. It is recommended you use 2 n ( 16, 32, 64...) numbers, and those above 4, as numbers lower than this will result in many tiles being processed and therefore slow operation.
-		
-		
-		
     **/
     
      

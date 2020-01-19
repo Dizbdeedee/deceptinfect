@@ -2,51 +2,37 @@ package gmod.panels;
 #if client
 
 /**
-    A tab oriented control where you can create multiple tabs with items within. Used mainly for organization. 
-	
-	
+    A tab oriented control where you can create multiple tabs with items within. Used mainly for organization.
 **/
 extern class DPropertySheet extends DPanel {
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does nothing. 
-		
+		Does nothing.
 		
 		Name | Description
 		--- | ---
 		`show` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetShowIcons(show:Bool):Void;
     /**
-        Creates a close button on the right side of the DPropertySheet that will run the given callback function when pressed. 
-		
+        Creates a close button on the right side of the DPropertySheet that will run the given callback function when pressed.
 		
 		Name | Description
 		--- | ---
 		`func` | Callback function to be called when the close button is pressed.
-		
-		
-		
     **/
     
      
     public function SetupCloseButton(func:Function):Void;
     /**
-        Switches the active tab to a tab with given name. 
-		
+        Switches the active tab to a tab with given name.
 		
 		Name | Description
 		--- | ---
 		`name` | Case sensitive name of the tab.
-		
-		
-		
     **/
     
      
@@ -54,55 +40,41 @@ extern class DPropertySheet extends DPanel {
     /**
         Returns the amount of time (in seconds) it takes to fade between tabs. 
 		
-		Set by DPropertySheet:SetFadeTime 
+		Set by DPropertySheet:SetFadeTime
 		
-		 
-		**Returns:** The amount of time (in seconds) it takes to fade between tabs.
-		
-		
+		`**Returns:** The amount of time (in seconds) it takes to fade between tabs.
     **/
     
      
     public function GetFadeTime():Float;
     /**
-        Sets the padding from parent panel to children panel. 
-		
+        Sets the padding from parent panel to children panel.
 		
 		Name | Description
 		--- | ---
 		`padding` | Amount of padding
-		
-		
-		
     **/
     
      
     public function SetPadding(?padding:Float):Void;
     /**
-        Returns a list of all tabs of this DPropertySheet. 
+        Returns a list of all tabs of this DPropertySheet.
 		
-		
-		**Returns:** A table of tables. Each table contains 3 key-value pairs: string Name - The name of the tab. Panel Tab - The DTab associated with the tab Panel Panel - The Panel associated with the tab
-		
-		
+		`**Returns:** A table of tables. Each table contains 3 key-value pairs: string Name - The name of the tab. Panel Tab - The DTab associated with the tab Panel Panel - The Panel associated with the tab
     **/
     
      
     public function GetItems():AnyTable;
     /**
-        Returns the active DTab of this DPropertySheet. 
+        Returns the active DTab of this DPropertySheet.
 		
-		
-		**Returns:** The DTab
-		
-		
+		`**Returns:** The DTab
     **/
     
      
     public function GetActiveTab():Panel;
     /**
-        Adds a new tab. 
-		
+        Adds a new tab.
 		
 		Name | Description
 		--- | ---
@@ -114,7 +86,7 @@ extern class DPropertySheet extends DPanel {
 		`tooltip` | Tooltip for the tab when user hovers over it with his cursor
 		
 		
-		**Returns:** A table containing the following keys: Panel Tab - The created DTab. string Name - Name of the created tab Panel Panel - The contents panel of the tab
+		`**Returns:** A table containing the following keys: Panel Tab - The created DTab. string Name - Name of the created tab Panel Panel - The contents panel of the tab
 		
 		___
 		### Lua Examples
@@ -139,43 +111,33 @@ extern class DPropertySheet extends DPanel {
 		 
 		tabs:AddSheet( "Tab 1", tab1panel, "icon16/user.png", false, false, "Description of first tab")
 		```
-		
-		
     **/
     
      
     public function AddSheet(name:String, pnl:Panel, ?icon:String, ?noStretchX:Bool, ?noStretchY:Bool, ?tooltip:String):AnyTable;
     /**
-        Called when a player switches the tabs 
-		
+        Called when a player switches the tabs
 		
 		Name | Description
 		--- | ---
 		`old` | The previously active DTab
 		`new` | The newly active DTab
-		
-		
-		
     **/
     
     @:hook 
     public function OnActiveTabChanged(old:Panel, _new:Panel):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Returns whatever value was set by DPropertySheet:SetShowIcons. 
+		Returns whatever value was set by DPropertySheet:SetShowIcons.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetShowIcons():Bool;
     /**
-        Sets the amount of time (in seconds) it takes to fade between tabs. 
-		
+        Sets the amount of time (in seconds) it takes to fade between tabs.
 		
 		Name | Description
 		--- | ---
@@ -197,35 +159,26 @@ extern class DPropertySheet extends DPanel {
 		```lua 
 		DPropertySheet.SetFadeTime(2)
 		```
-		
-		
     **/
     
      
     public function SetFadeTime(?time:Float):Void;
     /**
-        Gets the padding from the parent panel to child panels. 
+        Gets the padding from the parent panel to child panels.
 		
-		
-		**Returns:** Padding
-		
-		
+		`**Returns:** Padding
     **/
     
      
     public function GetPadding():Float;
     /**
-        Sets the width of the DPropertySheet to fit the contents of all of the tabs. 
-		
-		
-		
+        Sets the width of the DPropertySheet to fit the contents of all of the tabs.
     **/
     
      
     public function SizeToContentWidth():Void;
     /**
-        Sets the active tab of the DPropertySheet. 
-		
+        Sets the active tab of the DPropertySheet.
 		
 		Name | Description
 		--- | ---
@@ -256,33 +209,26 @@ extern class DPropertySheet extends DPanel {
 		
 		MainSheet:SetActiveTab( MainSheet:GetItems()[2].Tab ) --2 is a representation of the second sheet
 		```
-		
-		
     **/
     
      
     public function SetActiveTab(tab:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Internal function that handles the cross fade animation when the player switches tabs. 
-		
+		Internal function that handles the cross fade animation when the player switches tabs.
 		
 		Name | Description
 		--- | ---
 		`anim` | 
 		`delta` | 
 		`data` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function CrossFade(anim:AnyTable, delta:Float, data:AnyTable):Void;
     /**
-        Removes tab and/or panel from the parent DPropertySheet. 
-		
+        Removes tab and/or panel from the parent DPropertySheet.
 		
 		Name | Description
 		--- | ---
@@ -290,7 +236,7 @@ extern class DPropertySheet extends DPanel {
 		`removePanel` | Set to true to remove the associated panel object as well.
 		
 		
-		**Returns:** The panel of the tab.
+		`**Returns:** The panel of the tab.
 		
 		___
 		### Lua Examples
@@ -320,8 +266,6 @@ extern class DPropertySheet extends DPanel {
 		    MainSheet:CloseTab( MainSheet:GetItems()[2].Tab ) --2 is a representation of the second sheet
 		end
 		```
-		
-		
     **/
     
      

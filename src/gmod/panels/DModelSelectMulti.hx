@@ -2,9 +2,7 @@ package gmod.panels;
 #if client
 
 /**
-    A combination of DModelSelect and DPropertySheet. 
-	
-	
+    A combination of DModelSelect and DPropertySheet.
 **/
 extern class DModelSelectMulti extends DPropertySheet {
     

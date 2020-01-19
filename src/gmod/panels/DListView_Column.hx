@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    A single column, used by .  Inherits the following functions from DPanel and its parents up to 3 levels deep: 
-	
-	
+    A single column, used by [DListView](https://wiki.garrysmod.com/page/Category:DListView).  Inherits the following functions from DPanel and its parents up to 3 levels deep:
 **/
 extern class DListView_Column extends DPanel {
     /**
-        Sets the width of the panel. 
-		
+        Sets the width of the panel.
 		
 		Name | Description
 		--- | ---
@@ -37,15 +34,12 @@ extern class DListView_Column extends DPanel {
 		SimpleList:AddLine( "First", "Column" )
 		SimpleList:AddLine( "Second", "Column" )
 		```
-		
-		
     **/
     
      
     public function SetWidth(width:Float):Void;
     /**
-        Sets the fixed width of the column. 
-		
+        Sets the fixed width of the column.
 		
 		Name | Description
 		--- | ---
@@ -73,15 +67,12 @@ extern class DListView_Column extends DPanel {
 		SimpleList:AddLine( "First", "Column" )
 		SimpleList:AddLine( "Second", "Column" )
 		```
-		
-		
     **/
     
      
     public function SetFixedWidth(width:Float):Void;
     /**
-        Sets the minimum width of a column. 
-		
+        Sets the minimum width of a column.
 		
 		Name | Description
 		--- | ---
@@ -109,15 +100,12 @@ extern class DListView_Column extends DPanel {
 		SimpleList:AddLine( "First", "Column" )
 		SimpleList:AddLine( "Second", "Column" )
 		```
-		
-		
     **/
     
      
     public function SetMinWidth(width:Float):Void;
     /**
-        Sets the maximum width of a column. 
-		
+        Sets the maximum width of a column.
 		
 		Name | Description
 		--- | ---
@@ -145,22 +133,16 @@ extern class DListView_Column extends DPanel {
 		SimpleList:AddLine( "First", "Column" )
 		SimpleList:AddLine( "Second", "Column" )
 		```
-		
-		
     **/
     
      
     public function SetMaxWidth(width:Float):Void;
     /**
-        Sets the text alignment for the column 
-		
+        Sets the text alignment for the column
 		
 		Name | Description
 		--- | ---
 		`alignment` | The direction of the content, based on the number pad. 7: top-left 8: top-center 9: top-right 4: middle-left 5: center 6: middle-right 1: bottom-left 2: bottom-center 3: bottom-right
-		
-		
-		
     **/
     
      

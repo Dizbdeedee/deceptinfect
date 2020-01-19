@@ -8,15 +8,16 @@ package gmod.hooks;
 	
 	 Some more "hooks" are available for all entities (including engine entities) with the function Entity:AddCallback. 
 	
-	 See also: ENT structure 
+	 See also: ENT structure
 	
-	 
+	**Note:** The hooks listed here are also dependent on the scripted entity type. For instance, a base scripted entity will not use ENTITY:DoSchedule at all, that is only for scripted NPCs
 **/
-extern class Ent {
+class Ent {
     
     /**
-        Allows you to override trace result when a trace hits the entitys Bounding Box. 
+        Allows you to override trace result when a trace hits the entitys Bounding Box.
 		
+		**Note:** Your entity must have Entity:EnableCustomCollisions enabled for this hook to work
 		
 		Name | Description
 		--- | ---
@@ -27,7 +28,7 @@ extern class Ent {
 		`mask` | The CONTENTS_ Enums mask
 		
 		
-		**Returns:** A table containing new HitPos, Fraction and Normal. Returning nothing allows the trace to ignore the entity completely.
+		`**Returns:** A table containing new HitPos, Fraction and Normal. Returning nothing allows the trace to ignore the entity completely.
 		
 		___
 		### Lua Examples
@@ -50,20 +51,19 @@ extern class Ent {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function TestCollision(startpos:Vector, delta:Vector, isbox:Bool, extents:Vector, mask:Float):AnyTable;
+    public function TestCollision(startpos:Vector, delta:Vector, isbox:Bool, extents:Vector, mask:CONTENTS):AnyTable {return null;}
     
     #if server
     /**
         Called when another entity uses this entity, example would be a player pressing "+use" this entity. 
 		
-		To change how often the function is called, see Entity:SetUseType. 
+		To change how often the function is called, see Entity:SetUseType.
 		
-		 
+		**Note:** This hook only works for "nextbot", "ai" and "anim" scripted entity types.
+		
 		Name | Description
 		--- | ---
 		`activator` | The entity that caused this input. This will usually be the player who pressed their use key
@@ -88,19 +88,16 @@ extern class Ent {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function Use(activator:Entity, caller:Entity, useType:Float, value:Float):Void;
+    public function Use(activator:Entity, caller:Entity, useType:USE, value:Float):Void {}
     #end
     #if client
     /**
-        Specify a mesh that should be rendered instead of this SENT's model. 
+        Specify a mesh that should be rendered instead of this SENT's model.
 		
-		
-		**Returns:** A table containing the following keys: IMesh Mesh - Required IMaterial Material - Required VMatrix Matrix - Optional
+		`**Returns:** A table containing the following keys: IMesh Mesh - Required IMaterial Material - Required VMatrix Matrix - Optional
 		
 		___
 		### Lua Examples
@@ -235,17 +232,14 @@ extern class Ent {
 		    self.Mesh:BuildFromTriangles( verts )
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function GetRenderMesh():AnyTable;
+    public function GetRenderMesh():AnyTable {return null;}
     #end
     #if client
     /**
-        Called when a bullet trace hits this entity and allows you to override the default behavior by returning true. 
-		
+        Called when a bullet trace hits this entity and allows you to override the default behavior by returning true.
 		
 		Name | Description
 		--- | ---
@@ -254,7 +248,7 @@ extern class Ent {
 		`customImpactName` | The effect name to override the impact effect with. Possible arguments are ImpactJeep, AirboatGunImpact, HelicopterImpact, ImpactGunship.
 		
 		
-		**Returns:** Return true to override the default impact effects.
+		`**Returns:** Return true to override the default impact effects.
 		
 		___
 		### Lua Examples
@@ -269,35 +263,30 @@ extern class Ent {
 		    return true
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function ImpactTrace(traceResult:AnyTable, damageType:Float, ?customImpactName:String):Bool;
+    public function ImpactTrace(traceResult:TraceResult, damageType:DMG, ?customImpactName:String):Bool {return null;}
     #end
     #if server
     /**
-        Triggers all outputs stored using ENTITY:StoreOutput. 
-		
+        Triggers all outputs stored using ENTITY:StoreOutput.
 		
 		Name | Description
 		--- | ---
 		`output` | Name of output to fire
 		`activator` | Activator entity
 		`data` | The data to give to the output.
-		
-		
-		
     **/
     
     @:hook
-    public function TriggerOutput(output:String, activator:Entity, ?data:String):Void;
+    public function TriggerOutput(output:String, activator:Entity, ?data:String):Void {}
     #end
     #if server
     /**
-        Called when an engine task has been started on the entity. 
+        Called when an engine task has been started on the entity.
 		
+		**Note:** This hook only exists for ai type SENTs
 		
 		Name | Description
 		--- | ---
@@ -305,82 +294,78 @@ extern class Ent {
 		`TaskData` | Task data
 		
 		
-		**Returns:** true to stop default action
-		
-		
+		`**Returns:** true to stop default action
     **/
     
     @:hook
-    public function StartEngineTask(taskID:Float, TaskData:Float):Bool;
+    public function StartEngineTask(taskID:Float, TaskData:Float):Bool {return null;}
     #end
     
     /**
-        Called whenever the physics of the entity are updated. 
+        Called whenever the physics of the entity are updated.
 		
+		**Warning:** This hook won't be called if the Entity's PhysObj goes asleep
 		
 		Name | Description
 		--- | ---
 		`phys` | The physics object of the entity.
-		
-		
-		
     **/
     
     @:hook
-    public function PhysicsUpdate(phys:PhysObj):Void;
+    public function PhysicsUpdate(phys:PhysObj):Void {}
     
     #if server
     /**
-        Called when an NPC's expression has finished.   
+        Called when an NPC's expression has finished.
+		
 		Name | Description
 		--- | ---
 		`strExp` | The path of the expression.
-		
-		
-		
     **/
     
     @:hook
-    public function ExpressionFinished(strExp:String):Void;
+    public function ExpressionFinished(strExp:String):Void {}
     #end
     #if server
     /**
         Called after the duplicator library pastes the entity, after the bone/entity modifiers have been applied to the entity. 
 		
-		This hook is called after ENTITY:OnDuplicated. 
+		This hook is called after ENTITY:OnDuplicated.
 		
-		 
+		**Warning:** This may not be a valid player in some circumstances. For example, when a save is loaded from the main menu, this hook will be called before the player is spawned. This argument will be a NULL entity in that case.
+		
+		**Note:** The keys of each value in this table are the original entity indexes when the duplication was created. This can be utilized to restore entity references that don't get saved in duplications.
+		
+		**Bug:** BUG This will be nil for invalid players. Pull Request: #1408
+		
 		Name | Description
 		--- | ---
 		`ply` | The player who pasted the entity. WARNING This may not be a valid player in some circumstances. For example, when a save is loaded from the main menu, this hook will be called before the player is spawned. This argument will be a NULL entity in that case. BUG This will be nil for invalid players. Pull Request: #1408
 		`ent` | The entity itself. Same as 'self'.
 		`createdEntities` | All entities that are within the placed dupe. NOTE The keys of each value in this table are the original entity indexes when the duplication was created. This can be utilized to restore entity references that don't get saved in duplications.
-		
-		
-		
     **/
     
     @:hook
-    public function PostEntityPaste(ply:Player, ent:Entity, createdEntities:AnyTable):Void;
+    public function PostEntityPaste(ply:Player, ent:Entity, createdEntities:AnyTable):Void {}
     #end
     #if server
     /**
-        Called from the engine every 0.1 seconds. 
-		
-		
-		
+        Called from the engine every 0.1 seconds.
     **/
     
     @:hook
-    public function RunAI():Void;
+    public function RunAI():Void {}
     #end
     
     /**
         Called whenever the entity's position changes. A callback for when an entity's angle changes is available via Entity:AddCallback. 
 		
-		Like ENTITY:RenderOverride, this hook works on any entity (scripted or not) it is applied on. 
+		Like ENTITY:RenderOverride, this hook works on any entity (scripted or not) it is applied on.
 		
-		 
+		**Note:** If EFL_DIRTY_ABSTRANSFORM is set on the entity, this will be called serverside only; otherwise, this will be called clientside only. This means serverside calls of Entity:SetPos without the EFL_DIRTY_ABSTRANSFORM flag enabled (most cases) will be called clientside only.
+		
+		**Note:** The give concommand will call this hook serverside only upon entity spawn.
+		
 		Name | Description
 		--- | ---
 		`pos` | The entity's actual position. May differ from Entity: GetPos
@@ -391,37 +376,33 @@ extern class Ent {
 		--- | ---
 		`a` | New position
 		`b` | New angles
-		
-		
-		
     **/
     
     @:hook
-    public function CalcAbsolutePosition(pos:Vector, ang:Angle):EntCalcAbsolutePositionReturn;
+    public function CalcAbsolutePosition(pos:Vector, ang:Angle):EntCalcAbsolutePositionReturn {return null;}
     
     #if server
     /**
-        Called every think on running task. The actual task function should tell us when the task is finished. 
-		
+        Called every think on running task. The actual task function should tell us when the task is finished.
 		
 		Name | Description
 		--- | ---
 		`task` | The task to run
-		
-		
-		
     **/
     
     @:hook
-    public function RunTask(task:AnyTable):Void;
+    public function RunTask(task:AnyTable):Void {}
     #end
     
     /**
         Called from the Entity's motion controller to simulate physics. 
 		
-		This will only be called after using Entity:StartMotionController on a scripted entity of "anim" type. 
+		This will only be called after using Entity:StartMotionController on a scripted entity of "anim" type.
 		
-		 
+		**Warning:** Do not use functions such as PhysObj:EnableCollisions or PhysObj:EnableGravity in this hook as they're very likely to crash your game. You may want to use ENTITY:PhysicsUpdate instead.
+		
+		**Note:** This hook can work on the CLIENT if you call Entity:StartMotionController and use Entity:AddToMotionController on the physics objects you want to control
+		
 		Name | Description
 		--- | ---
 		`phys` | The physics object of the entity.
@@ -433,18 +414,16 @@ extern class Ent {
 		`a` | Angular force
 		`b` | Linear force
 		`c` | One of the SIM_ Enums.
-		
-		
-		
     **/
     
     @:hook
-    public function PhysicsSimulate(phys:PhysObj, deltaTime:Float):EntPhysicsSimulateReturn;
+    public function PhysicsSimulate(phys:PhysObj, deltaTime:Float):EntPhysicsSimulateReturn {return null;}
     
     
     /**
-        Called so the entity can override the bullet impact effects it makes. 
+        Called so the entity can override the bullet impact effects it makes.
 		
+		**Note:** This hook only works for the "anim" type entities.
 		
 		Name | Description
 		--- | ---
@@ -452,7 +431,7 @@ extern class Ent {
 		`damageType` | The damage type of bullet. See DMG_ Enums
 		
 		
-		**Returns:** Return true to not do the default thing - which is to call UTIL_ImpactTrace in C++
+		`**Returns:** Return true to not do the default thing - which is to call UTIL_ImpactTrace in C++
 		
 		___
 		### Lua Examples
@@ -471,115 +450,96 @@ extern class Ent {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function DoImpactEffect(tr:AnyTable, damageType:Float):Bool;
+    public function DoImpactEffect(tr:TraceResult, damageType:DMG):Bool {return null;}
     
     #if server
     /**
         Called when the engine sets a value for this scripted entity. 
 		
-		See GM:EntityKeyValue for a hook that works for all entities. See WEAPON:KeyValue for a hook that works for scripted weapons. 
+		See GM:EntityKeyValue for a hook that works for all entities. See WEAPON:KeyValue for a hook that works for scripted weapons.
 		
-		 
 		Name | Description
 		--- | ---
 		`key` | The key that was affected.
 		`value` | The new value.
 		
 		
-		**Returns:** Return true to suppress this KeyValue or return false or nothing to apply this key value.
-		
-		
+		`**Returns:** Return true to suppress this KeyValue or return false or nothing to apply this key value.
     **/
     
     @:hook
-    public function KeyValue(key:String, value:String):Bool;
+    public function KeyValue(key:String, value:String):Bool {return null;}
     #end
     #if server
     /**
-        Called when the entity stops touching another entity. 
+        Called when the entity stops touching another entity.
 		
+		**Warning:** This only works for brush entities and for entities that have Entity:SetTrigger set to true.
 		
 		Name | Description
 		--- | ---
 		`entity` | The entity which was touched.
-		
-		
-		
     **/
     
     @:hook
-    public function EndTouch(entity:Entity):Void;
+    public function EndTouch(entity:Entity):Void {}
     #end
     #if server
     /**
-        Called from the engine when TaskComplete is called. This allows us to move onto the next task - even when TaskComplete was called from an engine side task. 
-		
-		
-		
+        Called from the engine when TaskComplete is called. This allows us to move onto the next task - even when TaskComplete was called from an engine side task.
     **/
     
     @:hook
-    public function OnTaskComplete():Void;
+    public function OnTaskComplete():Void {}
     #end
     #if server
     /**
-        Starts an engine schedule. 
-		
+        Starts an engine schedule.
 		
 		Name | Description
 		--- | ---
 		`scheduleID` | Schedule ID to start. See SCHED_ Enums
-		
-		
-		
     **/
     
     @:hook
-    public function StartEngineSchedule(scheduleID:Float):Void;
+    public function StartEngineSchedule(scheduleID:SCHED):Void {}
     #end
     #if server
     /**
-        Called whenever an engine schedule is being ran. 
-		
-		
-		
+        Called whenever an engine schedule is being ran.
     **/
     
     @:hook
-    public function DoingEngineSchedule():Void;
+    public function DoingEngineSchedule():Void {}
     #end
     
     /**
         Controls if a property can be used on this entity or not. 
 		
-		This hook will only work in Sandbox derived gamemodes that do not have SANDBOX:CanProperty overridden. 
+		This hook will only work in Sandbox derived gamemodes that do not have SANDBOX:CanProperty overridden.
 		
-		 
+		**Note:** This hook will work on ALL entities, not just the scripted ones (SENTs)
+		
 		Name | Description
 		--- | ---
 		`ply` | Player, that tried to use the property
 		`property` | Class of the property that is tried to use, for example - bonemanipulate
 		
 		
-		**Returns:** Return false to disallow using that property, return true to allow. You must return a value. Not returning anything can cause unexpected results.
-		
-		
+		`**Returns:** Return false to disallow using that property, return true to allow. You must return a value. Not returning anything can cause unexpected results.
     **/
     
     @:hook
-    public function CanProperty(ply:Player, property:String):Bool;
+    public function CanProperty(ply:Player, property:String):Bool {return null;}
     
     #if server
     /**
-        Called whenever the transmit state should be updated. 
+        Called whenever the transmit state should be updated.
 		
-		
-		**Returns:** Transmit state to set, see TRANSMIT_ Enums.
+		`**Returns:** Transmit state to set, see TRANSMIT_ Enums.
 		
 		___
 		### Lua Examples
@@ -609,17 +569,16 @@ extern class Ent {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function UpdateTransmitState():Float;
+    public function UpdateTransmitState():TRANSMIT {return null;}
     #end
     #if server
     /**
-        Called when an engine task is ran on the entity. 
+        Called when an engine task is ran on the entity.
 		
+		**Note:** This hook only exists for ai type SENTs
 		
 		Name | Description
 		--- | ---
@@ -627,34 +586,27 @@ extern class Ent {
 		`taskData` | The task data.
 		
 		
-		**Returns:** true to prevent default action
-		
-		
+		`**Returns:** true to prevent default action
     **/
     
     @:hook
-    public function RunEngineTask(taskID:Float, taskData:Float):Bool;
+    public function RunEngineTask(taskID:Float, taskData:Float):Bool {return null;}
     #end
     #if server
     /**
-        Sets the current task. 
-		
+        Sets the current task.
 		
 		Name | Description
 		--- | ---
 		`task` | The task to set.
-		
-		
-		
     **/
     
     @:hook
-    public function SetTask(task:AnyTable):Void;
+    public function SetTask(task:AnyTable):Void {}
     #end
     #if server
     /**
-        Called once on starting task. 
-		
+        Called once on starting task.
 		
 		Name | Description
 		--- | ---
@@ -671,17 +623,16 @@ extern class Ent {
 		    task:Start( self.Entity )
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function StartTask(task:Task):Void;
+    public function StartTask(task:Task):Void {}
     #end
     #if server
     /**
-        Called when deciding if the Scripted NPC should be able to perform a certain jump or not. 
+        Called when deciding if the Scripted NPC should be able to perform a certain jump or not.
 		
+		**Note:** This is only called for "ai" type entities
 		
 		Name | Description
 		--- | ---
@@ -690,49 +641,41 @@ extern class Ent {
 		`endPos` | The landing position
 		
 		
-		**Returns:** Return true if this jump should be allowed to be performed, false otherwise. Not returning anything, or returning a non boolean will perform the default action.
-		
-		
+		`**Returns:** Return true if this jump should be allowed to be performed, false otherwise. Not returning anything, or returning a non boolean will perform the default action.
     **/
     
     @:hook
-    public function IsJumpLegal(startPos:Vector, apex:Vector, endPos:Vector):Bool;
+    public function IsJumpLegal(startPos:Vector, apex:Vector, endPos:Vector):Bool {return null;}
     #end
     #if server
     /**
-        Returns how many seconds we've been doing this current task 
+        Returns how many seconds we've been doing this current task
 		
-		
-		**Returns:** How many seconds we've been doing this current task
-		
-		
+		`**Returns:** How many seconds we've been doing this current task
     **/
     
     @:hook
-    public function TaskTime():Float;
+    public function TaskTime():Float {return null;}
     #end
     #if server
     /**
         Starts a schedule previously created by ai_schedule.New. 
 		
-		Not to be confused with ENTITY:StartEngineSchedule or NPC:SetSchedule which start an Engine-based schedule. 
+		Not to be confused with ENTITY:StartEngineSchedule or NPC:SetSchedule which start an Engine-based schedule.
 		
-		 
 		Name | Description
 		--- | ---
 		`sched` | Schedule to start.
-		
-		
-		
     **/
     
     @:hook
-    public function StartSchedule(sched:Schedule):Void;
+    public function StartSchedule(sched:Schedule):Void {}
     #end
     #if server
     /**
-        Called when the entity collides with anything. The move type and solid type must be VPHYSICS for the hook to be called. 
+        Called when the entity collides with anything. The move type and solid type must be VPHYSICS for the hook to be called.
 		
+		**Note:** If you want to use this hook on default/engine/non-Lua entites ( like prop_physics ), use Entity:AddCallback instead! This page describes a hook for Lua entities
 		
 		Name | Description
 		--- | ---
@@ -750,17 +693,16 @@ extern class Ent {
 		    if ( data.Speed > 50 ) then self:EmitSound( Sound( "Flashbang.Bounce" ) ) end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PhysicsCollide(colData:AnyTable, collider:PhysObj):Void;
+    public function PhysicsCollide(colData:CollisionData, collider:PhysObj):Void {}
     #end
     #if server
     /**
-        Called when the entity is taking damage. 
+        Called when the entity is taking damage.
 		
+		**Warning:** Calling Entity:TakeDamage, Entity:TakeDamageInfo, Entity:DispatchTraceAttack, or Player:TraceHullAttack (if the entity is hit) in this hook on the victim entity can cause infinite loops since the hook will be called again. Make sure to setup recursion safeguards like the example below.
 		
 		Name | Description
 		--- | ---
@@ -783,17 +725,16 @@ extern class Ent {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function OnTakeDamage(damage:CTakeDamageInfo):Void;
+    public function OnTakeDamage(damage:CTakeDamageInfo):Void {}
     #end
     #if server
     /**
-        Called to determine how good an NPC is at using a particular weapon. 
+        Called to determine how good an NPC is at using a particular weapon.
 		
+		**Note:** "ai" base only
 		
 		Name | Description
 		--- | ---
@@ -801,25 +742,24 @@ extern class Ent {
 		`target` | The target the NPC is attacking
 		
 		
-		**Returns:** The number of degrees of inaccuracy in the NPC's attack.
-		
-		
+		`**Returns:** The number of degrees of inaccuracy in the NPC's attack.
     **/
     
     @:hook
-    public function GetAttackSpread(wep:Entity, target:Entity):Float;
+    public function GetAttackSpread(wep:Entity, target:Entity):Float {return null;}
     #end
     #if server
     /**
-        Polls whenever the entity should trigger the brush. 
+        Polls whenever the entity should trigger the brush.
 		
+		**Warning:** This hook is broken and will not work without code below
 		
 		Name | Description
 		--- | ---
 		`ent` | The entity that is about to trigger.
 		
 		
-		**Returns:** Should trigger or not.
+		`**Returns:** Should trigger or not.
 		
 		___
 		### Lua Examples
@@ -854,20 +794,21 @@ extern class Ent {
 		    -- Code 
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PassesTriggerFilters(ent:Entity):Bool;
+    public function PassesTriggerFilters(ent:Entity):Bool {return null;}
     #end
     #if server
     /**
         Called every tick for every entity being "touched". 
 		
-		See also ENTITY:StartTouch and ENTITY:EndTouch. 
+		See also ENTITY:StartTouch and ENTITY:EndTouch.
 		
-		 
+		**Warning:** This only works for brush entities and for entities that have Entity:SetTrigger set to true.
+		
+		**Note:** For physics enabled entities, this hook will not be ran while the entity's physics is asleep. See PhysObj:Wake.
+		
 		Name | Description
 		--- | ---
 		`entity` | The entity that touched it.
@@ -884,26 +825,23 @@ extern class Ent {
 		    self:Remove()
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function Touch(entity:Entity):Void;
+    public function Touch(entity:Entity):Void {}
     #end
     
     /**
         Called when this entity is about to be punted with the gravity gun (primary fire). 
 		
-		Only works in Sandbox derived gamemodes and only if GM:GravGunPunt is not overridden. 
+		Only works in Sandbox derived gamemodes and only if GM:GravGunPunt is not overridden.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | The player pressing left-click with the gravity gun at an entity
 		
 		
-		**Returns:** Return true or false to enable or disable punting respectively.
+		`**Returns:** Return true or false to enable or disable punting respectively.
 		
 		___
 		### Lua Examples
@@ -916,17 +854,14 @@ extern class Ent {
 		    return true
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function GravGunPunt(ply:Player):Bool;
+    public function GravGunPunt(ply:Player):Bool {return null;}
     
     #if server
     /**
-        Called when another entity fires an event to this entity. 
-		
+        Called when another entity fires an event to this entity.
 		
 		Name | Description
 		--- | ---
@@ -936,31 +871,25 @@ extern class Ent {
 		`data` | The data passed.
 		
 		
-		**Returns:** Should we suppress the default action for this input?
-		
-		
+		`**Returns:** Should we suppress the default action for this input?
     **/
     
     @:hook
-    public function AcceptInput(inputName:String, activator:Entity, caller:Entity, data:String):Bool;
+    public function AcceptInput(inputName:String, activator:Entity, caller:Entity, data:String):Bool {return null;}
     #end
     
     /**
         Called when the entity is about to be removed. 
 		
-		See also Entity:CallOnRemove, which can even be used on engine (non-Lua) entities. 
-		
-		 
-		
+		See also Entity:CallOnRemove, which can even be used on engine (non-Lua) entities.
     **/
     
     @:hook
-    public function OnRemove():Void;
+    public function OnRemove():Void {}
     
     #if server
     /**
-        Set the schedule we should be playing right now. 
-		
+        Set the schedule we should be playing right now.
 		
 		Name | Description
 		--- | ---
@@ -989,20 +918,17 @@ extern class Ent {
 		**Output:**
 		
 		The scripted NPC will run around when spawned.
-		
-		
     **/
     
     @:hook
-    public function SelectSchedule(iNPCState:Float):Void;
+    public function SelectSchedule(iNPCState:Float):Void {}
     #end
     #if server
     /**
         Called before the duplicator copies the entity. 
 		
-		If you are looking for a way to make the duplicator spawn another entity when duplicated. ( For example, you duplicate a "prop_physics", but you want the duplicator to spawn "prop_physics_my" ), you should add prop_physics.ClassOverride = "prop_physics_my". The duplication table should be also stored on that prop_physics, not on prop_physics_my. 
+		If you are looking for a way to make the duplicator spawn another entity when duplicated. ( For example, you duplicate a "prop_physics", but you want the duplicator to spawn "prop_physics_my" ), you should add prop_physics.ClassOverride = "prop_physics_my". The duplication table should be also stored on that prop_physics, not on prop_physics_my.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -1022,20 +948,19 @@ extern class Ent {
 		    self:ResetSequence( self.MyDuplicatorVariasble )
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PreEntityCopy():Void;
+    public function PreEntityCopy():Void {}
     #end
     
     /**
         Called when the entity is created. This is called when you Entity:Spawn the custom entity. 
 		
-		This is called after ENTITY:SetupDataTables and GM:OnEntityCreated. 
+		This is called after ENTITY:SetupDataTables and GM:OnEntityCreated.
 		
-		 
+		**Bug:** BUG This is sometimes not called clientside. You can work around this by setting a variable in Initialize and check if it exists in ENTITY:Think. See the example below. Issue Tracker: #2732
+		
 		___
 		### Lua Examples
 		#### Example 1
@@ -1080,36 +1005,31 @@ extern class Ent {
 		    -- Other code
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function Initialize():Void;
+    public function Initialize():Void {}
     
     #if server
     /**
-        Start the next task in specific schedule. 
-		
+        Start the next task in specific schedule.
 		
 		Name | Description
 		--- | ---
 		`sched` | The schedule to start next task in.
-		
-		
-		
     **/
     
     @:hook
-    public function NextTask(sched:AnyTable):Void;
+    public function NextTask(sched:AnyTable):Void {}
     #end
     #if server
     /**
         Called before firing serverside animation events, such as weapon reload, drawing and holstering for NPCs, scripted sequences, etc. 
 		
-		See ENTITY:FireAnimationEvent for the clientside version. 
+		See ENTITY:FireAnimationEvent for the clientside version.
 		
-		 
+		**Note:** This hook only works on "anim", "ai" and "nextbot" type entities.
+		
 		Name | Description
 		--- | ---
 		`event` | The event ID of happened even. See this page.
@@ -1117,54 +1037,45 @@ extern class Ent {
 		`cycle` | The frame this event occurred as a number between 0 and 1.
 		`type` | Event type. See the Source SDK.
 		`options` | Name or options of this event.
-		
-		
-		
     **/
     
     @:hook
-    public function HandleAnimEvent(event:Float, eventTime:Float, cycle:Float, type:Float, options:String):Void;
+    public function HandleAnimEvent(event:Float, eventTime:Float, cycle:Float, type:Float, options:String):Void {}
     #end
     #if server
     /**
-        Called by GM:GravGunPickupAllowed on ALL entites in Sandbox-derived gamemodes and acts as an override. 
-		
+        Called by GM:GravGunPickupAllowed on ALL entites in Sandbox-derived gamemodes and acts as an override.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player aiming at us
 		
 		
-		**Returns:** Return true to allow the entity to be picked up
-		
-		
+		`**Returns:** Return true to allow the entity to be picked up
     **/
     
     @:hook
-    public function GravGunPickupAllowed(ply:Player):Bool;
+    public function GravGunPickupAllowed(ply:Player):Bool {return null;}
     #end
     #if server
     /**
-        Runs a Lua schedule. Runs tasks inside the schedule. 
-		
+        Runs a Lua schedule. Runs tasks inside the schedule.
 		
 		Name | Description
 		--- | ---
 		`sched` | The schedule to run.
-		
-		
-		
     **/
     
     @:hook
-    public function DoSchedule(sched:AnyTable):Void;
+    public function DoSchedule(sched:AnyTable):Void {}
     #end
     
     /**
-        Called every frame on the client. Called every tick on the server. 
+        Called every frame on the client. Called every tick on the server.
 		
+		**Note:** By default, it runs about 5-6 times per second on the server, but you can force it to run at servers tickrate using the example below.
 		
-		**Returns:** Return true if you used Entity: NextThink to override the next execution time.
+		`**Returns:** Return true if you used Entity: NextThink to override the next execution time.
 		
 		___
 		### Lua Examples
@@ -1181,12 +1092,10 @@ extern class Ent {
 		    return true
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function Think():Bool;
+    public function Think():Bool {return null;}
     
     #if client
     /**
@@ -1194,9 +1103,8 @@ extern class Ent {
 		
 		See ENT structure and RENDERGROUP_ Enums for more information. 
 		
-		 See also ENTITY:DrawTranslucent. 
+		 See also ENTITY:DrawTranslucent.
 		
-		 
 		Name | Description
 		--- | ---
 		`flags` | The bit flags from STUDIO_ Enums
@@ -1241,54 +1149,48 @@ extern class Ent {
 		    Draw3DText( pos, ang, 0.2, text, true )
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function Draw(flags:Float):Void;
+    public function Draw(flags:STUDIO):Void {}
     #end
     #if server
     /**
-        Called when scripted NPC needs to check how he "feels" against another entity, such as when NPC:Disposition is called. 
-		
+        Called when scripted NPC needs to check how he "feels" against another entity, such as when NPC:Disposition is called.
 		
 		Name | Description
 		--- | ---
 		`ent` | The entity in question
 		
 		
-		**Returns:** How our scripter NPC "feels" towards the entity in question. See D_ Enums.
-		
-		
+		`**Returns:** How our scripter NPC "feels" towards the entity in question. See D_ Enums.
     **/
     
     @:hook
-    public function GetRelationship(ent:Entity):Float;
+    public function GetRelationship(ent:Entity):D {return null;}
     #end
     #if server
     /**
-        Called when the entity starts touching another entity. 
+        Called when the entity starts touching another entity.
 		
+		**Warning:** This only works for brush entities and for entities that have Entity:SetTrigger set to true.
 		
 		Name | Description
 		--- | ---
 		`entity` | The entity which is being touched.
-		
-		
-		
     **/
     
     @:hook
-    public function StartTouch(entity:Entity):Void;
+    public function StartTouch(entity:Entity):Void {}
     #end
     #if client
     /**
         Called before firing clientside animation events, such as muzzle flashes or shell ejections. 
 		
-		See ENTITY:HandleAnimEvent for the serverside version. 
+		See ENTITY:HandleAnimEvent for the serverside version.
 		
-		 
+		**Note:** This hook only works on "anim", "nextbot" and "ai" type entities.
+		
 		Name | Description
 		--- | ---
 		`pos` | Position of the effect
@@ -1297,21 +1199,20 @@ extern class Ent {
 		`name` | Name of the event
 		
 		
-		**Returns:** Return true to disable the effect
-		
-		
+		`**Returns:** Return true to disable the effect
     **/
     
     @:hook
-    public function FireAnimationEvent(pos:Vector, ang:Angle, event:Float, name:String):Bool;
+    public function FireAnimationEvent(pos:Vector, ang:Angle, event:Float, name:String):Bool {return null;}
     #end
     #if server
     /**
         This is the spawn function. It's called when a player spawns the entity from the spawnmenu. 
 		
-		If you want to make your SENT spawnable you need this function to properly create the entity. 
+		If you want to make your SENT spawnable you need this function to properly create the entity.
 		
-		 
+		**Warning:** Unlike other ENTITY functions, the "self" parameter of this function is not an entity but rather the table used to generate the SENT. This table is equivalent to scripted_ents.GetStored("ent_name").
+		
 		Name | Description
 		--- | ---
 		`ply` | The player that is spawning this SENT
@@ -1365,25 +1266,20 @@ extern class Ent {
 		    
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function SpawnFunction(ply:Player, tr:AnyTable, ClassName:String):Void;
+    public function SpawnFunction(ply:Player, tr:TraceResult, ClassName:String):Void {}
     #end
     #if server
     /**
         Called after the duplicator finished copying the entity. 
 		
-		See also ENTITY:PreEntityCopy and ENTITY:PostEntityPaste. 
-		
-		 
-		
+		See also ENTITY:PreEntityCopy and ENTITY:PostEntityPaste.
     **/
     
     @:hook
-    public function PostEntityCopy():Void;
+    public function PostEntityCopy():Void {}
     #end
     
     /**
@@ -1391,9 +1287,8 @@ extern class Ent {
 		
 		This is a much better option than using Set/Get Networked Values. 
 		
-		 This hook is called after GM:OnEntityCreated and GM:NetworkEntityCreated. 
+		 This hook is called after GM:OnEntityCreated and GM:NetworkEntityCreated.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -1414,28 +1309,24 @@ extern class Ent {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function SetupDataTables():Void;
+    public function SetupDataTables():Void {}
     
     #if server
     /**
-        Called whenever a schedule is finished. 
-		
-		
-		
+        Called whenever a schedule is finished.
     **/
     
     @:hook
-    public function ScheduleFinished():Void;
+    public function ScheduleFinished():Void {}
     #end
     #if server
     /**
-        Called by Entity:PassesFilter and engine entities to determine whether an entity passes this filter's filter. 
+        Called by Entity:PassesFilter and engine entities to determine whether an entity passes this filter's filter.
 		
+		**Note:** This hook only works for "filter" type SENTs.
 		
 		Name | Description
 		--- | ---
@@ -1443,18 +1334,15 @@ extern class Ent {
 		`ent` | The entity in question that is being tested
 		
 		
-		**Returns:** Whether the entity passes the filter ( true ) or not ( false )
-		
-		
+		`**Returns:** Whether the entity passes the filter ( true ) or not ( false )
     **/
     
     @:hook
-    public function PassesFilter(trigger:Entity, ent:Entity):Bool;
+    public function PassesFilter(trigger:Entity, ent:Entity):Bool {return null;}
     #end
     #if client
     /**
-        Called when the entity should be drawn translucently. 
-		
+        Called when the entity should be drawn translucently.
 		
 		Name | Description
 		--- | ---
@@ -1476,20 +1364,17 @@ extern class Ent {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function DrawTranslucent(flags:Float):Void;
+    public function DrawTranslucent(flags:STUDIO):Void {}
     #end
     #if server
     /**
         Called after duplicator finishes saving the entity, allowing you to modify the save data. 
 		
-		This is called after ENTITY:PostEntityCopy. 
+		This is called after ENTITY:PostEntityCopy.
 		
-		 
 		Name | Description
 		--- | ---
 		`data` | The save EntityCopyData structure that you can modify.
@@ -1505,38 +1390,37 @@ extern class Ent {
 		    for k, v in pairs( data ) do data[ k ] = nil end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function OnEntityCopyTableFinish(data:AnyTable):Void;
+    public function OnEntityCopyTableFinish(data:EntityCopyData):Void {}
     #end
     
     /**
         Toggles automatic frame advancing for animated sequences on an entity. 
 		
-		This has the same effect as setting the ENT.AutomaticFrameAdvance property. 
+		This has the same effect as setting the ENT.AutomaticFrameAdvance property.
 		
-		 
 		Name | Description
 		--- | ---
 		`enable` | Whether or not to set automatic frame advancing.
-		
-		
-		
     **/
     
     @:hook
-    public function SetAutomaticFrameAdvance(enable:Bool):Void;
+    public function SetAutomaticFrameAdvance(enable:Bool):Void {}
     
     #if client
     /**
         Called instead of the engine drawing function of the entity. This hook works on any entity (scripted or not) it is applied on. 
 		
-		This does not work on "physgun_beam", use GM:DrawPhysgunBeam instead. 
+		This does not work on "physgun_beam", use GM:DrawPhysgunBeam instead.
 		
-		 
+		**Note:** As a downside of this implementation, only one RenderOverride may be applied at a time.
+		
+		**Bug:** BUG Drawing a viewmodel in this function will cause GM:PreDrawViewModel, WEAPON:PreDrawViewModel, WEAPON:ViewModelDrawn, GM:PostDrawViewModel, and WEAPON:PostDrawViewModel to be called twice. Issue Tracker: #3292
+		
+		**Bug:** BUG This is called before PrePlayerDraw for players. If this function exists at all on a player, their worldmodel will always be rendered regardless of PrePlayerDraw's return. Issue Tracker: #3299
+		
 		___
 		### Lua Examples
 		#### Example 1
@@ -1557,56 +1441,48 @@ extern class Ent {
 		    pickent.RenderOverride = DontDrawMe
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function RenderOverride():Void;
+    public function RenderOverride():Void {}
     #end
     #if server
     /**
         Called on any entity after it has been created by the duplicator library and before any bone/entity modifiers have been applied. 
 		
-		This hook is called after ENTITY:Initialize and before ENTITY:PostEntityPaste. 
+		This hook is called after ENTITY:Initialize and before ENTITY:PostEntityPaste.
 		
-		 
 		Name | Description
 		--- | ---
 		`entTable` | EntityCopyData structure of the source entity.
-		
-		
-		
     **/
     
     @:hook
-    public function OnDuplicated(entTable:AnyTable):Void;
+    public function OnDuplicated(entTable:EntityCopyData):Void {}
     #end
     #if server
     /**
-        Called by Entity:PassesDamageFilter and engine entities to determine whether an entity passes this filter's damage filter. 
+        Called by Entity:PassesDamageFilter and engine entities to determine whether an entity passes this filter's damage filter.
 		
+		**Note:** This hook only works for "filter" type SENTs.
 		
 		Name | Description
 		--- | ---
 		`dmg` | Damage to test.
 		
 		
-		**Returns:** Whether the entity passes the damage filter ( true ) or not. ( false )
-		
-		
+		`**Returns:** Whether the entity passes the damage filter ( true ) or not. ( false )
     **/
     
     @:hook
-    public function PassesDamageFilter(dmg:CTakeDamageInfo):Bool;
+    public function PassesDamageFilter(dmg:CTakeDamageInfo):Bool {return null;}
     #end
     #if server
     /**
         Used to store an output so it can be triggered with ENTITY:TriggerOutput. Outputs compiled into a map are passed to entities as key/value pairs through ENTITY:KeyValue. 
 		
-		TriggerOutput will do nothing if this function has not been called first. 
+		TriggerOutput will do nothing if this function has not been called first.
 		
-		 
 		Name | Description
 		--- | ---
 		`name` | Name of output to store
@@ -1626,103 +1502,82 @@ extern class Ent {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function StoreOutput(name:String, info:String):Void;
+    public function StoreOutput(name:String, info:String):Void {}
     #end
     #if server
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called just before :  for "ai" type entities only. 
-		
+		Called just before [ENTITY](https://wiki.garrysmod.com/page/Category:ENTITY_Hooks): [Initialize](https://wiki.garrysmod.com/page/ENTITY/Initialize) for "ai" type entities only.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     @:hook
-    public function CreateSchedulesInternal():Void;
+    public function CreateSchedulesInternal():Void {}
     #end
     
     /**
         Called when the entity is reloaded from a Source Engine save (not the Sandbox saves or dupes) or on a changelevel (for example Half-Life 2 campaign level transitions). 
 		
-		For the duplicator library callbacks, see ENTITY:OnDuplicated. 
-		
-		 
-		
+		For the duplicator library callbacks, see ENTITY:OnDuplicated.
     **/
     
     @:hook
-    public function OnRestore():Void;
+    public function OnRestore():Void {}
     
     #if server
     /**
-        Called each time the NPC updates its condition. 
-		
+        Called each time the NPC updates its condition.
 		
 		Name | Description
 		--- | ---
 		`conditionID` | The ID of condition. See NPC: ConditionName.
-		
-		
-		
     **/
     
     @:hook
-    public function OnCondition(conditionID:Float):Void;
+    public function OnCondition(conditionID:Float):Void {}
     #end
     
     /**
-        Called when the entity is reloaded by the lua auto-refresh system, i.e. when the developer edits the lua file for the entity while the game is running. 
-		
-		
-		
+        Called when the entity is reloaded by the lua auto-refresh system, i.e. when the developer edits the lua file for the entity while the game is running.
     **/
     
     @:hook
-    public function OnReloaded():Void;
+    public function OnReloaded():Void {}
     
     #if server
     /**
-        Called when the entity is blocked. 
+        Called when the entity is blocked.
 		
+		**Note:** This only works for entities with MOVETYPE_PUSH as their Entity:SetMoveType
 		
 		Name | Description
 		--- | ---
 		`other` | The entity that is blocking this entity.
-		
-		
-		
     **/
     
     @:hook
-    public function Blocked(other:Entity):Void;
+    public function Blocked(other:Entity):Void {}
     #end
     #if server
     /**
-        Called whenever an engine schedule is finished. 
-		
-		
-		
+        Called whenever an engine schedule is finished.
     **/
     
     @:hook
-    public function EngineScheduleFinish():Void;
+    public function EngineScheduleFinish():Void {}
     #end
     #if server
     /**
-        Returns true if the current running Task is finished. 
+        Returns true if the current running Task is finished.
 		
-		
-		**Returns:** Is the current running Task is finished or not.
-		
-		
+		`**Returns:** Is the current running Task is finished or not.
     **/
     
     @:hook
-    public function TaskFinished():Bool;
+    public function TaskFinished():Bool {return null;}
     #end
     
 }
@@ -1731,7 +1586,7 @@ extern class Ent {
 @:multiReturn extern class EntPhysicsSimulateReturn {
 var a:Vector;
 var b:Vector;
-var c:Float;
+var c:SIM;
 
 }
 @:multiReturn extern class EntCalcAbsolutePositionReturn {

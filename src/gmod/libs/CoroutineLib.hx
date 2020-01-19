@@ -2,22 +2,19 @@ package gmod.libs;
 
 
 /**
-    Coroutines are similar to threads, however they do not run simultaneously. They offer a way to split up tasks and dynamically pause & resume functions. 
-	
-	
+    Coroutines are similar to threads, however they do not run simultaneously. They offer a way to split up tasks and dynamically pause & resume functions.
 **/
 @:native("coroutine")extern class CoroutineLib {
     
     /**
-        Creates a coroutine of the given function. 
-		
+        Creates a coroutine of the given function.
 		
 		Name | Description
 		--- | ---
 		`func` | The function for the coroutine to use
 		
 		
-		**Returns:** coroutine
+		`**Returns:** coroutine
 		
 		___
 		### Lua Examples
@@ -53,23 +50,20 @@ package gmod.libs;
 		    end )
 		end
 		```
-		
-		
     **/
     
     public static function create(func:Function):Thread;
     
     
     /**
-        Pauses the active coroutine and passes all additional variables to the call of coroutine.resume that resumed the coroutine last time, and returns all additional variables that were passed to the previous call of resume. 
-		
+        Pauses the active coroutine and passes all additional variables to the call of coroutine.resume that resumed the coroutine last time, and returns all additional variables that were passed to the previous call of resume.
 		
 		Name | Description
 		--- | ---
 		`returnValue` | Arguments to be returned by the last call of coroutine. resume
 		
 		
-		**Returns:** Arguments that were set previously by coroutine. resume
+		`**Returns:** Arguments that were set previously by coroutine. resume
 		
 		___
 		### Lua Examples
@@ -85,50 +79,41 @@ package gmod.libs;
 		**Output:**
 		
 		true, "Hello world!"
-		
-		
     **/
     
     public static function yield(returnValue:Rest<Dynamic>):Rest<Dynamic>;
     
     
     /**
-        Returns the status of the coroutine passed to it, the possible statuses are "suspended", "running", and "dead". 
-		
+        Returns the status of the coroutine passed to it, the possible statuses are "suspended", "running", and "dead".
 		
 		Name | Description
 		--- | ---
 		`coroutine` | Coroutine to check the status of.
 		
 		
-		**Returns:** status
-		
-		
+		`**Returns:** status
     **/
     
     public static function status(coroutine:Thread):String;
     
     
     /**
-        Returns a function which calling is equivalent with calling coroutine.resume with the coroutine and all extra parameters. 
-		
+        Returns a function which calling is equivalent with calling coroutine.resume with the coroutine and all extra parameters.
 		
 		Name | Description
 		--- | ---
 		`coroutine` | Coroutine to resume.
 		
 		
-		**Returns:** func
-		
-		
+		`**Returns:** func
     **/
     
     public static function wrap(coroutine:Function):Function;
     
     
     /**
-        Resumes the given coroutine and passes the given vararg to either the function arguments or the coroutine.yield that is inside that function and returns whatever yield is called with the next time or by the final return in the function. 
-		
+        Resumes the given coroutine and passes the given vararg to either the function arguments or the coroutine.yield that is inside that function and returns whatever yield is called with the next time or by the final return in the function.
 		
 		Name | Description
 		--- | ---
@@ -140,9 +125,6 @@ package gmod.libs;
 		--- | ---
 		`a` | If the executed thread code had no errors occur within it.
 		`b` | If an error occured, this will be a string containing the error message. Otherwise, this will be arguments that were yielded.
-		
-		
-		
     **/
     
     public static function resume(coroutine:Thread, args:Rest<Dynamic>):CoroutineLibResumeReturn;
@@ -153,27 +135,20 @@ package gmod.libs;
 		
 		This only works inside a coroutine. 
 		
-		 This function uses CurTime instead of RealTime. 
+		 This function uses CurTime instead of RealTime.
 		
-		 
 		Name | Description
 		--- | ---
 		`duration` | The number of seconds to wait
-		
-		
-		
     **/
     
     public static function wait(duration:Float):Void;
     
     
     /**
-        Returns the active coroutine or nil if we are not within a coroutine. 
+        Returns the active coroutine or nil if we are not within a coroutine.
 		
-		
-		**Returns:** coroutine
-		
-		
+		`**Returns:** coroutine
     **/
     
     public static function running():Thread;

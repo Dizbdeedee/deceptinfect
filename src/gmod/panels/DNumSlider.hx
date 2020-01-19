@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    The DNumSlider allows you to create a slider, allowing the user to slide it to set a value, or changing the value in the box. 
-	
-	
+    The DNumSlider allows you to create a slider, allowing the user to slide it to set a value, or changing the value in the box.
 **/
 extern class DNumSlider extends Panel {
     /**
-        Sets the minimum value for the slider 
-		
+        Sets the minimum value for the slider
 		
 		Name | Description
 		--- | ---
@@ -40,22 +37,16 @@ extern class DNumSlider extends Panel {
 		DermaSlider:SetValue( 0.5 )
 		DermaSlider:SetDecimals( 2 )
 		```
-		
-		
     **/
     
      
     public function SetMin(min:Float):Void;
     /**
-        Called when the value of the slider is changed, through code or changing the slider. 
-		
+        Called when the value of the slider is changed, through code or changing the slider.
 		
 		Name | Description
 		--- | ---
 		`value` | The new value of the DNumSlider
-		
-		
-		
     **/
     
     @:hook 
@@ -63,93 +54,70 @@ extern class DNumSlider extends Panel {
     /**
         Resets the slider to the default value, if one was set by DNumSlider:SetDefaultValue. 
 		
-		This function is called by the DNumSlider when user middle mouse clicks on the draggable knob of the slider. 
-		
-		 
-		
+		This function is called by the DNumSlider when user middle mouse clicks on the draggable knob of the slider.
     **/
     
      
     public function ResetToDefaultValue():Void;
     /**
-        Sets the maximum value for the slider. 
-		
+        Sets the maximum value for the slider.
 		
 		Name | Description
 		--- | ---
 		`max` | The value to set as maximum for the slider.
-		
-		
-		
     **/
     
      
     public function SetMax(max:Float):Void;
     /**
-        Returns true if either the DTextEntry, the DSlider or the DNumberScratch are being edited. 
+        Returns true if either the DTextEntry, the DSlider or the DNumberScratch are being edited.
 		
-		
-		**Returns:** Whether or not the DNumSlider is being edited by the player.
-		
-		
+		`**Returns:** Whether or not the DNumSlider is being edited by the player.
     **/
     
      
     public function IsEditing():Bool;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called when the value has been changed. This will also be called when the user manually changes the value through the text panel. This is an internal function. Override DNumSlider:OnValueChanged instead. 
-		
+		Called when the value has been changed. This will also be called when the user manually changes the value through the text panel. This is an internal function. Override DNumSlider:OnValueChanged instead.
 		
 		Name | Description
 		--- | ---
 		`value` | The value the slider has been changed to.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function ValueChanged(value:Float):Void;
     /**
-        Returns the default value of the slider, if one was set by DNumSlider:SetDefaultValue 
+        Returns the default value of the slider, if one was set by DNumSlider:SetDefaultValue
 		
-		
-		**Returns:** The default value of the slider
-		
-		
+		`**Returns:** The default value of the slider
     **/
     
      
     public function GetDefaultValue():Float;
     /**
-        Returns the DTextEntry component of the slider. 
+        Returns the DTextEntry component of the slider.
 		
-		
-		**Returns:** The DTextEntry.
-		
-		
+		`**Returns:** The DTextEntry.
     **/
     
      
     public function GetTextArea():Panel;
     /**
-        Sets the value of the DNumSlider. 
-		
+        Sets the value of the DNumSlider.
 		
 		Name | Description
 		--- | ---
 		`val` | The value to set.
-		
-		
-		
     **/
     
      
     public function SetValue(val:Float):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
+		
 		
 		
 		Name | Description
@@ -162,144 +130,103 @@ extern class DNumSlider extends Panel {
 		--- | ---
 		`a` | 
 		`b` | The second passed argument.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function TranslateSliderValues(x:Float, y:Float):DNumSliderTranslateSliderValuesReturn;
     /**
-        Sets the minimum and the maximum value of the slider. 
-		
+        Sets the minimum and the maximum value of the slider.
 		
 		Name | Description
 		--- | ---
 		`min` | The minimum value of the slider.
 		`max` | The maximum value of the slider.
-		
-		
-		
     **/
     
      
     public function SetMinMax(min:Float, max:Float):Void;
     /**
-        Returns the minimum value of the slider 
+        Returns the minimum value of the slider
 		
-		
-		**Returns:** The minimum value of the slider
-		
-		
+		`**Returns:** The minimum value of the slider
     **/
     
      
     public function GetMin():Float;
     /**
-        Returns the range of the slider, basically maximum value - minimum value. 
+        Returns the range of the slider, basically maximum value - minimum value.
 		
-		
-		**Returns:** The range of the slider
-		
-		
+		`**Returns:** The range of the slider
     **/
     
      
     public function GetRange():Float;
     /**
-        Calls DLabel:SetDark on the DLabel part of the DNumSlider. 
-		
+        Calls DLabel:SetDark on the DLabel part of the DNumSlider.
 		
 		Name | Description
 		--- | ---
 		`dark` | 
-		
-		
-		
     **/
     
      
     public function SetDark(dark:Bool):Void;
     /**
-        Returns the maximum value of the slider 
+        Returns the maximum value of the slider
 		
-		
-		**Returns:** The maximum value of the slider
-		
-		
+		`**Returns:** The maximum value of the slider
     **/
     
      
     public function GetMax():Float;
     /**
-        Returns the amount of numbers after the decimal point. 
+        Returns the amount of numbers after the decimal point.
 		
-		
-		**Returns:** 0 for whole numbers only, 1 for one number after the decimal point, etc.
-		
-		
+		`**Returns:** 0 for whole numbers only, 1 for one number after the decimal point, etc.
     **/
     
      
     public function GetDecimals():Float;
     /**
-        Sets the console variable to be updated when the value of the slider is changed. 
-		
+        Sets the console variable to be updated when the value of the slider is changed.
 		
 		Name | Description
 		--- | ---
 		`cvar` | The name of the ConVar to be updated.
-		
-		
-		
     **/
     
      
     public function SetConVar(cvar:String):Void;
     /**
-        Returns the value of the DNumSlider 
+        Returns the value of the DNumSlider
 		
-		
-		**Returns:** The value of the slider.
-		
-		
+		`**Returns:** The value of the slider.
     **/
     
      
     public function GetValue():Float;
     /**
-        Sets the desired amount of numbers after the decimal point. 
-		
+        Sets the desired amount of numbers after the decimal point.
 		
 		Name | Description
 		--- | ---
 		`decimals` | 0 for whole numbers only, 1 for one number after the decimal point, etc.
-		
-		
-		
     **/
     
      
     public function SetDecimals(decimals:Float):Void;
     /**
-        ***INTERNAL:**  
-		
-		
-		
+        ***INTERNAL** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function UpdateNotches():Void;
     /**
-        Sets the default value of the slider, to be used by DNumSlider:ResetToDefaultValue or by middle mouse clicking the draggable knob of the slider. 
-		
+        Sets the default value of the slider, to be used by DNumSlider:ResetToDefaultValue or by middle mouse clicking the draggable knob of the slider.
 		
 		Name | Description
 		--- | ---
 		`default` | The new default value of the slider to set
-		
-		
-		
     **/
     
      

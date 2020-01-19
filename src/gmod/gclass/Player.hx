@@ -2,17 +2,14 @@ package gmod.gclass;
 
 
 /**
-    This is a list of all methods only available for players. It is also possible to call Entity functions on the Player. 
-	
-	
+    This is a list of all methods only available for players. It is also possible to call Entity functions on the Player.
 **/
-extern class Player extends Entity {
+extern class Player {
     
     /**
-        Returns a player's duck speed (in seconds) 
+        Returns a player's duck speed (in seconds)
 		
-		
-		**Returns:** duckspeed
+		`**Returns:** duckspeed
 		
 		___
 		### Lua Examples
@@ -25,16 +22,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		0.3 in console (tested)
-		
-		
     **/
     
     public function GetDuckSpeed():Float;
     
     #if server
     /**
-        Kills a player and calls GM:PlayerDeath. 
-		
+        Kills a player and calls GM:PlayerDeath.
 		
 		___
 		### Lua Examples
@@ -50,16 +44,13 @@ extern class Player extends Entity {
 		    end
 		end )
 		```
-		
-		
     **/
     
     public function Kill():Void;
     #end
     
     /**
-        Show/Hide the player's weapon's viewmodel. 
-		
+        Show/Hide the player's weapon's viewmodel.
 		
 		Name | Description
 		--- | ---
@@ -79,8 +70,6 @@ extern class Player extends Entity {
 		    LocalPlayer():DrawViewModel(cvarObject:GetBool()) -- Call ConVar:GetBool() inside the parameters of DrawViewModel
 		end)
 		```
-		
-		
     **/
     
     public function DrawViewModel(draw:Bool, ?vm:Float):Void;
@@ -89,9 +78,10 @@ extern class Player extends Entity {
     /**
         Freeze the player. Frozen players cannot move, look around, or attack. Key bindings are still called. Similar to Player:Lock but the player can still take damage. 
 		
-		Adds or removes the FL_FROZEN flag from the player. 
+		Adds or removes the FL_FROZEN flag from the player.
 		
-		 
+		**Bug:** BUG Frozen bots will still be able to look around.
+		
 		Name | Description
 		--- | ---
 		`frozen` | Whether the player should be frozen.
@@ -107,94 +97,79 @@ extern class Player extends Entity {
 		    v:Freeze( true )
 		end
 		```
-		
-		
     **/
     
     public function Freeze(?frozen:Bool):Void;
     #end
     
     /**
-        Returns true if the players' model is allowed to rotate around the pitch and roll axis. 
+        Returns true if the players' model is allowed to rotate around the pitch and roll axis.
 		
-		
-		**Returns:** Allowed
-		
-		
+		`**Returns:** Allowed
     **/
     
     public function GetAllowFullRotation():Bool;
     
     
     /**
-        Translates ACT_ Enums according to the holdtype of players currently held weapon. 
-		
+        Translates ACT_ Enums according to the holdtype of players currently held weapon.
 		
 		Name | Description
 		--- | ---
 		`act` | The initial ACT_ Enums
 		
 		
-		**Returns:** Translated ACT_ Enums
-		
-		
+		`**Returns:** Translated ACT_ Enums
     **/
     
-    public function TranslateWeaponActivity(act:Float):Float;
+    public function TranslateWeaponActivity(act:ACT):ACT;
     
     
     /**
-        Returns the position of a Kinect bone. 
-		
+        Returns the position of a Kinect bone.
 		
 		Name | Description
 		--- | ---
 		`bone` | Bone to get the position of. Must be from 0 to 19.
 		
 		
-		**Returns:** Position of the bone.
-		
-		
+		`**Returns:** Position of the bone.
     **/
     
     public function MotionSensorPos(bone:Float):Vector;
     
     
     /**
-        Sets how quickly a player un-ducks 
-		
+        Sets how quickly a player un-ducks
 		
 		Name | Description
 		--- | ---
 		`UnDuckSpeed` | How quickly the player will un-duck
-		
-		
-		
     **/
     
     public function SetUnDuckSpeed(UnDuckSpeed:Float):Void;
     
     
     /**
-        Returns the last command which was sent by the specified player. Can only be used in a Predicted Hook. 
+        Returns the last command which was sent by the specified player. Can only be used in a Predicted Hook.
 		
+		**Note:** When called clientside in singleplayer during WEAPON:Think, it will return nothing as the hook is not technically predicted in that instance. See the note on the page.
 		
-		**Returns:** Last user commands
+		**Bug:** BUG This will fail in GM:StartCommand. Issue Tracker: #3302
 		
-		
+		`**Returns:** Last user commands
     **/
     
     public function GetCurrentCommand():CUserCmd;
     
     
     /**
-        ***Deprecated:**   This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
+        ***Deprecated:** This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 		
 		When used in a GM:SetupMove hook, this function will prevent the player from sprinting. 
 		
-		When +walk is engaged, the player will still be able to sprint to half speed (normal run speed) as opposed to full sprint speed without this function. 
+		When +walk is engaged, the player will still be able to sprint to half speed (normal run speed) as opposed to full sprint speed without this function.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -205,35 +180,29 @@ extern class Player extends Entity {
 		    ply:StopSprinting()
 		end )
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.")
     public function StopSprinting():Void;
     
     #if server
     /**
-        Returns the hitgroup where the player was last hit. 
+        Returns the hitgroup where the player was last hit.
 		
-		
-		**Returns:** Hitgroup, see HITGROUP_ Enums
-		
-		
+		`**Returns:** Hitgroup, see HITGROUP_ Enums
     **/
     
-    public function LastHitGroup():Float;
+    public function LastHitGroup():HITGROUP;
     #end
     
     /**
-        Gets whether a key is down. This is not networked to other players, meaning only the local client can see the keys they are pressing. 
-		
+        Gets whether a key is down. This is not networked to other players, meaning only the local client can see the keys they are pressing.
 		
 		Name | Description
 		--- | ---
 		`key` | The key, see IN_ Enums
 		
 		
-		**Returns:** isDown
+		`**Returns:** isDown
 		
 		___
 		### Lua Examples
@@ -247,34 +216,27 @@ extern class Player extends Entity {
 		    end
 		end)
 		```
-		
-		
     **/
     
-    public function KeyDown(key:Float):Bool;
+    public function KeyDown(key:IN):Bool;
     
     
     /**
-        Sets the weight of the animation playing in the given gesture slot. 
-		
+        Sets the weight of the animation playing in the given gesture slot.
 		
 		Name | Description
 		--- | ---
 		`slot` | The gesture slot. See GESTURE_SLOT_ Enums
 		`weight` | The weight this slot should be set to. Value must be ranging from 0 to 1.
-		
-		
-		
     **/
     
-    public function AnimSetGestureWeight(slot:Float, weight:Float):Void;
+    public function AnimSetGestureWeight(slot:GESTURE_SLOT, weight:Float):Void;
     
     
     /**
-        Returns a player's unduck speed (in seconds) 
+        Returns a player's unduck speed (in seconds)
 		
-		
-		**Returns:** unduck speed
+		`**Returns:** unduck speed
 		
 		___
 		### Lua Examples
@@ -287,26 +249,26 @@ extern class Player extends Entity {
 		**Output:**
 		
 		0.3 in console
-		
-		
     **/
     
     public function GetUnDuckSpeed():Float;
     
     #if server
     /**
-        Creates the player's ragdoll entity. This is normally used when a player dies, to create their death ragdoll. The ragdoll will be created with the player's properties such as Position, Angles, PlayerColor, Velocity and Model. You can retrieve the entity this creates with Player:GetRagdollEntity. 
+        Creates the player's death ragdoll entity and deletes the old one. 
 		
+		This is normally used when a player dies, to create their death ragdoll. 
 		
+		 The ragdoll will be created with the player's properties such as Position, Angles, PlayerColor, Velocity and Model. 
 		
+		 You can retrieve the entity this creates with Player:GetRagdollEntity.
     **/
     
     public function CreateRagdoll():Void;
     #end
     
     /**
-        Plays a sequence directly from a sequence number, similar to Player:AnimRestartGesture. This function has the advantage to play sequences that haven't been bound to an existing ACT_ Enums 
-		
+        Plays a sequence directly from a sequence number, similar to Player:AnimRestartGesture. This function has the advantage to play sequences that haven't been bound to an existing ACT_ Enums
 		
 		Name | Description
 		--- | ---
@@ -314,17 +276,13 @@ extern class Player extends Entity {
 		`sequenceId` | The sequence ID to play, can be retrieved with Entity: LookupSequence.
 		`cycle` | The cycle to start the animation at, ranges from 0 to 1.
 		`autokill` | If the animation should not loop. true = stops the animation, false = the animation keeps playing.
-		
-		
-		
     **/
     
-    public function AddVCDSequenceToGestureSlot(slot:Float, sequenceId:Float, cycle:Float, ?autokill:Bool):Void;
+    public function AddVCDSequenceToGestureSlot(slot:GESTURE_SLOT, sequenceId:Float, cycle:Float, ?autokill:Bool):Void;
     
     #if client
     /**
-        Sets if the player should be muted locally. 
-		
+        Sets if the player should be muted locally.
 		
 		Name | Description
 		--- | ---
@@ -341,30 +299,24 @@ extern class Player extends Entity {
 		    v:SetMuted(true)
 		end
 		```
-		
-		
     **/
     
     public function SetMuted(mute:Bool):Void;
     #end
     
     /**
-        Returns true if the player's flashlight is on. 
+        Returns true if the player's flashlight is on.
 		
-		
-		**Returns:** Whether the player's flashlight is on.
-		
-		
+		`**Returns:** Whether the player's flashlight is on.
     **/
     
     public function FlashlightIsOn():Bool;
     
     #if client
     /**
-        Returns a table containing player information. 
+        Returns a table containing player information.
 		
-		
-		**Returns:** A table containing player information.
+		`**Returns:** A table containing player information.
 		
 		___
 		### Lua Examples
@@ -402,8 +354,6 @@ extern class Player extends Entity {
 		friendid	=	0
 		name	=	Bot01
 		userid	=	3
-		
-		
     **/
     
     public function GetPlayerInfo():AnyTable;
@@ -412,15 +362,11 @@ extern class Player extends Entity {
     /**
         Sets the widget that is currently in use by the player's mouse. 
 		
-		Having a pressed widget stops the player from firing his weapon to allow input to be passed onto the widget. 
+		Having a pressed widget stops the player from firing his weapon to allow input to be passed onto the widget.
 		
-		 
 		Name | Description
 		--- | ---
 		`pressedWidget` | The widget the player is currently using.
-		
-		
-		
     **/
     
     public function SetPressedWidget(?pressedWidget:Entity):Void;
@@ -429,82 +375,62 @@ extern class Player extends Entity {
     /**
         Attempts to switch the player weapon to the one specified in the "cl_defaultweapon" convar, if the player does not own the specified weapon nothing will happen. 
 		
-		If you want to switch to a specific weapon, use: Player:SetActiveWeapon 
-		
-		 
-		
+		If you want to switch to a specific weapon, use: Player:SetActiveWeapon
     **/
     
     public function SwitchToDefaultWeapon():Void;
     #end
     
     /**
-        Gets if the player will be pushed out of nocollided players. 
+        Gets if the player will be pushed out of nocollided players.
 		
-		
-		**Returns:** pushed
-		
-		
+		`**Returns:** pushed
     **/
     
     public function GetAvoidPlayers():Bool;
     
     
     /**
-        Adds an entity to the total count of entities of same class. 
-		
+        Adds an entity to the total count of entities of same class.
 		
 		Name | Description
 		--- | ---
 		`str` | Entity type
 		`ent` | Entity
-		
-		
-		
     **/
     
     public function AddCount(str:String, ent:Entity):Void;
     
     
     /**
-        Returns TOOL table of players current tool, or of the one specified. 
-		
+        Returns TOOL table of players current tool, or of the one specified.
 		
 		Name | Description
 		--- | ---
 		`mode` | Classname of the tool to retrieve. ( Filename of the tool in gmod_tool/stools/ )
 		
 		
-		**Returns:** TOOL table, or nil if the table wasn't found or the player doesn't have a tool gun.
-		
-		
+		`**Returns:** TOOL table, or nil if the table wasn't found or the player doesn't have a tool gun.
     **/
     
     public function GetTool(?mode:String):AnyTable;
     
     
     /**
-        Pushes the player away from another player whenever it's inside the other players bounding box. 
-		
+        Pushes the player away from another player whenever it's inside the other players bounding box.
 		
 		Name | Description
 		--- | ---
 		`avoidPlayers` | Avoid or not avoid.
-		
-		
-		
     **/
     
     public function SetAvoidPlayers(avoidPlayers:Bool):Void;
     
     
     /**
-        Returns whenever the player is set not to collide with their teammates. 
+        Returns whenever the player is set not to collide with their teammates.
 		
-		
-		**Returns:** noCollideWithTeammates
-		
-		
+		`**Returns:** noCollideWithTeammates
     **/
     
     public function GetNoCollideWithTeammates():Bool;
@@ -513,54 +439,43 @@ extern class Player extends Entity {
     /**
         Sets whether the player's current weapon should drop on death. 
 		
-		NOTE! This seems to be reset to false when player dies. 
+		NOTE! This seems to be reset to false when player dies.
 		
-		 
 		Name | Description
 		--- | ---
 		`drop` | Whether to drop the player's current weapon or not
-		
-		
-		
     **/
     
     public function ShouldDropWeapon(drop:Bool):Void;
     #end
     
     /**
-        Sets the player's class id. 
-		
+        Sets the player's class id.
 		
 		Name | Description
 		--- | ---
 		`classID` | The class id the player is being set with.
-		
-		
-		
     **/
     
     public function SetClassID(classID:Float):Void;
     
     
     /**
-        Sets the sequence of the animation playing in the given gesture slot. 
-		
+        Sets the sequence of the animation playing in the given gesture slot.
 		
 		Name | Description
 		--- | ---
 		`slot` | The gesture slot. See GESTURE_SLOT_ Enums
 		`sequenceID` | Sequence ID to set.
-		
-		
-		
     **/
     
-    public function AnimSetGestureSequence(slot:Float, sequenceID:Float):Void;
+    public function AnimSetGestureSequence(slot:GESTURE_SLOT, sequenceID:Float):Void;
     
     #if server
     /**
-        Performs a trace hull and applies damage to the entities hit, returns the first entity hit. 
+        Performs a trace hull and applies damage to the entities hit, returns the first entity hit.
 		
+		**Warning:** Hitting the victim entity with this function in ENTITY:OnTakeDamage can cause infinite loops.
 		
 		Name | Description
 		--- | ---
@@ -574,19 +489,16 @@ extern class Player extends Entity {
 		`damageAllNPCs` | Whether to apply damage to all hit NPCs or not.
 		
 		
-		**Returns:** The hit entity
-		
-		
+		`**Returns:** The hit entity
     **/
     
-    public function TraceHullAttack(startPos:Vector, endPos:Vector, mins:Vector, maxs:Vector, damage:Float, damageFlags:Vector, damageForce:Float, damageAllNPCs:Bool):Entity;
+    public function TraceHullAttack(startPos:Vector, endPos:Vector, mins:Vector, maxs:Vector, damage:Float, damageFlags:DMG, damageForce:Float, damageAllNPCs:Bool):Entity;
     #end
     
     /**
-        Returns the player's death count 
+        Returns the player's death count
 		
-		
-		**Returns:** The number of deaths the player has had.
+		`**Returns:** The number of deaths the player has had.
 		
 		___
 		### Lua Examples
@@ -609,16 +521,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		The player will not be able to spawn after they've died 10 times.
-		
-		
     **/
     
     public function Deaths():Float;
     
     #if server
     /**
-        Removes all ammo from a certain player 
-		
+        Removes all ammo from a certain player
 		
 		___
 		### Lua Examples
@@ -630,57 +539,42 @@ extern class Player extends Entity {
 		    ply:RemoveAllAmmo()
 		end )
 		```
-		
-		
     **/
     
     public function RemoveAllAmmo():Void;
     #end
     #if server
     /**
-        Sets up the players view model hands. Calls GM:PlayerSetHandsModel to set the model of the hands. 
-		
+        Sets up the players view model hands. Calls GM:PlayerSetHandsModel to set the model of the hands.
 		
 		Name | Description
 		--- | ---
 		`ent` | If the player is spectating an entity, this should be the entity the player is spectating, so we can use its hands model instead.
-		
-		
-		
     **/
     
     public function SetupHands(ent:Entity):Void;
     #end
     #if client
     /**
-        Returns if the player can be heard by the local player. 
+        Returns if the player can be heard by the local player.
 		
-		
-		**Returns:** isAudible
-		
-		
+		`**Returns:** isAudible
     **/
     
     public function IsVoiceAudible():Bool;
     #end
     #if server
     /**
-        Removes all weapons and ammo from the player. 
-		
-		
-		
+        Removes all weapons and ammo from the player.
     **/
     
     public function RemoveAllItems():Void;
     #end
     
     /**
-        Returns the player's user group. 
+        Returns the player's user group.
 		
-		
-		**Returns:** The user group of the player. This will return "user" if player has no user group.
-		
-		
+		`**Returns:** The user group of the player. This will return "user" if player has no user group.
     **/
     
     public function GetUserGroup():String;
@@ -697,10 +591,9 @@ extern class Player extends Entity {
 		
 		 On the client it returns no value for bots. 
 		
-		 Use Player:AccountID for a shorter version of the SteamID. 
+		 Use Player:AccountID for a shorter version of the SteamID.
 		
-		 
-		**Returns:** Player's 64bit SteamID aka CommunityID.
+		`**Returns:** Player's 64bit SteamID aka CommunityID.
 		
 		___
 		### Lua Examples
@@ -713,8 +606,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		64bit SteamID (about 20 digits)
-		
-		
     **/
     
     public function SteamID64():String;
@@ -723,12 +614,9 @@ extern class Player extends Entity {
     /**
         Gets the actual view offset which equals the difference between the players actual position and their view when standing. 
 		
-		Do not confuse with Player:GetViewOffset and Player:GetViewOffsetDucked 
+		Do not confuse with Player:GetViewOffset and Player:GetViewOffsetDucked
 		
-		 
-		**Returns:** The actual view offset.
-		
-		
+		`**Returns:** The actual view offset.
     **/
     
     public function GetCurrentViewOffset():Vector;
@@ -737,30 +625,25 @@ extern class Player extends Entity {
     /**
         Returns the entity the player is currently observing. 
 		
-		Set using Player:SpectateEntity. 
+		Set using Player:SpectateEntity.
 		
-		 
-		**Returns:** The entity the player is currently spectating, or NULL if the player has no target.
-		
-		
+		`**Returns:** The entity the player is currently spectating, or NULL if the player has no target.
     **/
     
     public function GetObserverTarget():Entity;
     
     #if server
     /**
-        Detonates all tripmines belonging to the player. 
-		
-		
-		
+        Detonates all tripmines belonging to the player.
     **/
     
     public function DetonateTripmines():Void;
     #end
     #if server
     /**
-        Enables the sprint on the player. 
+        Enables the sprint on the player.
 		
+		**Bug:** BUG Not working - use Player:SetRunSpeed or CMoveData:SetMaxSpeed in a GM:Move hook, instead. Issue Tracker: #2390
 		
 		___
 		### Lua Examples
@@ -773,18 +656,15 @@ extern class Player extends Entity {
 		**Output:**
 		
 		None, but Player 1's sprint is enabled.
-		
-		
     **/
     
     public function SprintEnable():Void;
     #end
     
     /**
-        Returns the player's active weapon. 
+        Returns the player's active weapon.
 		
-		
-		**Returns:** The weapon the player is currently has equipped.
+		`**Returns:** The weapon the player is currently has equipped.
 		
 		___
 		### Lua Examples
@@ -797,18 +677,19 @@ extern class Player extends Entity {
 		**Output:**
 		
 		The active weapon's class. For example, if you are holding the tool gun then this will be "gmod_tool".
-		
-		
     **/
     
     public function GetActiveWeapon():Weapon;
     
     
     /**
-        Returns the player's name, this is an alias of Player:Nick. 
+        Returns the player's name, this is an alias of Player:Nick.
 		
+		**Note:** This function overrides Entity:GetName (in the Lua metatable, not in c++), keep it in mind when dealing with ents.FindByName or any engine function which requires the mapping name.
 		
-		**Returns:** The player's name. BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
+		**Bug:** BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
+		
+		`**Returns:** The player's name. BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
 		
 		___
 		### Lua Examples
@@ -821,8 +702,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Ninja101
-		
-		
     **/
     
     public function GetName():String;
@@ -831,20 +710,16 @@ extern class Player extends Entity {
     /**
         Sends a third person secondary fire animation event to the player. 
 		
-		Similar to other animation event functions, calls GM:DoAnimationEvent with PLAYERANIMEVENT_ATTACK_SECONDARY as the event and no extra data. 
-		
-		 
-		
+		Similar to other animation event functions, calls GM:DoAnimationEvent with PLAYERANIMEVENT_ATTACK_SECONDARY as the event and no extra data.
     **/
     
     public function DoSecondaryAttack():Void;
     
     
     /**
-        Returns a table of all ammo the player has. 
+        Returns a table of all ammo the player has.
 		
-		
-		**Returns:** number Key: AmmoID to be used with functions like game.GetAmmoName. number Value: Amount of ammo the player has of this kind.
+		`**Returns:** number Key: AmmoID to be used with functions like game.GetAmmoName. number Value: Amount of ammo the player has of this kind.
 		
 		___
 		### Lua Examples
@@ -865,16 +740,15 @@ extern class Player extends Entity {
 		7	=	64
 		8	=	3
 		10	=	6
-		
-		
     **/
     
     public function GetAmmo():AnyTable;
     
     
     /**
-        Restart a gesture on a player, within a gesture slot. 
+        Restart a gesture on a player, within a gesture slot.
 		
+		**Warning:** This is not automatically networked. This function has to be called on the client to be seen by said client.
 		
 		Name | Description
 		--- | ---
@@ -940,19 +814,16 @@ extern class Player extends Entity {
 		    
 		end
 		```
-		
-		
     **/
     
-    public function AnimRestartGesture(slot:Float, activity:Float, ?autokill:Bool):Void;
+    public function AnimRestartGesture(slot:GESTURE_SLOT, activity:ACT, ?autokill:Bool):Void;
     
     #if server
     /**
         Kills a player without notifying the rest of the server. 
 		
-		This will call GM:PlayerSilentDeath instead of GM:PlayerDeath. 
+		This will call GM:PlayerSilentDeath instead of GM:PlayerDeath.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -961,77 +832,61 @@ extern class Player extends Entity {
 		```lua 
 		Player(2):KillSilent()
 		```
-		
-		
     **/
     
     public function KillSilent():Void;
     #end
     #if server
     /**
-        Plays the correct step sound according to what the player is staying on. 
-		
+        Plays the correct step sound according to what the player is staying on.
 		
 		Name | Description
 		--- | ---
 		`volume` | Volume for the sound, in range from 0 to 1
-		
-		
-		
     **/
     
     public function PlayStepSound(volume:Float):Void;
     #end
     #if server
     /**
-        Allows player to use his weapons in a vehicle. You need to call this before entering a vehicle. 
+        Allows player to use his weapons in a vehicle. You need to call this before entering a vehicle.
 		
+		**Bug:** BUG Shooting in a vehicle fires two bullets. Issue Tracker: #1277
+		
+		**Bug:** BUG Weapon viewpunch does not decay while in a vehicle, leading to incorrect aim angles. Issue Tracker: #3261
 		
 		Name | Description
 		--- | ---
 		`allow` | Show we allow player to use his weapons in a vehicle or not.
-		
-		
-		
     **/
     
     public function SetAllowWeaponsInVehicle(allow:Bool):Void;
     #end
     
     /**
-        Unfreezes the props player is looking at. This is essentially the same as pressing reload with the physics gun, including double press for unfreeze all. 
+        Unfreezes the props player is looking at. This is essentially the same as pressing reload with the physics gun, including double press for unfreeze all.
 		
-		
-		**Returns:** Number of props unfrozen.
-		
-		
+		`**Returns:** Number of props unfrozen.
     **/
     
     public function PhysgunUnfreeze():Float;
     
     #if server
     /**
-        Returns the number of seconds that the player has been timing out for. You can check if a player is timing out with Player:IsTimingOut. 
+        Returns the number of seconds that the player has been timing out for. You can check if a player is timing out with Player:IsTimingOut.
 		
-		
-		**Returns:** Timeout seconds.
-		
-		
+		`**Returns:** Timeout seconds.
     **/
     
     public function GetTimeoutSeconds():Float;
     #end
     #if server
     /**
-        Sets whether the player can use the HL2 suit zoom ("+zoom" bind) or not. 
-		
+        Sets whether the player can use the HL2 suit zoom ("+zoom" bind) or not.
 		
 		Name | Description
 		--- | ---
 		`canZoom` | Whether to make the player able or unable to zoom.
-		
-		
-		
     **/
     
     public function SetCanZoom(canZoom:Bool):Void;
@@ -1042,45 +897,38 @@ extern class Player extends Entity {
 		
 		There currently is no way to modify the slow walking +walk speed. 
 		
-		 See also Player:GetWalkSpeed, Player:SetCrouchedWalkSpeed, Player:SetMaxSpeed and Player:SetRunSpeed. 
+		 See also Player:GetWalkSpeed, Player:SetCrouchedWalkSpeed, Player:SetMaxSpeed and Player:SetRunSpeed.
 		
-		 
+		**Bug:** BUG Using a speed of 0 can lead to prediction errors. Issue Tracker: #2030
+		
 		Name | Description
 		--- | ---
 		`walkSpeed` | The new walk speed when sv_friction is below 10. Higher sv_friction values will result in slower speed. Has to be 7 or above or the player won't be able to move.
-		
-		
-		
     **/
     
     public function SetWalkSpeed(walkSpeed:Float):Void;
     
     
     /**
-        Sets the maximum height a player can step onto without jumping. 
-		
+        Sets the maximum height a player can step onto without jumping.
 		
 		Name | Description
 		--- | ---
 		`stepHeight` | The new maximum height the player can step onto without jumping
-		
-		
-		
     **/
     
     public function SetStepSize(stepHeight:Float):Void;
     
     
     /**
-        Returns if the player has the specified weapon 
-		
+        Returns if the player has the specified weapon
 		
 		Name | Description
 		--- | ---
 		`className` | Class name of the weapon
 		
 		
-		**Returns:** True if the player has the weapon
+		`**Returns:** True if the player has the weapon
 		
 		___
 		### Lua Examples
@@ -1093,57 +941,45 @@ extern class Player extends Entity {
 		**Output:**
 		
 		"true" in console, if player 1 has Physics Gun.
-		
-		
     **/
     
     public function HasWeapon(className:String):Bool;
     
     #if client
     /**
-        Returns whether or not the player is muted locally. 
+        Returns whether or not the player is muted locally.
 		
-		
-		**Returns:** whether or not the player is muted locally.
-		
-		
+		`**Returns:** whether or not the player is muted locally.
     **/
     
     public function IsMuted():Bool;
     #end
     
     /**
-        Returns if the player is an bot or not 
+        Returns if the player is an bot or not
 		
-		
-		**Returns:** True if the player is a bot.
-		
-		
+		`**Returns:** True if the player is a bot.
     **/
     
     public function IsBot():Bool;
     
     #if client
     /**
-        Opens the player steam profile page in the steam overlay browser. 
-		
-		
-		
+        Opens the player steam profile page in the steam overlay browser.
     **/
     
     public function ShowProfile():Void;
     #end
     
     /**
-        Returns true/false if the player is in specified group or not. 
-		
+        Returns true/false if the player is in specified group or not.
 		
 		Name | Description
 		--- | ---
 		`groupname` | Group to check the player for.
 		
 		
-		**Returns:** isInUserGroup
+		`**Returns:** isInUserGroup
 		
 		___
 		### Lua Examples
@@ -1158,57 +994,44 @@ extern class Player extends Entity {
 		**Output:**
 		
 		"Yes, I'm awesome!" in console.
-		
-		
     **/
     
     public function IsUserGroup(groupname:String):Bool;
     
     
     /**
-        Sets the render angles of a player. 
-		
+        Sets the render angles of a player.
 		
 		Name | Description
 		--- | ---
 		`ang` | The new render angles to set
-		
-		
-		
     **/
     
     public function SetRenderAngles(ang:Angle):Void;
     
     
     /**
-        Returns the maximum height player can step onto. 
+        Returns the maximum height player can step onto.
 		
-		
-		**Returns:** The maximum height player can get up onto without jumping, in hammer units.
-		
-		
+		`**Returns:** The maximum height player can get up onto without jumping, in hammer units.
     **/
     
     public function GetStepSize():Float;
     
     #if client
     /**
-        Polls the engine to request if the player should be drawn at the time the function is called. 
+        Polls the engine to request if the player should be drawn at the time the function is called.
 		
-		
-		**Returns:** shouldDraw
-		
-		
+		`**Returns:** shouldDraw
     **/
     
     public function ShouldDrawLocalPlayer():Bool;
     #end
     
     /**
-        Returns the entity the player is using to see from (such as the player itself, the camera, or another entity). 
+        Returns the entity the player is using to see from (such as the player itself, the camera, or another entity).
 		
-		
-		**Returns:** The entity the player is using to see from
+		`**Returns:** The entity the player is using to see from
 		
 		___
 		### Lua Examples
@@ -1221,35 +1044,26 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Player [1][ExamplePlayer]
-		
-		
     **/
     
     public function GetViewEntity():Entity;
     
     
     /**
-        Sets if the player can toggle his flashlight. Function exists on both the server and client but has no effect when ran on the client. 
-		
+        Sets if the player can toggle his flashlight. Function exists on both the server and client but has no effect when ran on the client.
 		
 		Name | Description
 		--- | ---
 		`canFlashlight` | True allows flashlight toggling
-		
-		
-		
     **/
     
     public function AllowFlashlight(canFlashlight:Bool):Void;
     
     
     /**
-        Returns whether the players movement is currently frozen, contolled by Player:Freeze. 
+        Returns whether the players movement is currently frozen, contolled by Player:Freeze.
 		
-		
-		**Returns:** Whether the players movement is currently frozen or not.
-		
-		
+		`**Returns:** Whether the players movement is currently frozen or not.
     **/
     
     public function IsFrozen():Bool;
@@ -1258,23 +1072,18 @@ extern class Player extends Entity {
     /**
         Sends a third person animation event to the player. 
 		
-		Calls GM:DoAnimationEvent with PLAYERANIMEVENT_CUSTOM_GESTURE as the event, data as the given data. 
+		Calls GM:DoAnimationEvent with PLAYERANIMEVENT_CUSTOM_GESTURE as the event, data as the given data.
 		
-		 
 		Name | Description
 		--- | ---
 		`data` | The data to send.
-		
-		
-		
     **/
     
     public function DoAnimationEvent(data:Float):Void;
     
     #if server
     /**
-        Sets the player armor to the argument. 
-		
+        Sets the player armor to the argument.
 		
 		Name | Description
 		--- | ---
@@ -1294,40 +1103,30 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Sets the player armor to 100
-		
-		
     **/
     
     public function SetArmor(Amount:Float):Void;
     #end
     
     /**
-        Set a player's FOV (Field Of View) over a certain amount of time. 
-		
+        Set a player's FOV (Field Of View) over a certain amount of time.
 		
 		Name | Description
 		--- | ---
 		`fov` | the angle of perception (FOV). Set to 0 to return to default user FOV. ( Which is ranging from 75 to 90, depending on user settings )
 		`time` | the time it takes to transition to the FOV expressed in a floating point.
-		
-		
-		
     **/
     
     public function SetFOV(fov:Float, time:Float):Void;
     
     
     /**
-        Gets total count of entities of same class. 
-		
+        Gets total count of entities of same class.
 		
 		Name | Description
 		--- | ---
 		`type` | Entity type to get count of.
 		`minus` | If specified, it will reduce the counter by this value. Works only serverside.
-		
-		
-		
     **/
     
     public function GetCount(type:String, ?minus:Float):Void;
@@ -1336,10 +1135,9 @@ extern class Player extends Entity {
     /**
         Returns the player's sprint speed. 
 		
-		See also Player:SetRunSpeed, Player:GetWalkSpeed and Player:GetMaxSpeed. 
+		See also Player:SetRunSpeed, Player:GetWalkSpeed and Player:GetMaxSpeed.
 		
-		 
-		**Returns:** The sprint speed
+		`**Returns:** The sprint speed
 		
 		___
 		### Lua Examples
@@ -1352,23 +1150,20 @@ extern class Player extends Entity {
 		**Output:**
 		
 		500
-		
-		
     **/
     
     public function GetRunSpeed():Float;
     
     
     /**
-        Returns the weapon for the specified class 
-		
+        Returns the weapon for the specified class
 		
 		Name | Description
 		--- | ---
 		`className` | Class name of weapon
 		
 		
-		**Returns:** The weapon for the specified class.
+		`**Returns:** The weapon for the specified class.
 		
 		___
 		### Lua Examples
@@ -1381,45 +1176,35 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Something like "Weapon [77]" in console.
-		
-		
     **/
     
     public function GetWeapon(className:String):Weapon;
     
     
     /**
-        Resets the player's view punch ( Player:ViewPunch ) effect back to normal. 
-		
+        Resets the player's view punch ( Player:ViewPunch ) effect back to normal.
 		
 		Name | Description
 		--- | ---
 		`tolerance` | Reset all ViewPunch below this threshold.
-		
-		
-		
     **/
     
     public function ViewPunchReset(?tolerance:Float):Void;
     
     
     /**
-        ***Deprecated:**   You should use Player: GetViewPunchAngles instead.
+        ***Deprecated:** You should use Player: GetViewPunchAngles instead.
 		
-		Returns players screen punch effect angle. 
+		Returns players screen punch effect angle.
 		
-		
-		**Returns:** The punch angle
-		
-		
+		`**Returns:** The punch angle
     **/
-    @:deprecated
+    @:deprecated("You should use Player: GetViewPunchAngles instead.")
     public function GetPunchAngle():Angle;
     
     #if server
     /**
-        Add a certain amount to the player's death count 
-		
+        Add a certain amount to the player's death count
 		
 		Name | Description
 		--- | ---
@@ -1437,8 +1222,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Player1 has 2 extra deaths on the scoreboard relative to his old score.
-		
-		
     **/
     
     public function AddDeaths(count:Float):Void;
@@ -1447,49 +1230,38 @@ extern class Player extends Entity {
     /**
         Starts the player's attack animation. The attack animation is determined by the weapon's HoldType. 
 		
-		Similar to other animation event functions, calls GM:DoAnimationEvent with PLAYERANIMEVENT_ATTACK_PRIMARY as the event and no extra data. 
-		
-		 
-		
+		Similar to other animation event functions, calls GM:DoAnimationEvent with PLAYERANIMEVENT_ATTACK_PRIMARY as the event and no extra data.
     **/
     
     public function DoAttackEvent():Void;
     
     
     /**
-        Returns whether the player is currently sprinting or not. 
+        Returns whether the player is currently sprinting or not.
 		
-		
-		**Returns:** Is the player sprinting or not
-		
-		
+		`**Returns:** Is the player sprinting or not
     **/
     
     public function IsSprinting():Bool;
     
     
     /**
-        Sets how quickly a player ducks. 
+        Sets how quickly a player ducks.
 		
+		**Bug:** BUG This will not work for values >= 1. Issue Tracker: #2722
 		
 		Name | Description
 		--- | ---
 		`duckSpeed` | How quickly the player will duck.
-		
-		
-		
     **/
     
     public function SetDuckSpeed(duckSpeed:Float):Void;
     
     
     /**
-        Returns the packet loss of the client. It is not networked so it only returns 0 when run clientside. 
+        Returns the packet loss of the client. It is not networked so it only returns 0 when run clientside.
 		
-		
-		**Returns:** Packets lost
-		
-		
+		`**Returns:** Packets lost
     **/
     
     public function PacketLoss():Float;
@@ -1498,71 +1270,56 @@ extern class Player extends Entity {
     /**
         Sets the hands entity of a player. 
 		
-		The hands entity is an entity introduced in Garry's Mod 13 and it's used to show the player's hands attached to the viewmodel. This is similar to the approach used in L4D and CS:GO, for more information on how to implement this system in your gamemode visit Using Viewmodel Hands. 
+		The hands entity is an entity introduced in Garry's Mod 13 and it's used to show the player's hands attached to the viewmodel. This is similar to the approach used in L4D and CS:GO, for more information on how to implement this system in your gamemode visit Using Viewmodel Hands.
 		
-		 
 		Name | Description
 		--- | ---
 		`hands` | The hands entity to set
-		
-		
-		
     **/
     
     public function SetHands(hands:Entity):Void;
     
     #if server
     /**
-        Returns if a player is the host of the current session. 
+        Returns if a player is the host of the current session.
 		
-		
-		**Returns:** True if the player is the listen server host, false otherwise. This will always be true in single player, and false on a dedicated server.
-		
-		
+		`**Returns:** True if the player is the listen server host, false otherwise. This will always be true in single player, and false on a dedicated server.
     **/
     
     public function IsListenServerHost():Bool;
     #end
     
     /**
-        Returns the player's ID. You can use Player() to get the player by their ID. 
+        Returns the player's ID. You can use Player() to get the player by their ID.
 		
-		
-		**Returns:** The player's user ID
-		
-		
+		`**Returns:** The player's user ID
     **/
     
     public function UserID():Float;
     
     
     /**
-        Returns whether the player is allowed to use his weapons in a vehicle or not. 
+        Returns whether the player is allowed to use his weapons in a vehicle or not.
 		
-		
-		**Returns:** Whether the player is allowed to use his weapons in a vehicle or not.
-		
-		
+		`**Returns:** Whether the player is allowed to use his weapons in a vehicle or not.
     **/
     
     public function GetAllowWeaponsInVehicle():Bool;
     
     
     /**
-        Returns the FOV of the player. 
+        Returns the FOV of the player.
 		
-		
-		**Returns:** FOV
-		
-		
+		`**Returns:** Field of view as a float
     **/
     
     public function GetFOV():Float;
     
     #if server
     /**
-        Prevents a hint from showing up. 
+        Prevents a hint from showing up.
 		
+		**Note:** This function is only available in Sandbox and its derivatives
 		
 		Name | Description
 		--- | ---
@@ -1586,20 +1343,15 @@ extern class Player extends Entity {
 		
 		-- Other default Hint types : PhysgunFreeze, PhysgunUse, VehicleView ...
 		```
-		
-		
     **/
     
     public function SuppressHint(name:String):Void;
     #end
     #if client
     /**
-        Returns whenever the player is heard by the local player. 
+        Returns whenever the player is heard by the local player.
 		
-		
-		**Returns:** isSpeaking
-		
-		
+		`**Returns:** isSpeaking
     **/
     
     public function IsSpeaking():Bool;
@@ -1608,9 +1360,10 @@ extern class Player extends Entity {
     /**
         Runs the concommand on the player. This does not work on bots. 
 		
-		If you wish to directly modify the movement input of bots, use GM:StartCommand instead. 
+		If you wish to directly modify the movement input of bots, use GM:StartCommand instead.
 		
-		 
+		**Note:** Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see Blocked ConCommands.
+		
 		Name | Description
 		--- | ---
 		`command` | command to run
@@ -1627,8 +1380,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		The Player1 dies.
-		
-		
     **/
     
     public function ConCommand(command:String):Void;
@@ -1637,12 +1388,9 @@ extern class Player extends Entity {
     /**
         Returns the view offset of the player which equals the difference between the players actual position and their view when ducked. 
 		
-		See also Player:GetViewOffset. 
+		See also Player:GetViewOffset.
 		
-		 
-		**Returns:** New crouching view offset, must be local vector to players Entity: GetPos
-		
-		
+		`**Returns:** New crouching view offset, must be local vector to players Entity: GetPos
     **/
     
     public function GetViewOffsetDucked():Vector;
@@ -1651,25 +1399,21 @@ extern class Player extends Entity {
     /**
         Returns the preferred carry angles of an object, if any are set. 
 		
-		Calls GM:GetPreferredCarryAngles with the target entity and returns the carry angles. 
+		Calls GM:GetPreferredCarryAngles with the target entity and returns the carry angles.
 		
-		 
 		Name | Description
 		--- | ---
 		`carryEnt` | Entity to retrieve the carry angles of.
 		
 		
-		**Returns:** Carry angles or nil if the entity has no preferred carry angles.
-		
-		
+		`**Returns:** Carry angles or nil if the entity has no preferred carry angles.
     **/
     
     public function GetPreferredCarryAngles(carryEnt:Entity):Angle;
     #end
     #if server
     /**
-        Sets a player's frags (kills) 
-		
+        Sets a player's frags (kills)
 		
 		Name | Description
 		--- | ---
@@ -1684,18 +1428,19 @@ extern class Player extends Entity {
 		```lua 
 		player.GetByID( 1 ):SetFrags( 9001 )
 		```
-		
-		
     **/
     
     public function SetFrags(fragcount:Float):Void;
     #end
     
     /**
-        Returns a 32 bit integer that remains constant for a player across joins/leaves and across different servers. This can be used when a string is inappropriate - e.g. in a database primary key. 
+        Returns a 32 bit integer that remains constant for a player across joins/leaves and across different servers. This can be used when a string is inappropriate - e.g. in a database primary key.
 		
+		**Warning:** This function has collisions, where more than one player has the same UniqueID. It is highly recommended to use Player:AccountID, Player:SteamID or Player:SteamID64 instead, which are guaranteed to be unique to each player.
 		
-		**Returns:** The player's Unique ID
+		**Note:** In Singleplayer, this function will always return 1.
+		
+		`**Returns:** The player's Unique ID
 		
 		___
 		### Lua Examples
@@ -1720,30 +1465,24 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Something like 1592073762
-		
-		
     **/
     
     public function UniqueID():Float;
     
     
     /**
-        Returns the widget the player is hovering with his mouse. 
+        Returns the widget the player is hovering with his mouse.
 		
-		
-		**Returns:** The hovered widget.
-		
-		
+		`**Returns:** The hovered widget.
     **/
     
     public function GetHoveredWidget():Entity;
     
     
     /**
-        ***Deprecated:**   This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
+        ***Deprecated:** This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 		
-		Doesn't appear to do anything. 
-		
+		Doesn't appear to do anything.
 		
 		___
 		### Lua Examples
@@ -1764,35 +1503,26 @@ extern class Player extends Entity {
 		    prevDown = cmd:KeyDown(IN_FORWARD)
 		end )
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.")
     public function StartSprinting():Void;
     
     
     /**
-        Returns the player's ping to server. 
+        Returns the player's ping to server.
 		
-		
-		**Returns:** The player's ping.
-		
-		
+		`**Returns:** The player's ping.
     **/
     
     public function Ping():Float;
     
     #if server
     /**
-        Attaches the players view to the position and angles of the specified entity. 
-		
+        Attaches the players view to the position and angles of the specified entity.
 		
 		Name | Description
 		--- | ---
 		`viewEntity` | The entity to attach the player view to.
-		
-		
-		
     **/
     
     public function SetViewEntity(viewEntity:Entity):Void;
@@ -1801,22 +1531,18 @@ extern class Player extends Entity {
     /**
         Returns the widget entity the player is using. 
 		
-		Having a pressed widget stops the player from firing his weapon to allow input to be passed onto the widget. 
+		Having a pressed widget stops the player from firing his weapon to allow input to be passed onto the widget.
 		
-		 
-		**Returns:** The pressed widget.
-		
-		
+		`**Returns:** The pressed widget.
     **/
     
     public function GetPressedWidget():Entity;
     
     
     /**
-        Used to find out if a player is currently 'driving' an entity (by which we mean 'right click > drive' ). 
+        Used to find out if a player is currently 'driving' an entity (by which we mean 'right click > drive' ).
 		
-		
-		**Returns:** A value representing whether or not the player is 'driving' an entity.
+		`**Returns:** A value representing whether or not the player is 'driving' an entity.
 		
 		___
 		### Lua Examples
@@ -1836,18 +1562,17 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Every player 'driving' an entity will die a painful death.
-		
-		
     **/
     
     public function IsDrivingEntity():Bool;
     
     
     /**
-        Returns the player's nickname. 
+        Returns the player's nickname.
 		
+		**Bug:** BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
 		
-		**Returns:** Player's Steam name BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
+		`**Returns:** Player's Steam name BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
 		
 		___
 		### Lua Examples
@@ -1860,16 +1585,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Ninja101
-		
-		
     **/
     
     public function Nick():String;
     
     
     /**
-        Fades the screen 
-		
+        Fades the screen
 		
 		Name | Description
 		--- | ---
@@ -1889,11 +1611,9 @@ extern class Player extends Entity {
 		    ply:ScreenFade( SCREENFADE.IN, Color( 255, 0, 0, 128 ), 0.3, 0 )
 		end )
 		```
-		
-		
     **/
     
-    public function ScreenFade(flags:Float, ?clr:Float, fadeTime:Float, fadeHold:Float):Void;
+    public function ScreenFade(flags:SCREENFADE, ?clr:Float, fadeTime:Float, fadeHold:Float):Void;
     
     
     /**
@@ -1901,23 +1621,20 @@ extern class Player extends Entity {
 		
 		If you want to set actual view offset, use Player:SetCurrentViewOffset 
 		
-		 See also Player:SetViewOffset for desired view offset when standing. 
+		 See also Player:SetViewOffset for desired view offset when standing.
 		
-		 
 		Name | Description
 		--- | ---
 		`viewOffset` | The new desired view offset when crouching.
-		
-		
-		
     **/
     
     public function SetViewOffsetDucked(viewOffset:Vector):Void;
     
     #if server
     /**
-        Disables the sprint on the player. 
+        Disables the sprint on the player.
 		
+		**Bug:** BUG Not working - use Player:SetRunSpeed or CMoveData:SetMaxSpeed in a GM:Move hook, instead. Issue Tracker: #2390
 		
 		___
 		### Lua Examples
@@ -1930,18 +1647,15 @@ extern class Player extends Entity {
 		**Output:**
 		
 		None, but Player 1's sprint is disabled.
-		
-		
     **/
     
     public function SprintDisable():Void;
     #end
     
     /**
-        Returns the player's armor. 
+        Returns the player's armor.
 		
-		
-		**Returns:** The player's armor.
+		`**Returns:** The player's armor.
 		
 		___
 		### Lua Examples
@@ -1955,8 +1669,6 @@ extern class Player extends Entity {
 		    end
 		end
 		```
-		
-		
     **/
     
     public function Armor():Float;
@@ -1965,24 +1677,20 @@ extern class Player extends Entity {
     /**
         Returns the player's AccountID aka SteamID3. 
 		
-		For bots and in singleplayer, this will return no value. 
+		For bots and in singleplayer, this will return no value.
 		
-		 
-		**Returns:** Player's SteamID3 aka AccountID.
-		
-		
+		`**Returns:** Player's SteamID3 aka AccountID.
     **/
     
     public function AccountID():Float;
     
     
     /**
-        Returns whenever the player is equipped with the suit item. 
+        Returns whenever the player is equipped with the suit item.
 		
+		**Bug:** BUG This will only work for the local player when used clientside. Issue Tracker: #3449
 		
-		**Returns:** Is the suit equipped or not.
-		
-		
+		`**Returns:** Is the suit equipped or not.
     **/
     
     public function IsSuitEquipped():Bool;
@@ -1993,9 +1701,8 @@ extern class Player extends Entity {
 		
 		Doesn't work for values above 1. 
 		
-		 See also Player:SetWalkSpeed and Player:GetCrouchedWalkSpeed. 
+		 See also Player:SetWalkSpeed and Player:GetCrouchedWalkSpeed.
 		
-		 
 		Name | Description
 		--- | ---
 		`speed` | The walk speed multiplier that crouch speed should be.
@@ -2012,16 +1719,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		The player will crouch-walk as fast as normal walking.
-		
-		
     **/
     
     public function SetCrouchedWalkSpeed(speed:Float):Void;
     
     #if server
     /**
-        Removes the specified weapon class from a certain player 
-		
+        Removes the specified weapon class from a certain player
 		
 		Name | Description
 		--- | ---
@@ -2039,37 +1743,30 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Crowbar removed from player 1
-		
-		
     **/
     
     public function StripWeapon(weapon:String):Void;
     #end
     #if server
     /**
-        Drops the players' weapon of a specific class. 
-		
+        Drops the players' weapon of a specific class.
 		
 		Name | Description
 		--- | ---
 		`class` | The class to drop.
 		`target` | If set, launches the weapon at given position. There is a limit to how far it is willing to throw the weapon. Overrides velocity argument.
 		`velocity` | If set and previous argument is unset, launches the weapon with given velocity. If the velocity is higher than 400, it will be clamped to 400.
-		
-		
-		
     **/
     
     public function DropNamedWeapon(_class:String, ?target:Vector, ?velocity:Vector):Void;
     #end
     
     /**
-        Returns whether the player has god mode or not, contolled by Player:GodEnable and Player:GodDisable. 
+        Returns whether the player has god mode or not, contolled by Player:GodEnable and Player:GodDisable.
 		
+		**Bug:** BUG This is not synced between the client and server. This will cause the client to always return false even in godmode. Issue Tracker: #2038
 		
-		**Returns:** Whether the player has god mode or not.
-		
-		
+		`**Returns:** Whether the player has god mode or not.
     **/
     
     public function HasGodMode():Bool;
@@ -2078,25 +1775,20 @@ extern class Player extends Entity {
     /**
         Sets the actual view offset which equals the difference between the players actual position and their view when standing. 
 		
-		Do not confuse with Player:SetViewOffset and Player:SetViewOffsetDucked 
+		Do not confuse with Player:SetViewOffset and Player:SetViewOffsetDucked
 		
-		 
 		Name | Description
 		--- | ---
 		`viewOffset` | The new view offset.
-		
-		
-		
     **/
     
     public function SetCurrentViewOffset(viewOffset:Vector):Void;
     
     
     /**
-        Checks if the player is alive. 
+        Checks if the player is alive.
 		
-		
-		**Returns:** Whether the player is alive
+		`**Returns:** Whether the player is alive
 		
 		___
 		### Lua Examples
@@ -2110,20 +1802,15 @@ extern class Player extends Entity {
 		   end
 		end
 		```
-		
-		
     **/
     
     public function Alive():Bool;
     
     
     /**
-        Returns if the player is in a vehicle 
+        Returns if the player is in a vehicle
 		
-		
-		**Returns:** Whether the player is in a vehicle.
-		
-		
+		`**Returns:** Whether the player is in a vehicle.
     **/
     
     public function InVehicle():Bool;
@@ -2132,16 +1819,19 @@ extern class Player extends Entity {
     /**
         Returns a Player Data key-value pair from the SQL database. (sv.db when called on server, cl.db when called on client) 
 		
-		Internally uses the sql library. 
+		Internally uses the sql library.
 		
-		 
+		**Warning:** This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+		
+		**Note:** PData is not networked from servers to clients!
+		
 		Name | Description
 		--- | ---
 		`key` | Name of the PData key
 		`default` | Default value if PData key doesn't exist.
 		
 		
-		**Returns:** The data in the SQL database or the default value given.
+		`**Returns:** The data in the SQL database or the default value given.
 		
 		___
 		### Lua Examples
@@ -2151,25 +1841,24 @@ extern class Player extends Entity {
 		```lua 
 		player.GetByID( 1 ):GetPData( "money", 0 )
 		```
-		
-		
     **/
     
-    public function GetPData(key:String, ?_default:Any):String;
+    public function GetPData(key:String, ?_default:Dynamic):String;
     
     
     /**
         Removes a Player Data key-value pair from the SQL database. (sv.db when called on server, cl.db when called on client) 
 		
-		Internally uses the sql library. 
+		Internally uses the sql library.
 		
-		 
+		**Warning:** This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+		
 		Name | Description
 		--- | ---
 		`key` | Key to remove
 		
 		
-		**Returns:** true is succeeded, false otherwise
+		`**Returns:** true is succeeded, false otherwise
 		
 		___
 		### Lua Examples
@@ -2179,43 +1868,37 @@ extern class Player extends Entity {
 		```lua 
 		player.GetByID( 1 ):RemovePData( "money" )
 		```
-		
-		
     **/
     
     public function RemovePData(key:String):Bool;
     
     
     /**
-        Returns the the observer mode of the player 
+        Returns the the observer mode of the player
 		
-		
-		**Returns:** Observe mode of that player, see OBS_MODE_ Enums.
-		
-		
+		`**Returns:** Observe mode of that player, see OBS_MODE_ Enums.
     **/
     
-    public function GetObserverMode():Float;
+    public function GetObserverMode():OBS_MODE;
     
     #if server
     /**
-        Sets the player's active weapon. You should use CUserCmd:SelectWeapon or Player:SelectWeapon, instead in most cases. 
+        Sets the player's active weapon. You should use CUserCmd:SelectWeapon or Player:SelectWeapon, instead in most cases.
 		
+		**Note:** This function will not trigger the weapon switch event or associated equip animations. You can achieve this using Player:SelectWeapon with Entity:GetClass.
+		
+		**Note:** This will not call GM:PlayerSwitchWeapon.
 		
 		Name | Description
 		--- | ---
 		`weapon` | The weapon to equip.
-		
-		
-		
     **/
     
     public function SetActiveWeapon(weapon:Weapon):Void;
     #end
     #if server
     /**
-        Enables the player's crosshair, if it was previously disabled via Player:CrosshairDisable. 
-		
+        Enables the player's crosshair, if it was previously disabled via Player:CrosshairDisable.
 		
 		___
 		### Lua Examples
@@ -2225,8 +1908,6 @@ extern class Player extends Entity {
 		```lua 
 		Entity( 1 ):CrosshairEnable()
 		```
-		
-		
     **/
     
     public function CrosshairEnable():Void;
@@ -2235,10 +1916,9 @@ extern class Player extends Entity {
     /**
         Returns the player's team ID. 
 		
-		Returns 0 clientside when the game is not fully loaded. 
+		Returns 0 clientside when the game is not fully loaded.
 		
-		 
-		**Returns:** The player's team's index number, as in the TEAM_ Enums or a custom team defined in team. SetUp.
+		`**Returns:** The player's team's index number, as in the TEAM_ Enums or a custom team defined in team. SetUp.
 		
 		___
 		### Lua Examples
@@ -2251,33 +1931,26 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Something like "Unassigned" in console.
-		
-		
     **/
     
-    public function Team():Float;
+    public function Team():TEAM;
     
     
     /**
-        Set if the player should be allowed to walk using the (default) alt key. 
-		
+        Set if the player should be allowed to walk using the (default) alt key.
 		
 		Name | Description
 		--- | ---
 		`abletowalk` | True allows the player to walk.
-		
-		
-		
     **/
     
     public function SetCanWalk(abletowalk:Bool):Void;
     
     
     /**
-        Returns the direction that the player is aiming. 
+        Returns the direction that the player is aiming.
 		
-		
-		**Returns:** The direction vector of players aim
+		`**Returns:** The direction vector of players aim
 		
 		___
 		### Lua Examples
@@ -2288,8 +1961,6 @@ extern class Player extends Entity {
 		local ply = Entity( 1 )
 		ply:SetVelocity( ply:GetAimVector() * 1000 )
 		```
-		
-		
     **/
     
     public function GetAimVector():Vector;
@@ -2298,34 +1969,27 @@ extern class Player extends Entity {
     /**
         Returns the view offset of the player which equals the difference between the players actual position and their view. 
 		
-		See also Player:GetViewOffsetDucked. 
+		See also Player:GetViewOffsetDucked.
 		
-		 
-		**Returns:** New view offset, must be local vector to players Entity: GetPos
-		
-		
+		`**Returns:** New view offset, must be local vector to players Entity: GetPos
     **/
     
     public function GetViewOffset():Vector;
     
     #if server
     /**
-        Returns whether the player identity was confirmed by the steam network. 
+        Returns whether the player identity was confirmed by the steam network.
 		
-		
-		**Returns:** Whether the player has been fully authenticated or not. This will always be true for singleplayer and the listen server host. This will always be false for bots.
-		
-		
+		`**Returns:** Whether the player has been fully authenticated or not. This will always be true for singleplayer and the listen server host. This will always be false for bots.
     **/
     
     public function IsFullyAuthenticated():Bool;
     #end
     
     /**
-        ***Deprecated:**   This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
+        ***Deprecated:** This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 		
-		When used in a GM:SetupMove hook, this function will force the player to walk, as well as preventing the player from sprinting. 
-		
+		When used in a GM:SetupMove hook, this function will force the player to walk, as well as preventing the player from sprinting.
 		
 		___
 		### Lua Examples
@@ -2337,24 +2001,20 @@ extern class Player extends Entity {
 		    ply:StartWalking()
 		end )
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.")
     public function StartWalking():Void;
     
     #if server
     /**
-        Forces the player to say whatever the first argument is. Works on bots too. 
+        Forces the player to say whatever the first argument is. Works on bots too.
 		
+		**Note:** This function ignores the default chat message cooldown
 		
 		Name | Description
 		--- | ---
 		`text` | The text to force the player to say.
 		`teamOnly` | Whether to send this message to our own team only.
-		
-		
-		
     **/
     
     public function Say(text:String, ?teamOnly:Bool):Void;
@@ -2363,80 +2023,62 @@ extern class Player extends Entity {
     /**
         Returns the crouched walk speed multiplier. 
 		
-		See also Player:GetWalkSpeed and Player:SetCrouchedWalkSpeed. 
+		See also Player:GetWalkSpeed and Player:SetCrouchedWalkSpeed.
 		
-		 
-		**Returns:** The crouched walk speed multiplier.
-		
-		
+		`**Returns:** The crouched walk speed multiplier.
     **/
     
     public function GetCrouchedWalkSpeed():Float;
     
     #if server
     /**
-        Returns the time in seconds since the player connected. 
+        Returns the time in seconds since the player connected.
 		
-		
-		**Returns:** connectTime
-		
-		
+		`**Returns:** connectTime
     **/
     
     public function TimeConnected():Float;
     #end
     
     /**
-        Returns the entity the player is currently using, like func_tank mounted turrets or +use prop pickups. 
+        Returns the entity the player is currently using, like func_tank mounted turrets or +use prop pickups.
 		
-		
-		**Returns:** Entity in use, or NULL entity otherwise. For +use prop pickups, this will be NULL clientside.
-		
-		
+		`**Returns:** Entity in use, or NULL entity otherwise. For +use prop pickups, this will be NULL clientside.
     **/
     
     public function GetEntityInUse():Entity;
     
     
     /**
-        Sets the widget that is currently hovered by the player's mouse. 
-		
+        Sets the widget that is currently hovered by the player's mouse.
 		
 		Name | Description
 		--- | ---
 		`widget` | The widget entity that the player is hovering.
-		
-		
-		
     **/
     
     public function SetHoveredWidget(?widget:Entity):Void;
     
     
     /**
-        Sets the amount of the specified ammo for the player. 
-		
+        Sets the amount of the specified ammo for the player.
 		
 		Name | Description
 		--- | ---
 		`ammoCount` | The amount of ammunition to set.
 		`ammoType` | The ammunition type. Can be either number ammo ID or string ammo name.
-		
-		
-		
     **/
     
-    public function SetAmmo(ammoCount:Float, ammoType:Any):Void;
+    public function SetAmmo(ammoCount:Float, ammoType:Dynamic):Void;
     
     #if server
     /**
-        Bans the player from the server for a certain amount of minutes. 
-		
+        Bans the player from the server for a certain amount of minutes.
 		
 		Name | Description
 		--- | ---
 		`minutes` | Duration of the ban in minutes (0 is permanent)
-		`kick` | Whether to kick the player after banning then or not
+		`kick` | Whether to kick the player after banning them or not
 		
 		
 		___
@@ -2447,40 +2089,31 @@ extern class Player extends Entity {
 		```lua 
 		Entity(1):Ban( 1440, true )
 		```
-		
-		
     **/
     
     public function Ban(minutes:Float, ?kick:Bool):Void;
     #end
     
     /**
-        Determines whenever the player is allowed to use the zoom functionality. 
+        Determines whenever the player is allowed to use the zoom functionality.
 		
-		
-		**Returns:** canZoom
-		
-		
+		`**Returns:** canZoom
     **/
     
     public function GetCanZoom():Bool;
     
     
     /**
-        Returns true if the player is playing a taunt. 
+        Returns true if the player is playing a taunt.
 		
-		
-		**Returns:** Whether the player is playing a taunt.
-		
-		
+		`**Returns:** Whether the player is playing a taunt.
     **/
     
     public function IsPlayingTaunt():Bool;
     
     #if server
     /**
-        Add a certain amount to the player's frag count (or kills count) 
-		
+        Add a certain amount to the player's frag count (or kills count)
 		
 		Name | Description
 		--- | ---
@@ -2498,16 +2131,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Player1 has 2 extra frags on the scoreboard relative to his old score.
-		
-		
     **/
     
     public function AddFrags(count:Float):Void;
     #end
     
     /**
-        Sets the player weapon's color. The part of the model that is colored is determined by the model itself, and is different for each model. 
-		
+        Sets the player weapon's color. The part of the model that is colored is determined by the model itself, and is different for each model.
 		
 		Name | Description
 		--- | ---
@@ -2524,16 +2154,13 @@ extern class Player extends Entity {
 		 ply:SetWeaponColor( Vector(1,0,0) )
 		end
 		```
-		
-		
     **/
     
     public function SetWeaponColor(Color:Vector):Void;
     
     
     /**
-        Gets the bottom base and the top base size of the player's hull. 
-		
+        Gets the bottom base and the top base size of the player's hull.
 		
 		Name | Description
 		--- | ---
@@ -2560,8 +2187,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		-16.000000 -16.000000 0.000000 16.000000 16.000000 72.000000
-		
-		
     **/
     
     public function GetHull():PlayerGetHullReturn;
@@ -2570,10 +2195,9 @@ extern class Player extends Entity {
     /**
         Returns the player's normal walking speed. Not sprinting, not slow walking. (+walk) 
 		
-		See also Player:SetWalkSpeed, Player:GetMaxSpeed and Player:GetRunSpeed. 
+		See also Player:SetWalkSpeed, Player:GetMaxSpeed and Player:GetRunSpeed.
 		
-		 
-		**Returns:** The normal walking speed.
+		`**Returns:** The normal walking speed.
 		
 		___
 		### Lua Examples
@@ -2586,16 +2210,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		200 in console by default
-		
-		
     **/
     
     public function GetWalkSpeed():Float;
     
     #if server
     /**
-        Disables the default player's crosshair. Can be reenabled with Player:CrosshairEnable. This will affect WEAPON:DoDrawCrosshair. 
-		
+        Disables the default player's crosshair. Can be reenabled with Player:CrosshairEnable. This will affect WEAPON:DoDrawCrosshair.
 		
 		___
 		### Lua Examples
@@ -2605,16 +2226,13 @@ extern class Player extends Entity {
 		```lua 
 		Entity( 1 ):CrosshairDisable()
 		```
-		
-		
     **/
     
     public function CrosshairDisable():Void;
     #end
     #if server
     /**
-        Forces the player to drop the specified weapon 
-		
+        Forces the player to drop the specified weapon
 		
 		Name | Description
 		--- | ---
@@ -2650,35 +2268,26 @@ extern class Player extends Entity {
 		    ply:DropWeapon( ply:GetActiveWeapon() )
 		end )
 		```
-		
-		
     **/
     
     public function DropWeapon(?weapon:Weapon, ?target:Vector, ?velocity:Vector):Void;
     #end
     
     /**
-        Returns true if the player is able to walk using the (default) alt key. 
+        Returns true if the player is able to walk using the (default) alt key.
 		
-		
-		**Returns:** AbleToWalk
-		
-		
+		`**Returns:** AbleToWalk
     **/
     
     public function GetCanWalk():Bool;
     
     #if server
     /**
-        Lets the player spray his decal without delay 
-		
+        Lets the player spray his decal without delay
 		
 		Name | Description
 		--- | ---
 		`allow` | Allow or disallow
-		
-		
-		
     **/
     
     public function AllowImmediateDecalPainting(allow:Bool):Void;
@@ -2687,57 +2296,46 @@ extern class Player extends Entity {
     /**
         Slows down the player movement simulation by the timescale, this is used internally in the HL2 weapon stripping sequence. 
 		
-		It achieves such behavior by multiplying the FrameTime by the specified timescale at the start of the movement simulation and then restoring it afterwards. 
+		It achieves such behavior by multiplying the FrameTime by the specified timescale at the start of the movement simulation and then restoring it afterwards.
 		
-		 
+		**Note:** This is reset to 1 on spawn
+		
+		**Note:** There is no weapon counterpart to this, you'll have to hardcode the multiplier in the weapon or call Weapon:SetNextPrimaryFire / Weapon:SetNextSecondaryFire manually from a Predicted Hook
+		
 		Name | Description
 		--- | ---
 		`timescale` | The timescale multiplier.
-		
-		
-		
     **/
     
     public function SetLaggedMovementValue(timescale:Float):Void;
     #end
     
     /**
-        Gets the vehicle the player is driving, returns NULL ENTITY if the player is not driving. 
+        Gets the vehicle the player is driving, returns NULL ENTITY if the player is not driving.
 		
-		
-		**Returns:** vehicle
-		
-		
+		`**Returns:** vehicle
     **/
     
     public function GetVehicle():Vehicle;
     
     #if server
     /**
-        Starts spectate mode for given player. This will also affect the players movetype in some cases. 
-		
+        Starts spectate mode for given player. This will also affect the players movetype in some cases.
 		
 		Name | Description
 		--- | ---
 		`mode` | Spectate mode, see OBS_MODE_ Enums.
-		
-		
-		
     **/
     
-    public function Spectate(mode:Float):Void;
+    public function Spectate(mode:OBS_MODE):Void;
     #end
     
     /**
-        Set if the players' model is allowed to rotate around the pitch and roll axis. 
-		
+        Set if the players' model is allowed to rotate around the pitch and roll axis.
 		
 		Name | Description
 		--- | ---
 		`Allowed` | Allowed to rotate
-		
-		
-		
     **/
     
     public function SetAllowFullRotation(Allowed:Bool):Void;
@@ -2746,9 +2344,8 @@ extern class Player extends Entity {
     /**
         Executes a simple Lua string on the player. 
 		
-		Note: The string is limited to 254 bytes. Consider using the net library for more advanced server-client interaction. 
+		Note: The string is limited to 254 bytes. Consider using the net library for more advanced server-client interaction.
 		
-		 
 		Name | Description
 		--- | ---
 		`script` | The script to execute.
@@ -2763,16 +2360,15 @@ extern class Player extends Entity {
 		local pl = Entity( 1 )
 		pl:SendLua( "print( 'Hello World' )" )
 		```
-		
-		
     **/
     
     public function SendLua(script:String):Void;
     #end
     #if server
     /**
-        Gives the player a weapon. 
+        Gives the player a weapon.
 		
+		**Note:** While this function is meant for weapons/pickupables only, it is not restricted to weapons. Any entity can be spawned using this function, including NPCs and SENTs.
 		
 		Name | Description
 		--- | ---
@@ -2780,7 +2376,7 @@ extern class Player extends Entity {
 		`bNoAmmo` | Set to true to not give any ammo on weapon spawn. (Reserve ammo set by DefaultClip)
 		
 		
-		**Returns:** The weapon given to the player, if one was given. It will return NULL if the player already has the weapon, or the weapon entity (entity with given classname) doesn't exist.
+		`**Returns:** The weapon given to the player, if one was given. It will return NULL if the player already has the weapon, or the weapon entity (entity with given classname) doesn't exist.
 		
 		___
 		### Lua Examples
@@ -2800,38 +2396,29 @@ extern class Player extends Entity {
 		
 		local w = Entity( 1 ):Give( "weapon_base", true )
 		```
-		
-		
     **/
     
     public function Give(weaponClassName:String, ?bNoAmmo:Bool):Weapon;
     #end
     
     /**
-        Returns players screen punch effect angle. 
+        Returns players screen punch effect angle.
 		
-		
-		**Returns:** The punch angle
-		
-		
+		`**Returns:** The punch angle
     **/
     
     public function GetViewPunchAngles():Angle;
     
     #if server
     /**
-        Removes all ammo from the player. 
-		
-		
-		
+        Removes all ammo from the player.
     **/
     
     public function StripAmmo():Void;
     #end
     
     /**
-        Simulates a push on the client's screen. 
-		
+        Simulates a push on the client's screen.
 		
 		Name | Description
 		--- | ---
@@ -2846,16 +2433,17 @@ extern class Player extends Entity {
 		```lua 
 		player:ViewPunch(Angle(-10, 0, 0))
 		```
-		
-		
     **/
     
     public function ViewPunch(PunchAngle:Angle):Void;
     
     
     /**
-        Displays a message either in their chat, console, or center of the screen. See also PrintMessage. 
+        Displays a message either in their chat, console, or center of the screen. See also PrintMessage.
 		
+		**Note:** When called serverside, this uses the archaic user message system (the umsg library) and hence is limited to ≈250 characters.
+		
+		**Note:** HUD_PRINTCENTER will not work when this is called clientside.
 		
 		Name | Description
 		--- | ---
@@ -2874,18 +2462,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		I'm new here.
-		
-		
     **/
     
-    public function PrintMessage(type:Float, message:String):Void;
+    public function PrintMessage(type:HUD, message:String):Void;
     
     
     /**
-        Resets both normal and duck hulls to their default values. 
-		
-		
-		
+        Resets both normal and duck hulls to their default values.
     **/
     
     public function ResetHull():Void;
@@ -2894,33 +2477,27 @@ extern class Player extends Entity {
     /**
         Stops a player from using any inputs, such as moving, turning, or attacking. Key binds are still called. Similar to Player:Freeze but the player takes no damage. 
 		
-		Adds the FL_FROZEN and FL_GODMODE flags to the player. 
+		Adds the FL_FROZEN and FL_GODMODE flags to the player.
 		
-		 
-		
+		**Bug:** BUG Frozen bots will still be able to look around.
     **/
     
     public function Lock():Void;
     #end
     #if server
     /**
-        Signals the entity that it was picked up by the gravity gun. This call is only required if you want to simulate the situation of picking up objects. 
-		
+        Signals the entity that it was picked up by the gravity gun. This call is only required if you want to simulate the situation of picking up objects.
 		
 		Name | Description
 		--- | ---
 		`ent` | The entity picked up
-		
-		
-		
     **/
     
     public function SimulateGravGunPickup(ent:Entity):Void;
     #end
     #if server
     /**
-        Sets the usergroup of the player. 
-		
+        Sets the usergroup of the player.
 		
 		Name | Description
 		--- | ---
@@ -2936,50 +2513,38 @@ extern class Player extends Entity {
 		Entity(1):SetUserGroup("superadmin")
 		print(Entity(1):GetUserGroup())
 		```
-		
-		
     **/
     
     public function SetUserGroup(groupName:String):Void;
     #end
     
     /**
-        Unfreezes all objects the player has frozen with their Physics Gun. Same as double pressing R while holding Physics Gun. 
-		
-		
-		
+        Unfreezes all objects the player has frozen with their Physics Gun. Same as double pressing R while holding Physics Gun.
     **/
     
     public function UnfreezePhysicsObjects():Void;
     
     
     /**
-        Returns whether the player is a superadmin. 
+        Returns whether the player is a superadmin.
 		
-		
-		**Returns:** True if the player is a superadmin.
-		
-		
+		`**Returns:** True if the player is a superadmin.
     **/
     
     public function IsSuperAdmin():Bool;
     
     
     /**
-        Returns the render angles for the player. 
+        Returns the render angles for the player.
 		
-		
-		**Returns:** The render angles of the player. Only yaw part of the angle seems to be present.
-		
-		
+		`**Returns:** The render angles of the player. Only yaw part of the angle seems to be present.
     **/
     
     public function GetRenderAngles():Angle;
     
     #if server
     /**
-        Makes a player spray their decal. 
-		
+        Makes a player spray their decal.
 		
 		Name | Description
 		--- | ---
@@ -2995,16 +2560,13 @@ extern class Player extends Entity {
 		```lua 
 		ply:SprayDecal(ply:EyePos(),ply:EyePos() + ply:GetAimVector()*5000)
 		```
-		
-		
     **/
     
     public function SprayDecal(sprayOrigin:Vector, sprayEndPos:Vector):Void;
     #end
     #if server
     /**
-        Enables god mode on the player. 
-		
+        Enables god mode on the player.
 		
 		___
 		### Lua Examples
@@ -3016,93 +2578,74 @@ extern class Player extends Entity {
 		    v:GodEnable()
 		end
 		```
-		
-		
     **/
     
     public function GodEnable():Void;
     #end
     
     /**
-        Returns players death ragdoll. The ragdoll is created by Player:CreateRagdoll. 
+        Returns players death ragdoll. The ragdoll is created by Player:CreateRagdoll.
 		
-		
-		**Returns:** The ragdoll. Unlike normal clientside ragdolls (C_ClientRagdoll), this will be a C_HL2MPRagdoll on the client, and hl2mp_ragdoll on the server.
-		
-		
+		`**Returns:** The ragdoll. Unlike normal clientside ragdolls (C_ClientRagdoll), this will be a C_HL2MPRagdoll on the client, and hl2mp_ragdoll on the server.
     **/
     
     public function GetRagdollEntity():Entity;
     
     
     /**
-        Removes the amount of the specified ammo from the player. 
-		
+        Removes the amount of the specified ammo from the player.
 		
 		Name | Description
 		--- | ---
 		`ammoCount` | The amount of ammunition to remove.
 		`ammoName` | The name of the ammunition to remove from. This can also be a number ammoID.
-		
-		
-		
     **/
     
     public function RemoveAmmo(ammoCount:Float, ammoName:String):Void;
     
     
     /**
-        Sets the maximum speed which the player can move at. 
+        Sets the maximum speed which the player can move at.
 		
+		**Note:** This is called automatically by the engine. If you wish to limit player speed without setting their run/sprint speeds, see CMoveData:SetMaxClientSpeed.
 		
 		Name | Description
 		--- | ---
 		`walkSpeed` | The maximum speed.
-		
-		
-		
     **/
     
     public function SetMaxSpeed(walkSpeed:Float):Void;
     
     #if server
     /**
-        Show/Hide the player's weapon's worldmodel. 
-		
+        Show/Hide the player's weapon's worldmodel.
 		
 		Name | Description
 		--- | ---
 		`draw` | Should draw
-		
-		
-		
     **/
     
     public function DrawWorldModel(draw:Bool):Void;
     #end
     
     /**
-        Checks if the limit is hit or not. If it is, it will throw a notification saying so. 
-		
+        Checks if the limit is hit or not. If it is, it will throw a notification saying so.
 		
 		Name | Description
 		--- | ---
 		`limitType` | Limit type. In unmodified Sandbox possible values are: "props" "ragdolls" "vehicles" "effects" "balloons" "cameras" "npcs" "sents" "dynamite" "lamps" "lights" "wheels" "thrusters" "hoverballs" "buttons" "emitters"
 		
 		
-		**Returns:** Returns true if limit is not hit, false if it is hit
-		
-		
+		`**Returns:** Returns true if limit is not hit, false if it is hit
     **/
     
     public function CheckLimit(limitType:String):Bool;
     
     
     /**
-        Returns the amount of kills a player has. 
+        Returns the amount of kills a player has.
 		
-		
-		**Returns:** kills
+		`**Returns:** kills
 		
 		___
 		### Lua Examples
@@ -3112,28 +2655,22 @@ extern class Player extends Entity {
 		```lua 
 		print(Entity( 1 ):Frags())
 		```
-		
-		
     **/
     
     public function Frags():Float;
     
     #if server
     /**
-        Unlocks the player movement if locked previously. Will disable godmode for the player if locked previously. 
-		
-		
-		
+        Unlocks the player movement if locked previously. Will disable godmode for the player if locked previously.
     **/
     
     public function UnLock():Void;
     #end
     
     /**
-        Returns a player model's color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is Vector(r,g,b), and each color should be between 0 and 1. 
+        Returns a player model's color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is Vector(r,g,b), and each color should be between 0 and 1.
 		
-		
-		**Returns:** color
+		`**Returns:** color
 		
 		___
 		### Lua Examples
@@ -3146,8 +2683,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Vector( 1, 1, 1 )
-		
-		
     **/
     
     public function GetPlayerColor():Vector;
@@ -3158,15 +2693,11 @@ extern class Player extends Entity {
 		
 		If you want to set actual view offset, use Player:SetCurrentViewOffset 
 		
-		 See also Player:SetViewOffsetDucked for desired view offset when crouching. 
+		 See also Player:SetViewOffsetDucked for desired view offset when crouching.
 		
-		 
 		Name | Description
 		--- | ---
 		`viewOffset` | The new desired view offset when standing.
-		
-		
-		
     **/
     
     public function SetViewOffset(viewOffset:Vector):Void;
@@ -3175,66 +2706,50 @@ extern class Player extends Entity {
     /**
         Sends a specified third person animation event to the player. 
 		
-		Calls GM:DoAnimationEvent with specified arguments. 
+		Calls GM:DoAnimationEvent with specified arguments.
 		
-		 
 		Name | Description
 		--- | ---
 		`event` | The event to send. See PLAYERANIMEVENT_ Enums.
 		`data` | The data to send alongside the event.
-		
-		
-		
     **/
     
-    public function DoCustomAnimEvent(event:Float, data:Float):Void;
+    public function DoCustomAnimEvent(event:PLAYERANIMEVENT, data:Float):Void;
     
     #if client
     /**
-        Returns the players voice volume, how loud the player's voice communication currently is, as a normal number. Doesn't work on local player unless the voice_loopback convar is set to 1. 
+        Returns the players voice volume, how loud the player's voice communication currently is, as a normal number. Doesn't work on local player unless the voice_loopback convar is set to 1.
 		
-		
-		**Returns:** The voice volume.
-		
-		
+		`**Returns:** The voice volume.
     **/
     
     public function VoiceVolume():Float;
     #end
     
     /**
-        Sets the jump power, eg. the velocity the player will applied to when he jumps. 
-		
+        Sets the jump power, eg. the velocity the player will applied to when he jumps.
 		
 		Name | Description
 		--- | ---
 		`jumpPower` | The new jump velocity.
-		
-		
-		
     **/
     
     public function SetJumpPower(jumpPower:Float):Void;
     
     
     /**
-        Sets whenever to suppress the pickup notification for the player. 
-		
+        Sets whenever to suppress the pickup notification for the player.
 		
 		Name | Description
 		--- | ---
 		`doSuppress` | Whenever to suppress the notice or not.
-		
-		
-		
     **/
     
     public function SetSuppressPickupNotices(doSuppress:Bool):Void;
     
     #if server
     /**
-        Enters the player into specified vehicle 
-		
+        Enters the player into specified vehicle
 		
 		Name | Description
 		--- | ---
@@ -3250,26 +2765,20 @@ extern class Player extends Entity {
 		local jeep = Entity( 1 ):GetEyeTrace().Entity
 		Entity( 1 ):EnterVehicle(jeep)
 		```
-		
-		
     **/
     
     public function EnterVehicle(vehicle:Vehicle):Void;
     #end
     #if server
     /**
-        Prints the players' name and position to the console. 
-		
-		
-		
+        Prints the players' name and position to the console.
     **/
     
     public function DebugInfo():Void;
     #end
     #if server
     /**
-        Enables/Disables the player's flashlight 
-		
+        Enables/Disables the player's flashlight
 		
 		Name | Description
 		--- | ---
@@ -3285,28 +2794,26 @@ extern class Player extends Entity {
 		Entity( 1 ):Flashlight(false)
 		Entity( 1 ):AllowFlashlight(false)
 		```
-		
-		
     **/
     
     public function Flashlight(isOn:Bool):Void;
     #end
     #if server
     /**
-        Returns true if the player is timing out (i.e. is losing connection), false otherwise. 
+        Returns true if the player is timing out (i.e. is losing connection), false otherwise.
 		
-		
-		**Returns:** isTimingOut
-		
-		
+		`**Returns:** isTimingOut
     **/
     
     public function IsTimingOut():Bool;
     #end
     #if server
     /**
-        This makes the player hold ( same as pressing E on a small prop ) the provided entity. 
+        This makes the player hold ( same as pressing E on a small prop ) the provided entity.
 		
+		**Note:** Don't get this confused with picking up items like ammo or health kits
+		
+		**Note:** This picks up the passed entity regardless of its mass or distance from the player
 		
 		Name | Description
 		--- | ---
@@ -3324,30 +2831,24 @@ extern class Player extends Entity {
 		    ply:PickupObject( obj )
 		end
 		```
-		
-		
     **/
     
     public function PickupObject(entity:Entity):Void;
     #end
     
     /**
-        Returns driving mode of the player. See Entity Driving. 
+        Returns driving mode of the player. See Entity Driving.
 		
-		
-		**Returns:** The drive mode ID or 0 if player doesn't use the drive system.
-		
-		
+		`**Returns:** The drive mode ID or 0 if player doesn't use the drive system.
     **/
     
     public function GetDrivingMode():Float;
     
     
     /**
-        Returns the jump power of the player 
+        Returns the jump power of the player
 		
-		
-		**Returns:** Jump power
+		`**Returns:** Jump power
 		
 		___
 		### Lua Examples
@@ -3360,18 +2861,15 @@ extern class Player extends Entity {
 		**Output:**
 		
 		200
-		
-		
     **/
     
     public function GetJumpPower():Float;
     
     
     /**
-        Returns whether the player is an admin or not 
+        Returns whether the player is an admin or not
 		
-		
-		**Returns:** True if the player is an admin
+		`**Returns:** True if the player is an admin
 		
 		___
 		### Lua Examples
@@ -3387,16 +2885,13 @@ extern class Player extends Entity {
 		    end
 		end )
 		```
-		
-		
     **/
     
     public function IsAdmin():Bool;
     
     #if server
     /**
-        Sets the player to the chosen team. 
-		
+        Sets the player to the chosen team.
 		
 		Name | Description
 		--- | ---
@@ -3418,54 +2913,43 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Sets the player to team 1 and respawns him/her.
-		
-		
     **/
     
     public function SetTeam(Team:Float):Void;
     #end
     
     /**
-        Returns if the player is in the context menu. 
+        Returns if the player is in the context menu.
 		
+		**Note:** Although this is shared, it will only work properly on the CLIENT for the local player. Using this serverside or on other players will return false.
 		
-		**Returns:** Is the player world clicking or not.
-		
-		
+		`**Returns:** Is the player world clicking or not.
     **/
     
     public function IsWorldClicking():Bool;
     
     #if server
     /**
-        Adds a entity to the players list of frozen objects. 
-		
+        Adds a entity to the players list of frozen objects.
 		
 		Name | Description
 		--- | ---
 		`ent` | Entity
 		`physobj` | Physics object belonging to ent
-		
-		
-		
     **/
     
     public function AddFrozenPhysicsObject(ent:Entity, physobj:PhysObj):Void;
     #end
     #if server
     /**
-        Stops the player from spectating another entity. 
-		
-		
-		
+        Stops the player from spectating another entity.
     **/
     
     public function UnSpectate():Void;
     #end
     
     /**
-        Sets the angle of the player's view (may rotate body too if angular difference is large) 
-		
+        Sets the angle of the player's view (may rotate body too if angular difference is large)
 		
 		Name | Description
 		--- | ---
@@ -3486,38 +2970,33 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Local player will look at 0,0,0
-		
-		
     **/
     
     public function SetEyeAngles(angle:Angle):Void;
     
     #if server
     /**
-        Signals the entity that it was dropped by the gravity gun. 
-		
+        Signals the entity that it was dropped by the gravity gun.
 		
 		Name | Description
 		--- | ---
 		`ent` | Entity that was dropped.
-		
-		
-		
     **/
     
     public function SimulateGravGunDrop(ent:Entity):Void;
     #end
     #if server
     /**
-        Retrieves the value of a client-side ConVar. The ConVar must have a FCVAR_USERINFO flag for this to work. 
+        Retrieves the value of a client-side ConVar. The ConVar must have a FCVAR_USERINFO flag for this to work.
 		
+		**Warning:** The returned value is truncated to 31 bytes.
 		
 		Name | Description
 		--- | ---
 		`cVarName` | The name of the client-side ConVar
 		
 		
-		**Returns:** The value of the ConVar
+		`**Returns:** The value of the ConVar
 		
 		___
 		### Lua Examples
@@ -3531,36 +3010,27 @@ extern class Player extends Entity {
 		    MsgN( Entity( 1 ):GetInfo( "Apple" ) )
 		end
 		```
-		
-		
     **/
     
     public function GetInfo(cVarName:String):String;
     #end
     
     /**
-        Sets the mins and maxs of the AABB of the players collision when ducked. 
-		
+        Sets the mins and maxs of the AABB of the players collision when ducked.
 		
 		Name | Description
 		--- | ---
 		`hullMins` | The min coordinates of the hull.
 		`hullMaxs` | The max coordinates of the hull.
-		
-		
-		
     **/
     
     public function SetHullDuck(hullMins:Vector, hullMaxs:Vector):Void;
     
     #if server
     /**
-        Returns true from the point when the player is sending client info but not fully in the game until they disconnect. 
+        Returns true from the point when the player is sending client info but not fully in the game until they disconnect.
 		
-		
-		**Returns:** isConnected
-		
-		
+		`**Returns:** isConnected
     **/
     
     public function IsConnected():Bool;
@@ -3569,12 +3039,9 @@ extern class Player extends Entity {
     /**
         Returns the player's maximum movement speed. 
 		
-		See also Player:SetMaxSpeed, Player:GetWalkSpeed and Player:GetRunSpeed. 
+		See also Player:SetMaxSpeed, Player:GetWalkSpeed and Player:GetRunSpeed.
 		
-		 
-		**Returns:** The maximum movement speed the player can go at.
-		
-		
+		`**Returns:** The maximum movement speed the player can go at.
     **/
     
     public function GetMaxSpeed():Float;
@@ -3583,17 +3050,16 @@ extern class Player extends Entity {
     /**
         Returns the player's view model entity by the index. Each player has 3 view models by default, but only the first one is used. 
 		
-		To use the other viewmodels in your SWEP, see Entity:SetWeaponModel. 
+		To use the other viewmodels in your SWEP, see Entity:SetWeaponModel.
 		
-		 
+		**Note:** In the Client realm, other players' viewmodels are not available unless they are being spectated.
+		
 		Name | Description
 		--- | ---
 		`index` | optional index of the view model to return, can range from 0 to 2
 		
 		
-		**Returns:** The view model entity
-		
-		
+		`**Returns:** The view model entity
     **/
     
     public function GetViewModel(?index:Float):Entity;
@@ -3602,9 +3068,14 @@ extern class Player extends Entity {
     /**
         This allows the server to mitigate the lag of the player by moving back all the entities that can be lag compensated to the time the player attacked with his weapon. 
 		
-		This technique is most commonly used on things that hit other entities instantaneously, such as traces. 
+		This technique is most commonly used on things that hit other entities instantaneously, such as traces.
 		
-		 
+		**Warning:** This function NEEDS to be disabled after you're done with it or it will break the movement of the entities affected!
+		
+		**Note:** Entity:FireBullets calls this function internally.
+		
+		**Bug:** BUG Lag compensation does not support pose parameters. Issue Tracker: #3683
+		
 		Name | Description
 		--- | ---
 		`lagCompensation` | The state of the lag compensation, true to enable and false to disable.
@@ -3643,18 +3114,15 @@ extern class Player extends Entity {
 		    self:SetNextPrimaryFire( CurTime() + 0.5 )
 		end
 		```
-		
-		
     **/
     
     public function LagCompensation(lagCompensation:Bool):Void;
     
     #if server
     /**
-        Returns the player's IP address and connection port in ip:port form 
+        Returns the player's IP address and connection port in ip:port form
 		
-		
-		**Returns:** The player's IP address and connection port
+		`**Returns:** The player's IP address and connection port
 		
 		___
 		### Lua Examples
@@ -3667,8 +3135,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		192.168.1.101:27005
-		
-		
     **/
     
     public function IPAddress():String;
@@ -3677,9 +3143,10 @@ extern class Player extends Entity {
     /**
         Makes the player spectate the entity 
 		
-		To get the applied spectated entity, use Player:GetObserverTarget(). 
+		To get the applied spectated entity, use Player:GetObserverTarget().
 		
-		 
+		**Bug:** BUG The player's position will not update while spectating, causing area portals and other map optimisations to not work properly. You can fix this by setting the player's position to the spectated entity's each tick. Issue Tracker: #3267
+		
 		Name | Description
 		--- | ---
 		`entity` | Entity to spectate.
@@ -3707,18 +3174,15 @@ extern class Player extends Entity {
 		    end )
 		end
 		```
-		
-		
     **/
     
     public function SpectateEntity(entity:Entity):Void;
     #end
     
     /**
-        ***Deprecated:**   This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
+        ***Deprecated:** This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.
 		
-		When used in a GM:SetupMove hook, this function behaves unexpectedly by preventing the player from sprinting similar to Player:StopSprinting. 
-		
+		When used in a GM:SetupMove hook, this function behaves unexpectedly by preventing the player from sprinting similar to Player:StopSprinting.
 		
 		___
 		### Lua Examples
@@ -3730,35 +3194,29 @@ extern class Player extends Entity {
 		    ply:StopWalking()
 		end )
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("This appears to be a direct binding to internal functionality that is overridden by the engine every frame so calling these functions may not have any or expected effect.")
     public function StopWalking():Void;
     
     
     /**
-        Returns the player's class id. 
+        Returns the player's class id.
 		
-		
-		**Returns:** The player's class id.
-		
-		
+		`**Returns:** The player's class id.
     **/
     
     public function GetClassID():Float;
     
     
     /**
-        Gets whether a key was just released this tick 
-		
+        Gets whether a key was just released this tick
 		
 		Name | Description
 		--- | ---
 		`key` | The key, see IN_ Enums
 		
 		
-		**Returns:** Was released or not
+		`**Returns:** Was released or not
 		
 		___
 		### Lua Examples
@@ -3770,24 +3228,20 @@ extern class Player extends Entity {
 		   if Entity( 1 ):KeyReleased( IN_FORWARD ) then print("Ent1 just stopped moving forward!") end
 		end)
 		```
-		
-		
     **/
     
-    public function KeyReleased(key:Float):Bool;
+    public function KeyReleased(key:IN):Bool;
     
     
     /**
-        Sets the mins and maxs of the AABB of the players collision. 
+        Sets the mins and maxs of the AABB of the players collision.
 		
+		**Bug:** BUG Setting both the mins and maxs to Vector(0,0,0) will crash the game. Issue Tracker: #3365
 		
 		Name | Description
 		--- | ---
 		`hullMins` | The min coordinates of the hull.
 		`hullMaxs` | The max coordinates of the hull.
-		
-		
-		
     **/
     
     public function SetHull(hullMins:Vector, hullMaxs:Vector):Void;
@@ -3798,10 +3252,9 @@ extern class Player extends Entity {
 		
 		For Bots this will return "BOT" on the server and on the client it returns "NULL". 
 		
-		 Use Player:AccountID for a shorter version of the SteamID. 
+		 Use Player:AccountID for a shorter version of the SteamID.
 		
-		 
-		**Returns:** SteamID
+		`**Returns:** SteamID
 		
 		___
 		### Lua Examples
@@ -3816,8 +3269,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		A list consisting of every player's EntityID, Name & SteamID on the server.
-		
-		
     **/
     
     public function SteamID():String;
@@ -3826,18 +3277,14 @@ extern class Player extends Entity {
     /**
         Sends a third person reload animation event to the player. 
 		
-		Similar to other animation event functions, calls GM:DoAnimationEvent with PLAYERANIMEVENT_RELOAD as the event and no extra data. 
-		
-		 
-		
+		Similar to other animation event functions, calls GM:DoAnimationEvent with PLAYERANIMEVENT_RELOAD as the event and no extra data.
     **/
     
     public function DoReloadEvent():Void;
     
     #if server
     /**
-        Removes all weapons from a certain player 
-		
+        Removes all weapons from a certain player
 		
 		___
 		### Lua Examples
@@ -3850,16 +3297,17 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Player 1 has no weapons anymore
-		
-		
     **/
     
     public function StripWeapons():Void;
     #end
     #if server
     /**
-        Kicks the player from the server. 
+        Kicks the player from the server.
 		
+		**Warning:** This will be shortened to ~512 chars, though this includes the command itself and the player index so will realistically be more around ~498. It is recommended to avoid going near the limit to avoid truncation.
+		
+		**Note:** This can not be run before the player has fully joined in. Use game.KickID for that.
 		
 		Name | Description
 		--- | ---
@@ -3874,16 +3322,13 @@ extern class Player extends Entity {
 		```lua 
 		ply:Kick( "Goodbye" )
 		```
-		
-		
     **/
     
     public function Kick(?reason:String):Void;
     #end
     #if client
     /**
-        Sets up the voting system for the player. This is a really barebone system. By calling this a vote gets started, when the player presses 0-9 the callback function gets called along with the key the player pressed. Use the draw callback to draw the vote panel. 
-		
+        Sets up the voting system for the player. This is a really barebone system. By calling this a vote gets started, when the player presses 0-9 the callback function gets called along with the key the player pressed. Use the draw callback to draw the vote panel.
 		
 		Name | Description
 		--- | ---
@@ -3911,23 +3356,20 @@ extern class Player extends Entity {
 		
 		LocalPlayer():AddPlayerOption("SelectWeapon",30,AfterChoice,VisualVote) -- Creates new vote
 		```
-		
-		
     **/
     
     public function AddPlayerOption(name:String, timeout:Float, vote_callback:Function, draw_callback:Function):Void;
     #end
     
     /**
-        Gets whether a key was down one tick ago. 
-		
+        Gets whether a key was down one tick ago.
 		
 		Name | Description
 		--- | ---
 		`key` | The key, see IN_ Enums
 		
 		
-		**Returns:** Is key down
+		`**Returns:** Is key down
 		
 		___
 		### Lua Examples
@@ -3939,44 +3381,38 @@ extern class Player extends Entity {
 		   if ( !Entity( 1 ):KeyDown( IN_FORWARD ) ) and Entity( 1 ):KeyDownLast( IN_FORWARD ) then print( "Ent1 is no longer holding W!") end
 		end )
 		```
-		
-		
     **/
     
-    public function KeyDownLast(key:Float):Bool;
+    public function KeyDownLast(key:IN):Bool;
     
     #if server
     /**
-        Strips the player's suit item. 
-		
-		
-		
+        Strips the player's suit item.
     **/
     
     public function RemoveSuit():Void;
     #end
     #if server
     /**
-        Sends a hint to a player. 
+        Sends a hint to a player.
 		
+		**Note:** This function is only available in Sandbox and its derivatives. Since this adds #Hint_ to the beginning of each message, you should only use it with default hint messages, or those cached with language.Add. For hints with custom text, look at notification.AddLegacy
 		
 		Name | Description
 		--- | ---
 		`name` | Name/class/index of the hint. The text of the hint will contain this value. ( "#Hint_" .. name ) An example is PhysgunFreeze.
 		`delay` | Delay in seconds before showing the hint
-		
-		
-		
     **/
     
     public function SendHint(name:String, delay:Float):Void;
     #end
     
     /**
-        Returns the position of a Player's view 
+        Returns the position of a Player's view
 		
+		**Note:** This is the same as calling Entity:EyePos on the player.
 		
-		**Returns:** aim pos
+		`**Returns:** aim pos
 		
 		___
 		### Lua Examples
@@ -3999,28 +3435,22 @@ extern class Player extends Entity {
 		print(LocalPlayer():GetShootPos())
 		print(LocalPlayer():EyePos())
 		```
-		
-		
     **/
     
     public function GetShootPos():Vector;
     
     
     /**
-        Gets the entity the player is currently driving. 
+        Gets the entity the player is currently driving.
 		
-		
-		**Returns:** DriveEntity
-		
-		
+		`**Returns:** DriveEntity
     **/
     
     public function GetDrivingEntity():Entity;
     
     #if server
     /**
-        Sets a player's death count 
-		
+        Sets a player's death count
 		
 		Name | Description
 		--- | ---
@@ -4038,18 +3468,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		None
-		
-		
     **/
     
     public function SetDeaths(deathcount:Float):Void;
     #end
     #if server
     /**
-        Drops any object the player is currently holding with either gravitygun or +Use (E key) 
-		
-		
-		
+        Drops any object the player is currently holding with either gravitygun or +Use (E key)
     **/
     
     public function DropObject():Void;
@@ -4060,10 +3485,9 @@ extern class Player extends Entity {
 		
 		The results of this function are cached every frame. 
 		
-		 See also Player:GetEyeTraceNoCursor 
+		 See also Player:GetEyeTraceNoCursor
 		
-		 
-		**Returns:** Trace information, see TraceResult structure
+		`**Returns:** Trace information, see TraceResult structure
 		
 		___
 		### Lua Examples
@@ -4076,18 +3500,15 @@ extern class Player extends Entity {
 		**Output:**
 		
 		"Entity [0][worldspawn]" in console, if you aim at world.
-		
-		
     **/
     
-    public function GetEyeTrace():AnyTable;
+    public function GetEyeTrace():TraceResult;
     
     
     /**
-        Returns a table of the player's weapons. 
+        Returns a table of the player's weapons.
 		
-		
-		**Returns:** All the weapons the player currently has.
+		`**Returns:** All the weapons the player currently has.
 		
 		___
 		### Lua Examples
@@ -4095,50 +3516,44 @@ extern class Player extends Entity {
 		Prints how many weapons the player has.
 		
 		```lua 
-		print( table.Count( Entity(1):GetWeapons() ) )
+		print( #Entity(1):GetWeapons() )
 		```
 		**Output:**
 		
 		The number of weapons the player has (e.g. 5).
-		
-		
     **/
     
     public function GetWeapons():AnyTable;
     
     
     /**
-        Returns true if the player's flashlight hasn't been disabled by Player:AllowFlashlight. 
+        Returns true if the player's flashlight hasn't been disabled by Player:AllowFlashlight.
 		
+		**Note:** This is not synchronized between clients and server automatically!
 		
-		**Returns:** Whether the player can use flashlight.
-		
-		
+		`**Returns:** Whether the player can use flashlight.
     **/
     
     public function CanUseFlashlight():Bool;
     
     
     /**
-        Resets player gesture in selected slot. 
-		
+        Resets player gesture in selected slot.
 		
 		Name | Description
 		--- | ---
 		`slot` | Slot to reset. See the GESTURE_SLOT_ Enums.
-		
-		
-		
     **/
     
-    public function AnimResetGestureSlot(slot:Float):Void;
+    public function AnimResetGestureSlot(slot:GESTURE_SLOT):Void;
     
     
     /**
-        Returns the players name. Identical to Player:Nick and Player:GetName. 
+        Returns the players name. Identical to Player:Nick and Player:GetName.
 		
+		**Bug:** BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
 		
-		**Returns:** Player's Steam name. BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
+		`**Returns:** Player's Steam name. BUG This is limited to 31 characters even though Steam names can have 32. Issue Tracker: #3178
 		
 		___
 		### Lua Examples
@@ -4151,35 +3566,26 @@ extern class Player extends Entity {
 		**Output:**
 		
 		YourNameHere
-		
-		
     **/
     
     public function Name():String;
     
     
     /**
-        Sets the players observer mode. You must start the spectating first with Player:Spectate. 
-		
+        Sets the players observer mode. You must start the spectating first with Player:Spectate.
 		
 		Name | Description
 		--- | ---
 		`mode` | Spectator mode using OBS_MODE_ Enums.
-		
-		
-		
     **/
     
     public function SetObserverMode(mode:OBS_MODE):Void;
     
     
     /**
-        Gets the hands entity of a player 
+        Gets the hands entity of a player
 		
-		
-		**Returns:** The hands entity if players has one
-		
-		
+		`**Returns:** The hands entity if players has one
     **/
     
     public function GetHands():Entity;
@@ -4188,16 +3594,19 @@ extern class Player extends Entity {
     /**
         Writes a Player Data key-value pair to the SQL database. (sv.db when called on server, cl.db when called on client) 
 		
-		Internally uses the sql library. 
+		Internally uses the sql library.
 		
-		 
+		**Warning:** This function internally uses Player:UniqueID, which can cause collisions (two or more players sharing the same PData entry). It's recommended that you don't use it. See the related wiki page for more information.
+		
+		**Note:** PData is not networked from servers to clients!
+		
 		Name | Description
 		--- | ---
 		`key` | Name of the PData key
 		`value` | Value to write to the key ( must be an SQL valid data type, such as a string or integer)
 		
 		
-		**Returns:** Whether the operation was successful or not
+		`**Returns:** Whether the operation was successful or not
 		
 		___
 		### Lua Examples
@@ -4207,23 +3616,20 @@ extern class Player extends Entity {
 		```lua 
 		player.GetByID( 1 ):SetPData( "money", 100 )
 		```
-		
-		
     **/
     
-    public function SetPData(key:String, value:Any):Bool;
+    public function SetPData(key:String, value:Dynamic):Bool;
     
     
     /**
-        Gets whether a key was just pressed this tick 
-		
+        Gets whether a key was just pressed this tick
 		
 		Name | Description
 		--- | ---
 		`key` | Corresponds to an IN_ Enums
 		
 		
-		**Returns:** Was pressed or not
+		`**Returns:** Was pressed or not
 		
 		___
 		### Lua Examples
@@ -4237,11 +3643,9 @@ extern class Player extends Entity {
 		    end
 		end )
 		```
-		
-		
     **/
     
-    public function KeyPressed(key:Float):Bool;
+    public function KeyPressed(key:IN):Bool;
     
     #if server
     /**
@@ -4249,35 +3653,29 @@ extern class Player extends Entity {
 		
 		Allows the player to zoom, walk slowly, sprint, pickup armor batteries, use the health and armor stations and also shows the HUD. The player also emits a flatline sound on death, which can be overridden with GM:PlayerDeathSound. 
 		
-		 The player is automatically equipped with the suit on spawn, if you wish to stop that, use Player:RemoveSuit. 
-		
-		 
-		
+		 The player is automatically equipped with the suit on spawn, if you wish to stop that, use Player:RemoveSuit.
     **/
     
     public function EquipSuit():Void;
     #end
     #if server
     /**
-        Sets whenever the player should not collide with their teammates. 
+        Sets whenever the player should not collide with their teammates.
 		
+		**Bug:** BUG This only works with Player:Team IDs 1-4. This also has major collision issues. Issue Tracker: #2757
 		
 		Name | Description
 		--- | ---
 		`shouldNotCollide` | True to disable, false to enable collision.
-		
-		
-		
     **/
     
     public function SetNoCollideWithTeammates(shouldNotCollide:Bool):Void;
     #end
     
     /**
-        Returns a player's weapon color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is Vector(r,g,b), and each color should be between 0 and 1. 
+        Returns a player's weapon color. The part of the model that is colored is determined by the model itself, and is different for each model. The format is Vector(r,g,b), and each color should be between 0 and 1.
 		
-		
-		**Returns:** color
+		`**Returns:** color
 		
 		___
 		### Lua Examples
@@ -4290,32 +3688,25 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Vector( 1, 1, 1 )
-		
-		
     **/
     
     public function GetWeaponColor():Vector;
     
     
     /**
-        Applies the specified sound filter to the player. 
-		
+        Applies the specified sound filter to the player.
 		
 		Name | Description
 		--- | ---
 		`soundFilter` | The index of the sound filter to apply. Pick from the list of DSP's.
 		`fastReset` | If set to true the sound filter will be removed faster.
-		
-		
-		
     **/
     
     public function SetDSP(soundFilter:Float, fastReset:Bool):Void;
     
     #if server
     /**
-        Gives ammo to a player 
-		
+        Gives ammo to a player
 		
 		Name | Description
 		--- | ---
@@ -4324,7 +3715,7 @@ extern class Player extends Entity {
 		`hidePopup` | Hide display popup when giving the ammo
 		
 		
-		**Returns:** Ammo given.
+		`**Returns:** Ammo given.
 		
 		___
 		### Lua Examples
@@ -4334,16 +3725,13 @@ extern class Player extends Entity {
 		```lua 
 		player.GetByID(1):GiveAmmo( 200, "Pistol", true )
 		```
-		
-		
     **/
     
     public function GiveAmmo(amount:Float, type:String, ?hidePopup:Bool):Float;
     #end
     
     /**
-        Gets the bottom base and the top base size of the player's crouch hull. 
-		
+        Gets the bottom base and the top base size of the player's crouch hull.
 		
 		Name | Description
 		--- | ---
@@ -4370,16 +3758,15 @@ extern class Player extends Entity {
 		**Output:**
 		
 		-16.000000 -16.000000 0.000000 16.000000 16.000000 36.000000
-		
-		
     **/
     
     public function GetHullDuck():PlayerGetHullDuckReturn;
     
     
     /**
-        Prints a string to the chatbox of the client. 
+        Prints a string to the chatbox of the client.
 		
+		**Warning:** Just like the usermessage library, this function is affected by the 255 byte limit!
 		
 		Name | Description
 		--- | ---
@@ -4399,8 +3786,6 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Hello World (In chatbox)
-		
-		
     **/
     
     public function ChatPrint(message:String):Void;
@@ -4411,41 +3796,31 @@ extern class Player extends Entity {
 		
 		The results of this function are cached every frame. 
 		
-		 See also Player:GetEyeTrace 
+		 See also Player:GetEyeTrace
 		
-		 
-		**Returns:** Trace result. See TraceResult structure
-		
-		
+		`**Returns:** Trace result. See TraceResult structure
     **/
     
-    public function GetEyeTraceNoCursor():AnyTable;
+    public function GetEyeTraceNoCursor():TraceResult;
     
     #if server
     /**
         Sets the players visibility towards NPCs. 
 		
-		Internally this toggles the FL_NOTARGET flag, which you can manually test for using Entity:IsFlagSet 
+		Internally this toggles the FL_NOTARGET flag, which you can manually test for using Entity:IsFlagSet
 		
-		 
 		Name | Description
 		--- | ---
 		`visibility` | The visibility.
-		
-		
-		
     **/
     
     public function SetNoTarget(visibility:Bool):Void;
     #end
     
     /**
-        Returns the timescale multiplier of the player movement. 
+        Returns the timescale multiplier of the player movement.
 		
-		
-		**Returns:** The timescale multiplier, defaults to 1.
-		
-		
+		`**Returns:** The timescale multiplier, defaults to 1.
     **/
     
     public function GetLaggedMovementValue():Float;
@@ -4454,12 +3829,9 @@ extern class Player extends Entity {
     /**
         Returns whether the player is typing in their chat. 
 		
-		This may not work properly if the server uses a custom chatbox. 
+		This may not work properly if the server uses a custom chatbox.
 		
-		 
-		**Returns:** Whether the player is typing in their chat or not.
-		
-		
+		`**Returns:** Whether the player is typing in their chat or not.
     **/
     
     public function IsTyping():Bool;
@@ -4468,23 +3840,18 @@ extern class Player extends Entity {
     /**
         Sets the player's sprint speed. 
 		
-		See also Player:GetRunSpeed, Player:SetWalkSpeed and Player:SetMaxSpeed. 
+		See also Player:GetRunSpeed, Player:SetWalkSpeed and Player:SetMaxSpeed.
 		
-		 
 		Name | Description
 		--- | ---
 		`runSpeed` | The new sprint speed when sv_friction is below 10. Higher sv_friction values will result in slower speed. Has to be 7 or above or the player won't be able to move.
-		
-		
-		
     **/
     
     public function SetRunSpeed(runSpeed:Float):Void;
     
     #if server
     /**
-        Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The ConVar must have a FCVAR_USERINFO flag for this to work. 
-		
+        Retrieves the numeric value of a client-side convar, returns nil if value is not convertible to a number. The ConVar must have a FCVAR_USERINFO flag for this to work.
 		
 		Name | Description
 		--- | ---
@@ -4492,7 +3859,7 @@ extern class Player extends Entity {
 		`default` | Default value if we failed to retrieve the number.
 		
 		
-		**Returns:** The value of the ConVar or the default value
+		`**Returns:** The value of the ConVar or the default value
 		
 		___
 		### Lua Examples
@@ -4518,31 +3885,28 @@ extern class Player extends Entity {
 		    MsgN( type( Entity( 1 ):GetInfo( "Apple" ) ) )
 		end
 		```
-		
-		
     **/
     
     public function GetInfoNum(cVarName:String, _default:Float):Float;
     #end
     
     /**
-        Sets client's view punch. See Player:ViewPunch 
-		
+        Sets client's view punch. See Player:ViewPunch
 		
 		Name | Description
 		--- | ---
 		`punchAngle` | The angle to set.
-		
-		
-		
     **/
     
     public function SetViewPunchAngles(punchAngle:Angle):Void;
     
     #if server
     /**
-        Sets the active weapon of the player by its class name. 
+        Sets the active weapon of the player by its class name.
 		
+		**Warning:** This will switch the weapon out of prediction, causing delay on the client and WEAPON:Deploy to be called out of prediction. Try using CUserCmd:SelectWeapon or input.SelectWeapon, instead.
+		
+		**Note:** This will trigger the weapon switch event and associated animations. To switch weapons silently, use Player:SetActiveWeapon.
 		
 		Name | Description
 		--- | ---
@@ -4567,48 +3931,40 @@ extern class Player extends Entity {
 		
 		Entity( 1 ):SelectWeapon( weapon:GetClass() )
 		```
-		
-		
     **/
     
     public function SelectWeapon(className:String):Void;
     #end
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Sets the driving entity and driving mode. 
 		
-		Use drive.PlayerStartDriving instead, see Entity Driving. 
+		Use drive.PlayerStartDriving instead, see Entity Driving.
 		
-		 
 		Name | Description
 		--- | ---
 		`drivingEntity` | The entity the player should drive.
 		`drivingMode` | The driving mode index.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public function SetDrivingEntity(?drivingEntity:Entity, drivingMode:Float):Void;
     
     
     /**
-        Returns whether the player is crouching or not 
+        Returns whether the player is crouching or not
 		
-		
-		**Returns:** Whether the player is crouching
-		
-		
+		`**Returns:** Whether the player is crouching
     **/
     
     public function Crouching():Bool;
     
     
     /**
-        Shows "limit hit" notification in sandbox. 
+        Shows "limit hit" notification in sandbox.
 		
+		**Note:** This function is only available in Sandbox and its derivatives
 		
 		Name | Description
 		--- | ---
@@ -4628,42 +3984,34 @@ extern class Player extends Entity {
 		**Output:**
 		
 		A notification pops up saying "SBoxLimit_test"
-		
-		
     **/
     
     public function LimitHit(type:String):Void;
     
     
     /**
-        Adds an entity to the players clean up list.     
+        Adds an entity to the players clean up list.
+		
 		Name | Description
 		--- | ---
 		`type` | Cleanup type
 		`ent` | Entity to add
-		
-		
-		
     **/
     
     public function AddCleanup(type:String, ent:Entity):Void;
     
     
     /**
-        Restarts the main animation on the player, has the same effect as calling Entity:SetCycle( 0 ). 
-		
-		
-		
+        Restarts the main animation on the player, has the same effect as calling Entity:SetCycle( 0 ).
     **/
     
     public function AnimRestartMainSequence():Void;
     
     #if client
     /**
-        Returns the steam "relationship" towards the player. 
+        Returns the steam "relationship" towards the player.
 		
-		
-		**Returns:** Should return one of four different things depending on their status on your friends list: "friend", "blocked", "none" or "requested".
+		`**Returns:** Should return one of four different things depending on their status on your friends list: "friend", "blocked", "none" or "requested".
 		
 		___
 		### Lua Examples
@@ -4676,16 +4024,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		"friend"
-		
-		
     **/
     
     public function GetFriendStatus():String;
     #end
     #if server
     /**
-        Disables god mode on the player. 
-		
+        Disables god mode on the player.
 		
 		___
 		### Lua Examples
@@ -4697,16 +4042,13 @@ extern class Player extends Entity {
 		    v:GodDisable()
 		end
 		```
-		
-		
     **/
     
     public function GodDisable():Void;
     #end
     #if server
     /**
-        Makes the player exit the vehicle if they're in one. 
-		
+        Makes the player exit the vehicle if they're in one.
 		
 		___
 		### Lua Examples
@@ -4719,16 +4061,13 @@ extern class Player extends Entity {
 		**Output:**
 		
 		Player 1 will exit the the vehicle he's currently in.
-		
-		
     **/
     
     public function ExitVehicle():Void;
     #end
     
     /**
-        Sets the player model's color. The part of the model that is colored is determined by the model itself, and is different for each model. 
-		
+        Sets the player model's color. The part of the model that is colored is determined by the model itself, and is different for each model.
 		
 		Name | Description
 		--- | ---
@@ -4754,8 +4093,6 @@ extern class Player extends Entity {
 		    ply:SetPlayerColor( Vector( color.r / 255, color.g / 255, color.b / 255 ) )
 		end
 		```
-		
-		
     **/
     
     public function SetPlayerColor(Color:Vector):Void;
@@ -4764,25 +4101,21 @@ extern class Player extends Entity {
     /**
         Turns off the zoom mode of the player. (+zoom console command) 
 		
-		Basically equivalent of entering "-zoom" into player's console. 
-		
-		 
-		
+		Basically equivalent of entering "-zoom" into player's console.
     **/
     
     public function StopZooming():Void;
     #end
     
     /**
-        Gets the amount of ammo the player has. 
-		
+        Gets the amount of ammo the player has.
 		
 		Name | Description
 		--- | ---
 		`ammotype` | The ammunition type. Can be either number ammo ID or string ammo name.
 		
 		
-		**Returns:** The amount of ammo player has in reserve.
+		`**Returns:** The amount of ammo player has in reserve.
 		
 		___
 		### Lua Examples
@@ -4816,23 +4149,20 @@ extern class Player extends Entity {
 		255
 		0
 		255
-		
-		
     **/
     
-    public function GetAmmoCount(ammotype:Any):Float;
+    public function GetAmmoCount(ammotype:Dynamic):Float;
     
     
     /**
-        Returns a table that will stay allocated for the specific player between connects until the server shuts down. Note, that this table is not synchronized between client and server. 
-		
+        Returns a table that will stay allocated for the specific player between connects until the server shuts down. Note, that this table is not synchronized between client and server.
 		
 		Name | Description
 		--- | ---
 		`key` | Unique table key.
 		
 		
-		**Returns:** The table that contains any info you have put in it.
+		`**Returns:** The table that contains any info you have put in it.
 		
 		___
 		### Lua Examples
@@ -4852,11 +4182,9 @@ extern class Player extends Entity {
 		**Output:**
 		
 		"test" nil
-		
-		
     **/
     
-    public function UniqueIDTable(key:Any):AnyTable;
+    public function UniqueIDTable(key:Dynamic):AnyTable;
     
     
 }
@@ -4872,36 +4200,4 @@ var a:Vector;
 var b:Vector;
 
 }
-/**
-	Hallo
 
-**/
-@:native("_G")
-extern enum abstract OBS_MODE(Int) {
-	/**
-		Not spectating
-	**/
-	var OBS_MODE_NONE;
-	var OBS_MODE_DEATHCAM;
-	/**
-		TF2-like freezecam
-	**/
-	var OBS_MODE_FREEZECAM;
-	/**
-		 Same as OBS_MODE_CHASE, but you can't rotate the view 
-	**/
-	var OBS_MODE_FIXED;
-	/**
-		First person cam 
-	**/
-	var OBS_MODE_IN_EYE;
-	/**
-		Chase cam, 3rd person cam, free rotation around the spectated target 
-	**/
-	var OBS_MODE_CHASE;
-	/**
-		Free roam/noclip-alike. Does not work from GM:PlayerDeath
-	**/
-	var OBS_MODE_ROAMING;
-
-}

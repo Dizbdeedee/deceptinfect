@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    A simple rectangular box, commonly used for parenting other elements to. Pretty much all elements are based on this. 
-	
-	
+    A simple rectangular box, commonly used for parenting other elements to. Pretty much all elements are based on this.
 **/
 extern class DPanel extends Panel {
     /**
-        Sets the background color of the panel. 
-		
+        Sets the background color of the panel.
 		
 		Name | Description
 		--- | ---
@@ -35,92 +32,74 @@ extern class DPanel extends Panel {
 		BGPanel2:SetSize(200, 200)
 		BGPanel2:SetBackgroundColor(COLOR_TEAM_BLUE)
 		```
-		
-		
     **/
     
      
     public function SetBackgroundColor(color:AnyTable):Void;
     /**
-        ***Deprecated:**   You should use DPanel: GetPaintBackground instead.
+        ***Deprecated:** You should use DPanel: GetPaintBackground instead.
 		
-		Returns whether or not the panel background is being drawn. Alias of : .   
-		**Returns:** True if the panel background is drawn, false otherwise.
+		Returns whether or not the panel background is being drawn. Alias of [DPanel](https://wiki.garrysmod.com/page/Category:DPanel): [GetPaintBackground](https://wiki.garrysmod.com/page/DPanel/GetPaintBackground).
 		
-		
+		`**Returns:** True if the panel background is drawn, false otherwise.
     **/
-    @:deprecated
+    @:deprecated("You should use DPanel: GetPaintBackground instead.")
      
     public function GetDrawBackground():Bool;
     /**
-        Returns whether or not the panel background is being drawn. 
+        Returns whether or not the panel background is being drawn.
 		
-		
-		**Returns:** True if the panel background is drawn, false otherwise.
-		
-		
+		`**Returns:** True if the panel background is drawn, false otherwise.
     **/
     
      
     public function GetPaintBackground():Bool;
     /**
-        ***Deprecated:**   You should use DPanel: SetPaintBackground instead.
+        ***Deprecated:** You should use DPanel: SetPaintBackground instead.
 		
-		Sets whether or not to draw the panel background. Alias of : .   
+		Sets whether or not to draw the panel background. Alias of [DPanel](https://wiki.garrysmod.com/page/Category:DPanel): [SetPaintBackground](https://wiki.garrysmod.com/page/DPanel/SetPaintBackground).
+		
 		Name | Description
 		--- | ---
 		`draw` | True to show the panel's background, false to hide it.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should use DPanel: SetPaintBackground instead.")
      
     public function SetDrawBackground(draw:Bool):Void;
     /**
-        Returns whether or not the panel is disabled. 
+        Returns whether or not the panel is disabled.
 		
-		
-		**Returns:** True if the panel is disabled (mouse input disabled and background alpha set to 75), false if its enabled (mouse input enabled and background alpha set to 255).
-		
-		
+		`**Returns:** True if the panel is disabled (mouse input disabled and background alpha set to 75), false if its enabled (mouse input enabled and background alpha set to 255).
     **/
     
      
     public function GetDisabled():Bool;
     /**
-        Sets whether or not to disable the panel. 
-		
+        Sets whether or not to disable the panel.
 		
 		Name | Description
 		--- | ---
 		`disabled` | True to disable the panel (mouse input disabled and background alpha set to 75), false to enable it (mouse input enabled and background alpha set to 255).
-		
-		
-		
     **/
     
      
     public function SetDisabled(disabled:Bool):Void;
     /**
-        Sets whether or not to paint/draw the panel background. 
-		
+        Sets whether or not to paint/draw the panel background.
 		
 		Name | Description
 		--- | ---
 		`paint` | True to show the panel's background, false to hide it.
-		
-		
-		
     **/
     
      
     public function SetPaintBackground(paint:Bool):Void;
     /**
-        Returns the panel's background color. 
+        Returns the panel's background color.
 		
+		**Note:** By default this returns nil even though the default background color is white
 		
-		**Returns:** Color of the panel's background.
+		`**Returns:** Color of the panel's background.
 		
 		___
 		### Lua Examples
@@ -137,8 +116,6 @@ extern class DPanel extends Panel {
 		**Output:**
 		
 		nil
-		
-		
     **/
     
      

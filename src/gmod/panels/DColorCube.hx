@@ -2,32 +2,25 @@ package gmod.panels;
 #if client
 
 /**
-    The DColorCube allows a user to select saturation and value but not hue. Uses HSV colors 
-	
-	
+    The DColorCube allows a user to select saturation and value but not hue. Uses HSV colors
 **/
 extern class DColorCube extends DSlider {
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Appears to do nothing and unused. 
-		
+		Appears to do nothing and unused.
 		
 		Name | Description
 		--- | ---
 		`hue` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetHue(hue:Float):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Updates the color cube RGB based on the given x and y position. Similar to DColorCube:TranslateValues. 
-		
+		Updates the color cube RGB based on the given x and y position. Similar to DColorCube:TranslateValues.
 		
 		Name | Description
 		--- | ---
@@ -57,17 +50,14 @@ extern class DColorCube extends DSlider {
 		-- Print new color
 		print("Color( "..new_color.r..", "..new_color.g..", "..new_color.b..", "..new_color.a.." )")
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function UpdateColor(?x:Float, ?y:Float):Void;
     /**
-        Returns the color cube's current set color. 
+        Returns the color cube's current set color.
 		
-		
-		**Returns:** The set color, uses Color structure.
+		`**Returns:** The set color, uses Color structure.
 		
 		___
 		### Lua Examples
@@ -94,17 +84,14 @@ extern class DColorCube extends DSlider {
 		b	=	127
 		a	=	255
 		g	=	127
-		
-		
     **/
     
      
-    public function GetRGB():AnyTable;
+    public function GetRGB():Color;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Updates the color cube RGB based on the given x and y position and returns its arguments. Similar to DColorCube:UpdateColor. 
-		
+		Updates the color cube RGB based on the given x and y position and returns its arguments. Similar to DColorCube:UpdateColor.
 		
 		Name | Description
 		--- | ---
@@ -146,15 +133,14 @@ extern class DColorCube extends DSlider {
 		**Output:**
 		
 		Color( 30, 153, 30, 255 )
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function TranslateValues(x:Float, y:Float):DColorCubeTranslateValuesReturn;
     /**
-        Sets the base color and the color used to draw the color cube panel itself. 
+        Sets the base color and the color used to draw the color cube panel itself.
 		
+		**Note:** Calling this when using a color that isn't 100% saturated and valued (HSVToColor with saturation and value set to 1) causes the color cube to look inaccurate compared to the color that's returned by methods like DColorCube:GetRGB and DColorCube:OnUserChanged. You should use DColorCube:SetColor instead
 		
 		Name | Description
 		--- | ---
@@ -191,15 +177,12 @@ extern class DColorCube extends DSlider {
 		**Output:**
 		
 		Notice how the output/background color doesn't match the color where the slider is positioned.
-		
-		
     **/
     
      
-    public function SetBaseRGB(color:AnyTable):Void;
+    public function SetBaseRGB(color:Color):Void;
     /**
-        Function which is called when the color cube slider is moved (through user input). Meant to be overridden. 
-		
+        Function which is called when the color cube slider is moved (through user input). Meant to be overridden.
 		
 		Name | Description
 		--- | ---
@@ -241,55 +224,42 @@ extern class DColorCube extends DSlider {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook 
-    public function OnUserChanged(color:AnyTable):Void;
+    public function OnUserChanged(color:Color):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used internally to set the real "output" color of the panel. 
-		
+		Used internally to set the real "output" color of the panel.
 		
 		Name | Description
 		--- | ---
 		`clr` | A Color structure
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
-    public function SetRGB(clr:AnyTable):Void;
+    public function SetRGB(clr:Color):Void;
     /**
-        Returns the base Color set by DColorCube:SetBaseRGB. 
+        Returns the base Color set by DColorCube:SetBaseRGB.
 		
-		
-		**Returns:** A Color structure
-		
-		
+		`**Returns:** A Color structure
     **/
     
      
-    public function GetBaseRGB():AnyTable;
+    public function GetBaseRGB():Color;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Returns the value set by DColorCube:SetHue. 
+		Returns the value set by DColorCube:SetHue.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetHue():Float;
     /**
-        Sets the base color of the color cube and updates the slider position. 
-		
+        Sets the base color of the color cube and updates the slider position.
 		
 		Name | Description
 		--- | ---
@@ -322,12 +292,10 @@ extern class DColorCube extends DSlider {
 		-- Change background color too
 		BGPanel:SetBackgroundColor(Color(p_r, p_g, p_b))
 		```
-		
-		
     **/
     
      
-    public function SetColor(color:AnyTable):Void;
+    public function SetColor(color:Color):Void;
     
 }
 

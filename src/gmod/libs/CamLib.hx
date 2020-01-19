@@ -4,27 +4,21 @@ package gmod.libs;
 /**
     This directs all drawing to be done to a certain 2D or 3D plane or position, until the corresponding "End" function is called. 
 	
-	The matrix functions exist, but are mostly unusable unless you're familiar with the source engine's layout for each aspect. 
-	
-	 
+	The matrix functions exist, but are mostly unusable unless you're familiar with the source engine's layout for each aspect.
 **/
 @:native("cam")extern class CamLib {
     
     /**
-        Switches the renderer back to the previous drawing mode from a 3D orthographic rendering context. 
-		
-		
-		
+        Switches the renderer back to the previous drawing mode from a 3D orthographic rendering context.
     **/
     
     public static function EndOrthoView():Void;
     
     
     /**
-        Switches the renderer back to the previous drawing mode from a 3D context. 
+        Switches the renderer back to the previous drawing mode from a 3D context.
 		
-		
-		
+		**Bug:** BUG This will crash the game if there is no context to end. Issue Tracker: #1091
     **/
     
     public static function End3D():Void;
@@ -33,11 +27,14 @@ package gmod.libs;
     /**
         Sets up a new 3D rendering context. Must be finished by cam.End3D. 
 		
-		For more advanced settings such as an orthographic view, use cam.Start instead. 
+		For more advanced settings such as an orthographic view, use cam.Start instead.
 		
-		  
+		**Note:** This is a function that starts a 3D rendering context. This means that the only rendering functions will work after it are functions with a 3D rendering context.
 		
-		 
+		**Bug:** BUG Negative x/y values won't work. Issue Tracker: #1995
+		
+		**Bug:** BUG This will not update current view properties. Issue Tracker: #2682
+		
 		Name | Description
 		--- | ---
 		`pos` | Render cam position.
@@ -68,41 +65,37 @@ package gmod.libs;
 		**Output:**
 		
 		All players can be seen through walls.
-		
-		
     **/
     
     public static function Start3D(?pos:Vector, ?angles:Angle, ?fov:Float, ?x:Float, ?y:Float, ?w:Float, ?h:Float, ?zNear:Float, ?zFar:Float):Void;
     
     
     /**
-        Pops the current active rendering matrix from the stack and reinstates the previous one. 
-		
-		
-		
+        Pops the current active rendering matrix from the stack and reinstates the previous one.
     **/
     
     public static function PopModelMatrix():Void;
     
     
     /**
-        Sets up a new rendering context. This is an extended version of cam.Start3D and cam.Start2D. Must be finished by cam.End3D or cam.End2D. 
+        Sets up a new rendering context. This is an extended version of cam.Start3D and cam.Start2D. Must be finished by cam.End3D or cam.End2D.
 		
+		**Bug:** BUG This will not update current view properties for 3D contexts. Issue Tracker: #2682
 		
 		Name | Description
 		--- | ---
 		`dataTbl` | Render context config. See RenderCamData structure
-		
-		
-		
     **/
     
-    public static function Start(dataTbl:AnyTable):Void;
+    public static function Start(dataTbl:RenderCamData):Void;
     
     
     /**
-        Sets up a new 2D rendering context. Must be finished by cam.End3D2D. 
+        Sets up a new 2D rendering context. Must be finished by cam.End3D2D.
 		
+		**Note:** This is a function that starts a 2D rendering context. This means that the only rendering functions will work after it are functions with a 2D rendering context.
+		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -132,23 +125,17 @@ package gmod.libs;
 		    cam.End3D2D()
 		end )
 		```
-		
-		
     **/
     
     public static function Start3D2D(pos:Vector, angles:Angle, scale:Float):Void;
     
     
     /**
-        Tells the renderer to ignore the depth buffer and draw any upcoming operation "ontop" of everything that was drawn yet. 
-		
+        Tells the renderer to ignore the depth buffer and draw any upcoming operation "ontop" of everything that was drawn yet.
 		
 		Name | Description
 		--- | ---
 		`ignoreZ` | Determines whenever to ignore the depth buffer or not.
-		
-		
-		
     **/
     
     public static function IgnoreZ(ignoreZ:Bool):Void;
@@ -157,28 +144,27 @@ package gmod.libs;
     /**
         Switches the renderer back to the previous drawing mode from a 3D context. 
 		
-		This function is an alias of cam.End3D. 
+		This function is an alias of cam.End3D.
 		
-		 
-		
+		**Bug:** BUG This will crash the game if there is no context to end. Issue Tracker: #1091
     **/
     
     public static function End():Void;
     
     
     /**
-        Switches the renderer back to the previous drawing mode from a 2D context. 
+        Switches the renderer back to the previous drawing mode from a 2D context.
 		
-		
-		
+		**Bug:** BUG This will crash the game if there is no context to end. Issue Tracker: #1091
     **/
     
     public static function End2D():Void;
     
     
     /**
-        Pushes the specified matrix onto the render matrix stack. Unlike opengl, this will replace the current model matrix. 
+        Pushes the specified matrix onto the render matrix stack. Unlike opengl, this will replace the current model matrix.
 		
+		**Bug:** BUG This does not work with cam.Start3D2D in certain hooks. Issue Tracker: #1663
 		
 		Name | Description
 		--- | ---
@@ -235,16 +221,13 @@ package gmod.libs;
 		    render.PopFilterMin()
 		end
 		```
-		
-		
     **/
     
     public static function PushModelMatrix(matrix:VMatrix):Void;
     
     
     /**
-        Sets up a new 3d context using orthographic projection. 
-		
+        Sets up a new 3d context using orthographic projection.
 		
 		Name | Description
 		--- | ---
@@ -252,36 +235,28 @@ package gmod.libs;
 		`topOffset` | The top plane offset.
 		`rightOffset` | The right plane offset.
 		`bottomOffset` | The bottom plane offset.
-		
-		
-		
     **/
     
     public static function StartOrthoView(leftOffset:Float, topOffset:Float, rightOffset:Float, bottomOffset:Float):Void;
     
     
     /**
-        Shakes the screen at a certain position. 
-		
+        Shakes the screen at a certain position.
 		
 		Name | Description
 		--- | ---
 		`pos` | Origin of the shake.
 		`angles` | Angles of the shake.
 		`factor` | The shake factor.
-		
-		
-		
     **/
     
     public static function ApplyShake(pos:Vector, angles:Angle, factor:Float):Void;
     
     
     /**
-        Switches the renderer back to the previous drawing mode from a 3D2D context. 
+        Switches the renderer back to the previous drawing mode from a 3D2D context.
 		
-		
-		
+		**Bug:** BUG This will crash the game if there is no context to end. Issue Tracker: #1091
     **/
     
     public static function End3D2D():Void;
@@ -290,9 +265,12 @@ package gmod.libs;
     /**
         Sets up a new 2D rendering context. Must be finished by cam.End2D. 
 		
-		This is almost always used with a render target from the render library. To set its position use render.SetViewPort with a target already stored. 
+		This is almost always used with a render target from the render library. To set its position use render.SetViewPort with a target already stored.
 		
-		 
+		**Note:** This will put an identity matrix at the top of the model matrix stack. If you are trying to use cam.PushModelMatrix, call it after this function and not before.
+		
+		**Note:** This is a function that starts a 2D rendering context. This means that the only rendering functions will work after it are functions with a 2D rendering context.
+		
 		___
 		### Lua Examples
 		#### Example 1
@@ -307,8 +285,6 @@ package gmod.libs;
 		cam.End2D()
 		render.SetViewPort( 0, 0, oldW, oldH )
 		```
-		
-		
     **/
     
     public static function Start2D():Void;
@@ -317,39 +293,6 @@ package gmod.libs;
 
 }
 
-typedef StartCamData = {
-	
-	?x : Float,
-	?y : Float,
-	?w : Float,
-	?h : Float,
-	?type : CamType,
-	?origin : Vector,
-	?angles : Angle,
-	?fov : Float,
-	?aspect : Float,
-	?zfar : Float,
-	?znear : Float,
-	?subrect : Bool,
-	?bloomtone : Bool,
-	?offcenter : {
-		left : Float,
-		right : Float,
-		bottom : Float,
-		top : Float
-	},
-	?ortho : {
-		left : Float,
-		right : Float,
-		bottom : Float,
-		top : Float
-	}
-}
 
-
-enum abstract CamType(String) {
-	var _2D = "2D";
-	var _3D = "3D";
-}
 
 #end

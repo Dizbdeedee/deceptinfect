@@ -8,22 +8,21 @@ package gmod.libs;
 	
 	 In Garry's Mod there are several extra useful functions and features added to this library. Most notably all strings will access this library through the string metatable index function.[2] 
 	
-	 This means all strings are treated like table objects and the string library as its Meta Table 
+	 This means all strings are treated like table objects and the string library as its Meta Table
 	
-	 
+	**Warning:** Making changes to the string metatable is not a good idea unless you know what you are doing. Use the string library instead.
 **/
 @:native("string")extern class StringLib {
     
     /**
-        Inserts commas for every third digit. 
-		
+        Inserts commas for every third digit.
 		
 		Name | Description
 		--- | ---
 		`InputNumber` | The input number to commafy
 		
 		
-		**Returns:** Prettystring
+		`**Returns:** Prettystring
 		
 		___
 		### Lua Examples
@@ -36,23 +35,20 @@ package gmod.libs;
 		**Output:**
 		
 		123,456,789
-		
-		
     **/
     
     public static function Comma(InputNumber:Float):String;
     
     
     /**
-        Reverses a string. 
-		
+        Reverses a string.
 		
 		Name | Description
 		--- | ---
 		`str` | The string to be reversed.
 		
 		
-		**Returns:** reversed string
+		`**Returns:** reversed string
 		
 		___
 		### Lua Examples
@@ -65,16 +61,13 @@ package gmod.libs;
 		**Output:**
 		
 		fedcba
-		
-		
     **/
     
     public static function reverse(str:String):String;
     
     
     /**
-        Returns everything left of supplied place of that string. 
-		
+        Returns everything left of supplied place of that string.
 		
 		Name | Description
 		--- | ---
@@ -82,7 +75,7 @@ package gmod.libs;
 		`num` | Amount of chars relative to the beginning (starting from 1).
 		
 		
-		**Returns:** Returns a string containing a specified number of characters from the left side of a string.
+		`**Returns:** Returns a string containing a specified number of characters from the left side of a string.
 		
 		___
 		### Lua Examples
@@ -96,16 +89,13 @@ package gmod.libs;
 		**Output:**
 		
 		garry
-		
-		
     **/
     
     public static function Left(str:String, num:Float):String;
     
     
     /**
-        Finds a Pattern in a string. 
-		
+        Finds a Pattern in a string.
 		
 		Name | Description
 		--- | ---
@@ -114,7 +104,7 @@ package gmod.libs;
 		`startPosition` | The start index to start the matching from, can be negative to start the match from a position relative to the end.
 		
 		
-		**Returns:** Matched text(s)
+		`**Returns:** Matched text(s)
 		
 		___
 		### Lua Examples
@@ -135,16 +125,13 @@ package gmod.libs;
 		print( string.match( toMatch, "this$" ) )
 		print( string.match( toMatch, "nil" ) )
 		```
-		
-		
     **/
     
     public static function match(string:String, pattern:String, ?startPosition:Float):Rest<Dynamic>;
     
     
     /**
-        Returns the given string's characters in their numeric ASCII representation. 
-		
+        Returns the given string's characters in their numeric ASCII representation.
 		
 		Name | Description
 		--- | ---
@@ -153,7 +140,7 @@ package gmod.libs;
 		`endPos` | The last character of the string to get the byte of.
 		
 		
-		**Returns:** Numerical bytes
+		`**Returns:** Numerical bytes
 		
 		___
 		### Lua Examples
@@ -166,23 +153,20 @@ package gmod.libs;
 		**Output:**
 		
 		72 101 108 108
-		
-		
     **/
     
     public static function byte(string:String, ?startPos:Float, ?endPos:Float):Rest<Dynamic>;
     
     
     /**
-        Escapes special characters for JavaScript in a string, making the string safe for inclusion in to JavaScript strings. 
-		
+        Escapes special characters for JavaScript in a string, making the string safe for inclusion in to JavaScript strings.
 		
 		Name | Description
 		--- | ---
 		`str` | The string that should be escaped.
 		
 		
-		**Returns:** The escaped string.
+		`**Returns:** The escaped string.
 		
 		___
 		### Lua Examples
@@ -198,18 +182,15 @@ package gmod.libs;
 		Panel:SetSize( 100, 100 )
 		Panel:RunJavascript( "MyJavaScriptFunction('" .. string.JavascriptSafe( user_input ) .. "')" )
 		```
-		
-		
     **/
     
     public static function JavascriptSafe(str:String):String;
     
     
     /**
-        ***Deprecated:**   Use either string.sub(str, index, index) or str[index].
+        ***Deprecated:** Use either string.sub(str, index, index) or str[index].
 		
-		Returns char value from the specified index in the supplied string.         Looks index in the supplied string and returns value of that index. 
-		
+		Returns char value from the specified index in the supplied string.         Looks index in the supplied string and returns value of that index.
 		
 		Name | Description
 		--- | ---
@@ -217,7 +198,7 @@ package gmod.libs;
 		`index` | The index's value of the string to be returned.
 		
 		
-		**Returns:** str
+		`**Returns:** str
 		
 		___
 		### Lua Examples
@@ -231,16 +212,15 @@ package gmod.libs;
 		**Output:**
 		
 		B
-		
-		
     **/
-    @:deprecated
+    @:deprecated("Use either string.sub(str, index, index) or str[index].")
     public static function GetChar(str:String, index:Float):String;
     
     
     /**
-        Returns the binary bytecode of the given function. 
+        Returns the binary bytecode of the given function.
 		
+		**Note:** This does not work with functions created in C/C++. An error will be thrown if it is
 		
 		Name | Description
 		--- | ---
@@ -248,17 +228,14 @@ package gmod.libs;
 		`stripDebugInfo` | True to strip the debug data, false to keep it
 		
 		
-		**Returns:** Bytecode
-		
-		
+		`**Returns:** Bytecode
     **/
     
     public static function dump(func:Function, ?stripDebugInfo:Bool):String;
     
     
     /**
-        Splits the string into a table of strings, separated by the second argument. 
-		
+        Splits the string into a table of strings, separated by the second argument.
 		
 		Name | Description
 		--- | ---
@@ -266,7 +243,7 @@ package gmod.libs;
 		`Separator` | Character(s) to split with.
 		
 		
-		**Returns:** Split table
+		`**Returns:** Split table
 		
 		___
 		### Lua Examples
@@ -277,23 +254,20 @@ package gmod.libs;
 		local mystring = "This is some text"
 		PrintTable( string.Split( mystring, " " ) )
 		```
-		
-		
     **/
     
     public static function Split(Inputstring:String, Separator:String):AnyTable;
     
     
     /**
-        Returns the path only from a file's path. 
-		
+        Returns the path only from a file's path.
 		
 		Name | Description
 		--- | ---
 		`Inputstring` | String to get path from.
 		
 		
-		**Returns:** Path
+		`**Returns:** Path
 		
 		___
 		### Lua Examples
@@ -306,23 +280,20 @@ package gmod.libs;
 		**Output:**
 		
 		"garrysmod/lua/modules/"
-		
-		
     **/
     
     public static function GetPathFromFilename(Inputstring:String):String;
     
     
     /**
-        Returns given time in "MM:SS:MS" format. 
-		
+        Returns given time in "MM:SS:MS" format.
 		
 		Name | Description
 		--- | ---
 		`time` | Time in seconds
 		
 		
-		**Returns:** Formatted time
+		`**Returns:** Formatted time
 		
 		___
 		### Lua Examples
@@ -335,16 +306,13 @@ package gmod.libs;
 		**Output:**
 		
 		01:01:13
-		
-		
     **/
     
     public static function ToMinutesSecondsMilliseconds(time:Float):String;
     
     
     /**
-        Attempts to find the specified substring in a string, uses Patterns by default. 
-		
+        Attempts to find the specified substring in a string, uses Patterns by default.
 		
 		Name | Description
 		--- | ---
@@ -375,16 +343,13 @@ package gmod.libs;
 		    end
 		end )
 		```
-		
-		
     **/
     
     public static function find(haystack:String, needle:String, ?startPos:Float, ?noPatterns:Bool):StringLibFindReturn;
     
     
     /**
-        This functions main purpose is to replace certain character sequences in a string using Patterns. 
-		
+        This functions main purpose is to replace certain character sequences in a string using Patterns.
 		
 		Name | Description
 		--- | ---
@@ -411,16 +376,13 @@ package gmod.libs;
 		**Output:**
 		
 		hi there!
-		
-		
     **/
     
     public static function gsub(string:String, pattern:String, replacement:String, ?maxReplaces:Float):StringLibGsubReturn;
     
     
     /**
-        Removes leading and trailing matches of a string. 
-		
+        Removes leading and trailing matches of a string.
 		
 		Name | Description
 		--- | ---
@@ -428,7 +390,7 @@ package gmod.libs;
 		`Char` | String to match.
 		
 		
-		**Returns:** Modified string
+		`**Returns:** Modified string
 		
 		___
 		### Lua Examples
@@ -441,16 +403,13 @@ package gmod.libs;
 		**Output:**
 		
 		"hi whatsup"
-		
-		
     **/
     
     public static function Trim(Inputstring:String, ?Char:String):String;
     
     
     /**
-        Returns a sub-string, starting from the character at position StartPos of the string (inclusive), and optionally ending at the character at position EndPos of the string (also inclusive). If EndPos is not given, the rest of the string is returned. 
-		
+        Returns a sub-string, starting from the character at position StartPos of the string (inclusive), and optionally ending at the character at position EndPos of the string (also inclusive). If EndPos is not given, the rest of the string is returned.
 		
 		Name | Description
 		--- | ---
@@ -459,7 +418,7 @@ package gmod.libs;
 		`EndPos` | The position of the last character to be included in the sub-string. It can be negative to count from the end.
 		
 		
-		**Returns:** The substring.
+		`**Returns:** The substring.
 		
 		___
 		### Lua Examples
@@ -473,23 +432,20 @@ package gmod.libs;
 		**Output:**
 		
 		Some
-		
-		
     **/
     
     public static function sub(string:String, StartPos:Float, ?EndPos:Float):String;
     
     
     /**
-        Removes the extension of a path. 
-		
+        Removes the extension of a path.
 		
 		Name | Description
 		--- | ---
 		`Inputstring` | The path to change.
 		
 		
-		**Returns:** Modifiedstring
+		`**Returns:** Modifiedstring
 		
 		___
 		### Lua Examples
@@ -502,23 +458,20 @@ package gmod.libs;
 		**Output:**
 		
 		"garrysmod/lua/modules/string"
-		
-		
     **/
     
     public static function StripExtension(Inputstring:String):String;
     
     
     /**
-        Fetches a Color type from a string. 
-		
+        Fetches a Color type from a string.
 		
 		Name | Description
 		--- | ---
 		`Inputstring` | The string to convert from.
 		
 		
-		**Returns:** The output Color structure
+		`**Returns:** The output Color structure
 		
 		___
 		### Lua Examples
@@ -528,16 +481,13 @@ package gmod.libs;
 		```lua 
 		PrintTable( string.ToColor( "255 0 255 125" ) )
 		```
-		
-		
     **/
     
-    public static function ToColor(Inputstring:String):AnyTable;
+    public static function ToColor(Inputstring:String):Color;
     
     
     /**
-        Returns the last n-th characters of the string. 
-		
+        Returns the last n-th characters of the string.
 		
 		Name | Description
 		--- | ---
@@ -545,7 +495,7 @@ package gmod.libs;
 		`num` | Amount of chars relative to the end (starting from 1).
 		
 		
-		**Returns:** Returns a string containing a specified number of characters from the right side of a string.
+		`**Returns:** Returns a string containing a specified number of characters from the right side of a string.
 		
 		___
 		### Lua Examples
@@ -559,23 +509,20 @@ package gmod.libs;
 		**Output:**
 		
 		mod
-		
-		
     **/
     
     public static function Right(str:String, num:Float):String;
     
     
     /**
-        Returns extension of the file. 
-		
+        Returns extension of the file.
 		
 		Name | Description
 		--- | ---
 		`file` | String eg. file-path to get the file extensions from.
 		
 		
-		**Returns:** fileExtension
+		`**Returns:** fileExtension
 		
 		___
 		### Lua Examples
@@ -588,16 +535,13 @@ package gmod.libs;
 		**Output:**
 		
 		lua
-		
-		
     **/
     
     public static function GetExtensionFromFilename(file:String):String;
     
     
     /**
-        Replaces all occurrences of the supplied second string. 
-		
+        Replaces all occurrences of the supplied second string.
 		
 		Name | Description
 		--- | ---
@@ -606,7 +550,7 @@ package gmod.libs;
 		`replace` | What to replace find with.
 		
 		
-		**Returns:** string
+		`**Returns:** string
 		
 		___
 		### Lua Examples
@@ -620,16 +564,13 @@ package gmod.libs;
 		**Output:**
 		
 		Hers Mod
-		
-		
     **/
     
     public static function Replace(str:String, find:String, replace:String):String;
     
     
     /**
-        Removes leading spaces/characters from a string. 
-		
+        Removes leading spaces/characters from a string.
 		
 		Name | Description
 		--- | ---
@@ -637,24 +578,21 @@ package gmod.libs;
 		`char` | Custom character to remove
 		
 		
-		**Returns:** Trimmed string
-		
-		
+		`**Returns:** Trimmed string
     **/
     
     public static function TrimLeft(str:String, ?char:String):String;
     
     
     /**
-        Returns given time in "MM:SS" format. 
-		
+        Returns given time in "MM:SS" format.
 		
 		Name | Description
 		--- | ---
 		`time` | Time in seconds
 		
 		
-		**Returns:** Formatted time
+		`**Returns:** Formatted time
 		
 		___
 		### Lua Examples
@@ -667,28 +605,25 @@ package gmod.libs;
 		**Output:**
 		
 		01:01
-		
-		
     **/
     
     public static function ToMinutesSeconds(time:Float):String;
     
     
     /**
-        ***Deprecated:**   You really should just use table. concat.
+        ***Deprecated:** You really should just use table. concat.
 		
 		Joins the values of a table together to form a string. 
 		
-		This is the reverse of string.Explode and is functionally identical to table.concat, but with less features. 
+		This is the reverse of string.Explode and is functionally identical to table.concat, but with less features.
 		
-		 
 		Name | Description
 		--- | ---
 		`separator` | The separator to insert between each piece.
 		`pieces` | The table of pieces to concatenate. The keys for these must be numeric and sequential.
 		
 		
-		**Returns:** Imploded pieces
+		`**Returns:** Imploded pieces
 		
 		___
 		### Lua Examples
@@ -703,23 +638,20 @@ package gmod.libs;
 		**Output:**
 		
 		one two three
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You really should just use table. concat.")
     public static function Implode(?separator:String, pieces:AnyTable):String;
     
     
     /**
-        Changes any upper-case letters in a string to lower-case letters. 
-		
+        Changes any upper-case letters in a string to lower-case letters.
 		
 		Name | Description
 		--- | ---
 		`str` | The string to convert.
 		
 		
-		**Returns:** The original string, with all uppercase letters replaced with their lowercase variants.
+		`**Returns:** The original string, with all uppercase letters replaced with their lowercase variants.
 		
 		___
 		### Lua Examples
@@ -759,23 +691,20 @@ package gmod.libs;
 		print(GetProduct("banana"))
 		print(GetProduct("BaNaNa"))
 		```
-		
-		
     **/
     
     public static function lower(str:String):String;
     
     
     /**
-        Returns file name and extension. 
-		
+        Returns file name and extension.
 		
 		Name | Description
 		--- | ---
 		`pathString` | The string eg. file-path to get the file-name from.
 		
 		
-		**Returns:** The file name
+		`**Returns:** The file name
 		
 		___
 		### Lua Examples
@@ -788,23 +717,22 @@ package gmod.libs;
 		**Output:**
 		
 		string.lua
-		
-		
     **/
     
     public static function GetFileFromFilename(pathString:String):String;
     
     
     /**
-        Splits the string into characters and creates a sequential table of characters. 
+        Splits the string into characters and creates a sequential table of characters.
 		
+		**Warning:** As a result of the UTF-8 encoding, non-ASCII characters will be split into more than one character in the output table. Each character value in the output table will always be 1 byte.
 		
 		Name | Description
 		--- | ---
 		`str` | The string you'll turn into a table.
 		
 		
-		**Returns:** A sequential table where each value is a character from the given string
+		`**Returns:** A sequential table where each value is a character from the given string
 		
 		___
 		### Lua Examples
@@ -824,16 +752,13 @@ package gmod.libs;
 		    print(k, bit.tohex(string.byte(v)), v)
 		end
 		```
-		
-		
     **/
     
     public static function ToTable(str:String):AnyTable;
     
     
     /**
-        Removes trailing spaces/passed character from a string. 
-		
+        Removes trailing spaces/passed character from a string.
 		
 		Name | Description
 		--- | ---
@@ -841,24 +766,21 @@ package gmod.libs;
 		`char` | Custom character to remove, default is a space
 		
 		
-		**Returns:** Trimmed string
-		
-		
+		`**Returns:** Trimmed string
     **/
     
     public static function TrimRight(str:String, ?char:String):String;
     
     
     /**
-        Escapes all special characters within a string, making the string safe for inclusion in a Lua pattern. 
-		
+        Escapes all special characters within a string, making the string safe for inclusion in a Lua pattern.
 		
 		Name | Description
 		--- | ---
 		`str` | The string to be sanitized
 		
 		
-		**Returns:** The string that has been sanitized for inclusion in Lua patterns
+		`**Returns:** The string that has been sanitized for inclusion in Lua patterns
 		
 		___
 		### Lua Examples
@@ -875,23 +797,20 @@ package gmod.libs;
 		**Output:**
 		
 		You scored 0%!
-		
-		
     **/
     
     public static function PatternSafe(str:String):String;
     
     
     /**
-        Counts the number of characters in the string (length). This is equivalent to using the length operator (#). 
-		
+        Counts the number of characters in the string (length). This is equivalent to using the length operator (#).
 		
 		Name | Description
 		--- | ---
 		`str` | The string to find the length of.
 		
 		
-		**Returns:** Length of the string
+		`**Returns:** Length of the string
 		
 		___
 		### Lua Examples
@@ -907,16 +826,13 @@ package gmod.libs;
 		**Output:**
 		
 		2 10 0 true
-		
-		
     **/
     
     public static function len(str:String):Float;
     
     
     /**
-        Formats the specified values into the string given. 
-		
+        Formats the specified values into the string given.
 		
 		Name | Description
 		--- | ---
@@ -924,7 +840,7 @@ package gmod.libs;
 		`formatParameters` | Values to be formatted into the string.
 		
 		
-		**Returns:** The formatted string
+		`**Returns:** The formatted string
 		
 		___
 		### Lua Examples
@@ -955,23 +871,20 @@ package gmod.libs;
 		// octal, hex, and uppercase hex
 		print(string.format("%o, %x, %X", -100, -100, -100))
 		```
-		
-		
     **/
     
     public static function format(format:String, formatParameters:Rest<Dynamic>):String;
     
     
     /**
-        Changes any lower-case letters in a string to upper-case letters. 
-		
+        Changes any lower-case letters in a string to upper-case letters.
 		
 		Name | Description
 		--- | ---
 		`str` | The string to convert.
 		
 		
-		**Returns:** A string representing the value of a string converted to upper-case.
+		`**Returns:** A string representing the value of a string converted to upper-case.
 		
 		___
 		### Lua Examples
@@ -987,16 +900,13 @@ package gmod.libs;
 		**Output:**
 		
 		ABCDEFG ABCDEFG ABCDEFG 1234567890
-		
-		
     **/
     
     public static function upper(str:String):String;
     
     
     /**
-        Returns whether or not the first string starts with the second. 
-		
+        Returns whether or not the first string starts with the second.
 		
 		Name | Description
 		--- | ---
@@ -1004,7 +914,7 @@ package gmod.libs;
 		`start` | String to check with.
 		
 		
-		**Returns:** Whether the first string starts with the second.
+		`**Returns:** Whether the first string starts with the second.
 		
 		___
 		### Lua Examples
@@ -1017,16 +927,13 @@ package gmod.libs;
 		**Output:**
 		
 		true
-		
-		
     **/
     
     public static function StartWith(inputStr:String, start:String):Bool;
     
     
     /**
-        Returns whether or not the second passed string matches the end of the first. 
-		
+        Returns whether or not the second passed string matches the end of the first.
 		
 		Name | Description
 		--- | ---
@@ -1034,7 +941,7 @@ package gmod.libs;
 		`end` | The string to be matched with the end of the first.
 		
 		
-		**Returns:** true if the first string ends with the second, or the second is empty, otherwise false.
+		`**Returns:** true if the first string ends with the second, or the second is empty, otherwise false.
 		
 		___
 		### Lua Examples
@@ -1050,18 +957,15 @@ package gmod.libs;
 		**Output:**
 		
 		Marry Poppins
-		
-		
     **/
     
     public static function EndsWith(str:String, end:String):Bool;
     
     
     /**
-        ***Deprecated:**   This function is removed in Lua versions later than what GMod is currently using. Use string. gmatch instead.
+        ***Deprecated:** This function is removed in Lua versions later than what GMod is currently using. Use string. gmatch instead.
 		
-		Returns an iterator function that is called for every complete match of the pattern, all sub matches will be passed as to the loop.         Example usage of the function 
-		
+		Returns an iterator function that is called for every complete match of the pattern, all sub matches will be passed as to the loop.         Example usage of the function
 		
 		Name | Description
 		--- | ---
@@ -1069,7 +973,7 @@ package gmod.libs;
 		`pattern` | The pattern to search for
 		
 		
-		**Returns:** The iterator function that can be used in a for-in loop
+		`**Returns:** The iterator function that can be used in a for-in loop
 		
 		___
 		### Lua Examples
@@ -1085,23 +989,20 @@ package gmod.libs;
 		**Output:**
 		
 		In your console: myawesomestuff
-		
-		
     **/
-    @:deprecated
+    @:deprecated("This function is removed in Lua versions later than what GMod is currently using. Use string. gmatch instead.")
     public static function gfind(data:String, pattern:String):Function;
     
     
     /**
-        Takes the given numerical bytes and converts them to a string. 
-		
+        Takes the given numerical bytes and converts them to a string.
 		
 		Name | Description
 		--- | ---
 		`bytes` | The bytes to create the string from.
 		
 		
-		**Returns:** String built from given bytes
+		`**Returns:** String built from given bytes
 		
 		___
 		### Lua Examples
@@ -1136,16 +1037,13 @@ package gmod.libs;
 		
 		print( string.Random( 10 ) )
 		```
-		
-		
     **/
     
     public static function char(bytes:Rest<Dynamic>):String;
     
     
     /**
-        Returns the time as a formatted string or as a table if no format is given. 
-		
+        Returns the time as a formatted string or as a table if no format is given.
 		
 		Name | Description
 		--- | ---
@@ -1153,7 +1051,7 @@ package gmod.libs;
 		`format` | An optional formatting to use. If no format it specified, a table will be returned instead.
 		
 		
-		**Returns:** Returns the time as a formatted string only if a format was specified. Returns a table only if no format was specified. The table will contain these fields: number ms - milliseconds number s - seconds number m - minutes number h - hours
+		`**Returns:** Returns the time as a formatted string only if a format was specified. Returns a table only if no format was specified. The table will contain these fields: number ms - milliseconds number s - seconds number m - minutes number h - hours
 		
 		___
 		### Lua Examples
@@ -1178,16 +1076,13 @@ package gmod.libs;
 		**Output:**
 		
 		ms = 0 m = 1 s = 30 h = 0
-		
-		
     **/
     
     public static function FormattedTime(float:Float, ?format:String):String;
     
     
     /**
-        Using Patterns, returns an iterator which will return either one value if no capture groups are defined, or any capture group matches. 
-		
+        Using Patterns, returns an iterator which will return either one value if no capture groups are defined, or any capture group matches.
 		
 		Name | Description
 		--- | ---
@@ -1195,7 +1090,7 @@ package gmod.libs;
 		`pattern` | The pattern to search for
 		
 		
-		**Returns:** The iterator function that can be used in a for-in loop
+		`**Returns:** The iterator function that can be used in a for-in loop
 		
 		___
 		### Lua Examples
@@ -1208,23 +1103,20 @@ package gmod.libs;
 		    print(s)
 		end
 		```
-		
-		
     **/
     
     public static function gmatch(data:String, pattern:String):Function;
     
     
     /**
-        Converts a digital filesize to human-readable text. 
-		
+        Converts a digital filesize to human-readable text.
 		
 		Name | Description
 		--- | ---
 		`bytes` | The filesize in bytes.
 		
 		
-		**Returns:** The human-readable filesize, in Bytes/KB/MB/GB (whichever is appropriate).
+		`**Returns:** The human-readable filesize, in Bytes/KB/MB/GB (whichever is appropriate).
 		
 		___
 		### Lua Examples
@@ -1237,8 +1129,6 @@ package gmod.libs;
 		**Output:**
 		
 		63 KB
-		
-		
     **/
     
     public static function NiceSize(bytes:Float):String;
@@ -1247,9 +1137,8 @@ package gmod.libs;
     /**
         Splits a string up wherever it finds the given separator. 
 		
-		This is the reverse of string.Implode. 
+		This is the reverse of string.Implode.
 		
-		 
 		Name | Description
 		--- | ---
 		`separator` | The string will be separated wherever this sequence is found.
@@ -1257,7 +1146,7 @@ package gmod.libs;
 		`use_patterns` | Set this to true if your separator is a pattern.
 		
 		
-		**Returns:** Exploded string as a numerical sequential table.
+		`**Returns:** Exploded string as a numerical sequential table.
 		
 		___
 		### Lua Examples
@@ -1291,23 +1180,20 @@ package gmod.libs;
 		
 		end)
 		```
-		
-		
     **/
     
     public static function Explode(separator:String, str:String, use_patterns:Bool):AnyTable;
     
     
     /**
-        Formats the supplied number (in seconds) to the highest possible time unit. 
-		
+        Formats the supplied number (in seconds) to the highest possible time unit.
 		
 		Name | Description
 		--- | ---
 		`num` | The number to format, in seconds.
 		
 		
-		**Returns:** A nicely formatted time string.
+		`**Returns:** A nicely formatted time string.
 		
 		___
 		### Lua Examples
@@ -1321,16 +1207,13 @@ package gmod.libs;
 		print(string.NiceTime(4356))
 		print(string.NiceTime(43545456))
 		```
-		
-		
     **/
     
     public static function NiceTime(num:Float):String;
     
     
     /**
-        Sets the character at the specific index of the string. 
-		
+        Sets the character at the specific index of the string.
 		
 		Name | Description
 		--- | ---
@@ -1339,7 +1222,7 @@ package gmod.libs;
 		`ReplacementChar` | String to replace with.
 		
 		
-		**Returns:** ModifiedString
+		`**Returns:** ModifiedString
 		
 		___
 		### Lua Examples
@@ -1353,23 +1236,20 @@ package gmod.libs;
 		**Output:**
 		
 		"Apgles"
-		
-		
     **/
     
     public static function SetChar(InputString:String, Index:Float, ReplacementChar:String):String;
     
     
     /**
-        Creates a string from a Color variable. 
-		
+        Creates a string from a Color variable.
 		
 		Name | Description
 		--- | ---
 		`color` | The color to put in the string.
 		
 		
-		**Returns:** Output
+		`**Returns:** Output
 		
 		___
 		### Lua Examples
@@ -1382,16 +1262,13 @@ package gmod.libs;
 		**Output:**
 		
 		"255 0 255 125"
-		
-		
     **/
     
     public static function FromColor(color:AnyTable):String;
     
     
     /**
-        Repeats a string by the provided number, with an optional separator. 
-		
+        Repeats a string by the provided number, with an optional separator.
 		
 		Name | Description
 		--- | ---
@@ -1400,7 +1277,7 @@ package gmod.libs;
 		`separator` | String that will separate the repeated piece. Notice that it doesn't add this string to the start or the end of the result, only between the repeated parts.
 		
 		
-		**Returns:** Repeated string.
+		`**Returns:** Repeated string.
 		
 		___
 		### Lua Examples
@@ -1423,8 +1300,6 @@ package gmod.libs;
 		**Output:**
 		
 		hello world hello world hello world
-		
-		
     **/
     
     public static function rep(str:String, repetitions:Float, ?separator:String):String;

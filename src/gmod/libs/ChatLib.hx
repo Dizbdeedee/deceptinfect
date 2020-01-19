@@ -2,25 +2,19 @@ package gmod.libs;
 #if client
 
 /**
-    The chat library's purpose is to interface with the default chatbox. 
-	
-	
+    The chat library's purpose is to interface with the default chatbox.
 **/
 @:native("chat")extern class ChatLib {
     
     /**
-        Closes the chat window. 
-		
-		
-		
+        Closes the chat window.
     **/
     
     public static function Close():Void;
     
     
     /**
-        Returns the chatbox size. 
-		
+        Returns the chatbox size.
 		
 		Name | Description
 		--- | ---
@@ -36,31 +30,24 @@ package gmod.libs;
 		```lua 
 		print( chat.GetChatBoxSize() )
 		```
-		
-		
     **/
     
     public static function GetChatBoxSize():ChatLibGetChatBoxSizeReturn;
     
     
     /**
-        Opens the chat window. 
-		
+        Opens the chat window.
 		
 		Name | Description
 		--- | ---
 		`mode` | If equals 1, opens public chat, otherwise opens team chat
-		
-		
-		
     **/
     
     public static function Open(mode:Float):Void;
     
     
     /**
-        Plays the chat "tick" sound. 
-		
+        Plays the chat "tick" sound.
 		
 		___
 		### Lua Examples
@@ -70,16 +57,13 @@ package gmod.libs;
 		```lua 
 		chat.PlaySound()
 		```
-		
-		
     **/
     
     public static function PlaySound():Void;
     
     
     /**
-        Returns the chatbox position. 
-		
+        Returns the chatbox position.
 		
 		Name | Description
 		--- | ---
@@ -95,16 +79,13 @@ package gmod.libs;
 		```lua 
 		print( chat.GetChatBoxPos() )
 		```
-		
-		
     **/
     
     public static function GetChatBoxPos():ChatLibGetChatBoxPosReturn;
     
     
     /**
-        Adds text to the local player's chat box (which only they can read). 
-		
+        Adds text to the local player's chat box (which only they can read).
 		
 		Name | Description
 		--- | ---
@@ -120,11 +101,9 @@ package gmod.libs;
 		local ply = LocalPlayer()
 		chat.AddText( Color( 100, 100, 255 ), ply, ", you are holding ", Color( 100, 255, 100 ), ply:GetActiveWeapon():GetClass() )
 		```
-		
-		
     **/
     
-    public static function AddText(arguments:Rest<Dynamic>):Void;
+    public static function AddText(arguments:Color):Void;
     
     
 

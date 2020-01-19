@@ -2,15 +2,12 @@ package gmod.libs;
 #if server
 
 /**
-    The construct library is used to control the physical properties of entities. 
-	
-	
+    The construct library is used to control the physical properties of entities.
 **/
 @:native("construct")extern class ConstructLib {
     
     /**
-        Creates a magnet. 
-		
+        Creates a magnet.
 		
 		Name | Description
 		--- | ---
@@ -31,17 +28,14 @@ package gmod.libs;
 		`frozen` | Freeze the magnet on start
 		
 		
-		**Returns:** The magnet
-		
-		
+		`**Returns:** The magnet
     **/
     
-    public static function Magnet(ply:Player, pos:Vector, ang:Angle, model:String, material:String, key:Float, maxObjects:Float, strength:Float, ?nopull:Float, ?allowrot:Float, ?startOn:Float, toggle:Float, ?vel:Vector, ?aVel:Angle, ?frozen:Bool):Entity;
+    public static function Magnet(ply:Player, pos:Vector, ang:Angle, model:String, material:String, key:KEY, maxObjects:Float, strength:Float, ?nopull:Float, ?allowrot:Float, ?startOn:Float, toggle:Float, ?vel:Vector, ?aVel:Angle, ?frozen:Bool):Entity;
     
     
     /**
-        Sets props physical properties. 
-		
+        Sets props physical properties.
 		
 		Name | Description
 		--- | ---
@@ -50,12 +44,9 @@ package gmod.libs;
 		`physObjID` | You can use this or the argument below. This will be used in case you don't provide argument below.
 		`physObj` | The physics object to apply the properties to
 		`data` | The table containing properties to apply. See PhysProperties structure
-		
-		
-		
     **/
     
-    public static function SetPhysProp(ply:Player, ent:Entity, physObjID:Float, physObj:PhysObj, data:AnyTable):Void;
+    public static function SetPhysProp(ply:Player, ent:Entity, physObjID:Float, physObj:PhysObj, data:PhysProperties):Void;
     
     
 

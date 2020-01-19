@@ -2,18 +2,15 @@ package gmod.libs;
 #if client
 
 /**
-    The spawnmenu library is a set of functions that allow you to control the spawn (Q) menu. 
-	
-	
+    The spawnmenu library is a set of functions that allow you to control the spawn (Q) menu.
 **/
 @:native("spawnmenu")extern class SpawnmenuLib {
     
     /**
         Adds a new tool tab to the right side of the spawnmenu via the SANDBOX:AddToolMenuTabs hook. 
 		
-		This function is a inferior duplicate of spawnmenu.GetToolMenu, just without its return value. 
+		This function is a inferior duplicate of spawnmenu.GetToolMenu, just without its return value.
 		
-		 
 		Name | Description
 		--- | ---
 		`name` | The internal name of the tab. This is used for sorting.
@@ -31,16 +28,13 @@ package gmod.libs;
 		    spawnmenu.AddToolTab( "Tab name!", "#Unique_Name", "icon16/wrench.png" )
 		end )
 		```
-		
-		
     **/
     
     public static function AddToolTab(name:String, ?label:String, ?icon:String):Void;
     
     
     /**
-        Inserts a new tab into the CreationMenus table, which will be used by the creation menu to generate its tabs (Spawnlists, Weapons, Entities, etc.) 
-		
+        Inserts a new tab into the CreationMenus table, which will be used by the creation menu to generate its tabs (Spawnlists, Weapons, Entities, etc.)
 		
 		Name | Description
 		--- | ---
@@ -72,8 +66,6 @@ package gmod.libs;
 		**Output:**
 		
 		A new tab named "Dupes" will be placed in the creation menu.
-		
-		
     **/
     
     public static function AddCreationTab(name:String, _function:Function, ?material:String, ?order:Float, ?tooltip:String):Void;
@@ -82,9 +74,8 @@ package gmod.libs;
     /**
         Used to create a new category in the list inside of a spawnmenu ToolTab. 
 		
-		You must call this function from SANDBOX:AddToolMenuCategories for it to work properly. 
+		You must call this function from SANDBOX:AddToolMenuCategories for it to work properly.
 		
-		 
 		Name | Description
 		--- | ---
 		`tab` | The ToolTab name, as created with spawnmenu.AddToolTab. You can also use the default ToolTab names "Main" and "Utilities".
@@ -107,8 +98,6 @@ package gmod.libs;
 		```lua 
 		spawnmenu.AddToolCategory( "Utilities", "User", "#spawnmenu.utilities.user" )
 		```
-		
-		
     **/
     
     public static function AddToolCategory(tab:String, RealName:String, PrintName:String):Void;
@@ -117,9 +106,10 @@ package gmod.libs;
     /**
         Used to add addon spawnlists to the spawnmenu tree. This function should be called within SANDBOX:PopulatePropMenu. 
 		
-		Addon spawnlists will not save to disk if edited. 
+		Addon spawnlists will not save to disk if edited.
 		
-		 
+		**Warning:** You should never try to modify player customized spawnlists!
+		
 		Name | Description
 		--- | ---
 		`classname` | A unique classname of the list.
@@ -234,16 +224,13 @@ package gmod.libs;
 		    spawnmenu.AddPropCategory( "TwoOfEach", "Two of each type", contents, "icon16/box.png" )
 		end )
 		```
-		
-		
     **/
     
     public static function AddPropCategory(classname:String, name:String, contents:AnyTable, icon:String, ?id:Float, ?parentID:Float, ?needsApp:String):Void;
     
     
     /**
-        Creates a new content icon. 
-		
+        Creates a new content icon.
 		
 		Name | Description
 		--- | ---
@@ -252,19 +239,16 @@ package gmod.libs;
 		`data` | The data to send to the content icon in spawnmenu. AddContentType
 		
 		
-		**Returns:** The created content icon, if it was returned by spawnmenu. AddContentType
-		
-		
+		`**Returns:** The created content icon, if it was returned by spawnmenu. AddContentType
     **/
     
     public static function CreateContentIcon(type:String, parent:Panel, data:AnyTable):Panel;
     
     
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Adds an option to the right side of the spawnmenu 
-		
+		Adds an option to the right side of the spawnmenu
 		
 		Name | Description
 		--- | ---
@@ -292,18 +276,15 @@ package gmod.libs;
 		    end )
 		end )
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
     public static function AddToolMenuOption(tab:String, category:String, _class:String, name:String, cmd:String, config:String, cpanel:Function, ?table:AnyTable):Void;
     
     
     /**
-        Gets a table of tools on the client. 
+        Gets a table of tools on the client.
 		
-		
-		**Returns:** A table with groups of tools, along with information on each tool.
+		`**Returns:** A table with groups of tools, along with information on each tool.
 		
 		___
 		### Lua Examples
@@ -313,57 +294,44 @@ package gmod.libs;
 		```lua 
 		PrintTable( spawnmenu.GetTools() )
 		```
-		
-		
     **/
     
     public static function GetTools():AnyTable;
     
     
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Supposed to open specified tool tab in spawnmenu, in reality does nothing. 
-		
+		Supposed to open specified tool tab in spawnmenu, in reality does nothing.
 		
 		Name | Description
 		--- | ---
 		`id` | The tab ID to open
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
     public static function SwitchToolTab(id:Float):Void;
     
     
     /**
-        Returns the function to create an vgui element for a specified content type 
-		
+        Returns the function to create an vgui element for a specified content type
 		
 		Name | Description
 		--- | ---
 		`contentType` | 
 		
 		
-		**Returns:** The panel creation function
-		
-		
+		`**Returns:** The panel creation function
     **/
     
     public static function GetContentType(contentType:String):Function;
     
     
     /**
-        Activates a tool, opens context menu and brings up the tool gun. 
-		
+        Activates a tool, opens context menu and brings up the tool gun.
 		
 		Name | Description
 		--- | ---
 		`tool` | Tool class/file name
-		
-		
-		
     **/
     
     public static function ActivateTool(tool:String):Void;
@@ -372,9 +340,8 @@ package gmod.libs;
     /**
         Clears all the tools from the different tool categories and the categories itself, if ran at the correct place. 
 		
-		Seems to only work when ran at initialization. 
+		Seems to only work when ran at initialization.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -385,16 +352,13 @@ package gmod.libs;
 		
 		spawnmenu.ClearToolMenus()
 		```
-		
-		
     **/
     
     public static function ClearToolMenus():Void;
     
     
     /**
-        Adds a new tool tab (or returns an existing one by name) to the right side of the spawnmenu via the SANDBOX:AddToolMenuTabs hook. 
-		
+        Adds a new tool tab (or returns an existing one by name) to the right side of the spawnmenu via the SANDBOX:AddToolMenuTabs hook.
 		
 		Name | Description
 		--- | ---
@@ -403,7 +367,7 @@ package gmod.libs;
 		`icon` | The filepath to the icon of the tab. Should be a .png
 		
 		
-		**Returns:** A table of tables representing categories and items in the left part of the tab. See example below to example structure.
+		`**Returns:** A table of tables representing categories and items in the left part of the tab. See example below to example structure.
 		
 		___
 		### Lua Examples
@@ -413,32 +377,25 @@ package gmod.libs;
 		```lua 
 		PrintTable( spawnmenu.GetToolMenu( "Main" ) )
 		```
-		
-		
     **/
     
     public static function GetToolMenu(name:String, ?label:String, ?icon:String):AnyTable;
     
     
     /**
-        Activates tools context menu in specified tool tab. 
-		
+        Activates tools context menu in specified tool tab.
 		
 		Name | Description
 		--- | ---
 		`tab` | The tabID of the tab to open the context menu in
 		`cp` | The control panel to open
-		
-		
-		
     **/
     
     public static function ActivateToolPanel(tab:Float, cp:Panel):Void;
     
     
     /**
-        Registers a new content type that is saveable into spawnlists. Created/called by spawnmenu.CreateContentIcon. 
-		
+        Registers a new content type that is saveable into spawnlists. Created/called by spawnmenu.CreateContentIcon.
 		
 		Name | Description
 		--- | ---
@@ -463,52 +420,39 @@ package gmod.libs;
 		    
 		end )
 		```
-		
-		
     **/
     
     public static function AddContentType(name:String, constructor:Function):Void;
     
     
     /**
-        Sets currently active control panel to be returned by spawnmenu.ActiveControlPanel. 
-		
+        Sets currently active control panel to be returned by spawnmenu.ActiveControlPanel.
 		
 		Name | Description
 		--- | ---
 		`pnl` | The panel to set.
-		
-		
-		
     **/
     
     public static function SetActiveControlPanel(pnl:Panel):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Calls spawnmenu.SaveToTextFiles. 
-		
+		Calls spawnmenu.SaveToTextFiles.
 		
 		Name | Description
 		--- | ---
 		`spawnlists` | A table containing spawnlists.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function DoSaveToTextFiles(spawnlists:AnyTable):Void;
     
     
     /**
-        Returns currently opened control panel of a tool, post process effect or some other menu in spawnmenu. 
+        Returns currently opened control panel of a tool, post process effect or some other menu in spawnmenu.
 		
-		
-		**Returns:** The currently opened control panel, if any.
-		
-		
+		`**Returns:** The currently opened control panel, if any.
     **/
     
     public static function ActiveControlPanel():Panel;
@@ -517,55 +461,42 @@ package gmod.libs;
     /**
         Similar to spawnmenu.GetPropTable, but only returns spawnlists created by addons via spawnmenu.AddPropCategory. 
 		
-		These spawnlists are shown in a separate menu in-game. 
+		These spawnlists are shown in a separate menu in-game.
 		
-		 
-		**Returns:** See spawnmenu. GetPropTable for table format.
-		
-		
+		`**Returns:** See spawnmenu. GetPropTable for table format.
     **/
     
     public static function GetCustomPropTable():AnyTable;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Calls spawnmenu.PopulateFromTextFiles. 
-		
-		
-		
+		Calls spawnmenu.PopulateFromTextFiles.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function PopulateFromEngineTextFiles():Void;
     
     
     /**
-        Gets the CreationMenus table, which was filled with creation menu tabs from spawnmenu.AddCreationTab. 
+        Gets the CreationMenus table, which was filled with creation menu tabs from spawnmenu.AddCreationTab.
 		
-		
-		**Returns:** The CreationMenus table. See the CreationMenus structure.
-		
-		
+		`**Returns:** The CreationMenus table. See the CreationMenus structure.
     **/
     
-    public static function GetCreationTabs():AnyTable;
+    public static function GetCreationTabs():CreationMenus;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Saves a table of spawnlists to files. 
-		
+		Saves a table of spawnlists to files.
 		
 		Name | Description
 		--- | ---
 		`spawnlists` | A table containing spawnlists.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function SaveToTextFiles(spawnlists:AnyTable):Void;
     
     
@@ -574,10 +505,9 @@ package gmod.libs;
 		
 		Note that if the spawnmenu has not been populated, this will return an empty table. 
 		
-		 This will not return spawnlists created by addons, see spawnmenu.GetCustomPropTable for that. 
+		 This will not return spawnlists created by addons, see spawnmenu.GetCustomPropTable for that.
 		
-		 
-		**Returns:** Table of all the prop categories and props in the following format: {
+		`**Returns:** Table of all the prop categories and props in the following format: {
 			["settings/spawnlist/001-construction props.txt"] = {
 				name = "Construction Props",
 				icon = "icon16/page.png",
@@ -594,23 +524,17 @@ package gmod.libs;
 			}
 			-- etc.
 		}
-		
-		
     **/
     
     public static function GetPropTable():AnyTable;
     
     
     /**
-        Loads spawnlists from text files. 
-		
+        Loads spawnlists from text files.
 		
 		Name | Description
 		--- | ---
 		`callback` | The function to call. Arguments are ( strFilename, strName, tabContents, icon, id, parentid, needsapp )
-		
-		
-		
     **/
     
     public static function PopulateFromTextFiles(callback:Function):Void;

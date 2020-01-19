@@ -4,53 +4,39 @@ package gmod.panels;
 /**
     This panel is created whenever you add a node to a DTree. 
 	
-	The root node of a DTree is also a DTree_Node and controls much of its action; it can be accessed with DTree:Root. 
-	
-	 
+	The root node of a DTree is also a DTree_Node and controls much of its action; it can be accessed with DTree:Root.
 **/
 extern class DTree_Node extends DPanel {
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns whether or not the node is set to be populated from the filesystem. 
+		Returns whether or not the node is set to be populated from the filesystem.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetNeedsPopulating():Bool;
     /**
-        Returns the folder path to search in, set by DTree_Node:MakeFolder. 
+        Returns the folder path to search in, set by DTree_Node:MakeFolder.
 		
-		
-		**Returns:** The folder path.
-		
-		
+		`**Returns:** The folder path.
     **/
     
      
     public function GetFolder():String;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called automatically from DTree_Node:PopulateChildrenAndSelf. 
-		
-		
-		
+		Called automatically from DTree_Node:PopulateChildrenAndSelf.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function PopulateChildren():Void;
     /**
-        Returns whether the expand button (little + button) should be shown or hidden. 
+        Returns whether the expand button (little + button) should be shown or hidden.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
@@ -58,57 +44,43 @@ extern class DTree_Node extends DPanel {
     /**
         Returns the root node, the DTree this node is under. 
 		
-		See also DTree_Node:GetParentNode. 
+		See also DTree_Node:GetParentNode.
 		
-		 
-		**Returns:** The root node
-		
-		
+		`**Returns:** The root node
     **/
     
      
     public function GetRoot():Panel;
     /**
-        Inserts a sub-node into this node before or after the given node. 
-		
+        Inserts a sub-node into this node before or after the given node.
 		
 		Name | Description
 		--- | ---
 		`node` | The DTree_Node to insert.
 		`nodeNextTo` | The node to insert the node above before or after.
 		`before` | true to insert before, false to insert after.
-		
-		
-		
     **/
     
      
     public function Insert(node:Panel, nodeNextTo:Panel, before:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		See DTree_Node:DoClick 
-		
-		
-		
+		See DTree_Node:DoClick
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function InternalDoClick():Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		See DTree_Node:DoRightClick. 
-		
-		
-		
+		See DTree_Node:DoRightClick.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function InternalDoRightClick():Void;
     /**
-        Add a child node to the DTree_Node 
-		
+        Add a child node to the DTree_Node
 		
 		Name | Description
 		--- | ---
@@ -116,41 +88,34 @@ extern class DTree_Node extends DPanel {
 		`icon` | The icon that will show nexto the node in the DTree.
 		
 		
-		**Returns:** Returns the created DTree_Node panel.
-		
-		
+		`**Returns:** Returns the created DTree_Node panel.
     **/
     
      
     public function AddNode(name:String, ?icon:String):Panel;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		
-		**Returns:** 
 		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetNeedsChildSearch():Bool;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called automatically to update the status of DTree_Node:GetLastChild on children of this node. 
-		
-		
-		
+		Called automatically to update the status of DTree_Node:GetLastChild on children of this node.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function DoChildrenOrder():Void;
     /**
         Makes this node a folder in the filesystem. This will make it automatically populated. 
 		
-		See also DTree_Node:AddFolder. 
+		See also DTree_Node:AddFolder.
 		
-		 
 		Name | Description
 		--- | ---
 		`folder` | The folder in the filesystem to use, relative to the garrysmod/ folder.
@@ -158,20 +123,14 @@ extern class DTree_Node extends DPanel {
 		`showFiles` | Should files be added as nodes (true) or folders only (false)
 		`wildcard` | The wildcard to use when searching for files.
 		`dontForceExpandable` | If set to true, don't show the expand buttons on empty nodes.
-		
-		
-		
     **/
     
      
     public function MakeFolder(folder:String, path:String, ?showFiles:Bool, ?wildcard:String, ?dontForceExpandable:Bool):Void;
     /**
-        Returns the wildcard set by DTree_Node:MakeFolder. 
+        Returns the wildcard set by DTree_Node:MakeFolder.
 		
-		
-		**Returns:** The search wildcard
-		
-		
+		`**Returns:** The search wildcard
     **/
     
      
@@ -179,80 +138,59 @@ extern class DTree_Node extends DPanel {
     /**
         The height of a single DTree_Node of the DTree this node belongs to. 
 		
-		Alias of DTree:GetLineHeight. 
+		Alias of DTree:GetLineHeight.
 		
-		 
-		**Returns:** The height of a single DTree_Node.
-		
-		
+		`**Returns:** The height of a single DTree_Node.
     **/
     
      
     public function GetLineHeight():Float;
     /**
-        Sets the material for the icon of the DTree_Node. 
-		
+        Sets the material for the icon of the DTree_Node.
 		
 		Name | Description
 		--- | ---
 		`path` | The path to the material to be used. Do not include "materials/". .pngs are supported.
-		
-		
-		
     **/
     
      
     public function SetIcon(path:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used to store name for sub elements for a Panel:Droppable call. 
-		
+		Used to store name for sub elements for a Panel:Droppable call.
 		
 		Name | Description
 		--- | ---
 		`name` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetDraggableName(name:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called automatically to perform layout on this node if this node DTree_Node:IsRootNode. 
-		
-		
-		
+		Called automatically to perform layout on this node if this node DTree_Node:IsRootNode.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function PerformRootNodeLayout():Void;
     /**
         Removes given node as a sub-node of this node. 
 		
-		It doesn't actually remove or unparent the panel, just removes it from the internal DListView. 
+		It doesn't actually remove or unparent the panel, just removes it from the internal DListView.
 		
-		 
 		Name | Description
 		--- | ---
 		`pnl` | The node to remove
-		
-		
-		
     **/
     
      
     public function LeaveTree(pnl:Panel):Void;
     /**
-        Returns the parent DTree_Node. Note that Panel:GetParent will not be the same! 
+        Returns the parent DTree_Node. Note that Panel:GetParent will not be the same!
 		
-		
-		**Returns:** The parent node.
-		
-		
+		`**Returns:** The parent node.
     **/
     
      
@@ -260,12 +198,9 @@ extern class DTree_Node extends DPanel {
     /**
         Returns the path ID (File Search Paths) used in populating the DTree from the filesystem. 
 		
-		See DTree_Node:SetPathID and DTree_Node:MakeFolder. 
+		See DTree_Node:SetPathID and DTree_Node:MakeFolder.
 		
-		 
-		**Returns:** The Path ID
-		
-		
+		`**Returns:** The Path ID
     **/
     
      
@@ -273,261 +208,200 @@ extern class DTree_Node extends DPanel {
     /**
         Returns whether or not the DTree this node is in has icons enabled. 
 		
-		See DTree:ShowIcons for more info. 
+		See DTree:ShowIcons for more info.
 		
-		 
-		**Returns:** Whether the icons are shown or not
-		
-		
+		`**Returns:** Whether the icons are shown or not
     **/
     
      
     public function ShowIcons():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Inserts an existing node as a "child" or a sub-node of this node. Used internally by the drag'n'drop functionality. 
-		
+		Inserts an existing node as a "child" or a sub-node of this node. Used internally by the drag'n'drop functionality.
 		
 		Name | Description
 		--- | ---
 		`node` | Has to be DTree_Node
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function InsertNode(node:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called automatically from DTree_Node:PopulateChildrenAndSelf and DTree_Node:PopulateChildren to populate this node with child nodes of files and folders. 
-		
+		Called automatically from DTree_Node:PopulateChildrenAndSelf and DTree_Node:PopulateChildren to populate this node with child nodes of files and folders.
 		
 		Name | Description
 		--- | ---
 		`bAndChildren` | Does nothing. Set to true if called from DTree_Node: PopulateChildren.
 		`bExpand` | Expand self once population process is finished.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function FilePopulate(bAndChildren:Bool, bExpand:Bool):Void;
     /**
         Called when the node is clicked. 
 		
-		See also DTree_Node:DoRightClick. 
+		See also DTree_Node:DoRightClick.
 		
-		 
-		**Returns:** Return true to prevent DoClick from being called on parent nodes or the DTree itself.
-		
-		
+		`**Returns:** Return true to prevent DoClick from being called on parent nodes or the DTree itself.
     **/
     
     @:hook 
     public function DoClick():Bool;
     /**
-        Called when sub-nodes of this DTree_Node were changed, such as being rearranged if that functionality is enabled. 
-		
-		
-		
+        Called when sub-nodes of this DTree_Node were changed, such as being rearranged if that functionality is enabled.
     **/
     
     @:hook 
     public function OnModified():Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Creates the container DListLayout for the DTree_Nodes. 
 		
-		This is called automatically so you don't have to. 
-		
-		 
-		
+		This is called automatically so you don't have to.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function CreateChildNodes():Void;
     /**
         Returns the indentation level of the DTree this node belongs to. 
 		
-		Alias of DTree:GetIndentSize, see it for more info. 
+		Alias of DTree:GetIndentSize, see it for more info.
 		
-		 
-		**Returns:** The indentation level.
-		
-		
+		`**Returns:** The indentation level.
     **/
     
      
     public function GetIndentSize():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets whether or not this node should draw visual lines. 
-		
+		Sets whether or not this node should draw visual lines.
 		
 		Name | Description
 		--- | ---
 		`draw` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetDrawLines(draw:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
+		
 		
 		
 		Name | Description
 		--- | ---
 		`newState` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetNeedsChildSearch(newState:Bool):Void;
     /**
         Collapses or expands all nodes from the topmost-level node to this one. 
 		
-		Works opposite of DTree_Node:ExpandRecurse. 
+		Works opposite of DTree_Node:ExpandRecurse.
 		
-		 
 		Name | Description
 		--- | ---
 		`expand` | Whether to expand (true) or collapse (false)
-		
-		
-		
     **/
     
      
     public function ExpandTo(expand:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Sets the search wildcard. 
 		
-		Use DTree_Node:MakeFolder instead 
+		Use DTree_Node:MakeFolder instead
 		
-		 
 		Name | Description
 		--- | ---
 		`wildcard` | The wildcard to set
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetWildCard(wildcard:String):Void;
     /**
-        Returns whether or not nodes for files should/will be added when populating the node from filesystem. 
+        Returns whether or not nodes for files should/will be added when populating the node from filesystem.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetShowFiles():Bool;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Sets the parent node of this node. Not the same as Panel:SetParent. 
 		
-		This is set automatically, you shouldn't use this. 
+		This is set automatically, you shouldn't use this.
 		
-		 
 		Name | Description
 		--- | ---
 		`parent` | The panel to set as a parent node for this node
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetParentNode(parent:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Sets the folder to search files and folders in. 
 		
-		Use DTree_Node:MakeFolder instead. 
+		Use DTree_Node:MakeFolder instead.
 		
-		 
 		Name | Description
 		--- | ---
 		`folder` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetFolder(folder:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called automatically from DTree_Node:SetExpanded (or when user manually expands the node) to populate the node with sub-nodes from the filesystem if this was enabled via DTree_Node:MakeFolder. 
-		
+		Called automatically from DTree_Node:SetExpanded (or when user manually expands the node) to populate the node with sub-nodes from the filesystem if this was enabled via DTree_Node:MakeFolder.
 		
 		Name | Description
 		--- | ---
 		`expand` | Expand self once population process is finished.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function PopulateChildrenAndSelf(expand:Bool):Void;
     /**
-        Sets whether double clicking the node should expand/collapse it or not. 
-		
+        Sets whether double clicking the node should expand/collapse it or not.
 		
 		Name | Description
 		--- | ---
 		`enable` | true to enable, false to disable this functionality.
-		
-		
-		
     **/
     
      
     public function SetDoubleClickToOpen(enable:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Sets the path ID (File Search Paths) for populating the tree from the filesystem. 
 		
-		Use DTree_Node:MakeFolder instead. 
+		Use DTree_Node:MakeFolder instead.
 		
-		 
 		Name | Description
 		--- | ---
 		`path` | The path ID to set.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetPathID(path:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called automatically from DTree_Node:FilePopulate to actually fill the node with sub-nodes based on set preferences like should files be added, etc. 
-		
+		Called automatically from DTree_Node:FilePopulate to actually fill the node with sub-nodes based on set preferences like should files be added, etc.
 		
 		Name | Description
 		--- | ---
@@ -537,157 +411,117 @@ extern class DTree_Node extends DPanel {
 		`path` | The Path ID search was performed with. See File Search Paths
 		`bAndChildren` | Inherited from the FilePopulate call. Does nothing
 		`wildcard` | The wildcard that was given
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function FilePopulateCallback(files:AnyTable, folders:AnyTable, foldername:String, path:String, bAndChildren:Bool, wildcard:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Called automatically internally. 
 		
-		Makes the target node compatible with this node's drag'n'drop. 
+		Makes the target node compatible with this node's drag'n'drop.
 		
-		 
 		Name | Description
 		--- | ---
 		`node` | The DTree_Node.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function InstallDraggable(node:Panel):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Currently does nothing, not implemented. 
-		
-		
-		
+		Currently does nothing, not implemented.
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetupCopy():Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets whether the expand button (little + button) should be shown or hidden. 
-		
+		Sets whether the expand button (little + button) should be shown or hidden.
 		
 		Name | Description
 		--- | ---
 		`hide` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetHideExpander(hide:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns what is set by DTree_Node:SetDraggableName. 
+		Returns what is set by DTree_Node:SetDraggableName.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetDraggableName():String;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called automatically to set whether this node is the last child on this level or not. 
-		
+		Called automatically to set whether this node is the last child on this level or not.
 		
 		Name | Description
 		--- | ---
 		`last` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetLastChild(last:Bool):Void;
     /**
-        Expands or collapses this node. 
-		
+        Expands or collapses this node.
 		
 		Name | Description
 		--- | ---
 		`expand` | Whether to expand (true) or collapse (false)
 		`surpressAnimation` | Whether to play animation (false) or not (true)
-		
-		
-		
     **/
     
      
     public function SetExpanded(expand:Bool, ?surpressAnimation:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets whether or not nodes for files should be added when populating the node from filesystem. 
-		
+		Sets whether or not nodes for files should be added when populating the node from filesystem.
 		
 		Name | Description
 		--- | ---
 		`showFiles` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetShowFiles(showFiles:Bool):Void;
     /**
         Moves given panel to the top of the children of this node. 
 		
-		Despite name of this function, it cannot move the children to any position but the topmost. 
+		Despite name of this function, it cannot move the children to any position but the topmost.
 		
-		 
 		Name | Description
 		--- | ---
 		`node` | The node to move.
-		
-		
-		
     **/
     
      
     public function MoveChildTo(node:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Adds the given panel to the child nodes list, a DListLayout. 
-		
+		Adds the given panel to the child nodes list, a DListLayout.
 		
 		Name | Description
 		--- | ---
 		`pnl` | The panel to add.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function AddPanel(pnl:Panel):Void;
     /**
-        Returns whether the double clock to collapse/expand functionality is enabled on this node. 
+        Returns whether the double clock to collapse/expand functionality is enabled on this node.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
@@ -695,12 +529,9 @@ extern class DTree_Node extends DPanel {
     /**
         Returns whether the expand/collapse button is shown on this node regardless of whether or not it has sub-nodes. 
 		
-		See also DTree_Node:SetForceShowExpander. 
+		See also DTree_Node:SetForceShowExpander.
 		
-		 
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
@@ -708,19 +539,17 @@ extern class DTree_Node extends DPanel {
     /**
         Called when the node is right clicked. 
 		
-		See also DTree_Node:DoClick. 
+		See also DTree_Node:DoClick.
 		
-		 
-		**Returns:** Return true to prevent DoRightClick from being called on parent nodes or the DTree itself.
-		
-		
+		`**Returns:** Return true to prevent DoRightClick from being called on parent nodes or the DTree itself.
     **/
     
     @:hook 
     public function DoRightClick():Bool;
     /**
-        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton. 
+        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
+		**Warning:** When used on a Label or its derivatives ( DLabel and DButton ), it will automatically call Panel:InvalidateLayout, meaning that you should avoid running this function every frame on these panels to avoid unnecessary performance loss.
 		
 		Name | Description
 		--- | ---
@@ -746,60 +575,44 @@ extern class DTree_Node extends DPanel {
 		-- Set the text to the message you get when VAC banned
 		richtext:SetText("#VAC_ConnectionRefusedDetail")
 		```
-		
-		
     **/
     
      
     public function SetText(text:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called when a child node is expanded or collapsed to propagate this event to parent nodes to update layout. 
-		
+		Called when a child node is expanded or collapsed to propagate this event to parent nodes to update layout.
 		
 		Name | Description
 		--- | ---
 		`expanded` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function ChildExpanded(expanded:Bool):Void;
     /**
-        Create and returns a copy of this node, including all the sub-nodes. 
+        Create and returns a copy of this node, including all the sub-nodes.
 		
-		
-		**Returns:** The copied DTree_Node.
-		
-		
+		`**Returns:** The copied DTree_Node.
     **/
     
      
     public function Copy():Panel;
     /**
-        Sets whether or not the expand/collapse button (+/- button) should be shown on this node regardless of whether it has sub-elements or not. 
-		
+        Sets whether or not the expand/collapse button (+/- button) should be shown on this node regardless of whether it has sub-elements or not.
 		
 		Name | Description
 		--- | ---
 		`forceShow` | 
-		
-		
-		
     **/
     
      
     public function SetForceShowExpander(forceShow:Bool):Void;
     /**
-        Returns whether this node is the last child on this level or not. 
+        Returns whether this node is the last child on this level or not.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
@@ -807,10 +620,7 @@ extern class DTree_Node extends DPanel {
     /**
         Cleans up the internal table of items (sub-nodes) of this node from invalid panels or sub-nodes that were moved from this node to another. 
 		
-		Appears the be completely unused by the game on its own. 
-		
-		 
-		
+		Appears the be completely unused by the game on its own.
     **/
     
      
@@ -818,111 +628,86 @@ extern class DTree_Node extends DPanel {
     /**
         Returns n-th child node. 
 		
-		Basically an alias of Panel:GetChild. 
+		Basically an alias of Panel:GetChild.
 		
-		 
 		Name | Description
 		--- | ---
 		`num` | The number of the child to get, starting with 0
 		
 		
-		**Returns:** The child panel, if valid ID is given
-		
-		
+		`**Returns:** The child panel, if valid ID is given
     **/
     
      
     public function GetChildNode(num:Float):Panel;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Sets the root node (the DTree) of this node. 
 		
-		This is set automatically, you shouldn't use this. 
+		This is set automatically, you shouldn't use this.
 		
-		 
 		Name | Description
 		--- | ---
 		`root` | The panel to set as root node.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetRoot(root:Panel):Void;
     /**
-        Returns the filepath of the file attached to this node. 
+        Returns the filepath of the file attached to this node.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetFileName():String;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns whether or not this node is drawing lines 
+		Returns whether or not this node is drawing lines
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetDrawLines():Bool;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called automatically to update the "selected" status of this node. 
-		
+		Called automatically to update the "selected" status of this node.
 		
 		Name | Description
 		--- | ---
 		`selected` | Whether this node is currently selected or not.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetSelected(selected:Bool):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Returns value set by DTree_Node:SetDirty. 
+		Returns value set by DTree_Node:SetDirty.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetDirty():Bool;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets whether or not the node needs populating from the filesystem. 
-		
+		Sets whether or not the node needs populating from the filesystem.
 		
 		Name | Description
 		--- | ---
 		`needs` | Whether or not the node needs populating
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetNeedsPopulating(needs:Bool):Void;
     /**
-        A helper function that adds a new node and calls to DTree_Node:MakeFolder on it. 
-		
+        A helper function that adds a new node and calls to DTree_Node:MakeFolder on it.
 		
 		Name | Description
 		--- | ---
@@ -932,126 +717,94 @@ extern class DTree_Node extends DPanel {
 		`showFiles` | Should files be added as nodes (true) or folders only (false)
 		`wildcard` | The wildcard to use when searching for files.
 		`bDontForceExpandable` | 
-		
-		
-		
     **/
     
      
     public function AddFolder(name:String, folder:String, path:String, ?showFiles:Bool, ?wildcard:String, ?bDontForceExpandable:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Internal function that handles the expand/collapse animations. 
-		
+		Internal function that handles the expand/collapse animations.
 		
 		Name | Description
 		--- | ---
 		`anim` | 
 		`delta` | 
 		`data` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function AnimSlide(anim:AnyTable, delta:Float, data:AnyTable):Void;
     /**
         Expands or collapses this node, as well as ALL child nodes of this node. 
 		
-		Works opposite of DTree_Node:ExpandTo. 
+		Works opposite of DTree_Node:ExpandTo.
 		
-		 
 		Name | Description
 		--- | ---
 		`expand` | Whether to expand (true) or collapse (false)
-		
-		
-		
     **/
     
      
     public function ExpandRecurse(expand:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Called when this or a sub node is selected. Do not use this, it is not for override. 
 		
-		Use DTree:OnNodeSelected or DTree_Node:DoClick instead. 
+		Use DTree:OnNodeSelected or DTree_Node:DoClick instead.
 		
-		 
 		Name | Description
 		--- | ---
 		`node` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function OnNodeSelected(node:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets the file full filepath to the file attached to this node 
-		
+		Sets the file full filepath to the file attached to this node
 		
 		Name | Description
 		--- | ---
 		`filename` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetFileName(filename:String):Void;
     /**
-        Returns true if DTree_Node:GetRoot is the same as DTree_Node:GetParentNode of this node. 
+        Returns true if DTree_Node:GetRoot is the same as DTree_Node:GetParentNode of this node.
 		
-		
-		**Returns:** If this is a root node.
-		
-		
+		`**Returns:** If this is a root node.
     **/
     
      
     public function IsRootNode():Bool;
     /**
-        Returns the image path to the icon of this node. 
+        Returns the image path to the icon of this node.
 		
-		
-		**Returns:** The path to the image
-		
-		
+		`**Returns:** The path to the image
     **/
     
      
     public function GetIcon():String;
     /**
-        Moves this node to the top of the level. 
-		
-		
-		
+        Moves this node to the top of the level.
     **/
     
      
     public function MoveToTop():Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Appears to have no effect on the DTree_Node. 
-		
+		Appears to have no effect on the DTree_Node.
 		
 		Name | Description
 		--- | ---
 		`dirty` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetDirty(dirty:Bool):Void;
     

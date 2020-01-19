@@ -2,15 +2,14 @@ package gmod.libs;
 #if client
 
 /**
-    The draw library's purpose is to simplify the usage of the surface library. 
-	
-	
+    The draw library's purpose is to simplify the usage of the surface library.
 **/
 @:native("draw")extern class DrawLib {
     
     /**
-        Creates a simple line of text that is outlined. 
+        Creates a simple line of text that is outlined.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -29,17 +28,15 @@ package gmod.libs;
 		--- | ---
 		`a` | The width of the text. Same value as if you were calling surface. GetTextSize.
 		`b` | The height of the text. Same value as if you were calling surface. GetTextSize.
-		
-		
-		
     **/
     
-    public static function SimpleTextOutlined(Text:String, ?font:String, ?x:Float, ?y:Float, ?color:AnyTable, ?xAlign:Float, ?yAlign:Float, outlinewidth:Float, ?outlinecolor:AnyTable):DrawLibSimpleTextOutlinedReturn;
+    public static function SimpleTextOutlined(Text:String, ?font:String, ?x:Float, ?y:Float, ?color:Color, ?xAlign:TEXT_ALIGN, ?yAlign:TEXT_ALIGN, outlinewidth:Float, ?outlinecolor:Color):DrawLibSimpleTextOutlinedReturn;
     
     
     /**
-        Simple draw text at position, but this will expand newlines and tabs. 
+        Simple draw text at position, but this will expand newlines and tabs.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -64,16 +61,15 @@ package gmod.libs;
 		**Output:**
 		
 		Hello there!
-		
-		
     **/
     
-    public static function DrawText(text:String, ?font:String, ?x:Float, ?y:Float, ?color:AnyTable, ?xAlign:Float):Void;
+    public static function DrawText(text:String, ?font:String, ?x:Float, ?y:Float, ?color:Color, ?xAlign:TEXT_ALIGN):Void;
     
     
     /**
-        Draws text on the screen. 
+        Draws text on the screen.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -102,33 +98,31 @@ package gmod.libs;
 		    draw.SimpleText( "Hello there!", "DermaDefault", 50, 50, color_white )
 		end )
 		```
-		
-		
     **/
     
-    public static function SimpleText(text:String, ?font:String, ?x:Float, ?y:Float, ?color:AnyTable, ?xAlign:Float, ?yAlign:Float):DrawLibSimpleTextReturn;
+    public static function SimpleText(text:String, ?font:String, ?x:Float, ?y:Float, ?color:Color, ?xAlign:TEXT_ALIGN, ?yAlign:TEXT_ALIGN):DrawLibSimpleTextReturn;
     
     
     /**
-        Returns the height of the specified font in pixels. 
+        Returns the height of the specified font in pixels.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
 		`font` | Name of the font to get the height of.
 		
 		
-		**Returns:** The font height
-		
-		
+		`**Returns:** The font height
     **/
     
     public static function GetFontHeight(font:String):Float;
     
     
     /**
-        Draws a rounded box with text in it. 
+        Draws a rounded box with text in it.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -145,27 +139,26 @@ package gmod.libs;
 		--- | ---
 		`a` | The width of the word box.
 		`b` | The height of the word box.
-		
-		
-		
     **/
     
-    public static function WordBox(bordersize:Float, x:Float, y:Float, text:String, font:String, boxcolor:AnyTable, textcolor:AnyTable):DrawLibWordBoxReturn;
+    public static function WordBox(bordersize:Float, x:Float, y:Float, text:String, font:String, boxcolor:Color, textcolor:Color):DrawLibWordBoxReturn;
     
     
     /**
-        Sets drawing texture to a default white texture (vgui/white) via surface.SetMaterial. Useful for resetting the drawing texture. 
+        Sets drawing texture to a default white texture (vgui/white) via surface.SetMaterial. Useful for resetting the drawing texture.
 		
-		
-		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
     **/
     
     public static function NoTexture():Void;
     
     
     /**
-        Draws a rounded rectangle. 
+        Draws a rounded rectangle.
 		
+		**Note:** If you intend to draw a non-rounded rectangle, then it's more efficient to use surface.DrawRect.
+		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -175,17 +168,15 @@ package gmod.libs;
 		`width` | The width of the rectangle.
 		`height` | The height of the rectangle.
 		`color` | The color to fill the rectangle with. Uses the Color structure.
-		
-		
-		
     **/
     
-    public static function RoundedBox(cornerRadius:Float, x:Float, y:Float, width:Float, height:Float, color:AnyTable):Void;
+    public static function RoundedBox(cornerRadius:Float, x:Float, y:Float, width:Float, height:Float, color:Color):Void;
     
     
     /**
-        Draws a rounded rectangle. This function also lets you specify which corners are drawn rounded. 
+        Draws a rounded rectangle. This function also lets you specify which corners are drawn rounded.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -199,34 +190,30 @@ package gmod.libs;
 		`roundTopRight` | Whether the top right corner should be rounded.
 		`roundBottomLeft` | Whether the bottom left corner should be rounded.
 		`roundBottomRight` | Whether the bottom right corner should be rounded.
-		
-		
-		
     **/
     
-    public static function RoundedBoxEx(cornerRadius:Float, x:Float, y:Float, width:Float, height:Float, color:AnyTable, ?roundTopLeft:Bool, ?roundTopRight:Bool, ?roundBottomLeft:Bool, ?roundBottomRight:Bool):Void;
+    public static function RoundedBoxEx(cornerRadius:Float, x:Float, y:Float, width:Float, height:Float, color:Color, ?roundTopLeft:Bool, ?roundTopRight:Bool, ?roundBottomLeft:Bool, ?roundBottomRight:Bool):Void;
     
     
     /**
-        Works like draw.Text, but draws the text as a shadow. 
+        Works like draw.Text, but draws the text as a shadow.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
 		`textdata` | The text properties. See TextData structure
 		`distance` | How far away the shadow appears.
 		`alpha` | How visible the shadow is (0-255).
-		
-		
-		
     **/
     
-    public static function TextShadow(textdata:AnyTable, distance:Float, ?alpha:Float):Void;
+    public static function TextShadow(textdata:TextData, distance:Float, ?alpha:Float):Void;
     
     
     /**
-        Works like draw.SimpleText but uses a table structure instead. 
+        Works like draw.SimpleText but uses a table structure instead.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -252,16 +239,15 @@ package gmod.libs;
 		    } )
 		end )
 		```
-		
-		
     **/
     
-    public static function Text(textdata:AnyTable):DrawLibTextReturn;
+    public static function Text(textdata:TextData):DrawLibTextReturn;
     
     
     /**
-        Draws a texture with a table structure. 
+        Draws a texture with a table structure.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -287,11 +273,9 @@ package gmod.libs;
 		**Output:**
 		
 		Renders the texture.
-		
-		
     **/
     
-    public static function TexturedQuad(texturedata:AnyTable):Void;
+    public static function TexturedQuad(texturedata:TextureData):Void;
     
     
 

@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    Used to show a player's Steam avatar. You are recommended but not limited to pick one of the following sizes: 16, 32, 64, 84, 128, 184. 
-	
-	
+    Used to show a player's Steam avatar. You are recommended but not limited to pick one of the following sizes: 16, 32, 64, 84, 128, 184.
 **/
 extern class AvatarImage extends Panel {
     /**
-        Used by AvatarImage panels to load an avatar by its 64-bit Steam ID (community ID). 
-		
+        Used by AvatarImage panels to load an avatar by its 64-bit Steam ID (community ID).
 		
 		Name | Description
 		--- | ---
@@ -88,23 +85,17 @@ extern class AvatarImage extends Panel {
 		**Output:**
 		
 		CreateSteamUserGrid(64, 64) The white question mark avatars mean no custom icon used or the user hasn't set up a community profile. The blue question mark avatars mean the user doesn't exist.
-		
-		
     **/
     
      
     public function SetSteamID(steamid:String, size:Float):Void;
     /**
-        Used by AvatarImage to load an avatar for given player. 
-		
+        Used by AvatarImage to load an avatar for given player.
 		
 		Name | Description
 		--- | ---
 		`player` | The player to use avatar of.
 		`size` | The size of the avatar to use. Acceptable sizes are 32, 64, 184.
-		
-		
-		
     **/
     
      

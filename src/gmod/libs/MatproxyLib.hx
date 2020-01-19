@@ -2,15 +2,12 @@ package gmod.libs;
 #if client
 
 /**
-    Add proxies to materials. 
-	
-	
+    Add proxies to materials.
 **/
 @:native("matproxy")extern class MatproxyLib {
     
     /**
-        Adds a material proxy. 
-		
+        Adds a material proxy.
 		
 		Name | Description
 		--- | ---
@@ -56,50 +53,40 @@ package gmod.libs;
 		    }
 		}
 		```
-		
-		
     **/
     
-    public static function Add(MatProxyData:AnyTable):Void;
+    public static function Add(MatProxyData:MatProxyData):Void;
     
     
     /**
-        Called by the engine from OnBind 
-		
+        Called by the engine from OnBind
 		
 		Name | Description
 		--- | ---
 		`uname` | 
 		`mat` | 
 		`ent` | 
-		
-		
-		
     **/
     
     public static function Call(uname:String, mat:IMaterial, ent:Entity):Void;
     
     
     /**
-        Called by engine, returns true if we're overriding a proxy 
-		
+        Called by engine, returns true if we're overriding a proxy
 		
 		Name | Description
 		--- | ---
 		`name` | The name of proxy in question
 		
 		
-		**Returns:** Are we overriding it?
-		
-		
+		`**Returns:** Are we overriding it?
     **/
     
     public static function ShouldOverrideProxy(name:String):Bool;
     
     
     /**
-        Called by the engine from OnBind 
-		
+        Called by the engine from OnBind
 		
 		Name | Description
 		--- | ---
@@ -107,9 +94,6 @@ package gmod.libs;
 		`uname` | 
 		`mat` | 
 		`values` | 
-		
-		
-		
     **/
     
     public static function Init(name:String, uname:String, mat:IMaterial, values:AnyTable):Void;

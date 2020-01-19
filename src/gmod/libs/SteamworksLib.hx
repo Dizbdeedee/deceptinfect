@@ -2,15 +2,12 @@ package gmod.libs;
 #if client
 
 /**
-    Steamworks related functions. 
-	
-	
+    Steamworks related functions.
 **/
 @:native("steamworks")extern class SteamworksLib {
     
     /**
-        Sets if an addon should be enabled or disabled. Call steamworks.ApplyAddons afterwards to update. 
-		
+        Sets if an addon should be enabled or disabled. Call steamworks.ApplyAddons afterwards to update.
 		
 		Name | Description
 		--- | ---
@@ -30,8 +27,6 @@ package gmod.libs;
 		**Output:**
 		
 		Enabled the gm_construct_beta addon, if installed.
-		
-		
     **/
     
     public static function SetShouldMountAddon(workshopItemID:String, shouldMount:Bool):Void;
@@ -39,22 +34,20 @@ package gmod.libs;
     
     /**
         
+		
 		Name | Description
 		--- | ---
 		`workshopid` | The Steam Workshop item id
 		
 		
-		**Returns:** Whatever you have put in as first argument
-		
-		
+		`**Returns:** Whatever you have put in as first argument
     **/
     
     public static function SetFileCompleted(workshopid:String):String;
     
     
     /**
-        Opens the workshop website in the steam overlay browser. 
-		
+        Opens the workshop website in the steam overlay browser.
 		
 		___
 		### Lua Examples
@@ -64,18 +57,15 @@ package gmod.libs;
 		```lua 
 		gui.OpenURL( "http://steamcommunity.com/app/4000/workshop/" )
 		```
-		
-		
     **/
     
     public static function OpenWorkshop():Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Publishes dupes, saves or demos to workshop. 
-		
+		Publishes dupes, saves or demos to workshop.
 		
 		Name | Description
 		--- | ---
@@ -84,28 +74,24 @@ package gmod.libs;
 		`image` | Path to the image to use as icon
 		`name` | Name of the Workshop submission
 		`desc` | Description of the Workshop submission
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Publish(tags:AnyTable, filename:String, image:String, name:String, desc:String):Void;
     
     
     /**
-        ***Deprecated:**   You should use the callback of steamworks. RequestPlayerInfo instead.
+        ***Deprecated:** You should use the callback of steamworks. RequestPlayerInfo instead.
 		
 		Retrieves players name by his 64bit SteamID. 
 		
-		You must call steamworks.RequestPlayerInfo a decent amount of time before calling this function. 
+		You must call steamworks.RequestPlayerInfo a decent amount of time before calling this function.
 		
-		 
 		Name | Description
 		--- | ---
 		`steamID64` | The 64bit Steam ID ( aka Community ID ) of the player
 		
 		
-		**Returns:** The name of that player
+		`**Returns:** The name of that player
 		
 		___
 		### Lua Examples
@@ -121,16 +107,13 @@ package gmod.libs;
 		**Output:**
 		
 		A name of local player is printed into console.
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should use the callback of steamworks. RequestPlayerInfo instead.")
     public static function GetPlayerName(steamID64:String):String;
     
     
     /**
-        Refreshes clients addons. 
-		
+        Refreshes clients addons.
 		
 		___
 		### Lua Examples
@@ -141,8 +124,6 @@ package gmod.libs;
 		steamworks.Subscribe( 21197 )
 		steamworks.ApplyAddons()
 		```
-		
-		
     **/
     
     public static function ApplyAddons():Void;
@@ -153,9 +134,8 @@ package gmod.libs;
 		
 		This is mostly used to download the preview image of the addon, but the game seems to also use it to download replays and saves. 
 		
-		 In case the retrieved file is an image and you need the IMaterial, use AddonMaterial with the path supplied from the callback. 
+		 In case the retrieved file is an image and you need the IMaterial, use AddonMaterial with the path supplied from the callback.
 		
-		 
 		Name | Description
 		--- | ---
 		`workshopPreviewID` | The Preview ID of workshop item.
@@ -178,16 +158,13 @@ package gmod.libs;
 		**Output:**
 		
 		Something like this will be printed into console: cache/559813303754221947.cache
-		
-		
     **/
     
     public static function Download(workshopPreviewID:String, uncompress:Bool, resultCallback:Function):Void;
     
     
     /**
-        Retrieves info about supplied Steam Workshop addon. 
-		
+        Retrieves info about supplied Steam Workshop addon.
 		
 		Name | Description
 		--- | ---
@@ -203,16 +180,13 @@ package gmod.libs;
 		```lua 
 		steamworks.FileInfo( 21197, function( result ) PrintTable( result ) end)
 		```
-		
-		
     **/
     
-    public static function FileInfo(workshopItemID:String, resultCallback:Function):Void;
+    public static function FileInfo(workshopItemID:String, resultCallback:UGCFileInfo):Void;
     
     
     /**
-        Retrieves vote info of supplied addon. 
-		
+        Retrieves vote info of supplied addon.
 		
 		Name | Description
 		--- | ---
@@ -234,18 +208,15 @@ package gmod.libs;
 		total = 2952
 		down = 36
 		 up = 2916
-		
-		
     **/
     
     public static function VoteInfo(workshopItemID:String, resultCallback:Function):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Subscribes to the specified workshop addon. Call steamworks.ApplyAddons afterwards to update. 
-		
+		Subscribes to the specified workshop addon. Call steamworks.ApplyAddons afterwards to update.
 		
 		Name | Description
 		--- | ---
@@ -264,16 +235,13 @@ package gmod.libs;
 		**Output:**
 		
 		Subscribes to gm_construct_beta addon, if not already.
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Subscribe(workshopItemID:String):Void;
     
     
     /**
-        Opens the workshop website for specified Steam Workshop item in the Steam overlay browser. 
-		
+        Opens the workshop website for specified Steam Workshop item in the Steam overlay browser.
 		
 		Name | Description
 		--- | ---
@@ -288,18 +256,15 @@ package gmod.libs;
 		```lua 
 		steamworks.ViewFile( 21197 )
 		```
-		
-		
     **/
     
     public static function ViewFile(workshopItemID:String):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Makes the user vote for the specified addon       Give the Gm_construct_Beta Steam Workshop item a thumbs up. 
-		
+		Makes the user vote for the specified addon       Give the Gm_construct_Beta Steam Workshop item a thumbs up.
 		
 		Name | Description
 		--- | ---
@@ -315,33 +280,27 @@ package gmod.libs;
 		```lua 
 		steamworks.Vote( 21197, true )
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Vote(workshopItemID:String, upOrDown:Bool):Void;
     
     
     /**
-        Sets whether you have played this addon or not. This will be shown to the user in the Steam Workshop itself: 
-		
+        Sets whether you have played this addon or not. This will be shown to the user in the Steam Workshop itself:
 		
 		Name | Description
 		--- | ---
 		`workshopid` | The Steam Workshop item ID
 		
 		
-		**Returns:** Whatever you have put in as first argument
-		
-		
+		`**Returns:** Whatever you have put in as first argument
     **/
     
     public static function SetFilePlayed(workshopid:String):String;
     
     
     /**
-        Retrieves a customized list of Steam Workshop addons. 
-		
+        Retrieves a customized list of Steam Workshop addons.
 		
 		Name | Description
 		--- | ---
@@ -377,16 +336,13 @@ package gmod.libs;
 		8 = 72145362
 		9 = 16221
 		 10 = 22104
-		
-		
     **/
     
     public static function GetList(type:String, tags:AnyTable, offset:Float, numRetrieve:Float, days:Float, userID:String, resultCallback:Function):Void;
     
     
     /**
-        Requests information of the player with SteamID64 for later use with steamworks.GetPlayerName. 
-		
+        Requests information of the player with SteamID64 for later use with steamworks.GetPlayerName.
 		
 		Name | Description
 		--- | ---
@@ -407,18 +363,15 @@ package gmod.libs;
 		**Output:**
 		
 		The local player's name
-		
-		
     **/
     
     public static function RequestPlayerInfo(steamID64:String, callback:Function):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Unsubscribes to the specified workshop addon. Call .  afterwards to update. This function should never be called without a user's consent and should not be called if the addon is currently in use (aka: the user is not in the main menu) as it may result in unexpected behaviour. 
-		
+		Unsubscribes to the specified workshop addon. Call [steamworks](https://wiki.garrysmod.com/page/Category:steamworks). [ApplyAddons](https://wiki.garrysmod.com/page/steamworks/ApplyAddons) afterwards to update. This function should never be called without a user's consent and should not be called if the addon is currently in use (aka: the user is not in the main menu) as it may result in unexpected behaviour.
 		
 		Name | Description
 		--- | ---
@@ -437,23 +390,20 @@ package gmod.libs;
 		**Output:**
 		
 		Unsubscribes from the gm_construct_beta addon, if subscribed.
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Unsubscribe(workshopItemID:String):Void;
     
     
     /**
-        Returns whenever the client is subscribed to the specified Steam Workshop item. 
-		
+        Returns whenever the client is subscribed to the specified Steam Workshop item.
 		
 		Name | Description
 		--- | ---
 		`workshopItemID` | The ID of the Steam Workshop item.
 		
 		
-		**Returns:** Is the client subscribed to the addon or not.
+		`**Returns:** Is the client subscribed to the addon or not.
 		
 		___
 		### Lua Examples
@@ -466,23 +416,20 @@ package gmod.libs;
 		**Output:**
 		
 		If client is subscribed true is printed into console, false otherwise.
-		
-		
     **/
     
     public static function IsSubscribed(workshopItemID:String):Bool;
     
     
     /**
-        Returns whenever the specified Steam Workshop addon will be mounted or not. 
-		
+        Returns whenever the specified Steam Workshop addon will be mounted or not.
 		
 		Name | Description
 		--- | ---
 		`workshopItemID` | The ID of the Steam Workshop
 		
 		
-		**Returns:** Will the workshop item be mounted or not
+		`**Returns:** Will the workshop item be mounted or not
 		
 		___
 		### Lua Examples
@@ -495,8 +442,6 @@ package gmod.libs;
 		**Output:**
 		
 		If client has enabled the addon true is printed into console, false otherwise.
-		
-		
     **/
     
     public static function ShouldMountAddon(workshopItemID:String):Bool;

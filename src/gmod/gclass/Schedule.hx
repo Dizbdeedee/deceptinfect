@@ -2,19 +2,14 @@ package gmod.gclass;
 #if server
 
 /**
-    The object returned by ai_schedule.New. 
-	
-	
+    The object returned by ai_schedule.New.
 **/
 extern class Schedule {
     
     /**
-        Returns the number of tasks in the schedule. 
+        Returns the number of tasks in the schedule.
 		
-		
-		**Returns:** The number of tasks in this schedule.
-		
-		
+		`**Returns:** The number of tasks in this schedule.
     **/
     
     public function NumTasks():Float;
@@ -23,9 +18,8 @@ extern class Schedule {
     /**
         Adds a task to the schedule. See also Schedule:AddTaskEx if you wish to customize task start and run function names. 
 		
-		See also ENTITY:StartSchedule, NPC:StartEngineTask, and NPC:RunEngineTask. 
+		See also ENTITY:StartSchedule, NPC:StartEngineTask, and NPC:RunEngineTask.
 		
-		 
 		Name | Description
 		--- | ---
 		`taskname` | Custom task name
@@ -62,73 +56,57 @@ extern class Schedule {
 		**Output:**
 		
 		Prints "HELLO" in the console, then prints "HELLO again" on every NPC think until 5 seconds have passed.
-		
-		
     **/
     
-    public function AddTask(taskname:String, taskdata:Any):Void;
+    public function AddTask(taskname:String, taskdata:Dynamic):Void;
     
     
     /**
         Adds a task to the schedule with completely custom function names. 
 		
-		See also Schedule:AddTask. 
+		See also Schedule:AddTask.
 		
-		 
 		Name | Description
 		--- | ---
 		`start` | The full name of a function on the entity's table to be ran when the task is started.
 		`run` | The full name of a function on the entity's table to be ran when the task is continuously running.
 		`data` | Task data to be passed into the NPC's functions
-		
-		
-		
     **/
     
     public function AddTaskEx(start:String, run:String, data:Float):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Initialises the Schedule. Called by .  when the Schedule is created.   
+		Initialises the Schedule. Called by [ai_schedule](https://wiki.garrysmod.com/page/Category:ai_schedule). [New](https://wiki.garrysmod.com/page/ai_schedule/New) when the Schedule is created.
+		
 		Name | Description
 		--- | ---
 		`debugName` | The name passed from ai_schedule. New.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public function Init(debugName:String):Void;
     
     
     /**
-        Adds an engine task to the schedule. 
-		
+        Adds an engine task to the schedule.
 		
 		Name | Description
 		--- | ---
 		`taskname` | Task name, see ai_task.h
 		`taskdata` | Task data, can be a float.
-		
-		
-		
     **/
     
     public function EngTask(taskname:String, taskdata:Float):Void;
     
     
     /**
-        Returns the task at the given index. 
-		
+        Returns the task at the given index.
 		
 		Name | Description
 		--- | ---
 		`num` | Task index.
-		
-		
-		
     **/
     
     public function GetTask(num:Float):Void;

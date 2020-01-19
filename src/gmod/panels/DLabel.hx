@@ -2,29 +2,23 @@ package gmod.panels;
 #if client
 
 /**
-    A standard Derma text label. A lot of this panels functionality is a base for button elements, such as DButton 
-	
-	
+    A standard Derma text label. A lot of this panels functionality is a base for button elements, such as DButton
 **/
 extern class DLabel extends Label {
     /**
-        ***Deprecated:**   You really should use DLabel: SetTextColor.
+        ***Deprecated:** You really should use DLabel: SetTextColor.
 		
 		Sets the color of the text to the bright text color defined in the skin. 
 		
 		See also DLabel:SetDark and DLabel:SetHighlight. 
 		
-		 You should only consider using this if you are using background elements that are not manually painted and are using the skin colors. 
+		 You should only consider using this if you are using background elements that are not manually painted and are using the skin colors.
 		
-		 
 		Name | Description
 		--- | ---
 		`bright` | Whenever to set the text to bright or not.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You really should use DLabel: SetTextColor.")
      
     public function SetBright(bright:Bool):Void;
     /**
@@ -34,9 +28,8 @@ extern class DLabel extends Label {
 		
 		 This will be called after DLabel:OnDepressed and DLabel:OnReleased and DLabel:DoClick. 
 		
-		 See also DLabel:DoRightClick and DLabel:DoMiddleClick. 
+		 See also DLabel:DoRightClick and DLabel:DoMiddleClick.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -62,47 +55,34 @@ extern class DLabel extends Label {
 		-- Uncommentiing this will disable double clicking
 		-- frame_label:SetDoubleClickingEnabled( false )
 		```
-		
-		
     **/
     
     @:hook 
     public function DoDoubleClick():Void;
     /**
-        Returns the "override" text color, set by DLabel:SetTextColor. 
+        Returns the "override" text color, set by DLabel:SetTextColor.
 		
-		
-		**Returns:** The color of the text, or nil.
-		
-		
+		`**Returns:** The color of the text, or nil.
     **/
     
      
     public function GetTextColor():AnyTable;
     /**
-        A hook called from within DLabel:ApplySchemeSettings to determine the color of the text on display. 
-		
+        A hook called from within DLabel:ApplySchemeSettings to determine the color of the text on display.
 		
 		Name | Description
 		--- | ---
 		`skin` | A table supposed to contain the color values listed above.
-		
-		
-		
     **/
     
      
     public function UpdateColours(skin:AnyTable):Void;
     /**
-        Sets the alignment of the contents. 
-		
+        Sets the alignment of the contents.
 		
 		Name | Description
 		--- | ---
 		`alignment` | The direction of the content, based on the number pad. 7: top-left 8: top-center 9: top-right 4: middle-left 5: center 6: middle-right 1: bottom-left 2: bottom-center 3: bottom-right
-		
-		
-		
     **/
     
      
@@ -110,12 +90,9 @@ extern class DLabel extends Label {
     /**
         Returns whether the DLabel should set its text color to the current skin's highlighted text color. 
 		
-		See DLabel:SetHighlight. 
+		See DLabel:SetHighlight.
 		
-		 
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
@@ -125,9 +102,8 @@ extern class DLabel extends Label {
 		
 		This works as an alternative to PANEL:OnMouseReleased as that hook is used heavily by DLabel and overriding it will break functionality. 
 		
-		 See also DLabel:DoClick, DLabel:DoMiddleClick, DLabel:DoRightClick and DLabel:DoDoubleClick. 
+		 See also DLabel:DoClick, DLabel:DoMiddleClick, DLabel:DoRightClick and DLabel:DoDoubleClick.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -155,8 +131,6 @@ extern class DLabel extends Label {
 		    frame_label:SizeToContents()
 		end
 		```
-		
-		
     **/
     
     @:hook 
@@ -164,35 +138,27 @@ extern class DLabel extends Label {
     /**
         Returns whether the DLabel should set its text color to the current skin's bright text color. 
 		
-		See DLabel:SetBright. 
+		See DLabel:SetBright.
 		
-		 
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetBright():Bool;
     /**
-        ***INTERNAL:**   Use DLabel: SetTextColor instead!
+        ***INTERNAL** Use DLabel: SetTextColor instead!
 		
-		Used by DLabel:SetDark, DLabel:SetBright and DLabel:SetHighlight to set the text color without affecting DLabel:SetTextColor calls. 
-		
+		Used by DLabel:SetDark, DLabel:SetBright and DLabel:SetHighlight to set the text color without affecting DLabel:SetTextColor calls.
 		
 		Name | Description
 		--- | ---
 		`color` | The text color. Uses the Color structure.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL: Use DLabel: SetTextColor instead!")
      
-    public function SetTextStyleColor(color:AnyTable):Void;
+    public function SetTextStyleColor(color:Color):Void;
     /**
-        Sets whether text wrapping should be enabled or disabled on Label and DLabel panels. Use DLabel:SetAutoStretchVertical to automatically correct vertical size; Panel:SizeToContents will not set the correct height. 
-		
+        Sets whether text wrapping should be enabled or disabled on Label and DLabel panels. Use DLabel:SetAutoStretchVertical to automatically correct vertical size; Panel:SizeToContents will not set the correct height.
 		
 		Name | Description
 		--- | ---
@@ -229,8 +195,6 @@ extern class DLabel extends Label {
 		
 		lbl_wrap:SetWrap(true)
 		```
-		
-		
     **/
     
      
@@ -238,29 +202,23 @@ extern class DLabel extends Label {
     /**
         Returns whether the DLabel should set its text color to the current skin's dark text color. 
 		
-		See DLabel:SetDark. 
+		See DLabel:SetDark.
 		
-		 
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetDark():Bool;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called internally to update the color of the text. 
-		
-		
-		
+		Called internally to update the color of the text.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function UpdateFGColor():Void;
     /**
-        ***Deprecated:**   You really should use DLabel: SetTextColor.
+        ***Deprecated:** You really should use DLabel: SetTextColor.
 		
 		Sets the color of the text to the highlight text color defined in the skin. 
 		
@@ -268,24 +226,19 @@ extern class DLabel extends Label {
 		
 		 See also DLabel:SetBright and DLabel:SetDark. 
 		
-		 You should only consider using this if you are using background elements that are not manually painted and are using the skin colors. 
+		 You should only consider using this if you are using background elements that are not manually painted and are using the skin colors.
 		
-		 
 		Name | Description
 		--- | ---
 		`highlight` | true to set the label's color to skins's text highlight color, false otherwise.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You really should use DLabel: SetTextColor.")
      
     public function SetHighlight(highlight:Bool):Void;
     /**
-        Returns the current font of the DLabel. This is set with : .   
-		**Returns:** The name of the font in use.
+        Returns the current font of the DLabel. This is set with [DLabel](https://wiki.garrysmod.com/page/Category:DLabel): [SetFont](https://wiki.garrysmod.com/page/DLabel/SetFont).
 		
-		
+		`**Returns:** The name of the font in use.
     **/
     
      
@@ -293,24 +246,17 @@ extern class DLabel extends Label {
     /**
         Sets whether or not double clicking should call DLabel:DoDoubleClick. 
 		
-		This is enabled by default. 
+		This is enabled by default.
 		
-		 
 		Name | Description
 		--- | ---
 		`enable` | true to enable, false to disable
-		
-		
-		
     **/
     
      
     public function SetDoubleClickingEnabled(enable:Bool):Void;
     /**
-        Called just before DLabel:DoDoubleClick. In DLabel does nothing and is safe to override. 
-		
-		
-		
+        Called just before DLabel:DoDoubleClick. In DLabel does nothing and is safe to override.
     **/
     
      
@@ -318,10 +264,7 @@ extern class DLabel extends Label {
     /**
         Called just before DLabel:DoClick. 
 		
-		In DLabel does nothing and is safe to override. Used by DMenuOption and DCollapsibleCategory's tabs. 
-		
-		 
-		
+		In DLabel does nothing and is safe to override. Used by DMenuOption and DCollapsibleCategory's tabs.
     **/
     
      
@@ -333,9 +276,8 @@ extern class DLabel extends Label {
 		
 		 This can be overridden; by default, it calls DLabel:Toggle. 
 		
-		 See also DLabel:DoRightClick, DLabel:DoMiddleClick and DLabel:DoDoubleClick. 
+		 See also DLabel:DoRightClick, DLabel:DoMiddleClick and DLabel:DoDoubleClick.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -356,32 +298,24 @@ extern class DLabel extends Label {
 		**Output:**
 		
 		I was clicked! When the label is clicked.
-		
-		
     **/
     
     @:hook 
     public function DoClick():Void;
     /**
-        ***Deprecated:**   Use Panel: IsEnabled instead.
+        ***Deprecated:** Use Panel: IsEnabled instead.
 		
-		Gets the disabled state of the DLabel. This is set with DLabel:SetDisabled. 
+		Gets the disabled state of the DLabel. This is set with DLabel:SetDisabled.
 		
-		
-		**Returns:** The disabled state of the label.
-		
-		
+		`**Returns:** The disabled state of the label.
     **/
-    @:deprecated
+    @:deprecated("Use Panel: IsEnabled instead.")
      
     public function GetDisabled():Bool;
     /**
-        Returns whether the toggle functionality is enabled for a label. Set with DLabel:SetIsToggle. 
+        Returns whether the toggle functionality is enabled for a label. Set with DLabel:SetIsToggle.
 		
-		
-		**Returns:** Whether or not toggle functionality is enabled.
-		
-		
+		`**Returns:** Whether or not toggle functionality is enabled.
     **/
     
      
@@ -391,17 +325,13 @@ extern class DLabel extends Label {
 		
 		This will be called after DLabel:OnDepressed and DLabel:OnReleased. 
 		
-		 See also DLabel:DoClick, DLabel:DoRightClick and DLabel:DoDoubleClick. 
-		
-		 
-		
+		 See also DLabel:DoClick, DLabel:DoRightClick and DLabel:DoDoubleClick.
     **/
     
     @:hook 
     public function DoMiddleClick():Void;
     /**
-        Sets the text color of the DLabel. This will take precedence over DLabel:SetTextStyleColor. 
-		
+        Sets the text color of the DLabel. This will take precedence over DLabel:SetTextStyleColor.
 		
 		Name | Description
 		--- | ---
@@ -424,40 +354,32 @@ extern class DLabel extends Label {
 		frame_label:SetPos( 10, 30 )
 		frame_label:SetTextColor( Color( 255, 0, 0) )
 		```
-		
-		
     **/
     
      
-    public function SetTextColor(color:AnyTable):Void;
+    public function SetTextColor(color:Color):Void;
     /**
-        ***Deprecated:**   You really should use DLabel: SetTextColor.
+        ***Deprecated:** You really should use DLabel: SetTextColor.
 		
 		Sets the color of the text to the dark text color defined in the skin. 
 		
 		See also DLabel:SetBright and DLabel:SetHighlight. 
 		
-		 You should only consider using this if you are using background elements that are not manually painted and are using the skin colors. 
+		 You should only consider using this if you are using background elements that are not manually painted and are using the skin colors.
 		
-		 
 		Name | Description
 		--- | ---
 		`dark` | Whenever to set the text to dark or not.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You really should use DLabel: SetTextColor.")
      
     public function SetDark(dark:Bool):Void;
     /**
-        Sets the font of the label.   
+        Sets the font of the label.
+		
 		Name | Description
 		--- | ---
 		`fontName` | The name of the font. See here for a list of existing fonts. Alternatively, use surface. CreateFont to create your own custom font.
-		
-		
-		
     **/
     
      
@@ -465,43 +387,33 @@ extern class DLabel extends Label {
     /**
         Returns whether or not double clicking will call DLabel:DoDoubleClick. 
 		
-		See DLabel:SetDoubleClickingEnabled. 
+		See DLabel:SetDoubleClickingEnabled.
 		
-		 
-		**Returns:** true = enabled, false means disabled
-		
-		
+		`**Returns:** true = enabled, false means disabled
     **/
     
      
     public function GetDoubleClickingEnabled():Bool;
     /**
-        ***Deprecated:**   Use Panel: SetEnabled instead.
+        ***Deprecated:** Use Panel: SetEnabled instead.
 		
 		Sets the disabled state of the DLabel. 
 		
-		When disabled, the label does not respond to click, toggle or drag & drop actions. 
+		When disabled, the label does not respond to click, toggle or drag & drop actions.
 		
-		 
 		Name | Description
 		--- | ---
 		`disable` | true to disable the DLabel, false to enable it.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("Use Panel: SetEnabled instead.")
      
     public function SetDisabled(disable:Bool):Void;
     /**
         Returns the current toggle state of the label. This can be set with DLabel:SetToggle and toggled with DLabel:Toggle. 
 		
-		In order to use toggle functionality, you must first call DLabel:SetIsToggle with true, as it is disabled by default. 
+		In order to use toggle functionality, you must first call DLabel:SetIsToggle with true, as it is disabled by default.
 		
-		 
-		**Returns:** The current toggle state.
-		
-		
+		`**Returns:** The current toggle state.
     **/
     
      
@@ -511,9 +423,8 @@ extern class DLabel extends Label {
 		
 		This works as an alternative to PANEL:OnMousePressed as that hook is used heavily by DLabel and overriding it will break functionality. 
 		
-		 See also DLabel:DoClick, DLabel:DoMiddleClick, DLabel:DoRightClick, DLabel:OnReleased and DLabel:DoDoubleClick. 
+		 See also DLabel:DoClick, DLabel:DoMiddleClick, DLabel:DoRightClick, DLabel:OnReleased and DLabel:DoDoubleClick.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -541,22 +452,16 @@ extern class DLabel extends Label {
 		    frame_label:SizeToContents()
 		end
 		```
-		
-		
     **/
     
     @:hook 
     public function OnDepressed():Void;
     /**
-        Automatically adjusts the height of the label dependent of the height of the text inside of it. 
-		
+        Automatically adjusts the height of the label dependent of the height of the text inside of it.
 		
 		Name | Description
 		--- | ---
 		`stretch` | Whenever to stretch the label vertically or not.
-		
-		
-		
     **/
     
      
@@ -564,15 +469,11 @@ extern class DLabel extends Label {
     /**
         Enables or disables toggle functionality for a label. Retrieved with DLabel:GetIsToggle. 
 		
-		You must call this before using DLabel:SetToggle, DLabel:GetToggle or DLabel:Toggle. 
+		You must call this before using DLabel:SetToggle, DLabel:GetToggle or DLabel:Toggle.
 		
-		 
 		Name | Description
 		--- | ---
 		`allowToggle` | Whether or not to enable toggle functionality.
-		
-		
-		
     **/
     
      
@@ -582,9 +483,8 @@ extern class DLabel extends Label {
 		
 		This will be called after DLabel:OnDepressed and DLabel:OnReleased. 
 		
-		 See also DLabel:DoClick, DLabel:DoMiddleClick and DLabel:DoDoubleClick. 
+		 See also DLabel:DoClick, DLabel:DoMiddleClick and DLabel:DoDoubleClick.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -605,15 +505,14 @@ extern class DLabel extends Label {
 		**Output:**
 		
 		I was clicked! When the label is right clicked.
-		
-		
     **/
     
      
     public function DoRightClick():Void;
     /**
-        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton. 
+        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
+		**Warning:** When used on a Label or its derivatives ( DLabel and DButton ), it will automatically call Panel:InvalidateLayout, meaning that you should avoid running this function every frame on these panels to avoid unnecessary performance loss.
 		
 		Name | Description
 		--- | ---
@@ -639,8 +538,6 @@ extern class DLabel extends Label {
 		-- Set the text to the message you get when VAC banned
 		richtext:SetText("#VAC_ConnectionRefusedDetail")
 		```
-		
-		
     **/
     
      
@@ -648,12 +545,9 @@ extern class DLabel extends Label {
     /**
         Returns the actual color of the text. 
 		
-		See also DLabel:GetTextColor and DLabel:GetTextStyleColor. 
+		See also DLabel:GetTextColor and DLabel:GetTextStyleColor.
 		
-		 
-		**Returns:** The the actual color of the text.
-		
-		
+		`**Returns:** The the actual color of the text.
     **/
     
      
@@ -661,15 +555,11 @@ extern class DLabel extends Label {
     /**
         Sets the toggle state of the label. This can be retrieved with DLabel:GetToggle and toggled with DLabel:Toggle. 
 		
-		In order to use toggle functionality, you must first call DLabel:SetIsToggle with true, as it is disabled by default. 
+		In order to use toggle functionality, you must first call DLabel:SetIsToggle with true, as it is disabled by default.
 		
-		 
 		Name | Description
 		--- | ---
 		`toggleState` | The toggle state to be set.
-		
-		
-		
     **/
     
      
@@ -677,10 +567,7 @@ extern class DLabel extends Label {
     /**
         Toggles the label's state. This can be set and retrieved with DLabel:SetToggle and DLabel:GetToggle. 
 		
-		In order to use toggle functionality, you must first call DLabel:SetIsToggle with true, as it is disabled by default. 
-		
-		 
-		
+		In order to use toggle functionality, you must first call DLabel:SetIsToggle with true, as it is disabled by default.
     **/
     
      
@@ -688,50 +575,39 @@ extern class DLabel extends Label {
     /**
         Called when the toggle state of the label is changed by DLabel:Toggle. 
 		
-		In order to use toggle functionality, you must first call DLabel:SetIsToggle with true, as it is disabled by default. 
+		In order to use toggle functionality, you must first call DLabel:SetIsToggle with true, as it is disabled by default.
 		
-		 
 		Name | Description
 		--- | ---
 		`toggleState` | The new toggle state.
-		
-		
-		
     **/
     
     @:hook 
     public function OnToggled(toggleState:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Returns the "internal" or fallback color of the text. 
 		
-		See also DLabel:GetTextColor and DLabel:SetTextStyleColor. 
+		See also DLabel:GetTextColor and DLabel:SetTextStyleColor.
 		
-		 
-		**Returns:** The "internal" color of the text
-		
-		
+		`**Returns:** The "internal" color of the text
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetTextStyleColor():AnyTable;
     /**
         Returns whether the label stretches vertically or not. 
 		
-		Set by DLabel:SetAutoStretchVertical. 
+		Set by DLabel:SetAutoStretchVertical.
 		
-		 
-		**Returns:** Whether the label stretches vertically or not.
-		
-		
+		`**Returns:** Whether the label stretches vertically or not.
     **/
     
      
     public function GetAutoStretchVertical():Bool;
     /**
-        Changes color of label. Alias of DLabel:SetTextColor. 
-		
+        Changes color of label. Alias of DLabel:SetTextColor.
 		
 		Name | Description
 		--- | ---
@@ -750,8 +626,6 @@ extern class DLabel extends Label {
 		DLabel:SetText( "Hello world." )
 		DLabel:SizeToContents()
 		```
-		
-		
     **/
     
      

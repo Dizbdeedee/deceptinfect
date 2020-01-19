@@ -2,15 +2,12 @@ package gmod.libs;
 
 
 /**
-    The player_manager library lets you manage players, such as setting their models or creating player classes. 
-	
-	
+    The player_manager library lets you manage players, such as setting their models or creating player classes.
 **/
 @:native("player_manager")extern class Player_managerLib {
     
     /**
-        Assigns view model hands to player model. 
-		
+        Assigns view model hands to player model.
 		
 		Name | Description
 		--- | ---
@@ -31,23 +28,20 @@ package gmod.libs;
 		player_manager.AddValidHands( "hostage03", "models/weapons/c_arms_cstrike.mdl", 0, "10000000" )
 		player_manager.AddValidHands( "hostage04", "models/weapons/c_arms_cstrike.mdl", 0, "10000000" )
 		```
-		
-		
     **/
     
     public static function AddValidHands(name:String, model:String, skin:Float, bodygroups:String):Void;
     
     
     /**
-        Returns the valid model path for a simplified name. 
-		
+        Returns the valid model path for a simplified name.
 		
 		Name | Description
 		--- | ---
 		`shortName` | The short name of the model.
 		
 		
-		**Returns:** The valid model path for the short name.
+		`**Returns:** The valid model path for the short name.
 		
 		___
 		### Lua Examples
@@ -60,16 +54,13 @@ package gmod.libs;
 		**Output:**
 		
 		Console outputs: "models/player/alyx.mdl"
-		
-		
     **/
     
     public static function TranslatePlayerModel(shortName:String):String;
     
     
     /**
-        Returns the entire list of valid player models. 
-		
+        Returns the entire list of valid player models.
 		
 		___
 		### Lua Examples
@@ -83,16 +74,13 @@ package gmod.libs;
 		**Output:**
 		
 		Console outputs: "models/player/alyx.mdl"
-		
-		
     **/
     
     public static function AllValidModels():Void;
     
     
     /**
-        Register a class metatable to be assigned to players later 
-		
+        Register a class metatable to be assigned to players later
 		
 		Name | Description
 		--- | ---
@@ -125,16 +113,13 @@ package gmod.libs;
 		**Output:**
 		
 		Walkspeed = 300 RunSpeed = 500 CalcView = function: 0x00665988 UseVMHands = true etc...
-		
-		
     **/
     
     public static function RegisterClass(name:String, table:AnyTable, base:String):Void;
     
     
     /**
-        Clears a player's class association by setting their ClassID to 0 
-		
+        Clears a player's class association by setting their ClassID to 0
 		
 		Name | Description
 		--- | ---
@@ -153,41 +138,32 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
     public static function ClearPlayerClass(ply:Player):Void;
     
     
     /**
-        Associates a simplified name with a path to a valid player model. Only used internally. 
-		
+        Associates a simplified name with a path to a valid player model. Only used internally.
 		
 		Name | Description
 		--- | ---
 		`name` | Simplified name
 		`model` | Valid PlayerModel path
-		
-		
-		
     **/
     
     public static function AddValidModel(name:String, model:String):Void;
     
     
     /**
-        Gets a players class 
-		
+        Gets a players class
 		
 		Name | Description
 		--- | ---
 		`ply` | Player to get class
 		
 		
-		**Returns:** The players class
-		
-		
+		`**Returns:** The players class
     **/
     
     public static function GetPlayerClass(ply:Player):String;
@@ -196,15 +172,11 @@ package gmod.libs;
     /**
         Applies basic class variables when the player spawns. 
 		
-		Called from GM:PlayerSpawn in the base gamemode. 
+		Called from GM:PlayerSpawn in the base gamemode.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | Player to setup
-		
-		
-		
     **/
     
     public static function OnPlayerSpawn(ply:Player):Void;
@@ -213,25 +185,21 @@ package gmod.libs;
     /**
         Returns the simplified name for a valid model path of a player model. 
 		
-		Opposite of player_manager.TranslatePlayerModel. 
+		Opposite of player_manager.TranslatePlayerModel.
 		
-		 
 		Name | Description
 		--- | ---
 		`model` | The model path to a player model
 		
 		
-		**Returns:** The simplified name for that model
-		
-		
+		`**Returns:** The simplified name for that model
     **/
     
     public static function TranslateToPlayerModelName(model:String):String;
     
     
     /**
-        Execute a named function within the player's set class 
-		
+        Execute a named function within the player's set class
 		
 		Name | Description
 		--- | ---
@@ -240,7 +208,7 @@ package gmod.libs;
 		`arguments` | Optional arguments. Can be of any type.
 		
 		
-		**Returns:** The values returned by the called function.
+		`**Returns:** The values returned by the called function.
 		
 		___
 		### Lua Examples
@@ -280,16 +248,13 @@ package gmod.libs;
 		**Output:**
 		
 		Hello Flowx !
-		
-		
     **/
     
     public static function RunClass(ply:Player, funcName:String, arguments:Rest<Dynamic>):Rest<Dynamic>;
     
     
     /**
-        Sets a player's class 
-		
+        Sets a player's class
 		
 		Name | Description
 		--- | ---
@@ -307,25 +272,20 @@ package gmod.libs;
 		 player_manager.SetPlayerClass(ply, "player_default")
 		end
 		```
-		
-		
     **/
     
     public static function SetPlayerClass(ply:Player, classname:String):Void;
     
     
     /**
-        Retrieves correct hands for given player model. By default returns citizen hands. 
-		
+        Retrieves correct hands for given player model. By default returns citizen hands.
 		
 		Name | Description
 		--- | ---
 		`name` | Player model name
 		
 		
-		**Returns:** A table with following contents: string model - Model of hands number skin - Skin of hands string body - Bodygroups of hands
-		
-		
+		`**Returns:** A table with following contents: string model - Model of hands number skin - Skin of hands string body - Bodygroups of hands
     **/
     
     public static function TranslatePlayerHands(name:String):AnyTable;

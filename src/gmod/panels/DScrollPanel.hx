@@ -6,30 +6,25 @@ package gmod.panels;
 	
 	This can be used to replace the DPanelList with DPanelList:EnableVerticalScrollbar and get similar functionality as well as using a non-deprecated element. 
 	
-	 If you would like to paint or edit the elements of the scrollbar use GetVBar. If you want to see if the scrollbar is visible then use the VBar.Enabled variable on the scrollbar's VBar. 
+	 If you would like to paint or edit the elements of the scrollbar use GetVBar. If you want to see if the scrollbar is visible then use the VBar.Enabled variable on the scrollbar's VBar.
 	
-	 
+	**Note:** Panel:DockPadding will not have an effect on children of this panel. Use the function on DScrollPanel:GetCanvas instead.
 **/
 extern class DScrollPanel extends DPanel {
     /**
-        Parents the passed panel to the DScrollPanel's canvas. 
-		
+        Parents the passed panel to the DScrollPanel's canvas.
 		
 		Name | Description
 		--- | ---
 		`pnl` | The panel to add.
-		
-		
-		
     **/
     
      
     public function AddItem(pnl:Panel):Void;
     /**
-        Returns the vertical scroll bar of the panel. 
+        Returns the vertical scroll bar of the panel.
 		
-		
-		**Returns:** The DVScrollBar.
+		`**Returns:** The DVScrollBar.
 		
 		___
 		### Lua Examples
@@ -72,90 +67,68 @@ extern class DScrollPanel extends DPanel {
 		DLabel:Center()
 		DLabel:SizeToContents()
 		```
-		
-		
     **/
     
      
     public function GetVBar():Panel;
     /**
-        Sets the DScrollPanel's padding. This function appears to be unused. 
-		
+        Sets the DScrollPanel's padding. This function appears to be unused.
 		
 		Name | Description
 		--- | ---
 		`padding` | The padding of the DScrollPanel.
-		
-		
-		
     **/
     
      
     public function SetPadding(padding:Float):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets the canvas of the DScrollPanel.   
+		Sets the canvas of the DScrollPanel.
+		
 		Name | Description
 		--- | ---
 		`canvas` | The new canvas
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetCanvas(canvas:Panel):Void;
     /**
-        Return the width of the DScrollPanel's canvas. 
+        Return the width of the DScrollPanel's canvas.
 		
-		
-		**Returns:** The width of the DScrollPanel's canvas
-		
-		
+		`**Returns:** The width of the DScrollPanel's canvas
     **/
     
      
     public function InnerWidth():Float;
     /**
-        Gets the DScrollPanels padding 
+        Gets the DScrollPanels padding
 		
-		
-		**Returns:** DScrollPanels padding
-		
-		
+		`**Returns:** DScrollPanels padding
     **/
     
      
     public function GetPadding():Float;
     /**
         
-		
     **/
     
      
     public function Rebuild():Void;
     /**
-        Scrolls to the given child 
-		
+        Scrolls to the given child
 		
 		Name | Description
 		--- | ---
 		`panel` | The panel to scroll to, must be a child of the DScrollPanel.
-		
-		
-		
     **/
     
      
     public function ScrollToChild(panel:Panel):Void;
     /**
-        Returns the canvas ( The panel all child panels are parented to ) of the DScrollPanel. 
+        Returns the canvas ( The panel all child panels are parented to ) of the DScrollPanel.
 		
-		
-		**Returns:** The canvas
-		
-		
+		`**Returns:** The canvas
     **/
     
      

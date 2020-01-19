@@ -2,22 +2,19 @@ package gmod.libs;
 #if client
 
 /**
-    Retrieves the control panel for a given stool in the Q menu. 
-	
-	
+    Retrieves the control panel for a given stool in the Q menu.
 **/
 @:native("controlpanel")extern class ControlpanelLib {
     
     /**
-        Returns (or creates if not exists) a controlpanel. 
-		
+        Returns (or creates if not exists) a controlpanel.
 		
 		Name | Description
 		--- | ---
 		`name` | The name of the panel.
 		
 		
-		**Returns:** ControlPanel
+		`**Returns:** ControlPanel
 		
 		___
 		### Lua Examples
@@ -27,18 +24,13 @@ package gmod.libs;
 		```lua 
 		local ControlPanel = controlpanel.Get( "Weld" )
 		```
-		
-		
     **/
     
     public static function Get(name:String):Panel;
     
     
     /**
-        Clears ALL the control panels ( for tools ) 
-		
-		
-		
+        Clears ALL the control panels ( for tools )
     **/
     
     public static function Clear():Void;

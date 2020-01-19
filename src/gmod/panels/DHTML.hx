@@ -2,23 +2,19 @@ package gmod.panels;
 #if client
 
 /**
-    The DHTML control wraps the internal Awesomium framework, supports calling Javascript functions from Lua, as well as running Lua from within the HTML. Running Lua code is disabled by default. 
-	
-	
+    The DHTML control wraps the internal Awesomium framework, supports calling Javascript functions from Lua, as well as running Lua from within the HTML. Running Lua code is disabled by default.
 **/
 extern class DHTML extends Awesomium {
     /**
-        Stops the loading of the HTML panel's current page. 
-		
-		
-		
+        Stops the loading of the HTML panel's current page.
     **/
     
      
     public function StopLoading():Void;
     /**
-        Defines a Javascript function that when called will call a Lua callback. 
+        Defines a Javascript function that when called will call a Lua callback.
 		
+		**Note:** Must be called after the HTML document has fully loaded.
 		
 		Name | Description
 		--- | ---
@@ -52,15 +48,16 @@ extern class DHTML extends Awesomium {
 		--This runs our function. Our function could also be called from Javascript on the DHTML's page.
 		DHTML:RunJavascript("console.luaprint('Hello from Javascript!');")
 		```
-		
-		
     **/
     
      
     public function AddFunction(library:String, name:String, callback:Function):Void;
     /**
-        Runs/Executes a string as JavaScript code. 
+        Runs/Executes a string as JavaScript code.
 		
+		**Note:** This function does NOT evaluate expression (i.e. allow you to pass variables from JavaScript (JS) to Lua context). Because a return value is nil/no value (a.k.a. void). If you wish to pass/return values from JS to Lua, you may want to use DHTML:AddFunction function to accomplish that job.
+		
+		**Note:** This function is an alias of DHTML:QueueJavascript (source).
 		
 		Name | Description
 		--- | ---
@@ -96,68 +93,54 @@ extern class DHTML extends Awesomium {
 		**Output:**
 		
 		Inner HTML of document body in DHTML panel is now set to "HTML changed from Lua using JavaScript!".
-		
-		
     **/
     
      
     public function Call(js:String):Void;
     /**
-        Determines whether the loaded page can run Lua code or not. See DHTML for how to run Lua from a DHTML window. 
-		
+        Determines whether the loaded page can run Lua code or not. See DHTML for how to run Lua from a DHTML window.
 		
 		Name | Description
 		--- | ---
 		`allow` | Whether or not to allow Lua.
-		
-		
-		
     **/
     
      
     public function SetAllowLua(?allow:Bool):Void;
     /**
-        Returns if the loaded page can run Lua code, set by DHTML:SetAllowLua 
+        Returns if the loaded page can run Lua code, set by DHTML:SetAllowLua
 		
-		
-		**Returns:** Whether or not Lua code can be called from the loaded page.
-		
-		
+		`**Returns:** Whether or not Lua code can be called from the loaded page.
     **/
     
      
     public function GetAllowLua():Bool;
     /**
-        Called when the page inside the DHTML window runs console.log. This can also be called within the Lua environment to emulate console.log. If the contained message begins with RUNLUA: the following text will be executed as code within the Lua environment (this is how Lua is called from DHTML windows). 
-		
+        Called when the page inside the DHTML window runs console.log. This can also be called within the Lua environment to emulate console.log. If the contained message begins with RUNLUA: the following text will be executed as code within the Lua environment (this is how Lua is called from DHTML windows).
 		
 		Name | Description
 		--- | ---
 		`msg` | The message to be logged (or Lua code to be executed; see above).
-		
-		
-		
     **/
     
      
     public function ConsoleMessage(msg:String):Void;
     /**
-        ***Deprecated:**   Broken. Use the CSS overflow rule instead.
+        ***Deprecated:** Broken. Use the CSS overflow rule instead.
 		
-		Sets if the loaded window should display scrollbars when the webpage is larger than the viewing window. This is similar to the CSS  rule.   
+		Sets if the loaded window should display scrollbars when the webpage is larger than the viewing window. This is similar to the CSS  rule.
+		
 		Name | Description
 		--- | ---
 		`show` | True if scrollbars should be visible.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("Broken. Use the CSS overflow rule instead.")
      
     public function SetScrollbars(show:Bool):Void;
     /**
-        Runs/Executes a string as JavaScript code. 
+        Runs/Executes a string as JavaScript code.
 		
+		**Note:** This function does NOT evaluate expression (i.e. allow you to pass variables from JavaScript (JS) to Lua context). Because a return value is nil/no value (a.k.a. void). If you wish to pass/return values from JS to Lua, you may want to use DHTML:AddFunction function to accomplish that job.
 		
 		Name | Description
 		--- | ---
@@ -193,8 +176,6 @@ extern class DHTML extends Awesomium {
 		**Output:**
 		
 		Inner HTML of document body in DHTML panel is now set to "HTML changed from Lua using JavaScript!".
-		
-		
     **/
     
      

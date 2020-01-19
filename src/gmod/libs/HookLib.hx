@@ -1,18 +1,13 @@
 package gmod.libs;
 
 
-import gmod.Hooks.Hook;
-
 /**
-    The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function. 
-	
-	
+    The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function.
 **/
 @:native("hook")extern class HookLib {
     
     /**
-        Removes the hook with the supplied identifier from the given event. 
-		
+        Removes the hook with the supplied identifier from the given event.
 		
 		Name | Description
 		--- | ---
@@ -42,16 +37,15 @@ import gmod.Hooks.Hook;
 		**Output:**
 		
 		After the hook gets removed, the dark overlay doesn't appear anymore.
-		
-		
     **/
     
-    public static function Remove(eventName:String, identifier:Any):Void;
+    public static function Remove(eventName:String, identifier:Dynamic):Void;
     
     
     /**
-        Add a hook to be called upon the given event occurring. 
+        Add a hook to be called upon the given event occurring.
 		
+		**Warning:** Returning any value besides nil from the hook's function will stop other hooks of the same event down the loop from being executed. Only return a value when absolutely necessary and when you know what you are doing. It WILL break other addons.
 		
 		Name | Description
 		--- | ---
@@ -107,19 +101,16 @@ import gmod.Hooks.Hook;
 		**Output:**
 		
 		"CustomHook table: 0x00000000 Player [1][PotatoMan]"
-		
-		
     **/
     
-    public static function Add<T:Function>(eventName:Hook<T>, identifier:Any, func:T):Void;
+    public static function Add(eventName:String, identifier:Dynamic, func:Function):Void;
     
     
     /**
         Calls all hooks associated with the given event until one returns something other than nil, and then returns that data. 
 		
-		In almost all cases, you should use hook.Run instead - it calls hook.Call internally but supplies the gamemode table by itself, making your code neater. 
+		In almost all cases, you should use hook.Run instead - it calls hook.Call internally but supplies the gamemode table by itself, making your code neater.
 		
-		 
 		Name | Description
 		--- | ---
 		`eventName` | The event to call hooks for
@@ -127,7 +118,7 @@ import gmod.Hooks.Hook;
 		`args` | The arguments to be passed to the hooks
 		
 		
-		**Returns:** Return data from called hooks. Limited to 6 return values
+		`**Returns:** Return data from called hooks. Limited to 6 return values
 		
 		___
 		### Lua Examples
@@ -196,18 +187,15 @@ import gmod.Hooks.Hook;
 		**Output:**
 		
 		Hello Hey
-		
-		
     **/
     
-    public static function Call(eventName:String, gamemodeTable:AnyTable, args:Rest<Dynamic>):Dynamic;
+    public static function Call(eventName:String, gamemodeTable:AnyTable, args:Rest<Dynamic>):Rest<Dynamic>;
     
     
     /**
-        Returns a list of all the hooks registered with hook.Add. 
+        Returns a list of all the hooks registered with hook.Add.
 		
-		
-		**Returns:** A table of tables. See below for output example.
+		`**Returns:** A table of tables. See below for output example.
 		
 		___
 		### Lua Examples
@@ -217,8 +205,6 @@ import gmod.Hooks.Hook;
 		```lua 
 		PrintTable( hook.GetTable() )
 		```
-		
-		
     **/
     
     public static function GetTable():AnyTable;
@@ -231,21 +217,18 @@ import gmod.Hooks.Hook;
 		
 		 This function internally calls hook.Call. 
 		
-		 See also: gamemode.Call - same as this, but does not call hooks if the gamemode hasn't defined the function. 
+		 See also: gamemode.Call - same as this, but does not call hooks if the gamemode hasn't defined the function.
 		
-		 
 		Name | Description
 		--- | ---
 		`eventName` | The event to call hooks for
 		`args` | The arguments to be passed to the hooks
 		
 		
-		**Returns:** Returned data from called hooks
-		
-		
+		`**Returns:** Returned data from called hooks
     **/
     
-    public static function Run(eventName:String, args:Rest<Dynamic>):Any;
+    public static function Run(eventName:String, args:Rest<Dynamic>):Dynamic;
     
     
 

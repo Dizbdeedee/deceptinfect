@@ -4,30 +4,23 @@ package gmod.panels;
 /**
     DImage is an advanced, more robust version of the Material panel. 
 	
-	See DImageButton for a click-able version of this panel. 
-	
-	 
+	See DImageButton for a click-able version of this panel.
 **/
 extern class DImage extends DPanel {
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets the backup material to be loaded when the image is first rendered. Used by DImage:SetOnViewMaterial. 
-		
+		Sets the backup material to be loaded when the image is first rendered. Used by DImage:SetOnViewMaterial.
 		
 		Name | Description
 		--- | ---
 		`backupMat` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetFailsafeMatName(backupMat:String):Void;
     /**
-        Paints a ghost copy of the DImage panel at the given position and dimensions. This function overrides Panel:PaintAt. 
-		
+        Paints a ghost copy of the DImage panel at the given position and dimensions. This function overrides Panel:PaintAt.
 		
 		Name | Description
 		--- | ---
@@ -35,9 +28,6 @@ extern class DImage extends DPanel {
 		`posY` | The y coordinate to draw the panel from.
 		`width` | The width of the panel image to be drawn.
 		`height` | The height of the panel image to be drawn.
-		
-		
-		
     **/
     
      
@@ -45,21 +35,19 @@ extern class DImage extends DPanel {
     /**
         Returns whether the DImage should keep the aspect ratio of its image when being resized. 
 		
-		See DImage:SetKeepAspect for more info on how it works. 
+		See DImage:SetKeepAspect for more info on how it works.
 		
-		 
-		**Returns:** Whether the DImage should keep the aspect ratio of its image when being resized.
-		
-		
+		`**Returns:** Whether the DImage should keep the aspect ratio of its image when being resized.
     **/
     
      
     public function GetKeepAspect():Bool;
     /**
-        Resizes the panel so that its width and height fit all of the content inside. 
+        Resizes the panel so that its width and height fit all of the content inside.
 		
+		**Warning:** You must call this function AFTER setting text/font, adjusting child panels or otherwise altering the panel.
 		
-		
+		**Note:** Only works on Label derived panels such as DLabel by default, and on any panel that manually implemented the Panel:SizeToContents method, such as DNumberWang and DImage.
     **/
     
      
@@ -67,83 +55,62 @@ extern class DImage extends DPanel {
     /**
         Similar to DImage:SetImage, but will only do the expensive part of actually loading the textures/material if the material is about to be rendered/viewed. 
 		
-		Useful for cases like DIconBrowser, where there are hundreds of small icons in 1 panel in a list that do not need all to be loaded at the same time. 
+		Useful for cases like DIconBrowser, where there are hundreds of small icons in 1 panel in a list that do not need all to be loaded at the same time.
 		
-		 
 		Name | Description
 		--- | ---
 		`mat` | 
 		`backupMat` | 
-		
-		
-		
     **/
     
      
     public function SetOnViewMaterial(mat:String, backupMat:String):Void;
     /**
-        Sets a Material directly as an image. 
-		
+        Sets a Material directly as an image.
 		
 		Name | Description
 		--- | ---
 		`mat` | The material to set
-		
-		
-		
     **/
     
      
     public function SetMaterial(mat:IMaterial):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns the texture path set by DImage:SetMatName. 
+		Returns the texture path set by DImage:SetMatName.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetMatName():String;
     /**
-        Returns true if the image is not yet loaded. 
+        Returns true if the image is not yet loaded.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function Unloaded():Bool;
     /**
-        Returns the current Material of the DImage. 
+        Returns the current Material of the DImage.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetMaterial():IMaterial;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Actually loads the IMaterial to render it. Called from DImage:LoadMaterial. 
-		
-		
-		
+		Actually loads the IMaterial to render it. Called from DImage:LoadMaterial.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function DoLoadMaterial():Void;
     /**
-        Sets the image's color override. 
-		
+        Sets the image's color override.
 		
 		Name | Description
 		--- | ---
@@ -170,46 +137,36 @@ extern class DImage extends DPanel {
 		
 		metalbox_img:SetImageColor(Color(128, 255, 0, 255))
 		```
-		
-		
     **/
     
      
-    public function SetImageColor(col:AnyTable):Void;
+    public function SetImageColor(col:Color):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns the texture path set by DImage:SetFailsafeMatName. 
+		Returns the texture path set by DImage:SetFailsafeMatName.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetFailsafeMatName():String;
     /**
         Sets whether the DImage should keep the aspect ratio of its image when being resized. 
 		
-		Note that this will not try to fit the image inside the button, but instead it will fill the button with the image. 
+		Note that this will not try to fit the image inside the button, but instead it will fill the button with the image.
 		
-		 
 		Name | Description
 		--- | ---
 		`keep` | true to keep the aspect ratio, false not to
-		
-		
-		
     **/
     
      
     public function SetKeepAspect(keep:Bool):Void;
     /**
-        Returns the color override of the image panel. 
+        Returns the color override of the image panel.
 		
-		
-		**Returns:** The color override of the image. Uses the Color structure.
+		`**Returns:** The color override of the image. Uses the Color structure.
 		
 		___
 		### Lua Examples
@@ -228,30 +185,24 @@ extern class DImage extends DPanel {
 		**Output:**
 		
 		255 255 255 255
-		
-		
     **/
     
      
-    public function GetImageColor():AnyTable;
+    public function GetImageColor():Color;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Initializes the loading process of the material to render if it is not loaded yet. 
 		
-		You do not need to call this function. It is done for you automatically. 
-		
-		 
-		
+		You do not need to call this function. It is done for you automatically.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function LoadMaterial():Void;
     /**
-        Returns the image loaded in the image panel. 
+        Returns the image loaded in the image panel.
 		
-		
-		**Returns:** The path to the image that is loaded.
+		`**Returns:** The path to the image that is loaded.
 		
 		___
 		### Lua Examples
@@ -279,47 +230,37 @@ extern class DImage extends DPanel {
 		**Output:**
 		
 		materials/gui/postprocess/colourmod.png
-		
-		
     **/
     
      
     public function GetImage():String;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		"Fixes" the current material of the DImage if it has VertexLit shader by creating a new one with the same name and a prefix of "_DImage" and automatically calling DImage:SetMaterial with the new material. 
 		
-		This fixes the problem where using materials using shaders that expect lighting information causing "weird" flickering when displayed in 2D/Unlit environment. 
-		
-		 
-		
+		This fixes the problem where using materials using shaders that expect lighting information causing "weird" flickering when displayed in 2D/Unlit environment.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function FixVertexLitMaterial():Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets the material to be loaded when the image is first rendered. Used by DImage:SetOnViewMaterial. 
-		
+		Sets the material to be loaded when the image is first rendered. Used by DImage:SetOnViewMaterial.
 		
 		Name | Description
 		--- | ---
 		`mat` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetMatName(mat:String):Void;
     /**
         Sets the image to load into the frame. If the first image can't be loaded and strBackup is set, that image will be loaded instead. 
 		
-		This eventually calls DImage:SetMaterial. 
+		This eventually calls DImage:SetMaterial.
 		
-		 
 		Name | Description
 		--- | ---
 		`strImage` | The path of the image to load. When no file extension is supplied the VMT file extension is used.
@@ -350,8 +291,6 @@ extern class DImage extends DPanel {
 		**Output:**
 		
 		If CS:S is mounted then the left image is shown, otherwise the right image is shown.
-		
-		
     **/
     
      

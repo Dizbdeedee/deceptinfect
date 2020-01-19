@@ -4,15 +4,12 @@ package gmod.hooks;
 /**
     This is a list of hooks that are only available in Sandbox or Sandbox derived gamemodes. 
 	
-	Easiest way to tell if a gamemode is Sandbox derived is to check if this variable exists: 
-	
-	 
+	Easiest way to tell if a gamemode is Sandbox derived is to check if this variable exists:
 **/
-extern class Sandbox extends Gm {
+class Sandbox {
     #if server
     /**
-        Called when a player attempts to spawn a ragdoll from the Q menu. 
-		
+        Called when a player attempts to spawn a ragdoll from the Q menu.
 		
 		Name | Description
 		--- | ---
@@ -20,7 +17,7 @@ extern class Sandbox extends Gm {
 		`model` | Path to the model of the ragdoll the player is attempting to spawn.
 		
 		
-		**Returns:** Should the player be able to spawn the ragdoll or not.
+		`**Returns:** Should the player be able to spawn the ragdoll or not.
 		
 		___
 		### Lua Examples
@@ -34,30 +31,26 @@ extern class Sandbox extends Gm {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnRagdoll(ply:Player, model:String):Bool;
+    public function PlayerSpawnRagdoll(ply:Player, model:String):Bool {return null;}
     #end
     #if client
     /**
-        Called right after the Lua Loaded tool menus are reloaded. This is a good place to set up any ControlPanels. 
-		
-		
-		
+        Called right after the Lua Loaded tool menus are reloaded. This is a good place to set up any ControlPanels.
     **/
     
     @:hook
-    public function PostReloadToolsMenu():Void;
+    public function PostReloadToolsMenu():Void {}
     #end
     #if client
     /**
-        Called when spawnmenu is trying to be opened. 
+        Called when spawnmenu is trying to be opened.
 		
+		**Note:** Hiding the spawnmenu will not stop people from being able to use the various console commands to spawn in items, etc. See GM:PlayerSpawn* hooks for blocking actual spawning.
 		
-		**Returns:** Return false to dissallow opening the spawnmenu
+		`**Returns:** Return false to dissallow opening the spawnmenu
 		
 		___
 		### Lua Examples
@@ -76,85 +69,69 @@ extern class Sandbox extends Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function SpawnMenuOpen():Bool;
+    public function SpawnMenuOpen():Bool {return null;}
     #end
     #if client
     /**
-        Called from GM:HUDPaint to draw world tips. By default, enabling cl_drawworldtooltips will stop world tips from being drawn here. See AddWorldTip for more information. 
+        Called from GM:HUDPaint to draw world tips. By default, enabling cl_drawworldtooltips will stop world tips from being drawn here. See AddWorldTip for more information.
 		
-		
-		
+		**Note:** This cannot be used with hook.Add
     **/
     
     @:hook
-    public function PaintWorldTips():Void;
+    public function PaintWorldTips():Void {}
     #end
     #if client
     /**
-        Called when the context menu is created. 
-		
+        Called when the context menu is created.
 		
 		Name | Description
 		--- | ---
 		`g_ContextMenu` | The created context menu panel
-		
-		
-		
     **/
     
     @:hook
-    public function ContextMenuCreated(g_ContextMenu:Panel):Void;
+    public function ContextMenuCreated(g_ContextMenu:Panel):Void {}
     #end
     #if client
     /**
-        ***Deprecated:**   This hook is never called. Use SANDBOX: PopulateToolMenu, instead.
+        ***Deprecated:** This hook is never called. Use SANDBOX: PopulateToolMenu, instead.
 		
-		Called to populate the Scripted Tool menu. 
-		
-		
-		
+		Called to populate the Scripted Tool menu.
     **/
-    @:deprecated
+    @:deprecated("This hook is never called. Use SANDBOX: PopulateToolMenu, instead.")
     @:hook
-    public function PopulateSTOOLMenu():Void;
+    public function PopulateSTOOLMenu():Void {}
     #end
     #if client
     /**
-        Called from GM:HUDPaint; does nothing by default. 
+        Called from GM:HUDPaint; does nothing by default.
 		
-		
-		
+		**Note:** This cannot be used with hook.Add
     **/
     
     @:hook
-    public function PaintNotes():Void;
+    public function PaintNotes():Void {}
     #end
     #if server
     /**
-        Called after the player spawned an NPC. 
-		
+        Called after the player spawned an NPC.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player that spawned the NPC
 		`ent` | The spawned NPC itself
-		
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnedNPC(ply:Player, ent:Entity):Void;
+    public function PlayerSpawnedNPC(ply:Player, ent:Entity):Void {}
     #end
     #if server
     /**
-        Called to ask if player allowed to spawn a particular effect or not. 
-		
+        Called to ask if player allowed to spawn a particular effect or not.
 		
 		Name | Description
 		--- | ---
@@ -162,18 +139,19 @@ extern class Sandbox extends Gm {
 		`model` | The effect model that player wants to spawn
 		
 		
-		**Returns:** Return false to disallow spawning that effect
-		
-		
+		`**Returns:** Return false to disallow spawning that effect
     **/
     
     @:hook
-    public function PlayerSpawnEffect(ply:Player, model:String):Bool;
+    public function PlayerSpawnEffect(ply:Player, model:String):Bool {return null;}
     #end
     
     /**
-        Controls if a property can be used or not. 
+        Controls if a property can be used or not.
 		
+		**Warning:** This is not guaranteed to be the internal property name used in properties.Add!
+		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
 		
 		Name | Description
 		--- | ---
@@ -182,7 +160,7 @@ extern class Sandbox extends Gm {
 		`ent` | The entity, on which property is tried to be used on
 		
 		
-		**Returns:** Return false to disallow using that property
+		`**Returns:** Return false to disallow using that property
 		
 		___
 		### Lua Examples
@@ -194,17 +172,14 @@ extern class Sandbox extends Gm {
 		    if ( !ply:IsAdmin() && property == "remover" ) then return false end
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function CanProperty(ply:Player, property:String, ent:Entity):Bool;
+    public function CanProperty(ply:Player, property:String, ent:Entity):Bool {return null;}
     
     #if server
     /**
-        Called to ask if player allowed to spawn a particular vehicle or not. 
-		
+        Called to ask if player allowed to spawn a particular vehicle or not.
 		
 		Name | Description
 		--- | ---
@@ -214,33 +189,27 @@ extern class Sandbox extends Gm {
 		`table` | Table of that vehicle, containing info about it
 		
 		
-		**Returns:** Return false to disallow spawning that vehicle
-		
-		
+		`**Returns:** Return false to disallow spawning that vehicle
     **/
     
     @:hook
-    public function PlayerSpawnVehicle(ply:Player, model:String, name:String, table:AnyTable):Bool;
+    public function PlayerSpawnVehicle(ply:Player, model:String, name:String, table:AnyTable):Bool {return null;}
     #end
     #if client
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		This hook is used to add default tool tabs to spawnmenu. 
 		
-		Do not override or hook this function, use SANDBOX:AddToolMenuTabs! 
-		
-		 
-		
+		Do not override or hook this function, use SANDBOX:AddToolMenuTabs!
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     @:hook
-    public function AddGamemodeToolMenuTabs():Void;
+    public function AddGamemodeToolMenuTabs():Void {}
     #end
     #if client
     /**
-        This hook is used to add new tool tabs to spawnmenu. 
-		
+        This hook is used to add new tool tabs to spawnmenu.
 		
 		___
 		### Lua Examples
@@ -258,34 +227,27 @@ extern class Sandbox extends Gm {
 		    end ) -- Add an entry to our new category
 		end)
 		```
-		
-		
     **/
     
     @:hook
-    public function AddToolMenuTabs():Void;
+    public function AddToolMenuTabs():Void {}
     #end
     #if server
     /**
-        Called after the player has spawned a scripted entity. 
-		
+        Called after the player has spawned a scripted entity.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player that spawned the SENT
 		`ent` | The spawned SENT
-		
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnedSENT(ply:Player, ent:Entity):Void;
+    public function PlayerSpawnedSENT(ply:Player, ent:Entity):Void {}
     #end
     #if client
     /**
-        This hook is used to add new categories to spawnmenu tool tabs. 
-		
+        This hook is used to add new categories to spawnmenu tool tabs.
 		
 		___
 		### Lua Examples
@@ -301,17 +263,16 @@ extern class Sandbox extends Gm {
 		end        
 		hook.Add( "AddToolMenuCategories", "CreateUtilitiesCategories", CreateUtilitiesCategories )
 		```
-		
-		
     **/
     
     @:hook
-    public function AddToolMenuCategories():Void;
+    public function AddToolMenuCategories():Void {}
     #end
     
     /**
-        Called when a player attempts to drive a prop via Prop Drive 
+        Called when a player attempts to drive a prop via Prop Drive
 		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
 		
 		Name | Description
 		--- | ---
@@ -319,7 +280,7 @@ extern class Sandbox extends Gm {
 		`ent` | The entity the player is attempting to drive
 		
 		
-		**Returns:** Return true to allow driving, false to disallow
+		`**Returns:** Return true to allow driving, false to disallow
 		
 		___
 		### Lua Examples
@@ -331,36 +292,29 @@ extern class Sandbox extends Gm {
 		    if !ply:IsAdmin() then return false end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function CanDrive(ply:Player, ent:Entity):Bool;
+    public function CanDrive(ply:Player, ent:Entity):Bool {return null;}
     
     #if server
     /**
         Called after the player has spawned a scripted weapon from the spawnmenu with a middle mouse click. 
 		
-		For left mouse click spawns, see SANDBOX:PlayerGiveSWEP. 
+		For left mouse click spawns, see SANDBOX:PlayerGiveSWEP.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | The player that spawned the SWEP
 		`ent` | The SWEP itself
-		
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnedSWEP(ply:Player, ent:Entity):Void;
+    public function PlayerSpawnedSWEP(ply:Player, ent:Entity):Void {}
     #end
     #if server
     /**
-        Called when a player attempts to spawn a weapon from the Q menu. ( Mouse wheel clicks on an icon ) 
-		
+        Called when a player attempts to spawn a weapon from the Q menu. ( Mouse wheel clicks on an icon )
 		
 		Name | Description
 		--- | ---
@@ -369,7 +323,7 @@ extern class Sandbox extends Gm {
 		`swep` | Information about the weapon the player is trying to spawn, see SWEP structure
 		
 		
-		**Returns:** Can the SWEP be spawned
+		`**Returns:** Can the SWEP be spawned
 		
 		___
 		### Lua Examples
@@ -383,41 +337,32 @@ extern class Sandbox extends Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnSWEP(ply:Player, weapon:String, swep:AnyTable):Bool;
+    public function PlayerSpawnSWEP(ply:Player, weapon:String, swep:SWEP):Bool {return null;}
     #end
     #if client
     /**
-        Add the STOOLS to the tool menu. You want to call spawnmenu.AddToolMenuOption in this hook. 
-		
-		
-		
+        Add the STOOLS to the tool menu. You want to call spawnmenu.AddToolMenuOption in this hook.
     **/
     
     @:hook
-    public function PopulateToolMenu():Void;
+    public function PopulateToolMenu():Void {}
     #end
     #if client
     /**
-        Called when the context menu is trying to be opened. Return false to disallow it. 
+        Called when the context menu is trying to be opened. Return false to disallow it.
 		
-		
-		**Returns:** Allow menu to open.
-		
-		
+		`**Returns:** Allow menu to open.
     **/
     
     @:hook
-    public function ContextMenuOpen():Bool;
+    public function ContextMenuOpen():Bool {return null;}
     #end
     #if server
     /**
-        Called when a player attempts to spawn an Entity from the Q menu. 
-		
+        Called when a player attempts to spawn an Entity from the Q menu.
 		
 		Name | Description
 		--- | ---
@@ -425,7 +370,7 @@ extern class Sandbox extends Gm {
 		`class` | Class name of the entity the player tried to spawn.
 		
 		
-		**Returns:** can_spawn
+		`**Returns:** can_spawn
 		
 		___
 		### Lua Examples
@@ -439,46 +384,36 @@ extern class Sandbox extends Gm {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnSENT(ply:Player, _class:String):Bool;
+    public function PlayerSpawnSENT(ply:Player, _class:String):Bool {return null;}
     #end
     #if client
     /**
-        Called right before the Lua Loaded tool menus are reloaded. 
-		
-		
-		
+        Called right before the Lua Loaded tool menus are reloaded.
     **/
     
     @:hook
-    public function PreReloadToolsMenu():Void;
+    public function PreReloadToolsMenu():Void {}
     #end
     #if server
     /**
-        Called after the player spawned an effect. 
-		
+        Called after the player spawned an effect.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player that spawned the effect
 		`model` | The model of spawned effect
 		`ent` | The spawned effect itself
-		
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnedEffect(ply:Player, model:String, ent:Entity):Void;
+    public function PlayerSpawnedEffect(ply:Player, model:String, ent:Entity):Void {}
     #end
     #if server
     /**
-        Called to ask if player allowed to spawn a particular NPC or not. 
-		
+        Called to ask if player allowed to spawn a particular NPC or not.
 		
 		Name | Description
 		--- | ---
@@ -487,33 +422,27 @@ extern class Sandbox extends Gm {
 		`weapon` | The weapon of that NPC
 		
 		
-		**Returns:** Return false to disallow spawning that NPC
-		
-		
+		`**Returns:** Return false to disallow spawning that NPC
     **/
     
     @:hook
-    public function PlayerSpawnNPC(ply:Player, npc_type:String, weapon:String):Bool;
+    public function PlayerSpawnNPC(ply:Player, npc_type:String, weapon:String):Bool {return null;}
     #end
     #if client
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		This hook is used to add default categories to spawnmenu tool tabs. 
 		
-		Do not override or hook this function, use SANDBOX:AddToolMenuCategories! 
-		
-		 
-		
+		Do not override or hook this function, use SANDBOX:AddToolMenuCategories!
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     @:hook
-    public function AddGamemodeToolMenuCategories():Void;
+    public function AddGamemodeToolMenuCategories():Void {}
     #end
     #if server
     /**
-        Called to ask whether player is allowed to spawn a given model. This includes props, effects and ragdolls and is called before the respective PlayerSpawn* hook. 
-		
+        Called to ask whether player is allowed to spawn a given model. This includes props, effects and ragdolls and is called before the respective PlayerSpawn* hook.
 		
 		Name | Description
 		--- | ---
@@ -522,35 +451,28 @@ extern class Sandbox extends Gm {
 		`skin` | Skin number
 		
 		
-		**Returns:** Return false to disallow the player to spawn the given model.
-		
-		
+		`**Returns:** Return false to disallow the player to spawn the given model.
     **/
     
     @:hook
-    public function PlayerSpawnObject(ply:Player, model:String, skin:Float):Bool;
+    public function PlayerSpawnObject(ply:Player, model:String, skin:Float):Bool {return null;}
     #end
     #if client
     /**
-        Called when player selects an item on the spawnmenu sidebar at the left. 
-		
+        Called when player selects an item on the spawnmenu sidebar at the left.
 		
 		Name | Description
 		--- | ---
 		`parent` | The panel that holds spawnicons and the sidebar of spawnmenu
 		`node` | The item player selected
-		
-		
-		
     **/
     
     @:hook
-    public function ContentSidebarSelection(parent:Panel, node:Panel):Void;
+    public function ContentSidebarSelection(parent:Panel, node:Panel):Void {}
     #end
     #if server
     /**
-        Called when a player has successfully spawned a prop from the Q menu. 
-		
+        Called when a player has successfully spawned a prop from the Q menu.
 		
 		Name | Description
 		--- | ---
@@ -569,17 +491,14 @@ extern class Sandbox extends Gm {
 		    ent:SetColor(Color(0, 255, 0))
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnedProp(ply:Player, model:String, entity:Entity):Void;
+    public function PlayerSpawnedProp(ply:Player, model:String, entity:Entity):Void {}
     #end
     #if server
     /**
-        Called when a player attempts to spawn a prop from the Q menu. 
-		
+        Called when a player attempts to spawn a prop from the Q menu.
 		
 		Name | Description
 		--- | ---
@@ -587,7 +506,7 @@ extern class Sandbox extends Gm {
 		`model` | Path to the model of the prop the player is attempting to spawn.
 		
 		
-		**Returns:** Should the player be able to spawn the prop or not.
+		`**Returns:** Should the player be able to spawn the prop or not.
 		
 		___
 		### Lua Examples
@@ -601,17 +520,14 @@ extern class Sandbox extends Gm {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnProp(ply:Player, model:String):Bool;
+    public function PlayerSpawnProp(ply:Player, model:String):Bool {return null;}
     #end
     #if server
     /**
-        Called when a player attempts to give themselves a weapon from the Q menu. ( Left mouse clicks on an icon ) 
-		
+        Called when a player attempts to give themselves a weapon from the Q menu. ( Left mouse clicks on an icon )
 		
 		Name | Description
 		--- | ---
@@ -620,7 +536,7 @@ extern class Sandbox extends Gm {
 		`swep` | The swep table of this weapon, see SWEP structure
 		
 		
-		**Returns:** Can the SWEP be given to the player
+		`**Returns:** Can the SWEP be given to the player
 		
 		___
 		### Lua Examples
@@ -634,65 +550,53 @@ extern class Sandbox extends Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function PlayerGiveSWEP(ply:Player, weapon:String, swep:AnyTable):Bool;
+    public function PlayerGiveSWEP(ply:Player, weapon:String, swep:SWEP):Bool {return null;}
     #end
     #if client
     /**
-        If false is returned then the spawn menu is never created. This saves load times if your mod doesn't actually use the spawn menu for any reason. 
+        If false is returned then the spawn menu is never created. This saves load times if your mod doesn't actually use the spawn menu for any reason.
 		
-		
-		**Returns:** Whether to create spawnmenu or not.
-		
-		
+		`**Returns:** Whether to create spawnmenu or not.
     **/
     
     @:hook
-    public function SpawnMenuEnabled():Bool;
+    public function SpawnMenuEnabled():Bool {return null;}
     #end
     #if server
     /**
-        Called after the player spawned a ragdoll. 
-		
+        Called after the player spawned a ragdoll.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player that spawned the ragdoll
 		`model` | The ragdoll model that player wants to spawn
 		`ent` | The spawned ragdoll itself
-		
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnedRagdoll(ply:Player, model:String, ent:Entity):Void;
+    public function PlayerSpawnedRagdoll(ply:Player, model:String, ent:Entity):Void {}
     #end
     #if server
     /**
-        Called after the player spawned a vehicle. 
-		
+        Called after the player spawned a vehicle.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player that spawned the vehicle
 		`ent` | The vehicle itself
-		
-		
-		
     **/
     
     @:hook
-    public function PlayerSpawnedVehicle(ply:Player, ent:Entity):Void;
+    public function PlayerSpawnedVehicle(ply:Player, ent:Entity):Void {}
     #end
     
     /**
-        Called when a player attempts to fire their tool gun. Return true to specifically allow the attempt, false to block it. 
+        Called when a player attempts to fire their tool gun. Return true to specifically allow the attempt, false to block it.
 		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
 		
 		Name | Description
 		--- | ---
@@ -701,7 +605,7 @@ extern class Sandbox extends Gm {
 		`tool` | The tool mode the player currently has selected.
 		
 		
-		**Returns:** Can use toolgun or not.
+		`**Returns:** Can use toolgun or not.
 		
 		___
 		### Lua Examples
@@ -715,39 +619,30 @@ extern class Sandbox extends Gm {
 		   end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function CanTool(ply:Player, tr:AnyTable, tool:String):Bool;
+    public function CanTool(ply:Player, tr:TraceResult, tool:String):Bool {return null;}
     
     #if server
     /**
-        Called when persistent props are loaded. 
-		
-		
-		
+        Called when persistent props are loaded.
     **/
     
     @:hook
-    public function PersistenceLoad():Void;
+    public function PersistenceLoad():Void {}
     #end
     #if server
     /**
-        Called when persistent props are saved. 
-		
-		
-		
+        Called when persistent props are saved.
     **/
     
     @:hook
-    public function PersistenceSave():Void;
+    public function PersistenceSave():Void {}
     #end
     #if client
     /**
-        This hook makes the engine load the spawnlist text files. It calls spawnmenu.PopulateFromEngineTextFiles by default. 
-		
+        This hook makes the engine load the spawnlist text files. It calls spawnmenu.PopulateFromEngineTextFiles by default.
 		
 		___
 		### Lua Examples
@@ -764,80 +659,10 @@ extern class Sandbox extends Gm {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PopulatePropMenu():Void;
-	#end
-	
-	#if server
-    /**
-        This is the spawn function. It's called when a player spawns the entity from the spawnmenu. 
-		
-		If you want to make your SENT spawnable you need this function to properly create the entity. 
-		
-		 
-		Name | Description
-		--- | ---
-		`ply` | The player that is spawning this SENT
-		`tr` | A TraceResult structure from player eyes to their aim position
-		`ClassName` | The classname of your entity
-		
-		
-		___
-		### Lua Examples
-		#### Example 1
-		This is how it is defined in sent_ball
-		
-		```lua 
-		function ENT:SpawnFunction( ply, tr, ClassName )
-		
-		    if ( !tr.Hit ) then return end
-		
-		    local SpawnPos = tr.HitPos + tr.HitNormal * 16
-		
-		    local ent = ents.Create( ClassName )
-		    ent:SetPos( SpawnPos )
-		    ent:SetBallSize( math.random( 16, 48 ) )
-		    ent:Spawn()
-		    ent:Activate()
-		
-		    return ent
-		
-		end
-		```
-		
-		#### Example 2
-		This is how base_edit spawns (also rotates the entity to face the player, remove * 10 if it spawns in the air)
-		
-		```lua 
-		function ENT:SpawnFunction( ply, tr, ClassName )
-		
-		    if ( !tr.Hit ) then return end
-		    
-		    local SpawnPos = tr.HitPos + tr.HitNormal * 10
-		    local SpawnAng = ply:EyeAngles()
-		    SpawnAng.p = 0
-		    SpawnAng.y = SpawnAng.y + 180
-		    
-		    local ent = ents.Create( ClassName )
-		    ent:SetPos( SpawnPos )
-		    ent:SetAngles( SpawnAng )
-		    ent:Spawn()
-		    ent:Activate()
-		    
-		    return ent
-		    
-		end
-		```
-		
-		
-    **/
-    
-    @:hook
-    public function SpawnFunction(ply:Player, tr:AnyTable, ClassName:String):Void;
+    public function PopulatePropMenu():Void {}
     #end
     
 }

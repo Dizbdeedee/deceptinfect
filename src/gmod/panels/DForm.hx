@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    An easy form with functions to quickly add form elements 
-	
-	
+    An easy form with functions to quickly add form elements
 **/
 extern class DForm extends DCollapsibleCategory {
     /**
-        Adds a DCheckBoxLabel onto the DForm 
-		
+        Adds a DCheckBoxLabel onto the DForm
 		
 		Name | Description
 		--- | ---
@@ -17,23 +14,17 @@ extern class DForm extends DCollapsibleCategory {
 		`convar` | The console variable to change when this is changed
 		
 		
-		**Returns:** The created DCheckBoxLabel
-		
-		
+		`**Returns:** The created DCheckBoxLabel
     **/
     
      
     public function CheckBox(label:String, convar:String):Panel;
     /**
-        Sets the title (header) name of the DForm. This is Label until set. 
-		
+        Sets the title (header) name of the DForm. This is Label until set.
 		
 		Name | Description
 		--- | ---
 		`name` | The new header name.
-		
-		
-		
     **/
     
      
@@ -41,23 +32,18 @@ extern class DForm extends DCollapsibleCategory {
     /**
         Adds one or two items to the DForm. If this method is called with only one argument, it is added to the bottom of the form. If two arguments are passed, they are placed side-by-side at the bottom of the form. 
 		
-		Internally, this function is used by the various DForm functions to, for example, add labels to the left of buttons. 
+		Internally, this function is used by the various DForm functions to, for example, add labels to the left of buttons.
 		
-		 
 		Name | Description
 		--- | ---
 		`left` | Left-hand element to add to the DForm.
 		`right` | Right-hand element to add to the DForm.
-		
-		
-		
     **/
     
      
     public function AddItem(left:Panel, ?right:Panel):Void;
     /**
-        Adds a DListBox onto the DForm 
-		
+        Adds a DListBox onto the DForm
 		
 		Name | Description
 		--- | ---
@@ -68,59 +54,46 @@ extern class DForm extends DCollapsibleCategory {
 		--- | ---
 		`a` | The created DListBox
 		`b` | The created DLabel
-		
-		
-		
     **/
     
      
     public function ListBox(label:String):DFormListBoxReturn;
     /**
-        Creates a DPanelSelect and docks it to the top of the DForm. 
+        Creates a DPanelSelect and docks it to the top of the DForm.
 		
-		
-		**Returns:** The created DPanelSelect.
-		
-		
+		`**Returns:** The created DPanelSelect.
     **/
     
      
     public function PanelSelect():Panel;
     /**
-        Adds a DLabel onto the DForm. Unlike DForm:Help, this is indented and is colored blue, depending on the derma skin. 
-		
+        Adds a DLabel onto the DForm. Unlike DForm:Help, this is indented and is colored blue, depending on the derma skin.
 		
 		Name | Description
 		--- | ---
 		`help` | The help message to be displayed.
 		
 		
-		**Returns:** The created DLabel
-		
-		
+		`**Returns:** The created DLabel
     **/
     
      
     public function ControlHelp(help:String):Panel;
     /**
-        Adds a DLabel onto the DForm as a helper 
-		
+        Adds a DLabel onto the DForm as a helper
 		
 		Name | Description
 		--- | ---
 		`help` | The help message to be displayed
 		
 		
-		**Returns:** The created DLabel
-		
-		
+		`**Returns:** The created DLabel
     **/
     
      
     public function Help(help:String):Panel;
     /**
-        Adds a DButton onto the DForm 
-		
+        Adds a DButton onto the DForm
 		
 		Name | Description
 		--- | ---
@@ -129,27 +102,21 @@ extern class DForm extends DCollapsibleCategory {
 		`concmd args` | The arguments to pass on to the concommand when the button is clicked
 		
 		
-		**Returns:** The created DButton
-		
-		
+		`**Returns:** The created DButton
     **/
     
      
     public function Button(text:String, concmd:String, args:Rest<Dynamic>):Panel;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does nothing. 
-		
-		
-		
+		Does nothing.
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function Rebuild():Void;
     /**
-        Adds a DNumSlider onto the DForm 
-		
+        Adds a DNumSlider onto the DForm
 		
 		Name | Description
 		--- | ---
@@ -160,16 +127,13 @@ extern class DForm extends DCollapsibleCategory {
 		`decimals` | The number of decimals to allow on the slider. (Optional)
 		
 		
-		**Returns:** The created DNumSlider
-		
-		
+		`**Returns:** The created DNumSlider
     **/
     
      
     public function NumSlider(label:String, convar:String, min:Float, max:Float, ?decimals:Float):Panel;
     /**
-        Adds a DComboBox onto the DForm 
-		
+        Adds a DComboBox onto the DForm
 		
 		Name | Description
 		--- | ---
@@ -201,15 +165,12 @@ extern class DForm extends DCollapsibleCategory {
 		combobox:AddChoice( "10" ) -- 10 will be used as convar value
 		combobox:AddChoice( "1000", 100 ) -- 100 will be used as convar value
 		```
-		
-		
     **/
     
      
     public function ComboBox(title:String, convar:String):DFormComboBoxReturn;
     /**
-        Adds a DTextEntry to a DForm 
-		
+        Adds a DTextEntry to a DForm
 		
 		Name | Description
 		--- | ---
@@ -221,16 +182,12 @@ extern class DForm extends DCollapsibleCategory {
 		--- | ---
 		`a` | The created DTextEntry
 		`b` | The created DLabel
-		
-		
-		
     **/
     
      
     public function TextEntry(label:String, convar:String):DFormTextEntryReturn;
     /**
-        Adds a DNumberWang onto the DForm 
-		
+        Adds a DNumberWang onto the DForm
 		
 		Name | Description
 		--- | ---
@@ -245,9 +202,6 @@ extern class DForm extends DCollapsibleCategory {
 		--- | ---
 		`a` | The created DNumberWang
 		`b` | The created DLabel
-		
-		
-		
     **/
     
      

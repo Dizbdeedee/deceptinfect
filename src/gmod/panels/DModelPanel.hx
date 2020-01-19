@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    DModelPanel is a VGUI element that projects a 3D model onto a 2D plane. 
-	
-	
+    DModelPanel is a VGUI element that projects a 3D model onto a 2D plane.
 **/
 extern class DModelPanel extends DButton {
     /**
-        Sets the directional lighting used on the rendered entity. 
-		
+        Sets the directional lighting used on the rendered entity.
 		
 		Name | Description
 		--- | ---
@@ -50,15 +47,12 @@ extern class DModelPanel extends DButton {
 		    self:RunAnimation()
 		end
 		```
-		
-		
     **/
     
      
-    public function SetDirectionalLight(direction:Float, color:AnyTable):Void;
+    public function SetDirectionalLight(direction:BOX, color:AnyTable):Void;
     /**
-        Sets the model of the rendered entity. 
-		
+        Sets the model of the rendered entity.
 		
 		Name | Description
 		--- | ---
@@ -76,17 +70,14 @@ extern class DModelPanel extends DButton {
 		modelPanel:SetSize( 200, 200 )
 		modelPanel:SetModel( "models/player/kleiner.mdl" )
 		```
-		
-		
     **/
     
      
     public function SetModel(model:String):Void;
     /**
-        Returns the entity being rendered by the model panel. 
+        Returns the entity being rendered by the model panel.
 		
-		
-		**Returns:** The rendered entity (client-side)
+		`**Returns:** The rendered entity (client-side)
 		
 		___
 		### Lua Examples
@@ -105,29 +96,24 @@ extern class DModelPanel extends DButton {
 		
 		mdl:GetEntity():SetSkin(1)
 		```
-		
-		
     **/
     
      
     public function GetEntity():CSEnt;
     /**
         
+		
 		Name | Description
 		--- | ---
 		`path` | The path to the scene file. (.vcd)
-		
-		
-		
     **/
     
      
     public function StartScene(path:String):Void;
     /**
-        Returns the ambient lighting used on the rendered entity. 
+        Returns the ambient lighting used on the rendered entity.
 		
-		
-		**Returns:** The color of the ambient lighting.
+		`**Returns:** The color of the ambient lighting.
 		
 		___
 		### Lua Examples
@@ -145,15 +131,12 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		50 50 50 255
-		
-		
     **/
     
      
     public function GetAmbientLight():AnyTable;
     /**
-        Sets the position of the camera. 
-		
+        Sets the position of the camera.
 		
 		Name | Description
 		--- | ---
@@ -208,26 +191,20 @@ extern class DModelPanel extends DButton {
 		mdlpnl:SetCamPos( Vector( size, size, size ) )
 		mdlpnl:SetLookAt( (mn + mx) * 0.5 )
 		```
-		
-		
     **/
     
      
     public function SetCamPos(pos:Vector):Void;
     /**
-        Gets the model of the rendered entity. 
+        Gets the model of the rendered entity.
 		
-		
-		**Returns:** The model of the rendered entity.
-		
-		
+		`**Returns:** The model of the rendered entity.
     **/
     
      
     public function GetModel():String;
     /**
-        Sets the ambient lighting used on the rendered entity. 
-		
+        Sets the ambient lighting used on the rendered entity.
 		
 		Name | Description
 		--- | ---
@@ -253,15 +230,12 @@ extern class DModelPanel extends DButton {
 		
 		mdl:SetAmbientLight(Color(255, 0, 0, 255))
 		```
-		
-		
     **/
     
      
     public function SetAmbientLight(color:AnyTable):Void;
     /**
-        Sets the panel camera's FOV (field of view). 
-		
+        Sets the panel camera's FOV (field of view).
 		
 		Name | Description
 		--- | ---
@@ -301,17 +275,14 @@ extern class DModelPanel extends DButton {
 		    
 		end
 		```
-		
-		
     **/
     
      
     public function SetFOV(fov:Float):Void;
     /**
-        Returns the FOV (field of view) the camera is using. 
+        Returns the FOV (field of view) the camera is using.
 		
-		
-		**Returns:** The FOV of the camera.
+		`**Returns:** The FOV of the camera.
 		
 		___
 		### Lua Examples
@@ -329,15 +300,14 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		70
-		
-		
     **/
     
      
     public function GetFOV():Float;
     /**
-        Sets the entity to be rendered by the model panel. 
+        Sets the entity to be rendered by the model panel.
 		
+		**Note:** If you set ent to a shared entity you must set ent to nil before removing this panel or else a "Trying to remove server entity on client!" error is thrown
 		
 		Name | Description
 		--- | ---
@@ -479,15 +449,12 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		"I find it helpful at times like these to remind myself that our true enemy is: Instinct."
-		
-		
     **/
     
      
     public function SetEntity(ent:Entity):Void;
     /**
-        This function is used in the DModelPanel:LayoutEntity. It will set the active model to the last set animation using Entity:SetSequence. By default, it is the walking animation. 
-		
+        This function is used in the DModelPanel:LayoutEntity. It will set the active model to the last set animation using Entity:SetSequence. By default, it is the walking animation.
 		
 		___
 		### Lua Examples
@@ -501,15 +468,14 @@ extern class DModelPanel extends DButton {
 		     ModelPanel:RunAnimation()
 		end
 		```
-		
-		
     **/
     
      
     public function RunAnimation():Void;
     /**
-        Sets the speed used by DModelPanel:RunAnimation to advance frame on an entity sequence. 
+        Sets the speed used by DModelPanel:RunAnimation to advance frame on an entity sequence.
 		
+		**Note:** Entity:FrameAdvance doesn't seem to have any functioning arguments and therefore changing this will not have any affect on the panel entity's sequence speed without reimplementation. It only affects the value returned by DModelPanel:GetAnimSpeed
 		
 		Name | Description
 		--- | ---
@@ -544,17 +510,14 @@ extern class DModelPanel extends DButton {
 		
 		end
 		```
-		
-		
     **/
     
      
     public function SetAnimSpeed(animSpeed:Float):Void;
     /**
-        Returns the animation speed of the panel entity, see DModelPanel:SetAnimSpeed. 
+        Returns the animation speed of the panel entity, see DModelPanel:SetAnimSpeed.
 		
-		
-		**Returns:** The animation speed.
+		`**Returns:** The animation speed.
 		
 		___
 		### Lua Examples
@@ -572,17 +535,14 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		0.5
-		
-		
     **/
     
      
     public function GetAnimSpeed():Float;
     /**
-        Returns the angles of the model viewing camera. Is nil until changed with DModelPanel:SetLookAng. 
+        Returns the angles of the model viewing camera. Is nil until changed with DModelPanel:SetLookAng.
 		
-		
-		**Returns:** The angles of the camera.
+		`**Returns:** The angles of the camera.
 		
 		___
 		### Lua Examples
@@ -600,17 +560,14 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		nil
-		
-		
     **/
     
      
     public function GetLookAng():Angle;
     /**
-        Returns the position of the model viewing camera. 
+        Returns the position of the model viewing camera.
 		
-		
-		**Returns:** The position of the camera.
+		`**Returns:** The position of the camera.
 		
 		___
 		### Lua Examples
@@ -628,42 +585,35 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		50.000000 50.000000 50.000000
-		
-		
     **/
     
      
     public function GetCamPos():Vector;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used by the DModelPanel's paint hook to draw the model and background. 
-		
+		Used by the DModelPanel's paint hook to draw the model and background.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function DrawModel():Void;
     /**
-        Called before the entity of the DModelPanel is drawn. 
-		
+        Called before the entity of the DModelPanel is drawn.
 		
 		Name | Description
 		--- | ---
 		`ent` | The clientside entity of the DModelPanel that has been drawn.
 		
 		
-		**Returns:** Return false to stop the entity from being drawn. This will also cause DModelPanel: PostDrawModel to stop being called.
-		
-		
+		`**Returns:** Return false to stop the entity from being drawn. This will also cause DModelPanel: PostDrawModel to stop being called.
     **/
     
      
     public function PreDrawModel(ent:Entity):Bool;
     /**
-        Returns the position the viewing camera is pointing toward. 
+        Returns the position the viewing camera is pointing toward.
 		
-		
-		**Returns:** The position the camera is pointing toward.
+		`**Returns:** The position the camera is pointing toward.
 		
 		___
 		### Lua Examples
@@ -681,15 +631,12 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		0.000000 0.000000 40.000000
-		
-		
     **/
     
      
     public function GetLookAt():Vector;
     /**
-        Makes the panel's camera face the given position. 
-		
+        Makes the panel's camera face the given position.
 		
 		Name | Description
 		--- | ---
@@ -722,15 +669,12 @@ extern class DModelPanel extends DButton {
 		-- ^^ Makes Odessa look at the camera
 		-- Commented out because the result is funnier without this
 		```
-		
-		
     **/
     
      
     public function SetLookAt(pos:Vector):Void;
     /**
-        Sets the angles of the camera. 
-		
+        Sets the angles of the camera.
 		
 		Name | Description
 		--- | ---
@@ -775,8 +719,6 @@ extern class DModelPanel extends DButton {
 		
 		end
 		```
-		
-		
     **/
     
      
@@ -784,24 +726,19 @@ extern class DModelPanel extends DButton {
     /**
         Called when the entity of the DModelPanel was drawn. 
 		
-		This is a rendering hook with 3d drawing context. 
+		This is a rendering hook with 3d drawing context.
 		
-		 
 		Name | Description
 		--- | ---
 		`ent` | The clientside entity of the DModelPanel that has been drawn.
-		
-		
-		
     **/
     
      
     public function PostDrawModel(ent:Entity):Void;
     /**
-        Returns the color of the rendered entity. 
+        Returns the color of the rendered entity.
 		
-		
-		**Returns:** The color of the entity, see Color structure.
+		`**Returns:** The color of the entity, see Color structure.
 		
 		___
 		### Lua Examples
@@ -819,17 +756,14 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		255 255 255 255
-		
-		
     **/
     
      
-    public function GetColor():AnyTable;
+    public function GetColor():Color;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		By default, this function slowly rotates and animates the entity being rendered. If you want to change this behavior, you should override it. 
-		
+		By default, this function slowly rotates and animates the entity being rendered. If you want to change this behavior, you should override it.
 		
 		Name | Description
 		--- | ---
@@ -851,15 +785,12 @@ extern class DModelPanel extends DButton {
 		    -- do nothing
 		end
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function LayoutEntity(entity:Entity):Void;
     /**
-        Sets whether or not to animate the entity when the default DModelPanel:LayoutEntity is called. 
-		
+        Sets whether or not to animate the entity when the default DModelPanel:LayoutEntity is called.
 		
 		Name | Description
 		--- | ---
@@ -901,17 +832,14 @@ extern class DModelPanel extends DButton {
 		mdl1:GetEntity():SetSequence(dance)
 		mdl2:GetEntity():SetSequence(dance)
 		```
-		
-		
     **/
     
      
     public function SetAnimated(animated:Bool):Void;
     /**
-        Returns whether or not the panel entity should be animated when the default DModelPanel:LayoutEntity function is called. 
+        Returns whether or not the panel entity should be animated when the default DModelPanel:LayoutEntity function is called.
 		
-		
-		**Returns:** True if the panel entity can be animated with Entity: SetSequence directly, false otherwise.
+		`**Returns:** True if the panel entity can be animated with Entity: SetSequence directly, false otherwise.
 		
 		___
 		### Lua Examples
@@ -929,15 +857,14 @@ extern class DModelPanel extends DButton {
 		**Output:**
 		
 		false
-		
-		
     **/
     
      
     public function GetAnimated():Bool;
     /**
-        Sets the color of the rendered entity. 
+        Sets the color of the rendered entity.
 		
+		**Note:** This does not work on Garry's Mod player models since they use a different color system. To modify a player model color, see Example 2 on the DModelPanel page
 		
 		Name | Description
 		--- | ---
@@ -961,8 +888,6 @@ extern class DModelPanel extends DButton {
 		mdl:SetCamPos(Vector(10, 10, 10))
 		mdl:SetColor(Color(255, 0, 0))
 		```
-		
-		
     **/
     
      

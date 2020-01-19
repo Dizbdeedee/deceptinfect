@@ -2,22 +2,19 @@ package gmod.libs;
 
 
 /**
-    The undo library allows you to add custom entities to the undo list, allowing users to "undo" their creation with their undo (default: Z) key. 
-	
-	
+    The undo library allows you to add custom entities to the undo list, allowing users to "undo" their creation with their undo (default: Z) key.
 **/
 @:native("undo")extern class UndoLib {
     #if server
     /**
-        Processes an undo block (in table form). This is used internally by the undo manager when a player presses Z. 
-		
+        Processes an undo block (in table form). This is used internally by the undo manager when a player presses Z.
 		
 		Name | Description
 		--- | ---
 		`tab` | The undo block to process as an Undo structure
 		
 		
-		**Returns:** Number of removed entities
+		`**Returns:** Number of removed entities
 		
 		___
 		### Lua Examples
@@ -31,16 +28,13 @@ package gmod.libs;
 		tab.Entities = {Entity(56),Entity(57)}
 		undo.Do_Undo(tab)
 		```
-		
-		
     **/
     
-    public static function Do_Undo(tab:AnyTable):Float;
+    public static function Do_Undo(tab:Undo):Float;
     #end
     #if server
     /**
-        Adds a function to call when the current undo block is undone 
-		
+        Adds a function to call when the current undo block is undone
 		
 		Name | Description
 		--- | ---
@@ -68,28 +62,22 @@ package gmod.libs;
 		**Output:**
 		
 		"PlayerName removed prop models/props_junk/wood_crate001a.mdl, code: 556" will be printed
-		
-		
     **/
     
     public static function AddFunction(func:Function, arguments:Rest<Dynamic>):Void;
     #end
     #if client
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Adds a hook (CPanelPaint) to the control panel paint function so we can determine when it is being drawn. 
-		
-		
-		
+		Adds a hook (CPanelPaint) to the control panel paint function so we can determine when it is being drawn.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function SetupUI():Void;
     #end
     #if server
     /**
-        Begins a new undo entry 
-		
+        Begins a new undo entry
 		
 		Name | Description
 		--- | ---
@@ -110,16 +98,13 @@ package gmod.libs;
 		 undo.SetPlayer(Player)
 		undo.Finish()
 		```
-		
-		
     **/
     
     public static function Create(name:String):Void;
     #end
     #if server
     /**
-        Sets the player which the current undo block belongs to 
-		
+        Sets the player which the current undo block belongs to
 		
 		Name | Description
 		--- | ---
@@ -140,28 +125,22 @@ package gmod.libs;
 		 undo.SetPlayer(ply)
 		undo.Finish()
 		```
-		
-		
     **/
     
     public static function SetPlayer(ply:Player):Void;
     #end
     
     /**
-        Serverside, returns a table containing all undo blocks of all players. Clientside, returns a table of the local player's undo blocks. 
+        Serverside, returns a table containing all undo blocks of all players. Clientside, returns a table of the local player's undo blocks.
 		
-		
-		**Returns:** The undo table.
-		
-		
+		`**Returns:** The undo table.
     **/
     
     public static function GetTable():AnyTable;
     
     #if server
     /**
-        Replaces any instance of the "from" reference with the "to" reference, in any existing undo block. Returns true if something was replaced 
-		
+        Replaces any instance of the "from" reference with the "to" reference, in any existing undo block. Returns true if something was replaced
 		
 		Name | Description
 		--- | ---
@@ -169,7 +148,7 @@ package gmod.libs;
 		`to` | The new entity to replace the old one
 		
 		
-		**Returns:** somethingReplaced
+		`**Returns:** somethingReplaced
 		
 		___
 		### Lua Examples
@@ -183,16 +162,13 @@ package gmod.libs;
 		 cleanup.ReplaceEntity( entity, ragdoll )
 		end
 		```
-		
-		
     **/
     
     public static function ReplaceEntity(from:Entity, to:Entity):Bool;
     #end
     
     /**
-        Completes an undo entry, and registers it with the player's client 
-		
+        Completes an undo entry, and registers it with the player's client
 		
 		___
 		### Lua Examples
@@ -208,16 +184,13 @@ package gmod.libs;
 		 undo.SetPlayer(Player)
 		undo.Finish()
 		```
-		
-		
     **/
     
     public static function Finish():Void;
     
     #if server
     /**
-        Sets a custom undo text for the current undo block 
-		
+        Sets a custom undo text for the current undo block
 		
 		Name | Description
 		--- | ---
@@ -239,28 +212,22 @@ package gmod.libs;
 		 undo.SetCustomUndoText("Undone a crate prop")
 		undo.Finish()
 		```
-		
-		
     **/
     
     public static function SetCustomUndoText(customText:String):Void;
     #end
     #if client
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Makes the UI dirty - it will re-create the controls the next time it is viewed. We also take this opportun 
-		
-		
-		
+		Makes the UI dirty - it will re-create the controls the next time it is viewed. We also take this opportun
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function MakeUIDirty():Void;
     #end
     #if server
     /**
-        Adds an entity to the current undo block 
-		
+        Adds an entity to the current undo block
 		
 		Name | Description
 		--- | ---
@@ -282,8 +249,6 @@ package gmod.libs;
 		    undo.SetPlayer(Player)
 		undo.Finish()
 		```
-		
-		
     **/
     
     public static function AddEntity(ent:Entity):Void;

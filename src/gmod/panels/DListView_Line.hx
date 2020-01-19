@@ -2,23 +2,20 @@ package gmod.panels;
 #if client
 
 /**
-    A panel used by   Inherits the following functions from Panel and its parents up to 3 levels deep: 
-	
-	
+    A panel used by [DListView](https://wiki.garrysmod.com/page/Category:DListView)  Inherits the following functions from Panel and its parents up to 3 levels deep:
 **/
 extern class DListView_Line extends Panel {
     /**
         Gets the string held in the specified column of a DListView_Line panel. 
 		
-		This is the same thing as doing DListView_Line:GetValue( column_number ). 
+		This is the same thing as doing DListView_Line:GetValue( column_number ).
 		
-		 
 		Name | Description
 		--- | ---
 		`column` | The number of the column to retrieve the text from, starts with 1.
 		
 		
-		**Returns:** The contents of the specified column.
+		`**Returns:** The contents of the specified column.
 		
 		___
 		### Lua Examples
@@ -43,23 +40,17 @@ extern class DListView_Line extends Panel {
 		**Output:**
 		
 		Prints "STEAM_0:1:18093014" when the line containing Stalker is double clicked.
-		
-		
     **/
     
      
     public function GetColumnText(column:Float):String;
     /**
-        Sets the string held in the specified column of a DListView_Line panel. 
-		
+        Sets the string held in the specified column of a DListView_Line panel.
 		
 		Name | Description
 		--- | ---
 		`column` | The number of the column to write the text from, starts with 1.
 		`value` | Column text you want to set
-		
-		
-		
     **/
     
      

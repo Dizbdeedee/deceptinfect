@@ -6,86 +6,68 @@ package gmod.panels;
 	
 	Blocked URL Extentions 
 	
-	 This means your url cannot end in any of these extensions, e.g.: (http://yourdomain.com/garry.exe) 
-	
-	 
+	 This means your url cannot end in any of these extensions, e.g.: (http://yourdomain.com/garry.exe)
 **/
 extern class HTML extends Panel {
     /**
-        Stops the loading of the HTML panel's current page. 
-		
-		
-		
+        Stops the loading of the HTML panel's current page.
     **/
     
      
     public function StopLoading():Void;
     /**
-        Refreshes the HTML panel's current page. 
-		
+        Refreshes the HTML panel's current page.
 		
 		Name | Description
 		--- | ---
 		`ignoreCache` | If true, the refresh will ignore cached content similar to "ctrl+f5" in most browsers.
-		
-		
-		
     **/
     
      
     public function Refresh(?ignoreCache:Bool):Void;
     /**
-        Goes to the page in the HTML panel's history at the specified relative offset. 
-		
+        Goes to the page in the HTML panel's history at the specified relative offset.
 		
 		Name | Description
 		--- | ---
 		`offset` | The offset in the panel's back/forward history, relative to the current page, that you would like to skip to. Because this is relative, 0 = current page while negative goes back and positive goes forward. For example, -2 will go back 2 pages in the history.
-		
-		
-		
     **/
     
      
     public function GoToHistoryOffset(offset:Float):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
+		
 		
 		
 		Name | Description
 		--- | ---
 		`objectName` | 
 		`callbackName` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function NewObjectCallback(objectName:String, callbackName:String):Void;
     /**
-        Goes forward one page in the HTML panel's history if available. 
-		
-		
-		
+        Goes forward one page in the HTML panel's history if available.
     **/
     
      
     public function GoForward():Void;
     /**
-        Forcibly updates the panels' HTML Material, similar to when Paint is called on it. This is only useful if the panel is not normally visible, i.e the panel exists purely for its HTML Material. 
+        Forcibly updates the panels' HTML Material, similar to when Paint is called on it. This is only useful if the panel is not normally visible, i.e the panel exists purely for its HTML Material.
 		
+		**Note:** Only works on with panels that have a HTML Material. See Panel:GetHTMLMaterial for more details.
 		
-		
+		**Note:** A good place to call this is in the GM:PreRender hook
     **/
     
      
     public function UpdateHTMLTexture():Void;
     /**
-        Returns the panel's HTML material. Only works with Awesomium, HTML and DHTML panels that have been fully loaded. 
+        Returns the panel's HTML material. Only works with Awesomium, HTML and DHTML panels that have been fully loaded.
 		
-		
-		**Returns:** The HTML material used by the panel. Typically starts with "__vgui_texture_" followed by an incremental number.
+		`**Returns:** The HTML material used by the panel. Typically starts with "__vgui_texture_" followed by an incremental number.
 		
 		___
 		### Lua Examples
@@ -217,24 +199,18 @@ extern class HTML extends Panel {
 		    if(self.Panel) then self.Panel:Remove() end
 		end
 		```
-		
-		
     **/
     
      
     public function GetHTMLMaterial():IMaterial;
     /**
-        Goes back one page in the HTML panel's history if available. 
-		
-		
-		
+        Goes back one page in the HTML panel's history if available.
     **/
     
      
     public function GoBack():Void;
     /**
-        Instructs a HTML control to download and parse a HTML script using the passed URL.     Displays the Garry's Mod wiki page. 
-		
+        Instructs a HTML control to download and parse a HTML script using the passed URL.     Displays the Garry's Mod wiki page.
 		
 		Name | Description
 		--- | ---
@@ -272,15 +248,12 @@ extern class HTML extends Panel {
 		html:Dock( FILL )
 		html:OpenURL( "asset://garrysmod/html/loading.html" )
 		```
-		
-		
     **/
     
      
     public function OpenURL(URL:String):Void;
     /**
-        Allows you to set HTML code within a panel.       
-		
+        Allows you to set HTML code within a panel.
 		
 		Name | Description
 		--- | ---
@@ -297,24 +270,20 @@ extern class HTML extends Panel {
 		HTML:SetHTML( "<p>Put HTML code here</p>" )
 		HTML:SetSize( 390, 400 )
 		```
-		
-		
     **/
     
      
     public function SetHTML(code:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
+		
 		
 		
 		Name | Description
 		--- | ---
 		`objectName` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function NewObject(objectName:String):Void;
     

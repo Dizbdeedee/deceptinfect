@@ -2,71 +2,55 @@ package gmod.libs;
 #if client
 
 /**
-    The drag'n'drop library, used internally by certain base panels to allow for drag'n'drop functionality, like spawnmenu's customizations. 
-	
-	
+    The drag'n'drop library, used internally by certain base panels to allow for drag'n'drop functionality, like spawnmenu's customizations.
 **/
 @:native("dragndrop")extern class DragndropLib {
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Starts the drag'n'drop. 
-		
-		
-		
+		Starts the drag'n'drop.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function StartDragging():Void;
     
     
     /**
-        Stops the drag'n'drop and calls dragndrop.Clear. 
-		
-		
-		
+        Stops the drag'n'drop and calls dragndrop.Clear.
     **/
     
     public static function StopDragging():Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Handles the drop action of drag'n'drop library. 
-		
+		Handles the drop action of drag'n'drop library.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Drop():Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Updates the receiver to drop the panels onto. Called from dragndrop.Think. 
-		
-		
-		
+		Updates the receiver to drop the panels onto. Called from dragndrop.Think.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function UpdateReceiver():Void;
     
     
     /**
-        If returns true, calls dragndrop.StopDragging in dragndrop.Drop. Seems to be broken and does nothing. Is it for override? 
-		
-		
-		
+        If returns true, calls dragndrop.StopDragging in dragndrop.Drop. Seems to be broken and does nothing. Is it for override?
     **/
     
     public static function HandleDroppedInGame():Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Calls the receiver function of hovered panel. 
-		
+		Calls the receiver function of hovered panel.
 		
 		Name | Description
 		--- | ---
@@ -74,72 +58,54 @@ package gmod.libs;
 		`command` | The command value. This should be the ID of the clicked dropdown menu ( if right clicked, or nil )
 		`mx` | The local to the panel mouse cursor X position when the click happened.
 		`my` | The local to the panel mouse cursor Y position when the click happened.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function CallReceiverFunction(bDoDrop:Bool, command:Float, mx:Float, my:Float):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Handles all the drag'n'drop processes. Calls dragndrop.UpdateReceiver and dragndrop.HoverThink. 
-		
-		
-		
+		Handles all the drag'n'drop processes. Calls dragndrop.UpdateReceiver and dragndrop.HoverThink.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Think():Void;
     
     
     /**
-        Clears all the internal drag'n'drop variables. 
-		
-		
-		
+        Clears all the internal drag'n'drop variables.
     **/
     
     public static function Clear():Void;
     
     
     /**
-        Returns whether the user is dragging something with the drag'n'drop system. 
+        Returns whether the user is dragging something with the drag'n'drop system.
 		
-		
-		**Returns:** True if the user is dragging something with the drag'n'drop system.
-		
-		
+		`**Returns:** True if the user is dragging something with the drag'n'drop system.
     **/
     
     public static function IsDragging():Bool;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Handles the hover think. Called from dragndrop.Think. 
-		
-		
-		
+		Handles the hover think. Called from dragndrop.Think.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function HoverThink():Void;
     
     
     /**
-        Returns a table of currently dragged panels. 
-		
+        Returns a table of currently dragged panels.
 		
 		Name | Description
 		--- | ---
 		`name` | If set, the function will return only the panels with this Panel: Droppable name.
 		
 		
-		**Returns:** A table of all panels that are being currently dragged, if any.
-		
-		
+		`**Returns:** A table of all panels that are being currently dragged, if any.
     **/
     
     public static function GetDroppable(?name:String):AnyTable;

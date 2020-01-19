@@ -2,22 +2,19 @@ package gmod.libs;
 
 
 /**
-    The os library is a standard Lua library originally intended to allow Lua access to various features of the Operating System it's running on, however many of the features and functions have been removed in Garry's Mod due to security issues. It's only used in Garry's Mod for date & time operations. 
-	
-	
+    The os library is a standard Lua library originally intended to allow Lua access to various features of the Operating System it's running on, however many of the features and functions have been removed in Garry's Mod due to security issues. It's only used in Garry's Mod for date & time operations.
 **/
 @:native("os")extern class OsLib {
     
     /**
-        Returns the system time in seconds past the unix epoch. If a table is supplied, the function attempts to build a system time with the specified table members. 
-		
+        Returns the system time in seconds past the unix epoch. If a table is supplied, the function attempts to build a system time with the specified table members.
 		
 		Name | Description
 		--- | ---
 		`dateData` | Table to generate the time from. This table's data is interpreted as being in the local timezone. See DateData structure
 		
 		
-		**Returns:** Seconds passed since Unix epoch
+		`**Returns:** Seconds passed since Unix epoch
 		
 		___
 		### Lua Examples
@@ -30,16 +27,17 @@ package gmod.libs;
 		**Output:**
 		
 		1574269694
-		
-		
     **/
     
-    public static function time(?dateData:AnyTable):Float;
+    public static function time(?dateData:DateData):Float;
     
     
     /**
-        Returns the date/time as a formatted string or in a table. 
+        Returns the date/time as a formatted string or in a table.
 		
+		**Note:** This will be a DateData structure if the first argument equals to '*t' or '!*t'
+		
+		**Bug:** BUG Not all flags are available on all operating systems and the result of using an invalid flag is undefined. This currently crashes the game on Windows. Most or all flags are available on OS X and Linux but considerably fewer are available on Windows. See http://msdn.microsoft.com/en-us/library/fe06s4ak.aspx for a list of available flags on Windows. Note that the # flags also crashes the game on Windows. Issue Tracker: #329
 		
 		Name | Description
 		--- | ---
@@ -47,7 +45,7 @@ package gmod.libs;
 		`time` | Time to use for the format.
 		
 		
-		**Returns:** Formatted date NOTE This will be a DateData structure if the first argument equals to '*t' or '!*t'
+		`**Returns:** Formatted date NOTE This will be a DateData structure if the first argument equals to '*t' or '!*t'
 		
 		___
 		### Lua Examples
@@ -60,18 +58,17 @@ package gmod.libs;
 		print( "Timestamp:", Timestamp )
 		print( "TimeString:", TimeString )
 		```
-		
-		
     **/
     
-    public static function date(format:String, time:Float):String;
+    public static function date(format:DateData, time:Float):DateData;
     
     
     /**
-        Returns the approximate cpu time the application ran. 
+        Returns the approximate cpu time the application ran.
 		
+		**Note:** This function has different precision on Linux (1/100).
 		
-		**Returns:** runtime
+		`**Returns:** runtime
 		
 		___
 		### Lua Examples
@@ -84,16 +81,13 @@ package gmod.libs;
 		**Output:**
 		
 		runtime
-		
-		
     **/
     
     public static function clock():Float;
     
     
     /**
-        Subtracts the second of the first value and rounds the result. 
-		
+        Subtracts the second of the first value and rounds the result.
 		
 		Name | Description
 		--- | ---
@@ -101,9 +95,7 @@ package gmod.libs;
 		`timeB` | The value to subtract.
 		
 		
-		**Returns:** diffTime
-		
-		
+		`**Returns:** diffTime
     **/
     
     public static function difftime(timeA:Float, timeB:Float):Float;

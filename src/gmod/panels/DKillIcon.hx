@@ -2,34 +2,25 @@ package gmod.panels;
 #if client
 
 /**
-    Uses the killicon library to persistently draw a killicon. 
-	
-	
+    Uses the killicon library to persistently draw a killicon.
 **/
 extern class DKillIcon extends Panel {
     /**
         Sets the killicon to be displayed. You should call DKillIcon:SizeToContents following this. 
 		
-		Killicons can be added with killicon.Add and killicon.AddFont. 
+		Killicons can be added with killicon.Add and killicon.AddFont.
 		
-		 
 		Name | Description
 		--- | ---
 		`iconName` | The name of the killicon to be displayed.
-		
-		
-		
     **/
     
      
     public function SetName(iconName:String):Void;
     /**
-        Gets the killicon being shown. 
+        Gets the killicon being shown.
 		
-		
-		**Returns:** The name of the killicon currently being displayed.
-		
-		
+		`**Returns:** The name of the killicon currently being displayed.
     **/
     
      

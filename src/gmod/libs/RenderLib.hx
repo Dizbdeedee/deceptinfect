@@ -2,15 +2,14 @@ package gmod.libs;
 #if client
 
 /**
-    The render library is a powerful set of functions that let you control how the world and its contents are rendered. It can also be used to draw some 3D clientside effects such as beams, boxes and spheres. 
-	
-	
+    The render library is a powerful set of functions that let you control how the world and its contents are rendered. It can also be used to draw some 3D clientside effects such as beams, boxes and spheres.
 **/
 @:native("render")extern class RenderLib {
     
     /**
-        Sets lighting mode when rendering something. 
+        Sets lighting mode when rendering something.
 		
+		**Note:** Do not forget to restore the default value to avoid unexpected behavior, like the world and the HUD/UI being affected
 		
 		Name | Description
 		--- | ---
@@ -58,23 +57,19 @@ package gmod.libs;
 		hook.Add( "PostRender", "fullbright", EndOfLightingMod )
 		hook.Add( "PreDrawHUD", "fullbright", EndOfLightingMod )
 		```
-		
-		
     **/
     
     public static function SetLightingMode(Mode:Float):Void;
     
     
     /**
-        Start a new beam draw operation. 
+        Start a new beam draw operation.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
 		`segmentCount` | Amount of beam segments that are about to be drawn.
-		
-		
-		
     **/
     
     public static function StartBeam(segmentCount:Float):Void;
@@ -83,9 +78,8 @@ package gmod.libs;
     /**
         Swaps the frame buffers/cycles the frame. In other words, this updates the screen. 
 		
-		If you take a really long time during a single frame render, it is a good idea to use this and let the user know that the game isn't stuck. 
+		If you take a really long time during a single frame render, it is a good idea to use this and let the user know that the game isn't stuck.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -111,8 +105,6 @@ package gmod.libs;
 		
 		render.Spin()
 		```
-		
-		
     **/
     
     public static function Spin():Void;
@@ -120,32 +112,26 @@ package gmod.libs;
     
     /**
         
-		**Returns:** 
 		
-		
+		`**Returns:** 
     **/
     
     public static function GetBloomTex1():ITexture;
     
     
     /**
-        Sets the render material override for all next calls of Entity:DrawModel. Also overrides render.MaterialOverrideByIndex. 
-		
+        Sets the render material override for all next calls of Entity:DrawModel. Also overrides render.MaterialOverrideByIndex.
 		
 		Name | Description
 		--- | ---
 		`material` | The material to use as override, use nil to disable.
-		
-		
-		
     **/
     
     public static function MaterialOverride(material:IMaterial):Void;
     
     
     /**
-        Reads the color of the specified pixel from the RenderTarget sent by render.CapturePixels 
-		
+        Reads the color of the specified pixel from the RenderTarget sent by render.CapturePixels
 		
 		Name | Description
 		--- | ---
@@ -158,32 +144,24 @@ package gmod.libs;
 		`a` | r
 		`b` | g
 		`c` | b
-		
-		
-		
     **/
     
     public static function ReadPixel(x:Float, y:Float):RenderLibReadPixelReturn;
     
     
     /**
-        Sets the maximum shadow projection range. 
-		
+        Sets the maximum shadow projection range.
 		
 		Name | Description
 		--- | ---
 		`shadowDistance` | The new maximum shadow distance.
-		
-		
-		
     **/
     
     public static function SetShadowDistance(shadowDistance:Float):Void;
     
     
     /**
-        Sets the operation to be performed on the stencil buffer values if the stencil test is passed but the depth buffer test fails. 
-		
+        Sets the operation to be performed on the stencil buffer values if the stencil test is passed but the depth buffer test fails.
 		
 		Name | Description
 		--- | ---
@@ -231,57 +209,51 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
-    public static function SetStencilZFailOperation(zFailOperation:Float):Void;
+    public static function SetStencilZFailOperation(zFailOperation:STENCILOPERATION):Void;
     
     
     /**
-        Returns the maximum available directX version. 
+        Returns the maximum available directX version.
 		
-		
-		**Returns:** dxLevel
-		
-		
+		`**Returns:** dxLevel
     **/
     
     public static function GetDXLevel():Float;
     
     
     /**
-        Returns a floating point texture the same resolution as the screen. 
+        Returns a floating point texture the same resolution as the screen.
 		
+		**Note:** The gmodscreenspace shader doesn't behave as expected when drawing a floating-point texture to an integer texture (e.g. the default render target). Use an UnlitGeneric material instead
 		
-		**Returns:** Render target named "__rt_supertexture2"
-		
-		
+		`**Returns:** Render target named "__rt_supertexture2"
     **/
     
     public static function GetSuperFPTex2():ITexture;
     
     
     /**
-        Gets the light exposure on the specified position. 
-		
+        Gets the light exposure on the specified position.
 		
 		Name | Description
 		--- | ---
 		`position` | The position of the surface to get the light from.
 		
 		
-		**Returns:** lightColor
-		
-		
+		`**Returns:** lightColor
     **/
     
     public static function GetLightColor(position:Vector):Vector;
     
     
     /**
-        Sets the texture to be used as the lightmap in upcoming rendering operations. This is required when rendering meshes using a material with a lightmapped shader such as LightmappedGeneric. 
+        Sets the texture to be used as the lightmap in upcoming rendering operations. This is required when rendering meshes using a material with a lightmapped shader such as LightmappedGeneric.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
+		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -370,23 +342,19 @@ package gmod.libs;
 		    end
 		end )
 		```
-		
-		
     **/
     
     public static function SetLightmapTexture(tex:ITexture):Void;
     
     
     /**
-        Sets the lighting origin. 
+        Sets the lighting origin.
 		
+		**Bug:** BUG This does not work for prop_physics. Issue Tracker: #2804
 		
 		Name | Description
 		--- | ---
 		`lightingOrigin` | The position from which the light should be "emitted".
-		
-		
-		
     **/
     
     public static function SetLightingOrigin(lightingOrigin:Vector):Void;
@@ -394,17 +362,15 @@ package gmod.libs;
     
     /**
         
-		**Returns:** 
 		
-		
+		`**Returns:** 
     **/
     
     public static function GetMorphTex1():ITexture;
     
     
     /**
-        Sets a material to override a model's default material. Similar to Entity:SetMaterial except it uses an IMaterial argument and it can be used to change materials on models which are part of the world geometry. 
-		
+        Sets a material to override a model's default material. Similar to Entity:SetMaterial except it uses an IMaterial argument and it can be used to change materials on models which are part of the world geometry.
 		
 		Name | Description
 		--- | ---
@@ -425,8 +391,6 @@ package gmod.libs;
 		    
 		end
 		```
-		
-		
     **/
     
     public static function ModelMaterialOverride(material:IMaterial):Void;
@@ -435,9 +399,8 @@ package gmod.libs;
     /**
         Sets the current drawing material to "color". 
 		
-		The material is defined as: 
+		The material is defined as:
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -446,8 +409,6 @@ package gmod.libs;
 		```lua 
 		render.SetMaterial( Material( "color" ) )
 		```
-		
-		
     **/
     
     public static function SetColorMaterial():Void;
@@ -456,15 +417,16 @@ package gmod.libs;
     /**
         Captures a part of the current render target and returns the data as a binary string in the given format. 
 		
-		Since the pixel buffer clears itself every frame, this will return a black screen outside of render hooks. To capture the user's final view, use GM:PostRender. This will not capture the Steam overlay or third-party injections (such as the Discord overlay, Overwolf, and advanced cheats) on the user's screen. 
+		Since the pixel buffer clears itself every frame, this will return a black screen outside of render hooks. To capture the user's final view, use GM:PostRender. This will not capture the Steam overlay or third-party injections (such as the Discord overlay, Overwolf, and advanced cheats) on the user's screen.
 		
-		 
+		**Bug:** BUG This sets the alpha channel incorrectly in PNG mode, causing the foreground to be rendered almost completely transparent. Issue Tracker: #2571
+		
 		Name | Description
 		--- | ---
 		`captureData` | Parameters of the capture. See RenderCaptureData structure.
 		
 		
-		**Returns:** binaryData
+		`**Returns:** binaryData
 		
 		___
 		### Lua Examples
@@ -500,33 +462,28 @@ package gmod.libs;
 		**Output:**
 		
 		You should now have Image.jpg in your garrysmod/garrysmod/data folder, containing a screenshot.
-		
-		
     **/
     
-    public static function Capture(captureData:AnyTable):String;
+    public static function Capture(captureData:RenderCaptureData):String;
     
     
     /**
         Resets the HDR tone multiplier to the specified value. 
 		
-		This will only work on HDR maps, and the value will automatically fade to what it was ( or whatever render.SetGoalToneMappingScale is ) if called only once. 
+		This will only work on HDR maps, and the value will automatically fade to what it was ( or whatever render.SetGoalToneMappingScale is ) if called only once.
 		
-		 
 		Name | Description
 		--- | ---
 		`scale` | The value which should be used as multiplier.
-		
-		
-		
     **/
     
     public static function ResetToneMappingScale(scale:Float):Void;
     
     
     /**
-        Renders the scene with the specified viewData to the current active render target. 
+        Renders the scene with the specified viewData to the current active render target.
 		
+		**Bug:** BUG Static props and LODs are rendered improperly due to incorrectly perceived distance. Issue Tracker: #1330
 		
 		Name | Description
 		--- | ---
@@ -557,19 +514,18 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
-    public static function RenderView(?view:AnyTable):Void;
+    public static function RenderView(?view:ViewData):Void;
     
     
     /**
         Draws a sphere in 3D space. The material previously set with render.SetMaterial will be applied the sphere's surface. 
 		
-		See also render.DrawWireframeSphere for a wireframe equivalent. 
+		See also render.DrawWireframeSphere for a wireframe equivalent.
 		
-		 
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
+		
 		Name | Description
 		--- | ---
 		`position` | Position of the sphere.
@@ -602,81 +558,61 @@ package gmod.libs;
 		
 		end )
 		```
-		
-		
     **/
     
-    public static function DrawSphere(position:Vector, radius:Float, longitudeSteps:Float, latitudeSteps:Float, ?color:AnyTable):Void;
+    public static function DrawSphere(position:Vector, radius:Float, longitudeSteps:Float, latitudeSteps:Float, ?color:Color):Void;
     
     
     /**
-        Alias of render.GetPowerOfTwoTexture. 
+        Alias of render.GetPowerOfTwoTexture.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
     public static function GetRefractTexture():ITexture;
     
     
     /**
-        Overrides the write behaviour of all next rendering operations towards the depth buffer. 
-		
+        Overrides the write behaviour of all next rendering operations towards the depth buffer.
 		
 		Name | Description
 		--- | ---
 		`enable` | Enable or disable the override.
 		`shouldWrite` | If the previous argument is true, sets whether the next rendering operations should write to the depth buffer or not. Has no effect if the previous argument is false.
-		
-		
-		
     **/
     
     public static function OverrideDepthEnable(enable:Bool, shouldWrite:Bool):Void;
     
     
     /**
-        Updates the power of two texture. 
+        Updates the power of two texture.
 		
-		
-		**Returns:** Returns render. GetPowerOfTwoTexture.
-		
-		
+		`**Returns:** Returns render. GetPowerOfTwoTexture.
     **/
     
     public static function UpdatePowerOfTwoTexture():ITexture;
     
     
     /**
-        Copies the contents of one texture to another. Only works with rendertargets. 
-		
+        Copies the contents of one texture to another. Only works with rendertargets.
 		
 		Name | Description
 		--- | ---
 		`texture_from` | 
 		`texture_to` | 
-		
-		
-		
     **/
     
     public static function CopyTexture(texture_from:ITexture, texture_to:ITexture):Void;
     
     
     /**
-        Returns the fog start and end distance. 
-		
+        Returns the fog start and end distance.
 		
 		Name | Description
 		--- | ---
 		`a` | Fog start distance set by render. FogStart
 		`b` | For end distance set by render. FogEnd
 		`c` | Fog Z distance set by render. SetFogZ
-		
-		
-		
     **/
     
     public static function GetFogDistances():RenderLibGetFogDistancesReturn;
@@ -685,15 +621,15 @@ package gmod.libs;
     /**
         Sets the material to be used in any upcoming render operation using the render library. 
 		
-		Not to be confused with surface.SetMaterial. 
+		Not to be confused with surface.SetMaterial.
 		
-		 
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
+		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
+		
 		Name | Description
 		--- | ---
 		`mat` | The material to be used.
-		
-		
-		
     **/
     
     public static function SetMaterial(mat:IMaterial):Void;
@@ -702,56 +638,50 @@ package gmod.libs;
     /**
         Sets up the ambient lighting for any upcoming render operation. Ambient lighting can be seen as a cube enclosing the object to be drawn, each of its faces representing a directional light source that shines towards the object. Thus, there is a total of six different light sources that can be configured separately. 
 		
-		Light color components are not restricted to a specific range (i.e. 0-255), instead, higher values will result in a brighter light. 
+		Light color components are not restricted to a specific range (i.e. 0-255), instead, higher values will result in a brighter light.
 		
-		 
 		Name | Description
 		--- | ---
 		`lightDirection` | The light source to edit, see BOX_ Enums.
 		`red` | The red component of the light color.
 		`green` | The green component of the light color.
 		`blue` | The blue component of the light color.
-		
-		
-		
     **/
     
-    public static function SetModelLighting(lightDirection:Float, red:Float, green:Float, blue:Float):Void;
+    public static function SetModelLighting(lightDirection:BOX, red:Float, green:Float, blue:Float):Void;
     
     
     /**
         
+		
+		**Warning:** This function is broken and does absolutely nothing
+		
 		Name | Description
 		--- | ---
 		`mat` | 
-		
-		
-		
     **/
     
     public static function BrushMaterialOverride(?mat:IMaterial):Void;
     
     
     /**
-        Returns if the current settings and the system allow the usage of pixel shaders 2.0. 
+        Returns if the current settings and the system allow the usage of pixel shaders 2.0.
 		
-		
-		**Returns:** Whether Pixel Shaders 2.0 are supported or not.
-		
-		
+		`**Returns:** Whether Pixel Shaders 2.0 are supported or not.
     **/
     
     public static function SupportsPixelShaders_2_0():Bool;
     
     
     /**
-        ***Deprecated:**   Use render. OverrideBlend instead.
+        ***Deprecated:** Use render. OverrideBlend instead.
 		
 		Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture. 
 		
-		See also render.OverrideAlphaWriteEnable. 
+		See also render.OverrideAlphaWriteEnable.
 		
-		 
+		**Note:** Doing surface library draw calls with alpha set to 0 is a no-op and will never have any effect.
+		
 		Name | Description
 		--- | ---
 		`enabled` | true to enable, false to disable. No other arguments are required when disabling.
@@ -801,19 +731,18 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
-    @:deprecated
-    public static function OverrideBlendFunc(enabled:Bool, srcBlend:Float, destBlend:Float, ?srcBlendAlpha:Float, ?destBlendAlpha:Float):Void;
+    @:deprecated("Use render. OverrideBlend instead.")
+    public static function OverrideBlendFunc(enabled:Bool, srcBlend:BLEND, destBlend:Float, ?srcBlendAlpha:BLEND, ?destBlendAlpha:Float):Void;
     
     
     /**
         Draws the the current material set by render.SetMaterial to the area specified. Color cannot be customized. 
 		
-		See also render.DrawScreenQuad. 
+		See also render.DrawScreenQuad.
 		
-		 
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
+		
 		Name | Description
 		--- | ---
 		`startX` | X start position of the rect.
@@ -834,16 +763,15 @@ package gmod.libs;
 		    render.DrawScreenQuadEx( 100, 100, 256, 256 )
 		end )
 		```
-		
-		
     **/
     
     public static function DrawScreenQuadEx(startX:Float, startY:Float, width:Float, height:Float):Void;
     
     
     /**
-        Draws a sprite in 3D space. 
+        Draws a sprite in 3D space.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -947,18 +875,13 @@ package gmod.libs;
 		    end
 		end)
 		```
-		
-		
     **/
     
-    public static function DrawSprite(position:Vector, width:Float, height:Float, ?color:AnyTable):Void;
+    public static function DrawSprite(position:Vector, width:Float, height:Float, ?color:Color):Void;
     
     
     /**
-        Enables HDR tone mapping which influences the brightness. 
-		
-		
-		
+        Enables HDR tone mapping which influences the brightness.
     **/
     
     public static function TurnOnToneMapping():Void;
@@ -967,23 +890,20 @@ package gmod.libs;
     /**
         Sets up the local lighting for any upcoming render operation. Up to 4 local lights can be defined, with one of three different types (point, directional, spot). 
 		
-		Disables all local lights if called with no arguments. 
+		Disables all local lights if called with no arguments.
 		
-		 
 		Name | Description
 		--- | ---
 		`lights` | A table containing up to 4 tables for each light source that should be set up. Each of these tables should contain the properties of its associated light source, see LocalLight structure.
-		
-		
-		
     **/
     
-    public static function SetLocalModelLights(?lights:AnyTable):Void;
+    public static function SetLocalModelLights(?lights:LocalLight):Void;
     
     
     /**
-        Draws a wireframe sphere in 3d space. 
+        Draws a wireframe sphere in 3d space.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -1021,57 +941,42 @@ package gmod.libs;
 		
 		end )
 		```
-		
-		
     **/
     
-    public static function DrawWireframeSphere(position:Vector, radius:Float, longitudeSteps:Float, latitudeSteps:Float, ?color:AnyTable, ?writeZ:Bool):Void;
+    public static function DrawWireframeSphere(position:Vector, radius:Float, longitudeSteps:Float, latitudeSteps:Float, ?color:Color, ?writeZ:Bool):Void;
     
     
     /**
-        Returns the ambient color of the map. 
+        Returns the ambient color of the map.
 		
-		
-		**Returns:** color
-		
-		
+		`**Returns:** color
     **/
     
     public static function GetAmbientLightColor():Vector;
     
     
     /**
-        Returns a vector representing linear tone mapping scale. 
+        Returns a vector representing linear tone mapping scale.
 		
-		
-		**Returns:** The vector representing linear tone mapping scale.
-		
-		
+		`**Returns:** The vector representing linear tone mapping scale.
     **/
     
     public static function GetToneMappingScaleLinear():Vector;
     
     
     /**
-        Sets the shadow projection direction. 
-		
+        Sets the shadow projection direction.
 		
 		Name | Description
 		--- | ---
 		`shadowDirections` | The new shadow direction.
-		
-		
-		
     **/
     
     public static function SetShadowDirection(shadowDirections:Vector):Void;
     
     
     /**
-        Copies the entire screen to the screen effect texture, which can be acquired via render.GetScreenEffectTexture. This function is mainly intended to be used in GM:RenderScreenspaceEffects 
-		
-		
-		
+        Copies the entire screen to the screen effect texture, which can be acquired via render.GetScreenEffectTexture. This function is mainly intended to be used in GM:RenderScreenspaceEffects
     **/
     
     public static function UpdateScreenEffectTexture():Void;
@@ -1079,32 +984,28 @@ package gmod.libs;
     
     /**
         
-		**Returns:** The bloom texture
 		
-		
+		`**Returns:** The bloom texture
     **/
     
     public static function GetBloomTex0():ITexture;
     
     
     /**
-        Sets the reference value which will be used for all stencil operations. This is an unsigned integer. 
-		
+        Sets the reference value which will be used for all stencil operations. This is an unsigned integer.
 		
 		Name | Description
 		--- | ---
 		`referenceValue` | Reference value.
-		
-		
-		
     **/
     
     public static function SetStencilReferenceValue(referenceValue:Float):Void;
     
     
     /**
-        Draws a wireframe box in 3D space. 
+        Draws a wireframe box in 3D space.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -1114,41 +1015,32 @@ package gmod.libs;
 		`maxs` | The highest corner of the box.
 		`color` | The color of the box. Uses the Color structure.
 		`writeZ` | Sets whenever to write to the zBuffer.
-		
-		
-		
     **/
     
-    public static function DrawWireframeBox(position:Vector, angle:Angle, mins:Vector, maxs:Vector, ?color:AnyTable, ?writeZ:Bool):Void;
+    public static function DrawWireframeBox(position:Vector, angle:Angle, mins:Vector, maxs:Vector, ?color:Color, ?writeZ:Bool):Void;
     
     
     /**
         Sets the goal HDR tone mapping scale. 
 		
-		Use this in a rendering/think hook as it is reset every frame. 
+		Use this in a rendering/think hook as it is reset every frame.
 		
-		 
 		Name | Description
 		--- | ---
 		`scale` | The target scale.
-		
-		
-		
     **/
     
     public static function SetGoalToneMappingScale(scale:Float):Void;
     
     
     /**
-        Sets the alpha blending for every upcoming render operation. 
+        Sets the alpha blending for every upcoming render operation.
 		
+		**Bug:** BUG This does not affect non-model render.Draw* functions. Issue Tracker: #3166
 		
 		Name | Description
 		--- | ---
 		`blending` | Blending value from 0-1.
-		
-		
-		
     **/
     
     public static function SetBlend(blending:Float):Void;
@@ -1157,30 +1049,25 @@ package gmod.libs;
     /**
         Pops the current texture magnification filter from the filter stack. 
 		
-		See render.PushFilterMag 
-		
-		 
-		
+		See render.PushFilterMag
     **/
     
     public static function PopFilterMag():Void;
     
     
     /**
-        Returns the maximum texture width the renderer can handle. 
+        Returns the maximum texture width the renderer can handle.
 		
-		
-		**Returns:** maxTextureWidth
-		
-		
+		`**Returns:** maxTextureWidth
     **/
     
     public static function MaxTextureWidth():Float;
     
     
     /**
-        Draws 2 connected triangles. Expects material to be set by render.SetMaterial. 
+        Draws 2 connected triangles. Expects material to be set by render.SetMaterial.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -1205,37 +1092,28 @@ package gmod.libs;
 		
 		end)
 		```
-		
-		
     **/
     
     public static function DrawQuad(vert1:Vector, vert2:Vector, vert3:Vector, vert4:Vector, ?color:AnyTable):Void;
     
     
     /**
-        Returns the current alpha blending. 
+        Returns the current alpha blending.
 		
-		
-		**Returns:** blend
-		
-		
+		`**Returns:** blend
     **/
     
     public static function GetBlend():Float;
     
     
     /**
-        Sets the ambient lighting for any upcoming render operation. 
-		
+        Sets the ambient lighting for any upcoming render operation.
 		
 		Name | Description
 		--- | ---
 		`r` | The red part of the color, 0-1.
 		`g` | The green part of the color, 0-1.
 		`b` | The blue part of the color, 0-1.
-		
-		
-		
     **/
     
     public static function SetAmbientLight(r:Float, g:Float, b:Float):Void;
@@ -1243,24 +1121,21 @@ package gmod.libs;
     
     /**
         
-		**Returns:** 
 		
-		
+		`**Returns:** 
     **/
     
     public static function GetMoBlurTex0():ITexture;
     
     
     /**
-        Sets the distance at which the fog starts showing up. 
+        Sets the distance at which the fog starts showing up.
 		
+		**Note:** If used in GM:SetupSkyboxFog, this value must be scaled by the first argument of the hook
 		
 		Name | Description
 		--- | ---
 		`fogStart` | The distance at which the fog starts showing up. NOTE If used in GM:SetupSkyboxFog, this value must be scaled by the first argument of the hook
-		
-		
-		
     **/
     
     public static function FogStart(fogStart:Float):Void;
@@ -1269,68 +1144,52 @@ package gmod.libs;
     /**
         Resets the model lighting to the specified color. 
 		
-		Calls render.SetModelLighting for every direction with given color. 
+		Calls render.SetModelLighting for every direction with given color.
 		
-		 
 		Name | Description
 		--- | ---
 		`r` | The red part of the color, 0-1
 		`g` | The green part of the color, 0-1
 		`b` | The blue part of the color, 0-1
-		
-		
-		
     **/
     
     public static function ResetModelLighting(r:Float, g:Float, b:Float):Void;
     
     
     /**
-        Sets the render target with the specified index to the specified rt. 
-		
+        Sets the render target with the specified index to the specified rt.
 		
 		Name | Description
 		--- | ---
 		`rtIndex` | The index of the rt to set.
 		`texture` | The new render target to be used.
-		
-		
-		
     **/
     
     public static function SetRenderTargetEx(rtIndex:Float, texture:ITexture):Void;
     
     
     /**
-        Sets the maximum density of the fog. 
-		
+        Sets the maximum density of the fog.
 		
 		Name | Description
 		--- | ---
 		`maxDensity` | The maximum density of the fog, 0-1.
-		
-		
-		
     **/
     
     public static function FogMaxDensity(maxDensity:Float):Void;
     
     
     /**
-        Returns if the current settings and the system allow the usage of vertex shaders 2.0. 
+        Returns if the current settings and the system allow the usage of vertex shaders 2.0.
 		
-		
-		**Returns:** Whether Vertex Shaders 2.0 are supported or not.
-		
-		
+		`**Returns:** Whether Vertex Shaders 2.0 are supported or not.
     **/
     
     public static function SupportsVertexShaders_2_0():Bool;
     
     
     /**
-        Pushes a texture filter onto the minification texture filter stack. 
-		
+        Pushes a texture filter onto the minification texture filter stack.
 		
 		Name | Description
 		--- | ---
@@ -1351,23 +1210,17 @@ package gmod.libs;
 		render.PopFilterMag()
 		render.PopFilterMin()
 		```
-		
-		
     **/
     
-    public static function PushFilterMin(texFilterType:Float):Void;
+    public static function PushFilterMin(texFilterType:TEXFILTER):Void;
     
     
     /**
-        Sets the render target to the specified rt. 
-		
+        Sets the render target to the specified rt.
 		
 		Name | Description
 		--- | ---
 		`texture` | The new render target to be used.
-		
-		
-		
     **/
     
     public static function SetRenderTarget(texture:ITexture):Void;
@@ -1376,15 +1229,14 @@ package gmod.libs;
     /**
         Obtain an ITexture of the screen. You must call render.UpdateScreenEffectTexture in order to update this texture with the currently rendered scene. 
 		
-		This texture is mainly used within GM:RenderScreenspaceEffects 
+		This texture is mainly used within GM:RenderScreenspaceEffects
 		
-		 
 		Name | Description
 		--- | ---
 		`textureIndex` | Max index is 3, but engine only creates the first two for you.
 		
 		
-		**Returns:** 
+		`**Returns:** 
 		
 		___
 		### Lua Examples
@@ -1398,16 +1250,13 @@ package gmod.libs;
 		**Output:**
 		
 		_rt_fullframefb _rt_fullframefb1
-		
-		
     **/
     
     public static function GetScreenEffectTexture(?textureIndex:Float):ITexture;
     
     
     /**
-        Sets a scissoring rect which limits the drawing area. 
-		
+        Sets a scissoring rect which limits the drawing area.
 		
 		Name | Description
 		--- | ---
@@ -1428,78 +1277,62 @@ package gmod.libs;
 		    draw.RoundedBox( 4, 0, 0, ScrW(), ScrH(), color_white ) -- Draw a white rectangle over the whole screen
 		render.SetScissorRect( 0, 0, 0, 0, false ) -- Disable after you are done
 		```
-		
-		
     **/
     
     public static function SetScissorRect(startX:Float, startY:Float, endX:Float, endY:Float, enable:Bool):Void;
     
     
     /**
-        If the fog mode is set to MATERIAL_FOG_LINEAR_BELOW_FOG_Z, the fog will only be rendered below the specified height. 
-		
+        If the fog mode is set to MATERIAL_FOG_LINEAR_BELOW_FOG_Z, the fog will only be rendered below the specified height.
 		
 		Name | Description
 		--- | ---
 		`fogZ` | The fog Z.
-		
-		
-		
     **/
     
     public static function SetFogZ(fogZ:Float):Void;
     
     
     /**
-        Sets the shadow color. 
-		
+        Sets the shadow color.
 		
 		Name | Description
 		--- | ---
 		`red` | The red channel of the shadow color.
 		`green` | The green channel of the shadow color.
 		`blue` | The blue channel of the shadow color.
-		
-		
-		
     **/
     
     public static function SetShadowColor(red:Float, green:Float, blue:Float):Void;
     
     
     /**
-        Returns the _rt_ResolvedFullFrameDepth texture for SSAO depth. 
+        Returns the _rt_ResolvedFullFrameDepth texture for SSAO depth.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
     public static function GetResolvedFullFrameDepth():ITexture;
     
     
     /**
-        Creates a new ClientsideModel, renders it at the specified pos/ang, and removes it. Can also be given an existing CSEnt to reuse instead. 
+        Creates a new ClientsideModel, renders it at the specified pos/ang, and removes it. Can also be given an existing CSEnt to reuse instead.
 		
+		**Note:** This function is only meant to be used in a single render pass kind of scenario, if you need to render a model continuously, use a cached ClientsideModel and provide it as a second argument.
+		
+		**Bug:** BUG Using this with a map model (game.GetWorld():GetModel()) crashes the game. Issue Tracker: #3307
 		
 		Name | Description
 		--- | ---
 		`settings` | Requires: string model - The model to draw Vector pos - The position to draw the model at Angle angle - The angles to draw the model at
 		`ent` | If provided, this entity will be reused instead of creating a new one with ClientsideModel. Note that the ent's model, position and angles will be changed, and Entity: SetNoDraw will be set to true.
-		
-		
-		
     **/
     
     public static function Model(settings:AnyTable, ?ent:CSEnt):Void;
     
     
     /**
-        Ends the beam mesh of a beam started with render.StartBeam. 
-		
-		
-		
+        Ends the beam mesh of a beam started with render.StartBeam.
     **/
     
     public static function EndBeam():Void;
@@ -1510,9 +1343,12 @@ package gmod.libs;
 		
 		This is similar to a call to render.SetRenderTarget and render.SetViewPort where the current render target and viewport have been saved beforehand, except the viewport isn't clipped to screen bounds. 
 		
-		 See also render.PopRenderTarget. 
+		 See also render.PopRenderTarget.
 		
-		 
+		**Note:** If you want to render to the render target in 2d mode and it is not the same size as the screen, use cam.Start2D and cam.End2D.
+		
+		**Note:** If the render target is bigger than the screen, rendering done with the surface library will be clipped to the screen bounds unless you call surface.DisableClipping
+		
 		Name | Description
 		--- | ---
 		`texture` | The new render target to be used.
@@ -1575,50 +1411,44 @@ package gmod.libs;
 		render.OverrideAlphaWriteEnable( false )
 		render.PopRenderTarget()
 		```
-		
-		
     **/
     
     public static function PushRenderTarget(texture:ITexture, ?x:Float, ?y:Float, ?w:Float, ?h:Float):Void;
     
     
     /**
-        Returns the current color modulation values as normals. 
+        Returns the current color modulation values as normals.
 		
-		
-		**Returns:** r
-		
-		
+		`**Returns:** r
     **/
     
     public static function GetColorModulation():Float;
     
     
     /**
-        Pushes a texture filter onto the magnification texture filter stack. 
-		
+        Pushes a texture filter onto the magnification texture filter stack.
 		
 		Name | Description
 		--- | ---
 		`texFilterType` | The texture filter type, see TEXFILTER_ Enums
-		
-		
-		
     **/
     
-    public static function PushFilterMag(texFilterType:Float):Void;
+    public static function PushFilterMag(texFilterType:TEXFILTER):Void;
     
     
     /**
-        Sets the status of the clip renderer, returning previous state. 
+        Sets the status of the clip renderer, returning previous state.
 		
+		**Warning:** To prevent unintended rendering behavior of other mods/the game, you must reset the clipping state to its previous value.
+		
+		**Bug:** BUG Reloading the map does not reset the previous value of this function. Issue Tracker: #3105
 		
 		Name | Description
 		--- | ---
 		`state` | New clipping state.
 		
 		
-		**Returns:** Previous clipping state.
+		`**Returns:** Previous clipping state.
 		
 		___
 		### Lua Examples
@@ -1652,18 +1482,13 @@ package gmod.libs;
 		    render.EnableClipping( oldEC )
 		end
 		```
-		
-		
     **/
     
     public static function EnableClipping(state:Bool):Bool;
     
     
     /**
-        Pops the current flashlight mode from the flashlight mode stack. 
-		
-		
-		
+        Pops the current flashlight mode from the flashlight mode stack.
     **/
     
     public static function PopFlashlightMode():Void;
@@ -1672,9 +1497,10 @@ package gmod.libs;
     /**
         Changes the view port position and size. The values will be clamped to the game's screen resolution. 
 		
-		If you are looking to render something to a texture (render target), you should use render.PushRenderTarget. 
+		If you are looking to render something to a texture (render target), you should use render.PushRenderTarget.
 		
-		 
+		**Note:** This function will override values of ScrW and ScrH with the ones you set.
+		
 		Name | Description
 		--- | ---
 		`x` | X origin of the view port.
@@ -1699,8 +1525,6 @@ package gmod.libs;
 		render.SetRenderTarget(oldRT)
 		render.SetViewPort(0,0,oldW,oldH)
 		```
-		
-		
     **/
     
     public static function SetViewPort(x:Float, y:Float, w:Float, h:Float):Void;
@@ -1709,9 +1533,10 @@ package gmod.libs;
     /**
         Draws the the current material set by render.SetMaterial to the whole screen. The color cannot be customized. 
 		
-		See also render.DrawScreenQuadEx. 
+		See also render.DrawScreenQuadEx.
 		
-		 
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
+		
 		___
 		### Lua Examples
 		#### Example 1
@@ -1725,16 +1550,13 @@ package gmod.libs;
 		    render.DrawScreenQuad()
 		end )
 		```
-		
-		
     **/
     
     public static function DrawScreenQuad():Void;
     
     
     /**
-        Clears the current rendertarget for obeying the current stencil buffer conditions. 
-		
+        Clears the current rendertarget for obeying the current stencil buffer conditions.
 		
 		Name | Description
 		--- | ---
@@ -1783,8 +1605,6 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
     public static function ClearBuffersObeyStencil(r:Float, g:Float, b:Float, a:Float, depth:Bool):Void;
@@ -1795,50 +1615,40 @@ package gmod.libs;
 		
 		Pixels which fail the stencil comparison function are not written to the render target. The operation to be performed on the stencil buffer values for these pixels can be set using render.SetStencilFailOperation. 
 		
-		 Pixels which pass the stencil comparison function are written to the render target unless they fail the depth buffer test (where applicable). The operation to perform on the stencil buffer values for these pixels can be set using render.SetStencilPassOperation and render.SetStencilZFailOperation. 
+		 Pixels which pass the stencil comparison function are written to the render target unless they fail the depth buffer test (where applicable). The operation to perform on the stencil buffer values for these pixels can be set using render.SetStencilPassOperation and render.SetStencilZFailOperation.
 		
-		 
 		Name | Description
 		--- | ---
 		`compareFunction` | Compare function, see STENCILCOMPARISONFUNCTION_ Enums, and STENCIL_ Enums for short.
-		
-		
-		
     **/
     
-    public static function SetStencilCompareFunction(compareFunction:Float):Void;
+    public static function SetStencilCompareFunction(compareFunction:STENCILCOMPARISONFUNCTION):Void;
     
     
     /**
-        Sets the color modulation. 
-		
+        Sets the color modulation.
 		
 		Name | Description
 		--- | ---
 		`r` | The red channel multiplier normal ranging from 0-1.
 		`g` | The green channel multiplier normal ranging from 0-1.
 		`b` | The blue channel multiplier normal ranging from 0-1.
-		
-		
-		
     **/
     
     public static function SetColorModulation(r:Float, g:Float, b:Float):Void;
     
     
     /**
-        Dumps the current render target and allows the pixels to be accessed by render.ReadPixel. 
-		
-		
-		
+        Dumps the current render target and allows the pixels to be accessed by render.ReadPixel.
     **/
     
     public static function CapturePixels():Void;
     
     
     /**
-        Pushes a new clipping plane of the clip plane stack and sets it as active. 
+        Pushes a new clipping plane of the clip plane stack and sets it as active.
 		
+		**Note:** A max of 2 clip planes are supported on Linux/POSIX, and 6 on Windows.
 		
 		Name | Description
 		--- | ---
@@ -1865,16 +1675,15 @@ package gmod.libs;
 		    render.EnableClipping( oldEC )
 		end
 		```
-		
-		
     **/
     
     public static function PushCustomClipPlane(normal:Vector, distance:Float):Void;
     
     
     /**
-        Draws a textured rectangle. 
+        Draws a textured rectangle.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -1883,27 +1692,22 @@ package gmod.libs;
 		`y` | The y coordinate of the rectangle to draw.
 		`width` | The width of the rectangle to draw.
 		`height` | The height of the rectangle to draw.
-		
-		
-		
     **/
     
     public static function DrawTextureToScreenRect(tex:ITexture, x:Float, y:Float, width:Float, height:Float):Void;
     
     
     /**
-        Resets the depth buffer. 
+        Resets the depth buffer.
 		
-		
-		
+		**Bug:** BUG This function also clears the stencil buffer. Use render.Clear in the meantime. Issue Tracker: #3317
     **/
     
     public static function ClearDepth():Void;
     
     
     /**
-        Sets the operation to be performed on the stencil buffer values if the compare function was successful. 
-		
+        Sets the operation to be performed on the stencil buffer values if the compare function was successful.
 		
 		Name | Description
 		--- | ---
@@ -1950,19 +1754,16 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
-    public static function SetStencilPassOperation(passOperation:Float):Void;
+    public static function SetStencilPassOperation(passOperation:STENCILOPERATION):Void;
     
     
     /**
         Sets whether stencil tests are carried out for each rendered pixel. 
 		
-		Only pixels passing the stencil test are written to the render target. 
+		Only pixels passing the stencil test are written to the render target.
 		
-		 
 		Name | Description
 		--- | ---
 		`newState` | The new state.
@@ -2007,8 +1808,6 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
     public static function SetStencilEnable(newState:Bool):Void;
@@ -2016,32 +1815,28 @@ package gmod.libs;
     
     /**
         
+		
 		Name | Description
 		--- | ---
 		`vec` | 
-		
-		
-		
     **/
     
     public static function SetToneMappingScaleLinear(vec:Vector):Void;
     
     
     /**
-        Returns if the current settings and the system allow the usage of pixel shaders 1.4. 
+        Returns if the current settings and the system allow the usage of pixel shaders 1.4.
 		
-		
-		**Returns:** Whether Pixel Shaders 1.4 are supported or not.
-		
-		
+		`**Returns:** Whether Pixel Shaders 1.4 are supported or not.
     **/
     
     public static function SupportsPixelShaders_1_4():Bool;
     
     
     /**
-        Draws a box in 3D space. 
+        Draws a box in 3D space.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -2050,32 +1845,26 @@ package gmod.libs;
 		`mins` | Start position of the box, relative to origin.
 		`maxs` | End position of the box, relative to origin.
 		`color` | The color of the box. Uses the Color structure.
-		
-		
-		
     **/
     
-    public static function DrawBox(position:Vector, angles:Angle, mins:Vector, maxs:Vector, ?color:AnyTable):Void;
+    public static function DrawBox(position:Vector, angles:Angle, mins:Vector, maxs:Vector, ?color:Color):Void;
     
     
     /**
-        This applies the changes made to map lighting using engine.LightStyle. 
-		
+        This applies the changes made to map lighting using engine.LightStyle.
 		
 		Name | Description
 		--- | ---
 		`DoStaticProps` | When true, this will also apply lighting changes to static props. This is really slow on large maps.
-		
-		
-		
     **/
     
     public static function RedownloadAllLightmaps(?DoStaticProps:Bool):Void;
     
     
     /**
-        Draws textured beam. 
+        Draws textured beam.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -2085,36 +1874,28 @@ package gmod.libs;
 		`textureStart` | The start coordinate of the texture used.
 		`textureEnd` | The end coordinate of the texture used.
 		`color` | The color to be used. Uses the Color structure.
-		
-		
-		
     **/
     
-    public static function DrawBeam(startPos:Vector, endPos:Vector, width:Float, textureStart:Float, textureEnd:Float, ?color:AnyTable):Void;
+    public static function DrawBeam(startPos:Vector, endPos:Vector, width:Float, textureStart:Float, textureEnd:Float, ?color:Color):Void;
     
     
     /**
         Pops the current texture minification filter from the filter stack. 
 		
-		See render.PushFilterMin 
-		
-		 
-		
+		See render.PushFilterMin
     **/
     
     public static function PopFilterMin():Void;
     
     
     /**
-        Sets the at which the fog reaches its max density. 
+        Sets the at which the fog reaches its max density.
 		
+		**Note:** If used in GM:SetupSkyboxFog, this value must be scaled by the first argument of the hook
 		
 		Name | Description
 		--- | ---
 		`distance` | The distance at which the fog reaches its max density. NOTE If used in GM:SetupSkyboxFog, this value must be scaled by the first argument of the hook
-		
-		
-		
     **/
     
     public static function FogEnd(distance:Float):Void;
@@ -2123,9 +1904,10 @@ package gmod.libs;
     /**
         Overrides the write behaviour of all next rendering operations towards the alpha channel of the current render target. 
 		
-		See also render.OverrideBlend. 
+		See also render.OverrideBlend.
 		
-		 
+		**Note:** Doing surface library draw calls with alpha set to 0 is a no-op and will never have any effect.
+		
 		Name | Description
 		--- | ---
 		`enable` | Enable or disable the override.
@@ -2147,26 +1929,20 @@ package gmod.libs;
 		render.OverrideAlphaWriteEnable( false )
 		render.PopRenderTarget()
 		```
-		
-		
     **/
     
     public static function OverrideAlphaWriteEnable(enable:Bool, shouldWrite:Bool):Void;
     
     
     /**
-        Removes the current active clipping plane from the clip plane stack. 
-		
-		
-		
+        Removes the current active clipping plane from the clip plane stack.
     **/
     
     public static function PopCustomClipPlane():Void;
     
     
     /**
-        Sets the operation to be performed on the stencil buffer values if the compare function was not successful. Note that this takes place before depth testing. 
-		
+        Sets the operation to be performed on the stencil buffer values if the compare function was not successful. Note that this takes place before depth testing.
 		
 		Name | Description
 		--- | ---
@@ -2214,16 +1990,13 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
-    public static function SetStencilFailOperation(failOperation:Float):Void;
+    public static function SetStencilFailOperation(failOperation:STENCILOPERATION):Void;
     
     
     /**
-        Blurs the render target ( or a given texture ) 
-		
+        Blurs the render target ( or a given texture )
 		
 		Name | Description
 		--- | ---
@@ -2231,32 +2004,24 @@ package gmod.libs;
 		`blurx` | Horizontal amount of blur
 		`blury` | Vertical amount of blur
 		`passes` | Amount of passes to go through
-		
-		
-		
     **/
     
     public static function BlurRenderTarget(rendertarget:ITexture, blurx:Float, blury:Float, passes:Float):Void;
     
     
     /**
-        Changes the cull mode. 
-		
+        Changes the cull mode.
 		
 		Name | Description
 		--- | ---
 		`cullMode` | Cullmode, see MATERIAL_CULLMODE_ Enums
-		
-		
-		
     **/
     
-    public static function CullMode(cullMode:Float):Void;
+    public static function CullMode(cullMode:MATERIAL_CULLMODE):Void;
     
     
     /**
-        Set's the depth range of the upcoming render. 
-		
+        Set's the depth range of the upcoming render.
 		
 		Name | Description
 		--- | ---
@@ -2358,81 +2123,63 @@ package gmod.libs;
 		**Output:**
 		
 		File:DepthRange example.webm
-		
-		
     **/
     
     public static function DepthRange(depthmin:Float, depthmax:Float):Void;
     
     
     /**
-        Returns the fog mode. 
+        Returns the fog mode.
 		
-		
-		**Returns:** Fog mode, see MATERIAL_FOG_ Enums
-		
-		
+		`**Returns:** Fog mode, see MATERIAL_FOG_ Enums
     **/
     
-    public static function GetFogMode():Float;
+    public static function GetFogMode():MATERIAL_FOG;
     
     
     /**
-        Sets the mode of fog. 
-		
+        Sets the mode of fog.
 		
 		Name | Description
 		--- | ---
 		`fogMode` | Fog mode, see MATERIAL_FOG_ Enums.
-		
-		
-		
     **/
     
-    public static function FogMode(fogMode:Float):Void;
+    public static function FogMode(fogMode:MATERIAL_FOG):Void;
     
     
     /**
         
-		**Returns:** 
 		
-		
+		`**Returns:** 
     **/
     
     public static function GetMorphTex0():ITexture;
     
     
     /**
-        Returns the _rt_FullFrameDepth texture. Alias of _rt_PowerOfTwoFB 
+        Returns the _rt_FullFrameDepth texture. Alias of _rt_PowerOfTwoFB
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
     public static function GetFullScreenDepthTexture():ITexture;
     
     
     /**
-        Overrides the write behaviour of all next rendering operations towards the color channel of the current render target. 
-		
+        Overrides the write behaviour of all next rendering operations towards the color channel of the current render target.
 		
 		Name | Description
 		--- | ---
 		`enable` | Enable or disable the override.
 		`shouldWrite` | If the previous argument is true, sets whether the next rendering operations should write to the color channel or not. Has no effect if the previous argument is false.
-		
-		
-		
     **/
     
     public static function OverrideColorWriteEnable(enable:Bool, shouldWrite:Bool):Void;
     
     
     /**
-        Resets all values in the stencil buffer to zero. 
-		
+        Resets all values in the stencil buffer to zero.
 		
 		___
 		### Lua Examples
@@ -2469,8 +2216,6 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
     public static function ClearStencil():Void;
@@ -2478,17 +2223,15 @@ package gmod.libs;
     
     /**
         
-		**Returns:** 
 		
-		
+		`**Returns:** 
     **/
     
     public static function GetSmallTex1():ITexture;
     
     
     /**
-        Copies the currently active Render Target to the specified texture. 
-		
+        Copies the currently active Render Target to the specified texture.
 		
 		Name | Description
 		--- | ---
@@ -2512,16 +2255,15 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
     public static function CopyRenderTargetToTexture(Target:ITexture):Void;
     
     
     /**
-        Draws a quad. 
+        Draws a quad.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -2562,28 +2304,24 @@ package gmod.libs;
 		    render.DrawQuadEasy( tr.HitPos + tr.HitNormal * 32, -dir, 64, 64, Color( 255, 255, 255 ), 0 )
 		end )
 		```
-		
-		
     **/
     
-    public static function DrawQuadEasy(position:Vector, normal:Vector, width:Float, height:Float, color:AnyTable, ?rotation:Float):Void;
+    public static function DrawQuadEasy(position:Vector, normal:Vector, width:Float, height:Float, color:Color, ?rotation:Float):Void;
     
     
     /**
-        Returns the maximum texture height the renderer can handle. 
+        Returns the maximum texture height the renderer can handle.
 		
-		
-		**Returns:** maxTextureHeight
-		
-		
+		`**Returns:** maxTextureHeight
     **/
     
     public static function MaxTextureHeight():Float;
     
     
     /**
-        Clears the current render target and the specified buffers. 
+        Clears the current render target and the specified buffers.
 		
+		**Bug:** BUG This sets the alpha incorrectly for surface library draw calls for render targets. Issue Tracker: #2085
 		
 		Name | Description
 		--- | ---
@@ -2593,17 +2331,17 @@ package gmod.libs;
 		`a` | Alpha component to clear to.
 		`clearDepth` | Clear the depth.
 		`clearStencil` | Clear the stencil.
-		
-		
-		
     **/
     
     public static function Clear(r:Float, g:Float, b:Float, a:Float, ?clearDepth:Bool, ?clearStencil:Bool):Void;
     
     
     /**
-        Draws a line in 3D space. 
+        Draws a line in 3D space.
 		
+		**Note:** This is a rendering function that requires a 3D rendering context. This means that it will only work in hooks with a 3D rendering context.
+		
+		**Bug:** BUG Enabling this option will cause the line to ignore the color's alpha. Issue Tracker: #1086
 		
 		Name | Description
 		--- | ---
@@ -2611,17 +2349,13 @@ package gmod.libs;
 		`endPos` | Line end position in world coordinates.
 		`color` | The color to be used. Uses the Color structure.
 		`writeZ` | Whether or not to consider the Z buffer. If false, the line will be drawn over everything currently drawn, if true, the line will be drawn with depth considered, as if it were a regular object in 3D space. BUG Enabling this option will cause the line to ignore the color's alpha. Issue Tracker: #1086
-		
-		
-		
     **/
     
-    public static function DrawLine(startPos:Vector, endPos:Vector, ?color:AnyTable, ?writeZ:Bool):Void;
+    public static function DrawLine(startPos:Vector, endPos:Vector, ?color:Color, ?writeZ:Bool):Void;
     
     
     /**
-        Calculates the light color of a certain surface. 
-		
+        Calculates the light color of a certain surface.
 		
 		Name | Description
 		--- | ---
@@ -2629,9 +2363,7 @@ package gmod.libs;
 		`normal` | The normal of the surface to get the light from.
 		
 		
-		**Returns:** A vector representing the light at that point.
-		
-		
+		`**Returns:** A vector representing the light at that point.
     **/
     
     public static function ComputeLighting(position:Vector, normal:Vector):Vector;
@@ -2639,42 +2371,34 @@ package gmod.libs;
     
     /**
         
+		
 		Name | Description
 		--- | ---
 		`enable` | 
-		
-		
-		
     **/
     
     public static function SetWriteDepthToDestAlpha(enable:Bool):Void;
     
     
     /**
-        Suppresses or enables any engine lighting for any upcoming render operation. 
+        Suppresses or enables any engine lighting for any upcoming render operation.
 		
+		**Bug:** BUG This does not affect IMeshes. Issue Tracker: #4070
 		
 		Name | Description
 		--- | ---
 		`suppressLighting` | True to suppress false to enable.
-		
-		
-		
     **/
     
     public static function SuppressEngineLighting(suppressLighting:Bool):Void;
     
     
     /**
-        Sets whether any future render operations will ignore shadow drawing. 
-		
+        Sets whether any future render operations will ignore shadow drawing.
 		
 		Name | Description
 		--- | ---
 		`newState` | 
-		
-		
-		
     **/
     
     public static function SetShadowsDisabled(newState:Bool):Void;
@@ -2683,10 +2407,9 @@ package gmod.libs;
     /**
         Returns the currently active render target. 
 		
-		Instead of saving the current render target using this function and restoring to it later, it is generally better practice to use render.PushRenderTarget and render.PopRenderTarget. 
+		Instead of saving the current render target using this function and restoring to it later, it is generally better practice to use render.PushRenderTarget and render.PopRenderTarget.
 		
-		 
-		**Returns:** The currently active Render Target
+		`**Returns:** The currently active Render Target
 		
 		___
 		### Lua Examples
@@ -2712,16 +2435,13 @@ package gmod.libs;
 		    pictureFile:Close()
 		render.PopRenderTarget()
 		```
-		
-		
     **/
     
     public static function GetRenderTarget():ITexture;
     
     
     /**
-        Sets the unsigned 8-bit write bitflag mask to be used for any writes to the stencil buffer. 
-		
+        Sets the unsigned 8-bit write bitflag mask to be used for any writes to the stencil buffer.
 		
 		Name | Description
 		--- | ---
@@ -2851,52 +2571,41 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
     public static function SetStencilWriteMask(mask:Float):Void;
     
     
     /**
-        Sets the color of the fog. 
-		
+        Sets the color of the fog.
 		
 		Name | Description
 		--- | ---
 		`red` | Red channel of the fog color, 0 - 255.
 		`green` | Green channel of the fog color, 0 - 255.
 		`blue` | Blue channel of the fog color, 0 - 255.
-		
-		
-		
     **/
     
     public static function FogColor(red:Float, green:Float, blue:Float):Void;
     
     
     /**
-        Draws a texture over the whole screen. 
+        Draws a texture over the whole screen.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
 		`tex` | The texture to draw
-		
-		
-		
     **/
     
     public static function DrawTextureToScreen(tex:ITexture):Void;
     
     
     /**
-        Returns the render target's power of two texture. 
+        Returns the render target's power of two texture.
 		
-		
-		**Returns:** The power of two texture, which is _rt_poweroftwofb by default.
-		
-		
+		`**Returns:** The power of two texture, which is _rt_poweroftwofb by default.
     **/
     
     public static function GetPowerOfTwoTexture():ITexture;
@@ -2905,28 +2614,21 @@ package gmod.libs;
     /**
         Updates the texture returned by render.GetFullScreenDepthTexture. 
 		
-		Silently fails if render.SupportsPixelShaders_2_0 returns false. 
-		
-		 
-		
+		Silently fails if render.SupportsPixelShaders_2_0 returns false.
     **/
     
     public static function UpdateFullScreenDepthTexture():Void;
     
     
     /**
-        Pretty much alias of render.UpdatePowerOfTwoTexture but does not return the texture. 
-		
-		
-		
+        Pretty much alias of render.UpdatePowerOfTwoTexture but does not return the texture.
     **/
     
     public static function UpdateRefractTexture():Void;
     
     
     /**
-        Sets the unsigned 8-bit test bitflag mask to be used for any stencil testing. 
-		
+        Sets the unsigned 8-bit test bitflag mask to be used for any stencil testing.
 		
 		Name | Description
 		--- | ---
@@ -3056,23 +2758,19 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
     public static function SetStencilTestMask(mask:Float):Void;
     
     
     /**
-        Enables the flashlight projection for the upcoming rendering. 
+        Enables the flashlight projection for the upcoming rendering.
 		
+		**Bug:** BUG This will leave models lit under specific conditions. Issue Tracker: #3029
 		
 		Name | Description
 		--- | ---
 		`enable` | Whether the flashlight mode should be enabled or disabled.
-		
-		
-		
     **/
     
     public static function PushFlashlightMode(?enable:Bool):Void;
@@ -3081,9 +2779,10 @@ package gmod.libs;
     /**
         Overrides the internal graphical functions used to determine the final color and alpha of a rendered texture. 
 		
-		See also render.OverrideAlphaWriteEnable. 
+		See also render.OverrideAlphaWriteEnable.
 		
-		 
+		**Note:** Doing surface library draw calls with alpha set to 0 is a no-op and won't have an effect.
+		
 		Name | Description
 		--- | ---
 		`enabled` | true to enable, false to disable. No other arguments are required when disabling.
@@ -3093,19 +2792,15 @@ package gmod.libs;
 		`srcBlendAlpha` | The source alpha blend function BLEND_ Enums. Determines how a rendered texture's final alpha should be calculated.
 		`destBlendAlpha` | The destination alpha blend function BLEND_ Enums.
 		`blendFuncAlpha` | The blend mode used for drawing the alpha layer BLENDFUNC_ Enums.
-		
-		
-		
     **/
     
-    public static function OverrideBlend(enabled:Bool, srcBlend:Float, destBlend:Float, blendFunc:Float, ?srcBlendAlpha:Float, ?destBlendAlpha:Float, ?blendFuncAlpha:Float):Void;
+    public static function OverrideBlend(enabled:Bool, srcBlend:BLEND, destBlend:BLEND, blendFunc:BLENDFUNC, ?srcBlendAlpha:BLEND, ?destBlendAlpha:BLEND, ?blendFuncAlpha:BLENDFUNC):Void;
     
     
     /**
         
-		**Returns:** 
 		
-		
+		`**Returns:** 
     **/
     
     public static function GetMoBlurTex1():ITexture;
@@ -3114,16 +2809,12 @@ package gmod.libs;
     /**
         Similar to render.MaterialOverride, but overrides the materials per index. 
 		
-		render.MaterialOverride overrides effects of this function. 
+		render.MaterialOverride overrides effects of this function.
 		
-		 
 		Name | Description
 		--- | ---
 		`index` | Starts with 0, the index of the material to override
 		`material` | The material to override with
-		
-		
-		
     **/
     
     public static function MaterialOverrideByIndex(index:Float, material:IMaterial):Void;
@@ -3131,9 +2822,8 @@ package gmod.libs;
     
     /**
         
-		**Returns:** 
 		
-		
+		`**Returns:** 
     **/
     
     public static function GetSmallTex0():ITexture;
@@ -3142,9 +2832,8 @@ package gmod.libs;
     /**
         Sets the current drawing material to "color_ignorez". 
 		
-		The material is defined as: 
+		The material is defined as:
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -3153,37 +2842,30 @@ package gmod.libs;
 		```lua 
 		render.SetMaterial( Material( "color_ignorez" ) )
 		```
-		
-		
     **/
     
     public static function SetColorMaterialIgnoreZ():Void;
     
     
     /**
-        Returns the current fog color. 
-		
+        Returns the current fog color.
 		
 		Name | Description
 		--- | ---
 		`a` | Red part of the color.
 		`b` | Green part of the color
 		`c` | Blue part of the color
-		
-		
-		
     **/
     
     public static function GetFogColor():RenderLibGetFogColorReturn;
     
     
     /**
-        Returns a floating point texture the same resolution as the screen. 
+        Returns a floating point texture the same resolution as the screen.
 		
+		**Note:** The gmodscreenspace shader doesn't behave as expected when drawing a floating-point texture to an integer texture (e.g. the default render target). Use an UnlitGeneric material instead
 		
-		**Returns:** Render target named "__rt_supertexture1"
-		
-		
+		`**Returns:** Render target named "__rt_supertexture1"
     **/
     
     public static function GetSuperFPTex():ITexture;
@@ -3192,9 +2874,8 @@ package gmod.libs;
     /**
         Sets the stencil value in a specified rect. 
 		
-		This is not affected by render.SetStencilWriteMask 
+		This is not affected by render.SetStencilWriteMask
 		
-		 
 		Name | Description
 		--- | ---
 		`originX` | X origin of the rectangle.
@@ -3243,8 +2924,6 @@ package gmod.libs;
 		    render.SetStencilEnable( false )
 		end )
 		```
-		
-		
     **/
     
     public static function ClearStencilBufferRectangle(originX:Float, originY:Float, endX:Float, endY:Float, stencilValue:Float):Void;
@@ -3253,36 +2932,28 @@ package gmod.libs;
     /**
         Clears a render target 
 		
-		It uses render.Clear then render.SetRenderTarget on the modified render target. 
+		It uses render.Clear then render.SetRenderTarget on the modified render target.
 		
-		 
 		Name | Description
 		--- | ---
 		`texture` | 
 		`color` | The color, see Color structure
-		
-		
-		
     **/
     
-    public static function ClearRenderTarget(texture:ITexture, color:AnyTable):Void;
+    public static function ClearRenderTarget(texture:ITexture, color:Color):Void;
     
     
     /**
-        Returns whether the game supports HDR, i.e. if the DirectX level is higher than or equal to 8. 
+        Returns whether the game supports HDR, i.e. if the DirectX level is higher than or equal to 8.
 		
-		
-		**Returns:** supportsHDR
-		
-		
+		`**Returns:** supportsHDR
     **/
     
     public static function SupportsHDR():Bool;
     
     
     /**
-        Calculates the lighting caused by dynamic lights for the specified surface. 
-		
+        Calculates the lighting caused by dynamic lights for the specified surface.
 		
 		Name | Description
 		--- | ---
@@ -3290,9 +2961,7 @@ package gmod.libs;
 		`normal` | The normal of the surface.
 		
 		
-		**Returns:** A vector representing the light at that point.
-		
-		
+		`**Returns:** A vector representing the light at that point.
     **/
     
     public static function ComputeDynamicLighting(position:Vector, normal:Vector):Vector;
@@ -3301,18 +2970,14 @@ package gmod.libs;
     /**
         Pops the last render target and viewport from the RT stack and sets them as the current render target and viewport. 
 		
-		This is should be called to restore the previous render target and viewport after a call to render.PushRenderTarget. 
-		
-		 
-		
+		This is should be called to restore the previous render target and viewport after a call to render.PushRenderTarget.
     **/
     
     public static function PopRenderTarget():Void;
     
     
     /**
-        Performs a render trace and returns the color of the surface hit, this uses a low res version of the texture. 
-		
+        Performs a render trace and returns the color of the surface hit, this uses a low res version of the texture.
 		
 		Name | Description
 		--- | ---
@@ -3320,17 +2985,14 @@ package gmod.libs;
 		`endPos` | The end position of the trace.
 		
 		
-		**Returns:** color
-		
-		
+		`**Returns:** color
     **/
     
     public static function GetSurfaceColor(startPos:Vector, endPos:Vector):Vector;
     
     
     /**
-        Renders the HUD on the screen. 
-		
+        Renders the HUD on the screen.
 		
 		Name | Description
 		--- | ---
@@ -3338,17 +3000,13 @@ package gmod.libs;
 		`y` | Y position for the HUD draw origin.
 		`w` | Width of the HUD draw.
 		`h` | Height of the HUD draw.
-		
-		
-		
     **/
     
     public static function RenderHUD(x:Float, y:Float, w:Float, h:Float):Void;
     
     
     /**
-        Adds a beam segment to the beam started by render.StartBeam. 
-		
+        Adds a beam segment to the beam started by render.StartBeam.
 		
 		Name | Description
 		--- | ---
@@ -3356,17 +3014,13 @@ package gmod.libs;
 		`width` | The width of the beam.
 		`textureEnd` | The end coordinate of the texture used.
 		`color` | The color to be used. Uses the Color structure.
-		
-		
-		
     **/
     
-    public static function AddBeam(startPos:Vector, width:Float, textureEnd:Float, color:AnyTable):Void;
+    public static function AddBeam(startPos:Vector, width:Float, textureEnd:Float, color:Color):Void;
     
     
     /**
         
-		
     **/
     
     public static function PerformFullScreenStencilOperation():Void;

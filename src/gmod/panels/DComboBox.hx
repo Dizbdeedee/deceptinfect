@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    A field with multiple selectable values. 
-	
-	
+    A field with multiple selectable values.
 **/
 extern class DComboBox extends DButton {
     /**
-        Selects an option within a combo box based on its table index. 
-		
+        Selects an option within a combo box based on its table index.
 		
 		Name | Description
 		--- | ---
@@ -64,72 +61,55 @@ extern class DComboBox extends DButton {
 		    
 		end
 		```
-		
-		
     **/
     
      
     public function ChooseOptionID(index:Float):Void;
     /**
-        Selects a combo box option by its index and changes the text displayed at the top of the combo box. 
-		
+        Selects a combo box option by its index and changes the text displayed at the top of the combo box.
 		
 		Name | Description
 		--- | ---
 		`value` | The text to display at the top of the combo box.
 		`index` | The option index.
-		
-		
-		
     **/
     
      
     public function ChooseOption(value:String, index:Float):Void;
     /**
-        Returns the currently selected option's text and data 
-		
+        Returns the currently selected option's text and data
 		
 		Name | Description
 		--- | ---
 		`a` | The option's text value.
 		`b` | The option's stored data.
-		
-		
-		
     **/
     
      
     public function GetSelected():DComboBoxGetSelectedReturn;
     /**
-        Returns an option's data based on the given index. 
-		
+        Returns an option's data based on the given index.
 		
 		Name | Description
 		--- | ---
 		`index` | The option index.
 		
 		
-		**Returns:** The option's data value.
-		
-		
+		`**Returns:** The option's data value.
     **/
     
      
-    public function GetOptionData(index:Float):Any;
+    public function GetOptionData(index:Float):Dynamic;
     /**
-        Returns whether or not the combo box's menu is opened. 
+        Returns whether or not the combo box's menu is opened.
 		
-		
-		**Returns:** True if the menu is open, false otherwise.
-		
-		
+		`**Returns:** True if the menu is open, false otherwise.
     **/
     
      
     public function IsMenuOpen():Bool;
     /**
-        Called when an option in the combo box is selected. 
-		
+        Called when an option in the combo box is selected.
 		
 		Name | Description
 		--- | ---
@@ -175,24 +155,18 @@ extern class DComboBox extends DButton {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook 
-    public function OnSelect(index:Float, value:String, data:Any):Void;
+    public function OnSelect(index:Float, value:String, data:Dynamic):Void;
     /**
-        Closes the combo box menu. Called when the combo box is clicked while open. 
-		
-		
-		
+        Closes the combo box menu. Called when the combo box is clicked while open.
     **/
     
      
     public function CloseMenu():Void;
     /**
-        Sets the text shown in the combo box when the menu is not collapsed. 
-		
+        Sets the text shown in the combo box when the menu is not collapsed.
 		
 		Name | Description
 		--- | ---
@@ -233,8 +207,6 @@ extern class DComboBox extends DButton {
 		
 		end
 		```
-		
-		
     **/
     
      
@@ -242,51 +214,38 @@ extern class DComboBox extends DButton {
     /**
         Sets whether or not the items should be sorted alphabetically in the dropdown menu of the DComboBox. If set to false, items will appear in the order they were added by DComboBox:AddChoice calls. 
 		
-		This is enabled by default. 
+		This is enabled by default.
 		
-		 
 		Name | Description
 		--- | ---
 		`sort` | true to enable, false to disable
-		
-		
-		
     **/
     
      
     public function SetSortItems(sort:Bool):Void;
     /**
-        Returns an option's text based on the given data. 
-		
+        Returns an option's text based on the given data.
 		
 		Name | Description
 		--- | ---
 		`data` | The data to look up the name of. If given a number and no matching data was found, the function will test given data against each tonumber'd data entry.
 		
 		
-		**Returns:** The option's text value. If no matching data was found, the data itself will be returned. If multiple identical data entries exist, the first instance will be returned.
-		
-		
+		`**Returns:** The option's text value. If no matching data was found, the data itself will be returned. If multiple identical data entries exist, the first instance will be returned.
     **/
     
      
     public function GetOptionTextByData(data:String):String;
     /**
-        Returns the index (ID) of the currently selected option. 
+        Returns the index (ID) of the currently selected option.
 		
-		
-		**Returns:** The ID of the currently selected option.
-		
-		
+		`**Returns:** The ID of the currently selected option.
     **/
     
      
     public function GetSelectedID():Float;
     /**
-        Clears the combo box's text value, choices, and data values. 
-		
-		
-		
+        Clears the combo box's text value, choices, and data values.
     **/
     
      
@@ -294,26 +253,22 @@ extern class DComboBox extends DButton {
     /**
         Returns an whether the items in the dropdown will be alphabetically sorted or not. 
 		
-		See DComboBox:SetSortItems. 
+		See DComboBox:SetSortItems.
 		
-		 
-		**Returns:** True if enabled, false otherwise.
-		
-		
+		`**Returns:** True if enabled, false otherwise.
     **/
     
      
     public function GetSortItems():Bool;
     /**
-        Returns an option's text based on the given index. 
-		
+        Returns an option's text based on the given index.
 		
 		Name | Description
 		--- | ---
 		`index` | The option index.
 		
 		
-		**Returns:** The option's text value.
+		`**Returns:** The option's text value.
 		
 		___
 		### Lua Examples
@@ -336,24 +291,18 @@ extern class DComboBox extends DButton {
 		**Output:**
 		
 		Blue
-		
-		
     **/
     
      
     public function GetOptionText(index:Float):String;
     /**
-        Opens the combo box drop down menu. Called when the combo box is clicked. 
-		
-		
-		
+        Opens the combo box drop down menu. Called when the combo box is clicked.
     **/
     
      
     public function OpenMenu():Void;
     /**
-        Adds a choice to the combo box. 
-		
+        Adds a choice to the combo box.
 		
 		Name | Description
 		--- | ---
@@ -363,20 +312,18 @@ extern class DComboBox extends DButton {
 		`icon` | Adds an icon for this choice.
 		
 		
-		**Returns:** The index of the new option.
-		
-		
+		`**Returns:** The index of the new option.
     **/
     
      
-    public function AddChoice(value:String, ?data:Any, ?select:Bool, ?icon:Panel):Float;
+    public function AddChoice(value:String, ?data:Dynamic, ?select:Bool, ?icon:Panel):Float;
     
 }
 
 
 @:multiReturn extern class DComboBoxGetSelectedReturn {
 var a:String;
-var b:Any;
+var b:Dynamic;
 
 }
 

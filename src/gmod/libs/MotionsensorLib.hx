@@ -2,19 +2,14 @@ package gmod.libs;
 
 
 /**
-    Functions related to Kinect for Windows usage in GMod. 
-	
-	
+    Functions related to Kinect for Windows usage in GMod.
 **/
 @:native("motionsensor")extern class MotionsensorLib {
     #if client
     /**
-        Returns true if we have detected that there's a kinect connected to the PC 
+        Returns true if we have detected that there's a kinect connected to the PC
 		
-		
-		**Returns:** Connected or not
-		
-		
+		`**Returns:** Connected or not
     **/
     
     public static function IsAvailable():Bool;
@@ -22,6 +17,7 @@ package gmod.libs;
     
     /**
         
+		
 		Name | Description
 		--- | ---
 		`translator` | 
@@ -30,9 +26,7 @@ package gmod.libs;
 		`rotation` | 
 		
 		
-		**Returns:** Ang. If !translator.AnglesTable then return - {}
-		
-		
+		`**Returns:** Ang. If !translator.AnglesTable then return - {}
     **/
     
     public static function ProcessAnglesTable(translator:AnyTable, sensor:AnyTable, pos:Vector, rotation:Angle):Angle;
@@ -40,7 +34,6 @@ package gmod.libs;
     #if client
     /**
         
-		
     **/
     
     public static function GetSkeleton():Void;
@@ -48,14 +41,13 @@ package gmod.libs;
     
     /**
         
+		
 		Name | Description
 		--- | ---
 		`ent` | Entity to choose builder for
 		
 		
-		**Returns:** Chosen builder
-		
-		
+		`**Returns:** Chosen builder
     **/
     
     public static function ChooseBuilderFromEntity(ent:Entity):String;
@@ -63,6 +55,7 @@ package gmod.libs;
     
     /**
         
+		
 		Name | Description
 		--- | ---
 		`translator` | 
@@ -74,9 +67,7 @@ package gmod.libs;
 		`v` | 
 		
 		
-		**Returns:** Return nil on failure
-		
-		
+		`**Returns:** Return nil on failure
     **/
     
     public static function ProcessAngle(translator:AnyTable, sensor:AnyTable, pos:Vector, ang:Angle, special_vectors:AnyTable, boneid:Float, v:AnyTable):Bool;
@@ -84,37 +75,30 @@ package gmod.libs;
     
     /**
         
+		
 		Name | Description
 		--- | ---
 		`translator` | 
 		`sensor` | 
 		
 		
-		**Returns:** Pos. if !translator.PositionTable then return - {}
-		
-		
+		`**Returns:** Pos. if !translator.PositionTable then return - {}
     **/
     
     public static function ProcessPositionTable(translator:AnyTable, sensor:AnyTable):Vector;
     
     #if client
     /**
-        This starts access to the kinect sensor. Note that this usually freezes the game for a couple of seconds. 
-		
-		
-		
+        This starts access to the kinect sensor. Note that this usually freezes the game for a couple of seconds.
     **/
     
     public static function Start():Void;
     #end
     #if client
     /**
-        Return whether a kinect is connected - and active (ie - Start has been called). 
+        Return whether a kinect is connected - and active (ie - Start has been called).
 		
-		
-		**Returns:** Connected and active or not
-		
-		
+		`**Returns:** Connected and active or not
     **/
     
     public static function IsActive():Bool;
@@ -122,6 +106,7 @@ package gmod.libs;
     
     /**
         
+		
 		Name | Description
 		--- | ---
 		`translator` | 
@@ -134,31 +119,22 @@ package gmod.libs;
 		`a` | Pos
 		`b` | ang
 		`c` | sensor
-		
-		
-		
     **/
     
     public static function BuildSkeleton(translator:AnyTable, player:Player, rotation:Angle):MotionsensorLibBuildSkeletonReturn;
     
     #if client
     /**
-        Returns the depth map material. 
+        Returns the depth map material.
 		
-		
-		**Returns:** The material
-		
-		
+		`**Returns:** The material
     **/
     
     public static function GetColourMaterial():IMaterial;
     #end
     #if client
     /**
-        Stops the motion capture. 
-		
-		
-		
+        Stops the motion capture.
     **/
     
     public static function Stop():Void;

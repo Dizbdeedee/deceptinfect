@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    control for a  panel.  Inherits the following functions from DProperty_Generic and its parents up to 3 levels deep: 
-	
-	
+    [DComboBox](https://wiki.garrysmod.com/page/Category:DComboBox) control for a [DProperties](https://wiki.garrysmod.com/page/Category:DProperties) panel.  Inherits the following functions from DProperty_Generic and its parents up to 3 levels deep:
 **/
 extern class DProperty_Combo extends DProperty_Generic {
     /**
-        Sets up a combo control. 
-		
+        Sets up a combo control.
 		
 		Name | Description
 		--- | ---
@@ -32,15 +29,12 @@ extern class DProperty_Combo extends DProperty_Generic {
 		    }
 		} )
 		```
-		
-		
     **/
     
      
     public function Setup(?prop:String, ?data:AnyTable):Void;
     /**
-        Called after the user selects a new value. 
-		
+        Called after the user selects a new value.
 		
 		Name | Description
 		--- | ---
@@ -67,15 +61,12 @@ extern class DProperty_Combo extends DProperty_Generic {
 		**Output:**
 		
 		You selected: table: 0x8e05f3b8
-		
-		
     **/
     
      
-    public function DataChanged(data:Any):Void;
+    public function DataChanged(data:Dynamic):Void;
     /**
-        Set the selected option. 
-		
+        Set the selected option.
 		
 		Name | Description
 		--- | ---
@@ -95,15 +86,12 @@ extern class DProperty_Combo extends DProperty_Generic {
 		choice:AddChoice( "Choice #3", "Hello world", true )
 		choice:SetSelected( 2 ) -- Even if "Choice #3" is selected by default, "Choice #2" will be selected.
 		```
-		
-		
     **/
     
      
     public function SetSelected(Id:Float):Void;
     /**
-        Add a choice to your combo control. 
-		
+        Add a choice to your combo control.
 		
 		Name | Description
 		--- | ---
@@ -124,12 +112,10 @@ extern class DProperty_Combo extends DProperty_Generic {
 		choice:AddChoice( "I am selected", 8, true )
 		choice:AddChoice( "I am not selected", "Hello world" )
 		```
-		
-		
     **/
     
      
-    public function AddChoice(Text:String, data:Any, ?select:Bool):Void;
+    public function AddChoice(Text:String, data:Dynamic, ?select:Bool):Void;
     
 }
 

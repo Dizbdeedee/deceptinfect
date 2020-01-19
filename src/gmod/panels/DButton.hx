@@ -4,60 +4,45 @@ package gmod.panels;
 /**
     A standard Derma button. 
 	
-	By default, a DButton is 22px tall. 
-	
-	 
+	By default, a DButton is 22px tall.
 **/
 extern class DButton extends DLabel {
     /**
-        A hook called from within DLabel's PANEL:ApplySchemeSettings to determine the color of the text on display. 
-		
+        A hook called from within DLabel's PANEL:ApplySchemeSettings to determine the color of the text on display.
 		
 		Name | Description
 		--- | ---
 		`skin` | A table supposed to contain the color values listed above.
-		
-		
-		
     **/
     
      
     public function UpdateColours(skin:AnyTable):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does absolutely nothing at all. Default value is automatically set to true. 
-		
+		Does absolutely nothing at all. Default value is automatically set to true.
 		
 		Name | Description
 		--- | ---
 		`draw` | Does nothing.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetDrawBorder(draw:Bool):Void;
     /**
-        Sets an image to be displayed as the button's background. Alias of DButton:SetImage 
-		
+        Sets an image to be displayed as the button's background. Alias of DButton:SetImage
 		
 		Name | Description
 		--- | ---
 		`img` | The image file to use, relative to /materials. If this is nil, the image background is removed.
-		
-		
-		
     **/
     
      
     public function SetIcon(?img:String):Void;
     /**
-        Returns the current font of the DLabel. This is set with : .   
-		**Returns:** The name of the font in use.
+        Returns the current font of the DLabel. This is set with [DLabel](https://wiki.garrysmod.com/page/Category:DLabel): [SetFont](https://wiki.garrysmod.com/page/DLabel/SetFont).
 		
-		
+		`**Returns:** The name of the font in use.
     **/
     
      
@@ -69,9 +54,8 @@ extern class DButton extends DLabel {
 		
 		 This can be overridden; by default, it calls DLabel:Toggle. 
 		
-		 See also DLabel:DoRightClick, DLabel:DoMiddleClick and DLabel:DoDoubleClick. 
+		 See also DLabel:DoRightClick, DLabel:DoMiddleClick and DLabel:DoDoubleClick.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -92,8 +76,6 @@ extern class DButton extends DLabel {
 		**Output:**
 		
 		I was clicked! When the label is clicked.
-		
-		
     **/
     
     @:hook 
@@ -101,9 +83,8 @@ extern class DButton extends DLabel {
     /**
         Sets a console command to be called when the button is clicked. 
 		
-		This overrides the button's DoClick method. 
+		This overrides the button's DoClick method.
 		
-		 
 		Name | Description
 		--- | ---
 		`command` | The console command to be called.
@@ -123,8 +104,6 @@ extern class DButton extends DLabel {
 		button:MakePopup()
 		button:SetConsoleCommand( "say", LocalPlayer():Nick() )
 		```
-		
-		
     **/
     
      
@@ -134,51 +113,39 @@ extern class DButton extends DLabel {
 		
 		This will be called after DLabel:OnDepressed and DLabel:OnReleased. 
 		
-		 See also DLabel:DoClick, DLabel:DoRightClick and DLabel:DoDoubleClick. 
-		
-		 
-		
+		 See also DLabel:DoClick, DLabel:DoRightClick and DLabel:DoDoubleClick.
     **/
     
     @:hook 
     public function DoMiddleClick():Void;
     /**
-        Returns true if the DButton is currently depressed (a user is clicking on it). 
+        Returns true if the DButton is currently depressed (a user is clicking on it).
 		
-		
-		**Returns:** Whether or not the button is depressed.
-		
-		
+		`**Returns:** Whether or not the button is depressed.
     **/
     
      
     public function IsDown():Bool;
     /**
-        Sets the font of the label.   
+        Sets the font of the label.
+		
 		Name | Description
 		--- | ---
 		`fontName` | The name of the font. See here for a list of existing fonts. Alternatively, use surface. CreateFont to create your own custom font.
-		
-		
-		
     **/
     
      
     public function SetFont(fontName:String):Void;
     /**
-        ***Deprecated:**   Use Panel: SetEnabled instead.
+        ***Deprecated:** Use Panel: SetEnabled instead.
 		
-		Sets whether or not the DButton is disabled. When disabled, the button is greyed out and cannot be clicked. 
-		
+		Sets whether or not the DButton is disabled. When disabled, the button is greyed out and cannot be clicked.
 		
 		Name | Description
 		--- | ---
 		`disable` | true Enable the button false Disable the button
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("Use Panel: SetEnabled instead.")
      
     public function SetDisabled(disable:Bool):Void;
     /**
@@ -186,9 +153,8 @@ extern class DButton extends DLabel {
 		
 		This will be called after DLabel:OnDepressed and DLabel:OnReleased. 
 		
-		 See also DLabel:DoClick, DLabel:DoMiddleClick and DLabel:DoDoubleClick. 
+		 See also DLabel:DoClick, DLabel:DoMiddleClick and DLabel:DoDoubleClick.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -209,37 +175,28 @@ extern class DButton extends DLabel {
 		**Output:**
 		
 		I was clicked! When the label is right clicked.
-		
-		
     **/
     
      
     public function DoRightClick():Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Returns value set by DButton:SetDrawBorder. See that page for more info. 
+		Returns value set by DButton:SetDrawBorder. See that page for more info.
 		
-		
-		**Returns:** value set by DButton: SetDrawBorder.
-		
-		
+		`**Returns:** value set by DButton: SetDrawBorder.
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetDrawBorder():Bool;
     /**
         Sets an image to be displayed as the button's background. 
 		
-		Also see: DImageButton 
+		Also see: DImageButton
 		
-		 
 		Name | Description
 		--- | ---
 		`img` | The image file to use, relative to /materials. If this is nil, the image background is removed.
-		
-		
-		
     **/
     
      

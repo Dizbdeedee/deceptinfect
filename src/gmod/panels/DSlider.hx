@@ -2,126 +2,95 @@ package gmod.panels;
 #if client
 
 /**
-    Creates a slider that can be moved along the X and/or Y axis 
-	
-	
+    Creates a slider that can be moved along the X and/or Y axis
 **/
 extern class DSlider extends DPanel {
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does nothing. 
-		
+		Does nothing.
 		
 		Name | Description
 		--- | ---
 		`slider` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
-    public function SetNumSlider(slider:Any):Void;
+    public function SetNumSlider(slider:Dynamic):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Appears to be non functioning, however is still used by panels such as DNumSlider. 
-		
+		Appears to be non functioning, however is still used by panels such as DNumSlider.
 		
 		Name | Description
 		--- | ---
 		`trap` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetTrapInside(trap:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used to position the draggable panel of the slider on the Y axis. 
-		
+		Used to position the draggable panel of the slider on the Y axis.
 		
 		Name | Description
 		--- | ---
 		`y` | The value range seems to be from 0 to 1
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetSlideY(y:Float):Void;
     /**
-        Identical to DSlider:IsEditing 
+        Identical to DSlider:IsEditing
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetDragging():Bool;
     /**
-        Returns true if this element is being edited by the player. 
+        Returns true if this element is being edited by the player.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function IsEditing():Bool;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Appears to be non functioning, however is still used by panels such as DNumSlider. 
+		Appears to be non functioning, however is still used by panels such as DNumSlider.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetTrapInside():Bool;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Appears to be non functioning, however is still used by panels such as DNumSlider. 
-		
+		Appears to be non functioning, however is still used by panels such as DNumSlider.
 		
 		Name | Description
 		--- | ---
 		`notches` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetNotches(notches:Float):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does nothing. 
+		Does nothing.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
-    public function GetNumSlider():Any;
+    public function GetNumSlider():Dynamic;
     /**
-        For override by child panels, such as DNumSlider. 
-		
+        For override by child panels, such as DNumSlider.
 		
 		Name | Description
 		--- | ---
@@ -133,50 +102,36 @@ extern class DSlider extends DPanel {
 		--- | ---
 		`a` | x
 		`b` | y
-		
-		
-		
     **/
     
      
     public function TranslateValues(x:Float, y:Float):DSliderTranslateValuesReturn;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Sets whether or not the slider is being dragged. 
-		
+		Sets whether or not the slider is being dragged.
 		
 		Name | Description
 		--- | ---
 		`dragging` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetDragging(dragging:Bool):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does nothing. 
-		
-		
-		
+		Does nothing.
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetImageColor():Void;
     /**
-        Sets the background for the slider. 
-		
+        Sets the background for the slider.
 		
 		Name | Description
 		--- | ---
 		`path` | Path to the image.
-		
-		
-		
     **/
     
      
@@ -184,67 +139,51 @@ extern class DSlider extends DPanel {
     /**
         Returns the draggable panel's lock on the X axis. 
 		
-		See DSlider:SetLockX for more info. 
+		See DSlider:SetLockX for more info.
 		
-		 
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetLockX():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used to position the draggable panel of the slider on the X axis. 
-		
+		Used to position the draggable panel of the slider on the X axis.
 		
 		Name | Description
 		--- | ---
 		`x` | The value range seems to be from 0 to 1
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetSlideX(x:Float):Void;
     /**
         Returns the draggable panel's lock on the Y axis. 
 		
-		See DSlider:SetLockY for more info. 
+		See DSlider:SetLockY for more info.
 		
-		 
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetLockY():Float;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Appears to be non functioning, however is still used by panels such as DNumSlider. 
+		Appears to be non functioning, however is still used by panels such as DNumSlider.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetNotches():Float;
     /**
         Returns the target position of the draggable "knob" panel of the slider on the X axis. 
 		
-		Set by DSlider:SetSlideX. 
+		Set by DSlider:SetSlideX.
 		
-		 
-		**Returns:** The value range seems to be from 0 to 1
-		
-		
+		`**Returns:** The value range seems to be from 0 to 1
     **/
     
      
@@ -252,39 +191,29 @@ extern class DSlider extends DPanel {
     /**
         Returns the target position of the draggable "knob" panel of the slider on the Y axis. 
 		
-		Set by DSlider:SetSlideY. 
+		Set by DSlider:SetSlideY.
 		
-		 
-		**Returns:** The value range seems to be from 0 to 1
-		
-		
+		`**Returns:** The value range seems to be from 0 to 1
     **/
     
      
     public function GetSlideY():Float;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does nothing. 
-		
-		
-		
+		Does nothing.
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetImage():Void;
     /**
         Sets the lock on the Y axis. 
 		
-		For example the value 0.5 will lock the draggable panel to half the height of the slider's panel. 
+		For example the value 0.5 will lock the draggable panel to half the height of the slider's panel.
 		
-		 
 		Name | Description
 		--- | ---
 		`lockY` | Set to nil to reset lock. The value range is from 0 to 1.
-		
-		
-		
     **/
     
      
@@ -292,9 +221,8 @@ extern class DSlider extends DPanel {
     /**
         Sets the lock on the X axis. 
 		
-		For example the value 0.5 will lock the draggable panel to half the width of the slider's panel. 
+		For example the value 0.5 will lock the draggable panel to half the width of the slider's panel.
 		
-		 
 		Name | Description
 		--- | ---
 		`lockX` | Set to nil to reset lock. The value range is from 0 to 1.
@@ -317,8 +245,6 @@ extern class DSlider extends DPanel {
 		Slider:SetLockX()
 		Slider:SetLockY()
 		```
-		
-		
     **/
     
      

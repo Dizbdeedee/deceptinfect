@@ -2,9 +2,7 @@ package gmod.panels;
 #if client
 
 /**
-    Used in sandbox tools 
-	
-	
+    Used in sandbox tools
 **/
 extern class PropSelect extends ContextBase {
     

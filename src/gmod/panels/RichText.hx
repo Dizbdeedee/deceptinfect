@@ -4,17 +4,14 @@ package gmod.panels;
 /**
     A very versatile text display element that's used to power the default chat and console. 
 	
-	Rich Text panels allows multicolored, highlight-able, and interactive text using individual text segment markup (segments are defined by the Panel:AppendText method). 
-	
-	 
+	Rich Text panels allows multicolored, highlight-able, and interactive text using individual text segment markup (segments are defined by the Panel:AppendText method).
 **/
 extern class RichText extends Panel {
     /**
         Begins a text fade for a RichText element where the last appended text segment is fully faded out after a specific amount of time, at a specific speed. 
 		
-		The alpha of the text at any given time is determined by the text's base alpha * ((sustain - CurTime) / length) where CurTime is added to sustain when this method is called. 
+		The alpha of the text at any given time is determined by the text's base alpha * ((sustain - CurTime) / length) where CurTime is added to sustain when this method is called.
 		
-		 
 		Name | Description
 		--- | ---
 		`sustain` | The number of seconds the text remains visible.
@@ -99,8 +96,6 @@ extern class RichText extends Panel {
 		-- Kleiner read along
 		LocalPlayer():EmitSound("vo/k_lab2/kl_onehedy.wav")
 		```
-		
-		
     **/
     
      
@@ -108,22 +103,17 @@ extern class RichText extends Panel {
     /**
         Sets the visibility of the vertical scrollbar. 
 		
-		Works for RichText and TextEntry. 
+		Works for RichText and TextEntry.
 		
-		 
 		Name | Description
 		--- | ---
 		`display` | True to display the vertical text scroll bar, false to hide it.
-		
-		
-		
     **/
     
      
     public function SetVerticalScrollbarEnabled(?display:Bool):Void;
     /**
-        Resets all text fades in a RichText element made with Panel:InsertFade. 
-		
+        Resets all text fades in a RichText element made with Panel:InsertFade.
 		
 		Name | Description
 		--- | ---
@@ -170,8 +160,6 @@ extern class RichText extends Panel {
 		
 		end)
 		```
-		
-		
     **/
     
      
@@ -179,9 +167,10 @@ extern class RichText extends Panel {
     /**
         Starts the insertion of clickable text for a RichText element. Any text appended with Panel:AppendText between this call and Panel:InsertClickableTextEnd will become clickable text. 
 		
-		The hook PANEL:ActionSignal is called when the text is clicked, with "TextClicked" as the signal name and signalValue as the signal value. 
+		The hook PANEL:ActionSignal is called when the text is clicked, with "TextClicked" as the signal name and signalValue as the signal value.
 		
-		 
+		**Note:** The clickable text is a separate Derma panel which will not inherit the current font from the RichText.
+		
 		Name | Description
 		--- | ---
 		`signalValue` | The text passed as the action signal's value.
@@ -238,15 +227,14 @@ extern class RichText extends Panel {
 		
 		end
 		```
-		
-		
     **/
     
      
     public function InsertClickableTextStart(signalValue:String):Void;
     /**
-        Sets the height of a RichText element to accommodate the text inside. 
+        Sets the height of a RichText element to accommodate the text inside.
 		
+		**Note:** This function internally relies on Panel:GetNumLines, so it should be called at least a couple frames after modifying the text using Panel:AppendText
 		
 		___
 		### Lua Examples
@@ -280,8 +268,6 @@ extern class RichText extends Panel {
 		    
 		end)
 		```
-		
-		
     **/
     
      
@@ -289,9 +275,8 @@ extern class RichText extends Panel {
     /**
         Sets the font used to render this panel's text. 
 		
-		To retrieve the font used by a panel, call Panel:GetFont. 
+		To retrieve the font used by a panel, call Panel:GetFont.
 		
-		 
 		Name | Description
 		--- | ---
 		`fontName` | The name of the font. See here for a list of existing fonts. Alternatively, use surface. CreateFont to create your own custom font.
@@ -325,15 +310,12 @@ extern class RichText extends Panel {
 		    
 		end
 		```
-		
-		
     **/
     
      
     public function SetFontInternal(fontName:String):Void;
     /**
-        Inserts a color change in a RichText element, which affects the color of all text added with Panel:AppendText until another color change is applied. 
-		
+        Inserts a color change in a RichText element, which affects the color of all text added with Panel:AppendText until another color change is applied.
 		
 		Name | Description
 		--- | ---
@@ -425,31 +407,26 @@ extern class RichText extends Panel {
 		    
 		end
 		```
-		
-		
     **/
     
      
     public function InsertColorChange(r:Float, g:Float, b:Float, a:Float):Void;
     /**
-        Appends text to a RichText element. This does not automatically add a new line. 
-		
+        Appends text to a RichText element. This does not automatically add a new line.
 		
 		Name | Description
 		--- | ---
 		`txt` | The text to append (add on).
-		
-		
-		
     **/
     
      
     public function AppendText(txt:String):Void;
     /**
-        Returns the number of lines in a RichText. You must wait a couple frames before calling this after using Panel:AppendText or Panel:SetText, otherwise it will return the number of text lines before the text change. 
+        Returns the number of lines in a RichText. You must wait a couple frames before calling this after using Panel:AppendText or Panel:SetText, otherwise it will return the number of text lines before the text change.
 		
+		**Note:** Even though this function can be called on any panel, it will only work with RichText
 		
-		**Returns:** The number of lines.
+		`**Returns:** The number of lines.
 		
 		___
 		### Lua Examples
@@ -494,15 +471,14 @@ extern class RichText extends Panel {
 		The panel shows 5 lines of text, but the number 5 isn't returned until PerformLayout has been called 2 times. PerformLayout called 0 times: 1 line(s) returned
 		PerformLayout called 1 times: 1 line(s) returned
 		PerformLayout called 2 times: 5 line(s) returned
-		
-		
     **/
     
      
     public function GetNumLines():Float;
     /**
-        Causes a RichText element to scroll to the top of its text. 
+        Causes a RichText element to scroll to the top of its text.
 		
+		**Bug:** BUG This does not work on the same frame as Panel:SetText. Issue Tracker: #2239
 		
 		___
 		### Lua Examples
@@ -542,15 +518,12 @@ extern class RichText extends Panel {
 		    
 		end
 		```
-		
-		
     **/
     
      
     public function GotoTextStart():Void;
     /**
-        Marks the end of a clickable text segment in a RichText element, started with Panel:InsertClickableTextStart. 
-		
+        Marks the end of a clickable text segment in a RichText element, started with Panel:InsertClickableTextStart.
 		
 		___
 		### Lua Examples
@@ -603,15 +576,14 @@ extern class RichText extends Panel {
 		
 		end
 		```
-		
-		
     **/
     
      
     public function InsertClickableTextEnd():Void;
     /**
-        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton. 
+        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
+		**Warning:** When used on a Label or its derivatives ( DLabel and DButton ), it will automatically call Panel:InvalidateLayout, meaning that you should avoid running this function every frame on these panels to avoid unnecessary performance loss.
 		
 		Name | Description
 		--- | ---
@@ -637,17 +609,12 @@ extern class RichText extends Panel {
 		-- Set the text to the message you get when VAC banned
 		richtext:SetText("#VAC_ConnectionRefusedDetail")
 		```
-		
-		
     **/
     
      
     public function SetText(text:String):Void;
     /**
-        Causes a RichText element to scroll to the bottom of its text. 
-		
-		
-		
+        Causes a RichText element to scroll to the bottom of its text.
     **/
     
      

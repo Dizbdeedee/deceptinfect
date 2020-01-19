@@ -2,83 +2,62 @@ package gmod.panels;
 #if client
 
 /**
-    A simple menu with sub menu, icon and convar support. 
-	
-	
+    A simple menu with sub menu, icon and convar support.
 **/
 extern class DMenu extends DScrollPanel {
     /**
-        Called when a option has been selected 
-		
+        Called when a option has been selected
 		
 		Name | Description
 		--- | ---
 		`option` | The DMenuOption that was selected
 		`optionText` | The options text
-		
-		
-		
     **/
     
     @:hook 
     public function OptionSelected(option:Panel, optionText:String):Void;
     /**
-        Returns the maximum height of the DMenu. 
+        Returns the maximum height of the DMenu.
 		
-		
-		**Returns:** The maximum height in pixels
-		
-		
+		`**Returns:** The maximum height in pixels
     **/
     
      
     public function GetMaxHeight():Float;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does nothing. 
-		
+		Does nothing.
 		
 		Name | Description
 		--- | ---
 		`bool` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetDrawBorder(bool:Bool):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
 		Highlights selected item in the DMenu by setting the item's key "Highlight" to true. 
 		
-		Doesn't appear to be working or used. 
+		Doesn't appear to be working or used.
 		
-		 
 		Name | Description
 		--- | ---
 		`item` | The item to highlight.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function HighlightItem(item:Panel):Void;
     /**
-        Used to safely hide (not remove) the menu. This will also hide any opened submenues recursively. 
-		
-		
-		
+        Used to safely hide (not remove) the menu. This will also hide any opened submenues recursively.
     **/
     
      
     public function Hide():Void;
     /**
-        Opens the DMenu at the current mouse position 
-		
+        Opens the DMenu at the current mouse position
 		
 		Name | Description
 		--- | ---
@@ -86,98 +65,74 @@ extern class DMenu extends DScrollPanel {
 		`y` | Position (Y coordinate) to open the menu at.
 		`skipanimation` | This argument does nothing.
 		`ownerpanel` | 
-		
-		
-		
     **/
     
      
-    public function Open(?x:Float, ?y:Float, skipanimation:Any, ownerpanel:Panel):Void;
+    public function Open(?x:Float, ?y:Float, skipanimation:Dynamic, ownerpanel:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used internally to store the open submenu by DMenu:Hide, DMenu:OpenSubMenu, DMenu:CloseSubMenu 
-		
+		Used internally to store the open submenu by DMenu:Hide, DMenu:OpenSubMenu, DMenu:CloseSubMenu
 		
 		Name | Description
 		--- | ---
 		`item` | The menu to store
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetOpenSubMenu(item:Panel):Void;
     /**
-        Sets whether the DMenu should draw the icon column with a different color. 
-		
+        Sets whether the DMenu should draw the icon column with a different color.
 		
 		Name | Description
 		--- | ---
 		`draw` | Whether to draw the column or not
-		
-		
-		
     **/
     
      
     public function SetDrawColumn(draw:Bool):Void;
     /**
-        Returns the minimum width of the DMenu in pixels 
+        Returns the minimum width of the DMenu in pixels
 		
-		
-		**Returns:** the minimum width of the DMenu
-		
-		
+		`**Returns:** the minimum width of the DMenu
     **/
     
      
     public function GetMinimumWidth():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used internally by DMenu:OpenSubMenu. 
-		
+		Used internally by DMenu:OpenSubMenu.
 		
 		Name | Description
 		--- | ---
 		`menu` | The menu to close
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function CloseSubMenu(menu:Panel):Void;
     /**
-        Returns the number of child elements of DMenu's DScrollPanel:GetCanvas. 
+        Returns the number of child elements of DMenu's DScrollPanel:GetCanvas.
 		
-		
-		**Returns:** The number of child elements
-		
-		
+		`**Returns:** The number of child elements
     **/
     
      
     public function ChildCount():Float;
     /**
-        Gets a child by its index. 
+        Gets a child by its index.
 		
+		**Note:** Unlike Panel:GetChild, this index starts at 1.
 		
 		Name | Description
 		--- | ---
 		`childIndex` | The index of the child to get. NOTE Unlike Panel:GetChild, this index starts at 1.
-		
-		
-		
     **/
     
      
     public function GetChild(childIndex:Float):Void;
     /**
-        Add an option to the DMenu 
-		
+        Add an option to the DMenu
 		
 		Name | Description
 		--- | ---
@@ -185,7 +140,7 @@ extern class DMenu extends DScrollPanel {
 		`func` | Function to execute when this option is clicked.
 		
 		
-		**Returns:** Returns the created DMenuOption panel.
+		`**Returns:** Returns the created DMenuOption panel.
 		
 		___
 		### Lua Examples
@@ -200,15 +155,12 @@ extern class DMenu extends DScrollPanel {
 		
 		m:Open()
 		```
-		
-		
     **/
     
      
     public function AddOption(name:String, ?func:Function):Panel;
     /**
-        Creates a DMenuOptionCVar and adds it as an option into the menu. Checking and unchecking the option will alter the given console variable's value. 
-		
+        Creates a DMenuOptionCVar and adds it as an option into the menu. Checking and unchecking the option will alter the given console variable's value.
 		
 		Name | Description
 		--- | ---
@@ -219,76 +171,60 @@ extern class DMenu extends DScrollPanel {
 		`funcFunction` | If set, the function will be called every time the option is pressed/clicked/selected. It will have only one argument: Panel pnl - The created DMenuOptionCVar.
 		
 		
-		**Returns:** The created DMenuOptionCVar
-		
-		
+		`**Returns:** The created DMenuOptionCVar
     **/
     
      
     public function AddCVar(strText:String, convar:String, on:String, off:String, ?funcFunction:Function):Panel;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called by DMenuOption. Calls DMenu:OptionSelected. 
-		
+		Called by DMenuOption. Calls DMenu:OptionSelected.
 		
 		Name | Description
 		--- | ---
 		`option` | The DMenuOption that called this function
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function OptionSelectedInternal(option:Panel):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Set by DMenu:SetDeleteSelf 
+		Set by DMenu:SetDeleteSelf
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetDeleteSelf():Bool;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
 		Clears all highlights made by DMenu:HighlightItem. 
 		
-		Doesn't appear to be used or do anything. 
-		
-		 
-		
+		Doesn't appear to be used or do anything.
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function ClearHighlights():Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Returns the currently opened submenu. 
 		
-		Used internally to store the open submenu by DMenu:Hide, DMenu:OpenSubMenu. 
+		Used internally to store the open submenu by DMenu:Hide, DMenu:OpenSubMenu.
 		
-		 
-		**Returns:** The currently opened submenu, if any.
-		
-		
+		`**Returns:** The currently opened submenu, if any.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function GetOpenSubMenu():Panel;
     /**
         Adds a panel to the DMenu as if it were an option. 
 		
-		This invokes DScrollPanel:AddItem and will not create a new panel if a class name is passed, unlike Panel:Add. 
+		This invokes DScrollPanel:AddItem and will not create a new panel if a class name is passed, unlike Panel:Add.
 		
-		 
 		Name | Description
 		--- | ---
 		`pnl` | The panel that you want to add.
@@ -317,8 +253,6 @@ extern class DMenu extends DScrollPanel {
 		
 		m:Open() -- Show our menu
 		```
-		
-		
     **/
     
      
@@ -326,75 +260,56 @@ extern class DMenu extends DScrollPanel {
     /**
         Returns whether the DMenu should draw the icon column with a different color or not. 
 		
-		See DMenu:SetDrawColumn 
+		See DMenu:SetDrawColumn
 		
-		 
-		**Returns:** Whether to draw the column or not
-		
-		
+		`**Returns:** Whether to draw the column or not
     **/
     
      
     public function GetDrawColumn():Bool;
     /**
-        Sets the maximum height the DMenu can have. If the height of all menu items exceed this value, a scroll bar will be automatically added. 
-		
+        Sets the maximum height the DMenu can have. If the height of all menu items exceed this value, a scroll bar will be automatically added.
 		
 		Name | Description
 		--- | ---
 		`maxHeight` | The maximum height of the DMenu to set, in pixels
-		
-		
-		
     **/
     
      
     public function SetMaxHeight(maxHeight:Float):Void;
     /**
-        Closes any active sub menus, and opens a new one. 
-		
+        Closes any active sub menus, and opens a new one.
 		
 		Name | Description
 		--- | ---
 		`item` | The DMenuOption to open the submenu at
 		`menu` | The submenu to open. If set to nil, the function just closes existing submenus.
-		
-		
-		
     **/
     
      
     public function OpenSubMenu(item:Panel, ?menu:Panel):Void;
     /**
-        Sets the minimum width of the DMenu. The menu will be stretched to match the given value. 
-		
+        Sets the minimum width of the DMenu. The menu will be stretched to match the given value.
 		
 		Name | Description
 		--- | ---
 		`minWidth` | The minimum width of the DMenu in pixels
-		
-		
-		
     **/
     
      
     public function SetMinimumWidth(minWidth:Float):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Returns the value set by DMenu:SetDrawBorder. 
+		Returns the value set by DMenu:SetDrawBorder.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function GetDrawBorder():Bool;
     /**
-        Adds a horizontal line spacer. 
-		
+        Adds a horizontal line spacer.
 		
 		___
 		### Lua Examples
@@ -413,15 +328,12 @@ extern class DMenu extends DScrollPanel {
 		
 		m:Open() -- Show our menu
 		```
-		
-		
     **/
     
      
     public function AddSpacer():Void;
     /**
-        Add a sub menu to the DMenu 
-		
+        Add a sub menu to the DMenu
 		
 		Name | Description
 		--- | ---
@@ -454,8 +366,6 @@ extern class DMenu extends DScrollPanel {
 		
 		parentMenu:Open()
 		```
-		
-		
     **/
     
      
@@ -463,15 +373,11 @@ extern class DMenu extends DScrollPanel {
     /**
         Set to true by default. IF set to true, the menu will be deleted when it is closed, not simply hidden. 
 		
-		This is used by DMenuBar 
+		This is used by DMenuBar
 		
-		 
 		Name | Description
 		--- | ---
 		`newState` | true to delete menu on close, false to simply hide.
-		
-		
-		
     **/
     
      

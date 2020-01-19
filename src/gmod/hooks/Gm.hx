@@ -4,15 +4,18 @@ package gmod.hooks;
 /**
     Hooks that are available for all gamemodes based on base gamemode. 
 	
-	See also: GM structure 
-	
-	 
+	See also: GM structure
 **/
 class Gm {
-
+    
     /**
-        Executes when a player connects to the server. Called before the player has been assigned a UserID and entity. See the player_connect gameevent for a version of this hook called after the player entity has been created. 
+        Executes when a player connects to the server. Called before the player has been assigned a UserID and entity. See the player_connect gameevent for a version of this hook called after the player entity has been created.
 		
+		**Note:** This is only called clientside for listen server hosts.
+		
+		**Note:** This is not called clientside for the local player.
+		
+		**Note:** This argument will only be passed serverside.
 		
 		Name | Description
 		--- | ---
@@ -33,8 +36,6 @@ class Gm {
 		**Output:**
 		
 		Player1 has joined the game.
-		
-		
     **/
     
     @:hook
@@ -42,8 +43,7 @@ class Gm {
     
     #if server
     /**
-        Check if a player can spawn at a certain spawnpoint. 
-		
+        Check if a player can spawn at a certain spawnpoint.
 		
 		Name | Description
 		--- | ---
@@ -52,7 +52,7 @@ class Gm {
 		`makeSuitable` | If this is true, it'll kill any players blocking the spawnpoint
 		
 		
-		**Returns:** Return true to indicate that the spawnpoint is suitable (Allow for the player to spawn here), false to prevent spawning
+		`**Returns:** Return true to indicate that the spawnpoint is suitable (Allow for the player to spawn here), false to prevent spawning
 		
 		___
 		### Lua Examples
@@ -94,8 +94,6 @@ class Gm {
 		**Output:**
 		
 		true or false
-		
-		
     **/
     
     @:hook
@@ -103,17 +101,13 @@ class Gm {
     #end
     #if server
     /**
-        Called from gm_load when the game should load a map. 
-		
+        Called from gm_load when the game should load a map.
 		
 		Name | Description
 		--- | ---
 		`data` | 
 		`map` | 
 		`timestamp` | 
-		
-		
-		
     **/
     
     @:hook
@@ -121,17 +115,17 @@ class Gm {
     #end
     #if client
     /**
-        Called after view model is drawn. 
+        Called after view model is drawn.
 		
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
+		
+		**Note:** The 3D rendering context in this event is different from the main view. Every render operation will only be accurate with the view model entity.
 		
 		Name | Description
 		--- | ---
 		`viewmodel` | Players view model
 		`player` | The owner of the weapon/view model
 		`weapon` | The weapon the player is currently holding
-		
-		
-		
     **/
     
     @:hook
@@ -139,15 +133,11 @@ class Gm {
     #end
     #if server
     /**
-        Called when a player executes gm_showteam console command. ( Default bind is F2 ) 
-		
+        Called when a player executes gm_showteam console command. ( Default bind is F2 )
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who executed the command
-		
-		
-		
     **/
     
     @:hook
@@ -157,16 +147,21 @@ class Gm {
     /**
         Called to decide whether a pair of entities should collide with each other. This is only called if Entity:SetCustomCollisionCheck was used on one or both entities. 
 		
-		Where applicable, consider using constraint.NoCollide instead - it is considerably easier to use. 
+		Where applicable, consider using constraint.NoCollide instead - it is considerably easier to use.
 		
-		 
+		**Warning:** This hook must return the same value consistently for the same pair of entities. If an entity changed in such a way that its collision rules change, you must call Entity:CollisionRulesChanged on that entity immediately - not in this hook.
+		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
+		**Bug:** BUG This hook can cause all physics to break under certain conditions. Issue Tracker: #642
+		
 		Name | Description
 		--- | ---
 		`ent1` | The first entity in the collision poll.
 		`ent2` | The second entity in the collision poll.
 		
 		
-		**Returns:** Whether the entities should collide.
+		`**Returns:** Whether the entities should collide.
 		
 		___
 		### Lua Examples
@@ -184,8 +179,6 @@ class Gm {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -193,8 +186,7 @@ class Gm {
     
     #if server
     /**
-        Returns whether or not a player is allowed to pick an item up. 
-		
+        Returns whether or not a player is allowed to pick an item up.
 		
 		Name | Description
 		--- | ---
@@ -202,9 +194,7 @@ class Gm {
 		`item` | The item the player is attempting to pick up
 		
 		
-		**Returns:** Allow pick up
-		
-		
+		`**Returns:** Allow pick up
     **/
     
     @:hook
@@ -212,15 +202,16 @@ class Gm {
     #end
     #if client
     /**
-        Runs when the user tries to open the chat box. 
+        Runs when the user tries to open the chat box.
 		
+		**Bug:** BUG Returning true won't stop the chatbox from taking VGUI focus. Issue Tracker: #855
 		
 		Name | Description
 		--- | ---
 		`isTeamChat` | Whether the message was sent through team chat.
 		
 		
-		**Returns:** Return true to hide the default chat box.
+		`**Returns:** Return true to hide the default chat box.
 		
 		___
 		### Lua Examples
@@ -236,8 +227,6 @@ class Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -245,10 +234,9 @@ class Gm {
     #end
     #if client
     /**
-        Called after rendering effects. This is where halos are drawn. Called just before GM:PreDrawHUD. 
+        Called after rendering effects. This is where halos are drawn. Called just before GM:PreDrawHUD.
 		
-		
-		
+		**Note:** This is a rendering hook with a 2D rendering context. This means that the only rendering functions will work in it are functions with a 2D rendering context.
     **/
     
     @:hook
@@ -258,16 +246,12 @@ class Gm {
     /**
         Called when a serverside ragdoll of an entity has been created. 
 		
-		See GM:CreateClientsideRagdoll for clientside ragdolls. 
+		See GM:CreateClientsideRagdoll for clientside ragdolls.
 		
-		 
 		Name | Description
 		--- | ---
 		`owner` | Entity that owns the ragdoll
 		`ragdoll` | The ragdoll entity
-		
-		
-		
     **/
     
     @:hook
@@ -275,12 +259,9 @@ class Gm {
     #end
     #if client
     /**
-        Returning true in this hook will cause it to render depth buffers defined with render.GetResolvedFullFrameDepth. 
+        Returning true in this hook will cause it to render depth buffers defined with render.GetResolvedFullFrameDepth.
 		
-		
-		**Returns:** Render depth buffer
-		
-		
+		`**Returns:** Render depth buffer
     **/
     
     @:hook
@@ -292,10 +273,7 @@ class Gm {
 		
 		See GM:Restored for a hook that is called when such a save file is loaded. 
 		
-		 See also the saverestore library for relevant functions. 
-		
-		 
-		
+		 See also the saverestore library for relevant functions.
     **/
     
     @:hook
@@ -303,8 +281,9 @@ class Gm {
     
     #if client
     /**
-        Called whenever a player sends a chat message. For the serverside equivalent, see GM:PlayerSay. 
+        Called whenever a player sends a chat message. For the serverside equivalent, see GM:PlayerSay.
 		
+		**Note:** The text input of this hook depends on GM:PlayerSay. If it is suppressed on the server, it will be suppressed on the client.
 		
 		Name | Description
 		--- | ---
@@ -314,7 +293,7 @@ class Gm {
 		`isDead` | Is the player dead?
 		
 		
-		**Returns:** Should the message be suppressed?
+		`**Returns:** Should the message be suppressed?
 		
 		___
 		### Lua Examples
@@ -377,8 +356,6 @@ class Gm {
 		**Output:**
 		
 		Prints "Hello world!" to the console when you type /hello in the chat.
-		
-		
     **/
     
     @:hook
@@ -388,16 +365,15 @@ class Gm {
     /**
         Called when a player tries to pick up something using the "use" key, return to override. 
 		
-		See GM:GravGunPickupAllowed for the Gravity Gun pickup variant. 
+		See GM:GravGunPickupAllowed for the Gravity Gun pickup variant.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | The player trying to pick up something.
 		`ent` | The Entity the player attempted to pick up.
 		
 		
-		**Returns:** Allow the player to pick up the entity or not.
+		`**Returns:** Allow the player to pick up the entity or not.
 		
 		___
 		### Lua Examples
@@ -410,8 +386,6 @@ class Gm {
 		end
 		hook.Add( "AllowPlayerPickup", "some_unique_name", up )
 		```
-		
-		
     **/
     
     @:hook
@@ -419,8 +393,9 @@ class Gm {
     #end
     
     /**
-        This hook allows you to change how much damage a player receives when one takes damage to a specific body part. 
+        This hook allows you to change how much damage a player receives when one takes damage to a specific body part.
 		
+		**Note:** This is not called for all damage a player receives ( For example fall damage or NPC melee damage ), so you should use GM:EntityTakeDamage instead if you need to detect ALL damage.
 		
 		Name | Description
 		--- | ---
@@ -429,7 +404,7 @@ class Gm {
 		`dmginfo` | The damage info.
 		
 		
-		**Returns:** Return true to prevent damage that this hook is called for, stop blood particle effects and blood decals. It is possible to return true only on client ( This will work only in multiplayer ) to stop the effects but still take damage.
+		`**Returns:** Return true to prevent damage that this hook is called for, stop blood particle effects and blood decals. It is possible to return true only on client ( This will work only in multiplayer ) to stop the effects but still take damage.
 		
 		___
 		### Lua Examples
@@ -445,29 +420,26 @@ class Gm {
 		     end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function ScalePlayerDamage(ply:Player, hitgroup:Float, dmginfo:CTakeDamageInfo):Bool {return null;}
+    public function ScalePlayerDamage(ply:Player, hitgroup:HITGROUP, dmginfo:CTakeDamageInfo):Bool {return null;}
     
     #if client
     /**
         Called before all opaque entities are drawn. 
 		
-		See also GM:PreDrawTranslucentRenderables and GM:PostDrawOpaqueRenderables. 
+		See also GM:PreDrawTranslucentRenderables and GM:PostDrawOpaqueRenderables.
 		
-		 
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
+		
 		Name | Description
 		--- | ---
 		`isDrawingDepth` | Whether the current draw is writing depth.
 		`isDrawSkybox` | Whether the current draw is drawing the skybox.
 		
 		
-		**Returns:** Return true to prevent opaque renderables from drawing.
-		
-		
+		`**Returns:** Return true to prevent opaque renderables from drawing.
     **/
     
     @:hook
@@ -477,9 +449,12 @@ class Gm {
     /**
         Called when the player spawns for the first time. 
 		
-		See GM:PlayerSpawn for a hook called every player spawn. 
+		See GM:PlayerSpawn for a hook called every player spawn.
 		
-		 
+		**Warning:** Due to the above note, sending net library messages to the spawned player in this hook is highly unreliable, and they most likely won't be received. See https://github.com/Facepunch/garrysmod-requests/issues/718. A quick and dirty work-around is to delay any sending using timer.Simple with at least 5 seconds delay.
+		
+		**Note:** This hook is called before the player has fully loaded, when the player is still in seeing the "Starting Lua" screen. For example, trying to use the Entity:GetModel function will return the default model ("player/default.mdl")
+		
 		Name | Description
 		--- | ---
 		`player` | The player who spawned.
@@ -506,8 +481,6 @@ class Gm {
 		**Output:**
 		
 		Player1 joined the game
-		
-		
     **/
     
     @:hook
@@ -515,16 +488,12 @@ class Gm {
     #end
     #if server
     /**
-        Makes the player join a specified team. This is a convenience function that calls Player:SetTeam and runs the GM:OnPlayerChangedTeam hook. 
-		
+        Makes the player join a specified team. This is a convenience function that calls Player:SetTeam and runs the GM:OnPlayerChangedTeam hook.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player to force
 		`team` | The team to put player into
-		
-		
-		
     **/
     
     @:hook
@@ -532,8 +501,9 @@ class Gm {
     #end
     #if server
     /**
-        Called when a player freezes an entity with the physgun. 
+        Called when a player freezes an entity with the physgun.
 		
+		**Bug:** BUG This is not called for players or NPCs being held with the physgun. Issue Tracker: #723
 		
 		Name | Description
 		--- | ---
@@ -543,7 +513,7 @@ class Gm {
 		`ply` | The player who tried to freeze the entity.
 		
 		
-		**Returns:** Allows you to override whether the player can freeze the entity
+		`**Returns:** Allows you to override whether the player can freeze the entity
 		
 		___
 		### Lua Examples
@@ -561,8 +531,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -570,8 +538,9 @@ class Gm {
     #end
     #if server
     /**
-        Called to give players the default set of weapons. 
+        Called to give players the default set of weapons.
 		
+		**Note:** This function may not work in your custom gamemode if you have overridden your GM:PlayerSpawn and you do not use self.BaseClass.PlayerSpawn or hook.Call.
 		
 		Name | Description
 		--- | ---
@@ -591,8 +560,6 @@ class Gm {
 		    return true
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -602,10 +569,7 @@ class Gm {
     /**
         Called right before the map cleans up (usually because game.CleanUpMap was called) 
 		
-		See also GM:PostCleanupMap. 
-		
-		 
-		
+		See also GM:PostCleanupMap.
     **/
     
     @:hook
@@ -613,10 +577,9 @@ class Gm {
     
     
     /**
-        Teams are created within this hook using team.SetUp. 
+        Teams are created within this hook using team.SetUp.
 		
-		
-		
+		**Note:** This hook is called before GM:PreGamemodeLoaded.
     **/
     
     @:hook
@@ -624,10 +587,7 @@ class Gm {
     
     #if client
     /**
-        Hides the team selection panel. 
-		
-		
-		
+        Hides the team selection panel.
     **/
     
     @:hook
@@ -635,15 +595,11 @@ class Gm {
     #end
     #if client
     /**
-        Called whenever the content of the user's chat input box is changed. 
-		
+        Called whenever the content of the user's chat input box is changed.
 		
 		Name | Description
 		--- | ---
 		`text` | The new contents of the input box
-		
-		
-		
     **/
     
     @:hook
@@ -651,24 +607,24 @@ class Gm {
     #end
     #if client
     /**
-        Called when user clicks on a VGUI panel.     
+        Called when user clicks on a VGUI panel.
+		
 		Name | Description
 		--- | ---
 		`button` | The button that was pressed, see MOUSE_ Enums
 		
 		
-		**Returns:** Return true if the mouse click should be ignored or not.
-		
-		
+		`**Returns:** Return true if the mouse click should be ignored or not.
     **/
     
     @:hook
-    public function VGUIMousePressAllowed(button:Float):Bool {return null;}
+    public function VGUIMousePressAllowed(button:MOUSE):Bool {return null;}
     #end
     
     /**
-        Called when a Lua error occurs, only works in the Menu realm. 
+        Called when a Lua error occurs, only works in the Menu realm.
 		
+		**Warning:** Modify menu state Lua code at your own risk!
 		
 		Name | Description
 		--- | ---
@@ -782,8 +738,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -791,16 +745,12 @@ class Gm {
     
     #if server
     /**
-        Called when an entity is released by a gravity gun. 
-		
+        Called when an entity is released by a gravity gun.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who is wielding the gravity gun
 		`ent` | The entity that has been dropped
-		
-		
-		
     **/
     
     @:hook
@@ -808,8 +758,7 @@ class Gm {
     #end
     #if client
     /**
-        Allows you to modify the supplied User Command with mouse input. This could be used to make moving the mouse do funky things to view angles. 
-		
+        Allows you to modify the supplied User Command with mouse input. This could be used to make moving the mouse do funky things to view angles.
 		
 		Name | Description
 		--- | ---
@@ -819,7 +768,7 @@ class Gm {
 		`ang` | The current view angle
 		
 		
-		**Returns:** Return true if we modified something
+		`**Returns:** Return true if we modified something
 		
 		___
 		### Lua Examples
@@ -834,8 +783,6 @@ class Gm {
 		    return true
 		end)
 		```
-		
-		
     **/
     
     @:hook
@@ -845,9 +792,12 @@ class Gm {
     /**
         Called whenever a player pressed a key included within the IN keys. 
 		
-		For a more general purpose function that handles all kinds of input, see GM:PlayerButtonDown 
+		For a more general purpose function that handles all kinds of input, see GM:PlayerButtonDown
 		
-		 
+		**Warning:** Due to this being a predicted hook, ParticleEffects created only serverside from this hook will not be networked to the client, so make sure to do that on both realms
+		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
 		Name | Description
 		--- | ---
 		`ply` | The player pressing the key. If running client-side, this will always be LocalPlayer
@@ -877,17 +827,14 @@ class Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function KeyPress(ply:Player, key:Float):Void {}
+    public function KeyPress(ply:Player, key:IN):Void {}
     
     
     /**
-        Allows to override player flying ( in mid-air, not noclipping ) animations. 
-		
+        Allows to override player flying ( in mid-air, not noclipping ) animations.
 		
 		Name | Description
 		--- | ---
@@ -895,9 +842,7 @@ class Gm {
 		`velocity` | Players velocity
 		
 		
-		**Returns:** Return true if we've changed/set the animation, false otherwise
-		
-		
+		`**Returns:** Return true if we've changed/set the animation, false otherwise
     **/
     
     @:hook
@@ -905,8 +850,7 @@ class Gm {
     
     #if server
     /**
-        Returns whether or not the player can see the other player's chat. 
-		
+        Returns whether or not the player can see the other player's chat.
 		
 		Name | Description
 		--- | ---
@@ -916,9 +860,7 @@ class Gm {
 		`speaker` | The player sending the message
 		
 		
-		**Returns:** Can see other player's chat
-		
-		
+		`**Returns:** Can see other player's chat
     **/
     
     @:hook
@@ -928,17 +870,16 @@ class Gm {
     /**
         Called every think while the player is dead. The return value will determine if the player respawns. 
 		
-		Overwriting this function will prevent players from respawning by pressing space or clicking. 
+		Overwriting this function will prevent players from respawning by pressing space or clicking.
 		
-		 
+		**Bug:** BUG This hook is not called for players with the FL_FROZEN flag applied. Issue Tracker: #1577
+		
 		Name | Description
 		--- | ---
 		`ply` | The player affected in the hook.
 		
 		
-		**Returns:** Allow spawn
-		
-		
+		`**Returns:** Allow spawn
     **/
     
     @:hook
@@ -948,9 +889,8 @@ class Gm {
     /**
         Called when a key-value pair is set on an entity, either by the engine (for example when map spawns) or Entity:SetKeyValue. 
 		
-		See ENTITY:KeyValue for a hook that works for scripted entities. See WEAPON:KeyValue for a hook that works for scripted weapons. 
+		See ENTITY:KeyValue for a hook that works for scripted entities. See WEAPON:KeyValue for a hook that works for scripted weapons.
 		
-		 
 		Name | Description
 		--- | ---
 		`ent` | Entity that the keyvalue is being set on
@@ -958,9 +898,7 @@ class Gm {
 		`value` | Value of the key/value pair
 		
 		
-		**Returns:** If set, the value of the key-value pair will be overridden by this string.
-		
-		
+		`**Returns:** If set, the value of the key-value pair will be overridden by this string.
     **/
     
     @:hook
@@ -968,8 +906,11 @@ class Gm {
     
     #if client
     /**
-        Called before the view model has been drawn. This hook by default also calls this on weapons, so you can use WEAPON:PreDrawViewModel. 
+        Called before the view model has been drawn. This hook by default also calls this on weapons, so you can use WEAPON:PreDrawViewModel.
 		
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
+		
+		**Bug:** BUG This is also called once a frame with no arguments. Issue Tracker: #3024
 		
 		Name | Description
 		--- | ---
@@ -978,9 +919,7 @@ class Gm {
 		`weapon` | This is the weapon that is from the view model.
 		
 		
-		**Returns:** Return true to prevent the default view model rendering. This also affects GM: PostDrawViewModel.
-		
-		
+		`**Returns:** Return true to prevent the default view model rendering. This also affects GM: PostDrawViewModel.
     **/
     
     @:hook
@@ -988,8 +927,7 @@ class Gm {
     #end
     
     /**
-        Allows to override player landing animations. 
-		
+        Allows to override player landing animations.
 		
 		Name | Description
 		--- | ---
@@ -998,9 +936,7 @@ class Gm {
 		`onGround` | Was the player on ground?
 		
 		
-		**Returns:** Return true if we've changed/set the animation, false otherwise
-		
-		
+		`**Returns:** Return true if we've changed/set the animation, false otherwise
     **/
     
     @:hook
@@ -1008,8 +944,7 @@ class Gm {
     
     #if server
     /**
-        Returns whether or not a player is allowed to pick up a weapon. 
-		
+        Returns whether or not a player is allowed to pick up a weapon.
 		
 		Name | Description
 		--- | ---
@@ -1017,7 +952,7 @@ class Gm {
 		`wep` | The weapon entity in question
 		
 		
-		**Returns:** Allowed pick up or not
+		`**Returns:** Allowed pick up or not
 		
 		___
 		### Lua Examples
@@ -1051,8 +986,6 @@ class Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -1060,10 +993,7 @@ class Gm {
     #end
     
     /**
-        Called when downloading content from Steam workshop ends. Used by default to hide fancy workshop downloading panel. 
-		
-		
-		
+        Called when downloading content from Steam workshop ends. Used by default to hide fancy workshop downloading panel.
     **/
     
     @:hook
@@ -1073,15 +1003,13 @@ class Gm {
     /**
         Called right after GM:DoPlayerDeath, GM:PlayerDeath and GM:PlayerSilentDeath. 
 		
-		This hook will be called for all deaths, including Player:KillSilent 
+		This hook will be called for all deaths, including Player:KillSilent
 		
-		 
+		**Note:** The player is considered dead when this is hook is called, Player:Alive will return false.
+		
 		Name | Description
 		--- | ---
 		`ply` | The player
-		
-		
-		
     **/
     
     @:hook
@@ -1091,34 +1019,28 @@ class Gm {
     /**
         Called when the mouse has been double clicked on any panel derived from CGModBase, such as the panel used by gui.EnableScreenClicker and the panel used by Panel:ParentToHUD. 
 		
-		By default this hook calls GM:GUIMousePressed. 
+		By default this hook calls GM:GUIMousePressed.
 		
-		 
 		Name | Description
 		--- | ---
 		`mouseCode` | The code of the mouse button pressed, see MOUSE_ Enums
 		`aimVector` | A normalized vector pointing in the direction the client has clicked
-		
-		
-		
     **/
     
     @:hook
-    public function GUIMouseDoublePressed(mouseCode:Float, aimVector:Vector):Void {}
+    public function GUIMouseDoublePressed(mouseCode:MOUSE, aimVector:Vector):Void {}
     #end
     
     /**
-        Sets player run and sprint speeds. 
+        Sets player run and sprint speeds.
 		
+		**Warning:** This is not a hook. Treat this as a utility function to set the player's speed.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player to set the speed of.
 		`walkSpeed` | The walk speed.
 		`runSpeed` | The run speed.
-		
-		
-		
     **/
     
     @:hook
@@ -1126,10 +1048,9 @@ class Gm {
     
     #if client
     /**
-        Called after drawing the skybox. 
+        Called after drawing the skybox.
 		
-		
-		
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
     **/
     
     @:hook
@@ -1139,18 +1060,17 @@ class Gm {
     /**
         Called after GM:Move, applies all the changes from the CMoveData to the player. 
 		
-		See Game Movement for an explanation on the move system. 
+		See Game Movement for an explanation on the move system.
 		
-		 
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
 		Name | Description
 		--- | ---
 		`ply` | Player
 		`mv` | Movement data
 		
 		
-		**Returns:** Return true to suppress default engine behavior, i.e. declare that you have already moved the player according to the move data in a custom way.
-		
-		
+		`**Returns:** Return true to suppress default engine behavior, i.e. declare that you have already moved the player according to the move data in a custom way.
     **/
     
     @:hook
@@ -1158,15 +1078,14 @@ class Gm {
     
     #if server
     /**
-        Determines if the player can kill themselves using the concommands "kill" or "explode". 
-		
+        Determines if the player can kill themselves using the concommands "kill" or "explode".
 		
 		Name | Description
 		--- | ---
 		`player` | The player
 		
 		
-		**Returns:** True if they can suicide.
+		`**Returns:** True if they can suicide.
 		
 		___
 		### Lua Examples
@@ -1178,8 +1097,6 @@ class Gm {
 		    return ply:IsSuperAdmin()
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -1189,9 +1106,8 @@ class Gm {
     /**
         Called whenever an entity becomes a clientside ragdoll. 
 		
-		See GM:CreateEntityRagdoll for serverside ragdolls. 
+		See GM:CreateEntityRagdoll for serverside ragdolls.
 		
-		 
 		Name | Description
 		--- | ---
 		`entity` | The Entity that created the ragdoll
@@ -1210,8 +1126,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -1219,16 +1133,12 @@ class Gm {
     #end
     
     /**
-        Called right before an entity starts driving. Overriding this hook will cause it to not call drive.Start and the player will not begin driving the entity. 
-		
+        Called right before an entity starts driving. Overriding this hook will cause it to not call drive.Start and the player will not begin driving the entity.
 		
 		Name | Description
 		--- | ---
 		`ent` | The entity that is going to be driven
 		`ply` | The player that is going to drive the entity
-		
-		
-		
     **/
     
     @:hook
@@ -1236,12 +1146,9 @@ class Gm {
     
     #if client
     /**
-        Allows you to use render.Fog* functions to manipulate world fog. 
+        Allows you to use render.Fog* functions to manipulate world fog.
 		
-		
-		**Returns:** Return true to tell the engine that fog is set up
-		
-		
+		`**Returns:** Return true to tell the engine that fog is set up
     **/
     
     @:hook
@@ -1251,9 +1158,10 @@ class Gm {
     /**
         Called when a player is killed by Player:Kill or any other normal means. 
 		
-		This hook is not called if the player is killed by Player:KillSilent. See GM:PlayerSilentDeath for that. 
+		This hook is not called if the player is killed by Player:KillSilent. See GM:PlayerSilentDeath for that.
 		
-		 
+		**Note:** Player:Alive will return true in this hook.
+		
 		Name | Description
 		--- | ---
 		`victim` | The player who died
@@ -1278,8 +1186,6 @@ class Gm {
 		**Output:**
 		
 		If suicide: Player1 has committed suicide. Else: Player1 was killed by Player2.
-		
-		
     **/
     
     @:hook
@@ -1287,8 +1193,9 @@ class Gm {
     #end
     #if server
     /**
-        Decides whether a player can hear another player using voice chat. 
+        Decides whether a player can hear another player using voice chat.
 		
+		**Note:** This hook is called several times a tick, so ensure your code is efficient.
 		
 		Name | Description
 		--- | ---
@@ -1312,26 +1219,22 @@ class Gm {
 		    if listener:GetPos():Distance(talker:GetPos()) > 500 then return false end
 		end)
 		```
-		
-		
     **/
     
     @:hook
-    public function PlayerCanHearPlayersVoice(listener:Player, talker:Player):Dynamic {return null;} //multireturn 
+    public function PlayerCanHearPlayersVoice(listener:Player, talker:Player):GmPlayerCanHearPlayersVoiceReturn {return null;}
     #end
     #if server
     /**
-        Called when a player has changed team using GM:PlayerJoinTeam. 
+        Called when a player has changed team using GM:PlayerJoinTeam.
 		
+		**Warning:** This hook will not work with hook.Add and it is only called manually from GM:PlayerJoinTeam by the base gamemode
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who has changed team
 		`oldTeam` | Index of the team the player was originally in
 		`newTeam` | Index of the team the player has changed to
-		
-		
-		
     **/
     
     @:hook
@@ -1339,17 +1242,14 @@ class Gm {
     #end
     
     /**
-        Allows to override player driving animations. 
-		
+        Allows to override player driving animations.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player to process
 		
 		
-		**Returns:** Return true if we've changed/set the animation, false otherwise
-		
-		
+		`**Returns:** Return true if we've changed/set the animation, false otherwise
     **/
     
     @:hook
@@ -1361,17 +1261,13 @@ class Gm {
 		
 		Called just after GM:CanPlayerEnterVehicle. 
 		
-		 See also GM:PlayerLeaveVehicle. 
+		 See also GM:PlayerLeaveVehicle.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | Player who entered vehicle
 		`veh` | Vehicle the player entered
 		`role` | 
-		
-		
-		
     **/
     
     @:hook
@@ -1379,15 +1275,11 @@ class Gm {
     #end
     #if client
     /**
-        Called when an item has been picked up. Override to disable the default HUD notification. 
-		
+        Called when an item has been picked up. Override to disable the default HUD notification.
 		
 		Name | Description
 		--- | ---
 		`itemName` | Name of the picked up item
-		
-		
-		
     **/
     
     @:hook
@@ -1397,27 +1289,22 @@ class Gm {
     /**
         Called whenever a players presses a mouse key on the context menu in Sandbox or on any panel derived from CGModBase, such as the panel used by gui.EnableScreenClicker and the panel used by Panel:ParentToHUD. 
 		
-		See GM:VGUIMousePressed for a hook that is called on all VGUI elements. 
+		See GM:VGUIMousePressed for a hook that is called on all VGUI elements.
 		
-		 
 		Name | Description
 		--- | ---
 		`mouseCode` | The key that the player pressed using MOUSE_ Enums.
 		`aimVector` | A normalized direction vector local to the camera. Internally, this is gui. ScreenToVector( gui. MousePos() ).
-		
-		
-		
     **/
     
     @:hook
-    public function GUIMousePressed(mouseCode:Float, aimVector:Vector):Void {}
+    public function GUIMousePressed(mouseCode:MOUSE, aimVector:Vector):Void {}
     #end
     #if client
     /**
-        Called before GM:HUDPaint when the HUD background is being drawn. Things rendered in this hook will always appear behind things rendered in GM:HUDPaint. 
+        Called before GM:HUDPaint when the HUD background is being drawn. Things rendered in this hook will always appear behind things rendered in GM:HUDPaint.
 		
-		
-		
+		**Note:** This is a rendering hook with a 2D rendering context. This means that the only rendering functions will work in it are functions with a 2D rendering context.
     **/
     
     @:hook
@@ -1425,15 +1312,13 @@ class Gm {
     #end
     #if server
     /**
-        Called when the player is killed by Player:KillSilent. The player is already considered dead when this hook is called. 
+        Called when the player is killed by Player:KillSilent. The player is already considered dead when this hook is called.
 		
+		**Note:** Player:Alive will return true in this hook.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player who was killed
-		
-		
-		
     **/
     
     @:hook
@@ -1441,8 +1326,7 @@ class Gm {
     #end
     #if server
     /**
-        Called when a player has been hurt by an explosion. Override to disable default sound effect. 
-		
+        Called when a player has been hurt by an explosion. Override to disable default sound effect.
 		
 		Name | Description
 		--- | ---
@@ -1460,8 +1344,6 @@ class Gm {
 		    return true
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -1469,8 +1351,7 @@ class Gm {
     #end
     #if server
     /**
-        Called when a player dispatched a chat message. For the clientside equivalent, see GM:OnPlayerChat. 
-		
+        Called when a player dispatched a chat message. For the clientside equivalent, see GM:OnPlayerChat.
 		
 		Name | Description
 		--- | ---
@@ -1479,7 +1360,7 @@ class Gm {
 		`teamChat` | Is team chat?
 		
 		
-		**Returns:** What to show instead of original text. Set to "" to stop the message from displaying.
+		`**Returns:** What to show instead of original text. Set to "" to stop the message from displaying.
 		
 		___
 		### Lua Examples
@@ -1494,8 +1375,6 @@ class Gm {
 		    end
 		end)
 		```
-		
-		
     **/
     
     @:hook
@@ -1505,10 +1384,7 @@ class Gm {
     /**
         Called right after the map has cleaned up (usually because game.CleanUpMap was called) 
 		
-		See also GM:PreCleanupMap. 
-		
-		 
-		
+		See also GM:PreCleanupMap.
     **/
     
     @:hook
@@ -1516,15 +1392,11 @@ class Gm {
     
     
     /**
-        Override this gamemode function to disable mouth movement when talking on voice chat. 
-		
+        Override this gamemode function to disable mouth movement when talking on voice chat.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player in question
-		
-		
-		
     **/
     
     @:hook
@@ -1532,15 +1404,11 @@ class Gm {
     
     
     /**
-        Called after the player's think. 
-		
+        Called after the player's think.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player
-		
-		
-		
     **/
     
     @:hook
@@ -1548,8 +1416,9 @@ class Gm {
     
     
     /**
-        Called when a player tries to switch noclip mode. 
+        Called when a player tries to switch noclip mode.
 		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
 		
 		Name | Description
 		--- | ---
@@ -1557,7 +1426,7 @@ class Gm {
 		`desiredState` | Represents the noclip state (on/off) the user will enter if this hook allows them to.
 		
 		
-		**Returns:** Return false to disallow the switch.
+		`**Returns:** Return false to disallow the switch.
 		
 		___
 		### Lua Examples
@@ -1596,8 +1465,6 @@ class Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -1605,15 +1472,11 @@ class Gm {
     
     
     /**
-        Called to update the player's animation during a drive. 
-		
+        Called to update the player's animation during a drive.
 		
 		Name | Description
 		--- | ---
 		`ply` | The driving player
-		
-		
-		
     **/
     
     @:hook
@@ -1621,8 +1484,11 @@ class Gm {
     
     #if server
     /**
-        Called when a player leaves a vehicle. 
+        Called when a player leaves a vehicle.
 		
+		**Note:** For vehicles with exit animations, this will be called at the end of the animation, not at the start!
+		
+		**Bug:** BUG This is not called when a different vehicle is immediately entered with Player:EnterVehicle. Issue Tracker: #2619
 		
 		Name | Description
 		--- | ---
@@ -1649,8 +1515,6 @@ class Gm {
 		    end )
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -1660,10 +1524,7 @@ class Gm {
     /**
         Called when the game is reloaded from a Source Engine save system ( not the Sandbox saves or dupes ). 
 		
-		See GM:Saved for a hook that is called when such a save file is created. 
-		
-		 
-		
+		See GM:Saved for a hook that is called when such a save file is created.
     **/
     
     @:hook
@@ -1673,17 +1534,16 @@ class Gm {
     /**
         Called to determine if the LocalPlayer should be drawn. 
 		
-		Due to an optimization, this hook is only called once per frame (github issue). This is problematic if you need to have the player drawn only in certain contexts, such as within render.RenderView or based on the render target. As a workaround, you can call cam.Start3D() cam.End3D() within this hook to force the engine to call it every time. 
+		Due to an optimization, this hook is only called once per frame (github issue). This is problematic if you need to have the player drawn only in certain contexts, such as within render.RenderView or based on the render target. As a workaround, you can call cam.Start3D() cam.End3D() within this hook to force the engine to call it every time.
 		
-		 
+		**Note:** If you're using this hook to draw a player for a GM:CalcView hook, then you may want to consider using the drawviewer variable you can use in your CamData structure table instead.
+		
 		Name | Description
 		--- | ---
 		`ply` | The player
 		
 		
-		**Returns:** True to draw the player, false to hide.
-		
-		
+		`**Returns:** True to draw the player, false to hide.
     **/
     
     @:hook
@@ -1691,16 +1551,12 @@ class Gm {
     #end
     
     /**
-        Called right before an entity stops driving. Overriding this hook will cause it to not call drive.End and the player will not stop driving. 
-		
+        Called right before an entity stops driving. Overriding this hook will cause it to not call drive.End and the player will not stop driving.
 		
 		Name | Description
 		--- | ---
 		`ent` | The entity being driven
 		`ply` | The player driving the entity
-		
-		
-		
     **/
     
     @:hook
@@ -1708,15 +1564,11 @@ class Gm {
     
     #if server
     /**
-        Called when a player executes gm_showspare2 console command. ( Default bind is F4 ) 
-		
+        Called when a player executes gm_showspare2 console command. ( Default bind is F4 )
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who executed the command
-		
-		
-		
     **/
     
     @:hook
@@ -1724,8 +1576,7 @@ class Gm {
     #end
     #if server
     /**
-        Find a team spawn point entity for this player. 
-		
+        Find a team spawn point entity for this player.
 		
 		Name | Description
 		--- | ---
@@ -1733,9 +1584,7 @@ class Gm {
 		`ply` | The player
 		
 		
-		**Returns:** The entity to use as a spawn point.
-		
-		
+		`**Returns:** The entity to use as a spawn point.
     **/
     
     @:hook
@@ -1743,16 +1592,12 @@ class Gm {
     #end
     #if server
     /**
-        Called when a player has been validated by Steam. 
-		
+        Called when a player has been validated by Steam.
 		
 		Name | Description
 		--- | ---
 		`name` | Player name
 		`steamID` | Player SteamID
-		
-		
-		
     **/
     
     @:hook
@@ -1762,9 +1607,10 @@ class Gm {
     /**
         SetupMove is called before the engine process movements. This allows us to override the players movement. 
 		
-		See Game Movement for an explanation on the move system. 
+		See Game Movement for an explanation on the move system.
 		
-		 
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
 		Name | Description
 		--- | ---
 		`ply` | The player whose movement we are about to process
@@ -1804,8 +1650,6 @@ class Gm {
 		    end
 		end)
 		```
-		
-		
     **/
     
     @:hook
@@ -1813,32 +1657,31 @@ class Gm {
     
     
     /**
-        Called when a player presses a button. 
+        Called when a player presses a button.
 		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who pressed the button
 		`button` | The button, see BUTTON_CODE_ Enums
-		
-		
-		
     **/
     
     @:hook
-    public function PlayerButtonDown(ply:Player, button:Float):Void {}
+    public function PlayerButtonDown(ply:Player, button:BUTTON_CODE):Void {}
     
     #if client
     /**
-        Called when the Gamemode is about to draw a given element on the client's HUD (heads-up display). 
+        Called when the Gamemode is about to draw a given element on the client's HUD (heads-up display).
 		
+		**Note:** This hook is called HUNDREDS of times per second (more than 5 times per frame on average). You shouldn't be performing any computationally intensive operations.
 		
 		Name | Description
 		--- | ---
 		`name` | The name of the HUD element. You can find a full list of HUD elements for this hook here.
 		
 		
-		**Returns:** Return false to prevent the given element from being drawn on the client's screen.
+		`**Returns:** Return false to prevent the given element from being drawn on the client's screen.
 		
 		___
 		### Lua Examples
@@ -1857,8 +1700,6 @@ class Gm {
 		    -- Don't return anything here, it may break other addons that rely on this hook.
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -1866,10 +1707,7 @@ class Gm {
     #end
     #if client
     /**
-        Called when player released the scoreboard button. ( TAB by default ) 
-		
-		
-		
+        Called when player released the scoreboard button. ( TAB by default )
     **/
     
     @:hook
@@ -1877,8 +1715,7 @@ class Gm {
     #end
     
     /**
-        Called upon an animation event, this is the ideal place to call player animation functions such as Player:AddVCDSequenceToGestureSlot, Player:AnimRestartGesture and so on. 
-		
+        Called upon an animation event, this is the ideal place to call player animation functions such as Player:AddVCDSequenceToGestureSlot, Player:AnimRestartGesture and so on.
 		
 		Name | Description
 		--- | ---
@@ -1887,7 +1724,7 @@ class Gm {
 		`data` | The data for the event. This is interpreted as an ACT_ Enums by PLAYERANIMEVENT_CUSTOM and PLAYERANIMEVENT_CUSTOM_GESTURE, or a sequence by PLAYERANIMEVENT_CUSTOM_SEQUENCE.
 		
 		
-		**Returns:** The translated activity to send to the weapon. See ACT_ Enums. Return ACT_INVALID if you don't want to send an activity.
+		`**Returns:** The translated activity to send to the weapon. See ACT_ Enums. Return ACT_INVALID if you don't want to send an activity.
 		
 		___
 		### Lua Examples
@@ -1921,19 +1758,14 @@ class Gm {
 		    end
 		end)
 		```
-		
-		
     **/
     
     @:hook
-    public function DoAnimationEvent(ply:Player, event:Float, ?data:Float):Float {return null;}
+    public function DoAnimationEvent(ply:Player, event:PLAYERANIMEVENT, ?data:ACT):ACT {return null;}
     
     
     /**
-        Called when menu.lua has finished loading. 
-		
-		
-		
+        Called when menu.lua has finished loading.
     **/
     
     @:hook
@@ -1941,10 +1773,7 @@ class Gm {
     
     
     /**
-        Called when you start a new game via the menu. 
-		
-		
-		
+        Called when you start a new game via the menu.
     **/
     
     @:hook
@@ -1952,8 +1781,9 @@ class Gm {
     
     #if client
     /**
-        Render the scene. Used by the "Stereoscopy" Post-processing effect. 
+        Render the scene. Used by the "Stereoscopy" Post-processing effect.
 		
+		**Note:** Materials rendered in this hook require $ignorez parameter to draw properly.
 		
 		Name | Description
 		--- | ---
@@ -1962,9 +1792,7 @@ class Gm {
 		`fov` | View FOV
 		
 		
-		**Returns:** Return true to override drawing the scene
-		
-		
+		`**Returns:** Return true to override drawing the scene
     **/
     
     @:hook
@@ -1972,25 +1800,22 @@ class Gm {
     #end
     
     /**
-        Called when a player releases a button. 
+        Called when a player releases a button.
 		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who released the button
 		`button` | The button, see BUTTON_CODE_ Enums
-		
-		
-		
     **/
     
     @:hook
-    public function PlayerButtonUp(ply:Player, button:Float):Void {}
+    public function PlayerButtonUp(ply:Player, button:BUTTON_CODE):Void {}
     
     
     /**
-        Called when an addon from the Steam workshop begins downloading. Used by default to place details on the workshop downloading panel. 
-		
+        Called when an addon from the Steam workshop begins downloading. Used by default to place details on the workshop downloading panel.
 		
 		Name | Description
 		--- | ---
@@ -1998,9 +1823,6 @@ class Gm {
 		`imageID` | ID of addon's preview image. For example, for Extended Spawnmenu addon, the image URL is http://cloud-4.steamusercontent.com/ugc/702859018846106764/9E7E1946296240314751192DA0AD15B6567FF92D/ So, the value of this argument would be 702859018846106764.
 		`title` | Name of addon.
 		`size` | File size of addon in bytes.
-		
-		
-		
     **/
     
     @:hook
@@ -2008,8 +1830,9 @@ class Gm {
     
     #if client
     /**
-        Called after the player was drawn. 
+        Called after the player was drawn.
 		
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -2083,8 +1906,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -2092,10 +1913,9 @@ class Gm {
     #end
     #if client
     /**
-        Called after the VGUI has been drawn. 
+        Called after the VGUI has been drawn.
 		
-		
-		
+		**Note:** This is a rendering hook with a 2D rendering context. This means that the only rendering functions will work in it are functions with a 2D rendering context.
     **/
     
     @:hook
@@ -2103,8 +1923,7 @@ class Gm {
     #end
     #if server
     /**
-        Called when a variable is edited on an Entity (called by Edit Properties... menu) 
-		
+        Called when a variable is edited on an Entity (called by Edit Properties... menu)
 		
 		Name | Description
 		--- | ---
@@ -2129,8 +1948,6 @@ class Gm {
 		    ent:EditValue( key, val )
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -2138,8 +1955,9 @@ class Gm {
     #end
     #if server
     /**
-        Called whenever a player attempts to either turn on or off their flashlight, returning false will deny the change. 
+        Called whenever a player attempts to either turn on or off their flashlight, returning false will deny the change.
 		
+		**Note:** Also gets called when using Player:Flashlight.
 		
 		Name | Description
 		--- | ---
@@ -2147,9 +1965,7 @@ class Gm {
 		`enabled` | The new state the player requested, true for on, false for off.
 		
 		
-		**Returns:** Can toggle the flashlight or not
-		
-		
+		`**Returns:** Can toggle the flashlight or not
     **/
     
     @:hook
@@ -2157,17 +1973,13 @@ class Gm {
     #end
     #if server
     /**
-        Called whenever an NPC is killed. 
-		
+        Called whenever an NPC is killed.
 		
 		Name | Description
 		--- | ---
 		`npc` | The killed NPC
 		`attacker` | The NPCs attacker, the entity that gets the kill credit, for example a player or an NPC.
 		`inflictor` | Death inflictor. The entity that did the killing. Not necessarily a weapon.
-		
-		
-		
     **/
     
     @:hook
@@ -2175,17 +1987,14 @@ class Gm {
     #end
     #if client
     /**
-        Returns the team color for the given team index. 
-		
+        Returns the team color for the given team index.
 		
 		Name | Description
 		--- | ---
 		`team` | Team index
 		
 		
-		**Returns:** Team Color
-		
-		
+		`**Returns:** Team Color
     **/
     
     @:hook
@@ -2195,15 +2004,11 @@ class Gm {
     /**
         Called when a DTextEntry gets focus. 
 		
-		This hook is run from DTextEntry:OnGetFocus and PANEL:OnMousePressed of DTextEntry. 
+		This hook is run from DTextEntry:OnGetFocus and PANEL:OnMousePressed of DTextEntry.
 		
-		 
 		Name | Description
 		--- | ---
 		`panel` | The panel that got focus
-		
-		
-		
     **/
     
     @:hook
@@ -2211,15 +2016,14 @@ class Gm {
     #end
     #if server
     /**
-        Determines if the player can spray using the "impulse 201" console command. 
-		
+        Determines if the player can spray using the "impulse 201" console command.
 		
 		Name | Description
 		--- | ---
 		`sprayer` | The player
 		
 		
-		**Returns:** Return false to allow spraying, return true to prevent spraying.
+		`**Returns:** Return false to allow spraying, return true to prevent spraying.
 		
 		___
 		### Lua Examples
@@ -2231,8 +2035,6 @@ class Gm {
 		    return !ply:IsAdmin()
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -2240,8 +2042,7 @@ class Gm {
     #end
     
     /**
-        Called whenever a player steps. Return true to mute the normal sound. 
-		
+        Called whenever a player steps. Return true to mute the normal sound.
 		
 		Name | Description
 		--- | ---
@@ -2253,7 +2054,7 @@ class Gm {
 		`filter` | The Recipient filter of players who can hear the footstep
 		
 		
-		**Returns:** Prevent default step sound
+		`**Returns:** Prevent default step sound
 		
 		___
 		### Lua Examples
@@ -2266,26 +2067,22 @@ class Gm {
 		    return true -- Don't allow default footsteps
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PlayerFootstep(ply:Player, pos:Vector, foot:Float, sound:String, volume:Float#if server ,filter:CRecipientFilter #end):Bool {return null;}
+    public function PlayerFootstep(ply:Player, pos:Vector, foot:Float, sound:String, volume:Float, filter:CRecipientFilter):Bool {return null;}
     
     
     /**
-        Called when the player changes their weapon to another one - and their viewmodel model changes. 
+        Called when the player changes their weapon to another one - and their viewmodel model changes.
 		
+		**Bug:** BUG This is not always called clientside. Issue Tracker: #2473
 		
 		Name | Description
 		--- | ---
 		`viewmodel` | The viewmodel that is changing
 		`oldModel` | The old model
 		`newModel` | The new model
-		
-		
-		
     **/
     
     @:hook
@@ -2293,8 +2090,7 @@ class Gm {
     
     
     /**
-        Called when a prop has been destroyed. 
-		
+        Called when a prop has been destroyed.
 		
 		Name | Description
 		--- | ---
@@ -2312,8 +2108,6 @@ class Gm {
 		    client:Kill()
 		end)
 		```
-		
-		
     **/
     
     @:hook
@@ -2321,15 +2115,18 @@ class Gm {
     
     #if server
     /**
-        Called to determine preferred carry angles for the entity. It works for both, +use pickup and gravity gun pickup. 
+        Called to determine preferred carry angles for the entity. It works for both, +use pickup and gravity gun pickup.
 		
+		**Warning:** Due to nature of the gravity gun coding in multiplayer, this hook MAY seem to not work ( but rest assured it does ), due to clientside prediction not knowing the carry angles. The +use pickup doesn't present this issue as it doesn't predict the player carrying the object clientside ( as you may notice by the prop lagging behind in multiplayer )
+		
+		**Note:** This hook can not override preferred carry angles of props such as the sawblade and the harpoon.
 		
 		Name | Description
 		--- | ---
 		`ent` | The entity to generate carry angles for
 		
 		
-		**Returns:** The preferred carry angles for the entity.
+		`**Returns:** The preferred carry angles for the entity.
 		
 		___
 		### Lua Examples
@@ -2341,8 +2138,6 @@ class Gm {
 		    return Angle( 0, 0, 0 )
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -2350,8 +2145,7 @@ class Gm {
     #end
     #if server
     /**
-        Determines if the player can unfreeze the entity. 
-		
+        Determines if the player can unfreeze the entity.
 		
 		Name | Description
 		--- | ---
@@ -2360,9 +2154,7 @@ class Gm {
 		`phys` | The physics object of the entity
 		
 		
-		**Returns:** True if they can unfreeze.
-		
-		
+		`**Returns:** True if they can unfreeze.
     **/
     
     @:hook
@@ -2370,8 +2162,9 @@ class Gm {
     #end
     #if client
     /**
-        Adds a death notice entry. 
+        Adds a death notice entry.
 		
+		**Bug:** BUG You cannot use hook.Add on this hook yet. Issue Tracker: #2611 Pull Request: #1380
 		
 		Name | Description
 		--- | ---
@@ -2391,8 +2184,6 @@ class Gm {
 		local ply = Entity(1)
 		GAMEMODE:AddDeathNotice( ply:GetName(), ply:Team(), nil, ply:GetName(), ply:Team() )
 		```
-		
-		
     **/
     
     @:hook
@@ -2400,10 +2191,9 @@ class Gm {
     #end
     #if client
     /**
-        Called before rendering the halos. This is the place to call halo.Add. This hook is actually running inside of GM:PostDrawEffects. 
+        Called before rendering the halos. This is the place to call halo.Add. This hook is actually running inside of GM:PostDrawEffects.
 		
-		
-		
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
     **/
     
     @:hook
@@ -2411,10 +2201,7 @@ class Gm {
     #end
     
     /**
-        Called after the gamemode has loaded. 
-		
-		
-		
+        Called after the gamemode has loaded.
     **/
     
     @:hook
@@ -2426,10 +2213,7 @@ class Gm {
 		
 		This hook will not run if input.IsKeyTrapping returns true. 
 		
-		 See also GM:OnContextMenuOpen. 
-		
-		 
-		
+		 See also GM:OnContextMenuOpen.
     **/
     
     @:hook
@@ -2439,17 +2223,16 @@ class Gm {
     /**
         Allows you to change the players movements before they're sent to the server. 
 		
-		See Game Movement for an explanation on the move system. 
+		See Game Movement for an explanation on the move system.
 		
-		 
+		**Note:** Due to this hook being clientside only, it could be overridden by the user allowing them to completely skip your logic, it is recommended to use GM:StartCommand in a shared file instead.
+		
 		Name | Description
 		--- | ---
 		`cmd` | The User Command data
 		
 		
-		**Returns:** Return true to: Disable Sandbox C menu "screen clicking" Disable Teammate nocollide (verification required) Prevent calling of C_BaseHLPlayer::CreateMove & subsequently C_BasePlayer::CreateMove
-		
-		
+		`**Returns:** Return true to: Disable Sandbox C menu "screen clicking" Disable Teammate nocollide (verification required) Prevent calling of C_BaseHLPlayer::CreateMove & subsequently C_BasePlayer::CreateMove
     **/
     
     @:hook
@@ -2457,16 +2240,12 @@ class Gm {
     #end
     
     /**
-        Called when a player drops an entity with the Physgun. 
-		
+        Called when a player drops an entity with the Physgun.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player who dropped an entitiy
 		`ent` | The dropped entity
-		
-		
-		
     **/
     
     @:hook
@@ -2474,12 +2253,9 @@ class Gm {
     
     #if server
     /**
-        Returns whether or not the default death sound should be muted. 
+        Returns whether or not the default death sound should be muted.
 		
-		
-		**Returns:** Mute death sound
-		
-		
+		`**Returns:** Mute death sound
     **/
     
     @:hook
@@ -2487,16 +2263,12 @@ class Gm {
     #end
     #if client
     /**
-        Called when a player has achieved an achievement. You can get the name and other information from an achievement ID with the achievements library. 
-		
+        Called when a player has achieved an achievement. You can get the name and other information from an achievement ID with the achievements library.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player that earned the achievement
 		`achievement` | The index of the achievement
-		
-		
-		
     **/
     
     @:hook
@@ -2504,8 +2276,7 @@ class Gm {
     #end
     
     /**
-        Allows to override player swimming animations. 
-		
+        Allows to override player swimming animations.
 		
 		Name | Description
 		--- | ---
@@ -2513,9 +2284,7 @@ class Gm {
 		`velocity` | Players velocity
 		
 		
-		**Returns:** Return true if we've changed/set the animation, false otherwise
-		
-		
+		`**Returns:** Return true if we've changed/set the animation, false otherwise
     **/
     
     @:hook
@@ -2523,8 +2292,11 @@ class Gm {
     
     
     /**
-        This hook is used to calculate animations for a player. 
+        This hook is used to calculate animations for a player.
 		
+		**Warning:** This hook must return the same values at the same time on both, client and server. On client for players to see the animations, on server for hit detection to work properly.
+		
+		**Bug:** BUG This can return the incorrect velocity when on a moving object. Issue Tracker: #3322
 		
 		Name | Description
 		--- | ---
@@ -2536,25 +2308,18 @@ class Gm {
 		--- | ---
 		`a` | ACT_ Enums for the activity the player should use. A nil return will be treated as ACT_INVALID.
 		`b` | Sequence for the player to use. This takes precedence over the activity (the activity is still used for layering). Return -1 or nil to let the activity determine the sequence.
-		
-		
-		
     **/
     
     @:hook
-    public function CalcMainActivity(ply:Player, vel:Vector):MultiReturnHelper<GmCalcMainActivityReturn> {return null;} //multireturn
+    public function CalcMainActivity(ply:Player, vel:Vector):GmCalcMainActivityReturn {return null;}
     
     #if client
     /**
-        Called when a weapon has been picked up. Override to disable the default HUD notification. 
-		
+        Called when a weapon has been picked up. Override to disable the default HUD notification.
 		
 		Name | Description
 		--- | ---
 		`weapon` | The picked up weapon
-		
-		
-		
     **/
     
     @:hook
@@ -2562,8 +2327,9 @@ class Gm {
     #end
     #if client
     /**
-        Called right after the 2D skybox has been drawn - allowing you to draw over it. 
+        Called right after the 2D skybox has been drawn - allowing you to draw over it.
 		
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
 		
 		___
 		### Lua Examples
@@ -2587,8 +2353,6 @@ class Gm {
 		
 		end)
 		```
-		
-		
     **/
     
     @:hook
@@ -2598,10 +2362,11 @@ class Gm {
     /**
         Called after all other 2D draw hooks are called. Draws over all VGUI Panels and HUDs. 
 		
-		Unlike GM:HUDPaint, this hook is called with the game paused and while the Camera SWEP is equipped. 
+		Unlike GM:HUDPaint, this hook is called with the game paused and while the Camera SWEP is equipped.
 		
-		 
+		**Note:** Only be called when r_drawvgui is enabled
 		
+		**Note:** This is a rendering hook with a 2D rendering context. This means that the only rendering functions will work in it are functions with a 2D rendering context.
     **/
     
     @:hook
@@ -2609,8 +2374,7 @@ class Gm {
     #end
     #if server
     /**
-        Called whenever view model hands needs setting a model. By default this calls PLAYER:GetHandsModel and if that fails, sets the hands model according to his player model. 
-		
+        Called whenever view model hands needs setting a model. By default this calls PLAYER:GetHandsModel and if that fails, sets the hands model according to his player model.
 		
 		Name | Description
 		--- | ---
@@ -2634,8 +2398,6 @@ class Gm {
 		   end
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -2645,10 +2407,7 @@ class Gm {
     /**
         Called when the gamemode is loaded. 
 		
-		LocalPlayer() returns NULL at the time this is run. 
-		
-		 
-		
+		LocalPlayer() returns NULL at the time this is run.
     **/
     
     @:hook
@@ -2656,10 +2415,9 @@ class Gm {
     
     #if client
     /**
-        Called just after GM:PreDrawViewModel and can technically be considered "PostDrawAllViewModels". 
+        Called just after GM:PreDrawViewModel and can technically be considered "PostDrawAllViewModels".
 		
-		
-		
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
     **/
     
     @:hook
@@ -2671,9 +2429,10 @@ class Gm {
 		
 		See GM:PlayerInitialSpawn for a hook called only the first time a player spawns. 
 		
-		 See the player_spawn gameevent for a shared version of this hook. 
+		 See the player_spawn gameevent for a shared version of this hook.
 		
-		 
+		**Warning:** By default, in "base" derived gamemodes, this hook will also call GM:PlayerLoadout and GM:PlayerSetModel, which may override your Entity:SetModel and Player:Give calls. Consider using the other hooks or a 0-second timer.
+		
 		Name | Description
 		--- | ---
 		`player` | The player who spawned.
@@ -2700,8 +2459,6 @@ class Gm {
 		end
 		hook.Add( "PlayerSpawn", "some_unique_name", spawn )
 		```
-		
-		
     **/
     
     @:hook
@@ -2709,17 +2466,14 @@ class Gm {
     #end
     #if client
     /**
-        Allows you to use render.Fog* functions to manipulate skybox fog. 
-		
+        Allows you to use render.Fog* functions to manipulate skybox fog.
 		
 		Name | Description
 		--- | ---
 		`scale` | The scale of 3D skybox
 		
 		
-		**Returns:** Return true to tell the engine that fog is set up
-		
-		
+		`**Returns:** Return true to tell the engine that fog is set up
     **/
     
     @:hook
@@ -2729,18 +2483,15 @@ class Gm {
     /**
         Called when an entity is about to be punted with the gravity gun (primary fire). 
 		
-		By default this function makes ENTITY:GravGunPunt work in Sandbox derived gamemodes. 
+		By default this function makes ENTITY:GravGunPunt work in Sandbox derived gamemodes.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | The player wielding the gravity gun
 		`ent` | The entity the player is attempting to punt
 		
 		
-		**Returns:** Return true to allow and false to disallow.
-		
-		
+		`**Returns:** Return true to allow and false to disallow.
     **/
     
     @:hook
@@ -2748,8 +2499,7 @@ class Gm {
     
     #if server
     /**
-        Called when a player takes damage from falling, allows to override the damage. 
-		
+        Called when a player takes damage from falling, allows to override the damage.
 		
 		Name | Description
 		--- | ---
@@ -2757,7 +2507,7 @@ class Gm {
 		`speed` | The fall speed
 		
 		
-		**Returns:** New fall damage
+		`**Returns:** New fall damage
 		
 		___
 		### Lua Examples
@@ -2778,8 +2528,6 @@ class Gm {
 		    return math.max( 0, math.ceil( 0.2418*speed - 141.75 ) )
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -2787,8 +2535,7 @@ class Gm {
     #end
     #if server
     /**
-        Determines if the player can exit the vehicle. 
-		
+        Determines if the player can exit the vehicle.
 		
 		Name | Description
 		--- | ---
@@ -2796,7 +2543,7 @@ class Gm {
 		`ply` | The player
 		
 		
-		**Returns:** True if the player can exit the vehicle.
+		`**Returns:** True if the player can exit the vehicle.
 		
 		___
 		### Lua Examples
@@ -2808,8 +2555,6 @@ class Gm {
 		    return (veh:GetVelocity() == Vector(0,0,0))
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -2817,8 +2562,15 @@ class Gm {
     #end
     #if client
     /**
-        Runs when a bind has been pressed. Allows to block commands. 
+        Runs when a bind has been pressed. Allows to block commands.
 		
+		**Note:** By using the "alias" console command, this hook can be effectively circumvented
+		
+		**Note:** To stop the user from using +attack, +left and any other movement commands of the sort, please look into using GM:StartCommand instead
+		
+		**Bug:** BUG The third argument will always be true. Issue Tracker: #1176
+		
+		**Bug:** BUG This does not run for function keys binds (F1-F12). Issue Tracker: #2888
 		
 		Name | Description
 		--- | ---
@@ -2827,7 +2579,7 @@ class Gm {
 		`pressed` | If the bind was activated or deactivated
 		
 		
-		**Returns:** Return true to prevent the bind
+		`**Returns:** Return true to prevent the bind
 		
 		___
 		### Lua Examples
@@ -2841,8 +2593,6 @@ class Gm {
 		    if ( string.find( bind, "impulse 100" ) ) then return true end
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -2852,16 +2602,14 @@ class Gm {
     /**
         Called after drawing opaque entities. 
 		
-		See also GM:PostDrawTranslucentRenderables and GM:PreDrawOpaqueRenderables. 
+		See also GM:PostDrawTranslucentRenderables and GM:PreDrawOpaqueRenderables.
 		
-		 
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
+		
 		Name | Description
 		--- | ---
 		`bDrawingDepth` | Whether the current draw is writing depth.
 		`bDrawingSkybox` | Whether the current draw is drawing the skybox.
-		
-		
-		
     **/
     
     @:hook
@@ -2871,9 +2619,8 @@ class Gm {
     /**
         Called from GM:CalcView when player is in driving a vehicle. 
 		
-		This hook may not be called in gamemodes that override GM:CalcView. 
+		This hook may not be called in gamemodes that override GM:CalcView.
 		
-		 
 		Name | Description
 		--- | ---
 		`veh` | The vehicle the player is driving
@@ -2881,21 +2628,18 @@ class Gm {
 		`view` | The view data containing players FOV, view position and angles, see CamData structure
 		
 		
-		**Returns:** The modified view table containing new values, see CamData structure
-		
-		
+		`**Returns:** The modified view table containing new values, see CamData structure
     **/
     
     @:hook
-    public function CalcVehicleView(veh:Vehicle, ply:Player, view:AnyTable):AnyTable {return null;}
+    public function CalcVehicleView(veh:Vehicle, ply:Player, view:CamData):CamData {return null;}
     #end
     #if client
     /**
         Called when a message is printed to the chat box. Note, that this isn't working with player messages even though there are arguments for it. 
 		
-		For player messages see GM:PlayerSay and GM:OnPlayerChat 
+		For player messages see GM:PlayerSay and GM:OnPlayerChat
 		
-		 
 		Name | Description
 		--- | ---
 		`index` | The index of the player.
@@ -2904,7 +2648,7 @@ class Gm {
 		`type` | Chat filter type. Possible values are: joinleave - Player join and leave messages namechange - Player name change messages servermsg - Server messages such as convar changes teamchange - Team changes? chat - (Obsolete?) Player chat? none - A fallback value
 		
 		
-		**Returns:** Return true to suppress the chat message
+		`**Returns:** Return true to suppress the chat message
 		
 		___
 		### Lua Examples
@@ -2916,8 +2660,6 @@ class Gm {
 		    if ( typ == "joinleave" ) then return true end
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -2927,9 +2669,8 @@ class Gm {
     /**
         Called when a map I/O event occurs. 
 		
-		See also Entity:Fire and Entity:Input for functions to fire Inputs on entities. 
+		See also Entity:Fire and Entity:Input for functions to fire Inputs on entities.
 		
-		 
 		Name | Description
 		--- | ---
 		`ent` | Entity that receives the input
@@ -2939,7 +2680,7 @@ class Gm {
 		`value` | Data provided with the input. Will be either a string, a number, a boolean or a nil.
 		
 		
-		**Returns:** Return true to prevent this input from being processed.
+		`**Returns:** Return true to prevent this input from being processed.
 		
 		___
 		### Lua Examples
@@ -2953,27 +2694,21 @@ class Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function AcceptInput(ent:Entity, input:String, activator:Entity, caller:Entity, value:Any):Bool {return null;}
+    public function AcceptInput(ent:Entity, input:String, activator:Entity, caller:Entity, value:Dynamic):Bool {return null;}
     #end
     #if server
     /**
         Called to when a player has successfully picked up an entity with their Physics Gun. 
 		
-		Not to be confused with GM:PhysgunPickup which is called multiple times to ask if the player should be able to pick up an entity. 
+		Not to be confused with GM:PhysgunPickup which is called multiple times to ask if the player should be able to pick up an entity.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | The player that has picked up something using the physics gun.
 		`ent` | The entity that was picked up.
-		
-		
-		
     **/
     
     @:hook
@@ -2981,17 +2716,14 @@ class Gm {
     #end
     #if client
     /**
-        Allows you to adjust the mouse sensitivity. 
-		
+        Allows you to adjust the mouse sensitivity.
 		
 		Name | Description
 		--- | ---
 		`defaultSensitivity` | The old sensitivity In general it will be 0, which is equivalent to a sensitivity of 1.
 		
 		
-		**Returns:** A fraction of the normal sensitivity (0.5 would be half as sensitive), return -1 to not override.
-		
-		
+		`**Returns:** A fraction of the normal sensitivity (0.5 would be half as sensitive), return -1 to not override.
     **/
     
     @:hook
@@ -2999,8 +2731,7 @@ class Gm {
     #end
     #if client
     /**
-        Called when spawn icon is generated. 
-		
+        Called when spawn icon is generated.
 		
 		Name | Description
 		--- | ---
@@ -3074,8 +2805,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -3083,8 +2812,7 @@ class Gm {
     #end
     #if client
     /**
-        Called before the player hands are drawn. 
-		
+        Called before the player hands are drawn.
 		
 		Name | Description
 		--- | ---
@@ -3094,9 +2822,7 @@ class Gm {
 		`weapon` | This is the weapon that is from the view model.
 		
 		
-		**Returns:** Return true to prevent the viewmodel hands from rendering
-		
-		
+		`**Returns:** Return true to prevent the viewmodel hands from rendering
     **/
     
     @:hook
@@ -3106,16 +2832,17 @@ class Gm {
     /**
         Called to determine if a player should be able to pick up an entity with the Physics Gun. 
 		
-		See GM:OnPhysgunPickup for a hook which is called when a player has successfully picked up an entity. 
+		See GM:OnPhysgunPickup for a hook which is called when a player has successfully picked up an entity.
 		
-		 
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
 		Name | Description
 		--- | ---
 		`player` | The player that is picking up using the Physics Gun.
 		`entity` | The entity that is being picked up.
 		
 		
-		**Returns:** Returns whether the player can pick up the entity or not.
+		`**Returns:** Returns whether the player can pick up the entity or not.
 		
 		___
 		### Lua Examples
@@ -3129,8 +2856,6 @@ class Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -3138,15 +2863,11 @@ class Gm {
     
     #if server
     /**
-        Called when a player executes gm_showhelp console command. ( Default bind is F1 ) 
-		
+        Called when a player executes gm_showhelp console command. ( Default bind is F1 )
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who executed the command
-		
-		
-		
     **/
     
     @:hook
@@ -3154,10 +2875,7 @@ class Gm {
     #end
     #if client
     /**
-        Called when derma menus are closed with CloseDermaMenus. 
-		
-		
-		
+        Called when derma menus are closed with CloseDermaMenus.
     **/
     
     @:hook
@@ -3165,8 +2883,9 @@ class Gm {
     #end
     
     /**
-        Called when a player makes contact with the ground. 
+        Called when a player makes contact with the ground.
 		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
 		
 		Name | Description
 		--- | ---
@@ -3176,7 +2895,7 @@ class Gm {
 		`speed` | The speed at which the player hit the ground
 		
 		
-		**Returns:** Return true to suppress default action
+		`**Returns:** Return true to suppress default action
 		
 		___
 		### Lua Examples
@@ -3196,8 +2915,6 @@ class Gm {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -3205,16 +2922,12 @@ class Gm {
     
     #if server
     /**
-        Called when an entity is picked up by a gravity gun. 
-		
+        Called when an entity is picked up by a gravity gun.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player wielding the gravity gun
 		`ent` | The entity that has been picked up by the gravity gun
-		
-		
-		
     **/
     
     @:hook
@@ -3230,16 +2943,17 @@ class Gm {
 		
 		 This hook is called after GM:PlayerTick. 
 		
-		 See Game Movement for an explanation on the move system. 
+		 See Game Movement for an explanation on the move system.
 		
-		 
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
 		Name | Description
 		--- | ---
 		`ply` | Player
 		`mv` | Movement information
 		
 		
-		**Returns:** Return true to suppress default engine action
+		`**Returns:** Return true to suppress default engine action
 		
 		___
 		### Lua Examples
@@ -3304,8 +3018,6 @@ class Gm {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -3313,32 +3025,24 @@ class Gm {
     
     #if client
     /**
-        Called whenever a players releases a mouse key on the context menu in Sandbox or on any panel derived from CGModBase, such as the panel used by gui.EnableScreenClicker and the panel used by Panel:ParentToHUD. 
-		
+        Called whenever a players releases a mouse key on the context menu in Sandbox or on any panel derived from CGModBase, such as the panel used by gui.EnableScreenClicker and the panel used by Panel:ParentToHUD.
 		
 		Name | Description
 		--- | ---
 		`mouseCode` | The key the player released, see MOUSE_ Enums
 		`aimVector` | A normalized direction vector local to the camera. Internally this is gui. ScreenToVector( gui. MousePos() ).
-		
-		
-		
     **/
     
     @:hook
-    public function GUIMouseReleased(mouseCode:Float, aimVector:Vector):Void {}
+    public function GUIMouseReleased(mouseCode:MOUSE, aimVector:Vector):Void {}
     #end
     #if client
     /**
-        Called when a player starts using voice chat. 
-		
+        Called when a player starts using voice chat.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who started using voice chat
-		
-		
-		
     **/
     
     @:hook
@@ -3346,16 +3050,16 @@ class Gm {
     #end
     
     /**
-        The Move hook is called for you to manipulate the player's CMoveData. This hook is called moments before GM:Move and GM:PlayerNoClip. 
+        The Move hook is called for you to manipulate the player's CMoveData. This hook is called moments before GM:Move and GM:PlayerNoClip.
 		
+		**Warning:** This hook will not run when inside a vehicle. GM:VehicleMove will be called instead.
+		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
 		
 		Name | Description
 		--- | ---
 		`player` | The player
 		`mv` | The current movedata for the player.
-		
-		
-		
     **/
     
     @:hook
@@ -3363,8 +3067,7 @@ class Gm {
     
     
     /**
-        Called after the gamemode loads and starts. 
-		
+        Called after the gamemode loads and starts.
 		
 		___
 		### Lua Examples
@@ -3383,8 +3086,6 @@ class Gm {
 		end
 		hook.Add( "Initialize", "some_unique_name", init )
 		```
-		
-		
     **/
     
     @:hook
@@ -3392,8 +3093,11 @@ class Gm {
     
     
     /**
-        Allows you to change the players inputs before they are processed by the server. This is basically a shared version of GM:CreateMove. 
+        Allows you to change the players inputs before they are processed by the server. This is basically a shared version of GM:CreateMove.
 		
+		**Note:** This function is also called for bots, making it the best solution to control them so far
+		
+		**Note:** This hook is predicted, but not by usual means, this hook is called when a CUserCmd is generated on the client, and on the server when it is received, so it is necessary for this hook to be called clientside even on singleplayer
 		
 		Name | Description
 		--- | ---
@@ -3457,8 +3161,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -3466,8 +3168,7 @@ class Gm {
     
     #if server
     /**
-        Returns whether or not a player is allowed to join a team 
-		
+        Returns whether or not a player is allowed to join a team
 		
 		Name | Description
 		--- | ---
@@ -3475,9 +3176,7 @@ class Gm {
 		`team` | Index of the team
 		
 		
-		**Returns:** Allowed to switch
-		
-		
+		`**Returns:** Allowed to switch
     **/
     
     @:hook
@@ -3485,15 +3184,11 @@ class Gm {
     #end
     #if client
     /**
-        Called when an entity has been created over the network. 
-		
+        Called when an entity has been created over the network.
 		
 		Name | Description
 		--- | ---
 		`ent` | Created entity
-		
-		
-		
     **/
     
     @:hook
@@ -3501,10 +3196,9 @@ class Gm {
     #end
     
     /**
-        Called each frame to record demos to video using IVideoWriter. 
+        Called each frame to record demos to video using IVideoWriter.
 		
-		
-		
+		**Note:** This hook is called every frame regardless of whether or not a demo is being recorded
     **/
     
     @:hook
@@ -3514,9 +3208,10 @@ class Gm {
     /**
         Runs when a IN key was released by a player. 
 		
-		For a more general purpose function that handles all kinds of input, see GM:PlayerButtonUp 
+		For a more general purpose function that handles all kinds of input, see GM:PlayerButtonUp
 		
-		 
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
 		Name | Description
 		--- | ---
 		`ply` | The player releasing the key. If running client-side, this will always be LocalPlayer
@@ -3535,26 +3230,20 @@ class Gm {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function KeyRelease(ply:Player, key:Float):Void {}
+    public function KeyRelease(ply:Player, key:IN):Void {}
     
     #if server
     /**
-        Called when a player freezes an object. 
-		
+        Called when a player freezes an object.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who has frozen an object
 		`ent` | The frozen object
 		`physobj` | The frozen physics object of the frozen entity ( For ragdolls )
-		
-		
-		
     **/
     
     @:hook
@@ -3562,8 +3251,7 @@ class Gm {
     #end
     #if client
     /**
-        Called when it's time to populate the context menu menu bar at the top. 
-		
+        Called when it's time to populate the context menu menu bar at the top.
 		
 		Name | Description
 		--- | ---
@@ -3600,8 +3288,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -3609,10 +3295,7 @@ class Gm {
     #end
     #if client
     /**
-        Called when a player presses the "+menu" bind on their keyboard, which is bound to Q by default. 
-		
-		
-		
+        Called when a player presses the "+menu" bind on their keyboard, which is bound to Q by default.
     **/
     
     @:hook
@@ -3622,18 +3305,21 @@ class Gm {
     /**
         Called before all the translucent entities are drawn. 
 		
-		See also GM:PreDrawOpaqueRenderables and GM:PostDrawTranslucentRenderables. 
+		See also GM:PreDrawOpaqueRenderables and GM:PostDrawTranslucentRenderables.
 		
-		 
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
+		
+		**Bug:** BUG This is still called when r_drawentities or r_drawopaquerenderables is disabled. Issue Tracker: #3295
+		
+		**Bug:** BUG This is not called when r_drawtranslucentworld is disabled. Issue Tracker: #3296
+		
 		Name | Description
 		--- | ---
 		`isDrawingDepth` | Whether the current draw is writing depth.
 		`isDrawSkybox` | Whether the current draw is drawing the skybox.
 		
 		
-		**Returns:** Return true to prevent translucent renderables from drawing.
-		
-		
+		`**Returns:** Return true to prevent translucent renderables from drawing.
     **/
     
     @:hook
@@ -3643,9 +3329,8 @@ class Gm {
     /**
         Called when a non local player connects to allow the Lua system to check the password. 
 		
-		The default behaviour in the base gamemodes emulates what would normally happen. If sv_password is set and its value matches the password passed in by the client - then they are allowed to join. If it isn't set it lets them in too. 
+		The default behaviour in the base gamemodes emulates what would normally happen. If sv_password is set and its value matches the password passed in by the client - then they are allowed to join. If it isn't set it lets them in too.
 		
-		 
 		Name | Description
 		--- | ---
 		`steamID64` | The 64bit Steam ID of the joining player, use util. SteamIDFrom64 to convert it to a "STEAM_0:" one.
@@ -3679,19 +3364,14 @@ class Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function CheckPassword(steamID64:String, ipAddress:String, svPassword:String, clPassword:String, name:String):Dynamic {return null;}
+    public function CheckPassword(steamID64:String, ipAddress:String, svPassword:String, clPassword:String, name:String):GmCheckPasswordReturn {return null;}
     #end
     #if client
     /**
-        Called when player presses the scoreboard button. ( TAB by default ) 
-		
-		
-		
+        Called when player presses the scoreboard button. ( TAB by default )
     **/
     
     @:hook
@@ -3699,8 +3379,7 @@ class Gm {
     #end
     #if client
     /**
-        Called before any of 2D drawing functions. Drawing anything in it seems to work incorrectly. 
-		
+        Called before any of 2D drawing functions. Drawing anything in it seems to work incorrectly.
 		
 		___
 		### Lua Examples
@@ -3718,8 +3397,6 @@ class Gm {
 		    cam.End2D()
 		end)
 		```
-		
-		
     **/
     
     @:hook
@@ -3727,15 +3404,11 @@ class Gm {
     #end
     #if client
     /**
-        Called when DTextEntry loses focus. 
-		
+        Called when DTextEntry loses focus.
 		
 		Name | Description
 		--- | ---
 		`panel` | The panel that lost focus
-		
-		
-		
     **/
     
     @:hook
@@ -3743,15 +3416,11 @@ class Gm {
     #end
     #if server
     /**
-        Called when a player executes gm_showspare1 console command. ( Default bind is F3 ) 
-		
+        Called when a player executes gm_showspare1 console command. ( Default bind is F3 )
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who executed the command
-		
-		
-		
     **/
     
     @:hook
@@ -3759,8 +3428,7 @@ class Gm {
     #end
     #if client
     /**
-        Allows overriding the position and angle of the viewmodel. 
-		
+        Allows overriding the position and angle of the viewmodel.
 		
 		Name | Description
 		--- | ---
@@ -3776,18 +3444,14 @@ class Gm {
 		--- | ---
 		`a` | New position
 		`b` | New angle
-		
-		
-		
     **/
     
     @:hook
-    public function CalcViewModelView(wep:Weapon, vm:Entity, oldPos:Vector, oldAng:Angle, pos:Vector, ang:Angle):Dynamic {return null;}
+    public function CalcViewModelView(wep:Weapon, vm:Entity, oldPos:Vector, oldAng:Angle, pos:Vector, ang:Angle):GmCalcViewModelViewReturn {return null;}
     #end
     
     /**
-        Called while an addon from the Steam workshop is downloading. Used by default to update details on the fancy workshop download panel. 
-		
+        Called while an addon from the Steam workshop is downloading. Used by default to update details on the fancy workshop download panel.
 		
 		Name | Description
 		--- | ---
@@ -3796,9 +3460,6 @@ class Gm {
 		`title` | Name of addon.
 		`downloaded` | Current bytes of addon downloaded.
 		`expected` | Expected file size of addon in bytes.
-		
-		
-		
     **/
     
     @:hook
@@ -3806,8 +3467,7 @@ class Gm {
     
     #if client
     /**
-        Allows override of the default view. 
-		
+        Allows override of the default view.
 		
 		Name | Description
 		--- | ---
@@ -3819,7 +3479,7 @@ class Gm {
 		`zfar` | Distance to far clipping plane.
 		
 		
-		**Returns:** View data table. See CamData structure
+		`**Returns:** View data table. See CamData structure
 		
 		___
 		### Lua Examples
@@ -3839,26 +3499,20 @@ class Gm {
 		 
 		hook.Add( "CalcView", "MyCalcView", MyCalcView )
 		```
-		
-		
     **/
     
     @:hook
-    public function CalcView(ply:Player, origin:Vector, angles:Angle, fov:Float, znear:Float, zfar:Float):AnyTable {return null;}
+    public function CalcView(ply:Player, origin:Vector, angles:Angle, fov:Float, znear:Float, zfar:Float):CamData {return null;}
     #end
     #if server
     /**
-        Called when a player unfreezes an object. 
-		
+        Called when a player unfreezes an object.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who has unfrozen an object
 		`ent` | The unfrozen object
 		`physobj` | The frozen physics object of the unfrozen entity ( For ragdolls )
-		
-		
-		
     **/
     
     @:hook
@@ -3866,8 +3520,7 @@ class Gm {
     #end
     
     /**
-        Allows you to translate player activities. 
-		
+        Allows you to translate player activities.
 		
 		Name | Description
 		--- | ---
@@ -3875,18 +3528,15 @@ class Gm {
 		`act` | The activity. See ACT_ Enums
 		
 		
-		**Returns:** The new, translated activity
-		
-		
+		`**Returns:** The new, translated activity
     **/
     
     @:hook
-    public function TranslateActivity(ply:Player, act:Float):Float {return null;}
+    public function TranslateActivity(ply:Player, act:ACT):Float {return null;}
     
     #if server
     /**
-        Allows to suppress player taunts. 
-		
+        Allows to suppress player taunts.
 		
 		Name | Description
 		--- | ---
@@ -3894,27 +3544,22 @@ class Gm {
 		`act` | Act ID of the taunt player tries to do, see ACT_ Enums
 		
 		
-		**Returns:** Return false to disallow player taunting
-		
-		
+		`**Returns:** Return false to disallow player taunting
     **/
     
     @:hook
-    public function PlayerShouldTaunt(ply:Player, act:Float):Bool {return null;}
+    public function PlayerShouldTaunt(ply:Player, act:ACT):Bool {return null;}
     #end
     #if client
     /**
-        Called before the player is drawn. 
-		
+        Called before the player is drawn.
 		
 		Name | Description
 		--- | ---
 		`player` | The player that is about to be drawn.
 		
 		
-		**Returns:** Prevent default player rendering. Return true to hide the player.
-		
-		
+		`**Returns:** Prevent default player rendering. Return true to hide the player.
     **/
     
     @:hook
@@ -3922,8 +3567,7 @@ class Gm {
     #end
     #if client
     /**
-        Called after the player hands are drawn. 
-		
+        Called after the player hands are drawn.
 		
 		Name | Description
 		--- | ---
@@ -3931,9 +3575,6 @@ class Gm {
 		`vm` | This is the view model entity.
 		`ply` | The the owner of the view model.
 		`weapon` | This is the weapon that is from the view model.
-		
-		
-		
     **/
     
     @:hook
@@ -3941,17 +3582,14 @@ class Gm {
     #end
     #if client
     /**
-        Allows you to suppress post processing effect drawing. 
-		
+        Allows you to suppress post processing effect drawing.
 		
 		Name | Description
 		--- | ---
 		`ppeffect` | The classname of Post Processing effect
 		
 		
-		**Returns:** Return true/false depending on whether this post process should be allowed
-		
-		
+		`**Returns:** Return true/false depending on whether this post process should be allowed
     **/
     
     @:hook
@@ -3961,17 +3599,15 @@ class Gm {
     /**
         Called when you are driving a vehicle. This hook works just like GM:Move. 
 		
-		This hook is called before GM:Move and will be called when GM:PlayerTick is not. 
+		This hook is called before GM:Move and will be called when GM:PlayerTick is not.
 		
-		 
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
 		Name | Description
 		--- | ---
 		`ply` | Player who is driving the vehicle
 		`veh` | The vehicle being driven
 		`mv` | Move data
-		
-		
-		
     **/
     
     @:hook
@@ -3983,18 +3619,15 @@ class Gm {
 		
 		See GM:AllowPlayerPickup for the +USE pickup variant. 
 		
-		 Calls ENTITY:GravGunPickupAllowed on the entity being hovered every frame in Sandbox-derived gamemodes. 
+		 Calls ENTITY:GravGunPickupAllowed on the entity being hovered every frame in Sandbox-derived gamemodes.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | The player wielding the gravity gun
 		`ent` | The entity the player is attempting to pick up
 		
 		
-		**Returns:** Return true to allow entity pick up
-		
-		
+		`**Returns:** Return true to allow entity pick up
     **/
     
     @:hook
@@ -4002,10 +3635,7 @@ class Gm {
     #end
     
     /**
-        Called whenever the Lua environment is about to be shut down, for example on map change, or when the server is going to shut down. 
-		
-		
-		
+        Called whenever the Lua environment is about to be shut down, for example on map change, or when the server is going to shut down.
     **/
     
     @:hook
@@ -4015,9 +3645,8 @@ class Gm {
     /**
         Called when a variable is edited on an Entity (called by Edit Properties... menu), to determine if the edit should be permitted. 
 		
-		See Editable entities for more details about the system. 
+		See Editable entities for more details about the system.
 		
-		 
 		Name | Description
 		--- | ---
 		`ent` | The entity being edited
@@ -4027,7 +3656,7 @@ class Gm {
 		`editor` | The edit table defined in Entity: NetworkVar
 		
 		
-		**Returns:** Return true to allow editing
+		`**Returns:** Return true to allow editing
 		
 		___
 		### Lua Examples
@@ -4039,8 +3668,6 @@ class Gm {
 		    return ply:IsAdmin()
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -4048,8 +3675,11 @@ class Gm {
     #end
     
     /**
-        Called when an NWVar is changed. 
+        Called when an NWVar is changed.
 		
+		**Note:** Currently this hook only works for the NW2Var system (accessed by adding a 2 in between NW and Var for most NWVar functions), which will replace the original one at some point in the future
+		
+		**Note:** This hook is fired before the client value is actually changed. Calling the GetNW function for the specified variable name within this hook will return the old value, not the current/updated one.
 		
 		Name | Description
 		--- | ---
@@ -4070,17 +3700,16 @@ class Gm {
 		-- Trigger a change!
 		Entity(1):SetNW2String( "UserGroup", "owner" )
 		```
-		
-		
     **/
     
     @:hook
-    public function EntityNetworkedVarChanged(ent:Entity, name:String, oldval:Any, newval:Any):Void {}
+    public function EntityNetworkedVarChanged(ent:Entity, name:String, oldval:Dynamic, newval:Dynamic):Void {}
     
     
     /**
-        Called every time a bullet is fired from an entity. 
+        Called every time a bullet is fired from an entity.
 		
+		**Warning:** This hook is called directly from Entity:FireBullets. Due to this, you cannot call Entity:FireBullets inside this hook or an infinite loop will occur crashing the game.
 		
 		Name | Description
 		--- | ---
@@ -4088,18 +3717,15 @@ class Gm {
 		`data` | The bullet data. See Bullet structure
 		
 		
-		**Returns:** Return true to apply all changes done to the bullet table. Return false to suppress the bullet.
-		
-		
+		`**Returns:** Return true to apply all changes done to the bullet table. Return false to suppress the bullet.
     **/
     
     @:hook
-    public function EntityFireBullets(ent:Entity, data:AnyTable):Bool {return null;}
+    public function EntityFireBullets(ent:Entity, data:Bullet):Bool {return null;}
     
     
     /**
-        Allows to override player jumping animations. 
-		
+        Allows to override player jumping animations.
 		
 		Name | Description
 		--- | ---
@@ -4107,9 +3733,7 @@ class Gm {
 		`velocity` | Players velocity
 		
 		
-		**Returns:** Return true if we've changed/set the animation, false otherwise
-		
-		
+		`**Returns:** Return true if we've changed/set the animation, false otherwise
     **/
     
     @:hook
@@ -4117,15 +3741,11 @@ class Gm {
     
     #if client
     /**
-        Called when player stops using voice chat. 
-		
+        Called when player stops using voice chat.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player who stopped talking
-		
-		
-		
     **/
     
     @:hook
@@ -4135,10 +3755,9 @@ class Gm {
     /**
         Called every frame on client and every tick on server. 
 		
-		See GM:Tick for a hook that runs every tick on both the client and server. 
+		See GM:Tick for a hook that runs every tick on both the client and server.
 		
-		 
-		
+		**Note:** This hook WILL NOT run if the server is empty, unless you set the ConVar sv_hibernate_think to 1
     **/
     
     @:hook
@@ -4148,17 +3767,15 @@ class Gm {
     /**
         Handles the player's death. 
 		
-		This hook is not called if the player is killed by Player:KillSilent. See GM:PlayerSilentDeath for that. 
+		This hook is not called if the player is killed by Player:KillSilent. See GM:PlayerSilentDeath for that.
 		
-		 
+		**Note:** Player:Alive returns true when this is called
+		
 		Name | Description
 		--- | ---
 		`ply` | The player
 		`attacker` | The entity that killed the player
 		`dmg` | Damage info
-		
-		
-		
     **/
     
     @:hook
@@ -4166,8 +3783,7 @@ class Gm {
     #end
     #if server
     /**
-        Called when an entity takes damage. You can modify all parts of the damage info in this hook. 
-		
+        Called when an entity takes damage. You can modify all parts of the damage info in this hook.
 		
 		Name | Description
 		--- | ---
@@ -4175,7 +3791,7 @@ class Gm {
 		`dmg` | Damage info
 		
 		
-		**Returns:** Return true to completely block the damage event
+		`**Returns:** Return true to completely block the damage event
 		
 		___
 		### Lua Examples
@@ -4214,8 +3830,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -4223,10 +3837,7 @@ class Gm {
     #end
     #if client
     /**
-        Called when a player releases the "+menu" bind on their keyboard, which is bound to Q by default. 
-		
-		
-		
+        Called when a player releases the "+menu" bind on their keyboard, which is bound to Q by default.
     **/
     
     @:hook
@@ -4234,16 +3845,12 @@ class Gm {
     #end
     #if client
     /**
-        Called when the client has picked up ammo. Override to disable default HUD notification. 
-		
+        Called when the client has picked up ammo. Override to disable default HUD notification.
 		
 		Name | Description
 		--- | ---
 		`itemName` | Name of the item (ammo) picked up
 		`amount` | Amount of the item (ammo) picked up
-		
-		
-		
     **/
     
     @:hook
@@ -4251,8 +3858,9 @@ class Gm {
     #end
     #if server
     /**
-        Called when an NPC takes damage. 
+        Called when an NPC takes damage.
 		
+		**Note:** This hook is called only when a specific hit group of the NPC is hit. In cases where the hitgroup doesn't matter, you should use GM:EntityTakeDamage instead!
 		
 		Name | Description
 		--- | ---
@@ -4271,20 +3879,21 @@ class Gm {
 		    dmginfo:ScaleDamage( 2 )
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function ScaleNPCDamage(npc:NPC, hitgroup:Float, dmginfo:CTakeDamageInfo):Void {}
+    public function ScaleNPCDamage(npc:NPC, hitgroup:HITGROUP, dmginfo:CTakeDamageInfo):Void {}
     #end
     #if server
     /**
         Called as a weapon entity is picked up by a player. 
 		
-		See also GM:PlayerDroppedWeapon. 
+		See also GM:PlayerDroppedWeapon.
 		
-		 
+		**Note:** At the time when this hook is called Entity:GetOwner will return NULL. The owner is set on the next frame
+		
+		**Note:** This will not be called when picking up a weapon you already have as the weapon will be removed and WEAPON:EquipAmmo will be called instead
+		
 		Name | Description
 		--- | ---
 		`weapon` | The equipped weapon.
@@ -4301,8 +3910,6 @@ class Gm {
 		    timer.Simple( 0, function() ply:DropWeapon( wep ) end )
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -4310,10 +3917,7 @@ class Gm {
     #end
     
     /**
-        Called before the gamemode is loaded. 
-		
-		
-		
+        Called before the gamemode is loaded.
     **/
     
     @:hook
@@ -4321,8 +3925,9 @@ class Gm {
     
     #if client
     /**
-        Used to render post processing effects. 
+        Used to render post processing effects.
 		
+		**Note:** This is a rendering hook with a 2D rendering context. This means that the only rendering functions will work in it are functions with a 2D rendering context.
 		
 		___
 		### Lua Examples
@@ -4346,8 +3951,6 @@ class Gm {
 		    DrawSobel( 0.5 ) --Draws Sobel effect
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -4357,10 +3960,7 @@ class Gm {
     /**
         Called when downloading content from Steam workshop begins. Used by default to show fancy workshop downloading panel. 
 		
-		The order of Workshop hooks is this: 
-		
-		 
-		
+		The order of Workshop hooks is this:
     **/
     
     @:hook
@@ -4368,8 +3968,7 @@ class Gm {
     
     #if server
     /**
-        Called when a player gets hurt. 
-		
+        Called when a player gets hurt.
 		
 		Name | Description
 		--- | ---
@@ -4391,8 +3990,6 @@ class Gm {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -4400,16 +3997,12 @@ class Gm {
     #end
     
     /**
-        Called after GM:WorkshopStart. 
-		
+        Called after GM:WorkshopStart.
 		
 		Name | Description
 		--- | ---
 		`remain` | Remaining addons to download
 		`total` | Total addons needing to be downloaded
-		
-		
-		
     **/
     
     @:hook
@@ -4417,8 +4010,7 @@ class Gm {
     
     #if server
     /**
-        Returns true if the player should take damage from the given attacker. 
-		
+        Returns true if the player should take damage from the given attacker.
 		
 		Name | Description
 		--- | ---
@@ -4426,9 +4018,7 @@ class Gm {
 		`attacker` | The attacker
 		
 		
-		**Returns:** Allow damage
-		
-		
+		`**Returns:** Allow damage
     **/
     
     @:hook
@@ -4436,16 +4026,12 @@ class Gm {
     #end
     #if client
     /**
-        This hook is called every frame to draw all of the current death notices. 
-		
+        This hook is called every frame to draw all of the current death notices.
 		
 		Name | Description
 		--- | ---
 		`x` | X position to draw death notices as a ratio
 		`y` | Y position to draw death notices as a ratio
-		
-		
-		
     **/
     
     @:hook
@@ -4453,10 +4039,7 @@ class Gm {
     #end
     
     /**
-        Called every server tick. Serverside, this is similar to GM:Think. 
-		
-		
-		
+        Called every server tick. Serverside, this is similar to GM:Think.
     **/
     
     @:hook
@@ -4464,17 +4047,13 @@ class Gm {
     
     
     /**
-        Animation updates (pose params etc) should be done here. 
-		
+        Animation updates (pose params etc) should be done here.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player to update the animation info for.
 		`velocity` | The player's velocity.
 		`maxSeqGroundSpeed` | Speed of the animation - used for playback rate scaling.
-		
-		
-		
     **/
     
     @:hook
@@ -4482,30 +4061,29 @@ class Gm {
     
     #if client
     /**
-        Called when a mouse button is pressed on a VGUI element or menu.     
+        Called when a mouse button is pressed on a VGUI element or menu.
+		
 		Name | Description
 		--- | ---
 		`pnl` | Panel that currently has focus.
 		`mouseCode` | The key that the player pressed using MOUSE_ Enums.
-		
-		
-		
     **/
     
     @:hook
-    public function VGUIMousePressed(pnl:Panel, mouseCode:Float):Void {}
+    public function VGUIMousePressed(pnl:Panel, mouseCode:MOUSE):Void {}
     #end
     
     /**
-        Called whenever a sound has been played. This will not be called clientside if the server played the sound without the client also calling Entity:EmitSound. 
+        Called whenever a sound has been played. This will not be called clientside if the server played the sound without the client also calling Entity:EmitSound.
 		
+		**Bug:** BUG This is not called for scripted sequences. Issue Tracker: #1021
 		
 		Name | Description
 		--- | ---
 		`data` | Information about the played sound. Changes done to this table can be applied by returning true from this hook. See EmitSoundInfo structure.
 		
 		
-		**Returns:** Return true to apply all changes done to the data table. Return false to prevent the sound from playing. Return nil or nothing to play the sound without altering it.
+		`**Returns:** Return true to apply all changes done to the data table. Return false to prevent the sound from playing. Return nil or nothing to play the sound without altering it.
 		
 		___
 		### Lua Examples
@@ -4537,19 +4115,14 @@ class Gm {
 		    
 		end )
 		```
-		
-		
     **/
     
     @:hook
-    public function EntityEmitSound(data:AnyTable):Bool {return null;}
+    public function EntityEmitSound(data:EmitSoundInfo):Bool {return null;}
     
     
     /**
-        Called to refresh menu content once it has initialized or something has been mounted. 
-		
-		
-		
+        Called to refresh menu content once it has initialized or something has been mounted.
     **/
     
     @:hook
@@ -4559,9 +4132,8 @@ class Gm {
     /**
         Determines whether or not the player can enter the vehicle. 
 		
-		Called just before GM:PlayerEnteredVehicle. 
+		Called just before GM:PlayerEnteredVehicle.
 		
-		 
 		Name | Description
 		--- | ---
 		`player` | The player
@@ -4569,9 +4141,7 @@ class Gm {
 		`role` | 
 		
 		
-		**Returns:** False if the player is not allowed to enter the vehicle.
-		
-		
+		`**Returns:** False if the player is not allowed to enter the vehicle.
     **/
     
     @:hook
@@ -4579,8 +4149,7 @@ class Gm {
     #end
     #if server
     /**
-        Called to spawn the player as a spectator. 
-		
+        Called to spawn the player as a spectator.
 		
 		Name | Description
 		--- | ---
@@ -4599,8 +4168,6 @@ class Gm {
 		 
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -4608,8 +4175,9 @@ class Gm {
     #end
     #if client
     /**
-        Allows you to override physgun beam drawing. 
+        Allows you to override physgun beam drawing.
 		
+		**Bug:** BUG This is still called when physgun_drawbeams is disabled. Issue Tracker: #3294
 		
 		Name | Description
 		--- | ---
@@ -4621,7 +4189,7 @@ class Gm {
 		`hitPos` | Beam hit position relative to the physics bone ( PhysObj) we are grabbing.
 		
 		
-		**Returns:** Return false to hide default beam
+		`**Returns:** Return false to hide default beam
 		
 		___
 		### Lua Examples
@@ -4662,8 +4230,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -4673,10 +4239,7 @@ class Gm {
     /**
         Called when the context menu keybind (+menu_context) is pressed, which by default is C. 
 		
-		See also GM:OnContextMenuClose. 
-		
-		 
-		
+		See also GM:OnContextMenuClose.
     **/
     
     @:hook
@@ -4684,16 +4247,12 @@ class Gm {
     #end
     #if server
     /**
-        Allows you to add extra positions to the player's PVS. This is the place to call AddOriginToPVS. 
-		
+        Allows you to add extra positions to the player's PVS. This is the place to call AddOriginToPVS.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player
 		`viewEntity` | Players Player: GetViewEntity
-		
-		
-		
     **/
     
     @:hook
@@ -4701,17 +4260,13 @@ class Gm {
     #end
     #if server
     /**
-        Called when player starts taunting. 
-		
+        Called when player starts taunting.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player who is taunting
 		`act` | The sequence ID of the taunt
 		`length` | Length of the taunt
-		
-		
-		
     **/
     
     @:hook
@@ -4719,16 +4274,16 @@ class Gm {
     #end
     #if client
     /**
-        Called whenever this entity changes its transmission state for this LocalPlayer, such as exiting or re entering the PVS. 
+        Called whenever this entity changes its transmission state for this LocalPlayer, such as exiting or re entering the PVS.
 		
+		**Note:** This is the best place to handle the reset of Entity:SetPredictable, as this would be usually called when the player lags and requests a full packet update
+		
+		**Note:** When the entity stops transmitting, Entity:IsDormant will only return true after this hook
 		
 		Name | Description
 		--- | ---
 		`ent` | The entity that changed its transmission state.
 		`shouldtransmit` | True if we started transmitting to this client and false if we stopped.
-		
-		
-		
     **/
     
     @:hook
@@ -4736,8 +4291,7 @@ class Gm {
     #end
     
     /**
-        Called when a player has been hit by a trace and damaged (such as from a bullet). Returning true overrides the damage handling and prevents GM:ScalePlayerDamage from being called. 
-		
+        Called when a player has been hit by a trace and damaged (such as from a bullet). Returning true overrides the damage handling and prevents GM:ScalePlayerDamage from being called.
 		
 		Name | Description
 		--- | ---
@@ -4747,20 +4301,19 @@ class Gm {
 		`trace` | The trace of the bullet's path, see TraceResult structure
 		
 		
-		**Returns:** Override engine handling
-		
-		
+		`**Returns:** Override engine handling
     **/
     
     @:hook
-    public function PlayerTraceAttack(ply:Player, dmginfo:CTakeDamageInfo, dir:Vector, trace:AnyTable):Bool {return null;}
+    public function PlayerTraceAttack(ply:Player, dmginfo:CTakeDamageInfo, dir:Vector, trace:TraceResult):Bool {return null;}
     
     #if client
     /**
-        Called to allow override of the default Derma skin for all panels. 
+        Called to allow override of the default Derma skin for all panels.
 		
+		**Note:** This hook is only called on Lua start up, changing its value (or adding new hooks) after it has been already called will not have any effect.
 		
-		**Returns:** A case sensitive Derma skin name to be used as default, registered previously via derma.DefineSkin. Returning nothing, nil or invalid name will make it fallback to the "Default" skin.
+		`**Returns:** A case sensitive Derma skin name to be used as default, registered previously via derma.DefineSkin. Returning nothing, nil or invalid name will make it fallback to the "Default" skin.
 		
 		___
 		### Lua Examples
@@ -4772,8 +4325,6 @@ class Gm {
 		    return "some_skin"
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -4781,12 +4332,9 @@ class Gm {
     #end
     
     /**
-        Called when the game(server) needs to update the text shown in the server browser as the gamemode. 
+        Called when the game(server) needs to update the text shown in the server browser as the gamemode.
 		
-		
-		**Returns:** The text to be shown in the server browser as the gamemode
-		
-		
+		`**Returns:** The text to be shown in the server browser as the gamemode
     **/
     
     @:hook
@@ -4794,10 +4342,9 @@ class Gm {
     
     #if client
     /**
-        Called before the renderer is about to start rendering the next frame. 
+        Called before the renderer is about to start rendering the next frame.
 		
-		
-		**Returns:** Return true to prevent all rendering. This can make the whole game stop rendering anything.
+		`**Returns:** Return true to prevent all rendering. This can make the whole game stop rendering anything.
 		
 		___
 		### Lua Examples
@@ -4812,8 +4359,6 @@ class Gm {
 		    cam.End2D()
 		end)
 		```
-		
-		
     **/
     
     @:hook
@@ -4821,8 +4366,7 @@ class Gm {
     #end
     #if server
     /**
-        Called to determine a spawn point for a player to spawn at. 
-		
+        Called to determine a spawn point for a player to spawn at.
 		
 		Name | Description
 		--- | ---
@@ -4830,7 +4374,7 @@ class Gm {
 		`transition` | If true, the player just spawned from a map transition. You probably want to not return an entity for that case to not override player's position.
 		
 		
-		**Returns:** The spawnpoint entity to spawn the player at
+		`**Returns:** The spawnpoint entity to spawn the player at
 		
 		___
 		### Lua Examples
@@ -4847,8 +4391,6 @@ class Gm {
 		    
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -4856,8 +4398,7 @@ class Gm {
     #end
     #if client
     /**
-        Called when the player undoes something. 
-		
+        Called when the player undoes something.
 		
 		Name | Description
 		--- | ---
@@ -4882,8 +4423,6 @@ class Gm {
 		**Output:**
 		
 		Undone <action>
-		
-		
     **/
     
     @:hook
@@ -4891,17 +4430,14 @@ class Gm {
     #end
     #if client
     /**
-        Called when the local player presses TAB while having their chatbox opened. 
-		
+        Called when the local player presses TAB while having their chatbox opened.
 		
 		Name | Description
 		--- | ---
 		`text` | The currently typed into chatbox text
 		
 		
-		**Returns:** What should be placed into the chatbox instead of what currently is when player presses tab
-		
-		
+		`**Returns:** What should be placed into the chatbox instead of what currently is when player presses tab
     **/
     
     @:hook
@@ -4909,8 +4445,7 @@ class Gm {
     #end
     #if client
     /**
-        Allows you to modify the Source Engine's motion blur shaders. 
-		
+        Allows you to modify the Source Engine's motion blur shaders.
 		
 		Name | Description
 		--- | ---
@@ -4943,17 +4478,16 @@ class Gm {
 		**Output:**
 		
 		Your radial blur pulses.
-		
-		
     **/
     
     @:hook
-    public function GetMotionBlurValues(horizontal:Float, vertical:Float, forward:Float, rotational:Float):Dynamic {return null;}
+    public function GetMotionBlurValues(horizontal:Float, vertical:Float, forward:Float, rotational:Float):GmGetMotionBlurValuesReturn {return null;}
     #end
     
     /**
-        Called after all the entities are initialized. 
+        Called after all the entities are initialized.
 		
+		**Note:** At this point the client only knows about the entities that are within the spawnpoints' PVS. For instance, if the server sends an entity that is not within this PVS, the client will receive it as NULL entity.
 		
 		___
 		### Lua Examples
@@ -4972,8 +4506,6 @@ class Gm {
 		    print("Initialization hook called")
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -4981,15 +4513,11 @@ class Gm {
     
     
     /**
-        Override this hook to disable/change ear-grabbing in your gamemode. 
-		
+        Override this hook to disable/change ear-grabbing in your gamemode.
 		
 		Name | Description
 		--- | ---
 		`ply` | Player
-		
-		
-		
     **/
     
     @:hook
@@ -4997,27 +4525,24 @@ class Gm {
     
     #if client
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called whenever a player's class is changed on the server-side with player_manager.SetPlayerClass. 
-		
+		Called whenever a player's class is changed on the server-side with player_manager.SetPlayerClass.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player whose class has been changed.
 		`newID` | The network ID of the player class's name string, or 0 if we are clearing a player class from the player. Pass this into util. NetworkIDToString to retrieve the proper name of the player class.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     @:hook
     public function PlayerClassChanged(ply:Player, newID:Float):Void {}
     #end
     #if server
     /**
-        Called whenever a player spawns and must choose a model. A good place to assign a model to a player. 
+        Called whenever a player spawns and must choose a model. A good place to assign a model to a player.
 		
+		**Note:** This function may not work in your custom gamemode if you have overridden your GM:PlayerSpawn and you do not use self.BaseClass.PlayerSpawn or hook.Call.
 		
 		Name | Description
 		--- | ---
@@ -5034,8 +4559,6 @@ class Gm {
 		   ply:SetModel( "models/player/odessa.mdl" )
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -5043,8 +4566,7 @@ class Gm {
     #end
     #if client
     /**
-        Called from GM:HUDPaint to draw player info when you hover over a player with your crosshair or mouse. 
-		
+        Called from GM:HUDPaint to draw player info when you hover over a player with your crosshair or mouse.
 		
 		___
 		### Lua Examples
@@ -5055,8 +4577,6 @@ class Gm {
 		function GM:HUDDrawTargetID()
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -5068,16 +4588,12 @@ class Gm {
 		
 		See also GM:WeaponEquip for a hook when a player picks up a weapon. 
 		
-		 The weapon's Entity:GetOwner will be NULL at the time this hook is called. WEAPON:OnDrop will be called before this hook is. 
+		 The weapon's Entity:GetOwner will be NULL at the time this hook is called. WEAPON:OnDrop will be called before this hook is.
 		
-		 
 		Name | Description
 		--- | ---
 		`owner` | The player who owned this weapon before it was dropped
 		`wep` | The weapon that was dropped
-		
-		
-		
     **/
     
     @:hook
@@ -5085,16 +4601,12 @@ class Gm {
     #end
     
     /**
-        Called when an addon from the Steam workshop finishes downloading. Used by default to update details on the workshop downloading panel. 
-		
+        Called when an addon from the Steam workshop finishes downloading. Used by default to update details on the workshop downloading panel.
 		
 		Name | Description
 		--- | ---
 		`id` | Workshop ID of addon.
 		`title` | Name of addon.
-		
-		
-		
     **/
     
     @:hook
@@ -5106,16 +4618,12 @@ class Gm {
 		
 		This hook is called when the player runs "changeteam" in the console. 
 		
-		 To prevent the player from changing teams, see GM:PlayerCanJoinTeam 
+		 To prevent the player from changing teams, see GM:PlayerCanJoinTeam
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | The player to try to put into a team
 		`team` | Team to put the player into if the checks succeeded
-		
-		
-		
     **/
     
     @:hook
@@ -5123,8 +4631,7 @@ class Gm {
     #end
     #if server
     /**
-        Triggered when the player presses use on an object. Continuously runs until USE is released but will not activate other Entities until the USE key is released; dependent on activation type of the Entity. 
-		
+        Triggered when the player presses use on an object. Continuously runs until USE is released but will not activate other Entities until the USE key is released; dependent on activation type of the Entity.
 		
 		Name | Description
 		--- | ---
@@ -5132,7 +4639,7 @@ class Gm {
 		`ent` | The entity which the player is looking at / activating USE on.
 		
 		
-		**Returns:** Return false if the player is not allowed to USE the entity. Do not return true if using a hook, otherwise other mods may not get a chance to block a player's use.
+		`**Returns:** Return false if the player is not allowed to USE the entity. Do not return true if using a hook, otherwise other mods may not get a chance to block a player's use.
 		
 		___
 		### Lua Examples
@@ -5163,8 +4670,6 @@ class Gm {
 		    end
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -5172,8 +4677,7 @@ class Gm {
     #end
     #if client
     /**
-        Runs when user cancels/finishes typing. 
-		
+        Runs when user cancels/finishes typing.
 		
 		___
 		### Lua Examples
@@ -5185,8 +4689,6 @@ class Gm {
 		    print( "User has closed the chatbox." )
 		end)
 		```
-		
-		
     **/
     
     @:hook
@@ -5196,9 +4698,12 @@ class Gm {
     /**
         Called whenever the HUD should be drawn. Called right before GM:HUDDrawScoreBoard and after GM:HUDPaintBackground. 
 		
-		Not called when the Camera SWEP is equipped. See also GM:DrawOverlay. 
+		Not called when the Camera SWEP is equipped. See also GM:DrawOverlay.
 		
-		 
+		**Note:** Only be called when r_drawvgui is enabled and the game is not paused
+		
+		**Note:** This is a rendering hook with a 2D rendering context. This means that the only rendering functions will work in it are functions with a 2D rendering context.
+		
 		___
 		### Lua Examples
 		#### Example 1
@@ -5210,8 +4715,6 @@ class Gm {
 		    surface.DrawRect( 50, 50, 128, 128 )
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -5219,8 +4722,7 @@ class Gm {
     #end
     
     /**
-        Allows to override player noclip animations. 
-		
+        Allows to override player noclip animations.
 		
 		Name | Description
 		--- | ---
@@ -5228,9 +4730,7 @@ class Gm {
 		`velocity` | Players velocity
 		
 		
-		**Returns:** Return true if we've changed/set the animation, false otherwise
-		
-		
+		`**Returns:** Return true if we've changed/set the animation, false otherwise
     **/
     
     @:hook
@@ -5238,10 +4738,9 @@ class Gm {
     
     #if client
     /**
-        Called after GM:PreDrawHUD, GM:HUDPaintBackground and GM:HUDPaint but before GM:DrawOverlay. 
+        Called after GM:PreDrawHUD, GM:HUDPaintBackground and GM:HUDPaint but before GM:DrawOverlay.
 		
-		
-		
+		**Note:** This is a rendering hook with a 2D rendering context. This means that the only rendering functions will work in it are functions with a 2D rendering context.
     **/
     
     @:hook
@@ -5249,12 +4748,11 @@ class Gm {
     #end
     #if client
     /**
-        Called before the sky box is drawn. 
+        Called before the sky box is drawn.
 		
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
 		
-		**Returns:** Return true to disable skybox drawing (both 2D and 3D skybox)
-		
-		
+		`**Returns:** Return true to disable skybox drawing (both 2D and 3D skybox)
     **/
     
     @:hook
@@ -5262,8 +4760,7 @@ class Gm {
     #end
     
     /**
-        Allows to override player crouch animations. 
-		
+        Allows to override player crouch animations.
 		
 		Name | Description
 		--- | ---
@@ -5271,9 +4768,7 @@ class Gm {
 		`velocity` | Players velocity
 		
 		
-		**Returns:** Return true if we've changed/set the animation, false otherwise
-		
-		
+		`**Returns:** Return true if we've changed/set the animation, false otherwise
     **/
     
     @:hook
@@ -5281,10 +4776,9 @@ class Gm {
     
     #if client
     /**
-        Called every frame to render the scoreboard. It is recommended to use Derma and VGUI for this job instead of this hook. Called right after GM:HUDPaint. 
+        Called every frame to render the scoreboard. It is recommended to use Derma and VGUI for this job instead of this hook. Called right after GM:HUDPaint.
 		
-		
-		
+		**Note:** This is a rendering hook with a 2D rendering context. This means that the only rendering functions will work in it are functions with a 2D rendering context.
     **/
     
     @:hook
@@ -5292,15 +4786,11 @@ class Gm {
     #end
     
     /**
-        Called right before the removal of an entity. 
-		
+        Called right before the removal of an entity.
 		
 		Name | Description
 		--- | ---
 		`ent` | Entity being removed
-		
-		
-		
     **/
     
     @:hook
@@ -5308,17 +4798,14 @@ class Gm {
     
     #if client
     /**
-        Returns the color for the given entity's team. This is used in chat and deathnotice text. 
-		
+        Returns the color for the given entity's team. This is used in chat and deathnotice text.
 		
 		Name | Description
 		--- | ---
 		`ent` | Entity
 		
 		
-		**Returns:** Team Color
-		
-		
+		`**Returns:** Team Color
     **/
     
     @:hook
@@ -5326,10 +4813,9 @@ class Gm {
     #end
     
     /**
-        Called when gamemode has been reloaded by auto refresh. 
+        Called when gamemode has been reloaded by auto refresh.
 		
-		
-		
+		**Note:** It seems that this event can be triggered more than once for a single refresh event.
     **/
     
     @:hook
@@ -5337,10 +4823,7 @@ class Gm {
     
     #if client
     /**
-        Called after the frame has been rendered. 
-		
-		
-		
+        Called after the frame has been rendered.
     **/
     
     @:hook
@@ -5350,9 +4833,14 @@ class Gm {
     /**
         Called after all translucent entities are drawn. 
 		
-		See also GM:PostDrawOpaqueRenderables and GM:PreDrawTranslucentRenderables. 
+		See also GM:PostDrawOpaqueRenderables and GM:PreDrawTranslucentRenderables.
 		
-		 
+		**Note:** This is a rendering hook with a 3D rendering context. This means that the only rendering functions will work in it are functions with a 3D rendering context.
+		
+		**Bug:** BUG This is still called when r_drawentities or r_drawopaquerenderables is disabled. Issue Tracker: #3295
+		
+		**Bug:** BUG This is not called when r_drawtranslucentworld is disabled. Issue Tracker: #3296
+		
 		Name | Description
 		--- | ---
 		`bDrawingDepth` | Whether the current call is writing depth.
@@ -5381,8 +4869,6 @@ class Gm {
 		
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -5390,27 +4876,26 @@ class Gm {
     #end
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called by the engine when the game initially fetches subscriptions to be displayed on the bottom of the main menu screen. 
-		
+		Called by the engine when the game initially fetches subscriptions to be displayed on the bottom of the main menu screen.
 		
 		Name | Description
 		--- | ---
 		`num` | Amount of subscribed addons that have info retrieved.
 		`max` | Total amount of subscribed addons that need their info retrieved.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     @:hook
     public function WorkshopSubscriptionsProgress(num:Float, max:Float):Void {}
     
     
     /**
-        Called when the entity is created. 
+        Called when the entity is created.
 		
+		**Warning:** Removing the created entity during this event can lead to unexpected problems. Use timer.Simple( 0, .... ) to safely remove the entity.
+		
+		**Note:** Some entities on initial map spawn are passed through this hook, and then removed in the same frame. This is used by the engine to precache things like models and sounds, so always check their validity with IsValid.
 		
 		Name | Description
 		--- | ---
@@ -5448,8 +4933,6 @@ class Gm {
 		    EntList[ ent:EntIndex() ] = ent
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -5457,8 +4940,7 @@ class Gm {
     
     
     /**
-        Allows you to override the time between footsteps. 
-		
+        Allows you to override the time between footsteps.
 		
 		Name | Description
 		--- | ---
@@ -5467,20 +4949,17 @@ class Gm {
 		`walking` | Is the player walking or not ( +walk? )
 		
 		
-		**Returns:** Time between footsteps, in ms
-		
-		
+		`**Returns:** Time between footsteps, in ms
     **/
     
     @:hook
-    public function PlayerStepSoundTime(ply:Player, type:Float, walking:Bool):Float {return null;}
+    public function PlayerStepSoundTime(ply:Player, type:STEPSOUNDTIME, walking:Bool):Float {return null;}
     
     #if client
     /**
-        This will prevent IN_ATTACK from sending to server when player tries to shoot from C menu. 
+        This will prevent IN_ATTACK from sending to server when player tries to shoot from C menu.
 		
-		
-		**Returns:** Return true to prevent screen clicks
+		`**Returns:** Return true to prevent screen clicks
 		
 		___
 		### Lua Examples
@@ -5493,8 +4972,6 @@ class Gm {
 		    if ( pnl:IsWorldClicker() ) then return true end
 		end )
 		```
-		
-		
     **/
     
     @:hook
@@ -5502,8 +4979,11 @@ class Gm {
     #end
     
     /**
-        Called when a player switches their weapon. 
+        Called when a player switches their weapon.
 		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
+		**Bug:** BUG This can be NULL on the client if the weapon hasn't been created over the network yet. Issue Tracker: #2922
 		
 		Name | Description
 		--- | ---
@@ -5512,7 +4992,7 @@ class Gm {
 		`newWeapon` | The weapon the player switched to. Will be NULL if the player is switching to nothing. BUG This can be NULL on the client if the weapon hasn't been created over the network yet. Issue Tracker: #2922
 		
 		
-		**Returns:** Return true to prevent weapon switch
+		`**Returns:** Return true to prevent weapon switch
 		
 		___
 		### Lua Examples
@@ -5526,8 +5006,6 @@ class Gm {
 		    MsgN("Your new weapon is " .. newWeapon:GetClass() .. ".");
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -5535,10 +5013,7 @@ class Gm {
     
     #if client
     /**
-        Called every frame before drawing the in-game monitors ( Breencast, in-game TVs, etc ), but doesn't seem to be doing anything, trying to render 2D or 3D elements fail. 
-		
-		
-		
+        Called every frame before drawing the in-game monitors ( Breencast, in-game TVs, etc ), but doesn't seem to be doing anything, trying to render 2D or 3D elements fail.
     **/
     
     @:hook
@@ -5546,10 +5021,7 @@ class Gm {
     #end
     #if client
     /**
-        Renders the HUD pick-up history. Override to hide default or draw your own HUD. 
-		
-		
-		
+        Renders the HUD pick-up history. Override to hide default or draw your own HUD.
     **/
     
     @:hook
@@ -5557,8 +5029,9 @@ class Gm {
     #end
     #if server
     /**
-        Called when a player leaves the server. See the player_disconnect gameevent for a shared version of this hook. 
+        Called when a player leaves the server. See the player_disconnect gameevent for a shared version of this hook.
 		
+		**Bug:** BUG This is not called in single-player or listen servers for the host. Issue Tracker: #3523
 		
 		Name | Description
 		--- | ---
@@ -5578,8 +5051,6 @@ class Gm {
 		**Output:**
 		
 		Garry :D has left the server.
-		
-		
     **/
     
     @:hook
@@ -5587,8 +5058,7 @@ class Gm {
     #end
     #if server
     /**
-        Called when a player reloads with the physgun. Override this to disable default unfreezing behavior. 
-		
+        Called when a player reloads with the physgun. Override this to disable default unfreezing behavior.
 		
 		Name | Description
 		--- | ---
@@ -5596,9 +5066,7 @@ class Gm {
 		`ply` | The player wielding the physgun
 		
 		
-		**Returns:** Whether the player can reload with the physgun or not
-		
-		
+		`**Returns:** Whether the player can reload with the physgun or not
     **/
     
     @:hook
@@ -5606,8 +5074,9 @@ class Gm {
     #end
     #if server
     /**
-        Called once when the player is authenticated. 
+        Called once when the player is authenticated.
 		
+		**Bug:** BUG CurTime returns 0 in this hook. Issue Tracker: #3026
 		
 		Name | Description
 		--- | ---
@@ -5626,8 +5095,6 @@ class Gm {
 		    print( ply:Name() .. " has been authenticated as " .. steamid .. "." )
 		end
 		```
-		
-		
     **/
     
     @:hook
@@ -5635,8 +5102,9 @@ class Gm {
     #end
     
     /**
-        This hook polls the entity the player use action should be applied to. 
+        This hook polls the entity the player use action should be applied to.
 		
+		**Note:** The default behavior of this hook is in CBasePlayer::FindUseEntity. Despite CBasePlayer::FindUseEntity being defined shared, it is only called serverside in practice, so this hook will be only called serverside, as well. It is possible for modules to call it clientside, so the Lua code should still be treated as shared.
 		
 		Name | Description
 		--- | ---
@@ -5644,9 +5112,7 @@ class Gm {
 		`defaultEnt` | The entity that was chosen by the engine.
 		
 		
-		**Returns:** The entity to use instead of default entity
-		
-		
+		`**Returns:** The entity to use instead of default entity
     **/
     
     @:hook
@@ -5679,7 +5145,7 @@ var b:Angle;
 
 }
 @:multiReturn extern class GmCalcMainActivityReturn {
-var a:Float;
+var a:ACT;
 var b:Float;
 
 }

@@ -2,15 +2,12 @@ package gmod.libs;
 
 
 /**
-    Used to interface with the built in game events system. 
-	
-	
+    Used to interface with the built in game events system.
 **/
 @:native("gameevent")extern class GameeventLib {
     
     /**
-        Add a game event listener. 
-		
+        Add a game event listener.
 		
 		Name | Description
 		--- | ---
@@ -128,8 +125,6 @@ package gmod.libs;
 		
 		end )
 		```
-		
-		
     **/
     
     public static function Listen(eventName:String):Void;

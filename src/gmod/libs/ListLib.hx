@@ -2,59 +2,50 @@ package gmod.libs;
 
 
 /**
-    The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality. 
-	
-	
+    The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality.
 **/
 @:native("list")extern class ListLib {
     
     /**
         Returns true if the list contains the value. (as a value - not a key) 
 		
-		For a function that looks for a key and not a value see list.HasEntry. 
+		For a function that looks for a key and not a value see list.HasEntry.
 		
-		 
 		Name | Description
 		--- | ---
 		`list` | List to search through
 		`value` | The value to test
 		
 		
-		**Returns:** Returns true if the list contains the value, false otherwise
-		
-		
+		`**Returns:** Returns true if the list contains the value, false otherwise
     **/
     
-    public static function Contains(list:String, value:Any):Bool;
+    public static function Contains(list:String, value:Dynamic):Bool;
     
     
     /**
-        Returns the actual table of the list stored at identifier. Modifying this will affect the stored list 
-		
+        Returns the actual table of the list stored at identifier. Modifying this will affect the stored list
 		
 		Name | Description
 		--- | ---
 		`identifier` | The list identifier
 		
 		
-		**Returns:** The actual list
-		
-		
+		`**Returns:** The actual list
     **/
     
     public static function GetForEdit(identifier:String):AnyTable;
     
     
     /**
-        Returns a copy of the list stored at identifier 
-		
+        Returns a copy of the list stored at identifier
 		
 		Name | Description
 		--- | ---
 		`identifier` | The list identifier
 		
 		
-		**Returns:** The copy of the list
+		`**Returns:** The copy of the list
 		
 		___
 		### Lua Examples
@@ -64,16 +55,13 @@ package gmod.libs;
 		```lua 
 		PrintTable( list.Get( "NPC" ) )
 		```
-		
-		
     **/
     
     public static function Get(identifier:String):AnyTable;
     
     
     /**
-        Adds an item to a named list 
-		
+        Adds an item to a named list
 		
 		Name | Description
 		--- | ---
@@ -91,16 +79,13 @@ package gmod.libs;
 		list.Add( "PaintMaterials", "Smile" )
 		list.Add( "PaintMaterials", "Light" )
 		```
-		
-		
     **/
     
-    public static function Add(identifier:String, item:Any):Void;
+    public static function Add(identifier:String, item:Dynamic):Void;
     
     
     /**
-        Sets a specific position in the named list to a value. 
-		
+        Sets a specific position in the named list to a value.
 		
 		Name | Description
 		--- | ---
@@ -136,31 +121,26 @@ package gmod.libs;
 		    end
 		} )
 		```
-		
-		
     **/
     
-    public static function Set(identifier:String, key:Any, item:Any):Void;
+    public static function Set(identifier:String, key:Dynamic, item:Dynamic):Void;
     
     
     /**
         Returns true if the list contains the given key. 
 		
-		For a function that looks for values and not keys see list.Contains. 
+		For a function that looks for values and not keys see list.Contains.
 		
-		 
 		Name | Description
 		--- | ---
 		`list` | List to search through
 		`key` | The key to test
 		
 		
-		**Returns:** Returns true if the list contains the key, false otherwise
-		
-		
+		`**Returns:** Returns true if the list contains the key, false otherwise
     **/
     
-    public static function HasEntry(list:String, key:Any):Bool;
+    public static function HasEntry(list:String, key:Dynamic):Bool;
     
     
 

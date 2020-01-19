@@ -4,27 +4,21 @@ package gmod.panels;
 /**
     The DColorPalette allows the player to select a color from a list of given colors. 
 	
-	This panel supports saving across sessions via the panel cookie system. Use Panel:SetCookieName to change "save files". 
-	
-	 
+	This panel supports saving across sessions via the panel cookie system. Use Panel:SetCookieName to change "save files".
 **/
 extern class DColorPalette extends DIconLayout {
     /**
         Returns the ConVar name for the green channel of the color. 
 		
-		See also: 
+		See also:
 		
-		 
-		**Returns:** The ConVar name for the green channel of the color
-		
-		
+		`**Returns:** The ConVar name for the green channel of the color
     **/
     
      
     public function GetConVarG():String;
     /**
-        Called when the color is changed after clicking a new value. 
-		
+        Called when the color is changed after clicking a new value.
 		
 		Name | Description
 		--- | ---
@@ -52,8 +46,6 @@ extern class DColorPalette extends DIconLayout {
 		**Output:**
 		
 		The color chosen on the palette.
-		
-		
     **/
     
     @:hook 
@@ -63,16 +55,12 @@ extern class DColorPalette extends DIconLayout {
 		
 		The color is saved as a panel cookie, see Panel:SetCookie and Panel:SetCookieName. 
 		
-		 It is expected that the amount of colors per palette (Panel:SetCookieName) is the same every time. 
+		 It is expected that the amount of colors per palette (Panel:SetCookieName) is the same every time.
 		
-		 
 		Name | Description
 		--- | ---
 		`btn` | The button to save the color of. Used to get the ID of the button.
 		`clr` | The color to save to this button's index
-		
-		
-		
     **/
     
      
@@ -80,29 +68,21 @@ extern class DColorPalette extends DIconLayout {
     /**
         Sets the ConVar name for the green channel of the color. 
 		
-		See also: 
+		See also:
 		
-		 
 		Name | Description
 		--- | ---
 		`convar` | The ConVar name for the green channel of the color
-		
-		
-		
     **/
     
      
     public function SetConVarG(convar:String):Void;
     /**
-        Called when a palette button has been pressed 
-		
+        Called when a palette button has been pressed
 		
 		Name | Description
 		--- | ---
 		`pnl` | The DColorButton that was pressed.
-		
-		
-		
     **/
     
     @:hook 
@@ -110,30 +90,25 @@ extern class DColorPalette extends DIconLayout {
     /**
         Returns the ConVar name for the alpha channel of the color. 
 		
-		See also: 
+		See also:
 		
-		 
-		**Returns:** The ConVar name for the alpha channel of the color
-		
-		
+		`**Returns:** The ConVar name for the alpha channel of the color
     **/
     
      
     public function GetConVarA():String;
     /**
-        Returns the size of each palette button. Set by DColorPalette:SetButtonSize. 
+        Returns the size of each palette button. Set by DColorPalette:SetButtonSize.
 		
-		
-		**Returns:** The size of each palette button
-		
-		
+		`**Returns:** The size of each palette button
     **/
     
      
     public function GetButtonSize():Float;
     /**
-        Roughly sets the number of colors that can be picked by the user. If the DColorPalette is exactly 6 rows tall, this function will set the number of colors shown per row in the palette. 
+        Roughly sets the number of colors that can be picked by the user. If the DColorPalette is exactly 6 rows tall, this function will set the number of colors shown per row in the palette.
 		
+		**Note:** DColorPalette:Reset or DColorPalette:ResetSavedColors must be called after this function to apply changes.
 		
 		Name | Description
 		--- | ---
@@ -182,8 +157,6 @@ extern class DColorPalette extends DIconLayout {
 		pallette4:SetSize( 240, 60 )
 		pallette4:Reset()
 		```
-		
-		
     **/
     
      
@@ -193,43 +166,32 @@ extern class DColorPalette extends DIconLayout {
 		
 		This is best kept to such a number, where this equation would return a whole number: WidthOfColorPalette/ButtonSize=WholeNumber 
 		
-		 If not, there will be ugly whitespace on the right side of the panel. 
+		 If not, there will be ugly whitespace on the right side of the panel.
 		
-		 
 		Name | Description
 		--- | ---
 		`size` | Sets the new size
-		
-		
-		
     **/
     
      
     public function SetButtonSize(size:Float):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Basically the same functionality as DColorPalette:OnValueChanged, you should use that instead! 
-		
+		Basically the same functionality as DColorPalette:OnValueChanged, you should use that instead!
 		
 		Name | Description
 		--- | ---
 		`clr` | The new color via the Color structure
 		`btn` | The DColorButton that was pressed.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
-    public function DoClick(clr:AnyTable, btn:Panel):Void;
+    public function DoClick(clr:Color, btn:Panel):Void;
     /**
         Resets this entire color palette to a default preset one, without saving. 
 		
-		See DColorPalette:ResetSavedColors for version that also saves the changes. 
-		
-		 
-		
+		See DColorPalette:ResetSavedColors for version that also saves the changes.
     **/
     
      
@@ -237,73 +199,55 @@ extern class DColorPalette extends DIconLayout {
     /**
         Sets the ConVar name for the blue channel of the color. 
 		
-		See also: 
+		See also:
 		
-		 
 		Name | Description
 		--- | ---
 		`convar` | The ConVar name for the blue channel of the color
-		
-		
-		
     **/
     
      
     public function SetConVarB(convar:String):Void;
     /**
-        Returns the number of rows of the palette, provided 6 colors fill each row. This value is equal to the number of colors in the DColorPalette divided by 6. 
+        Returns the number of rows of the palette, provided 6 colors fill each row. This value is equal to the number of colors in the DColorPalette divided by 6.
 		
-		
-		**Returns:** Number of rows of the DColorPalette.
-		
-		
+		`**Returns:** Number of rows of the DColorPalette.
     **/
     
      
     public function GetNumRows():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Internal helper function for DColorPalette:UpdateConVars. 
-		
+		Internal helper function for DColorPalette:UpdateConVars.
 		
 		Name | Description
 		--- | ---
 		`name` | The name of the console variable to set
 		`key` | The key of the 3rd argument to set the convar to Possible values: "r", "g", "b", "a"
 		`clr` | The Color structure to retrieve the info from.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
-    public function UpdateConVar(name:String, key:String, clr:AnyTable):Void;
+    public function UpdateConVar(name:String, key:String, clr:Color):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Updates all the console variables set by DColorPalette:SetConVarR and so on with given color. 
 		
-		Called internally when a palette color is clicked. 
+		Called internally when a palette color is clicked.
 		
-		 
 		Name | Description
 		--- | ---
 		`clr` | A Color structure
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
-    public function UpdateConVars(clr:AnyTable):Void;
+    public function UpdateConVars(clr:Color):Void;
     /**
         Resets this entire color palette to a default preset one and saves the changes. 
 		
-		See DColorPalette:Reset for version that does not save the changes. 
-		
-		 
-		
+		See DColorPalette:Reset for version that does not save the changes.
     **/
     
      
@@ -311,12 +255,9 @@ extern class DColorPalette extends DIconLayout {
     /**
         Returns the ConVar name for the blue channel of the color. 
 		
-		See also: 
+		See also:
 		
-		 
-		**Returns:** The ConVar name for the blue channel of the color
-		
-		
+		`**Returns:** The ConVar name for the blue channel of the color
     **/
     
      
@@ -324,15 +265,11 @@ extern class DColorPalette extends DIconLayout {
     /**
         Sets the ConVar name for the alpha channel of the color. 
 		
-		See also: 
+		See also:
 		
-		 
 		Name | Description
 		--- | ---
 		`convar` | The ConVar name for the alpha channel of the color
-		
-		
-		
     **/
     
      
@@ -340,73 +277,55 @@ extern class DColorPalette extends DIconLayout {
     /**
         Returns the ConVar name for the red channel of the color. 
 		
-		See also: 
+		See also:
 		
-		 
-		**Returns:** The ConVar name for the red channel of the color
-		
-		
+		`**Returns:** The ConVar name for the red channel of the color
     **/
     
      
     public function GetConVarR():String;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used internally to make sure changes on one palette affect other palettes with same name. 
-		
-		
-		
+		Used internally to make sure changes on one palette affect other palettes with same name.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function NetworkColorChange():Void;
     /**
         Sets the ConVar name for the red channel of the color. 
 		
-		See also: 
+		See also:
 		
-		 
 		Name | Description
 		--- | ---
 		`convar` | The ConVar name for the red channel of the color
-		
-		
-		
     **/
     
      
     public function SetConVarR(convar:String):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Currently does nothing. Intended to "select" the color. 
-		
+		Currently does nothing. Intended to "select" the color.
 		
 		Name | Description
 		--- | ---
 		`clr` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function SetColor(clr:AnyTable):Void;
     /**
-        Clears the palette and adds new buttons with given colors. 
-		
+        Clears the palette and adds new buttons with given colors.
 		
 		Name | Description
 		--- | ---
 		`tab` | A number indexed table where each value is a Color structure
-		
-		
-		
     **/
     
      
-    public function SetColorButtons(tab:AnyTable):Void;
+    public function SetColorButtons(tab:Color):Void;
     
 }
 

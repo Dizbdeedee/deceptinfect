@@ -2,32 +2,25 @@ package gmod.gclass;
 #if server
 
 /**
-    List of all possible functions to manipulate Recipient Filters. Can be created with RecipientFilter. 
-	
-	
+    List of all possible functions to manipulate Recipient Filters. Can be created with RecipientFilter.
 **/
 extern class CRecipientFilter {
     
     /**
-        Adds all players that are on the given team to the filter. 
-		
+        Adds all players that are on the given team to the filter.
 		
 		Name | Description
 		--- | ---
 		`teamid` | Team index to add players from.
-		
-		
-		
     **/
     
     public function AddRecipientsByTeam(teamid:Float):Void;
     
     
     /**
-        Returns the number of valid players in the recipient filter. 
+        Returns the number of valid players in the recipient filter.
 		
-		
-		**Returns:** Number of valid players in the recipient filter.
+		`**Returns:** Number of valid players in the recipient filter.
 		
 		___
 		### Lua Examples
@@ -43,16 +36,13 @@ extern class CRecipientFilter {
 		**Output:**
 		
 		2 1 = Player [1][Player #1] 2 = Player [2][Player #2]
-		
-		
     **/
     
     public function GetCount():Float;
     
     
     /**
-        Adds all players to the recipient filter. 
-		
+        Adds all players to the recipient filter.
 		
 		___
 		### Lua Examples
@@ -70,16 +60,13 @@ extern class CRecipientFilter {
 		**Output:**
 		
 		Sends a usermessage to every player.
-		
-		
     **/
     
     public function AddAllPlayers():Void;
     
     
     /**
-        Removes all players from the recipient filter. 
-		
+        Removes all players from the recipient filter.
 		
 		___
 		### Lua Examples
@@ -99,16 +86,13 @@ extern class CRecipientFilter {
 		**Output:**
 		
 		Sends a usermessage to the first player object, if it exists.
-		
-		
     **/
     
     public function RemoveAllPlayers():Void;
     
     
     /**
-        Removes all players that can see this PVS from the recipient filter. 
-		
+        Removes all players that can see this PVS from the recipient filter.
 		
 		Name | Description
 		--- | ---
@@ -132,33 +116,26 @@ extern class CRecipientFilter {
 		**Output:**
 		
 		Adds all players that can see the map's origin to the recipient filter, then removes all players who can see 10 units to the left of the origin, and sends the rest a message.
-		
-		
     **/
     
     public function RemovePVS(pos:Vector):Void;
     
     
     /**
-        Removes all players that are not on the given team from the filter. 
-		
+        Removes all players that are not on the given team from the filter.
 		
 		Name | Description
 		--- | ---
 		`teamid` | Team index.
-		
-		
-		
     **/
     
     public function RemoveRecipientsNotOnTeam(teamid:Float):Void;
     
     
     /**
-        Returns a table of all valid players currently in the recipient filter. 
+        Returns a table of all valid players currently in the recipient filter.
 		
-		
-		**Returns:** A table of all valid players currently in the recipient filter.
+		`**Returns:** A table of all valid players currently in the recipient filter.
 		
 		___
 		### Lua Examples
@@ -174,31 +151,24 @@ extern class CRecipientFilter {
 		**Output:**
 		
 		2 1 = Player [1][Player #1] 2 = Player [2][Player #2]
-		
-		
     **/
     
     public function GetPlayers():AnyTable;
     
     
     /**
-        Removes all players that are on the given team from the filter. 
-		
+        Removes all players that are on the given team from the filter.
 		
 		Name | Description
 		--- | ---
 		`teamid` | Team index to remove players from.
-		
-		
-		
     **/
     
     public function RemoveRecipientsByTeam(teamid:Float):Void;
     
     
     /**
-        Removes the player from the recipient filter. 
-		
+        Removes the player from the recipient filter.
 		
 		Name | Description
 		--- | ---
@@ -223,16 +193,13 @@ extern class CRecipientFilter {
 		**Output:**
 		
 		Sends a net message to every player except the first.
-		
-		
     **/
     
     public function RemovePlayer(Player:Player):Void;
     
     
     /**
-        Adds a player to the recipient filter 
-		
+        Adds a player to the recipient filter
 		
 		Name | Description
 		--- | ---
@@ -255,46 +222,35 @@ extern class CRecipientFilter {
 		**Output:**
 		
 		Sends a usermessage to the first player object, if it exists.
-		
-		
     **/
     
     public function AddPlayer(Player:Player):Void;
     
     
     /**
-        Adds all players that are in the same PAS as this position. 
-		
+        Adds all players that are in the same PAS as this position.
 		
 		Name | Description
 		--- | ---
 		`pos` | PAS position that players may be able to see.
-		
-		
-		
     **/
     
     public function AddPAS(pos:Vector):Void;
     
     
     /**
-        Removes all players from the filter that are in Potentially Audible Set for given position. 
-		
+        Removes all players from the filter that are in Potentially Audible Set for given position.
 		
 		Name | Description
 		--- | ---
 		`position` | The position to test
-		
-		
-		
     **/
     
     public function RemovePAS(position:Vector):Void;
     
     
     /**
-        Adds all players that are in the same PVS as this position. 
-		
+        Adds all players that are in the same PVS as this position.
 		
 		Name | Description
 		--- | ---
@@ -317,8 +273,6 @@ extern class CRecipientFilter {
 		**Output:**
 		
 		Sends a usermessage to every player visible from 0,0,0
-		
-		
     **/
     
     public function AddPVS(Position:Vector):Void;
@@ -329,4 +283,3 @@ extern class CRecipientFilter {
 
 
 #end
-

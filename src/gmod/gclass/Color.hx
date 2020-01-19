@@ -7,8 +7,7 @@ package gmod.gclass;
 extern class Color {
     
     /**
-        Sets the r, g, b, and a of the color. 
-		
+        Sets the r, g, b, and a of the color.
 		
 		Name | Description
 		--- | ---
@@ -16,38 +15,28 @@ extern class Color {
 		`g` | 
 		`b` | 
 		`a` | 
-		
-		
-		
     **/
     
     public function SetUnpacked(r:Float, g:Float, b:Float, a:Float):Void;
     
     
     /**
-        Returns the color as a table with four elements. 
+        Returns the color as a table with four elements.
 		
-		
-		**Returns:** The table with elements 1 = r, 2 = g, 3 = b, 4 = a.
-		
-		
+		`**Returns:** The table with elements 1 = r, 2 = g, 3 = b, 4 = a.
     **/
     
     public function ToTable():AnyTable;
     
     
     /**
-        Returns the r, g, b, and a of the color. 
-		
+        Returns the r, g, b, and a of the color.
 		
 		Name | Description
 		--- | ---
 		`a` | r
 		`b` | g
 		`c` | b
-		
-		
-		
     **/
     
     public function Unpack():ColorUnpackReturn;
@@ -58,10 +47,9 @@ extern class Color {
 		
 		r / 255 -> x g / 255 -> y b / 255 -> z 
 		
-		 This is the opposite of Vector:ToColor 
+		 This is the opposite of Vector:ToColor
 		
-		 
-		**Returns:** The created Vector
+		`**Returns:** The created Vector
 		
 		___
 		### Lua Examples
@@ -74,8 +62,6 @@ extern class Color {
 		**Output:**
 		
 		Sets the player color for Player1 (only works if they are using a colorable player model)
-		
-		
     **/
     
     public function ToVector():Vector;

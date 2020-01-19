@@ -2,42 +2,37 @@ package gmod.libs;
 #if client
 
 /**
-    The effects library allows you to manually add scripted effects. 
-	
-	
+    The effects library allows you to manually add scripted effects.
 **/
 @:native("effects")extern class EffectsLib {
     
     /**
-        ***INTERNAL:**   You are looking for util. Effect.
+        ***INTERNAL** You are looking for util. Effect.
 		
-		Returns the table of the effect specified.     
+		Returns the table of the effect specified.
+		
 		Name | Description
 		--- | ---
 		`name` | Effect name.
 		
 		
-		**Returns:** Effect table.
-		
-		
+		`**Returns:** Effect table.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL: You are looking for util. Effect.")
     public static function Create(name:String):AnyTable;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Registers a new effect.     
+		Registers a new effect.
+		
 		Name | Description
 		--- | ---
 		`effect_table` | Effect table.
 		`name` | Effect name.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Register(effect_table:AnyTable, name:String):Void;
     
     

@@ -2,14 +2,13 @@ package gmod.panels;
 #if client
 
 /**
-    Material is a VGUI element that renders a VMT material. 
-	
-	
+    Material is a VGUI element that renders a VMT material.
 **/
 extern class Material extends Button {
     /**
-        Sets the material used by the panel. 
+        Sets the material used by the panel.
 		
+		**Note:** If the material is not showing up as the correct size, try setting the Material panel's AutoSize variable to false
 		
 		Name | Description
 		--- | ---
@@ -39,15 +38,12 @@ extern class Material extends Button {
 		-- Stretch to fit
 		mat.AutoSize = false
 		```
-		
-		
     **/
     
      
     public function SetMaterial(matname:String):Void;
     /**
-        Sets the alpha value of the Material panel. 
-		
+        Sets the alpha value of the Material panel.
 		
 		Name | Description
 		--- | ---
@@ -67,8 +63,6 @@ extern class Material extends Button {
 		    
 		mat:SetAlpha(128)
 		```
-		
-		
     **/
     
      

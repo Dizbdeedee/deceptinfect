@@ -2,109 +2,83 @@ package gmod.libs;
 #if client
 
 /**
-    The frame blending library. 
-	
-	
+    The frame blending library.
 **/
 @:native("frame_blend")extern class Frame_blendLib {
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns amount of frames needed to render? 
+		Returns amount of frames needed to render?
 		
-		
-		**Returns:** Amount of frames needed to render?
-		
-		
+		`**Returns:** Amount of frames needed to render?
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function RenderableFrames():Float;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Renders the frame onto internal render target. 
-		
-		
-		
+		Renders the frame onto internal render target.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function CompleteFrame():Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Actually draws the frame blend effect. 
-		
-		
-		
+		Actually draws the frame blend effect.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function DrawPreview():Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Adds a frame to the blend. Calls frame_blend.CompleteFrame once enough frames have passed since last frame_blend.CompleteFrame call. 
-		
-		
-		
+		Adds a frame to the blend. Calls frame_blend.CompleteFrame once enough frames have passed since last frame_blend.CompleteFrame call.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function AddFrame():Void;
     
     
     /**
-        Returns whether we should skip frame or not 
+        Returns whether we should skip frame or not
 		
-		
-		**Returns:** Should the frame be skipped or not
-		
-		
+		`**Returns:** Should the frame be skipped or not
     **/
     
     public static function ShouldSkipFrame():Bool;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Blends the frame(s). 
-		
-		
-		
+		Blends the frame(s).
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function BlendFrame():Void;
     
     
     /**
-        Returns whether frame blend post processing effect is enabled or not. 
+        Returns whether frame blend post processing effect is enabled or not.
 		
-		
-		**Returns:** Is frame blend enabled or not
-		
-		
+		`**Returns:** Is frame blend enabled or not
     **/
     
     public static function IsActive():Bool;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns whether the current frame is the last frame? 
+		Returns whether the current frame is the last frame?
 		
-		
-		**Returns:** Whether the current frame is the last frame?
-		
-		
+		`**Returns:** Whether the current frame is the last frame?
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function IsLastFrame():Bool;
     
     

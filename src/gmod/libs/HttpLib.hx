@@ -2,15 +2,12 @@ package gmod.libs;
 
 
 /**
-    The http library allows either the server or client to communicate with external websites via HTTP, both GET (http.Fetch) and POST (http.Post) are supported. A more powerful & advanced method can be used via the global HTTP function. 
-	
-	
+    The http library allows either the server or client to communicate with external websites via HTTP, both GET (http.Fetch) and POST (http.Post) are supported. A more powerful & advanced method can be used via the global HTTP function.
 **/
 @:native("http")extern class HttpLib {
     
     /**
-        Launches a GET request. 
-		
+        Launches a GET request.
 		
 		Name | Description
 		--- | ---
@@ -41,8 +38,6 @@ package gmod.libs;
 		**Output:**
 		
 		If it successfully fetched the page, the variable 'TheReturnedHTML' should contain the returned HTML in plain text.
-		
-		
     **/
     
     public static function Fetch(url:String, ?onSuccess:Function, ?onFailure:Function, ?headers:AnyTable):Void;
@@ -53,9 +48,8 @@ package gmod.libs;
 		
 		HTTP requests returning a status code >= 400 are still considered a success and will call the onSuccess callback. 
 		
-		 The onFailure callback is usually only called on DNS or TCP errors (e.g. the website is unavailable or the domain does not exist) 
+		 The onFailure callback is usually only called on DNS or TCP errors (e.g. the website is unavailable or the domain does not exist)
 		
-		 
 		Name | Description
 		--- | ---
 		`url` | The url to of the website to fetch.
@@ -82,8 +76,6 @@ package gmod.libs;
 		    fclose($f);
 		?>
 		```
-		
-		
     **/
     
     public static function Post(url:String, parameters:AnyTable, ?onSuccess:Function, ?onFailure:Function, ?headers:AnyTable):Void;

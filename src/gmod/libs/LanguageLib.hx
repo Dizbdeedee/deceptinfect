@@ -2,15 +2,12 @@ package gmod.libs;
 #if client
 
 /**
-    The language library is used for translation. 
-	
-	
+    The language library is used for translation.
 **/
 @:native("language")extern class LanguageLib {
     
     /**
-        Adds a language item. Language placeholders preceded with "#" are replaced with full text in Garry's Mod once registered with this function. 
-		
+        Adds a language item. Language placeholders preceded with "#" are replaced with full text in Garry's Mod once registered with this function.
 		
 		Name | Description
 		--- | ---
@@ -32,23 +29,20 @@ package gmod.libs;
 		**Output:**
 		
 		When the player presses undo, "Cool stuff has been undone" will be shown. The cooltool's name will be "The really cool tool". Below that, where the description is shown, "Do some random cool stuff." will be shown. Below that, where the instructions or additional notes for the tool are shown, it will display "Left-click: Cool Stuff. Right-click: Nothing.".
-		
-		
     **/
     
     public static function Add(placeholder:String, fulltext:String):Void;
     
     
     /**
-        Retrieves the translated version of inputted string. Useful for concentrating multiple translated strings. 
-		
+        Retrieves the translated version of inputted string. Useful for concentrating multiple translated strings.
 		
 		Name | Description
 		--- | ---
 		`phrase` | The phrase to translate
 		
 		
-		**Returns:** The translated phrase, or the input string if no translation was found
+		`**Returns:** The translated phrase, or the input string if no translation was found
 		
 		___
 		### Lua Examples
@@ -61,8 +55,6 @@ package gmod.libs;
 		**Output:**
 		
 		Our phrase is: Limited Physgun
-		
-		
     **/
     
     public static function GetPhrase(phrase:String):String;

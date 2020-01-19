@@ -2,44 +2,43 @@ package gmod.libs;
 #if client
 
 /**
-    The surface library allows you to draw text and shapes on the screen. Primarily used for making HUDs & custom GUI panels. 
-	
-	
+    The surface library allows you to draw text and shapes on the screen. Primarily used for making HUDs & custom GUI panels.
 **/
 @:native("surface")extern class SurfaceLib {
     
     /**
-        Returns the texture id of the material with the given name/path. 
+        Returns the texture id of the material with the given name/path.
 		
+		**Note:** This function will not work with .png or .jpg images. For that, see Material
 		
 		Name | Description
 		--- | ---
 		`name/path` | Name or path of the texture.
 		
 		
-		**Returns:** The texture ID
-		
-		
+		`**Returns:** The texture ID
     **/
     
     public static function GetTextureID(path:String):Float;
     
     
     /**
-        Returns the current color affecting text draw operations. 
+        Returns the current color affecting text draw operations.
 		
+		**Bug:** BUG The returned color will not have the color metatable. Issue Tracker: #2407
 		
-		**Returns:** The color that text drawing operations will use as a Color structure.
-		
-		
+		`**Returns:** The color that text drawing operations will use as a Color structure.
     **/
     
-    public static function GetTextColor():AnyTable;
+    public static function GetTextColor():Color;
     
     
     /**
-        Draw the specified text on the screen, using the previously set position, font and color. 
+        Draw the specified text on the screen, using the previously set position, font and color.
 		
+		**Note:** This function does not handle newlines properly
+		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -59,16 +58,13 @@ package gmod.libs;
 		    surface.DrawText( "Hello World" )
 		end )
 		```
-		
-		
     **/
     
     public static function DrawText(text:String):Void;
     
     
     /**
-        Returns the width and height (in pixels) of the given text, but only if the font has been set with surface.SetFont. 
-		
+        Returns the width and height (in pixels) of the given text, but only if the font has been set with surface.SetFont.
 		
 		Name | Description
 		--- | ---
@@ -112,8 +108,6 @@ package gmod.libs;
 		**Output:**
 		
 		24
-		
-		
     **/
     
     public static function GetTextSize(text:String):SurfaceLibGetTextSizeReturn;
@@ -122,27 +116,20 @@ package gmod.libs;
     /**
         Enables or disables the clipping used by the VGUI that limits the drawing operations to a panels bounds. 
 		
-		See also DisableClipping and Panel:NoClipping. 
+		See also DisableClipping and Panel:NoClipping.
 		
-		 
 		Name | Description
 		--- | ---
 		`disable` | True to disable, false to enable the clipping
-		
-		
-		
     **/
     
     public static function DisableClipping(disable:Bool):Void;
     
     
     /**
-        Returns the current alpha multiplier affecting drawing operations. 
+        Returns the current alpha multiplier affecting drawing operations.
 		
-		
-		**Returns:** The multiplier ranging from 0 to 1.
-		
-		
+		`**Returns:** The multiplier ranging from 0 to 1.
     **/
     
     public static function GetAlphaMultiplier():Float;
@@ -153,35 +140,31 @@ package gmod.libs;
 		
 		Not to be confused with render.SetMaterial. 
 		
-		 See also surface.SetTexture. 
+		 See also surface.SetTexture.
 		
-		 
+		**Warning:** Material function calls are expensive to be done inside this function or inside rendering context, you should be caching the results of Material calls
+		
 		Name | Description
 		--- | ---
 		`material` | The material to be used.
-		
-		
-		
     **/
     
     public static function SetMaterial(material:IMaterial):Void;
     
     
     /**
-        Returns the current color affecting draw operations. 
+        Returns the current color affecting draw operations.
 		
+		**Bug:** BUG The returned color will not have the color metatable. Issue Tracker: #2407
 		
-		**Returns:** The color that drawing operations will use as a Color structure.
-		
-		
+		`**Returns:** The color that drawing operations will use as a Color structure.
     **/
     
-    public static function GetDrawColor():AnyTable;
+    public static function GetDrawColor():Color;
     
     
     /**
-        Play a sound file directly on the client (such as UI sounds, etc). 
-		
+        Play a sound file directly on the client (such as UI sounds, etc).
 		
 		Name | Description
 		--- | ---
@@ -196,8 +179,6 @@ package gmod.libs;
 		```lua 
 		surface.PlaySound( "mysound.wav" )
 		```
-		
-		
     **/
     
     public static function PlaySound(soundfile:String):Void;
@@ -206,9 +187,24 @@ package gmod.libs;
     /**
         Draws a textured rectangle with a repeated or partial texture. 
 		
-		u and v refer to texture coordinates. 
+		u and v refer to texture coordinates.
 		
-		 
+		**Note:** If you are using a .png image, you need supply the "noclamp" flag as second parameter for Material if you intend to use tiling.
+		
+		**Note:** If you find that surface.DrawTexturedRectUV is getting your texture coordinates (u0, v0), (u1, v1) wrong and you're rendering with a material created with CreateMaterial, try adjusting them with the following code: local du = 0.5 / 32 -- half pixel anticorrection
+		
+		local dv = 0.5 / 32 -- half pixel anticorrection
+		
+		local u0, v0 = (u0 - du) / (1 - 2 * du), (v0 - dv) / (1 - 2 * dv)
+		
+		local u1, v1 = (u1 - du) / (1 - 2 * du), (v1 - dv) / (1 - 2 * dv)
+		
+		 Explanation: surface.DrawTexturedRectUV tries to correct the texture coordinates by half a pixel (something to do with sampling) and computes the correction using IMaterial::GetMappingWidth()/GetMappingHeight(). If the material was created without a $basetexture, then GetMappingWidth()/GetMappingHeight() uses the width and height of the error material (which is 32x32).
+		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
+		
+		**Bug:** BUG The UV offsets might require (sub-)pixel correction for accurate tiling results. Issue Tracker: #3173
+		
 		Name | Description
 		--- | ---
 		`x` | The X integer coordinate.
@@ -256,16 +252,13 @@ package gmod.libs;
 		    surface.DrawTexturedRectUV( 0, 0, w, h, 0, 0, w / texW, h / texH )
 		end
 		```
-		
-		
     **/
     
     public static function DrawTexturedRectUV(x:Float, y:Float, width:Float, height:Float, startU:Float, startV:Float, endU:Float, endV:Float):Void;
     
     
     /**
-        Set the color of any future shapes to be drawn, can be set by either using r, g, b, a as separate values or by a Color structure. Using a color structure is not recommended to be created procedurally. 
-		
+        Set the color of any future shapes to be drawn, can be set by either using r, g, b, a as separate values or by a Color structure. Using a color structure is not recommended to be created procedurally.
 		
 		Name | Description
 		--- | ---
@@ -289,16 +282,15 @@ package gmod.libs;
 		    surface.DrawTexturedRect( 0, 0, 512, 512 )
 		end )
 		```
-		
-		
     **/
     
-    public static function SetDrawColor(r:Float, g:Float, b:Float, ?a:Float):Void;
+    public static function SetDrawColor(r:Color, g:Color, b:Color, ?a:Color):Void;
     
     
     /**
-        Draws a hollow box with a border width of 1 px. 
+        Draws a hollow box with a border width of 1 px.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -334,16 +326,13 @@ package gmod.libs;
 		    draw.OutlinedBox( 0, 0, 100, 100, 2, Color( 255, 255, 255 ) )
 		end )
 		```
-		
-		
     **/
     
     public static function DrawOutlinedRect(x:Float, y:Float, w:Float, h:Float):Void;
     
     
     /**
-        Set the top-left position to draw any future text at. 
-		
+        Set the top-left position to draw any future text at.
 		
 		Name | Description
 		--- | ---
@@ -367,20 +356,17 @@ package gmod.libs;
 		    surface.DrawText( "Hello World" ) -- Draw the text
 		end )
 		```
-		
-		
     **/
     
     public static function SetTextPos(x:Float, y:Float):Void;
     
     
     /**
-        ***Deprecated:**   You should use ScrH instead.
+        ***Deprecated:** You should use ScrH instead.
 		
-		Returns the height of the current client's screen. 
+		Returns the height of the current client's screen.
 		
-		
-		**Returns:** screenHeight
+		`**Returns:** screenHeight
 		
 		___
 		### Lua Examples
@@ -393,10 +379,8 @@ package gmod.libs;
 		**Output:**
 		
 		Screen height: 1080
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should use ScrH instead.")
     public static function ScreenHeight():Float;
     
     
@@ -405,9 +389,10 @@ package gmod.libs;
 		
 		To prevent the font from displaying incorrectly when using the "outline" setting, set "antialias" to false. This will ensure the text properly fills out the entire outline. 
 		
-		 Be sure to check the List of Default Fonts first! Those fonts can be used without using this function. 
+		 Be sure to check the List of Default Fonts first! Those fonts can be used without using this function.
 		
-		 
+		**Warning:** Due to the static nature of fonts, do NOT create the font more than once. You should only be creating them once, it is recommended to create them at the top of your script. Do not use this function within GM:HUDPaint!
+		
 		Name | Description
 		--- | ---
 		`fontName` | The new font name.
@@ -442,16 +427,13 @@ package gmod.libs;
 		    draw.SimpleText( "Hello there!", "TheDefaultSettings", ScrW() * 0.5, ScrH() * 0.25, color_white, TEXT_ALIGN_CENTER )
 		end )
 		```
-		
-		
     **/
     
-    public static function CreateFont(fontName:String, fontData:AnyTable):Void;
+    public static function CreateFont(fontName:String, fontData:FontData):Void;
     
     
     /**
-        Set the color of any future text to be drawn, can be set by either using r, g, b, a as separate values or by a Color structure. Using a color structure is not recommended to be created procedurally. 
-		
+        Set the color of any future text to be drawn, can be set by either using r, g, b, a as separate values or by a Color structure. Using a color structure is not recommended to be created procedurally.
 		
 		Name | Description
 		--- | ---
@@ -477,16 +459,15 @@ package gmod.libs;
 		    surface.DrawText( "Hello World" ) -- Draw the text
 		end )
 		```
-		
-		
     **/
     
-    public static function SetTextColor(r:Float, g:Float, b:Float, ?a:Float):Void;
+    public static function SetTextColor(r:Color, g:Float, b:Float, ?a:Float):Void;
     
     
     /**
-        Draw a textured rotated rectangle with the given position and dimensions and angle on the screen, using the current active texture. 
+        Draw a textured rotated rectangle with the given position and dimensions and angle on the screen, using the current active texture.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -530,8 +511,6 @@ package gmod.libs;
 		    draw.RotatedBox( 100, 100, 100, 100, CurTime() % 360, Color( 255, 0, 0) )
 		end )
 		```
-		
-		
     **/
     
     public static function DrawTexturedRectRotated(x:Float, y:Float, width:Float, height:Float, rotation:Float):Void;
@@ -540,9 +519,12 @@ package gmod.libs;
     /**
         Draws a textured polygon (secretly a triangle fan) with a maximum of 256 vertices. Only works properly with convex polygons. You may try to render concave polygons, but there is no guarantee that things wont get messed up. 
 		
-		Unlike most surface library functions, non-integer coordinates are not rounded. 
+		Unlike most surface library functions, non-integer coordinates are not rounded.
 		
-		 
+		**Warning:** You must reset the drawing color and texture before calling the function to ensure consistent results. See examples below.
+		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
+		
 		Name | Description
 		--- | ---
 		`vertices` | A table containing integer vertices. See the PolygonVertex structure. The vertices must be in clockwise order.
@@ -599,33 +581,29 @@ package gmod.libs;
 		
 		end )
 		```
-		
-		
     **/
     
-    public static function DrawPoly(vertices:AnyTable):Void;
+    public static function DrawPoly(vertices:PolygonVertex):Void;
     
     
     /**
-        Gets the HUD texture with the specified name. 
-		
+        Gets the HUD texture with the specified name.
 		
 		Name | Description
 		--- | ---
 		`name` | The name of the texture.
 		
 		
-		**Returns:** text
-		
-		
+		`**Returns:** text
     **/
     
     public static function GetHUDTexture(name:String):ITexture;
     
     
     /**
-        Draws a hollow circle, made of dots. For a filled circle, see examples for surface.DrawPoly. 
+        Draws a hollow circle, made of dots. For a filled circle, see examples for surface.DrawPoly.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -650,19 +628,16 @@ package gmod.libs;
 		
 		end )
 		```
-		
-		
     **/
     
-    public static function DrawCircle(originX:Float, originY:Float, radius:Float, r:Float, g:Float, b:Float, ?a:Float):Void;
+    public static function DrawCircle(originX:Float, originY:Float, radius:Float, r:Color, g:Color, b:Color, ?a:Color):Void;
     
     
     /**
         Set the current font to be used for text operations later. 
 		
-		The fonts must first be created with surface.CreateFont or be one of the Default Fonts. 
+		The fonts must first be created with surface.CreateFont or be one of the Default Fonts.
 		
-		 
 		Name | Description
 		--- | ---
 		`fontName` | The name of the font to use.
@@ -684,16 +659,15 @@ package gmod.libs;
 		    surface.DrawText( "Hello World" ) -- Draw the text
 		end )
 		```
-		
-		
     **/
     
     public static function SetFont(fontName:String):Void;
     
     
     /**
-        Draws a line from one point to another. 
+        Draws a line from one point to another.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -720,16 +694,15 @@ package gmod.libs;
 		    end
 		end )
 		```
-		
-		
     **/
     
     public static function DrawLine(startX:Float, startY:Float, endX:Float, endY:Float):Void;
     
     
     /**
-        Draws a solid rectangle on the screen. 
+        Draws a solid rectangle on the screen.
 		
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
 		
 		Name | Description
 		--- | ---
@@ -750,8 +723,6 @@ package gmod.libs;
 		    surface.DrawRect(25, 25, 100, 100)
 		end)
 		```
-		
-		
     **/
     
     public static function DrawRect(x:Float, y:Float, width:Float, height:Float):Void;
@@ -760,30 +731,22 @@ package gmod.libs;
     /**
         Sets the texture to be used in all upcoming draw operations using the surface library. 
 		
-		See also surface.SetMaterial for an IMaterial alternative. 
+		See also surface.SetMaterial for an IMaterial alternative.
 		
-		 
 		Name | Description
 		--- | ---
 		`textureID` | The ID of the texture to draw with returned by surface. GetTextureID.
-		
-		
-		
     **/
     
     public static function SetTexture(textureID:Float):Void;
     
     
     /**
-        Sets the alpha multiplier that will influence all upcoming drawing operations. 
-		
+        Sets the alpha multiplier that will influence all upcoming drawing operations.
 		
 		Name | Description
 		--- | ---
 		`multiplier` | The multiplier ranging from 0 to 1.
-		
-		
-		
     **/
     
     public static function SetAlphaMultiplier(multiplier:Float):Void;
@@ -792,9 +755,10 @@ package gmod.libs;
     /**
         Draw a textured rectangle with the given position and dimensions on the screen, using the current active texture set with surface.SetMaterial. It is also affected by surface.SetDrawColor. 
 		
-		See also render.SetMaterial and render.DrawScreenQuadEx. See also surface.DrawTexturedRectUV. 
+		See also render.SetMaterial and render.DrawScreenQuadEx. See also surface.DrawTexturedRectUV.
 		
-		 
+		**Note:** This is a rendering function that requires a 2D rendering context. This means that it will only work in hooks with a 2D rendering context.
+		
 		Name | Description
 		--- | ---
 		`x` | The X integer co-ordinate.
@@ -817,16 +781,13 @@ package gmod.libs;
 		    surface.DrawTexturedRect( 0, 0, 512, 512 )
 		end )
 		```
-		
-		
     **/
     
     public static function DrawTexturedRect(x:Float, y:Float, width:Float, height:Float):Void;
     
     
     /**
-        Returns the size of the texture with the associated texture ID. 
-		
+        Returns the size of the texture with the associated texture ID.
 		
 		Name | Description
 		--- | ---
@@ -837,21 +798,17 @@ package gmod.libs;
 		--- | ---
 		`a` | The texture width.
 		`b` | The texture height.
-		
-		
-		
     **/
     
     public static function GetTextureSize(textureID:Float):SurfaceLibGetTextureSizeReturn;
     
     
     /**
-        ***Deprecated:**   You should use ScrW instead.
+        ***Deprecated:** You should use ScrW instead.
 		
-		Returns the width of the current client's screen. 
+		Returns the width of the current client's screen.
 		
-		
-		**Returns:** screenWidth
+		`**Returns:** screenWidth
 		
 		___
 		### Lua Examples
@@ -864,10 +821,8 @@ package gmod.libs;
 		**Output:**
 		
 		Screen width: 1920
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should use ScrW instead.")
     public static function ScreenWidth():Float;
     
     

@@ -2,49 +2,26 @@ package gmod.libs;
 
 
 /**
-    The math library is a standard Lua library that provides functions for manipulating numbers. In Garry's Mod several additional math functions have been added. 
-	
-	
+    The math library is a standard Lua library that provides functions for manipulating numbers. In Garry's Mod several additional math functions have been added.
 **/
 @:native("math")extern class MathLib {
     
     /**
-        Returns the arc tangent of the given number. 
-		
-		
-		Name | Description
-		--- | ---
-		`normal` | Tangent value.
-		
-		
-		**Returns:** An angle in radians, in the range -pi/2 to pi/2, which has the given tangent.
-		
-		
-    **/
-    
-    public static function atan(normal:Float):Float;
-    
-    
-    /**
-        Returns the hyperbolic sine of the given angle. 
-		
+        Returns the hyperbolic sine of the given angle.
 		
 		Name | Description
 		--- | ---
 		`number` | Angle in radians.
 		
 		
-		**Returns:** The hyperbolic sine of the given angle.
-		
-		
+		`**Returns:** The hyperbolic sine of the given angle.
     **/
     
     public static function sinh(number:Float):Float;
     
     
     /**
-        Gradually approaches the target value by the specified amount. 
-		
+        Gradually approaches the target value by the specified amount.
 		
 		Name | Description
 		--- | ---
@@ -53,7 +30,7 @@ package gmod.libs;
 		`change` | The amount that the current value is allowed to change by to approach the target. (It makes no difference whether this is positive or negative.)
 		
 		
-		**Returns:** New current value, closer to the target than it was previously.
+		`**Returns:** New current value, closer to the target than it was previously.
 		
 		___
 		### Lua Examples
@@ -97,35 +74,29 @@ package gmod.libs;
 		    ChangeRate = newrate
 		end
 		```
-		
-		
     **/
     
     public static function Approach(current:Float, target:Float, change:Float):Float;
     
     
     /**
-        Converts radians to degrees. 
-		
+        Converts radians to degrees.
 		
 		Name | Description
 		--- | ---
 		`radians` | Value to be converted to degrees.
 		
 		
-		**Returns:** degrees
-		
-		
+		`**Returns:** degrees
     **/
     
     public static function deg(radians:Float):Float;
     
     
     /**
-        ***Deprecated:**   You should use math. Distance instead
+        ***Deprecated:** You should use math. Distance instead
 		
-		Returns the difference between two points in 2D space. Alias of math.Distance. 
-		
+		Returns the difference between two points in 2D space. Alias of math.Distance.
 		
 		Name | Description
 		--- | ---
@@ -135,7 +106,7 @@ package gmod.libs;
 		`y2` | Y position of second point
 		
 		
-		**Returns:** Distance between the two points.
+		`**Returns:** Distance between the two points.
 		
 		___
 		### Lua Examples
@@ -148,16 +119,13 @@ package gmod.libs;
 		**Output:**
 		
 		5.6568542494924
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should use math. Distance instead")
     public static function Dist(x1:Float, y1:Float, x2:Float, y2:Float):Float;
     
     
     /**
-        Remaps the value from one range to another 
-		
+        Remaps the value from one range to another
 		
 		Name | Description
 		--- | ---
@@ -168,7 +136,7 @@ package gmod.libs;
 		`outMax` | The maximum of new range
 		
 		
-		**Returns:** The number in the new range
+		`**Returns:** The number in the new range
 		
 		___
 		### Lua Examples
@@ -181,18 +149,15 @@ package gmod.libs;
 		**Output:**
 		
 		127.5
-		
-		
     **/
     
     public static function Remap(value:Float, inMin:Float, inMax:Float, outMin:Float, outMax:Float):Float;
     
     
     /**
-        ***Deprecated:**   This is removed in Lua versions later than what GMod is currently using. You should use the % operator or math. fmod instead.
+        ***Deprecated:** This is removed in Lua versions later than what GMod is currently using. You should use the % operator or math. fmod instead.
 		
-		Returns the modulus of the specified values. Same as math.fmod. 
-		
+		Returns the modulus of the specified values. Same as math.fmod.
 		
 		Name | Description
 		--- | ---
@@ -200,24 +165,21 @@ package gmod.libs;
 		`modulator` | Modulator
 		
 		
-		**Returns:** The calculated modulus
-		
-		
+		`**Returns:** The calculated modulus
     **/
-    @:deprecated
+    @:deprecated("This is removed in Lua versions later than what GMod is currently using. You should use the % operator or math. fmod instead.")
     public static function mod(base:Float, modulator:Float):Float;
     
     
     /**
-        Floors or rounds a number down. 
-		
+        Floors or rounds a number down.
 		
 		Name | Description
 		--- | ---
 		`number` | The number to be rounded down.
 		
 		
-		**Returns:** floored numbers
+		`**Returns:** floored numbers
 		
 		___
 		### Lua Examples
@@ -242,16 +204,13 @@ package gmod.libs;
 		**Output:**
 		
 		4 3
-		
-		
     **/
     
     public static function floor(number:Float):Float;
     
     
     /**
-        Takes a normalised number and returns the floating point representation. 
-		
+        Takes a normalised number and returns the floating point representation.
 		
 		Name | Description
 		--- | ---
@@ -259,41 +218,35 @@ package gmod.libs;
 		`exponent` | The value to get the normalized fraction and the exponent from.
 		
 		
-		**Returns:** result
-		
-		
+		`**Returns:** result
     **/
     
     public static function ldexp(normalizedFraction:Float, exponent:Float):Float;
     
     
     /**
-        Returns the x power of the Euler constant e. 
-		
+        Returns the x power of the Euler constant e.
 		
 		Name | Description
 		--- | ---
 		`exponent` | The exponent for the function.
 		
 		
-		**Returns:** e to the specified power
-		
-		
+		`**Returns:** e to the specified power
     **/
     
     public static function exp(exponent:Float):Float;
     
     
     /**
-        Returns the smallest value of all arguments. 
-		
+        Returns the smallest value of all arguments.
 		
 		Name | Description
 		--- | ---
 		`numbers` | Numbers to get the smallest from.
 		
 		
-		**Returns:** The smallest number
+		`**Returns:** The smallest number
 		
 		___
 		### Lua Examples
@@ -306,16 +259,13 @@ package gmod.libs;
 		**Output:**
 		
 		-3
-		
-		
     **/
     
     public static function min(numbers:Rest<Dynamic>):Float;
     
     
     /**
-        Basic code for Bézier-Spline algorithm. 
-		
+        Basic code for Bézier-Spline algorithm.
 		
 		Name | Description
 		--- | ---
@@ -324,7 +274,7 @@ package gmod.libs;
 		`tMax` | Just leave this at 1.
 		
 		
-		**Returns:** Point on Bezier curve, related to tDiff.
+		`**Returns:** Point on Bezier curve, related to tDiff.
 		
 		___
 		### Lua Examples
@@ -344,16 +294,13 @@ package gmod.libs;
 		    draw.RoundedBox( 0, pos.x - 2, pos.y - 2, 4, 4, Color( 0, 0, 0 ) )
 		end )
 		```
-		
-		
     **/
     
     public static function BSplinePoint(tDiff:Float, tPoints:AnyTable, tMax:Float):Vector;
     
     
     /**
-        Returns the integral and fractional component of the modulo operation. 
-		
+        Returns the integral and fractional component of the modulo operation.
 		
 		Name | Description
 		--- | ---
@@ -377,8 +324,6 @@ package gmod.libs;
 		**Output:**
 		
 		5   0.6
-		
-		
     **/
     
     public static function modf(base:Float):MathLibModfReturn;
@@ -387,33 +332,29 @@ package gmod.libs;
     /**
         Returns a random float between min and max. 
 		
-		See also math.random 
+		See also math.random
 		
-		 
 		Name | Description
 		--- | ---
 		`min` | The minimum value.
 		`max` | The maximum value.
 		
 		
-		**Returns:** Random float between min and max.
-		
-		
+		`**Returns:** Random float between min and max.
     **/
     
     public static function Rand(min:Float, max:Float):Float;
     
     
     /**
-        Converts an integer to a binary (base-2) string. 
-		
+        Converts an integer to a binary (base-2) string.
 		
 		Name | Description
 		--- | ---
 		`int` | Number to be converted.
 		
 		
-		**Returns:** Binary number string. The length of this will always be a multiple of 3.
+		`**Returns:** Binary number string. The length of this will always be a multiple of 3.
 		
 		___
 		### Lua Examples
@@ -426,50 +367,43 @@ package gmod.libs;
 		**Output:**
 		
 		100
-		
-		
     **/
     
     public static function IntToBin(int:Float):String;
     
     
     /**
-        Returns the square root of the number. 
-		
+        Returns the square root of the number.
 		
 		Name | Description
 		--- | ---
 		`value` | Value to get the square root of.
 		
 		
-		**Returns:** squareRoot
-		
-		
+		`**Returns:** squareRoot
     **/
     
     public static function sqrt(value:Float):Float;
     
     
     /**
-        Returns the hyperbolic cosine of the given angle. 
-		
+        Returns the hyperbolic cosine of the given angle.
 		
 		Name | Description
 		--- | ---
 		`number` | Angle in radians.
 		
 		
-		**Returns:** The hyperbolic cosine of the given angle.
-		
-		
+		`**Returns:** The hyperbolic cosine of the given angle.
     **/
     
     public static function cosh(number:Float):Float;
     
     
     /**
-        Increments an angle towards another by specified rate. 
+        Increments an angle towards another by specified rate.
 		
+		**Note:** This function is for numbers representing angles (0-360), NOT Angle objects!
 		
 		Name | Description
 		--- | ---
@@ -478,19 +412,18 @@ package gmod.libs;
 		`rate` | The amount to approach the target angle by
 		
 		
-		**Returns:** Modified angle
-		
-		
+		`**Returns:** Modified angle
     **/
     
     public static function ApproachAngle(currentAngle:Float, targetAngle:Float, rate:Float):Float;
     
     
     /**
-        ***INTERNAL:**   Use math. BSplinePoint instead.
+        ***INTERNAL** Use math. BSplinePoint instead.
 		
-		Basic code for Bezier-Spline algorithm, helper function for math.BSplinePoint. 
+		Basic code for Bezier-Spline algorithm, helper function for math.BSplinePoint.
 		
+		**Bug:** BUG Sending in a value < 1 will result in an infinite loop. Pull Request: #1477
 		
 		Name | Description
 		--- | ---
@@ -500,17 +433,14 @@ package gmod.libs;
 		`tinc` | 
 		
 		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL: Use math. BSplinePoint instead.")
     public static function calcBSplineN(i:Float, k:Float, t:Float, tinc:Float):Float;
     
     
     /**
-        Calculates the difference between two angles. 
-		
+        Calculates the difference between two angles.
 		
 		Name | Description
 		--- | ---
@@ -518,7 +448,7 @@ package gmod.libs;
 		`b` | The second angle.
 		
 		
-		**Returns:** The difference between the angles between -180 and 180
+		`**Returns:** The difference between the angles between -180 and 180
 		
 		___
 		### Lua Examples
@@ -533,16 +463,13 @@ package gmod.libs;
 		**Output:**
 		
 		Angle difference between 159 and 240 is -81 Angle difference between 240 and 159 is 81 Angle difference between 58 and 145 is -87
-		
-		
     **/
     
     public static function AngleDifference(a:Float, b:Float):Float;
     
     
     /**
-        Returns the difference between two points in 2D space. 
-		
+        Returns the difference between two points in 2D space.
 		
 		Name | Description
 		--- | ---
@@ -552,7 +479,7 @@ package gmod.libs;
 		`y2` | Y position of second point
 		
 		
-		**Returns:** Distance between the two points
+		`**Returns:** Distance between the two points
 		
 		___
 		### Lua Examples
@@ -565,16 +492,13 @@ package gmod.libs;
 		**Output:**
 		
 		5.6568542494924
-		
-		
     **/
     
     public static function Distance(x1:Float, y1:Float, x2:Float, y2:Float):Float;
     
     
     /**
-        Rounds towards zero. 
-		
+        Rounds towards zero.
 		
 		Name | Description
 		--- | ---
@@ -593,16 +517,13 @@ package gmod.libs;
 		print( math.Truncate( num, 2 ) ) -- 54.59
 		print( math.Round( num, 2 ) ) -- 54.6
 		```
-		
-		
     **/
     
     public static function Truncate(num:Float, ?digits:Float):Void;
     
     
     /**
-        Rounds the given value to the nearest whole number or to the given decimal places. 
-		
+        Rounds the given value to the nearest whole number or to the given decimal places.
 		
 		Name | Description
 		--- | ---
@@ -610,7 +531,7 @@ package gmod.libs;
 		`decimals` | The decimal places to round to.
 		
 		
-		**Returns:** The rounded value.
+		`**Returns:** The rounded value.
 		
 		___
 		### Lua Examples
@@ -633,23 +554,20 @@ package gmod.libs;
 		**Output:**
 		
 		104.63
-		
-		
     **/
     
     public static function Round(value:Float, ?decimals:Float):Float;
     
     
     /**
-        Returns the cosine of given angle. 
-		
+        Returns the cosine of given angle.
 		
 		Name | Description
 		--- | ---
 		`number` | Angle in radians
 		
 		
-		**Returns:** Cosine of given angle
+		`**Returns:** Cosine of given angle
 		
 		___
 		### Lua Examples
@@ -662,23 +580,20 @@ package gmod.libs;
 		**Output:**
 		
 		-1
-		
-		
     **/
     
     public static function cos(number:Float):Float;
     
     
     /**
-        Converts an angle in degrees to it's equivalent in radians. 
-		
+        Converts an angle in degrees to it's equivalent in radians.
 		
 		Name | Description
 		--- | ---
 		`degrees` | The angle measured in degrees.
 		
 		
-		**Returns:** radians
+		`**Returns:** radians
 		
 		___
 		### Lua Examples
@@ -694,8 +609,6 @@ package gmod.libs;
 		**Output:**
 		
 		Degrees: 360, Radians: 6.2831853071796 Degrees: 180, Radians: 3.1415926535898 Degrees: 90, Radians: 1.5707963267949 Degrees: 1, Radians: 0.017453292519943
-		
-		
     **/
     
     public static function rad(degrees:Float):Float;
@@ -704,26 +617,22 @@ package gmod.libs;
     /**
         With one argument, return the natural logarithm of x (to base e). 
 		
-		With two arguments, return the logarithm of x to the given base, calculated as log(x)/log(base). 
+		With two arguments, return the logarithm of x to the given base, calculated as log(x)/log(base).
 		
-		 
 		Name | Description
 		--- | ---
 		`x` | The value to get the base from exponent from.
 		`base` | The logarithmic base.
 		
 		
-		**Returns:** Logarithm of x to the given base
-		
-		
+		`**Returns:** Logarithm of x to the given base
     **/
     
     public static function log(x:Float, ?base:Float):Float;
     
     
     /**
-        Calculates the progress of a value fraction, taking in to account given easing fractions 
-		
+        Calculates the progress of a value fraction, taking in to account given easing fractions
 		
 		Name | Description
 		--- | ---
@@ -732,7 +641,7 @@ package gmod.libs;
 		`easeOut` | Fraction of how much easing to end with
 		
 		
-		**Returns:** Eased Value
+		`**Returns:** Eased Value
 		
 		___
 		### Lua Examples
@@ -747,40 +656,34 @@ package gmod.libs;
 		**Output:**
 		
 		0.055555... 0.166666... 0.277777...
-		
-		
     **/
     
     public static function EaseInOut(progress:Float, easeIn:Float, easeOut:Float):Float;
     
     
     /**
-        Returns the hyperbolic tangents of the given number. 
-		
+        Returns the hyperbolic tangents of the given number.
 		
 		Name | Description
 		--- | ---
 		`number` | Angle in radians.
 		
 		
-		**Returns:** The hyperbolic tangent of the given angle.
-		
-		
+		`**Returns:** The hyperbolic tangent of the given angle.
     **/
     
     public static function tanh(number:Float):Float;
     
     
     /**
-        Converts a binary string into a number. 
-		
+        Converts a binary string into a number.
 		
 		Name | Description
 		--- | ---
 		`string` | Binary string to convert
 		
 		
-		**Returns:** Base 10 number.
+		`**Returns:** Base 10 number.
 		
 		___
 		### Lua Examples
@@ -793,8 +696,6 @@ package gmod.libs;
 		**Output:**
 		
 		341
-		
-		
     **/
     
     public static function BinToInt(string:String):Float;
@@ -803,9 +704,8 @@ package gmod.libs;
     /**
         Used to split the number value into a normalized fraction and an exponent. Two values are returned: the first is a multiplier in the range 1/2 (inclusive) to 1 (exclusive) and the second is an integer exponent. 
 		
-		The result is such that x = m*2^e. 
+		The result is such that x = m*2^e.
 		
-		 
 		Name | Description
 		--- | ---
 		`x` | The value to get the normalized fraction and the exponent from.
@@ -815,24 +715,20 @@ package gmod.libs;
 		--- | ---
 		`a` | m, multiplier - between 0.5 and 1
 		`b` | e, exponent - always an integer
-		
-		
-		
     **/
     
     public static function frexp(x:Float):MathLibFrexpReturn;
     
     
     /**
-        Returns the largest value of all arguments. 
-		
+        Returns the largest value of all arguments.
 		
 		Name | Description
 		--- | ---
 		`numbers` | Numbers to get the largest from
 		
 		
-		**Returns:** The largest number
+		`**Returns:** The largest number
 		
 		___
 		### Lua Examples
@@ -861,25 +757,20 @@ package gmod.libs;
 		print( lowClamp( 8 ) )
 		print( lowClamp( 24 ) )
 		```
-		
-		
     **/
     
     public static function max(numbers:Rest<Dynamic>):Float;
     
     
     /**
-        Returns the arc sine of the given number. 
-		
+        Returns the arc sine of the given number.
 		
 		Name | Description
 		--- | ---
 		`normal` | Sine value in the range of -1 to 1.
 		
 		
-		**Returns:** An angle in radians, in the range -pi/2 to pi/2, which has the given sine value. nan if the argument is out of range.
-		
-		
+		`**Returns:** An angle in radians, in the range -pi/2 to pi/2, which has the given sine value. nan if the argument is out of range.
     **/
     
     public static function asin(normal:Float):Float;
@@ -888,23 +779,22 @@ package gmod.libs;
     /**
         Seeds the random number generator. The same seed will guarantee the same sequence of numbers each time with math.random. 
 		
-		For shared random values across predicted realms, use util.SharedRandom. 
+		For shared random values across predicted realms, use util.SharedRandom.
 		
-		 
+		**Warning:** Incorrect usage of this function will affect all random numbers in the game.
+		
 		Name | Description
 		--- | ---
 		`seed` | The new seed
-		
-		
-		
     **/
     
     public static function randomseed(seed:Float):Void;
     
     
     /**
-        atan2 functions like math.atan(y / x), except it also takes into account the quadrant of the angle and so doesn't have a limited range of output. 
+        atan2 functions like math.atan(y / x), except it also takes into account the quadrant of the angle and so doesn't have a limited range of output.
 		
+		**Note:** The Y argument comes first!
 		
 		Name | Description
 		--- | ---
@@ -912,7 +802,7 @@ package gmod.libs;
 		`x` | X coordinate.
 		
 		
-		**Returns:** The angle of the line from (0, 0) to (x, y) in radians, in the range -pi to pi.
+		`**Returns:** The angle of the line from (0, 0) to (x, y) in radians, in the range -pi to pi.
 		
 		___
 		### Lua Examples
@@ -927,65 +817,52 @@ package gmod.libs;
 		**Output:**
 		
 		0.7853981633974483 0.7853981633974483 -2.356194490192345
-		
-		
     **/
     
     public static function atan2(y:Float, x:Float):Float;
     
     
     /**
-        Returns the arc cosine of the given number. 
-		
+        Returns the arc cosine of the given number.
 		
 		Name | Description
 		--- | ---
 		`cos` | Cosine value in range of -1 to 1.
 		
 		
-		**Returns:** An angle in radians, between 0 and pi, which has the given cos value. nan if the argument is out of range.
-		
-		
+		`**Returns:** An angle in radians, between 0 and pi, which has the given cos value. nan if the argument is out of range.
     **/
     
     public static function acos(cos:Float):Float;
     
     
     /**
-        Returns the base-10 logarithm of x. This is usually more accurate than math.log(x, 10). 
-		
+        Returns the base-10 logarithm of x. This is usually more accurate than math.log(x, 10).
 		
 		Name | Description
 		--- | ---
 		`x` | The value to get the base from exponent from.
-		
-		
-		
     **/
     
     public static function log10(x:Float):Void;
     
     
     /**
-        Returns the tangent of the given angle. 
-		
+        Returns the tangent of the given angle.
 		
 		Name | Description
 		--- | ---
 		`value` | Angle in radians
 		
 		
-		**Returns:** The tangent of the given angle.
-		
-		
+		`**Returns:** The tangent of the given angle.
     **/
     
     public static function tan(value:Float):Float;
     
     
     /**
-        Clamps a number between a minimum and maximum value 
-		
+        Clamps a number between a minimum and maximum value
 		
 		Name | Description
 		--- | ---
@@ -994,7 +871,7 @@ package gmod.libs;
 		`max` | The maximum value, this function will never return a number greater than this.
 		
 		
-		**Returns:** The clamped value.
+		`**Returns:** The clamped value.
 		
 		___
 		### Lua Examples
@@ -1016,23 +893,20 @@ package gmod.libs;
 		```lua 
 		ply:SetHealth( math.Clamp( ply:Health() + 10, 0, 100 ) )
 		```
-		
-		
     **/
     
     public static function Clamp(input:Float, min:Float, max:Float):Float;
     
     
     /**
-        Calculates the absolute value of a number (effectively removes any negative sign). 
-		
+        Calculates the absolute value of a number (effectively removes any negative sign).
 		
 		Name | Description
 		--- | ---
 		`x` | The number to get the absolute value of.
 		
 		
-		**Returns:** absolute_value
+		`**Returns:** absolute_value
 		
 		___
 		### Lua Examples
@@ -1046,8 +920,6 @@ package gmod.libs;
 		**Output:**
 		
 		15 15
-		
-		
     **/
     
     public static function abs(x:Float):Float;
@@ -1056,43 +928,36 @@ package gmod.libs;
     /**
         Returns the modulus of the specified values. 
 		
-		While this is similar to the % operator, it will return a negative value if the first argument is negative, whereas the % operator will return a positive value even if the first operand is negative. 
+		While this is similar to the % operator, it will return a negative value if the first argument is negative, whereas the % operator will return a positive value even if the first operand is negative.
 		
-		 
 		Name | Description
 		--- | ---
 		`base` | The base value.
 		`modulator` | The modulator.
 		
 		
-		**Returns:** The calculated modulus.
-		
-		
+		`**Returns:** The calculated modulus.
     **/
     
     public static function fmod(base:Float, modulator:Float):Float;
     
     
     /**
-        Normalizes angle, so it returns value between -180 and 180. 
-		
+        Normalizes angle, so it returns value between -180 and 180.
 		
 		Name | Description
 		--- | ---
 		`angle` | The angle to normalize, in degrees.
 		
 		
-		**Returns:** The normalized angle, in the range of -180 to 180 degrees.
-		
-		
+		`**Returns:** The normalized angle, in the range of -180 to 180 degrees.
     **/
     
     public static function NormalizeAngle(angle:Float):Float;
     
     
     /**
-        Returns x raised to the power y. In particular, math.pow(1.0, x) and math.pow(x, 0.0) always return 1.0, even when x is a zero or a NaN. If both x and y are finite, x is negative, and y is not an integer then math.pow(x, y) is undefined. 
-		
+        Returns x raised to the power y. In particular, math.pow(1.0, x) and math.pow(x, 0.0) always return 1.0, even when x is a zero or a NaN. If both x and y are finite, x is negative, and y is not an integer then math.pow(x, y) is undefined.
 		
 		Name | Description
 		--- | ---
@@ -1100,24 +965,21 @@ package gmod.libs;
 		`y` | Exponent.
 		
 		
-		**Returns:** y power of x
-		
-		
+		`**Returns:** y power of x
     **/
     
     public static function pow(x:Float, y:Float):Float;
     
     
     /**
-        Ceils or rounds a number up. 
-		
+        Ceils or rounds a number up.
 		
 		Name | Description
 		--- | ---
 		`number` | The number to be rounded up.
 		
 		
-		**Returns:** ceiled numbers
+		`**Returns:** ceiled numbers
 		
 		___
 		### Lua Examples
@@ -1130,25 +992,20 @@ package gmod.libs;
 		**Output:**
 		
 		4
-		
-		
     **/
     
     public static function ceil(number:Float):Float;
     
     
     /**
-        Returns the sine of given angle. 
-		
+        Returns the sine of given angle.
 		
 		Name | Description
 		--- | ---
 		`number` | Angle in radians
 		
 		
-		**Returns:** Sine for given angle
-		
-		
+		`**Returns:** Sine for given angle
     **/
     
     public static function sin(number:Float):Float;
@@ -1161,16 +1018,15 @@ package gmod.libs;
 		
 		 When called with two integer numbers m and n, returns a uniform pseudo-random integer in the range m to n inclusive. 
 		
-		 See also math.Rand 
+		 See also math.Rand
 		
-		 
 		Name | Description
 		--- | ---
 		`m` | If m is the only parameter: upper limit. If n is also provided: lower limit. If provided, this must be an integer.
 		`n` | Upper limit. If provided, this must be an integer.
 		
 		
-		**Returns:** Random value
+		`**Returns:** Random value
 		
 		___
 		### Lua Examples
@@ -1213,16 +1069,13 @@ package gmod.libs;
 		    print(GetWeightedRandomKey(fruit))
 		end
 		```
-		
-		
     **/
-    @:overload(function ():Float {})
-    public static function random(m:Int, ?n:Int):Int;
+    
+    public static function random(?m:Float, ?n:Float):Float;
     
     
     /**
-        Returns the fraction of where the current time is relative to the start and end times 
-		
+        Returns the fraction of where the current time is relative to the start and end times
 		
 		Name | Description
 		--- | ---
@@ -1231,7 +1084,7 @@ package gmod.libs;
 		`current` | Current time in seconds
 		
 		
-		**Returns:** Fraction
+		`**Returns:** Fraction
 		
 		___
 		### Lua Examples
@@ -1244,8 +1097,6 @@ package gmod.libs;
 		**Output:**
 		
 		0.5
-		
-		
     **/
     
     public static function TimeFraction(start:Float, end:Float, current:Float):Float;

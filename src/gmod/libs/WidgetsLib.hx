@@ -4,17 +4,14 @@ package gmod.libs;
 /**
     The widgets library. 
 	
-	Widgets allow the player to have mouse interaction with entities, such as being able to manipulate the bones of an NPC. 
-	
-	 
+	Widgets allow the player to have mouse interaction with entities, such as being able to manipulate the bones of an NPC.
 **/
 @:native("widgets")extern class WidgetsLib {
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Automatically called to update all widgets.       That's how it is used in lua/includes/modules/widget.lua 
-		
+		Automatically called to update all widgets.       That's how it is used in lua/includes/modules/widget.lua
 		
 		Name | Description
 		--- | ---
@@ -30,16 +27,13 @@ package gmod.libs;
 		```lua 
 		hook.Add( "PlayerTick", "TickWidgets", function( pl, mv ) widgets.PlayerTick( pl, mv ) end )
 		```
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function PlayerTick(ply:Player, mv:CMoveData):Void;
     
     #if client
     /**
-        Renders a widget. Normally you won't need to call this. 
-		
+        Renders a widget. Normally you won't need to call this.
 		
 		Name | Description
 		--- | ---
@@ -58,8 +52,6 @@ package gmod.libs;
 		    
 		end
 		```
-		
-		
     **/
     
     public static function RenderMe(ent:Entity):Void;

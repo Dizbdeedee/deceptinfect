@@ -2,59 +2,45 @@ package gmod.panels;
 #if client
 
 /**
-    Base panel used by DFrame, this panel is needed so that elements such as the TextEntry can obtain focus. 
-	
-	
+    Base panel used by DFrame, this panel is needed so that elements such as the TextEntry can obtain focus.
 **/
 extern class EditablePanel {
     /**
-        ***Deprecated:**  
+        ***INTERNAL** 
 		
-		***INTERNAL:**  
+		***Deprecated:** 
 		
-		Loads controls(positions, etc) from given data. This is what the default options menu uses. 
-		
+		Loads controls(positions, etc) from given data. This is what the default options menu uses.
 		
 		Name | Description
 		--- | ---
 		`data` | The data to load controls from. Format unknown.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function LoadControlsFromString(data:String):Void;
     /**
-        Sets the panel that owns this FocusNavGroup to be the root in the focus traversal hierarchy. 
-		
+        Sets the panel that owns this FocusNavGroup to be the root in the focus traversal hierarchy.
 		
 		Name | Description
 		--- | ---
 		`state` | 
-		
-		
-		
     **/
     
      
     public function SetFocusTopLevel(state:Bool):Void;
     /**
-        ***Deprecated:**  
+        ***INTERNAL** 
 		
-		***INTERNAL:**  
+		***Deprecated:** 
 		
-		Similar to Panel:LoadControlsFromString but loads controls from a file. 
-		
+		Similar to Panel:LoadControlsFromString but loads controls from a file.
 		
 		Name | Description
 		--- | ---
 		`path` | The path to load the controls from.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function LoadControlsFromFile(path:String):Void;
     

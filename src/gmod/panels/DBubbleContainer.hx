@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    A transparent gray speech bubble panel made up of a rounded box and point coming from the bottom. 
-	
-	
+    A transparent gray speech bubble panel made up of a rounded box and point coming from the bottom.
 **/
 extern class DBubbleContainer extends DPanel {
     /**
-        Sets the speech bubble position and size along with the dialog point position. 
-		
+        Sets the speech bubble position and size along with the dialog point position.
 		
 		Name | Description
 		--- | ---
@@ -42,8 +39,6 @@ extern class DBubbleContainer extends DPanel {
 		-- h = 184 (16 pixel bottom margin)
 		bubble1:OpenForPos(size/2, 0, size-20, size-16)
 		```
-		
-		
     **/
     
      

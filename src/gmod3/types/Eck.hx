@@ -1,11 +1,11 @@
 package gmod.types;
 
-class Eck {
-    static function hmm() {
-        var e:PLAYER = {DisplayName: "ook"}
+// class Eck {
+//     static function hmm() {
+//         var e:PLAYER = {DisplayName: "ook"}
         
-    }
-}
+//     }
+// }
 
 /**
     This page describes all  fields for a playerclass.  

@@ -2,54 +2,43 @@ package gmod.libs;
 
 
 /**
-    This is the list of global functions. 
-	
-	
+    This is the list of global functions.
 **/
 @:native("_G")extern class GlobalLib {
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Gets the ConVar with the specified name. This function doesn't cache the convar.     
+		Gets the ConVar with the specified name. This function doesn't cache the convar.
+		
 		Name | Description
 		--- | ---
 		`name` | Name of the ConVar to get
 		
 		
-		**Returns:** The ConVar object
-		
-		
+		`**Returns:** The ConVar object
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function GetConVar_Internal(name:String):ConVar;
     
     #if client
     /**
-        Registers a Derma element to be closed the next time CloseDermaMenus is called 
-		
+        Registers a Derma element to be closed the next time CloseDermaMenus is called
 		
 		Name | Description
 		--- | ---
 		`menu` | Menu to be registered for closure
-		
-		
-		
     **/
     
     public static function RegisterDermaMenuForClose(menu:Panel):Void;
     #end
     #if client
     /**
-        Automatically called by the engine when a panel is hovered over with the mouse 
-		
+        Automatically called by the engine when a panel is hovered over with the mouse
 		
 		Name | Description
 		--- | ---
 		`panel` | Panel that has been hovered over
-		
-		
-		
     **/
     
     public static function ChangeTooltip(panel:Panel):Void;
@@ -58,25 +47,21 @@ package gmod.libs;
     /**
         Returns if the given NPC class name is a friend. 
 		
-		Returns true if the entity name is one of the following: 
+		Returns true if the entity name is one of the following:
 		
-		 
 		Name | Description
 		--- | ---
 		`className` | Class name of the entity to check
 		
 		
-		**Returns:** Is a friend
-		
-		
+		`**Returns:** Is a friend
     **/
     
     public static function IsFriendEntityName(className:String):Bool;
     
     
     /**
-        Returns an iterator function that can be used to loop through a table in random order 
-		
+        Returns an iterator function that can be used to loop through a table in random order
 		
 		Name | Description
 		--- | ---
@@ -84,7 +69,7 @@ package gmod.libs;
 		`descending` | Whether the iterator should iterate descending or not
 		
 		
-		**Returns:** Iterator function
+		`**Returns:** Iterator function
 		
 		___
 		### Lua Examples
@@ -101,50 +86,39 @@ package gmod.libs;
 		**Output:**
 		
 		b d f c a e
-		
-		
     **/
     
     public static function RandomPairs(table:AnyTable, descending:Bool):Function;
     
     
     /**
-        Sets the active main menu background image to a random entry from the background images pool. Images are added with AddBackgroundImage. 
-		
+        Sets the active main menu background image to a random entry from the background images pool. Images are added with AddBackgroundImage.
 		
 		Name | Description
 		--- | ---
 		`currentgm` | Apparently does nothing.
-		
-		
-		
     **/
     
     public static function ChangeBackground(currentgm:String):Void;
     
     
     /**
-        ***Deprecated:**   To send the target file to the client simply call AddCSLuaFile() in the target file itself.
+        ***Deprecated:** To send the target file to the client simply call AddCSLuaFile() in the target file itself.
 		
 		This function works exactly the same as include both clientside and serverside. 
 		
-		The only difference is that on the serverside it also calls AddCSLuaFile on the filename, so that it gets sent to the client. 
+		The only difference is that on the serverside it also calls AddCSLuaFile on the filename, so that it gets sent to the client.
 		
-		 
 		Name | Description
 		--- | ---
 		`filename` | The filename of the Lua file you want to include.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("To send the target file to the client simply call AddCSLuaFile() in the target file itself.")
     public static function IncludeCS(filename:String):Void;
     
     
     /**
-        Precaches the particle with the specified name. 
-		
+        Precaches the particle with the specified name.
 		
 		Name | Description
 		--- | ---
@@ -167,18 +141,15 @@ package gmod.libs;
 		    end )
 		end
 		```
-		
-		
     **/
     
     public static function PrecacheParticleSystem(particleSystemName:String):Void;
     
     #if client
     /**
-        Gets the height of the game's window (in pixels). 
+        Gets the height of the game's window (in pixels).
 		
-		
-		**Returns:** The height of the game's window in pixels
+		`**Returns:** The height of the game's window in pixels
 		
 		___
 		### Lua Examples
@@ -204,16 +175,17 @@ package gmod.libs;
 		**Output:**
 		
 		A white box on the top left corner of your screen
-		
-		
     **/
     
     public static function ScrH():Float;
     #end
     
     /**
-        Sets an integer that is shared between the server and all clients. 
+        Sets an integer that is shared between the server and all clients.
 		
+		**Note:** Running this function clientside will only set it clientside for the client it is called on!
+		
+		**Bug:** BUG This function will not round decimal values as it actually networks a float internally. Issue Tracker: #3374
 		
 		Name | Description
 		--- | ---
@@ -229,23 +201,20 @@ package gmod.libs;
 		```lua 
 		SetGlobalInt("RoundNumber", 4)
 		```
-		
-		
     **/
     
     public static function SetGlobalInt(index:String, value:Float):Void;
     
     
     /**
-        Attempts to compile the given file. If successful, returns a function that can be called to perform the actual execution of the script. 
-		
+        Attempts to compile the given file. If successful, returns a function that can be called to perform the actual execution of the script.
 		
 		Name | Description
 		--- | ---
 		`path` | Path to the file, relative to the garrysmod/lua/ directory.
 		
 		
-		**Returns:** The function which executes the script.
+		`**Returns:** The function which executes the script.
 		
 		___
 		### Lua Examples
@@ -259,8 +228,6 @@ package gmod.libs;
 		**Output:**
 		
 		Hello!
-		
-		
     **/
     
     public static function CompileFile(path:String):Function;
@@ -269,24 +236,19 @@ package gmod.libs;
     /**
         Creates a table with the specified module name and sets the function environment for said table. 
 		
-		Any passed loaders are called with the table as an argument. An example of this is package.seeall. 
+		Any passed loaders are called with the table as an argument. An example of this is package.seeall.
 		
-		 
 		Name | Description
 		--- | ---
 		`name` | The name of the module. This will be used to access the module table in the runtime environment.
 		`loaders` | Calls each function passed with the new table as an argument.
-		
-		
-		
     **/
     
     public static function module(name:String, loaders:Rest<Dynamic>):Void;
     
     
     /**
-        Recursively prints the contents of a table to the console. 
-		
+        Recursively prints the contents of a table to the console.
 		
 		Name | Description
 		--- | ---
@@ -318,16 +280,13 @@ package gmod.libs;
 		 2 = baah
 		 3 = 4
 		4 = true
-		
-		
     **/
     
     public static function PrintTable(tableToPrint:AnyTable, ?indent:Float, ?done:AnyTable):Void;
     
     
     /**
-        An 'if then else'. This is almost equivalent to (condition and truevar or falsevar) in Lua. The difference is that if truevar evaluates to false, the plain Lua method stated would return falsevar regardless of condition whilst this function would take condition into account. 
-		
+        An 'if then else'. This is almost equivalent to (condition and truevar or falsevar) in Lua. The difference is that if truevar evaluates to false, the plain Lua method stated would return falsevar regardless of condition whilst this function would take condition into account.
 		
 		Name | Description
 		--- | ---
@@ -336,7 +295,7 @@ package gmod.libs;
 		`falsevar` | If the condition is nil/false, returns this value.
 		
 		
-		**Returns:** The result.
+		`**Returns:** The result.
 		
 		___
 		### Lua Examples
@@ -363,35 +322,31 @@ package gmod.libs;
 		
 		print( "Halflife? "..( (LocalPlayer():Health()==50) and "halflife" or "not halflife") )
 		```
-		
-		
     **/
     
-    public static function Either(condition:Any, truevar:Any, falsevar:Any):Any;
+    public static function Either(condition:Dynamic, truevar:Dynamic, falsevar:Dynamic):Dynamic;
     
     
     /**
         Returns the entity with the matching Entity:EntIndex. 
 		
-		Indices 1 through game.MaxPlayers() are always reserved for players. 
+		Indices 1 through game.MaxPlayers() are always reserved for players.
 		
-		 
+		**Note:** In examples on this wiki, Entity( 1 ) is used when a player entity is needed (see wiki editing guide). In singleplayer and listen servers, Entity( 1 ) will always be the first player. In dedicated servers, however, Entity( 1 ) won't always be a valid player.
+		
 		Name | Description
 		--- | ---
 		`entityIndex` | The entity index.
 		
 		
-		**Returns:** The entity if it exists, or NULL if it doesn't.
-		
-		
+		`**Returns:** The entity if it exists, or NULL if it doesn't.
     **/
     
     public static function Entity(entityIndex:Float):Entity;
     
     
     /**
-        Returns a boolean that is shared between the server and all clients. 
-		
+        Returns a boolean that is shared between the server and all clients.
 		
 		Name | Description
 		--- | ---
@@ -399,53 +354,45 @@ package gmod.libs;
 		`default` | The value to return if the global value is not set.
 		
 		
-		**Returns:** The global value, or the default if the global value is not set.
-		
-		
+		`**Returns:** The global value, or the default if the global value is not set.
     **/
     
     public static function GetGlobalBool(index:String, ?_default:Bool):Bool;
     
     
     /**
-        ***Deprecated:**   This uses the umsg library internally, which has been deprecated. Use the net library instead.
+        ***Deprecated:** This uses the umsg library internally, which has been deprecated. Use the net library instead.
 		
-		Send a usermessage 
+		Send a usermessage
 		
+		**Note:** Useless on client, only server can send info to client.
 		
 		Name | Description
 		--- | ---
 		`name` | The name of the usermessage
 		`recipients` | Can be a CRecipientFilter, table or Player object.
 		`args` | Data to send in the usermessage
-		
-		
-		
     **/
-    @:deprecated
-    public static function SendUserMessage(name:String, recipients:Any, args:Rest<Dynamic>):Void;
+    @:deprecated("This uses the umsg library internally, which has been deprecated. Use the net library instead.")
+    public static function SendUserMessage(name:String, recipients:Dynamic, args:Rest<Dynamic>):Void;
     
     
     /**
-        Returns the environment table of either the stack level or the function specified. 
-		
+        Returns the environment table of either the stack level or the function specified.
 		
 		Name | Description
 		--- | ---
 		`location` | The object to get the enviroment from. Can also be a number that specifies the function at that stack level: Level 1 is the function calling getfenv.
 		
 		
-		**Returns:** The environment.
-		
-		
+		`**Returns:** The environment.
     **/
     
     public static function getfenv(?location:Function):AnyTable;
     
     
     /**
-        Returns an angle that is shared between the server and all clients. 
-		
+        Returns an angle that is shared between the server and all clients.
 		
 		Name | Description
 		--- | ---
@@ -453,32 +400,25 @@ package gmod.libs;
 		`default` | The value to return if the global value is not set.
 		
 		
-		**Returns:** The global value, or default if the global is not set.
-		
-		
+		`**Returns:** The global value, or default if the global is not set.
     **/
     
     public static function GetGlobalAngle(index:String, ?_default:Angle):Angle;
     
     
     /**
-        Toggles whether or not the named map is favorited in the new game list. 
-		
+        Toggles whether or not the named map is favorited in the new game list.
 		
 		Name | Description
 		--- | ---
 		`map` | Map to toggle favorite.
-		
-		
-		
     **/
     
     public static function ToggleFavourite(map:String):Void;
     
     #if client
     /**
-        Shows a message box in the middle of the screen, with up to 4 buttons they can press. 
-		
+        Shows a message box in the middle of the screen, with up to 4 buttons they can press.
 		
 		Name | Description
 		--- | ---
@@ -494,23 +434,18 @@ package gmod.libs;
 		`btn4func` | The function to run if the user clicks the fourth button.
 		
 		
-		**Returns:** The Panel object of the created window.
-		
-		
+		`**Returns:** The Panel object of the created window.
     **/
     
     public static function Derma_Query(?text:String, ?title:String, btn1text:String, ?btn1func:Function, ?btn2text:String, ?btn2func:Function, ?btn3text:String, ?btn3func:Function, ?btn4text:String, ?btn4func:Function):Panel;
     #end
     
     /**
-        ***Deprecated:**   Use RunString instead.
+        ***Deprecated:** Use RunString instead.
 		
-		Alias of RunString. 
-		
-		
-		
+		Alias of RunString.
     **/
-    @:deprecated
+    @:deprecated("Use RunString instead.")
     public static function RunStringEx():Void;
     
     
@@ -519,15 +454,14 @@ package gmod.libs;
 		
 		This is used not just by entities, but also by widgets, panels, drive modes, weapons and gamemodes (with "gamemode_" prefix). 
 		
-		 The keyword DEFINE_BASECLASS translates into a call to this function. In the engine, it is replaced with: 
+		 The keyword DEFINE_BASECLASS translates into a call to this function. In the engine, it is replaced with:
 		
-		 
 		Name | Description
 		--- | ---
 		`name` | The child class.
 		
 		
-		**Returns:** The base class's meta table.
+		`**Returns:** The base class's meta table.
 		
 		___
 		### Lua Examples
@@ -554,16 +488,13 @@ package gmod.libs;
 		    BaseClass.SetupDataTables( self ) //calls SWEP:SetupDataTables() from weapon_csbasegun and inits its dtvars
 		end
 		```
-		
-		
     **/
     
     public static function Get(name:String):AnyTable;
     
     
     /**
-        Defines a global entity class variable with an automatic value in order to prevent collisions with other CLASS_ Enums. You should prefix your variable with CLASS_ for consistency. 
-		
+        Defines a global entity class variable with an automatic value in order to prevent collisions with other CLASS_ Enums. You should prefix your variable with CLASS_ for consistency.
 		
 		Name | Description
 		--- | ---
@@ -582,16 +513,13 @@ package gmod.libs;
 		**Output:**
 		
 		36 (one greater than the current highest value of the CLASS_ Enums)
-		
-		
     **/
     
     public static function Add_NPC_Class(name:String):Void;
     
     #if client
     /**
-        Draws the texturize shader, which replaces each pixel on your screen with a different part of the texture depending on its brightness. See g_texturize for information on making the texture. 
-		
+        Draws the texturize shader, which replaces each pixel on your screen with a different part of the texture depending on its brightness. See g_texturize for information on making the texture.
 		
 		Name | Description
 		--- | ---
@@ -611,23 +539,20 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
     public static function DrawTexturize(Scale:Float, BaseTexture:Float):Void;
     #end
     
     /**
-        Returns a VMatrix object. 
-		
+        Returns a VMatrix object.
 		
 		Name | Description
 		--- | ---
 		`data` | Initial data to initialize the matrix with. Leave empty to initialize an identity matrix. See examples for usage. Can be a VMatrix to copy its data.
 		
 		
-		**Returns:** New matrix.
+		`**Returns:** New matrix.
 		
 		___
 		### Lua Examples
@@ -647,16 +572,13 @@ package gmod.libs;
 		    { 0, 0, 0, 1 }
 		} )
 		```
-		
-		
     **/
     
     public static function Matrix(?data:AnyTable):VMatrix;
     
     #if client
     /**
-        Creates a derma window to display information 
-		
+        Creates a derma window to display information
 		
 		Name | Description
 		--- | ---
@@ -665,7 +587,7 @@ package gmod.libs;
 		`Button` | The text of the button to close the panel.
 		
 		
-		**Returns:** The created DFrame
+		`**Returns:** The created DFrame
 		
 		___
 		### Lua Examples
@@ -675,16 +597,13 @@ package gmod.libs;
 		```lua 
 		Derma_Message("You are currently dead", "Death Notice", "OK")
 		```
-		
-		
     **/
     
     public static function Derma_Message(Text:String, Title:String, Button:String):Panel;
     #end
     #if client
     /**
-        Creates a motion blur effect by drawing your screen multiple times. 
-		
+        Creates a motion blur effect by drawing your screen multiple times.
 		
 		Name | Description
 		--- | ---
@@ -705,28 +624,22 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
     public static function DrawMotionBlur(AddAlpha:Float, DrawAlpha:Float, Delay:Float):Void;
     #end
     #if client
     /**
-        Cancels any existing DOF post-process effects. Begins the DOF post-process effect. 
-		
-		
-		
+        Cancels any existing DOF post-process effects. Begins the DOF post-process effect.
     **/
     
     public static function DOF_Start():Void;
     #end
     #if client
     /**
-        Creates a new ProjectedTexture. 
+        Creates a new ProjectedTexture.
 		
-		
-		**Returns:** Newly created projected texture.
+		`**Returns:** Newly created projected texture.
 		
 		___
 		### Lua Examples
@@ -763,16 +676,13 @@ package gmod.libs;
 		    end
 		end
 		```
-		
-		
     **/
     
     public static function ProjectedTexture():ProjectedTexture;
     #end
     
     /**
-        Callback function for when the client has joined a server. This function shows the server's loading URL by default. 
-		
+        Callback function for when the client has joined a server. This function shows the server's loading URL by default.
 		
 		Name | Description
 		--- | ---
@@ -809,66 +719,53 @@ package gmod.libs;
 		4	8
 		5	76561198052589582
 		6	sandbox
-		
-		
     **/
     
     public static function GameDetails(servername:String, serverurl:String, mapname:String, maxplayers:Float, steamid:String, gamemode:String):Void;
     
     #if client
     /**
-        Renders the stereoscopic post-process effect 
-		
+        Renders the stereoscopic post-process effect
 		
 		Name | Description
 		--- | ---
 		`viewOrigin` | Origin to render the effect at
 		`viewAngles` | Angles to render the effect at
-		
-		
-		
     **/
     
     public static function RenderStereoscopy(viewOrigin:Vector, viewAngles:Angle):Void;
     #end
     
     /**
-        Returns if the passed object is a boolean. 
-		
+        Returns if the passed object is a boolean.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is a boolean.
-		
-		
+		`**Returns:** True if the variable is a boolean.
     **/
     
-    public static function isbool(variable:Any):Bool;
+    public static function isbool(variable:Dynamic):Bool;
     
     
     /**
-        Creates a Color structure with randomized red, green, and blue components. If the alpha argument is true, alpha will also be randomized. 
-		
+        Creates a Color structure with randomized red, green, and blue components. If the alpha argument is true, alpha will also be randomized.
 		
 		Name | Description
 		--- | ---
 		`a` | Should alpha be randomized.
 		
 		
-		**Returns:** The created Color structure.
-		
-		
+		`**Returns:** The created Color structure.
     **/
     
-    public static function ColorRand(?a:Bool):AnyTable;
+    public static function ColorRand(?a:Bool):Color;
     
     
     /**
-        Returns an angle with a randomized pitch, yaw, and roll between min(inclusive), max(exclusive). 
-		
+        Returns an angle with a randomized pitch, yaw, and roll between min(inclusive), max(exclusive).
 		
 		Name | Description
 		--- | ---
@@ -876,7 +773,7 @@ package gmod.libs;
 		`max` | Max bound exclusive.
 		
 		
-		**Returns:** The randomly generated angle.
+		`**Returns:** The randomly generated angle.
 		
 		___
 		### Lua Examples
@@ -889,16 +786,13 @@ package gmod.libs;
 		**Output:**
 		
 		-6.949 113.388 130.879
-		
-		
     **/
     
     public static function AngleRand(?min:Float, ?max:Float):Angle;
     
     #if client
     /**
-        Returns a number based on the Size argument and your screen's width. The screen's width is always equal to size 640. This function is primarily used for scaling font sizes. 
-		
+        Returns a number based on the Size argument and your screen's width. The screen's width is always equal to size 640. This function is primarily used for scaling font sizes.
 		
 		Name | Description
 		--- | ---
@@ -918,8 +812,6 @@ package gmod.libs;
 		**Output:**
 		
 		252, 1050, 1680 (This will differ depending on your screen width. Here the screen width is 1680.)
-		
-		
     **/
     
     public static function ScreenScale(Size:Float):Void;
@@ -928,25 +820,21 @@ package gmod.libs;
     /**
         Runs a function without stopping the whole script on error. 
 		
-		This function is similar to pcall and xpcall except the errors are still printed and sent to the error handler (i.e. sent to server console if clientside and GM:OnLuaError called). 
+		This function is similar to pcall and xpcall except the errors are still printed and sent to the error handler (i.e. sent to server console if clientside and GM:OnLuaError called).
 		
-		 
 		Name | Description
 		--- | ---
 		`func` | Function to run
 		
 		
-		**Returns:** Whether the function executed successfully or not
-		
-		
+		`**Returns:** Whether the function executed successfully or not
     **/
     
     public static function ProtectedCall(func:Function):Bool;
     
     #if client
     /**
-        Draws the bloom shader, which creates a glowing effect from bright objects. 
-		
+        Draws the bloom shader, which creates a glowing effect from bright objects.
 		
 		Name | Description
 		--- | ---
@@ -971,16 +859,13 @@ package gmod.libs;
 		    DrawBloom( 0.65, 2, 9, 9, 1, 1, 1, 1, 1 )
 		end
 		```
-		
-		
     **/
     
     public static function DrawBloom(Darken:Float, Multiply:Float, SizeX:Float, SizeY:Float, Passes:Float, ColorMultiply:Float, Red:Float, Green:Float, Blue:Float):Void;
     #end
     
     /**
-        Creates a Color structure. 
-		
+        Creates a Color structure.
 		
 		Name | Description
 		--- | ---
@@ -990,7 +875,7 @@ package gmod.libs;
 		`a` | An integer from 0-255 describing the alpha (transparency) of the color.
 		
 		
-		**Returns:** The created Color structure.
+		`**Returns:** The created Color structure.
 		
 		___
 		### Lua Examples
@@ -1048,77 +933,63 @@ package gmod.libs;
 		**Output:**
 		
 		equal
-		
-		
     **/
     
-    public static function Color(r:Float, g:Float, b:Float, ?a:Float):AnyTable;
+    public static function Color(r:Float, g:Float, b:Float, ?a:Float):Color;
     
     
     /**
         Returns if the given NPC class name is an enemy. 
 		
-		Returns true if the entity name is one of the following: 
+		Returns true if the entity name is one of the following:
 		
-		 
 		Name | Description
 		--- | ---
 		`className` | Class name of the entity to check
 		
 		
-		**Returns:** Is an enemy
-		
-		
+		`**Returns:** Is an enemy
     **/
     
     public static function IsEnemyEntityName(className:String):Bool;
     
     #if client
     /**
-        Returns the real frame-time which is unaffected by host_timescale. To be used for GUI effects (for example) 
+        Returns the real frame-time which is unaffected by host_timescale. To be used for GUI effects (for example)
 		
-		
-		**Returns:** Real frame time
-		
-		
+		`**Returns:** Real frame time
     **/
     
     public static function RealFrameTime():Float;
     #end
     
     /**
-        Defined a boolean to be automatically networked to clients 
+        Defined a boolean to be automatically networked to clients
 		
+		**Note:** Running this function clientside will only set it clientside for the client it is called on!
 		
 		Name | Description
 		--- | ---
 		`index` | Index to identify the global boolean with
 		`bool` | Boolean to be networked
-		
-		
-		
     **/
     
-    public static function SetGlobalBool(index:Any, bool:Bool):Void;
+    public static function SetGlobalBool(index:Dynamic, bool:Bool):Void;
     
     #if client
     /**
-        Returns the angle that the clients view is being rendered at 
+        Returns the angle that the clients view is being rendered at
 		
-		
-		**Returns:** Render Angles
-		
-		
+		`**Returns:** Render Angles
     **/
     
     public static function RenderAngles():Angle;
     #end
     #if client
     /**
-        Gets the width of the game's window (in pixels). 
+        Gets the width of the game's window (in pixels).
 		
-		
-		**Returns:** The width of the game's window in pixels
+		`**Returns:** The width of the game's window in pixels
 		
 		___
 		### Lua Examples
@@ -1131,31 +1002,26 @@ package gmod.libs;
 		**Output:**
 		
 		1280 (depends on your resolution)
-		
-		
     **/
     
     public static function ScrW():Float;
     #end
     #if server
     /**
-        Prints "ServerLog: PARAM" without a newline, to the server log and console. 
-		
+        Prints "ServerLog: PARAM" without a newline, to the server log and console.
 		
 		Name | Description
 		--- | ---
 		`parameter` | The value to be printed to console.
-		
-		
-		
     **/
     
     public static function ServerLog(parameter:String):Void;
     #end
     
     /**
-        Returns a sine value that fluctuates based on CurTime. The value returned will be between the start value plus/minus the range value. 
+        Returns a sine value that fluctuates based on CurTime. The value returned will be between the start value plus/minus the range value.
 		
+		**Bug:** BUG The range arguments don't work as intended. The existing (bugged) behavior is documented below.
 		
 		Name | Description
 		--- | ---
@@ -1165,9 +1031,7 @@ package gmod.libs;
 		`offset` | Offset variable that doesn't affect the rate of change, but causes the returned value to be offset by time
 		
 		
-		**Returns:** Sine value
-		
-		
+		`**Returns:** Sine value
     **/
     
     public static function TimedSin(frequency:Float, origin:Float, max:Float, offset:Float):Float;
@@ -1176,17 +1040,14 @@ package gmod.libs;
     /**
         Returns the amount of skins the specified model has. 
 		
-		See also Entity:SkinCount if you have an entity. 
+		See also Entity:SkinCount if you have an entity.
 		
-		 
 		Name | Description
 		--- | ---
 		`modelName` | Model to return amount of skins of
 		
 		
-		**Returns:** Amount of skins
-		
-		
+		`**Returns:** Amount of skins
     **/
     
     public static function NumModelSkins(modelName:String):Float;
@@ -1195,9 +1056,8 @@ package gmod.libs;
     /**
         Sets whether rendering should be limited to being inside a panel or not. 
 		
-		See also surface.DisableClipping and Panel:NoClipping. 
+		See also surface.DisableClipping and Panel:NoClipping.
 		
-		 
 		Name | Description
 		--- | ---
 		`disable` | Whether or not clipping should be disabled
@@ -1215,16 +1075,13 @@ package gmod.libs;
 		    DisableClipping(false)
 		end
 		```
-		
-		
     **/
     
     public static function DisableClipping(disable:Bool):Void;
     #end
     #if client
     /**
-        Creates and returns a DShape rectangle GUI element with the given dimensions. 
-		
+        Creates and returns a DShape rectangle GUI element with the given dimensions.
 		
 		Name | Description
 		--- | ---
@@ -1234,17 +1091,14 @@ package gmod.libs;
 		`h` | Height of the created element
 		
 		
-		**Returns:** DShape element
-		
-		
+		`**Returns:** DShape element
     **/
     
     public static function VGUIRect(x:Float, y:Float, w:Float, h:Float):Panel;
     #end
     #if client
     /**
-        Draws the sharpen shader, which creates more contrast. 
-		
+        Draws the sharpen shader, which creates more contrast.
 		
 		Name | Description
 		--- | ---
@@ -1264,28 +1118,22 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
     public static function DrawSharpen(Contrast:Float, Distance:Float):Void;
     #end
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Draws the currently active main menu background image and handles transitioning between background images. This is called by default in the menu panel's Paint hook. 
-		
-		
-		
+		Draws the currently active main menu background image and handles transitioning between background images. This is called by default in the menu panel's Paint hook.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function DrawBackground():Void;
     
     #if client
     /**
-        Draws a material overlay on the screen. 
-		
+        Draws a material overlay on the screen.
 		
 		Name | Description
 		--- | ---
@@ -1305,16 +1153,13 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
     public static function DrawMaterialOverlay(Material:String, RefractAmount:Float):Void;
     #end
     
     /**
-        Executes the specified action on the garbage collector. 
-		
+        Executes the specified action on the garbage collector.
 		
 		Name | Description
 		--- | ---
@@ -1322,7 +1167,7 @@ package gmod.libs;
 		`arg` | The argument of the specified action, only applicable for "step", "setpause" and "setstepmul".
 		
 		
-		**Returns:** If the action is count this is the number of kilobytes of memory used by Lua. If the action is step this is true if a garbage collection cycle was finished. If the action is setpause this is the previous value for the GC's pause. If the action is setstepmul this is the previous value for the GC's step.
+		`**Returns:** If the action is count this is the number of kilobytes of memory used by Lua. If the action is step this is true if a garbage collection cycle was finished. If the action is setpause this is the previous value for the GC's pause. If the action is setstepmul this is the previous value for the GC's step.
 		
 		___
 		### Lua Examples
@@ -1332,16 +1177,13 @@ package gmod.libs;
 		```lua 
 		print( collectgarbage( "count" ) )
 		```
-		
-		
     **/
     
-    public static function collectgarbage(?action:String, arg:Float):Any;
+    public static function collectgarbage(?action:String, arg:Float):Dynamic;
     
     #if client
     /**
-        Returns the tool-tip text and tool-tip-panel (if any) of the given panel as well as itself 
-		
+        Returns the tool-tip text and tool-tip-panel (if any) of the given panel as well as itself
 		
 		Name | Description
 		--- | ---
@@ -1353,17 +1195,17 @@ package gmod.libs;
 		`a` | tool-tip text
 		`b` | tool-tip panel
 		`c` | panel that the function was called with
-		
-		
-		
     **/
     
     public static function FindTooltip(panel:Panel):GlobalLibFindTooltipReturn;
     #end
     
     /**
-        Emits the specified sound at the specified position. 
+        Emits the specified sound at the specified position.
 		
+		**Bug:** BUG Sounds must be precached serverside manually before they can be played. util.PrecacheSound does not work for this purpose, Entity.EmitSound does the trick
+		
+		**Bug:** BUG This does not work with soundscripts. TODO: Is this a bug or intended?
 		
 		Name | Description
 		--- | ---
@@ -1385,39 +1227,33 @@ package gmod.libs;
 		```lua 
 		EmitSound( Sound("garrysmod/save_load1.wav"), Entity(1):GetPos(), 1, CHAN_AUTO, 1, 75, 0, 100 )
 		```
-		
-		
     **/
     
-    public static function EmitSound(soundName:String, position:Vector, entity:Float, ?channel:Float, ?volume:Float, ?soundLevel:Float, ?soundFlags:Float, ?pitch:Float):Void;
+    public static function EmitSound(soundName:String, position:Vector, entity:Float, ?channel:CHAN, ?volume:Float, ?soundLevel:SNDLVL, ?soundFlags:SND, ?pitch:Float):Void;
     
     
     /**
-        ***Deprecated:**   You should use IsUselessModel instead.
+        ***Deprecated:** You should use IsUselessModel instead.
 		
 		Returns whether or not a model is useless by checking that the file path is that of a proper model. 
 		
 		If the string ".mdl" is not found in the model name, the function will return true. 
 		
-		 The function will also return true if any of the following strings are found in the given model name: 
+		 The function will also return true if any of the following strings are found in the given model name:
 		
-		 
 		Name | Description
 		--- | ---
 		`modelName` | The model name to be checked
 		
 		
-		**Returns:** Whether or not the model is useless
-		
-		
+		`**Returns:** Whether or not the model is useless
     **/
-    @:deprecated
+    @:deprecated("You should use IsUselessModel instead.")
     public static function UTIL_IsUselessModel(modelName:String):Bool;
     
     
     /**
-        Creates a Vector object. 
-		
+        Creates a Vector object.
 		
 		Name | Description
 		--- | ---
@@ -1426,7 +1262,7 @@ package gmod.libs;
 		`z` | The z component of the vector.
 		
 		
-		**Returns:** The created vector object.
+		`**Returns:** The created vector object.
 		
 		___
 		### Lua Examples
@@ -1450,16 +1286,13 @@ package gmod.libs;
 		
 		0.000000 0.000000 0.000000
 		0.000000 0.000000 0.000000
-		
-		
     **/
     
     public static function Vector(?x:Float, ?y:Float, ?z:Float):Vector;
     
     
     /**
-        Used to select single values from a vararg or get the count of values in it. 
-		
+        Used to select single values from a vararg or get the count of values in it.
 		
 		Name | Description
 		--- | ---
@@ -1467,7 +1300,7 @@ package gmod.libs;
 		`vararg` | The vararg. These are the values from which you want to select.
 		
 		
-		**Returns:** Returns a number or vararg, depending on the select method.
+		`**Returns:** Returns a number or vararg, depending on the select method.
 		
 		___
 		### Lua Examples
@@ -1500,16 +1333,21 @@ package gmod.libs;
 		**Output:**
 		
 		"4 5" in the console
-		
-		
     **/
     
-    public static function select(parameter:Any, vararg:Rest<Dynamic>):Any;
+    public static function select(parameter:Dynamic, vararg:Rest<Dynamic>):Dynamic;
     
     #if client
     /**
-        Creates a non physical entity that only exists on the client. See also ents.CreateClientProp. 
+        Creates a non physical entity that only exists on the client. See also ents.CreateClientProp.
 		
+		**Warning:** Model must be precached with util.PrecacheModel on the server before usage.
+		
+		**Bug:** BUG Parented clientside models will become detached if the parent entity leaves the PVS. Issue Tracker: #861
+		
+		**Bug:** BUG Clientside entities are not garbage-collected, thus you must store a reference to the object and call CSEnt:Remove manually. Issue Tracker: #1387
+		
+		**Bug:** BUG Clientside models will occasionally delete themselves during high server lag. Issue Tracker: #3184
 		
 		Name | Description
 		--- | ---
@@ -1517,20 +1355,17 @@ package gmod.libs;
 		`renderGroup` | The rendergroup of the entity, see RENDERGROUP_ Enums.
 		
 		
-		**Returns:** Created client-side model. ( C_BaseFlex )
-		
-		
+		`**Returns:** Created client-side model. ( C_BaseFlex )
     **/
     
-    public static function ClientsideModel(model:String, ?renderGroup:Float):CSEnt;
+    public static function ClientsideModel(model:String, ?renderGroup:RENDERGROUP):CSEnt;
     #end
     
     /**
         This function can be used in a for loop instead of pairs. It sorts all keys alphabetically. 
 		
-		For sorting by specific value member, use SortedPairsByMemberValue. For sorting by value, use SortedPairsByValue. 
+		For sorting by specific value member, use SortedPairsByMemberValue. For sorting by value, use SortedPairsByValue.
 		
-		 
 		Name | Description
 		--- | ---
 		`table` | The table to sort
@@ -1572,32 +1407,29 @@ package gmod.libs;
 		c 4
 		d 3
 		e 1
-		
-		
     **/
     
     public static function SortedPairs(table:AnyTable, ?desc:Bool):GlobalLibSortedPairsReturn;
     
     
     /**
-        Defines an entity to be automatically networked to clients 
+        Defines an entity to be automatically networked to clients
 		
+		**Note:** Running this function clientside will only set it clientside for the client it is called on!
 		
 		Name | Description
 		--- | ---
 		`index` | Index to identify the global entity with
 		`ent` | Entity to be networked
-		
-		
-		
     **/
     
-    public static function SetGlobalEntity(index:Any, ent:Entity):Void;
+    public static function SetGlobalEntity(index:Dynamic, ent:Entity):Void;
     
     
     /**
-        Converts a color from HSV color space into RGB color space and returns a Color structure. 
+        Converts a color from HSV color space into RGB color space and returns a Color structure.
 		
+		**Bug:** BUG The returned color will not have the color metatable. Issue Tracker: #2407
 		
 		Name | Description
 		--- | ---
@@ -1606,7 +1438,7 @@ package gmod.libs;
 		`value` | The value from 0-1.
 		
 		
-		**Returns:** The Color structure created from the HSV color space.
+		`**Returns:** The Color structure created from the HSV color space.
 		
 		___
 		### Lua Examples
@@ -1665,16 +1497,15 @@ package gmod.libs;
 		    
 		end
 		```
-		
-		
     **/
     
-    public static function HSVToColor(hue:Float, saturation:Float, value:Float):AnyTable;
+    public static function HSVToColor(hue:Float, saturation:Float, value:Float):Color;
     
     
     /**
-        Returns an integer that is shared between the server and all clients. 
+        Returns an integer that is shared between the server and all clients.
 		
+		**Bug:** BUG This function will not round decimal values as it actually networks a float internally. Issue Tracker: #3374
 		
 		Name | Description
 		--- | ---
@@ -1682,7 +1513,7 @@ package gmod.libs;
 		`default` | The value to return if the global value is not set.
 		
 		
-		**Returns:** The global value, or the default if the global value is not set.
+		`**Returns:** The global value, or the default if the global value is not set.
 		
 		___
 		### Lua Examples
@@ -1692,8 +1523,6 @@ package gmod.libs;
 		```lua 
 		print(GetGlobalInt("RoundNumber", 0))
 		```
-		
-		
     **/
     
     public static function GetGlobalInt(index:String, ?_default:Float):Float;
@@ -1702,15 +1531,14 @@ package gmod.libs;
     /**
         Returns the metatable of an object. This function obeys the metatable's __metatable field, and will return that field if the metatable has it set. 
 		
-		Use debug.getmetatable if you want the true metatable of the object. 
+		Use debug.getmetatable if you want the true metatable of the object.
 		
-		 
 		Name | Description
 		--- | ---
 		`object` | The value to return the metatable of.
 		
 		
-		**Returns:** The metatable of the value. This is not always a table.
+		`**Returns:** The metatable of the value. This is not always a table.
 		
 		___
 		### Lua Examples
@@ -1734,18 +1562,17 @@ package gmod.libs;
 		**Output:**
 		
 		"John Doe"
-		
-		
     **/
     
-    public static function getmetatable(object:Any):Any;
+    public static function getmetatable(object:Dynamic):Dynamic;
     
     #if client
     /**
-        Returns the origin of the current render context as calculated by GM:CalcView. 
+        Returns the origin of the current render context as calculated by GM:CalcView.
 		
+		**Bug:** BUG This function is only reliable inside rendering hooks. Issue Tracker: #2516
 		
-		**Returns:** Camera position.
+		`**Returns:** Camera position.
 		
 		___
 		### Lua Examples
@@ -1775,16 +1602,15 @@ package gmod.libs;
 		**Output:**
 		
 		Draws a white box in the world where you point the mouse to. Requires the developer convar to be set to 1.
-		
-		
     **/
     
     public static function EyePos():Vector;
     #end
     
     /**
-        Executes the given console command with the parameters. 
+        Executes the given console command with the parameters.
 		
+		**Note:** Some commands/convars are blocked from being ran/changed using this function, usually to prevent harm/annoyance to clients. For a list of blocked commands, see Blocked ConCommands.
 		
 		Name | Description
 		--- | ---
@@ -1800,45 +1626,36 @@ package gmod.libs;
 		```lua 
 		RunConsoleCommand("sv_gravity", "400")
 		```
-		
-		
     **/
     
     public static function RunConsoleCommand(command:String, arguments:Rest<Dynamic>):Void;
     
     
     /**
-        Returns the number of files needed from the server you are currently joining. 
+        Returns the number of files needed from the server you are currently joining.
 		
-		
-		**Returns:** The number of downloadables
-		
-		
+		`**Returns:** The number of downloadables
     **/
     
     public static function NumDownloadables():Float;
     
     
     /**
-        Returns whether a ConVar with the given name exists or not 
-		
+        Returns whether a ConVar with the given name exists or not
 		
 		Name | Description
 		--- | ---
 		`name` | Name of the ConVar.
 		
 		
-		**Returns:** True if the ConVar exists, false otherwise.
-		
-		
+		`**Returns:** True if the ConVar exists, false otherwise.
     **/
     
     public static function ConVarExists(name:String):Bool;
     
     #if server
     /**
-        Sends the specified Lua code to all connected clients and executes it. 
-		
+        Sends the specified Lua code to all connected clients and executes it.
 		
 		Name | Description
 		--- | ---
@@ -1856,32 +1673,25 @@ package gmod.libs;
 		**Output:**
 		
 		Hello World!
-		
-		
     **/
     
     public static function BroadcastLua(code:String):Void;
     #end
     
     /**
-        Removes entity after delay using SafeRemoveEntity 
-		
+        Removes entity after delay using SafeRemoveEntity
 		
 		Name | Description
 		--- | ---
 		`entity` | Entity to be removed
 		`delay` | Delay for entity removal in seconds
-		
-		
-		
     **/
     
     public static function SafeRemoveEntityDelayed(entity:Entity, delay:Float):Void;
     
     
     /**
-        Callback function for when the client's language changes. Called by the engine. 
-		
+        Callback function for when the client's language changes. Called by the engine.
 		
 		Name | Description
 		--- | ---
@@ -1903,28 +1713,22 @@ package gmod.libs;
 		**Output:**
 		
 		New language: en
-		
-		
     **/
     
     public static function LanguageChanged(lang:String):Void;
     
     
     /**
-        Returns the default loading screen URL (asset://garrysmod/html/loading.html) 
+        Returns the default loading screen URL (asset://garrysmod/html/loading.html)
 		
-		
-		**Returns:** Default loading url (asset://garrysmod/html/loading.html)
-		
-		
+		`**Returns:** Default loading url (asset://garrysmod/html/loading.html)
     **/
     
     public static function GetDefaultLoadingHTML():String;
     
     #if client
     /**
-        Returns the number of frames rendered since the game was launched. 
-		
+        Returns the number of frames rendered since the game was launched.
 		
 		___
 		### Lua Examples
@@ -1934,38 +1738,29 @@ package gmod.libs;
 		```lua 
 		print(FrameNumber())
 		```
-		
-		
     **/
     
     public static function FrameNumber():Void;
     #end
     #if client
     /**
-        Returns the entity the client is using to see from (such as the player itself, the camera, or another entity). 
+        Returns the entity the client is using to see from (such as the player itself, the camera, or another entity).
 		
-		
-		**Returns:** The view entity.
-		
-		
+		`**Returns:** The view entity.
     **/
     
     public static function GetViewEntity():Entity;
     #end
     
     /**
-        Aborts joining of the server you are currently joining. 
-		
-		
-		
+        Aborts joining of the server you are currently joining.
     **/
     
     public static function CancelLoading():Void;
     
     #if client
     /**
-        Creates a new derma animation. 
-		
+        Creates a new derma animation.
 		
 		Name | Description
 		--- | ---
@@ -1974,7 +1769,7 @@ package gmod.libs;
 		`func` | Function to call to process the animation Arguments: Panel pnl - the panel passed to Derma_Anim table anim - the anim table number delta - the fraction of the progress through the animation any data - optional data passed to the run metatable method
 		
 		
-		**Returns:** A lua metatable containing four methods: Run() - Should be called each frame you want the animation to be ran. Active() - Returns if the animation is currently active (has not finished and stop has not been called) Stop() - Halts the animation at its current progress. Start( Length, Data ) - Prepares the animation to be ran for Length seconds. Must be called once before calling Run(). The data parameter will be passed to the func function.
+		`**Returns:** A lua metatable containing four methods: Run() - Should be called each frame you want the animation to be ran. Active() - Returns if the animation is currently active (has not finished and stop has not been called) Stop() - Halts the animation at its current progress. Start( Length, Data ) - Prepares the animation to be ran for Length seconds. Must be called once before calling Run(). The data parameter will be passed to the func function.
 		
 		___
 		### Lua Examples
@@ -2004,31 +1799,24 @@ package gmod.libs;
 		**Output:**
 		
 		Panel naturally glides across the screen from 200 x to 800 x
-		
-		
     **/
     
     public static function Derma_Anim(name:String, panel:Panel, func:Function):AnyTable;
     #end
     #if client
     /**
-        Adds javascript function 'language.Update' to an HTML panel as a method to call Lua's language.GetPhrase function. 
-		
+        Adds javascript function 'language.Update' to an HTML panel as a method to call Lua's language.GetPhrase function.
 		
 		Name | Description
 		--- | ---
 		`htmlPanel` | Panel to add javascript function 'language.Update' to.
-		
-		
-		
     **/
     
     public static function JS_Language(htmlPanel:Panel):Void;
     #end
     
     /**
-        Returns point between first and second angle using given fraction and linear interpolation 
-		
+        Returns point between first and second angle using given fraction and linear interpolation
 		
 		Name | Description
 		--- | ---
@@ -2037,7 +1825,7 @@ package gmod.libs;
 		`angleEnd` | Angle to end at
 		
 		
-		**Returns:** angle
+		`**Returns:** angle
 		
 		___
 		### Lua Examples
@@ -2054,45 +1842,36 @@ package gmod.libs;
 		    entity:SetAngles(Lerp(ratio, startAngle, endAngle))
 		end)
 		```
-		
-		
     **/
     
     public static function LerpAngle(ratio:Float, angleStart:Angle, angleEnd:Angle):Angle;
     
-    #if menu
+    
     /**
-        Returns the loading screen panel and creates it if it doesn't exist. 
+        Returns the loading screen panel and creates it if it doesn't exist.
 		
-		
-		**Returns:** The loading screen panel
-		
-		
+		`**Returns:** The loading screen panel
     **/
     
     public static function GetLoadPanel():Panel;
-    #end
+    
     #if client
     /**
-        Loads the specified image from the /cache folder, used in combination steamworks.Download. Most addons will provide a 512x512 png image. 
-		
+        Loads the specified image from the /cache folder, used in combination steamworks.Download. Most addons will provide a 512x512 png image.
 		
 		Name | Description
 		--- | ---
 		`name` | The name of the file.
 		
 		
-		**Returns:** The material, returns nil if the cached file is not an image.
-		
-		
+		`**Returns:** The material, returns nil if the cached file is not an image.
     **/
     
     public static function AddonMaterial(name:String):IMaterial;
     #end
     
     /**
-        Returns an entity that is shared between the server and all clients. 
-		
+        Returns an entity that is shared between the server and all clients.
 		
 		Name | Description
 		--- | ---
@@ -2100,24 +1879,21 @@ package gmod.libs;
 		`default` | The value to return if the global value is not set.
 		
 		
-		**Returns:** The global value, or the default if the global value is not set.
-		
-		
+		`**Returns:** The global value, or the default if the global value is not set.
     **/
     
     public static function GetGlobalEntity(index:String, ?_default:Entity):Entity;
     
     
     /**
-        Runs util.PrecacheSound and returns the string 
-		
+        Runs util.PrecacheSound and returns the string
 		
 		Name | Description
 		--- | ---
 		`soundPath` | The soundpath to precache
 		
 		
-		**Returns:** The string passed as the first argument
+		`**Returns:** The string passed as the first argument
 		
 		___
 		### Lua Examples
@@ -2132,16 +1908,15 @@ package gmod.libs;
 		 sound.Play( BounceSound, self:GetPos(), 75, math.random( 90, 120 ), math.Clamp( data.Speed / 150, 0, 1 ) )
 		 ...
 		```
-		
-		
     **/
     
     public static function Sound(soundPath:String):String;
     
     
     /**
-        Creates a new PhysCollide from the given bounds. 
+        Creates a new PhysCollide from the given bounds.
 		
+		**Bug:** BUG This fails to create planes or points - no components of the mins or maxs can be the same. Issue Tracker: #3568
 		
 		Name | Description
 		--- | ---
@@ -2149,7 +1924,7 @@ package gmod.libs;
 		`maxs` | Max corner of the box. This is not automatically ordered with the mins and must contain the largest vector components.
 		
 		
-		**Returns:** The new PhysCollide. This will be a NULL PhysCollide ( PhysCollide: IsValid returns false) if given bad vectors or no more PhysCollides can be created in the physics engine.
+		`**Returns:** The new PhysCollide. This will be a NULL PhysCollide ( PhysCollide: IsValid returns false) if given bad vectors or no more PhysCollides can be created in the physics engine.
 		
 		___
 		### Lua Examples
@@ -2214,16 +1989,13 @@ package gmod.libs;
 		    render.DrawWireframeBox( self:GetPos(), self:GetAngles(), self.Mins, self.Maxs, Color( 255, 0, 0 ), true )
 		end
 		```
-		
-		
     **/
     
     public static function CreatePhysCollideBox(mins:Vector, maxs:Vector):PhysCollide;
     
     
     /**
-        Returns a new Color structure with the RGB components of the given Color structure and the alpha value specified. 
-		
+        Returns a new Color structure with the RGB components of the given Color structure and the alpha value specified.
 		
 		Name | Description
 		--- | ---
@@ -2231,7 +2003,7 @@ package gmod.libs;
 		`alpha` | The new alpha value, a number between 0 and 255. Values above 255 will be clamped.
 		
 		
-		**Returns:** The new Color structure with the modified alpha value
+		`**Returns:** The new Color structure with the modified alpha value
 		
 		___
 		### Lua Examples
@@ -2248,28 +2020,23 @@ package gmod.libs;
 		
 		255	0	0	255
 		255	0	0	125
-		
-		
     **/
     
-    public static function ColorAlpha(color:AnyTable, alpha:Float):AnyTable;
+    public static function ColorAlpha(color:Color, alpha:Float):Color;
     
     
     /**
-        Returns whether the passed object is a VMatrix. 
-		
+        Returns whether the passed object is a VMatrix.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is a VMatrix.
-		
-		
+		`**Returns:** True if the variable is a VMatrix.
     **/
     
-    public static function ismatrix(variable:Any):Bool;
+    public static function ismatrix(variable:Dynamic):Bool;
     
     
     /**
@@ -2277,9 +2044,8 @@ package gmod.libs;
 		
 		If you're working with an entity's local vectors, use Entity:LocalToWorld and/or Entity:LocalToWorldAngles instead. 
 		
-		 See also: WorldToLocal, the reverse of this function. 
+		 See also: WorldToLocal, the reverse of this function.
 		
-		 
 		Name | Description
 		--- | ---
 		`localPos` | The position vector in the source coordinate system, that should be translated to world coordinates
@@ -2292,17 +2058,15 @@ package gmod.libs;
 		--- | ---
 		`a` | The world position of the supplied local position.
 		`b` | The world angles of the supplied local angle.
-		
-		
-		
     **/
     
     public static function LocalToWorld(localPos:Vector, localAng:Angle, originPos:Vector, originAngle:Angle):GlobalLibLocalToWorldReturn;
     
     
     /**
-        Makes a clientside-only console variable 
+        Makes a clientside-only console variable
 		
+		**Note:** This function is a wrapper of CreateConVar, with the difference being that FCVAR_ARCHIVE and FCVAR_USERINFO are added automatically when shouldsave and userinfo are true, respectively.
 		
 		Name | Description
 		--- | ---
@@ -2315,7 +2079,7 @@ package gmod.libs;
 		`max` | If set, the convar cannot be changed to a number higher than this value.
 		
 		
-		**Returns:** Created convar.
+		`**Returns:** Created convar.
 		
 		___
 		### Lua Examples
@@ -2325,16 +2089,15 @@ package gmod.libs;
 		```lua 
 		CreateClientConVar("superspeed_enabled", "0", true, false)
 		```
-		
-		
     **/
     
     public static function CreateClientConVar(name:String, _default:String, ?shouldsave:Bool, ?userinfo:Bool, ?helptext:String, ?min:Float, ?max:Float):ConVar;
     
     #if client
     /**
-        Creates a new particle system. 
+        Creates a new particle system.
 		
+		**Note:** The particle effect must be precached with PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
 		
 		Name | Description
 		--- | ---
@@ -2345,85 +2108,71 @@ package gmod.libs;
 		`offset` | The offset from the Entity: GetPos of the entity we are attaching this CP to.
 		
 		
-		**Returns:** The created particle system.
-		
-		
+		`**Returns:** The created particle system.
     **/
     
-    public static function CreateParticleSystem(ent:Entity, effect:String, partAttachment:Float, ?entAttachment:Float, ?offset:Vector):CNewParticleEffect;
+    public static function CreateParticleSystem(ent:Entity, effect:String, partAttachment:PATTACH, ?entAttachment:Float, ?offset:Vector):CNewParticleEffect;
     #end
     
     /**
-        Sets the value with the specified key from the table without calling the __newindex method. 
-		
+        Sets the value with the specified key from the table without calling the __newindex method.
 		
 		Name | Description
 		--- | ---
 		`table` | Table to get the value from.
 		`index` | The index to get the value from.
 		`value` | The value to set for the specified key.
-		
-		
-		
     **/
     
-    public static function rawset(table:AnyTable, index:Any, value:Any):Void;
+    public static function rawset(table:AnyTable, index:Dynamic, value:Dynamic):Void;
     
     
     /**
-        First tries to load a binary module with the given name, if unsuccessful, it tries to load a Lua module with the given name. 
+        First tries to load a binary module with the given name, if unsuccessful, it tries to load a Lua module with the given name.
 		
+		**Bug:** BUG Running this function with pcall or xpcall will still print an error that counts towards sv_kickerrornum. Issue Tracker: #1041 Request Tracker: #813
 		
 		Name | Description
 		--- | ---
 		`name` | The name of the module to be loaded.
-		
-		
-		
     **/
     
     public static function require(name:String):Void;
     
     #if client
     /**
-        Returns the time in seconds it took to render the VGUI. 
-		
-		
-		
+        Returns the time in seconds it took to render the VGUI.
     **/
     
     public static function VGUIFrameTime():Void;
     #end
     
     /**
-        Returns the current status of the server join progress. 
+        Returns the current status of the server join progress.
 		
-		
-		**Returns:** The current status
-		
-		
+		`**Returns:** The current status
     **/
     
     public static function GetLoadStatus():String;
     
     
     /**
-        Returns a CEffectData object to be used with util.Effect. 
+        Returns a CEffectData object to be used with util.Effect.
 		
+		**Bug:** BUG This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once. Issue Tracker: #2771
 		
-		**Returns:** The CEffectData object.
-		
-		
+		`**Returns:** The CEffectData object.
     **/
     
     public static function EffectData():CEffectData;
     
     #if client
     /**
-        Returns the angles of the current render context as calculated by GM:CalcView. 
+        Returns the angles of the current render context as calculated by GM:CalcView.
 		
+		**Bug:** BUG This function is only reliable inside rendering hooks. Issue Tracker: #2516
 		
-		**Returns:** The angle of the currently rendered scene.
+		`**Returns:** The angle of the currently rendered scene.
 		
 		___
 		### Lua Examples
@@ -2440,33 +2189,27 @@ package gmod.libs;
 		```lua 
 		print(EyeAngles():Forward())
 		```
-		
-		
     **/
     
     public static function EyeAngles():Angle;
     #end
     
     /**
-        Returns a table of console command names beginning with the given text. 
-		
+        Returns a table of console command names beginning with the given text.
 		
 		Name | Description
 		--- | ---
 		`text` | Text that the console commands must begin with.
 		
 		
-		**Returns:** Table of console command names.
-		
-		
+		`**Returns:** Table of console command names.
     **/
     
     public static function ConsoleAutoComplete(text:String):AnyTable;
     
     
     /**
-        Plays a sentence from scripts/sentences.txt 
-		
+        Plays a sentence from scripts/sentences.txt
 		
 		Name | Description
 		--- | ---
@@ -2488,45 +2231,36 @@ package gmod.libs;
 		```lua 
 		EmitSentence( "COMBINE_DIE" .. math.random( 0, 3 ), Entity(1):GetPos(), 1, CHAN_AUTO, 1, 75, 0, 100 )
 		```
-		
-		
     **/
     
-    public static function EmitSentence(soundName:String, position:Vector, entity:Float, ?channel:Float, ?volume:Float, ?soundLevel:Float, ?soundFlags:Float, ?pitch:Float):Void;
+    public static function EmitSentence(soundName:String, position:Vector, entity:Float, ?channel:CHAN, ?volume:Float, ?soundLevel:SNDLVL, ?soundFlags:SND, ?pitch:Float):Void;
     
     
     /**
-        Gets the ConVar with the specified name. This function caches the ConVar object internally. 
-		
+        Gets the ConVar with the specified name. This function caches the ConVar object internally.
 		
 		Name | Description
 		--- | ---
 		`name` | Name of the ConVar to get
 		
 		
-		**Returns:** The ConVar object
-		
-		
+		`**Returns:** The ConVar object
     **/
     
     public static function GetConVar(name:String):ConVar;
     
-    #if menu
+    
     /**
-        Returns the menu overlay panel, a container for panels like the error panel created in GM:OnLuaError. 
+        Returns the menu overlay panel, a container for panels like the error panel created in GM:OnLuaError.
 		
-		
-		**Returns:** The overlay panel
-		
-		
+		`**Returns:** The overlay panel
     **/
     
     public static function GetOverlayPanel():Panel;
-    #end
+    
     #if client
     /**
-        Renders the post-processing effect of beams of light originating from the map's sun. Utilises the "pp/sunbeams" material 
-		
+        Renders the post-processing effect of beams of light originating from the map's sun. Utilises the "pp/sunbeams" material
 		
 		Name | Description
 		--- | ---
@@ -2535,34 +2269,26 @@ package gmod.libs;
 		`sunSize` | $sunsize property for sunbeams material
 		`sunX` | $sunx property for sunbeams material
 		`sunY` | $suny property for sunbeams material
-		
-		
-		
     **/
     
     public static function DrawSunbeams(darken:Float, multiplier:Float, sunSize:Float, sunX:Float, sunY:Float):Void;
     #end
     
     /**
-        ***Deprecated:**   Alias of ErrorNoHalt.
+        Throws an error. This is currently an alias of ErrorNoHalt despite it once throwing a halting error like error without the stack trace appended.
 		
-		Alias of ErrorNoHalt. 
-		
+		**Bug:** BUG This function throws a non-halting error instead of a halting error. Issue Tracker: #2113
 		
 		Name | Description
 		--- | ---
 		`arguments` | Converts all arguments to strings and prints them with no spacing or line breaks.
-		
-		
-		
     **/
-    @:deprecated
+    
     public static function Error(arguments:Rest<Dynamic>):Void;
     
     #if client
     /**
-        Draws background blur around the given panel. 
-		
+        Draws background blur around the given panel.
 		
 		Name | Description
 		--- | ---
@@ -2587,29 +2313,25 @@ package gmod.libs;
 		**Output:**
 		
 		Background blur is drawn around the panel
-		
-		
     **/
     
     public static function Derma_DrawBackgroundBlur(panel:Panel, startTime:Float):Void;
     #end
     
     /**
-        Returns the name of the current server. 
+        Returns the name of the current server.
 		
-		
-		**Returns:** The name of the server.
-		
-		
+		`**Returns:** The name of the server.
     **/
     
     public static function GetHostName():String;
     
     #if client
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called by the engine when a model has been loaded. Caches model information with the .               
+		Called by the engine when a model has been loaded. Caches model information with the [sqllibrary](https://wiki.garrysmod.com/page/Category:sql).
+		
 		Name | Description
 		--- | ---
 		`modelName` | Name of the model.
@@ -2619,17 +2341,13 @@ package gmod.libs;
 		`numBoneControllers` | Number of bone controllers the model has.
 		`numSkins` | Number of skins that the model has.
 		`size` | Size of the model.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function OnModelLoaded(modelName:String, numPostParams:Float, numSeq:Float, numAttachments:Float, numBoneControllers:Float, numSkins:Float, size:Float):Void;
     #end
     
     /**
-        Translates the specified position and angle into the specified coordinate system. 
-		
+        Translates the specified position and angle into the specified coordinate system.
 		
 		Name | Description
 		--- | ---
@@ -2643,26 +2361,20 @@ package gmod.libs;
 		--- | ---
 		`a` | Local position
 		`b` | Local angles
-		
-		
-		
     **/
     
     public static function WorldToLocal(position:Vector, angle:Angle, newSystemOrigin:Vector, newSystemAngles:Angle):GlobalLibWorldToLocalReturn;
     
     
     /**
-        Calls game.AddParticles and returns given string. 
-		
+        Calls game.AddParticles and returns given string.
 		
 		Name | Description
 		--- | ---
 		`file` | The particle file.
 		
 		
-		**Returns:** The particle file.
-		
-		
+		`**Returns:** The particle file.
     **/
     
     public static function Particle(file:String):String;
@@ -2673,10 +2385,9 @@ package gmod.libs;
 		
 		This should be used for frame/tick based timing, such as movement prediction or animations. 
 		
-		 For real-time-based frame time that isn't affected by host_timescale, use RealFrameTime. RealFrameTime is more suited for things like GUIs or HUDs. 
+		 For real-time-based frame time that isn't affected by host_timescale, use RealFrameTime. RealFrameTime is more suited for things like GUIs or HUDs.
 		
-		 
-		**Returns:** time (in seconds)
+		`**Returns:** time (in seconds)
 		
 		___
 		### Lua Examples
@@ -2699,16 +2410,15 @@ package gmod.libs;
 		**Output:**
 		
 		Tick: 66.666668156783
-		
-		
     **/
     
     public static function FrameTime():Float;
     
     
     /**
-        Throws a Lua error but does not break out of the current call stack. This function will not print a stack trace like a normal error would. Essentially similar if not equivalent to Msg. 
+        Throws a Lua error but does not break out of the current call stack. This function will not print a stack trace like a normal error would. Essentially similar if not equivalent to Msg.
 		
+		**Bug:** BUG Using this function in the menu state exits the menu. Issue Tracker: #1810
 		
 		Name | Description
 		--- | ---
@@ -2729,8 +2439,6 @@ package gmod.libs;
 		    print("This line will be printed")
 		end
 		```
-		
-		
     **/
     
     public static function ErrorNoHalt(arguments:Rest<Dynamic>):Void;
@@ -2739,42 +2447,39 @@ package gmod.libs;
     /**
         Returns the player with the matching Player:UserID. 
 		
-		For a function that returns a player based on their Entity:EntIndex, see Entity. For a function that returns a player based on their connection ID, see player.GetByID. 
+		For a function that returns a player based on their Entity:EntIndex, see Entity. For a function that returns a player based on their connection ID, see player.GetByID.
 		
-		 
 		Name | Description
 		--- | ---
 		`playerIndex` | The player index.
 		
 		
-		**Returns:** The retrieved player.
-		
-		
+		`**Returns:** The retrieved player.
     **/
     
     public static function Player(playerIndex:Float):Player;
     
     
     /**
-        Launches an asynchronous http request with the given parameters. 
+        Launches an asynchronous http request with the given parameters.
 		
+		**Bug:** BUG This cannot send or receive multiple headers at once. Issue Tracker: #2232
 		
 		Name | Description
 		--- | ---
 		`parameters` | The request parameters. See HTTPRequest structure.
 		
 		
-		**Returns:** true if we made a request, nil if we failed.
-		
-		
+		`**Returns:** true if we made a request, nil if we failed.
     **/
     
-    public static function HTTP(parameters:AnyTable):Bool;
+    public static function HTTP(parameters:HTTPRequest):Bool;
     
     
     /**
-        Creates a particle effect with specialized parameters. 
+        Creates a particle effect with specialized parameters.
 		
+		**Note:** The particle effect must be precached with PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
 		
 		Name | Description
 		--- | ---
@@ -2782,44 +2487,35 @@ package gmod.libs;
 		`attachType` | Attachment type using PATTACH_ Enums.
 		`entity` | The entity to be used in the way specified by the attachType.
 		`attachmentID` | The id of the attachment to be used in the way specified by the attachType.
-		
-		
-		
     **/
     
-    public static function ParticleEffectAttach(particleName:String, attachType:Float, entity:Entity, attachmentID:Float):Void;
+    public static function ParticleEffectAttach(particleName:String, attachType:PATTACH, entity:Entity, attachmentID:Float):Void;
     
     
     /**
-        Works exactly like Msg except that, if called on the server, will print to all players consoles plus the server console. 
-		
+        Works exactly like Msg except that, if called on the server, will print to all players consoles plus the server console.
 		
 		Name | Description
 		--- | ---
 		`args` | List of values to print.
-		
-		
-		
     **/
     
     public static function MsgAll(args:Rest<Dynamic>):Void;
     
     
     /**
-        Returns an CTakeDamageInfo object. 
+        Returns an CTakeDamageInfo object.
 		
+		**Bug:** BUG This does not create a unique object, but instead returns a shared reference. That means you cannot use two or more of these objects at once. Issue Tracker: #2771
 		
-		**Returns:** The CTakeDamageInfo object.
-		
-		
+		`**Returns:** The CTakeDamageInfo object.
     **/
     
     public static function DamageInfo():CTakeDamageInfo;
     
     
     /**
-        Runs a menu command. Equivalent to RunConsoleCommand( "gamemenucommand", command ) unless the command starts with the "engine" keyword in which case it is equivalent to RunConsoleCommand( command ). 
-		
+        Runs a menu command. Equivalent to RunConsoleCommand( "gamemenucommand", command ) unless the command starts with the "engine" keyword in which case it is equivalent to RunConsoleCommand( command ).
 		
 		Name | Description
 		--- | ---
@@ -2841,8 +2537,6 @@ package gmod.libs;
 		```lua 
 		RunGameUICommand( "engine gameui_hide" )
 		```
-		
-		
     **/
     
     public static function RunGameUICommand(command:String):Void;
@@ -2851,9 +2545,16 @@ package gmod.libs;
     /**
         Attempts to call the first function. If the execution succeeds, this returns true followed by the returns of the function. If execution fails, this returns false and the second function is called with the error message. 
 		
-		Unlike in pcall, the stack is not unwound and can therefore be used for stack analyses with the debug library. 
+		Unlike in pcall, the stack is not unwound and can therefore be used for stack analyses with the debug library.
 		
-		 
+		**Bug:** BUG Using this function with include will break autorefresh. Issue Tracker: #1976
+		
+		**Bug:** BUG This cannot stop errors from hooks called from the engine. Issue Tracker: #2036
+		
+		**Bug:** BUG This does not stop Error and ErrorNoHalt from sending error messages to the server (if called clientside) or calling the GM:OnLuaError hook. The success boolean returned will always return true and thus you will not get the error message returned. error does not exhibit these behaviours. Issue Tracker: #2498
+		
+		**Bug:** BUG This does not stop errors incurred by include. Issue Tracker: #3112
+		
 		Name | Description
 		--- | ---
 		`func` | The function to call initially.
@@ -2886,23 +2587,20 @@ package gmod.libs;
 		**Output:**
 		
 		ERROR: lua/wiki/xpcall_example.lua:2: attempt to call global 'aisj' (a nil value) Output: false nil
-		
-		
     **/
     
     public static function xpcall(func:Function, errorCallback:Function, arguments:Rest<Dynamic>):GlobalLibXpcallReturn;
     
     
     /**
-        Runs util.PrecacheModel and returns the string 
-		
+        Runs util.PrecacheModel and returns the string
 		
 		Name | Description
 		--- | ---
 		`model` | The model to precache
 		
 		
-		**Returns:** The same string entered as an argument
+		`**Returns:** The same string entered as an argument
 		
 		___
 		### Lua Examples
@@ -2915,33 +2613,35 @@ package gmod.libs;
 		 self:SetModel( CAMERA_MODEL )
 		 ...
 		```
-		
-		
     **/
     
     public static function Model(model:String):String;
     
     
     /**
-        Returns the duration of the sound specified in seconds. 
+        Returns the duration of the sound specified in seconds.
 		
+		**Bug:** BUG This only works properly for .wav files. Issue Tracker: #936
 		
 		Name | Description
 		--- | ---
 		`soundName` | The sound file path.
 		
 		
-		**Returns:** Sound duration in seconds.
-		
-		
+		`**Returns:** Sound duration in seconds.
     **/
     
     public static function SoundDuration(soundName:String):Float;
     
     #if client
     /**
-        Creates a fully clientside ragdoll. 
+        Creates a fully clientside ragdoll.
 		
+		**Warning:** Model must be precached with util.PrecacheModel on the server before usage.
+		
+		**Note:** The ragdoll initially starts as hidden and with shadows disabled, see the example for how to enable it. There's no need to call Entity:Spawn on this entity. The physics won't initialize at all if the model hasn't been precached serverside first.
+		
+		**Bug:** BUG Clientside entities are not garbage-collected, thus you must store a reference to the object and call CSEnt:Remove manually. Issue Tracker: #1387
 		
 		Name | Description
 		--- | ---
@@ -2949,7 +2649,7 @@ package gmod.libs;
 		`renderGroup` | The RENDERGROUP_ Enums to assign.
 		
 		
-		**Returns:** The newly created client-side ragdoll. ( C_ClientRagdoll )
+		`**Returns:** The newly created client-side ragdoll. ( C_ClientRagdoll )
 		
 		___
 		### Lua Examples
@@ -2961,16 +2661,13 @@ package gmod.libs;
 		ragdoll:SetNoDraw( false )
 		ragdoll:DrawShadow( true )
 		```
-		
-		
     **/
     
-    public static function ClientsideRagdoll(model:String, ?renderGroup:Float):CSEnt;
+    public static function ClientsideRagdoll(model:String, ?renderGroup:RENDERGROUP):CSEnt;
     #end
     
     /**
-        Sets, changes or removes a table's metatable. Returns Tab (the first argument). 
-		
+        Sets, changes or removes a table's metatable. Returns Tab (the first argument).
 		
 		Name | Description
 		--- | ---
@@ -2978,7 +2675,7 @@ package gmod.libs;
 		`Metatable` | The metatable to assign. If it's nil, the metatable will be removed.
 		
 		
-		**Returns:** The first argument.
+		`**Returns:** The first argument.
 		
 		___
 		### Lua Examples
@@ -3006,76 +2703,64 @@ package gmod.libs;
 		**Output:**
 		
 		"John Doe"
-		
-		
     **/
     
     public static function setmetatable(Tab:AnyTable, Metatable:AnyTable):AnyTable;
     
     
     /**
-        Defines an angle to be automatically networked to clients 
+        Defines an angle to be automatically networked to clients
 		
+		**Note:** Running this function clientside will only set it clientside for the client it is called on!
 		
 		Name | Description
 		--- | ---
 		`index` | Index to identify the global angle with
 		`angle` | Angle to be networked
-		
-		
-		
     **/
     
-    public static function SetGlobalAngle(index:Any, angle:Angle):Void;
+    public static function SetGlobalAngle(index:Dynamic, angle:Angle):Void;
     
     #if client
     /**
-        Creates and returns a new DSprite element with the supplied material. 
-		
+        Creates and returns a new DSprite element with the supplied material.
 		
 		Name | Description
 		--- | ---
 		`material` | Material the sprite should draw.
 		
 		
-		**Returns:** The new DSprite element.
-		
-		
+		`**Returns:** The new DSprite element.
     **/
     
     public static function CreateSprite(material:IMaterial):Panel;
     #end
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		This function is used to get the last map and category to which the map belongs from the cookie saved with . 
-		
+		This function is used to get the last map and category to which the map belongs from the cookie saved with [SaveLastMap](https://wiki.garrysmod.com/page/Global/SaveLastMap).
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function LoadLastMap():Void;
     
     
     /**
-        Returns if the passed object is a Panel. 
-		
+        Returns if the passed object is a Panel.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is a Panel.
-		
-		
+		`**Returns:** True if the variable is a Panel.
     **/
     
-    public static function ispanel(variable:Any):Bool;
+    public static function ispanel(variable:Dynamic):Bool;
     
     
     /**
-        Gets the value with the specified key from the table without calling the __index method. 
-		
+        Gets the value with the specified key from the table without calling the __index method.
 		
 		Name | Description
 		--- | ---
@@ -3083,34 +2768,33 @@ package gmod.libs;
 		`index` | The index to get the value from.
 		
 		
-		**Returns:** The value.
-		
-		
+		`**Returns:** The value.
     **/
     
-    public static function rawget(table:AnyTable, index:Any):Any;
+    public static function rawget(table:AnyTable, index:Dynamic):Dynamic;
     
     #if client
     /**
-        ***Deprecated:**   You should use IsValid instead
+        ***Deprecated:** You should use IsValid instead
 		
-		Returns if a panel is safe to use. 
-		
+		Returns if a panel is safe to use.
 		
 		Name | Description
 		--- | ---
 		`panel` | The panel to validate.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should use IsValid instead")
     public static function ValidPanel(panel:Panel):Void;
     #end
     #if client
     /**
-        Creates or replaces a dynamic light with the given id. 
+        Creates or replaces a dynamic light with the given id.
 		
+		**Warning:** It is not safe to hold a reference to this object after creation since its data can be replaced by another dlight at any time.
+		
+		**Note:** Only 32 dlights and 64 elights can be active at once.
+		
+		**Bug:** BUG The minlight parameter affects the world and entities differently. Issue Tracker: #3798
 		
 		Name | Description
 		--- | ---
@@ -3118,7 +2802,7 @@ package gmod.libs;
 		`elight` | Allocates an elight instead of a dlight. Elights have a higher light limit and do not light the world (making the "noworld" parameter have no effect).
 		
 		
-		**Returns:** A DynamicLight structured table. See DynamicLight structure
+		`**Returns:** A DynamicLight structured table. See DynamicLight structure
 		
 		___
 		### Lua Examples
@@ -3140,19 +2824,16 @@ package gmod.libs;
 		    end
 		end )
 		```
-		
-		
     **/
     
-    public static function DynamicLight(index:Float, ?elight:Bool):AnyTable;
+    public static function DynamicLight(index:Float, ?elight:Bool):DynamicLight;
     #end
     
     /**
         Returns an iterator function that can be used to loop through a table in order of its values. 
 		
-		To sort by specific value member, use SortedPairsByMemberValue. To sort by keys, use SortedPairs. 
+		To sort by specific value member, use SortedPairsByMemberValue. To sort by keys, use SortedPairs.
 		
-		 
 		Name | Description
 		--- | ---
 		`table` | Table to create iterator for
@@ -3163,24 +2844,20 @@ package gmod.libs;
 		--- | ---
 		`a` | Iterator function
 		`b` | The table which will be iterated over
-		
-		
-		
     **/
     
     public static function SortedPairsByValue(table:AnyTable, ?descending:Bool):GlobalLibSortedPairsByValueReturn;
     
     
     /**
-        Attempts to return an appropriate boolean for the given value 
-		
+        Attempts to return an appropriate boolean for the given value
 		
 		Name | Description
 		--- | ---
 		`val` | The object to be converted to a boolean
 		
 		
-		**Returns:** false for the boolean false. false for "false". false for "0". false for numeric 0. false for nil. true otherwise.
+		`**Returns:** false for the boolean false. false for "false". false for "0". false for numeric 0. false for nil. true otherwise.
 		
 		___
 		### Lua Examples
@@ -3202,28 +2879,24 @@ package gmod.libs;
 		**Output:**
 		
 		boolean true: true boolean false: false string true: true string false: false numeric 0: false string 0: false string 1: true nil: false text string: true empty string: true
-		
-		
     **/
     
-    public static function tobool(val:Any):Bool;
+    public static function tobool(val:Dynamic):Bool;
     
     
     /**
-        ***Deprecated:**   This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use collectgarbage( "count" ) instead.
+        ***Deprecated:** This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use collectgarbage( "count" ) instead.
 		
-		Returns the current floored dynamic memory usage of Lua in kilobytes.   
-		**Returns:** The current floored dynamic memory usage of Lua, in kilobytes.
+		Returns the current floored dynamic memory usage of Lua in kilobytes.
 		
-		
+		`**Returns:** The current floored dynamic memory usage of Lua, in kilobytes.
     **/
-    @:deprecated
+    @:deprecated("This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use collectgarbage( "count" ) instead.")
     public static function gcinfo():Float;
     
     
     /**
-        Linear interpolation between two vectors. It is commonly used to smooth movement between two vectors. 
-		
+        Linear interpolation between two vectors. It is commonly used to smooth movement between two vectors.
 		
 		Name | Description
 		--- | ---
@@ -3232,7 +2905,7 @@ package gmod.libs;
 		`to` | The desired Vector
 		
 		
-		**Returns:** The lerped vector.
+		`**Returns:** The lerped vector.
 		
 		___
 		### Lua Examples
@@ -3245,26 +2918,20 @@ package gmod.libs;
 		**Output:**
 		
 		Vector( 0, 0, 150 )
-		
-		
     **/
     
     public static function LerpVector(fraction:Float, from:Vector, to:Vector):Vector;
     
     #if client
     /**
-        Saves position of your cursor on screen. You can restore it by using RestoreCursorPosition. 
-		
-		
-		
+        Saves position of your cursor on screen. You can restore it by using RestoreCursorPosition.
     **/
     
     public static function RememberCursorPosition():Void;
     #end
     
     /**
-        Adds simple Get/Set accessor functions on the specified table. Can also force the value to be set to a number, bool or string. 
-		
+        Adds simple Get/Set accessor functions on the specified table. Can also force the value to be set to a number, bool or string.
 		
 		Name | Description
 		--- | ---
@@ -3291,18 +2958,15 @@ package gmod.libs;
 		**Output:**
 		
 		false
-		
-		
     **/
     
-    public static function AccessorFunc(tab:AnyTable, key:Any, name:String, ?force:Float):Void;
+    public static function AccessorFunc(tab:AnyTable, key:Dynamic, name:String, ?force:FORCE):Void;
     
     
     /**
-        Returns a highly accurate time in seconds since the start up, ideal for benchmarking. 
+        Returns a highly accurate time in seconds since the start up, ideal for benchmarking.
 		
-		
-		**Returns:** Uptime of the server.
+		`**Returns:** Uptime of the server.
 		
 		___
 		### Lua Examples
@@ -3342,60 +3006,50 @@ package gmod.libs;
 		
 		print("Total: " .. TotalTime .. " seconds. Average: " .. AverageTime .. " seconds.")
 		```
-		
-		
     **/
     
     public static function SysTime():Float;
     
     #if server
     /**
-        Creates a path for the bot to follow 
-		
+        Creates a path for the bot to follow
 		
 		Name | Description
 		--- | ---
 		`type` | The name of the path to create. This is going to be "Follow" or "Chase" right now.
 		
 		
-		**Returns:** The path
-		
-		
+		`**Returns:** The path
     **/
     
     public static function Path(type:String):PathFollower;
     #end
     
     /**
-        Returns whether the given object does or doesn't have a metatable of a color. 
+        Returns whether the given object does or doesn't have a metatable of a color.
 		
+		**Bug:** BUG Engine functions (i.e. those not written in plain Lua) that return color objects do not currently set the color metatable and this function will return false if you use it on them. Issue Tracker: #2407
 		
 		Name | Description
 		--- | ---
 		`Object` | The object to be tested
 		
 		
-		**Returns:** Whether the given object is a color or not
-		
-		
+		`**Returns:** Whether the given object is a color or not
     **/
     
-    public static function IsColor(Object:Any):Bool;
+    public static function IsColor(Object:Dynamic):Bool;
     
     #if client
     /**
-        Closes all Derma menus that have been passed to RegisterDermaMenuForClose and calls GM:CloseDermaMenus 
-		
-		
-		
+        Closes all Derma menus that have been passed to RegisterDermaMenuForClose and calls GM:CloseDermaMenus
     **/
     
     public static function CloseDermaMenus():Void;
     #end
     #if client
     /**
-        Creates a derma window asking players to input a string. 
-		
+        Creates a derma window asking players to input a string.
 		
 		Name | Description
 		--- | ---
@@ -3408,7 +3062,7 @@ package gmod.libs;
 		`cancelText` | Allows you to override text of the "Cancel" button
 		
 		
-		**Returns:** The created DFrame
+		`**Returns:** The created DFrame
 		
 		___
 		### Lua Examples
@@ -3424,16 +3078,21 @@ package gmod.libs;
 		    function(text) print("Cancelled input") end
 		)
 		```
-		
-		
     **/
     
     public static function Derma_StringRequest(title:String, subtitle:String, _default:String, confirm:Function, ?cancel:Function, ?confirmText:String, ?cancelText:String):Panel;
     #end
     
     /**
-        Calls a function and catches an error that can be thrown while the execution of the call. 
+        Calls a function and catches an error that can be thrown while the execution of the call.
 		
+		**Bug:** BUG Using this function with include will break autorefresh. Issue Tracker: #1976
+		
+		**Bug:** BUG This cannot stop errors from hooks called from the engine. Issue Tracker: #2036
+		
+		**Bug:** BUG This does not stop Error and ErrorNoHalt from sending error messages to the server (if called clientside) or calling the GM:OnLuaError hook. The success boolean returned will always return true and thus you will not get the error message returned. error does not exhibit these behaviours. Issue Tracker: #2498
+		
+		**Bug:** BUG This does not stop errors incurred by include. Issue Tracker: #3112
 		
 		Name | Description
 		--- | ---
@@ -3459,16 +3118,13 @@ package gmod.libs;
 		**Output:**
 		
 		false attempt to call global 'aisj' (a nil value)
-		
-		
     **/
     
     public static function pcall(func:Function, arguments:Rest<Dynamic>):GlobalLibPcallReturn;
     
     
     /**
-        Formats the specified values into the string given. Same as string.format. 
-		
+        Formats the specified values into the string given. Same as string.format.
 		
 		Name | Description
 		--- | ---
@@ -3476,53 +3132,45 @@ package gmod.libs;
 		`formatParameters` | Values to be formatted into the string.
 		
 		
-		**Returns:** The formatted string
-		
-		
+		`**Returns:** The formatted string
     **/
     
     public static function Format(format:String, formatParameters:Rest<Dynamic>):String;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		This function is used to save the last map and category to which the map belongs as a cookie. 
-		
+		This function is used to save the last map and category to which the map belongs as a cookie.
 		
 		Name | Description
 		--- | ---
 		`map` | The name of the map.
 		`category` | The name of the category to which this map belongs.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function SaveLastMap(map:String, category:String):Void;
     
     #if client
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns a new WorkshopFileBase element       
+		Returns a new WorkshopFileBase element
+		
 		Name | Description
 		--- | ---
 		`namespace` | Namespace for the file base
 		`requiredTags` | Tags required for a Workshop submission to be interacted with by the filebase
 		
 		
-		**Returns:** WorkshopFileBase element
-		
-		
+		`**Returns:** WorkshopFileBase element
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function WorkshopFileBase(namespace:String, requiredTags:AnyTable):AnyTable;
     #end
     #if client
     /**
-        Creates a scene entity based on the scene name and the entity. 
-		
+        Creates a scene entity based on the scene name and the entity.
 		
 		Name | Description
 		--- | ---
@@ -3530,7 +3178,7 @@ package gmod.libs;
 		`targetEnt` | The entity to play the scene on.
 		
 		
-		**Returns:** C_SceneEntity
+		`**Returns:** C_SceneEntity
 		
 		___
 		### Lua Examples
@@ -3540,40 +3188,34 @@ package gmod.libs;
 		```lua 
 		ClientsideScene( "scenes/eli_lab/mo_gowithalyx01.vcd", LocalPlayer() )
 		```
-		
-		
     **/
     
     public static function ClientsideScene(name:String, targetEnt:Entity):CSEnt;
     #end
     
     /**
-        Returns if the passed object is an Entity. Alias of isentity. 
-		
+        Returns if the passed object is an Entity. Alias of isentity.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to check.
 		
 		
-		**Returns:** True if the variable is an Entity.
-		
-		
+		`**Returns:** True if the variable is an Entity.
     **/
     
-    public static function IsEntity(variable:Any):Bool;
+    public static function IsEntity(variable:Dynamic):Bool;
     
     
     /**
-        Returns the ordinal suffix of a given number. 
-		
+        Returns the ordinal suffix of a given number.
 		
 		Name | Description
 		--- | ---
 		`number` | The number to find the ordinal suffix of.
 		
 		
-		**Returns:** suffix
+		`**Returns:** suffix
 		
 		___
 		### Lua Examples
@@ -3586,40 +3228,31 @@ package gmod.libs;
 		**Output:**
 		
 		72nd
-		
-		
     **/
     
     public static function STNDRD(number:Float):String;
     
     #if server
     /**
-        Precaches a scene file. 
-		
+        Precaches a scene file.
 		
 		Name | Description
 		--- | ---
 		`scene` | Path to the scene file to precache.
-		
-		
-		
     **/
     
     public static function PrecacheScene(scene:String):Void;
     #end
     
     /**
-        Returns a new userdata object. 
-		
+        Returns a new userdata object.
 		
 		Name | Description
 		--- | ---
 		`addMetatable` | If true, the userdata will get its own metatable automatically.
 		
 		
-		**Returns:** The newly created userdata.
-		
-		
+		`**Returns:** The newly created userdata.
     **/
     
     public static function newproxy(?addMetatable:Bool):UserData;
@@ -3632,15 +3265,14 @@ package gmod.libs;
 		
 		 You can learn more about meta tables on the Meta Tables page. 
 		
-		 You can find a list of meta tables that can be retrieved with this function on TYPE_ Enums. The name in the description is the string to use with this function. 
+		 You can find a list of meta tables that can be retrieved with this function on TYPE_ Enums. The name in the description is the string to use with this function.
 		
-		 
 		Name | Description
 		--- | ---
 		`metaName` | The object type to retrieve the meta table of.
 		
 		
-		**Returns:** The corresponding meta table.
+		`**Returns:** The corresponding meta table.
 		
 		___
 		### Lua Examples
@@ -3661,16 +3293,17 @@ package gmod.libs;
 		    ply:ChatPrint( "I just don't understand how you're always sick..." )
 		end
 		```
-		
-		
     **/
     
     public static function FindMetaTable(metaName:String):AnyTable;
     
     
     /**
-        Returns a sound parented to the specified entity. 
+        Returns a sound parented to the specified entity.
 		
+		**Note:** You can only create one CSoundPatch per audio file, per entity at the same time.
+		
+		**Note:** This argument only works serverside.
 		
 		Name | Description
 		--- | ---
@@ -3679,7 +3312,7 @@ package gmod.libs;
 		`filter` | A CRecipientFilter of the players that will have this sound networked to them. NOTE This argument only works serverside.
 		
 		
-		**Returns:** The sound object
+		`**Returns:** The sound object
 		
 		___
 		### Lua Examples
@@ -3724,76 +3357,59 @@ package gmod.libs;
 		-- When we are ready, we play the sound:
 		ReadSound( "phx/hmetal1.wav" )
 		```
-		
-		
     **/
     
     public static function CreateSound(targetEnt:Entity, soundName:String, ?filter:CRecipientFilter):CSoundPatch;
     
     #if client
     /**
-        Does the removing of the tooltip panel. Called by EndTooltip. 
-		
-		
-		
+        Does the removing of the tooltip panel. Called by EndTooltip.
     **/
     
     public static function RemoveTooltip():Void;
     #end
     
     /**
-        Returns a table with the names of all maps and categories that you have on your client. 
+        Returns a table with the names of all maps and categories that you have on your client.
 		
-		
-		**Returns:** table of map names and categories
-		
-		
+		`**Returns:** table of map names and categories
     **/
     
     public static function GetMapList():AnyTable;
     
     
     /**
-        Called by the engine to set which constraint system [1] the next created constraints should use 
-		
+        Called by the engine to set which constraint system [1] the next created constraints should use
 		
 		Name | Description
 		--- | ---
 		`constraintSystem` | Constraint system to use
-		
-		
-		
     **/
     
     public static function SetPhysConstraintSystem(constraintSystem:Entity):Void;
     
     #if client
     /**
-        Returns a localisation for the given token, if none is found it will return the default(second) parameter. 
-		
+        Returns a localisation for the given token, if none is found it will return the default(second) parameter.
 		
 		Name | Description
 		--- | ---
 		`localisationToken` | The token to find a translation for.
 		`default` | The default value to be returned if no translation was found.
-		
-		
-		
     **/
     
     public static function Localize(localisationToken:String, _default:String):Void;
     #end
     #if client
     /**
-        Creates a DMenu and closes any current menus. 
-		
+        Creates a DMenu and closes any current menus.
 		
 		Name | Description
 		--- | ---
 		`parent` | The panel to parent the created menu to.
 		
 		
-		**Returns:** The created DMenu
+		`**Returns:** The created DMenu
 		
 		___
 		### Lua Examples
@@ -3806,16 +3422,13 @@ package gmod.libs;
 		menu:AddOption("Close", function() print("Close pressed") end) -- The menu will remove itself, we don't have to do anything.
 		menu:Open()
 		```
-		
-		
     **/
     
     public static function DermaMenu(parent:Panel):Panel;
     #end
     
     /**
-        Returns a vector that is shared between the server and all clients. 
-		
+        Returns a vector that is shared between the server and all clients.
 		
 		Name | Description
 		--- | ---
@@ -3823,17 +3436,16 @@ package gmod.libs;
 		`Default` | The value to return if the global value is not set.
 		
 		
-		**Returns:** The global value, or the default if the global value is not set.
-		
-		
+		`**Returns:** The global value, or the default if the global value is not set.
     **/
     
     public static function GetGlobalVector(Index:String, Default:Vector):Vector;
     
     
     /**
-        Returns the next key and value pair in a table. 
+        Returns the next key and value pair in a table.
 		
+		**Note:** Table keys in Lua have no specific order, and will be returned in whatever order they exist in memory. This may not always be in ascending order or alphabetical order. If you need to iterate over an array in order, use ipairs.
 		
 		Name | Description
 		--- | ---
@@ -3862,18 +3474,15 @@ package gmod.libs;
 		mytable["hello"]=true
 		print( "mytable is empty:", IsEmptyTable( mytable ) )
 		```
-		
-		
     **/
     
-    public static function next(tab:AnyTable, ?prevKey:Any):GlobalLibNextReturn;
+    public static function next(tab:AnyTable, ?prevKey:Dynamic):GlobalLibNextReturn;
     
     #if server
     /**
-        Creates a new CRecipientFilter. 
+        Creates a new CRecipientFilter.
 		
-		
-		**Returns:** The new created recipient filter.
+		`**Returns:** The new created recipient filter.
 		
 		___
 		### Lua Examples
@@ -3889,8 +3498,6 @@ package gmod.libs;
 		**Output:**
 		
 		2 1 = Player [1][Player #1] 2 = Player [2][Player #2]
-		
-		
     **/
     
     public static function RecipientFilter():CRecipientFilter;
@@ -3905,9 +3512,8 @@ package gmod.libs;
 		
 		 Additionally, a newline isn't added automatically to the end, so subsequent Msg or print operations will continue the same line of text in the console. See MsgN for a version that does add a newline. 
 		
-		 The text is blue on the server, orange on the client, and green on the menu: 
+		 The text is blue on the server, orange on the client, and green on the menu:
 		
-		 
 		Name | Description
 		--- | ---
 		`args` | List of values to print.
@@ -3924,16 +3530,13 @@ package gmod.libs;
 		**Output:**
 		
 		Hello World!
-		
-		
     **/
     
     public static function Msg(args:Rest<Dynamic>):Void;
     
     
     /**
-        Creates a console variable (ConVar), in general these are for things like gamemode/server settings. 
-		
+        Creates a console variable (ConVar), in general these are for things like gamemode/server settings.
 		
 		Name | Description
 		--- | ---
@@ -3945,54 +3548,46 @@ package gmod.libs;
 		`max` | If set, the ConVar cannot be changed to a number higher than this value.
 		
 		
-		**Returns:** The convar created.
-		
-		
+		`**Returns:** The convar created.
     **/
     
-    public static function CreateConVar(name:String, value:String, ?flags:Float, ?helptext:String, ?min:Float, ?max:Float):ConVar;
+    public static function CreateConVar(name:String, value:String, ?flags:FCVAR, ?helptext:String, ?min:Float, ?max:Float):ConVar;
     
     
     /**
-        ***Deprecated:**  
+        ***INTERNAL** 
 		
-		***INTERNAL:**  
+		***Deprecated:** 
 		
-		Returns "Lua Cache File" if the given file name is in a certain string table, nothing otherwise. 
-		
+		Returns "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
 		
 		Name | Description
 		--- | ---
 		`filename` | File name to test
 		
 		
-		**Returns:** "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
-		
-		
+		`**Returns:** "Lua Cache File" if the given file name is in a certain string table, nothing otherwise.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function TranslateDownloadableName(filename:String):String;
     
     
     /**
-        Defines a floating point number to be automatically networked to clients 
+        Defines a floating point number to be automatically networked to clients
 		
+		**Note:** Running this function clientside will only set it clientside for the client it is called on!
 		
 		Name | Description
 		--- | ---
 		`index` | Index to identify the global float with
 		`float` | Float to be networked
-		
-		
-		
     **/
     
-    public static function SetGlobalFloat(index:Any, float:Float):Void;
+    public static function SetGlobalFloat(index:Dynamic, float:Float):Void;
     
     #if client
     /**
-        Adds the given string to the computers clipboard, which can then be pasted in or outside of GMod with Ctrl + V. 
-		
+        Adds the given string to the computers clipboard, which can then be pasted in or outside of GMod with Ctrl + V.
 		
 		Name | Description
 		--- | ---
@@ -4007,16 +3602,13 @@ package gmod.libs;
 		```lua 
 		SetClipboardText( "Hello!" )
 		```
-		
-		
     **/
     
     public static function SetClipboardText(text:String):Void;
     #end
     
     /**
-        Converts a Color structure into HSV color space. 
-		
+        Converts a Color structure into HSV color space.
 		
 		Name | Description
 		--- | ---
@@ -4041,16 +3633,13 @@ package gmod.libs;
 		**Output:**
 		
 		60 1 1
-		
-		
     **/
     
-    public static function ColorToHSV(color:AnyTable):GlobalLibColorToHSVReturn;
+    public static function ColorToHSV(color:Color):GlobalLibColorToHSVReturn;
     
     
     /**
-        Returns a random vector whose components are each between min(inclusive), max(exclusive). 
-		
+        Returns a random vector whose components are each between min(inclusive), max(exclusive).
 		
 		Name | Description
 		--- | ---
@@ -4058,9 +3647,7 @@ package gmod.libs;
 		`max` | Max bound exclusive.
 		
 		
-		**Returns:** The random direction vector.
-		
-		
+		`**Returns:** The random direction vector.
     **/
     
     public static function VectorRand(?min:Float, ?max:Float):Vector;
@@ -4069,9 +3656,8 @@ package gmod.libs;
     /**
         Same as print, except it concatinates the arguments without inserting any whitespace in between them. 
 		
-		See also Msg, which doesn't add a newline ("\n") at the end. 
+		See also Msg, which doesn't add a newline ("\n") at the end.
 		
-		 
 		Name | Description
 		--- | ---
 		`args` | List of values to print. They can be of any type and will be converted to strings with tostring.
@@ -4086,23 +3672,20 @@ package gmod.libs;
 		MsgN("Hello,")
 		MsgN("World!")
 		```
-		
-		
     **/
     
     public static function MsgN(args:Rest<Dynamic>):Void;
     
     #if client
     /**
-        Returns a new mesh object. 
-		
+        Returns a new mesh object.
 		
 		Name | Description
 		--- | ---
 		`mat` | The material the mesh is intended to be rendered with. It's merely a hint that tells that mesh what vertex format it should use.
 		
 		
-		**Returns:** The created object.
+		`**Returns:** The created object.
 		
 		___
 		### Lua Examples
@@ -4128,16 +3711,13 @@ package gmod.libs;
 		
 		end )
 		```
-		
-		
     **/
     
     public static function Mesh(?mat:IMaterial):IMesh;
     #end
     
     /**
-        Loads and registers the specified gamemode, setting the GM table's DerivedFrom field to the value provided, if the table exists. The DerivedFrom field is used post-gamemode-load as the "derived" parameter for gamemode.Register. 
-		
+        Loads and registers the specified gamemode, setting the GM table's DerivedFrom field to the value provided, if the table exists. The DerivedFrom field is used post-gamemode-load as the "derived" parameter for gamemode.Register.
 		
 		Name | Description
 		--- | ---
@@ -4152,8 +3732,6 @@ package gmod.libs;
 		```lua 
 		DeriveGamemode("sandbox")
 		```
-		
-		
     **/
     
     public static function DeriveGamemode(base:String):Void;
@@ -4162,9 +3740,8 @@ package gmod.libs;
     /**
         Returns an iterator function(next) for a for loop that will return the values of the specified table in an arbitrary order. 
 		
-		For alphabetical key order use SortedPairs. For alphabetical value order use SortedPairsByValue. 
+		For alphabetical key order use SortedPairs. For alphabetical value order use SortedPairsByValue.
 		
-		 
 		Name | Description
 		--- | ---
 		`tab` | The table to iterate over
@@ -4190,8 +3767,6 @@ package gmod.libs;
 		**Output:**
 		
 		A list of players in console.
-		
-		
     **/
     
     public static function pairs(tab:AnyTable):GlobalLibPairsReturn;
@@ -4200,9 +3775,8 @@ package gmod.libs;
     /**
         Displays a message in the chat, console, or center of screen of every player. 
 		
-		This uses the archaic user message system (umsg library) and hence is limited to ≈250 characters. 
+		This uses the archaic user message system (umsg library) and hence is limited to ≈250 characters.
 		
-		 
 		Name | Description
 		--- | ---
 		`type` | Which type of message should be sent to the players (see HUD_ Enums)
@@ -4220,16 +3794,13 @@ package gmod.libs;
 		**Output:**
 		
 		I'm new here.
-		
-		
     **/
     
-    public static function PrintMessage(type:Float, message:String):Void;
+    public static function PrintMessage(type:HUD, message:String):Void;
     #end
     
     /**
-        Converts a Color structure into HSL color space. 
-		
+        Converts a Color structure into HSL color space.
 		
 		Name | Description
 		--- | ---
@@ -4241,17 +3812,13 @@ package gmod.libs;
 		`a` | The hue in degrees [0, 360).
 		`b` | The saturation in the range [0, 1].
 		`c` | The lightness in the range [0, 1].
-		
-		
-		
     **/
     
-    public static function ColorToHSL(color:AnyTable):GlobalLibColorToHSLReturn;
+    public static function ColorToHSL(color:Color):GlobalLibColorToHSLReturn;
     
     
     /**
-        Joins the server with the specified IP. 
-		
+        Joins the server with the specified IP.
 		
 		Name | Description
 		--- | ---
@@ -4266,33 +3833,27 @@ package gmod.libs;
 		```lua 
 		JoinServer("localhost")
 		```
-		
-		
     **/
     
     public static function JoinServer(IP:String):Void;
     
     #if client
     /**
-        Returns named color defined in resource/ClientScheme.res. 
-		
+        Returns named color defined in resource/ClientScheme.res.
 		
 		Name | Description
 		--- | ---
 		`name` | Name of color
 		
 		
-		**Returns:** A Color structure or nil
-		
-		
+		`**Returns:** A Color structure or nil
     **/
     
-    public static function NamedColor(name:String):AnyTable;
+    public static function NamedColor(name:String):Color;
     #end
     #if client
     /**
-        Renders a Depth of Field effect 
-		
+        Renders a Depth of Field effect
 		
 		Name | Description
 		--- | ---
@@ -4305,17 +3866,13 @@ package gmod.libs;
 		`spin` | Whether to cycle the frame or not
 		`inView` | Table of view data
 		`fov` | FOV to render the effect with
-		
-		
-		
     **/
     
     public static function RenderDoF(origin:Vector, angle:Angle, usableFocusPoint:Vector, angleSize:Float, radialSteps:Float, passes:Float, spin:Bool, inView:AnyTable, fov:Float):Void;
     #end
     
     /**
-        Writes every given argument to the console. Automatically attempts to convert each argument to a string. (See tostring) Separates arguments with a tab character ("\t"). 
-		
+        Writes every given argument to the console. Automatically attempts to convert each argument to a string. (See tostring) Separates arguments with a tab character ("\t").
 		
 		Name | Description
 		--- | ---
@@ -4330,8 +3887,6 @@ package gmod.libs;
 		```lua 
 		print("Hello World!", "Yay!")
 		```
-		
-		
     **/
     
     public static function print(args:Rest<Dynamic>):Void;
@@ -4340,9 +3895,8 @@ package gmod.libs;
     /**
         Performs a linear interpolation from the start number to the end number. 
 		
-		This function provides a very efficient and easy way to smooth out movements. 
+		This function provides a very efficient and easy way to smooth out movements.
 		
-		 
 		Name | Description
 		--- | ---
 		`t` | The fraction for finding the result. This number is clamped between 0 and 1.
@@ -4350,17 +3904,14 @@ package gmod.libs;
 		`to` | The ending number. The result will be equal to this if delta is 1.
 		
 		
-		**Returns:** The result of the linear interpolation, (1 - t) * from + t * to.
-		
-		
+		`**Returns:** The result of the linear interpolation, (1 - t) * from + t * to.
     **/
     
     public static function Lerp(t:Float, from:Float, to:Float):Float;
     
     
     /**
-        Returns a string that is shared between the server and all clients. 
-		
+        Returns a string that is shared between the server and all clients.
 		
 		Name | Description
 		--- | ---
@@ -4368,7 +3919,7 @@ package gmod.libs;
 		`default` | The value to return if the global value is not set.
 		
 		
-		**Returns:** The global value, or the default if the global value is not set.
+		`**Returns:** The global value, or the default if the global value is not set.
 		
 		___
 		### Lua Examples
@@ -4378,23 +3929,30 @@ package gmod.libs;
 		```lua 
 		print( GetGlobalString("ServerName", "Garry's Mod 13") )
 		```
-		
-		
     **/
     
     public static function GetGlobalString(index:String, ?_default:String):String;
     
     
     /**
-        Executes a Lua script. 
+        Executes a Lua script.
 		
+		**Warning:** The file you are attempting to include MUST NOT be empty or the include will fail. Files over a certain size may fail as well.
+		
+		**Warning:** If the file you are including is clientside or shared, it must be AddCSLuaFile'd or this function will error saying the file doesn't exist.
+		
+		**Note:** Addon files (.gma files) do not support relative parent folders (.. notation).
+		
+		**Note:** Please make sure your file names are unique, the filesystem is shared across all addons, so a file named "lua/config.lua" in your addon may be overwritten by the same file in another addon.
+		
+		**Bug:** BUG pcalling this function will break autorefresh. Issue Tracker: #1976
 		
 		Name | Description
 		--- | ---
 		`fileName` | The name of the script to be executed. The path must be either relative to the current file, or be an absolute path (relative to and excluding the lua/ folder). NOTE Please make sure your file names are unique, the filesystem is shared across all addons, so a file named "lua/config.lua" in your addon may be overwritten by the same file in another addon.
 		
 		
-		**Returns:** Anything that the executed Lua script returns.
+		`**Returns:** Anything that the executed Lua script returns.
 		
 		___
 		### Lua Examples
@@ -4412,16 +3970,13 @@ package gmod.libs;
 		include( "addons/MyAddon/lua/myLuaFolder/myLuaFile.lua" )
 		include(       "MyAddon/lua/myLuaFolder/myLuaFile.lua" )
 		```
-		
-		
     **/
     
     public static function include(fileName:String):Rest<Dynamic>;
     
     
     /**
-        Returns a float that is shared between the server and all clients. 
-		
+        Returns a float that is shared between the server and all clients.
 		
 		Name | Description
 		--- | ---
@@ -4429,17 +3984,14 @@ package gmod.libs;
 		`default` | The value to return if the global value is not set.
 		
 		
-		**Returns:** The global value, or the default if the global value is not set.
-		
-		
+		`**Returns:** The global value, or the default if the global value is not set.
     **/
     
     public static function GetGlobalFloat(index:String, ?_default:Float):Float;
     
     #if client
     /**
-        Convenience function that creates a DLabel, sets the text, and returns it 
-		
+        Convenience function that creates a DLabel, sets the text, and returns it
 		
 		Name | Description
 		--- | ---
@@ -4447,7 +3999,7 @@ package gmod.libs;
 		`parent` | Optional. The panel to parent the DLabel to
 		
 		
-		**Returns:** The created DLabel
+		`**Returns:** The created DLabel
 		
 		___
 		### Lua Examples
@@ -4465,8 +4017,6 @@ package gmod.libs;
 		local pnl = vgui.Create("DPanel")
 		local lbl = Label( "The quick brown fox", pnl )
 		```
-		
-		
     **/
     
     public static function Label(text:String, ?parent:Panel):Panel;
@@ -4475,9 +4025,8 @@ package gmod.libs;
     /**
         This function will compile the code argument as lua code and return a function that will execute that code. 
 		
-		Please note that this function will not automatically execute the given code after compiling it. 
+		Please note that this function will not automatically execute the given code after compiling it.
 		
-		 
 		Name | Description
 		--- | ---
 		`code` | The code to compile.
@@ -4542,18 +4091,13 @@ package gmod.libs;
 		5
 		AB
 		1   2
-		
-		
     **/
     
     public static function CompileString(code:String, identifier:String, ?HandleError:Bool):GlobalLibCompileStringReturn;
     
     
     /**
-        Empties the pool of main menu background images. 
-		
-		
-		
+        Empties the pool of main menu background images.
     **/
     
     public static function ClearBackgroundImages():Void;
@@ -4562,9 +4106,8 @@ package gmod.libs;
     /**
         Returns an iterator function that can be used to loop through a table in order of member values, when the values of the table are also tables and contain that member. 
 		
-		To sort by value, use SortedPairsByValue. To sort by keys, use SortedPairs. 
+		To sort by value, use SortedPairsByValue. To sort by keys, use SortedPairs.
 		
-		 
 		Name | Description
 		--- | ---
 		`table` | Table to create iterator for.
@@ -4603,11 +4146,9 @@ package gmod.libs;
 		
 		Charles
 		Adam
-		
-		
     **/
     
-    public static function SortedPairsByMemberValue(table:AnyTable, memberKey:Any, ?descending:Bool):GlobalLibSortedPairsByMemberValueReturn;
+    public static function SortedPairsByMemberValue(table:AnyTable, memberKey:Dynamic, ?descending:Bool):GlobalLibSortedPairsByMemberValueReturn;
     
     
     /**
@@ -4615,25 +4156,21 @@ package gmod.libs;
 		
 		If the string ".mdl" is not found in the model name, the function will return true. 
 		
-		 The function will also return true if any of the following strings are found in the given model name: 
+		 The function will also return true if any of the following strings are found in the given model name:
 		
-		 
 		Name | Description
 		--- | ---
 		`modelName` | The model name to be checked
 		
 		
-		**Returns:** Whether or not the model is useless
-		
-		
+		`**Returns:** Whether or not the model is useless
     **/
     
     public static function IsUselessModel(modelName:String):Bool;
     
     
     /**
-        Sets the enviroment for a function or a stack level, if a function is passed, the return value will be the function, otherwise nil. 
-		
+        Sets the enviroment for a function or a stack level, if a function is passed, the return value will be the function, otherwise nil.
 		
 		Name | Description
 		--- | ---
@@ -4661,16 +4198,13 @@ package gmod.libs;
 		
 		Display()
 		```
-		
-		
     **/
     
     public static function setfenv(location:Function, enviroment:AnyTable):Void;
     
     #if client
     /**
-        Creates panel method that calls the supplied Derma skin hook via derma.SkinHook 
-		
+        Creates panel method that calls the supplied Derma skin hook via derma.SkinHook
 		
 		Name | Description
 		--- | ---
@@ -4691,16 +4225,13 @@ package gmod.libs;
 		**Output:**
 		
 		Panel is painted with correct derma hooks
-		
-		
     **/
     
     public static function Derma_Hook(panel:Panel, functionName:String, hookName:String, typeName:String):Void;
     #end
     
     /**
-        Returns a cosine value that fluctuates based on the current time 
-		
+        Returns a cosine value that fluctuates based on the current time
 		
 		Name | Description
 		--- | ---
@@ -4710,9 +4241,7 @@ package gmod.libs;
 		`offset` | Offset variable that doesn't affect the rate of change, but causes the returned value to be offset by time
 		
 		
-		**Returns:** Cosine value
-		
-		
+		`**Returns:** Cosine value
     **/
     
     public static function TimedCos(frequency:Float, min:Float, max:Float, offset:Float):Float;
@@ -4721,26 +4250,22 @@ package gmod.libs;
     /**
         Attempts to convert the value to a number. 
 		
-		Returns nil on failure. 
+		Returns nil on failure.
 		
-		 
 		Name | Description
 		--- | ---
 		`value` | The value to convert. Can be a number or string.
 		`base` | The numeric base used in the string. Can be any integer between 2 and 36, inclusive.
 		
 		
-		**Returns:** The numeric representation of the value with the given base, or nil if the conversion failed.
-		
-		
+		`**Returns:** The numeric representation of the value with the given base, or nil if the conversion failed.
     **/
     
-    public static function tonumber(value:Any, ?base:Float):Float;
+    public static function tonumber(value:Dynamic, ?base:Float):Float;
     
     #if server
     /**
-        Adds the specified vector to the PVS which is currently building. This allows all objects in visleafs visible from that vector to be drawn. 
-		
+        Adds the specified vector to the PVS which is currently building. This allows all objects in visleafs visible from that vector to be drawn.
 		
 		Name | Description
 		--- | ---
@@ -4760,16 +4285,19 @@ package gmod.libs;
 		    end
 		end)
 		```
-		
-		
     **/
     
     public static function AddOriginToPVS(position:Vector):Void;
     #end
     
     /**
-        Either returns the material with the given name, or loads the material interpreting the first argument as the path. 
+        Either returns the material with the given name, or loads the material interpreting the first argument as the path.
 		
+		**Note:** When using .png or .jpg textures, try to make their sizes Power Of 2 (1, 2, 4, 8, 16, 32, 64, etc). While images are no longer scaled to Power of 2 sizes since February 2019, it is a good practice for things like icons, etc.
+		
+		**Note:** Since paths are relative to the materials folder, resource paths like ../data/MyImage.jpg will work since ".." translates to moving up a parent directory in the file tree.
+		
+		**Note:** This feature only works when importing .png or .jpeg image files
 		
 		Name | Description
 		--- | ---
@@ -4823,16 +4351,15 @@ package gmod.libs;
 		    render.DrawScreenQuad()
 		end )
 		```
-		
-		
     **/
     
     public static function Material(materialName:String, ?pngParameters:String):GlobalLibMaterialReturn;
     
     
     /**
-        Opens a folder with the given name in the garrysmod folder using the operating system's file browser. 
+        Opens a folder with the given name in the garrysmod folder using the operating system's file browser.
 		
+		**Bug:** BUG This does not work on OSX or Linux. Issue Tracker: #1532
 		
 		Name | Description
 		--- | ---
@@ -4847,79 +4374,68 @@ package gmod.libs;
 		```lua 
 		OpenFolder( "saves" )
 		```
-		
-		
     **/
     
     public static function OpenFolder(folder:String):Void;
     
     #if client
     /**
-        Restores position of your cursor on screen. You can save it by using RememberCursorPosition. 
-		
-		
-		
+        Restores position of your cursor on screen. You can save it by using RememberCursorPosition.
     **/
     
     public static function RestoreCursorPosition():Void;
     #end
     
     /**
-        Returns whether or not every element within a table is a valid entity 
-		
+        Returns whether or not every element within a table is a valid entity
 		
 		Name | Description
 		--- | ---
 		`table` | Table containing entities to check
 		
 		
-		**Returns:** All entities valid
-		
-		
+		`**Returns:** All entities valid
     **/
     
     public static function IsTableOfEntitiesValid(table:AnyTable):Bool;
     
     
     /**
-        Returns the uptime of the game/server in seconds (to at least 4 decimal places) 
+        Returns the uptime of the game/server in seconds (to at least 4 decimal places)
 		
+		**Note:** This is not synchronised or affected by the game.
 		
-		**Returns:** Uptime of the game/server.
+		**Note:** This will be affected by precision loss if the uptime is more than 30+(?) days, and effectively cease to be functional after 50+(?) days.
 		
-		
+		`**Returns:** Uptime of the game/server.
     **/
     
     public static function RealTime():Float;
     
     
     /**
-        Returns if the passed object is a function. 
-		
+        Returns if the passed object is a function.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is a function.
-		
-		
+		`**Returns:** True if the variable is a function.
     **/
     
-    public static function isfunction(variable:Any):Bool;
+    public static function isfunction(variable:Dynamic):Bool;
     
     
     /**
-        Checks whether or not a game is currently mounted. Uses data given by engine.GetGames. 
-		
+        Checks whether or not a game is currently mounted. Uses data given by engine.GetGames.
 		
 		Name | Description
 		--- | ---
 		`game` | The game string/app ID to check.
 		
 		
-		**Returns:** True if the game is mounted.
+		`**Returns:** True if the game is mounted.
 		
 		___
 		### Lua Examples
@@ -4929,32 +4445,35 @@ package gmod.libs;
 		```lua 
 		IsMounted('cstrike')
 		```
-		
-		
     **/
     
     public static function IsMounted(game:String):Bool;
     
     
     /**
-        Writes text to the right hand side of the screen, like the old error system. Messages disappear after a couple of seconds. 
-		
+        Writes text to the right hand side of the screen, like the old error system. Messages disappear after a couple of seconds.
 		
 		Name | Description
 		--- | ---
 		`slot` | The location on the right hand screen to write the debug info to. Starts at 0, no upper limit
 		`info` | The debugging information to be written to the screen
-		
-		
-		
     **/
     
     public static function DebugInfo(slot:Float, info:String):Void;
     
     #if client
     /**
-        Creates a new material with the specified name and shader. 
+        Creates a new material with the specified name and shader.
 		
+		**Note:** Materials created with this function can be used in Entity:SetMaterial and Entity:SetSubMaterial by prepending a "!" to their material name argument.
+		
+		**Note:** Unlike IMaterial:SetTexture, this table will not accept ITexture values. Instead, use the texture's name (see ITexture:GetName).
+		
+		**Bug:** BUG .pngs must be loaded with Material before being used with this function. Issue Tracker: #1531
+		
+		**Bug:** BUG This does not work with patch materials. Issue Tracker: #2511
+		
+		**Bug:** BUG This will not create a new material if another material object with the same name already exists. Issue Tracker: #3103
 		
 		Name | Description
 		--- | ---
@@ -4963,7 +4482,7 @@ package gmod.libs;
 		`materialData` | Key-value table that contains shader parameters and proxies. See: List of Shader Parameters on Valve Developers Wiki and each shader's page from Category: Shaders. NOTE Unlike IMaterial:SetTexture, this table will not accept ITexture values. Instead, use the texture's name (see ITexture:GetName).
 		
 		
-		**Returns:** Created material
+		`**Returns:** Created material
 		
 		___
 		### Lua Examples
@@ -4979,49 +4498,41 @@ package gmod.libs;
 		  ["$vertexcolor"] = 1
 		} )
 		```
-		
-		
     **/
     
     public static function CreateMaterial(name:String, shaderName:String, materialData:AnyTable):IMaterial;
     #end
     
     /**
-        Retrieves data about the demo with the specified filename. Similar to GetSaveFileDetails. 
-		
+        Retrieves data about the demo with the specified filename. Similar to GetSaveFileDetails.
 		
 		Name | Description
 		--- | ---
 		`filename` | The file name of the demo.
 		
 		
-		**Returns:** Demo data.
-		
-		
+		`**Returns:** Demo data.
     **/
     
     public static function GetDemoFileDetails(filename:String):AnyTable;
     
     
     /**
-        Defines a string with a maximum of 199 characters to be automatically networked to clients 
+        Defines a string with a maximum of 199 characters to be automatically networked to clients
 		
+		**Note:** Running this function clientside will only set it clientside for the client it is called on!
 		
 		Name | Description
 		--- | ---
 		`index` | Index to identify the global string with
 		`string` | String to be networked
-		
-		
-		
     **/
     
-    public static function SetGlobalString(index:Any, string:String):Void;
+    public static function SetGlobalString(index:Dynamic, string:String):Void;
     
     #if client
     /**
-        Draws the toy town shader, which blurs the top and bottom of your screen. This can make very large objects look like toys, hence the name. 
-		
+        Draws the toy town shader, which blurs the top and bottom of your screen. This can make very large objects look like toys, hence the name.
 		
 		Name | Description
 		--- | ---
@@ -5041,38 +4552,31 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
     public static function DrawToyTown(Passes:Float, Height:Float):Void;
     #end
     
     /**
-        Adds the specified image path to the main menu background pool. Image can be png or jpeg. 
-		
+        Adds the specified image path to the main menu background pool. Image can be png or jpeg.
 		
 		Name | Description
 		--- | ---
 		`path` | Path to the image.
-		
-		
-		
     **/
     
     public static function AddBackgroundImage(path:String):Void;
     
     
     /**
-        Returns a string representing the name of the type of the passed object. 
-		
+        Returns a string representing the name of the type of the passed object.
 		
 		Name | Description
 		--- | ---
 		`var` | The object to get the type of.
 		
 		
-		**Returns:** The name of the object's type.
+		`**Returns:** The name of the object's type.
 		
 		___
 		### Lua Examples
@@ -5102,19 +4606,18 @@ package gmod.libs;
 		print(type(Entity(num))) -- -> num is the EntIndex for the entity
 		print(type(vgui.Create("DFrame")))
 		```
-		
-		
     **/
     
-    public static function type(_var:Any):String;
+    public static function type(_var:Dynamic):String;
     
     #if client
     /**
         Creates (or gets if it already exsits) the rendertarget with the given name, this function allows to adjust the creation of a rendertarget more than GetRenderTarget. 
 		
-		See also render.PushRenderTarget and render.SetRenderTarget. 
+		See also render.PushRenderTarget and render.SetRenderTarget.
 		
-		 
+		**Warning:** The name is treated like a path and gets its extension discarded. "name.1" and "name.2" are considered the same name and will result in the same render target being reused.
+		
 		Name | Description
 		--- | ---
 		`name` | The internal name of the render target. WARNING The name is treated like a path and gets its extension discarded. "name.1" and "name.2" are considered the same name and will result in the same render target being reused.
@@ -5127,19 +4630,18 @@ package gmod.libs;
 		`imageFormat` | Image format, see IMAGE_FORMAT_ Enums.
 		
 		
-		**Returns:** The new render target.
-		
-		
+		`**Returns:** The new render target.
     **/
     
-    public static function GetRenderTargetEx(name:String, width:Float, height:Float, sizeMode:Float, depthMode:Float, textureFlags:Float, rtFlags:Float, imageFormat:Float):ITexture;
+    public static function GetRenderTargetEx(name:String, width:Float, height:Float, sizeMode:RT_SIZE, depthMode:MATERIAL_RT_DEPTH, textureFlags:TEXTUREFLAGS, rtFlags:CREATERENDERTARGETFLAGS, imageFormat:IMAGE_FORMAT):ITexture;
     #end
     #if client
     /**
-        Returns the normal vector of the current render context as calculated by GM:CalcView, similar to EyeAngles. 
+        Returns the normal vector of the current render context as calculated by GM:CalcView, similar to EyeAngles.
 		
+		**Bug:** BUG This function is only reliable inside rendering hooks. Issue Tracker: #2516
 		
-		**Returns:** View direction of the currently rendered scene.
+		`**Returns:** View direction of the currently rendered scene.
 		
 		___
 		### Lua Examples
@@ -5149,31 +4651,24 @@ package gmod.libs;
 		```lua 
 		print( EyeVector() )
 		```
-		
-		
     **/
     
     public static function EyeVector():Vector;
     #end
     #if client
     /**
-        Adds workshop related javascript functions to an HTML panel, used by the "Dupes" and "Saves" tabs in the spawnmenu. 
-		
+        Adds workshop related javascript functions to an HTML panel, used by the "Dupes" and "Saves" tabs in the spawnmenu.
 		
 		Name | Description
 		--- | ---
 		`htmlPanel` | Panel to add javascript functions to.
-		
-		
-		
     **/
     
     public static function JS_Workshop(htmlPanel:Panel):Void;
     #end
     #if server
     /**
-        Precache a sentence group in a sentences.txt definition file. 
-		
+        Precache a sentence group in a sentences.txt definition file.
 		
 		Name | Description
 		--- | ---
@@ -5191,28 +4686,22 @@ package gmod.libs;
 		**Output:**
 		
 		Precaches sounds used in all sentences starting with "METROPOLICE".
-		
-		
     **/
     
     public static function PrecacheSentenceGroup(group:String):Void;
     #end
     #if client
     /**
-        Clears focus from any text entries player may have focused. 
-		
-		
-		
+        Clears focus from any text entries player may have focused.
     **/
     
     public static function TextEntryLoseFocus():Void;
     #end
     #if client
     /**
-        Loads all preset settings for the presets library and returns them in a table 
+        Loads all preset settings for the presets library and returns them in a table
 		
-		
-		**Returns:** Preset data
+		`**Returns:** Preset data
 		
 		___
 		### Lua Examples
@@ -5222,16 +4711,13 @@ package gmod.libs;
 		```lua 
 		PrintTable(LoadPresets())
 		```
-		
-		
     **/
     
     public static function LoadPresets():AnyTable;
     #end
     #if server
     /**
-        Load and precache a custom sentence file. 
-		
+        Load and precache a custom sentence file.
 		
 		Name | Description
 		--- | ---
@@ -5249,45 +4735,36 @@ package gmod.libs;
 		**Output:**
 		
 		Loads and precaches the sentences.
-		
-		
     **/
     
     public static function PrecacheSentenceFile(filename:String):Void;
     #end
     
     /**
-        Dumps the networked variables of all entities into one table and returns it. 
+        Dumps the networked variables of all entities into one table and returns it.
 		
-		
-		**Returns:** Format: key = Entity for NWVars or number (always 0) for global vars value = table formatted as: key = string var name value = any type var value
-		
-		
+		`**Returns:** Format: key = Entity for NWVars or number (always 0) for global vars value = table formatted as: key = string var name value = any type var value
     **/
     
     public static function BuildNetworkedVarsTable():AnyTable;
     
     
     /**
-        Returns if the passed object is a table. 
-		
+        Returns if the passed object is a table.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is a table.
-		
-		
+		`**Returns:** True if the variable is a table.
     **/
     
-    public static function istable(variable:Any):Bool;
+    public static function istable(variable:Dynamic):Bool;
     
     
     /**
-        Creates an Angle object. 
-		
+        Creates an Angle object.
 		
 		Name | Description
 		--- | ---
@@ -5296,7 +4773,7 @@ package gmod.libs;
 		`roll` | The roll value of the angle.
 		
 		
-		**Returns:** Created angle
+		`**Returns:** Created angle
 		
 		___
 		### Lua Examples
@@ -5320,36 +4797,32 @@ package gmod.libs;
 		
 		0.00 0.00 0.00
 		0.00 0.00 0.00
-		
-		
     **/
     
     public static function Angle(?pitch:Float, ?yaw:Float, ?roll:Float):Angle;
     
     
     /**
-        Returns if the passed object is a number. 
-		
+        Returns if the passed object is a number.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is a number.
-		
-		
+		`**Returns:** True if the variable is a number.
     **/
     
-    public static function isnumber(variable:Any):Bool;
+    public static function isnumber(variable:Dynamic):Bool;
     
     #if client
     /**
         Creates or gets the rendertarget with the given name. 
 		
-		See GetRenderTargetEx for an advanced version of this function with more options. 
+		See GetRenderTargetEx for an advanced version of this function with more options.
 		
-		 
+		**Bug:** BUG This crashes when used on a cubemap texture. Issue Tracker: #2885
+		
 		Name | Description
 		--- | ---
 		`name` | The internal name of the render target.
@@ -5358,32 +4831,25 @@ package gmod.libs;
 		`additive` | Sets whenever the rt should be additive.
 		
 		
-		**Returns:** The render target
-		
-		
+		`**Returns:** The render target
     **/
     
     public static function GetRenderTarget(name:String, width:Float, height:Float, ?additive:Bool):ITexture;
     #end
     #if server
     /**
-        Suppress any networking from the server to the specified player. This is automatically called by the engine before/after a player fires their weapon, reloads, or causes any other similar shared-predicted event to occur. 
-		
+        Suppress any networking from the server to the specified player. This is automatically called by the engine before/after a player fires their weapon, reloads, or causes any other similar shared-predicted event to occur.
 		
 		Name | Description
 		--- | ---
 		`suppressPlayer` | The player to suppress any networking to.
-		
-		
-		
     **/
     
     public static function SuppressHostEvents(suppressPlayer:Player):Void;
     #end
     #if client
     /**
-        Draws the sobel shader, which detects edges and draws a black border. 
-		
+        Draws the sobel shader, which detects edges and draws a black border.
 		
 		Name | Description
 		--- | ---
@@ -5402,18 +4868,15 @@ package gmod.libs;
 		
 		end
 		```
-		
-		
     **/
     
     public static function DrawSobel(Threshold:Float):Void;
     #end
     
     /**
-        Returns a table with the names of files needed from the server you are currently joining. 
+        Returns a table with the names of files needed from the server you are currently joining.
 		
-		
-		**Returns:** table of file names
+		`**Returns:** table of file names
 		
 		___
 		### Lua Examples
@@ -5423,81 +4886,69 @@ package gmod.libs;
 		```lua 
 		PrintTable( GetDownloadables() )
 		```
-		
-		
     **/
     
     public static function GetDownloadables():AnyTable;
     
     #if client
     /**
-        Overwrites all presets with the supplied table. Used by the presets library for preset saving 
-		
+        Overwrites all presets with the supplied table. Used by the presets library for preset saving
 		
 		Name | Description
 		--- | ---
 		`presets` | Presets to be saved
-		
-		
-		
     **/
     
     public static function SavePresets(presets:AnyTable):Void;
     #end
     
     /**
-        Returns if the passed object is an Angle. 
-		
+        Returns if the passed object is an Angle.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is an Angle.
-		
-		
+		`**Returns:** True if the variable is an Angle.
     **/
     
-    public static function isangle(variable:Any):Bool;
+    public static function isangle(variable:Dynamic):Bool;
     
     
     /**
-        Gets the associated type ID of the variable. 
+        Gets the associated type ID of the variable.
 		
+		**Bug:** BUG This returns garbage for _LOADLIB objects. Request Tracker: #1120
+		
+		**Bug:** BUG This returns TYPE_NIL for protos. Request Tracker: #1459
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to get the type ID of.
 		
 		
-		**Returns:** The type ID of the variable. See the TYPE_ Enums.
-		
-		
+		`**Returns:** The type ID of the variable. See the TYPE_ Enums.
     **/
     
-    public static function TypeID(variable:Any):Float;
+    public static function TypeID(variable:Dynamic):TYPE;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used internally to check if the current server the player is on can be added to favorites or not. Does not check if the server is ALREADY in the favorites. 
+		Used internally to check if the current server the player is on can be added to favorites or not. Does not check if the server is ALREADY in the favorites.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function CanAddServerToFavorites():Bool;
     
     #if client
     /**
-        ***Deprecated:**   You should be using ScreenScale instead.
+        ***Deprecated:** You should be using ScreenScale instead.
 		
-		Returns a number based on the Size argument and your screen's width. Alias of ScreenScale. 
-		
+		Returns a number based on the Size argument and your screen's width. Alias of ScreenScale.
 		
 		Name | Description
 		--- | ---
@@ -5515,16 +4966,15 @@ package gmod.libs;
 		**Output:**
 		
 		105 (This will differ depending on your screen size.)
-		
-		
     **/
-    @:deprecated
+    @:deprecated("You should be using ScreenScale instead.")
     public static function SScale(Size:Float):Void;
     #end
     
     /**
-        Evaluates and executes the given code, will throw an error on failure. 
+        Evaluates and executes the given code, will throw an error on failure.
 		
+		**Note:** Local variables are not passed to the given code.
 		
 		Name | Description
 		--- | ---
@@ -5533,9 +4983,7 @@ package gmod.libs;
 		`handleError` | If false, this function will return a string containing any error messages instead of throwing an error.
 		
 		
-		**Returns:** If handleError is false, the error message (if any).
-		
-		
+		`**Returns:** If handleError is false, the error message (if any).
     **/
     
     public static function RunString(code:String, ?identifier:String, ?handleError:Bool):String;
@@ -5544,15 +4992,14 @@ package gmod.libs;
     /**
         Attempts to convert the value to a string. If the value is an object and its metatable has defined the __tostring metamethod, this will call that function. 
 		
-		print also uses this functionality. 
+		print also uses this functionality.
 		
-		 
 		Name | Description
 		--- | ---
 		`value` | The object to be converted to a string.
 		
 		
-		**Returns:** The string representation of the value.
+		`**Returns:** The string representation of the value.
 		
 		___
 		### Lua Examples
@@ -5565,48 +5012,37 @@ package gmod.libs;
 		**Output:**
 		
 		22
-		
-		
     **/
     
-    public static function tostring(value:Any):String;
+    public static function tostring(value:Dynamic):String;
     
     
     /**
-        Removes the given entity unless it is a player or the world entity 
-		
+        Removes the given entity unless it is a player or the world entity
 		
 		Name | Description
 		--- | ---
 		`ent` | Entity to safely remove.
-		
-		
-		
     **/
     
     public static function SafeRemoveEntity(ent:Entity):Void;
     
     #if client
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		A hacky method used to fix some bugs regarding DoF. 
-		
+		A hacky method used to fix some bugs regarding DoF.
 		
 		Name | Description
 		--- | ---
 		`enable` | Enables or disables depth-of-field mode
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function DOFModeHack(enable:Bool):Void;
     #end
     
     /**
-        Compares the two values without calling their __eq operator. 
-		
+        Compares the two values without calling their __eq operator.
 		
 		Name | Description
 		--- | ---
@@ -5614,34 +5050,27 @@ package gmod.libs;
 		`value2` | The second value to compare.
 		
 		
-		**Returns:** Whether or not the two values are equal.
-		
-		
+		`**Returns:** Whether or not the two values are equal.
     **/
     
-    public static function rawequal(value1:Any, value2:Any):Bool;
+    public static function rawequal(value1:Dynamic, value2:Dynamic):Bool;
     
     #if client
     /**
-        Renders the Super Depth of Field post-process effect 
-		
+        Renders the Super Depth of Field post-process effect
 		
 		Name | Description
 		--- | ---
 		`viewOrigin` | Origin to render the effect at
 		`viewAngles` | Angles to render the effect at
 		`viewFOV` | Field of View to render the effect at
-		
-		
-		
     **/
     
     public static function RenderSuperDoF(viewOrigin:Vector, viewAngles:Angle, viewFOV:Float):Void;
     #end
     
     /**
-        If the result of the first argument is false or nil, an error is thrown with the second argument as the message. 
-		
+        If the result of the first argument is false or nil, an error is thrown with the second argument as the message.
 		
 		Name | Description
 		--- | ---
@@ -5687,44 +5116,42 @@ package gmod.libs;
 		print(assert(5))
 		print(assert(true, "foo", 2, {}))
 		```
-		
-		
     **/
     
-    public static function assert(expression:Any, ?errorMessage:String, returns:Rest<Dynamic>):GlobalLibAssertReturn;
+    public static function assert(expression:Dynamic, ?errorMessage:String, returns:Rest<Dynamic>):GlobalLibAssertReturn;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Adds a frame to the currently recording demo. 
-		
-		
-		
+		Adds a frame to the currently recording demo.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function RecordDemoFrame():Void;
     
     
     /**
-        Defines a vector to be automatically networked to clients 
+        Defines a vector to be automatically networked to clients
 		
+		**Note:** Running this function clientside will only set it clientside for the client it is called on!
 		
 		Name | Description
 		--- | ---
 		`index` | Index to identify the global vector with
 		`vec` | Vector to be networked
-		
-		
-		
     **/
     
-    public static function SetGlobalVector(index:Any, vec:Vector):Void;
+    public static function SetGlobalVector(index:Dynamic, vec:Vector):Void;
     
     
     /**
-        Marks a Lua file to be sent to clients when they join the server. Doesn't do anything on the client - this means you can use it in a shared file without problems. 
+        Marks a Lua file to be sent to clients when they join the server. Doesn't do anything on the client - this means you can use it in a shared file without problems.
 		
+		**Warning:** If the file trying to be added is empty, an error will occur, and the file will not be sent to the client.
+		
+		**Note:** This function is not needed for scripts located in lua/autorun/ and lua/autorun/client/: they are automatically sent to clients.
+		
+		**Note:** You can add up to 8192 files.
 		
 		Name | Description
 		--- | ---
@@ -5746,8 +5173,6 @@ package gmod.libs;
 		```lua 
 		AddCSLuaFile()
 		```
-		
-		
     **/
     
     public static function AddCSLuaFile(?file:String):Void;
@@ -5756,10 +5181,9 @@ package gmod.libs;
     /**
         Returns the player object of the current client. 
 		
-		LocalPlayer() will return NULL until all entities have been initialized. See GM:InitPostEntity. 
+		LocalPlayer() will return NULL until all entities have been initialized. See GM:InitPostEntity.
 		
-		 
-		**Returns:** The player object representing the client.
+		`**Returns:** The player object representing the client.
 		
 		___
 		### Lua Examples
@@ -5772,16 +5196,13 @@ package gmod.libs;
 		**Output:**
 		
 		[Player][1][Player1]
-		
-		
     **/
     
     public static function LocalPlayer():Player;
     #end
     #if client
     /**
-        Draws the Color Modify shader, which can be used to adjust colors on screen. 
-		
+        Draws the Color Modify shader, which can be used to adjust colors on screen.
 		
 		Name | Description
 		--- | ---
@@ -5812,74 +5233,64 @@ package gmod.libs;
 		
 		end )
 		```
-		
-		
     **/
     
     public static function DrawColorModify(modifyParameters:AnyTable):Void;
     #end
     
     /**
-        ***Deprecated:**   Store the ConVar object retrieved with GetConVar and call ConVar: GetInt or ConVar: GetFloat on it.
+        ***Deprecated:** Store the ConVar object retrieved with GetConVar and call ConVar: GetInt or ConVar: GetFloat on it.
 		
-		Gets the numeric value ConVar with the specified name.     
+		Gets the numeric value ConVar with the specified name.
+		
 		Name | Description
 		--- | ---
 		`name` | Name of the ConVar to get.
 		
 		
-		**Returns:** The ConVar's value.
-		
-		
+		`**Returns:** The ConVar's value.
     **/
-    @:deprecated
+    @:deprecated("Store the ConVar object retrieved with GetConVar and call ConVar: GetInt or ConVar: GetFloat on it.")
     public static function GetConVarNumber(name:String):Float;
     
     
     /**
-        Returns true if the client is currently playing either a singleplayer or multiplayer game. 
+        Returns true if the client is currently playing either a singleplayer or multiplayer game.
 		
-		
-		**Returns:** True if we are in a game.
-		
-		
+		`**Returns:** True if we are in a game.
     **/
     
     public static function IsInGame():Bool;
     
     
     /**
-        ***INTERNAL:**   Use concommand. Add instead.
+        ***INTERNAL** Use concommand. Add instead.
 		
-		Tells the engine to register a console command. If the command was ran, the engine calls . .       
+		Tells the engine to register a console command. If the command was ran, the engine calls [concommand](https://wiki.garrysmod.com/page/Category:concommand). [Run](https://wiki.garrysmod.com/page/concommand/Run).
+		
 		Name | Description
 		--- | ---
 		`name` | The name of the console command to add.
 		`helpText` | The help text.
 		`flags` | Concommand flags using FCVAR_ Enums
-		
-		
-		
     **/
-    @:deprecated
-    public static function AddConsoleCommand(name:String, helpText:String, flags:Float):Void;
+    @:deprecated("INTERNAL: Use concommand. Add instead.")
+    public static function AddConsoleCommand(name:String, helpText:String, flags:FCVAR):Void;
     
     
     /**
-        Returns the current asynchronous in-game time. 
+        Returns the current asynchronous in-game time.
 		
-		
-		**Returns:** The asynchronous in-game time.
-		
-		
+		`**Returns:** The asynchronous in-game time.
     **/
     
     public static function UnPredictedCurTime():Float;
     
     
     /**
-        Converts a color from HSL color space into RGB color space and returns a Color structure. 
+        Converts a color from HSL color space into RGB color space and returns a Color structure.
 		
+		**Bug:** BUG The returned color will not have the color metatable. Issue Tracker: #2407
 		
 		Name | Description
 		--- | ---
@@ -5888,17 +5299,14 @@ package gmod.libs;
 		`value` | The lightness from 0-1.
 		
 		
-		**Returns:** The Color structure created from the HSL color space.
-		
-		
+		`**Returns:** The Color structure created from the HSL color space.
     **/
     
-    public static function HSLToColor(hue:Float, saturation:Float, value:Float):AnyTable;
+    public static function HSLToColor(hue:Float, saturation:Float, value:Float):Color;
     
     
     /**
-        Throws a Lua error and breaks out of the current call stack. 
-		
+        Throws a Lua error and breaks out of the current call stack.
 		
 		Name | Description
 		--- | ---
@@ -5917,24 +5325,20 @@ package gmod.libs;
 		**Output:**
 		
 		[ERROR] lua_run:1: garry
-		
-		
     **/
     
     public static function error(message:String, ?errorLevel:Float):Void;
     
     
     /**
-        Modifies the given vectors so that all of vector2's axis are larger than vector1's by switching them around. Also known as ordering vectors. 
+        Modifies the given vectors so that all of vector2's axis are larger than vector1's by switching them around. Also known as ordering vectors.
 		
+		**Note:** This function will irreversibly modify the given vectors
 		
 		Name | Description
 		--- | ---
 		`vector1` | Bounding box min resultant
 		`vector2` | Bounding box max resultant
-		
-		
-		
     **/
     
     public static function OrderVectors(vector1:Vector, vector2:Vector):Void;
@@ -5945,9 +5349,8 @@ package gmod.libs;
 		
 		This will only iterate though numerical keys, and these must also be sequential; starting at 1 with no gaps. 
 		
-		 For unordered pairs, see pairs. For pairs sorted by key in alphabetical order, see SortedPairs. 
+		 For unordered pairs, see pairs. For pairs sorted by key in alphabetical order, see SortedPairs.
 		
-		 
 		Name | Description
 		--- | ---
 		`tab` | The table to iterate over.
@@ -6007,23 +5410,17 @@ package gmod.libs;
 		    if ( Count > NUM ) then break end
 		end
 		```
-		
-		
     **/
     
     public static function ipairs(tab:AnyTable):GlobalLibIpairsReturn;
     
     #if client
     /**
-        Adds javascript function 'util.MotionSensorAvailable' to an HTML panel as a method to call Lua's motionsensor.IsAvailable function. 
-		
+        Adds javascript function 'util.MotionSensorAvailable' to an HTML panel as a method to call Lua's motionsensor.IsAvailable function.
 		
 		Name | Description
 		--- | ---
 		`htmlPanel` | Panel to add javascript function 'util.MotionSensorAvailable' to.
-		
-		
-		
     **/
     
     public static function JS_Utility(htmlPanel:Panel):Void;
@@ -6032,98 +5429,79 @@ package gmod.libs;
     /**
         Returns the panel that is used as a wrapper for the HUD. 
 		
-		See also vgui.GetWorldPanel 
+		See also vgui.GetWorldPanel
 		
-		  
-		
-		 
-		**Returns:** The HUD panel
-		
-		
+		`**Returns:** The HUD panel
     **/
     
     public static function GetHUDPanel():Panel;
     #end
     
     /**
-        Returns a TauntCamera object 
+        Returns a TauntCamera object
 		
-		
-		**Returns:** TauntCamera
-		
-		
+		`**Returns:** TauntCamera
     **/
     
     public static function TauntCamera():AnyTable;
     
     
     /**
-        Creates PhysCollide objects for every physics object the model has. The model must be precached with util.PrecacheModel before being used with this function. 
-		
+        Creates PhysCollide objects for every physics object the model has. The model must be precached with util.PrecacheModel before being used with this function.
 		
 		Name | Description
 		--- | ---
 		`modelName` | Model path to get the collision objects of.
 		
 		
-		**Returns:** Table of PhysCollide objects. The number of entries will match the model's physics object count. See also Entity: GetPhysicsObjectCount. Returns no value if the model doesn't exist, or has not been precached.
-		
-		
+		`**Returns:** Table of PhysCollide objects. The number of entries will match the model's physics object count. See also Entity: GetPhysicsObjectCount. Returns no value if the model doesn't exist, or has not been precached.
     **/
     
     public static function CreatePhysCollidesFromModel(modelName:String):AnyTable;
     
     
     /**
-        ***Deprecated:**   Store the ConVar object retrieved with GetConVar and call ConVar: GetString on it.
+        ***Deprecated:** Store the ConVar object retrieved with GetConVar and call ConVar: GetString on it.
 		
-		Gets the string value ConVar with the specified name.     
+		Gets the string value ConVar with the specified name.
+		
 		Name | Description
 		--- | ---
 		`name` | Name of the ConVar to get.
 		
 		
-		**Returns:** The ConVar's value.
-		
-		
+		`**Returns:** The ConVar's value.
     **/
-    @:deprecated
+    @:deprecated("Store the ConVar object retrieved with GetConVar and call ConVar: GetString on it.")
     public static function GetConVarString(name:String):String;
     
     #if client
     /**
-        Removes the currently active tool tip from the screen. 
-		
+        Removes the currently active tool tip from the screen.
 		
 		Name | Description
 		--- | ---
 		`panel` | This is the panel that has a tool tip.
-		
-		
-		
     **/
     
     public static function EndTooltip(panel:Panel):Void;
     #end
     #if client
     /**
-        Briefly displays layout details of the given panel on-screen 
-		
+        Briefly displays layout details of the given panel on-screen
 		
 		Name | Description
 		--- | ---
 		`panel` | Panel to display layout details of
-		
-		
-		
     **/
     
     public static function VisualizeLayout(panel:Panel):Void;
     #end
     
     /**
-        Creates a particle effect. 
+        Creates a particle effect.
 		
+		**Note:** The particle effect must be precached with PrecacheParticleSystem and the file its from must be added via game.AddParticles before it can be used!
 		
 		Name | Description
 		--- | ---
@@ -6149,50 +5527,38 @@ package gmod.libs;
 		    end )
 		end
 		```
-		
-		
     **/
     
     public static function ParticleEffect(particleName:String, position:Vector, angles:Angle, ?parent:Entity):Void;
     
     
     /**
-        Runs JavaScript on the loading screen panel (GetLoadPanel). 
-		
+        Runs JavaScript on the loading screen panel (GetLoadPanel).
 		
 		Name | Description
 		--- | ---
 		`javascript` | JavaScript to run on the loading panel.
-		
-		
-		
     **/
     
     public static function UpdateLoadPanel(javascript:String):Void;
     
     
     /**
-        Returns if the passed object is a Vector. 
-		
+        Returns if the passed object is a Vector.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is a Vector.
-		
-		
+		`**Returns:** True if the variable is a Vector.
     **/
     
-    public static function isvector(variable:Any):Bool;
+    public static function isvector(variable:Dynamic):Bool;
     
     #if client
     /**
-        Cancels current DOF post-process effect started with DOF_Start 
-		
-		
-		
+        Cancels current DOF post-process effect started with DOF_Start
     **/
     
     public static function DOF_Kill():Void;
@@ -6201,9 +5567,8 @@ package gmod.libs;
     /**
         Moves the given model to the given position and calculates appropriate camera parameters for rendering the model to an icon. 
 		
-		The output table interacts nicely with Panel:RebuildSpawnIconEx with a few key renames. 
+		The output table interacts nicely with Panel:RebuildSpawnIconEx with a few key renames.
 		
-		 
 		Name | Description
 		--- | ---
 		`model` | Model that is being rendered to the spawn icon
@@ -6211,7 +5576,7 @@ package gmod.libs;
 		`noAngles` | If true the function won't reset the angles to 0 for the model.
 		
 		
-		**Returns:** Table of information of the view which can be used for rendering
+		`**Returns:** Table of information of the view which can be used for rendering
 		
 		___
 		### Lua Examples
@@ -6225,8 +5590,6 @@ package gmod.libs;
 		
 		PrintTable(tab)
 		```
-		
-		
     **/
     
     public static function PositionSpawnIcon(model:Entity, position:Vector, noAngles:Bool):AnyTable;
@@ -6239,10 +5602,13 @@ package gmod.libs;
 		
 		 You should use this function for timing in-game events but not for real-world events. 
 		
-		 See also: RealTime, SysTime 
+		 See also: RealTime, SysTime
 		
-		 
-		**Returns:** Time synced with the game server.
+		**Note:** This is internally defined as a float, and as such it will be affected by precision loss if your server uptime is more than 6 hours, which will cause jittery movement of players and props and inaccuracy of timers, it is highly encouraged to refresh or change the map when that happens (a server restart is not necessary). This is NOT easy as it sounds to fix in the engine, so please refrain from posting issues about this
+		
+		**Bug:** BUG This returns 0 in GM:PlayerAuthed. Issue Tracker: #3026
+		
+		`**Returns:** Time synced with the game server.
 		
 		___
 		### Lua Examples
@@ -6260,62 +5626,53 @@ package gmod.libs;
 		**Output:**
 		
 		This message will repeat every 5 seconds.
-		
-		
     **/
     
     public static function CurTime():Float;
     
     
     /**
-        Returns if the passed object is an Entity. 
-		
+        Returns if the passed object is an Entity.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is an Entity.
-		
-		
+		`**Returns:** True if the variable is an Entity.
     **/
     
-    public static function isentity(variable:Any):Bool;
+    public static function isentity(variable:Dynamic):Bool;
     
     
     /**
-        Retrieves data about the save with the specified filename. Similar to GetDemoFileDetails. 
-		
+        Retrieves data about the save with the specified filename. Similar to GetDemoFileDetails.
 		
 		Name | Description
 		--- | ---
 		`filename` | The file name of the save.
 		
 		
-		**Returns:** Save data.
-		
-		
+		`**Returns:** Save data.
     **/
     
     public static function GetSaveFileDetails(filename:String):AnyTable;
     
     
     /**
-        Returns whether an object is valid or not. (Such as Entitys, Panels, custom table objects and more) Checks that an object is not nil, has an IsValid method and if this method returns true. 
+        Returns whether an object is valid or not. (Such as Entitys, Panels, custom table objects and more) Checks that an object is not nil, has an IsValid method and if this method returns true.
 		
+		**Note:** Due to vehicles being technically valid the moment they're spawned, also use Vehicle:IsValidVehicle to make sure they're fully initialized
 		
 		Name | Description
 		--- | ---
 		`toBeValidated` | The table or object to be validated.
 		
 		
-		**Returns:** True if the object is valid.
-		
-		
+		`**Returns:** True if the object is valid.
     **/
     
-    public static function IsValid(toBeValidated:Any):Bool;
+    public static function IsValid(toBeValidated:Dynamic):Bool;
     
     
     /**
@@ -6323,10 +5680,11 @@ package gmod.libs;
 		
 		This is useful for one-time logic in your SWEPs PrimaryAttack, SecondaryAttack and Reload and other predicted hooks (to prevent those hooks from being called rapidly in succession). It's also useful in a Move hook for when the client predicts movement. 
 		
-		 Visit Prediction for more information about this behavior. 
+		 Visit Prediction for more information about this behavior.
 		
-		 
-		**Returns:** Whether or not this is the first time being predicted.
+		**Note:** This is already used internally for Entity:EmitSound, Weapon:SendWeaponAnim and Entity:FireBullets, but NOT in util.Effect.
+		
+		`**Returns:** Whether or not this is the first time being predicted.
 		
 		___
 		### Lua Examples
@@ -6345,8 +5703,6 @@ package gmod.libs;
 		   end
 		end
 		```
-		
-		
     **/
     
     public static function IsFirstTimePredicted():Bool;
@@ -6357,9 +5713,10 @@ package gmod.libs;
 		
 		This function will make a World Tip that will only last 50 milliseconds (1/20th of a second), so you must call it continuously as long as you want the World Tip to be shown. It is common to call it inside a Think hook. 
 		
-		 Contrary to what the function's name implies, it is impossible to create more than one World Tip at the same time. A new World Tip will overwrite the old one, so only use this function when you know nothing else will also be using it. See SANDBOX:PaintWorldTips for more information. 
+		 Contrary to what the function's name implies, it is impossible to create more than one World Tip at the same time. A new World Tip will overwrite the old one, so only use this function when you know nothing else will also be using it. See SANDBOX:PaintWorldTips for more information.
 		
-		 
+		**Note:** This function is only available in Sandbox and its derivatives
+		
 		Name | Description
 		--- | ---
 		`entindex` | This argument is no longer used; it has no effect on anything. You can use nil in this argument.
@@ -6385,16 +5742,13 @@ package gmod.libs;
 		    AddWorldTip( nil, "Hello world!", nil, pos, ent )
 		end )
 		```
-		
-		
     **/
     
     public static function AddWorldTip(?entindex:Float, text:String, ?dieTime:Float, ?pos:Vector, ?ent:Entity):Void;
     #end
     
     /**
-        Returns the input value in an escaped form so that it can safely be used inside of queries. The returned value is surrounded by quotes unless noQuotes is true. Alias of sql.SQLStr 
-		
+        Returns the input value in an escaped form so that it can safely be used inside of queries. The returned value is surrounded by quotes unless noQuotes is true. Alias of sql.SQLStr
 		
 		Name | Description
 		--- | ---
@@ -6402,34 +5756,28 @@ package gmod.libs;
 		`noQuotes` | Whether the returned value should be surrounded in quotes or not
 		
 		
-		**Returns:** Escaped input
-		
-		
+		`**Returns:** Escaped input
     **/
     
     public static function SQLStr(input:String, ?noQuotes:Bool):String;
     
     
     /**
-        Returns if the passed object is a string. 
-		
+        Returns if the passed object is a string.
 		
 		Name | Description
 		--- | ---
 		`variable` | The variable to perform the type check for.
 		
 		
-		**Returns:** True if the variable is a string.
-		
-		
+		`**Returns:** True if the variable is a string.
     **/
     
-    public static function isstring(variable:Any):Bool;
+    public static function isstring(variable:Dynamic):Bool;
     
     
     /**
-        Just like Msg, except it can also print colored text, just like chat.AddText. 
-		
+        Just like Msg, except it can also print colored text, just like chat.AddText.
 		
 		Name | Description
 		--- | ---
@@ -6452,16 +5800,13 @@ package gmod.libs;
 		MsgC( Color( 137, 222, 255 ), "Default server color" )
 		MsgC( Color( 255, 222, 102 ), "Default client color" )
 		```
-		
-		
     **/
     
     public static function MsgC(args:Rest<Dynamic>):Void;
     
     #if client
     /**
-        Makes the panel (usually an input of sorts) respond to changes in console variables by adding next functions to the panel: 
-		
+        Makes the panel (usually an input of sorts) respond to changes in console variables by adding next functions to the panel:
 		
 		Name | Description
 		--- | ---
@@ -6488,16 +5833,13 @@ package gmod.libs;
 		**Output:**
 		
 		The PANEL table now contains the functions SetConVar, ConVarChanged, ConVarStringThink and ConVarNumberThink (and an Init function and a Think function)
-		
-		
     **/
     
     public static function Derma_Install_Convar_Functions(target:Panel):Void;
     #end
     
     /**
-        This function takes a numeric indexed table and return all the members as a vararg. If specified, it will start at the given index and end at end index. 
-		
+        This function takes a numeric indexed table and return all the members as a vararg. If specified, it will start at the given index and end at end index.
 		
 		Name | Description
 		--- | ---
@@ -6506,7 +5848,7 @@ package gmod.libs;
 		`endIndex` | Which index to end at. Optional, even if you set StartIndex.
 		
 		
-		**Returns:** Output values
+		`**Returns:** Output values
 		
 		___
 		### Lua Examples
@@ -6516,16 +5858,15 @@ package gmod.libs;
 		```lua 
 		print( unpack({"a", "b", "c"}) )
 		```
-		
-		
     **/
     
     public static function unpack(tbl:AnyTable, ?startIndex:Float, ?endIndex:Float):Rest<Dynamic>;
     
     #if client
     /**
-        Creates a new CLuaEmitter. 
+        Creates a new CLuaEmitter.
 		
+		**Note:** Do not forget to delete the emitter with CLuaEmitter:Finish once you are done with it
 		
 		Name | Description
 		--- | ---
@@ -6533,7 +5874,7 @@ package gmod.libs;
 		`use3D` | Whenever to render the particles in 2D or 3D mode.
 		
 		
-		**Returns:** The new particle emitter.
+		`**Returns:** The new particle emitter.
 		
 		___
 		### Lua Examples
@@ -6564,23 +5905,17 @@ package gmod.libs;
 		
 		emitter:Finish()
 		```
-		
-		
     **/
     
     public static function ParticleEmitter(position:Vector, use3D:Bool):CLuaEmitter;
     #end
     
     /**
-        Drops the specified entity if it is being held by any player with Gravity Gun or +use pickup. 
-		
+        Drops the specified entity if it is being held by any player with Gravity Gun or +use pickup.
 		
 		Name | Description
 		--- | ---
 		`ent` | The entity to drop.
-		
-		
-		
     **/
     
     public static function DropEntityIfHeld(ent:Entity):Void;
@@ -6623,12 +5958,12 @@ var b:Rest<Dynamic>;
 @:multiReturn extern class GlobalLibPairsReturn {
 var a:Function;
 var b:AnyTable;
-var c:Any;
+var c:Dynamic;
 
 }
 @:multiReturn extern class GlobalLibNextReturn {
-var a:Any;
-var b:Any;
+var a:Dynamic;
+var b:Dynamic;
 
 }
 @:multiReturn extern class GlobalLibMaterialReturn {
@@ -6647,14 +5982,12 @@ var b:AnyTable;
 var c:Float;
 
 }
-#if client
 @:multiReturn extern class GlobalLibFindTooltipReturn {
 var a:String;
 var b:Panel;
 var c:Panel;
 
 }
-#end
 @:multiReturn extern class GlobalLibCompileStringReturn {
 var a:Function;
 var b:String;
@@ -6673,12 +6006,9 @@ var c:Float;
 
 }
 @:multiReturn extern class GlobalLibAssertReturn {
-var a:Any;
-var b:Any;
+var a:Dynamic;
+var b:Dynamic;
 var c:Rest<Dynamic>;
 
 }
 
-#if !server
-private typedef CRecipientFilter = Dynamic;
-#end

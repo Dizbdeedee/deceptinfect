@@ -4,51 +4,40 @@ package gmod.hooks;
 /**
     Default weapon methods, that are available for use in SWEPs. These functions/hooks will not work on non-scripted weapons, such as the Half-Life 2 weapons. 
 	
-	You can find all available SWEP fields here: SWEP structure 
-	
-	 
+	You can find all available SWEP fields here: SWEP structure
 **/
-extern class Swep {
-
-	// public static var worldModel = "models/weapons/w_357.mdl";
-
+class Swep {
     #if client
     /**
         Called after the view model has been drawn while the weapon in use. This hook is called from the default implementation of GM:PostDrawViewModel, and as such, will not occur if it has been overridden. 
 		
-		WEAPON:ViewModelDrawn is an alternative hook which is always called before GM:PostDrawViewModel. 
+		WEAPON:ViewModelDrawn is an alternative hook which is always called before GM:PostDrawViewModel.
 		
-		 
 		Name | Description
 		--- | ---
 		`vm` | This is the view model entity after it is drawn
 		`weapon` | This is the weapon that is from the view model (same as self)
 		`ply` | The owner of the view model
-		
-		
-		
     **/
     
     @:hook
-    public function PostDrawViewModel(vm:Entity, weapon:Weapon, ply:Player):Void;
+    public function PostDrawViewModel(vm:Entity, weapon:Weapon, ply:Player):Void {}
     #end
     
     /**
-        Called when player has just switched to this weapon. 
+        Called when player has just switched to this weapon.
 		
+		**Note:** Due to this hook being predicted, it is not called clientside in singleplayer at all, and in multiplayer it will not be called clientside if the weapon is switched with Player:SelectWeapon or the "use" console command, however it will be called clientside with the default weapon selection menu and when using CUserCmd:SelectWeapon
 		
-		**Returns:** Return true to allow switching away from this weapon using lastinv command
-		
-		
+		`**Returns:** Return true to allow switching away from this weapon using lastinv command
     **/
     
     @:hook
-    public function Deploy():Bool;
+    public function Deploy():Bool {return null;}
     
     #if client
     /**
-        This hook allows you to adjust view model position and angles. 
-		
+        This hook allows you to adjust view model position and angles.
 		
 		Name | Description
 		--- | ---
@@ -96,17 +85,14 @@ extern class Swep {
 		    return EyePos, EyeAng
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function GetViewModelPosition(EyePos:Vector, EyeAng:Angle):SwepGetViewModelPositionReturn;
+    public function GetViewModelPosition(EyePos:Vector, EyeAng:Angle):SwepGetViewModelPositionReturn {return null;}
     #end
     
     /**
-        A convenience function to remove primary ammo from clip. 
-		
+        A convenience function to remove primary ammo from clip.
 		
 		Name | Description
 		--- | ---
@@ -134,37 +120,30 @@ extern class Swep {
 		    
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function TakePrimaryAmmo(amount:Float):Void;
+    public function TakePrimaryAmmo(amount:Float):Void {}
     
     #if client
     /**
-        Allows you to modify viewmodel while the weapon in use before it is drawn. This hook only works if you haven't overridden GM:PreDrawViewModel. 
-		
+        Allows you to modify viewmodel while the weapon in use before it is drawn. This hook only works if you haven't overridden GM:PreDrawViewModel.
 		
 		Name | Description
 		--- | ---
 		`vm` | This is the view model entity before it is drawn.
 		`weapon` | This is the weapon that is from the view model.
 		`ply` | The the owner of the view model.
-		
-		
-		
     **/
     
     @:hook
-    public function PreDrawViewModel(vm:Entity, weapon:Weapon, ply:Player):Void;
+    public function PreDrawViewModel(vm:Entity, weapon:Weapon, ply:Player):Void {}
     #end
     
     /**
-        Helper function for checking for no ammo. 
+        Helper function for checking for no ammo.
 		
-		
-		**Returns:** Can use secondary attack
+		`**Returns:** Can use secondary attack
 		
 		___
 		### Lua Examples
@@ -186,20 +165,17 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function CanSecondaryAttack():Bool;
+    public function CanSecondaryAttack():Bool {return null;}
     
     #if client
     /**
         This hook allows you to draw on screen while this weapon is in use. 
 		
-		If you want to draw a custom crosshair, consider using WEAPON:DoDrawCrosshair instead. 
+		If you want to draw a custom crosshair, consider using WEAPON:DoDrawCrosshair instead.
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -248,20 +224,19 @@ extern class Swep {
 		**Output:**
 		
 		Draws 4 lines for crosshairs
-		
-		
     **/
     
     @:hook
-    public function DrawHUD():Void;
+    public function DrawHUD():Void {}
     #end
     
     /**
         Called when secondary attack button ( +attack2 ) is pressed. 
 		
-		For issues with this hook being called rapidly on the client side, see the global function IsFirstTimePredicted. 
+		For issues with this hook being called rapidly on the client side, see the global function IsFirstTimePredicted.
 		
-		 
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
 		___
 		### Lua Examples
 		#### Example 1
@@ -287,17 +262,14 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function SecondaryAttack():Void;
+    public function SecondaryAttack():Void {}
     
     #if client
     /**
-        This hook draws the selection icon in the weapon selection menu. 
-		
+        This hook draws the selection icon in the weapon selection menu.
 		
 		Name | Description
 		--- | ---
@@ -340,17 +312,14 @@ extern class Swep {
 		    
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function DrawWeaponSelection(x:Float, y:Float, width:Float, height:Float, alpha:Float):Void;
+    public function DrawWeaponSelection(x:Float, y:Float, width:Float, height:Float, alpha:Float):Void {}
     #end
     #if client
     /**
-        A convenience function that draws the weapon info box, used in WEAPON:DrawWeaponSelection. 
-		
+        A convenience function that draws the weapon info box, used in WEAPON:DrawWeaponSelection.
 		
 		Name | Description
 		--- | ---
@@ -394,17 +363,14 @@ extern class Swep {
 		    
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PrintWeaponInfo(x:Float, y:Float, alpha:Float):Void;
+    public function PrintWeaponInfo(x:Float, y:Float, alpha:Float):Void {}
     #end
     
     /**
-        Called so the weapon can override the impact effects it makes. 
-		
+        Called so the weapon can override the impact effects it makes.
 		
 		Name | Description
 		--- | ---
@@ -412,7 +378,7 @@ extern class Swep {
 		`damageType` | The damage type of bullet. See DMG_ Enums
 		
 		
-		**Returns:** Return true to not do the default thing - which is to call UTIL_ImpactTrace in C++
+		`**Returns:** Return true to not do the default thing - which is to call UTIL_ImpactTrace in C++
 		
 		___
 		### Lua Examples
@@ -431,45 +397,41 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function DoImpactEffect(tr:AnyTable, damageType:Float):Bool;
+    public function DoImpactEffect(tr:TraceResult, damageType:DMG):Bool {return null;}
     
     #if server
     /**
         Called when the engine sets a value for this scripted weapon. 
 		
-		See GM:EntityKeyValue for a hook that works for all entities. See ENTITY:KeyValue for an SENT hook that works for scripted entities. 
+		See GM:EntityKeyValue for a hook that works for all entities. See ENTITY:KeyValue for an SENT hook that works for scripted entities.
 		
-		 
 		Name | Description
 		--- | ---
 		`key` | The key that was affected.
 		`value` | The new value.
 		
 		
-		**Returns:** Return true to suppress this KeyValue or return false or nothing to apply this key value.
-		
-		
+		`**Returns:** Return true to suppress this KeyValue or return false or nothing to apply this key value.
     **/
     
     @:hook
-    public function KeyValue(key:String, value:String):Bool;
+    public function KeyValue(key:String, value:String):Bool {return null;}
     #end
     
     /**
-        Allows to change players field of view while player holds the weapon. 
+        Allows to change players field of view while player holds the weapon.
 		
+		**Note:** This hook must be defined shared and return same value on both to properly affect Area Portals.
 		
 		Name | Description
 		--- | ---
 		`fov` | The current/default FOV.
 		
 		
-		**Returns:** The target FOV.
+		`**Returns:** The target FOV.
 		
 		___
 		### Lua Examples
@@ -484,100 +446,81 @@ extern class Swep {
 		**Output:**
 		
 		Players view is zoomed in.
-		
-		
     **/
     
     @:hook
-    public function TranslateFOV(fov:Float):Float;
+    public function TranslateFOV(fov:Float):Float {return null;}
     
     #if client
     /**
         Called every frame just before GM:RenderScene. 
 		
-		Used by the Tool Gun to render view model screens (TOOL:DrawToolScreen). 
+		Used by the Tool Gun to render view model screens (TOOL:DrawToolScreen).
 		
-		  
-		
-		 
-		
+		**Note:** Materials rendered in this hook require $ignorez parameter to draw properly.
     **/
     
     @:hook
-    public function RenderScreen():Void;
+    public function RenderScreen():Void {}
     #end
     #if client
     /**
-        This hook determines which parts of the HUD to draw. 
-		
+        This hook determines which parts of the HUD to draw.
 		
 		Name | Description
 		--- | ---
 		`element` | The HUD element in question
 		
 		
-		**Returns:** Return false to hide this HUD element
-		
-		
+		`**Returns:** Return false to hide this HUD element
     **/
     
     @:hook
-    public function HUDShouldDraw(element:String):Bool;
+    public function HUDShouldDraw(element:String):Bool {return null;}
     #end
     #if server
     /**
-        Called when a Citizen NPC is looking around to a (better) weapon to pickup. 
+        Called when a Citizen NPC is looking around to a (better) weapon to pickup.
 		
-		
-		**Returns:** Return true to allow this weapon to be picked up by NPCs.
-		
-		
+		`**Returns:** Return true to allow this weapon to be picked up by NPCs.
     **/
     
     @:hook
-    public function CanBePickedUpByNPCs():Bool;
+    public function CanBePickedUpByNPCs():Bool {return null;}
     #end
     #if server
     /**
-        Called when the weapon is used by NPCs to tell the NPC how to use this weapon. Controls amount of time the NPC can rest (not shoot) between bursts. 
-		
+        Called when the weapon is used by NPCs to tell the NPC how to use this weapon. Controls amount of time the NPC can rest (not shoot) between bursts.
 		
 		Name | Description
 		--- | ---
 		`a` | Minimum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is 0.3 seconds.
 		`b` | Maximum amount of time the NPC can rest (not shoot) between bursts in seconds. Default is 0.66 seconds.
-		
-		
-		
     **/
     
     @:hook
-    public function GetNPCRestTimes():SwepGetNPCRestTimesReturn;
+    public function GetNPCRestTimes():SwepGetNPCRestTimesReturn {return null;}
     #end
     #if server
     /**
         Called when the weapon is used by NPCs to determine how accurate the bullets fired should be. 
 		
-		The inaccuracy is simulated by changing the NPC:GetAimVector based on the value returned from this hook. 
+		The inaccuracy is simulated by changing the NPC:GetAimVector based on the value returned from this hook.
 		
-		 
 		Name | Description
 		--- | ---
 		`proficiency` | How proficient the NPC is with this gun. See WEAPON_PROFICIENCY_ Enums
 		
 		
-		**Returns:** An amount of degrees the bullets should deviate from the NPC's NPC: GetAimVector. Default is 15.
-		
-		
+		`**Returns:** An amount of degrees the bullets should deviate from the NPC's NPC: GetAimVector. Default is 15.
     **/
     
     @:hook
-    public function GetNPCBulletSpread(proficiency:Float):Float;
+    public function GetNPCBulletSpread(proficiency:WEAPON_PROFICIENCY):Float {return null;}
     #end
     #if client
     /**
-        Called when we are about to draw the translucent world model. 
-		
+        Called when we are about to draw the translucent world model.
 		
 		___
 		### Lua Examples
@@ -589,19 +532,16 @@ extern class Swep {
 		    self:DrawModel()
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function DrawWorldModelTranslucent():Void;
+    public function DrawWorldModelTranslucent():Void {}
     #end
     #if server
     /**
-        This hook is for NPCs, you return what they should try to do with it. 
+        This hook is for NPCs, you return what they should try to do with it.
 		
-		
-		**Returns:** A number defining what NPC should do with the weapon. Use the CAP_ Enums.
+		`**Returns:** A number defining what NPC should do with the weapon. Use the CAP_ Enums.
 		
 		___
 		### Lua Examples
@@ -615,19 +555,16 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function GetCapabilities():Float;
+    public function GetCapabilities():CAP {return null;}
     #end
     
     /**
-        Returns how much of secondary ammo the player has. 
+        Returns how much of secondary ammo the player has.
 		
-		
-		**Returns:** The amount of secondary ammo player has
+		`**Returns:** The amount of secondary ammo player has
 		
 		___
 		### Lua Examples
@@ -639,17 +576,14 @@ extern class Swep {
 		    return self.Owner:GetAmmoCount( self.Weapon:GetSecondaryAmmoType() )
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function Ammo2():Float;
+    public function Ammo2():Float {return null;}
     
     
     /**
-        A convenience function to create shoot effects. 
-		
+        A convenience function to create shoot effects.
 		
 		___
 		### Lua Examples
@@ -665,17 +599,14 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function ShootEffects():Void;
+    public function ShootEffects():Void {}
     
     
     /**
-        A convenience function to remove secondary ammo from clip. 
-		
+        A convenience function to remove secondary ammo from clip.
 		
 		Name | Description
 		--- | ---
@@ -703,19 +634,16 @@ extern class Swep {
 		    
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function TakeSecondaryAmmo(amount:Float):Void;
+    public function TakeSecondaryAmmo(amount:Float):Void {}
     
     
     /**
-        Helper function for checking for no ammo. 
+        Helper function for checking for no ammo.
 		
-		
-		**Returns:** Can use primary attack
+		`**Returns:** Can use primary attack
 		
 		___
 		### Lua Examples
@@ -738,28 +666,24 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function CanPrimaryAttack():Bool;
+    public function CanPrimaryAttack():Bool {return null;}
     
     
     /**
-        Called when the reload key ( +reload ) is pressed. 
+        Called when the reload key ( +reload ) is pressed.
 		
-		
-		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
     **/
     
     @:hook
-    public function Reload():Void;
+    public function Reload():Void {}
     
     
     /**
-        A convenience function to shoot bullets. 
-		
+        A convenience function to shoot bullets.
 		
 		Name | Description
 		--- | ---
@@ -769,18 +693,14 @@ extern class Swep {
 		`ammo_type` | Ammo type of the bullets
 		`force` | Force of the bullets
 		`tracer` | Show a tracer on every x bullets
-		
-		
-		
     **/
     
     @:hook
-    public function ShootBullet(damage:Float, num_bullets:Float, aimcone:Float, ?ammo_type:String, ?force:Float, ?tracer:Float):Void;
+    public function ShootBullet(damage:Float, num_bullets:Float, aimcone:Float, ?ammo_type:String, ?force:Float, ?tracer:Float):Void {}
     
     #if server
     /**
-        Called when another entity fires an event to this entity. 
-		
+        Called when another entity fires an event to this entity.
 		
 		Name | Description
 		--- | ---
@@ -790,7 +710,7 @@ extern class Swep {
 		`data` | The data passed.
 		
 		
-		**Returns:** Should we suppress the default action for this input?
+		`**Returns:** Should we suppress the default action for this input?
 		
 		___
 		### Lua Examples
@@ -813,19 +733,16 @@ extern class Swep {
 		    end
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function AcceptInput(inputName:String, activator:Entity, called:Entity, data:String):Bool;
+    public function AcceptInput(inputName:String, activator:Entity, called:Entity, data:String):Bool {return null;}
     #end
     #if client
     /**
-        Allows you to adjust the mouse sensitivity. This hook only works if you haven't overridden GM:AdjustMouseSensitivity. 
+        Allows you to adjust the mouse sensitivity. This hook only works if you haven't overridden GM:AdjustMouseSensitivity.
 		
-		
-		**Returns:** Sensitivity scale
+		`**Returns:** Sensitivity scale
 		
 		___
 		### Lua Examples
@@ -837,21 +754,18 @@ extern class Swep {
 		    return 0.5
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function AdjustMouseSensitivity():Float;
+    public function AdjustMouseSensitivity():Float {return null;}
     #end
     #if client
     /**
         Allows you to use any numbers you want for the ammo display on the HUD. 
 		
-		Can be useful for weapons that don't use standard ammo. 
+		Can be useful for weapons that don't use standard ammo.
 		
-		 
-		**Returns:** The new ammo display settings. A table with 4 possible keys: boolean Draw - Whether to draw the ammo display or not number PrimaryClip - Amount of primary ammo in the clip number PrimaryAmmo - Amount of primary ammo in the reserves number SecondaryAmmo - Amount of secondary ammo. It is shown like alt-fire for SMG1 and AR2 are shown. There is no SecondaryClip!
+		`**Returns:** The new ammo display settings. A table with 4 possible keys: boolean Draw - Whether to draw the ammo display or not number PrimaryClip - Amount of primary ammo in the clip number PrimaryAmmo - Amount of primary ammo in the reserves number SecondaryAmmo - Amount of secondary ammo. It is shown like alt-fire for SMG1 and AR2 are shown. There is no SecondaryClip!
 		
 		___
 		### Lua Examples
@@ -875,41 +789,38 @@ extern class Swep {
 		    return self.AmmoDisplay //return the table
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function CustomAmmoDisplay():AnyTable;
+    public function CustomAmmoDisplay():AnyTable {return null;}
     #end
     
     /**
-        Called when the swep is about to be removed. 
-		
-		
-		
+        Called when the swep is about to be removed.
     **/
     
     @:hook
-    public function OnRemove():Void;
+    public function OnRemove():Void {}
     
     
     /**
         Called when weapon is dropped or picked up by a new player. 
 		
-		See also WEAPON:OnDrop. 
-		
-		 
-		
+		See also WEAPON:OnDrop.
     **/
     
     @:hook
-    public function OwnerChanged():Void;
+    public function OwnerChanged():Void {}
     
     
     /**
-        Called when the weapon entity is created. 
+        Called when the weapon entity is created.
 		
+		**Note:** Entity:GetOwner will return NULL at this point because the weapon is not equpped by a player or NPC yet. Use WEAPON:Equip or WEAPON:Deploy if you need the owner to be valid.
+		
+		**Bug:** BUG This is sometimes not called clientside. You can work around this by setting a variable in Initialize and check if it exists in WEAPON:Think. See the example below. Issue Tracker: #2732
+		
+		**Bug:** BUG This is not called serverside after a quicksave. Issue Tracker: #3015
 		
 		___
 		### Lua Examples
@@ -942,33 +853,26 @@ extern class Swep {
 		    -- Other code
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function Initialize():Void;
+    public function Initialize():Void {}
     
     #if server
     /**
-        The player has picked up the weapon and has taken the ammo from it. The weapon will be removed immidiately after this call. 
-		
+        The player has picked up the weapon and has taken the ammo from it. The weapon will be removed immidiately after this call.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player who picked up the weapon
-		
-		
-		
     **/
     
     @:hook
-    public function EquipAmmo(ply:Player):Void;
+    public function EquipAmmo(ply:Player):Void {}
     #end
     #if client
     /**
-        Allows overriding the position and angle of the viewmodel. This hook only works if you haven't overridden GM:CalcViewModelView. 
-		
+        Allows overriding the position and angle of the viewmodel. This hook only works if you haven't overridden GM:CalcViewModelView.
 		
 		Name | Description
 		--- | ---
@@ -999,33 +903,29 @@ extern class Swep {
 		**Output:**
 		
 		Skin 0 Skin 1
-		
-		
     **/
     
     @:hook
-    public function CalcViewModelView(ViewModel:Entity, OldEyePos:Vector, OldEyeAng:Angle, EyePos:Vector, EyeAng:Angle):SwepCalcViewModelViewReturn;
+    public function CalcViewModelView(ViewModel:Entity, OldEyePos:Vector, OldEyeAng:Angle, EyePos:Vector, EyeAng:Angle):SwepCalcViewModelViewReturn {return null;}
     #end
     #if client
     /**
-        Allows you to override where the tracer effect comes from. ( Visual bullets ) 
+        Allows you to override where the tracer effect comes from. ( Visual bullets )
 		
-		
-		**Returns:** The new position to start tracer effect from
-		
-		
+		`**Returns:** The new position to start tracer effect from
     **/
     
     @:hook
-    public function GetTracerOrigin():Vector;
+    public function GetTracerOrigin():Vector {return null;}
     #end
     #if client
     /**
         Allows you to adjust player view while this weapon in use. 
 		
-		This hook is called from the default implementation of GM:CalcView ([1]). Therefore, it will not be called if any other hook added to CalcView returns any value, or if the current gamemode overrides the default hook and does not call the SWEP function. 
+		This hook is called from the default implementation of GM:CalcView ([1]). Therefore, it will not be called if any other hook added to CalcView returns any value, or if the current gamemode overrides the default hook and does not call the SWEP function.
 		
-		 
+		**Bug:** BUG SWEPs that define this function will not work with the taunt camera. Pull Request: #1348
+		
 		Name | Description
 		--- | ---
 		`ply` | The owner of weapon
@@ -1039,27 +939,23 @@ extern class Swep {
 		`a` | New position of players view
 		`b` | New angle of players view
 		`c` | New FOV of players view
-		
-		
-		
     **/
     
     @:hook
-    public function CalcView(ply:Player, pos:Vector, ang:Angle, fov:Float):SwepCalcViewReturn;
+    public function CalcView(ply:Player, pos:Vector, ang:Angle, fov:Float):SwepCalcViewReturn {return null;}
     #end
     
     /**
         Translate a player's Activity into a weapon's activity, depending on how you want the player to be holding the weapon. 
 		
-		For example, ACT_MP_RUN becomes ACT_HL2MP_RUN_PISTOL. 
+		For example, ACT_MP_RUN becomes ACT_HL2MP_RUN_PISTOL.
 		
-		 
 		Name | Description
 		--- | ---
 		`act` | The activity to translate
 		
 		
-		**Returns:** The translated activity
+		`**Returns:** The translated activity
 		
 		___
 		### Lua Examples
@@ -1084,24 +980,27 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function TranslateActivity(act:Float):Float;
+    public function TranslateActivity(act:Float):Float {return null;}
     
     
     /**
-        Called when weapon tries to holster. 
+        Called when weapon tries to holster.
 		
+		**Note:** This hook is predicted. This means that in singleplayer, it will not be called in the Client realm.
+		
+		**Bug:** BUG This is called twice for every holster clientside, one in prediction and one not. Issue Tracker: #2854
+		
+		**Bug:** BUG Before WEAPON:OnRemove is called, this function is only called serverside. Issue Tracker: #3133
 		
 		Name | Description
 		--- | ---
 		`weapon` | The weapon we are trying switch to.
 		
 		
-		**Returns:** Return true to allow weapon to holster
+		`**Returns:** Return true to allow weapon to holster
 		
 		___
 		### Lua Examples
@@ -1117,17 +1016,14 @@ extern class Swep {
 		**Output:**
 		
 		Switched to Toolgun Switched to weapon_crowbar
-		
-		
     **/
     
     @:hook
-    public function Holster(weapon:Entity):Bool;
+    public function Holster(weapon:Entity):Bool {return null;}
     
     
     /**
-        Sets the weapon deploy speed. This value needs to match on client and server. 
-		
+        Sets the weapon deploy speed. This value needs to match on client and server.
 		
 		Name | Description
 		--- | ---
@@ -1144,33 +1040,33 @@ extern class Swep {
 		    self.m_WeaponDeploySpeed = tonumber( speed )
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function SetDeploySpeed(speed:Float):Void;
+    public function SetDeploySpeed(speed:Float):Void {}
     
     
     /**
         Called when the swep thinks. 
 		
-		This hook won't be called during the deploy animation and when using Weapon:DefaultReload. 
+		This hook won't be called during the deploy animation and when using Weapon:DefaultReload.
 		
-		 
+		**Note:** Despite being a predicted hook, this hook is called clientside in single player, however it will not be recognized as a predicted hook to Player:GetCurrentCommand.
 		
+		**Note:** This hook will be called before Player movement is processed on the client, and after on the server.
+		
+		**Bug:** BUG This will not be run during deploy animations after a serverside-only deploy. This usually happens after picking up and dropping an object with +use. Issue Tracker: #2855
     **/
     
     @:hook
-    public function Think():Void;
+    public function Think():Void {}
     
     
     /**
         Called before firing animation events, such as muzzle flashes or shell ejections. 
 		
-		This will only be called serverside for 3000-range events, and clientside for 5000-range and other events. 
+		This will only be called serverside for 3000-range events, and clientside for 5000-range and other events.
 		
-		 
 		Name | Description
 		--- | ---
 		`pos` | Position of the effect.
@@ -1179,7 +1075,7 @@ extern class Swep {
 		`options` | Name or options of the event.
 		
 		
-		**Returns:** Return true to disable the effect.
+		`**Returns:** Return true to disable the effect.
 		
 		___
 		### Lua Examples
@@ -1226,17 +1122,14 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function FireAnimationEvent(pos:Vector, ang:Angle, event:Float, options:String):Bool;
+    public function FireAnimationEvent(pos:Vector, ang:Angle, event:Float, options:String):Bool {return null;}
     
     #if client
     /**
-        Called when we are about to draw the world model. 
-		
+        Called when we are about to draw the world model.
 		
 		___
 		### Lua Examples
@@ -1295,17 +1188,14 @@ extern class Swep {
 		**Output:**
 		
 		The World model is in the Players hand, with a skin applied. The World model when dropped.
-		
-		
     **/
     
     @:hook
-    public function DrawWorldModel():Void;
+    public function DrawWorldModel():Void {}
     #end
     
     /**
-        Called when the SWEP should set up its Data Tables. 
-		
+        Called when the SWEP should set up its Data Tables.
 		
 		___
 		### Lua Examples
@@ -1318,12 +1208,10 @@ extern class Swep {
 		    self:NetworkVar( "Vector", 0, "MuzzlePos" )
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function SetupDataTables():Void;
+    public function SetupDataTables():Void {}
     
     
     /**
@@ -1333,9 +1221,8 @@ extern class Swep {
 		
 		 When in singleplayer, this function is only called in the server realm. When in multiplayer, the hook will be called on both the server and the client in order to allow for prediction. 
 		
-		 You can force the hook to always be called on client like this: 
+		 You can force the hook to always be called on client like this:
 		
-		 
 		___
 		### Lua Examples
 		#### Example 1
@@ -1361,35 +1248,28 @@ extern class Swep {
 		
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function PrimaryAttack():Void;
+    public function PrimaryAttack():Void {}
     
     #if client
     /**
-        Called straight after the view model has been drawn. This is called before GM:PostDrawViewModel and WEAPON:PostDrawViewModel. 
-		
+        Called straight after the view model has been drawn. This is called before GM:PostDrawViewModel and WEAPON:PostDrawViewModel.
 		
 		Name | Description
 		--- | ---
 		`ViewModel` | Players view model
-		
-		
-		
     **/
     
     @:hook
-    public function ViewModelDrawn(ViewModel:Entity):Void;
+    public function ViewModelDrawn(ViewModel:Entity):Void {}
     #end
     
     /**
-        Returns how much of primary ammo the player has. 
+        Returns how much of primary ammo the player has.
 		
-		
-		**Returns:** The amount of primary ammo player has
+		`**Returns:** The amount of primary ammo player has
 		
 		___
 		### Lua Examples
@@ -1401,45 +1281,42 @@ extern class Swep {
 		    return self.Owner:GetAmmoCount( self.Weapon:GetPrimaryAmmoType() )
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function Ammo1():Float;
+    public function Ammo1():Float {return null;}
     
     #if server
     /**
         Called when weapon is dropped by Player:DropWeapon. 
 		
-		See also WEAPON:OwnerChanged. 
-		
-		 
-		
+		See also WEAPON:OwnerChanged.
     **/
     
     @:hook
-    public function OnDrop():Void;
+    public function OnDrop():Void {}
     #end
     #if server
     /**
         Should this weapon be dropped when its owner dies? 
 		
-		This only works if the player has Player:ShouldDropWeapon set to true. 
+		This only works if the player has Player:ShouldDropWeapon set to true.
 		
-		 
-		**Returns:** Return true to drop the weapon, false otherwise. Default ( if you don't return anything ) is false.
-		
-		
+		`**Returns:** Return true to drop the weapon, false otherwise. Default ( if you don't return anything ) is false.
     **/
     
     @:hook
-    public function ShouldDropOnDie():Bool;
+    public function ShouldDropOnDie():Bool {return null;}
     #end
     #if client
     /**
-        Called when the crosshair is about to get drawn, and allows you to override it. 
+        Called when the crosshair is about to get drawn, and allows you to override it.
 		
+		**Note:** This function will not be called if SWEP.DrawCrosshair set to false.
+		
+		**Note:** This function will not be called if player was affected by Player:CrosshairDisable.
+		
+		**Bug:** BUG The arguments passed to this function are not affected by SWEP.AccurateCrosshair. Issue Tracker: #2117
 		
 		Name | Description
 		--- | ---
@@ -1447,7 +1324,7 @@ extern class Swep {
 		`y` | Y coordinate of the crosshair.
 		
 		
-		**Returns:** Return true to override the default crosshair.
+		`**Returns:** Return true to override the default crosshair.
 		
 		___
 		### Lua Examples
@@ -1461,43 +1338,34 @@ extern class Swep {
 		    return true
 		end
 		```
-		
-		
     **/
     
     @:hook
-    public function DoDrawCrosshair(x:Float, y:Float):Bool;
+    public function DoDrawCrosshair(x:Float, y:Float):Bool {return null;}
     #end
     #if server
     /**
-        Called when the weapon is used by NPCs to tell the NPC how to use this weapon. Controls how long the NPC can or should shoot continuously. 
-		
+        Called when the weapon is used by NPCs to tell the NPC how to use this weapon. Controls how long the NPC can or should shoot continuously.
 		
 		Name | Description
 		--- | ---
 		`a` | Minimum amount of bullets per burst. Default is 1.
 		`b` | Maximum amount of bullets per burst. Default is 1.
 		`c` | Delay between each shot, aka firerate. Default is 1.
-		
-		
-		
     **/
     
     @:hook
-    public function GetNPCBurstSettings():SwepGetNPCBurstSettingsReturn;
+    public function GetNPCBurstSettings():SwepGetNPCBurstSettingsReturn {return null;}
     #end
     #if client
     /**
-        Called to determine if the view model should be drawn or not. 
+        Called to determine if the view model should be drawn or not.
 		
-		
-		**Returns:** Return true to draw the view model, false otherwise.
-		
-		
+		`**Returns:** Return true to draw the view model, false otherwise.
     **/
     
     @:hook
-    public function ShouldDrawViewModel():Bool;
+    public function ShouldDrawViewModel():Bool {return null;}
     #end
     
     /**
@@ -1505,83 +1373,65 @@ extern class Swep {
 		
 		For the duplicator library callbacks, see ENTITY:OnDuplicated. 
 		
-		 See also saverestore library for relevant functions. 
-		
-		 
-		
+		 See also saverestore library for relevant functions.
     **/
     
     @:hook
-    public function OnRestore():Void;
+    public function OnRestore():Void {}
     
     
     /**
-        Called whenever the weapons Lua script is reloaded. 
-		
-		
-		
+        Called whenever the weapons Lua script is reloaded.
     **/
     
     @:hook
-    public function OnReloaded():Void;
+    public function OnReloaded():Void {}
     
     #if client
     /**
-        This hook allows you to freeze players screen. 
+        This hook allows you to freeze players screen.
 		
+		**Note:** Player will still be able to move or shoot
 		
-		**Returns:** Return true to freeze moving the view
-		
-		
+		`**Returns:** Return true to freeze moving the view
     **/
     
     @:hook
-    public function FreezeMovement():Bool;
+    public function FreezeMovement():Bool {return null;}
     #end
     #if server
     /**
-        Called when a player or NPC has picked the weapon up. 
-		
+        Called when a player or NPC has picked the weapon up.
 		
 		Name | Description
 		--- | ---
 		`NewOwner` | The one who picked the weapon up. Can be Player or NPC.
-		
-		
-		
     **/
     
     @:hook
-    public function Equip(NewOwner:Entity):Void;
+    public function Equip(NewOwner:Entity):Void {}
     #end
     
     /**
         Sets the hold type of the weapon. This must be called on both the server and the client to work properly. 
 		
-		NOTE: You should avoid calling this function and call Weapon:SetHoldType now. 
+		NOTE: You should avoid calling this function and call Weapon:SetHoldType now.
 		
-		 
 		Name | Description
 		--- | ---
 		`name` | Name of the hold type. You can find all default hold types here
-		
-		
-		
     **/
     
     @:hook
-    public function SetWeaponHoldType(name:String):Void;
+    public function SetWeaponHoldType(name:String):Void {}
     
     #if client
     /**
-        This hook allows you to draw on screen while this weapon is in use. This hook is called before WEAPON:DrawHUD and is equivalent of GM:HUDPaintBackground. 
-		
-		
-		
+        This hook allows you to draw on screen while this weapon is in use. This hook is called before WEAPON:DrawHUD and is equivalent of GM:HUDPaintBackground.
     **/
     
     @:hook
-    public function DrawHUDBackground():Void;
+    public function DrawHUDBackground():Void {}
     #end
     
 }

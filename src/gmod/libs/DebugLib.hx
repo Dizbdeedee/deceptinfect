@@ -2,15 +2,12 @@ package gmod.libs;
 
 
 /**
-    The debug library is intended to help you debug your scripts, however it also has several other powerful uses. 
-	
-	
+    The debug library is intended to help you debug your scripts, however it also has several other powerful uses.
 **/
 @:native("debug")extern class DebugLib {
     
     /**
-        Returns the current hook settings of the passed thread. The thread argument can be omitted. This is unrelated to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html 
-		
+        Returns the current hook settings of the passed thread. The thread argument can be omitted. This is unrelated to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html
 		
 		Name | Description
 		--- | ---
@@ -22,26 +19,20 @@ package gmod.libs;
 		`a` | Hook function
 		`b` | Hook mask
 		`c` | Hook count
-		
-		
-		
     **/
     
     public static function gethook(?thread:Thread):DebugLibGethookReturn;
     
     
     /**
-        Returns the environment of the passed object. This can be set with debug.setfenv 
-		
+        Returns the environment of the passed object. This can be set with debug.setfenv
 		
 		Name | Description
 		--- | ---
 		`object` | Object to get environment of
 		
 		
-		**Returns:** Environment
-		
-		
+		`**Returns:** Environment
     **/
     
     public static function getfenv(object:AnyTable):AnyTable;
@@ -50,43 +41,35 @@ package gmod.libs;
     /**
         Sets the given function as a Lua hook. This is completely different to gamemode hooks. The thread argument can be completely omitted and calling this function with no arguments will remove the current hook. This is used by default for infinite loop detection. More information on hooks can be found at http://www.lua.org/pil/23.2.html 
 		
-		Hooks are not always ran when code that has been compiled by LuaJIT's JIT compiler is being executed. This means that relying on them for infinite loop protection is unwise. 
+		Hooks are not always ran when code that has been compiled by LuaJIT's JIT compiler is being executed. This means that relying on them for infinite loop protection is unwise.
 		
-		 
 		Name | Description
 		--- | ---
 		`thread` | Thread to set the hook on. This argument can be omited
 		`hook` | Function for the hook to call
 		`mask` | The hook's mask
 		`count` | How often to call the hook (in instructions). 0 for every instruction
-		
-		
-		
     **/
     
     public static function sethook(thread:Thread, hook:Function, mask:String, count:Float):Void;
     
     
     /**
-        Returns the metatable of an object. This function ignores the metatable's __metatable field. 
-		
+        Returns the metatable of an object. This function ignores the metatable's __metatable field.
 		
 		Name | Description
 		--- | ---
 		`object` | The object to retrieve the metatable from.
 		
 		
-		**Returns:** The metatable of the given object.
-		
-		
+		`**Returns:** The metatable of the given object.
     **/
     
-    public static function getmetatable(object:Any):AnyTable;
+    public static function getmetatable(object:Dynamic):AnyTable;
     
     
     /**
-        Sets a local variable's value. 
-		
+        Sets a local variable's value.
 		
 		Name | Description
 		--- | ---
@@ -96,7 +79,7 @@ package gmod.libs;
 		`value` | The value to set the local to
 		
 		
-		**Returns:** The name of the local variable if the local at the index exists, otherwise nil is returned.
+		`**Returns:** The name of the local variable if the local at the index exists, otherwise nil is returned.
 		
 		___
 		### Lua Examples
@@ -140,16 +123,13 @@ package gmod.libs;
 		2	=	I'm actually your mother.
 		1	=	var2
 		2	=	Chemo-chi
-		
-		
     **/
     
-    public static function setlocal(?thread:Thread, level:Float, index:Float, ?value:Any):String;
+    public static function setlocal(?thread:Thread, level:Float, index:Float, ?value:Dynamic):String;
     
     
     /**
-        Returns an unique identifier for the upvalue indexed from func 
-		
+        Returns an unique identifier for the upvalue indexed from func
 		
 		Name | Description
 		--- | ---
@@ -157,7 +137,7 @@ package gmod.libs;
 		`index` | The index from func
 		
 		
-		**Returns:** A unique identifier
+		`**Returns:** A unique identifier
 		
 		___
 		### Lua Examples
@@ -170,16 +150,13 @@ package gmod.libs;
 		**Output:**
 		
 		userdata
-		
-		
     **/
     
     public static function upvalueid(func:Function, index:Float):Float;
     
     
     /**
-        Sets the object's metatable. Unlike setmetatable, this function works regardless of whether the first object passed is a valid table or not; this function even works on primitive datatypes such as numbers, functions, and even nil. 
-		
+        Sets the object's metatable. Unlike setmetatable, this function works regardless of whether the first object passed is a valid table or not; this function even works on primitive datatypes such as numbers, functions, and even nil.
 		
 		Name | Description
 		--- | ---
@@ -187,17 +164,14 @@ package gmod.libs;
 		`metatable` | The metatable to set for the object. If this argument is nil, then the object's metatable is removed.
 		
 		
-		**Returns:** true if the object's metatable was set successfully.
-		
-		
+		`**Returns:** true if the object's metatable was set successfully.
     **/
     
-    public static function setmetatable(object:Any, metatable:AnyTable):Bool;
+    public static function setmetatable(object:Dynamic, metatable:AnyTable):Bool;
     
     
     /**
-        Make the n1-th upvalue of the Lua closure f1 refer to the n2-th upvalue of the Lua closure f2. 
-		
+        Make the n1-th upvalue of the Lua closure f1 refer to the n2-th upvalue of the Lua closure f2.
 		
 		Name | Description
 		--- | ---
@@ -205,17 +179,13 @@ package gmod.libs;
 		`n1` | 
 		`f2` | 
 		`n2` | 
-		
-		
-		
     **/
     
     public static function upvaluejoin(f1:Function, n1:Float, f2:Function, n2:Float):Void;
     
     
     /**
-        Sets the variable indexed from func 
-		
+        Sets the variable indexed from func
 		
 		Name | Description
 		--- | ---
@@ -224,7 +194,7 @@ package gmod.libs;
 		`val` | The value to set the upvalue to.
 		
 		
-		**Returns:** Returns nil if there is no upvalue with the given index, otherwise it returns the upvalue's name.
+		`**Returns:** Returns nil if there is no upvalue with the given index, otherwise it returns the upvalue's name.
 		
 		___
 		### Lua Examples
@@ -238,30 +208,26 @@ package gmod.libs;
 		
 		print(debug.setupvalue(hook.Add, 1, my_isfunction))
 		```
-		
-		
     **/
     
-    public static function setupvalue(func:Function, index:Float, ?val:Any):String;
+    public static function setupvalue(func:Function, index:Float, ?val:Dynamic):String;
     
     
     /**
         Returns the internal Lua registry table. 
 		
-		The Lua registry is used by the engine and binary modules to create references to Lua values. Avoid creating entries into the registry with a number as the key, as they are reserved for the reference system. 
+		The Lua registry is used by the engine and binary modules to create references to Lua values. Avoid creating entries into the registry with a number as the key, as they are reserved for the reference system.
 		
-		 
-		**Returns:** The Lua registry
+		**Warning:** Improper editing of the registry can result in unintended side effects, including crashing of the game.
 		
-		
+		`**Returns:** The Lua registry
     **/
     
     public static function getregistry():AnyTable;
     
     
     /**
-        Returns a full execution stack trace. 
-		
+        Returns a full execution stack trace.
 		
 		Name | Description
 		--- | ---
@@ -270,7 +236,7 @@ package gmod.libs;
 		`level` | Which level to start the traceback.
 		
 		
-		**Returns:** A dump of the execution stack.
+		`**Returns:** A dump of the execution stack.
 		
 		___
 		### Lua Examples
@@ -301,26 +267,20 @@ package gmod.libs;
 		stack traceback:        lua_run:1: in function 'AnotherTracebackFunction'
 		       lua_run:1: in function 'TracebackTest'
 		 lua_run:1: in main chunk
-		
-		
     **/
     
     public static function traceback(?thread:Thread, ?message:String, ?level:Float):String;
     
     
     /**
-        Enters an interactive mode with the user, running each string that the user enters. Using simple commands and other debug facilities, the user can inspect global and local variables, change their values, evaluate expressions, and so on. A line containing only the word cont finishes this function, so that the caller continues its execution. 
-		
-		
-		
+        Enters an interactive mode with the user, running each string that the user enters. Using simple commands and other debug facilities, the user can inspect global and local variables, change their values, evaluate expressions, and so on. A line containing only the word cont finishes this function, so that the caller continues its execution.
     **/
     
     public static function debug():Void;
     
     
     /**
-        Sets the environment of the passed object. 
-		
+        Sets the environment of the passed object.
 		
 		Name | Description
 		--- | ---
@@ -328,7 +288,7 @@ package gmod.libs;
 		`env` | Environment to set
 		
 		
-		**Returns:** The object
+		`**Returns:** The object
 		
 		___
 		### Lua Examples
@@ -350,16 +310,13 @@ package gmod.libs;
 		
 		Display()
 		```
-		
-		
     **/
     
     public static function setfenv(object:AnyTable, env:AnyTable):AnyTable;
     
     
     /**
-        Used for getting variable values in an index from the passed function. This does nothing for C functions. 
-		
+        Used for getting variable values in an index from the passed function. This does nothing for C functions.
 		
 		Name | Description
 		--- | ---
@@ -443,16 +400,17 @@ package gmod.libs;
 				1	=	table
 				2	=	true
 				3	=	variable
-		
-		
     **/
     
-    public static function getupvalue(func:Function, index:Float):DebugLibGetupvalueReturn;
+    public static function getupvalue(func:Function, index:DebugInfo):DebugLibGetupvalueReturn;
     
     
     /**
-        Gets the name and value of a local variable indexed from the level 
+        Gets the name and value of a local variable indexed from the level
 		
+		**Warning:** When a function has a tailcall return, you cannot access the locals of this function
+		
+		**Note:** Variables with names starting with ( are internal variables.
 		
 		Name | Description
 		--- | ---
@@ -520,16 +478,13 @@ package gmod.libs;
 		event_name
 		name
 		func
-		
-		
     **/
     
     public static function getlocal(?thread:Thread, level:Float, index:Float):DebugLibGetlocalReturn;
     
     
     /**
-        Prints out the lua function call stack to the console. 
-		
+        Prints out the lua function call stack to the console.
 		
 		___
 		### Lua Examples
@@ -544,16 +499,13 @@ package gmod.libs;
 		Trace: 
 		 1: Line 32 "Trace" lua/includes/extensions/debug.lua
 		 2: Line 1 "(null)" LuaCmd
-		
-		
     **/
     
     public static function Trace():Void;
     
     
     /**
-        Returns debug information about a function. 
-		
+        Returns debug information about a function.
 		
 		Name | Description
 		--- | ---
@@ -561,7 +513,7 @@ package gmod.libs;
 		`fields` | A string whose characters specify the information to be retrieved. f - Populates the func field. l - Populates the currentline field. L - Populates the activelines field. n - Populates the name and namewhat fields - only works if stack level is passed rather than function pointer. S - Populates the location fields (lastlinedefined, linedefined, short_src, source and what). u - Populates the argument and upvalue fields (isvararg, nparams, nups)
 		
 		
-		**Returns:** A table as a DebugInfo structure containing information about the function you passed. Can return nil if the stack level didn't point to a valid stack frame.
+		`**Returns:** A table as a DebugInfo structure containing information about the function you passed. Can return nil if the stack level didn't point to a valid stack frame.
 		
 		___
 		### Lua Examples
@@ -571,11 +523,9 @@ package gmod.libs;
 		```lua 
 		PrintTable( debug.getinfo( net.Receive ) )
 		```
-		
-		
     **/
     
-    public static function getinfo(funcOrStackLevel:Function, ?fields:String):AnyTable;
+    public static function getinfo(funcOrStackLevel:Function, ?fields:String):DebugInfo;
     
     
 
@@ -584,12 +534,12 @@ package gmod.libs;
 
 @:multiReturn extern class DebugLibGetupvalueReturn {
 var a:String;
-var b:Any;
+var b:Dynamic;
 
 }
 @:multiReturn extern class DebugLibGetlocalReturn {
 var a:String;
-var b:Any;
+var b:Dynamic;
 
 }
 @:multiReturn extern class DebugLibGethookReturn {

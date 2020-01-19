@@ -2,32 +2,23 @@ package gmod.panels;
 #if client
 
 /**
-    The DColorCombo allows the user to choose color, without alpha, using DColorMixer or DColorPalette in a tabbed view. 
-	
-	
+    The DColorCombo allows the user to choose color, without alpha, using DColorMixer or DColorPalette in a tabbed view.
 **/
 extern class DColorCombo extends DPropertySheet {
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called internally to create panels necessary for this panel to work. 
-		
-		
-		
+		Called internally to create panels necessary for this panel to work.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function BuildControls():Void;
     /**
-        Called when the value (color) of this panel was changed. 
-		
+        Called when the value (color) of this panel was changed.
 		
 		Name | Description
 		--- | ---
 		`newcol` | 
-		
-		
-		
     **/
     
     @:hook 
@@ -35,41 +26,31 @@ extern class DColorCombo extends DPropertySheet {
     /**
         Returns true if the panel is currently being edited 
 		
-		More of a internal method, it technically should only ever work (i.e. return true) inside DColorCombo:OnValueChanged. 
+		More of a internal method, it technically should only ever work (i.e. return true) inside DColorCombo:OnValueChanged.
 		
-		 
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function IsEditing():Bool;
     /**
-        Returns the color of the DColorCombo. 
+        Returns the color of the DColorCombo.
 		
-		
-		**Returns:** A Color structure
-		
-		
+		`**Returns:** A Color structure
     **/
     
      
-    public function GetColor():AnyTable;
+    public function GetColor():Color;
     /**
-        Sets the color of this panel. 
-		
+        Sets the color of this panel.
 		
 		Name | Description
 		--- | ---
 		`clr` | A Color structure.
-		
-		
-		
     **/
     
      
-    public function SetColor(clr:AnyTable):Void;
+    public function SetColor(clr:Color):Void;
     
 }
 

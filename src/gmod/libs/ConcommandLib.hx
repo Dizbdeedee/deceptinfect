@@ -2,15 +2,16 @@ package gmod.libs;
 
 
 /**
-    The concommand library is used to create console commands which can be used to network (basic) information & events between the client and the server. 
-	
-	
+    The concommand library is used to create console commands which can be used to network (basic) information & events between the client and the server.
 **/
 @:native("concommand")extern class ConcommandLib {
     
     /**
-        Removes a console command. 
+        Removes a console command.
 		
+		**Bug:** BUG This will not always remove the command from auto-complete. Issue Tracker: #1183
+		
+		**Bug:** BUG concommand.Add will fail if the concommand was previously removed with this function in a different realm (creating a command on the client that was removed from the server and vice-versa). Issue Tracker: #1183
 		
 		Name | Description
 		--- | ---
@@ -25,16 +26,15 @@ package gmod.libs;
 		```lua 
 		concommand.Remove("gmod_camera")
 		```
-		
-		
     **/
     
     public static function Remove(name:String):Void;
     
     
     /**
-        Creates a console command that runs a function in lua with optional autocompletion function and help text. 
+        Creates a console command that runs a function in lua with optional autocompletion function and help text.
 		
+		**Bug:** BUG This will fail if the concommand was previously removed with concommand.Remove in a different realm (creating a command on the client that was removed from the server and vice-versa). Issue Tracker: #1183
 		
 		Name | Description
 		--- | ---
@@ -67,55 +67,47 @@ package gmod.libs;
 		    end
 		end)
 		```
-		
-		
     **/
     
-    public static function Add(name:String, callback:Function, ?autoComplete:Function, ?helpText:String, ?flags:Float):Void;
+    public static function Add(name:String, callback:Function, ?autoComplete:Function, ?helpText:String, ?flags:FCVAR):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used by the engine to call the autocomplete function for a console command, and retrieve returned options.       
+		Used by the engine to call the autocomplete function for a console command, and retrieve returned options.
+		
 		Name | Description
 		--- | ---
 		`command` | Name of command
 		`arguments` | Arguments given to the command
 		
 		
-		**Returns:** Possibilities for auto-completion. This is the return value of the auto-complete callback.
-		
-		
+		`**Returns:** Possibilities for auto-completion. This is the return value of the auto-complete callback.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function AutoComplete(command:String, arguments:String):AnyTable;
     
     
     /**
-        Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add. 
-		
+        Returns the tables of all console command callbacks, and autocomplete functions, that were added to the game with concommand.Add.
 		
 		Name | Description
 		--- | ---
 		`a` | Table of command callback functions.
 		`b` | Table of command autocomplete functions.
-		
-		
-		
     **/
     
     public static function GetTable():ConcommandLibGetTableReturn;
     
     
     /**
-        ***INTERNAL:**   You might be looking for RunConsoleCommand or Player: ConCommand.
+        ***INTERNAL** You might be looking for RunConsoleCommand or Player: ConCommand.
 		
 		Used by the engine to run a console command's callback function. This will only be called for commands that were added with AddConsoleCommand, which concommand.Add calls internally. An error is sent to the player's chat if no callback is found. 
 		
-		This will still be called for concommands removed with concommand.Remove but will return false. 
+		This will still be called for concommands removed with concommand.Remove but will return false.
 		
-		 
 		Name | Description
 		--- | ---
 		`ply` | Player to run concommand on
@@ -124,12 +116,10 @@ package gmod.libs;
 		`argumentString` | string of all arguments sent to the command
 		
 		
-		**Returns:** true if the console command with the given name exists, and false if it doesn't.
-		
-		
+		`**Returns:** true if the console command with the given name exists, and false if it doesn't.
     **/
-    @:deprecated
-    public static function Run(ply:Player, cmd:String, args:Any, argumentString:String):Bool;
+    @:deprecated("INTERNAL: You might be looking for RunConsoleCommand or Player: ConCommand.")
+    public static function Run(ply:Player, cmd:String, args:Dynamic, argumentString:String):Bool;
     
     
 

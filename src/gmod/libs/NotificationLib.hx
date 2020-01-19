@@ -2,30 +2,23 @@ package gmod.libs;
 #if client
 
 /**
-    Used to display notifications on the screen (mid-right). 
-	
-	
+    Used to display notifications on the screen (mid-right).
 **/
 @:native("notification")extern class NotificationLib {
     
     /**
-        Removes the notification after 0.8 seconds. 
-		
+        Removes the notification after 0.8 seconds.
 		
 		Name | Description
 		--- | ---
 		`uid` | The unique ID of the notification
-		
-		
-		
     **/
     
-    public static function Kill(uid:Any):Void;
+    public static function Kill(uid:Dynamic):Void;
     
     
     /**
-        Adds a notification with an animated progress bar. 
-		
+        Adds a notification with an animated progress bar.
 		
 		Name | Description
 		--- | ---
@@ -44,16 +37,13 @@ package gmod.libs;
 		    notification.Kill("FileDownload")
 		end)
 		```
-		
-		
     **/
     
-    public static function AddProgress(id:Any, strText:String):Void;
+    public static function AddProgress(id:Dynamic, strText:String):Void;
     
     
     /**
-        Adds a standard notification to your screen. 
-		
+        Adds a standard notification to your screen.
 		
 		Name | Description
 		--- | ---
@@ -75,11 +65,9 @@ package gmod.libs;
 		**Output:**
 		
 		Adds a notice that says "Undone Prop", plays the undo sound, and adds a message to the console.
-		
-		
     **/
     
-    public static function AddLegacy(text:String, type:Float, length:Float):Void;
+    public static function AddLegacy(text:String, type:NOTIFY, length:Float):Void;
     
     
 

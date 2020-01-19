@@ -4,14 +4,11 @@ package gmod.panels;
 /**
     ***Deprecated:**   This is derived from the deprecated DPanelList.
 	
-	A vertical list of models.  Inherits the following functions from DPanelSelect and its parents up to 3 levels deep: 
-	
-	
+	A vertical list of models.  Inherits the following functions from DPanelSelect and its parents up to 3 levels deep:
 **/
 extern class DModelSelect extends DPanelSelect {
     /**
-        Called to set the list of models within the panel element. 
-		
+        Called to set the list of models within the panel element.
 		
 		Name | Description
 		--- | ---
@@ -19,9 +16,6 @@ extern class DModelSelect extends DPanelSelect {
 		`convar` | 
 		`dontSort` | 
 		`DontCallListConVars` | 
-		
-		
-		
     **/
     
      
@@ -29,15 +23,11 @@ extern class DModelSelect extends DPanelSelect {
     /**
         Sets the height of the panel in the amount of 64px spawnicons. 
 		
-		Overrides Panel:SetHeight. 
+		Overrides Panel:SetHeight.
 		
-		 
 		Name | Description
 		--- | ---
 		`num` | Basically how many rows of 64x64 px spawnicons should fit in this DModelSelect
-		
-		
-		
     **/
     
      

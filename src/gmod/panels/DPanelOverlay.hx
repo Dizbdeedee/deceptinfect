@@ -2,65 +2,52 @@ package gmod.panels;
 #if client
 
 /**
-    Adds curved corners. 
-	
-	
+    Adds curved corners.
 **/
 extern class DPanelOverlay extends DPanel {
     /**
-        Sets the type of the DPanelOverlay. 
-		
+        Sets the type of the DPanelOverlay.
 		
 		Name | Description
 		--- | ---
 		`type` | The type to set. Possible value are: 1 - 8px corners of given color 2 - 4px corners of given type 3 - 2 top? corners of hardcoded color, 2 other corners of given color
-		
-		
-		
     **/
     
      
     public function SetType(type:Float):Void;
     /**
-        Returns the type of the DPanelOverlay set by DPanelOverlay:SetType. 
+        Returns the type of the DPanelOverlay set by DPanelOverlay:SetType.
 		
-		
-		**Returns:** The set type.
-		
-		
+		`**Returns:** The set type.
     **/
     
      
     public function GetType():Float;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used internally by the panel for types 1 and 2.   
+		Used internally by the panel for types 1 and 2.
+		
 		Name | Description
 		--- | ---
 		`size` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function PaintInnerCorners(size:Float):Void;
     /**
-        Returns the border color of the DPanelOverlay set by DPanelOverlay:SetColor. 
+        Returns the border color of the DPanelOverlay set by DPanelOverlay:SetColor.
 		
-		
-		**Returns:** The set color. Uses the Color structure.
-		
-		
+		`**Returns:** The set color. Uses the Color structure.
     **/
     
      
-    public function GetColor():AnyTable;
+    public function GetColor():Color;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Used internally by the panel for type 3.           
+		Used internally by the panel for type 3.
+		
 		Name | Description
 		--- | ---
 		`cola` | 
@@ -68,27 +55,20 @@ extern class DPanelOverlay extends DPanel {
 		`colc` | 
 		`cold` | 
 		`size` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function PaintDifferentColours(cola:AnyTable, colb:AnyTable, colc:AnyTable, cold:AnyTable, size:Float):Void;
     /**
-        Sets the border color of the DPanelOverlay. 
-		
+        Sets the border color of the DPanelOverlay.
 		
 		Name | Description
 		--- | ---
 		`color` | The color to set. Uses the Color structure.
-		
-		
-		
     **/
     
      
-    public function SetColor(color:AnyTable):Void;
+    public function SetColor(color:Color):Void;
     
 }
 

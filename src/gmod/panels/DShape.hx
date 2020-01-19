@@ -2,14 +2,11 @@ package gmod.panels;
 #if client
 
 /**
-    Draw a shape on a derma panel. Only one kind of shape, a rectangle, is available for use. 
-	
-	
+    Draw a shape on a derma panel. Only one kind of shape, a rectangle, is available for use.
 **/
 extern class DShape extends DPanel {
     /**
-        Sets the shape to be drawn. 
-		
+        Sets the shape to be drawn.
 		
 		Name | Description
 		--- | ---
@@ -27,8 +24,6 @@ extern class DShape extends DPanel {
 		Shape:SetSize(500,500)
 		Shape:SetPos(10, 10)
 		```
-		
-		
     **/
     
      
@@ -36,28 +31,21 @@ extern class DShape extends DPanel {
     /**
         Sets the border color of the shape. 
 		
-		Currently does nothing. 
+		Currently does nothing.
 		
-		 
 		Name | Description
 		--- | ---
 		`clr` | The desired border color. See Color structure
-		
-		
-		
     **/
     
      
-    public function SetBorderColor(clr:AnyTable):Void;
+    public function SetBorderColor(clr:Color):Void;
     /**
         Returns the current type of shape this panel is set to display. 
 		
-		See DShape:SetType. 
+		See DShape:SetType.
 		
-		 
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
@@ -65,41 +53,31 @@ extern class DShape extends DPanel {
     /**
         Returns the current type of shape this panel is set to display. 
 		
-		See DShape:SetBorderColor. 
+		See DShape:SetBorderColor.
 		
-		 
-		**Returns:** The border color See Color structure
-		
-		
+		`**Returns:** The border color See Color structure
     **/
     
      
-    public function GetBorderColor():AnyTable;
+    public function GetBorderColor():Color;
     /**
-        Returns the color set to display the shape with. 
+        Returns the color set to display the shape with.
 		
-		
-		**Returns:** The Color structure
-		
-		
+		`**Returns:** The Color structure
     **/
     
      
-    public function GetColor():AnyTable;
+    public function GetColor():Color;
     /**
-        Sets the color to display the shape with. 
-		
+        Sets the color to display the shape with.
 		
 		Name | Description
 		--- | ---
 		`clr` | The Color structure
-		
-		
-		
     **/
     
      
-    public function SetColor(clr:AnyTable):Void;
+    public function SetColor(clr:Color):Void;
     
 }
 

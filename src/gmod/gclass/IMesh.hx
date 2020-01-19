@@ -2,17 +2,14 @@ package gmod.gclass;
 #if client
 
 /**
-    Renderable mesh object, can be used to create models on the fly. The only way to create your own IMesh object is to call Mesh. 
+    Renderable mesh object, can be used to create models on the fly. The only way to create your own IMesh object is to call Mesh.
 	
-	
+	**Bug:** IMeshes only respond to one projected texture. Issue Tracker: #2301
 **/
 extern class IMesh {
     
     /**
-        Deletes the mesh and frees the memory used by it. 
-		
-		
-		
+        Deletes the mesh and frees the memory used by it.
     **/
     
     public function Destroy():Void;
@@ -21,23 +18,18 @@ extern class IMesh {
     /**
         Builds the mesh from a table mesh vertexes. 
 		
-		See Mesh and util.GetModelMeshes for examples. 
+		See Mesh and util.GetModelMeshes for examples.
 		
-		 
 		Name | Description
 		--- | ---
 		`vertexes` | A table consisting of MeshVertex structures.
-		
-		
-		
     **/
     
-    public function BuildFromTriangles(vertexes:AnyTable):Void;
+    public function BuildFromTriangles(vertexes:MeshVertex):Void;
     
     
     /**
-        Renders the mesh with the active matrix. 
-		
+        Renders the mesh with the active matrix.
 		
 		___
 		### Lua Examples
@@ -47,8 +39,6 @@ extern class IMesh {
 		```lua 
 		self.Mesh
 		```
-		
-		
     **/
     
     public function Draw():Void;

@@ -2,34 +2,27 @@ package gmod.libs;
 
 
 /**
-    The drive library is for adding custom control modes to the new "remote control" entity piloting system in Garry's Mod 13. 
-	
-	
+    The drive library is for adding custom control modes to the new "remote control" entity piloting system in Garry's Mod 13.
 **/
 @:native("drive")extern class DriveLib {
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Destroys players current driving method. 
-		
+		Destroys players current driving method.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player to affect
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function DestroyMethod(ply:Player):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		The move is finished. Copy mv back into the target. 
-		
+		The move is finished. Copy mv back into the target.
 		
 		Name | Description
 		--- | ---
@@ -37,69 +30,55 @@ package gmod.libs;
 		`mv` | The move data
 		
 		
-		**Returns:** true if succeeded
-		
-		
+		`**Returns:** true if succeeded
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function FinishMove(ply:Player, mv:CMoveData):Bool;
     
     
     /**
-        Stops the player from driving anything. ( For example a prop in sandbox ) 
-		
+        Stops the player from driving anything. ( For example a prop in sandbox )
 		
 		Name | Description
 		--- | ---
 		`ply` | The player to affect
-		
-		
-		
     **/
     
     public static function PlayerStopDriving(ply:Player):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Clientside, the client creates the cmd (usercommand) from their input device (mouse, keyboard) and then it's sent to the server. Restrict view angles here. 
-		
+		Clientside, the client creates the cmd (usercommand) from their input device (mouse, keyboard) and then it's sent to the server. Restrict view angles here.
 		
 		Name | Description
 		--- | ---
 		`cmd` | The user command
 		
 		
-		**Returns:** true if succeeded
-		
-		
+		`**Returns:** true if succeeded
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function CreateMove(cmd:CUserCmd):Bool;
     
     
     /**
-        Called when the player first starts driving this entity 
-		
+        Called when the player first starts driving this entity
 		
 		Name | Description
 		--- | ---
 		`ply` | The player
 		`ent` | The entity
-		
-		
-		
     **/
     
     public static function Start(ply:Player, ent:Entity):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		The move is executed here. 
-		
+		The move is executed here.
 		
 		Name | Description
 		--- | ---
@@ -107,19 +86,16 @@ package gmod.libs;
 		`mv` | The move data
 		
 		
-		**Returns:** true if succeeded
-		
-		
+		`**Returns:** true if succeeded
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Move(ply:Player, mv:CMoveData):Bool;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		The user command is received by the server and then converted into a move. This is also run clientside when in multiplayer, for prediction to work. 
-		
+		The user command is received by the server and then converted into a move. This is also run clientside when in multiplayer, for prediction to work.
 		
 		Name | Description
 		--- | ---
@@ -128,19 +104,16 @@ package gmod.libs;
 		`cmd` | The user command
 		
 		
-		**Returns:** true if succeeded
-		
-		
+		`**Returns:** true if succeeded
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function StartMove(ply:Player, mv:CMoveData, cmd:CUserCmd):Bool;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Optionally alter the view. 
-		
+		Optionally alter the view.
 		
 		Name | Description
 		--- | ---
@@ -148,69 +121,55 @@ package gmod.libs;
 		`view` | The view, see ViewData structure
 		
 		
-		**Returns:** true if succeeded
-		
-		
+		`**Returns:** true if succeeded
     **/
-    @:deprecated
-    public static function CalcView(ply:Player, view:AnyTable):Bool;
+    @:deprecated("INTERNAL")
+    public static function CalcView(ply:Player, view:ViewData):Bool;
     
     
     /**
-        Player has stopped driving the entity. 
-		
+        Player has stopped driving the entity.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player
 		`ent` | The entity
-		
-		
-		
     **/
     
     public static function End(ply:Player, ent:Entity):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Returns ( or creates if inexistent ) a driving method. 
-		
+		Returns ( or creates if inexistent ) a driving method.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player
 		
 		
-		**Returns:** A method object.
-		
-		
+		`**Returns:** A method object.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function GetMethod(ply:Player):AnyTable;
     
     
     /**
-        Starts driving for the player. 
-		
+        Starts driving for the player.
 		
 		Name | Description
 		--- | ---
 		`ply` | The player to affect
 		`ent` | The entity to drive
 		`mode` | The driving mode
-		
-		
-		
     **/
     
     public static function PlayerStartDriving(ply:Player, ent:Entity, mode:String):Void;
     
     
     /**
-        Registers a new entity drive. 
-		
+        Registers a new entity drive.
 		
 		Name | Description
 		--- | ---
@@ -340,8 +299,6 @@ package gmod.libs;
 		
 		}, "drive_base" );
 		```
-		
-		
     **/
     
     public static function Register(name:String, data:AnyTable, base:String):Void;

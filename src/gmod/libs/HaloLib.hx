@@ -2,29 +2,25 @@ package gmod.libs;
 #if client
 
 /**
-    The halo library is used to draw glowing outlines around entities, an example of this can be seen by picking up props with the physgun in Garry's Mod 13. 
-	
-	
+    The halo library is used to draw glowing outlines around entities, an example of this can be seen by picking up props with the physgun in Garry's Mod 13.
 **/
 @:native("halo")extern class HaloLib {
     
     /**
         Returns the entity the halo library is currently rendering the halo for. 
 		
-		The main purpose of this function is to be used in ENTITY:Draw in order not to draw certain parts of the entity when the halo is being rendered, so there's no halo around unwanted entity parts, such as lasers, 3D2D displays, etc. 
+		The main purpose of this function is to be used in ENTITY:Draw in order not to draw certain parts of the entity when the halo is being rendered, so there's no halo around unwanted entity parts, such as lasers, 3D2D displays, etc.
 		
-		 
-		**Returns:** If set, the currently rendered entity by the halo library.
-		
-		
+		`**Returns:** If set, the currently rendered entity by the halo library.
     **/
     
     public static function RenderedEntity():Entity;
     
     
     /**
-        Applies a "halo" glow effect to one or multiple entities. 
+        Applies a "halo" glow effect to one or multiple entities.
 		
+		**Warning:** Using this function outside of the PreDrawHalos hook can cause instability or crashes.
 		
 		Name | Description
 		--- | ---
@@ -71,25 +67,21 @@ package gmod.libs;
 		    end
 		end )
 		```
-		
-		
     **/
     
-    public static function Add(entities:AnyTable, color:AnyTable, ?blurX:Float, ?blurY:Float, ?passes:Float, ?additive:Bool, ?ignoreZ:Bool):Void;
+    public static function Add(entities:AnyTable, color:Color, ?blurX:Float, ?blurY:Float, ?passes:Float, ?additive:Bool, ?ignoreZ:Bool):Void;
     
     
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Renders a halo according to the specified table, only used internally, called from a PostDrawEffects hook added by the halo library   
+		Renders a halo according to the specified table, only used internally, called from a PostDrawEffects hook added by the halo library
+		
 		Name | Description
 		--- | ---
 		`entry` | Table with info about the halo to draw.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
     public static function Render(entry:AnyTable):Void;
     
     

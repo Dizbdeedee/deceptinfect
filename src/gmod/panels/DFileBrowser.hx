@@ -4,115 +4,90 @@ package gmod.panels;
 /**
     A tree and list-based file browser. 
 	
-	It allows filtering by folder (directory) name and file extension, and can display models as SpawnIcons. 
+	It allows filtering by folder (directory) name and file extension, and can display models as SpawnIcons.
 	
-	 
+	**Note:** Uses the same DFrame as above
 **/
 extern class DFileBrowser extends DPanel {
     /**
         Sets the search filter for the file tree. 
 		
-		This accepts the same wildcards as file.Find. 
+		This accepts the same wildcards as file.Find.
 		
-		 
 		Name | Description
 		--- | ---
 		`filter` | The filter to use on the file tree.
-		
-		
-		
     **/
     
      
     public function SetSearch(?filter:String):Void;
     /**
-        Returns the current directory/folder being displayed. 
+        Returns the current directory/folder being displayed.
 		
-		
-		**Returns:** The directory the file list is currently displaying.
-		
-		
+		`**Returns:** The directory the file list is currently displaying.
     **/
     
      
     public function GetCurrentFolder():String;
     /**
-        Sets the directory/folder from which to display the file list. 
-		
+        Sets the directory/folder from which to display the file list.
 		
 		Name | Description
 		--- | ---
 		`currentDir` | The directory to display files from.
-		
-		
-		
     **/
     
      
     public function SetCurrentFolder(currentDir:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called to set up the  and file viewer when a base path has been set. Calls DFileBrowser:SetupTree and DFileBrowser:SetupFiles. 
+		Called to set up the [DTree](https://wiki.garrysmod.com/page/Category:DTree) and file viewer when a base path has been set. Calls DFileBrowser:SetupTree and DFileBrowser:SetupFiles.
 		
-		
-		**Returns:** Whether or not the variables needed to set up have been defined.
-		
-		
+		`**Returns:** Whether or not the variables needed to set up have been defined.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function Setup():Bool;
     /**
-        Sets the name to use for the file tree. 
-		
+        Sets the name to use for the file tree.
 		
 		Name | Description
 		--- | ---
 		`treeName` | The name for the root of the file tree. Passing no value causes this to be the base folder name. See DFileBrowser: SetBaseFolder.
-		
-		
-		
     **/
     
      
     public function SetName(?treeName:String):Void;
     /**
-        Called when a file is right-clicked. 
+        Called when a file is right-clicked.
 		
+		**Note:** When not in model viewer mode, DFileBrowser:OnSelect will also be called if the file is not already selected.
 		
 		Name | Description
 		--- | ---
 		`filePath` | The path to the file that was right-clicked.
 		`selectedPanel` | The panel that was right-clicked to select this file. This will either be a DListView_Line or SpawnIcon depending on whether the model viewer mode is enabled. See DFileBrowser: SetModels.
-		
-		
-		
     **/
     
     @:hook 
     public function OnRightClick(filePath:String, selectedPanel:Panel):Void;
     /**
-        Enables or disables the model viewer mode. In this mode, files are displayed as SpawnIcons instead of a list. 
+        Enables or disables the model viewer mode. In this mode, files are displayed as SpawnIcons instead of a list.
 		
+		**Note:** This should only be used for .mdl files; the spawn icons will display error models for others. See DFileBrowser:SetFileTypes
 		
 		Name | Description
 		--- | ---
 		`showModels` | Whether or not to display files using SpawnIcons.
-		
-		
-		
     **/
     
      
     public function SetModels(?showModels:Bool):Void;
     /**
-        Returns the name being used for the file tree. 
+        Returns the name being used for the file tree.
 		
-		
-		**Returns:** The name used for the root of the file tree.
-		
-		
+		`**Returns:** The name used for the root of the file tree.
     **/
     
      
@@ -120,119 +95,92 @@ extern class DFileBrowser extends DPanel {
     /**
         Returns the DTree Node that the file tree stems from. 
 		
-		This is a child of the root node of the DTree. 
+		This is a child of the root node of the DTree.
 		
-		 
-		**Returns:** The DTree_Node used for the tree.
-		
-		
+		`**Returns:** The DTree_Node used for the tree.
     **/
     
      
     public function GetFolderNode():Panel;
     /**
-        Sorts the file list. 
+        Sorts the file list.
 		
+		**Note:** This is only functional when not using the model viewer. See DFileBrowser:SetModels
 		
 		Name | Description
 		--- | ---
 		`descending` | The sort order. true for descending (z-a), false for ascending (a-z).
-		
-		
-		
     **/
     
      
     public function SortFiles(?descending:Bool):Void;
     /**
-        Called when a file is selected. 
-		
+        Called when a file is selected.
 		
 		Name | Description
 		--- | ---
 		`filePath` | The path to the file that was selected.
 		`selectedPanel` | The panel that was clicked to select this file. This will either be a DListView_Line or SpawnIcon depending on whether the model viewer mode is enabled. See DFileBrowser: SetModels.
-		
-		
-		
     **/
     
     @:hook 
     public function OnSelect(filePath:String, selectedPanel:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Builds the file or icon list for the current directory. You should use DFileBrowser:SetCurrentFolder to change the directory. 
-		
+		Builds the file or icon list for the current directory. You should use DFileBrowser:SetCurrentFolder to change the directory.
 		
 		Name | Description
 		--- | ---
 		`currentDir` | The directory to populate the list from.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function ShowFolder(currentDir:String):Void;
     /**
-        Returns the current file type filter on the file list. 
+        Returns the current file type filter on the file list.
 		
-		
-		**Returns:** The current filter applied to the file list.
-		
-		
+		`**Returns:** The current filter applied to the file list.
     **/
     
      
     public function GetFileTypes():String;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called to set up the  or  by : . The icon browser is used when in models mode. See DFileBrowser:SetModels. 
+		Called to set up the [DListView](https://wiki.garrysmod.com/page/Category:DListView) or [DIconBrowser](https://wiki.garrysmod.com/page/Category:DIconBrowser) by [DFileBrowser](https://wiki.garrysmod.com/page/Category:DFileBrowser): [Setup](https://wiki.garrysmod.com/page/DFileBrowser/Setup). The icon browser is used when in models mode. See DFileBrowser:SetModels.
 		
-		
-		**Returns:** Whether or not the files pane was set up successfully.
-		
-		
+		`**Returns:** Whether or not the files pane was set up successfully.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetupFiles():Bool;
     /**
-        Returns the current search filter on the file tree. 
+        Returns the current search filter on the file tree.
 		
-		
-		**Returns:** The filter in use on the file tree.
-		
-		
+		`**Returns:** The filter in use on the file tree.
     **/
     
      
     public function GetSearch():String;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called to set up the  by : .   
-		**Returns:** Whether or not the tree was set up successfully.
+		Called to set up the [DTree](https://wiki.garrysmod.com/page/Category:DTree) by [DFileBrowser](https://wiki.garrysmod.com/page/Category:DFileBrowser): [Setup](https://wiki.garrysmod.com/page/DFileBrowser/Setup).
 		
-		
+		`**Returns:** Whether or not the tree was set up successfully.
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetupTree():Bool;
     /**
         Sets the access path for the file tree. This is set to GAME by default. 
 		
-		See file.Read for how paths work. 
+		See file.Read for how paths work.
 		
-		 
 		Name | Description
 		--- | ---
 		`path` | The access path i.e. "GAME", "LUA", "DATA" etc.
-		
-		
-		
     **/
     
      
@@ -240,50 +188,36 @@ extern class DFileBrowser extends DPanel {
     /**
         Sets the root directory/folder of the file tree. 
 		
-		This needs to be set for the file tree to be displayed. 
+		This needs to be set for the file tree to be displayed.
 		
-		 
 		Name | Description
 		--- | ---
 		`baseDir` | The path to the folder to use as the root.
-		
-		
-		
     **/
     
      
     public function SetBaseFolder(baseDir:String):Void;
     /**
-        Clears the file tree and list, and resets all values. 
-		
-		
-		
+        Clears the file tree and list, and resets all values.
     **/
     
      
     public function Clear():Void;
     /**
-        Opens or closes the file tree. 
-		
+        Opens or closes the file tree.
 		
 		Name | Description
 		--- | ---
 		`open` | true to open the tree, false to close it.
 		`useAnim` | If true, the DTree's open/close animation is used.
-		
-		
-		
     **/
     
      
     public function SetOpen(?open:Bool, ?useAnim:Bool):Void;
     /**
-        Returns the root directory/folder of the file tree. 
+        Returns the root directory/folder of the file tree.
 		
-		
-		**Returns:** The path to the root folder.
-		
-		
+		`**Returns:** The path to the root folder.
     **/
     
      
@@ -291,12 +225,9 @@ extern class DFileBrowser extends DPanel {
     /**
         Returns the access path of the file tree. This is GAME unless changed with DFileBrowser:SetPath. 
 		
-		See file.Read for how paths work. 
+		See file.Read for how paths work.
 		
-		 
-		**Returns:** The current access path i.e. "GAME", "LUA", "DATA" etc.
-		
-		
+		`**Returns:** The current access path i.e. "GAME", "LUA", "DATA" etc.
     **/
     
      
@@ -304,52 +235,40 @@ extern class DFileBrowser extends DPanel {
     /**
         Sets the file type filter for the file list. 
 		
-		This accepts the same file extension wildcards as file.Find. 
+		This accepts the same file extension wildcards as file.Find.
 		
-		 
 		Name | Description
 		--- | ---
 		`fileTypes` | A list of file types to display, separated by spaces e.g. "*.lua *.txt *.mdl"
-		
-		
-		
     **/
     
      
     public function SetFileTypes(?fileTypes:String):Void;
     /**
-        Returns whether or not the model viewer mode is enabled. In this mode, files are displayed as SpawnIcons instead of a list. 
+        Returns whether or not the model viewer mode is enabled. In this mode, files are displayed as SpawnIcons instead of a list.
 		
-		
-		**Returns:** Whether or not files will be displayed using SpawnIcons.
-		
-		
+		`**Returns:** Whether or not files will be displayed using SpawnIcons.
     **/
     
      
     public function GetModels():Bool;
     /**
-        Returns whether or not the file tree is open. 
+        Returns whether or not the file tree is open.
 		
-		
-		**Returns:** Whether or not the file tree is open.
-		
-		
+		`**Returns:** Whether or not the file tree is open.
     **/
     
      
     public function GetOpen():Bool;
     /**
-        Called when a file is double-clicked. 
+        Called when a file is double-clicked.
 		
+		**Note:** Double-clicking a file or icon will trigger both this and DFileBrowser:OnSelect.
 		
 		Name | Description
 		--- | ---
 		`filePath` | The path to the file that was double-clicked.
 		`selectedPanel` | The panel that was double-clicked to select this file. This will either be a DListView_Line or SpawnIcon depending on whether the model viewer mode is enabled. See DFileBrowser: SetModels.
-		
-		
-		
     **/
     
     @:hook 

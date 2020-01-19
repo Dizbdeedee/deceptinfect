@@ -4,30 +4,23 @@ package gmod.panels;
 /**
     A tree view element for Derma. 
 	
-	See also DTree_Node. 
-	
-	 
+	See also DTree_Node.
 **/
 extern class DTree extends DScrollPanel {
     /**
         Sets whether or not the Silkicons next to each node of the DTree will be displayed. 
 		
-		Individual icons can be set with DTree_Node:SetIcon or passed as the second argument in DTree:AddNode. 
+		Individual icons can be set with DTree_Node:SetIcon or passed as the second argument in DTree:AddNode.
 		
-		 
 		Name | Description
 		--- | ---
 		`show` | Whether or not to show icons.
-		
-		
-		
     **/
     
      
     public function SetShowIcons(show:Bool):Void;
     /**
-        Add a node to the DTree 
-		
+        Add a node to the DTree
 		
 		Name | Description
 		--- | ---
@@ -35,9 +28,7 @@ extern class DTree extends DScrollPanel {
 		`icon` | The icon that will show nexto the node in the DTree.
 		
 		
-		**Returns:** Returns the created DTree_Node panel.
-		
-		
+		`**Returns:** Returns the created DTree_Node panel.
     **/
     
      
@@ -45,48 +36,35 @@ extern class DTree extends DScrollPanel {
     /**
         Sets the indentation size of the DTree, the distance between each "level" of the tree is offset on the left from the previous level. 
 		
-		Currently this feature has no effect on the DTree element. 
+		Currently this feature has no effect on the DTree element.
 		
-		 
 		Name | Description
 		--- | ---
 		`size` | The new indentation size.
-		
-		
-		
     **/
     
      
     public function SetIndentSize(size:Float):Void;
     /**
-        Returns the height of each DTree_Node in the tree. 
+        Returns the height of each DTree_Node in the tree.
 		
-		
-		**Returns:** The height of each DTree_Node in the tree.
-		
-		
+		`**Returns:** The height of each DTree_Node in the tree.
     **/
     
      
     public function GetLineHeight():Float;
     /**
-        Returns the currently selected node. 
+        Returns the currently selected node.
 		
-		
-		**Returns:** Curently selected node.
-		
-		
+		`**Returns:** Curently selected node.
     **/
     
      
     public function GetSelectedItem():Panel;
     /**
-        Returns the root DTree_Node, the node that is the parent to all other nodes of the DTree. 
+        Returns the root DTree_Node, the node that is the parent to all other nodes of the DTree.
 		
-		
-		**Returns:** Root node.
-		
-		
+		`**Returns:** Root node.
     **/
     
      
@@ -94,21 +72,15 @@ extern class DTree extends DScrollPanel {
     /**
         Returns whether or not the Silkicons next to each node of the DTree will be displayed. 
 		
-		Alias of DTree:GetShowIcons. 
+		Alias of DTree:GetShowIcons.
 		
-		 
-		**Returns:** Whether or not the silkicons next to each node will be displayed.
-		
-		
+		`**Returns:** Whether or not the silkicons next to each node will be displayed.
     **/
     
      
     public function ShowIcons():Bool;
     /**
-        Called when the any node is clicked. Called by DTree_Node:DoClick. 
-		
-		
-		
+        Called when the any node is clicked. Called by DTree_Node:DoClick.
     **/
     
     @:hook 
@@ -116,23 +88,17 @@ extern class DTree extends DScrollPanel {
     /**
         Returns whether or not the Silkicons next to each node of the DTree will be displayed. 
 		
-		Individual icons can be set with DTree_Node:SetIcon or passed as the second argument in DTree:AddNode. 
+		Individual icons can be set with DTree_Node:SetIcon or passed as the second argument in DTree:AddNode.
 		
-		 
-		**Returns:** Whether or not the silkicons next to each node will be displayed.
-		
-		
+		`**Returns:** Whether or not the silkicons next to each node will be displayed.
     **/
     
      
     public function GetShowIcons():Bool;
     /**
-        Returns the status of DTree:SetClickOnDragHover. See that for more info. 
+        Returns the status of DTree:SetClickOnDragHover. See that for more info.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
@@ -140,12 +106,9 @@ extern class DTree extends DScrollPanel {
     /**
         Returns the indentation size of the DTree, the distance between each "level" of the tree is offset on the left from the previous level. 
 		
-		Currently this feature has no effect on the DTree element. 
+		Currently this feature has no effect on the DTree element.
 		
-		 
-		**Returns:** The indentation size.
-		
-		
+		`**Returns:** The indentation size.
     **/
     
      
@@ -155,156 +118,118 @@ extern class DTree extends DScrollPanel {
 		
 		If enabled, when hovering over any DTree_Node of this DTree while dragging a panel, the node will be automatically clicked on (and subsequently DTree:OnNodeSelected will be called) to open any attached panels, such as spawnlists in spawnmenu. 
 		
-		 See also: PANEL:DragHoverClick. 
+		 See also: PANEL:DragHoverClick.
 		
-		 
 		Name | Description
 		--- | ---
 		`enable` | 
-		
-		
-		
     **/
     
      
     public function SetClickOnDragHover(enable:Bool):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Does nothing. Used as a placeholder empty function alongside DTree:MoveChildTo, DTree:SetExpanded and DTree:ChildExpanded. 
 		
-		The DTree acts a root node and methods with the same name in DTree_Node call to the parent. 
+		The DTree acts a root node and methods with the same name in DTree_Node call to the parent.
 		
-		 
 		Name | Description
 		--- | ---
 		`bExpand` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function ExpandTo(bExpand:Bool):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
-		Does nothing. 
-		
-		
-		
+		Does nothing.
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function LayoutTree():Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Does nothing. Is not called by the DTree itself. 
 		
-		Used as a placeholder empty function alongside DTree:ExpandTo, DTree:MoveChildTo and DTree:ChildExpanded to prevent errors when DTree_Node:SetExpanded is incorrectly used on a DTree. 
+		Used as a placeholder empty function alongside DTree:ExpandTo, DTree:MoveChildTo and DTree:ChildExpanded to prevent errors when DTree_Node:SetExpanded is incorrectly used on a DTree.
 		
-		 
 		Name | Description
 		--- | ---
 		`bExpand` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function SetExpanded(bExpand:Bool):Void;
     /**
-        ***Deprecated:**  
+        ***Deprecated:** 
 		
 		Moves given node to the top of DTrees children. (Makes it the topmost mode) 
 		
 		Used as a placeholder function alongside DTree:ExpandTo, DTree:SetExpanded and DTree:ChildExpanded. 
 		
-		 The DTree acts a root node and methods with the same name in DTree_Node call to the parent. 
+		 The DTree acts a root node and methods with the same name in DTree_Node call to the parent.
 		
-		 
 		Name | Description
 		--- | ---
 		`child` | The node to move
 		`pos` | This feature is deprecated. You should avoid using it as it may be removed in a future version. Unused, does nothing. This feature is deprecated. You should avoid using it as it may be removed in a future version.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("")
      
     public function MoveChildTo(child:Panel, pos:Float):Void;
     /**
-        Called when the any node is right clicked. Called by DTree_Node:DoRightClick. 
-		
-		
-		
+        Called when the any node is right clicked. Called by DTree_Node:DoRightClick.
     **/
     
     @:hook 
     public function DoRightClick():Void;
     /**
-        Set the currently selected top-level node. 
-		
+        Set the currently selected top-level node.
 		
 		Name | Description
 		--- | ---
 		`node` | DTree_Node to select.
-		
-		
-		
     **/
     
      
     public function SetSelectedItem(node:Panel):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
 		Calls directly to Panel:InvalidateLayout. Called by DTree_Nodes when a sub element has been expanded or collapsed. 
 		
 		Used as a placeholder function alongside DTree:ExpandTo, DTree:SetExpanded and DTree:MoveChildTo. 
 		
-		 The DTree acts a root node and methods with the same name in DTree_Node call to the parent. 
+		 The DTree acts a root node and methods with the same name in DTree_Node call to the parent.
 		
-		 
 		Name | Description
 		--- | ---
 		`bExpand` | 
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function ChildExpanded(bExpand:Bool):Void;
     /**
         Sets the height of each DTree_Node in the tree. 
 		
-		The default value is 17. 
+		The default value is 17.
 		
-		 
 		Name | Description
 		--- | ---
 		`h` | The height to set.
-		
-		
-		
     **/
     
      
     public function SetLineHeight(h:Float):Void;
     /**
-        This function is called when a node within a tree is selected. 
-		
+        This function is called when a node within a tree is selected.
 		
 		Name | Description
 		--- | ---
 		`node` | The node that was selected.
-		
-		
-		
     **/
     
     @:hook 

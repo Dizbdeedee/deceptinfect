@@ -2,15 +2,12 @@ package gmod.libs;
 
 
 /**
-    Used primarily for adding new soundscript entries. 
-	
-	
+    Used primarily for adding new soundscript entries.
 **/
 @:native("sound")extern class SoundLib {
     
     /**
-        Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds. 
-		
+        Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.
 		
 		Name | Description
 		--- | ---
@@ -28,16 +25,13 @@ package gmod.libs;
 		**Output:**
 		
 		SoundEmitter: adding map sound overrides from scripts/override_test.txt [1 total, 1 replacements, 0 duplicated replacements] (Displayed in the console)
-		
-		
     **/
     
     public static function AddSoundOverrides(filepath:String):Void;
     
     
     /**
-        Creates a sound script. It can also override sounds, which seems to only work when set on the server. 
-		
+        Creates a sound script. It can also override sounds, which seems to only work when set on the server.
 		
 		Name | Description
 		--- | ---
@@ -62,16 +56,13 @@ package gmod.libs;
 		**Output:**
 		
 		You can now play your custom sound script with Entity: EmitSound like so: Entity( 1 ):EmitSound( "enzo_engine_idle" )
-		
-		
     **/
     
-    public static function Add(soundData:AnyTable):Void;
+    public static function Add(soundData:SoundData):Void;
     
     
     /**
-        Plays a sound from the specified position in the world. If you want to play a sound without a position, such as a UI sound, use surface.PlaySound instead. 
-		
+        Plays a sound from the specified position in the world. If you want to play a sound without a position, such as a UI sound, use surface.PlaySound instead.
 		
 		Name | Description
 		--- | ---
@@ -90,8 +81,6 @@ package gmod.libs;
 		```lua 
 		sound.Play( "ambient/explosions/exp1.wav", Vector(0, 0, 0) )
 		```
-		
-		
     **/
     
     public static function Play(Name:String, Pos:Vector, Level:Float, Pitch:Float, Volume:Float):Void;
@@ -100,9 +89,12 @@ package gmod.libs;
     /**
         Plays a file from GMod directory. You can find a list of all error codes here 
 		
-		For external file/stream playback, see sound.PlayURL. 
+		For external file/stream playback, see sound.PlayURL.
 		
-		 
+		**Bug:** BUG This fails for looping .wav files in 3D mode. Issue Tracker: #1752
+		
+		**Bug:** BUG This fails with unicode file names. Issue Tracker: #2304
+		
 		Name | Description
 		--- | ---
 		`path` | The path to the file to play. Unlike other sound functions and structures, the path is relative to garrysmod/ instead of garrysmod/sound/
@@ -124,18 +116,15 @@ package gmod.libs;
 		    end
 		end )
 		```
-		
-		
     **/
     
     public static function PlayFile(path:String, flags:String, callback:Function):Void;
     #end
     
     /**
-        Returns a list of all registered sound scripts. 
+        Returns a list of all registered sound scripts.
 		
-		
-		**Returns:** The list/array of all registered sound scripts ( No other information is provided )
+		`**Returns:** The list/array of all registered sound scripts ( No other information is provided )
 		
 		___
 		### Lua Examples
@@ -181,33 +170,29 @@ package gmod.libs;
 		BaseCombatCharacter.StopWeaponSounds
 		BaseCombatCharacter.AmmoPickup
 		...
-		
-		
     **/
     
     public static function GetTable():AnyTable;
     
     
     /**
-        Returns properties of the soundscript. 
-		
+        Returns properties of the soundscript.
 		
 		Name | Description
 		--- | ---
 		`name` | The name of the sound script
 		
 		
-		**Returns:** The properties of the soundscript. See SoundData structure
-		
-		
+		`**Returns:** The properties of the soundscript. See SoundData structure
     **/
     
-    public static function GetProperties(name:String):AnyTable;
+    public static function GetProperties(name:String):SoundData;
     
     #if client
     /**
-        Creates a sound from a function. 
+        Creates a sound from a function.
 		
+		**Bug:** BUG This function cannot generate sounds that have a duration of less than 1 second. Issue Tracker: #3360
 		
 		Name | Description
 		--- | ---
@@ -235,8 +220,6 @@ package gmod.libs;
 		sound.Generate   ("testgen" .. test_sound_id, samplerate, 2, data)
 		surface.PlaySound("testgen" .. test_sound_id)
 		```
-		
-		
     **/
     
     public static function Generate(indentifier:String, samplerate:Float, length:Float, callback:Function):Void;
@@ -245,9 +228,10 @@ package gmod.libs;
     /**
         Allows you to play external sound files, as well as online radio streams. You can find a list of all error codes here 
 		
-		For offline file playback, see sound.PlayFile. 
+		For offline file playback, see sound.PlayFile.
 		
-		 
+		**Bug:** BUG Due to a bug with BASS, AAC codec streams cannot be played in 3D mode. Issue Tracker: #2296
+		
 		Name | Description
 		--- | ---
 		`url` | The URL of the sound to play
@@ -275,8 +259,6 @@ package gmod.libs;
 		    end
 		end )
 		```
-		
-		
     **/
     
     public static function PlayURL(url:String, flags:String, callback:Function):Void;

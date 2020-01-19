@@ -2,28 +2,25 @@ package gmod.panels;
 #if client
 
 /**
-    A form which may be used to display text the player is meant to select and copy or alternately allow them to enter some text of their own . Do note that at least one of your DTextEntry's parents must either be an EditablePanel or derived from it (like a DFrame, for example), else it won't be able to focus and thus be unselectable. You must also call Panel:MakePopup on said panel or the DTextEntry will not work. 
+    A form which may be used to display text the player is meant to select and copy or alternately allow them to enter some text of their own . Do note that at least one of your DTextEntry's parents must either be an EditablePanel or derived from it (like a DFrame, for example), else it won't be able to focus and thus be unselectable. You must also call Panel:MakePopup on said panel or the DTextEntry will not work.
 	
-	
+	**Bug:** This does not clear out previously-pasted text properly. Issue Tracker: #1588
 **/
 extern class DTextEntry extends TextEntry {
     /**
-        Sets whether pressing the Enter key will cause the DTextEntry to lose focus or not, provided it is not multiline. This is true by default. 
-		
+        Sets whether pressing the Enter key will cause the DTextEntry to lose focus or not, provided it is not multiline. This is true by default.
 		
 		Name | Description
 		--- | ---
 		`allowEnter` | If set to false, pressing Enter will not cause the panel to lose focus and will never call DTextEntry: OnEnter.
-		
-		
-		
     **/
     
      
     public function SetEnterAllowed(allowEnter:Bool):Void;
     /**
-        Called whenever enter is pressed on a DTextEntry. 
+        Called whenever enter is pressed on a DTextEntry.
 		
+		**Note:** DTextEntry:IsEditing will still return true in this callback!
 		
 		___
 		### Lua Examples
@@ -41,17 +38,14 @@ extern class DTextEntry extends TextEntry {
 		**Output:**
 		
 		Changes the text color when enter is pressed.
-		
-		
     **/
     
     @:hook 
     public function OnEnter():Void;
     /**
-        Returns the text color of a DTextEntry. 
+        Returns the text color of a DTextEntry.
 		
-		
-		**Returns:** The color of the text as a Color structure.
+		`**Returns:** The color of the text as a Color structure.
 		
 		___
 		### Lua Examples
@@ -66,22 +60,19 @@ extern class DTextEntry extends TextEntry {
 		**Output:**
 		
 		Prints the R, G, B and A of the text color.
-		
-		
     **/
     
      
-    public function GetTextColor():AnyTable;
+    public function GetTextColor():Color;
     /**
-        Called by the DTextEntry when a list of autocompletion options is requested. Meant to be overridden. 
-		
+        Called by the DTextEntry when a list of autocompletion options is requested. Meant to be overridden.
 		
 		Name | Description
 		--- | ---
 		`inputText` | Player's current input.
 		
 		
-		**Returns:** If a table is returned, the values of the table will show up as autocomplete suggestions for the user.
+		`**Returns:** If a table is returned, the values of the table will show up as autocomplete suggestions for the user.
 		
 		___
 		### Lua Examples
@@ -113,105 +104,78 @@ extern class DTextEntry extends TextEntry {
 		    return suggestions
 		end
 		```
-		
-		
     **/
     
     @:hook 
     public function GetAutoComplete(inputText:String):AnyTable;
     /**
-        Returns the contents of the DTextEntry as a number. 
+        Returns the contents of the DTextEntry as a number.
 		
-		
-		**Returns:** Text of the DTextEntry as a float, or nil if it cannot be converted to a number using tonumber.
-		
-		
+		`**Returns:** Text of the DTextEntry as a float, or nil if it cannot be converted to a number using tonumber.
     **/
     
      
     public function GetFloat():Float;
     /**
-        ***INTERNAL:**   You really should be using DTextEntry: GetAutoComplete instead.
+        ***INTERNAL** You really should be using DTextEntry: GetAutoComplete instead.
 		
-		Builds a DMenu for the DTextEntry based on the input table. 
-		
+		Builds a DMenu for the DTextEntry based on the input table.
 		
 		Name | Description
 		--- | ---
 		`tab` | Table containing results from DTextEntry: GetAutoComplete.
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL: You really should be using DTextEntry: GetAutoComplete instead.")
      
     public function OpenAutoComplete(tab:AnyTable):Void;
     /**
-        Returns whether this DTextEntry is being edited or not. (i.e. has focus) 
+        Returns whether this DTextEntry is being edited or not. (i.e. has focus)
 		
-		
-		**Returns:** Whether this DTextEntry is being edited or not
-		
-		
+		`**Returns:** Whether this DTextEntry is being edited or not
     **/
     
      
     public function IsEditing():Bool;
     /**
-        Similar to DTextEntry:GetFloat, but rounds the value to the nearest integer. 
+        Similar to DTextEntry:GetFloat, but rounds the value to the nearest integer.
 		
-		
-		**Returns:** Text of the DTextEntry as a round number, or nil if it cannot be converted to a number.
-		
-		
+		`**Returns:** Text of the DTextEntry as a round number, or nil if it cannot be converted to a number.
     **/
     
      
     public function GetInt():Float;
     /**
-        Allow you to add a hint. 
-		
+        Allow you to add a hint.
 		
 		Name | Description
 		--- | ---
 		`text` | 
-		
-		
-		
     **/
     
      
     public function SetPlaceholderText(?text:String):Void;
     /**
-        ***INTERNAL:**  
+        ***INTERNAL** 
 		
-		Called internally when the text inside the DTextEntry changes. You should not override this function. Use DTextEntry:OnValueChange instead. 
-		
+		Called internally when the text inside the DTextEntry changes. You should not override this function. Use DTextEntry:OnValueChange instead.
 		
 		Name | Description
 		--- | ---
 		`noMenuRemoval` | Determines whether to remove the autocomplete menu (false) or not (true).
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("INTERNAL")
      
     public function OnTextChanged(noMenuRemoval:Bool):Void;
     /**
-        Returns whether pressing Enter can cause the panel to lose focus. Note that a multiline DTextEntry cannot be escaped using the Enter key even when this function returns true. 
+        Returns whether pressing Enter can cause the panel to lose focus. Note that a multiline DTextEntry cannot be escaped using the Enter key even when this function returns true.
 		
-		
-		**Returns:** Whether pressing the Enter key can cause the panel to lose focus.
-		
-		
+		`**Returns:** Whether pressing the Enter key can cause the panel to lose focus.
     **/
     
      
     public function GetEnterAllowed():Bool;
     /**
-        Called whenever the DTextEntry gains focus. 
-		
+        Called whenever the DTextEntry gains focus.
 		
 		___
 		### Lua Examples
@@ -229,15 +193,12 @@ extern class DTextEntry extends TextEntry {
 		**Output:**
 		
 		Text entry clears when user clicks it to begin typing
-		
-		
     **/
     
     @:hook 
     public function OnGetFocus():Void;
     /**
-        Sets the cursor's color in DTextEntry (the blinking line). 
-		
+        Sets the cursor's color in DTextEntry (the blinking line).
 		
 		Name | Description
 		--- | ---
@@ -272,22 +233,16 @@ extern class DTextEntry extends TextEntry {
 		**Output:**
 		
 		Makes the text entry's cursor color red.
-		
-		
     **/
     
      
     public function SetCursorColor(color:AnyTable):Void;
     /**
-        Sets the text of the DTextEntry and calls DTextEntry:OnValueChange. 
-		
+        Sets the text of the DTextEntry and calls DTextEntry:OnValueChange.
 		
 		Name | Description
 		--- | ---
 		`text` | The value to set.
-		
-		
-		
     **/
     
      
@@ -295,9 +250,8 @@ extern class DTextEntry extends TextEntry {
     /**
         Sets whether or not to decline non-numeric characters as input. 
 		
-		Numeric characters are 1234567890.- 
+		Numeric characters are 1234567890.-
 		
-		 
 		Name | Description
 		--- | ---
 		`numericOnly` | Whether to accept only numeric characters.
@@ -315,31 +269,25 @@ extern class DTextEntry extends TextEntry {
 		**Output:**
 		
 		Only allow numeric characters.
-		
-		
     **/
     
      
     public function SetNumeric(numericOnly:Bool):Void;
     /**
-        Returns whether a string is numeric or not. Always returns false if the DTextEntry:SetNumeric is set to false. 
-		
+        Returns whether a string is numeric or not. Always returns false if the DTextEntry:SetNumeric is set to false.
 		
 		Name | Description
 		--- | ---
 		`strValue` | The string to check.
 		
 		
-		**Returns:** Whether the string is numeric or not.
-		
-		
+		`**Returns:** Whether the string is numeric or not.
     **/
     
      
     public function CheckNumeric(strValue:String):Bool;
     /**
-        Disables Input on a DTextEntry. This differs from DTextEntry:SetDisabled - SetEditable will not affect the appearance of the textbox. 
-		
+        Disables Input on a DTextEntry. This differs from DTextEntry:SetDisabled - SetEditable will not affect the appearance of the textbox.
 		
 		Name | Description
 		--- | ---
@@ -358,15 +306,12 @@ extern class DTextEntry extends TextEntry {
 		TextEntry:SetText( "Sample String" )
 		TextEntry:SetEditable ( false)
 		```
-		
-		
     **/
     
      
     public function SetEditable(enabled:Bool):Void;
     /**
-        Sets the text color of the DTextEntry. 
-		
+        Sets the text color of the DTextEntry.
 		
 		Name | Description
 		--- | ---
@@ -390,12 +335,10 @@ extern class DTextEntry extends TextEntry {
 		TextEntry:SetTextColor(Color(255,20,20))
 		TextEntry:SetValue("Basic Text")
 		```
-		
-		
     **/
     
      
-    public function SetTextColor(color:AnyTable):Void;
+    public function SetTextColor(color:Color):Void;
     /**
         Called whenever the value of the panel has been updated (whether by user input or otherwise). 
 		
@@ -403,15 +346,14 @@ extern class DTextEntry extends TextEntry {
 		
 		 By default, this only checks whether the panel disallows numeric characters, preventing it from being edited if the value contains any. 
 		
-		 This is actually an engine hook that only works on TextEntry derived elements. 
+		 This is actually an engine hook that only works on TextEntry derived elements.
 		
-		 
 		Name | Description
 		--- | ---
 		`char` | The last character entered into the panel.
 		
 		
-		**Returns:** Return true to prevent the value from changing, false to allow it.
+		`**Returns:** Return true to prevent the value from changing, false to allow it.
 		
 		___
 		### Lua Examples
@@ -427,22 +369,16 @@ extern class DTextEntry extends TextEntry {
 		**Output:**
 		
 		The panel does not allow any alterations.
-		
-		
     **/
     
      
     public function AllowInput(char:String):Bool;
     /**
-        Sets whether we should fire DTextEntry:OnValueChange every time we type or delete a character or only when Enter is pressed. 
-		
+        Sets whether we should fire DTextEntry:OnValueChange every time we type or delete a character or only when Enter is pressed.
 		
 		Name | Description
 		--- | ---
 		`updateOnType` | 
-		
-		
-		
     **/
     
      
@@ -454,33 +390,25 @@ extern class DTextEntry extends TextEntry {
 		
 		 You should override this function to define custom behavior when the text changes. 
 		
-		 This method is called: 
+		 This method is called:
 		
-		 
 		Name | Description
 		--- | ---
 		`value` | The DTextEntry text.
-		
-		
-		
     **/
     
      
     public function OnValueChange(value:String):Void;
     /**
-        Returns whether the DTextEntry is set to run DTextEntry:OnValueChange every time a character is typed or deleted or only when Enter is pressed. 
+        Returns whether the DTextEntry is set to run DTextEntry:OnValueChange every time a character is typed or deleted or only when Enter is pressed.
 		
-		
-		**Returns:** 
-		
-		
+		`**Returns:** 
     **/
     
      
     public function GetUpdateOnType():Bool;
     /**
-        Changes the font of the DTextEntry. 
-		
+        Changes the font of the DTextEntry.
 		
 		Name | Description
 		--- | ---
@@ -496,46 +424,34 @@ extern class DTextEntry extends TextEntry {
 		local textentry = vgui.Create("DTextEntry")
 		textentry:SetFont("DermaDefault")
 		```
-		
-		
     **/
     
      
     public function SetFont(font:String):Void;
     /**
-        ***Deprecated:**   Use Panel: SetEnabled instead.
+        ***Deprecated:** Use Panel: SetEnabled instead.
 		
-		Disables input on a DTextEntry and greys it out visually. This differs from DTextEntry:SetEditable which doesn't visually change the textbox. 
-		
+		Disables input on a DTextEntry and greys it out visually. This differs from DTextEntry:SetEditable which doesn't visually change the textbox.
 		
 		Name | Description
 		--- | ---
 		`disabled` | Whether the textbox should be disabled
-		
-		
-		
     **/
-    @:deprecated
+    @:deprecated("Use Panel: SetEnabled instead.")
      
     public function SetDisabled(disabled:Bool):Void;
     /**
-        Return current color of panel placeholder 
+        Return current color of panel placeholder
 		
-		
-		**Returns:** Current placeholder color
-		
-		
+		`**Returns:** Current placeholder color
     **/
     
      
     public function GetPlaceholderColor():AnyTable;
     /**
-        Returns whether only numeric characters (123456789.-) can be entered into the DTextEntry. 
+        Returns whether only numeric characters (123456789.-) can be entered into the DTextEntry.
 		
-		
-		**Returns:** Whether the DTextEntry is numeric or not.
-		
-		
+		`**Returns:** Whether the DTextEntry is numeric or not.
     **/
     
      
@@ -543,19 +459,15 @@ extern class DTextEntry extends TextEntry {
     /**
         Called internally by DTextEntry:OnTextChanged when the user modifies the text in the DTextEntry. 
 		
-		You should override this function to define custom behavior when the DTextEntry text changes. 
-		
-		 
-		
+		You should override this function to define custom behavior when the DTextEntry text changes.
     **/
     
     @:hook 
     public function OnChange():Void;
     /**
-        Returns the cursor color of a DTextEntry. 
+        Returns the cursor color of a DTextEntry.
 		
-		
-		**Returns:** The color of the cursor as a Color structure.
+		`**Returns:** The color of the cursor as a Color structure.
 		
 		___
 		### Lua Examples
@@ -570,42 +482,35 @@ extern class DTextEntry extends TextEntry {
 		**Output:**
 		
 		Prints the R, G, B and A of the cursor color.
-		
-		
     **/
     
      
-    public function GetCursorColor():AnyTable;
+    public function GetCursorColor():Color;
     /**
-        Allow you to set placeholder color. 
-		
+        Allow you to set placeholder color.
 		
 		Name | Description
 		--- | ---
 		`color` | The color of the placeholder.
-		
-		
-		
     **/
     
      
     public function SetPlaceholderColor(?color:AnyTable):Void;
     /**
-        Called whenever a valid character is typed while the text entry is focused. 
+        Called whenever a valid character is typed while the text entry is focused.
 		
+		**Note:** This hook only works on panels derived from TextEntry, such as DTextEntry.
 		
 		Name | Description
 		--- | ---
 		`keyCode` | They key code of the key pressed, see KEY_ Enums.
 		
 		
-		**Returns:** Whether you've handled the key press. Returning true prevents the default text entry behavior from occurring.
-		
-		
+		`**Returns:** Whether you've handled the key press. Returning true prevents the default text entry behavior from occurring.
     **/
     
     @:hook 
-    public function OnKeyCodeTyped(keyCode:Float):Bool;
+    public function OnKeyCodeTyped(keyCode:KEY):Bool;
     
 }
 

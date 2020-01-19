@@ -2,39 +2,30 @@ package gmod.gclass;
 #if client
 
 /**
-    This is returned from video.Record. 
-	
-	
+    This is returned from video.Record.
 **/
 extern class IVideoWriter {
     
     /**
-        Returns the width of the video stream. 
+        Returns the width of the video stream.
 		
-		
-		**Returns:** width
-		
-		
+		`**Returns:** width
     **/
     
     public function Width():Float;
     
     
     /**
-        Returns the height of the video stream. 
+        Returns the height of the video stream.
 		
-		
-		**Returns:** height
-		
-		
+		`**Returns:** height
     **/
     
     public function Height():Float;
     
     
     /**
-        Adds the current framebuffer to the video stream. 
-		
+        Adds the current framebuffer to the video stream.
 		
 		Name | Description
 		--- | ---
@@ -58,33 +49,24 @@ extern class IVideoWriter {
 		
 		end )
 		```
-		
-		
     **/
     
     public function AddFrame(frameTime:Float, downsample:Bool):Void;
     
     
     /**
-        Sets whether to record sound or not. 
-		
+        Sets whether to record sound or not.
 		
 		Name | Description
 		--- | ---
 		`record` | Record.
-		
-		
-		
     **/
     
     public function SetRecordSound(record:Bool):Void;
     
     
     /**
-        Ends the video recording and dumps it to disk. 
-		
-		
-		
+        Ends the video recording and dumps it to disk.
     **/
     
     public function Finish():Void;

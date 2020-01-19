@@ -2,19 +2,14 @@ package gmod.libs;
 #if server
 
 /**
-    Used to create tasks for scripted NPCs. 
-	
-	
+    Used to create tasks for scripted NPCs.
 **/
 @:native("ai_task")extern class Ai_taskLib {
     
     /**
-        Create a new empty task. Used by Schedule:AddTask and Schedule:EngTask. 
+        Create a new empty task. Used by Schedule:AddTask and Schedule:EngTask.
 		
-		
-		**Returns:** The new task object.
-		
-		
+		`**Returns:** The new task object.
     **/
     
     public static function New():Task;

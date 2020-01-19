@@ -2,18 +2,17 @@ package gmod.panels;
 #if client
 
 /**
-    Basic text input field. 
-	
-	
+    Basic text input field.
 **/
 extern class TextEntry extends Panel {
     /**
         Only works for TextEntries. 
 		
-		Pastes the contents of the clipboard into the TextEntry. 
+		Pastes the contents of the clipboard into the TextEntry.
 		
-		 
+		**Warning:** Due to privacy concerns, this function has been disabled
 		
+		**Note:** Tab characters will be dropped from the pasted text
     **/
     
      
@@ -21,21 +20,15 @@ extern class TextEntry extends Panel {
     /**
         Restores the last saved state (caret position and the text inside) of a TextEntry. Should act identically to pressing CTRL+Z in a TextEntry. 
 		
-		See also Panel:SaveUndoState. 
-		
-		 
-		
+		See also Panel:SaveUndoState.
     **/
     
      
     public function Undo():Void;
     /**
-        Determines whether or not a text-based panel object, such as a DTextEntry, is in multi-line mode. This is set with Panel:SetMultiline. 
+        Determines whether or not a text-based panel object, such as a DTextEntry, is in multi-line mode. This is set with Panel:SetMultiline.
 		
-		
-		**Returns:** Whether the object is in multi-line mode or not.
-		
-		
+		`**Returns:** Whether the object is in multi-line mode or not.
     **/
     
      
@@ -43,15 +36,11 @@ extern class TextEntry extends Panel {
     /**
         Sets the visibility of the vertical scrollbar. 
 		
-		Works for RichText and TextEntry. 
+		Works for RichText and TextEntry.
 		
-		 
 		Name | Description
 		--- | ---
 		`display` | True to display the vertical text scroll bar, false to hide it.
-		
-		
-		
     **/
     
      
@@ -59,9 +48,8 @@ extern class TextEntry extends Panel {
     /**
         Configures a text input to allow user to type characters that are not included in the US-ASCII (7-bit ASCII) character set. 
 		
-		Characters not included in US-ASCII are multi-byte characters in UTF-8. They can be accented characters, non-Latin characters and special characters. 
+		Characters not included in US-ASCII are multi-byte characters in UTF-8. They can be accented characters, non-Latin characters and special characters.
 		
-		 
 		Name | Description
 		--- | ---
 		`allowed` | Set to true in order not to restrict input characters.
@@ -84,31 +72,22 @@ extern class TextEntry extends Panel {
 		    return vgui_elt
 		end
 		```
-		
-		
     **/
     
      
     public function SetAllowNonAsciiCharacters(allowed:Bool):Void;
     /**
-        Performs the "CONTROL + X" ( delete text and copy it to clipboard buffer ) action on selected text. 
-		
-		
-		
+        Performs the "CONTROL + X" ( delete text and copy it to clipboard buffer ) action on selected text.
     **/
     
      
     public function CutSelected():Void;
     /**
-        Enables or disables the multi-line functionality of a text object, such as a DTextEntry. 
-		
+        Enables or disables the multi-line functionality of a text object, such as a DTextEntry.
 		
 		Name | Description
 		--- | ---
 		`multiline` | Whether to enable multiline or not.
-		
-		
-		
     **/
     
      
@@ -116,9 +95,8 @@ extern class TextEntry extends Panel {
     /**
         Sets the font used to render this panel's text. 
 		
-		To retrieve the font used by a panel, call Panel:GetFont. 
+		To retrieve the font used by a panel, call Panel:GetFont.
 		
-		 
 		Name | Description
 		--- | ---
 		`fontName` | The name of the font. See here for a list of existing fonts. Alternatively, use surface. CreateFont to create your own custom font.
@@ -152,37 +130,26 @@ extern class TextEntry extends Panel {
 		    
 		end
 		```
-		
-		
     **/
     
      
     public function SetFontInternal(fontName:String):Void;
     /**
-        Selects all the text in a panel object. Will not select non-text items; for this, use Panel:SelectAll. 
-		
-		
-		
+        Selects all the text in a panel object. Will not select non-text items; for this, use Panel:SelectAll.
     **/
     
      
     public function SelectAllText():Void;
     /**
-        Returns the position/offset of the caret (or text cursor) in a text-based panel object. 
+        Returns the position/offset of the caret (or text cursor) in a text-based panel object.
 		
-		
-		**Returns:** The caret position/offset from the start of the text. A value of 0 means the caret sits before the first character.
-		
-		
+		`**Returns:** The caret position/offset from the start of the text. A value of 0 means the caret sits before the first character.
     **/
     
      
     public function GetCaretPos():Float;
     /**
-        Deselects all items in a panel object. For text-based objects, this will deselect all text. 
-		
-		
-		
+        Deselects all items in a panel object. For text-based objects, this will deselect all text.
     **/
     
      
@@ -190,58 +157,43 @@ extern class TextEntry extends Panel {
     /**
         Saves the current state (caret position and the text inside) of a TextEntry as an undo state. 
 		
-		See also Panel:Undo. 
-		
-		 
-		
+		See also Panel:Undo.
     **/
     
      
     public function SaveUndoState():Void;
     /**
-        Sets the position of the caret (or text cursor) in a text-based panel object. 
-		
+        Sets the position of the caret (or text cursor) in a text-based panel object.
 		
 		Name | Description
 		--- | ---
 		`offset` | Caret position/offset from the start of text. A value of 0 places the caret before the first character.
-		
-		
-		
     **/
     
      
     public function SetCaretPos(offset:Float):Void;
     /**
-        If called on a text entry, clicking the text entry for the first time will automatically select all of the text ready to be copied by the user. 
-		
-		
-		
+        If called on a text entry, clicking the text entry for the first time will automatically select all of the text ready to be copied by the user.
     **/
     
      
     public function SelectAllOnFocus():Void;
     /**
-        Performs the "CONTROL + C" key combination effect ( Copy selection to clipboard ) on selected text. 
-		
-		
-		
+        Performs the "CONTROL + C" key combination effect ( Copy selection to clipboard ) on selected text.
     **/
     
      
     public function CopySelected():Void;
     /**
-        Selects all items within a panel or object. For text-based objects, selects all text. 
-		
-		
-		
+        Selects all items within a panel or object. For text-based objects, selects all text.
     **/
     
      
     public function SelectAll():Void;
     /**
-        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton. 
+        Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
+		**Warning:** When used on a Label or its derivatives ( DLabel and DButton ), it will automatically call Panel:InvalidateLayout, meaning that you should avoid running this function every frame on these panels to avoid unnecessary performance loss.
 		
 		Name | Description
 		--- | ---
@@ -267,15 +219,12 @@ extern class TextEntry extends Panel {
 		-- Set the text to the message you get when VAC banned
 		richtext:SetText("#VAC_ConnectionRefusedDetail")
 		```
-		
-		
     **/
     
      
     public function SetText(text:String):Void;
     /**
-        Used to draw the text in a DTextEntry within a derma skin. This should be called within the SKIN:PaintTextEntry skin hook. 
-		
+        Used to draw the text in a DTextEntry within a derma skin. This should be called within the SKIN:PaintTextEntry skin hook.
 		
 		Name | Description
 		--- | ---
@@ -308,8 +257,6 @@ extern class TextEntry extends Panel {
 		    
 		end
 		```
-		
-		
     **/
     
      
@@ -317,15 +264,11 @@ extern class TextEntry extends Panel {
     /**
         Sets the visibility of the language selection box in a TextEntry when typing in non-English mode. 
 		
-		See Panel:SetDrawLanguageIDAtLeft for a function that changes the position of the language selection box. 
+		See Panel:SetDrawLanguageIDAtLeft for a function that changes the position of the language selection box.
 		
-		 
 		Name | Description
 		--- | ---
 		`visible` | true to make it visible, false to hide it.
-		
-		
-		
     **/
     
      
@@ -333,15 +276,11 @@ extern class TextEntry extends Panel {
     /**
         Sets where to draw the language selection box. 
 		
-		See Panel:SetDrawLanguageID for a function that hides or shows the language selection box. 
+		See Panel:SetDrawLanguageID for a function that hides or shows the language selection box.
 		
-		 
 		Name | Description
 		--- | ---
 		`left` | true = left, false = right
-		
-		
-		
     **/
     
      

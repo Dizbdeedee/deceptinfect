@@ -2,15 +2,12 @@ package gmod.libs;
 #if client
 
 /**
-    The markup library only contains a single function to create a MarkupObject. 
-	
-	
+    The markup library only contains a single function to create a MarkupObject.
 **/
 @:native("markup")extern class MarkupLib {
     
     /**
-        Parses markup into a MarkupObject. Currently, this only supports fonts and colors as demonstrated in the example. 
-		
+        Parses markup into a MarkupObject. Currently, this only supports fonts and colors as demonstrated in the example.
 		
 		Name | Description
 		--- | ---
@@ -18,7 +15,7 @@ package gmod.libs;
 		`maxwidth` | The max width of the output
 		
 		
-		**Returns:** The parsed markup object ready to be drawn.
+		`**Returns:** The parsed markup object ready to be drawn.
 		
 		___
 		### Lua Examples
@@ -32,8 +29,6 @@ package gmod.libs;
 		    parsed:Draw(100, 100, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		end)
 		```
-		
-		
     **/
     
     public static function Parse(markup:String, maxwidth:Float):MarkupObject;

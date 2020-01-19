@@ -2,15 +2,12 @@ package gmod.libs;
 #if client
 
 /**
-    The video library. 
-	
-	
+    The video library.
 **/
 @:native("video")extern class VideoLib {
     
     /**
-        Attempts to create an IVideoWriter. 
-		
+        Attempts to create an IVideoWriter.
 		
 		Name | Description
 		--- | ---
@@ -57,11 +54,9 @@ package gmod.libs;
 		    iVideoWriter:Finish()
 		end
 		```
-		
-		
     **/
     
-    public static function Record(config:AnyTable):VideoLibRecordReturn;
+    public static function Record(config:VideoData):VideoLibRecordReturn;
     
     
 

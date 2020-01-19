@@ -2,7 +2,7 @@ package gmod.panels;
 #if client
 
 /**
-    Engine checkbox  
+    Engine checkbox
 **/
 extern class CheckButton {
     
