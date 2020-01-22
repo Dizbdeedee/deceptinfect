@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by ClientsideModel, ENT.RenderGroup in ENT structure and Entity:GetRenderGroup.
 **/

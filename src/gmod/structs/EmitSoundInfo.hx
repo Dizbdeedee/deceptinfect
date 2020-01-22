@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Passed as argument of [GM](https://wiki.garrysmod.com/page/Category:GM_Hooks): [EntityEmitSound](https://wiki.garrysmod.com/page/GM/EntityEmitSound).
 **/

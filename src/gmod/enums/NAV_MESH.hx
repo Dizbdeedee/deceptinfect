@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by CNavArea:GetAttributes and CNavArea:HasAttributes.
 **/

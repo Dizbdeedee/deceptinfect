@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Surface flags, used by the TraceResult structure.
 **/

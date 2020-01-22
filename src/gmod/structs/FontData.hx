@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Used for [surface](https://wiki.garrysmod.com/page/Category:surface). [CreateFont](https://wiki.garrysmod.com/page/surface/CreateFont).
 **/

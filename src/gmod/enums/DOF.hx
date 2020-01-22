@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Internal globals for SimpleDoF. Clientside only.
 **/

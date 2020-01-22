@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used as trace masks in Trace structure and HullTrace structure. These enumerations are simply combinations of CONTENTS_ Enums.
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     A structure containing vertex information for use with [surface](https://wiki.garrysmod.com/page/Category:surface). [DrawPoly](https://wiki.garrysmod.com/page/surface/DrawPoly). UV coordinates describe which part of a given texture should be drawn at a vertex - your graphics card's interpolator will fill in space between vertices. UV coords range from 0-1, with 0 being top/left and 1 being bottom/right. If you're using a texture these are mandatory.
 	

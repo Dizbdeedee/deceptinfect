@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     The TOOL table is used in Sandbox tool creation. You can find a list of callbacks on the TOOL Hooks page and a list of methods on the Tool Functions page. Do note that some of the fields below have no effect on server-side operations. 
 	

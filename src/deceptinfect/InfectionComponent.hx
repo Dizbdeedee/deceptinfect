@@ -1,9 +1,16 @@
 package deceptinfect;
 
+using tink.CoreApi;
+
 class InfectionComponent {
 
-    var infection:INF_STATE = NOT_INFECTED(0);
-    var rate:Float = 1;
+    public var infection(default,null):INF_STATE = NOT_INFECTED(0);
+    public var rate(default,null):Float = 1;
+
+    public var baseInfection:Ref<Float>;
+
+    public var onInfected:Signal<Noise>;
+    var infectedTrigger:SignalTrigger<Noise>;
     
     public function handleInfection() {
         // if (not DeceptInfect)
@@ -16,18 +23,40 @@ class InfectionComponent {
         }
         switch (infection) {
             case INFECTED:
-                onInfected();
+                infectedTrigger.trigger(Noise);
             default:
         }
     }
 
-    public function baseInfection() {
-
+    function baseInfect() {
+        setInfection((baseInfection:Float) * rate);
     }
 
-    function onInfected() {
-
+    public function setInfected() {
+        infection = INFECTED;
     }
+
+    public function infect(f:Float) {
+        switch (infection) {
+            case NOT_INFECTED(inf):
+                setInfection(inf + f);
+            default:
+        }
+    }
+
+
+
+    
+    public function setInfection(inf:Float) {
+        switch(infection) {
+            case NOT_INFECTED(x):
+                x = inf;
+                handleInfection();
+            default:
+        }
+    }
+
+    
 
     
 

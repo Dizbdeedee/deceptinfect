@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Various count enums.
 	**Note:** These only exist serverside.

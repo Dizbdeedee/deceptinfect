@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table returned by [util](https://wiki.garrysmod.com/page/Category:util). [GetSurfaceData](https://wiki.garrysmod.com/page/util/GetSurfaceData).
 **/

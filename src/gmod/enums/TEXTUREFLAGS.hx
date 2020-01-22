@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Bit flags used by GetRenderTargetEx. Clientside only. Information taken from here
 	**Warning:** These enumerations do not exist in the game and are listed here purely for reference purposes only.

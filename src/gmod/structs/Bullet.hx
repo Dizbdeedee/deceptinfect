@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Tables used for bullets see [Entity](https://wiki.garrysmod.com/page/Category:Entity): [FireBullets](https://wiki.garrysmod.com/page/Entity/FireBullets) and [GM](https://wiki.garrysmod.com/page/Category:GM_Hooks): [EntityFireBullets](https://wiki.garrysmod.com/page/GM/EntityFireBullets).
 **/

@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by Player:SetObserverMode, Player:GetObserverMode and Player:Spectate.
 **/

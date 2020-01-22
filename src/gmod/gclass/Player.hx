@@ -1,10 +1,10 @@
 package gmod.gclass;
 
-
+using tink.CoreApi; // SELF ADDED
 /**
     This is a list of all methods only available for players. It is also possible to call Entity functions on the Player.
 **/
-extern class Player {
+extern class Player extends Entity {
     
     /**
         Returns a player's duck speed (in seconds)
@@ -4186,7 +4186,7 @@ extern class Player {
     
     public function UniqueIDTable(key:Dynamic):AnyTable;
     
-    
+    public var annex:Annex<Player>; //SELF ADDED!
 }
 
 

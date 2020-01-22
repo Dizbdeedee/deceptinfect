@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by Entity:AddEFlags, Entity:RemoveEFlags and Entity:IsEFlagSet.
 **/

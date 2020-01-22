@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table is one element from [team](https://wiki.garrysmod.com/page/Category:team). [GetAllTeams](https://wiki.garrysmod.com/page/team/GetAllTeams).
 **/

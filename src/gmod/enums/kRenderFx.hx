@@ -1,10 +1,11 @@
+package gmod.enums;
 /**
     Used by Entity:SetRenderFX and returned by Entity:GetRenderFX. 
 	
 	Most of these require alpha value of entitys color to be less than 255 to have any visible effect.
 **/
 @:native("_G")
-extern enum abstract kRenderFx(Int) {
+extern enum abstract KRenderFx(Int) {
     /**
         Very quickly switches the entitys transparency between its alpha and 0.
     **/

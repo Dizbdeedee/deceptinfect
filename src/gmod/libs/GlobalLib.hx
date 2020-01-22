@@ -1846,7 +1846,7 @@ package gmod.libs;
     
     public static function LerpAngle(ratio:Float, angleStart:Angle, angleEnd:Angle):Angle;
     
-    
+    #if menu
     /**
         Returns the loading screen panel and creates it if it doesn't exist.
 		
@@ -1854,7 +1854,7 @@ package gmod.libs;
     **/
     
     public static function GetLoadPanel():Panel;
-    
+    #end
     #if client
     /**
         Loads the specified image from the /cache folder, used in combination steamworks.Download. Most addons will provide a 512x512 png image.
@@ -2249,7 +2249,7 @@ package gmod.libs;
     
     public static function GetConVar(name:String):ConVar;
     
-    
+    #if menu
     /**
         Returns the menu overlay panel, a container for panels like the error panel created in GM:OnLuaError.
 		
@@ -2257,7 +2257,7 @@ package gmod.libs;
     **/
     
     public static function GetOverlayPanel():Panel;
-    
+    #end
     #if client
     /**
         Renders the post-processing effect of beams of light originating from the map's sun. Utilises the "pp/sunbeams" material
@@ -2891,7 +2891,7 @@ package gmod.libs;
 		
 		`**Returns:** The current floored dynamic memory usage of Lua, in kilobytes.
     **/
-    @:deprecated("This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use collectgarbage( "count" ) instead.")
+    @:deprecated("This function was deprecated in Lua 5.1 and is removed in Lua 5.2. Use collectgarbage( \"count\" ) instead.")
     public static function gcinfo():Float;
     
     
@@ -3358,9 +3358,12 @@ package gmod.libs;
 		ReadSound( "phx/hmetal1.wav" )
 		```
     **/
-    
+    #if server
     public static function CreateSound(targetEnt:Entity, soundName:String, ?filter:CRecipientFilter):CSoundPatch;
-    
+	#else
+	public static function CreateSound(targetEnt:Entity, soundName:String):CSoundPatch;
+	#end
+	
     #if client
     /**
         Does the removing of the tooltip panel. Called by EndTooltip.
@@ -5982,12 +5985,14 @@ var b:AnyTable;
 var c:Float;
 
 }
+#if client
 @:multiReturn extern class GlobalLibFindTooltipReturn {
 var a:String;
 var b:Panel;
 var c:Panel;
 
 }
+#end
 @:multiReturn extern class GlobalLibCompileStringReturn {
 var a:Function;
 var b:String;

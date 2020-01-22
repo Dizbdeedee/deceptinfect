@@ -23,7 +23,7 @@ package gmod.libs;
 		`**Returns:** The read integer number, or 0 if no integer could be read.
     **/
     
-    public static function ReadInt(bitCount:Float):Float;
+    public static function ReadInt(bitCount:Int):Int;
     
     
     /**

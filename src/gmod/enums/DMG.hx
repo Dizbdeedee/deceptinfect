@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by CTakeDamageInfo:GetDamageType, CTakeDamageInfo:SetDamageType and CTakeDamageInfo:IsDamageType
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Structure used for storing/restoring bone manipulations. Data is stored from Entity:GetManipulateBoneScale, Entity:GetManipulateBoneAngles, and Entity:GetManipulateBonePosition. Data is restored using Entity:ManipulateBoneScale, Entity:ManipulateBoneAngles, and Entity:ManipulateBonePosition. 
 	

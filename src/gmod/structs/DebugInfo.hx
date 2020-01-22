@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table returned by [debug](https://wiki.garrysmod.com/page/Category:debug). [getinfo](https://wiki.garrysmod.com/page/debug/getinfo).  For functions defined in C/C++, the following members will always have the given values:
 	

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure used for [util](https://wiki.garrysmod.com/page/Category:util). [TraceLine](https://wiki.garrysmod.com/page/util/TraceLine).
 **/

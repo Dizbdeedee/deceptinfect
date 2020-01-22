@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by Entity:GetBloodColor and Entity:SetBloodColor.
 **/

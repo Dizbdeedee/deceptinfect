@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by game.SetGlobalState and game.GetGlobalState. 
 	

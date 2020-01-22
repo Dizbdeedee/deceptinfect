@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used in TraceResult structure and by Entity:GetMaterialType.
 **/

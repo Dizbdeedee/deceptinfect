@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table used by panel animation methods, primarily [Panel](https://wiki.garrysmod.com/page/Category:Panel): [AnimationThinkInternal](https://wiki.garrysmod.com/page/Panel/AnimationThinkInternal), and returned by [Panel](https://wiki.garrysmod.com/page/Category:Panel): [NewAnimation](https://wiki.garrysmod.com/page/Panel/NewAnimation).
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table returned by [os](https://wiki.garrysmod.com/page/Category:os). [date](https://wiki.garrysmod.com/page/os/date) and used by [os](https://wiki.garrysmod.com/page/Category:os). [time](https://wiki.garrysmod.com/page/os/time).
 **/

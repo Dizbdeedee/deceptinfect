@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by render.GetFogMode and render.FogMode. Clientside only.
 **/

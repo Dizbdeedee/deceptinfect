@@ -141,7 +141,7 @@ package gmod.libs;
 		`**Returns:** Player if one is found, false otherwise.
     **/
     
-    public static function GetByAccountID(accountID:String):EithierType<Player,Bool>;
+    public static function GetByAccountID(accountID:String):EitherType<Player,Bool>;
     
     
     /**
@@ -166,7 +166,7 @@ package gmod.libs;
 		`**Returns:** Player if one is found, false otherwise.
     **/
     
-    public static function GetBySteamID(steamID:String):EithierType<Player,Bool>;
+    public static function GetBySteamID(steamID:String):EitherType<Player,Bool>;
     
     
     /**
@@ -182,7 +182,7 @@ package gmod.libs;
 		`**Returns:** Player if one is found, false otherwise.
     **/
     
-    public static function GetByUniqueID(uniqueID:String):EithierType<Player,Bool>;
+    public static function GetByUniqueID(uniqueID:String):EitherType<Player,Bool>;
     
     
 

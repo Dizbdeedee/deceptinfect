@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Used for [serverlist](https://wiki.garrysmod.com/page/Category:serverlist). [Query](https://wiki.garrysmod.com/page/serverlist/Query).
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Passed as argument of [ENTITY](https://wiki.garrysmod.com/page/Category:ENTITY_Hooks): [PhysicsCollide](https://wiki.garrysmod.com/page/ENTITY/PhysicsCollide).
 	

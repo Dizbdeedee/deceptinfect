@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Returned by [util](https://wiki.garrysmod.com/page/Category:util). [GetSunInfo](https://wiki.garrysmod.com/page/util/GetSunInfo).
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Information about a SWEP, used by [SANDBOX](https://wiki.garrysmod.com/page/Category:SANDBOX_Hooks): [PlayerGiveSWEP](https://wiki.garrysmod.com/page/SANDBOX/PlayerGiveSWEP) and SWEP creation. For list of callbacks, see [Category:WEAPON_Hooks](https://wiki.garrysmod.com/page/Category:WEAPON_Hooks). While some of the fields may be serverside or clientside only, it is recommended to provide them on both so addons could use their values.
 **/

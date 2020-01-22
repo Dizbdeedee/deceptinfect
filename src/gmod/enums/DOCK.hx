@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by Panel:Dock.
 	**Note:** These enumerations doesn't have DOCK_ prefix, this is an exception from all other enumerations.

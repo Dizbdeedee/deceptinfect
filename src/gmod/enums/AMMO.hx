@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Used by game.AddAmmoType's input structure - the AmmoData structure.
 	**Note:** These enumerations do not exist in game and are listed here only for reference!

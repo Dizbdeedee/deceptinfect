@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Data structure used by the [duplicatorlibrary](https://wiki.garrysmod.com/page/Category:duplicator) to store and load entity data. It is created by duplicator.CopyEntTable and can be loaded by duplicator.CreateEntityFromTable. 
 	

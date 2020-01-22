@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Information about a gamemode, used in [GamemodeCreation](https://wiki.garrysmod.com/page/Gamemode_Creation). For list of hooks, see [GMHooks](https://wiki.garrysmod.com/page/Category:GM_Hooks). While some of the fields may be serverside or clientside only, it is recommended to provide them on both so addons could use their values.
 **/

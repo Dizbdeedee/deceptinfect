@@ -7,7 +7,7 @@ package gmod.hooks;
 	See also: GM structure
 **/
 class Gm {
-    
+    #if server
     /**
         Executes when a player connects to the server. Called before the player has been assigned a UserID and entity. See the player_connect gameevent for a version of this hook called after the player entity has been created.
 		
@@ -40,7 +40,36 @@ class Gm {
     
     @:hook
     public function PlayerConnect(name:String, ip:String):Void {}
-    
+	#elseif client
+	/**
+        Executes when a player connects to the server. Called before the player has been assigned a UserID and entity. See the player_connect gameevent for a version of this hook called after the player entity has been created.
+		
+		**Note:** This is only called clientside for listen server hosts.
+		
+		**Note:** This is not called clientside for the local player.
+		
+		Name | Description
+		--- | ---
+		`name` | The player's name.
+		
+		
+		
+		___
+		### Lua Examples
+		#### Example 1
+		prints a message to the chatbox when a player joins the game
+		
+		```lua 
+		function GM:PlayerConnect( name)
+		    PrintMessage( HUD_PRINTTALK, name .. " has joined the game." )
+		end
+		```
+		**Output:**
+		
+		Player1 has joined the game.
+    **/
+	public function PlayerConnect(name:String):Void {}
+	#end
     #if server
     /**
         Check if a player can spawn at a certain spawnpoint.
@@ -1222,7 +1251,7 @@ class Gm {
     **/
     
     @:hook
-    public function PlayerCanHearPlayersVoice(listener:Player, talker:Player):GmPlayerCanHearPlayersVoiceReturn {return null;}
+    public function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<GmPlayerCanHearPlayersVoiceHaxeReturn> {return null;} //return
     #end
     #if server
     /**
@@ -2069,10 +2098,12 @@ class Gm {
 		```
     **/
     
-    @:hook
+	@:hook
+	#if server
     public function PlayerFootstep(ply:Player, pos:Vector, foot:Float, sound:String, volume:Float, filter:CRecipientFilter):Bool {return null;}
-    
-    
+	#else
+	public function PlayerFootstep(ply:Player, pos:Vector, foot:Float, sound:String, volume:Float):Bool {return null;}
+	#end
     /**
         Called when the player changes their weapon to another one - and their viewmodel model changes.
 		
@@ -2311,7 +2342,7 @@ class Gm {
     **/
     
     @:hook
-    public function CalcMainActivity(ply:Player, vel:Vector):GmCalcMainActivityReturn {return null;}
+    public function CalcMainActivity(ply:Player, vel:Vector):Dynamic {return null;}
     
     #if client
     /**
@@ -3367,7 +3398,7 @@ class Gm {
     **/
     
     @:hook
-    public function CheckPassword(steamID64:String, ipAddress:String, svPassword:String, clPassword:String, name:String):GmCheckPasswordReturn {return null;}
+    public function CheckPassword(steamID64:String, ipAddress:String, svPassword:String, clPassword:String, name:String):Dynamic {return null;}
     #end
     #if client
     /**
@@ -3447,7 +3478,7 @@ class Gm {
     **/
     
     @:hook
-    public function CalcViewModelView(wep:Weapon, vm:Entity, oldPos:Vector, oldAng:Angle, pos:Vector, ang:Angle):GmCalcViewModelViewReturn {return null;}
+    public function CalcViewModelView(wep:Weapon, vm:Entity, oldPos:Vector, oldAng:Angle, pos:Vector, ang:Angle):Dynamic {return null;}
     #end
     
     /**
@@ -4481,7 +4512,7 @@ class Gm {
     **/
     
     @:hook
-    public function GetMotionBlurValues(horizontal:Float, vertical:Float, forward:Float, rotational:Float):GmGetMotionBlurValuesReturn {return null;}
+    public function GetMotionBlurValues(horizontal:Float, vertical:Float, forward:Float, rotational:Float):Dynamic {return null;}
     #end
     
     /**
@@ -5127,6 +5158,18 @@ var a:Bool;
 var b:Bool;
 
 }
+
+typedef GmPlayerCanHearPlayersVoiceHaxeReturn = {
+	/**
+		Return true if the listener should hear the talker, false if they shouldn't.
+	**/
+	var a : Bool;
+	/**
+		3D sound. If set to true, will fade out the sound the further away listener is from the talker, the voice will also be in stereo, and not mono.
+	**/
+	var b : Bool;
+}
+
 @:multiReturn extern class GmGetMotionBlurValuesReturn {
 var a:Float;
 var b:Float;

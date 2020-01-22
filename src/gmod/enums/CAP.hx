@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by NPC:CapabilitiesAdd, WEAPON:GetCapabilities and NPC:CapabilitiesGet. Serverside only.
 **/

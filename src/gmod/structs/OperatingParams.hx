@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     The structure used by [Vehicle](https://wiki.garrysmod.com/page/Category:Vehicle): [GetOperatingParams](https://wiki.garrysmod.com/page/Vehicle/GetOperatingParams).
 **/

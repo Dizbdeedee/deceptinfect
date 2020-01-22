@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Used by render.OverrideBlend to determine how texture RGBA information should be interpreted when rendered. 
 	

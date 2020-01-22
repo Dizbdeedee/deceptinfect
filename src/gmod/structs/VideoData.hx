@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table used by [video](https://wiki.garrysmod.com/page/Category:video). [Record](https://wiki.garrysmod.com/page/video/Record).
 **/

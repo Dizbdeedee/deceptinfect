@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations for NPC conditions, used by NPC:SetCondition. Serverside only.
 	**Warning:** These enumerations do not exist in game, but are listed here anyway for reference

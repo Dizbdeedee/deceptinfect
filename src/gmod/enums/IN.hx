@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Unlike BUTTON_CODE_ Enums, these enums are abstracted to allow the user to bind actions to any key they might prefer. 
 	

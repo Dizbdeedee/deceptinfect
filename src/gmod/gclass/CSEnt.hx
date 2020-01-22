@@ -6,7 +6,7 @@ package gmod.gclass;
 	
 	Its base class is Entity so it inherits all of the Client and Shared functions used by Entity.
 **/
-extern class CSEnt {
+extern class CSEnt extends Entity {
     
     /**
         Removes the clientside entity

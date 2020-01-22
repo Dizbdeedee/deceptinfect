@@ -8,7 +8,7 @@ package gmod.gclass;
 	
 	 See NextBot NPC Creation for more information on how to create NextBot NPCs.
 **/
-extern class NextBot {
+extern class NextBot extends Entity {
     
     /**
         To be called in the behaviour coroutine only! Will yield until the bot has reached the goal or is stuck

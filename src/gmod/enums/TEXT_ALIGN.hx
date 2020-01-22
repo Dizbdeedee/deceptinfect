@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by draw.SimpleText, draw.DrawText and in TextData structure.
 **/

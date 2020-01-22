@@ -1,9 +1,9 @@
 -cp src
 -D lua-5.1
--D luajit
 -D lua-vanilla
 -D client
--dce full
+-lib tink_core
+-D gmodAddonFolder=C:\steamcmd\gmod\garrysmod\addons
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
 --macro gmod.macros.InitMacro.init()

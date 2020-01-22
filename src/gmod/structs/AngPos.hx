@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table used by various functions, such as [Entity](https://wiki.garrysmod.com/page/Category:Entity): [GetAttachment](https://wiki.garrysmod.com/page/Entity/GetAttachment).
 **/

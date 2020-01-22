@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Information about the ENT structure.  To learn more about scripted entities, see this page. For list of callbacks, see ENT Hooks. 
 	

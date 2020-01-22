@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table used by [physenv](https://wiki.garrysmod.com/page/Category:physenv). [SetPerformanceSettings](https://wiki.garrysmod.com/page/physenv/SetPerformanceSettings).
 **/

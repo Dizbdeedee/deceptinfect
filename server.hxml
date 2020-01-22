@@ -1,11 +1,11 @@
 -cp src
 -D lua-5.1
--D luajit
 -D lua-vanilla
 -D server
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
 -D dump=pretty
+-lib tink_core
 --macro include("deceptinfect")
 --macro gmod.macros.InitMacro.init()
 -main Main

@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by GM:ScalePlayerDamage and GM:ScaleNPCDamage and returned by Player:LastHitGroup.
 **/

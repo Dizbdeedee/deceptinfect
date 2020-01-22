@@ -1,9 +1,13 @@
 package deceptinfect;
 
+import tink.core.Annex;
+import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
+import gmod.HaxeMultiReturn;
 import gmod.libs.MathLib;
 import gmod.types.Vector;
 import gmod.libs.EntsLib;
 import gmod.gclass.Player;
+import deceptinfect.DI_Player;
 import gmod.types.Entity;
 using gmod.PairTools;
 using gmod.TableTools;
@@ -27,7 +31,9 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
 
     override function PlayerInitialSpawn(player:Player, transition:Bool) {
-        new DI_Player(player);
+        player.annex = new Annex(player);
+        new DI_Player(player); //calls get to initalise
+        // new DI_Player(player);
         switch (currentState) {
             case PLAY(_):
                 player.KillSilent();
@@ -49,7 +55,7 @@ class DeceptInfect extends gmod.hooks.Gm {
         var blockers = EntsLib.FindInBox(pos + Vector.New(-16,-16,0), pos + Vector.New(16,16,72));
         for (ent in blockers) {
             if (ent.IsPlayer()) {
-                untyped ent.SetWalkthroughable(true);
+                // untyped ent.SetWalkthroughable(true);
             }
         }
         return true;
@@ -64,11 +70,22 @@ class DeceptInfect extends gmod.hooks.Gm {
         return null;
     }
 
-    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):Dynamic {
-        if (listener.GetPos().Distance(talker.GetPos()) > 1000) 
-            return [false];
-        return [true,true];
-    
+    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<GmPlayerCanHearPlayersVoiceHaxeReturn> {
+        if (listener.GetPos().Distance(talker.GetPos()) > 1000) {
+           return {a : false,b : false};
+        }
+        var _talker:DI_Player = talker;
+        if (_talker.grab.isGrabbed) {
+            return {a : false, b : true}
+        }
+        return {a : true, b : true}
+        
+        // 
+        // if (_talker.) {
+        //     return {
+
+        //     }
+        // }
     }
     #end
     

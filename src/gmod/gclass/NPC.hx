@@ -4,7 +4,7 @@ package gmod.gclass;
 /**
     This is a list of all methods only available for NPCs. It is also possible to call Entity functions on NPCs.
 **/
-extern class NPC {
+extern class NPC extends Entity {
     #if server
     /**
         Sets the hull type for the NPC.

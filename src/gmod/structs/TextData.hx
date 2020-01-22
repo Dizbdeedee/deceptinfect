@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Used for [draw](https://wiki.garrysmod.com/page/Category:draw). [Text](https://wiki.garrysmod.com/page/draw/Text).
 **/

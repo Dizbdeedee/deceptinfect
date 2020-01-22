@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table used by [util](https://wiki.garrysmod.com/page/Category:util). [TraceHull](https://wiki.garrysmod.com/page/util/TraceHull).
 **/

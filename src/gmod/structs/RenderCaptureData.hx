@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Used for [render](https://wiki.garrysmod.com/page/Category:render). [Capture](https://wiki.garrysmod.com/page/render/Capture).
 **/

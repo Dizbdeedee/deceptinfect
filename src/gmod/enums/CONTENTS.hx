@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by util.PointContents and as tracer masks.
 **/

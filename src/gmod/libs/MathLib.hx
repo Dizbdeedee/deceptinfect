@@ -369,7 +369,7 @@ package gmod.libs;
 		100
     **/
     
-    public static function IntToBin(int:Float):String;
+    public static function IntToBin(int:Int):String;
     
     
     /**
@@ -1069,9 +1069,10 @@ package gmod.libs;
 		    print(GetWeightedRandomKey(fruit))
 		end
 		```
-    **/
-    
-    public static function random(?m:Float, ?n:Float):Float;
+	**/
+	@:overload(function ():Float {})
+    @:overload(function (upperLimit:Int):Int {})
+    public static function random(m:Int, n:Int):Int;
     
     
     /**

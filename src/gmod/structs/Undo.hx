@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure used by [undo](https://wiki.garrysmod.com/page/Category:undo). [Do_Undo](https://wiki.garrysmod.com/page/undo/Do_Undo).
 **/

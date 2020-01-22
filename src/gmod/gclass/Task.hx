@@ -60,7 +60,7 @@ extern class Task {
     /**
         ***INTERNAL** 
 		
-		Initialises the AI task. Called by [ai_task](https://wiki.garrysmod.com/page/Category:ai_task). [New](https://wiki.garrysmod.com/page/ai_task/New).
+		Initialises the AI task. Called by [ai_task](https://wiki.garrysmod.com/page/Category:ai_task).[New](https://wiki.garrysmod.com/page/ai_task/New).
     **/
     @:deprecated("INTERNAL")
     public function Init():Void;

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table created by the [Color](https://wiki.garrysmod.com/page/Global/Color) function and used in various situations.
 **/

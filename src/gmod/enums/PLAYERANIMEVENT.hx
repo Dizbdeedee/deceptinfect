@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Used by GM:DoAnimationEvent and Player:DoCustomAnimEvent.
 **/

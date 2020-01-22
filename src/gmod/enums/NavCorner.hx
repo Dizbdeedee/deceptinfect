@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by CNavArea methods. These Enums correspond to each corner of a CNavArea
 	**Note:** These enumerations do not exist in game and are listed here only for reference!

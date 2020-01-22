@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used in GM:PlayerStepSoundTime hook.
 **/

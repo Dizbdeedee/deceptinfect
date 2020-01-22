@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by net.ReadType and returned by TypeID
 **/

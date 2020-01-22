@@ -1,4 +1,5 @@
 package deceptinfect;
+import deceptinfect.Infected.GrabbableComponent;
 import haxe.display.Display.GotoTypeDefinitionResult;
 import gmod.safety.InvalidObject;
 import deceptinfect.InfectionComponent;
@@ -6,26 +7,20 @@ import gmod.types.Player;
 using gmod.safety.Safety;
 
 @:forward
-abstract DI_Player(_DI_Player) {
+abstract DI_Player(_DI_Player) from _DI_Player to _DI_Player {
 
-    public function new(p:Player) {
-        var di_ply = new _DI_Player(p);
-        untyped p._DI_Player = di_ply;
-        this = di_ply;
+    public inline function new(p:Player) {
+        this = p.annex.get(_DI_Player);
     }
 
     @:from
     public static inline function fromPlayer(p:Player):DI_Player {
-        return untyped p._DI_Player;
+        return new DI_Player(p);
     }
 
     @:to
     public inline function toPlayer():Player {
-        #if disafety
-        return this.gPlayer.sure();
-        #else
         return this.gPlayer;
-        #end
 
     }
 
@@ -38,6 +33,9 @@ private class _DI_Player {
 
     public var infection:InfectionComponent;
 
+    public var infectedPlayer:InfectedPlayer;
+
+    public var grab:GrabbableComponent;
 
     public function new(p:Player) {
         gPlayer = p;
@@ -46,6 +44,8 @@ private class _DI_Player {
     public function spectateNextPlayer() {
         
     }
+
+     
 
     public function chooseSpectateTarget(spec:Spectate,dir:SpectateDir) {
         
@@ -74,6 +74,8 @@ private class _DI_Player {
 
 }
 
+// class 
+
 enum SpectateDir {
     FORWARD;
     BACKWARD;
@@ -92,3 +94,4 @@ typedef Spectate = {
     state : SpectateState,
     current : Int,
 }
+

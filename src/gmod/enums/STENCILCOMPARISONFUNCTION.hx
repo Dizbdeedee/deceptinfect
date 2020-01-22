@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations for use with render.SetStencilCompareFunction. 
 	

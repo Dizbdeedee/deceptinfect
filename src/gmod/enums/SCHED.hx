@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations for NPC schedules, used by ENTITY:StartEngineSchedule and NPC:SetSchedule. Serverside only.
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table used in [sound](https://wiki.garrysmod.com/page/Category:sound). [Add](https://wiki.garrysmod.com/page/sound/Add) and [sound](https://wiki.garrysmod.com/page/Category:sound). [GetProperties](https://wiki.garrysmod.com/page/sound/GetProperties).
 **/

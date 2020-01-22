@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table used by various functions, such as [IMesh](https://wiki.garrysmod.com/page/Category:IMesh): [BuildFromTriangles](https://wiki.garrysmod.com/page/IMesh/BuildFromTriangles).
 **/

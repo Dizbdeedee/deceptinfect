@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Structure for [DynamicLight](https://wiki.garrysmod.com/page/Global/DynamicLight). All members are case insensitive.
 	

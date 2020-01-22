@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     The structure used by [VehicleParamsstructure](https://wiki.garrysmod.com/page/Structures/VehicleParams).
 **/

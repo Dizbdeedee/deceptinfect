@@ -379,7 +379,7 @@ class Ent {
     **/
     
     @:hook
-    public function CalcAbsolutePosition(pos:Vector, ang:Angle):EntCalcAbsolutePositionReturn {return null;}
+    public function CalcAbsolutePosition(pos:Vector, ang:Angle):Dynamic {return null;}
     
     #if server
     /**
@@ -417,7 +417,7 @@ class Ent {
     **/
     
     @:hook
-    public function PhysicsSimulate(phys:PhysObj, deltaTime:Float):EntPhysicsSimulateReturn {return null;}
+    public function PhysicsSimulate(phys:PhysObj, deltaTime:Float):Dynamic {return null;}
     
     
     /**

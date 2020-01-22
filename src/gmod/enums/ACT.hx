@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by functions like Weapon:SendWeaponAnim & Entity:SelectWeightedSequence.
 **/

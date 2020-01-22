@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Used by ENTITY:Draw and ENTITY:DrawTranslucent.
 **/

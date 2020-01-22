@@ -1,6 +1,9 @@
+package gmod.enums;
+#if client
 /**
     Enumerations used by IGModAudioChannel:FFT. Clientside only.
 **/
+
 @:native("_G")
 extern enum abstract FFT(Int) {
     /**
@@ -37,3 +40,4 @@ extern enum abstract FFT(Int) {
     var FFT_256;
     
 }
+#end

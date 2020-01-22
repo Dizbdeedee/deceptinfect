@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations describing certain spawnflags. Everything except for SF_PHYS* is serverside only. 
 	

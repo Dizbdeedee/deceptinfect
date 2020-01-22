@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Sound flags used by EmitSound and Entity:EmitSound.
 **/

@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by NPC:SetNPCState. Serverside only.
 **/

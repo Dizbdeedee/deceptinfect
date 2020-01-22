@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Structure used by [construct](https://wiki.garrysmod.com/page/Category:construct). [SetPhysProp](https://wiki.garrysmod.com/page/construct/SetPhysProp).
 **/

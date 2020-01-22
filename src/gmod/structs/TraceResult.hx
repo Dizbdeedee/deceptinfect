@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure used as trace result. Default values are when the trace hits nothing.
 **/

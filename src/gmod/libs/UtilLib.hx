@@ -169,7 +169,7 @@ package gmod.libs;
 		`**Returns:** PixVis
     **/
     
-    public static function GetPixelVisibleHandle():Pixelvis handle t;
+    public static function GetPixelVisibleHandle():Pixelvis;
     #end
     
     /**

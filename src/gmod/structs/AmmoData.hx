@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure that describes a Source Engine ammo type. See game.AddAmmoType and game.GetAmmoData.
 **/

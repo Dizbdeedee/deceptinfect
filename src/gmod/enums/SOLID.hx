@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     For use with Entity:PhysicsInit, Entity:SetSolid and Entity:GetSolid.
 **/

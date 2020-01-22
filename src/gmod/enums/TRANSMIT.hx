@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used in ENTITY:UpdateTransmitState hook.
 **/

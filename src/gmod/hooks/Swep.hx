@@ -88,7 +88,7 @@ class Swep {
     **/
     
     @:hook
-    public function GetViewModelPosition(EyePos:Vector, EyeAng:Angle):SwepGetViewModelPositionReturn {return null;}
+    public function GetViewModelPosition(EyePos:Vector, EyeAng:Angle):Dynamic {return null;}
     #end
     
     /**
@@ -499,7 +499,7 @@ class Swep {
     **/
     
     @:hook
-    public function GetNPCRestTimes():SwepGetNPCRestTimesReturn {return null;}
+    public function GetNPCRestTimes():Dynamic {return null;}
     #end
     #if server
     /**
@@ -906,7 +906,7 @@ class Swep {
     **/
     
     @:hook
-    public function CalcViewModelView(ViewModel:Entity, OldEyePos:Vector, OldEyeAng:Angle, EyePos:Vector, EyeAng:Angle):SwepCalcViewModelViewReturn {return null;}
+    public function CalcViewModelView(ViewModel:Entity, OldEyePos:Vector, OldEyeAng:Angle, EyePos:Vector, EyeAng:Angle):Dynamic {return null;}
     #end
     #if client
     /**
@@ -942,7 +942,7 @@ class Swep {
     **/
     
     @:hook
-    public function CalcView(ply:Player, pos:Vector, ang:Angle, fov:Float):SwepCalcViewReturn {return null;}
+    public function CalcView(ply:Player, pos:Vector, ang:Angle, fov:Float):Dynamic {return null;}
     #end
     
     /**
@@ -1355,7 +1355,7 @@ class Swep {
     **/
     
     @:hook
-    public function GetNPCBurstSettings():SwepGetNPCBurstSettingsReturn {return null;}
+    public function GetNPCBurstSettings():Dynamic {return null;}
     #end
     #if client
     /**

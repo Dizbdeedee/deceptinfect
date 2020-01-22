@@ -103,7 +103,7 @@ package gmod.libs;
 		"CustomHook table: 0x00000000 Player [1][PotatoMan]"
     **/
     
-    public static function Add(eventName:String, identifier:Dynamic, func:Function):Void;
+    public static function Add<T:Function>(eventName:Hook<T>, identifier:Any, func:T):Void;
     
     
     /**

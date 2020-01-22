@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by concommand.Add, CreateClientConVar and CreateConVar.
 **/

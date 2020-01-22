@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     The sound's attenuation; how fast it drops away, enumerations used by EmitSound and Entity:EmitSound.
 	**Warning:** These enumerations do not exist in the game and are listed here purely for reference purposes only.
@@ -19,7 +20,11 @@ extern enum abstract SNDLVL(Int) {
     /**
         Normal conversation, clothes dryer
     **/
-    var SNDLVL_60dB SNDLVL_IDLE;
+    var SNDLVL_60dB;
+    /**
+        Normal conversation, clothes dryer
+    **/
+    var SNDLVL_IDLE;
     /**
         Stop the sound
     **/
@@ -71,7 +76,11 @@ extern enum abstract SNDLVL(Int) {
     /**
         Busy traffic
     **/
-    var SNDLVL_75dB SNDLVL_NORM;
+    var SNDLVL_75dB;
+    /**
+        Busy traffic
+    **/ 
+    var SNDLVL_NORM;
     /**
         Subway train, diesel truck, woodworking shop, pneumatic drill, boiler shop, jackhammer
     **/
@@ -83,7 +92,11 @@ extern enum abstract SNDLVL(Int) {
     /**
         Mini-bike, alarm clock, noisy restaurant, office tabulator, outboard motor, passing snowmobile
     **/
-    var SNDLVL_80dB SNDLVL_TALKING;
+    var SNDLVL_80dB;
+     /**
+        Mini-bike, alarm clock, noisy restaurant, office tabulator, outboard motor, passing snowmobile
+    **/
+    var SNDLVL_TALKING;
     /**
         
     **/
@@ -99,7 +112,11 @@ extern enum abstract SNDLVL(Int) {
     /**
         Threshold of pain, gunshot, jet engine
     **/
-    var SNDLVL_140dB SNDLVL_GUNFIRE;
+    var SNDLVL_140dB;
+    /**
+        Threshold of pain, gunshot, jet engine
+    **/
+    var SNDLVL_GUNFIRE;
     /**
         Snowmobile (drivers seat), inboard motorboat, sandblasting
     **/

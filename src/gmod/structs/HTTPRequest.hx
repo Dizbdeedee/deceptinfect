@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table used by [HTTP](https://wiki.garrysmod.com/page/Global/HTTP) function.
 **/

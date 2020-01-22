@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table returned by [Entity](https://wiki.garrysmod.com/page/Category:Entity): [GetBodyGroups](https://wiki.garrysmod.com/page/Entity/GetBodyGroups).
 **/

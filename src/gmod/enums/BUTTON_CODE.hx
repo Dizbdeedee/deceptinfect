@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Encompasses the range of KEY_ Enums, MOUSE_ Enums and JOYSTICK_ Enums, all of which can be used by:
 **/

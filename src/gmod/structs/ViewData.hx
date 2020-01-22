@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure used for [render](https://wiki.garrysmod.com/page/Category:render). [RenderView](https://wiki.garrysmod.com/page/render/RenderView). Unless stated otherwise, the default values for all these keys would be inherited from the engine's CViewSetup and do not have static representations.
 **/

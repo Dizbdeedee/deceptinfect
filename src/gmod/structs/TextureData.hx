@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Used for [draw](https://wiki.garrysmod.com/page/Category:draw). [TexturedQuad](https://wiki.garrysmod.com/page/draw/TexturedQuad).
 **/

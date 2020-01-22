@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations for use with render.SetStencilPassOperation, render.SetStencilFailOperation and render.SetStencilZFailOperation. Clientside only.
 	**Note:** These enumerations are also mirrored as STENCIL_ Enums.

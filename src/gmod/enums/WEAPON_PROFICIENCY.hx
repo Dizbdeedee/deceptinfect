@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by NPC:SetCurrentWeaponProficiency and NPC:GetCurrentWeaponProficiency.
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table returned by [Vector](https://wiki.garrysmod.com/page/Category:Vector): [ToScreen](https://wiki.garrysmod.com/page/Vector/ToScreen).
 **/

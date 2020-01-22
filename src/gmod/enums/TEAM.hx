@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Default defined teams in Garry's Mod. This does not include any custom teams created in custom gamemodes. Enumerations to use with Player:Team
 **/

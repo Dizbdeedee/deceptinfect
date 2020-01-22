@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Structure represents a path segment, returned by [PathFollower](https://wiki.garrysmod.com/page/Category:PathFollower): [GetCurrentGoal](https://wiki.garrysmod.com/page/PathFollower/GetCurrentGoal), [PathFollower](https://wiki.garrysmod.com/page/Category:PathFollower): [FirstSegment](https://wiki.garrysmod.com/page/PathFollower/FirstSegment) and [PathFollower](https://wiki.garrysmod.com/page/Category:PathFollower): [LastSegment](https://wiki.garrysmod.com/page/PathFollower/LastSegment).
 **/

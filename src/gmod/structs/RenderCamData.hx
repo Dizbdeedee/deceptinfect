@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Used for [cam](https://wiki.garrysmod.com/page/Category:cam). [Start](https://wiki.garrysmod.com/page/cam/Start). Unless stated otherwise, the default values for all these keys would be inherited from the engine's current CViewSetup and do not have static representations.
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Structure used in storing/restoring physics object attributes. duplicator.GenericDuplicatorFunction and duplicator.DoGenericPhysics use a table of PhysicsObjectSaves with the struct's index in the table being the physics object ID. 
 	

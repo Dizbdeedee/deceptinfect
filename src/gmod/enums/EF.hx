@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by Entity:AddEffects, Entity:RemoveEffects and Entity:IsEffectActive.
 **/

@@ -4,7 +4,7 @@ package gmod.gclass;
 /**
     This is a list of all methods only available for weapons. It is also possible to call Entity functions on weapons.
 **/
-extern class Weapon {
+extern class Weapon extends Entity {
     
     /**
         Lets you change the number of bullets in the given weapons primary clip.

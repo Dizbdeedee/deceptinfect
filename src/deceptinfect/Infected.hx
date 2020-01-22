@@ -12,6 +12,7 @@ interface GrabComponent {
 
 interface GrabbableComponent {
     var grab:Entity;
+    var isGrabbed:Bool;
 }
 
 interface FormComponent {

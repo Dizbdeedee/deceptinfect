@@ -4,7 +4,7 @@ package gmod.gclass;
 /**
     This is a list of all methods only available for vehicles. It is also possible to call Entity functions on vehicles.
 **/
-extern class Vehicle {
+extern class Vehicle extends Entity {
     #if server
     /**
         Returns the current RPM of the vehicle. This value is fake and doesn't actually affect the vehicle movement.

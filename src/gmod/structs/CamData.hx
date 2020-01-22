@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure used [GM](https://wiki.garrysmod.com/page/Category:GM_Hooks): [CalcView](https://wiki.garrysmod.com/page/GM/CalcView) and [GM](https://wiki.garrysmod.com/page/Category:GM_Hooks): [CalcVehicleView](https://wiki.garrysmod.com/page/GM/CalcVehicleView) hook.
 **/

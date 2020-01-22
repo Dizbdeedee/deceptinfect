@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure used for [render](https://wiki.garrysmod.com/page/Category:render). [SetLocalModelLights](https://wiki.garrysmod.com/page/render/SetLocalModelLights).
 **/

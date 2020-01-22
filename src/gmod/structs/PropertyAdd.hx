@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Structure used for [properties](https://wiki.garrysmod.com/page/Category:properties). [Add](https://wiki.garrysmod.com/page/properties/Add).
 **/

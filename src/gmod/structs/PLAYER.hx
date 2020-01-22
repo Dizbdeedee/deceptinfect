@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     This page describes all  fields for a [playerclass](https://wiki.garrysmod.com/page/Player_Classes).
 **/

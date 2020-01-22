@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Used by [Entity](https://wiki.garrysmod.com/page/Category:Entity): [GetSequenceInfo](https://wiki.garrysmod.com/page/Entity/GetSequenceInfo).
 **/

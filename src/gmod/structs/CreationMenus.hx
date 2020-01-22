@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table that maintains information on the creation menu tabs. Each key of the table represents the name of the tab. See [spawnmenu](https://wiki.garrysmod.com/page/Category:spawnmenu). [AddCreationTab](https://wiki.garrysmod.com/page/spawnmenu/AddCreationTab) and [spawnmenu](https://wiki.garrysmod.com/page/Category:spawnmenu). [GetCreationTabs](https://wiki.garrysmod.com/page/spawnmenu/GetCreationTabs).
 **/

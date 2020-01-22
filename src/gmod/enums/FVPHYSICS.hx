@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by PhysObj:AddGameFlag, PhysObj:HasGameFlag and PhysObj:ClearGameFlag.
 **/

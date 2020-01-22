@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by CNavArea:GetParentHow.
 	**Note:** These enumerations do not exist in game and are listed here only for reference!

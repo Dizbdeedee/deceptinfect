@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Citizen type, a KeyValue for npc_citizen( citizentype ), serverside only.
 **/

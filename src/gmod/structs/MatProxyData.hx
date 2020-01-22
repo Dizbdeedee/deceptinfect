@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure used by [matproxy](https://wiki.garrysmod.com/page/Category:matproxy). [Add](https://wiki.garrysmod.com/page/matproxy/Add).
 **/

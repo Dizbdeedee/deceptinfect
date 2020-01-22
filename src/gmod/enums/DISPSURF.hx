@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Displacement surface flags, used by the TraceResult structure.
 **/

@@ -1,4 +1,4 @@
-
+package gmod.structs;
 /**
     Table structure used by [steamworks](https://wiki.garrysmod.com/page/Category:steamworks). [FileInfo](https://wiki.garrysmod.com/page/steamworks/FileInfo).
 **/

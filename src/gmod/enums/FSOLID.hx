@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by Entity:SetSolidFlags and Entity:GetSolidFlags.
 **/

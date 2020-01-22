@@ -1,3 +1,4 @@
+package gmod.enums;
 /**
     Enumerations used by Player:PrintMessage and PrintMessage.
 **/
