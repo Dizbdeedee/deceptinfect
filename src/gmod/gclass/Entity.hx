@@ -2302,7 +2302,7 @@ extern class Entity {
 		1
     **/
     
-    public function EntIndex():Float;
+    public function EntIndex():EntityID;
     
     
     /**
@@ -6749,7 +6749,7 @@ extern class Entity {
 		```
     **/
     
-    public function SetUseType(useType:USE):Void;
+    public function SetUseType(useType:USETYPE):Void;
     #end
     #if client
     /**
@@ -8711,3 +8711,7 @@ var b:Angle;
 
 }
 
+@:forward
+abstract EntityID(Int) {
+
+}

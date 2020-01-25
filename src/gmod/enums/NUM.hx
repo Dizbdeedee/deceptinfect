@@ -1,4 +1,5 @@
 package gmod.enums;
+#if server
 /**
     Various count enums.
 	**Note:** These only exist serverside.
@@ -15,3 +16,4 @@ extern enum abstract NUM(Int) {
     var NUM_AI_CLASSES;
     
 }
+#end

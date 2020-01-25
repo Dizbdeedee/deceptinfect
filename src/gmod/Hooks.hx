@@ -7,15 +7,4 @@ abstract Hook<T:Function>(String) {
 
 @:keep
 @:build(gmod.macros.GenerateHooksFile.build())
-class Hooks {
-    public static function hmm() {
-        // trace(Cringe.x);
-    }
-    
-}
-
-private class HooksTest {
-    public static function test() {
-        
-    }
-}
+class Hooks {}

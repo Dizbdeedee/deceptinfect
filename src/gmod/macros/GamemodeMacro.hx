@@ -30,7 +30,9 @@ class GamemodeMacro {
                     if (field.access.indexOf(Access.AOverride) > -1) {
                         field.access.remove(Access.APublic);
                         var name = field.name;
-                        exprBuffer.push(macro Reflect.setField(self,$v{field.name},this.$name));
+                        var str = '{0}.$name = function(GM,...) {1}:$name(...) end';
+                        exprBuffer.push(macro untyped __lua__($v{str},self,this));
+                        // exprBuffer.push(macro Reflect.setField(self,$v{field.name},this.$name));
                         // exprBuffer.add('Reflect.setField(self,${field.name},this.${field.name});\n');
                     }
                 default:

@@ -6,7 +6,7 @@ typedef TeamData = {
     /**
         Color of the team
     **/
-    var Color : AnyTable;
+    var Color : Color;
     /**
         Whether the team is joinable or not.
     **/

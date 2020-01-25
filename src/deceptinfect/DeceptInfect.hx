@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import lua.Lua;
 import tink.core.Annex;
 import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
 import gmod.HaxeMultiReturn;
@@ -11,6 +12,7 @@ import deceptinfect.DI_Player;
 import gmod.types.Entity;
 using gmod.PairTools;
 using gmod.TableTools;
+using deceptinfect.PlayerExt;
 
 @:build(gmod.macros.GamemodeMacro.build())
 class DeceptInfect extends gmod.hooks.Gm {
@@ -27,7 +29,7 @@ class DeceptInfect extends gmod.hooks.Gm {
 
 
     override function PlayerDeath(victim:Player, inflictor:Entity, attacker:Entity) {
-        
+        trace("Player ded!");
     }
 
     override function PlayerInitialSpawn(player:Player, transition:Bool) {
@@ -44,7 +46,9 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
 
     override function PlayerDeathThink(ply:Player):Bool {
-        return super.PlayerDeathThink(ply);
+        var plyr:DI_Player = ply;
+        
+        return true;
     }
 
     override function Think() {
@@ -52,10 +56,10 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
     override function IsSpawnpointSuitable(ply:Player, spawnpoint:Entity, makeSuitable:Bool):Bool {
         var pos = spawnpoint.GetPos();
-        var blockers = EntsLib.FindInBox(pos + Vector.New(-16,-16,0), pos + Vector.New(16,16,72));
+        var blockers = EntsLib.FindInBox(pos + new Vector(-16,-16,0), pos + new Vector(16,16,72));
         for (ent in blockers) {
             if (ent.IsPlayer()) {
-                // untyped ent.SetWalkthroughable(true);
+                ply.setWalkthroughable(true);
             }
         }
         return true;
@@ -71,14 +75,17 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
 
     override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<GmPlayerCanHearPlayersVoiceHaxeReturn> {
-        if (listener.GetPos().Distance(talker.GetPos()) > 1000) {
-           return {a : false,b : false};
-        }
-        var _talker:DI_Player = talker;
-        if (_talker.grab.isGrabbed) {
-            return {a : false, b : true}
-        }
-        return {a : true, b : true}
+        //Lua.print(listener,talker);
+        //GlobalLib.PrintTable(cast listener);
+        return {a : false, b: false};
+        // if (listener.GetPos().Distance(talker.GetPos()) > 1000) {
+        //    return {a : false,b : false};
+        // }
+        // var _talker:DI_Player = talker;
+        // if (_talker.grab.isGrabbed) {
+        //     return {a : false, b : true}
+        // }
+        // return {a : true, b : true}
         
         // 
         // if (_talker.) {

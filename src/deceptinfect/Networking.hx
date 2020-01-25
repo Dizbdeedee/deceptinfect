@@ -4,11 +4,10 @@ import gmod.Networking;
 @:build(gmod.macros.Networking.build())
 class Networking {
 
-    var infection2:NetMessageServer<InfectionMessage>;
+    var InfectionMessage:NetMessageServer<InfectionMessageDef>;
     
 }
 
-typedef InfectionMessage = {
+typedef InfectionMessageDef = {
     infection : Float,
-    rate : Float
 }

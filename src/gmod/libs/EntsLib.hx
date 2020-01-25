@@ -320,7 +320,7 @@ package gmod.libs;
 		The location of each prop on the map. In gm_construct, the output might be as follows: -2936.288818 -1376.545532 -73.852913 -2943.928467 -1375.800171 -84.964996 -2932.637695 -1288.051636 -76.791924 -2064.000000 -183.000000 -179.216003 -2384.000000 -183.000000 -179.216003 -2704.000000 -183.000000 -179.216003 -1744.000000 -183.000000 -179.216003 -1424.000000 -183.000000 -179.216003 -3019.895020 -1095.824829 -78.900757
     **/
     
-    public static function FindByClass(_class:String):AnyTable;
+    public static function FindByClass(_class:String):Table<Int,Entity>;
     
     
     /**

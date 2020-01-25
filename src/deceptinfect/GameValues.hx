@@ -1,7 +1,5 @@
 package deceptinfect;
 
-class PlayerTools {
-
+class GameValues {
     
-
 }

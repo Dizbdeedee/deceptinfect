@@ -2,64 +2,91 @@ package deceptinfect;
 
 using tink.CoreApi;
 
-class InfectionComponent {
+/**
+    Controls infection state
+**/
+class Infection implements InfectionComponent {
 
-    public var infection(default,null):INF_STATE = NOT_INFECTED(0);
-    public var rate(default,null):Float = 1;
-
+    public var infection:INF_STATE = NOT_INFECTED(0);
+    public var rate(default,set):Float = 1;
     public var baseInfection:Ref<Float>;
-
     public var onInfected:Signal<Noise>;
+    public var acceptingInfection:AcceptingInfection;
     var infectedTrigger:SignalTrigger<Noise>;
-    
+    public function new() {
+
+    }
     public function handleInfection() {
-        // if (not DeceptInfect)
         switch (infection) {
             case NOT_INFECTED(x) if (x >= 100):
                 infection = INFECTED;
+                infectedTrigger.trigger(Noise);
+                // infectedTrigger.clear();
             case NOT_INFECTED(x) if (x <= 0):
                 x = 0;
+            
             default:
         }
-        switch (infection) {
-            case INFECTED:
-                infectedTrigger.trigger(Noise);
-            default:
-        }
+        
     }
 
+    public function set_rate(r:Float):Float {
+        return rate = r;
+    }
     function baseInfect() {
-        setInfection((baseInfection:Float) * rate);
+        infect((baseInfection:Float) * rate);
     }
 
-    public function setInfected() {
-        infection = INFECTED;
+    public function think() {
+        baseInfect();
+
     }
+
 
     public function infect(f:Float) {
-        switch (infection) {
-            case NOT_INFECTED(inf):
+        switch ([infection,acceptingInfection]) {
+            case [NOT_INFECTED(inf),ACCEPTING]:
                 setInfection(inf + f);
             default:
         }
     }
-
-
-
-    
     public function setInfection(inf:Float) {
-        switch(infection) {
-            case NOT_INFECTED(x):
+        switch([infection,acceptingInfection]) {
+            case [NOT_INFECTED(x),ACCEPTING]:
                 x = inf;
                 handleInfection();
             default:
         }
     }
 
-    
 
     
 
+    
+
+}
+
+interface InfectionComponent {
+    var rate(default,set):Float;
+    var onInfected:Signal<Noise>;
+    var baseInfection:Ref<Float>;
+    var acceptingInfection:AcceptingInfection;
+    var infection:INF_STATE;
+    function infect(f:Float):Void;
+    function setInfection(f:Float):Void;
+    function think():Void;
+
+    
+    
+}
+
+typedef InfectionMessageInfo = {
+    infection : Float,
+}
+
+enum AcceptingInfection {
+    ACCEPTING;
+    REJECTING;
 }
 
 

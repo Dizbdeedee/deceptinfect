@@ -1,23 +1,27 @@
 package deceptinfect;
 
 import deceptinfect.DI_Player;
+
 @:forward
-abstract InfectedPlayer(DI_Player) to DI_Player {
+abstract InfectedPlayer(_InfectedPlayer) {
 
     @:from
     static function toInfected(p:DI_Player):InfectedPlayer {
-        return null;
-        switch (p.infection.infection) {
-            case INFECTED:
-
-            default:
-                throw ("Attempt to use non infected player as infected!");
+        return switch (p.infectedPlayer) {
+            case INFECTED(infplayer):
+                infplayer;
+            case NOT_INFECTED:
+                throw "Attempt to use non infected as infected!";
         }        
     }
 
 
 }
 
-// class InfectedPlayer {
+private class _InfectedPlayer {
+    
+    var grab:Grab
+    function new(x:DI_Player) {
 
-// }
+    }
+}

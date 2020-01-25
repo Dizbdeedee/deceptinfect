@@ -25,6 +25,7 @@ class Networking {
         var serverMessages:Array<ServerMessages> = [];
         for (field in fields) {
             switch(field.kind) {
+                
                 case FVar(TPath({name : "NetMessageServer", params : params}), _):
                     var param = params[0];
                     switch (param) {

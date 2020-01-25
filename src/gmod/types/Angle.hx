@@ -1,12 +1,13 @@
 package gmod.types;
 
 import gmod.libs.GlobalLib;
-import gmod.gclass.Vector as GVec;
+import gmod.gclass.Angle as GAng;
+
 @:forward
-extern abstract Vector(GVec) from GVec to GVec {
+extern abstract Angle(GAng) from GAng to GAng {
 
     public inline function new(?x:Float,?y:Float,?z:Float) {
-        this = GlobalLib.Vector(x,y,z);
+        this = GlobalLib.Angle(x,y,z);
     }
 
     @:op(A + B)

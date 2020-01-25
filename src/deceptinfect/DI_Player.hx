@@ -1,6 +1,5 @@
 package deceptinfect;
 import deceptinfect.Infected.GrabbableComponent;
-import haxe.display.Display.GotoTypeDefinitionResult;
 import gmod.safety.InvalidObject;
 import deceptinfect.InfectionComponent;
 import gmod.types.Player;
@@ -33,11 +32,14 @@ private class _DI_Player {
 
     public var infection:InfectionComponent;
 
-    public var infectedPlayer:InfectedPlayer;
+    public var infectedPlayer:InfectedAbilitiesState;
 
+    public var hiddenHealth:Float;
     public var grab:GrabbableComponent;
 
     public function new(p:Player) {
+        
+        
         gPlayer = p;
     }
 
@@ -45,8 +47,20 @@ private class _DI_Player {
         
     }
 
-     
+    public function initGame() {
+        switch (Game.currentGame) {
+            case AVALIABLE(game):
+                var rate = new RateHandler(infection);
+                var radhandler = new RadiationRateHandler(rate);
+                infection = new Infection();
+                infection.baseInfection = game.baseInfection;
+            default:
+                throw "Attempt to init game when no game avaliable!";
+        }
+        
+    }
 
+    #if server
     public function chooseSpectateTarget(spec:Spectate,dir:SpectateDir) {
         
         var iter = switch (dir) {
@@ -57,7 +71,7 @@ private class _DI_Player {
         }
         var specNext = spec.current + iter;
         var specCurrent = spec.current;
-        var players = Game.currentGame.players;
+        var players = PlayerLib.GetAll();
         while (specNext != specCurrent) {
             var target:Player = players[specNext];
             switch (target.valid()) {
@@ -71,6 +85,18 @@ private class _DI_Player {
         }
 
     }
+
+    public function think() {
+        
+    }
+
+    
+    #end
+}
+
+enum InfectedAbilitiesState {
+    NOT_INFECTED;
+    INFECTED(x:InfectedPlayer);
 
 }
 

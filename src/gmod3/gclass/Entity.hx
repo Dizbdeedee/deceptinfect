@@ -7644,7 +7644,7 @@ extern class Entity {
 		
     **/
     
-    public function SetUseType(useType:Float):Void;
+    public function SetUseType(useType:_USE):Void;
     #end
     #if client
     /**
