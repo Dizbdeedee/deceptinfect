@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.Radiation.RadiationManager;
 using gmod.PairTools;
 using tink.CoreApi;
 /**
@@ -10,7 +11,7 @@ class Game {
     
     public static var currentGame:GAME;
     
-    public var state:
+    public var state(default,null):GAME_STATE = WAIT;
     public var numPlayers = 0;
     public var players(default,null):Array<DI_Player> = [];
     public var queen:DI_Player;
@@ -18,8 +19,16 @@ class Game {
         Maximum amount of time until everyone's infected
     **/
     public var gameTime:Float;
+    public var radiationManager:RadiationManager = new RadiationManager();
     
-    public var lastTick:Float = null;
+    public var difftime(default,null):Float;
+
+    var gameStartedTrigger:SignalTrigger<Noise> = new SignalTrigger();
+    public var gameStarted(default,null):Signal<Noise>;
+
+    
+    
+    public var lastTick:Null<Float> = null;
     public var baseInfection:Ref<Float>;
 
     public static function sure():Game {
@@ -35,11 +44,12 @@ class Game {
     static public function startGame(){
         var game = AVALIABLE(new Game());
         currentGame = game;
+        
     }
 
 
-    public function new() {
-
+    function new() {
+        gameStarted = gameStartedTrigger.asSignal();
     }
 
     public function getDiffTime() {
@@ -48,12 +58,15 @@ class Game {
 
     public function think() {
         if (lastTick == null) {
-            lastTick = GlobalLib.CurTime();   
+            lastTick = GlobalLib.CurTime();
         }
+        difftime = GlobalLib.CurTime() - lastTick;
         baseInfection.value = calcBaseInfection();
         
         lastTick = GlobalLib.CurTime(); //NOTE should be last thing ran
     }
+
+    
 
     public function addPlayers() {
         for (player in PlayerLib.GetAll()) {
@@ -62,7 +75,6 @@ class Game {
     }
 
     public function calcBaseInfection():Float {
-        var difftime = GlobalLib.CurTime() - lastTick;
         var baseInf = (100 / gameTime) * difftime;
         return baseInf;
     }
@@ -98,7 +110,7 @@ enum GAME {
 
 enum GAME_STATE {
     WAIT;
-    PLAYING(playState:PLAYING_STATE)
+    PLAYING(playState:PLAYING_STATE);
 }
 
 enum PLAYING_STATE {

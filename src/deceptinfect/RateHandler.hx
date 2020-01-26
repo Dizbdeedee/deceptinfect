@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.Radiation.RadiationManager;
 import haxe.ds.List;
 import haxe.ds.ListSort;
 import haxe.ds.ArraySort;
@@ -18,6 +19,7 @@ class RateHandler implements RateProvider {
     
     public function new(i:InfectionComponent) {
         infection = i;
+        
     }
 
     

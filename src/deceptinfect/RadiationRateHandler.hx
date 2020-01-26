@@ -10,8 +10,9 @@ class RadiationRateHandler {
     
     
     
-    public function new(e:RateProvider) {
+    public function new(e:RateProvider,t:RadiationTarget) {
         rate = e;
+        Game.sure().radiationManager.addTarget(t);
     }
 
     function think() {
@@ -32,7 +33,7 @@ class RadiationRateHandler {
         return total;
     }
 
-    function updateRadiationRate(rad:RadiationID,rate:Float) {
+    public function updateRadiationRate(rad:RadiationID,rate:Float) {
         sourceRates.set(rad,rate);
     }
 }

@@ -5,6 +5,10 @@ import deceptinfect.DI_Player;
 @:forward
 abstract InfectedPlayer(_InfectedPlayer) {
 
+    public function new(x:DI_Player) {
+        this = new _InfectedPlayer(x);
+    }
+    
     @:from
     static function toInfected(p:DI_Player):InfectedPlayer {
         return switch (p.infectedPlayer) {
@@ -20,8 +24,8 @@ abstract InfectedPlayer(_InfectedPlayer) {
 
 private class _InfectedPlayer {
     
-    var grab:Grab
-    function new(x:DI_Player) {
+    
+    public function new(x:DI_Player) {
 
     }
 }

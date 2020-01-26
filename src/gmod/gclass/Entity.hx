@@ -8712,6 +8712,6 @@ var b:Angle;
 }
 
 @:forward
-abstract EntityID(Int) {
+abstract EntityID(Int) to Int {
 
 }

@@ -10,11 +10,12 @@ class Infection implements InfectionComponent {
     public var infection:INF_STATE = NOT_INFECTED(0);
     public var rate(default,set):Float = 1;
     public var baseInfection:Ref<Float>;
-    public var onInfected:Signal<Noise>;
+    var infectedTrigger:SignalTrigger<Noise> = new SignalTrigger();
+    public var onInfected(default,null):Signal<Noise>;
     public var acceptingInfection:AcceptingInfection;
-    var infectedTrigger:SignalTrigger<Noise>;
+    
     public function new() {
-
+        onInfected = infectedTrigger.asSignal();
     }
     public function handleInfection() {
         switch (infection) {
@@ -68,7 +69,7 @@ class Infection implements InfectionComponent {
 
 interface InfectionComponent {
     var rate(default,set):Float;
-    var onInfected:Signal<Noise>;
+    var onInfected(default,null):Signal<Noise>;
     var baseInfection:Ref<Float>;
     var acceptingInfection:AcceptingInfection;
     var infection:INF_STATE;

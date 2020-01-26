@@ -1,9 +1,13 @@
 package deceptinfect;
+import gmod.gclass.Entity.EntityID;
+import deceptinfect.Radiation.RadiationTarget;
+import tink.CoreApi.Noise;
 import deceptinfect.Infected.GrabbableComponent;
 import gmod.safety.InvalidObject;
 import deceptinfect.InfectionComponent;
 import gmod.types.Player;
 using gmod.safety.Safety;
+import deceptinfect.GameEntity;
 
 @:forward
 abstract DI_Player(_DI_Player) from _DI_Player to _DI_Player {
@@ -26,37 +30,58 @@ abstract DI_Player(_DI_Player) from _DI_Player to _DI_Player {
 
 }
 
-private class _DI_Player {
+private class _DI_Player implements RadiationTarget {
 
     public var gPlayer(default,null):Player;
 
     public var infection:InfectionComponent;
-
-    public var infectedPlayer:InfectedAbilitiesState;
-
+    public var pos(get,set):Vector;
+    public var index(get,never):EntityID;
+    public var infectedPlayer:InfectedAbilitiesState = NOT_INFECTED;
+    public var radhandler:ComponentState<RadiationRateHandler>;
+    public var rate:RateHandler;
     public var hiddenHealth:Float;
     public var grab:GrabbableComponent;
 
     public function new(p:Player) {
-        
-        
         gPlayer = p;
+        
     }
 
     public function spectateNextPlayer() {
         
     }
 
+    public function get_pos():Vector {
+        return gPlayer.GetPos();
+    }
+
+    public function get_index():EntityID {
+        return gPlayer.EntIndex();
+    }
+
+    public function set_pos(v:Vector):Vector {
+        gPlayer.SetPos(v);
+        return v;
+    }
+
     public function initGame() {
+        
         switch (Game.currentGame) {
             case AVALIABLE(game):
-                var rate = new RateHandler(infection);
-                var radhandler = new RadiationRateHandler(rate);
+                rate = new RateHandler(infection);
+                radhandler = COMPONENT(new RadiationRateHandler(rate,this));
                 infection = new Infection();
+                infection.onInfected.handle(onInfected);
                 infection.baseInfection = game.baseInfection;
             default:
-                throw "Attempt to init game when no game avaliable!";
+                trace("Attempt to init game when no game avaliable!");
         }
+        
+    }
+
+    public function onInfected(x:Noise) {
+        infectedPlayer = INFECTED(new InfectedPlayer(this));
         
     }
 

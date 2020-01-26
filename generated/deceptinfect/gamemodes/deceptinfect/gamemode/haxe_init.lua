@@ -64,16 +64,20 @@ __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
 __deceptinfect_CustomEnt = _hx_e()
 __deceptinfect__DI_Player_DI_Player_Impl_ = _hx_e()
+__deceptinfect_RadiationTarget = _hx_e()
 __deceptinfect__DI_Player__DI_Player = _hx_e()
 __deceptinfect_InfectedAbilitiesState = _hx_e()
 __deceptinfect_SpectateDir = _hx_e()
 __deceptinfect_SpectateState = _hx_e()
 __gmod_hooks_Gm = _hx_e()
 __deceptinfect_DeceptInfect = _hx_e()
-__deceptinfect_GAME_STATE = _hx_e()
-__deceptinfect_PLAY_STATE = _hx_e()
 __deceptinfect_Game = _hx_e()
 __deceptinfect_GAME = _hx_e()
+__deceptinfect_GAME_STATE = _hx_e()
+__deceptinfect_PLAYING_STATE = _hx_e()
+__deceptinfect_GameEntity = _hx_e()
+__deceptinfect_ComponentTools = _hx_e()
+__deceptinfect_ComponentState = _hx_e()
 __deceptinfect_GameManager = _hx_e()
 __deceptinfect_GameValues = _hx_e()
 __deceptinfect_Grab = _hx_e()
@@ -108,6 +112,14 @@ __deceptinfect_RateHandler = _hx_e()
 __deceptinfect_Target = _hx_e()
 __deceptinfect_TARGET_STATE = _hx_e()
 __deceptinfect_TimeKeep = _hx_e()
+__gmod__EntityClass_EntityClass_Impl_ = _hx_e()
+__gmod_EntityClasses = _hx_e()
+__gmod__EntityClass_FireEvent_Impl_ = _hx_e()
+__gmod__EntityClass_KeyValue_Impl_ = _hx_e()
+__gmod__EntityClass_FireEventParam_Impl_ = _hx_e()
+__gmod_EngineEntity = _hx_e()
+__gmod_Light = _hx_e()
+__gmod_FireEvents = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
 __gmod_Hooks = _hx_e()
@@ -504,6 +516,7 @@ Main.__name__ = true
 Main.main = function() 
   __deceptinfect_DeceptInfect.initaliseGamemode();
   __deceptinfect_Networking.initMessages();
+  __gmod_FireEvents.TestFire();
 end
 
 Math.new = {}
@@ -870,9 +883,9 @@ __deceptinfect__DI_Player_DI_Player_Impl_._new = function(p)
   local c = __deceptinfect__DI_Player__DI_Player;
   local _g = _this.registry:get(c);
   if (_g == nil) then 
-    local this2 = _this.registry;
+    local this11 = _this.registry;
     local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-    this2:set(c, v);
+    this11:set(c, v);
     this1 = v;
   else
     local v1 = _g;
@@ -886,9 +899,9 @@ __deceptinfect__DI_Player_DI_Player_Impl_.fromPlayer = function(p)
   local c = __deceptinfect__DI_Player__DI_Player;
   local _g = _this.registry:get(c);
   if (_g == nil) then 
-    local this2 = _this.registry;
+    local this11 = _this.registry;
     local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-    this2:set(c, v);
+    this11:set(c, v);
     this1 = v;
   else
     local v1 = _g;
@@ -900,29 +913,51 @@ __deceptinfect__DI_Player_DI_Player_Impl_.toPlayer = function(this1)
   do return this1.gPlayer end;
 end
 
+__deceptinfect_RadiationTarget.new = {}
+__deceptinfect_RadiationTarget.__name__ = true
+__deceptinfect_RadiationTarget.prototype = _hx_a();
+
+__deceptinfect_RadiationTarget.prototype.__class__ =  __deceptinfect_RadiationTarget
+
 __deceptinfect__DI_Player__DI_Player.new = function(p) 
   local self = _hx_new(__deceptinfect__DI_Player__DI_Player.prototype)
   __deceptinfect__DI_Player__DI_Player.super(self,p)
   return self
 end
 __deceptinfect__DI_Player__DI_Player.super = function(self,p) 
+  self.infectedPlayer = __deceptinfect_InfectedAbilitiesState.NOT_INFECTED;
   self.gPlayer = p;
 end
 __deceptinfect__DI_Player__DI_Player.__name__ = true
+__deceptinfect__DI_Player__DI_Player.__interfaces__ = {__deceptinfect_RadiationTarget}
 __deceptinfect__DI_Player__DI_Player.prototype = _hx_a();
 __deceptinfect__DI_Player__DI_Player.prototype.spectateNextPlayer = function(self) 
+end
+__deceptinfect__DI_Player__DI_Player.prototype.get_pos = function(self) 
+  do return self.gPlayer:GetPos() end
+end
+__deceptinfect__DI_Player__DI_Player.prototype.get_index = function(self) 
+  do return self.gPlayer:EntIndex() end
+end
+__deceptinfect__DI_Player__DI_Player.prototype.set_pos = function(self,v) 
+  self.gPlayer:SetPos(v);
+  do return v end
 end
 __deceptinfect__DI_Player__DI_Player.prototype.initGame = function(self) 
   local _g = __deceptinfect_Game.currentGame;
   if (_g[1] == 1) then 
     local game = _g[2];
-    local rate = __deceptinfect_RateHandler.new(self.infection);
-    local radhandler = __deceptinfect_RadiationRateHandler.new(rate);
+    self.rate = __deceptinfect_RateHandler.new(self.infection);
+    self.radhandler = __deceptinfect_ComponentState.COMPONENT(__deceptinfect_RadiationRateHandler.new(self.rate, self));
     self.infection = __deceptinfect_Infection.new();
+    self.infection.onInfected:handle(_hx_bind(self,self.onInfected));
     self.infection.baseInfection = game.baseInfection;
   else
-    _G.error("Attempt to init game when no game avaliable!",0);
+    __haxe_Log.trace("Attempt to init game when no game avaliable!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DI_Player.hx",lineNumber=78,className="deceptinfect._DI_Player._DI_Player",methodName="initGame"}));
   end;
+end
+__deceptinfect__DI_Player__DI_Player.prototype.onInfected = function(self,x) 
+  self.infectedPlayer = __deceptinfect_InfectedAbilitiesState.INFECTED(__deceptinfect__InfectedPlayer_InfectedPlayer_Impl_._new(self));
 end
 __deceptinfect__DI_Player__DI_Player.prototype.chooseSpectateTarget = function(self,spec,dir) 
   local iter;
@@ -1326,8 +1361,6 @@ __deceptinfect_DeceptInfect.new = function(_self)
   return self
 end
 __deceptinfect_DeceptInfect.super = function(self,_self) 
-  self.shouldAllowInfection = false;
-  self.currentState = __deceptinfect_GAME_STATE.WAIT;
   _self.PlayerDeath = function(GM,...) self:PlayerDeath(...) end;
   _self.PlayerInitialSpawn = function(GM,...) self:PlayerInitialSpawn(...) end;
   _self.PlayerDeathThink = function(GM,...) self:PlayerDeathThink(...) end;
@@ -1345,7 +1378,7 @@ __deceptinfect_DeceptInfect.initaliseGamemode = function()
 end
 __deceptinfect_DeceptInfect.prototype = _hx_a();
 __deceptinfect_DeceptInfect.prototype.PlayerDeath = function(self,victim,inflictor,attacker) 
-  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=32,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
+  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=24,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
 end
 __deceptinfect_DeceptInfect.prototype.PlayerInitialSpawn = function(self,player,transition) 
   player.annex = __tink_core_Annex.new(player);
@@ -1354,19 +1387,13 @@ __deceptinfect_DeceptInfect.prototype.PlayerInitialSpawn = function(self,player,
   local c = __deceptinfect__DI_Player__DI_Player;
   local _g = _this.registry:get(c);
   if (_g == nil) then 
-    local this2 = _this.registry;
+    local this11 = _this.registry;
     local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-    this2:set(c, v);
+    this11:set(c, v);
     this1 = v;
   else
     local v1 = _g;
     this1 = v1;
-  end;
-  local _g1 = self.currentState;
-  if (_g1[1] == 1) then 
-    local _g11 = _g1[2];
-    player:KillSilent();
-    __deceptinfect_DeceptInfect.GAMEMODE:PlayerSpawnAsSpectator(player);
   end;
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply) 
@@ -1375,9 +1402,9 @@ __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply)
   local c = __deceptinfect__DI_Player__DI_Player;
   local _g = _this.registry:get(c);
   if (_g == nil) then 
-    local this2 = _this.registry;
+    local this11 = _this.registry;
     local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-    this2:set(c, v);
+    this11:set(c, v);
     this1 = v;
   else
     local v1 = _g;
@@ -1433,17 +1460,6 @@ end
 __deceptinfect_DeceptInfect.prototype.__class__ =  __deceptinfect_DeceptInfect
 __deceptinfect_DeceptInfect.__super__ = __gmod_hooks_Gm
 setmetatable(__deceptinfect_DeceptInfect.prototype,{__index=__gmod_hooks_Gm.prototype})
-_hxClasses["deceptinfect.GAME_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WAIT","PLAY"},2)}
-__deceptinfect_GAME_STATE = _hxClasses["deceptinfect.GAME_STATE"];
-__deceptinfect_GAME_STATE.WAIT = _hx_tab_array({[0]="WAIT",0,__enum__ = __deceptinfect_GAME_STATE},2)
-
-__deceptinfect_GAME_STATE.PLAY = function(st) local _x = _hx_tab_array({[0]="PLAY",1,st,__enum__=__deceptinfect_GAME_STATE}, 3); return _x; end 
-_hxClasses["deceptinfect.PLAY_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NORMAL","EVAC"},2)}
-__deceptinfect_PLAY_STATE = _hxClasses["deceptinfect.PLAY_STATE"];
-__deceptinfect_PLAY_STATE.NORMAL = _hx_tab_array({[0]="NORMAL",0,__enum__ = __deceptinfect_PLAY_STATE},2)
-
-__deceptinfect_PLAY_STATE.EVAC = _hx_tab_array({[0]="EVAC",1,__enum__ = __deceptinfect_PLAY_STATE},2)
-
 
 __deceptinfect_Game.new = function() 
   local self = _hx_new(__deceptinfect_Game.prototype)
@@ -1452,8 +1468,12 @@ __deceptinfect_Game.new = function()
 end
 __deceptinfect_Game.super = function(self) 
   self.lastTick = nil;
+  self.gameStartedTrigger = __tink_core_SignalTrigger.new();
+  self.radiationManager = __deceptinfect_RadiationManager.new();
   self.players = _hx_tab_array({}, 0);
   self.numPlayers = 0;
+  self.state = __deceptinfect_GAME_STATE.WAIT;
+  self.gameStarted = self.gameStartedTrigger;
 end
 __deceptinfect_Game.__name__ = true
 __deceptinfect_Game.sure = function() 
@@ -1478,6 +1498,7 @@ __deceptinfect_Game.prototype.think = function(self)
   if (self.lastTick == nil) then 
     self.lastTick = _G.CurTime();
   end;
+  self.difftime = _G.CurTime() - self.lastTick;
   self.baseInfection[0] = self:calcBaseInfection();
   self.lastTick = _G.CurTime();
 end
@@ -1491,9 +1512,9 @@ __deceptinfect_Game.prototype.addPlayers = function(self)
     local c = __deceptinfect__DI_Player__DI_Player;
     local _g = _this.registry:get(c);
     if (_g == nil) then 
-      local this2 = _this.registry;
+      local this11 = _this.registry;
       local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-      this2:set(c, v);
+      this11:set(c, v);
       this1 = v;
     else
       local v1 = _g;
@@ -1503,8 +1524,7 @@ __deceptinfect_Game.prototype.addPlayers = function(self)
   end;
 end
 __deceptinfect_Game.prototype.calcBaseInfection = function(self) 
-  local difftime = _G.CurTime() - self.lastTick;
-  local baseInf = (100 / self.gameTime) * difftime;
+  local baseInf = (100 / self.gameTime) * self.difftime;
   do return baseInf end
 end
 
@@ -1514,6 +1534,39 @@ __deceptinfect_GAME = _hxClasses["deceptinfect.GAME"];
 __deceptinfect_GAME.NOT_AVALIABLE = _hx_tab_array({[0]="NOT_AVALIABLE",0,__enum__ = __deceptinfect_GAME},2)
 
 __deceptinfect_GAME.AVALIABLE = function(x) local _x = _hx_tab_array({[0]="AVALIABLE",1,x,__enum__=__deceptinfect_GAME}, 3); return _x; end 
+_hxClasses["deceptinfect.GAME_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WAIT","PLAYING"},2)}
+__deceptinfect_GAME_STATE = _hxClasses["deceptinfect.GAME_STATE"];
+__deceptinfect_GAME_STATE.WAIT = _hx_tab_array({[0]="WAIT",0,__enum__ = __deceptinfect_GAME_STATE},2)
+
+__deceptinfect_GAME_STATE.PLAYING = function(playState) local _x = _hx_tab_array({[0]="PLAYING",1,playState,__enum__=__deceptinfect_GAME_STATE}, 3); return _x; end 
+_hxClasses["deceptinfect.PLAYING_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NORMAL","EVAC"},2)}
+__deceptinfect_PLAYING_STATE = _hxClasses["deceptinfect.PLAYING_STATE"];
+__deceptinfect_PLAYING_STATE.NORMAL = _hx_tab_array({[0]="NORMAL",0,__enum__ = __deceptinfect_PLAYING_STATE},2)
+
+__deceptinfect_PLAYING_STATE.EVAC = _hx_tab_array({[0]="EVAC",1,__enum__ = __deceptinfect_PLAYING_STATE},2)
+
+
+__deceptinfect_GameEntity.new = {}
+__deceptinfect_GameEntity.__name__ = true
+__deceptinfect_GameEntity.prototype = _hx_a();
+
+__deceptinfect_GameEntity.prototype.__class__ =  __deceptinfect_GameEntity
+
+__deceptinfect_ComponentTools.new = {}
+__deceptinfect_ComponentTools.__name__ = true
+__deceptinfect_ComponentTools.sure = function(state) 
+  if (state[1] == 1) then 
+    local comp = state[2];
+    do return comp end;
+  else
+    _G.error("Attempt to use non existent component on entity!",0);
+  end;
+end
+_hxClasses["deceptinfect.ComponentState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NO_COMPONENT","COMPONENT"},2)}
+__deceptinfect_ComponentState = _hxClasses["deceptinfect.ComponentState"];
+__deceptinfect_ComponentState.NO_COMPONENT = _hx_tab_array({[0]="NO_COMPONENT",0,__enum__ = __deceptinfect_ComponentState},2)
+
+__deceptinfect_ComponentState.COMPONENT = function(comp) local _x = _hx_tab_array({[0]="COMPONENT",1,comp,__enum__=__deceptinfect_ComponentState}, 3); return _x; end 
 
 __deceptinfect_GameManager.new = {}
 __deceptinfect_GameManager.__name__ = true
@@ -1608,8 +1661,18 @@ __deceptinfect_ContaminationComponent.__name__ = true
 
 __deceptinfect__InfectedPlayer_InfectedPlayer_Impl_.new = {}
 __deceptinfect__InfectedPlayer_InfectedPlayer_Impl_.__name__ = true
+__deceptinfect__InfectedPlayer_InfectedPlayer_Impl_._new = function(x) 
+  local this1 = __deceptinfect__InfectedPlayer__InfectedPlayer.new(x);
+  do return this1 end;
+end
 __deceptinfect__InfectedPlayer_InfectedPlayer_Impl_.toInfected = function(p) 
-  do return nil end;
+  local _g = p.infectedPlayer;
+  local tmp = _g[1];
+  if (tmp) == 0 then 
+    _G.error("Attempt to use non infected as infected!",0);
+  elseif (tmp) == 1 then 
+    local infplayer = _g[2];
+    do return infplayer end; end;
 end
 
 __deceptinfect__InfectedPlayer__InfectedPlayer.new = function(x) 
@@ -1636,8 +1699,10 @@ __deceptinfect_Infection.new = function()
   return self
 end
 __deceptinfect_Infection.super = function(self) 
+  self.infectedTrigger = __tink_core_SignalTrigger.new();
   self.rate = 1;
   self.infection = __deceptinfect_INF_STATE.NOT_INFECTED(0);
+  self.onInfected = self.infectedTrigger;
 end
 __deceptinfect_Infection.__name__ = true
 __deceptinfect_Infection.__interfaces__ = {__deceptinfect_InfectionComponent}
@@ -1759,11 +1824,19 @@ end
 __deceptinfect_Radiation.super = function(self,pos,rad) 
   self.state = __deceptinfect_RadiationState.ENABLED;
   self.attatched = __deceptinfect_RadiationAttatched.NOT_ATTATCHED;
-  self.position = pos;
+  self.pos = pos;
   self.id = rad:addRadiation(self);
 end
 __deceptinfect_Radiation.__name__ = true
 __deceptinfect_Radiation.prototype = _hx_a();
+__deceptinfect_Radiation.prototype.getRadiationForPosition = function(self,pos) 
+  local rate = (self.maxrate - 1) * (self.radius - self.pos:Distance(pos));
+  if (rate >= 0) then 
+    do return __haxe_ds_Option.Some(rate) end;
+  else
+    do return __haxe_ds_Option.None end;
+  end;
+end
 __deceptinfect_Radiation.prototype.think = function(self) 
 end
 
@@ -1779,7 +1852,17 @@ __deceptinfect_ContamRadiation.super = function(self,pos,rad)
 end
 __deceptinfect_ContamRadiation.__name__ = true
 __deceptinfect_ContamRadiation.prototype = _hx_a();
-__deceptinfect_ContamRadiation.prototype.shouldContamRoll = function(self,f) 
+__deceptinfect_ContamRadiation.prototype.shouldContamRoll = function(self,pos,ent) 
+  local dist = self.pos:Distance(pos);
+  if (dist <= self.contam_dist) then 
+    local time = self.times:addTime(ent);
+    if (time >= self.contam_time) then 
+      self.times:setTime(ent, 0.0);
+      do return true end;
+    end;
+  else
+    self.times:removeTime(ent);
+  end;
   do return false end
 end
 __deceptinfect_ContamRadiation.prototype.contaminate = function(self,e) 
@@ -1803,6 +1886,38 @@ __deceptinfect_RadiationManager.prototype = _hx_a();
 __deceptinfect_RadiationManager.prototype.addRadiation = function(self,r) 
   self.storage:push(r);
   do return self.storage.length - 1 end
+end
+__deceptinfect_RadiationManager.prototype.removeRadation = function(self,r) 
+  self.storage[r] = nil;
+end
+__deceptinfect_RadiationManager.prototype.think = function(self) 
+  local _g = 0;
+  local _g1 = self.storage;
+  while (_g < _g1.length) do 
+    local rad = _g1[_g];
+    _g = _g + 1;
+    local _g2 = rad.attatched;
+    if (_g2[1] == 1) then 
+      local e = _g2[2];
+      rad.pos = _hx_funcToField(e.pos);
+    end;
+    local _g21 = 0;
+    local _g3 = self.targets;
+    while (_g21 < _g3.length) do 
+      local target = _g3[_g21];
+      _g21 = _g21 + 1;
+      local _g22 = rad:getRadiationForPosition(target:get_pos());
+      if (_g22[1] == 0) then 
+        local rate = _g22[2];
+        __deceptinfect_ComponentTools.sure(target.radhandler):updateRadiationRate(rad.id, rate);
+      else
+        __deceptinfect_ComponentTools.sure(target.radhandler):updateRadiationRate(rad.id, 0);
+      end;
+    end;
+  end;
+end
+__deceptinfect_RadiationManager.prototype.addTarget = function(self,t) 
+  self.targets:push(t);
 end
 __deceptinfect_RadiationManager.prototype.setContaminated = function(self,e,r) 
 end
@@ -1840,14 +1955,15 @@ __deceptinfect_RateManager.getMultiRateTicket = function()
   do return -1 end;
 end
 
-__deceptinfect_RadiationRateHandler.new = function(e) 
+__deceptinfect_RadiationRateHandler.new = function(e,t) 
   local self = _hx_new(__deceptinfect_RadiationRateHandler.prototype)
-  __deceptinfect_RadiationRateHandler.super(self,e)
+  __deceptinfect_RadiationRateHandler.super(self,e,t)
   return self
 end
-__deceptinfect_RadiationRateHandler.super = function(self,e) 
+__deceptinfect_RadiationRateHandler.super = function(self,e,t) 
   self.diminish = 0.75;
   self.rate = e;
+  __deceptinfect_Game.sure().radiationManager:addTarget(t);
 end
 __deceptinfect_RadiationRateHandler.__name__ = true
 __deceptinfect_RadiationRateHandler.prototype = _hx_a();
@@ -1867,7 +1983,7 @@ __deceptinfect_RadiationRateHandler.prototype.calcSourceRate = function(self)
     end;
   end;
   local sorted = _hx_tab_array({}, 0);
-  local _g = self.sourceRates:keyValueIterator();
+  local _g = __haxe_iterators_MapKeyValueIterator.new(self.sourceRates);
   while (_g:hasNext()) do 
     local _g1 = _g:next();
     local _ = _g1.key;
@@ -1886,7 +2002,12 @@ __deceptinfect_RadiationRateHandler.prototype.calcSourceRate = function(self)
   do return total end
 end
 __deceptinfect_RadiationRateHandler.prototype.updateRadiationRate = function(self,rad,rate) 
-  self.sourceRates:set(rad, rate);
+  local _this = self.sourceRates;
+  if (rate == nil) then 
+    _this.h[rad] = __haxe_ds_IntMap.tnull;
+  else
+    _this.h[rad] = rate;
+  end;
 end
 
 __deceptinfect_RadiationRateHandler.prototype.__class__ =  __deceptinfect_RadiationRateHandler
@@ -1976,7 +2097,7 @@ __deceptinfect_TimeKeep.__name__ = true
 __deceptinfect_TimeKeep.prototype = _hx_a();
 __deceptinfect_TimeKeep.prototype.addTime = function(self,key) 
   if (self.times.h[key] ~= nil) then 
-    local difftime = __deceptinfect_Game.sure():getDiffTime();
+    local difftime = __deceptinfect_Game.sure().difftime;
     local _g = key;
     local _g1 = self.times;
     local ret = _g1.h[_g];
@@ -1999,8 +2120,16 @@ __deceptinfect_TimeKeep.prototype.addTime = function(self,key)
   end;
   do return ret1 end
 end
+__deceptinfect_TimeKeep.prototype.setTime = function(self,key,f) 
+  local _this = self.times;
+  if (f == nil) then 
+    _this.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    _this.h[key] = f;
+  end;
+end
 __deceptinfect_TimeKeep.prototype.removeTime = function(self,key) 
-  local difftime = __deceptinfect_Game.sure():getDiffTime();
+  local difftime = __deceptinfect_Game.sure().difftime;
   local _g = key;
   local _g1 = self.times;
   local ret = _g1.h[_g];
@@ -2036,6 +2165,75 @@ __deceptinfect_TimeKeep.prototype.getTime = function(self,key)
 end
 
 __deceptinfect_TimeKeep.prototype.__class__ =  __deceptinfect_TimeKeep
+
+__gmod__EntityClass_EntityClass_Impl_.new = {}
+__gmod__EntityClass_EntityClass_Impl_.__name__ = true
+__gmod__EntityClass_EntityClass_Impl_._new = function(name) 
+  local this1 = name;
+  do return this1 end;
+end
+
+__gmod_EntityClasses.new = {}
+__gmod_EntityClasses.__name__ = true
+
+__gmod__EntityClass_FireEvent_Impl_.new = {}
+__gmod__EntityClass_FireEvent_Impl_.__name__ = true
+__gmod__EntityClass_FireEvent_Impl_._new = function(name) 
+  local this1 = name;
+  do return this1 end;
+end
+
+__gmod__EntityClass_KeyValue_Impl_.new = {}
+__gmod__EntityClass_KeyValue_Impl_.__name__ = true
+__gmod__EntityClass_KeyValue_Impl_._new = function(name) 
+  local this1 = name;
+  do return this1 end;
+end
+
+__gmod__EntityClass_FireEventParam_Impl_.new = {}
+__gmod__EntityClass_FireEventParam_Impl_.__name__ = true
+__gmod__EntityClass_FireEventParam_Impl_.fromX = function(x) 
+  do return tostringx end;
+end
+
+__gmod_EngineEntity.new = {}
+__gmod_EngineEntity.__name__ = true
+__gmod_EngineEntity.prototype = _hx_a();
+
+__gmod_EngineEntity.prototype.__class__ =  __gmod_EngineEntity
+__gmod_EngineEntity.__super__ = gmod.gclass.Entity
+setmetatable(__gmod_EngineEntity.prototype,{__index=gmod.gclass.Entity.prototype})
+
+__gmod_Light.new = {}
+__gmod_Light.__name__ = true
+__gmod_Light.prototype = _hx_a();
+
+__gmod_Light.prototype.__class__ =  __gmod_Light
+__gmod_Light.__super__ = gmod.gclass.Entity
+setmetatable(__gmod_Light.prototype,{__index=gmod.gclass.Entity.prototype})
+
+__gmod_FireEvents.new = {}
+__gmod_FireEvents.__name__ = true
+__gmod_FireEvents.SafeCreate = function(cls) 
+  do return ents.Create(cls) end;
+end
+__gmod_FireEvents.SafeFire = function(ent,input,param,delay) 
+  local p = nil;
+  if (param ~= nil) then 
+    p = tostringparam;
+  end;
+  ent:Fire(input, p, delay);
+  do return end;
+end
+__gmod_FireEvents.TestFire = function() 
+  local this1 = "light";
+  local light = __gmod_FireEvents.SafeCreate(this1);
+  local this2 = "TurnOn";
+  __gmod_FireEvents.SafeFire(light, this2);
+  light:SetKeyValue("radius", tostring5);
+  local this3 = "SetPattern";
+  __gmod_FireEvents.SafeFire(light, this3, "29");
+end
 
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.new = {}
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.__name__ = true
@@ -3440,15 +3638,15 @@ __tink_core__Future_Future_Impl_.first = function(this1,other)
   local l2 = other:handle(_hx_bind(ret,ret.trigger));
   local ret1 = ret;
   if (l1 ~= nil) then 
-    local this2 = l1;
+    local this11 = l1;
     ret1:handle(function(_) 
-      this2:cancel();
+      this11:cancel();
     end);
   end;
   if (l2 ~= nil) then 
-    local this3 = l2;
+    local this12 = l2;
     ret1:handle(function(_1) 
-      this3:cancel();
+      this12:cancel();
     end);
   end;
   do return ret1 end;
@@ -4811,11 +5009,11 @@ __tink_core__Signal_Signal_Impl_.nextTime = function(this1,condition)
 end
 __tink_core__Signal_Signal_Impl_["until"] = function(this1,_end) 
   local ret = __tink_core__Signal_Suspendable.new(function(yield) 
-    local this2 = this1:handle(yield);
-    if (this2 == nil) then 
+    local this11 = this1:handle(yield);
+    if (this11 == nil) then 
       do return __tink_core__Callback_CallbackLink_Impl_.noop end;
     else
-      do return _hx_bind(this2,(function() local __=this2; return _hx_bind(__,__.cancel) end)()) end;
+      do return _hx_bind(this11,(function() local __=this11; return _hx_bind(__,__.cancel) end)()) end;
     end;
   end);
   _end:handle(__tink_core__Callback_Callback_Impl_.fromNiladic(_hx_bind(ret,ret.kill)));
@@ -4858,10 +5056,10 @@ __tink_core__Signal_Signal_Impl_.ofClassical = function(add,remove,gather)
     add(f);
     local f1 = remove;
     local a1 = f;
-    local this2 = __tink_core_SimpleLink.new(function() 
+    local this11 = __tink_core_SimpleLink.new(function() 
       f1(a1);
     end);
-    do return this2 end;
+    do return this11 end;
   end);
   local ret = this1;
   if (gather) then 
@@ -5003,6 +5201,24 @@ local _hx_static_init = function()
   __deceptinfect_RateManager.nextMultiRate = 0;
   
   __deceptinfect_RadiationRateHandler.id = __deceptinfect_RateManager.getAddRateTicket();
+  
+  __gmod_EntityClasses.testEnt = (function() 
+    local _hx_1
+    
+    local this1 = "Blegh";
+    
+    _hx_1 = this1;
+    return _hx_1
+  end )();
+  
+  __gmod_FireEvents.testEvent = (function() 
+    local _hx_2
+    
+    local this1 = "Blegh2";
+    
+    _hx_2 = this1;
+    return _hx_2
+  end )();
   
   __gmod_Hooks.PlayerConnect = "PlayerConnect";
   
@@ -5311,12 +5527,12 @@ local _hx_static_init = function()
   __tink_core__Future_NeverFuture.inst = __tink_core__Future_NeverFuture.new();
   
   __tink_core__Future_Future_Impl_.NULL = (function() 
-    local _hx_1
+    local _hx_3
     
     local v = nil;
     
-    _hx_1 = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(v));
-    return _hx_1
+    _hx_3 = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(v));
+    return _hx_3
   end )();
   
   __tink_core__Future_Future_Impl_.NOISE = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Noise.Noise));
@@ -5324,12 +5540,12 @@ local _hx_static_init = function()
   __tink_core__Future_Future_Impl_.NEVER = __tink_core__Future_NeverFuture.inst;
   
   __tink_core__Lazy_Lazy_Impl_.NULL = (function() 
-    local _hx_2
+    local _hx_4
     
     local c = nil;
     
-    _hx_2 = __tink_core__Lazy_LazyConst.new(c);
-    return _hx_2
+    _hx_4 = __tink_core__Lazy_LazyConst.new(c);
+    return _hx_4
   end )();
   
   __tink_core__Promise_Promise_Impl_.NULL = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(nil)));
@@ -5337,12 +5553,12 @@ local _hx_static_init = function()
   __tink_core__Promise_Promise_Impl_.NOISE = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(__tink_core_Noise.Noise)));
   
   __tink_core__Promise_Promise_Impl_.NEVER = (function() 
-    local _hx_3
+    local _hx_5
     
     local ret = __tink_core__Future_Future_Impl_.NEVER:map(__tink_core_Outcome.Success);
     
-    _hx_3 = ret:gather();
-    return _hx_3
+    _hx_5 = ret:gather();
+    return _hx_5
   end )();
   
   

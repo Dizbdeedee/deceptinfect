@@ -16,14 +16,6 @@ using deceptinfect.PlayerExt;
 
 @:build(gmod.macros.GamemodeMacro.build())
 class DeceptInfect extends gmod.hooks.Gm {
-    
-    public var currentState:GAME_STATE = WAIT;
-    public var shouldAllowInfection:Bool = false;
-
-    
-
-    
-    
 
     #if server
 
@@ -36,12 +28,13 @@ class DeceptInfect extends gmod.hooks.Gm {
         player.annex = new Annex(player);
         new DI_Player(player); //calls get to initalise
         // new DI_Player(player);
-        switch (currentState) {
-            case PLAY(_):
-                player.KillSilent();
-                GAMEMODE.PlayerSpawnAsSpectator(player);
-            default:
-        }
+        //FIXME
+        // switch (currentState) {
+        //     case PLAY(_):
+        //         player.KillSilent();
+        //         GAMEMODE.PlayerSpawnAsSpectator(player);
+        //     default:
+        // }
 
     }
 
@@ -75,8 +68,7 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
 
     override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<GmPlayerCanHearPlayersVoiceHaxeReturn> {
-        //Lua.print(listener,talker);
-        //GlobalLib.PrintTable(cast listener);
+        
         return {a : false, b: false};
         // if (listener.GetPos().Distance(talker.GetPos()) > 1000) {
         //    return {a : false,b : false};
@@ -99,12 +91,12 @@ class DeceptInfect extends gmod.hooks.Gm {
 }
 
 
-enum GAME_STATE {
-    WAIT;
-    PLAY(st:PLAY_STATE);
-}
+// enum GAME_STATE {
+//     WAIT;
+//     PLAY(st:PLAY_STATE);
+// }
 
-enum PLAY_STATE {
-    NORMAL;
-    EVAC;
-}
+// enum PLAY_STATE {
+//     NORMAL;
+//     EVAC;
+// }

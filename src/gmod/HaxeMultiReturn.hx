@@ -4,14 +4,12 @@ import haxe.DynamicAccess;
 import lua.Table;
 using lua.TableTools;
 
-// @:genericBuild(gmod.macros.MultiReturn.build())
-// class MultiReturn<T> {
 
-// }
 
 /**
     Use this with a typedef to define the ability to multireturn from a haxe function.
     This adds a bit of overhead in exchange for typed multireturns
+    To have them in order, use a,b,c,d,e.... ect. as the keys for the structure
 **/
 abstract HaxeMultiReturn<T>(Dynamic) {
     @:from
@@ -29,9 +27,3 @@ abstract HaxeMultiReturn<T>(Dynamic) {
 
 
 
-// private class MyMultiReturnTest {
-//     public function derka():MultiReturnHelper<MyMultiReturn> {
-        
-         
-//     }
-// }
