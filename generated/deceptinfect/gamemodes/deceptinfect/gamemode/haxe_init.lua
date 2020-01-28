@@ -117,8 +117,7 @@ __gmod_EntityClasses = _hx_e()
 __gmod__EntityClass_FireEvent_Impl_ = _hx_e()
 __gmod__EntityClass_KeyValue_Impl_ = _hx_e()
 __gmod__EntityClass_FireEventParam_Impl_ = _hx_e()
-__gmod_EngineEntity = _hx_e()
-__gmod_Light = _hx_e()
+__gmod__EntityClass_Light_Impl_ = _hx_e()
 __gmod_FireEvents = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
@@ -2196,21 +2195,12 @@ __gmod__EntityClass_FireEventParam_Impl_.fromX = function(x)
   do return tostringx end;
 end
 
-__gmod_EngineEntity.new = {}
-__gmod_EngineEntity.__name__ = true
-__gmod_EngineEntity.prototype = _hx_a();
-
-__gmod_EngineEntity.prototype.__class__ =  __gmod_EngineEntity
-__gmod_EngineEntity.__super__ = gmod.gclass.Entity
-setmetatable(__gmod_EngineEntity.prototype,{__index=gmod.gclass.Entity.prototype})
-
-__gmod_Light.new = {}
-__gmod_Light.__name__ = true
-__gmod_Light.prototype = _hx_a();
-
-__gmod_Light.prototype.__class__ =  __gmod_Light
-__gmod_Light.__super__ = gmod.gclass.Entity
-setmetatable(__gmod_Light.prototype,{__index=gmod.gclass.Entity.prototype})
+__gmod__EntityClass_Light_Impl_.new = {}
+__gmod__EntityClass_Light_Impl_.__name__ = true
+__gmod__EntityClass_Light_Impl_._new = function() 
+  local this1 = ents.Create("Light");
+  do return this1 end;
+end
 
 __gmod_FireEvents.new = {}
 __gmod_FireEvents.__name__ = true
@@ -2220,17 +2210,18 @@ end
 __gmod_FireEvents.SafeFire = function(ent,input,param,delay) 
   local p = nil;
   if (param ~= nil) then 
-    p = tostringparam;
+    p = tostring"param";
   end;
-  ent:Fire(input, p, delay);
-  do return end;
+  do return ent:Fire(input, p, delay) end;
 end
 __gmod_FireEvents.TestFire = function() 
-  local this1 = "light";
-  local light = __gmod_FireEvents.SafeCreate(this1);
+  local this1 = ents.Create("Light");
+  local light = this1;
   local this2 = "TurnOn";
   __gmod_FireEvents.SafeFire(light, this2);
   light:SetKeyValue("radius", tostring5);
+  light:SetKeyValue("radius", tostring12003);
+  __haxe_Log.trace(light:GetKeyValues().radius, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/EntityClass.hx",lineNumber=128,className="gmod.FireEvents",methodName="TestFire"}));
   local this3 = "SetPattern";
   __gmod_FireEvents.SafeFire(light, this3, "29");
 end
@@ -4252,7 +4243,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -4269,7 +4260,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -4278,16 +4269,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -4296,7 +4287,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -4356,13 +4347,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g = o[2];
-    local tmp1 = _g[1];
+    local _g1 = o[2];
+    local tmp1 = _g1[1];
     if (tmp1) == 0 then 
-      local d = _g[2];
+      local d = _g1[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g[2];
+      local f = _g1[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -4498,7 +4489,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g = o[2];
+      local _g1 = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -4582,10 +4573,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g = o1[2];
-                local next3 = _g[1];
+                local _g1 = o1[2];
+                local next3 = _g1[1];
                 if (next3) == 0 then 
-                  local ret = _g[2];
+                  local ret = _g1[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;

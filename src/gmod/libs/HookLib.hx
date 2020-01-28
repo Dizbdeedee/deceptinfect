@@ -1,6 +1,8 @@
 package gmod.libs;
 
 
+import gmod.Hooks.Hook;
+
 /**
     The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function.
 **/

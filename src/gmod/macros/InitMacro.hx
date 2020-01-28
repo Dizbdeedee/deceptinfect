@@ -8,11 +8,13 @@ import haxe.macro.Compiler;
 
 import haxe.macro.Expr.Position;
 import haxe.macro.Context;
+#end
 class InitMacro {
-    
+    #if macro
     public static var baseEntFolder:String;
+    #end
     public static var exportName:String;
-
+    #if macro
     // @:persistent static var firstBuild = true;
     
     
@@ -54,7 +56,7 @@ class InitMacro {
         var clientName = "haxe_cl_init";
         if (Context.defined("gamemode")) {
             var gamemodeName = Context.definedValue("gamemode").toLowerCase();
-            exportName = gamemodeName.toLowerCase();
+            exportName = '${gamemodeName.toLowerCase()}_HAXE_EXPORT';
             baseEntFolder = 'generated/$addonName/gamemodes/$gamemodeName/entities';
             FileSystem.createDirectory('$baseEntFolder/entities');
             FileSystem.createDirectory('$baseEntFolder/effects');
@@ -63,27 +65,27 @@ class InitMacro {
             if (Context.defined("client")) {
                 if (Context.defined("generateLuaInit")) {
                     File.saveContent('generated/$addonName/gamemodes/$gamemodeName/gamemode/cl_init.lua',
-                    '${exportName}_HAXE_EXPORT = include("$clientName.lua")');
+                    '$exportName = include("$clientName.lua")');
                 }
                 trace("generated client.lua");
                 Compiler.setOutput('generated/$addonName/gamemodes/$gamemodeName/gamemode/$clientName.lua');
             } else if (Context.defined("server")) {
                 if (Context.defined("generateLuaInit")) {
                     File.saveContent('generated/$addonName/gamemodes/$gamemodeName/gamemode/init.lua',
-                    'AddCSLuaFile("$clientName.lua")\n${exportName}_HAXE_EXPORT = include("$serverName.lua")');
+                    'AddCSLuaFile("$clientName.lua")\n$exportName = include("$serverName.lua")');
                 }
                 trace("generated server.lua");
                 Compiler.setOutput('generated/$addonName/gamemodes/$gamemodeName/gamemode/$serverName.lua');
             }
             
         } else {
-            exportName = addonName;
+            exportName = '${addonName}_HAXE_EXPORT';
             
             baseEntFolder = 'generated/$addonName/lua';
             FileSystem.createDirectory('generated/$addonName/lua/autorun/');
             FileSystem.createDirectory('generated/$addonName/lua/$addonName');
             if (Context.defined("generateLuaInit")) {
-                var haxe_init:String = 'if SERVER then AddCSLuaFile("$addonName/cl_init.lua") ${exportName}_HAXE_EXPORT = include("$addonName/init.lua") end\nif CLIENT then ${addonName}_HAXE_EXPORT = include("$addonName/cl_init.lua") end';
+                var haxe_init:String = 'if SERVER then AddCSLuaFile("$addonName/cl_init.lua") $exportName = include("$addonName/init.lua") end\nif CLIENT then $exportName = include("$addonName/cl_init.lua") end';
                 File.saveContent('generated/$addonName/lua/autorun/haxe_init_$addonName.lua',haxe_init);
             }
             if (Context.defined("client")) {

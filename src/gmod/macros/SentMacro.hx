@@ -161,7 +161,7 @@ class SentMacro {
 
             
             filebuf.add('\nfunction ENT:Initialize(...)\n');
-            filebuf.add('\tlocal ent = ${exportName}_HAXE_EXPORT.${gen.genName}.new(self)\n');
+            filebuf.add('\tlocal ent = $exportName.${gen.genName}.new(self)\n');
             filebuf.add("\tself._gHaxeBurrow = ent\n");
             filebuf.add("\tself._gHaxeBurrow:Initialize()\n");
             #if client
