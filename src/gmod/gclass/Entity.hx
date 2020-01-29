@@ -3928,7 +3928,7 @@ extern class Entity {
 		```
     **/
     
-    public function SetKeyValue(key:String, value:String):Void;
+	public function SetKeyValue(key:String, value:Dynamic):Void;
     
     
     /**
@@ -8711,7 +8711,3 @@ var b:Angle;
 
 }
 
-@:forward
-abstract EntityID(Int) to Int {
-
-}

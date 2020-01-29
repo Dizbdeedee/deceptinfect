@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import gmod.Hooks;
 import lua.Lua;
 import tink.core.Annex;
 import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
@@ -22,6 +23,11 @@ class DeceptInfect extends gmod.hooks.Gm {
 
     override function PlayerDeath(victim:Player, inflictor:Entity, attacker:Entity) {
         trace("Player ded!");
+    }
+    
+    override function EntityKeyValue(ent:Entity, key:String, value:String):String {
+        trace(Lua.tostring(ent),key,value);
+        return null;
     }
 
     override function PlayerInitialSpawn(player:Player, transition:Bool) {

@@ -122,21 +122,28 @@ __gmod_FireEvents = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
 __gmod_Hooks = _hx_e()
+__haxe_IMap = _hx_e()
+__haxe_ds_IntMap = _hx_e()
+__gmod_OutputRunner = _hx_e()
 __gmod_PairTools = _hx_e()
 __gmod_TableTools = _hx_e()
+__gmod_engine_ents__Logic_relay_Logic_relay_Impl_ = _hx_e()
+__gmod_engine_ents__Npc_zombie_Npc_zombie_Impl_ = _hx_e()
+__gmod_engine_ents__Point_proximity_sensor_Point_proximity_sensor_Impl_ = _hx_e()
+__gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_ = _hx_e()
+__gmod_macros_InitMacro = _hx_e()
 __gmod_safety_Safety = _hx_e()
 __gmod_safety_ValidObject = _hx_e()
 __haxe_StackItem = _hx_e()
-__haxe_IMap = _hx_e()
 __haxe_EntryPoint = _hx_e()
 __haxe_Log = _hx_e()
 __haxe_MainEvent = _hx_e()
 __haxe_MainLoop = _hx_e()
 __haxe_Timer = _hx_e()
 __haxe_ds_Either = _hx_e()
-__haxe_ds_IntMap = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
 __haxe_ds_Option = _hx_e()
+__haxe_ds_StringMap = _hx_e()
 __lua_Boot = _hx_e()
 __haxe_iterators_MapKeyValueIterator = _hx_e()
 __lua_UserData = _hx_e()
@@ -515,7 +522,38 @@ Main.__name__ = true
 Main.main = function() 
   __deceptinfect_DeceptInfect.initaliseGamemode();
   __deceptinfect_Networking.initMessages();
-  __gmod_FireEvents.TestFire();
+end
+Main.makeThump = function() 
+  local this1 = ents.Create("npc_zombie");
+  local zombie = this1;
+  zombie:SetName("zombee");
+  zombie:Spawn();
+  local this2 = ents.Create("point_proximity_sensor");
+  local sensor = this2;
+  sensor:SetKeyValue("target", "zombee");
+  sensor:SetKeyValue("targetname", "zombee");
+  sensor:Spawn();
+  __gmod_OutputRunner.addOutput(zombie, "OnFoundEnemy", Main.onThumped);
+  sensor:Fire("FireUser1", "0.1", 0);
+  local _hx_status, _hx_result = pcall(function() 
+  
+      _G.error("No!!",0);
+    return _hx_pcall_default
+  end)
+  if not _hx_status and _hx_result == "_hx_pcall_break" then
+  elseif not _hx_status then 
+  
+    local _hx_1 = _hx_result
+    local e = _hx_1
+    __haxe_Log.trace(e, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=61,className="Main",methodName="makeThump"}));
+  elseif _hx_result ~= _hx_pcall_default then
+    return _hx_result
+  end;
+end
+_hx_exports["makeThump"] = Main.makeThump
+Main.onThumped = function(data) 
+  __haxe_Log.trace("THUMPED!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=66,className="Main",methodName="onThumped"}));
+  _G.print(data.activator);
 end
 
 Math.new = {}
@@ -1361,6 +1399,7 @@ __deceptinfect_DeceptInfect.new = function(_self)
 end
 __deceptinfect_DeceptInfect.super = function(self,_self) 
   _self.PlayerDeath = function(GM,...) self:PlayerDeath(...) end;
+  _self.EntityKeyValue = function(GM,...) self:EntityKeyValue(...) end;
   _self.PlayerInitialSpawn = function(GM,...) self:PlayerInitialSpawn(...) end;
   _self.PlayerDeathThink = function(GM,...) self:PlayerDeathThink(...) end;
   _self.Think = function(GM,...) self:Think(...) end;
@@ -1377,7 +1416,11 @@ __deceptinfect_DeceptInfect.initaliseGamemode = function()
 end
 __deceptinfect_DeceptInfect.prototype = _hx_a();
 __deceptinfect_DeceptInfect.prototype.PlayerDeath = function(self,victim,inflictor,attacker) 
-  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=24,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
+  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=25,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
+end
+__deceptinfect_DeceptInfect.prototype.EntityKeyValue = function(self,ent,key,value) 
+  __haxe_Log.trace(_G.tostring(ent), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true,customParams=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=29,className="deceptinfect.DeceptInfect",methodName="EntityKeyValue",customParams=_hx_tab_array({[0]=key, value}, 2)}));
+  do return nil end
 end
 __deceptinfect_DeceptInfect.prototype.PlayerInitialSpawn = function(self,player,transition) 
   player.annex = __tink_core_Annex.new(player);
@@ -1419,8 +1462,8 @@ __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,s
   local this1 = _G.Vector(-16, -16, 0);
   local otherVec = this1;
   local blockers = pos + otherVec;
-  local this2 = _G.Vector(16, 16, 72);
-  local otherVec1 = this2;
+  local this11 = _G.Vector(16, 16, 72);
+  local otherVec1 = this11;
   local blockers1 = ents.FindInBox(blockers, pos + otherVec1);
   local ent = __gmod_PairTools.iterator(blockers1);
   while (ent:hasNext()) do 
@@ -2212,16 +2255,21 @@ __gmod_FireEvents.SafeFire = function(ent,input,param,delay)
   if (param ~= nil) then 
     p = tostring"param";
   end;
-  do return ent:Fire(input, p, delay) end;
+  ent:Fire(input, p, delay);
+  do return end;
+end
+__gmod_FireEvents.accepted = function(x) 
 end
 __gmod_FireEvents.TestFire = function() 
   local this1 = ents.Create("Light");
   local light = this1;
   local this2 = "TurnOn";
   __gmod_FireEvents.SafeFire(light, this2);
+  __gmod_FireEvents.accepted(light);
   light:SetKeyValue("radius", tostring5);
+  light:SetKeyValue("radius", tostring100);
   light:SetKeyValue("radius", tostring12003);
-  __haxe_Log.trace(light:GetKeyValues().radius, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/EntityClass.hx",lineNumber=128,className="gmod.FireEvents",methodName="TestFire"}));
+  __haxe_Log.trace(light:GetKeyValues().radius, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/EntityClass.hx",lineNumber=136,className="gmod.FireEvents",methodName="TestFire"}));
   local this3 = "SetPattern";
   __gmod_FireEvents.SafeFire(light, this3, "29");
 end
@@ -2254,6 +2302,155 @@ end
 
 __gmod_Hooks.new = {}
 __gmod_Hooks.__name__ = true
+
+__haxe_IMap.new = {}
+__haxe_IMap.__name__ = true
+__haxe_IMap.prototype = _hx_a();
+
+__haxe_IMap.prototype.__class__ =  __haxe_IMap
+
+__haxe_ds_IntMap.new = function() 
+  local self = _hx_new(__haxe_ds_IntMap.prototype)
+  __haxe_ds_IntMap.super(self)
+  return self
+end
+__haxe_ds_IntMap.super = function(self) 
+  self.h = ({});
+end
+__haxe_ds_IntMap.__name__ = true
+__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_IntMap.prototype = _hx_a();
+__haxe_ds_IntMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_IntMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_IntMap.prototype.remove = function(self,key) 
+  if (self.h[key] == nil) then 
+    do return false end;
+  else
+    self.h[key] = nil;
+    do return true end;
+  end;
+end
+__haxe_ds_IntMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_IntMap.prototype.keyValueIterator = function(self) 
+  do return __haxe_iterators_MapKeyValueIterator.new(self) end
+end
+
+__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
+
+__gmod_OutputRunner.new = {}
+__gmod_OutputRunner.__name__ = true
+__gmod_OutputRunner.addOutput = function(e,outputName,cb) 
+  if (__gmod_OutputRunner.outputEnt == nil) then 
+    local this1 = ents.Create("logic_relay");
+    __gmod_OutputRunner.outputEnt = this1;
+    __gmod_OutputRunner.outputEnt:SetName("outputrunner");
+    __gmod_OutputRunner.outputEnt:Activate();
+    __gmod_OutputRunner.outputEnt:Spawn();
+    __gmod_OutputRunner.outputID = __gmod_OutputRunner.outputEnt:EntIndex();
+    local exportName = __gmod_macros_InitMacro.exportName;
+    hook.Add("AcceptInput", Std.string(Std.string("") .. Std.string(exportName)) .. Std.string("AcceptInput"), __gmod_OutputRunner.acceptInput);
+    __haxe_Log.trace("hooked", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=28,className="gmod.OutputRunner",methodName="addOutput"}));
+  end;
+  local id = e:EntIndex();
+  if (__gmod_OutputRunner.callbacks.h[id] == nil) then 
+    local callbacklist = __tink_core_CallbackList.new();
+    local callbackmap = __haxe_ds_StringMap.new();
+    if (callbacklist == nil) then 
+      callbackmap.h[outputName] = __haxe_ds_StringMap.tnull;
+    else
+      callbackmap.h[outputName] = callbacklist;
+    end;
+    local _this = __gmod_OutputRunner.callbacks;
+    if (callbackmap == nil) then 
+      _this.h[id] = __haxe_ds_IntMap.tnull;
+    else
+      _this.h[id] = callbackmap;
+    end;
+    __haxe_Log.trace("New callbacklist + map", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=36,className="gmod.OutputRunner",methodName="addOutput"}));
+    e:SetKeyValue(outputName, "outputrunner:Trigger::0:-1");
+  else
+    local ret = __gmod_OutputRunner.callbacks.h[id];
+    if (ret == __haxe_ds_IntMap.tnull) then 
+      ret = nil;
+    end;
+    if (ret.h[outputName] == nil) then 
+      local callbacklist1 = __tink_core_CallbackList.new();
+      local ret1 = __gmod_OutputRunner.callbacks.h[id];
+      if (ret1 == __haxe_ds_IntMap.tnull) then 
+        ret1 = nil;
+      end;
+      local _this1 = ret1;
+      if (callbacklist1 == nil) then 
+        _this1.h[outputName] = __haxe_ds_StringMap.tnull;
+      else
+        _this1.h[outputName] = callbacklist1;
+      end;
+      e:SetKeyValue(outputName, "outputrunner:Trigger::0:-1");
+      __haxe_Log.trace("New callbacklist", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=44,className="gmod.OutputRunner",methodName="addOutput"}));
+    end;
+  end;
+  __haxe_Log.trace(outputName, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=46,className="gmod.OutputRunner",methodName="addOutput"}));
+  local ret2 = __gmod_OutputRunner.callbacks.h[id];
+  if (ret2 == __haxe_ds_IntMap.tnull) then 
+    ret2 = nil;
+  end;
+  local ret3 = ret2.h[outputName];
+  if (ret3 == __haxe_ds_StringMap.tnull) then 
+    ret3 = nil;
+  end;
+  local _this2 = ret3;
+  local node = __tink_core__Callback_ListCell.new(cb, _this2);
+  _this2.cells:push(node);
+  _this2.used = _this2.used + 1;
+  do return node end;
+end
+__gmod_OutputRunner.acceptInput = function(ent,input,actv,caller,value) 
+  __haxe_Log.trace(Std.string(Std.string(Std.string(Std.string(Std.string(Std.string(Std.string("Entity: ") .. Std.string(ent:GetClass())) .. Std.string(" got sent ")) .. Std.string(input)) .. Std.string(" ")) .. Std.string(_G.tostring(actv))) .. Std.string(" with ")) .. Std.string(Std.string(value)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=51,className="gmod.OutputRunner",methodName="acceptInput"}));
+  if ((ent:EntIndex() == __gmod_OutputRunner.outputID) and _G.IsValid(caller)) then 
+    local this1 = __gmod_OutputRunner.callbacks;
+    local key = caller:EntIndex();
+    local ret = this1.h[key];
+    if (ret == __haxe_ds_IntMap.tnull) then 
+      ret = nil;
+    end;
+    local backs = ret;
+    if (backs ~= nil) then 
+      local ret1 = backs.h[input];
+      if (ret1 == __haxe_ds_StringMap.tnull) then 
+        ret1 = nil;
+      end;
+      local backs2 = ret1;
+      if (backs2 ~= nil) then 
+        backs2:invoke(_hx_o({__fields__={data=true,activator=true},data=value,activator=caller}));
+      end;
+      __haxe_Log.trace(backs2, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=59,className="gmod.OutputRunner",methodName="acceptInput"}));
+    end;
+  end;
+  do return nil end;
+end
 
 __gmod_PairTools.new = {}
 __gmod_PairTools.__name__ = true
@@ -2311,6 +2508,21 @@ __gmod_TableTools.__name__ = true
 __gmod_TableTools.length = function(table) 
   do return #table end;
 end
+
+__gmod_engine_ents__Logic_relay_Logic_relay_Impl_.new = {}
+__gmod_engine_ents__Logic_relay_Logic_relay_Impl_.__name__ = true
+
+__gmod_engine_ents__Npc_zombie_Npc_zombie_Impl_.new = {}
+__gmod_engine_ents__Npc_zombie_Npc_zombie_Impl_.__name__ = true
+
+__gmod_engine_ents__Point_proximity_sensor_Point_proximity_sensor_Impl_.new = {}
+__gmod_engine_ents__Point_proximity_sensor_Point_proximity_sensor_Impl_.__name__ = true
+
+__gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_.new = {}
+__gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_.__name__ = true
+
+__gmod_macros_InitMacro.new = {}
+__gmod_macros_InitMacro.__name__ = true
 
 __gmod_safety_Safety.new = {}
 __gmod_safety_Safety.__name__ = true
@@ -2378,12 +2590,6 @@ __haxe_StackItem.Module = function(m) local _x = _hx_tab_array({[0]="Module",1,m
 __haxe_StackItem.FilePos = function(s,file,line,column) local _x = _hx_tab_array({[0]="FilePos",2,s,file,line,column,__enum__=__haxe_StackItem}, 6); return _x; end 
 __haxe_StackItem.Method = function(classname,method) local _x = _hx_tab_array({[0]="Method",3,classname,method,__enum__=__haxe_StackItem}, 4); return _x; end 
 __haxe_StackItem.LocalFunction = function(v) local _x = _hx_tab_array({[0]="LocalFunction",4,v,__enum__=__haxe_StackItem}, 3); return _x; end 
-
-__haxe_IMap.new = {}
-__haxe_IMap.__name__ = true
-__haxe_IMap.prototype = _hx_a();
-
-__haxe_IMap.prototype.__class__ =  __haxe_IMap
 
 __haxe_EntryPoint.new = {}
 __haxe_EntryPoint.__name__ = true
@@ -2635,57 +2841,6 @@ __haxe_ds_Either = _hxClasses["haxe.ds.Either"];
 __haxe_ds_Either.Left = function(v) local _x = _hx_tab_array({[0]="Left",0,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
 __haxe_ds_Either.Right = function(v) local _x = _hx_tab_array({[0]="Right",1,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
 
-__haxe_ds_IntMap.new = function() 
-  local self = _hx_new(__haxe_ds_IntMap.prototype)
-  __haxe_ds_IntMap.super(self)
-  return self
-end
-__haxe_ds_IntMap.super = function(self) 
-  self.h = ({});
-end
-__haxe_ds_IntMap.__name__ = true
-__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_IntMap.prototype = _hx_a();
-__haxe_ds_IntMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_IntMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_IntMap.prototype.remove = function(self,key) 
-  if (self.h[key] == nil) then 
-    do return false end;
-  else
-    self.h[key] = nil;
-    do return true end;
-  end;
-end
-__haxe_ds_IntMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_IntMap.prototype.keyValueIterator = function(self) 
-  do return __haxe_iterators_MapKeyValueIterator.new(self) end
-end
-
-__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
-
 __haxe_ds_ObjectMap.new = function() 
   local self = _hx_new(__haxe_ds_ObjectMap.prototype)
   __haxe_ds_ObjectMap.super(self)
@@ -2734,6 +2889,57 @@ __haxe_ds_Option = _hxClasses["haxe.ds.Option"];
 __haxe_ds_Option.Some = function(v) local _x = _hx_tab_array({[0]="Some",0,v,__enum__=__haxe_ds_Option}, 3); return _x; end 
 __haxe_ds_Option.None = _hx_tab_array({[0]="None",1,__enum__ = __haxe_ds_Option},2)
 
+
+__haxe_ds_StringMap.new = function() 
+  local self = _hx_new(__haxe_ds_StringMap.prototype)
+  __haxe_ds_StringMap.super(self)
+  return self
+end
+__haxe_ds_StringMap.super = function(self) 
+  self.h = ({});
+end
+__haxe_ds_StringMap.__name__ = true
+__haxe_ds_StringMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_StringMap.prototype = _hx_a();
+__haxe_ds_StringMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_StringMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_StringMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_StringMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_StringMap.prototype.remove = function(self,key) 
+  if (self.h[key] == nil) then 
+    do return false end;
+  else
+    self.h[key] = nil;
+    do return true end;
+  end;
+end
+__haxe_ds_StringMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_StringMap.prototype.keyValueIterator = function(self) 
+  do return __haxe_iterators_MapKeyValueIterator.new(self) end
+end
+
+__haxe_ds_StringMap.prototype.__class__ =  __haxe_ds_StringMap
 
 __lua_Boot.new = {}
 __lua_Boot.__name__ = true
@@ -4243,7 +4449,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -4260,7 +4466,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -4269,16 +4475,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -4287,7 +4493,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -4347,13 +4553,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g1 = o[2];
-    local tmp1 = _g1[1];
+    local _g = o[2];
+    local tmp1 = _g[1];
     if (tmp1) == 0 then 
-      local d = _g1[2];
+      local d = _g[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g1[2];
+      local f = _g[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -4489,7 +4695,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g1 = o[2];
+      local _g = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -4573,10 +4779,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g1 = o1[2];
-                local next3 = _g1[1];
+                local _g = o1[2];
+                local next3 = _g[1];
                 if (next3) == 0 then 
-                  local ret = _g1[2];
+                  local ret = _g[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;
@@ -5499,11 +5705,15 @@ local _hx_static_init = function()
   
   __gmod_Hooks.FindUseEntity = "FindUseEntity";
   
+  __haxe_ds_IntMap.tnull = ({});
+  
+  __gmod_OutputRunner.callbacks = __haxe_ds_IntMap.new();
+  
   __haxe_EntryPoint.pending = Array.new();
   
   __haxe_EntryPoint.threadCount = 0;
   
-  __haxe_ds_IntMap.tnull = ({});
+  __haxe_ds_StringMap.tnull = ({});
   
   __lua_Boot.Max_Int32 = 2147483647;
   

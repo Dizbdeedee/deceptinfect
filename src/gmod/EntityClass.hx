@@ -1,7 +1,9 @@
 package gmod;
 
+import tink.CoreApi.CallbackLink;
+import tink.CoreApi.Callback;
 import gmod.libs.EntsLib;
-
+#if server
 /**
     Represents an entity class...
 **/
@@ -21,11 +23,6 @@ abstract FireEvent<X,PARAM>(String) to String {
     public inline function new<X:Entity,PARAM>(name:String) {
         this = name;
     }
-
-    public extern inline function Fire<X,PARAM>(ent:X,?param:PARAM) {
-        untyped ent.Fire(this,param,0);
-    } 
-
     
 }
 
@@ -75,9 +72,13 @@ abstract Light(Entity) to Entity {
 
     public extern inline function fireSetPattern(params:String,delay:Float) {
         this.Fire("TurnOn",params,0);
+        
         // this.
     }
 
+    public extern inline function outputOnTrouble(callback:Callback<Float>):CallbackLink {
+        return OutputRunner.addOutput(this,"OnTrouble",callback);
+    }
     
     public var radius(get,set):Int;
     
@@ -105,16 +106,20 @@ class FireEvents {
     
     public static var testEvent(default,never) = new FireEvent("Blegh2");
 
-    public static function SafeCreate<X,T:EntityClass<X>>(cls:T):X {
+    public static function SafeCreate<X:Entity,T:EntityClass<X>>(cls:T):X {
         return cast EntsLib.Create(cls);
     }
-    public static function SafeFire<X,T:FireEvent<X,Y>,Y>(ent:X,input:T, ?param:Y, ?delay:Float) { //P:FireEventParam<T,X,F>,F
+    public static function SafeFire<X:Entity,T:FireEvent<X,Y>,Y>(ent:X,input:T, ?param:Y, ?delay:Float) { //P:FireEventParam<T,X,F>,F
         var p = null;
         if (param != null) {
             p = untyped __lua__("tostring\"{0}\"",param);
         }
         
-        return untyped ent.Fire(input,p,delay);
+        return ent.Fire(input,p,delay);
+    }
+
+    public static function accepted<X:Entity>(x:X) {
+
     }
 
     
@@ -122,10 +127,14 @@ class FireEvents {
     public static function TestFire() {
         var light:Light = new Light();
         SafeFire(light,Light.turnOn);
+        accepted(light);
+        //SafeFire("",Light.turnOn);
         light.radius = 5;
+        light.radius = 100;
         light.radius = 12003;
         
         trace(light.radius);
         SafeFire(light,Light.setPattern,"29");
     }
 }
+#end

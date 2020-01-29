@@ -2,87 +2,87 @@ package gmod.enums;
 /**
     Enumerations used by Kinect SDK bindings.
 **/
-@:native("_G")
+@:native("_G.SENSORBONE")
 extern enum abstract SENSORBONE(Int) {
     /**
         
     **/
-    var SENSORBONE.HIP_RIGHT;
+    var HIP_RIGHT;
     /**
         
     **/
-    var SENSORBONE.FOOT_LEFT;
+    var FOOT_LEFT;
     /**
         
     **/
-    var SENSORBONE.SHOULDER;
+    var SHOULDER;
     /**
         
     **/
-    var SENSORBONE.SHOULDER_RIGHT;
+    var SHOULDER_RIGHT;
     /**
         
     **/
-    var SENSORBONE.ELBOW_LEFT;
+    var ELBOW_LEFT;
     /**
         
     **/
-    var SENSORBONE.KNEE_RIGHT;
+    var KNEE_RIGHT;
     /**
         
     **/
-    var SENSORBONE.SPINE;
+    var SPINE;
     /**
         
     **/
-    var SENSORBONE.HIP_LEFT;
+    var HIP_LEFT;
     /**
         
     **/
-    var SENSORBONE.ELBOW_RIGHT;
+    var ELBOW_RIGHT;
     /**
         
     **/
-    var SENSORBONE.HAND_RIGHT;
+    var HAND_RIGHT;
     /**
         
     **/
-    var SENSORBONE.HIP;
+    var HIP;
     /**
         
     **/
-    var SENSORBONE.SHOULDER_LEFT;
+    var SHOULDER_LEFT;
     /**
         
     **/
-    var SENSORBONE.HAND_LEFT;
+    var HAND_LEFT;
     /**
         
     **/
-    var SENSORBONE.WRIST_LEFT;
+    var WRIST_LEFT;
     /**
         
     **/
-    var SENSORBONE.ANKLE_RIGHT;
+    var ANKLE_RIGHT;
     /**
         
     **/
-    var SENSORBONE.FOOT_RIGHT;
+    var FOOT_RIGHT;
     /**
         
     **/
-    var SENSORBONE.ANKLE_LEFT;
+    var ANKLE_LEFT;
     /**
         
     **/
-    var SENSORBONE.KNEE_LEFT;
+    var KNEE_LEFT;
     /**
         
     **/
-    var SENSORBONE.WRIST_RIGHT;
+    var WRIST_RIGHT;
     /**
         
     **/
-    var SENSORBONE.HEAD;
+    var HEAD;
     
 }

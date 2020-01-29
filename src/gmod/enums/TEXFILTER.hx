@@ -4,23 +4,23 @@ package gmod.enums;
 	
 	See this and this page for more information on texture filtering.
 **/
-@:native("_G")
+@:native("_G.TEXFILTER")
 extern enum abstract TEXFILTER(Int) {
     /**
-        
+       
     **/
-    var TEXFILTER.LINEAR;
+    var LINEAR;
     /**
         
     **/
-    var TEXFILTER.NONE;
+    var NONE;
     /**
         
     **/
-    var TEXFILTER.ANISOTROPIC;
+    var ANISOTROPIC;
     /**
         
     **/
-    var TEXFILTER.POINT;
+    var POINT;
     
 }

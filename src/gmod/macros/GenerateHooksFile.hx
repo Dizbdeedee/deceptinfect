@@ -86,10 +86,11 @@ class GenerateHooksFile {
                 access: [Access.APublic,Access.AStatic,Access.AFinal,Access.AInline]
                 
             }
-            trace(field);
+           // trace(field);
             fields.push(field);
         }
-        trace("ran....");
+        //trace("ran....");
+       
         return fields;
     }
 

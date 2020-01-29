@@ -149,6 +149,6 @@ class InitMacro {
         }
         #end
     }
-}
 
 #end
+}

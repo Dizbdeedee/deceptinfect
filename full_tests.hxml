@@ -1,0 +1,29 @@
+-cp src
+-D lua-5.1
+-D lua-vanilla
+-D server
+-D gamemode=deceptinfect
+-D addonName=deceptinfect
+-D dump=pretty
+-lib tink_core
+--macro gmod.macros.InitMacro.init()
+-main Main
+--lua lua/server.lua
+--no-output
+
+--next
+
+-cp src
+-D lua-5.1
+-D lua-vanilla
+-D client
+-lib tink_core
+--macro include('gmod')
+--macro keep('gmod')
+--macro gmod.macros.InitMacro.init()
+-main Main
+--lua lua/client.lua
+--no-output
+
+
+
