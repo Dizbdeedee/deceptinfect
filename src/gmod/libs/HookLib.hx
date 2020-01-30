@@ -104,7 +104,7 @@ import gmod.Hooks.Hook;
 		
 		"CustomHook table: 0x00000000 Player [1][PotatoMan]"
     **/
-    
+    @:overload(function (eventName:String,identifier:Any,func:Function):Void {})
     public static function Add<T:Function>(eventName:Hook<T>, identifier:Any, func:T):Void;
     
     
@@ -229,7 +229,7 @@ import gmod.Hooks.Hook;
 		
 		`**Returns:** Returned data from called hooks
     **/
-    
+    //@:overload(function<T>(eventName:Hook<T>,args:Rest<Dynamic>):Dynamic {}) FIXME
     public static function Run(eventName:String, args:Rest<Dynamic>):Dynamic;
     
     

@@ -15,7 +15,7 @@ class RateHandler implements RateProvider {
     var multipliers:Map<MultiplierRateID,Float> = [];
     
     var infection:InfectionComponent;
-    
+  
     
     public function new(i:InfectionComponent) {
         infection = i;

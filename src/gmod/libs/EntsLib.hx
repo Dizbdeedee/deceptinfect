@@ -231,7 +231,7 @@ package gmod.libs;
 		`**Returns:** The entity if it exists.
     **/
     
-    public static function GetByIndex(entIdx:Float):Entity;
+    public static function GetByIndex(entIdx:Int):Entity;
     
     
     /**
@@ -289,7 +289,7 @@ package gmod.libs;
 		button:Spawn()
 		```
     **/
-    
+    @:overload(function<T:Entity>(_class:EntityClass<T>):T {})
     public static function Create(_class:String):Entity;
     #end
     
@@ -318,9 +318,11 @@ package gmod.libs;
 		**Output:**
 		
 		The location of each prop on the map. In gm_construct, the output might be as follows: -2936.288818 -1376.545532 -73.852913 -2943.928467 -1375.800171 -84.964996 -2932.637695 -1288.051636 -76.791924 -2064.000000 -183.000000 -179.216003 -2384.000000 -183.000000 -179.216003 -2704.000000 -183.000000 -179.216003 -1744.000000 -183.000000 -179.216003 -1424.000000 -183.000000 -179.216003 -3019.895020 -1095.824829 -78.900757
-    **/
-    
-    public static function FindByClass(_class:String):Table<Int,Entity>;
+	**/
+	#if server //FIXME
+    @:overload(function<T:Entity>(_class:gmod.EntityClass<T>):Table<Int,T> {})
+	#end
+	public static function FindByClass(_class:String):Table<Int,Entity>;
     
     
     /**
@@ -364,8 +366,9 @@ package gmod.libs;
 		
 		
 		`**Returns:** A table of found entities or nil if none are found
-    **/
-    
+	**/
+	
+    //@:overload(function<T:Entity>(_class:EntityClass<T>):Table<Int,T> {}) FIXME
     public static function FindByClassAndParent(_class:String, parent:Entity):Table<Int,Entity>;
     
     #if client

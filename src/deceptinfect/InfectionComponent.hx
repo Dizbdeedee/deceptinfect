@@ -18,17 +18,7 @@ class Infection implements InfectionComponent {
         onInfected = infectedTrigger.asSignal();
     }
     public function handleInfection() {
-        switch (infection) {
-            case NOT_INFECTED(x) if (x >= 100):
-                infection = INFECTED;
-                infectedTrigger.trigger(Noise);
-                // infectedTrigger.clear();
-            case NOT_INFECTED(x) if (x <= 0):
-                x = 0;
-            
-            default:
-        }
-        
+        //TODO put back if not using ecs
     }
 
     public function set_rate(r:Float):Float {

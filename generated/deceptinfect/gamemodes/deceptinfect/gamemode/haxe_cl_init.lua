@@ -101,6 +101,12 @@ __deceptinfect_RadiationRateHandler = _hx_e()
 __deceptinfect_RateProvider = _hx_e()
 __deceptinfect_RateHandler = _hx_e()
 __deceptinfect_TimeKeep = _hx_e()
+__deceptinfect_ecswip_Component = _hx_e()
+__deceptinfect_ecswip__Component_ComponentList_Impl_ = _hx_e()
+__deceptinfect_ecswip__Component_DI_Entity_Impl_ = _hx_e()
+__deceptinfect_ecswip_ComponentManager = _hx_e()
+__deceptinfect_ecswip_MyFirstComponent = _hx_e()
+__deceptinfect_ecswip_MyOtherComponent = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
 __gmod_Hooks = _hx_e()
@@ -1899,6 +1905,108 @@ end
 
 __deceptinfect_TimeKeep.prototype.__class__ =  __deceptinfect_TimeKeep
 
+__deceptinfect_ecswip_Component.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_Component.prototype)
+  __deceptinfect_ecswip_Component.super(self)
+  return self
+end
+__deceptinfect_ecswip_Component.super = function(self) 
+end
+__deceptinfect_ecswip_Component.__name__ = true
+__deceptinfect_ecswip_Component.prototype = _hx_a();
+
+__deceptinfect_ecswip_Component.prototype.__class__ =  __deceptinfect_ecswip_Component
+
+__deceptinfect_ecswip__Component_ComponentList_Impl_.new = {}
+__deceptinfect_ecswip__Component_ComponentList_Impl_.__name__ = true
+__deceptinfect_ecswip__Component_ComponentList_Impl_.getComponent = function(this1,cls) 
+  do return this1:get(cls) end;
+end
+__deceptinfect_ecswip__Component_ComponentList_Impl_.addComponent = function(this1,cls,comp) 
+  this1:set(cls, comp);
+end
+__deceptinfect_ecswip__Component_ComponentList_Impl_.removeComponent = function(this1,cls) 
+  this1:remove(cls);
+end
+__deceptinfect_ecswip__Component_ComponentList_Impl_.hasComponent = function(this1,cls) 
+  do return this1:exists(cls) end;
+end
+__deceptinfect_ecswip__Component_ComponentList_Impl_._new = function() 
+  local this1 = __haxe_ds_ObjectMap.new();
+  do return this1 end;
+end
+
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.new = {}
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.__name__ = true
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.get_components = function(this1) 
+  do return this1.components end;
+end
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.get_id = function(this1) 
+  do return this1.id end;
+end
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.has_component = function(this1,cls) 
+  do return this1.components:exists(cls) end;
+end
+__deceptinfect_ecswip__Component_DI_Entity_Impl_._new = function(x) 
+  local this1 = __haxe_ds_ObjectMap.new();
+  x.components = this1;
+  x.id = __deceptinfect_ecswip__Component_DI_Entity_Impl_.entID;
+  local this2 = x;
+  do return this2 end;
+end
+
+__deceptinfect_ecswip_ComponentManager.new = {}
+__deceptinfect_ecswip_ComponentManager.__name__ = true
+__deceptinfect_ecswip_ComponentManager.addEnt = function(x) 
+  __deceptinfect_ecswip_ComponentManager.entities:push(x);
+end
+__deceptinfect_ecswip_ComponentManager.gameLoop2 = function() 
+  local _g = 0;
+  local _g1 = __deceptinfect_ecswip_ComponentManager.entities;
+  while (_g < _g1.length) do 
+    local entity = _g1[_g];
+    _g = _g + 1;
+    if (entity.components:exists(__deceptinfect_ecswip_MyFirstComponent) and entity.components:exists(__deceptinfect_ecswip_MyOtherComponent)) then 
+      __haxe_Log.trace(Std.string(Std.string(Std.string("x:") .. Std.string(entity.components:get(__deceptinfect_ecswip_MyFirstComponent).x)) .. Std.string("y:")) .. Std.string(Std.string(entity.components:get(__deceptinfect_ecswip_MyOtherComponent))), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/ComponentManager.hx",lineNumber=18,className="deceptinfect.ecswip.ComponentManager",methodName="gameLoop2"}));
+    else
+      _G.error("missing component...",0);
+    end;
+  end;
+end
+_hx_exports["gameLoop"] = __deceptinfect_ecswip_ComponentManager.gameLoop2
+
+__deceptinfect_ecswip_MyFirstComponent.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_MyFirstComponent.prototype)
+  __deceptinfect_ecswip_MyFirstComponent.super(self)
+  return self
+end
+__deceptinfect_ecswip_MyFirstComponent.super = function(self) 
+  self.x = 5;
+  __deceptinfect_ecswip_Component.super(self);
+end
+__deceptinfect_ecswip_MyFirstComponent.__name__ = true
+__deceptinfect_ecswip_MyFirstComponent.prototype = _hx_a();
+
+__deceptinfect_ecswip_MyFirstComponent.prototype.__class__ =  __deceptinfect_ecswip_MyFirstComponent
+__deceptinfect_ecswip_MyFirstComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_ecswip_MyFirstComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
+__deceptinfect_ecswip_MyOtherComponent.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_MyOtherComponent.prototype)
+  __deceptinfect_ecswip_MyOtherComponent.super(self)
+  return self
+end
+__deceptinfect_ecswip_MyOtherComponent.super = function(self) 
+  self.y = 10;
+  __deceptinfect_ecswip_Component.super(self);
+end
+__deceptinfect_ecswip_MyOtherComponent.__name__ = true
+__deceptinfect_ecswip_MyOtherComponent.prototype = _hx_a();
+
+__deceptinfect_ecswip_MyOtherComponent.prototype.__class__ =  __deceptinfect_ecswip_MyOtherComponent
+__deceptinfect_ecswip_MyOtherComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_ecswip_MyOtherComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.new = {}
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.__name__ = true
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.multiReturn = function(rtns) 
@@ -2333,6 +2441,9 @@ __haxe_ds_IntMap.prototype.get = function(self,key)
   end;
   do return ret end
 end
+__haxe_ds_IntMap.prototype.exists = function(self,key) 
+  do return self.h[key] ~= nil end
+end
 __haxe_ds_IntMap.prototype.remove = function(self,key) 
   if (self.h[key] == nil) then 
     do return false end;
@@ -2377,6 +2488,9 @@ __haxe_ds_ObjectMap.prototype.set = function(self,key,value)
 end
 __haxe_ds_ObjectMap.prototype.get = function(self,key) 
   do return self.h[key] end
+end
+__haxe_ds_ObjectMap.prototype.exists = function(self,key) 
+  do return self.k[key] ~= nil end
 end
 __haxe_ds_ObjectMap.prototype.remove = function(self,key) 
   if (self.k[key] == nil) then 
@@ -4861,6 +4975,10 @@ local _hx_static_init = function()
   __deceptinfect_RateManager.nextMultiRate = 0;
   
   __deceptinfect_RadiationRateHandler.id = __deceptinfect_RateManager.getAddRateTicket();
+  
+  __deceptinfect_ecswip__Component_DI_Entity_Impl_.entID = 0;
+  
+  __deceptinfect_ecswip_ComponentManager.entities = _hx_tab_array({}, 0);
   
   __gmod_Hooks.PlayerConnect = "PlayerConnect";
   

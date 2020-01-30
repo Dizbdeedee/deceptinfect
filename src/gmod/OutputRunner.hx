@@ -6,7 +6,7 @@ import tink.CoreApi.CallbackLink;
 import tink.CoreApi.Callback;
 import tink.CoreApi.Noise;
 import gmod.libs.HookLib;
-import gmod.gclass.Entity.EntityID;
+
 import tink.CoreApi.CallbackList;
 #if server
 import gmod.engine_ents.Logic_relay;

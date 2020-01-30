@@ -1,5 +1,5 @@
 package deceptinfect;
-import gmod.gclass.Entity.EntityID;
+
 import deceptinfect.Radiation.RadiationTarget;
 import tink.CoreApi.Noise;
 import deceptinfect.Infected.GrabbableComponent;

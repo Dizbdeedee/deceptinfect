@@ -2,7 +2,6 @@ package deceptinfect;
 
 import haxe.ds.Option;
 import deceptinfect.GameEntity.ComponentState;
-import gmod.gclass.Entity.EntityID;
 
 class Radiation {
     var lifetime:Float;

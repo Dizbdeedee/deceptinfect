@@ -11,7 +11,7 @@ class RateManager { //implements RateManagerI
         return nextAddRate - 1;
     }
 
-    public static function getMultiRateTicket():MultiplierRateID {
+    public static function getMultiRateTicket():MultiplierRateID { //TODO implement
         return -1;
     }
     

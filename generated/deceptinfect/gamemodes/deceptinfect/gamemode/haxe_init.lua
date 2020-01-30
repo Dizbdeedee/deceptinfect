@@ -109,9 +109,16 @@ __deceptinfect_RateManager = _hx_e()
 __deceptinfect_RadiationRateHandler = _hx_e()
 __deceptinfect_RateProvider = _hx_e()
 __deceptinfect_RateHandler = _hx_e()
+__deceptinfect_SignalManager = _hx_e()
 __deceptinfect_Target = _hx_e()
 __deceptinfect_TARGET_STATE = _hx_e()
 __deceptinfect_TimeKeep = _hx_e()
+__deceptinfect_ecswip_Component = _hx_e()
+__deceptinfect_ecswip__Component_ComponentList_Impl_ = _hx_e()
+__deceptinfect_ecswip__Component_DI_Entity_Impl_ = _hx_e()
+__deceptinfect_ecswip_ComponentManager = _hx_e()
+__deceptinfect_ecswip_MyFirstComponent = _hx_e()
+__deceptinfect_ecswip_MyOtherComponent = _hx_e()
 __gmod__EntityClass_EntityClass_Impl_ = _hx_e()
 __gmod_EntityClasses = _hx_e()
 __gmod__EntityClass_FireEvent_Impl_ = _hx_e()
@@ -129,7 +136,6 @@ __gmod_PairTools = _hx_e()
 __gmod_TableTools = _hx_e()
 __gmod_engine_ents__Logic_relay_Logic_relay_Impl_ = _hx_e()
 __gmod_engine_ents__Npc_zombie_Npc_zombie_Impl_ = _hx_e()
-__gmod_engine_ents__Point_proximity_sensor_Point_proximity_sensor_Impl_ = _hx_e()
 __gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_ = _hx_e()
 __gmod_macros_InitMacro = _hx_e()
 __gmod_safety_Safety = _hx_e()
@@ -523,36 +529,18 @@ Main.main = function()
   __deceptinfect_DeceptInfect.initaliseGamemode();
   __deceptinfect_Networking.initMessages();
 end
+Main.testComponents = function() 
+  local cmp = player.GetByID(1);
+  __deceptinfect_ecswip_ComponentManager.addEnt(cmp);
+  cmp.components:set(__deceptinfect_ecswip_MyFirstComponent, __deceptinfect_ecswip_MyFirstComponent.new());
+  cmp.components:set(__deceptinfect_ecswip_MyOtherComponent, __deceptinfect_ecswip_MyOtherComponent.new());
+end
+_hx_exports["testComponents"] = Main.testComponents
 Main.makeThump = function() 
-  local this1 = ents.Create("npc_zombie");
-  local zombie = this1;
-  zombie:SetName("zombee");
-  zombie:Spawn();
-  local this2 = ents.Create("point_proximity_sensor");
-  local sensor = this2;
-  sensor:SetKeyValue("target", "zombee");
-  sensor:SetKeyValue("targetname", "zombee");
-  sensor:Spawn();
-  __gmod_OutputRunner.addOutput(zombie, "OnFoundEnemy", Main.onThumped);
-  sensor:Fire("FireUser1", "0.1", 0);
-  local _hx_status, _hx_result = pcall(function() 
-  
-      _G.error("No!!",0);
-    return _hx_pcall_default
-  end)
-  if not _hx_status and _hx_result == "_hx_pcall_break" then
-  elseif not _hx_status then 
-  
-    local _hx_1 = _hx_result
-    local e = _hx_1
-    __haxe_Log.trace(e, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=61,className="Main",methodName="makeThump"}));
-  elseif _hx_result ~= _hx_pcall_default then
-    return _hx_result
-  end;
 end
 _hx_exports["makeThump"] = Main.makeThump
 Main.onThumped = function(data) 
-  __haxe_Log.trace("THUMPED!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=66,className="Main",methodName="onThumped"}));
+  __haxe_Log.trace("THUMPED!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=79,className="Main",methodName="onThumped"}));
   _G.print(data.activator);
 end
 
@@ -1416,26 +1404,32 @@ __deceptinfect_DeceptInfect.initaliseGamemode = function()
 end
 __deceptinfect_DeceptInfect.prototype = _hx_a();
 __deceptinfect_DeceptInfect.prototype.PlayerDeath = function(self,victim,inflictor,attacker) 
-  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=25,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
+  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=28,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
 end
 __deceptinfect_DeceptInfect.prototype.EntityKeyValue = function(self,ent,key,value) 
-  __haxe_Log.trace(_G.tostring(ent), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true,customParams=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=29,className="deceptinfect.DeceptInfect",methodName="EntityKeyValue",customParams=_hx_tab_array({[0]=key, value}, 2)}));
+  __haxe_Log.trace(_G.tostring(ent), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true,customParams=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=32,className="deceptinfect.DeceptInfect",methodName="EntityKeyValue",customParams=_hx_tab_array({[0]=key, value}, 2)}));
   do return nil end
 end
 __deceptinfect_DeceptInfect.prototype.PlayerInitialSpawn = function(self,player,transition) 
   player.annex = __tink_core_Annex.new(player);
-  local this1;
+  local this1 = __haxe_ds_ObjectMap.new();
+  player.components = this1;
+  player.id = __deceptinfect_ecswip__Component_DI_Entity_Impl_.entID;
+  local this2 = player;
+  local ent = this2;
+  __deceptinfect_ecswip_ComponentManager.addEnt(ent);
+  local this11;
   local _this = player.annex;
   local c = __deceptinfect__DI_Player__DI_Player;
   local _g = _this.registry:get(c);
   if (_g == nil) then 
-    local this11 = _this.registry;
+    local this111 = _this.registry;
     local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-    this11:set(c, v);
-    this1 = v;
+    this111:set(c, v);
+    this11 = v;
   else
     local v1 = _g;
-    this1 = v1;
+    this11 = v1;
   end;
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply) 
@@ -2115,6 +2109,9 @@ end
 
 __deceptinfect_RateHandler.prototype.__class__ =  __deceptinfect_RateHandler
 
+__deceptinfect_SignalManager.new = {}
+__deceptinfect_SignalManager.__name__ = true
+
 __deceptinfect_Target.new = {}
 __deceptinfect_Target.__name__ = true
 _hxClasses["deceptinfect.TARGET_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NO_TARGET","TARGET"},2)}
@@ -2207,6 +2204,108 @@ __deceptinfect_TimeKeep.prototype.getTime = function(self,key)
 end
 
 __deceptinfect_TimeKeep.prototype.__class__ =  __deceptinfect_TimeKeep
+
+__deceptinfect_ecswip_Component.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_Component.prototype)
+  __deceptinfect_ecswip_Component.super(self)
+  return self
+end
+__deceptinfect_ecswip_Component.super = function(self) 
+end
+__deceptinfect_ecswip_Component.__name__ = true
+__deceptinfect_ecswip_Component.prototype = _hx_a();
+
+__deceptinfect_ecswip_Component.prototype.__class__ =  __deceptinfect_ecswip_Component
+
+__deceptinfect_ecswip__Component_ComponentList_Impl_.new = {}
+__deceptinfect_ecswip__Component_ComponentList_Impl_.__name__ = true
+__deceptinfect_ecswip__Component_ComponentList_Impl_.getComponent = function(this1,cls) 
+  do return this1:get(cls) end;
+end
+__deceptinfect_ecswip__Component_ComponentList_Impl_.addComponent = function(this1,cls,comp) 
+  this1:set(cls, comp);
+end
+__deceptinfect_ecswip__Component_ComponentList_Impl_.removeComponent = function(this1,cls) 
+  this1:remove(cls);
+end
+__deceptinfect_ecswip__Component_ComponentList_Impl_.hasComponent = function(this1,cls) 
+  do return this1:exists(cls) end;
+end
+__deceptinfect_ecswip__Component_ComponentList_Impl_._new = function() 
+  local this1 = __haxe_ds_ObjectMap.new();
+  do return this1 end;
+end
+
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.new = {}
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.__name__ = true
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.get_components = function(this1) 
+  do return this1.components end;
+end
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.get_id = function(this1) 
+  do return this1.id end;
+end
+__deceptinfect_ecswip__Component_DI_Entity_Impl_.has_component = function(this1,cls) 
+  do return this1.components:exists(cls) end;
+end
+__deceptinfect_ecswip__Component_DI_Entity_Impl_._new = function(x) 
+  local this1 = __haxe_ds_ObjectMap.new();
+  x.components = this1;
+  x.id = __deceptinfect_ecswip__Component_DI_Entity_Impl_.entID;
+  local this2 = x;
+  do return this2 end;
+end
+
+__deceptinfect_ecswip_ComponentManager.new = {}
+__deceptinfect_ecswip_ComponentManager.__name__ = true
+__deceptinfect_ecswip_ComponentManager.addEnt = function(x) 
+  __deceptinfect_ecswip_ComponentManager.entities:push(x);
+end
+__deceptinfect_ecswip_ComponentManager.gameLoop2 = function() 
+  local _g = 0;
+  local _g1 = __deceptinfect_ecswip_ComponentManager.entities;
+  while (_g < _g1.length) do 
+    local entity = _g1[_g];
+    _g = _g + 1;
+    if (entity.components:exists(__deceptinfect_ecswip_MyFirstComponent) and entity.components:exists(__deceptinfect_ecswip_MyOtherComponent)) then 
+      __haxe_Log.trace(Std.string(Std.string(Std.string("x:") .. Std.string(entity.components:get(__deceptinfect_ecswip_MyFirstComponent).x)) .. Std.string("y:")) .. Std.string(Std.string(entity.components:get(__deceptinfect_ecswip_MyOtherComponent))), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/ComponentManager.hx",lineNumber=18,className="deceptinfect.ecswip.ComponentManager",methodName="gameLoop2"}));
+    else
+      _G.error("missing component...",0);
+    end;
+  end;
+end
+_hx_exports["gameLoop"] = __deceptinfect_ecswip_ComponentManager.gameLoop2
+
+__deceptinfect_ecswip_MyFirstComponent.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_MyFirstComponent.prototype)
+  __deceptinfect_ecswip_MyFirstComponent.super(self)
+  return self
+end
+__deceptinfect_ecswip_MyFirstComponent.super = function(self) 
+  self.x = 5;
+  __deceptinfect_ecswip_Component.super(self);
+end
+__deceptinfect_ecswip_MyFirstComponent.__name__ = true
+__deceptinfect_ecswip_MyFirstComponent.prototype = _hx_a();
+
+__deceptinfect_ecswip_MyFirstComponent.prototype.__class__ =  __deceptinfect_ecswip_MyFirstComponent
+__deceptinfect_ecswip_MyFirstComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_ecswip_MyFirstComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
+__deceptinfect_ecswip_MyOtherComponent.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_MyOtherComponent.prototype)
+  __deceptinfect_ecswip_MyOtherComponent.super(self)
+  return self
+end
+__deceptinfect_ecswip_MyOtherComponent.super = function(self) 
+  self.y = 10;
+  __deceptinfect_ecswip_Component.super(self);
+end
+__deceptinfect_ecswip_MyOtherComponent.__name__ = true
+__deceptinfect_ecswip_MyOtherComponent.prototype = _hx_a();
+
+__deceptinfect_ecswip_MyOtherComponent.prototype.__class__ =  __deceptinfect_ecswip_MyOtherComponent
+__deceptinfect_ecswip_MyOtherComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_ecswip_MyOtherComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
 __gmod__EntityClass_EntityClass_Impl_.new = {}
 __gmod__EntityClass_EntityClass_Impl_.__name__ = true
@@ -2333,6 +2432,9 @@ __haxe_ds_IntMap.prototype.get = function(self,key)
     ret = nil;
   end;
   do return ret end
+end
+__haxe_ds_IntMap.prototype.exists = function(self,key) 
+  do return self.h[key] ~= nil end
 end
 __haxe_ds_IntMap.prototype.remove = function(self,key) 
   if (self.h[key] == nil) then 
@@ -2514,9 +2616,6 @@ __gmod_engine_ents__Logic_relay_Logic_relay_Impl_.__name__ = true
 
 __gmod_engine_ents__Npc_zombie_Npc_zombie_Impl_.new = {}
 __gmod_engine_ents__Npc_zombie_Npc_zombie_Impl_.__name__ = true
-
-__gmod_engine_ents__Point_proximity_sensor_Point_proximity_sensor_Impl_.new = {}
-__gmod_engine_ents__Point_proximity_sensor_Point_proximity_sensor_Impl_.__name__ = true
 
 __gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_.new = {}
 __gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_.__name__ = true
@@ -2860,6 +2959,9 @@ end
 __haxe_ds_ObjectMap.prototype.get = function(self,key) 
   do return self.h[key] end
 end
+__haxe_ds_ObjectMap.prototype.exists = function(self,key) 
+  do return self.k[key] ~= nil end
+end
 __haxe_ds_ObjectMap.prototype.remove = function(self,key) 
   if (self.k[key] == nil) then 
     do return false end;
@@ -2914,6 +3016,9 @@ __haxe_ds_StringMap.prototype.get = function(self,key)
     ret = nil;
   end;
   do return ret end
+end
+__haxe_ds_StringMap.prototype.exists = function(self,key) 
+  do return self.h[key] ~= nil end
 end
 __haxe_ds_StringMap.prototype.remove = function(self,key) 
   if (self.h[key] == nil) then 
@@ -5398,6 +5503,10 @@ local _hx_static_init = function()
   __deceptinfect_RateManager.nextMultiRate = 0;
   
   __deceptinfect_RadiationRateHandler.id = __deceptinfect_RateManager.getAddRateTicket();
+  
+  __deceptinfect_ecswip__Component_DI_Entity_Impl_.entID = 0;
+  
+  __deceptinfect_ecswip_ComponentManager.entities = _hx_tab_array({}, 0);
   
   __gmod_EntityClasses.testEnt = (function() 
     local _hx_1
