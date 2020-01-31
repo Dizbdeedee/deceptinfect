@@ -102,11 +102,12 @@ __deceptinfect_RateProvider = _hx_e()
 __deceptinfect_RateHandler = _hx_e()
 __deceptinfect_TimeKeep = _hx_e()
 __deceptinfect_ecswip_Component = _hx_e()
-__deceptinfect_ecswip__Component_ComponentList_Impl_ = _hx_e()
-__deceptinfect_ecswip__Component_DI_Entity_Impl_ = _hx_e()
+__haxe_IMap = _hx_e()
+__haxe_ds_ObjectMap = _hx_e()
 __deceptinfect_ecswip_ComponentManager = _hx_e()
-__deceptinfect_ecswip_MyFirstComponent = _hx_e()
-__deceptinfect_ecswip_MyOtherComponent = _hx_e()
+__deceptinfect_ecswip_ComponentState = _hx_e()
+__deceptinfect_ecswip_HasGEnt = _hx_e()
+__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_ = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
 __gmod_Hooks = _hx_e()
@@ -115,7 +116,6 @@ __gmod_TableTools = _hx_e()
 __gmod_safety_Safety = _hx_e()
 __gmod_safety_ValidObject = _hx_e()
 __haxe_StackItem = _hx_e()
-__haxe_IMap = _hx_e()
 __haxe_EntryPoint = _hx_e()
 __haxe_Log = _hx_e()
 __haxe_MainEvent = _hx_e()
@@ -123,7 +123,6 @@ __haxe_MainLoop = _hx_e()
 __haxe_Timer = _hx_e()
 __haxe_ds_Either = _hx_e()
 __haxe_ds_IntMap = _hx_e()
-__haxe_ds_ObjectMap = _hx_e()
 __haxe_ds_Option = _hx_e()
 __lua_Boot = _hx_e()
 __haxe_iterators_MapKeyValueIterator = _hx_e()
@@ -761,9 +760,9 @@ __deceptinfect__DI_Player_DI_Player_Impl_._new = function(p)
   local c = __deceptinfect__DI_Player__DI_Player;
   local _g = _this.registry:get(c);
   if (_g == nil) then 
-    local this11 = _this.registry;
+    local this2 = _this.registry;
     local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-    this11:set(c, v);
+    this2:set(c, v);
     this1 = v;
   else
     local v1 = _g;
@@ -777,9 +776,9 @@ __deceptinfect__DI_Player_DI_Player_Impl_.fromPlayer = function(p)
   local c = __deceptinfect__DI_Player__DI_Player;
   local _g = _this.registry:get(c);
   if (_g == nil) then 
-    local this11 = _this.registry;
+    local this2 = _this.registry;
     local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-    this11:set(c, v);
+    this2:set(c, v);
     this1 = v;
   else
     local v1 = _g;
@@ -1317,9 +1316,9 @@ __deceptinfect_Game.prototype.addPlayers = function(self)
     local c = __deceptinfect__DI_Player__DI_Player;
     local _g = _this.registry:get(c);
     if (_g == nil) then 
-      local this11 = _this.registry;
+      local this2 = _this.registry;
       local v = __deceptinfect__DI_Player__DI_Player.new(_this.target);
-      this11:set(c, v);
+      this2:set(c, v);
       this1 = v;
     else
       local v1 = _g;
@@ -1453,20 +1452,6 @@ __deceptinfect_Infection.__name__ = true
 __deceptinfect_Infection.__interfaces__ = {__deceptinfect_InfectionComponent}
 __deceptinfect_Infection.prototype = _hx_a();
 __deceptinfect_Infection.prototype.handleInfection = function(self) 
-  local _g = self.infection;
-  if (_g[1] == 0) then 
-    local _g1 = _g[2];
-    local x = _g1;
-    if (x >= 100) then 
-      self.infection = __deceptinfect_INF_STATE.INFECTED;
-      self.infectedTrigger.handlers:invoke(__tink_core_Noise.Noise);
-    else
-      local x1 = _g1;
-      if (x1 <= 0) then 
-        x1 = 0;
-      end;
-    end;
-  end;
 end
 __deceptinfect_Infection.prototype.set_rate = function(self,r) 
   self.rate = r do return self.rate end
@@ -1699,7 +1684,8 @@ __deceptinfect_RateManager.getAddRateTicket = function()
   do return __deceptinfect_RateManager.nextAddRate - 1 end;
 end
 __deceptinfect_RateManager.getMultiRateTicket = function() 
-  do return -1 end;
+  __deceptinfect_RateManager.nextMultiRate = __deceptinfect_RateManager.nextMultiRate + 1;
+  do return __deceptinfect_RateManager.nextMultiRate - 1 end;
 end
 
 __deceptinfect_RadiationRateHandler.new = function(e,t) 
@@ -1917,95 +1903,118 @@ __deceptinfect_ecswip_Component.prototype = _hx_a();
 
 __deceptinfect_ecswip_Component.prototype.__class__ =  __deceptinfect_ecswip_Component
 
-__deceptinfect_ecswip__Component_ComponentList_Impl_.new = {}
-__deceptinfect_ecswip__Component_ComponentList_Impl_.__name__ = true
-__deceptinfect_ecswip__Component_ComponentList_Impl_.getComponent = function(this1,cls) 
-  do return this1:get(cls) end;
+__haxe_IMap.new = {}
+__haxe_IMap.__name__ = true
+__haxe_IMap.prototype = _hx_a();
+
+__haxe_IMap.prototype.__class__ =  __haxe_IMap
+
+__haxe_ds_ObjectMap.new = function() 
+  local self = _hx_new(__haxe_ds_ObjectMap.prototype)
+  __haxe_ds_ObjectMap.super(self)
+  return self
 end
-__deceptinfect_ecswip__Component_ComponentList_Impl_.addComponent = function(this1,cls,comp) 
-  this1:set(cls, comp);
+__haxe_ds_ObjectMap.super = function(self) 
+  self.h = ({});
+  self.k = ({});
 end
-__deceptinfect_ecswip__Component_ComponentList_Impl_.removeComponent = function(this1,cls) 
-  this1:remove(cls);
+__haxe_ds_ObjectMap.__name__ = true
+__haxe_ds_ObjectMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_ObjectMap.prototype = _hx_a();
+__haxe_ds_ObjectMap.prototype.set = function(self,key,value) 
+  self.h[key] = value;
+  self.k[key] = true;
 end
-__deceptinfect_ecswip__Component_ComponentList_Impl_.hasComponent = function(this1,cls) 
-  do return this1:exists(cls) end;
+__haxe_ds_ObjectMap.prototype.get = function(self,key) 
+  do return self.h[key] end
 end
-__deceptinfect_ecswip__Component_ComponentList_Impl_._new = function() 
-  local this1 = __haxe_ds_ObjectMap.new();
-  do return this1 end;
+__haxe_ds_ObjectMap.prototype.remove = function(self,key) 
+  if (self.k[key] == nil) then 
+    do return false end;
+  end;
+  self.k[key] = nil;
+  self.h[key] = nil;
+  do return true end
+end
+__haxe_ds_ObjectMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.k, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_ObjectMap.prototype.keyValueIterator = function(self) 
+  do return __haxe_iterators_MapKeyValueIterator.new(self) end
 end
 
-__deceptinfect_ecswip__Component_DI_Entity_Impl_.new = {}
-__deceptinfect_ecswip__Component_DI_Entity_Impl_.__name__ = true
-__deceptinfect_ecswip__Component_DI_Entity_Impl_.get_components = function(this1) 
-  do return this1.components end;
-end
-__deceptinfect_ecswip__Component_DI_Entity_Impl_.get_id = function(this1) 
-  do return this1.id end;
-end
-__deceptinfect_ecswip__Component_DI_Entity_Impl_.has_component = function(this1,cls) 
-  do return this1.components:exists(cls) end;
-end
-__deceptinfect_ecswip__Component_DI_Entity_Impl_._new = function(x) 
-  local this1 = __haxe_ds_ObjectMap.new();
-  x.components = this1;
-  x.id = __deceptinfect_ecswip__Component_DI_Entity_Impl_.entID;
-  local this2 = x;
-  do return this2 end;
-end
+__haxe_ds_ObjectMap.prototype.__class__ =  __haxe_ds_ObjectMap
 
 __deceptinfect_ecswip_ComponentManager.new = {}
 __deceptinfect_ecswip_ComponentManager.__name__ = true
-__deceptinfect_ecswip_ComponentManager.addEnt = function(x) 
-  __deceptinfect_ecswip_ComponentManager.entities:push(x);
+__deceptinfect_ecswip_ComponentManager.addGEnt = function(x) 
+  local this1 = __deceptinfect_ecswip_ComponentManager.gEntityLookup;
+  local key = __deceptinfect_ecswip_ComponentManager.addEntity();
+  local _this = this1;
+  if (x == nil) then 
+    _this.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    _this.h[key] = x;
+  end;
+  __deceptinfect_ecswip_ComponentManager.gents:push(x);
 end
-__deceptinfect_ecswip_ComponentManager.gameLoop2 = function() 
-  local _g = 0;
-  local _g1 = __deceptinfect_ecswip_ComponentManager.entities;
-  while (_g < _g1.length) do 
-    local entity = _g1[_g];
-    _g = _g + 1;
-    if (entity.components:exists(__deceptinfect_ecswip_MyFirstComponent) and entity.components:exists(__deceptinfect_ecswip_MyOtherComponent)) then 
-      __haxe_Log.trace(Std.string(Std.string(Std.string("x:") .. Std.string(entity.components:get(__deceptinfect_ecswip_MyFirstComponent).x)) .. Std.string("y:")) .. Std.string(Std.string(entity.components:get(__deceptinfect_ecswip_MyOtherComponent))), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/ComponentManager.hx",lineNumber=18,className="deceptinfect.ecswip.ComponentManager",methodName="gameLoop2"}));
-    else
-      _G.error("missing component...",0);
-    end;
+__deceptinfect_ecswip_ComponentManager.getComponentForID = function(cls,x) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.components.h[cls];
+  local comp = comparray[x];
+  if (comp ~= nil) then 
+    do return __deceptinfect_ecswip_ComponentState.COMPONENT(comp) end;
+  else
+    do return __deceptinfect_ecswip_ComponentState.NONE end;
   end;
 end
-_hx_exports["gameLoop"] = __deceptinfect_ecswip_ComponentManager.gameLoop2
-
-__deceptinfect_ecswip_MyFirstComponent.new = function() 
-  local self = _hx_new(__deceptinfect_ecswip_MyFirstComponent.prototype)
-  __deceptinfect_ecswip_MyFirstComponent.super(self)
-  return self
+__deceptinfect_ecswip_ComponentManager.getGEnt = function(x) 
+  local ret = __deceptinfect_ecswip_ComponentManager.gEntityLookup.h[x];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  local look = ret;
+  if (look ~= nil) then 
+    do return __deceptinfect_ecswip_HasGEnt.GEnt(look) end;
+  else
+    do return __deceptinfect_ecswip_HasGEnt.NONE end;
+  end;
 end
-__deceptinfect_ecswip_MyFirstComponent.super = function(self) 
-  self.x = 5;
-  __deceptinfect_ecswip_Component.super(self);
+__deceptinfect_ecswip_ComponentManager.getComponents = function(cls) 
+  do return __deceptinfect_ecswip_ComponentManager.components.h[cls] end;
 end
-__deceptinfect_ecswip_MyFirstComponent.__name__ = true
-__deceptinfect_ecswip_MyFirstComponent.prototype = _hx_a();
-
-__deceptinfect_ecswip_MyFirstComponent.prototype.__class__ =  __deceptinfect_ecswip_MyFirstComponent
-__deceptinfect_ecswip_MyFirstComponent.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_ecswip_MyFirstComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_ecswip_MyOtherComponent.new = function() 
-  local self = _hx_new(__deceptinfect_ecswip_MyOtherComponent.prototype)
-  __deceptinfect_ecswip_MyOtherComponent.super(self)
-  return self
+__deceptinfect_ecswip_ComponentManager.addEntity = function() 
+  __deceptinfect_ecswip_ComponentManager.entities = __deceptinfect_ecswip_ComponentManager.entities + 1;
+  do return __deceptinfect_ecswip_ComponentManager.entities - 1 end;
 end
-__deceptinfect_ecswip_MyOtherComponent.super = function(self) 
-  self.y = 10;
-  __deceptinfect_ecswip_Component.super(self);
-end
-__deceptinfect_ecswip_MyOtherComponent.__name__ = true
-__deceptinfect_ecswip_MyOtherComponent.prototype = _hx_a();
+_hxClasses["deceptinfect.ecswip.ComponentState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","COMPONENT"},2)}
+__deceptinfect_ecswip_ComponentState = _hxClasses["deceptinfect.ecswip.ComponentState"];
+__deceptinfect_ecswip_ComponentState.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_ComponentState},2)
 
-__deceptinfect_ecswip_MyOtherComponent.prototype.__class__ =  __deceptinfect_ecswip_MyOtherComponent
-__deceptinfect_ecswip_MyOtherComponent.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_ecswip_MyOtherComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+__deceptinfect_ecswip_ComponentState.COMPONENT = function(comp) local _x = _hx_tab_array({[0]="COMPONENT",1,comp,__enum__=__deceptinfect_ecswip_ComponentState}, 3); return _x; end 
+_hxClasses["deceptinfect.ecswip.HasGEnt"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","GEnt"},2)}
+__deceptinfect_ecswip_HasGEnt = _hxClasses["deceptinfect.ecswip.HasGEnt"];
+__deceptinfect_ecswip_HasGEnt.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_HasGEnt},2)
+
+__deceptinfect_ecswip_HasGEnt.GEnt = function(e) local _x = _hx_tab_array({[0]="GEnt",1,e,__enum__=__deceptinfect_ecswip_HasGEnt}, 3); return _x; end 
+
+__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_.new = {}
+__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_.__name__ = true
+__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_.get_id = function(this1) 
+  do return this1.id end;
+end
+__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_._new = function(x) 
+  local this1 = x;
+  x.id = __deceptinfect_ecswip_ComponentManager:addEnt(this1);
+  do return this1 end;
+end
 
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.new = {}
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.__name__ = true
@@ -2159,12 +2168,6 @@ __haxe_StackItem.Module = function(m) local _x = _hx_tab_array({[0]="Module",1,m
 __haxe_StackItem.FilePos = function(s,file,line,column) local _x = _hx_tab_array({[0]="FilePos",2,s,file,line,column,__enum__=__haxe_StackItem}, 6); return _x; end 
 __haxe_StackItem.Method = function(classname,method) local _x = _hx_tab_array({[0]="Method",3,classname,method,__enum__=__haxe_StackItem}, 4); return _x; end 
 __haxe_StackItem.LocalFunction = function(v) local _x = _hx_tab_array({[0]="LocalFunction",4,v,__enum__=__haxe_StackItem}, 3); return _x; end 
-
-__haxe_IMap.new = {}
-__haxe_IMap.__name__ = true
-__haxe_IMap.prototype = _hx_a();
-
-__haxe_IMap.prototype.__class__ =  __haxe_IMap
 
 __haxe_EntryPoint.new = {}
 __haxe_EntryPoint.__name__ = true
@@ -2441,9 +2444,6 @@ __haxe_ds_IntMap.prototype.get = function(self,key)
   end;
   do return ret end
 end
-__haxe_ds_IntMap.prototype.exists = function(self,key) 
-  do return self.h[key] ~= nil end
-end
 __haxe_ds_IntMap.prototype.remove = function(self,key) 
   if (self.h[key] == nil) then 
     do return false end;
@@ -2469,53 +2469,6 @@ __haxe_ds_IntMap.prototype.keyValueIterator = function(self)
 end
 
 __haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
-
-__haxe_ds_ObjectMap.new = function() 
-  local self = _hx_new(__haxe_ds_ObjectMap.prototype)
-  __haxe_ds_ObjectMap.super(self)
-  return self
-end
-__haxe_ds_ObjectMap.super = function(self) 
-  self.h = ({});
-  self.k = ({});
-end
-__haxe_ds_ObjectMap.__name__ = true
-__haxe_ds_ObjectMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_ObjectMap.prototype = _hx_a();
-__haxe_ds_ObjectMap.prototype.set = function(self,key,value) 
-  self.h[key] = value;
-  self.k[key] = true;
-end
-__haxe_ds_ObjectMap.prototype.get = function(self,key) 
-  do return self.h[key] end
-end
-__haxe_ds_ObjectMap.prototype.exists = function(self,key) 
-  do return self.k[key] ~= nil end
-end
-__haxe_ds_ObjectMap.prototype.remove = function(self,key) 
-  if (self.k[key] == nil) then 
-    do return false end;
-  end;
-  self.k[key] = nil;
-  self.h[key] = nil;
-  do return true end
-end
-__haxe_ds_ObjectMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.k, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_ObjectMap.prototype.keyValueIterator = function(self) 
-  do return __haxe_iterators_MapKeyValueIterator.new(self) end
-end
-
-__haxe_ds_ObjectMap.prototype.__class__ =  __haxe_ds_ObjectMap
 _hxClasses["haxe.ds.Option"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Some","None"},2)}
 __haxe_ds_Option = _hxClasses["haxe.ds.Option"];
 __haxe_ds_Option.Some = function(v) local _x = _hx_tab_array({[0]="Some",0,v,__enum__=__haxe_ds_Option}, 3); return _x; end 
@@ -3416,15 +3369,15 @@ __tink_core__Future_Future_Impl_.first = function(this1,other)
   local l2 = other:handle(_hx_bind(ret,ret.trigger));
   local ret1 = ret;
   if (l1 ~= nil) then 
-    local this11 = l1;
+    local this2 = l1;
     ret1:handle(function(_) 
-      this11:cancel();
+      this2:cancel();
     end);
   end;
   if (l2 ~= nil) then 
-    local this12 = l2;
+    local this3 = l2;
     ret1:handle(function(_1) 
-      this12:cancel();
+      this3:cancel();
     end);
   end;
   do return ret1 end;
@@ -4030,7 +3983,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -4047,7 +4000,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -4056,16 +4009,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -4074,7 +4027,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -4134,13 +4087,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g1 = o[2];
-    local tmp1 = _g1[1];
+    local _g = o[2];
+    local tmp1 = _g[1];
     if (tmp1) == 0 then 
-      local d = _g1[2];
+      local d = _g[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g1[2];
+      local f = _g[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -4276,7 +4229,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g1 = o[2];
+      local _g = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -4360,10 +4313,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g1 = o1[2];
-                local next3 = _g1[1];
+                local _g = o1[2];
+                local next3 = _g[1];
                 if (next3) == 0 then 
-                  local ret = _g1[2];
+                  local ret = _g[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;
@@ -4787,11 +4740,11 @@ __tink_core__Signal_Signal_Impl_.nextTime = function(this1,condition)
 end
 __tink_core__Signal_Signal_Impl_["until"] = function(this1,_end) 
   local ret = __tink_core__Signal_Suspendable.new(function(yield) 
-    local this11 = this1:handle(yield);
-    if (this11 == nil) then 
+    local this2 = this1:handle(yield);
+    if (this2 == nil) then 
       do return __tink_core__Callback_CallbackLink_Impl_.noop end;
     else
-      do return _hx_bind(this11,(function() local __=this11; return _hx_bind(__,__.cancel) end)()) end;
+      do return _hx_bind(this2,(function() local __=this2; return _hx_bind(__,__.cancel) end)()) end;
     end;
   end);
   _end:handle(__tink_core__Callback_Callback_Impl_.fromNiladic(_hx_bind(ret,ret.kill)));
@@ -4834,10 +4787,10 @@ __tink_core__Signal_Signal_Impl_.ofClassical = function(add,remove,gather)
     add(f);
     local f1 = remove;
     local a1 = f;
-    local this11 = __tink_core_SimpleLink.new(function() 
+    local this2 = __tink_core_SimpleLink.new(function() 
       f1(a1);
     end);
-    do return this11 end;
+    do return this2 end;
   end);
   local ret = this1;
   if (gather) then 
@@ -4976,9 +4929,11 @@ local _hx_static_init = function()
   
   __deceptinfect_RadiationRateHandler.id = __deceptinfect_RateManager.getAddRateTicket();
   
-  __deceptinfect_ecswip__Component_DI_Entity_Impl_.entID = 0;
+  __deceptinfect_ecswip_ComponentManager.components = __haxe_ds_ObjectMap.new();
   
-  __deceptinfect_ecswip_ComponentManager.entities = _hx_tab_array({}, 0);
+  __deceptinfect_ecswip_ComponentManager.entities = 0;
+  
+  __deceptinfect_ecswip_ComponentManager.gEntityLookup = __haxe_ds_IntMap.new();
   
   __gmod_Hooks.PlayerConnect = "PlayerConnect";
   

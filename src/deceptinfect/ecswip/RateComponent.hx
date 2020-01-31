@@ -1,21 +1,14 @@
 package deceptinfect.ecswip;
+import deceptinfect.ecswip.RateSystem;
 
 class RateComponent extends Component {
 
 
-    var addRates:Map<AddRateID,Float> = [];
-    var multipliers:Map<MultiplierRateID,Float> = [];
+    public var addRates:Map<AddRateID,Float> = [];
+    public var multipliers:Map<MultiplierRateID,Float> = [];
     
     
   
 
-
-}
-
-
-abstract AddRateID(Int) from Int {
-}
-
-abstract MultiplierRateID(Int) from Int {
 
 }

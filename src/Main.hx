@@ -1,9 +1,6 @@
 
 import deceptinfect.ecswip.Component;
-import deceptinfect.ecswip.MyOtherComponent;
 import deceptinfect.ecswip.ComponentManager;
-import deceptinfect.ecswip.MyFirstComponent;
-import deceptinfect.ecswip.Component.DI_Entity;
 import lua.Lua;
 #if server
 import gmod.engine_ents.Prop_thumper.Prop_thumperdustscaleChoices;
@@ -35,10 +32,10 @@ class Main {
     #if server
     @:expose("testComponents")
     static function testComponents() {
-        var cmp:DI_Entity = cast PlayerLib.GetByID(1);
-        ComponentManager.addEnt(cmp);
-        cmp.components.addComponent(MyFirstComponent,new MyFirstComponent());
-        cmp.components.addComponent(MyOtherComponent, new MyOtherComponent());
+        // var cmp:DI_Entity = cast PlayerLib.GetByID(1);
+        // ComponentManager.addEnt(cmp);
+        // cmp.components.addComponent(MyFirstComponent,new MyFirstComponent());
+        // cmp.components.addComponent(MyOtherComponent, new MyOtherComponent());
     }
 
     @:expose("makeThump")

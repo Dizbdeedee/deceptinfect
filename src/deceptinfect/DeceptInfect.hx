@@ -1,8 +1,7 @@
 package deceptinfect;
 
 import deceptinfect.ecswip.ComponentManager;
-import deceptinfect.ecswip.MyFirstComponent;
-import deceptinfect.ecswip.Component.DI_Entity;
+
 import gmod.Hooks;
 import lua.Lua;
 import tink.core.Annex;
@@ -35,8 +34,8 @@ class DeceptInfect extends gmod.hooks.Gm {
 
     override function PlayerInitialSpawn(player:Player, transition:Bool) {
         player.annex = new Annex(player);
-        var ent = new DI_Entity(player);
-        ComponentManager.addEnt(ent);
+        // var ent = new DI_Entity(player);
+        // ComponentManager.addEnt(ent);
 
         new DI_Player(player); //calls get to initalise
         // new DI_Player(player);

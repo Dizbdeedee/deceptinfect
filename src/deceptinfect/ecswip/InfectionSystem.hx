@@ -1,32 +1,80 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.ecswip.InfectionComponent2;
+import gmod.engine_ents.Combine_mine;
+
 class InfectionSystem {
     public static function run() {
         handleInfections();
     }
 
+    
+
     public static function handleInfections() {
         for (entity in ComponentManager.entities) {
-            switch (entity.switch_component(InfectionComponent2)) {
-                case Some(inf = _.acceptingInfection => ACCEPTING)  :
-                    handleInfection(inf);
+            switch (entity.get_component(InfectionComponent2)) {
+                //TODO refactor?
+                case COMPONENT(infection = _.acceptingInfection => ACCEPTING):
+                    switch (infection.infection) {
+                        case NOT_INFECTED(inf):
+                        
+                            var base = getBaseInfection(infection);
+                        
+                            var rate = switch (entity.get_component(RateComponent)) {
+                                case COMPONENT(rate):
+                                    calcInfectionFromRates(rate);
+                                default:
+                                    infection.rate;
+                            }
+                            
+                            inf += base * rate;
+                            
+                            fixUpInfection(infection);
+                            
+                        default:
+                    }
+                    
+
+                    
+
                 default:
-                
             }
         }
     }
 
-    
-    public static function handleInfection(inf:InfectionComponent2) {
+    public static function calcInfectionFromRates(rate:RateComponent):Float {
+        var total = 0.0;
+        var totalmulti = 0.0;
+        for (rate in rate.addRates) {
+            total += rate;
+        }
+        for (multi in rate.multipliers) {
+            totalmulti += multi; 
+        }
+        return total * totalmulti;
+    }
+
+
+    public static function getBaseInfection(inf:InfectionComponent2):Float {
+        return switch (inf.baseInfection) {
+            case NOT_USING:
+                0;
+            case USING_GLOBAL:
+                0;
+            case USING_STATIC(rate):
+                rate;
+                // return Game.
+        }
+    }
+
+    //TODO needed?
+    public static function fixUpInfection(infection:InfectionComponent2) {
         
-        switch (inf.infection) {
-            case NOT_INFECTED(x) if (x >= 100):
-                inf.infection = INFECTED;
-                //infectedTrigger.trigger(Noise);
-                // infectedTrigger.clear();
-            case NOT_INFECTED(x) if (x <= 0):
-                x = 0;
-            
+        switch (infection.infection) {
+            case NOT_INFECTED(inf) if (inf < 0):
+                inf = 0;
+            case NOT_INFECTED(inf) if (inf >= 100):
+                infection.infection = INFECTED;
             default:
         }
     }

@@ -1,11 +1,8 @@
-package deceptinfect;
+package deceptinfect.ecswip;
 
-class RateManager { //implements RateManagerI
+class RateSystem {    
     static var nextAddRate:Int = 0;
-    static var nextMultiRate:Int = 0;
-
-    
-
+    static var nextMultiRate:Int = 0;    
     public static function getAddRateTicket():AddRateID {
         nextAddRate++;
         return nextAddRate - 1;
@@ -13,16 +10,18 @@ class RateManager { //implements RateManagerI
 
     public static function getMultiRateTicket():MultiplierRateID { //TODO implement
         nextMultiRate++;
-
         return nextMultiRate - 1; 
+    }
+
+    public static function addRate(rt:RateComponent,id:AddRateID,rate:Float) {
+        rt.addRates.set(id,rate);
     }
     
 }
 
-// interface RateManagerI {
-//     function getAddRateTicket():AddRateID;
-//     function getMultiRateTicket():MultiplierRateID;
-// }
+typedef Rate = {
+    rate : Float
+}
 
 abstract AddRateID(Int) from Int {
 }
