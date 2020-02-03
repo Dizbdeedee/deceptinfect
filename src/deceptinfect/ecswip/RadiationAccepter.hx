@@ -8,11 +8,6 @@ class RadiationAccepter extends Component {
     public var diminish:Float = 0.75;
     
     public var accepting:Bool = false;
-    // public var contaminatable:Bool = true;
-    public static var id(default,null) = RateManager.getAddRateTicket();
-    
-    
-    
     public function new() {
         super();
     }

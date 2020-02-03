@@ -1,4 +1,5 @@
 package deceptinfect.ecswip;
+import deceptinfect.ecswip.ComponentManager;
 class SignalStorage {
 
     public static var onInfected(default,null):Signal<InfectedSig>;
@@ -6,8 +7,8 @@ class SignalStorage {
 
 
 typedef InfectedSig = {
-    victim:DI_Entity,
-    cause:DI_Entity,
+    victim:DI_ID,
+    cause:DI_ID,
     
      
 }

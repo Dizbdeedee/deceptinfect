@@ -75,7 +75,7 @@ package gmod.libs;
 		
 		`**Returns:** panel
     **/
-    
+    @:overload(function<T:Panel>(_class:PanelClass<T>,?parent:Panel,?name:String):T {})
     public static function Create(classname:String, ?parent:Panel, ?name:String):Panel;
     
     

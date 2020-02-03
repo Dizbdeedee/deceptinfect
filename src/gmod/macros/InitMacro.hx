@@ -8,6 +8,9 @@ import haxe.macro.Compiler;
 
 import haxe.macro.Expr.Position;
 import haxe.macro.Context;
+import haxe.macro.Expr.TypeDefinition;
+using haxe.macro.TypeTools;
+using StringTools;
 #end
 class InitMacro {
     #if macro
@@ -17,10 +20,38 @@ class InitMacro {
     #if macro
     // @:persistent static var firstBuild = true;
     
-    
+    //TODO Add all gmod.hooks.Panel to gmod.panel.Panel
+    static function testFunc(x:String):TypeDefinition {
+        if (x.startsWith("PanelHelper_")) {
+            var ident = x.substring(12);
+            
+            var _class = macro class $x{
+                
+                function new() {
+
+                }
+                
+            }
+            var lookup:haxe.macro.Type;
+            try {
+                lookup = Context.getType('gmod.panels.$ident');
+            } catch (e:String) {
+                Context.warning('Could not find panel...$ident',Context.currentPos());
+                return null;
+            }
+            var fields = gmod.macros.PanelMacro.getSuperFields(lookup.getClass());
+            for (field in fields) {
+                _class.fields.push(gmod.macros.PanelMacro.classFuncToField(field));
+            }
+            return _class;
+        }
+        return null;
+    }
+
     static public function init() {
         Compiler.exclude("lua.lib",true);
         Compiler.exclude("Sys",true);
+        Context.onTypeNotFound(testFunc);
         Compiler.includeFile("include.lua",IncludePosition.Top);
         #if (!display)
         // if (firstBuild) {

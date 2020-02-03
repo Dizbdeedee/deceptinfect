@@ -14,5 +14,6 @@ import haxe.extern.EitherType;
 import haxe.extern.Rest;
 import haxe.Constraints.Function;
 using gmod.PairTools;
+using gmod.TableTools;
 using tink.CoreApi;
 #end

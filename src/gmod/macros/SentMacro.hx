@@ -34,7 +34,6 @@ class SentMacro {
         }
     }
     public static function build():Array<Field> {
-        
         var cls = Context.getLocalClass().get();
         var type = Context.toComplexType(Context.getLocalType());
         var fields = Context.getBuildFields();
@@ -54,28 +53,17 @@ class SentMacro {
         } else {
             overridename = cls.name;
         }
-
-        // cls.superClass;
-        // cls.superClass.t.get()
-        // var externSuper = getSuperType(cls);
         var _ent =  Context.getType("gmod.types.Entity");
         var entType = Context.toComplexType(_ent);
         var fOverride:Array<Field> = [];
 
         var exprBuffer = macro {}
-        // var constrStr = new StringBuf();
-        // constrStr.add("{");
         for (field in fields) {
             if (field.access.indexOf(AOverride) > -1) {
                 fOverride.push(field);
-                // constrStr.add('untyped __lua__("{0}.${field.name} = function(object,...) {1}(self,...) end",curEnt,this.${field.name});\n');
                 
             }
         }
-        // constrStr.add('untyped __lua__("{0}._gHaxeBurrow = {1}",curEnt,this);\n');
-        // constrStr.add('Reflect.setField(this,"self",curEnt);\n');
-        // constrStr.add('}');
-        
         var curEnt:FunctionArg = {
             name : "curEnt",
             type : entType,
@@ -84,8 +72,6 @@ class SentMacro {
             args: [curEnt],
             expr : macro {Reflect.setField(this,"self",curEnt);},
             ret : null,
-            
-
         }
 
         var self:Field = {
@@ -127,7 +113,6 @@ class SentMacro {
         }
         cls.meta.add(":keep",[],Context.currentPos());
         return fields;
-    
     }
     
     

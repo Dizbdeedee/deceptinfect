@@ -9,7 +9,8 @@ class InfectionSystem {
     }
 
     
-
+    static var infectedTrigger:SignalTrigger<Noise> = new SignalTrigger();
+    public static var infectedSig:Signal<Noise> = infectedTrigger.asSignal();
     public static function handleInfections() {
         for (entity in ComponentManager.entities) {
             switch (entity.get_component(InfectionComponent2)) {
@@ -26,10 +27,13 @@ class InfectionSystem {
                                 default:
                                     infection.rate;
                             }
+                            rate += 1;
                             
-                            inf += base * rate;
+                            inf.value += base * rate;
                             
+                            trace('$base $rate ${inf.value}');
                             fixUpInfection(infection);
+                            
                             
                         default:
                     }
@@ -71,9 +75,11 @@ class InfectionSystem {
     public static function fixUpInfection(infection:InfectionComponent2) {
         
         switch (infection.infection) {
-            case NOT_INFECTED(inf) if (inf < 0):
-                inf = 0;
-            case NOT_INFECTED(inf) if (inf >= 100):
+            case NOT_INFECTED(inf) if (inf.value < 0):
+                inf.value = 0;
+            case NOT_INFECTED(inf) if (inf.value >= 100):
+                trace("Now infected :)");    
+                // infectedTrigger.trigger(Noise);
                 infection.infection = INFECTED;
             default:
         }

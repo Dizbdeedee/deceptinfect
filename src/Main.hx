@@ -15,9 +15,11 @@ import gmod.sent.*;
 import gmod.engine_ents.*;
 import gmod.HaxeMultiReturn;
 import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
-import gmod.Hooks;
 import gmod.EntityClass;
 import gmod.Networking;
+#if client
+import gmod.PanelInterface.PanelTest;
+#end
 import deceptinfect.*;
 // import deceptinfect.CustomEnt;
 
@@ -25,9 +27,14 @@ class Main {
     public static function main() {
         DeceptInfect.initaliseGamemode();
         deceptinfect.Networking.initMessages();
+        #if client
+        // var b:PanelHelper_DTree;
         
-
-    
+        
+        
+        #end
+        var b:Player = null;
+        b.GetName();
     }
     #if server
     @:expose("testComponents")

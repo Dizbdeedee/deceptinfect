@@ -39,4 +39,6 @@ class PlayerExt {
         var finalR = MathLib.NormalizeAngle(curangs.r + punchR);
         p.SetEyeAngles(new Angle(curY,finalR,0));
     }
+
+    
 }

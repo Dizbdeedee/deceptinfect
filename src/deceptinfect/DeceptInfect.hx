@@ -1,5 +1,8 @@
 package deceptinfect;
 
+import deceptinfect.ecswip.PlayerComponent;
+import deceptinfect.ecswip.GEntCompat.GPlayerCompat;
+import gmod.enums.BUTTON_CODE;
 import deceptinfect.ecswip.ComponentManager;
 
 import gmod.Hooks;
@@ -28,16 +31,16 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
     
     override function EntityKeyValue(ent:Entity, key:String, value:String):String {
-        trace(Lua.tostring(ent),key,value);
+        // trace(Lua.tostring(ent),key,value);
         return null;
     }
 
     override function PlayerInitialSpawn(player:Player, transition:Bool) {
-        player.annex = new Annex(player);
+        // player.annex = new Annex(player);
         // var ent = new DI_Entity(player);
         // ComponentManager.addEnt(ent);
 
-        new DI_Player(player); //calls get to initalise
+        // new DI_Player(player); //calls get to initalise
         // new DI_Player(player);
         //FIXME
         // switch (currentState) {
@@ -49,21 +52,76 @@ class DeceptInfect extends gmod.hooks.Gm {
 
     }
 
-    override function PlayerDeathThink(ply:Player):Bool {
-        var plyr:DI_Player = ply;
-        
+    override function PlayerSpawn(player:gmod.types.Player, transition:Bool) {
+        player.UnSpectate();
+
+        player.SetModel(Misc.roundModels[0]);//TODO make random models
+        //player.SetWalkthroughable
+        player.ShouldDropWeapon(true);
+        if (GameManager.state.equals(WAIT)) {
+            player.Give(Misc.roundWeapons[0]); //TODO random weapons
+            player.ShouldDropWeapon(false);
+
+        }
+        //setHiddenHealth
+        //lowhealthrate???
+        //kill player if round in progress 
+    }
+
+    override function PlayerButtonUp(ply:gmod.types.Player, button:BUTTON_CODE) {
+        switch (button) {
+            case KEY_E:
+                trace("e lol");
+            default:
+            //handle case of infection? use command strategy
+        }
+    }
+    
+    override function PlayerSwitchWeapon(player:gmod.types.Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
+        if (newWeapon.GetClass() == "weapon_infect") {
+            return true;
+        }
+        return null;
+    }
+
+    override function PlayerButtonDown(ply:gmod.types.Player, button:BUTTON_CODE) {
+        switch (button) {
+            case KEY_E:
+                trace("down");
+            default:
+        }
+    }
+
+    // override function PlayerDeathSound():Bool {
+    //     return false;
+    // }
+
+    override function PlayerDeathThink(ply:GPlayerCompat):Bool {
+        var comp = ply.id.get_component(PlayerComponent).sure();
+        if (comp.deathTime == 0.0) {
+            comp.deathTime = GlobalLib.CurTime() + 1;
+        }
+        if (ply.IsBot() && GlobalLib.CurTime() > comp.deathTime) {
+            comp.deathTime = 0.0;
+            ply.UnSpectate();
+            ply.Spawn();
+        }
         return true;
     }
 
     override function Think() {
-        
+        switch (GameManager.state) {
+            case PLAYING(x):
+                x.think();
+            default:
+        }
     }
     override function IsSpawnpointSuitable(ply:Player, spawnpoint:Entity, makeSuitable:Bool):Bool {
         var pos = spawnpoint.GetPos();
         var blockers = EntsLib.FindInBox(pos + new Vector(-16,-16,0), pos + new Vector(16,16,72));
         for (ent in blockers) {
             if (ent.IsPlayer()) {
-                ply.setWalkthroughable(true);
+                //ply.setWalkthroughable(true);
             }
         }
         return true;
@@ -71,13 +129,20 @@ class DeceptInfect extends gmod.hooks.Gm {
     
     override function PlayerSelectSpawn(ply:Player, transition:Bool):Entity {
         var spawns = EntsLib.FindByClass("info_player_start");
+        trace(spawns.length());
+        GlobalLib.PrintTable(spawns);
         var random_spawn = MathLib.random(spawns.length());
-        if (GAMEMODE.IsSpawnpointSuitable(ply,spawns[random_spawn],false)) {
+        if (IsSpawnpointSuitable(ply,spawns[random_spawn],false)) {
             return spawns[random_spawn];
         }
         return null;
     }
 
+
+    override function PlayerSay(sender:gmod.types.Player, text:String, teamChat:Bool):String {
+        
+        return "aaaaple";
+    }
     override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<GmPlayerCanHearPlayersVoiceHaxeReturn> {
         
         return {a : false, b: false};

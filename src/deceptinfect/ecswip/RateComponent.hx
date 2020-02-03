@@ -8,6 +8,7 @@ class RateComponent extends Component {
     public var multipliers:Map<MultiplierRateID,Float> = [];
     
     
+    
   
 
 

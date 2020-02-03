@@ -4,7 +4,7 @@ package gmod.hooks;
 /**
     A list of hooks available in player classes.
 **/
-class Player {
+class PLAYER {
     #if client
     /**
         Called after the viewmodel has been drawn
