@@ -14,14 +14,27 @@ class PanelTest<T> {
     }
 }
 
-// class TestTwo extends PanelHelper_DTree {
+class TestTwo extends PanelHelper_DTree {
     
-//     override function DoClick() {
-//         trace("DtreeOverride");
-//     }
+    override function DoClick() {
+        self.DoClick();
+        
+        trace("DtreeOverride");
+    }
+
+    override function DoRightClick() {
+        super.DoRightClick();
+    }
+
+    override function OnNodeSelected(node:Panel) {
+        super.OnNodeSelected(node);
+    }
+    
+    
+    
    
 
-// } 
+} 
 // @:native("HELP")
 // extern class TestThree extends  {
 //     function d():Void;

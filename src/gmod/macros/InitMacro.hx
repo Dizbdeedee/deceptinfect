@@ -21,7 +21,7 @@ class InitMacro {
     //TODO Add all gmod.hooks.Panel to gmod.panel.Panel
     static function testFunc(x:String):TypeDefinition {
         
-        if (x.startsWith("PanelHelper_asdasd")) {
+        if (x.startsWith("PanelHelper_")) {
             
             var ident = x.substring(12);
             
@@ -45,9 +45,9 @@ class InitMacro {
             }
             var fields:Array<haxe.macro.Type.ClassField> = gmod.macros.PanelMacro.getSuperFields(lookup.getClass());
             trace(fields);
-            // for (field in fields) {
-            //     _class.fields.push(gmod.macros.PanelMacro.classFuncToField(field));
-            // }
+            for (field in fields) {
+                _class.fields.push(gmod.macros.PanelMacro.classFuncToField(field));
+            }
             return _class;
         }
         return null;

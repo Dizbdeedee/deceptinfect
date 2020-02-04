@@ -1,15 +1,8 @@
 package gmod.macros;
 
-import gmod.panels.MatSelect;
-import gmod.macros.InitMacro;
-import sys.FileSystem;
-import haxe.iterators.StringKeyValueIteratorUnicode;
-import haxe.rtti.CType.Classdef;
-import haxe.macro.Type.Ref;
-import sys.io.File;
+#if (macro)
 import haxe.macro.Type.ClassType;
 import haxe.macro.Type.ClassField;
-#if (macro)
 import haxe.macro.Context;
 import haxe.macro.Expr;
 using haxe.macro.ExprTools;

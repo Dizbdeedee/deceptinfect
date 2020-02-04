@@ -6,7 +6,7 @@ package gmod.hooks;
 	
 	See also Category:Panel_Hooks for hooks that only work if your panel is based on other specific panels.
 **/
-class Panel {
+class Panel2 {
     
     /**
         Only works on elements defined with derma.DefineControl and only if the panel has AllowAutoRefresh set to true. 
