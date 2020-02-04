@@ -85,7 +85,7 @@ __gmod_PanelInterface = _hx_e()
 __gmod_PanelTest = _hx_e()
 __gmod_TestFour = _hx_e()
 __gmod_TableTools = _hx_e()
-__gmod_hooks_Player = _hx_e()
+__gmod_hooks_PLAYER = _hx_e()
 __gmod_safety_Safety = _hx_e()
 __gmod_safety_ValidObject = _hx_e()
 __haxe_StackItem = _hx_e()
@@ -501,6 +501,7 @@ Main.main = function()
   __deceptinfect_DeceptInfect.initaliseGamemode();
   __deceptinfect_Networking.initMessages();
   local b = nil;
+  b:GetName();
 end
 
 Math.new = {}
@@ -1576,33 +1577,33 @@ __gmod_TableTools.length = function(table)
   do return #table end;
 end
 
-__gmod_hooks_Player.new = {}
-__gmod_hooks_Player.__name__ = true
-__gmod_hooks_Player.prototype = _hx_a();
-__gmod_hooks_Player.prototype.PostDrawViewModel = function(self,viewmodel,weapon) 
+__gmod_hooks_PLAYER.new = {}
+__gmod_hooks_PLAYER.__name__ = true
+__gmod_hooks_PLAYER.prototype = _hx_a();
+__gmod_hooks_PLAYER.prototype.PostDrawViewModel = function(self,viewmodel,weapon) 
 end
-__gmod_hooks_Player.prototype.PreDrawViewModel = function(self,viewmodel,weapon) 
+__gmod_hooks_PLAYER.prototype.PreDrawViewModel = function(self,viewmodel,weapon) 
 end
-__gmod_hooks_Player.prototype.FinishMove = function(self,mv) 
+__gmod_hooks_PLAYER.prototype.FinishMove = function(self,mv) 
   do return nil end
 end
-__gmod_hooks_Player.prototype.GetHandsModel = function(self) 
+__gmod_hooks_PLAYER.prototype.GetHandsModel = function(self) 
   do return nil end
 end
-__gmod_hooks_Player.prototype.ViewModelChanged = function(self,viewmodel,old,_new) 
+__gmod_hooks_PLAYER.prototype.ViewModelChanged = function(self,viewmodel,old,_new) 
 end
-__gmod_hooks_Player.prototype.Move = function(self,mv) 
+__gmod_hooks_PLAYER.prototype.Move = function(self,mv) 
   do return nil end
 end
-__gmod_hooks_Player.prototype.StartMove = function(self,mv,cmd) 
+__gmod_hooks_PLAYER.prototype.StartMove = function(self,mv,cmd) 
   do return nil end
 end
-__gmod_hooks_Player.prototype.Init = function(self) 
+__gmod_hooks_PLAYER.prototype.Init = function(self) 
 end
-__gmod_hooks_Player.prototype.SetupDataTables = function(self) 
+__gmod_hooks_PLAYER.prototype.SetupDataTables = function(self) 
 end
 
-__gmod_hooks_Player.prototype.__class__ =  __gmod_hooks_Player
+__gmod_hooks_PLAYER.prototype.__class__ =  __gmod_hooks_PLAYER
 
 __gmod_safety_Safety.new = {}
 __gmod_safety_Safety.__name__ = true

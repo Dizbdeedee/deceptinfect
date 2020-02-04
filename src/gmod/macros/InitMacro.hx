@@ -13,9 +13,7 @@ using haxe.macro.TypeTools;
 using StringTools;
 #end
 class InitMacro {
-    #if macro
     public static var baseEntFolder:String;
-    #end
     public static var exportName:String;
     #if macro
     // @:persistent static var firstBuild = true;

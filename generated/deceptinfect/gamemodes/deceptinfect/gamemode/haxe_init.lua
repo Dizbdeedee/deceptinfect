@@ -78,7 +78,6 @@ __deceptinfect_TimeKeep = _hx_e()
 __deceptinfect_ecswip_Component = _hx_e()
 __haxe_IMap = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
-__haxe_ds_IntMap = _hx_e()
 __deceptinfect_ecswip_ComponentManager = _hx_e()
 __deceptinfect_ecswip__ComponentManager_DI_ID_Impl_ = _hx_e()
 __deceptinfect_ecswip_ComponentTools = _hx_e()
@@ -123,7 +122,7 @@ __gmod_engine_ents__Game_end_Game_end_Impl_ = _hx_e()
 __gmod_engine_ents__Logic_relay_Logic_relay_Impl_ = _hx_e()
 __gmod_engine_ents__Npc_zombie_Npc_zombie_Impl_ = _hx_e()
 __gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_ = _hx_e()
-__gmod_hooks_Player = _hx_e()
+__gmod_hooks_PLAYER = _hx_e()
 __gmod_macros_InitMacro = _hx_e()
 __gmod_safety_Safety = _hx_e()
 __gmod_safety_ValidObject = _hx_e()
@@ -134,6 +133,7 @@ __haxe_MainEvent = _hx_e()
 __haxe_MainLoop = _hx_e()
 __haxe_Timer = _hx_e()
 __haxe_ds_Either = _hx_e()
+__haxe_ds_IntMap = _hx_e()
 __haxe_ds_Option = _hx_e()
 __haxe_ds_StringMap = _hx_e()
 __lua_Boot = _hx_e()
@@ -539,6 +539,7 @@ Main.main = function()
   __deceptinfect_DeceptInfect.initaliseGamemode();
   __deceptinfect_Networking.initMessages();
   local b = nil;
+  b:GetName();
 end
 Main.testComponents = function() 
 end
@@ -1764,55 +1765,6 @@ end
 
 __haxe_ds_ObjectMap.prototype.__class__ =  __haxe_ds_ObjectMap
 
-__haxe_ds_IntMap.new = function() 
-  local self = _hx_new(__haxe_ds_IntMap.prototype)
-  __haxe_ds_IntMap.super(self)
-  return self
-end
-__haxe_ds_IntMap.super = function(self) 
-  self.h = ({});
-end
-__haxe_ds_IntMap.__name__ = true
-__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_IntMap.prototype = _hx_a();
-__haxe_ds_IntMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_IntMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_IntMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_IntMap.prototype.iterator = function(self) 
-  local _gthis = self;
-  local it = self:keys();
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return it:hasNext() end;
-  end,next=function(self) 
-    do return _gthis.h[it:next()] end;
-  end}) end
-end
-
-__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
-
 __deceptinfect_ecswip_ComponentManager.new = {}
 __deceptinfect_ecswip_ComponentManager.__name__ = true
 __deceptinfect_ecswip_ComponentManager.addGEnt = function(x) 
@@ -2628,21 +2580,21 @@ __gmod_engine_ents__Npc_zombie_Npc_zombie_Impl_.__name__ = true
 __gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_.new = {}
 __gmod_engine_ents__Prop_thumper_Prop_thumper_Impl_.__name__ = true
 
-__gmod_hooks_Player.new = {}
-__gmod_hooks_Player.__name__ = true
-__gmod_hooks_Player.prototype = _hx_a();
-__gmod_hooks_Player.prototype.Loadout = function(self) 
+__gmod_hooks_PLAYER.new = {}
+__gmod_hooks_PLAYER.__name__ = true
+__gmod_hooks_PLAYER.prototype = _hx_a();
+__gmod_hooks_PLAYER.prototype.Loadout = function(self) 
 end
-__gmod_hooks_Player.prototype.SetModel = function(self) 
+__gmod_hooks_PLAYER.prototype.SetModel = function(self) 
 end
-__gmod_hooks_Player.prototype.Init = function(self) 
+__gmod_hooks_PLAYER.prototype.Init = function(self) 
 end
-__gmod_hooks_Player.prototype.SetupDataTables = function(self) 
+__gmod_hooks_PLAYER.prototype.SetupDataTables = function(self) 
 end
-__gmod_hooks_Player.prototype.Spawn = function(self) 
+__gmod_hooks_PLAYER.prototype.Spawn = function(self) 
 end
 
-__gmod_hooks_Player.prototype.__class__ =  __gmod_hooks_Player
+__gmod_hooks_PLAYER.prototype.__class__ =  __gmod_hooks_PLAYER
 
 __gmod_macros_InitMacro.new = {}
 __gmod_macros_InitMacro.__name__ = true
@@ -2963,6 +2915,55 @@ _hxClasses["haxe.ds.Either"] = { __ename__ = true, __constructs__ = _hx_tab_arra
 __haxe_ds_Either = _hxClasses["haxe.ds.Either"];
 __haxe_ds_Either.Left = function(v) local _x = _hx_tab_array({[0]="Left",0,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
 __haxe_ds_Either.Right = function(v) local _x = _hx_tab_array({[0]="Right",1,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
+
+__haxe_ds_IntMap.new = function() 
+  local self = _hx_new(__haxe_ds_IntMap.prototype)
+  __haxe_ds_IntMap.super(self)
+  return self
+end
+__haxe_ds_IntMap.super = function(self) 
+  self.h = ({});
+end
+__haxe_ds_IntMap.__name__ = true
+__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_IntMap.prototype = _hx_a();
+__haxe_ds_IntMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_IntMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_IntMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_IntMap.prototype.iterator = function(self) 
+  local _gthis = self;
+  local it = self:keys();
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return it:hasNext() end;
+  end,next=function(self) 
+    do return _gthis.h[it:next()] end;
+  end}) end
+end
+
+__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 _hxClasses["haxe.ds.Option"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Some","None"},2)}
 __haxe_ds_Option = _hxClasses["haxe.ds.Option"];
 __haxe_ds_Option.Some = function(v) local _x = _hx_tab_array({[0]="Some",0,v,__enum__=__haxe_ds_Option}, 3); return _x; end 
@@ -5473,8 +5474,6 @@ local _hx_static_init = function()
   
   __deceptinfect_Misc.roundWeapons = _hx_tab_array({[0]="weapon_mor_ump"}, 1);
   
-  __haxe_ds_IntMap.tnull = ({});
-  
   __deceptinfect_ecswip_ComponentManager.components = __haxe_ds_ObjectMap.new();
   
   __deceptinfect_ecswip_ComponentManager.entities = 0;
@@ -5799,6 +5798,8 @@ local _hx_static_init = function()
   __haxe_EntryPoint.pending = Array.new();
   
   __haxe_EntryPoint.threadCount = 0;
+  
+  __haxe_ds_IntMap.tnull = ({});
   
   __haxe_ds_StringMap.tnull = ({});
   
