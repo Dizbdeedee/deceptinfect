@@ -14,11 +14,11 @@ import gmod.panels.*;
 import gmod.sent.*;
 import gmod.engine_ents.*;
 import gmod.HaxeMultiReturn;
-import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
+// import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
 import gmod.EntityClass;
 import gmod.Networking;
 #if client
-import gmod.PanelInterface.PanelTest;
+// import gmod.PanelInterface.PanelTest;
 #end
 import deceptinfect.*;
 // import deceptinfect.CustomEnt;

@@ -2,6 +2,7 @@
 -D lua-5.1
 -D lua-vanilla
 -D client
+-D dump=pretty
 -lib tink_core
 -D gamemode=deceptinfect
 -D addonName=deceptinfect

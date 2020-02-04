@@ -20,7 +20,9 @@ class InitMacro {
     
     //TODO Add all gmod.hooks.Panel to gmod.panel.Panel
     static function testFunc(x:String):TypeDefinition {
-        if (x.startsWith("PanelHelper_")) {
+        
+        if (x.startsWith("PanelHelper_asdasd")) {
+            
             var ident = x.substring(12);
             
             var _class = macro class $x extends gmod.panels.$ident {
@@ -30,21 +32,22 @@ class InitMacro {
                 **/
                 public var self(default,never):gmod.panels.$ident;
                 function new(x:gmod.panels.$ident) {
-                    
+
                 }
                 
-            }
-            var lookup:haxe.macro.Type;
+            };
+            var lookup:haxe.macro.Type = null;
             try {
                 lookup = Context.getType('gmod.panels.$ident');
             } catch (e:String) {
                 Context.warning('Could not find panel...$ident',Context.currentPos());
                 return null;
             }
-            var fields = gmod.macros.PanelMacro.getSuperFields(lookup.getClass());
-            for (field in fields) {
-                _class.fields.push(gmod.macros.PanelMacro.classFuncToField(field));
-            }
+            var fields:Array<haxe.macro.Type.ClassField> = gmod.macros.PanelMacro.getSuperFields(lookup.getClass());
+            trace(fields);
+            // for (field in fields) {
+            //     _class.fields.push(gmod.macros.PanelMacro.classFuncToField(field));
+            // }
             return _class;
         }
         return null;

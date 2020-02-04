@@ -1,5 +1,6 @@
 package gmod.macros;
 
+import gmod.panels.MatSelect;
 import gmod.macros.InitMacro;
 import sys.FileSystem;
 import haxe.iterators.StringKeyValueIteratorUnicode;
@@ -21,8 +22,9 @@ private typedef Generate = {
 
     funcs : Array<Field>,
 }
+#end
 class PanelMacro {
-
+    #if macro
     static var generate:Array<Generate> = [];
     static var onGenerate = false;
     
@@ -50,34 +52,55 @@ class PanelMacro {
     public static function classFuncToField(x:ClassField):Field {
         
         var _args:Array<FunctionArg> = [];
+        var exprArgs = [];
         var _ret:haxe.macro.Type;
         switch (x.type) {
             case TFun(args, ret):
+                exprArgs = [];    
                 for (arg in args) {
                     _args.push(argToFuncArg(arg));
+                    exprArgs.push(macro $i{arg.name});
                 }
+                
                 _ret = ret;
             default:
                 throw "unhandled yet...";
         }
         
         // trace(_ret);
+        var name = x.name;
         
         var func:Function = switch (_ret) {
             case TAbstract(_.get().name => "Void", params):
+                
                 {
                     args : _args,
                     ret :  Context.toComplexType(_ret),
-                    expr : macro {}
+                    expr : macro self.$name($a{exprArgs})
                 };
             default:
 
                 {
                     args : _args,
                     ret :  Context.toComplexType(_ret),
-                    expr : macro return null,
+                    expr : macro return self.$name($a{exprArgs}),
                 };
         }
+        // var filter = function (msg:Message) {
+        //     return switch (msg){
+        //         case Warning(msg, pos):
+        //             trace(msg);
+        //             true;
+
+        //         default:
+        //             false;
+        //     }
+        // }
+        // if (filter(Context.getMessages()[0])) {
+        //     Context.getMessages().remove(Context.getMessages()[0]);
+        // }
+        
+        
         var access:Array<Access> = switch (x.meta.has(":hook")) {
             case false:
                 [Access.AOverride,Access.AFinal,Access.APublic];
@@ -125,6 +148,6 @@ class PanelMacro {
 
         return fields;
     }
+    #end
 }
 
-#end

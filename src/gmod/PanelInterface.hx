@@ -14,17 +14,14 @@ class PanelTest<T> {
     }
 }
 
-class TestTwo extends PanelHelper_DTree {
+// class TestTwo extends PanelHelper_DTree {
     
-   override extern inline function DoClick() {
-      super.DoClick();
-   } 
-    // override function OnNodeSelected(node:Panel) {
-        
-    // }
-    
+//     override function DoClick() {
+//         trace("DtreeOverride");
+//     }
+   
 
-} 
+// } 
 // @:native("HELP")
 // extern class TestThree extends  {
 //     function d():Void;

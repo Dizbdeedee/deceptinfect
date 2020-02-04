@@ -6,7 +6,8 @@ package gmod.gclass;
 	
 	It contains all of the basic methods, some of which may only work on certain VGUI elements. As their functionality is provided at the game's C/C++ level rather than by its Lua script extension, they are unfortunately unavailable for most practical purposes, however, they can still be obtained in a way similar to that provided by the baseclass library:
 **/
-@:autoBuild(gmod.macros.OverrideHelper.build())
+// @:autoBuild(gmod.macros.OverrideHelper.build())
+// @:build(gmod.macros.OverrideHelper.build())
 extern class Panel {
     
     /**
