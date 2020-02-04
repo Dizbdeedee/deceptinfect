@@ -14,19 +14,24 @@ class PanelTest<T> {
     }
 }
 
-// class TestTwo extends PanelHelper_DTree {
-//     override function OnNodeSelected(node:Panel) {
+class TestTwo extends PanelHelper_DTree {
+    
+   override extern inline function DoClick() {
+      super.DoClick();
+   } 
+    // override function OnNodeSelected(node:Panel) {
+        
+    // }
+    
+
+} 
+// @:native("HELP")
+// extern class TestThree extends  {
+//     function d():Void;
+// }
+
+// class TestFour extends TestThree {
+//     override function d() {
         
 //     }
-
-// } 
-@:native("HELP")
-extern class TestThree extends Entity {
-    function looool():Void;
-}
-
-class TestFour extends TestThree {
-    override function looool() {
-        
-    }
-}
+// }

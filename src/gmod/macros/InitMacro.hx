@@ -23,10 +23,14 @@ class InitMacro {
         if (x.startsWith("PanelHelper_")) {
             var ident = x.substring(12);
             
-            var _class = macro class $x{
+            var _class = macro class $x extends gmod.panels.$ident {
                 
-                function new() {
-
+                /**
+                    The underlying object
+                **/
+                public var self(default,never):gmod.panels.$ident;
+                function new(x:gmod.panels.$ident) {
+                    
                 }
                 
             }

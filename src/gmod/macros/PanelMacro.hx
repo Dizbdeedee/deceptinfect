@@ -80,9 +80,9 @@ class PanelMacro {
         }
         var access:Array<Access> = switch (x.meta.has(":hook")) {
             case false:
-                [Access.AFinal,Access.APublic];
+                [Access.AOverride,Access.AFinal,Access.APublic];
             default:
-                [];
+                [Access.AOverride,Access.APrivate];
         }
         var field:Field = {
             kind : FieldType.FFun(func),
