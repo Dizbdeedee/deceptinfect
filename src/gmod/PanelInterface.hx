@@ -29,6 +29,14 @@ class TestTwo extends PanelHelper_DTree {
     override function OnNodeSelected(node:Panel) {
         
     }
+    override function Init() {
+        stuff();
+    }
+
+    function stuff() {
+
+    }
+
     
     
     

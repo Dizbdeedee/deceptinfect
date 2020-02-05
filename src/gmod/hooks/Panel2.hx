@@ -6,7 +6,7 @@ package gmod.hooks;
 	
 	See also Category:Panel_Hooks for hooks that only work if your panel is based on other specific panels.
 **/
-class Panel2 {
+extern class Panel2 {
     
     /**
         Only works on elements defined with derma.DefineControl and only if the panel has AllowAutoRefresh set to true. 
@@ -17,7 +17,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function PreAutoRefresh():Void {}
+    public function PreAutoRefresh():Void;
     
     
     /**
@@ -33,7 +33,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnCursorMoved(cursorX:Float, cursorY:Float):Bool {return null;}
+    public function OnCursorMoved(cursorX:Float, cursorY:Float):Bool;
     
     
     /**
@@ -41,7 +41,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function ApplySchemeSettings():Void {}
+    public function ApplySchemeSettings():Void;
     
     
     /**
@@ -55,7 +55,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnChildViewCreated(sourceURL:String, targetURL:String, isPopup:Bool):Void {}
+    public function OnChildViewCreated(sourceURL:String, targetURL:String, isPopup:Bool):Void;
     
     
     /**
@@ -71,7 +71,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function PaintOver(width:Float, height:Float):Bool {return null;}
+    public function PaintOver(width:Float, height:Float):Bool;
     
     
     /**
@@ -81,7 +81,7 @@ class Panel2 {
     **/
     @:deprecated("INTERNAL")
     @:hook
-    public function OnStartDragging():Void {}
+    public function OnStartDragging():Void;
     
     
     /**
@@ -95,7 +95,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnFocusChanged(gained:Bool):Void {}
+    public function OnFocusChanged(gained:Bool):Void;
     
     
     /**
@@ -107,7 +107,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnDocumentReady(url:String):Void {}
+    public function OnDocumentReady(url:String):Void;
     
     
     /**
@@ -119,7 +119,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnChangeTitle(newTitle:String):Void {}
+    public function OnChangeTitle(newTitle:String):Void;
     
     
     /**
@@ -127,7 +127,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnCursorExited():Void {}
+    public function OnCursorExited():Void;
     
     
     /**
@@ -144,7 +144,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnKeyCodePressed(keyCode:KEY):Bool {return null;}
+    public function OnKeyCodePressed(keyCode:KEY):Bool;
     
     
     /**
@@ -159,7 +159,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function PerformLayout(width:Float, height:Float):Void {}
+    public function PerformLayout(width:Float, height:Float):Void;
     
     
     /**
@@ -169,7 +169,7 @@ class Panel2 {
     **/
     @:deprecated("INTERNAL")
     @:hook
-    public function OnStopDragging():Void {}
+    public function OnStopDragging():Void;
     
     
     /**
@@ -186,7 +186,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnSizeChanged(newWidth:Float, newHeight:Float):Void {}
+    public function OnSizeChanged(newWidth:Float, newHeight:Float):Void;
     
     
     /**
@@ -223,7 +223,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function Paint(width:Float, height:Float):Bool {return null;}
+    public function Paint(width:Float, height:Float):Bool;
     
     
     /**
@@ -235,7 +235,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnChangeTargetURL(targetURL:String):Void {}
+    public function OnChangeTargetURL(targetURL:String):Void;
     
     
     /**
@@ -250,7 +250,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnMousePressed(keyCode:MOUSE):Bool {return null;}
+    public function OnMousePressed(keyCode:MOUSE):Bool;
     
     
     /**
@@ -264,7 +264,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function DragHoverClick(hoverTime:Float):Void {}
+    public function DragHoverClick(hoverTime:Float):Void;
     
     
     /**
@@ -272,7 +272,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnRemove():Void {}
+    public function OnRemove():Void;
     
     
     /**
@@ -287,7 +287,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnScreenSizeChanged(oldWidth:Float, oldHeight:Float):Void {}
+    public function OnScreenSizeChanged(oldWidth:Float, oldHeight:Float):Void;
     
     
     /**
@@ -301,7 +301,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function DroppedOn(pnl:Panel):Void {}
+    public function DroppedOn(pnl:Panel):Void;
     
     
     /**
@@ -339,7 +339,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function GenerateExample(_class:String, dpropertysheet:Panel, width:Float, height:Float):Void {}
+    public function GenerateExample(_class:String, dpropertysheet:Panel, width:Float, height:Float):Void;
     
     
     /**
@@ -363,7 +363,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function LoadCookies():Void {}
+    public function LoadCookies():Void;
     
     
     /**
@@ -380,7 +380,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnKeyCodeReleased(keyCode:KEY):Bool {return null;}
+    public function OnKeyCodeReleased(keyCode:KEY):Bool;
     
     
     /**
@@ -392,7 +392,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function PostAutoRefresh():Void {}
+    public function PostAutoRefresh():Void;
     
     
     /**
@@ -402,7 +402,7 @@ class Panel2 {
     **/
     @:deprecated("INTERNAL")
     @:hook
-    public function OnActivate():Void {}
+    public function OnActivate():Void;
     
     
     /**
@@ -410,7 +410,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function Think():Void {}
+    public function Think():Void;
     
     
     /**
@@ -445,7 +445,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function Init():Void {}
+    public function Init():Void;
     
     
     /**
@@ -460,7 +460,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnMouseReleased(keyCode:MOUSE):Bool {return null;}
+    public function OnMouseReleased(keyCode:MOUSE):Bool;
     
     
     /**
@@ -475,7 +475,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnMouseWheeled(scrollDelta:Float):Bool {return null;}
+    public function OnMouseWheeled(scrollDelta:Float):Bool;
     
     
     /**
@@ -485,7 +485,7 @@ class Panel2 {
     **/
     @:deprecated("INTERNAL")
     @:hook
-    public function OnDeactivate():Void {}
+    public function OnDeactivate():Void;
     
     
     /**
@@ -497,7 +497,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnChildRemoved(child:Panel):Void {}
+    public function OnChildRemoved(child:Panel):Void;
     
     
     /**
@@ -509,7 +509,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnDrop():Panel {return null;}
+    public function OnDrop():Panel;
     
     
     /**
@@ -517,7 +517,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnCursorEntered():Void {}
+    public function OnCursorEntered():Void;
     
     
     /**
@@ -532,7 +532,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function ActionSignal(signalName:String, signalValue:String):Void {}
+    public function ActionSignal(signalName:String, signalValue:String):Void;
     
     
     /**
@@ -546,7 +546,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function OnChildAdded(child:Panel):Void {}
+    public function OnChildAdded(child:Panel):Void;
     
     
     /**
@@ -558,7 +558,7 @@ class Panel2 {
     **/
     
     @:hook
-    public function AnimationThink():Void {}
+    public function AnimationThink():Void;
     
     
 }

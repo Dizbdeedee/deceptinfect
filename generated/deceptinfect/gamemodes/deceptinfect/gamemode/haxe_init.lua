@@ -548,7 +548,7 @@ Main.makeThump = function()
 end
 _hx_exports["makeThump"] = Main.makeThump
 Main.onThumped = function(data) 
-  __haxe_Log.trace("THUMPED!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=83,className="Main",methodName="onThumped"}));
+  __haxe_Log.trace("THUMPED!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=84,className="Main",methodName="onThumped"}));
   _G.print(data.activator);
 end
 
@@ -1407,8 +1407,8 @@ __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,s
   local this1 = _G.Vector(-16, -16, 0);
   local otherVec = this1;
   local blockers = pos + otherVec;
-  local this11 = _G.Vector(16, 16, 72);
-  local otherVec1 = this11;
+  local this2 = _G.Vector(16, 16, 72);
+  local otherVec1 = this2;
   local blockers1 = ents.FindInBox(blockers, pos + otherVec1);
   local ent = __gmod_PairTools.iterator(blockers1);
   while (ent:hasNext()) do 
