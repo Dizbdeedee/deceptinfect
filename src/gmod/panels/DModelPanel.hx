@@ -50,7 +50,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetDirectionalLight(direction:BOX, color:AnyTable):Void;
+    function SetDirectionalLight(direction:BOX, color:AnyTable):Void;
     /**
         Sets the model of the rendered entity.
 		
@@ -73,7 +73,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetModel(model:String):Void;
+    function SetModel(model:String):Void;
     /**
         Returns the entity being rendered by the model panel.
 		
@@ -99,7 +99,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetEntity():CSEnt;
+    function GetEntity():CSEnt;
     /**
         
 		
@@ -109,7 +109,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function StartScene(path:String):Void;
+    function StartScene(path:String):Void;
     /**
         Returns the ambient lighting used on the rendered entity.
 		
@@ -134,7 +134,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetAmbientLight():AnyTable;
+    function GetAmbientLight():AnyTable;
     /**
         Sets the position of the camera.
 		
@@ -194,7 +194,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetCamPos(pos:Vector):Void;
+    function SetCamPos(pos:Vector):Void;
     /**
         Gets the model of the rendered entity.
 		
@@ -202,7 +202,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetModel():String;
+    function GetModel():String;
     /**
         Sets the ambient lighting used on the rendered entity.
 		
@@ -233,7 +233,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetAmbientLight(color:AnyTable):Void;
+    function SetAmbientLight(color:AnyTable):Void;
     /**
         Sets the panel camera's FOV (field of view).
 		
@@ -278,7 +278,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetFOV(fov:Float):Void;
+    function SetFOV(fov:Float):Void;
     /**
         Returns the FOV (field of view) the camera is using.
 		
@@ -303,7 +303,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetFOV():Float;
+    function GetFOV():Float;
     /**
         Sets the entity to be rendered by the model panel.
 		
@@ -452,7 +452,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetEntity(ent:Entity):Void;
+    function SetEntity(ent:Entity):Void;
     /**
         This function is used in the DModelPanel:LayoutEntity. It will set the active model to the last set animation using Entity:SetSequence. By default, it is the walking animation.
 		
@@ -471,7 +471,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function RunAnimation():Void;
+    function RunAnimation():Void;
     /**
         Sets the speed used by DModelPanel:RunAnimation to advance frame on an entity sequence.
 		
@@ -513,7 +513,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetAnimSpeed(animSpeed:Float):Void;
+    function SetAnimSpeed(animSpeed:Float):Void;
     /**
         Returns the animation speed of the panel entity, see DModelPanel:SetAnimSpeed.
 		
@@ -538,7 +538,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetAnimSpeed():Float;
+    function GetAnimSpeed():Float;
     /**
         Returns the angles of the model viewing camera. Is nil until changed with DModelPanel:SetLookAng.
 		
@@ -563,7 +563,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetLookAng():Angle;
+    function GetLookAng():Angle;
     /**
         Returns the position of the model viewing camera.
 		
@@ -588,7 +588,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetCamPos():Vector;
+    function GetCamPos():Vector;
     /**
         ***INTERNAL** 
 		
@@ -596,7 +596,7 @@ extern class DModelPanel extends DButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function DrawModel():Void;
+    function DrawModel():Void;
     /**
         Called before the entity of the DModelPanel is drawn.
 		
@@ -609,7 +609,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function PreDrawModel(ent:Entity):Bool;
+    function PreDrawModel(ent:Entity):Bool;
     /**
         Returns the position the viewing camera is pointing toward.
 		
@@ -634,7 +634,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetLookAt():Vector;
+    function GetLookAt():Vector;
     /**
         Makes the panel's camera face the given position.
 		
@@ -672,7 +672,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetLookAt(pos:Vector):Void;
+    function SetLookAt(pos:Vector):Void;
     /**
         Sets the angles of the camera.
 		
@@ -722,7 +722,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetLookAng(ang:Angle):Void;
+    function SetLookAng(ang:Angle):Void;
     /**
         Called when the entity of the DModelPanel was drawn. 
 		
@@ -734,7 +734,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function PostDrawModel(ent:Entity):Void;
+    function PostDrawModel(ent:Entity):Void;
     /**
         Returns the color of the rendered entity.
 		
@@ -759,7 +759,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetColor():Color;
+    function GetColor():Color;
     /**
         ***INTERNAL** 
 		
@@ -788,7 +788,7 @@ extern class DModelPanel extends DButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function LayoutEntity(entity:Entity):Void;
+    function LayoutEntity(entity:Entity):Void;
     /**
         Sets whether or not to animate the entity when the default DModelPanel:LayoutEntity is called.
 		
@@ -835,7 +835,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetAnimated(animated:Bool):Void;
+    function SetAnimated(animated:Bool):Void;
     /**
         Returns whether or not the panel entity should be animated when the default DModelPanel:LayoutEntity function is called.
 		
@@ -860,7 +860,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function GetAnimated():Bool;
+    function GetAnimated():Bool;
     /**
         Sets the color of the rendered entity.
 		
@@ -891,7 +891,7 @@ extern class DModelPanel extends DButton {
     **/
     
      
-    public function SetColor(color:AnyTable):Void;
+    function SetColor(color:AnyTable):Void;
     
 }
 

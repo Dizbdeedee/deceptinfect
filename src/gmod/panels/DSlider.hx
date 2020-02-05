@@ -16,7 +16,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("")
      
-    public function SetNumSlider(slider:Dynamic):Void;
+    function SetNumSlider(slider:Dynamic):Void;
     /**
         ***Deprecated:** 
 		
@@ -28,7 +28,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("")
      
-    public function SetTrapInside(trap:Bool):Void;
+    function SetTrapInside(trap:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -40,7 +40,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetSlideY(y:Float):Void;
+    function SetSlideY(y:Float):Void;
     /**
         Identical to DSlider:IsEditing
 		
@@ -48,7 +48,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function GetDragging():Bool;
+    function GetDragging():Bool;
     /**
         Returns true if this element is being edited by the player.
 		
@@ -56,7 +56,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function IsEditing():Bool;
+    function IsEditing():Bool;
     /**
         ***Deprecated:** 
 		
@@ -66,7 +66,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("")
      
-    public function GetTrapInside():Bool;
+    function GetTrapInside():Bool;
     /**
         ***Deprecated:** 
 		
@@ -78,7 +78,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("")
      
-    public function SetNotches(notches:Float):Void;
+    function SetNotches(notches:Float):Void;
     /**
         ***Deprecated:** 
 		
@@ -88,7 +88,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("")
      
-    public function GetNumSlider():Dynamic;
+    function GetNumSlider():Dynamic;
     /**
         For override by child panels, such as DNumSlider.
 		
@@ -105,7 +105,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function TranslateValues(x:Float, y:Float):DSliderTranslateValuesReturn;
+    function TranslateValues(x:Float, y:Float):DSliderTranslateValuesReturn;
     /**
         ***INTERNAL** 
 		
@@ -117,7 +117,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetDragging(dragging:Bool):Void;
+    function SetDragging(dragging:Bool):Void;
     /**
         ***Deprecated:** 
 		
@@ -125,7 +125,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("")
      
-    public function SetImageColor():Void;
+    function SetImageColor():Void;
     /**
         Sets the background for the slider.
 		
@@ -135,7 +135,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function SetBackground(path:String):Void;
+    function SetBackground(path:String):Void;
     /**
         Returns the draggable panel's lock on the X axis. 
 		
@@ -145,7 +145,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function GetLockX():Float;
+    function GetLockX():Float;
     /**
         ***INTERNAL** 
 		
@@ -157,7 +157,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetSlideX(x:Float):Void;
+    function SetSlideX(x:Float):Void;
     /**
         Returns the draggable panel's lock on the Y axis. 
 		
@@ -167,7 +167,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function GetLockY():Float;
+    function GetLockY():Float;
     /**
         ***Deprecated:** 
 		
@@ -177,7 +177,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("")
      
-    public function GetNotches():Float;
+    function GetNotches():Float;
     /**
         Returns the target position of the draggable "knob" panel of the slider on the X axis. 
 		
@@ -187,7 +187,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function GetSlideX():Float;
+    function GetSlideX():Float;
     /**
         Returns the target position of the draggable "knob" panel of the slider on the Y axis. 
 		
@@ -197,7 +197,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function GetSlideY():Float;
+    function GetSlideY():Float;
     /**
         ***Deprecated:** 
 		
@@ -205,7 +205,7 @@ extern class DSlider extends DPanel {
     **/
     @:deprecated("")
      
-    public function SetImage():Void;
+    function SetImage():Void;
     /**
         Sets the lock on the Y axis. 
 		
@@ -217,7 +217,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function SetLockY(?lockY:Float):Void;
+    function SetLockY(?lockY:Float):Void;
     /**
         Sets the lock on the X axis. 
 		
@@ -248,7 +248,7 @@ extern class DSlider extends DPanel {
     **/
     
      
-    public function SetLockX(?lockX:Float):Void;
+    function SetLockX(?lockX:Float):Void;
     
 }
 

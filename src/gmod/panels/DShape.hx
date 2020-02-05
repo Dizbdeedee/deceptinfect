@@ -27,7 +27,7 @@ extern class DShape extends DPanel {
     **/
     
      
-    public function SetType(type:String):Void;
+    function SetType(type:String):Void;
     /**
         Sets the border color of the shape. 
 		
@@ -39,7 +39,7 @@ extern class DShape extends DPanel {
     **/
     
      
-    public function SetBorderColor(clr:Color):Void;
+    function SetBorderColor(clr:Color):Void;
     /**
         Returns the current type of shape this panel is set to display. 
 		
@@ -49,7 +49,7 @@ extern class DShape extends DPanel {
     **/
     
      
-    public function GetType():String;
+    function GetType():String;
     /**
         Returns the current type of shape this panel is set to display. 
 		
@@ -59,7 +59,7 @@ extern class DShape extends DPanel {
     **/
     
      
-    public function GetBorderColor():Color;
+    function GetBorderColor():Color;
     /**
         Returns the color set to display the shape with.
 		
@@ -67,7 +67,7 @@ extern class DShape extends DPanel {
     **/
     
      
-    public function GetColor():Color;
+    function GetColor():Color;
     /**
         Sets the color to display the shape with.
 		
@@ -77,7 +77,7 @@ extern class DShape extends DPanel {
     **/
     
      
-    public function SetColor(clr:Color):Void;
+    function SetColor(clr:Color):Void;
     
 }
 

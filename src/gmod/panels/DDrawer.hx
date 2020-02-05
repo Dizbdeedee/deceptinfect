@@ -10,7 +10,7 @@ extern class DDrawer extends Panel {
     **/
     
      
-    public function Close():Void;
+    function Close():Void;
     /**
         Set the height of DDrawer
 		
@@ -20,13 +20,13 @@ extern class DDrawer extends Panel {
     **/
     
      
-    public function SetOpenSize(Value:Float):Void;
+    function SetOpenSize(Value:Float):Void;
     /**
         Opens the DDrawer.
     **/
     
      
-    public function Open():Void;
+    function Open():Void;
     /**
         Set the time (in seconds) for DDrawer to open.
 		
@@ -36,7 +36,7 @@ extern class DDrawer extends Panel {
     **/
     
      
-    public function SetOpenTime(value:Float):Void;
+    function SetOpenTime(value:Float):Void;
     /**
         Return the Open Time of DDrawer.
 		
@@ -44,13 +44,13 @@ extern class DDrawer extends Panel {
     **/
     
      
-    public function GetOpenTime():Float;
+    function GetOpenTime():Float;
     /**
         Toggles the DDrawer.
     **/
     
      
-    public function Toggle():Void;
+    function Toggle():Void;
     /**
         Return the Open Size of DDrawer.
 		
@@ -58,7 +58,7 @@ extern class DDrawer extends Panel {
     **/
     
      
-    public function GetOpenSize():Float;
+    function GetOpenSize():Float;
     
 }
 

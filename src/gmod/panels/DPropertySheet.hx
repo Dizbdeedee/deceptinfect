@@ -16,7 +16,7 @@ extern class DPropertySheet extends DPanel {
     **/
     @:deprecated("")
      
-    public function SetShowIcons(show:Bool):Void;
+    function SetShowIcons(show:Bool):Void;
     /**
         Creates a close button on the right side of the DPropertySheet that will run the given callback function when pressed.
 		
@@ -26,7 +26,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function SetupCloseButton(func:Function):Void;
+    function SetupCloseButton(func:Function):Void;
     /**
         Switches the active tab to a tab with given name.
 		
@@ -36,7 +36,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function SwitchToName(name:String):Void;
+    function SwitchToName(name:String):Void;
     /**
         Returns the amount of time (in seconds) it takes to fade between tabs. 
 		
@@ -46,7 +46,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function GetFadeTime():Float;
+    function GetFadeTime():Float;
     /**
         Sets the padding from parent panel to children panel.
 		
@@ -56,7 +56,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function SetPadding(?padding:Float):Void;
+    function SetPadding(?padding:Float):Void;
     /**
         Returns a list of all tabs of this DPropertySheet.
 		
@@ -64,7 +64,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function GetItems():AnyTable;
+    function GetItems():AnyTable;
     /**
         Returns the active DTab of this DPropertySheet.
 		
@@ -72,7 +72,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function GetActiveTab():Panel;
+    function GetActiveTab():Panel;
     /**
         Adds a new tab.
 		
@@ -114,7 +114,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function AddSheet(name:String, pnl:Panel, ?icon:String, ?noStretchX:Bool, ?noStretchY:Bool, ?tooltip:String):AnyTable;
+    function AddSheet(name:String, pnl:Panel, ?icon:String, ?noStretchX:Bool, ?noStretchY:Bool, ?tooltip:String):AnyTable;
     /**
         Called when a player switches the tabs
 		
@@ -125,7 +125,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
     @:hook 
-    public function OnActiveTabChanged(old:Panel, _new:Panel):Void;
+    function OnActiveTabChanged(old:Panel, _new:Panel):Void;
     /**
         ***Deprecated:** 
 		
@@ -135,7 +135,7 @@ extern class DPropertySheet extends DPanel {
     **/
     @:deprecated("")
      
-    public function GetShowIcons():Bool;
+    function GetShowIcons():Bool;
     /**
         Sets the amount of time (in seconds) it takes to fade between tabs.
 		
@@ -162,7 +162,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function SetFadeTime(?time:Float):Void;
+    function SetFadeTime(?time:Float):Void;
     /**
         Gets the padding from the parent panel to child panels.
 		
@@ -170,13 +170,13 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function GetPadding():Float;
+    function GetPadding():Float;
     /**
         Sets the width of the DPropertySheet to fit the contents of all of the tabs.
     **/
     
      
-    public function SizeToContentWidth():Void;
+    function SizeToContentWidth():Void;
     /**
         Sets the active tab of the DPropertySheet.
 		
@@ -212,7 +212,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function SetActiveTab(tab:Panel):Void;
+    function SetActiveTab(tab:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -226,7 +226,7 @@ extern class DPropertySheet extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function CrossFade(anim:AnyTable, delta:Float, data:AnyTable):Void;
+    function CrossFade(anim:AnyTable, delta:Float, data:AnyTable):Void;
     /**
         Removes tab and/or panel from the parent DPropertySheet.
 		
@@ -269,7 +269,7 @@ extern class DPropertySheet extends DPanel {
     **/
     
      
-    public function CloseTab(tab:Panel, removePanel:Bool):Panel;
+    function CloseTab(tab:Panel, removePanel:Bool):Panel;
     
 }
 

@@ -16,7 +16,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function GetStretchToFit():Bool;
+    function GetStretchToFit():Bool;
     /**
         Resizes the panel so that its width and height fit all of the content inside.
 		
@@ -26,7 +26,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function SizeToContents():Void;
+    function SizeToContents():Void;
     /**
         See DImage:SetOnViewMaterial
 		
@@ -37,7 +37,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function SetOnViewMaterial(mat:String, backup:String):Void;
+    function SetOnViewMaterial(mat:String, backup:String):Void;
     /**
         Sets a Material directly as an image. Equivalent of DImage:SetMaterial.
 		
@@ -47,7 +47,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function SetMaterial(mat:IMaterial):Void;
+    function SetMaterial(mat:IMaterial):Void;
     /**
         ***Deprecated:** 
 		
@@ -55,7 +55,7 @@ extern class DImageButton extends DButton {
     **/
     @:deprecated("")
      
-    public function SetIcon():Void;
+    function SetIcon():Void;
     /**
         Hides or shows the image of the image button. Internally this calls Panel:SetVisible on the internal DImage.
 		
@@ -65,7 +65,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function SetImageVisible(visible:Bool):Void;
+    function SetImageVisible(visible:Bool):Void;
     /**
         Sets whether the DImageButton should keep the aspect ratio of its image. Equivalent of DImage:SetKeepAspect. 
 		
@@ -77,7 +77,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function SetKeepAspect(keep:Bool):Void;
+    function SetKeepAspect(keep:Bool):Void;
     /**
         Returns the "image" of the DImageButton. Equivalent of DImage:GetImage.
 		
@@ -85,7 +85,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function GetImage():String;
+    function GetImage():String;
     /**
         Sets whether the image inside the DImageButton should be stretched to fill the entire size of the button, without preserving aspect ratio. 
 		
@@ -97,7 +97,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function SetStretchToFit(stretch:Bool):Void;
+    function SetStretchToFit(stretch:Bool):Void;
     /**
         Sets the "image" of the DImageButton. Equivalent of DImage:SetImage.
 		
@@ -108,7 +108,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function SetImage(strImage:String, strBackup:String):Void;
+    function SetImage(strImage:String, strBackup:String):Void;
     /**
         Sets the color of the image. Equivalent of DImage:SetImageColor
 		
@@ -134,7 +134,7 @@ extern class DImageButton extends DButton {
     **/
     
      
-    public function SetColor(color:AnyTable):Void;
+    function SetColor(color:AnyTable):Void;
     
 }
 

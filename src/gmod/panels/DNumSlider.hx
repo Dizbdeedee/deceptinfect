@@ -40,7 +40,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function SetMin(min:Float):Void;
+    function SetMin(min:Float):Void;
     /**
         Called when the value of the slider is changed, through code or changing the slider.
 		
@@ -50,7 +50,7 @@ extern class DNumSlider extends Panel {
     **/
     
     @:hook 
-    public function OnValueChanged(value:Float):Void;
+    function OnValueChanged(value:Float):Void;
     /**
         Resets the slider to the default value, if one was set by DNumSlider:SetDefaultValue. 
 		
@@ -58,7 +58,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function ResetToDefaultValue():Void;
+    function ResetToDefaultValue():Void;
     /**
         Sets the maximum value for the slider.
 		
@@ -68,7 +68,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function SetMax(max:Float):Void;
+    function SetMax(max:Float):Void;
     /**
         Returns true if either the DTextEntry, the DSlider or the DNumberScratch are being edited.
 		
@@ -76,7 +76,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function IsEditing():Bool;
+    function IsEditing():Bool;
     /**
         ***INTERNAL** 
 		
@@ -88,7 +88,7 @@ extern class DNumSlider extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function ValueChanged(value:Float):Void;
+    function ValueChanged(value:Float):Void;
     /**
         Returns the default value of the slider, if one was set by DNumSlider:SetDefaultValue
 		
@@ -96,7 +96,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function GetDefaultValue():Float;
+    function GetDefaultValue():Float;
     /**
         Returns the DTextEntry component of the slider.
 		
@@ -104,7 +104,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function GetTextArea():Panel;
+    function GetTextArea():Panel;
     /**
         Sets the value of the DNumSlider.
 		
@@ -114,7 +114,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function SetValue(val:Float):Void;
+    function SetValue(val:Float):Void;
     /**
         ***INTERNAL** 
 		
@@ -133,7 +133,7 @@ extern class DNumSlider extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function TranslateSliderValues(x:Float, y:Float):DNumSliderTranslateSliderValuesReturn;
+    function TranslateSliderValues(x:Float, y:Float):DNumSliderTranslateSliderValuesReturn;
     /**
         Sets the minimum and the maximum value of the slider.
 		
@@ -144,7 +144,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function SetMinMax(min:Float, max:Float):Void;
+    function SetMinMax(min:Float, max:Float):Void;
     /**
         Returns the minimum value of the slider
 		
@@ -152,7 +152,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function GetMin():Float;
+    function GetMin():Float;
     /**
         Returns the range of the slider, basically maximum value - minimum value.
 		
@@ -160,7 +160,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function GetRange():Float;
+    function GetRange():Float;
     /**
         Calls DLabel:SetDark on the DLabel part of the DNumSlider.
 		
@@ -170,7 +170,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function SetDark(dark:Bool):Void;
+    function SetDark(dark:Bool):Void;
     /**
         Returns the maximum value of the slider
 		
@@ -178,7 +178,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function GetMax():Float;
+    function GetMax():Float;
     /**
         Returns the amount of numbers after the decimal point.
 		
@@ -186,7 +186,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function GetDecimals():Float;
+    function GetDecimals():Float;
     /**
         Sets the console variable to be updated when the value of the slider is changed.
 		
@@ -196,7 +196,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function SetConVar(cvar:String):Void;
+    function SetConVar(cvar:String):Void;
     /**
         Returns the value of the DNumSlider
 		
@@ -204,7 +204,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function GetValue():Float;
+    function GetValue():Float;
     /**
         Sets the desired amount of numbers after the decimal point.
 		
@@ -214,13 +214,13 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function SetDecimals(decimals:Float):Void;
+    function SetDecimals(decimals:Float):Void;
     /**
         ***INTERNAL** 
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateNotches():Void;
+    function UpdateNotches():Void;
     /**
         Sets the default value of the slider, to be used by DNumSlider:ResetToDefaultValue or by middle mouse clicking the draggable knob of the slider.
 		
@@ -230,7 +230,7 @@ extern class DNumSlider extends Panel {
     **/
     
      
-    public function SetDefaultValue(_default:Float):Void;
+    function SetDefaultValue(_default:Float):Void;
     
 }
 

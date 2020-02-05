@@ -18,7 +18,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function SetShowIcons(show:Bool):Void;
+    function SetShowIcons(show:Bool):Void;
     /**
         Add a node to the DTree
 		
@@ -32,7 +32,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function AddNode(name:String, ?icon:String):Panel;
+    function AddNode(name:String, ?icon:String):Panel;
     /**
         Sets the indentation size of the DTree, the distance between each "level" of the tree is offset on the left from the previous level. 
 		
@@ -44,7 +44,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function SetIndentSize(size:Float):Void;
+    function SetIndentSize(size:Float):Void;
     /**
         Returns the height of each DTree_Node in the tree.
 		
@@ -52,7 +52,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function GetLineHeight():Float;
+    function GetLineHeight():Float;
     /**
         Returns the currently selected node.
 		
@@ -60,7 +60,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function GetSelectedItem():Panel;
+    function GetSelectedItem():Panel;
     /**
         Returns the root DTree_Node, the node that is the parent to all other nodes of the DTree.
 		
@@ -68,7 +68,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function Root():Panel;
+    function Root():Panel;
     /**
         Returns whether or not the Silkicons next to each node of the DTree will be displayed. 
 		
@@ -78,13 +78,13 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function ShowIcons():Bool;
+    function ShowIcons():Bool;
     /**
         Called when the any node is clicked. Called by DTree_Node:DoClick.
     **/
     
     @:hook 
-    public function DoClick():Void;
+    function DoClick():Void;
     /**
         Returns whether or not the Silkicons next to each node of the DTree will be displayed. 
 		
@@ -94,7 +94,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function GetShowIcons():Bool;
+    function GetShowIcons():Bool;
     /**
         Returns the status of DTree:SetClickOnDragHover. See that for more info.
 		
@@ -102,7 +102,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function GetClickOnDragHover():Bool;
+    function GetClickOnDragHover():Bool;
     /**
         Returns the indentation size of the DTree, the distance between each "level" of the tree is offset on the left from the previous level. 
 		
@@ -112,7 +112,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function GetIndentSize():Float;
+    function GetIndentSize():Float;
     /**
         Enables the "click when drag-hovering" functionality. 
 		
@@ -126,7 +126,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function SetClickOnDragHover(enable:Bool):Void;
+    function SetClickOnDragHover(enable:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -140,7 +140,7 @@ extern class DTree extends DScrollPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function ExpandTo(bExpand:Bool):Void;
+    function ExpandTo(bExpand:Bool):Void;
     /**
         ***Deprecated:** 
 		
@@ -148,7 +148,7 @@ extern class DTree extends DScrollPanel {
     **/
     @:deprecated("")
      
-    public function LayoutTree():Void;
+    function LayoutTree():Void;
     /**
         ***INTERNAL** 
 		
@@ -162,7 +162,7 @@ extern class DTree extends DScrollPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetExpanded(bExpand:Bool):Void;
+    function SetExpanded(bExpand:Bool):Void;
     /**
         ***Deprecated:** 
 		
@@ -179,13 +179,13 @@ extern class DTree extends DScrollPanel {
     **/
     @:deprecated("")
      
-    public function MoveChildTo(child:Panel, pos:Float):Void;
+    function MoveChildTo(child:Panel, pos:Float):Void;
     /**
         Called when the any node is right clicked. Called by DTree_Node:DoRightClick.
     **/
     
     @:hook 
-    public function DoRightClick():Void;
+    function DoRightClick():Void;
     /**
         Set the currently selected top-level node.
 		
@@ -195,7 +195,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function SetSelectedItem(node:Panel):Void;
+    function SetSelectedItem(node:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -211,7 +211,7 @@ extern class DTree extends DScrollPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function ChildExpanded(bExpand:Bool):Void;
+    function ChildExpanded(bExpand:Bool):Void;
     /**
         Sets the height of each DTree_Node in the tree. 
 		
@@ -223,7 +223,7 @@ extern class DTree extends DScrollPanel {
     **/
     
      
-    public function SetLineHeight(h:Float):Void;
+    function SetLineHeight(h:Float):Void;
     /**
         This function is called when a node within a tree is selected.
 		
@@ -233,7 +233,7 @@ extern class DTree extends DScrollPanel {
     **/
     
     @:hook 
-    public function OnNodeSelected(node:Panel):Void;
+    function OnNodeSelected(node:Panel):Void;
     
 }
 

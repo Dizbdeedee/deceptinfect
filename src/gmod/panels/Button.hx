@@ -18,7 +18,7 @@ extern class Button extends DLabel {
     **/
     @:deprecated("Does nothing at all.")
      
-    public function SetActionFunction(func:Function):Void;
+    function SetActionFunction(func:Function):Void;
     
 }
 

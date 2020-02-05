@@ -18,7 +18,7 @@ extern class Slider extends Panel {
     **/
     @:deprecated("Does nothing at all.")
      
-    public function SetActionFunction(func:Function):Void;
+    function SetActionFunction(func:Function):Void;
     /**
         ***Deprecated:** Only used in deprecated Derma controls.
 		
@@ -32,7 +32,7 @@ extern class Slider extends Panel {
     **/
     @:deprecated("Only used in deprecated Derma controls.")
      
-    public function PostMessage(messageName:String, valueType:String, value:String):Void;
+    function PostMessage(messageName:String, valueType:String, value:String):Void;
     
 }
 

@@ -16,7 +16,7 @@ extern class DColorCube extends DSlider {
     **/
     @:deprecated("")
      
-    public function SetHue(hue:Float):Void;
+    function SetHue(hue:Float):Void;
     /**
         ***INTERNAL** 
 		
@@ -53,7 +53,7 @@ extern class DColorCube extends DSlider {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateColor(?x:Float, ?y:Float):Void;
+    function UpdateColor(?x:Float, ?y:Float):Void;
     /**
         Returns the color cube's current set color.
 		
@@ -87,7 +87,7 @@ extern class DColorCube extends DSlider {
     **/
     
      
-    public function GetRGB():Color;
+    function GetRGB():Color;
     /**
         ***INTERNAL** 
 		
@@ -136,7 +136,7 @@ extern class DColorCube extends DSlider {
     **/
     @:deprecated("INTERNAL")
      
-    public function TranslateValues(x:Float, y:Float):DColorCubeTranslateValuesReturn;
+    function TranslateValues(x:Float, y:Float):DColorCubeTranslateValuesReturn;
     /**
         Sets the base color and the color used to draw the color cube panel itself.
 		
@@ -180,7 +180,7 @@ extern class DColorCube extends DSlider {
     **/
     
      
-    public function SetBaseRGB(color:Color):Void;
+    function SetBaseRGB(color:Color):Void;
     /**
         Function which is called when the color cube slider is moved (through user input). Meant to be overridden.
 		
@@ -227,7 +227,7 @@ extern class DColorCube extends DSlider {
     **/
     
     @:hook 
-    public function OnUserChanged(color:Color):Void;
+    function OnUserChanged(color:Color):Void;
     /**
         ***INTERNAL** 
 		
@@ -239,7 +239,7 @@ extern class DColorCube extends DSlider {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetRGB(clr:Color):Void;
+    function SetRGB(clr:Color):Void;
     /**
         Returns the base Color set by DColorCube:SetBaseRGB.
 		
@@ -247,7 +247,7 @@ extern class DColorCube extends DSlider {
     **/
     
      
-    public function GetBaseRGB():Color;
+    function GetBaseRGB():Color;
     /**
         ***Deprecated:** 
 		
@@ -257,7 +257,7 @@ extern class DColorCube extends DSlider {
     **/
     @:deprecated("")
      
-    public function GetHue():Float;
+    function GetHue():Float;
     /**
         Sets the base color of the color cube and updates the slider position.
 		
@@ -295,7 +295,7 @@ extern class DColorCube extends DSlider {
     **/
     
      
-    public function SetColor(color:Color):Void;
+    function SetColor(color:Color):Void;
     
 }
 

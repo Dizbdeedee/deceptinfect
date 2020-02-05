@@ -14,7 +14,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function SetContentAlignment(alignment:Float):Void;
+    function SetContentAlignment(alignment:Float):Void;
     /**
         Gets the size of the text within a Label derived panel.
 		
@@ -27,7 +27,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function GetTextSize():LabelGetTextSizeReturn;
+    function GetTextSize():LabelGetTextSizeReturn;
     /**
         Gets the size of the content/children within a panel object. 
 		
@@ -70,7 +70,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function GetContentSize():LabelGetContentSizeReturn;
+    function GetContentSize():LabelGetContentSizeReturn;
     /**
         Sets whether text wrapping should be enabled or disabled on Label and DLabel panels. Use DLabel:SetAutoStretchVertical to automatically correct vertical size; Panel:SizeToContents will not set the correct height.
 		
@@ -112,7 +112,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function SetWrap(wrap:Bool):Void;
+    function SetWrap(wrap:Bool):Void;
     /**
         Sets the left and top text margins of a text-based panel object, such as a DButton or DLabel.
 		
@@ -123,7 +123,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function SetTextInset(insetX:Float, insetY:Float):Void;
+    function SetTextInset(insetX:Float, insetY:Float):Void;
     /**
         Gets the left and top text margins of a text-based panel object, such as a DButton or DLabel. This is set with Panel:SetTextInset.
 		
@@ -134,7 +134,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function GetTextInset():LabelGetTextInsetReturn;
+    function GetTextInset():LabelGetTextInsetReturn;
     /**
         Sets the font used to render this panel's text. 
 		
@@ -176,7 +176,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function SetFontInternal(fontName:String):Void;
+    function SetFontInternal(fontName:String):Void;
     /**
         Adds a shadow falling to the bottom right corner of the panel's text. This has no effect on panels that do not derive from Label.
 		
@@ -187,7 +187,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function SetExpensiveShadow(distance:Float, Color:Color):Void;
+    function SetExpensiveShadow(distance:Float, Color:Color):Void;
     /**
         Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
@@ -220,7 +220,7 @@ extern class Label extends Panel {
     **/
     
      
-    public function SetText(text:String):Void;
+    function SetText(text:String):Void;
     
 }
 

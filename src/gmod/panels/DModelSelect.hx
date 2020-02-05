@@ -19,7 +19,7 @@ extern class DModelSelect extends DPanelSelect {
     **/
     
      
-    public function SetModelList(models:AnyTable, convar:String, dontSort:Bool, DontCallListConVars:Bool):Void;
+    function SetModelList(models:AnyTable, convar:String, dontSort:Bool, DontCallListConVars:Bool):Void;
     /**
         Sets the height of the panel in the amount of 64px spawnicons. 
 		
@@ -31,7 +31,7 @@ extern class DModelSelect extends DPanelSelect {
     **/
     
      
-    public function SetHeight(?num:Float):Void;
+    function SetHeight(?num:Float):Void;
     
 }
 

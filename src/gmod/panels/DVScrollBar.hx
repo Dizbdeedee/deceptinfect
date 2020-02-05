@@ -12,7 +12,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function GetScroll():Float;
+    function GetScroll():Float;
     /**
         Allows hiding the up and down buttons for better visual stylisation.
 		
@@ -22,7 +22,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function SetHideButtons(hide:Bool):Void;
+    function SetHideButtons(hide:Bool):Void;
     /**
         
 		
@@ -30,7 +30,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function BarScale():Float;
+    function BarScale():Float;
     /**
         Sets up the scrollbar for use. 
 		
@@ -43,7 +43,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function SetUp(barSize:Float, cavasSize:Float):Void;
+    function SetUp(barSize:Float, cavasSize:Float):Void;
     /**
         Returns the negative of DVScrollBar:GetScroll.
 		
@@ -51,7 +51,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function GetOffset():Float;
+    function GetOffset():Float;
     /**
         Smoothly scrolls to given level.
 		
@@ -64,7 +64,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function AnimateTo(scroll:Float, length:Float, ?delay:Float, ?ease:Float):Void;
+    function AnimateTo(scroll:Float, length:Float, ?delay:Float, ?ease:Float):Void;
     /**
         Adds specified amount of scroll in pixels.
 		
@@ -77,7 +77,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function AddScroll(add:Float):Bool;
+    function AddScroll(add:Float):Bool;
     /**
         ***INTERNAL** 
 		
@@ -85,7 +85,7 @@ extern class DVScrollBar extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function Grip():Void;
+    function Grip():Void;
     /**
         Returns whether or not the manual up/down scroll buttons are visible or not. Set by DVScrollBar:SetHideButtons.
 		
@@ -93,7 +93,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function GetHideButtons():Bool;
+    function GetHideButtons():Bool;
     /**
         Sets the scroll level in pixels.
 		
@@ -103,7 +103,7 @@ extern class DVScrollBar extends Panel {
     **/
     
      
-    public function SetScroll(scroll:Float):Void;
+    function SetScroll(scroll:Float):Void;
     /**
         ***Deprecated:** 
 		
@@ -113,7 +113,7 @@ extern class DVScrollBar extends Panel {
     **/
     @:deprecated("")
      
-    public function Value():Dynamic;
+    function Value():Dynamic;
     
 }
 

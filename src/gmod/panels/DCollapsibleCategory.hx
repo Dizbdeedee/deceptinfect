@@ -14,7 +14,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateAltLines():Void;
+    function UpdateAltLines():Void;
     /**
         
 		
@@ -24,7 +24,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function SetStartHeight(height:Float):Void;
+    function SetStartHeight(height:Float):Void;
     /**
         Adds a new text button to the collapsible category, like the tool menu in Spawnmenu.
 		
@@ -37,7 +37,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function Add(name:String):Panel;
+    function Add(name:String):Panel;
     /**
         Sets the name of the DCollapsibleCategory.
 		
@@ -47,7 +47,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function SetLabel(label:String):Void;
+    function SetLabel(label:String):Void;
     /**
         Returns whether the DCollapsibleCategory is expanded or not.
 		
@@ -55,7 +55,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function GetExpanded():Bool;
+    function GetExpanded():Bool;
     /**
         Doesn't actually do anything.
 		
@@ -65,7 +65,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function SetPadding(padding:Float):Void;
+    function SetPadding(padding:Float):Void;
     /**
         
 		
@@ -75,7 +75,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function SetList(pnl:Panel):Void;
+    function SetList(pnl:Panel):Void;
     /**
         Returns whether or not the background should be painted.
 		
@@ -83,7 +83,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function GetPaintBackground():Bool;
+    function GetPaintBackground():Bool;
     /**
         Sets the time in seconds it takes to expand the DCollapsibleCategory
 		
@@ -93,13 +93,13 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function SetAnimTime(time:Float):Void;
+    function SetAnimTime(time:Float):Void;
     /**
         
     **/
     
      
-    public function UnselectAll():Void;
+    function UnselectAll():Void;
     /**
         Returns the expand/collapse animation time set by DCollapsibleCategory:SetAnimTime.
 		
@@ -107,7 +107,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function GetAnimTime():Float;
+    function GetAnimTime():Float;
     /**
         Doesn't actually do anything. 
 		
@@ -117,7 +117,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function GetPadding():Float;
+    function GetPadding():Float;
     /**
         Forces the category to open or collapse
 		
@@ -127,7 +127,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function DoExpansion(expand:Bool):Void;
+    function DoExpansion(expand:Bool):Void;
     /**
         Sets whether the DCollapsibleCategory is expanded or not upon opening the container. 
 		
@@ -139,7 +139,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function SetExpanded(?expanded:Bool):Void;
+    function SetExpanded(?expanded:Bool):Void;
     /**
         Sets whether or not the background should be painted.
 		
@@ -149,13 +149,13 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function SetPaintBackground(paint:Bool):Void;
+    function SetPaintBackground(paint:Bool):Void;
     /**
         Called by DCollapsibleCategory:Toggle.
     **/
     
      
-    public function OnToggle():Void;
+    function OnToggle():Void;
     /**
         
 		
@@ -163,7 +163,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function GetStartHeight():Float;
+    function GetStartHeight():Float;
     /**
         
 		
@@ -171,13 +171,13 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function GetList():Panel;
+    function GetList():Panel;
     /**
         Toggles the expanded state of the DCollapsibleCategory.
     **/
     
      
-    public function Toggle():Void;
+    function Toggle():Void;
     /**
         Sets the contents of the DCollapsibleCategory.
 		
@@ -187,7 +187,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     
      
-    public function SetContents(pnl:Panel):Void;
+    function SetContents(pnl:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -201,7 +201,7 @@ extern class DCollapsibleCategory extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function AnimSlide(anim:AnyTable, delta:Float, data:AnyTable):Void;
+    function AnimSlide(anim:AnyTable, delta:Float, data:AnyTable):Void;
     
 }
 

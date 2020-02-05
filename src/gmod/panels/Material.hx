@@ -41,7 +41,7 @@ extern class Material extends Button {
     **/
     
      
-    public function SetMaterial(matname:String):Void;
+    function SetMaterial(matname:String):Void;
     /**
         Sets the alpha value of the Material panel.
 		
@@ -66,7 +66,7 @@ extern class Material extends Button {
     **/
     
      
-    public function SetAlpha(alpha:Float):Void;
+    function SetAlpha(alpha:Float):Void;
     
 }
 

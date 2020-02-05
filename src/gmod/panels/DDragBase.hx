@@ -14,7 +14,7 @@ extern class DDragBase extends DPanel {
     **/
     
      
-    public function SetUseLiveDrag(newState:Bool):Void;
+    function SetUseLiveDrag(newState:Bool):Void;
     /**
         
 		
@@ -22,7 +22,7 @@ extern class DDragBase extends DPanel {
     **/
     
      
-    public function GetUseLiveDrag():Bool;
+    function GetUseLiveDrag():Bool;
     /**
         
 		
@@ -32,7 +32,7 @@ extern class DDragBase extends DPanel {
     **/
     
      
-    public function SetDnD(name:String):Void;
+    function SetDnD(name:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -48,7 +48,7 @@ extern class DDragBase extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function DropAction_Simple(drops:AnyTable, bDoDrop:Bool, command:String, y:Float, x:Float):Void;
+    function DropAction_Simple(drops:AnyTable, bDoDrop:Bool, command:String, y:Float, x:Float):Void;
     /**
         
 		
@@ -56,7 +56,7 @@ extern class DDragBase extends DPanel {
     **/
     
      
-    public function GetDnD():String;
+    function GetDnD():String;
     /**
         ***INTERNAL** 
 		
@@ -72,13 +72,13 @@ extern class DDragBase extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function DropAction_Copy(drops:AnyTable, bDoDrop:Bool, command:String, y:Float, x:Float):Void;
+    function DropAction_Copy(drops:AnyTable, bDoDrop:Bool, command:String, y:Float, x:Float):Void;
     /**
         Called when anything is dropped on or rearranged within the DDragBase.
     **/
     
     @:hook 
-    public function OnModified():Void;
+    function OnModified():Void;
     /**
         ***INTERNAL** 
 		
@@ -91,7 +91,7 @@ extern class DDragBase extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateDropTarget(drop:Float, pnl:Panel):Void;
+    function UpdateDropTarget(drop:Float, pnl:Panel):Void;
     /**
         Determines where you can drop stuff. "4" for left "5" for center "6" for right "8" for top "2" for bottom
 		
@@ -101,7 +101,7 @@ extern class DDragBase extends DPanel {
     **/
     
      
-    public function SetDropPos(?pos:String):Void;
+    function SetDropPos(?pos:String):Void;
     /**
         Makes the panel a receiver for any droppable panel with the same DnD name. Internally calls Panel:Receiver.
 		
@@ -112,7 +112,7 @@ extern class DDragBase extends DPanel {
     **/
     
      
-    public function MakeDroppable(name:String, allowCopy:Bool):Void;
+    function MakeDroppable(name:String, allowCopy:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -128,7 +128,7 @@ extern class DDragBase extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function DropAction_Normal(drops:AnyTable, bDoDrop:Bool, command:String, y:Float, x:Float):Void;
+    function DropAction_Normal(drops:AnyTable, bDoDrop:Bool, command:String, y:Float, x:Float):Void;
     
 }
 

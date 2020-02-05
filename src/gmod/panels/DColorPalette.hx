@@ -16,7 +16,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function GetConVarG():String;
+    function GetConVarG():String;
     /**
         Called when the color is changed after clicking a new value.
 		
@@ -49,7 +49,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
     @:hook 
-    public function OnValueChanged(newcol:AnyTable):Void;
+    function OnValueChanged(newcol:AnyTable):Void;
     /**
         Saves the color of given button across sessions. 
 		
@@ -64,7 +64,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function SaveColor(btn:Panel, clr:AnyTable):Void;
+    function SaveColor(btn:Panel, clr:AnyTable):Void;
     /**
         Sets the ConVar name for the green channel of the color. 
 		
@@ -76,7 +76,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function SetConVarG(convar:String):Void;
+    function SetConVarG(convar:String):Void;
     /**
         Called when a palette button has been pressed
 		
@@ -86,7 +86,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
     @:hook 
-    public function OnRightClickButton(pnl:Panel):Void;
+    function OnRightClickButton(pnl:Panel):Void;
     /**
         Returns the ConVar name for the alpha channel of the color. 
 		
@@ -96,7 +96,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function GetConVarA():String;
+    function GetConVarA():String;
     /**
         Returns the size of each palette button. Set by DColorPalette:SetButtonSize.
 		
@@ -104,7 +104,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function GetButtonSize():Float;
+    function GetButtonSize():Float;
     /**
         Roughly sets the number of colors that can be picked by the user. If the DColorPalette is exactly 6 rows tall, this function will set the number of colors shown per row in the palette.
 		
@@ -160,7 +160,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function SetNumRows(rows:Float):Void;
+    function SetNumRows(rows:Float):Void;
     /**
         Sets the size of each palette button. 
 		
@@ -174,7 +174,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function SetButtonSize(size:Float):Void;
+    function SetButtonSize(size:Float):Void;
     /**
         ***Deprecated:** 
 		
@@ -187,7 +187,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     @:deprecated("")
      
-    public function DoClick(clr:Color, btn:Panel):Void;
+    function DoClick(clr:Color, btn:Panel):Void;
     /**
         Resets this entire color palette to a default preset one, without saving. 
 		
@@ -195,7 +195,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function Reset():Void;
+    function Reset():Void;
     /**
         Sets the ConVar name for the blue channel of the color. 
 		
@@ -207,7 +207,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function SetConVarB(convar:String):Void;
+    function SetConVarB(convar:String):Void;
     /**
         Returns the number of rows of the palette, provided 6 colors fill each row. This value is equal to the number of colors in the DColorPalette divided by 6.
 		
@@ -215,7 +215,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function GetNumRows():Float;
+    function GetNumRows():Float;
     /**
         ***INTERNAL** 
 		
@@ -229,7 +229,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateConVar(name:String, key:String, clr:Color):Void;
+    function UpdateConVar(name:String, key:String, clr:Color):Void;
     /**
         ***INTERNAL** 
 		
@@ -243,7 +243,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateConVars(clr:Color):Void;
+    function UpdateConVars(clr:Color):Void;
     /**
         Resets this entire color palette to a default preset one and saves the changes. 
 		
@@ -251,7 +251,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function ResetSavedColors():Void;
+    function ResetSavedColors():Void;
     /**
         Returns the ConVar name for the blue channel of the color. 
 		
@@ -261,7 +261,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function GetConVarB():String;
+    function GetConVarB():String;
     /**
         Sets the ConVar name for the alpha channel of the color. 
 		
@@ -273,7 +273,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function SetConVarA(convar:String):Void;
+    function SetConVarA(convar:String):Void;
     /**
         Returns the ConVar name for the red channel of the color. 
 		
@@ -283,7 +283,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function GetConVarR():String;
+    function GetConVarR():String;
     /**
         ***INTERNAL** 
 		
@@ -291,7 +291,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     @:deprecated("INTERNAL")
      
-    public function NetworkColorChange():Void;
+    function NetworkColorChange():Void;
     /**
         Sets the ConVar name for the red channel of the color. 
 		
@@ -303,7 +303,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function SetConVarR(convar:String):Void;
+    function SetConVarR(convar:String):Void;
     /**
         ***Deprecated:** 
 		
@@ -315,7 +315,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     @:deprecated("")
      
-    public function SetColor(clr:AnyTable):Void;
+    function SetColor(clr:AnyTable):Void;
     /**
         Clears the palette and adds new buttons with given colors.
 		
@@ -325,7 +325,7 @@ extern class DColorPalette extends DIconLayout {
     **/
     
      
-    public function SetColorButtons(tab:Color):Void;
+    function SetColorButtons(tab:Color):Void;
     
 }
 

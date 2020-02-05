@@ -16,7 +16,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetNeedsPopulating():Bool;
+    function GetNeedsPopulating():Bool;
     /**
         Returns the folder path to search in, set by DTree_Node:MakeFolder.
 		
@@ -24,7 +24,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetFolder():String;
+    function GetFolder():String;
     /**
         ***INTERNAL** 
 		
@@ -32,7 +32,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function PopulateChildren():Void;
+    function PopulateChildren():Void;
     /**
         Returns whether the expand button (little + button) should be shown or hidden.
 		
@@ -40,7 +40,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetHideExpander():Bool;
+    function GetHideExpander():Bool;
     /**
         Returns the root node, the DTree this node is under. 
 		
@@ -50,7 +50,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetRoot():Panel;
+    function GetRoot():Panel;
     /**
         Inserts a sub-node into this node before or after the given node.
 		
@@ -62,7 +62,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function Insert(node:Panel, nodeNextTo:Panel, before:Bool):Void;
+    function Insert(node:Panel, nodeNextTo:Panel, before:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -70,7 +70,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function InternalDoClick():Void;
+    function InternalDoClick():Void;
     /**
         ***INTERNAL** 
 		
@@ -78,7 +78,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function InternalDoRightClick():Void;
+    function InternalDoRightClick():Void;
     /**
         Add a child node to the DTree_Node
 		
@@ -92,7 +92,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function AddNode(name:String, ?icon:String):Panel;
+    function AddNode(name:String, ?icon:String):Panel;
     /**
         ***INTERNAL** 
 		
@@ -102,7 +102,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetNeedsChildSearch():Bool;
+    function GetNeedsChildSearch():Bool;
     /**
         ***INTERNAL** 
 		
@@ -110,7 +110,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function DoChildrenOrder():Void;
+    function DoChildrenOrder():Void;
     /**
         Makes this node a folder in the filesystem. This will make it automatically populated. 
 		
@@ -126,7 +126,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function MakeFolder(folder:String, path:String, ?showFiles:Bool, ?wildcard:String, ?dontForceExpandable:Bool):Void;
+    function MakeFolder(folder:String, path:String, ?showFiles:Bool, ?wildcard:String, ?dontForceExpandable:Bool):Void;
     /**
         Returns the wildcard set by DTree_Node:MakeFolder.
 		
@@ -134,7 +134,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetWildCard():String;
+    function GetWildCard():String;
     /**
         The height of a single DTree_Node of the DTree this node belongs to. 
 		
@@ -144,7 +144,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetLineHeight():Float;
+    function GetLineHeight():Float;
     /**
         Sets the material for the icon of the DTree_Node.
 		
@@ -154,7 +154,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function SetIcon(path:String):Void;
+    function SetIcon(path:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -166,7 +166,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetDraggableName(name:String):Void;
+    function SetDraggableName(name:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -174,7 +174,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function PerformRootNodeLayout():Void;
+    function PerformRootNodeLayout():Void;
     /**
         Removes given node as a sub-node of this node. 
 		
@@ -186,7 +186,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function LeaveTree(pnl:Panel):Void;
+    function LeaveTree(pnl:Panel):Void;
     /**
         Returns the parent DTree_Node. Note that Panel:GetParent will not be the same!
 		
@@ -194,7 +194,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetParentNode():Panel;
+    function GetParentNode():Panel;
     /**
         Returns the path ID (File Search Paths) used in populating the DTree from the filesystem. 
 		
@@ -204,7 +204,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetPathID():String;
+    function GetPathID():String;
     /**
         Returns whether or not the DTree this node is in has icons enabled. 
 		
@@ -214,7 +214,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function ShowIcons():Float;
+    function ShowIcons():Float;
     /**
         ***INTERNAL** 
 		
@@ -226,7 +226,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function InsertNode(node:Panel):Void;
+    function InsertNode(node:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -239,7 +239,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function FilePopulate(bAndChildren:Bool, bExpand:Bool):Void;
+    function FilePopulate(bAndChildren:Bool, bExpand:Bool):Void;
     /**
         Called when the node is clicked. 
 		
@@ -249,13 +249,13 @@ extern class DTree_Node extends DPanel {
     **/
     
     @:hook 
-    public function DoClick():Bool;
+    function DoClick():Bool;
     /**
         Called when sub-nodes of this DTree_Node were changed, such as being rearranged if that functionality is enabled.
     **/
     
     @:hook 
-    public function OnModified():Void;
+    function OnModified():Void;
     /**
         ***INTERNAL** 
 		
@@ -265,7 +265,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function CreateChildNodes():Void;
+    function CreateChildNodes():Void;
     /**
         Returns the indentation level of the DTree this node belongs to. 
 		
@@ -275,7 +275,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetIndentSize():Float;
+    function GetIndentSize():Float;
     /**
         ***INTERNAL** 
 		
@@ -287,7 +287,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetDrawLines(draw:Bool):Void;
+    function SetDrawLines(draw:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -299,7 +299,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetNeedsChildSearch(newState:Bool):Void;
+    function SetNeedsChildSearch(newState:Bool):Void;
     /**
         Collapses or expands all nodes from the topmost-level node to this one. 
 		
@@ -311,7 +311,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function ExpandTo(expand:Bool):Void;
+    function ExpandTo(expand:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -325,7 +325,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetWildCard(wildcard:String):Void;
+    function SetWildCard(wildcard:String):Void;
     /**
         Returns whether or not nodes for files should/will be added when populating the node from filesystem.
 		
@@ -333,7 +333,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetShowFiles():Bool;
+    function GetShowFiles():Bool;
     /**
         ***INTERNAL** 
 		
@@ -347,7 +347,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetParentNode(parent:Panel):Void;
+    function SetParentNode(parent:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -361,7 +361,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetFolder(folder:String):Void;
+    function SetFolder(folder:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -373,7 +373,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function PopulateChildrenAndSelf(expand:Bool):Void;
+    function PopulateChildrenAndSelf(expand:Bool):Void;
     /**
         Sets whether double clicking the node should expand/collapse it or not.
 		
@@ -383,7 +383,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function SetDoubleClickToOpen(enable:Bool):Void;
+    function SetDoubleClickToOpen(enable:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -397,7 +397,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetPathID(path:String):Void;
+    function SetPathID(path:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -414,7 +414,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function FilePopulateCallback(files:AnyTable, folders:AnyTable, foldername:String, path:String, bAndChildren:Bool, wildcard:String):Void;
+    function FilePopulateCallback(files:AnyTable, folders:AnyTable, foldername:String, path:String, bAndChildren:Bool, wildcard:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -428,7 +428,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function InstallDraggable(node:Panel):Void;
+    function InstallDraggable(node:Panel):Void;
     /**
         ***Deprecated:** 
 		
@@ -436,7 +436,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("")
      
-    public function SetupCopy():Void;
+    function SetupCopy():Void;
     /**
         ***INTERNAL** 
 		
@@ -448,7 +448,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetHideExpander(hide:Bool):Void;
+    function SetHideExpander(hide:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -458,7 +458,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetDraggableName():String;
+    function GetDraggableName():String;
     /**
         ***INTERNAL** 
 		
@@ -470,7 +470,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetLastChild(last:Bool):Void;
+    function SetLastChild(last:Bool):Void;
     /**
         Expands or collapses this node.
 		
@@ -481,7 +481,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function SetExpanded(expand:Bool, ?surpressAnimation:Bool):Void;
+    function SetExpanded(expand:Bool, ?surpressAnimation:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -493,7 +493,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetShowFiles(showFiles:Bool):Void;
+    function SetShowFiles(showFiles:Bool):Void;
     /**
         Moves given panel to the top of the children of this node. 
 		
@@ -505,7 +505,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function MoveChildTo(node:Panel):Void;
+    function MoveChildTo(node:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -517,7 +517,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function AddPanel(pnl:Panel):Void;
+    function AddPanel(pnl:Panel):Void;
     /**
         Returns whether the double clock to collapse/expand functionality is enabled on this node.
 		
@@ -525,7 +525,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetDoubleClickToOpen():Bool;
+    function GetDoubleClickToOpen():Bool;
     /**
         Returns whether the expand/collapse button is shown on this node regardless of whether or not it has sub-nodes. 
 		
@@ -535,7 +535,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetForceShowExpander():Bool;
+    function GetForceShowExpander():Bool;
     /**
         Called when the node is right clicked. 
 		
@@ -545,7 +545,7 @@ extern class DTree_Node extends DPanel {
     **/
     
     @:hook 
-    public function DoRightClick():Bool;
+    function DoRightClick():Bool;
     /**
         Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
@@ -578,7 +578,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function SetText(text:String):Void;
+    function SetText(text:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -590,7 +590,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function ChildExpanded(expanded:Bool):Void;
+    function ChildExpanded(expanded:Bool):Void;
     /**
         Create and returns a copy of this node, including all the sub-nodes.
 		
@@ -598,7 +598,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function Copy():Panel;
+    function Copy():Panel;
     /**
         Sets whether or not the expand/collapse button (+/- button) should be shown on this node regardless of whether it has sub-elements or not.
 		
@@ -608,7 +608,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function SetForceShowExpander(forceShow:Bool):Void;
+    function SetForceShowExpander(forceShow:Bool):Void;
     /**
         Returns whether this node is the last child on this level or not.
 		
@@ -616,7 +616,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetLastChild():Bool;
+    function GetLastChild():Bool;
     /**
         Cleans up the internal table of items (sub-nodes) of this node from invalid panels or sub-nodes that were moved from this node to another. 
 		
@@ -624,7 +624,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function CleanList():Void;
+    function CleanList():Void;
     /**
         Returns n-th child node. 
 		
@@ -639,7 +639,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetChildNode(num:Float):Panel;
+    function GetChildNode(num:Float):Panel;
     /**
         ***INTERNAL** 
 		
@@ -653,7 +653,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetRoot(root:Panel):Void;
+    function SetRoot(root:Panel):Void;
     /**
         Returns the filepath of the file attached to this node.
 		
@@ -661,7 +661,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetFileName():String;
+    function GetFileName():String;
     /**
         ***INTERNAL** 
 		
@@ -671,7 +671,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetDrawLines():Bool;
+    function GetDrawLines():Bool;
     /**
         ***INTERNAL** 
 		
@@ -683,7 +683,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetSelected(selected:Bool):Void;
+    function SetSelected(selected:Bool):Void;
     /**
         ***Deprecated:** 
 		
@@ -693,7 +693,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("")
      
-    public function GetDirty():Bool;
+    function GetDirty():Bool;
     /**
         ***INTERNAL** 
 		
@@ -705,7 +705,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetNeedsPopulating(needs:Bool):Void;
+    function SetNeedsPopulating(needs:Bool):Void;
     /**
         A helper function that adds a new node and calls to DTree_Node:MakeFolder on it.
 		
@@ -720,7 +720,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function AddFolder(name:String, folder:String, path:String, ?showFiles:Bool, ?wildcard:String, ?bDontForceExpandable:Bool):Void;
+    function AddFolder(name:String, folder:String, path:String, ?showFiles:Bool, ?wildcard:String, ?bDontForceExpandable:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -734,7 +734,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function AnimSlide(anim:AnyTable, delta:Float, data:AnyTable):Void;
+    function AnimSlide(anim:AnyTable, delta:Float, data:AnyTable):Void;
     /**
         Expands or collapses this node, as well as ALL child nodes of this node. 
 		
@@ -746,7 +746,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function ExpandRecurse(expand:Bool):Void;
+    function ExpandRecurse(expand:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -760,7 +760,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function OnNodeSelected(node:Panel):Void;
+    function OnNodeSelected(node:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -772,7 +772,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetFileName(filename:String):Void;
+    function SetFileName(filename:String):Void;
     /**
         Returns true if DTree_Node:GetRoot is the same as DTree_Node:GetParentNode of this node.
 		
@@ -780,7 +780,7 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function IsRootNode():Bool;
+    function IsRootNode():Bool;
     /**
         Returns the image path to the icon of this node.
 		
@@ -788,13 +788,13 @@ extern class DTree_Node extends DPanel {
     **/
     
      
-    public function GetIcon():String;
+    function GetIcon():String;
     /**
         Moves this node to the top of the level.
     **/
     
      
-    public function MoveToTop():Void;
+    function MoveToTop():Void;
     /**
         ***Deprecated:** 
 		
@@ -806,7 +806,7 @@ extern class DTree_Node extends DPanel {
     **/
     @:deprecated("")
      
-    public function SetDirty(dirty:Bool):Void;
+    function SetDirty(dirty:Bool):Void;
     
 }
 

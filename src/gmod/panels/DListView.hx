@@ -23,7 +23,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SortByColumns(?column1:Float, ?descrending1:Bool, ?column2:Float, ?descrending2:Bool, ?column3:Float, ?descrending3:Bool, ?column4:Float, ?descrending4:Bool):Void;
+    function SortByColumns(?column1:Float, ?descrending1:Bool, ?column2:Float, ?descrending2:Bool, ?column3:Float, ?descrending3:Bool, ?column4:Float, ?descrending4:Bool):Void;
     /**
         Removes a line from the list view.
 		
@@ -33,7 +33,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function RemoveLine(line:Float):Void;
+    function RemoveLine(line:Float):Void;
     /**
         ***INTERNAL** Use DListView: OnRowSelected instead!
 		
@@ -46,7 +46,7 @@ extern class DListView extends DPanel {
     **/
     @:deprecated("INTERNAL: Use DListView: OnRowSelected instead!")
     @:hook 
-    public function OnClickLine(line:Panel, isSelected:Bool):Void;
+    function OnClickLine(line:Panel, isSelected:Bool):Void;
     /**
         Gets all of the lines added to the DListView.
 		
@@ -79,7 +79,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetLines():AnyTable;
+    function GetLines():AnyTable;
     /**
         Called when a line in the DListView is double clicked.
 		
@@ -114,7 +114,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function DoDoubleClick(lineID:Float, line:Panel):Void;
+    function DoDoubleClick(lineID:Float, line:Panel):Void;
     /**
         Gets all of the lines that are currently selected.
 		
@@ -122,7 +122,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetSelected():AnyTable;
+    function GetSelected():AnyTable;
     /**
         Creates the lines and gets the height of the contents, in a DListView.
 		
@@ -130,7 +130,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function DataLayout():Float;
+    function DataLayout():Float;
     /**
         Resizes the panel so that its width and height fit all of the content inside.
 		
@@ -140,7 +140,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SizeToContents():Void;
+    function SizeToContents():Void;
     /**
         Adds a line to the list view.
 		
@@ -153,7 +153,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function AddLine(text:Rest<Dynamic>):Panel;
+    function AddLine(text:Rest<Dynamic>):Panel;
     /**
         Returns whether the header line should be visible on not.
 		
@@ -161,7 +161,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetHideHeaders():Bool;
+    function GetHideHeaders():Bool;
     /**
         Called when a row is right-clicked
 		
@@ -172,13 +172,13 @@ extern class DListView extends DPanel {
     **/
     
     @:hook 
-    public function OnRowRightClick(lineID:Float, line:Panel):Void;
+    function OnRowRightClick(lineID:Float, line:Panel):Void;
     /**
         Clears the current selection in the DListView.
     **/
     
      
-    public function ClearSelection():Void;
+    function ClearSelection():Void;
     /**
         Sets the height of the header line of the DListView. 
 		
@@ -190,7 +190,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SetHeaderHeight(height:Float):Void;
+    function SetHeaderHeight(height:Float):Void;
     /**
         Returns the height of the header of the DListView. 
 		
@@ -200,7 +200,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetHeaderHeight():Float;
+    function GetHeaderHeight():Float;
     /**
         Adds a column to the listview.
 		
@@ -214,7 +214,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function AddColumn(column:String, position:Float):Panel;
+    function AddColumn(column:String, position:Float):Panel;
     /**
         ***INTERNAL** 
 		
@@ -222,13 +222,13 @@ extern class DListView extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function FixColumnsLayout():Void;
+    function FixColumnsLayout():Void;
     /**
         Selects the line at the first index of the DListView if one has been added.
     **/
     
      
-    public function SelectFirstItem():Void;
+    function SelectFirstItem():Void;
     /**
         Sets whether the header line should be visible on not.
 		
@@ -238,7 +238,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SetHideHeaders(hide:Bool):Void;
+    function SetHideHeaders(hide:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -253,7 +253,7 @@ extern class DListView extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetSortedID(lineId:Float):Float;
+    function GetSortedID(lineId:Float):Float;
     /**
         ***INTERNAL** 
 		
@@ -266,7 +266,7 @@ extern class DListView extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function OnRequestResize(column:Panel, size:Float):Void;
+    function OnRequestResize(column:Panel, size:Float):Void;
     /**
         Gets the width of a column.
 		
@@ -279,7 +279,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function ColumnWidth(column:Float):Float;
+    function ColumnWidth(column:Float):Float;
     /**
         Sets the height of all lines of the DListView except for the header line. 
 		
@@ -291,7 +291,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SetDataHeight(height:Float):Void;
+    function SetDataHeight(height:Float):Void;
     /**
         Returns whether multiple lines can be selected or not. 
 		
@@ -301,7 +301,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetMultiSelect():Bool;
+    function GetMultiSelect():Bool;
     /**
         Enables/disables the sorting of columns by clicking.
 		
@@ -311,7 +311,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SetSortable(isSortable:Bool):Void;
+    function SetSortable(isSortable:Bool):Void;
     /**
         Returns the height of the data of the DListView. 
 		
@@ -321,7 +321,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetDataHeight():Float;
+    function GetDataHeight():Float;
     /**
         Gets the currently selected DListView_Line index. 
 		
@@ -334,7 +334,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetSelectedLine():DListViewGetSelectedLineReturn;
+    function GetSelectedLine():DListViewGetSelectedLineReturn;
     /**
         Sets whether multiple lines can be selected by the user by using the Ctrl or ⇧ Shift keys. When set to false, only one line can be selected.
 		
@@ -344,7 +344,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SetMultiSelect(allowMultiSelect:Bool):Void;
+    function SetMultiSelect(allowMultiSelect:Bool):Void;
     /**
         Called internally by DListView:OnClickLine when a line is selected. This is the function you should override to define the behavior when a line is selected.
 		
@@ -381,7 +381,7 @@ extern class DListView extends DPanel {
     **/
     
     @:hook 
-    public function OnRowSelected(rowIndex:Float, row:Panel):Void;
+    function OnRowSelected(rowIndex:Float, row:Panel):Void;
     /**
         Sorts the items in the specified column.
 		
@@ -392,13 +392,13 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SortByColumn(columnIndex:Float, ?descending:Bool):Void;
+    function SortByColumn(columnIndex:Float, ?descending:Bool):Void;
     /**
         Removes the scrollbar.
     **/
     
      
-    public function DisableScrollbar():Void;
+    function DisableScrollbar():Void;
     /**
         Returns the height of DListView:GetCanvas. 
 		
@@ -408,13 +408,13 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetInnerTall():Float;
+    function GetInnerTall():Float;
     /**
         Removes all lines that have been added to the DListView.
     **/
     
      
-    public function Clear():Void;
+    function Clear():Void;
     /**
         Gets the canvas.
 		
@@ -422,7 +422,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetCanvas():Panel;
+    function GetCanvas():Panel;
     /**
         Returns whether sorting of columns by clicking their headers is allowed or not. 
 		
@@ -432,7 +432,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetSortable():Bool;
+    function GetSortable():Bool;
     /**
         Gets the DListView_Line at the given index.
 		
@@ -461,7 +461,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function GetLine(id:Float):Panel;
+    function GetLine(id:Float):Panel;
     /**
         Selects a line in the listview.
 		
@@ -471,7 +471,7 @@ extern class DListView extends DPanel {
     **/
     
      
-    public function SelectItem(Line:Panel):Void;
+    function SelectItem(Line:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -481,7 +481,7 @@ extern class DListView extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetDirty():Bool;
+    function GetDirty():Bool;
     /**
         ***INTERNAL** 
 		
@@ -493,7 +493,7 @@ extern class DListView extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetDirty(isDirty:Bool):Void;
+    function SetDirty(isDirty:Bool):Void;
     
 }
 

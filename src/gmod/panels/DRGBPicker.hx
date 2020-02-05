@@ -32,7 +32,7 @@ extern class DRGBPicker extends DPanel {
     **/
     
      
-    public function GetRGB():Color;
+    function GetRGB():Color;
     /**
         ***INTERNAL** 
 		
@@ -52,7 +52,7 @@ extern class DRGBPicker extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetPosColor(x:Float, y:Float):DRGBPickerGetPosColorReturn;
+    function GetPosColor(x:Float, y:Float):DRGBPickerGetPosColorReturn;
     /**
         Sets the color stored in the color picker.
 		
@@ -117,7 +117,7 @@ extern class DRGBPicker extends DPanel {
     **/
     
      
-    public function SetRGB(color:Color):Void;
+    function SetRGB(color:Color):Void;
     /**
         Function which is called when the cursor is clicked and/or moved on the color picker. Meant to be overridden.
 		
@@ -159,7 +159,7 @@ extern class DRGBPicker extends DPanel {
     **/
     
     @:hook 
-    public function OnChange(col:Color):Void;
+    function OnChange(col:Color):Void;
     
 }
 

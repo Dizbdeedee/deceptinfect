@@ -17,7 +17,7 @@ extern class DCategoryList extends DScrollPanel {
     **/
     
      
-    public function Add(categoryName:String):Panel;
+    function Add(categoryName:String):Panel;
     /**
         Adds an element to the list.
 		
@@ -27,13 +27,13 @@ extern class DCategoryList extends DScrollPanel {
     **/
     
      
-    public function AddItem(element:Panel):Void;
+    function AddItem(element:Panel):Void;
     /**
         Calls Panel:UnselectAll on all child elements, if they have it.
     **/
     
      
-    public function UnselectAll():Void;
+    function UnselectAll():Void;
     
 }
 

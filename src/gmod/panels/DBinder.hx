@@ -14,7 +14,7 @@ extern class DBinder extends DButton {
     **/
     
      
-    public function SetSelectedNumber(keyCode:KEY):Void;
+    function SetSelectedNumber(keyCode:KEY):Void;
     /**
         Alias of DBinder:SetSelected.
 		
@@ -24,7 +24,7 @@ extern class DBinder extends DButton {
     **/
     
      
-    public function SetValue(keyCode:KEY):Void;
+    function SetValue(keyCode:KEY):Void;
     /**
         Called when the player selects a new bind.
 		
@@ -34,7 +34,7 @@ extern class DBinder extends DButton {
     **/
     
     @:hook 
-    public function OnChange(iNum:Float):Void;
+    function OnChange(iNum:Float):Void;
     /**
         Gets the code of the key currently bound by the DBinder. Same as DBinder:GetSelectedNumber.
 		
@@ -42,7 +42,7 @@ extern class DBinder extends DButton {
     **/
     
      
-    public function GetValue():KEY;
+    function GetValue():KEY;
     /**
         ***INTERNAL** 
 		
@@ -50,7 +50,7 @@ extern class DBinder extends DButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateText():Void;
+    function UpdateText():Void;
     /**
         Gets the code of the key currently bound by the DBinder. Same as DBinder:GetValue.
 		
@@ -58,7 +58,7 @@ extern class DBinder extends DButton {
     **/
     
      
-    public function GetSelectedNumber():KEY;
+    function GetSelectedNumber():KEY;
     
 }
 

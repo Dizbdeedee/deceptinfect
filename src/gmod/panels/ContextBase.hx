@@ -14,7 +14,7 @@ extern class ContextBase extends Panel {
     **/
     
      
-    public function ControlValues(contextData:AnyTable):Void;
+    function ControlValues(contextData:AnyTable):Void;
     /**
         Returns the ConVar for the panel to change/handle, set by ContextBase:SetConVar
 		
@@ -22,7 +22,7 @@ extern class ContextBase extends Panel {
     **/
     
      
-    public function ConVar():String;
+    function ConVar():String;
     /**
         Sets the ConVar for the panel to change/handle.
 		
@@ -32,13 +32,13 @@ extern class ContextBase extends Panel {
     **/
     
      
-    public function SetConVar(cvar:String):Void;
+    function SetConVar(cvar:String):Void;
     /**
         You should override this function and use it to check whether your convar value changed.
     **/
     
      
-    public function TestForChanges():Void;
+    function TestForChanges():Void;
     
 }
 

@@ -28,7 +28,7 @@ extern class DTileLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function FitsInTile(x:Float, y:Float, w:Float, h:Float):Bool;
+    function FitsInTile(x:Float, y:Float, w:Float, h:Float):Bool;
     /**
         Sets the spacing between 2 elements in the DTileLayout on the X axis.
 		
@@ -38,7 +38,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function SetSpaceX(spacingX:Float):Void;
+    function SetSpaceX(spacingX:Float):Void;
     /**
         Returns the border spacing set by DTileLayout:SetBorder.
 		
@@ -46,7 +46,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function GetBorder():Float;
+    function GetBorder():Float;
     /**
         ***INTERNAL** 
 		
@@ -54,13 +54,13 @@ extern class DTileLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function LayoutTiles():Void;
+    function LayoutTiles():Void;
     /**
         Called when anything is dropped on or rearranged within the DTileLayout.
     **/
     
     @:hook 
-    public function OnModified():Void;
+    function OnModified():Void;
     /**
         ***INTERNAL** 
 		
@@ -76,7 +76,7 @@ extern class DTileLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetTile(x:Float, y:Float):Dynamic;
+    function GetTile(x:Float, y:Float):Dynamic;
     /**
         Sets the spacing between the border/edge of the DTileLayout and all the elements inside.
 		
@@ -86,7 +86,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function SetBorder(border:Float):Void;
+    function SetBorder(border:Float):Void;
     /**
         Returns the X axis spacing between 2 elements set by DTileLayout:SetSpaceX.
 		
@@ -94,7 +94,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function GetSpaceX():Float;
+    function GetSpaceX():Float;
     /**
         ***INTERNAL** 
 		
@@ -115,7 +115,7 @@ extern class DTileLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function FindFreeTile(x:Float, y:Float, w:Float, h:Float):DTileLayoutFindFreeTileReturn;
+    function FindFreeTile(x:Float, y:Float, w:Float, h:Float):DTileLayoutFindFreeTileReturn;
     /**
         Returns the size of each single tile, set with DTileLayout:SetBaseSize.
 		
@@ -123,7 +123,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function GetBaseSize():Float;
+    function GetBaseSize():Float;
     /**
         ***INTERNAL** 
 		
@@ -138,7 +138,7 @@ extern class DTileLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function ConsumeTiles(x:Float, y:Float, w:Float, h:Float):Void;
+    function ConsumeTiles(x:Float, y:Float, w:Float, h:Float):Void;
     /**
         ***INTERNAL** 
 		
@@ -146,7 +146,7 @@ extern class DTileLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function ClearTiles():Void;
+    function ClearTiles():Void;
     /**
         Creates copies of all the children from the given panel object and parents them to this one.
 		
@@ -156,7 +156,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function CopyContents(source:Panel):Void;
+    function CopyContents(source:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -170,7 +170,7 @@ extern class DTileLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetTile(x:Float, y:Float, state:Dynamic):Void;
+    function SetTile(x:Float, y:Float, state:Dynamic):Void;
     /**
         Sets the spacing between 2 elements in the DTileLayout on the Y axis.
 		
@@ -180,7 +180,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function SetSpaceY(spaceY:Float):Void;
+    function SetSpaceY(spaceY:Float):Void;
     /**
         Creates and returns an exact copy of the DTileLayout.
 		
@@ -188,7 +188,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function Copy():Panel;
+    function Copy():Panel;
     /**
         Determines the minimum height the DTileLayout will resize to. This is useful if child panels will be added/removed often.
 		
@@ -198,7 +198,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function SetMinHeight(minH:Float):Void;
+    function SetMinHeight(minH:Float):Void;
     /**
         Returns the Y axis spacing between 2 elements set by DTileLayout:SetSpaceY.
 		
@@ -206,7 +206,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function GetSpaceY():Float;
+    function GetSpaceY():Float;
     /**
         Returns the minimum height the DTileLayout can resize to.
 		
@@ -214,13 +214,13 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function GetMinHeight():Float;
+    function GetMinHeight():Float;
     /**
         Resets the last width/height info, and invalidates the panel's layout, causing it to recalculate all child positions. It is called whenever a child is added or removed, and can be called to refresh the panel.
     **/
     
      
-    public function Layout():Void;
+    function Layout():Void;
     /**
         Sets the size of a single tile. If a child panel is larger than this size, it will occupy several tiles. 
 		
@@ -232,7 +232,7 @@ extern class DTileLayout extends DDragBase {
     **/
     
      
-    public function SetBaseSize(size:Float):Void;
+    function SetBaseSize(size:Float):Void;
     
 }
 

@@ -14,7 +14,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetTextValue():String;
+    function GetTextValue():String;
     /**
         ***INTERNAL** 
 		
@@ -29,7 +29,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function DrawScreen(x:Float, y:Float, w:Float, h:Float):Void;
+    function DrawScreen(x:Float, y:Float, w:Float, h:Float):Void;
     /**
         Sets the minimum value that can be selected on the number scratch.
 		
@@ -39,7 +39,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function SetMin(min:Float):Void;
+    function SetMin(min:Float):Void;
     /**
         Called when the value of the DNumberScratch is changed.
 		
@@ -49,7 +49,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
     @:hook 
-    public function OnValueChanged(newValue:Float):Void;
+    function OnValueChanged(newValue:Float):Void;
     /**
         Sets the zoom level of the scratch panel.
 		
@@ -59,7 +59,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function SetZoom(zoom:Float):Void;
+    function SetZoom(zoom:Float):Void;
     /**
         Returns the real value of the DNumberScratch as a number. 
 		
@@ -69,7 +69,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetFloatValue():Float;
+    function GetFloatValue():Float;
     /**
         Returns the ideal zoom level for the panel based on the DNumberScratch:GetRange.
 		
@@ -77,7 +77,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function IdealZoom():Float;
+    function IdealZoom():Float;
     /**
         Sets the max value that can be selected on the number scratch
 		
@@ -87,7 +87,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function SetMax(max:Float):Void;
+    function SetMax(max:Float):Void;
     /**
         Sets the value of the DNumberScratch as a fraction, a value between 0 and 1 where 0 is the minimum and 1 is the maximum value of the DNumberScratch
 		
@@ -97,7 +97,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function SetFraction(frac:Float):Void;
+    function SetFraction(frac:Float):Void;
     /**
         Returns whether the player is currently editing the value of the DNumberScratch.
 		
@@ -105,7 +105,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function IsEditing():Bool;
+    function IsEditing():Bool;
     /**
         ***INTERNAL** 
 		
@@ -119,7 +119,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetActive(active:Bool):Void;
+    function SetActive(active:Bool):Void;
     /**
         Returns whether the scratch window should be visible or not.
 		
@@ -127,7 +127,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetShouldDrawScreen():Bool;
+    function GetShouldDrawScreen():Bool;
     /**
         ***INTERNAL** 
 		
@@ -135,7 +135,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function PaintScratchWindow():Void;
+    function PaintScratchWindow():Void;
     /**
         ***INTERNAL** 
 		
@@ -143,7 +143,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function LockCursor():Void;
+    function LockCursor():Void;
     /**
         Returns whether this panel is active or not, i.e. if the player is currently changing its value.
 		
@@ -151,7 +151,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetActive():Bool;
+    function GetActive():Bool;
     /**
         Sets the value of the DNumberScratch and triggers DNumberScratch:OnValueChanged
 		
@@ -161,7 +161,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function SetValue(val:Float):Void;
+    function SetValue(val:Float):Void;
     /**
         Returns the minimum value that can be selected on the number scratch
 		
@@ -169,7 +169,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetMin():Float;
+    function GetMin():Float;
     /**
         Returns the range of the DNumberScratch. Basically max value - min value.
 		
@@ -177,7 +177,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetRange():Float;
+    function GetRange():Float;
     /**
         ***INTERNAL** 
 		
@@ -197,7 +197,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function DrawNotches(level:Float, x:Float, y:Float, w:Float, h:Float, range:Float, value:Float, min:Float, max:Float):Void;
+    function DrawNotches(level:Float, x:Float, y:Float, w:Float, h:Float, range:Float, value:Float, min:Float, max:Float):Void;
     /**
         Returns the maximum value that can be selected on the number scratch
 		
@@ -205,7 +205,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetMax():Float;
+    function GetMax():Float;
     /**
         ***INTERNAL** 
 		
@@ -217,7 +217,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetShouldDrawScreen(shouldDraw:Bool):Void;
+    function SetShouldDrawScreen(shouldDraw:Bool):Void;
     /**
         Returns the desired amount of numbers after the decimal point.
 		
@@ -225,7 +225,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetDecimals():Float;
+    function GetDecimals():Float;
     /**
         ***INTERNAL** 
 		
@@ -233,7 +233,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateConVar():Void;
+    function UpdateConVar():Void;
     /**
         Returns the value of the DNumberScratch as a fraction, a value between 0 and 1 where 0 is the minimum and 1 is the maximum value of the DNumberScratch. 
 		
@@ -243,7 +243,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetFraction():Float;
+    function GetFraction():Float;
     /**
         Returns the zoom level of the scratch window
 		
@@ -251,7 +251,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function GetZoom():Float;
+    function GetZoom():Float;
     /**
         ***INTERNAL** 
 		
@@ -265,7 +265,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetFloatValue(val:Float):Void;
+    function SetFloatValue(val:Float):Void;
     /**
         Sets the desired amount of numbers after the decimal point.
 		
@@ -275,7 +275,7 @@ extern class DNumberScratch extends DImageButton {
     **/
     
      
-    public function SetDecimals(decimals:Float):Void;
+    function SetDecimals(decimals:Float):Void;
     
 }
 

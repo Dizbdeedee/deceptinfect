@@ -12,7 +12,7 @@ extern class DAlphaBar extends DPanel {
     **/
     
      
-    public function GetBarColor():AnyTable;
+    function GetBarColor():AnyTable;
     /**
         Sets the alpha value or the alpha bar.
 		
@@ -22,7 +22,7 @@ extern class DAlphaBar extends DPanel {
     **/
     
      
-    public function SetValue(alpha:Float):Void;
+    function SetValue(alpha:Float):Void;
     /**
         Sets the base color of the alpha bar. This is the color for which the alpha channel is being modified.
 		
@@ -32,7 +32,7 @@ extern class DAlphaBar extends DPanel {
     **/
     
      
-    public function SetBarColor(clr:Color):Void;
+    function SetBarColor(clr:Color):Void;
     /**
         Called when user changes the desired alpha value with the control.
 		
@@ -42,7 +42,7 @@ extern class DAlphaBar extends DPanel {
     **/
     
     @:hook 
-    public function OnChange(alpha:Float):Void;
+    function OnChange(alpha:Float):Void;
     /**
         Returns the alpha value of the alpha bar.
 		
@@ -50,7 +50,7 @@ extern class DAlphaBar extends DPanel {
     **/
     
      
-    public function GetValue():Float;
+    function GetValue():Float;
     
 }
 

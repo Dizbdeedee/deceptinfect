@@ -14,13 +14,13 @@ extern class DTooltip extends DLabel {
     **/
     
      
-    public function OpenForPanel(pnl:Panel):Void;
+    function OpenForPanel(pnl:Panel):Void;
     /**
         Forces the tooltip to close. This will remove the panel.
     **/
     
      
-    public function Close():Void;
+    function Close():Void;
     /**
         Used to draw a triangle beneath the DTooltip
 		
@@ -33,7 +33,7 @@ extern class DTooltip extends DLabel {
     **/
     
      
-    public function DrawArrow(x:Float, y:Float):Void;
+    function DrawArrow(x:Float, y:Float):Void;
     /**
         ***INTERNAL** 
 		
@@ -41,7 +41,7 @@ extern class DTooltip extends DLabel {
     **/
     @:deprecated("INTERNAL")
      
-    public function PositionTooltip():Void;
+    function PositionTooltip():Void;
     /**
         What Panel you want put inside of the DTooltip
 		
@@ -54,7 +54,7 @@ extern class DTooltip extends DLabel {
     **/
     
      
-    public function SetContents(panel:Panel, ?bDelete:Bool):Void;
+    function SetContents(panel:Panel, ?bDelete:Bool):Void;
     
 }
 

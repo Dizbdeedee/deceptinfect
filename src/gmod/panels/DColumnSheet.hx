@@ -16,13 +16,13 @@ extern class DColumnSheet extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetActiveButton(active:Panel):Void;
+    function SetActiveButton(active:Panel):Void;
     /**
         Makes the tabs/buttons show only the image and no text.
     **/
     
      
-    public function UseButtonOnlyStyle():Void;
+    function UseButtonOnlyStyle():Void;
     /**
         Adds a new column/tab.
 		
@@ -37,7 +37,7 @@ extern class DColumnSheet extends Panel {
     **/
     
      
-    public function AddSheet(name:String, pnl:Panel, ?icon:String):AnyTable;
+    function AddSheet(name:String, pnl:Panel, ?icon:String):AnyTable;
     /**
         Returns the active button of this DColumnSheet.
 		
@@ -45,7 +45,7 @@ extern class DColumnSheet extends Panel {
     **/
     
      
-    public function GetActiveButton():Panel;
+    function GetActiveButton():Panel;
     
 }
 

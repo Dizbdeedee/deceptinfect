@@ -12,7 +12,7 @@ extern class DColorButton extends DLabel {
     **/
     
      
-    public function IsDown():Bool;
+    function IsDown():Bool;
     /**
         Used internally by DColorPalette to detect which button is which.
 		
@@ -22,7 +22,7 @@ extern class DColorButton extends DLabel {
     **/
     
      
-    public function SetID(id:Float):Void;
+    function SetID(id:Float):Void;
     /**
         Returns the unique ID set by DColorButton:SetID. 
 		
@@ -32,7 +32,7 @@ extern class DColorButton extends DLabel {
     **/
     
      
-    public function GetID():Float;
+    function GetID():Float;
     /**
         Returns the color of the button
 		
@@ -40,7 +40,7 @@ extern class DColorButton extends DLabel {
     **/
     
      
-    public function GetColor():Color;
+    function GetColor():Color;
     /**
         Sets the color of the DColorButton.
 		
@@ -51,7 +51,7 @@ extern class DColorButton extends DLabel {
     **/
     
      
-    public function SetColor(color:Color, ?noTooltip:Bool):Void;
+    function SetColor(color:Color, ?noTooltip:Bool):Void;
     
 }
 

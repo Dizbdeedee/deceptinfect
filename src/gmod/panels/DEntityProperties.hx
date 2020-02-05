@@ -17,7 +17,7 @@ extern class DEntityProperties extends DProperties {
     **/
     @:deprecated("INTERNAL")
      
-    public function EditVariable(varname:String, editdata:AnyTable):Void;
+    function EditVariable(varname:String, editdata:AnyTable):Void;
     /**
         ***INTERNAL** 
 		
@@ -27,7 +27,7 @@ extern class DEntityProperties extends DProperties {
     **/
     @:deprecated("INTERNAL")
      
-    public function EntityLost():Void;
+    function EntityLost():Void;
     /**
         Sets the entity to be edited by this panel. The entity must support the Editable Entities system or nothing will happen.
 		
@@ -37,13 +37,13 @@ extern class DEntityProperties extends DProperties {
     **/
     
      
-    public function SetEntity(ent:Entity):Void;
+    function SetEntity(ent:Entity):Void;
     /**
         Called when we were editing an entity and then it became invalid (probably removed)
     **/
     
     @:hook 
-    public function OnEntityLost():Void;
+    function OnEntityLost():Void;
     /**
         ***INTERNAL** 
 		
@@ -51,7 +51,7 @@ extern class DEntityProperties extends DProperties {
     **/
     @:deprecated("INTERNAL")
      
-    public function RebuildControls():Void;
+    function RebuildControls():Void;
     
 }
 

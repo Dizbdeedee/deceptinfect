@@ -14,7 +14,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function SetDividerHeight(height:Float):Void;
+    function SetDividerHeight(height:Float):Void;
     /**
         Sets the passed panel as the top content of the DVerticalDivider.
 		
@@ -24,7 +24,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function SetTop(pnl:Panel):Void;
+    function SetTop(pnl:Panel):Void;
     /**
         Sets the minimum height of the bottom content panel.
 		
@@ -34,7 +34,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function SetBottomMin(height:Float):Void;
+    function SetBottomMin(height:Float):Void;
     /**
         Sets the maximum height of the top content panel. This is ignored if the panel would exceed the minimum bottom content panel height set from DVerticalDivider:SetBottomMin.
 		
@@ -44,7 +44,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function SetTopMax(height:Float):Void;
+    function SetTopMax(height:Float):Void;
     /**
         Returns whether the divider is being dragged or not.
 		
@@ -52,7 +52,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetDragging():Bool;
+    function GetDragging():Bool;
     /**
         Returns the bottom content panel of the DVerticalDivider.
 		
@@ -60,7 +60,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetBottom():Panel;
+    function GetBottom():Panel;
     /**
         Returns the middle content panel of the DVerticalDivider.
 		
@@ -68,7 +68,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetMiddle():Panel;
+    function GetMiddle():Panel;
     /**
         ***INTERNAL** 
 		
@@ -80,7 +80,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetDragging(isDragging:Bool):Void;
+    function SetDragging(isDragging:Bool):Void;
     /**
         Sets the passed panel as the bottom content of the DVerticalDivider.
 		
@@ -90,7 +90,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function SetBottom(pnl:Panel):Void;
+    function SetBottom(pnl:Panel):Void;
     /**
         Returns the maximum height of the top content panel. See DVerticalDivider:SetTopMax for more information.
 		
@@ -98,7 +98,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetTopMax():Float;
+    function GetTopMax():Float;
     /**
         ***INTERNAL** 
 		
@@ -110,7 +110,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetHoldPos(y:Float):Void;
+    function SetHoldPos(y:Float):Void;
     /**
         Returns the minimum height of the top content panel.
 		
@@ -118,7 +118,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetTopMin():Float;
+    function GetTopMin():Float;
     /**
         Returns the height of the divider bar between the top and bottom content panels of the DVerticalDivider.
 		
@@ -126,7 +126,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetDividerHeight():Float;
+    function GetDividerHeight():Float;
     /**
         Returns the minimum height of the bottom content panel.
 		
@@ -134,7 +134,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetBottomMin():Float;
+    function GetBottomMin():Float;
     /**
         Sets the minimum height of the top content panel.
 		
@@ -144,7 +144,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function SetTopMin(height:Float):Void;
+    function SetTopMin(height:Float):Void;
     /**
         Returns the current height of the top content panel set by DVerticalDivider:SetTopHeight or by the user.
 		
@@ -152,7 +152,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetTopHeight():Float;
+    function GetTopHeight():Float;
     /**
         ***INTERNAL** 
 		
@@ -160,7 +160,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function StartGrab():Void;
+    function StartGrab():Void;
     /**
         Returns the top content panel of the DVerticalDivider.
 		
@@ -168,7 +168,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function GetTop():Panel;
+    function GetTop():Panel;
     /**
         ***INTERNAL** 
 		
@@ -178,7 +178,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetHoldPos():Float;
+    function GetHoldPos():Float;
     /**
         Places the passed panel in between the top and bottom content panels of the DVerticalDivider.
 		
@@ -188,7 +188,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function SetMiddle(pnl:Panel):Void;
+    function SetMiddle(pnl:Panel):Void;
     /**
         Sets the height of the top content panel. 
 		
@@ -200,7 +200,7 @@ extern class DVerticalDivider extends DPanel {
     **/
     
      
-    public function SetTopHeight(height:Float):Void;
+    function SetTopHeight(height:Float):Void;
     
 }
 

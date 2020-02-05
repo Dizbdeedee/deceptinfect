@@ -16,7 +16,7 @@ extern class DKillIcon extends Panel {
     **/
     
      
-    public function SetName(iconName:String):Void;
+    function SetName(iconName:String):Void;
     /**
         Gets the killicon being shown.
 		
@@ -24,7 +24,7 @@ extern class DKillIcon extends Panel {
     **/
     
      
-    public function GetName():String;
+    function GetName():String;
     
 }
 

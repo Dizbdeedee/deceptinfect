@@ -10,7 +10,7 @@ extern class SpawnIcon extends DButton {
     **/
     
      
-    public function RebuildSpawnIcon():Void;
+    function RebuildSpawnIcon():Void;
     /**
         Sets the model to be displayed by [SpawnIcon](https://wiki.garrysmod.com/page/Category:SpawnIcon).
 		
@@ -24,7 +24,7 @@ extern class SpawnIcon extends DButton {
     **/
     
      
-    public function SetModel(ModelPath:String, ?skin:Float, ?bodygroups:String):Void;
+    function SetModel(ModelPath:String, ?skin:Float, ?bodygroups:String):Void;
     /**
         Re-renders a spawn icon with customized cam data. 
 		
@@ -59,7 +59,7 @@ extern class SpawnIcon extends DButton {
     **/
     
      
-    public function RebuildSpawnIconEx(data:AnyTable):Void;
+    function RebuildSpawnIconEx(data:AnyTable):Void;
     /**
         Sets the .png image to be displayed on a [SpawnIcon](https://wiki.garrysmod.com/page/Category:SpawnIcon) or the panel it is based on [ModelImage](https://wiki.garrysmod.com/page/Category:ModelImage). Only .png images can be used with this function.
 		
@@ -69,7 +69,7 @@ extern class SpawnIcon extends DButton {
     **/
     
      
-    public function SetSpawnIcon(icon:String):Void;
+    function SetSpawnIcon(icon:String):Void;
     
 }
 

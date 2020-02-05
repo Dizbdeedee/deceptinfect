@@ -14,7 +14,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function SetBackgroundColor(color:Color):Void;
+    function SetBackgroundColor(color:Color):Void;
     /**
         Sets whether or not the panel is a menu. Used for closing menus when another panel is selected.
 		
@@ -24,7 +24,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function SetIsMenu(isMenu:Bool):Void;
+    function SetIsMenu(isMenu:Bool):Void;
     /**
         If a menu is visible/opened, then the menu is returned.
 		
@@ -32,7 +32,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function GetOpenMenu():Panel;
+    function GetOpenMenu():Panel;
     /**
         ***Deprecated:** Use DMenuBar: GetPaintBackground instead.
 		
@@ -42,7 +42,7 @@ extern class DMenuBar extends DPanel {
     **/
     @:deprecated("Use DMenuBar: GetPaintBackground instead.")
      
-    public function GetDrawBackground():Bool;
+    function GetDrawBackground():Bool;
     /**
         Returns whether or not the background should be painted. Is the same as DMenuBar:GetDrawBackground
 		
@@ -50,7 +50,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function GetPaintBackground():Bool;
+    function GetPaintBackground():Bool;
     /**
         ***Deprecated:** Use DMenuBar: SetPaintBackground
 		
@@ -62,7 +62,7 @@ extern class DMenuBar extends DPanel {
     **/
     @:deprecated("Use DMenuBar: SetPaintBackground")
      
-    public function SetDrawBackground(shouldPaint:Bool):Void;
+    function SetDrawBackground(shouldPaint:Bool):Void;
     /**
         Returns whether or not the DMenuBar is disabled
 		
@@ -70,7 +70,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function GetDisabled():Bool;
+    function GetDisabled():Bool;
     /**
         Retrieves a DMenu object from the menu bar. If one with the given label doesn't exist, a new one is created. 
 		
@@ -85,7 +85,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function AddOrGetMenu(label:String):Panel;
+    function AddOrGetMenu(label:String):Panel;
     /**
         Sets whether or not the panel is disabled
 		
@@ -95,7 +95,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function SetDisabled(disable:Bool):Void;
+    function SetDisabled(disable:Bool):Void;
     /**
         Sets whether or not the background should be painted. Is the same as DMenuBar:SetDrawBackground
 		
@@ -105,7 +105,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function SetPaintBackground(shouldPaint:Bool):Void;
+    function SetPaintBackground(shouldPaint:Bool):Void;
     /**
         Creates a new DMenu object tied to a DButton with the given label on the menu bar. 
 		
@@ -120,7 +120,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function AddMenu(label:String):Panel;
+    function AddMenu(label:String):Panel;
     /**
         Returns the DMenuBar's background color
 		
@@ -128,7 +128,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function GetBackgroundColor():Color;
+    function GetBackgroundColor():Color;
     /**
         Returns whether or not the panel is a menu. Used for closing menus when another panel is selected.
 		
@@ -136,7 +136,7 @@ extern class DMenuBar extends DPanel {
     **/
     
      
-    public function GetIsMenu():Bool;
+    function GetIsMenu():Bool;
     
 }
 

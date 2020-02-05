@@ -42,7 +42,7 @@ extern class DBubbleContainer extends DPanel {
     **/
     
      
-    public function OpenForPos(x:Float, y:Float, w:Float, h:Float):Void;
+    function OpenForPos(x:Float, y:Float, w:Float, h:Float):Void;
     
 }
 

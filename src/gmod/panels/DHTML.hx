@@ -10,7 +10,7 @@ extern class DHTML extends Awesomium {
     **/
     
      
-    public function StopLoading():Void;
+    function StopLoading():Void;
     /**
         Defines a Javascript function that when called will call a Lua callback.
 		
@@ -51,7 +51,7 @@ extern class DHTML extends Awesomium {
     **/
     
      
-    public function AddFunction(library:String, name:String, callback:Function):Void;
+    function AddFunction(library:String, name:String, callback:Function):Void;
     /**
         Runs/Executes a string as JavaScript code.
 		
@@ -96,7 +96,7 @@ extern class DHTML extends Awesomium {
     **/
     
      
-    public function Call(js:String):Void;
+    function Call(js:String):Void;
     /**
         Determines whether the loaded page can run Lua code or not. See DHTML for how to run Lua from a DHTML window.
 		
@@ -106,7 +106,7 @@ extern class DHTML extends Awesomium {
     **/
     
      
-    public function SetAllowLua(?allow:Bool):Void;
+    function SetAllowLua(?allow:Bool):Void;
     /**
         Returns if the loaded page can run Lua code, set by DHTML:SetAllowLua
 		
@@ -114,7 +114,7 @@ extern class DHTML extends Awesomium {
     **/
     
      
-    public function GetAllowLua():Bool;
+    function GetAllowLua():Bool;
     /**
         Called when the page inside the DHTML window runs console.log. This can also be called within the Lua environment to emulate console.log. If the contained message begins with RUNLUA: the following text will be executed as code within the Lua environment (this is how Lua is called from DHTML windows).
 		
@@ -124,7 +124,7 @@ extern class DHTML extends Awesomium {
     **/
     
      
-    public function ConsoleMessage(msg:String):Void;
+    function ConsoleMessage(msg:String):Void;
     /**
         ***Deprecated:** Broken. Use the CSS overflow rule instead.
 		
@@ -136,7 +136,7 @@ extern class DHTML extends Awesomium {
     **/
     @:deprecated("Broken. Use the CSS overflow rule instead.")
      
-    public function SetScrollbars(show:Bool):Void;
+    function SetScrollbars(show:Bool):Void;
     /**
         Runs/Executes a string as JavaScript code.
 		
@@ -179,7 +179,7 @@ extern class DHTML extends Awesomium {
     **/
     
      
-    public function QueueJavascript(js:String):Void;
+    function QueueJavascript(js:String):Void;
     
 }
 

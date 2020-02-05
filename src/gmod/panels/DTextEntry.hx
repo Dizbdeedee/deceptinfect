@@ -16,7 +16,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetEnterAllowed(allowEnter:Bool):Void;
+    function SetEnterAllowed(allowEnter:Bool):Void;
     /**
         Called whenever enter is pressed on a DTextEntry.
 		
@@ -41,7 +41,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
     @:hook 
-    public function OnEnter():Void;
+    function OnEnter():Void;
     /**
         Returns the text color of a DTextEntry.
 		
@@ -63,7 +63,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function GetTextColor():Color;
+    function GetTextColor():Color;
     /**
         Called by the DTextEntry when a list of autocompletion options is requested. Meant to be overridden.
 		
@@ -107,7 +107,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
     @:hook 
-    public function GetAutoComplete(inputText:String):AnyTable;
+    function GetAutoComplete(inputText:String):AnyTable;
     /**
         Returns the contents of the DTextEntry as a number.
 		
@@ -115,7 +115,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function GetFloat():Float;
+    function GetFloat():Float;
     /**
         ***INTERNAL** You really should be using DTextEntry: GetAutoComplete instead.
 		
@@ -127,7 +127,7 @@ extern class DTextEntry extends TextEntry {
     **/
     @:deprecated("INTERNAL: You really should be using DTextEntry: GetAutoComplete instead.")
      
-    public function OpenAutoComplete(tab:AnyTable):Void;
+    function OpenAutoComplete(tab:AnyTable):Void;
     /**
         Returns whether this DTextEntry is being edited or not. (i.e. has focus)
 		
@@ -135,7 +135,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function IsEditing():Bool;
+    function IsEditing():Bool;
     /**
         Similar to DTextEntry:GetFloat, but rounds the value to the nearest integer.
 		
@@ -143,7 +143,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function GetInt():Float;
+    function GetInt():Float;
     /**
         Allow you to add a hint.
 		
@@ -153,7 +153,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetPlaceholderText(?text:String):Void;
+    function SetPlaceholderText(?text:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -165,7 +165,7 @@ extern class DTextEntry extends TextEntry {
     **/
     @:deprecated("INTERNAL")
      
-    public function OnTextChanged(noMenuRemoval:Bool):Void;
+    function OnTextChanged(noMenuRemoval:Bool):Void;
     /**
         Returns whether pressing Enter can cause the panel to lose focus. Note that a multiline DTextEntry cannot be escaped using the Enter key even when this function returns true.
 		
@@ -173,7 +173,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function GetEnterAllowed():Bool;
+    function GetEnterAllowed():Bool;
     /**
         Called whenever the DTextEntry gains focus.
 		
@@ -196,7 +196,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
     @:hook 
-    public function OnGetFocus():Void;
+    function OnGetFocus():Void;
     /**
         Sets the cursor's color in DTextEntry (the blinking line).
 		
@@ -236,7 +236,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetCursorColor(color:AnyTable):Void;
+    function SetCursorColor(color:AnyTable):Void;
     /**
         Sets the text of the DTextEntry and calls DTextEntry:OnValueChange.
 		
@@ -246,7 +246,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetValue(text:String):Void;
+    function SetValue(text:String):Void;
     /**
         Sets whether or not to decline non-numeric characters as input. 
 		
@@ -272,7 +272,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetNumeric(numericOnly:Bool):Void;
+    function SetNumeric(numericOnly:Bool):Void;
     /**
         Returns whether a string is numeric or not. Always returns false if the DTextEntry:SetNumeric is set to false.
 		
@@ -285,7 +285,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function CheckNumeric(strValue:String):Bool;
+    function CheckNumeric(strValue:String):Bool;
     /**
         Disables Input on a DTextEntry. This differs from DTextEntry:SetDisabled - SetEditable will not affect the appearance of the textbox.
 		
@@ -309,7 +309,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetEditable(enabled:Bool):Void;
+    function SetEditable(enabled:Bool):Void;
     /**
         Sets the text color of the DTextEntry.
 		
@@ -338,7 +338,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetTextColor(color:Color):Void;
+    function SetTextColor(color:Color):Void;
     /**
         Called whenever the value of the panel has been updated (whether by user input or otherwise). 
 		
@@ -372,7 +372,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function AllowInput(char:String):Bool;
+    function AllowInput(char:String):Bool;
     /**
         Sets whether we should fire DTextEntry:OnValueChange every time we type or delete a character or only when Enter is pressed.
 		
@@ -382,7 +382,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetUpdateOnType(updateOnType:Bool):Void;
+    function SetUpdateOnType(updateOnType:Bool):Void;
     /**
         Called internally when the text changes of the DTextEntry are applied. (And set to the attached console variable, if one is given) 
 		
@@ -398,7 +398,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function OnValueChange(value:String):Void;
+    function OnValueChange(value:String):Void;
     /**
         Returns whether the DTextEntry is set to run DTextEntry:OnValueChange every time a character is typed or deleted or only when Enter is pressed.
 		
@@ -406,7 +406,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function GetUpdateOnType():Bool;
+    function GetUpdateOnType():Bool;
     /**
         Changes the font of the DTextEntry.
 		
@@ -427,7 +427,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetFont(font:String):Void;
+    function SetFont(font:String):Void;
     /**
         ***Deprecated:** Use Panel: SetEnabled instead.
 		
@@ -439,7 +439,7 @@ extern class DTextEntry extends TextEntry {
     **/
     @:deprecated("Use Panel: SetEnabled instead.")
      
-    public function SetDisabled(disabled:Bool):Void;
+    function SetDisabled(disabled:Bool):Void;
     /**
         Return current color of panel placeholder
 		
@@ -447,7 +447,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function GetPlaceholderColor():AnyTable;
+    function GetPlaceholderColor():AnyTable;
     /**
         Returns whether only numeric characters (123456789.-) can be entered into the DTextEntry.
 		
@@ -455,7 +455,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function GetNumeric():Bool;
+    function GetNumeric():Bool;
     /**
         Called internally by DTextEntry:OnTextChanged when the user modifies the text in the DTextEntry. 
 		
@@ -463,7 +463,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
     @:hook 
-    public function OnChange():Void;
+    function OnChange():Void;
     /**
         Returns the cursor color of a DTextEntry.
 		
@@ -485,7 +485,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function GetCursorColor():Color;
+    function GetCursorColor():Color;
     /**
         Allow you to set placeholder color.
 		
@@ -495,7 +495,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
      
-    public function SetPlaceholderColor(?color:AnyTable):Void;
+    function SetPlaceholderColor(?color:AnyTable):Void;
     /**
         Called whenever a valid character is typed while the text entry is focused.
 		
@@ -510,7 +510,7 @@ extern class DTextEntry extends TextEntry {
     **/
     
     @:hook 
-    public function OnKeyCodeTyped(keyCode:KEY):Bool;
+    function OnKeyCodeTyped(keyCode:KEY):Bool;
     
 }
 

@@ -12,7 +12,7 @@ extern class DCheckBox extends DButton {
     **/
     
      
-    public function IsEditing():Bool;
+    function IsEditing():Bool;
     /**
         Sets the checked state of the checkbox. Does not call the checkbox's DCheckBox:OnChange and Panel:ConVarChanged methods, unlike DCheckBox:SetValue.
 		
@@ -22,7 +22,7 @@ extern class DCheckBox extends DButton {
     **/
     
      
-    public function SetChecked(checked:Bool):Void;
+    function SetChecked(checked:Bool):Void;
     /**
         Gets the checked state of the checkbox.
 		
@@ -30,7 +30,7 @@ extern class DCheckBox extends DButton {
     **/
     
      
-    public function GetChecked():Bool;
+    function GetChecked():Bool;
     /**
         Sets the checked state of the checkbox, and calls the checkbox's DCheckBox:OnChange and Panel:ConVarChanged methods.
 		
@@ -40,7 +40,7 @@ extern class DCheckBox extends DButton {
     **/
     
      
-    public function SetValue(checked:Bool):Void;
+    function SetValue(checked:Bool):Void;
     /**
         Called when the "checked" state is changed.
 		
@@ -69,13 +69,13 @@ extern class DCheckBox extends DButton {
     **/
     
     @:hook 
-    public function OnChange(bVal:Bool):Void;
+    function OnChange(bVal:Bool):Void;
     /**
         Toggles the checked state of the checkbox, and calls the checkbox's DCheckBox:OnChange and Panel:ConVarChanged methods. This is called by DCheckBox:DoClick.
     **/
     
      
-    public function Toggle():Void;
+    function Toggle():Void;
     
 }
 

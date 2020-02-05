@@ -14,7 +14,7 @@ extern class DProgress extends Panel {
     **/
     
      
-    public function SetFraction(fraction:Float):Void;
+    function SetFraction(fraction:Float):Void;
     /**
         Returns the progress bar's fraction. 0 is 0% and 1 is 100%.
 		
@@ -22,7 +22,7 @@ extern class DProgress extends Panel {
     **/
     
      
-    public function GetFraction():Float;
+    function GetFraction():Float;
     
 }
 

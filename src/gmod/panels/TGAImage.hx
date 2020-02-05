@@ -15,7 +15,7 @@ extern class TGAImage extends Panel {
     **/
     
      
-    public function LoadTGAImage(imageName:String, strPath:String):Void;
+    function LoadTGAImage(imageName:String, strPath:String):Void;
     
 }
 

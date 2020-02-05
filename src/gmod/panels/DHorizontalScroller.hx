@@ -16,7 +16,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function SetUseLiveDrag(newState:Bool):Void;
+    function SetUseLiveDrag(newState:Bool):Void;
     /**
         
 		
@@ -24,7 +24,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function GetOverlap():Float;
+    function GetOverlap():Float;
     /**
         
 		
@@ -34,13 +34,13 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function SetShowDropTargets(newState:Bool):Void;
+    function SetShowDropTargets(newState:Bool):Void;
     /**
         Called when the panel is scrolled.
     **/
     
     @:hook 
-    public function OnDragModified():Void;
+    function OnDragModified():Void;
     /**
         Adds a panel to the DHorizontalScroller.
 		
@@ -50,7 +50,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function AddPanel(pnl:Panel):Void;
+    function AddPanel(pnl:Panel):Void;
     /**
         Scrolls the DHorizontalScroller to given child panel.
 		
@@ -60,7 +60,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function ScrollToChild(target:Panel):Void;
+    function ScrollToChild(target:Panel):Void;
     /**
         Returns the internal canvas panel where the content of DHorizontalScroller are placed on.
 		
@@ -68,7 +68,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function GetCanvas():Panel;
+    function GetCanvas():Panel;
     /**
         Controls the spacing between elements of the horizontal scroller.
 		
@@ -78,7 +78,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function SetOverlap(overlap:Float):Void;
+    function SetOverlap(overlap:Float):Void;
     /**
         Same as DDragBase:MakeDroppable. TODO: Transclude or whatever to here?
 		
@@ -88,7 +88,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function MakeDroppable(name:String):Void;
+    function MakeDroppable(name:String):Void;
     /**
         Sets the scroll amount, automatically clamping the value.
 		
@@ -98,7 +98,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function SetScroll(scroll:Float):Void;
+    function SetScroll(scroll:Float):Void;
     /**
         
 		
@@ -106,7 +106,7 @@ extern class DHorizontalScroller extends Panel {
     **/
     
      
-    public function GetShowDropTargets():Bool;
+    function GetShowDropTargets():Bool;
     
 }
 

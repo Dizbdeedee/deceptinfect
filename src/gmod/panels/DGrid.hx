@@ -16,7 +16,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function AddItem(item:Panel):Void;
+    function AddItem(item:Panel):Void;
     /**
         Sorts the items in the grid. Does not visually update the grid, use Panel:InvalidateLayout for that.
 		
@@ -27,7 +27,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function SortByMember(key:String, ?desc:Bool):Void;
+    function SortByMember(key:String, ?desc:Bool):Void;
     /**
         Returns a list of panels in the grid.
 		
@@ -35,7 +35,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function GetItems():AnyTable;
+    function GetItems():AnyTable;
     /**
         Returns the height of each row of the DGrid, which is set by DGrid:SetRowHeight.
 		
@@ -43,7 +43,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function GetRowHeight():Float;
+    function GetRowHeight():Float;
     /**
         Returns the number of columns of this DGrid. Set by DGrid:SetCols.
 		
@@ -51,7 +51,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function GetCols():Float;
+    function GetCols():Float;
     /**
         Removes given panel from the DGrid:GetItems.
 		
@@ -62,7 +62,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function RemoveItem(item:Panel, ?bDontDelete:Bool):Void;
+    function RemoveItem(item:Panel, ?bDontDelete:Bool):Void;
     /**
         Returns the width of each column of the DGrid, which is set by DGrid:SetColWide.
 		
@@ -70,7 +70,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function GetColWide():Float;
+    function GetColWide():Float;
     /**
         Sets the number of columns this panel should have. 
 		
@@ -82,7 +82,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function SetCols(cols:Float):Void;
+    function SetCols(cols:Float):Void;
     /**
         Sets the height of each row. 
 		
@@ -94,7 +94,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function SetRowHeight(rowHeight:Float):Void;
+    function SetRowHeight(rowHeight:Float):Void;
     /**
         Sets the width of each column. 
 		
@@ -106,7 +106,7 @@ extern class DGrid extends Panel {
     **/
     
      
-    public function SetColWide(colWidth:Float):Void;
+    function SetColWide(colWidth:Float):Void;
     
 }
 

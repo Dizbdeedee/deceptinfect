@@ -16,7 +16,7 @@ extern class AchievementIcon extends Panel {
     **/
     
      
-    public function SetAchievement(id:Float):Void;
+    function SetAchievement(id:Float):Void;
     
 }
 

@@ -12,7 +12,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function Close():Void;
+    function Close():Void;
     /**
         Sets whether the frame should be draggable by the user. The DFrame can only be dragged from its title bar.
 		
@@ -22,7 +22,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetDraggable(draggable:Bool):Void;
+    function SetDraggable(draggable:Bool):Void;
     /**
         Gets whether the background behind the frame is being blurred.
 		
@@ -30,13 +30,13 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetBackgroundBlur():Bool;
+    function GetBackgroundBlur():Bool;
     /**
         Centers the frame relative to the whole screen and invalidates its layout. This overrides Panel:Center.
     **/
     
      
-    public function Center():Void;
+    function Center():Void;
     /**
         Sets the title of the frame.
 		
@@ -46,7 +46,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetTitle(title:String):Void;
+    function SetTitle(title:String):Void;
     /**
         Sets whether the frame is part of a derma menu or not. 
 		
@@ -58,7 +58,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetIsMenu(isMenu:Bool):Void;
+    function SetIsMenu(isMenu:Bool):Void;
     /**
         Adds or removes an icon on the left of the DFrame's title.
 		
@@ -68,7 +68,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetIcon(path:String):Void;
+    function SetIcon(path:String):Void;
     /**
         Determines whether or not the DFrame will be removed when it is closed. This is set with DFrame:SetDeleteOnClose.
 		
@@ -76,7 +76,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetDeleteOnClose():Bool;
+    function GetDeleteOnClose():Bool;
     /**
         Determines whether the DFrame's control box (close, minimise and maximise buttons) is displayed.
 		
@@ -86,7 +86,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function ShowCloseButton(show:Bool):Void;
+    function ShowCloseButton(show:Bool):Void;
     /**
         Determines whether or not the DFrame is removed when it is closed with DFrame:Close.
 		
@@ -96,7 +96,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetDeleteOnClose(shouldDelete:Bool):Void;
+    function SetDeleteOnClose(shouldDelete:Bool):Void;
     /**
         Gets the minimum width the DFrame can be resized to by the user. 
 		
@@ -106,7 +106,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetMinWidth():Float;
+    function GetMinWidth():Float;
     /**
         Gets whether or not the frame is draggable by the user.
 		
@@ -114,7 +114,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetDraggable():Bool;
+    function GetDraggable():Bool;
     /**
         Sets whether or not the DFrame can be resized by the user. 
 		
@@ -126,7 +126,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetSizable(sizeable:Bool):Void;
+    function SetSizable(sizeable:Bool):Void;
     /**
         Gets whether or not the DFrame can be resized by the user. 
 		
@@ -136,7 +136,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetSizable():Bool;
+    function GetSizable():Bool;
     /**
         Gets whether or not the shadow effect bordering the DFrame is being drawn.
 		
@@ -144,7 +144,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetPaintShadow():Bool;
+    function GetPaintShadow():Bool;
     /**
         Sets the minimum width the DFrame can be resized to by the user. 
 		
@@ -156,7 +156,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetMinWidth(minW:Float):Void;
+    function SetMinWidth(minW:Float):Void;
     /**
         Called when the DFrame is closed with DFrame:Close. This applies when the close button in the DFrame's control box is clicked. 
 		
@@ -164,7 +164,7 @@ extern class DFrame extends EditablePanel {
     **/
     
     @:hook 
-    public function OnClose():Void;
+    function OnClose():Void;
     /**
         Determines if the frame or one of its children has the screen focus.
 		
@@ -172,7 +172,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function IsActive():Bool;
+    function IsActive():Bool;
     /**
         Sets whether the DFrame is restricted to the boundaries of the screen resolution.
 		
@@ -182,7 +182,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetScreenLock(lock:Bool):Void;
+    function SetScreenLock(lock:Bool):Void;
     /**
         Sets whether or not the shadow effect bordering the DFrame should be drawn.
 		
@@ -192,7 +192,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetPaintShadow(shouldPaint:Bool):Void;
+    function SetPaintShadow(shouldPaint:Bool):Void;
     /**
         Returns the title of the frame.
 		
@@ -200,7 +200,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetTitle():String;
+    function GetTitle():String;
     /**
         Blurs background behind the frame.
 		
@@ -210,7 +210,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetBackgroundBlur(blur:Bool):Void;
+    function SetBackgroundBlur(blur:Bool):Void;
     /**
         Sets the minimum height the DFrame can be resized to by the user. 
 		
@@ -222,7 +222,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function SetMinHeight(minH:Float):Void;
+    function SetMinHeight(minH:Float):Void;
     /**
         Gets whether or not the DFrame is restricted to the boundaries of the screen resolution.
 		
@@ -230,7 +230,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetScreenLock():Bool;
+    function GetScreenLock():Bool;
     /**
         Gets the minimum height the DFrame can be resized to by the user. 
 		
@@ -240,7 +240,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetMinHeight():Float;
+    function GetMinHeight():Float;
     /**
         Gets whether or not the frame is part of a derma menu. This is set with DFrame:SetIsMenu.
 		
@@ -248,7 +248,7 @@ extern class DFrame extends EditablePanel {
     **/
     
      
-    public function GetIsMenu():Bool;
+    function GetIsMenu():Bool;
     
 }
 

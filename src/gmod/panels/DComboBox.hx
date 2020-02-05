@@ -64,7 +64,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function ChooseOptionID(index:Float):Void;
+    function ChooseOptionID(index:Float):Void;
     /**
         Selects a combo box option by its index and changes the text displayed at the top of the combo box.
 		
@@ -75,7 +75,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function ChooseOption(value:String, index:Float):Void;
+    function ChooseOption(value:String, index:Float):Void;
     /**
         Returns the currently selected option's text and data
 		
@@ -86,7 +86,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function GetSelected():DComboBoxGetSelectedReturn;
+    function GetSelected():DComboBoxGetSelectedReturn;
     /**
         Returns an option's data based on the given index.
 		
@@ -99,7 +99,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function GetOptionData(index:Float):Dynamic;
+    function GetOptionData(index:Float):Dynamic;
     /**
         Returns whether or not the combo box's menu is opened.
 		
@@ -107,7 +107,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function IsMenuOpen():Bool;
+    function IsMenuOpen():Bool;
     /**
         Called when an option in the combo box is selected.
 		
@@ -158,13 +158,13 @@ extern class DComboBox extends DButton {
     **/
     
     @:hook 
-    public function OnSelect(index:Float, value:String, data:Dynamic):Void;
+    function OnSelect(index:Float, value:String, data:Dynamic):Void;
     /**
         Closes the combo box menu. Called when the combo box is clicked while open.
     **/
     
      
-    public function CloseMenu():Void;
+    function CloseMenu():Void;
     /**
         Sets the text shown in the combo box when the menu is not collapsed.
 		
@@ -210,7 +210,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function SetValue(value:String):Void;
+    function SetValue(value:String):Void;
     /**
         Sets whether or not the items should be sorted alphabetically in the dropdown menu of the DComboBox. If set to false, items will appear in the order they were added by DComboBox:AddChoice calls. 
 		
@@ -222,7 +222,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function SetSortItems(sort:Bool):Void;
+    function SetSortItems(sort:Bool):Void;
     /**
         Returns an option's text based on the given data.
 		
@@ -235,7 +235,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function GetOptionTextByData(data:String):String;
+    function GetOptionTextByData(data:String):String;
     /**
         Returns the index (ID) of the currently selected option.
 		
@@ -243,13 +243,13 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function GetSelectedID():Float;
+    function GetSelectedID():Float;
     /**
         Clears the combo box's text value, choices, and data values.
     **/
     
      
-    public function Clear():Void;
+    function Clear():Void;
     /**
         Returns an whether the items in the dropdown will be alphabetically sorted or not. 
 		
@@ -259,7 +259,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function GetSortItems():Bool;
+    function GetSortItems():Bool;
     /**
         Returns an option's text based on the given index.
 		
@@ -294,13 +294,13 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function GetOptionText(index:Float):String;
+    function GetOptionText(index:Float):String;
     /**
         Opens the combo box drop down menu. Called when the combo box is clicked.
     **/
     
      
-    public function OpenMenu():Void;
+    function OpenMenu():Void;
     /**
         Adds a choice to the combo box.
 		
@@ -316,7 +316,7 @@ extern class DComboBox extends DButton {
     **/
     
      
-    public function AddChoice(value:String, ?data:Dynamic, ?select:Bool, ?icon:Panel):Float;
+    function AddChoice(value:String, ?data:Dynamic, ?select:Bool, ?icon:Panel):Float;
     
 }
 

@@ -12,7 +12,7 @@ extern class DColorCombo extends DPropertySheet {
     **/
     @:deprecated("INTERNAL")
      
-    public function BuildControls():Void;
+    function BuildControls():Void;
     /**
         Called when the value (color) of this panel was changed.
 		
@@ -22,7 +22,7 @@ extern class DColorCombo extends DPropertySheet {
     **/
     
     @:hook 
-    public function OnValueChanged(newcol:AnyTable):Void;
+    function OnValueChanged(newcol:AnyTable):Void;
     /**
         Returns true if the panel is currently being edited 
 		
@@ -32,7 +32,7 @@ extern class DColorCombo extends DPropertySheet {
     **/
     
      
-    public function IsEditing():Bool;
+    function IsEditing():Bool;
     /**
         Returns the color of the DColorCombo.
 		
@@ -40,7 +40,7 @@ extern class DColorCombo extends DPropertySheet {
     **/
     
      
-    public function GetColor():Color;
+    function GetColor():Color;
     /**
         Sets the color of this panel.
 		
@@ -50,7 +50,7 @@ extern class DColorCombo extends DPropertySheet {
     **/
     
      
-    public function SetColor(clr:Color):Void;
+    function SetColor(clr:Color):Void;
     
 }
 

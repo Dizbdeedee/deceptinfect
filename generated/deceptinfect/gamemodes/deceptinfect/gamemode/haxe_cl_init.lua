@@ -55,6 +55,7 @@ local Array = _hx_e()
 local IntIterator = _hx_e()
 local Main = _hx_e()
 local Math = _hx_e()
+local PanelHelper_DTree = _hx_e()
 local Reflect = _hx_e()
 local String = _hx_e()
 local Std = _hx_e()
@@ -82,6 +83,9 @@ __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
 __gmod_Hooks = _hx_e()
 __gmod_PairTools = _hx_e()
+__gmod_PanelInterface = _hx_e()
+__gmod_PanelTest = _hx_e()
+__gmod_TestTwo = _hx_e()
 __gmod_TableTools = _hx_e()
 __gmod_hooks_PLAYER = _hx_e()
 __gmod_safety_Safety = _hx_e()
@@ -520,6 +524,948 @@ Math.min = function(a,b)
     do return _G.math.min(a, b) end;
   end;
 end
+
+PanelHelper_DTree.new = function(x) 
+  local self = _hx_new(PanelHelper_DTree.prototype)
+  PanelHelper_DTree.super(self,x)
+  return self
+end
+PanelHelper_DTree.super = function(self,x) 
+  self["self"] = x;
+  x.DoClick = _hx_funcToField(_hx_bind(self,self.DoClick));
+  x.DoRightClick = _hx_funcToField(_hx_bind(self,self.DoRightClick));
+  x.OnNodeSelected = _hx_funcToField(_hx_bind(self,self.OnNodeSelected));
+end
+PanelHelper_DTree.__name__ = true
+PanelHelper_DTree.prototype = _hx_a();
+PanelHelper_DTree.prototype.SetShowIcons = function(self,show) 
+  self["self"]:SetShowIcons(show);
+end
+PanelHelper_DTree.prototype.AddNode = function(self,name,icon) 
+  do return self["self"]:AddNode(name, icon) end
+end
+PanelHelper_DTree.prototype.SetIndentSize = function(self,size) 
+  self["self"]:SetIndentSize(size);
+end
+PanelHelper_DTree.prototype.GetLineHeight = function(self) 
+  do return self["self"]:GetLineHeight() end
+end
+PanelHelper_DTree.prototype.GetSelectedItem = function(self) 
+  do return self["self"]:GetSelectedItem() end
+end
+PanelHelper_DTree.prototype.Root = function(self) 
+  do return self["self"]:Root() end
+end
+PanelHelper_DTree.prototype.ShowIcons = function(self) 
+  do return self["self"]:ShowIcons() end
+end
+PanelHelper_DTree.prototype.DoClick = function(self) 
+end
+PanelHelper_DTree.prototype.GetShowIcons = function(self) 
+  do return self["self"]:GetShowIcons() end
+end
+PanelHelper_DTree.prototype.GetClickOnDragHover = function(self) 
+  do return self["self"]:GetClickOnDragHover() end
+end
+PanelHelper_DTree.prototype.GetIndentSize = function(self) 
+  do return self["self"]:GetIndentSize() end
+end
+PanelHelper_DTree.prototype.SetClickOnDragHover = function(self,enable) 
+  self["self"]:SetClickOnDragHover(enable);
+end
+PanelHelper_DTree.prototype.ExpandTo = function(self,bExpand) 
+  self["self"]:ExpandTo(bExpand);
+end
+PanelHelper_DTree.prototype.LayoutTree = function(self) 
+  self["self"]:LayoutTree();
+end
+PanelHelper_DTree.prototype.SetExpanded = function(self,bExpand) 
+  self["self"]:SetExpanded(bExpand);
+end
+PanelHelper_DTree.prototype.MoveChildTo = function(self,child,pos) 
+  self["self"]:MoveChildTo(child, pos);
+end
+PanelHelper_DTree.prototype.DoRightClick = function(self) 
+end
+PanelHelper_DTree.prototype.SetSelectedItem = function(self,node) 
+  self["self"]:SetSelectedItem(node);
+end
+PanelHelper_DTree.prototype.ChildExpanded = function(self,bExpand) 
+  self["self"]:ChildExpanded(bExpand);
+end
+PanelHelper_DTree.prototype.SetLineHeight = function(self,h) 
+  self["self"]:SetLineHeight(h);
+end
+PanelHelper_DTree.prototype.OnNodeSelected = function(self,node) 
+end
+PanelHelper_DTree.prototype.AddItem = function(self,pnl) 
+  self["self"]:AddItem(pnl);
+end
+PanelHelper_DTree.prototype.GetVBar = function(self) 
+  do return self["self"]:GetVBar() end
+end
+PanelHelper_DTree.prototype.SetPadding = function(self,padding) 
+  self["self"]:SetPadding(padding);
+end
+PanelHelper_DTree.prototype.SetCanvas = function(self,canvas) 
+  self["self"]:SetCanvas(canvas);
+end
+PanelHelper_DTree.prototype.InnerWidth = function(self) 
+  do return self["self"]:InnerWidth() end
+end
+PanelHelper_DTree.prototype.GetPadding = function(self) 
+  do return self["self"]:GetPadding() end
+end
+PanelHelper_DTree.prototype.Rebuild = function(self) 
+  self["self"]:Rebuild();
+end
+PanelHelper_DTree.prototype.ScrollToChild = function(self,panel) 
+  self["self"]:ScrollToChild(panel);
+end
+PanelHelper_DTree.prototype.GetCanvas = function(self) 
+  do return self["self"]:GetCanvas() end
+end
+PanelHelper_DTree.prototype.SetBackgroundColor = function(self,color) 
+  self["self"]:SetBackgroundColor(color);
+end
+PanelHelper_DTree.prototype.GetDrawBackground = function(self) 
+  do return self["self"]:GetDrawBackground() end
+end
+PanelHelper_DTree.prototype.GetPaintBackground = function(self) 
+  do return self["self"]:GetPaintBackground() end
+end
+PanelHelper_DTree.prototype.SetDrawBackground = function(self,draw) 
+  self["self"]:SetDrawBackground(draw);
+end
+PanelHelper_DTree.prototype.GetDisabled = function(self) 
+  do return self["self"]:GetDisabled() end
+end
+PanelHelper_DTree.prototype.SetDisabled = function(self,disabled) 
+  self["self"]:SetDisabled(disabled);
+end
+PanelHelper_DTree.prototype.SetPaintBackground = function(self,paint) 
+  self["self"]:SetPaintBackground(paint);
+end
+PanelHelper_DTree.prototype.GetBackgroundColor = function(self) 
+  do return self["self"]:GetBackgroundColor() end
+end
+PanelHelper_DTree.prototype.StretchToParent = function(self,offsetLeft,offsetTop,offsetRight,offsetBottom) 
+  self["self"]:StretchToParent(offsetLeft, offsetTop, offsetRight, offsetBottom);
+end
+PanelHelper_DTree.prototype.GetZPos = function(self) 
+  do return self["self"]:GetZPos() end
+end
+PanelHelper_DTree.prototype.SetPopupStayAtBack = function(self,stayAtBack) 
+  self["self"]:SetPopupStayAtBack(stayAtBack);
+end
+PanelHelper_DTree.prototype.SetWide = function(self,width) 
+  self["self"]:SetWide(width);
+end
+PanelHelper_DTree.prototype.Paste = function(self) 
+  self["self"]:Paste();
+end
+PanelHelper_DTree.prototype.Exec = function(self,cmd) 
+  self["self"]:Exec(cmd);
+end
+PanelHelper_DTree.prototype.SetSize = function(self,width,height) 
+  self["self"]:SetSize(width, height);
+end
+PanelHelper_DTree.prototype.Refresh = function(self,ignoreCache) 
+  self["self"]:Refresh(ignoreCache);
+end
+PanelHelper_DTree.prototype.InsertFade = function(self,sustain,length) 
+  self["self"]:InsertFade(sustain, length);
+end
+PanelHelper_DTree.prototype.Remove = function(self) 
+  self["self"]:Remove();
+end
+PanelHelper_DTree.prototype.ConVarStringThink = function(self) 
+  self["self"]:ConVarStringThink();
+end
+PanelHelper_DTree.prototype.DragMousePress = function(self,mouseCode) 
+  self["self"]:DragMousePress(mouseCode);
+end
+PanelHelper_DTree.prototype.SetWorldClicker = function(self,enabled) 
+  self["self"]:SetWorldClicker(enabled);
+end
+PanelHelper_DTree.prototype.SetPaintFunction = function(self) 
+  self["self"]:SetPaintFunction();
+end
+PanelHelper_DTree.prototype.GWEN_SetSize = function(self,size) 
+  self["self"]:GWEN_SetSize(size);
+end
+PanelHelper_DTree.prototype.Undo = function(self) 
+  self["self"]:Undo();
+end
+PanelHelper_DTree.prototype.RebuildSpawnIcon = function(self) 
+  self["self"]:RebuildSpawnIcon();
+end
+PanelHelper_DTree.prototype.FocusNext = function(self) 
+  self["self"]:FocusNext();
+end
+PanelHelper_DTree.prototype.IsVisible = function(self) 
+  do return self["self"]:IsVisible() end
+end
+PanelHelper_DTree.prototype.CopyPos = function(self,base) 
+  self["self"]:CopyPos(base);
+end
+PanelHelper_DTree.prototype.PaintAt = function(self,posX,posY) 
+  self["self"]:PaintAt(posX, posY);
+end
+PanelHelper_DTree.prototype.DisableLerp = function(self) 
+  self["self"]:DisableLerp();
+end
+PanelHelper_DTree.prototype.GetCookie = function(self,cookieName,_default) 
+  do return self["self"]:GetCookie(cookieName, _default) end
+end
+PanelHelper_DTree.prototype.SetSelectionCanvas = function(self,selCanvas) 
+  self["self"]:SetSelectionCanvas(selCanvas);
+end
+PanelHelper_DTree.prototype.HasParent = function(self,parentPanel) 
+  do return self["self"]:HasParent(parentPanel) end
+end
+PanelHelper_DTree.prototype.IsMultiline = function(self) 
+  do return self["self"]:IsMultiline() end
+end
+PanelHelper_DTree.prototype.IsMouseInputEnabled = function(self) 
+  do return self["self"]:IsMouseInputEnabled() end
+end
+PanelHelper_DTree.prototype.SetModel = function(self,ModelPath,skin,bodygroups) 
+  self["self"]:SetModel(ModelPath, skin, bodygroups);
+end
+PanelHelper_DTree.prototype.SetSelectable = function(self,selectable) 
+  self["self"]:SetSelectable(selectable);
+end
+PanelHelper_DTree.prototype.SetBGColor = function(self,color,g,b,a) 
+  self["self"]:SetBGColor(color, g, b, a);
+end
+PanelHelper_DTree.prototype.SetVerticalScrollbarEnabled = function(self,display) 
+  self["self"]:SetVerticalScrollbarEnabled(display);
+end
+PanelHelper_DTree.prototype.LocalToScreen = function(self,posX,posY) 
+  do return self["self"]:LocalToScreen(posX, posY) end
+end
+PanelHelper_DTree.prototype.LoadControlsFromString = function(self,data) 
+  self["self"]:LoadControlsFromString(data);
+end
+PanelHelper_DTree.prototype.SetSkin = function(self,skinName) 
+  self["self"]:SetSkin(skinName);
+end
+PanelHelper_DTree.prototype.GetDockMargin = function(self) 
+  do return self["self"]:GetDockMargin() end
+end
+PanelHelper_DTree.prototype.Center = function(self) 
+  self["self"]:Center();
+end
+PanelHelper_DTree.prototype.SlideDown = function(self,Length) 
+  self["self"]:SlideDown(Length);
+end
+PanelHelper_DTree.prototype.AlignLeft = function(self,offset) 
+  self["self"]:AlignLeft(offset);
+end
+PanelHelper_DTree.prototype.GoToHistoryOffset = function(self,offset) 
+  self["self"]:GoToHistoryOffset(offset);
+end
+PanelHelper_DTree.prototype.Add = function(self,object) 
+  do return self["self"]:Add(object) end
+end
+PanelHelper_DTree.prototype.GetText = function(self) 
+  do return self["self"]:GetText() end
+end
+PanelHelper_DTree.prototype.SizeToContents = function(self) 
+  self["self"]:SizeToContents();
+end
+PanelHelper_DTree.prototype.GetValidReceiverSlot = function(self) 
+  do return self["self"]:GetValidReceiverSlot() end
+end
+PanelHelper_DTree.prototype.DrawDragHover = function(self,x,y,width,height) 
+  self["self"]:DrawDragHover(x, y, width, height);
+end
+PanelHelper_DTree.prototype.SetBGColorEx = function(self,r,g,b,a) 
+  self["self"]:SetBGColorEx(r, g, b, a);
+end
+PanelHelper_DTree.prototype.IsKeyboardInputEnabled = function(self) 
+  do return self["self"]:IsKeyboardInputEnabled() end
+end
+PanelHelper_DTree.prototype.Prepare = function(self) 
+  self["self"]:Prepare();
+end
+PanelHelper_DTree.prototype.SetName = function(self,name) 
+  self["self"]:SetName(name);
+end
+PanelHelper_DTree.prototype.ChildrenSize = function(self) 
+  do return self["self"]:ChildrenSize() end
+end
+PanelHelper_DTree.prototype.NoClipping = function(self,clip) 
+  self["self"]:NoClipping(clip);
+end
+PanelHelper_DTree.prototype.SetMinimumSize = function(self,minW,minH) 
+  self["self"]:SetMinimumSize(minW, minH);
+end
+PanelHelper_DTree.prototype.SetContentAlignment = function(self,alignment) 
+  self["self"]:SetContentAlignment(alignment);
+end
+PanelHelper_DTree.prototype.GetTextSize = function(self) 
+  do return self["self"]:GetTextSize() end
+end
+PanelHelper_DTree.prototype.SetAllowNonAsciiCharacters = function(self,allowed) 
+  self["self"]:SetAllowNonAsciiCharacters(allowed);
+end
+PanelHelper_DTree.prototype.GetName = function(self) 
+  do return self["self"]:GetName() end
+end
+PanelHelper_DTree.prototype.ResetAllFades = function(self,hold,expiredOnly,newSustain) 
+  self["self"]:ResetAllFades(hold, expiredOnly, newSustain);
+end
+PanelHelper_DTree.prototype.SetMouseInputEnabled = function(self,mouseInput) 
+  self["self"]:SetMouseInputEnabled(mouseInput);
+end
+PanelHelper_DTree.prototype.CutSelected = function(self) 
+  self["self"]:CutSelected();
+end
+PanelHelper_DTree.prototype.ParentToHUD = function(self) 
+  self["self"]:ParentToHUD();
+end
+PanelHelper_DTree.prototype.MoveAbove = function(self,panel,offset) 
+  self["self"]:MoveAbove(panel, offset);
+end
+PanelHelper_DTree.prototype.InvalidateParent = function(self,layoutNow) 
+  self["self"]:InvalidateParent(layoutNow);
+end
+PanelHelper_DTree.prototype.SetSteamID = function(self,steamid,size) 
+  self["self"]:SetSteamID(steamid, size);
+end
+PanelHelper_DTree.prototype.CopyBounds = function(self,base) 
+  self["self"]:CopyBounds(base);
+end
+PanelHelper_DTree.prototype.ToggleVisible = function(self) 
+  self["self"]:ToggleVisible();
+end
+PanelHelper_DTree.prototype.SetWidth = function(self,width) 
+  self["self"]:SetWidth(width);
+end
+PanelHelper_DTree.prototype.InvalidateLayout = function(self,layoutNow) 
+  self["self"]:InvalidateLayout(layoutNow);
+end
+PanelHelper_DTree.prototype.InsertClickableTextStart = function(self,signalValue) 
+  self["self"]:InsertClickableTextStart(signalValue);
+end
+PanelHelper_DTree.prototype.GetContentSize = function(self) 
+  do return self["self"]:GetContentSize() end
+end
+PanelHelper_DTree.prototype.SetToFullHeight = function(self) 
+  self["self"]:SetToFullHeight();
+end
+PanelHelper_DTree.prototype.ConVarChanged = function(self,newValue) 
+  self["self"]:ConVarChanged(newValue);
+end
+PanelHelper_DTree.prototype.Hide = function(self) 
+  self["self"]:Hide();
+end
+PanelHelper_DTree.prototype.DoModal = function(self) 
+  self["self"]:DoModal();
+end
+PanelHelper_DTree.prototype.SetCookie = function(self,cookieName,value) 
+  self["self"]:SetCookie(cookieName, value);
+end
+PanelHelper_DTree.prototype.SetAutoDelete = function(self,autoDelete) 
+  self["self"]:SetAutoDelete(autoDelete);
+end
+PanelHelper_DTree.prototype.SetWrap = function(self,wrap) 
+  self["self"]:SetWrap(wrap);
+end
+PanelHelper_DTree.prototype.NewObjectCallback = function(self,objectName,callbackName) 
+  self["self"]:NewObjectCallback(objectName, callbackName);
+end
+PanelHelper_DTree.prototype.Find = function(self,panelName) 
+  do return self["self"]:Find(panelName) end
+end
+PanelHelper_DTree.prototype.MouseCapture = function(self,doCapture) 
+  self["self"]:MouseCapture(doCapture);
+end
+PanelHelper_DTree.prototype.SetTextInset = function(self,insetX,insetY) 
+  self["self"]:SetTextInset(insetX, insetY);
+end
+PanelHelper_DTree.prototype.GetPos = function(self) 
+  do return self["self"]:GetPos() end
+end
+PanelHelper_DTree.prototype.SetMultiline = function(self,multiline) 
+  self["self"]:SetMultiline(multiline);
+end
+PanelHelper_DTree.prototype.StretchBottomTo = function(self,tgtPanel,offset) 
+  self["self"]:StretchBottomTo(tgtPanel, offset);
+end
+PanelHelper_DTree.prototype.GWEN_SetDock = function(self,dockState) 
+  self["self"]:GWEN_SetDock(dockState);
+end
+PanelHelper_DTree.prototype.DeleteCookie = function(self,cookieName) 
+  self["self"]:DeleteCookie(cookieName);
+end
+PanelHelper_DTree.prototype.DrawSelections = function(self) 
+  self["self"]:DrawSelections();
+end
+PanelHelper_DTree.prototype.GoForward = function(self) 
+  self["self"]:GoForward();
+end
+PanelHelper_DTree.prototype.IsMarkedForDeletion = function(self) 
+  do return self["self"]:IsMarkedForDeletion() end
+end
+PanelHelper_DTree.prototype.CopyWidth = function(self,base) 
+  self["self"]:CopyWidth(base);
+end
+PanelHelper_DTree.prototype.GetAlpha = function(self) 
+  do return self["self"]:GetAlpha() end
+end
+PanelHelper_DTree.prototype.GetSize = function(self) 
+  do return self["self"]:GetSize() end
+end
+PanelHelper_DTree.prototype.Queue = function(self) 
+  self["self"]:Queue();
+end
+PanelHelper_DTree.prototype.GetTextInset = function(self) 
+  do return self["self"]:GetTextInset() end
+end
+PanelHelper_DTree.prototype.SetFontInternal = function(self,fontName) 
+  self["self"]:SetFontInternal(fontName);
+end
+PanelHelper_DTree.prototype.GetTall = function(self) 
+  do return self["self"]:GetTall() end
+end
+PanelHelper_DTree.prototype.InsertColorChange = function(self,r,g,b,a) 
+  self["self"]:InsertColorChange(r, g, b, a);
+end
+PanelHelper_DTree.prototype.RunJavascript = function(self,js) 
+  self["self"]:RunJavascript(js);
+end
+PanelHelper_DTree.prototype.GetSelectedChildren = function(self) 
+  do return self["self"]:GetSelectedChildren() end
+end
+PanelHelper_DTree.prototype.SetDropTarget = function(self,x,y,width,height) 
+  self["self"]:SetDropTarget(x, y, width, height);
+end
+PanelHelper_DTree.prototype.GetFont = function(self) 
+  do return self["self"]:GetFont() end
+end
+PanelHelper_DTree.prototype.SetTooltipPanel = function(self,tooltipPanel) 
+  self["self"]:SetTooltipPanel(tooltipPanel);
+end
+PanelHelper_DTree.prototype.MoveToAfter = function(self,siblingPanel) 
+  do return self["self"]:MoveToAfter(siblingPanel) end
+end
+PanelHelper_DTree.prototype.StartBoxSelection = function(self) 
+  self["self"]:StartBoxSelection();
+end
+PanelHelper_DTree.prototype.GetSkin = function(self) 
+  do return self["self"]:GetSkin() end
+end
+PanelHelper_DTree.prototype.GWEN_SetHorizontalAlign = function(self,hAlign) 
+  self["self"]:GWEN_SetHorizontalAlign(hAlign);
+end
+PanelHelper_DTree.prototype.SelectAllText = function(self) 
+  self["self"]:SelectAllText();
+end
+PanelHelper_DTree.prototype.AlignRight = function(self,offset) 
+  self["self"]:AlignRight(offset);
+end
+PanelHelper_DTree.prototype.SetExpensiveShadow = function(self,distance,Color) 
+  self["self"]:SetExpensiveShadow(distance, Color);
+end
+PanelHelper_DTree.prototype.SetHeight = function(self,height) 
+  self["self"]:SetHeight(height);
+end
+PanelHelper_DTree.prototype.SetPaintBorderEnabled = function(self,paintBorder) 
+  self["self"]:SetPaintBorderEnabled(paintBorder);
+end
+PanelHelper_DTree.prototype.DragHoverEnd = function(self) 
+  self["self"]:DragHoverEnd();
+end
+PanelHelper_DTree.prototype.ConVarNumberThink = function(self) 
+  self["self"]:ConVarNumberThink();
+end
+PanelHelper_DTree.prototype.MakePopup = function(self) 
+  self["self"]:MakePopup();
+end
+PanelHelper_DTree.prototype.SizeToChildren = function(self,sizeW,sizeH) 
+  self["self"]:SizeToChildren(sizeW, sizeH);
+end
+PanelHelper_DTree.prototype.GetParent = function(self) 
+  do return self["self"]:GetParent() end
+end
+PanelHelper_DTree.prototype.SetAlpha = function(self,alpha) 
+  self["self"]:SetAlpha(alpha);
+end
+PanelHelper_DTree.prototype.SetPlayer = function(self,player,size) 
+  self["self"]:SetPlayer(player, size);
+end
+PanelHelper_DTree.prototype.SetZPos = function(self,zIndex) 
+  self["self"]:SetZPos(zIndex);
+end
+PanelHelper_DTree.prototype.SetTooltip = function(self,str) 
+  self["self"]:SetTooltip(str);
+end
+PanelHelper_DTree.prototype.GWEN_SetText = function(self,txt) 
+  self["self"]:GWEN_SetText(txt);
+end
+PanelHelper_DTree.prototype.EndBoxSelection = function(self) 
+  do return self["self"]:EndBoxSelection() end
+end
+PanelHelper_DTree.prototype.UpdateHTMLTexture = function(self) 
+  self["self"]:UpdateHTMLTexture();
+end
+PanelHelper_DTree.prototype.SetDrawOnTop = function(self,drawOnTop) 
+  self["self"]:SetDrawOnTop(drawOnTop);
+end
+PanelHelper_DTree.prototype.HasChildren = function(self) 
+  do return self["self"]:HasChildren() end
+end
+PanelHelper_DTree.prototype.Distance = function(self,tgtPanel) 
+  do return self["self"]:Distance(tgtPanel) end
+end
+PanelHelper_DTree.prototype.SetCursor = function(self,cursor) 
+  self["self"]:SetCursor(cursor);
+end
+PanelHelper_DTree.prototype.GetChildPosition = function(self,pnl) 
+  do return self["self"]:GetChildPosition(pnl) end
+end
+PanelHelper_DTree.prototype.IsOurChild = function(self,childPanel) 
+  do return self["self"]:IsOurChild(childPanel) end
+end
+PanelHelper_DTree.prototype.StretchRightTo = function(self,tgtPanel,offset) 
+  self["self"]:StretchRightTo(tgtPanel, offset);
+end
+PanelHelper_DTree.prototype.UnselectAll = function(self) 
+  self["self"]:UnselectAll();
+end
+PanelHelper_DTree.prototype.SetToolTip = function(self) 
+  self["self"]:SetToolTip();
+end
+PanelHelper_DTree.prototype.GetChildrenInRect = function(self,x,y,w,h) 
+  do return self["self"]:GetChildrenInRect(x, y, w, h) end
+end
+PanelHelper_DTree.prototype.DragClick = function(self) 
+  do return self["self"]:DragClick() end
+end
+PanelHelper_DTree.prototype.GetWide = function(self) 
+  do return self["self"]:GetWide() end
+end
+PanelHelper_DTree.prototype.AlignTop = function(self,offset) 
+  self["self"]:AlignTop(offset);
+end
+PanelHelper_DTree.prototype.SetVisible = function(self,visible) 
+  self["self"]:SetVisible(visible);
+end
+PanelHelper_DTree.prototype.FocusPrevious = function(self) 
+  self["self"]:FocusPrevious();
+end
+PanelHelper_DTree.prototype.HasFocus = function(self) 
+  do return self["self"]:HasFocus() end
+end
+PanelHelper_DTree.prototype.SizeToContentsX = function(self,addVal) 
+  self["self"]:SizeToContentsX(addVal);
+end
+PanelHelper_DTree.prototype.GetClosestChild = function(self,x,y) 
+  do return self["self"]:GetClosestChild(x, y) end
+end
+PanelHelper_DTree.prototype.ChildCount = function(self) 
+  do return self["self"]:ChildCount() end
+end
+PanelHelper_DTree.prototype.RequestFocus = function(self) 
+  self["self"]:RequestFocus();
+end
+PanelHelper_DTree.prototype.SetEnabled = function(self,enable) 
+  self["self"]:SetEnabled(enable);
+end
+PanelHelper_DTree.prototype.GetSelectionCanvas = function(self) 
+  do return self["self"]:GetSelectionCanvas() end
+end
+PanelHelper_DTree.prototype.SetAnimationEnabled = function(self,enable) 
+  self["self"]:SetAnimationEnabled(enable);
+end
+PanelHelper_DTree.prototype.GetCookieName = function(self) 
+  do return self["self"]:GetCookieName() end
+end
+PanelHelper_DTree.prototype.GetChild = function(self,childIndex) 
+  self["self"]:GetChild(childIndex);
+end
+PanelHelper_DTree.prototype.SetFGColorEx = function(self,r,g,b,a) 
+  self["self"]:SetFGColorEx(r, g, b, a);
+end
+PanelHelper_DTree.prototype.GetChildren = function(self) 
+  do return self["self"]:GetChildren() end
+end
+PanelHelper_DTree.prototype.LocalCursorPos = function(self) 
+  do return self["self"]:LocalCursorPos() end
+end
+PanelHelper_DTree.prototype.GetCaretPos = function(self) 
+  do return self["self"]:GetCaretPos() end
+end
+PanelHelper_DTree.prototype.MoveBelow = function(self,panel,offset) 
+  self["self"]:MoveBelow(panel, offset);
+end
+PanelHelper_DTree.prototype.MoveToBefore = function(self,siblingPanel) 
+  do return self["self"]:MoveToBefore(siblingPanel) end
+end
+PanelHelper_DTree.prototype.SetTabPosition = function(self,position) 
+  self["self"]:SetTabPosition(position);
+end
+PanelHelper_DTree.prototype.SelectNone = function(self) 
+  self["self"]:SelectNone();
+end
+PanelHelper_DTree.prototype.RebuildSpawnIconEx = function(self,data) 
+  self["self"]:RebuildSpawnIconEx(data);
+end
+PanelHelper_DTree.prototype.DrawOutlinedRect = function(self) 
+  self["self"]:DrawOutlinedRect();
+end
+PanelHelper_DTree.prototype.LoadTGAImage = function(self,imageName,strPath) 
+  self["self"]:LoadTGAImage(imageName, strPath);
+end
+PanelHelper_DTree.prototype.GWEN_SetPosition = function(self,pos) 
+  self["self"]:GWEN_SetPosition(pos);
+end
+PanelHelper_DTree.prototype.SetPaintedManually = function(self,paintedManually) 
+  self["self"]:SetPaintedManually(paintedManually);
+end
+PanelHelper_DTree.prototype.AlignBottom = function(self,offset) 
+  self["self"]:AlignBottom(offset);
+end
+PanelHelper_DTree.prototype.AppendText = function(self,txt) 
+  self["self"]:AppendText(txt);
+end
+PanelHelper_DTree.prototype.Receiver = function(self,name,func,menu) 
+  self["self"]:Receiver(name, func, menu);
+end
+PanelHelper_DTree.prototype.GetNumLines = function(self) 
+  do return self["self"]:GetNumLines() end
+end
+PanelHelper_DTree.prototype.SaveUndoState = function(self) 
+  self["self"]:SaveUndoState();
+end
+PanelHelper_DTree.prototype.KillFocus = function(self) 
+  self["self"]:KillFocus();
+end
+PanelHelper_DTree.prototype.SetFocusTopLevel = function(self,state) 
+  self["self"]:SetFocusTopLevel(state);
+end
+PanelHelper_DTree.prototype.DistanceFrom = function(self,posX,posY) 
+  do return self["self"]:DistanceFrom(posX, posY) end
+end
+PanelHelper_DTree.prototype.AlphaTo = function(self,alpha,duration,delay,callback) 
+  self["self"]:AlphaTo(alpha, duration, delay, callback);
+end
+PanelHelper_DTree.prototype.AnimationThinkInternal = function(self) 
+  self["self"]:AnimationThinkInternal();
+end
+PanelHelper_DTree.prototype.SetURL = function(self,url) 
+  self["self"]:SetURL(url);
+end
+PanelHelper_DTree.prototype.SetCaretPos = function(self,offset) 
+  self["self"]:SetCaretPos(offset);
+end
+PanelHelper_DTree.prototype.NewAnimation = function(self,length,delay,ease,callback) 
+  do return self["self"]:NewAnimation(length, delay, ease, callback) end
+end
+PanelHelper_DTree.prototype.GetTable = function(self) 
+  do return self["self"]:GetTable() end
+end
+PanelHelper_DTree.prototype.GWEN_SetMin = function(self,minValue) 
+  self["self"]:GWEN_SetMin(minValue);
+end
+PanelHelper_DTree.prototype.IsSelected = function(self) 
+  do return self["self"]:IsSelected() end
+end
+PanelHelper_DTree.prototype.GetHTMLMaterial = function(self) 
+  do return self["self"]:GetHTMLMaterial() end
+end
+PanelHelper_DTree.prototype.Dock = function(self,dockType) 
+  self["self"]:Dock(dockType);
+end
+PanelHelper_DTree.prototype.SetRenderInScreenshots = function(self,renderInScreenshot) 
+  self["self"]:SetRenderInScreenshots(renderInScreenshot);
+end
+PanelHelper_DTree.prototype.SetCookieName = function(self,name) 
+  self["self"]:SetCookieName(name);
+end
+PanelHelper_DTree.prototype.ToggleSelection = function(self) 
+  self["self"]:ToggleSelection();
+end
+PanelHelper_DTree.prototype.GoBack = function(self) 
+  self["self"]:GoBack();
+end
+PanelHelper_DTree.prototype.Show = function(self) 
+  self["self"]:Show();
+end
+PanelHelper_DTree.prototype.SelectAllOnFocus = function(self) 
+  self["self"]:SelectAllOnFocus();
+end
+PanelHelper_DTree.prototype.Droppable = function(self,name) 
+  do return self["self"]:Droppable(name) end
+end
+PanelHelper_DTree.prototype.LoadControlsFromFile = function(self,path) 
+  self["self"]:LoadControlsFromFile(path);
+end
+PanelHelper_DTree.prototype.SizeTo = function(self,sizeW,sizeH,time,delay,ease,callback) 
+  self["self"]:SizeTo(sizeW, sizeH, time, delay, ease, callback);
+end
+PanelHelper_DTree.prototype.OpenURL = function(self,URL) 
+  self["self"]:OpenURL(URL);
+end
+PanelHelper_DTree.prototype.HasHierarchicalFocus = function(self) 
+  do return self["self"]:HasHierarchicalFocus() end
+end
+PanelHelper_DTree.prototype.IsLoading = function(self) 
+  do return self["self"]:IsLoading() end
+end
+PanelHelper_DTree.prototype.CenterVertical = function(self,fraction) 
+  self["self"]:CenterVertical(fraction);
+end
+PanelHelper_DTree.prototype.GetCookieNumber = function(self,cookieName,_default) 
+  do return self["self"]:GetCookieNumber(cookieName, _default) end
+end
+PanelHelper_DTree.prototype.SizeToContentsY = function(self,addVal) 
+  self["self"]:SizeToContentsY(addVal);
+end
+PanelHelper_DTree.prototype.MoveTo = function(self,posX,posY,time,delay,ease,callback) 
+  self["self"]:MoveTo(posX, posY, time, delay, ease, callback);
+end
+PanelHelper_DTree.prototype.SetTall = function(self,height) 
+  self["self"]:SetTall(height);
+end
+PanelHelper_DTree.prototype.SetKeyboardInputEnabled = function(self,enable) 
+  self["self"]:SetKeyboardInputEnabled(enable);
+end
+PanelHelper_DTree.prototype.AnimTail = function(self) 
+  do return self["self"]:AnimTail() end
+end
+PanelHelper_DTree.prototype.GotoTextStart = function(self) 
+  self["self"]:GotoTextStart();
+end
+PanelHelper_DTree.prototype.GWEN_SetMax = function(self,maxValue) 
+  self["self"]:GWEN_SetMax(maxValue);
+end
+PanelHelper_DTree.prototype.SetHTML = function(self,code) 
+  self["self"]:SetHTML(code);
+end
+PanelHelper_DTree.prototype.MoveToFront = function(self) 
+  self["self"]:MoveToFront();
+end
+PanelHelper_DTree.prototype.Clear = function(self) 
+  self["self"]:Clear();
+end
+PanelHelper_DTree.prototype.SetParent = function(self,parent) 
+  self["self"]:SetParent(parent);
+end
+PanelHelper_DTree.prototype.InsertClickableTextEnd = function(self) 
+  self["self"]:InsertClickableTextEnd();
+end
+PanelHelper_DTree.prototype.InvalidateChildren = function(self,recursive) 
+  self["self"]:InvalidateChildren(recursive);
+end
+PanelHelper_DTree.prototype.SetPaintBackgroundEnabled = function(self,paintBackground) 
+  self["self"]:SetPaintBackgroundEnabled(paintBackground);
+end
+PanelHelper_DTree.prototype.SetKeyBoardInputEnabled = function(self,keyboardInput) 
+  self["self"]:SetKeyBoardInputEnabled(keyboardInput);
+end
+PanelHelper_DTree.prototype.SetAchievement = function(self,id) 
+  self["self"]:SetAchievement(id);
+end
+PanelHelper_DTree.prototype.CopyHeight = function(self,base) 
+  self["self"]:CopyHeight(base);
+end
+PanelHelper_DTree.prototype.DockMargin = function(self,marginLeft,marginTop,marginRight,marginBottom) 
+  self["self"]:DockMargin(marginLeft, marginTop, marginRight, marginBottom);
+end
+PanelHelper_DTree.prototype.CopySelected = function(self) 
+  self["self"]:CopySelected();
+end
+PanelHelper_DTree.prototype.SetTerm = function(self,delay) 
+  self["self"]:SetTerm(delay);
+end
+PanelHelper_DTree.prototype.LoadGWENString = function(self,str) 
+  self["self"]:LoadGWENString(str);
+end
+PanelHelper_DTree.prototype.IsChildHovered = function(self,immediate) 
+  do return self["self"]:IsChildHovered(immediate) end
+end
+PanelHelper_DTree.prototype.GetDockPadding = function(self) 
+  do return self["self"]:GetDockPadding() end
+end
+PanelHelper_DTree.prototype.ColorTo = function(self,color,length,delay,callback) 
+  self["self"]:ColorTo(color, length, delay, callback);
+end
+PanelHelper_DTree.prototype.SetPos = function(self,posX,posY) 
+  self["self"]:SetPos(posX, posY);
+end
+PanelHelper_DTree.prototype.DrawTexturedRect = function(self) 
+  self["self"]:DrawTexturedRect();
+end
+PanelHelper_DTree.prototype.IsDragging = function(self) 
+  do return self["self"]:IsDragging() end
+end
+PanelHelper_DTree.prototype.Command = function(self,command) 
+  self["self"]:Command(command);
+end
+PanelHelper_DTree.prototype.IsWorldClicker = function(self) 
+  do return self["self"]:IsWorldClicker() end
+end
+PanelHelper_DTree.prototype.SelectAll = function(self) 
+  self["self"]:SelectAll();
+end
+PanelHelper_DTree.prototype.DragHover = function(self,HoverTime) 
+  self["self"]:DragHover(HoverTime);
+end
+PanelHelper_DTree.prototype.LerpPositions = function(self,speed,easeOut) 
+  self["self"]:LerpPositions(speed, easeOut);
+end
+PanelHelper_DTree.prototype.NumSelectedChildren = function(self) 
+  do return self["self"]:NumSelectedChildren() end
+end
+PanelHelper_DTree.prototype.IsEnabled = function(self) 
+  do return self["self"]:IsEnabled() end
+end
+PanelHelper_DTree.prototype.SetText = function(self,text) 
+  self["self"]:SetText(text);
+end
+PanelHelper_DTree.prototype.IsHovered = function(self) 
+  do return self["self"]:IsHovered() end
+end
+PanelHelper_DTree.prototype.DockPadding = function(self,paddingLeft,paddingTop,paddingRight,paddingBottom) 
+  self["self"]:DockPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+end
+PanelHelper_DTree.prototype.MoveBy = function(self,moveX,moveY,time,delay,ease,callback) 
+  self["self"]:MoveBy(moveX, moveY, time, delay, ease, callback);
+end
+PanelHelper_DTree.prototype.MoveRightOf = function(self,panel,offset) 
+  self["self"]:MoveRightOf(panel, offset);
+end
+PanelHelper_DTree.prototype.ApplyGWEN = function(self,GWENTable) 
+  self["self"]:ApplyGWEN(GWENTable);
+end
+PanelHelper_DTree.prototype.SetActionFunction = function(self,func) 
+  self["self"]:SetActionFunction(func);
+end
+PanelHelper_DTree.prototype.MoveToBack = function(self) 
+  self["self"]:MoveToBack();
+end
+PanelHelper_DTree.prototype.PaintManual = function(self) 
+  self["self"]:PaintManual();
+end
+PanelHelper_DTree.prototype.SetConVar = function(self,convar) 
+  self["self"]:SetConVar(convar);
+end
+PanelHelper_DTree.prototype.SlideUp = function(self,Length) 
+  self["self"]:SlideUp(Length);
+end
+PanelHelper_DTree.prototype.DragMouseRelease = function(self,mouseCode) 
+  do return self["self"]:DragMouseRelease(mouseCode) end
+end
+PanelHelper_DTree.prototype.CursorPos = function(self) 
+  do return self["self"]:CursorPos() end
+end
+PanelHelper_DTree.prototype.GWEN_SetControlName = function(self,name) 
+  self["self"]:GWEN_SetControlName(name);
+end
+PanelHelper_DTree.prototype.ScreenToLocal = function(self,screenX,screenY) 
+  do return self["self"]:ScreenToLocal(screenX, screenY) end
+end
+PanelHelper_DTree.prototype.GetDock = function(self) 
+  do return self["self"]:GetDock() end
+end
+PanelHelper_DTree.prototype.DrawTextEntryText = function(self,textCol,highlightCol,cursorCol) 
+  self["self"]:DrawTextEntryText(textCol, highlightCol, cursorCol);
+end
+PanelHelper_DTree.prototype.Valid = function(self) 
+  do return self["self"]:Valid() end
+end
+PanelHelper_DTree.prototype.GetBounds = function(self) 
+  do return self["self"]:GetBounds() end
+end
+PanelHelper_DTree.prototype.SetDragParent = function(self,parent) 
+  self["self"]:SetDragParent(parent);
+end
+PanelHelper_DTree.prototype.SetSelected = function(self,selected) 
+  self["self"]:SetSelected(selected);
+end
+PanelHelper_DTree.prototype.SetCommand = function(self) 
+  self["self"]:SetCommand();
+end
+PanelHelper_DTree.prototype.GetValue = function(self) 
+  do return self["self"]:GetValue() end
+end
+PanelHelper_DTree.prototype.LoadGWENFile = function(self,filename,path) 
+  self["self"]:LoadGWENFile(filename, path);
+end
+PanelHelper_DTree.prototype.CopyBase = function(self,srcPanel) 
+  self["self"]:CopyBase(srcPanel);
+end
+PanelHelper_DTree.prototype.IsSelectionCanvas = function(self) 
+  do return self["self"]:IsSelectionCanvas() end
+end
+PanelHelper_DTree.prototype.GWEN_SetCheckboxText = function(self,txt) 
+  self["self"]:GWEN_SetCheckboxText(txt);
+end
+PanelHelper_DTree.prototype.SetDrawLanguageID = function(self,visible) 
+  self["self"]:SetDrawLanguageID(visible);
+end
+PanelHelper_DTree.prototype.MoveLeftOf = function(self,panel,offset) 
+  self["self"]:MoveLeftOf(panel, offset);
+end
+PanelHelper_DTree.prototype.CenterHorizontal = function(self,fraction) 
+  self["self"]:CenterHorizontal(fraction);
+end
+PanelHelper_DTree.prototype.GetClassName = function(self) 
+  do return self["self"]:GetClassName() end
+end
+PanelHelper_DTree.prototype.IsDraggable = function(self) 
+  do return self["self"]:IsDraggable() end
+end
+PanelHelper_DTree.prototype.DrawFilledRect = function(self) 
+  self["self"]:DrawFilledRect();
+end
+PanelHelper_DTree.prototype.SetFGColor = function(self,color,g,b,a) 
+  self["self"]:SetFGColor(color, g, b, a);
+end
+PanelHelper_DTree.prototype.IsValid = function(self) 
+  do return self["self"]:IsValid() end
+end
+PanelHelper_DTree.prototype.PostMessage = function(self,messageName,valueType,value) 
+  self["self"]:PostMessage(messageName, valueType, value);
+end
+PanelHelper_DTree.prototype.IsSelectable = function(self) 
+  do return self["self"]:IsSelectable() end
+end
+PanelHelper_DTree.prototype.SetSpawnIcon = function(self,icon) 
+  self["self"]:SetSpawnIcon(icon);
+end
+PanelHelper_DTree.prototype.SetToolTipPanel = function(self) 
+  self["self"]:SetToolTipPanel();
+end
+PanelHelper_DTree.prototype.AddText = function(self) 
+  self["self"]:AddText();
+end
+PanelHelper_DTree.prototype.PositionLabel = function(self,lblWidth,x,y,lbl,panelObj) 
+  do return self["self"]:PositionLabel(lblWidth, x, y, lbl, panelObj) end
+end
+PanelHelper_DTree.prototype.NewObject = function(self,objectName) 
+  self["self"]:NewObject(objectName);
+end
+PanelHelper_DTree.prototype.SetDrawLanguageIDAtLeft = function(self,left) 
+  self["self"]:SetDrawLanguageIDAtLeft(left);
+end
+PanelHelper_DTree.prototype.GWEN_SetMargin = function(self,margins) 
+  self["self"]:GWEN_SetMargin(margins);
+end
+PanelHelper_DTree.prototype.Stop = function(self) 
+  self["self"]:Stop();
+end
+PanelHelper_DTree.prototype.GotoTextEnd = function(self) 
+  self["self"]:GotoTextEnd();
+end
+
+PanelHelper_DTree.prototype.__class__ =  PanelHelper_DTree
+PanelHelper_DTree.__super__ = {} or a
+setmetatable(PanelHelper_DTree.prototype,{__index={} or a.prototype})
 
 Reflect.new = {}
 Reflect.__name__ = true
@@ -1560,6 +2506,39 @@ __gmod_PairTools.ipairsIterator = function(table)
     do return _G.select(2, next(table, i)) ~= nil end;
   end}) end;
 end
+
+__gmod_PanelInterface.new = {}
+__gmod_PanelInterface.__name__ = true
+
+__gmod_PanelTest.new = {}
+__gmod_PanelTest.__name__ = true
+__gmod_PanelTest.prototype = _hx_a();
+__gmod_PanelTest.prototype.test = function(self) 
+end
+
+__gmod_PanelTest.prototype.__class__ =  __gmod_PanelTest
+
+__gmod_TestTwo.new = function(x) 
+  local self = _hx_new(__gmod_TestTwo.prototype)
+  __gmod_TestTwo.super(self,x)
+  return self
+end
+__gmod_TestTwo.super = function(self,x) 
+  PanelHelper_DTree.super(self,x);
+end
+__gmod_TestTwo.__name__ = true
+__gmod_TestTwo.prototype = _hx_a();
+__gmod_TestTwo.prototype.DoClick = function(self) 
+  __haxe_Log.trace("DtreeOverride", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/PanelInterface.hx",lineNumber=22,className="gmod.TestTwo",methodName="DoClick"}));
+end
+__gmod_TestTwo.prototype.DoRightClick = function(self) 
+end
+__gmod_TestTwo.prototype.OnNodeSelected = function(self,node) 
+end
+
+__gmod_TestTwo.prototype.__class__ =  __gmod_TestTwo
+__gmod_TestTwo.__super__ = PanelHelper_DTree
+setmetatable(__gmod_TestTwo.prototype,{__index=PanelHelper_DTree.prototype})
 
 __gmod_TableTools.new = {}
 __gmod_TableTools.__name__ = true

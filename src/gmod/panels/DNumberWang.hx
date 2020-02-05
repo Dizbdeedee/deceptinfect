@@ -14,7 +14,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function SetMin(min:Float):Void;
+    function SetMin(min:Float):Void;
     /**
         Internal function which is called when the number selector value is changed. This function is empty by default so it needs to be overridden in order to provide functionality.
 		
@@ -83,7 +83,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
     @:hook 
-    public function OnValueChanged(val:Float):Void;
+    function OnValueChanged(val:Float):Void;
     /**
         ***Deprecated:** 
 		
@@ -93,7 +93,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     @:deprecated("")
      
-    public function GetFloatValue():Float;
+    function GetFloatValue():Float;
     /**
         Resizes the panel so that its width and height fit all of the content inside.
 		
@@ -103,7 +103,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function SizeToContents():Void;
+    function SizeToContents():Void;
     /**
         Sets the maximum numeric value allowed by the number selector.
 		
@@ -113,7 +113,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function SetMax(max:Float):Void;
+    function SetMax(max:Float):Void;
     /**
         Sets the value of the number selector based on the given fraction number.
 		
@@ -151,7 +151,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function SetFraction(val:Float):Void;
+    function SetFraction(val:Float):Void;
     /**
         ***Deprecated:** 
 		
@@ -161,7 +161,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     @:deprecated("")
      
-    public function GetTextArea():Panel;
+    function GetTextArea():Panel;
     /**
         Sets the value of the DNumberWang and triggers DNumberWang:OnValueChanged
 		
@@ -171,7 +171,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function SetValue(val:Float):Void;
+    function SetValue(val:Float):Void;
     /**
         Sets the minimum and maximum value allowed by the number selector.
 		
@@ -182,7 +182,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function SetMinMax(min:Float, max:Float):Void;
+    function SetMinMax(min:Float, max:Float):Void;
     /**
         Returns the minimum numeric value allowed by the number selector.
 		
@@ -190,13 +190,13 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function GetMin():Float;
+    function GetMin():Float;
     /**
         Hides the number selector arrows.
     **/
     
      
-    public function HideWang():Void;
+    function HideWang():Void;
     /**
         Returns the maximum numeric value allowed by the number selector.
 		
@@ -204,7 +204,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function GetMax():Float;
+    function GetMax():Float;
     /**
         Returns the amount of decimal places allowed in the number selector, set by DNumberWang:SetDecimals
 		
@@ -212,7 +212,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function GetDecimals():Float;
+    function GetDecimals():Float;
     /**
         Returns a fraction representing the current number selector value to number selector min/max range ratio. If argument val is supplied, that number will be computed instead.
 		
@@ -249,7 +249,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function GetFraction(val:Float):Void;
+    function GetFraction(val:Float):Void;
     /**
         ***Deprecated:** 
 		
@@ -261,7 +261,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     @:deprecated("")
      
-    public function SetFloatValue(val:Float):Void;
+    function SetFloatValue(val:Float):Void;
     /**
         Returns the numeric value inside the number selector.
 		
@@ -269,7 +269,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function GetValue():Float;
+    function GetValue():Float;
     /**
         Sets the amount of decimal places allowed in the number selector.
 		
@@ -294,7 +294,7 @@ extern class DNumberWang extends DTextEntry {
     **/
     
      
-    public function SetDecimals(num:Float):Void;
+    function SetDecimals(num:Float):Void;
     
 }
 

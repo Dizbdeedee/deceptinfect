@@ -18,7 +18,7 @@ extern class EditablePanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function LoadControlsFromString(data:String):Void;
+    function LoadControlsFromString(data:String):Void;
     /**
         Sets the panel that owns this FocusNavGroup to be the root in the focus traversal hierarchy.
 		
@@ -28,7 +28,7 @@ extern class EditablePanel {
     **/
     
      
-    public function SetFocusTopLevel(state:Bool):Void;
+    function SetFocusTopLevel(state:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -42,7 +42,7 @@ extern class EditablePanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function LoadControlsFromFile(path:String):Void;
+    function LoadControlsFromFile(path:String):Void;
     
 }
 

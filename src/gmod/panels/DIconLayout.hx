@@ -16,7 +16,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function GetStretchWidth():Bool;
+    function GetStretchWidth():Bool;
     /**
         Sets the horizontal (x) spacing between children within the DIconLayout. You must call DIconLayout:Layout in order for the changes to take effect.
 		
@@ -26,7 +26,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function SetSpaceX(xSpacing:Float):Void;
+    function SetSpaceX(xSpacing:Float):Void;
     /**
         Returns the size of the border.
 		
@@ -34,7 +34,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function GetBorder():Float;
+    function GetBorder():Float;
     /**
         Returns the direction that it will be layed out, using the DOCK enumerations.
 		
@@ -42,13 +42,13 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function GetLayoutDir():Float;
+    function GetLayoutDir():Float;
     /**
         Called when the panel is modified.
     **/
     
     @:hook 
-    public function OnModified():Void;
+    function OnModified():Void;
     /**
         ***INTERNAL** 
 		
@@ -56,7 +56,7 @@ extern class DIconLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function LayoutIcons_TOP():Void;
+    function LayoutIcons_TOP():Void;
     /**
         Sets the internal border (padding) within the DIconLayout. This will not change its size, only the positioning of children. You must call DIconLayout:Layout in order for the changes to take effect.
 		
@@ -66,7 +66,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function SetBorder(width:Float):Void;
+    function SetBorder(width:Float):Void;
     /**
         If set to true, the icon layout will stretch its height to fit all the children. 
 		
@@ -78,7 +78,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function SetStretchHeight(do_stretch:Bool):Void;
+    function SetStretchHeight(do_stretch:Bool):Void;
     /**
         If set to true, the icon layout will stretch its width to fit all the children. 
 		
@@ -90,7 +90,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function SetStretchWidth(stretchW:Bool):Void;
+    function SetStretchWidth(stretchW:Bool):Void;
     /**
         Returns the distance between two 'icons' on the X axis.
 		
@@ -98,7 +98,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function GetSpaceX():Float;
+    function GetSpaceX():Float;
     /**
         Sets the direction that it will be layed out, using the DOCK_ Enums. 
 		
@@ -110,7 +110,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function SetLayoutDir(direction:DOCK):Void;
+    function SetLayoutDir(direction:DOCK):Void;
     /**
         Returns whether the icon layout will stretch its height to fit all the children. 
 		
@@ -120,7 +120,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function GetStretchHeight():Bool;
+    function GetStretchHeight():Bool;
     /**
         Copies the contents (Child elements) of another DIconLayout to itself.
 		
@@ -130,7 +130,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function CopyContents(from:Panel):Void;
+    function CopyContents(from:Panel):Void;
     /**
         Sets the vertical (y) spacing between children within the DIconLayout. You must call DIconLayout:Layout in order for the changes to take effect.
 		
@@ -140,7 +140,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function SetSpaceY(ySpacing:Float):Void;
+    function SetSpaceY(ySpacing:Float):Void;
     /**
         Creates a replica of the DIconLayout it is called on.
 		
@@ -148,7 +148,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function Copy():Panel;
+    function Copy():Panel;
     /**
         Returns distance between two "Icons" on the Y axis.
 		
@@ -156,7 +156,7 @@ extern class DIconLayout extends DDragBase {
     **/
     
      
-    public function GetSpaceY():Float;
+    function GetSpaceY():Float;
     /**
         ***INTERNAL** 
 		
@@ -164,13 +164,13 @@ extern class DIconLayout extends DDragBase {
     **/
     @:deprecated("INTERNAL")
      
-    public function LayoutIcons_LEFT():Void;
+    function LayoutIcons_LEFT():Void;
     /**
         Resets layout vars before calling Panel:InvalidateLayout. This is called when children are added or removed, and must be called when the spacing, border or layout direction is changed.
     **/
     
      
-    public function Layout():Void;
+    function Layout():Void;
     
 }
 

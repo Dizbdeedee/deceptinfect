@@ -9,6 +9,7 @@ using haxe.macro.ComplexTypeTools;
 using haxe.macro.ExprTools.ExprArrayTools;
 using StringTools;
 #end
+@:keep()
 class OverrideHelper {
     #if macro   
     static function isHook(x:Field):Bool {
@@ -38,6 +39,12 @@ class OverrideHelper {
                 if (isHook(field)) {
                     field.access.remove(Access.APublic);
                     field.access.push(Access.APrivate);
+
+                    field.meta.push({
+                        name : ":deprecated",
+                        pos: Context.currentPos(),
+                        params : [macro "Hook function. Do not call"]
+                    });
                 }
                 handleMultiReturn(field);
             }

@@ -12,7 +12,7 @@ extern class DIconBrowser extends DScrollPanel {
     **/
     
      
-    public function GetManual():Bool;
+    function GetManual():Bool;
     /**
         ***INTERNAL** 
 		
@@ -24,7 +24,7 @@ extern class DIconBrowser extends DScrollPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetSelectedIcon(str:String):Void;
+    function SetSelectedIcon(str:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -32,7 +32,7 @@ extern class DIconBrowser extends DScrollPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function Fill():Void;
+    function Fill():Void;
     /**
         Selects an icon from file path
 		
@@ -42,19 +42,19 @@ extern class DIconBrowser extends DScrollPanel {
     **/
     
      
-    public function SelectIcon(icon:String):Void;
+    function SelectIcon(icon:String):Void;
     /**
         Called when the selected icon was changed. Use DIconBrowser:GetSelectedIcon to get the selected icon's filepath.
     **/
     
     @:hook 
-    public function OnChange():Void;
+    function OnChange():Void;
     /**
         Scrolls the browser to the selected icon
     **/
     
      
-    public function ScrollToSelected():Void;
+    function ScrollToSelected():Void;
     /**
         A simple unused search feature, hides all icons that do not contain given text in their file path.
 		
@@ -64,7 +64,7 @@ extern class DIconBrowser extends DScrollPanel {
     **/
     
      
-    public function FilterByText(text:String):Void;
+    function FilterByText(text:String):Void;
     /**
         Sets whether or not the browser should automatically fill itself with icons.
 		
@@ -74,7 +74,7 @@ extern class DIconBrowser extends DScrollPanel {
     **/
     
      
-    public function SetManual(manual:Bool):Void;
+    function SetManual(manual:Bool):Void;
     /**
         Returns the currently selected icon's file path.
 		
@@ -82,7 +82,7 @@ extern class DIconBrowser extends DScrollPanel {
     **/
     
      
-    public function GetSelectedIcon():String;
+    function GetSelectedIcon():String;
     /**
         ***INTERNAL** 
 		
@@ -90,7 +90,7 @@ extern class DIconBrowser extends DScrollPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function OnChangeInternal():Void;
+    function OnChangeInternal():Void;
     
 }
 

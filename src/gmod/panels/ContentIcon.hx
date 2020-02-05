@@ -16,7 +16,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function SetName(name:String):Void;
+    function SetName(name:String):Void;
     /**
         Sets the internal "name" for the content icon, usually a class name for an entity.
 		
@@ -26,7 +26,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function SetSpawnName(name:String):Void;
+    function SetSpawnName(name:String):Void;
     /**
         Sets whether the content item is admin only. This makes the icon to display a admin icon in the top left corner of the icon.
 		
@@ -36,7 +36,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function SetAdminOnly(adminOnly:Bool):Void;
+    function SetAdminOnly(adminOnly:Bool):Void;
     /**
         Sets the material to be displayed as the content icon.
 		
@@ -46,7 +46,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function SetMaterial(path:String):Void;
+    function SetMaterial(path:String):Void;
     /**
         Returns the internal "name" for the content icon, usually a class name for an entity.
 		
@@ -54,7 +54,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function GetSpawnName():String;
+    function GetSpawnName():String;
     /**
         Returns the content type used to save and restore the content icon in a spawnlist.
 		
@@ -62,7 +62,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function GetContentType():String;
+    function GetContentType():String;
     /**
         Returns a table of weapon classes for the content icon with "NPC" content type to be randomly chosen from when user tries to spawn the NPC.
 		
@@ -70,7 +70,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function GetNPCWeapon():AnyTable;
+    function GetNPCWeapon():AnyTable;
     /**
         Sets a table of weapon classes for the content icon with "NPC" content type to be randomly chosen from when user tries to spawn the NPC.
 		
@@ -80,7 +80,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function SetNPCWeapon(weapons:AnyTable):Void;
+    function SetNPCWeapon(weapons:AnyTable):Void;
     /**
         Sets the content type used to save and restore the content icon in a spawnlist.
 		
@@ -90,13 +90,13 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function SetContentType(type:String):Void;
+    function SetContentType(type:String):Void;
     /**
         A hook for override, by default does nothing. Called when user right clicks on the content icon, you are supposed to open a DermaMenu here with additional options.
     **/
     
      
-    public function OpenMenu():Void;
+    function OpenMenu():Void;
     /**
         Returns the color set by ContentIcon:SetColor
 		
@@ -104,7 +104,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function GetColor():Color;
+    function GetColor():Color;
     /**
         Sets the color for the content icon. Currently is not used by the content icon panel.
 		
@@ -114,7 +114,7 @@ extern class ContentIcon extends DButton {
     **/
     
      
-    public function SetColor(clr:Color):Void;
+    function SetColor(clr:Color):Void;
     
 }
 

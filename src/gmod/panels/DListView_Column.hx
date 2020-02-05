@@ -37,7 +37,7 @@ extern class DListView_Column extends DPanel {
     **/
     
      
-    public function SetWidth(width:Float):Void;
+    function SetWidth(width:Float):Void;
     /**
         Sets the fixed width of the column.
 		
@@ -70,7 +70,7 @@ extern class DListView_Column extends DPanel {
     **/
     
      
-    public function SetFixedWidth(width:Float):Void;
+    function SetFixedWidth(width:Float):Void;
     /**
         Sets the minimum width of a column.
 		
@@ -103,7 +103,7 @@ extern class DListView_Column extends DPanel {
     **/
     
      
-    public function SetMinWidth(width:Float):Void;
+    function SetMinWidth(width:Float):Void;
     /**
         Sets the maximum width of a column.
 		
@@ -136,7 +136,7 @@ extern class DListView_Column extends DPanel {
     **/
     
      
-    public function SetMaxWidth(width:Float):Void;
+    function SetMaxWidth(width:Float):Void;
     /**
         Sets the text alignment for the column
 		
@@ -146,7 +146,7 @@ extern class DListView_Column extends DPanel {
     **/
     
      
-    public function SetTextAlign(alignment:Float):Void;
+    function SetTextAlign(alignment:Float):Void;
     
 }
 

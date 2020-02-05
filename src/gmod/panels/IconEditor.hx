@@ -16,7 +16,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function Refresh():Void;
+    function Refresh():Void;
     /**
         Applies the top-down view camera settings for the model in the DAdjustableModelPanel. 
 		
@@ -24,7 +24,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function AboveLayout():Void;
+    function AboveLayout():Void;
     /**
         Sets the editor's model and icon from an entity. Alternative to IconEditor:SetIcon, with uses a SpawnIcon. 
 		
@@ -36,7 +36,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function SetFromEntity(ent:Entity):Void;
+    function SetFromEntity(ent:Entity):Void;
     /**
         ***INTERNAL** 
 		
@@ -44,7 +44,7 @@ extern class IconEditor extends DFrame {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetDefaultLighting():Void;
+    function SetDefaultLighting():Void;
     /**
         Applies the front view camera settings for the model in the DAdjustableModelPanel. 
 		
@@ -52,7 +52,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function FullFrontalLayout():Void;
+    function FullFrontalLayout():Void;
     /**
         ***INTERNAL** 
 		
@@ -64,7 +64,7 @@ extern class IconEditor extends DFrame {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateEntity(ent:Entity):Void;
+    function UpdateEntity(ent:Entity):Void;
     /**
         Sets the SpawnIcon to modify. You should call Panel:Refresh immediately after this, as the user will not be able to make changes to the icon beforehand.
 		
@@ -74,7 +74,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function SetIcon(icon:Panel):Void;
+    function SetIcon(icon:Panel):Void;
     /**
         Re-renders the SpawnIcon. 
 		
@@ -82,7 +82,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function RenderIcon():Void;
+    function RenderIcon():Void;
     /**
         Applies the right side view camera settings for the model in the DAdjustableModelPanel. 
 		
@@ -90,7 +90,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function RightLayout():Void;
+    function RightLayout():Void;
     /**
         Applies the best camera settings for the model in the DAdjustableModelPanel, using the values returned by PositionSpawnIcon. 
 		
@@ -98,7 +98,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function BestGuessLayout():Void;
+    function BestGuessLayout():Void;
     /**
         ***INTERNAL** 
 		
@@ -110,7 +110,7 @@ extern class IconEditor extends DFrame {
     **/
     @:deprecated("INTERNAL")
      
-    public function FillAnimations(ent:Entity):Void;
+    function FillAnimations(ent:Entity):Void;
     /**
         Places the camera at the origin (0,0,0), relative to the entity, in the DAdjustableModelPanel. 
 		
@@ -118,7 +118,7 @@ extern class IconEditor extends DFrame {
     **/
     
      
-    public function OriginLayout():Void;
+    function OriginLayout():Void;
     
 }
 

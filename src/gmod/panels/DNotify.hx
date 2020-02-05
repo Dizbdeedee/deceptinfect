@@ -14,13 +14,13 @@ extern class DNotify extends Panel {
     **/
     
      
-    public function SetSpacing(spacing:Float):Void;
+    function SetSpacing(spacing:Float):Void;
     /**
         ***INTERNAL** 
     **/
     @:deprecated("INTERNAL")
      
-    public function Shuffle():Void;
+    function Shuffle():Void;
     /**
         Adds a panel to the notification
 		
@@ -31,7 +31,7 @@ extern class DNotify extends Panel {
     **/
     
      
-    public function AddItem(pnl:Panel, ?lifeLength:Float):Void;
+    function AddItem(pnl:Panel, ?lifeLength:Float):Void;
     /**
         Returns all the items added with DNotify:AddItem.
 		
@@ -39,7 +39,7 @@ extern class DNotify extends Panel {
     **/
     
      
-    public function GetItems():AnyTable;
+    function GetItems():AnyTable;
     /**
         Returns the current alignment of this notification panel. Set by DNotify:SetAlignment.
 		
@@ -47,7 +47,7 @@ extern class DNotify extends Panel {
     **/
     
      
-    public function GetAlignment():Float;
+    function GetAlignment():Float;
     /**
         Sets the alignment of the child panels in the notification
 		
@@ -57,7 +57,7 @@ extern class DNotify extends Panel {
     **/
     
      
-    public function SetAlignment(alignment:Float):Void;
+    function SetAlignment(alignment:Float):Void;
     /**
         Returns the spacing between items set by DNotify:SetSpacing.
 		
@@ -65,7 +65,7 @@ extern class DNotify extends Panel {
     **/
     
      
-    public function GetSpacing():Float;
+    function GetSpacing():Float;
     /**
         Sets the display time in seconds for the DNotify.
 		
@@ -75,7 +75,7 @@ extern class DNotify extends Panel {
     **/
     
      
-    public function SetLife(time:Float):Void;
+    function SetLife(time:Float):Void;
     /**
         Returns the display time in seconds of the DNotify. This is set with DNotify:SetLife.
 		
@@ -83,7 +83,7 @@ extern class DNotify extends Panel {
     **/
     
      
-    public function GetLife():Float;
+    function GetLife():Float;
     
 }
 

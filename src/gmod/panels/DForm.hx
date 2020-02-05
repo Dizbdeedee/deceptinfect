@@ -18,7 +18,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function CheckBox(label:String, convar:String):Panel;
+    function CheckBox(label:String, convar:String):Panel;
     /**
         Sets the title (header) name of the DForm. This is Label until set.
 		
@@ -28,7 +28,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function SetName(name:String):Void;
+    function SetName(name:String):Void;
     /**
         Adds one or two items to the DForm. If this method is called with only one argument, it is added to the bottom of the form. If two arguments are passed, they are placed side-by-side at the bottom of the form. 
 		
@@ -41,7 +41,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function AddItem(left:Panel, ?right:Panel):Void;
+    function AddItem(left:Panel, ?right:Panel):Void;
     /**
         Adds a DListBox onto the DForm
 		
@@ -57,7 +57,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function ListBox(label:String):DFormListBoxReturn;
+    function ListBox(label:String):DFormListBoxReturn;
     /**
         Creates a DPanelSelect and docks it to the top of the DForm.
 		
@@ -65,7 +65,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function PanelSelect():Panel;
+    function PanelSelect():Panel;
     /**
         Adds a DLabel onto the DForm. Unlike DForm:Help, this is indented and is colored blue, depending on the derma skin.
 		
@@ -78,7 +78,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function ControlHelp(help:String):Panel;
+    function ControlHelp(help:String):Panel;
     /**
         Adds a DLabel onto the DForm as a helper
 		
@@ -91,7 +91,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function Help(help:String):Panel;
+    function Help(help:String):Panel;
     /**
         Adds a DButton onto the DForm
 		
@@ -106,7 +106,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function Button(text:String, concmd:String, args:Rest<Dynamic>):Panel;
+    function Button(text:String, concmd:String, args:Rest<Dynamic>):Panel;
     /**
         ***Deprecated:** 
 		
@@ -114,7 +114,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     @:deprecated("")
      
-    public function Rebuild():Void;
+    function Rebuild():Void;
     /**
         Adds a DNumSlider onto the DForm
 		
@@ -131,7 +131,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function NumSlider(label:String, convar:String, min:Float, max:Float, ?decimals:Float):Panel;
+    function NumSlider(label:String, convar:String, min:Float, max:Float, ?decimals:Float):Panel;
     /**
         Adds a DComboBox onto the DForm
 		
@@ -168,7 +168,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function ComboBox(title:String, convar:String):DFormComboBoxReturn;
+    function ComboBox(title:String, convar:String):DFormComboBoxReturn;
     /**
         Adds a DTextEntry to a DForm
 		
@@ -185,7 +185,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function TextEntry(label:String, convar:String):DFormTextEntryReturn;
+    function TextEntry(label:String, convar:String):DFormTextEntryReturn;
     /**
         Adds a DNumberWang onto the DForm
 		
@@ -205,7 +205,7 @@ extern class DForm extends DCollapsibleCategory {
     **/
     
      
-    public function NumberWang(label:String, convar:String, min:Float, max:Float, ?decimals:Float):DFormNumberWangReturn;
+    function NumberWang(label:String, convar:String, min:Float, max:Float, ?decimals:Float):DFormNumberWangReturn;
     
 }
 

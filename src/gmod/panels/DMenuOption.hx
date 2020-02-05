@@ -14,7 +14,7 @@ extern class DMenuOption extends DButton {
     **/
     
      
-    public function SetChecked(checked:Bool):Void;
+    function SetChecked(checked:Bool):Void;
     /**
         Returns the checked state of DMenuOption.
 		
@@ -22,13 +22,13 @@ extern class DMenuOption extends DButton {
     **/
     
      
-    public function GetChecked():Bool;
+    function GetChecked():Bool;
     /**
         Toggles the checked state of DMenuOption. Does not respect DMenuOption:GetIsCheckable.
     **/
     
      
-    public function ToggleCheck():Void;
+    function ToggleCheck():Void;
     /**
         
 		
@@ -36,7 +36,7 @@ extern class DMenuOption extends DButton {
     **/
     
      
-    public function GetMenu():Panel;
+    function GetMenu():Panel;
     /**
         Sets whether the DMenuOption is a checkbox option or a normal button option.
 		
@@ -46,7 +46,7 @@ extern class DMenuOption extends DButton {
     **/
     
      
-    public function SetIsCheckable(checkable:Bool):Void;
+    function SetIsCheckable(checkable:Bool):Void;
     /**
         Returns whether the DMenuOption is a checkbox option or a normal button option.
 		
@@ -54,7 +54,7 @@ extern class DMenuOption extends DButton {
     **/
     
      
-    public function GetIsCheckable():Bool;
+    function GetIsCheckable():Bool;
     /**
         Called whenever the DMenuOption's checked state changes.
 		
@@ -64,7 +64,7 @@ extern class DMenuOption extends DButton {
     **/
     
     @:hook 
-    public function OnChecked(checked:Bool):Void;
+    function OnChecked(checked:Bool):Void;
     /**
         
 		
@@ -74,7 +74,7 @@ extern class DMenuOption extends DButton {
     **/
     
      
-    public function SetMenu(pnl:Panel):Void;
+    function SetMenu(pnl:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -86,7 +86,7 @@ extern class DMenuOption extends DButton {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetSubMenu(menu:Panel):Void;
+    function SetSubMenu(menu:Panel):Void;
     /**
         Creates a sub DMenu and returns it. Has no duplicate call protection.
 		
@@ -94,7 +94,7 @@ extern class DMenuOption extends DButton {
     **/
     
      
-    public function AddSubMenu():Panel;
+    function AddSubMenu():Panel;
     
 }
 

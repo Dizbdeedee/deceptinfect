@@ -14,7 +14,7 @@ extern class DHTMLControls extends Panel {
     **/
     
      
-    public function SetButtonColor(clr:Color):Void;
+    function SetButtonColor(clr:Color):Void;
     /**
         ***INTERNAL** 
 		
@@ -26,25 +26,25 @@ extern class DHTMLControls extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateHistory(url:String):Void;
+    function UpdateHistory(url:String):Void;
     /**
         ***INTERNAL** 
     **/
     @:deprecated("INTERNAL")
      
-    public function FinishedLoading():Void;
+    function FinishedLoading():Void;
     /**
         ***INTERNAL** 
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateNavButtonStatus():Void;
+    function UpdateNavButtonStatus():Void;
     /**
         ***INTERNAL** 
     **/
     @:deprecated("INTERNAL")
      
-    public function StartedLoading():Void;
+    function StartedLoading():Void;
     /**
         Sets the DHTML element to control with these DHTMLControls.
 		
@@ -54,7 +54,7 @@ extern class DHTMLControls extends Panel {
     **/
     
      
-    public function SetHTML(dhtml:Panel):Void;
+    function SetHTML(dhtml:Panel):Void;
     
 }
 

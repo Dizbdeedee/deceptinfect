@@ -16,7 +16,7 @@ extern class DPanelList extends DPanel {
     **/
     
      
-    public function SetSpacing(Distance:Float):Void;
+    function SetSpacing(Distance:Float):Void;
     /**
         Adds a existing panel to the end of DPanelList.
 		
@@ -27,7 +27,7 @@ extern class DPanelList extends DPanel {
     **/
     
      
-    public function AddItem(pnl:Panel, ?state:String):Void;
+    function AddItem(pnl:Panel, ?state:String):Void;
     /**
         Sets the offset of the lists items from the panel borders
 		
@@ -37,7 +37,7 @@ extern class DPanelList extends DPanel {
     **/
     
      
-    public function SetPadding(Offset:Float):Void;
+    function SetPadding(Offset:Float):Void;
     /**
         
 		
@@ -48,7 +48,7 @@ extern class DPanelList extends DPanel {
     **/
     
      
-    public function InsertAtTop(insert:Panel, strLineState:String):Void;
+    function InsertAtTop(insert:Panel, strLineState:String):Void;
     /**
         Returns all panels has added by DPanelList:AddItem
 		
@@ -56,7 +56,7 @@ extern class DPanelList extends DPanel {
     **/
     
      
-    public function GetItems():AnyTable;
+    function GetItems():AnyTable;
     /**
         Returns distance between list items set by DPanelList:SetSpacing
 		
@@ -64,7 +64,7 @@ extern class DPanelList extends DPanel {
     **/
     
      
-    public function GetSpacing():Float;
+    function GetSpacing():Float;
     /**
         Returns offset of list items from the panel borders set by DPanelList:SetPadding
 		
@@ -72,19 +72,19 @@ extern class DPanelList extends DPanel {
     **/
     
      
-    public function GetPadding():Float;
+    function GetPadding():Float;
     /**
         Enables/creates the vertical scroll bar so that the panel list can be scrolled through.
     **/
     
      
-    public function EnableVerticalScrollbar():Void;
+    function EnableVerticalScrollbar():Void;
     /**
         Removes all items.
     **/
     
      
-    public function CleanList():Void;
+    function CleanList():Void;
     
 }
 

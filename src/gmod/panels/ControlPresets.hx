@@ -16,7 +16,7 @@ extern class ControlPresets extends Panel {
     **/
     
      
-    public function SetLabel(name:String):Void;
+    function SetLabel(name:String):Void;
     /**
         Adds a convar to be managed by this control.
 		
@@ -26,7 +26,7 @@ extern class ControlPresets extends Panel {
     **/
     
      
-    public function AddConVar(convar:String):Void;
+    function AddConVar(convar:String):Void;
     /**
         Get a list of all Console Variables being managed by this panel.
 		
@@ -34,7 +34,7 @@ extern class ControlPresets extends Panel {
     **/
     
      
-    public function GetConVars():AnyTable;
+    function GetConVars():AnyTable;
     
 }
 

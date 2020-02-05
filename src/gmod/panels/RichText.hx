@@ -99,7 +99,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function InsertFade(sustain:Float, length:Float):Void;
+    function InsertFade(sustain:Float, length:Float):Void;
     /**
         Sets the visibility of the vertical scrollbar. 
 		
@@ -111,7 +111,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function SetVerticalScrollbarEnabled(?display:Bool):Void;
+    function SetVerticalScrollbarEnabled(?display:Bool):Void;
     /**
         Resets all text fades in a RichText element made with Panel:InsertFade.
 		
@@ -163,7 +163,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function ResetAllFades(hold:Bool, expiredOnly:Bool, newSustain:Float):Void;
+    function ResetAllFades(hold:Bool, expiredOnly:Bool, newSustain:Float):Void;
     /**
         Starts the insertion of clickable text for a RichText element. Any text appended with Panel:AppendText between this call and Panel:InsertClickableTextEnd will become clickable text. 
 		
@@ -230,7 +230,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function InsertClickableTextStart(signalValue:String):Void;
+    function InsertClickableTextStart(signalValue:String):Void;
     /**
         Sets the height of a RichText element to accommodate the text inside.
 		
@@ -271,7 +271,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function SetToFullHeight():Void;
+    function SetToFullHeight():Void;
     /**
         Sets the font used to render this panel's text. 
 		
@@ -313,7 +313,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function SetFontInternal(fontName:String):Void;
+    function SetFontInternal(fontName:String):Void;
     /**
         Inserts a color change in a RichText element, which affects the color of all text added with Panel:AppendText until another color change is applied.
 		
@@ -410,7 +410,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function InsertColorChange(r:Float, g:Float, b:Float, a:Float):Void;
+    function InsertColorChange(r:Float, g:Float, b:Float, a:Float):Void;
     /**
         Appends text to a RichText element. This does not automatically add a new line.
 		
@@ -420,7 +420,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function AppendText(txt:String):Void;
+    function AppendText(txt:String):Void;
     /**
         Returns the number of lines in a RichText. You must wait a couple frames before calling this after using Panel:AppendText or Panel:SetText, otherwise it will return the number of text lines before the text change.
 		
@@ -474,7 +474,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function GetNumLines():Float;
+    function GetNumLines():Float;
     /**
         Causes a RichText element to scroll to the top of its text.
 		
@@ -521,7 +521,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function GotoTextStart():Void;
+    function GotoTextStart():Void;
     /**
         Marks the end of a clickable text segment in a RichText element, started with Panel:InsertClickableTextStart.
 		
@@ -579,7 +579,7 @@ extern class RichText extends Panel {
     **/
     
      
-    public function InsertClickableTextEnd():Void;
+    function InsertClickableTextEnd():Void;
     /**
         Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
@@ -612,13 +612,13 @@ extern class RichText extends Panel {
     **/
     
      
-    public function SetText(text:String):Void;
+    function SetText(text:String):Void;
     /**
         Causes a RichText element to scroll to the bottom of its text.
     **/
     
      
-    public function GotoTextEnd():Void;
+    function GotoTextEnd():Void;
     
 }
 

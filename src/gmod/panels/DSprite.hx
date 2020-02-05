@@ -16,7 +16,7 @@ extern class DSprite extends DPanel {
     **/
     
      
-    public function SetMaterial(material:IMaterial):Void;
+    function SetMaterial(material:IMaterial):Void;
     /**
         
 		
@@ -24,7 +24,7 @@ extern class DSprite extends DPanel {
     **/
     
      
-    public function GetHandle():Vector;
+    function GetHandle():Vector;
     /**
         Sets the 2D rotation angle of the sprite, in the plane of the screen.
 		
@@ -34,7 +34,7 @@ extern class DSprite extends DPanel {
     **/
     
      
-    public function SetRotation(ang:Float):Void;
+    function SetRotation(ang:Float):Void;
     /**
         Gets the material the sprite is using.
 		
@@ -42,7 +42,7 @@ extern class DSprite extends DPanel {
     **/
     
      
-    public function GetMaterial():IMaterial;
+    function GetMaterial():IMaterial;
     /**
         Seems to be an unused feature. Does nothing.
 		
@@ -52,7 +52,7 @@ extern class DSprite extends DPanel {
     **/
     
      
-    public function SetHandle(vec:Vector):Void;
+    function SetHandle(vec:Vector):Void;
     /**
         Gets the 2D rotation angle of the sprite, in the plane of the screen.
 		
@@ -60,7 +60,7 @@ extern class DSprite extends DPanel {
     **/
     
      
-    public function GetRotation():Float;
+    function GetRotation():Float;
     /**
         Gets the color the sprite is using as a modifier.
 		
@@ -68,7 +68,7 @@ extern class DSprite extends DPanel {
     **/
     
      
-    public function GetColor():AnyTable;
+    function GetColor():AnyTable;
     /**
         Sets the color modifier for the sprite.
 		
@@ -78,7 +78,7 @@ extern class DSprite extends DPanel {
     **/
     
      
-    public function SetColor(color:AnyTable):Void;
+    function SetColor(color:AnyTable):Void;
     
 }
 

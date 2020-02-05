@@ -32,7 +32,7 @@ extern class DProperty_Combo extends DProperty_Generic {
     **/
     
      
-    public function Setup(?prop:String, ?data:AnyTable):Void;
+    function Setup(?prop:String, ?data:AnyTable):Void;
     /**
         Called after the user selects a new value.
 		
@@ -64,7 +64,7 @@ extern class DProperty_Combo extends DProperty_Generic {
     **/
     
      
-    public function DataChanged(data:Dynamic):Void;
+    function DataChanged(data:Dynamic):Void;
     /**
         Set the selected option.
 		
@@ -89,7 +89,7 @@ extern class DProperty_Combo extends DProperty_Generic {
     **/
     
      
-    public function SetSelected(Id:Float):Void;
+    function SetSelected(Id:Float):Void;
     /**
         Add a choice to your combo control.
 		
@@ -115,7 +115,7 @@ extern class DProperty_Combo extends DProperty_Generic {
     **/
     
      
-    public function AddChoice(Text:String, data:Dynamic, ?select:Bool):Void;
+    function AddChoice(Text:String, data:Dynamic, ?select:Bool):Void;
     
 }
 

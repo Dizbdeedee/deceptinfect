@@ -22,7 +22,7 @@ extern class ImageCheckBox extends Button {
     **/
     
      
-    public function SetMaterial(mat:String):Void;
+    function SetMaterial(mat:String):Void;
     /**
         Sets the checked state of the checkbox. 
 		
@@ -34,7 +34,7 @@ extern class ImageCheckBox extends Button {
     **/
     
      
-    public function SetChecked(bOn:Bool):Void;
+    function SetChecked(bOn:Bool):Void;
     /**
         Sets the checked state of the checkbox. 
 		
@@ -46,7 +46,7 @@ extern class ImageCheckBox extends Button {
     **/
     
      
-    public function Set(OnOff:Bool):Void;
+    function Set(OnOff:Bool):Void;
     /**
         Returns the checked state of the ImageCheckBox
 		
@@ -54,7 +54,7 @@ extern class ImageCheckBox extends Button {
     **/
     
      
-    public function GetChecked():Bool;
+    function GetChecked():Bool;
     
 }
 

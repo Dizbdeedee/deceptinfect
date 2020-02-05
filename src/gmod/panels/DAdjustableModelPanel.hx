@@ -16,7 +16,7 @@ extern class DAdjustableModelPanel extends DModelPanel {
     **/
     
      
-    public function GetFirstPerson():Bool;
+    function GetFirstPerson():Bool;
     /**
         ***INTERNAL** 
 		
@@ -24,7 +24,7 @@ extern class DAdjustableModelPanel extends DModelPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function CaptureMouse():Void;
+    function CaptureMouse():Void;
     /**
         ***INTERNAL** 
 		
@@ -32,7 +32,7 @@ extern class DAdjustableModelPanel extends DModelPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function FirstPersonControls():Void;
+    function FirstPersonControls():Void;
     /**
         Enables mouse and keyboard-based adjustment of the perspective. 
 		
@@ -44,7 +44,7 @@ extern class DAdjustableModelPanel extends DModelPanel {
     **/
     
      
-    public function SetFirstPerson(enable:Bool):Void;
+    function SetFirstPerson(enable:Bool):Void;
     
 }
 

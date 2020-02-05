@@ -14,7 +14,7 @@ extern class HTML extends Panel {
     **/
     
      
-    public function StopLoading():Void;
+    function StopLoading():Void;
     /**
         Refreshes the HTML panel's current page.
 		
@@ -24,7 +24,7 @@ extern class HTML extends Panel {
     **/
     
      
-    public function Refresh(?ignoreCache:Bool):Void;
+    function Refresh(?ignoreCache:Bool):Void;
     /**
         Goes to the page in the HTML panel's history at the specified relative offset.
 		
@@ -34,7 +34,7 @@ extern class HTML extends Panel {
     **/
     
      
-    public function GoToHistoryOffset(offset:Float):Void;
+    function GoToHistoryOffset(offset:Float):Void;
     /**
         ***INTERNAL** 
 		
@@ -47,13 +47,13 @@ extern class HTML extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function NewObjectCallback(objectName:String, callbackName:String):Void;
+    function NewObjectCallback(objectName:String, callbackName:String):Void;
     /**
         Goes forward one page in the HTML panel's history if available.
     **/
     
      
-    public function GoForward():Void;
+    function GoForward():Void;
     /**
         Forcibly updates the panels' HTML Material, similar to when Paint is called on it. This is only useful if the panel is not normally visible, i.e the panel exists purely for its HTML Material.
 		
@@ -63,7 +63,7 @@ extern class HTML extends Panel {
     **/
     
      
-    public function UpdateHTMLTexture():Void;
+    function UpdateHTMLTexture():Void;
     /**
         Returns the panel's HTML material. Only works with Awesomium, HTML and DHTML panels that have been fully loaded.
 		
@@ -202,13 +202,13 @@ extern class HTML extends Panel {
     **/
     
      
-    public function GetHTMLMaterial():IMaterial;
+    function GetHTMLMaterial():IMaterial;
     /**
         Goes back one page in the HTML panel's history if available.
     **/
     
      
-    public function GoBack():Void;
+    function GoBack():Void;
     /**
         Instructs a HTML control to download and parse a HTML script using the passed URL.     Displays the Garry's Mod wiki page.
 		
@@ -251,7 +251,7 @@ extern class HTML extends Panel {
     **/
     
      
-    public function OpenURL(URL:String):Void;
+    function OpenURL(URL:String):Void;
     /**
         Allows you to set HTML code within a panel.
 		
@@ -273,7 +273,7 @@ extern class HTML extends Panel {
     **/
     
      
-    public function SetHTML(code:String):Void;
+    function SetHTML(code:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -285,7 +285,7 @@ extern class HTML extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function NewObject(objectName:String):Void;
+    function NewObject(objectName:String):Void;
     
 }
 

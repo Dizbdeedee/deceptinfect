@@ -35,7 +35,7 @@ extern class DPanel extends Panel {
     **/
     
      
-    public function SetBackgroundColor(color:AnyTable):Void;
+    function SetBackgroundColor(color:AnyTable):Void;
     /**
         ***Deprecated:** You should use DPanel: GetPaintBackground instead.
 		
@@ -45,7 +45,7 @@ extern class DPanel extends Panel {
     **/
     @:deprecated("You should use DPanel: GetPaintBackground instead.")
      
-    public function GetDrawBackground():Bool;
+    function GetDrawBackground():Bool;
     /**
         Returns whether or not the panel background is being drawn.
 		
@@ -53,7 +53,7 @@ extern class DPanel extends Panel {
     **/
     
      
-    public function GetPaintBackground():Bool;
+    function GetPaintBackground():Bool;
     /**
         ***Deprecated:** You should use DPanel: SetPaintBackground instead.
 		
@@ -65,7 +65,7 @@ extern class DPanel extends Panel {
     **/
     @:deprecated("You should use DPanel: SetPaintBackground instead.")
      
-    public function SetDrawBackground(draw:Bool):Void;
+    function SetDrawBackground(draw:Bool):Void;
     /**
         Returns whether or not the panel is disabled.
 		
@@ -73,7 +73,7 @@ extern class DPanel extends Panel {
     **/
     
      
-    public function GetDisabled():Bool;
+    function GetDisabled():Bool;
     /**
         Sets whether or not to disable the panel.
 		
@@ -83,7 +83,7 @@ extern class DPanel extends Panel {
     **/
     
      
-    public function SetDisabled(disabled:Bool):Void;
+    function SetDisabled(disabled:Bool):Void;
     /**
         Sets whether or not to paint/draw the panel background.
 		
@@ -93,7 +93,7 @@ extern class DPanel extends Panel {
     **/
     
      
-    public function SetPaintBackground(paint:Bool):Void;
+    function SetPaintBackground(paint:Bool):Void;
     /**
         Returns the panel's background color.
 		
@@ -119,7 +119,7 @@ extern class DPanel extends Panel {
     **/
     
      
-    public function GetBackgroundColor():AnyTable;
+    function GetBackgroundColor():AnyTable;
     
 }
 

@@ -62,40 +62,40 @@ class PanelMacro {
         
         // trace(_ret);
         var name = x.name;
-        
+        var isHook = x.meta.has(":hook");
         var func:Function = switch (_ret) {
             case TAbstract(_.get().name => "Void", params):
-                
+                var expr;    
+                if (isHook) {
+                    expr = macro {}
+                } else {
+                    expr = macro self.$name($a{exprArgs});
+                }
+
                 {
                     args : _args,
                     ret :  Context.toComplexType(_ret),
-                    expr : macro self.$name($a{exprArgs})
+                    expr : expr,
+                    
                 };
             default:
-
+                var expr;    
+                if (isHook) {
+                    expr = macro return null;
+                } else {
+                    expr = macro return self.$name($a{exprArgs});
+                }
                 {
                     args : _args,
                     ret :  Context.toComplexType(_ret),
-                    expr : macro return self.$name($a{exprArgs}),
+                    expr : expr
                 };
         }
-        // var filter = function (msg:Message) {
-        //     return switch (msg){
-        //         case Warning(msg, pos):
-        //             trace(msg);
-        //             true;
-
-        //         default:
-        //             false;
-        //     }
-        // }
-        // if (filter(Context.getMessages()[0])) {
-        //     Context.getMessages().remove(Context.getMessages()[0]);
-        // }
         
         
-        var access:Array<Access> = switch (x.meta.has(":hook")) {
+        var access:Array<Access> = switch (isHook) {
             case false:
+                
                 [Access.AOverride,Access.AFinal,Access.APublic];
             default:
                 [Access.AOverride,Access.APrivate];
@@ -109,6 +109,9 @@ class PanelMacro {
             
         }
 
+        if (isHook) {
+            field.meta = [{name : ":deprecated",params : [macro "Hook function, do not use"],pos : Context.currentPos()}];
+        }
         return field;
 
     }

@@ -20,7 +20,7 @@ extern class DLabel extends Label {
     **/
     @:deprecated("You really should use DLabel: SetTextColor.")
      
-    public function SetBright(bright:Bool):Void;
+    function SetBright(bright:Bool):Void;
     /**
         Called when the label is double clicked by the player with left clicks. 
 		
@@ -58,7 +58,7 @@ extern class DLabel extends Label {
     **/
     
     @:hook 
-    public function DoDoubleClick():Void;
+    function DoDoubleClick():Void;
     /**
         Returns the "override" text color, set by DLabel:SetTextColor.
 		
@@ -66,7 +66,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetTextColor():AnyTable;
+    function GetTextColor():AnyTable;
     /**
         A hook called from within DLabel:ApplySchemeSettings to determine the color of the text on display.
 		
@@ -76,7 +76,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function UpdateColours(skin:AnyTable):Void;
+    function UpdateColours(skin:AnyTable):Void;
     /**
         Sets the alignment of the contents.
 		
@@ -86,7 +86,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetContentAlignment(alignment:Float):Void;
+    function SetContentAlignment(alignment:Float):Void;
     /**
         Returns whether the DLabel should set its text color to the current skin's highlighted text color. 
 		
@@ -96,7 +96,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetHighlight():Bool;
+    function GetHighlight():Bool;
     /**
         Called when the player releases any mouse button on the label. This is always called after DLabel:OnDepressed. 
 		
@@ -134,7 +134,7 @@ extern class DLabel extends Label {
     **/
     
     @:hook 
-    public function OnReleased():Void;
+    function OnReleased():Void;
     /**
         Returns whether the DLabel should set its text color to the current skin's bright text color. 
 		
@@ -144,7 +144,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetBright():Bool;
+    function GetBright():Bool;
     /**
         ***INTERNAL** Use DLabel: SetTextColor instead!
 		
@@ -156,7 +156,7 @@ extern class DLabel extends Label {
     **/
     @:deprecated("INTERNAL: Use DLabel: SetTextColor instead!")
      
-    public function SetTextStyleColor(color:Color):Void;
+    function SetTextStyleColor(color:Color):Void;
     /**
         Sets whether text wrapping should be enabled or disabled on Label and DLabel panels. Use DLabel:SetAutoStretchVertical to automatically correct vertical size; Panel:SizeToContents will not set the correct height.
 		
@@ -198,7 +198,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetWrap(wrap:Bool):Void;
+    function SetWrap(wrap:Bool):Void;
     /**
         Returns whether the DLabel should set its text color to the current skin's dark text color. 
 		
@@ -208,7 +208,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetDark():Bool;
+    function GetDark():Bool;
     /**
         ***INTERNAL** 
 		
@@ -216,7 +216,7 @@ extern class DLabel extends Label {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateFGColor():Void;
+    function UpdateFGColor():Void;
     /**
         ***Deprecated:** You really should use DLabel: SetTextColor.
 		
@@ -234,7 +234,7 @@ extern class DLabel extends Label {
     **/
     @:deprecated("You really should use DLabel: SetTextColor.")
      
-    public function SetHighlight(highlight:Bool):Void;
+    function SetHighlight(highlight:Bool):Void;
     /**
         Returns the current font of the DLabel. This is set with [DLabel](https://wiki.garrysmod.com/page/Category:DLabel): [SetFont](https://wiki.garrysmod.com/page/DLabel/SetFont).
 		
@@ -242,7 +242,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetFont():String;
+    function GetFont():String;
     /**
         Sets whether or not double clicking should call DLabel:DoDoubleClick. 
 		
@@ -254,13 +254,13 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetDoubleClickingEnabled(enable:Bool):Void;
+    function SetDoubleClickingEnabled(enable:Bool):Void;
     /**
         Called just before DLabel:DoDoubleClick. In DLabel does nothing and is safe to override.
     **/
     
      
-    public function DoDoubleClickInternal():Void;
+    function DoDoubleClickInternal():Void;
     /**
         Called just before DLabel:DoClick. 
 		
@@ -268,7 +268,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function DoClickInternal():Void;
+    function DoClickInternal():Void;
     /**
         Called when the label is left clicked (on key release) by the player. 
 		
@@ -301,7 +301,7 @@ extern class DLabel extends Label {
     **/
     
     @:hook 
-    public function DoClick():Void;
+    function DoClick():Void;
     /**
         ***Deprecated:** Use Panel: IsEnabled instead.
 		
@@ -311,7 +311,7 @@ extern class DLabel extends Label {
     **/
     @:deprecated("Use Panel: IsEnabled instead.")
      
-    public function GetDisabled():Bool;
+    function GetDisabled():Bool;
     /**
         Returns whether the toggle functionality is enabled for a label. Set with DLabel:SetIsToggle.
 		
@@ -319,7 +319,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetIsToggle():Bool;
+    function GetIsToggle():Bool;
     /**
         Called when the label is middle mouse (Mouse wheel, also known as mouse 3) clicked (on key release) by the player. 
 		
@@ -329,7 +329,7 @@ extern class DLabel extends Label {
     **/
     
     @:hook 
-    public function DoMiddleClick():Void;
+    function DoMiddleClick():Void;
     /**
         Sets the text color of the DLabel. This will take precedence over DLabel:SetTextStyleColor.
 		
@@ -357,7 +357,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetTextColor(color:Color):Void;
+    function SetTextColor(color:Color):Void;
     /**
         ***Deprecated:** You really should use DLabel: SetTextColor.
 		
@@ -373,7 +373,7 @@ extern class DLabel extends Label {
     **/
     @:deprecated("You really should use DLabel: SetTextColor.")
      
-    public function SetDark(dark:Bool):Void;
+    function SetDark(dark:Bool):Void;
     /**
         Sets the font of the label.
 		
@@ -383,7 +383,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetFont(fontName:String):Void;
+    function SetFont(fontName:String):Void;
     /**
         Returns whether or not double clicking will call DLabel:DoDoubleClick. 
 		
@@ -393,7 +393,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetDoubleClickingEnabled():Bool;
+    function GetDoubleClickingEnabled():Bool;
     /**
         ***Deprecated:** Use Panel: SetEnabled instead.
 		
@@ -407,7 +407,7 @@ extern class DLabel extends Label {
     **/
     @:deprecated("Use Panel: SetEnabled instead.")
      
-    public function SetDisabled(disable:Bool):Void;
+    function SetDisabled(disable:Bool):Void;
     /**
         Returns the current toggle state of the label. This can be set with DLabel:SetToggle and toggled with DLabel:Toggle. 
 		
@@ -417,7 +417,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetToggle():Bool;
+    function GetToggle():Bool;
     /**
         Called when the player presses the label with any mouse button. 
 		
@@ -455,7 +455,7 @@ extern class DLabel extends Label {
     **/
     
     @:hook 
-    public function OnDepressed():Void;
+    function OnDepressed():Void;
     /**
         Automatically adjusts the height of the label dependent of the height of the text inside of it.
 		
@@ -465,7 +465,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetAutoStretchVertical(stretch:Bool):Void;
+    function SetAutoStretchVertical(stretch:Bool):Void;
     /**
         Enables or disables toggle functionality for a label. Retrieved with DLabel:GetIsToggle. 
 		
@@ -477,7 +477,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetIsToggle(allowToggle:Bool):Void;
+    function SetIsToggle(allowToggle:Bool):Void;
     /**
         Called when the label is right clicked (on key release) by the player. 
 		
@@ -508,7 +508,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function DoRightClick():Void;
+    function DoRightClick():Void;
     /**
         Sets the text value of a panel object containing text, such as a Label, TextEntry or RichText and their derivatives, such as DLabel, DTextEntry or DButton.
 		
@@ -541,7 +541,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetText(text:String):Void;
+    function SetText(text:String):Void;
     /**
         Returns the actual color of the text. 
 		
@@ -551,7 +551,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetColor():AnyTable;
+    function GetColor():AnyTable;
     /**
         Sets the toggle state of the label. This can be retrieved with DLabel:GetToggle and toggled with DLabel:Toggle. 
 		
@@ -563,7 +563,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetToggle(toggleState:Bool):Void;
+    function SetToggle(toggleState:Bool):Void;
     /**
         Toggles the label's state. This can be set and retrieved with DLabel:SetToggle and DLabel:GetToggle. 
 		
@@ -571,7 +571,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function Toggle():Void;
+    function Toggle():Void;
     /**
         Called when the toggle state of the label is changed by DLabel:Toggle. 
 		
@@ -583,7 +583,7 @@ extern class DLabel extends Label {
     **/
     
     @:hook 
-    public function OnToggled(toggleState:Bool):Void;
+    function OnToggled(toggleState:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -595,7 +595,7 @@ extern class DLabel extends Label {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetTextStyleColor():AnyTable;
+    function GetTextStyleColor():AnyTable;
     /**
         Returns whether the label stretches vertically or not. 
 		
@@ -605,7 +605,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function GetAutoStretchVertical():Bool;
+    function GetAutoStretchVertical():Bool;
     /**
         Changes color of label. Alias of DLabel:SetTextColor.
 		
@@ -629,7 +629,7 @@ extern class DLabel extends Label {
     **/
     
      
-    public function SetColor(color:AnyTable):Void;
+    function SetColor(color:AnyTable):Void;
     
 }
 

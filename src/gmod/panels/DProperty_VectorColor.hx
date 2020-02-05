@@ -19,7 +19,7 @@ extern class DProperty_VectorColor extends DProperty_Generic {
     **/
     @:deprecated("INTERNAL")
      
-    public function Setup(?prop:String, settings:AnyTable):Void;
+    function Setup(?prop:String, settings:AnyTable):Void;
     /**
         Sets the color value of the property.
 		
@@ -41,7 +41,7 @@ extern class DProperty_VectorColor extends DProperty_Generic {
     **/
     
      
-    public function SetValue(color:Vector):Void;
+    function SetValue(color:Vector):Void;
     
 }
 

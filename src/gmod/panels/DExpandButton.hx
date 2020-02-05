@@ -12,7 +12,7 @@ extern class DExpandButton extends DButton {
     **/
     
      
-    public function GetExpanded():Bool;
+    function GetExpanded():Bool;
     /**
         Sets whether this DExpandButton should be expanded or not. Only changes appearance.
 		
@@ -22,7 +22,7 @@ extern class DExpandButton extends DButton {
     **/
     
      
-    public function SetExpanded(expanded:Bool):Void;
+    function SetExpanded(expanded:Bool):Void;
     
 }
 

@@ -20,7 +20,7 @@ extern class DScrollPanel extends DPanel {
     **/
     
      
-    public function AddItem(pnl:Panel):Void;
+    function AddItem(pnl:Panel):Void;
     /**
         Returns the vertical scroll bar of the panel.
 		
@@ -70,7 +70,7 @@ extern class DScrollPanel extends DPanel {
     **/
     
      
-    public function GetVBar():Panel;
+    function GetVBar():Panel;
     /**
         Sets the DScrollPanel's padding. This function appears to be unused.
 		
@@ -80,7 +80,7 @@ extern class DScrollPanel extends DPanel {
     **/
     
      
-    public function SetPadding(padding:Float):Void;
+    function SetPadding(padding:Float):Void;
     /**
         ***INTERNAL** 
 		
@@ -92,7 +92,7 @@ extern class DScrollPanel extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetCanvas(canvas:Panel):Void;
+    function SetCanvas(canvas:Panel):Void;
     /**
         Return the width of the DScrollPanel's canvas.
 		
@@ -100,7 +100,7 @@ extern class DScrollPanel extends DPanel {
     **/
     
      
-    public function InnerWidth():Float;
+    function InnerWidth():Float;
     /**
         Gets the DScrollPanels padding
 		
@@ -108,13 +108,13 @@ extern class DScrollPanel extends DPanel {
     **/
     
      
-    public function GetPadding():Float;
+    function GetPadding():Float;
     /**
         
     **/
     
      
-    public function Rebuild():Void;
+    function Rebuild():Void;
     /**
         Scrolls to the given child
 		
@@ -124,7 +124,7 @@ extern class DScrollPanel extends DPanel {
     **/
     
      
-    public function ScrollToChild(panel:Panel):Void;
+    function ScrollToChild(panel:Panel):Void;
     /**
         Returns the canvas ( The panel all child panels are parented to ) of the DScrollPanel.
 		
@@ -132,7 +132,7 @@ extern class DScrollPanel extends DPanel {
     **/
     
      
-    public function GetCanvas():Panel;
+    function GetCanvas():Panel;
     
 }
 

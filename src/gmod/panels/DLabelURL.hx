@@ -14,7 +14,7 @@ extern class DLabelURL extends URLLabel {
     **/
     
      
-    public function GetTextColor():AnyTable;
+    function GetTextColor():AnyTable;
     /**
         Sets the base text color of the DLabelURL. This is overridden by DLabelURL:SetTextColor.
 		
@@ -24,7 +24,7 @@ extern class DLabelURL extends URLLabel {
     **/
     
      
-    public function SetTextStyleColor(color:AnyTable):Void;
+    function SetTextStyleColor(color:AnyTable):Void;
     /**
         Sets the URL of a link-based panel such as [DLabelURL](https://wiki.garrysmod.com/page/Category:DLabelURL).
 		
@@ -34,7 +34,7 @@ extern class DLabelURL extends URLLabel {
     **/
     
      
-    public function SetURL(url:String):Void;
+    function SetURL(url:String):Void;
     /**
         Sets the text color of the DLabelURL. Overrides DLabelURL:SetTextStyleColor.
 		
@@ -44,7 +44,7 @@ extern class DLabelURL extends URLLabel {
     **/
     
      
-    public function SetTextColor(col:AnyTable):Void;
+    function SetTextColor(col:AnyTable):Void;
     /**
         Gets the current text color of the DLabelURL. Alias as DLabelURL:GetTextColor.
 		
@@ -52,7 +52,7 @@ extern class DLabelURL extends URLLabel {
     **/
     
      
-    public function GetColor():AnyTable;
+    function GetColor():AnyTable;
     /**
         Returns the color set by DLabelURL:SetTextStyleColor.
 		
@@ -60,7 +60,7 @@ extern class DLabelURL extends URLLabel {
     **/
     
      
-    public function GetTextStyleColor():Color;
+    function GetTextStyleColor():Color;
     /**
         Alias of DLabelURL:SetTextColor.
 		
@@ -70,7 +70,7 @@ extern class DLabelURL extends URLLabel {
     **/
     
      
-    public function SetColor(col:AnyTable):Void;
+    function SetColor(col:AnyTable):Void;
     
 }
 

@@ -22,7 +22,7 @@ extern class DProperties extends Panel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetCategory(name:String, create:Bool):Panel;
+    function GetCategory(name:String, create:Bool):Panel;
     /**
         Returns the DScrollPanel all the properties panels are attached to.
 		
@@ -30,7 +30,7 @@ extern class DProperties extends Panel {
     **/
     
      
-    public function GetCanvas():Panel;
+    function GetCanvas():Panel;
     /**
         Creates a row in the properties panel.
 		
@@ -44,7 +44,7 @@ extern class DProperties extends Panel {
     **/
     
      
-    public function CreateRow(category:String, name:String):Panel;
+    function CreateRow(category:String, name:String):Panel;
     
 }
 

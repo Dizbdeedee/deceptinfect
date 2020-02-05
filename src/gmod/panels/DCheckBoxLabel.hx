@@ -16,7 +16,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     @:deprecated("You really should be using DCheckBoxLabel: SetTextColor instread")
      
-    public function SetBright(bright:Bool):Void;
+    function SetBright(bright:Bool):Void;
     /**
         Sets the indentation of the element on the X axis.
 		
@@ -26,7 +26,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
      
-    public function SetIndent(ident:Float):Void;
+    function SetIndent(ident:Float):Void;
     /**
         Sets the checked state of the checkbox. Does not call DCheckBoxLabel:OnChange or Panel:ConVarChanged, unlike DCheckBoxLabel:SetValue.
 		
@@ -36,7 +36,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
      
-    public function SetChecked(checked:Bool):Void;
+    function SetChecked(checked:Bool):Void;
     /**
         Gets the checked state of the checkbox. This calls the checkbox's DCheckBox:GetChecked function.
 		
@@ -44,7 +44,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
      
-    public function GetChecked():Bool;
+    function GetChecked():Bool;
     /**
         Sets the checked state of the checkbox, and calls DCheckBoxLabel:OnChange and the checkbox's Panel:ConVarChanged methods.
 		
@@ -54,7 +54,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
      
-    public function SetValue(checked:Bool):Void;
+    function SetValue(checked:Bool):Void;
     /**
         Gets the indentation of the element on the X axis.
 		
@@ -62,7 +62,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
      
-    public function GetIndent():Float;
+    function GetIndent():Float;
     /**
         Sets the text color for the DCheckBoxLabel.
 		
@@ -83,7 +83,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
      
-    public function SetTextColor(color:Color):Void;
+    function SetTextColor(color:Color):Void;
     /**
         ***Deprecated:** You really should be using DCheckBoxLabel: SetTextColor instread
 		
@@ -95,7 +95,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     @:deprecated("You really should be using DCheckBoxLabel: SetTextColor instread")
      
-    public function SetDark(darkify:Bool):Void;
+    function SetDark(darkify:Bool):Void;
     /**
         Sets the font of the text part of the DCheckBoxLabel.
 		
@@ -105,7 +105,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
      
-    public function SetFont(font:String):Void;
+    function SetFont(font:String):Void;
     /**
         Called when the "checked" state is changed.
 		
@@ -141,7 +141,7 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
     @:hook 
-    public function OnChange(bVal:Bool):Void;
+    function OnChange(bVal:Bool):Void;
     /**
         Sets the console variable to be set when the checked state of the DCheckBoxLabel changes.
 		
@@ -151,13 +151,13 @@ extern class DCheckBoxLabel extends DPanel {
     **/
     
      
-    public function SetConVar(convar:String):Void;
+    function SetConVar(convar:String):Void;
     /**
         Toggles the checked state of the DCheckBoxLabel.
     **/
     
      
-    public function Toggle():Void;
+    function Toggle():Void;
     
 }
 

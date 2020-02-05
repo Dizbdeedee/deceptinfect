@@ -14,7 +14,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetConVarG():String;
+    function GetConVarG():String;
     /**
         Sets the ConVar name for the green channel of the color. 
 		
@@ -26,7 +26,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetConVarG(convar:String):Void;
+    function SetConVarG(convar:String):Void;
     /**
         Show/Hide the alpha bar in DColorMixer
 		
@@ -36,7 +36,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetAlphaBar(show:Bool):Void;
+    function SetAlphaBar(show:Bool):Void;
     /**
         Sets the base color of the DColorCube part of the DColorMixer. 
 		
@@ -48,7 +48,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetBaseColor(clr:Color):Void;
+    function SetBaseColor(clr:Color):Void;
     /**
         Sets the label's text to show.
 		
@@ -58,7 +58,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetLabel(?text:String):Void;
+    function SetLabel(?text:String):Void;
     /**
         Sets the color of DColorMixer from a Vector. Alpha is not included.
 		
@@ -68,7 +68,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetVector(vec:Vector):Void;
+    function SetVector(vec:Vector):Void;
     /**
         ***INTERNAL** 
 		
@@ -80,13 +80,13 @@ extern class DColorMixer extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateColor(clr:AnyTable):Void;
+    function UpdateColor(clr:AnyTable):Void;
     /**
         ***INTERNAL** 
     **/
     @:deprecated("INTERNAL")
      
-    public function ConVarThink():Void;
+    function ConVarThink():Void;
     /**
         Returns the ConVar name for the alpha channel of the color. 
 		
@@ -96,7 +96,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetConVarA():String;
+    function GetConVarA():String;
     /**
         Return true if alpha bar is shown, false if not.
 		
@@ -104,7 +104,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetAlphaBar():Bool;
+    function GetAlphaBar():Bool;
     /**
         Called when the player changes the color of the DColorMixer.
 		
@@ -114,7 +114,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function ValueChanged(col:Color):Void;
+    function ValueChanged(col:Color):Void;
     /**
         Show / Hide the colors indicators in DColorMixer
 		
@@ -124,7 +124,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetWangs(show:Bool):Void;
+    function SetWangs(show:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -136,7 +136,7 @@ extern class DColorMixer extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function DoConVarThink(cvar:String):Void;
+    function DoConVarThink(cvar:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -146,7 +146,7 @@ extern class DColorMixer extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function TranslateValues():Void;
+    function TranslateValues():Void;
     /**
         Returns the color as a normalized Vector.
 		
@@ -154,7 +154,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetVector():Vector;
+    function GetVector():Vector;
     /**
         Show or hide the palette panel
 		
@@ -164,7 +164,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetPalette(enabled:Bool):Void;
+    function SetPalette(enabled:Bool):Void;
     /**
         Sets the ConVar name for the blue channel of the color. 
 		
@@ -176,7 +176,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetConVarB(convar:String):Void;
+    function SetConVarB(convar:String):Void;
     /**
         Return true if palette is shown, false if not.
 		
@@ -184,7 +184,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetPalette():Bool;
+    function GetPalette():Bool;
     /**
         Return true if the wangs are shown, false if not.
 		
@@ -192,7 +192,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetWangs():Bool;
+    function GetWangs():Bool;
     /**
         ***INTERNAL** 
 		
@@ -206,7 +206,7 @@ extern class DColorMixer extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateConVar(cvar:String, part:String, clr:Color):Void;
+    function UpdateConVar(cvar:String, part:String, clr:Color):Void;
     /**
         ***INTERNAL** 
 		
@@ -218,7 +218,7 @@ extern class DColorMixer extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function UpdateConVars(clr:Color):Void;
+    function UpdateConVars(clr:Color):Void;
     /**
         Returns the ConVar name for the blue channel of the color. 
 		
@@ -228,7 +228,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetConVarB():String;
+    function GetConVarB():String;
     /**
         Sets the ConVar name for the alpha channel of the color. 
 		
@@ -240,7 +240,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetConVarA(convar:String):Void;
+    function SetConVarA(convar:String):Void;
     /**
         Returns the current selected color.
 		
@@ -248,7 +248,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetColor():Color;
+    function GetColor():Color;
     /**
         Returns the ConVar name for the red channel of the color. 
 		
@@ -258,7 +258,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function GetConVarR():String;
+    function GetConVarR():String;
     /**
         Sets the ConVar name for the red channel of the color. 
 		
@@ -270,7 +270,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetConVarR(convar:String):Void;
+    function SetConVarR(convar:String):Void;
     /**
         Sets the color of the DColorMixer
 		
@@ -280,7 +280,7 @@ extern class DColorMixer extends DPanel {
     **/
     
      
-    public function SetColor(color:AnyTable):Void;
+    function SetColor(color:AnyTable):Void;
     
 }
 

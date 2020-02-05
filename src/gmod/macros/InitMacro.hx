@@ -1,5 +1,8 @@
 package gmod.macros;
 #if macro
+
+import haxe.macro.Expr.Function;
+import haxe.macro.Expr.FieldType;
 //import gmod.libs.ConcommandLib;
 import haxe.io.Path;
 import sys.io.File;
@@ -22,20 +25,7 @@ class InitMacro {
     static function testFunc(x:String):TypeDefinition {
         
         if (x.startsWith("PanelHelper_")) {
-            
             var ident = x.substring(12);
-            
-            var _class = macro class $x extends gmod.panels.$ident {
-                
-                /**
-                    The underlying object
-                **/
-                public var self(default,never):gmod.panels.$ident;
-                function new(x:gmod.panels.$ident) {
-
-                }
-                
-            };
             var lookup:haxe.macro.Type = null;
             try {
                 lookup = Context.getType('gmod.panels.$ident');
@@ -43,11 +33,32 @@ class InitMacro {
                 Context.warning('Could not find panel...$ident',Context.currentPos());
                 return null;
             }
-            var fields:Array<haxe.macro.Type.ClassField> = gmod.macros.PanelMacro.getSuperFields(lookup.getClass());
-            trace(fields);
+            var _class = macro class $x extends gmod.panels.$ident {
+                
+                /**
+                    The underlying object
+                **/
+                public var self(default,never):gmod.panels.$ident;
+                function new(x:gmod.panels.$ident) {
+                }
+                
+            };
+            
+            var fields = gmod.macros.PanelMacro.getSuperFields(lookup.getClass());
+            var func:Function = _class.fields[1].kind.getParameters()[0];
+            var exprArray = [];
+            exprArray.push(macro Reflect.setField(this,"self",x));
             for (field in fields) {
+                var name = field.name;
                 _class.fields.push(gmod.macros.PanelMacro.classFuncToField(field));
+                if (field.meta.has(":hook")) {
+                    exprArray.push(macro untyped x.$name = $i{name});
+                }
+
             }
+            func.expr = macro $b{exprArray}
+
+            // trace(Context.getMessages());
             return _class;
         }
         return null;
@@ -58,6 +69,7 @@ class InitMacro {
         Compiler.exclude("Sys",true);
         Context.onTypeNotFound(testFunc);
         Compiler.includeFile("include.lua",IncludePosition.Top);
+        
         #if (!display)
         // if (firstBuild) {
         //     trace("skipping first build");

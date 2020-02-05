@@ -17,7 +17,7 @@ extern class ControlPanel extends DForm {
     **/
     @:deprecated("It is recommended to use DForm's members instead.")
      
-    public function AddControl(type:String, controlinfo:AnyTable):Void;
+    function AddControl(type:String, controlinfo:AnyTable):Void;
     /**
         Returns this control panel.
 		
@@ -25,7 +25,7 @@ extern class ControlPanel extends DForm {
     **/
     
      
-    public function GetEmbeddedPanel():ControlPanel;
+    function GetEmbeddedPanel():ControlPanel;
     /**
         Sets control values of the control panel.
 		
@@ -35,7 +35,7 @@ extern class ControlPanel extends DForm {
     **/
     
      
-    public function ControlValues(data:AnyTable):Void;
+    function ControlValues(data:AnyTable):Void;
     /**
         Creates a MatSelect panel and adds it as an item.
 		
@@ -52,7 +52,7 @@ extern class ControlPanel extends DForm {
     **/
     
      
-    public function MatSelect(convar:String, ?options:AnyTable, ?autostretch:Bool, ?width:Float, ?height:Float):MatSelect;
+    function MatSelect(convar:String, ?options:AnyTable, ?autostretch:Bool, ?width:Float, ?height:Float):MatSelect;
     /**
         Adds an item by calling DForm:AddItem.
 		
@@ -62,7 +62,7 @@ extern class ControlPanel extends DForm {
     **/
     
      
-    public function AddPanel(panel:Panel):Void;
+    function AddPanel(panel:Panel):Void;
     /**
         Calls the given function with this panel as the only argument. Used by the spawnmenu to populate the control panel.
 		
@@ -72,7 +72,7 @@ extern class ControlPanel extends DForm {
     **/
     
      
-    public function FillViaFunction(func:Function):Void;
+    function FillViaFunction(func:Function):Void;
     
 }
 

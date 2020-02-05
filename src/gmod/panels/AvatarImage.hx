@@ -88,7 +88,7 @@ extern class AvatarImage extends Panel {
     **/
     
      
-    public function SetSteamID(steamid:String, size:Float):Void;
+    function SetSteamID(steamid:String, size:Float):Void;
     /**
         Used by AvatarImage to load an avatar for given player.
 		
@@ -99,7 +99,7 @@ extern class AvatarImage extends Panel {
     **/
     
      
-    public function SetPlayer(player:Player, size:Float):Void;
+    function SetPlayer(player:Player, size:Float):Void;
     
 }
 

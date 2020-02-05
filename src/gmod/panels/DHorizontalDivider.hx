@@ -14,7 +14,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function SetRightMin(minWidth:Float):Void;
+    function SetRightMin(minWidth:Float):Void;
     /**
         Returns the right side content
 		
@@ -22,7 +22,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function GetRight():Panel;
+    function GetRight():Panel;
     /**
         Returns whether or not the player is currently dragging the middle divider bar.
 		
@@ -30,7 +30,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function GetDragging():Bool;
+    function GetDragging():Bool;
     /**
         Sets the minimum width of the left side
 		
@@ -40,7 +40,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function SetLeftMin(minWidth:Float):Void;
+    function SetLeftMin(minWidth:Float):Void;
     /**
         Returns the middle content, set by DHorizontalDivider:SetMiddle.
 		
@@ -48,7 +48,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function GetMiddle():Panel;
+    function GetMiddle():Panel;
     /**
         Sets the current/starting width of the left side. 
 		
@@ -60,7 +60,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function SetLeftWidth(width:Float):Void;
+    function SetLeftWidth(width:Float):Void;
     /**
         ***INTERNAL** 
 		
@@ -72,7 +72,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetDragging(dragonot:Bool):Void;
+    function SetDragging(dragonot:Bool):Void;
     /**
         ***INTERNAL** 
 		
@@ -84,7 +84,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetHoldPos(x:Float):Void;
+    function SetHoldPos(x:Float):Void;
     /**
         Returns the current width of the left side, set by DHorizontalDivider:SetLeftWidth or by the user.
 		
@@ -92,7 +92,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function GetLeftWidth():Float;
+    function GetLeftWidth():Float;
     /**
         Returns the width of the horizontal divider bar, set by DHorizontalDivider:SetDividerWidth.
 		
@@ -100,7 +100,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function GetDividerWidth():Float;
+    function GetDividerWidth():Float;
     /**
         Sets the right side content
 		
@@ -110,7 +110,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function SetRight(pnl:Panel):Void;
+    function SetRight(pnl:Panel):Void;
     /**
         Sets the width of the horizontal divider bar.
 		
@@ -120,7 +120,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function SetDividerWidth(width:Float):Void;
+    function SetDividerWidth(width:Float):Void;
     /**
         Returns the minimum width of the right side, set by DHorizontalDivider:SetRightMin.
 		
@@ -128,13 +128,13 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function GetRightMin():Float;
+    function GetRightMin():Float;
     /**
         ***INTERNAL** 
     **/
     @:deprecated("INTERNAL")
      
-    public function StartGrab():Void;
+    function StartGrab():Void;
     /**
         Sets the left side content of the DHorizontalDivider.
 		
@@ -144,7 +144,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function SetLeft(pnl:Panel):Void;
+    function SetLeft(pnl:Panel):Void;
     /**
         Returns the minimum width of the left side, set by DHorizontalDivider:SetLeftMin.
 		
@@ -152,7 +152,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function GetLeftMin():Float;
+    function GetLeftMin():Float;
     /**
         ***INTERNAL** 
 		
@@ -162,7 +162,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetHoldPos():Float;
+    function GetHoldPos():Float;
     /**
         Sets the middle content, over the draggable divider bar panel.
 		
@@ -172,7 +172,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function SetMiddle(middle:Panel):Void;
+    function SetMiddle(middle:Panel):Void;
     /**
         Returns the left side content of the DHorizontalDivider
 		
@@ -180,7 +180,7 @@ extern class DHorizontalDivider extends DPanel {
     **/
     
      
-    public function GetLeft():Panel;
+    function GetLeft():Panel;
     
 }
 

@@ -16,7 +16,7 @@ extern class DMenuOptionCVar extends DMenuOption {
     **/
     
      
-    public function GetValueOn():String;
+    function GetValueOn():String;
     /**
         Returns the console variable used by the DMenuOptionCVar.
 		
@@ -24,7 +24,7 @@ extern class DMenuOptionCVar extends DMenuOption {
     **/
     
      
-    public function GetConVar():String;
+    function GetConVar():String;
     /**
         Sets the value of the console variable when the DMenuOptionCVar is not checked.
 		
@@ -34,7 +34,7 @@ extern class DMenuOptionCVar extends DMenuOption {
     **/
     
      
-    public function SetValueOff(value:String):Void;
+    function SetValueOff(value:String):Void;
     /**
         Sets the value of the console variable when the DMenuOptionCVar is checked.
 		
@@ -44,7 +44,7 @@ extern class DMenuOptionCVar extends DMenuOption {
     **/
     
      
-    public function SetValueOn(value:String):Void;
+    function SetValueOn(value:String):Void;
     /**
         Returns the value of the console variable when the DMenuOptionCVar is not checked.
 		
@@ -52,7 +52,7 @@ extern class DMenuOptionCVar extends DMenuOption {
     **/
     
      
-    public function GetValueOff():String;
+    function GetValueOff():String;
     /**
         Sets the console variable to be used by DMenuOptionCVar.
 		
@@ -62,7 +62,7 @@ extern class DMenuOptionCVar extends DMenuOption {
     **/
     
      
-    public function SetConVar(cvar:String):Void;
+    function SetConVar(cvar:String):Void;
     
 }
 

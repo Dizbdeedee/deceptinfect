@@ -43,7 +43,7 @@ extern class DListView_Line extends Panel {
     **/
     
      
-    public function GetColumnText(column:Float):String;
+    function GetColumnText(column:Float):String;
     /**
         Sets the string held in the specified column of a DListView_Line panel.
 		
@@ -54,7 +54,7 @@ extern class DListView_Line extends Panel {
     **/
     
      
-    public function SetColumnText(column:Float, value:String):Void;
+    function SetColumnText(column:Float, value:String):Void;
     
 }
 

@@ -20,7 +20,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SetSearch(?filter:String):Void;
+    function SetSearch(?filter:String):Void;
     /**
         Returns the current directory/folder being displayed.
 		
@@ -28,7 +28,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetCurrentFolder():String;
+    function GetCurrentFolder():String;
     /**
         Sets the directory/folder from which to display the file list.
 		
@@ -38,7 +38,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SetCurrentFolder(currentDir:String):Void;
+    function SetCurrentFolder(currentDir:String):Void;
     /**
         ***INTERNAL** 
 		
@@ -48,7 +48,7 @@ extern class DFileBrowser extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function Setup():Bool;
+    function Setup():Bool;
     /**
         Sets the name to use for the file tree.
 		
@@ -58,7 +58,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SetName(?treeName:String):Void;
+    function SetName(?treeName:String):Void;
     /**
         Called when a file is right-clicked.
 		
@@ -71,7 +71,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
     @:hook 
-    public function OnRightClick(filePath:String, selectedPanel:Panel):Void;
+    function OnRightClick(filePath:String, selectedPanel:Panel):Void;
     /**
         Enables or disables the model viewer mode. In this mode, files are displayed as SpawnIcons instead of a list.
 		
@@ -83,7 +83,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SetModels(?showModels:Bool):Void;
+    function SetModels(?showModels:Bool):Void;
     /**
         Returns the name being used for the file tree.
 		
@@ -91,7 +91,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetName():String;
+    function GetName():String;
     /**
         Returns the DTree Node that the file tree stems from. 
 		
@@ -101,7 +101,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetFolderNode():Panel;
+    function GetFolderNode():Panel;
     /**
         Sorts the file list.
 		
@@ -113,7 +113,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SortFiles(?descending:Bool):Void;
+    function SortFiles(?descending:Bool):Void;
     /**
         Called when a file is selected.
 		
@@ -124,7 +124,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
     @:hook 
-    public function OnSelect(filePath:String, selectedPanel:Panel):Void;
+    function OnSelect(filePath:String, selectedPanel:Panel):Void;
     /**
         ***INTERNAL** 
 		
@@ -136,7 +136,7 @@ extern class DFileBrowser extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function ShowFolder(currentDir:String):Void;
+    function ShowFolder(currentDir:String):Void;
     /**
         Returns the current file type filter on the file list.
 		
@@ -144,7 +144,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetFileTypes():String;
+    function GetFileTypes():String;
     /**
         ***INTERNAL** 
 		
@@ -154,7 +154,7 @@ extern class DFileBrowser extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetupFiles():Bool;
+    function SetupFiles():Bool;
     /**
         Returns the current search filter on the file tree.
 		
@@ -162,7 +162,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetSearch():String;
+    function GetSearch():String;
     /**
         ***INTERNAL** 
 		
@@ -172,7 +172,7 @@ extern class DFileBrowser extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetupTree():Bool;
+    function SetupTree():Bool;
     /**
         Sets the access path for the file tree. This is set to GAME by default. 
 		
@@ -184,7 +184,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SetPath(path:String):Void;
+    function SetPath(path:String):Void;
     /**
         Sets the root directory/folder of the file tree. 
 		
@@ -196,13 +196,13 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SetBaseFolder(baseDir:String):Void;
+    function SetBaseFolder(baseDir:String):Void;
     /**
         Clears the file tree and list, and resets all values.
     **/
     
      
-    public function Clear():Void;
+    function Clear():Void;
     /**
         Opens or closes the file tree.
 		
@@ -213,7 +213,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SetOpen(?open:Bool, ?useAnim:Bool):Void;
+    function SetOpen(?open:Bool, ?useAnim:Bool):Void;
     /**
         Returns the root directory/folder of the file tree.
 		
@@ -221,7 +221,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetBaseFolder():String;
+    function GetBaseFolder():String;
     /**
         Returns the access path of the file tree. This is GAME unless changed with DFileBrowser:SetPath. 
 		
@@ -231,7 +231,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetPath():String;
+    function GetPath():String;
     /**
         Sets the file type filter for the file list. 
 		
@@ -243,7 +243,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function SetFileTypes(?fileTypes:String):Void;
+    function SetFileTypes(?fileTypes:String):Void;
     /**
         Returns whether or not the model viewer mode is enabled. In this mode, files are displayed as SpawnIcons instead of a list.
 		
@@ -251,7 +251,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetModels():Bool;
+    function GetModels():Bool;
     /**
         Returns whether or not the file tree is open.
 		
@@ -259,7 +259,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
      
-    public function GetOpen():Bool;
+    function GetOpen():Bool;
     /**
         Called when a file is double-clicked.
 		
@@ -272,7 +272,7 @@ extern class DFileBrowser extends DPanel {
     **/
     
     @:hook 
-    public function OnDoubleClick(filePath:String, selectedPanel:Panel):Void;
+    function OnDoubleClick(filePath:String, selectedPanel:Panel):Void;
     
 }
 

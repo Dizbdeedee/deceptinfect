@@ -14,7 +14,7 @@ extern class URLLabel {
     **/
     
      
-    public function SetURL(url:String):Void;
+    function SetURL(url:String):Void;
     
 }
 

@@ -18,7 +18,7 @@ extern class DImage extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetFailsafeMatName(backupMat:String):Void;
+    function SetFailsafeMatName(backupMat:String):Void;
     /**
         Paints a ghost copy of the DImage panel at the given position and dimensions. This function overrides Panel:PaintAt.
 		
@@ -31,7 +31,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function PaintAt(posX:Float, posY:Float, width:Float, height:Float):Void;
+    function PaintAt(posX:Float, posY:Float, width:Float, height:Float):Void;
     /**
         Returns whether the DImage should keep the aspect ratio of its image when being resized. 
 		
@@ -41,7 +41,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function GetKeepAspect():Bool;
+    function GetKeepAspect():Bool;
     /**
         Resizes the panel so that its width and height fit all of the content inside.
 		
@@ -51,7 +51,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function SizeToContents():Void;
+    function SizeToContents():Void;
     /**
         Similar to DImage:SetImage, but will only do the expensive part of actually loading the textures/material if the material is about to be rendered/viewed. 
 		
@@ -64,7 +64,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function SetOnViewMaterial(mat:String, backupMat:String):Void;
+    function SetOnViewMaterial(mat:String, backupMat:String):Void;
     /**
         Sets a Material directly as an image.
 		
@@ -74,7 +74,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function SetMaterial(mat:IMaterial):Void;
+    function SetMaterial(mat:IMaterial):Void;
     /**
         ***INTERNAL** 
 		
@@ -84,7 +84,7 @@ extern class DImage extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetMatName():String;
+    function GetMatName():String;
     /**
         Returns true if the image is not yet loaded.
 		
@@ -92,7 +92,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function Unloaded():Bool;
+    function Unloaded():Bool;
     /**
         Returns the current Material of the DImage.
 		
@@ -100,7 +100,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function GetMaterial():IMaterial;
+    function GetMaterial():IMaterial;
     /**
         ***INTERNAL** 
 		
@@ -108,7 +108,7 @@ extern class DImage extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function DoLoadMaterial():Void;
+    function DoLoadMaterial():Void;
     /**
         Sets the image's color override.
 		
@@ -140,7 +140,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function SetImageColor(col:Color):Void;
+    function SetImageColor(col:Color):Void;
     /**
         ***INTERNAL** 
 		
@@ -150,7 +150,7 @@ extern class DImage extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function GetFailsafeMatName():String;
+    function GetFailsafeMatName():String;
     /**
         Sets whether the DImage should keep the aspect ratio of its image when being resized. 
 		
@@ -162,7 +162,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function SetKeepAspect(keep:Bool):Void;
+    function SetKeepAspect(keep:Bool):Void;
     /**
         Returns the color override of the image panel.
 		
@@ -188,7 +188,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function GetImageColor():Color;
+    function GetImageColor():Color;
     /**
         ***INTERNAL** 
 		
@@ -198,7 +198,7 @@ extern class DImage extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function LoadMaterial():Void;
+    function LoadMaterial():Void;
     /**
         Returns the image loaded in the image panel.
 		
@@ -233,7 +233,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function GetImage():String;
+    function GetImage():String;
     /**
         ***INTERNAL** 
 		
@@ -243,7 +243,7 @@ extern class DImage extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function FixVertexLitMaterial():Void;
+    function FixVertexLitMaterial():Void;
     /**
         ***INTERNAL** 
 		
@@ -255,7 +255,7 @@ extern class DImage extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function SetMatName(mat:String):Void;
+    function SetMatName(mat:String):Void;
     /**
         Sets the image to load into the frame. If the first image can't be loaded and strBackup is set, that image will be loaded instead. 
 		
@@ -294,7 +294,7 @@ extern class DImage extends DPanel {
     **/
     
      
-    public function SetImage(strImage:String, ?strBackup:String):Void;
+    function SetImage(strImage:String, ?strBackup:String):Void;
     
 }
 

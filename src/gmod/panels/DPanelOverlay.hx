@@ -14,7 +14,7 @@ extern class DPanelOverlay extends DPanel {
     **/
     
      
-    public function SetType(type:Float):Void;
+    function SetType(type:Float):Void;
     /**
         Returns the type of the DPanelOverlay set by DPanelOverlay:SetType.
 		
@@ -22,7 +22,7 @@ extern class DPanelOverlay extends DPanel {
     **/
     
      
-    public function GetType():Float;
+    function GetType():Float;
     /**
         ***INTERNAL** 
 		
@@ -34,7 +34,7 @@ extern class DPanelOverlay extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function PaintInnerCorners(size:Float):Void;
+    function PaintInnerCorners(size:Float):Void;
     /**
         Returns the border color of the DPanelOverlay set by DPanelOverlay:SetColor.
 		
@@ -42,7 +42,7 @@ extern class DPanelOverlay extends DPanel {
     **/
     
      
-    public function GetColor():Color;
+    function GetColor():Color;
     /**
         ***INTERNAL** 
 		
@@ -58,7 +58,7 @@ extern class DPanelOverlay extends DPanel {
     **/
     @:deprecated("INTERNAL")
      
-    public function PaintDifferentColours(cola:AnyTable, colb:AnyTable, colc:AnyTable, cold:AnyTable, size:Float):Void;
+    function PaintDifferentColours(cola:AnyTable, colb:AnyTable, colc:AnyTable, cold:AnyTable, size:Float):Void;
     /**
         Sets the border color of the DPanelOverlay.
 		
@@ -68,7 +68,7 @@ extern class DPanelOverlay extends DPanel {
     **/
     
      
-    public function SetColor(color:Color):Void;
+    function SetColor(color:Color):Void;
     
 }
 

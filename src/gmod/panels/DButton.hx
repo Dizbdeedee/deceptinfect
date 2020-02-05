@@ -16,7 +16,7 @@ extern class DButton extends DLabel {
     **/
     
      
-    public function UpdateColours(skin:AnyTable):Void;
+    function UpdateColours(skin:AnyTable):Void;
     /**
         ***Deprecated:** 
 		
@@ -28,7 +28,7 @@ extern class DButton extends DLabel {
     **/
     @:deprecated("")
      
-    public function SetDrawBorder(draw:Bool):Void;
+    function SetDrawBorder(draw:Bool):Void;
     /**
         Sets an image to be displayed as the button's background. Alias of DButton:SetImage
 		
@@ -38,7 +38,7 @@ extern class DButton extends DLabel {
     **/
     
      
-    public function SetIcon(?img:String):Void;
+    function SetIcon(?img:String):Void;
     /**
         Returns the current font of the DLabel. This is set with [DLabel](https://wiki.garrysmod.com/page/Category:DLabel): [SetFont](https://wiki.garrysmod.com/page/DLabel/SetFont).
 		
@@ -46,7 +46,7 @@ extern class DButton extends DLabel {
     **/
     
      
-    public function GetFont():String;
+    function GetFont():String;
     /**
         Called when the label is left clicked (on key release) by the player. 
 		
@@ -79,7 +79,7 @@ extern class DButton extends DLabel {
     **/
     
     @:hook 
-    public function DoClick():Void;
+    function DoClick():Void;
     /**
         Sets a console command to be called when the button is clicked. 
 		
@@ -107,7 +107,7 @@ extern class DButton extends DLabel {
     **/
     
      
-    public function SetConsoleCommand(command:String, args:String):Void;
+    function SetConsoleCommand(command:String, args:String):Void;
     /**
         Called when the label is middle mouse (Mouse wheel, also known as mouse 3) clicked (on key release) by the player. 
 		
@@ -117,7 +117,7 @@ extern class DButton extends DLabel {
     **/
     
     @:hook 
-    public function DoMiddleClick():Void;
+    function DoMiddleClick():Void;
     /**
         Returns true if the DButton is currently depressed (a user is clicking on it).
 		
@@ -125,7 +125,7 @@ extern class DButton extends DLabel {
     **/
     
      
-    public function IsDown():Bool;
+    function IsDown():Bool;
     /**
         Sets the font of the label.
 		
@@ -135,7 +135,7 @@ extern class DButton extends DLabel {
     **/
     
      
-    public function SetFont(fontName:String):Void;
+    function SetFont(fontName:String):Void;
     /**
         ***Deprecated:** Use Panel: SetEnabled instead.
 		
@@ -147,7 +147,7 @@ extern class DButton extends DLabel {
     **/
     @:deprecated("Use Panel: SetEnabled instead.")
      
-    public function SetDisabled(disable:Bool):Void;
+    function SetDisabled(disable:Bool):Void;
     /**
         Called when the label is right clicked (on key release) by the player. 
 		
@@ -178,7 +178,7 @@ extern class DButton extends DLabel {
     **/
     
      
-    public function DoRightClick():Void;
+    function DoRightClick():Void;
     /**
         ***Deprecated:** 
 		
@@ -188,7 +188,7 @@ extern class DButton extends DLabel {
     **/
     @:deprecated("")
      
-    public function GetDrawBorder():Bool;
+    function GetDrawBorder():Bool;
     /**
         Sets an image to be displayed as the button's background. 
 		
@@ -200,7 +200,7 @@ extern class DButton extends DLabel {
     **/
     
      
-    public function SetImage(?img:String):Void;
+    function SetImage(?img:String):Void;
     
 }
 
