@@ -19,11 +19,11 @@ import gmod.types.Entity;
 using gmod.PairTools;
 using gmod.TableTools;
 using deceptinfect.PlayerExt;
-
+#if server
 @:build(gmod.macros.GamemodeMacro.build())
 class DeceptInfect extends gmod.hooks.Gm {
 
-    #if server
+    
 
     
     override function PlayerDeath(victim:Player, inflictor:Entity, attacker:Entity) {
@@ -162,10 +162,10 @@ class DeceptInfect extends gmod.hooks.Gm {
         //     }
         // }
     }
-    #end
+    
     
 }
-
+#end
 
 // enum GAME_STATE {
 //     WAIT;

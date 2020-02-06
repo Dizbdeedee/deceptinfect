@@ -33,21 +33,26 @@ class InitMacro {
                 Context.warning('Could not find panel...$ident',Context.currentPos());
                 return null;
             }
-            var _class = macro class $x extends gmod.panels.$ident {
+            var _class = macro class $x extends gmod.PanelHelper<gmod.panels.$ident> {
                 
                 /**
                     The underlying object
                 **/
-                public var self(default,never):gmod.panels.$ident;
+                // public var self(default,never):gmod.panels.$ident;
                 function new(x:gmod.panels.$ident) {
+                    
                 }
                 
+                
             };
-            
-            var fields = gmod.macros.PanelMacro.getSuperFields(lookup.getClass());
-            var func:Function = _class.fields[1].kind.getParameters()[0];
+            _class.meta.push({
+                name : ":dce",
+                pos : Context.currentPos()
+            });
+            var fields = gmod.macros.PanelMacro.getSuperFields2(lookup.getClass());
+            var func:Function = _class.fields[0].kind.getParameters()[0];
             var exprArray = [];
-            exprArray.push(macro Reflect.setField(this,"self",x));
+            exprArray.push(macro super(x));
             for (field in fields) {
                 var name = field.name;
                 _class.fields.push(gmod.macros.PanelMacro.classFuncToField(field));
@@ -70,6 +75,7 @@ class InitMacro {
         Context.onTypeNotFound(testFunc);
         Compiler.includeFile("include.lua",IncludePosition.Top);
         
+        Compiler.addGlobalMetadata("gmod.engine_ents","@:dce",true);
         #if (!display)
         // if (firstBuild) {
         //     trace("skipping first build");

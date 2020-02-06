@@ -9,7 +9,7 @@ using haxe.macro.ComplexTypeTools;
 using haxe.macro.ExprTools.ExprArrayTools;
 using StringTools;
 #end
-@:keep()
+@:keep @:keepInit
 class OverrideHelper {
     #if macro   
     static function isHook(x:Field):Bool {

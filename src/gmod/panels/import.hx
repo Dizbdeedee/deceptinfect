@@ -7,7 +7,8 @@ import gmod.gclass.*;
 import gmod.enums.*;
 import gmod.structs.*;
 import gmod.EntityClass;
-import gmod.types.*;
+// import gmod.types.*;
+// import gmod.gclass.Panel;
 
 import lua.Table.AnyTable;
 import lua.Table;

@@ -22,6 +22,32 @@ class PanelMacro {
     static var onGenerate = false;
     
 
+
+    public static function getSuperFields2(c:ClassType):Map<String,ClassField> {
+        var superFields = [];
+        var curClass = c;
+        var map:Map<String,ClassField> = [];
+        for (i in 0...10) {
+            var superC = curClass.superClass;
+            var fields = curClass.fields.get();
+            superFields.push(fields);
+            if (superC != null) {
+                curClass = superC.t.get();
+            } else {
+                break;
+            }
+        }
+        for (fieldAr in superFields) {
+            for (field in fieldAr) {
+                if (!map.exists(field.name)) {
+                    map.set(field.name,field);
+                }
+            }
+        }
+        return map;
+
+    }
+
     public static function getSuperFields(c:ClassType):Array<ClassField> {
         trace(c.name);
         var superc = c.superClass;
@@ -96,9 +122,9 @@ class PanelMacro {
         var access:Array<Access> = switch (isHook) {
             case false:
                 
-                [Access.AOverride,Access.AFinal,Access.APublic];
+                [Access.AFinal,Access.APublic]; //add override here if we revert...
             default:
-                [Access.AOverride,Access.APrivate];
+                [Access.APrivate];
         }
         var field:Field = {
             kind : FieldType.FFun(func),

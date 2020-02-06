@@ -34,7 +34,8 @@ class TestTwo extends PanelHelper_DTree {
     }
 
     function stuff() {
-
+        
+        var paneel:Panel = this;
     }
 
     
@@ -43,9 +44,14 @@ class TestTwo extends PanelHelper_DTree {
    
 
 }
-// class TestFour extends PanelHelper_DTree_Node {
-
-// }
+class TestFour extends PanelHelper_DTree_Node {
+    override function ActionSignal(signalName:String, signalValue:String) {
+        super.ActionSignal(signalName, signalValue);
+    }
+    override function AnimationThink() {
+        super.AnimationThink();
+    }
+}
 
 // class TestThree extends PanelHelper_DTree {
 //     override function DoClick() {
