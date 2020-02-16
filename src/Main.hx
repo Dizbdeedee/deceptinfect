@@ -14,7 +14,7 @@ import gmod.panels.*;
 import gmod.sent.*;
 import gmod.engine_ents.*;
 import gmod.HaxeMultiReturn;
-
+import deceptinfect.ecswip.*;
 // import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
 import gmod.EntityClass;
 import gmod.Networking;
@@ -31,6 +31,7 @@ class Main {
         #if client
         // var b:PanelHelper_DTree;
         
+        HiddenHealthSystem.init();
         
         
         #end

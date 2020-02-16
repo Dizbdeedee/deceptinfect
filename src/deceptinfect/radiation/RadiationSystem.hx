@@ -1,27 +1,28 @@
-package deceptinfect.ecswip;
+package deceptinfect.radiation;
 
+import deceptinfect.ecswip.ComponentManager;
+import deceptinfect.ecswip.RateComponent;
+import deceptinfect.GEntCompat;
 import deceptinfect.ecswip.RateSystem;
+
 class RadiationSystem {
    
     static var nextRadiationID:RadiationID = new RadiationID();
 
     static var radRateID:AddRateID = RateSystem.getAddRateTicket();
-    //Oh god
-    //My first """"""ecs""""" system and this is what i came up with
-    //God have mercy on us all
-    //TODO refactor at somepoint
-    public static function update() {
+
+    public static function run() {
 
         for (acceptEnt in ComponentManager.entities) {
             switch [acceptEnt.get_component(RadiationAccepter),acceptEnt.get_component(RateComponent),acceptEnt.get_gent()] {
-                case [COMPONENT(acceptComp = _.accepting => true),COMPONENT(rateComp),GEnt(acceptG)]:
+                case [COMPONENT(c_radAccept = _.accepting => true),COMPONENT(c_rateAccept),GEnt(g_accepter)]:
                     
                     for (produceEnt in ComponentManager.entities) {
                         switch [produceEnt.get_component(RadiationProducer),produceEnt.get_gent()] {
-                            case [COMPONENT(produceComp),GEnt(produceG)] :
-                                switch (radiationDistanceCalc(produceG,produceComp,acceptG)) {
+                            case [COMPONENT(c_radProduce),GEnt(g_producer)]:
+                                switch (radiationDistanceCalc(g_producer,c_radProduce,g_accepter)) {
                                     case Some(rate):
-                                        acceptComp.sourceRates.set(produceComp.id,rate);
+                                        c_radAccept.sourceRates.set(c_radProduce.id,rate);
                                     case None:
                                         continue;
                                 }
@@ -31,7 +32,7 @@ class RadiationSystem {
                         }
 
                     }
-                    rateComp.addRates.set(radRateID,getTotalRadiationRate(acceptComp));
+                    c_rateAccept.addRates.set(radRateID,getTotalRadiationRate(c_radAccept));
 
                 default:
             }

@@ -1,5 +1,5 @@
 package deceptinfect.ecswip;
-import deceptinfect.ecswip.GEntCompat.GPlayerCompat;
+import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.ecswip.Component;
 
 typedef ComponentArray = Array<ComponentState<Component>>;
@@ -106,6 +106,7 @@ abstract Entities(Int) from Int to Int {
     }
 }
 
+// @:using(deceptinfect.ecswip.ComponentFamily)
 abstract DI_ID(Int) from Int to Int {
     public extern inline function get_component<T:Component>(x:Class<T>):ComponentState<T> {
         return ComponentManager.getComponentForID(x,this);
@@ -118,10 +119,6 @@ abstract DI_ID(Int) from Int to Int {
     public extern inline function add_component<T:Component>(x:T) {
         ComponentManager.addComponent(x,this);
     }
-
-    
-
-    
 
     public inline function new(x:Int) {
         this = x;

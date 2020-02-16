@@ -65,6 +65,8 @@ local Type = _hx_e()
 __deceptinfect__DI_Player__DI_Player = _hx_e()
 __gmod_hooks_Gm = _hx_e()
 __deceptinfect_DeceptInfect = _hx_e()
+__deceptinfect__GEntCompat_GEntCompat_Impl_ = _hx_e()
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
 __deceptinfect_Networking = _hx_e()
 __deceptinfect_PlayerExt = _hx_e()
 __deceptinfect_ecswip_Component = _hx_e()
@@ -77,14 +79,19 @@ __deceptinfect_ecswip_ComponentTools = _hx_e()
 __deceptinfect_ecswip_ComponentState = _hx_e()
 __deceptinfect_ecswip_HasGEnt = _hx_e()
 __deceptinfect_ecswip_HasGPlayer = _hx_e()
-__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_ = _hx_e()
-__deceptinfect_ecswip__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
+__deceptinfect_ecswip_HiddenHealthComponent = _hx_e()
+__deceptinfect_ecswip_HiddenHealthSystem = _hx_e()
+__deceptinfect_ecswip_InfectedComponent = _hx_e()
 __deceptinfect_ecswip_PlayerComponent = _hx_e()
+__tink_core_SignalObject = _hx_e()
+__tink_core_SignalTrigger = _hx_e()
+__deceptinfect_ecswip_SignalStorage = _hx_e()
 __gmod__EntityClass_EntityClass_Impl_ = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
 __gmod_Hooks = _hx_e()
 __gmod_PairTools = _hx_e()
+__gmod__PanelClass_PanelClass_Impl_ = _hx_e()
 __gmod_PanelInterface = _hx_e()
 __gmod_PanelTest = _hx_e()
 __gmod_TestTwo = _hx_e()
@@ -142,10 +149,8 @@ __tink_core__Promise_Combiner_Impl_ = _hx_e()
 __tink_core__Promise_PromiseTrigger_Impl_ = _hx_e()
 __tink_core__Ref_Ref_Impl_ = _hx_e()
 __tink_core__Signal_Signal_Impl_ = _hx_e()
-__tink_core_SignalObject = _hx_e()
 __tink_core__Signal_SimpleSignal = _hx_e()
 __tink_core__Signal_Suspendable = _hx_e()
-__tink_core_SignalTrigger = _hx_e()
 
 local _hx_bind, _hx_bit, _hx_staticToInstance, _hx_funcToField, _hx_maxn, _hx_print, _hx_apply_self, _hx_box_mr, _hx_bit_clamp, _hx_table, _hx_bit_raw
 local _hx_pcall_default = {};
@@ -505,6 +510,7 @@ Main.__name__ = true
 Main.main = function() 
   __deceptinfect_DeceptInfect.initaliseGamemode();
   __deceptinfect_Networking.initMessages();
+  __deceptinfect_ecswip_HiddenHealthSystem.init();
   local b = nil;
   b:GetName();
 end
@@ -529,13 +535,15 @@ Math.min = function(a,b)
   end;
 end
 
-__gmod_PanelHelper.new = function(x) 
+__gmod_PanelHelper.new = function(parent,name) 
   local self = _hx_new(__gmod_PanelHelper.prototype)
-  __gmod_PanelHelper.super(self,x)
+  __gmod_PanelHelper.super(self,parent,name)
   return self
 end
-__gmod_PanelHelper.super = function(self,x) 
-  self["self"] = x;
+__gmod_PanelHelper.super = function(self,parent,name) 
+  local tb = vgui.RegisterTable(({}), "Panel");
+  local vgui = vgui.CreateFromTable(tb, parent, name);
+  self["self"] = vgui;
 end
 __gmod_PanelHelper.__name__ = true
 __gmod_PanelHelper.prototype = _hx_a();
@@ -1082,6 +1090,41 @@ Type.getClass = function(o)
     end;
   end;
 end
+Type.enumEq = function(a,b) 
+  if (a == b) then 
+    do return true end;
+  end;
+  local _hx_status, _hx_result = pcall(function() 
+  
+      if (a[0] ~= b[0]) then 
+        do return false end;
+      end;
+      local _g = 2;
+      local _g1 = a.length;
+      while (_g < _g1) do 
+        _g = _g + 1;
+        local i = _g - 1;
+        if (not Type.enumEq(a[i], b[i])) then 
+          do return false end;
+        end;
+      end;
+      local e = a.__enum__;
+      if ((e ~= b.__enum__) or (e == nil)) then 
+        do return false end;
+      end;
+    return _hx_pcall_default
+  end)
+  if not _hx_status and _hx_result == "_hx_pcall_break" then
+  elseif not _hx_status then 
+  
+    local _hx_1 = _hx_result
+    local e1 = _hx_1
+    do return false end;
+  elseif _hx_result ~= _hx_pcall_default then
+    return _hx_result
+  end;
+  do return true end;
+end
 
 __deceptinfect__DI_Player__DI_Player.new = {}
 __deceptinfect__DI_Player__DI_Player.__name__ = true
@@ -1493,6 +1536,108 @@ __deceptinfect_DeceptInfect.prototype.__class__ =  __deceptinfect_DeceptInfect
 __deceptinfect_DeceptInfect.__super__ = __gmod_hooks_Gm
 setmetatable(__deceptinfect_DeceptInfect.prototype,{__index=__gmod_hooks_Gm.prototype})
 
+__deceptinfect__GEntCompat_GEntCompat_Impl_.new = {}
+__deceptinfect__GEntCompat_GEntCompat_Impl_.__name__ = true
+__deceptinfect__GEntCompat_GEntCompat_Impl_.get_id = function(this1) 
+  do return this1.id end;
+end
+__deceptinfect__GEntCompat_GEntCompat_Impl_.has_id = function(this1) 
+  local _g = this1.id;
+  if (_g == nil) then 
+    do return __haxe_ds_Option.None end;
+  else
+    local x = _g;
+    do return __haxe_ds_Option.Some(x) end;
+  end;
+end
+__deceptinfect__GEntCompat_GEntCompat_Impl_.get_component = function(this1,x) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
+  local comp = comparray[this1.id];
+  do return comp end;
+end
+__deceptinfect__GEntCompat_GEntCompat_Impl_.infectedPlayer = function(this1) 
+  local _g;
+  local _g1 = this1.id;
+  if (_g1 == nil) then 
+    _g = __haxe_ds_Option.None;
+  else
+    local x = _g1;
+    _g = __haxe_ds_Option.Some(x);
+  end;
+  if (_g[1] == 0) then 
+    local id = _g[2];
+    local comparray = __deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_InfectedComponent];
+    local comp = comparray[id];
+    local _g2 = comp;
+    local comparray1 = __deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_PlayerComponent];
+    local comp1 = comparray1[id];
+    local _g11 = comp1;
+    if (_g11[1] == 1) then 
+      if (_g2[1] == 1) then 
+        local _g3 = _g2[2];
+        local p = _g11[2];
+        do return __haxe_ds_Option.Some(p) end;
+      else
+        do return __haxe_ds_Option.None end;
+      end;
+    else
+      do return __haxe_ds_Option.None end;
+    end;
+  else
+    do return __haxe_ds_Option.None end;
+  end;
+end
+__deceptinfect__GEntCompat_GEntCompat_Impl_.isPlayer = function(this1) 
+  local _g;
+  local _g1 = this1.id;
+  if (_g1 == nil) then 
+    _g = __haxe_ds_Option.None;
+  else
+    local x = _g1;
+    _g = __haxe_ds_Option.Some(x);
+  end;
+  if (_g[1] == 0) then 
+    local id = _g[2];
+    local comparray = __deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_PlayerComponent];
+    local comp = comparray[id];
+    local _g2 = comp;
+    if (_g2[1] == 1) then 
+      local p = _g2[2];
+      do return __haxe_ds_Option.Some(p) end;
+    else
+      do return __haxe_ds_Option.None end;
+    end;
+  else
+    do return __haxe_ds_Option.None end;
+  end;
+end
+__deceptinfect__GEntCompat_GEntCompat_Impl_._new = function(x) 
+  local this1 = x;
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
+  do return this1 end;
+end
+
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_.new = {}
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_.__name__ = true
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_.get_id = function(this1) 
+  do return this1.id end;
+end
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_.get_component = function(this1,x) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
+  local comp = comparray[this1.id];
+  do return comp end;
+end
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_.isInfected = function(this1) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_InfectedComponent];
+  local comp = comparray[this1.id];
+  do return Type.enumEq(comp, __deceptinfect_ecswip_ComponentState.COMPONENT(nil)) end;
+end
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_._new = function(x) 
+  local this1 = x.player;
+  x.id = __deceptinfect_ecswip_ComponentManager:addPlayer(x);
+  do return this1 end;
+end
+
 __deceptinfect_Networking.new = {}
 __deceptinfect_Networking.__name__ = true
 __deceptinfect_Networking.recvInfectionMessage = function() 
@@ -1743,27 +1888,76 @@ __deceptinfect_ecswip_HasGPlayer.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = _
 
 __deceptinfect_ecswip_HasGPlayer.GPlayer = function(p) local _x = _hx_tab_array({[0]="GPlayer",1,p,__enum__=__deceptinfect_ecswip_HasGPlayer}, 3); return _x; end 
 
-__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_.new = {}
-__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_.__name__ = true
-__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_.get_id = function(this1) 
-  do return this1.id end;
+__deceptinfect_ecswip_HiddenHealthComponent.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_HiddenHealthComponent.prototype)
+  __deceptinfect_ecswip_HiddenHealthComponent.super(self)
+  return self
 end
-__deceptinfect_ecswip__GEntCompat_GEntCompat_Impl_._new = function(x) 
-  local this1 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  do return this1 end;
+__deceptinfect_ecswip_HiddenHealthComponent.super = function(self) 
+  __deceptinfect_ecswip_Component.super(self);
+end
+__deceptinfect_ecswip_HiddenHealthComponent.__name__ = true
+__deceptinfect_ecswip_HiddenHealthComponent.prototype = _hx_a();
+
+__deceptinfect_ecswip_HiddenHealthComponent.prototype.__class__ =  __deceptinfect_ecswip_HiddenHealthComponent
+__deceptinfect_ecswip_HiddenHealthComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_ecswip_HiddenHealthComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
+__deceptinfect_ecswip_HiddenHealthSystem.new = {}
+__deceptinfect_ecswip_HiddenHealthSystem.__name__ = true
+__deceptinfect_ecswip_HiddenHealthSystem.init = function() 
+  __deceptinfect_ecswip_SignalStorage.entDamage:handle(__deceptinfect_ecswip_HiddenHealthSystem.hiddenHealthDamage);
+end
+__deceptinfect_ecswip_HiddenHealthSystem.hiddenHealthDamage = function(data) 
+  local victim = data.vicID;
+  local g_attacker = data.dmg:GetAttacker();
+  if (not g_attacker:IsPlayer()) then 
+    do return end;
+  end;
+  local comparray = __deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_InfectedComponent];
+  local comp = comparray[victim];
+  local _g = comp;
+  local _g1 = __deceptinfect_ecswip_ComponentManager.getGEnt(victim);
+  local comparray1 = __deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_HiddenHealthComponent];
+  local comp1 = comparray1[victim];
+  local _g2 = comp1;
+  if (_g2[1] == 1) then 
+    if (_g1[1] == 1) then 
+      if (_g[1] == 1) then 
+        local _g5 = _g[2];
+        local g_victim = _g1[2];
+        local c_hidHealth = _g2[2];
+        local damageVal = data.dmg:GetDamage();
+        local health = g_victim:Health();
+        local dmgInfo = data.dmg;
+        if (damageVal >= health) then 
+          local c_hidHealth1 = c_hidHealth;
+          c_hidHealth1.extraHealth = c_hidHealth1.extraHealth - damageVal;
+          if (c_hidHealth.extraHealth > 0) then 
+            dmgInfo:SetDamage(health - 1);
+          else
+            dmgInfo:SetDamage(health);
+          end;
+        end;
+      end;
+    end;
+  end;
 end
 
-__deceptinfect_ecswip__GEntCompat_GPlayerCompat_Impl_.new = {}
-__deceptinfect_ecswip__GEntCompat_GPlayerCompat_Impl_.__name__ = true
-__deceptinfect_ecswip__GEntCompat_GPlayerCompat_Impl_.get_id = function(this1) 
-  do return this1.id end;
+__deceptinfect_ecswip_InfectedComponent.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_InfectedComponent.prototype)
+  __deceptinfect_ecswip_InfectedComponent.super(self)
+  return self
 end
-__deceptinfect_ecswip__GEntCompat_GPlayerCompat_Impl_._new = function(x) 
-  local this1 = x.player;
-  x.id = __deceptinfect_ecswip_ComponentManager:addPlayer(x);
-  do return this1 end;
+__deceptinfect_ecswip_InfectedComponent.super = function(self) 
+  __deceptinfect_ecswip_Component.super(self);
 end
+__deceptinfect_ecswip_InfectedComponent.__name__ = true
+__deceptinfect_ecswip_InfectedComponent.prototype = _hx_a();
+
+__deceptinfect_ecswip_InfectedComponent.prototype.__class__ =  __deceptinfect_ecswip_InfectedComponent
+__deceptinfect_ecswip_InfectedComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_ecswip_InfectedComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
 __deceptinfect_ecswip_PlayerComponent.new = function(x) 
   local self = _hx_new(__deceptinfect_ecswip_PlayerComponent.prototype)
@@ -1784,6 +1978,52 @@ __deceptinfect_ecswip_PlayerComponent.prototype = _hx_a();
 __deceptinfect_ecswip_PlayerComponent.prototype.__class__ =  __deceptinfect_ecswip_PlayerComponent
 __deceptinfect_ecswip_PlayerComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_PlayerComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
+__tink_core_SignalObject.new = {}
+__tink_core_SignalObject.__name__ = true
+__tink_core_SignalObject.prototype = _hx_a();
+
+__tink_core_SignalObject.prototype.__class__ =  __tink_core_SignalObject
+
+__tink_core_SignalTrigger.new = function() 
+  local self = _hx_new(__tink_core_SignalTrigger.prototype)
+  __tink_core_SignalTrigger.super(self)
+  return self
+end
+__tink_core_SignalTrigger.super = function(self) 
+  self.handlers = __tink_core_CallbackList.new();
+end
+__tink_core_SignalTrigger.__name__ = true
+__tink_core_SignalTrigger.__interfaces__ = {__tink_core_SignalObject}
+__tink_core_SignalTrigger.prototype = _hx_a();
+__tink_core_SignalTrigger.prototype.trigger = function(self,event) 
+  self.handlers:invoke(event);
+end
+__tink_core_SignalTrigger.prototype.getLength = function(self) 
+  do return self.handlers.used end
+end
+__tink_core_SignalTrigger.prototype.handle = function(self,cb) 
+  local _this = self.handlers;
+  local node = __tink_core__Callback_ListCell.new(cb, _this);
+  _this.cells:push(node);
+  _this.used = _this.used + 1;
+  do return node end
+end
+__tink_core_SignalTrigger.prototype.clear = function(self) 
+  self.handlers:clear();
+end
+__tink_core_SignalTrigger.prototype.asSignal = function(self) 
+  do return self end
+end
+
+__tink_core_SignalTrigger.prototype.__class__ =  __tink_core_SignalTrigger
+
+__deceptinfect_ecswip_SignalStorage.new = {}
+__deceptinfect_ecswip_SignalStorage.__name__ = true
+__deceptinfect_ecswip_SignalStorage.initEvents = function() 
+  __deceptinfect_ecswip_SignalStorage.entDamage = __deceptinfect_ecswip_SignalStorage.entDamageTrigger;
+  __deceptinfect_ecswip_SignalStorage.onInfected = __deceptinfect_ecswip_SignalStorage.onInfectedTrigger;
+end
 
 __gmod__EntityClass_EntityClass_Impl_.new = {}
 __gmod__EntityClass_EntityClass_Impl_.__name__ = true
@@ -1870,6 +2110,13 @@ __gmod_PairTools.ipairsIterator = function(table)
   end,hasNext=function(self) 
     do return _G.select(2, next(table, i)) ~= nil end;
   end}) end;
+end
+
+__gmod__PanelClass_PanelClass_Impl_.new = {}
+__gmod__PanelClass_PanelClass_Impl_.__name__ = true
+__gmod__PanelClass_PanelClass_Impl_._new = function(name) 
+  local this1 = name;
+  do return this1 end;
 end
 
 __gmod_PanelInterface.new = {}
@@ -4586,12 +4833,6 @@ __tink_core__Signal_Signal_Impl_.ofClassical = function(add,remove,gather)
   end;
 end
 
-__tink_core_SignalObject.new = {}
-__tink_core_SignalObject.__name__ = true
-__tink_core_SignalObject.prototype = _hx_a();
-
-__tink_core_SignalObject.prototype.__class__ =  __tink_core_SignalObject
-
 __tink_core__Signal_SimpleSignal.new = function(f) 
   local self = _hx_new(__tink_core__Signal_SimpleSignal.prototype)
   __tink_core__Signal_SimpleSignal.super(self,f)
@@ -4650,39 +4891,6 @@ __tink_core__Signal_Suspendable.prototype.handle = function(self,cb)
 end
 
 __tink_core__Signal_Suspendable.prototype.__class__ =  __tink_core__Signal_Suspendable
-
-__tink_core_SignalTrigger.new = function() 
-  local self = _hx_new(__tink_core_SignalTrigger.prototype)
-  __tink_core_SignalTrigger.super(self)
-  return self
-end
-__tink_core_SignalTrigger.super = function(self) 
-  self.handlers = __tink_core_CallbackList.new();
-end
-__tink_core_SignalTrigger.__name__ = true
-__tink_core_SignalTrigger.__interfaces__ = {__tink_core_SignalObject}
-__tink_core_SignalTrigger.prototype = _hx_a();
-__tink_core_SignalTrigger.prototype.trigger = function(self,event) 
-  self.handlers:invoke(event);
-end
-__tink_core_SignalTrigger.prototype.getLength = function(self) 
-  do return self.handlers.used end
-end
-__tink_core_SignalTrigger.prototype.handle = function(self,cb) 
-  local _this = self.handlers;
-  local node = __tink_core__Callback_ListCell.new(cb, _this);
-  _this.cells:push(node);
-  _this.used = _this.used + 1;
-  do return node end
-end
-__tink_core_SignalTrigger.prototype.clear = function(self) 
-  self.handlers:clear();
-end
-__tink_core_SignalTrigger.prototype.asSignal = function(self) 
-  do return self end
-end
-
-__tink_core_SignalTrigger.prototype.__class__ =  __tink_core_SignalTrigger
 _hx_bit_clamp = function(v)
   if v <= 2147483647 and v >= -2147483648 then
     if v > 0 then return _G.math.floor(v)
@@ -4720,6 +4928,8 @@ local _hx_static_init = function()
   __deceptinfect_ecswip_ComponentManager.gEntityLookup = __haxe_ds_IntMap.new();
   
   __deceptinfect_ecswip_ComponentManager.gents = _hx_tab_array({}, 0);
+  
+  __deceptinfect_ecswip_SignalStorage.entDamageTrigger = __tink_core_SignalTrigger.new();
   
   __gmod__EntityClass_EntityClass_Impl_.info_player_start = "info_player_start";
   

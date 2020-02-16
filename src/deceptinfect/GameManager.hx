@@ -1,20 +1,21 @@
 package deceptinfect;
 import deceptinfect.ecswip.PlayerComponent;
 import gmod.engine_ents.Game_end;
-import deceptinfect.ecswip.RadiationAccepter;
+import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.ecswip.GrabAccepter;
 import deceptinfect.ecswip.HiddenHealthComponent;
 import deceptinfect.ecswip.RateComponent;
 import deceptinfect.ecswip.SpectateComponent;
-import deceptinfect.ecswip.InfectionComponent2;
+import deceptinfect.ecswip.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
-import deceptinfect.ecswip.GEntCompat;
+import deceptinfect.GEntCompat;
 import deceptinfect.GameInstance;
 
 class GameManager {
 
     public static var state(default,null):GAME_STATE = WAIT;
     public static var Game:GameInstance;
+
 
     public static function sure():GameInstance {
         return switch (state) {
@@ -35,7 +36,7 @@ class GameManager {
         for (player in PlayerLib.GetAll()) {
             var ent = new GPlayerCompat(new PlayerComponent(player));
             var p = ent.id;
-            var infcomp = new InfectionComponent2();
+            var infcomp = new InfectionComponent();
             var spec = new SpectateComponent();
             var rate = new RateComponent();
             var health = new HiddenHealthComponent();

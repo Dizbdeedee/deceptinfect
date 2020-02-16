@@ -1,6 +1,6 @@
 package deceptinfect.ecswip;
 
-class InfectionComponent2 extends Component {
+class InfectionComponent extends Component {
     
     public var infection:INF_STATE = NOT_INFECTED(0.0);
     public var rate:Float = 1;
@@ -8,10 +8,19 @@ class InfectionComponent2 extends Component {
     public var onInfected(default,null):Signal<Noise>;
     public var acceptingInfection:AcceptingInfection = ACCEPTING;
 
+    public function getInfValue():Float {
+        return switch(infection) {
+            case NOT_INFECTED(inf):
+                inf.value;
+            case INFECTED:
+                -1;
+        }
+    }
     
 
-
 }
+
+
 
 
 typedef InfectionMessageInfo = {
@@ -28,6 +37,7 @@ enum BaseInfection {
     USING_GLOBAL;
     USING_STATIC(rate:Float);
 }
+
 
 
 enum INF_STATE {

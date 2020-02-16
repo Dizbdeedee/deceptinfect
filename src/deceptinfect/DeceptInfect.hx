@@ -1,7 +1,8 @@
 package deceptinfect;
 
+import deceptinfect.GEntCompat;
 import deceptinfect.ecswip.PlayerComponent;
-import deceptinfect.ecswip.GEntCompat.GPlayerCompat;
+import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.enums.BUTTON_CODE;
 import deceptinfect.ecswip.ComponentManager;
 
@@ -19,10 +20,11 @@ import gmod.types.Entity;
 using gmod.PairTools;
 using gmod.TableTools;
 using deceptinfect.PlayerExt;
-#if server
+import deceptinfect.ecswip.SignalStorage;
+
 @:build(gmod.macros.GamemodeMacro.build())
 class DeceptInfect extends gmod.hooks.Gm {
-
+    #if server
     
 
     
@@ -138,6 +140,20 @@ class DeceptInfect extends gmod.hooks.Gm {
         return null;
     }
 
+    override function EntityTakeDamage(target:GEntCompat, dmg:CTakeDamageInfo):Bool {
+        switch (target.has_id()) {
+            case Some(id):
+                SignalStorage.entDamageTrigger.trigger(
+                    {
+                        vicID: id,
+                        dmg: dmg,
+                        entity: target
+                    });
+            default:
+        } 
+        return null;
+    }
+
 
     override function PlayerSay(sender:gmod.types.Player, text:String, teamChat:Bool):String {
         
@@ -163,9 +179,8 @@ class DeceptInfect extends gmod.hooks.Gm {
         // }
     }
     
-    
+    #end
 }
-#end
 
 // enum GAME_STATE {
 //     WAIT;

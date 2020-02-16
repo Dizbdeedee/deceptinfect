@@ -283,8 +283,9 @@ package gmod.libs;
 		end )
 		```
     **/
-    
-    public static function SetDrawColor(r:Color, g:Color, b:Color, ?a:Color):Void;
+	
+	@:overload(function(r:Color):Void {})
+    public static function SetDrawColor(r:Int, g:Int, b:Int, ?a:Int):Void;
     
     
     /**
@@ -460,8 +461,8 @@ package gmod.libs;
 		end )
 		```
     **/
-    
-    public static function SetTextColor(r:Color, g:Float, b:Float, ?a:Float):Void;
+    @:overload(function(col:Color):Void {})
+    public static function SetTextColor(r:Float, g:Float, b:Float, ?a:Float):Void;
     
     
     /**

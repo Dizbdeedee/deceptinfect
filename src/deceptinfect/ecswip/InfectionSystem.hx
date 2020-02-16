@@ -1,7 +1,7 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.ecswip.InfectionComponent2;
-import gmod.engine_ents.Combine_mine;
+import deceptinfect.ecswip.InfectionComponent;
+
 
 class InfectionSystem {
     public static function run() {
@@ -13,7 +13,7 @@ class InfectionSystem {
     public static var infectedSig:Signal<Noise> = infectedTrigger.asSignal();
     public static function handleInfections() {
         for (entity in ComponentManager.entities) {
-            switch (entity.get_component(InfectionComponent2)) {
+            switch (entity.get_component(InfectionComponent)) {
                 //TODO refactor?
                 case COMPONENT(infection = _.acceptingInfection => ACCEPTING):
                     switch (infection.infection) {
@@ -59,7 +59,7 @@ class InfectionSystem {
     }
 
 
-    public static function getBaseInfection(inf:InfectionComponent2):Float {
+    public static function getBaseInfection(inf:InfectionComponent):Float {
         return switch (inf.baseInfection) {
             case NOT_USING:
                 0;
@@ -72,7 +72,7 @@ class InfectionSystem {
     }
 
     //TODO needed?
-    public static function fixUpInfection(infection:InfectionComponent2) {
+    public static function fixUpInfection(infection:InfectionComponent) {
         
         switch (infection.infection) {
             case NOT_INFECTED(inf) if (inf.value < 0):
