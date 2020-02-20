@@ -45,8 +45,8 @@ class DeceptInfect2 extends gmod.hooks.Gm {
 
     function drawInfectionMeter() {
         var lp = PlayerManager.getLocalPlayer();
-        switch [lp.get_component(InfectionComponent),GameManager.state] {
-            case [COMPONENT(inf),PLAYING(_)]:
+        switch [lp.get(InfectionComponent),GameManager.state] {
+            case [Comp(inf),PLAYING(_)]:
                 SurfaceLib.SetDrawColor(180,180,180,255);
                 SurfaceLib.DrawRect(CSS(X,750),CSS(Y,825),CSS(X,300),CSS(Y,30));
                 var barExtend:Float;

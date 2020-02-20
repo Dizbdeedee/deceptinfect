@@ -2,7 +2,7 @@
 -D lua-5.1
 -D lua-vanilla
 -D client
--D dump=pretty
+-D gmodAddonFolder=C:\steamcmd\gmod\garrysmod\addons
 -lib tink_core
 -D gamemode=deceptinfect
 -D addonName=deceptinfect

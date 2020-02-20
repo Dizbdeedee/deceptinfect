@@ -28,6 +28,7 @@ class Main {
     public static function main() {
         DeceptInfect.initaliseGamemode();
         deceptinfect.Networking.initMessages();
+        trace("help");
         #if client
         // var b:PanelHelper_DTree;
         
@@ -35,8 +36,7 @@ class Main {
         
         
         #end
-        var b:Player = null;
-        b.GetName();
+      
     }
     #if server
     @:expose("testComponents")

@@ -13,8 +13,8 @@ class HiddenHealthSystem {
         var victim = data.vicID;
         var g_attacker:GEntCompat = data.dmg.GetAttacker();
         if (!g_attacker.IsPlayer()) return;
-        switch [victim.get_component(HiddenHealthComponent),victim.get_gent(),victim.get_component(InfectedComponent)] {
-            case [COMPONENT(c_hidHealth),GEnt(g_victim),COMPONENT(_)]:
+        switch [victim.get(HiddenHealthComponent),victim.get_gent(),victim.get(InfectedComponent)] {
+            case [Comp(c_hidHealth),GEnt(g_victim),Comp(_)]:
                 var damageVal = data.dmg.GetDamage();
                 var health = g_victim.Health();
                 var dmgInfo = data.dmg;

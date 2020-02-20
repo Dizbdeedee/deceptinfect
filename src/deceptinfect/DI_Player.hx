@@ -69,7 +69,7 @@ private class _DI_Player {
     //     switch (Game.currentGame) {
     //         case AVALIABLE(game):
     //             rate = new RateHandler(infection);
-    //             radhandler = COMPONENT(new RadiationRateHandler(rate,this));
+    //             radhandler = Comp(new RadiationRateHandler(rate,this));
     //             infection = new Infection();
     //             infection.onInfected.handle(onInfected);
     //             infection.baseInfection = game.baseInfection;

@@ -97,7 +97,6 @@ __gmod_PanelTest = _hx_e()
 __gmod_TestTwo = _hx_e()
 __gmod_TestFour = _hx_e()
 __gmod_TableTools = _hx_e()
-__gmod_hooks_PLAYER = _hx_e()
 __gmod_safety_Safety = _hx_e()
 __gmod_safety_ValidObject = _hx_e()
 __gmod_types__Panel_Panel_Impl_ = _hx_e()
@@ -510,9 +509,8 @@ Main.__name__ = true
 Main.main = function() 
   __deceptinfect_DeceptInfect.initaliseGamemode();
   __deceptinfect_Networking.initMessages();
+  __haxe_Log.trace("help", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=31,className="Main",methodName="main"}));
   __deceptinfect_ecswip_HiddenHealthSystem.init();
-  local b = nil;
-  b:GetName();
 end
 
 Math.new = {}
@@ -1550,7 +1548,7 @@ __deceptinfect__GEntCompat_GEntCompat_Impl_.has_id = function(this1)
     do return __haxe_ds_Option.Some(x) end;
   end;
 end
-__deceptinfect__GEntCompat_GEntCompat_Impl_.get_component = function(this1,x) 
+__deceptinfect__GEntCompat_GEntCompat_Impl_.get = function(this1,x) 
   local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
   local comp = comparray[this1.id];
   do return comp end;
@@ -1622,7 +1620,7 @@ __deceptinfect__GEntCompat_GPlayerCompat_Impl_.__name__ = true
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_.get_id = function(this1) 
   do return this1.id end;
 end
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_.get_component = function(this1,x) 
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_.get = function(this1,x) 
   local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
   local comp = comparray[this1.id];
   do return comp end;
@@ -1630,7 +1628,7 @@ end
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_.isInfected = function(this1) 
   local comparray = __deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_InfectedComponent];
   local comp = comparray[this1.id];
-  do return Type.enumEq(comp, __deceptinfect_ecswip_ComponentState.COMPONENT(nil)) end;
+  do return Type.enumEq(comp, __deceptinfect_ecswip_ComponentState.Comp(nil)) end;
 end
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_._new = function(x) 
   local this1 = x.player;
@@ -1821,8 +1819,8 @@ __deceptinfect_ecswip_ComponentManager.addComponent = function(x,to)
     end;
   end;
   local comparray1 = comparray;
-  __haxe_Log.trace(to, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/ComponentManager.hx",lineNumber=66,className="deceptinfect.ecswip.ComponentManager",methodName="addComponent"}));
-  comparray1[to] = __deceptinfect_ecswip_ComponentState.COMPONENT(x);
+  __haxe_Log.trace(to, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/ComponentManager.hx",lineNumber=67,className="deceptinfect.ecswip.ComponentManager",methodName="addComponent"}));
+  comparray1[to] = __deceptinfect_ecswip_ComponentState.Comp(x);
 end
 __deceptinfect_ecswip_ComponentManager.lazyInit = function(x) 
   local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
@@ -1839,6 +1837,14 @@ __deceptinfect_ecswip_ComponentManager.lazyInit = function(x)
   end;
   do return comparray end;
 end
+__deceptinfect_ecswip_ComponentManager.removeEntity = function(x) 
+  local component = __deceptinfect_ecswip_ComponentManager.components:iterator();
+  while (component:hasNext()) do 
+    local component1 = component:next();
+    component1[x] = __deceptinfect_ecswip_ComponentState.NONE;
+  end;
+  __deceptinfect_ecswip_ComponentManager.activeEntities = __deceptinfect_ecswip_ComponentManager.activeEntities - 1;
+end
 __deceptinfect_ecswip_ComponentManager.addToAllCompArrays = function() 
   local compArray = __deceptinfect_ecswip_ComponentManager.components:iterator();
   while (compArray:hasNext()) do 
@@ -1851,6 +1857,7 @@ __deceptinfect_ecswip_ComponentManager.getComponents = function(cls)
 end
 __deceptinfect_ecswip_ComponentManager.addEntity = function() 
   __deceptinfect_ecswip_ComponentManager.entities = __deceptinfect_ecswip_ComponentManager.entities + 1;
+  __deceptinfect_ecswip_ComponentManager.activeEntities = __deceptinfect_ecswip_ComponentManager.activeEntities + 1;
   __deceptinfect_ecswip_ComponentManager.addToAllCompArrays();
   do return __deceptinfect_ecswip_ComponentManager.entities - 1 end;
 end
@@ -1872,11 +1879,11 @@ __deceptinfect_ecswip_ComponentTools.sure = function(x)
     _G.error("Component not avaliable...",0);
   end;
 end
-_hxClasses["deceptinfect.ecswip.ComponentState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","COMPONENT"},2)}
+_hxClasses["deceptinfect.ecswip.ComponentState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","Comp"},2)}
 __deceptinfect_ecswip_ComponentState = _hxClasses["deceptinfect.ecswip.ComponentState"];
 __deceptinfect_ecswip_ComponentState.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_ComponentState},2)
 
-__deceptinfect_ecswip_ComponentState.COMPONENT = function(comp) local _x = _hx_tab_array({[0]="COMPONENT",1,comp,__enum__=__deceptinfect_ecswip_ComponentState}, 3); return _x; end 
+__deceptinfect_ecswip_ComponentState.Comp = function(comp) local _x = _hx_tab_array({[0]="Comp",1,comp,__enum__=__deceptinfect_ecswip_ComponentState}, 3); return _x; end 
 _hxClasses["deceptinfect.ecswip.HasGEnt"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","GEnt"},2)}
 __deceptinfect_ecswip_HasGEnt = _hxClasses["deceptinfect.ecswip.HasGEnt"];
 __deceptinfect_ecswip_HasGEnt.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_HasGEnt},2)
@@ -2184,34 +2191,6 @@ __gmod_TableTools.__name__ = true
 __gmod_TableTools.length = function(table) 
   do return #table end;
 end
-
-__gmod_hooks_PLAYER.new = {}
-__gmod_hooks_PLAYER.__name__ = true
-__gmod_hooks_PLAYER.prototype = _hx_a();
-__gmod_hooks_PLAYER.prototype.PostDrawViewModel = function(self,viewmodel,weapon) 
-end
-__gmod_hooks_PLAYER.prototype.PreDrawViewModel = function(self,viewmodel,weapon) 
-end
-__gmod_hooks_PLAYER.prototype.FinishMove = function(self,mv) 
-  do return nil end
-end
-__gmod_hooks_PLAYER.prototype.GetHandsModel = function(self) 
-  do return nil end
-end
-__gmod_hooks_PLAYER.prototype.ViewModelChanged = function(self,viewmodel,old,_new) 
-end
-__gmod_hooks_PLAYER.prototype.Move = function(self,mv) 
-  do return nil end
-end
-__gmod_hooks_PLAYER.prototype.StartMove = function(self,mv,cmd) 
-  do return nil end
-end
-__gmod_hooks_PLAYER.prototype.Init = function(self) 
-end
-__gmod_hooks_PLAYER.prototype.SetupDataTables = function(self) 
-end
-
-__gmod_hooks_PLAYER.prototype.__class__ =  __gmod_hooks_PLAYER
 
 __gmod_safety_Safety.new = {}
 __gmod_safety_Safety.__name__ = true
@@ -4016,7 +3995,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -4033,7 +4012,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -4042,16 +4021,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -4060,7 +4039,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -4120,13 +4099,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g1 = o[2];
-    local tmp1 = _g1[1];
+    local _g = o[2];
+    local tmp1 = _g[1];
     if (tmp1) == 0 then 
-      local d = _g1[2];
+      local d = _g[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g1[2];
+      local f = _g[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -4262,7 +4241,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g1 = o[2];
+      local _g = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -4346,10 +4325,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g1 = o1[2];
-                local next3 = _g1[1];
+                local _g = o1[2];
+                local next3 = _g[1];
                 if (next3) == 0 then 
-                  local ret = _g1[2];
+                  local ret = _g[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;
@@ -4922,6 +4901,8 @@ local _hx_static_init = function()
   __deceptinfect_ecswip_ComponentManager.components = __haxe_ds_ObjectMap.new();
   
   __deceptinfect_ecswip_ComponentManager.entities = 0;
+  
+  __deceptinfect_ecswip_ComponentManager.activeEntities = 0;
   
   __deceptinfect_ecswip_ComponentManager.players = __haxe_ds_IntMap.new();
   

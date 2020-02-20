@@ -13,16 +13,16 @@ class InfectionSystem {
     public static var infectedSig:Signal<Noise> = infectedTrigger.asSignal();
     public static function handleInfections() {
         for (entity in ComponentManager.entities) {
-            switch (entity.get_component(InfectionComponent)) {
+            switch (entity.get(InfectionComponent)) {
                 //TODO refactor?
-                case COMPONENT(infection = _.acceptingInfection => ACCEPTING):
+                case Comp(infection = _.acceptingInfection => ACCEPTING):
                     switch (infection.infection) {
                         case NOT_INFECTED(inf):
                         
                             var base = getBaseInfection(infection);
                         
-                            var rate = switch (entity.get_component(RateComponent)) {
-                                case COMPONENT(rate):
+                            var rate = switch (entity.get(RateComponent)) {
+                                case Comp(rate):
                                     calcInfectionFromRates(rate);
                                 default:
                                     infection.rate;

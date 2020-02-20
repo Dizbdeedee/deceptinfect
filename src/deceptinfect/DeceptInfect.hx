@@ -99,7 +99,7 @@ class DeceptInfect extends gmod.hooks.Gm {
     // }
 
     override function PlayerDeathThink(ply:GPlayerCompat):Bool {
-        var comp = ply.id.get_component(PlayerComponent).sure();
+        var comp = ply.id.get(PlayerComponent).sure();
         if (comp.deathTime == 0.0) {
             comp.deathTime = GlobalLib.CurTime() + 1;
         }

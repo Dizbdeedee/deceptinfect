@@ -22,15 +22,15 @@ abstract GEntCompat(Entity) from Entity to Entity {
         }
     }
 
-    public inline function get_component<T:Component>(x:Class<T>):ComponentState<T> {
-        return id.get_component(x);
+    public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
+        return id.get(x);
     }
 
     public function infectedPlayer():Option<PlayerComponent> {
         return switch(has_id()) {
             case Some(id):
-                switch [id.get_component(PlayerComponent),id.get_component(InfectedComponent)] {
-                    case [COMPONENT(p),COMPONENT(_)]:
+                switch [id.get(PlayerComponent),id.get(InfectedComponent)] {
+                    case [Comp(p),Comp(_)]:
                         Some(p);
                     default:
                         None;
@@ -43,8 +43,8 @@ abstract GEntCompat(Entity) from Entity to Entity {
     public inline function isPlayer():Option<PlayerComponent> {
         return switch(has_id()) {
             case Some(id):
-                switch id.get_component(PlayerComponent) {
-                    case COMPONENT(p):
+                switch id.get(PlayerComponent) {
+                    case Comp(p):
                         Some(p);
                     default:
                         None;
@@ -69,12 +69,12 @@ abstract GPlayerCompat(Player) from Player to Player {
     }
 
     
-    public inline function get_component<T:Component>(x:Class<T>):ComponentState<T> {
-        return id.get_component(x);
+    public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
+        return id.get(x);
     }
 
     public inline function isInfected():Bool {
-        return id.get_component(InfectedComponent).equals(COMPONENT(null));
+        return id.get(InfectedComponent).equals(Comp(null));
     }
 
     public inline function new(x:PlayerComponent) {

@@ -10,7 +10,8 @@ class ComponentManager {
     
     // public static var bitset(default,null):Map<DI_ID,
     public static var entities(default,null):Entities = 0;     
-
+    
+    public static var activeEntities(default,null):Int = 0;
 
     //component lookup
     public static var players(default,null):Map<DI_ID,PlayerComponent> = [];
@@ -64,7 +65,7 @@ class ComponentManager {
     public static function addComponent<T:Component>(x:T,to:DI_ID) {
         var comparray = lazyInit(Type.getClass(x));
         trace(to);
-        comparray[to] = COMPONENT(x);
+        comparray[to] = Comp(x);
     }
 
 
@@ -80,6 +81,12 @@ class ComponentManager {
         return comparray;
     }
 
+    public static function removeEntity(x:DI_ID) {
+        for (component in components) {
+            component[x] = NONE;
+        }
+        activeEntities--;
+    }
     public static function addToAllCompArrays() {
         for (compArray in components) {
             compArray.push(NONE);
@@ -92,6 +99,7 @@ class ComponentManager {
 
     public static function addEntity():DI_ID {
         entities++;
+        activeEntities++;
         addToAllCompArrays();
         return entities - 1;
     }
@@ -108,7 +116,7 @@ abstract Entities(Int) from Int to Int {
 
 // @:using(deceptinfect.ecswip.ComponentFamily)
 abstract DI_ID(Int) from Int to Int {
-    public extern inline function get_component<T:Component>(x:Class<T>):ComponentState<T> {
+    public extern inline function get<T:Component>(x:Class<T>):ComponentState<T> {
         return ComponentManager.getComponentForID(x,this);
     }
 
@@ -131,7 +139,7 @@ abstract DI_ID(Int) from Int to Int {
 class ComponentTools {
     public static function sure<T:Component>(x:ComponentState<T>):T {
         switch (x) {
-            case COMPONENT(comp):
+            case Comp(comp):
                 return comp;
             default:
                 throw "Component not avaliable...";
@@ -142,7 +150,7 @@ class ComponentTools {
 @:using(deceptinfect.ecswip.ComponentManager.ComponentTools)
 enum ComponentState<T:Component> {
     NONE;
-    COMPONENT(comp:T);
+    Comp(comp:T);
 }
 
 enum HasGEnt {

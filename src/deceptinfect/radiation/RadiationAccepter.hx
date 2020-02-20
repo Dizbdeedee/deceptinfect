@@ -5,10 +5,10 @@ import deceptinfect.ecswip.Component;
 import deceptinfect.radiation.ContaminationAccepter;
 class RadiationAccepter extends Component {
 
-    public var sourceRates:Map<RadiationID,Float> = []; //fill in
+    public var radiation:Map<RadiationID,Float> = []; //fill in
     public var diminish:Float = 0.75;
     
-    public var acceptContam:ContamAcceptState = REJECTING;
+    public var acceptContam:Option<ContaminationAccepter> = None;
     public var accepting:Bool = false;
     public function new() {
         super();
