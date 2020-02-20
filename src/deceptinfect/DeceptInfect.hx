@@ -15,7 +15,6 @@ import gmod.libs.MathLib;
 import gmod.types.Vector;
 import gmod.libs.EntsLib;
 import gmod.gclass.Player;
-import deceptinfect.DI_Player;
 import gmod.types.Entity;
 using gmod.PairTools;
 using gmod.TableTools;
@@ -24,6 +23,8 @@ import deceptinfect.ecswip.SignalStorage;
 
 @:build(gmod.macros.GamemodeMacro.build())
 class DeceptInfect extends gmod.hooks.Gm {
+    
+    
     #if server
     
 
@@ -103,7 +104,7 @@ class DeceptInfect extends gmod.hooks.Gm {
         if (comp.deathTime == 0.0) {
             comp.deathTime = GlobalLib.CurTime() + 1;
         }
-        if (ply.IsBot() && GlobalLib.CurTime() > comp.deathTime) {
+        if (GlobalLib.CurTime() > comp.deathTime) {
             comp.deathTime = 0.0;
             ply.UnSpectate();
             ply.Spawn();
@@ -154,6 +155,7 @@ class DeceptInfect extends gmod.hooks.Gm {
         return null;
     }
 
+    
 
     override function PlayerSay(sender:gmod.types.Player, text:String, teamChat:Bool):String {
         

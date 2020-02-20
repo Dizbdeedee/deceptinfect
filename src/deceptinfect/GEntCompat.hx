@@ -67,8 +67,15 @@ abstract GPlayerCompat(Player) from Player to Player {
     public inline function get_id() {
         return untyped this.id;
     }
-
     
+    public inline function has_id():Option<DI_ID> {
+        return switch(id) {
+            case null:
+                None;
+            case x:
+                Some(x);
+        }
+    }
     public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
         return id.get(x);
     }
@@ -79,6 +86,6 @@ abstract GPlayerCompat(Player) from Player to Player {
 
     public inline function new(x:PlayerComponent) {
         this = x.player;
-        untyped x.id = ComponentManager.addPlayer(x);
+        untyped x.player.id = ComponentManager.addPlayer(this);
     }
 }

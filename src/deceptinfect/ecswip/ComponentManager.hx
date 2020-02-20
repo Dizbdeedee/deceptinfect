@@ -22,23 +22,24 @@ class ComponentManager {
 
     
     
-    
+    //TODO move
     public static function addGEnt(x:GEntCompat):DI_ID {
         var id = addEntity();
-        gEntityLookup.set(id,x);
-        gents.push(x);
+        addComponent(new GEntityComponent(x),id);
+        
+        // gEntityLookup.set(id,x);
+        // gents.push(x);
         return id;
     }
 
-    public static function createGPlayer(x:PlayerComponent):DI_ID {
-        var id = addGEnt(x.player);
-        players.set(id,x);
-        addComponent(x,id);
+    public static function addPlayer(x:GPlayerCompat):DI_ID {
+        var id = addGEnt(cast x);
+        addComponent(new PlayerComponent(x),id);
         return id;
     }
 
     public static inline function getComponentForID<T:Component>(cls:Class<T>,x:DI_ID):ComponentState<T> {
-        var comparray = components.get(cls);
+        var comparray = lazyInit(cls);
         var comp = comparray[x];
         return cast comp;
     }
@@ -47,15 +48,6 @@ class ComponentManager {
         var look = gEntityLookup.get(x);
         if (GlobalLib.IsValid(look)) {
             return GEnt(look);
-        } else {
-            return NONE;
-        }
-    }
-
-    public static function getGPlayer(x:DI_ID):HasGPlayer {
-        var look = gEntityLookup.get(x);
-        if (GlobalLib.IsValid(look)) {
-            return GPlayer(cast look);
         } else {
             return NONE;
         }
@@ -138,9 +130,9 @@ abstract DI_ID(Int) from Int to Int {
 
 class ComponentTools {
     public static function sure<T:Component>(x:ComponentState<T>):T {
-        switch (x) {
+        return switch (x) {
             case Comp(comp):
-                return comp;
+                comp;
             default:
                 throw "Component not avaliable...";
         }

@@ -1,21 +1,35 @@
 package deceptinfect.client;
 
+import deceptinfect.ecswip.PlayerComponent;
+import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.ecswip.InfectionComponent;
 import deceptinfect.ecswip.InfectedComponent;
 #if client
 @:build(gmod.macros.GamemodeMacro.build())
-class DeceptInfect2 extends gmod.hooks.Gm {
-    
+class ClientOverrides extends gmod.hooks.Gm {
+     
     static var resolutionScale = [
         Axis.X => 1920,
         Axis.Y => 1080
     ];
-    static var cache:Map<Axis,Map<Float,Float>> = [Axis.X => [],Axis.Y => []];
+    static var cache:Map<Axis,Map<Int,Float>> = [Axis.X => [],Axis.Y => []];
     override function HUDPaint() {
-        super.HUDPaint();
+        drawInfectionMeter();
     }
 
-    function CSS(axis:Axis,num:Float):Float {
+    override function PostGamemodeLoaded() {
+        new GPlayerCompat(new PlayerComponent(GlobalLib.LocalPlayer()));
+        
+    }
+    
+    
+    @:expose("testAddCompat")
+    static function testAddCompat() {
+        new GPlayerCompat(new PlayerComponent(GlobalLib.LocalPlayer()));
+    }
+    
+    function CSS(axis:Axis,_num:Float):Float {
+        var num = Std.int(_num);
         if (!cache.get(axis).exists(num)) {
             var multiplier = switch (axis) {
                 case X:
@@ -45,6 +59,7 @@ class DeceptInfect2 extends gmod.hooks.Gm {
 
     function drawInfectionMeter() {
         var lp = PlayerManager.getLocalPlayer();
+        
         switch [lp.get(InfectionComponent),GameManager.state] {
             case [Comp(inf),PLAYING(_)]:
                 SurfaceLib.SetDrawColor(180,180,180,255);
