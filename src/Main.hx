@@ -24,18 +24,23 @@ import gmod.Networking;
 import gmod.PanelInterface.TestTwo;
 #end
 import deceptinfect.*;
+using gmod.PairTools;
+import deceptinfect.ecswip.SystemManager;
 // import deceptinfect.CustomEnt;
 
 class Main {
     public static function main() {
         DeceptInfect.initaliseGamemode();
         deceptinfect.Networking.initMessages();
-
-        trace("help");
+        for (ply in PlayerLib.GetAll()) {
+            new GPlayerCompat(new PlayerComponent(ply));
+        }
+        SystemManager;
         #if client
         // var b:PanelHelper_DTree;
         SignalStorage.initEvents();
-        HiddenHealthSystem.init();
+        // HiddenHealthSystem.init();
+        // InfectionSystem.init();
         ClientOverrides.initaliseGamemode();
         var ent = new GPlayerCompat(new PlayerComponent(GlobalLib.LocalPlayer()));
         ent.id.add_component(new InfectionComponent());

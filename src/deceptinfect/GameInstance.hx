@@ -24,6 +24,10 @@ class GameInstance {
         
     }
 
+    public function start() {
+        setTime();
+        calcBaseInfection();
+    }
     public function get_diffTime():Float {
         if (lastTick != null) {
             
@@ -35,7 +39,7 @@ class GameInstance {
 
     public function think() {
         baseInfection.value = calcBaseInfection();
-        InfectionSystem.run();
+        // InfectionSystem.run();
         lastTick = GlobalLib.CurTime(); //NOTE should be last thing ran
     }
 
@@ -49,6 +53,7 @@ class GameInstance {
 
     public function calcBaseInfection():Float {
         var baseInf = (100 / totalGameTime) * diffTime;
+        //trace(baseInf);
         return baseInf;
     }
 

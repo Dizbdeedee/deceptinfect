@@ -73,6 +73,11 @@ class ComponentManager {
         return comparray;
     }
 
+    public static function removeComponent<T:Component>(x:Class<T>,from:DI_ID) {
+        var comparray = lazyInit(x);
+        comparray[from] = NONE;
+    }
+
     public static function removeEntity(x:DI_ID) {
         for (component in components) {
             component[x] = NONE;
@@ -119,6 +124,8 @@ abstract DI_ID(Int) from Int to Int {
     public extern inline function add_component<T:Component>(x:T) {
         ComponentManager.addComponent(x,this);
     }
+
+    
 
     public inline function new(x:Int) {
         this = x;

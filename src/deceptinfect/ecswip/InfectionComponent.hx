@@ -4,7 +4,7 @@ class InfectionComponent extends Component {
     
     public var infection:INF_STATE = NOT_INFECTED(0.0);
     public var rate:Float = 1;
-    public var baseInfection:BaseInfection = USING_STATIC(1);
+    public var baseInfection:BaseInfection = USING_GLOBAL;
     public var onInfected(default,null):Signal<Noise>;
     public var acceptingInfection:AcceptingInfection = ACCEPTING;
 

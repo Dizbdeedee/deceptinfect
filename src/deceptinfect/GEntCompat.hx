@@ -76,9 +76,22 @@ abstract GPlayerCompat(Player) from Player to Player {
                 Some(x);
         }
     }
+
+    public inline function has_id_2():Bool {
+        return switch (id) {
+            case null:
+                false;
+            case x:
+                true;
+        }
+    }
     public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
         return id.get(x);
     }
+
+    // public inline function add_component<T:Component>(x:Class<T>):ComponentState<T> {
+    //     return 
+    // }
 
     public inline function isInfected():Bool {
         return id.get(InfectedComponent).equals(Comp(null));

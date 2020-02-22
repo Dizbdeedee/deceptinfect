@@ -16,7 +16,7 @@ class GameManager {
 
 
     public static var state(default,#if server set #else null #end):GAME_STATE = WAIT;
-    public static var Game:GameInstance;
+    static var Game:GameInstance;
 
 
     public static function sure():GameInstance {
@@ -32,6 +32,13 @@ class GameManager {
     public static function thinkWait() {
         if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS) {
             initAllPlayers();
+        }
+    }
+
+    public static function startWait() {
+        for (player in PlayerManager.getPlayers()) {
+            player.KillSilent();
+            
         }
     }
 
@@ -72,6 +79,7 @@ class GameManager {
         initAllPlayers();
         var game = new GameInstance();
         state = PLAYING(game);
+        game.start();
     }
 
     #end

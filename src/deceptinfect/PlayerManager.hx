@@ -5,6 +5,17 @@ import deceptinfect.GEntCompat.GPlayerCompat;
 
 class PlayerManager {
 
+    public static inline function getPlayers():Table<Int,GPlayerCompat> {
+        return PlayerLib.GetAll();
+    }
+
+    public static inline function getActivePlayers():Table<Int,GPlayerCompat> {
+        //TODO define validility/activity
+        return null;
+    }
+
+    
+    
     #if client
     public static inline function getLocalPlayer():GPlayerCompat {
         return GlobalLib.LocalPlayer();

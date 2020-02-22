@@ -59,7 +59,7 @@ class ClientOverrides extends gmod.hooks.Gm {
 
     function drawInfectionMeter() {
         var lp = PlayerManager.getLocalPlayer();
-        
+        if (!lp.has_id_2()) {return;}
         switch [lp.get(InfectionComponent),GameManager.state] {
             case [Comp(inf),PLAYING(_)]:
                 SurfaceLib.SetDrawColor(180,180,180,255);
@@ -81,6 +81,7 @@ class ClientOverrides extends gmod.hooks.Gm {
                 }
                 SurfaceLib.DrawRect(CSS(X,750),CSS(Y,825),CSS(X,3.0 * barExtend),CSS(Y,30));
                 SurfaceLib.SetFont("DermaLarge");
+                
                 SurfaceLib.SetTextColor(255,255,255);
                 SurfaceLib.SetTextPos(0,CSS(Y,600));
                 SurfaceLib.DrawText(StringLib.format("Infection: %6.3f%% ",barExtend)); //TODO infection value of 100?

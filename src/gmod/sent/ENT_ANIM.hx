@@ -324,7 +324,7 @@ class ENT_ANIM extends gmod.sent.ENT {
     **/
     
     @:hook
-    private function TestCollision(startpos:Vector, delta:Vector, isbox:Bool, extents:Vector, mask:Float):AnyTable {return null;}
+    private function TestCollision(startpos:Vector, delta:Vector, isbox:Bool, extents:Vector, mask:Float):gmod.structs.TestCollisionData {return null;}
 
     #if server
     /**

@@ -60,11 +60,13 @@ local Reflect = _hx_e()
 local String = _hx_e()
 local Std = _hx_e()
 local Type = _hx_e()
-__gmod_sent_ENT = _hx_e()
-__gmod_sent_ENT_ANIM = _hx_e()
-__deceptinfect_CustomEnt = _hx_e()
 __gmod_hooks_Gm = _hx_e()
 __deceptinfect_DeceptInfect = _hx_e()
+__gmod_sent_ENT = _hx_e()
+__gmod_sent_ENT_ANIM = _hx_e()
+__deceptinfect_Di_battery = _hx_e()
+__deceptinfect_Di_nest = _hx_e()
+__deceptinfect_EntityExt = _hx_e()
 __deceptinfect__GEntCompat_GEntCompat_Impl_ = _hx_e()
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
 __deceptinfect_GameInstance = _hx_e()
@@ -91,6 +93,7 @@ __deceptinfect_ecswip_HasGPlayer = _hx_e()
 __deceptinfect_ecswip_Family = _hx_e()
 __deceptinfect_ecswip_GEntityComponent = _hx_e()
 __deceptinfect_ecswip_GrabAccepter = _hx_e()
+__deceptinfect_ecswip_GrabState = _hx_e()
 __deceptinfect_ecswip_GrabProducer = _hx_e()
 __deceptinfect_ecswip_HiddenHealthComponent = _hx_e()
 __deceptinfect_ecswip_HiddenHealthSystem = _hx_e()
@@ -99,6 +102,7 @@ __deceptinfect_ecswip_InfectionComponent = _hx_e()
 __deceptinfect_ecswip_AcceptingInfection = _hx_e()
 __deceptinfect_ecswip_BaseInfection = _hx_e()
 __deceptinfect_ecswip_INF_STATE = _hx_e()
+__deceptinfect_ecswip_System = _hx_e()
 __tink_core_SignalObject = _hx_e()
 __tink_core_SignalTrigger = _hx_e()
 __deceptinfect_ecswip_InfectionSystem = _hx_e()
@@ -109,6 +113,7 @@ __deceptinfect_ecswip_SignalStorage = _hx_e()
 __deceptinfect_ecswip_SpectateComponent = _hx_e()
 __deceptinfect_ecswip_SpectateSystem = _hx_e()
 __deceptinfect_ecswip_Spec_Direction = _hx_e()
+__deceptinfect_ecswip_SystemManager = _hx_e()
 __deceptinfect_ecswip_VirtualPosition = _hx_e()
 __deceptinfect_radiation_ContaminationAccepter = _hx_e()
 __deceptinfect_radiation_ContaminationProducer = _hx_e()
@@ -544,17 +549,13 @@ Main.__name__ = true
 Main.main = function() 
   __deceptinfect_DeceptInfect.initaliseGamemode();
   __deceptinfect_Networking.initMessages();
-  __haxe_Log.trace("help", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=34,className="Main",methodName="main"}));
-end
-Main.testComponents = function() 
-end
-_hx_exports["testComponents"] = Main.testComponents
-Main.makeThump = function() 
-end
-_hx_exports["makeThump"] = Main.makeThump
-Main.onThumped = function(data) 
-  __haxe_Log.trace("THUMPED!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=91,className="Main",methodName="onThumped"}));
-  _G.print(data.activator);
+  local ply = __gmod_PairTools.iterator(player.GetAll());
+  while (ply:hasNext()) do 
+    local ply1 = ply:next();
+    local x = __deceptinfect_ecswip_PlayerComponent.new(ply1);
+    local this1 = x.player;
+    x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this1);
+  end;
 end
 
 Math.new = {}
@@ -888,114 +889,6 @@ Type.enumEq = function(a,b)
   end;
   do return true end;
 end
-
-__gmod_sent_ENT.new = {}
-__gmod_sent_ENT.__name__ = true
-__gmod_sent_ENT.prototype = _hx_a();
-__gmod_sent_ENT.prototype.Initialize = function(self) 
-end
-__gmod_sent_ENT.prototype.AcceptInput = function(self,inputName,activator,caller,data) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.KeyValue = function(self,key,value) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.OnReloaded = function(self) 
-end
-__gmod_sent_ENT.prototype.OnRemove = function(self) 
-end
-__gmod_sent_ENT.prototype.OnRestore = function(self) 
-end
-__gmod_sent_ENT.prototype.StoreOutput = function(self,name,info) 
-end
-__gmod_sent_ENT.prototype.Think = function(self) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.TriggerOutput = function(self,output,activator,data) 
-end
-__gmod_sent_ENT.prototype.CalcAbsolutePosition = function(self,pos,ang) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.CanProperty = function(self,ply,property) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.DoImpactEffect = function(self,tr,damageType) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.GravGunPickupAllowed = function(self,ply) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.GravGunPunt = function(self,ply) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.HandleAnimEvent = function(self,event,eventTime,cycle,type,options) 
-end
-__gmod_sent_ENT.prototype.IsJumpLegal = function(self,startPos,apex,endPos) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.OnDuplicated = function(self,entTable) 
-end
-__gmod_sent_ENT.prototype.OnEntityCopyTableFinish = function(self,data) 
-end
-__gmod_sent_ENT.prototype.PostEntityPaste = function(self,ply,ent,createdEntities) 
-end
-__gmod_sent_ENT.prototype.PreEntityCopy = function(self) 
-end
-__gmod_sent_ENT.prototype.SetAutomaticFrameAdvance = function(self,enable) 
-end
-__gmod_sent_ENT.prototype.SetupDataTables = function(self) 
-end
-
-__gmod_sent_ENT.prototype.__class__ =  __gmod_sent_ENT
-
-__gmod_sent_ENT_ANIM.new = {}
-__gmod_sent_ENT_ANIM.__name__ = true
-__gmod_sent_ENT_ANIM.prototype = _hx_a();
-__gmod_sent_ENT_ANIM.prototype.Blocked = function(self,other) 
-end
-__gmod_sent_ENT_ANIM.prototype.EndTouch = function(self,entity) 
-end
-__gmod_sent_ENT_ANIM.prototype.OnTakeDamage = function(self,damage) 
-end
-__gmod_sent_ENT_ANIM.prototype.PhysicsCollide = function(self,colData,collider) 
-end
-__gmod_sent_ENT_ANIM.prototype.PhysicsSimulate = function(self,phys,deltaTime) 
-  do return nil end
-end
-__gmod_sent_ENT_ANIM.prototype.PhysicsUpdate = function(self,phys) 
-end
-__gmod_sent_ENT_ANIM.prototype.StartTouch = function(self,entity) 
-end
-__gmod_sent_ENT_ANIM.prototype.TestCollision = function(self,startpos,delta,isbox,extents,mask) 
-  do return nil end
-end
-__gmod_sent_ENT_ANIM.prototype.Touch = function(self,entity) 
-end
-__gmod_sent_ENT_ANIM.prototype.UpdateTransmitState = function(self) 
-  do return nil end
-end
-__gmod_sent_ENT_ANIM.prototype.Use = function(self,activator,caller,useType,value) 
-end
-
-__gmod_sent_ENT_ANIM.prototype.__class__ =  __gmod_sent_ENT_ANIM
-__gmod_sent_ENT_ANIM.__super__ = __gmod_sent_ENT
-setmetatable(__gmod_sent_ENT_ANIM.prototype,{__index=__gmod_sent_ENT.prototype})
-
-__deceptinfect_CustomEnt.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_CustomEnt.prototype)
-  __deceptinfect_CustomEnt.super(self,curEnt)
-  return self
-end
-__deceptinfect_CustomEnt.super = function(self,curEnt) 
-  self["self"] = curEnt;
-end
-_hx_exports["CustomEnt"] = __deceptinfect_CustomEnt
-__deceptinfect_CustomEnt.__name__ = true
-__deceptinfect_CustomEnt.prototype = _hx_a();
-
-__deceptinfect_CustomEnt.prototype.__class__ =  __deceptinfect_CustomEnt
-__deceptinfect_CustomEnt.__super__ = __gmod_sent_ENT_ANIM
-setmetatable(__deceptinfect_CustomEnt.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
 
 __gmod_hooks_Gm.new = {}
 __gmod_hooks_Gm.__name__ = true
@@ -1354,6 +1247,7 @@ __deceptinfect_DeceptInfect.new = function(_self)
   return self
 end
 __deceptinfect_DeceptInfect.super = function(self,_self) 
+  _self.Think = function(GM,...) return self:Think(...) end;
   _self.PlayerDeath = function(GM,...) return self:PlayerDeath(...) end;
   _self.EntityKeyValue = function(GM,...) return self:EntityKeyValue(...) end;
   _self.PlayerInitialSpawn = function(GM,...) return self:PlayerInitialSpawn(...) end;
@@ -1362,7 +1256,6 @@ __deceptinfect_DeceptInfect.super = function(self,_self)
   _self.PlayerSwitchWeapon = function(GM,...) return self:PlayerSwitchWeapon(...) end;
   _self.PlayerButtonDown = function(GM,...) return self:PlayerButtonDown(...) end;
   _self.PlayerDeathThink = function(GM,...) return self:PlayerDeathThink(...) end;
-  _self.Think = function(GM,...) return self:Think(...) end;
   _self.IsSpawnpointSuitable = function(GM,...) return self:IsSpawnpointSuitable(...) end;
   _self.PlayerSelectSpawn = function(GM,...) return self:PlayerSelectSpawn(...) end;
   _self.EntityTakeDamage = function(GM,...) return self:EntityTakeDamage(...) end;
@@ -1377,13 +1270,21 @@ __deceptinfect_DeceptInfect.initaliseGamemode = function()
   do return inst end;
 end
 __deceptinfect_DeceptInfect.prototype = _hx_a();
+__deceptinfect_DeceptInfect.prototype.Think = function(self) 
+  local _g = __deceptinfect_GameManager.state;
+  if (_g[1] == 2) then 
+    local x = _g[2];
+    x:think();
+  end;
+end
 __deceptinfect_DeceptInfect.prototype.PlayerDeath = function(self,victim,inflictor,attacker) 
-  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=31,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
+  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=40,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
 end
 __deceptinfect_DeceptInfect.prototype.EntityKeyValue = function(self,ent,key,value) 
   do return nil end
 end
 __deceptinfect_DeceptInfect.prototype.PlayerInitialSpawn = function(self,player,transition) 
+  __deceptinfect_ecswip_ComponentManager.addPlayer(player);
 end
 __deceptinfect_DeceptInfect.prototype.PlayerSpawn = function(self,player,transition) 
   player:UnSpectate();
@@ -1396,7 +1297,7 @@ __deceptinfect_DeceptInfect.prototype.PlayerSpawn = function(self,player,transit
 end
 __deceptinfect_DeceptInfect.prototype.PlayerButtonUp = function(self,ply,button) 
   if (button == _G.KEY_E) then 
-    __haxe_Log.trace("e lol", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=75,className="deceptinfect.DeceptInfect",methodName="PlayerButtonUp"}));
+    __haxe_Log.trace("e lol", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=71,className="deceptinfect.DeceptInfect",methodName="PlayerButtonUp"}));
   end;
 end
 __deceptinfect_DeceptInfect.prototype.PlayerSwitchWeapon = function(self,player,oldWeapon,newWeapon) 
@@ -1407,7 +1308,7 @@ __deceptinfect_DeceptInfect.prototype.PlayerSwitchWeapon = function(self,player,
 end
 __deceptinfect_DeceptInfect.prototype.PlayerButtonDown = function(self,ply,button) 
   if (button == _G.KEY_E) then 
-    __haxe_Log.trace("down", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=91,className="deceptinfect.DeceptInfect",methodName="PlayerButtonDown"}));
+    __haxe_Log.trace("down", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=87,className="deceptinfect.DeceptInfect",methodName="PlayerButtonDown"}));
   end;
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply) 
@@ -1438,13 +1339,6 @@ __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply)
   end;
   do return true end
 end
-__deceptinfect_DeceptInfect.prototype.Think = function(self) 
-  local _g = __deceptinfect_GameManager.state;
-  if (_g[1] == 2) then 
-    local x = _g[2];
-    x:think();
-  end;
-end
 __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,spawnpoint,makeSuitable) 
   local pos = spawnpoint:GetPos();
   local this1 = _G.Vector(-16, -16, 0);
@@ -1462,7 +1356,7 @@ __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,s
 end
 __deceptinfect_DeceptInfect.prototype.PlayerSelectSpawn = function(self,ply,transition) 
   local spawns = ents.FindByClass("info_player_start");
-  __haxe_Log.trace(#spawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=133,className="deceptinfect.DeceptInfect",methodName="PlayerSelectSpawn"}));
+  __haxe_Log.trace(#spawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=122,className="deceptinfect.DeceptInfect",methodName="PlayerSelectSpawn"}));
   _G.PrintTable(spawns);
   local random_spawn = math.random(#spawns);
   if (self:IsSpawnpointSuitable(ply, spawns[random_spawn], false)) then 
@@ -1508,6 +1402,193 @@ end
 __deceptinfect_DeceptInfect.prototype.__class__ =  __deceptinfect_DeceptInfect
 __deceptinfect_DeceptInfect.__super__ = __gmod_hooks_Gm
 setmetatable(__deceptinfect_DeceptInfect.prototype,{__index=__gmod_hooks_Gm.prototype})
+
+__gmod_sent_ENT.new = {}
+__gmod_sent_ENT.__name__ = true
+__gmod_sent_ENT.prototype = _hx_a();
+__gmod_sent_ENT.prototype.Initialize = function(self) 
+end
+__gmod_sent_ENT.prototype.AcceptInput = function(self,inputName,activator,caller,data) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.KeyValue = function(self,key,value) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.OnReloaded = function(self) 
+end
+__gmod_sent_ENT.prototype.OnRemove = function(self) 
+end
+__gmod_sent_ENT.prototype.OnRestore = function(self) 
+end
+__gmod_sent_ENT.prototype.StoreOutput = function(self,name,info) 
+end
+__gmod_sent_ENT.prototype.Think = function(self) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.TriggerOutput = function(self,output,activator,data) 
+end
+__gmod_sent_ENT.prototype.CalcAbsolutePosition = function(self,pos,ang) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.CanProperty = function(self,ply,property) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.DoImpactEffect = function(self,tr,damageType) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.GravGunPickupAllowed = function(self,ply) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.GravGunPunt = function(self,ply) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.HandleAnimEvent = function(self,event,eventTime,cycle,type,options) 
+end
+__gmod_sent_ENT.prototype.IsJumpLegal = function(self,startPos,apex,endPos) 
+  do return nil end
+end
+__gmod_sent_ENT.prototype.OnDuplicated = function(self,entTable) 
+end
+__gmod_sent_ENT.prototype.OnEntityCopyTableFinish = function(self,data) 
+end
+__gmod_sent_ENT.prototype.PostEntityPaste = function(self,ply,ent,createdEntities) 
+end
+__gmod_sent_ENT.prototype.PreEntityCopy = function(self) 
+end
+__gmod_sent_ENT.prototype.SetAutomaticFrameAdvance = function(self,enable) 
+end
+__gmod_sent_ENT.prototype.SetupDataTables = function(self) 
+end
+
+__gmod_sent_ENT.prototype.__class__ =  __gmod_sent_ENT
+
+__gmod_sent_ENT_ANIM.new = {}
+__gmod_sent_ENT_ANIM.__name__ = true
+__gmod_sent_ENT_ANIM.prototype = _hx_a();
+__gmod_sent_ENT_ANIM.prototype.Blocked = function(self,other) 
+end
+__gmod_sent_ENT_ANIM.prototype.EndTouch = function(self,entity) 
+end
+__gmod_sent_ENT_ANIM.prototype.OnTakeDamage = function(self,damage) 
+end
+__gmod_sent_ENT_ANIM.prototype.PhysicsCollide = function(self,colData,collider) 
+end
+__gmod_sent_ENT_ANIM.prototype.PhysicsSimulate = function(self,phys,deltaTime) 
+  do return nil end
+end
+__gmod_sent_ENT_ANIM.prototype.PhysicsUpdate = function(self,phys) 
+end
+__gmod_sent_ENT_ANIM.prototype.StartTouch = function(self,entity) 
+end
+__gmod_sent_ENT_ANIM.prototype.TestCollision = function(self,startpos,delta,isbox,extents,mask) 
+  do return nil end
+end
+__gmod_sent_ENT_ANIM.prototype.Touch = function(self,entity) 
+end
+__gmod_sent_ENT_ANIM.prototype.UpdateTransmitState = function(self) 
+  do return nil end
+end
+__gmod_sent_ENT_ANIM.prototype.Use = function(self,activator,caller,useType,value) 
+end
+
+__gmod_sent_ENT_ANIM.prototype.__class__ =  __gmod_sent_ENT_ANIM
+__gmod_sent_ENT_ANIM.__super__ = __gmod_sent_ENT
+setmetatable(__gmod_sent_ENT_ANIM.prototype,{__index=__gmod_sent_ENT.prototype})
+
+__deceptinfect_Di_battery.new = function(curEnt) 
+  local self = _hx_new(__deceptinfect_Di_battery.prototype)
+  __deceptinfect_Di_battery.super(self,curEnt)
+  return self
+end
+__deceptinfect_Di_battery.super = function(self,curEnt) 
+  self.lastplayer = nil;
+  self["self"] = curEnt;
+end
+_hx_exports["Di_battery"] = __deceptinfect_Di_battery
+__deceptinfect_Di_battery.__name__ = true
+__deceptinfect_Di_battery.prototype = _hx_a();
+__deceptinfect_Di_battery.prototype.Initialize = function(self) 
+  self["self"]:SetModel("models/props_c17/chair02a.mdl");
+  self["self"]:PhysicsInit(_G.SOLID_VPHYSICS);
+  local physob = self["self"]:GetPhysicsObject();
+  if (_G.IsValid(physob)) then 
+    physob:Wake();
+  end;
+  self["self"]:SetUseType(_G.SIMPLE_USE);
+end
+__deceptinfect_Di_battery.prototype.Use = function(self,activator,caller,useType,value) 
+  if (self["self"]:IsPlayerHolding() or not activator:IsPlayer()) then 
+    do return end;
+  end;
+  local _activator = activator;
+  _activator:PickupObject(self["self"]);
+  self.lastplayer = _activator;
+end
+
+__deceptinfect_Di_battery.prototype.__class__ =  __deceptinfect_Di_battery
+__deceptinfect_Di_battery.__super__ = __gmod_sent_ENT_ANIM
+setmetatable(__deceptinfect_Di_battery.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
+
+__deceptinfect_Di_nest.new = function(curEnt) 
+  local self = _hx_new(__deceptinfect_Di_nest.prototype)
+  __deceptinfect_Di_nest.super(self,curEnt)
+  return self
+end
+__deceptinfect_Di_nest.super = function(self,curEnt) 
+  self["self"] = curEnt;
+end
+_hx_exports["Di_nest"] = __deceptinfect_Di_nest
+__deceptinfect_Di_nest.__name__ = true
+__deceptinfect_Di_nest.prototype = _hx_a();
+__deceptinfect_Di_nest.prototype.Initialize = function(self) 
+  self["self"]:SetModel("models/props_c17/chair02a.mdl");
+end
+__deceptinfect_Di_nest.prototype.Think = function(self) 
+  local player = __gmod_PairTools.iterator(player.GetAll());
+  while (player:hasNext()) do 
+    local player1 = player:next();
+    local this1 = player1.id;
+    local x = __deceptinfect_ecswip_InfectedComponent;
+    local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
+    if (comparray == nil) then 
+      comparray = _hx_tab_array({}, 0);
+      local _this = __deceptinfect_ecswip_ComponentManager.components;
+      _this.h[x] = comparray;
+      _this.k[x] = true;
+      local entity = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+      while (entity:hasNext()) do 
+        local entity1 = entity:next();
+        comparray[entity1] = __deceptinfect_ecswip_ComponentState.NONE;
+      end;
+    end;
+    local comparray1 = comparray;
+    local comp = comparray1[this1];
+    if (Type.enumEq(comp, __deceptinfect_ecswip_ComponentState.Comp(nil))) then 
+      self["self"]:SetPreventTransmit(player1, false);
+    else
+      self["self"]:SetPreventTransmit(player1, true);
+    end;
+  end;
+  do return nil end
+end
+__deceptinfect_Di_nest.prototype.TestCollision = function(self,startpos,delta,isbox,extents,mask) 
+  do return _hx_o({__fields__={HitPos=true,Fraction=true},HitPos=startpos,Fraction=0}) end
+end
+
+__deceptinfect_Di_nest.prototype.__class__ =  __deceptinfect_Di_nest
+__deceptinfect_Di_nest.__super__ = __gmod_sent_ENT_ANIM
+setmetatable(__deceptinfect_Di_nest.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
+
+__deceptinfect_EntityExt.new = {}
+__deceptinfect_EntityExt.__name__ = true
+__deceptinfect_EntityExt.facingBehind = function(me,target) 
+  local this1 = _G.Angle(0, me:EyeAngles().y, 0);
+  local vec1 = this1:Forward();
+  local this2 = _G.Angle(0, target:EyeAngles().y, 0);
+  local vec2 = this2:Forward();
+  local dot = _G.math.acos(vec1:Dot(vec2));
+  do return dot < (_G.math.pi / 4) end;
+end
 
 __deceptinfect__GEntCompat_GEntCompat_Impl_.new = {}
 __deceptinfect__GEntCompat_GEntCompat_Impl_.__name__ = true
@@ -1656,6 +1737,15 @@ __deceptinfect__GEntCompat_GPlayerCompat_Impl_.has_id = function(this1)
     do return __haxe_ds_Option.Some(x) end;
   end;
 end
+__deceptinfect__GEntCompat_GPlayerCompat_Impl_.has_id_2 = function(this1) 
+  local _g = this1.id;
+  if (_g == nil) then 
+    do return false end;
+  else
+    local x = _g;
+    do return true end;
+  end;
+end
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_.get = function(this1,x) 
   local this2 = this1.id;
   local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
@@ -1715,6 +1805,10 @@ __deceptinfect_GameInstance.super = function(self)
 end
 __deceptinfect_GameInstance.__name__ = true
 __deceptinfect_GameInstance.prototype = _hx_a();
+__deceptinfect_GameInstance.prototype.start = function(self) 
+  self:setTime();
+  self:calcBaseInfection();
+end
 __deceptinfect_GameInstance.prototype.get_diffTime = function(self) 
   if (self.lastTick ~= nil) then 
     do return _G.CurTime() - self.lastTick end;
@@ -1724,7 +1818,6 @@ __deceptinfect_GameInstance.prototype.get_diffTime = function(self)
 end
 __deceptinfect_GameInstance.prototype.think = function(self) 
   self.baseInfection[0] = self:calcBaseInfection();
-  __deceptinfect_ecswip_InfectionSystem.run();
   self.lastTick = _G.CurTime();
 end
 __deceptinfect_GameInstance.prototype.addPlayers = function(self) 
@@ -1742,7 +1835,7 @@ __deceptinfect_GameInstance.prototype.setTime = function(self)
   local time = __deceptinfect_GameValues.GAME_TIMER;
   local variance = __deceptinfect_GameValues.GAME_TIMER_VARIANCE;
   self.totalGameTime = time + math.random(-variance, variance);
-  __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=59,className="deceptinfect.GameInstance",methodName="setTime"}));
+  __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=64,className="deceptinfect.GameInstance",methodName="setTime"}));
 end
 
 __deceptinfect_GameInstance.prototype.__class__ =  __deceptinfect_GameInstance
@@ -1782,13 +1875,20 @@ __deceptinfect_GameManager.thinkWait = function()
     __deceptinfect_GameManager.initAllPlayers();
   end;
 end
+__deceptinfect_GameManager.startWait = function() 
+  local player = __gmod_PairTools.iterator(player.GetAll());
+  while (player:hasNext()) do 
+    local player1 = player:next();
+    player1:KillSilent();
+  end;
+end
 __deceptinfect_GameManager.set_state = function(x) 
   local p = __gmod_PairTools.iterator(player.GetAll());
   while (p:hasNext()) do 
     local p1 = p:next();
     __deceptinfect_Networking.sendGameState(_hx_o({__fields__={state=true},state=__deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.fromGAME_STATE(x)}), p1);
   end;
-  __haxe_Log.trace("set state...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=44,className="deceptinfect.GameManager",methodName="set_state"}));
+  __haxe_Log.trace("set state...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=51,className="deceptinfect.GameManager",methodName="set_state"}));
   __deceptinfect_GameManager.state = x do return __deceptinfect_GameManager.state end;
 end
 __deceptinfect_GameManager.initAllPlayers = function() 
@@ -1818,6 +1918,7 @@ __deceptinfect_GameManager.startGame = function()
   __deceptinfect_GameManager.initAllPlayers();
   local game = __deceptinfect_GameInstance.new();
   __deceptinfect_GameManager.set_state(__deceptinfect_GAME_STATE.PLAYING(game));
+  game:start();
 end
 _hx_exports["startGame"] = __deceptinfect_GameManager.startGame
 
@@ -1874,6 +1975,21 @@ __deceptinfect_PlayerExt.setWalkthroughable = function(p,b)
     p:SetCollisionGroup(_G.COLLISION_GROUP_PLAYER);
   end;
 end
+__deceptinfect_PlayerExt.shouldFreeRoam = function(p) 
+  local wrongMode = p:GetObserverMode() == _G.OBS_MODE_NONE;
+  local targetDead = _G.IsValid(p:GetObserverTarget()) and not p:GetObserverTarget():Alive();
+  local keyPressed = p:KeyPressed(_G.IN_JUMP);
+  local freeRoaming = p:GetObserverMode() == _G.OBS_MODE_ROAMING;
+  if (not (wrongMode or targetDead)) then 
+    if (keyPressed) then 
+      do return not freeRoaming end;
+    else
+      do return false end;
+    end;
+  else
+    do return true end;
+  end;
+end
 __deceptinfect_PlayerExt.randomIncDec = function(x) 
   local _g = math.random(1, 2);
   if (_g) == 1 then 
@@ -1904,6 +2020,12 @@ end
 
 __deceptinfect_PlayerManager.new = {}
 __deceptinfect_PlayerManager.__name__ = true
+__deceptinfect_PlayerManager.getPlayers = function() 
+  do return player.GetAll() end;
+end
+__deceptinfect_PlayerManager.getActivePlayers = function() 
+  do return nil end;
+end
 
 __deceptinfect_TimeKeep.new = function(limitZero) 
   local self = _hx_new(__deceptinfect_TimeKeep.prototype)
@@ -2066,6 +2188,36 @@ __haxe_ds_ObjectMap.prototype.iterator = function(self)
     do return _gthis.h[itr:next()] end;
   end}) end
 end
+__haxe_ds_ObjectMap.prototype.toString = function(self) 
+  local s_b = ({});
+  local s_length = 0;
+  local str = "{";
+  _G.table.insert(s_b, str);
+  s_length = s_length + #str;
+  local it = self:keys();
+  local i = it;
+  while (i:hasNext()) do 
+    local i1 = i:next();
+    local str1 = Std.string(i1);
+    _G.table.insert(s_b, str1);
+    s_length = s_length + #str1;
+    local str2 = " => ";
+    _G.table.insert(s_b, str2);
+    s_length = s_length + #str2;
+    local str3 = Std.string(self.h[i1]);
+    _G.table.insert(s_b, str3);
+    s_length = s_length + #str3;
+    if (it:hasNext()) then 
+      local str4 = ", ";
+      _G.table.insert(s_b, str4);
+      s_length = s_length + #str4;
+    end;
+  end;
+  local str5 = "}";
+  _G.table.insert(s_b, str5);
+  s_length = s_length + #str5;
+  do return _G.table.concat(s_b) end
+end
 
 __haxe_ds_ObjectMap.prototype.__class__ =  __haxe_ds_ObjectMap
 
@@ -2142,6 +2294,22 @@ __deceptinfect_ecswip_ComponentManager.lazyInit = function(x)
     end;
   end;
   do return comparray end;
+end
+__deceptinfect_ecswip_ComponentManager.removeComponent = function(x,from) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
+  if (comparray == nil) then 
+    comparray = _hx_tab_array({}, 0);
+    local _this = __deceptinfect_ecswip_ComponentManager.components;
+    _this.h[x] = comparray;
+    _this.k[x] = true;
+    local entity = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+    while (entity:hasNext()) do 
+      local entity1 = entity:next();
+      comparray[entity1] = __deceptinfect_ecswip_ComponentState.NONE;
+    end;
+  end;
+  local comparray1 = comparray;
+  comparray1[from] = __deceptinfect_ecswip_ComponentState.NONE;
 end
 __deceptinfect_ecswip_ComponentManager.removeEntity = function(x) 
   local component = __deceptinfect_ecswip_ComponentManager.components:iterator();
@@ -2268,6 +2436,8 @@ __deceptinfect_ecswip_GrabAccepter.new = function()
   return self
 end
 __deceptinfect_ecswip_GrabAccepter.super = function(self) 
+  self.grabState = __deceptinfect_ecswip_GrabState.NOT_GRABBED;
+  self.grabAttacker = __haxe_ds_ObjectMap.new();
   __deceptinfect_ecswip_Component.super(self);
 end
 __deceptinfect_ecswip_GrabAccepter.__name__ = true
@@ -2276,6 +2446,12 @@ __deceptinfect_ecswip_GrabAccepter.prototype = _hx_a();
 __deceptinfect_ecswip_GrabAccepter.prototype.__class__ =  __deceptinfect_ecswip_GrabAccepter
 __deceptinfect_ecswip_GrabAccepter.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_GrabAccepter.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.ecswip.GrabState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NOT_GRABBED","GRABBED"},2)}
+__deceptinfect_ecswip_GrabState = _hxClasses["deceptinfect.ecswip.GrabState"];
+__deceptinfect_ecswip_GrabState.NOT_GRABBED = _hx_tab_array({[0]="NOT_GRABBED",0,__enum__ = __deceptinfect_ecswip_GrabState},2)
+
+__deceptinfect_ecswip_GrabState.GRABBED = _hx_tab_array({[0]="GRABBED",1,__enum__ = __deceptinfect_ecswip_GrabState},2)
+
 
 __deceptinfect_ecswip_GrabProducer.new = function() 
   local self = _hx_new(__deceptinfect_ecswip_GrabProducer.prototype)
@@ -2411,7 +2587,7 @@ __deceptinfect_ecswip_InfectionComponent.new = function()
 end
 __deceptinfect_ecswip_InfectionComponent.super = function(self) 
   self.acceptingInfection = __deceptinfect_ecswip_AcceptingInfection.ACCEPTING;
-  self.baseInfection = __deceptinfect_ecswip_BaseInfection.USING_STATIC(1);
+  self.baseInfection = __deceptinfect_ecswip_BaseInfection.USING_GLOBAL;
   self.rate = 1;
   local ret = ({length = 1});
   ret[0] = 0.0;
@@ -2452,6 +2628,32 @@ __deceptinfect_ecswip_INF_STATE.NOT_INFECTED = function(inf) local _x = _hx_tab_
 __deceptinfect_ecswip_INF_STATE.INFECTED = _hx_tab_array({[0]="INFECTED",1,__enum__ = __deceptinfect_ecswip_INF_STATE},2)
 
 
+__deceptinfect_ecswip_System.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_System.prototype)
+  __deceptinfect_ecswip_System.super(self)
+  return self
+end
+__deceptinfect_ecswip_System.super = function(self) 
+  self:init_server();
+  self:init_shared();
+end
+__deceptinfect_ecswip_System.__name__ = true
+__deceptinfect_ecswip_System.prototype = _hx_a();
+__deceptinfect_ecswip_System.prototype.init_server = function(self) 
+end
+__deceptinfect_ecswip_System.prototype.run_server = function(self) 
+end
+__deceptinfect_ecswip_System.prototype.init_shared = function(self) 
+end
+__deceptinfect_ecswip_System.prototype.run_shared = function(self) 
+end
+__deceptinfect_ecswip_System.prototype.run = function(self) 
+  self:run_server();
+  self:run_shared();
+end
+
+__deceptinfect_ecswip_System.prototype.__class__ =  __deceptinfect_ecswip_System
+
 __tink_core_SignalObject.new = {}
 __tink_core_SignalObject.__name__ = true
 __tink_core_SignalObject.prototype = _hx_a();
@@ -2491,12 +2693,67 @@ end
 
 __tink_core_SignalTrigger.prototype.__class__ =  __tink_core_SignalTrigger
 
-__deceptinfect_ecswip_InfectionSystem.new = {}
-__deceptinfect_ecswip_InfectionSystem.__name__ = true
-__deceptinfect_ecswip_InfectionSystem.run = function() 
-  __deceptinfect_ecswip_InfectionSystem.handleInfections();
+__deceptinfect_ecswip_InfectionSystem.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_InfectionSystem.prototype)
+  __deceptinfect_ecswip_InfectionSystem.super(self)
+  return self
 end
-__deceptinfect_ecswip_InfectionSystem.handleInfections = function() 
+__deceptinfect_ecswip_InfectionSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+__deceptinfect_ecswip_InfectionSystem.__name__ = true
+__deceptinfect_ecswip_InfectionSystem.calcInfectionFromRates = function(rate) 
+  local total = 0.0;
+  local totalmulti = 0.0;
+  local rate1 = rate.addRates:iterator();
+  while (rate1:hasNext()) do 
+    local rate2 = rate1:next();
+    total = total + rate2;
+  end;
+  local multi = rate.multipliers:iterator();
+  while (multi:hasNext()) do 
+    local multi1 = multi:next();
+    totalmulti = totalmulti + multi1;
+  end;
+  do return total * totalmulti end;
+end
+__deceptinfect_ecswip_InfectionSystem.getBaseInfection = function(inf) 
+  local _g = inf.baseInfection;
+  local tmp = _g[1];
+  if (tmp) == 0 then 
+    do return 0 end;
+  elseif (tmp) == 1 then 
+    local _g1 = __deceptinfect_GameManager.state;
+    if (_g1[1] == 2) then 
+      local x = _g1[2];
+      do return x.baseInfection[0] end;
+    else
+      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/InfectionSystem.hx",lineNumber=95,className="deceptinfect.ecswip.InfectionSystem",methodName="getBaseInfection"}));
+      inf.baseInfection = __deceptinfect_ecswip_BaseInfection.USING_STATIC(0.0);
+      do return 0 end;
+    end;
+  elseif (tmp) == 2 then 
+    local rate = _g[2];
+    do return rate end; end;
+end
+__deceptinfect_ecswip_InfectionSystem.fixUpInfection = function(infection) 
+  local _g = infection.infection;
+  if (_g[1] == 0) then 
+    local _g1 = _g[2];
+    local inf = _g1;
+    if (inf[0] < 0) then 
+      inf[0] = 0;
+    else
+      local inf1 = _g1;
+      if (inf1[0] >= 100) then 
+        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/InfectionSystem.hx",lineNumber=112,className="deceptinfect.ecswip.InfectionSystem",methodName="fixUpInfection"}));
+        infection.infection = __deceptinfect_ecswip_INF_STATE.INFECTED;
+      end;
+    end;
+  end;
+end
+__deceptinfect_ecswip_InfectionSystem.prototype = _hx_a();
+__deceptinfect_ecswip_InfectionSystem.prototype.run_server = function(self) 
   local entity = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (entity:hasNext()) do 
     local entity1 = entity:next();
@@ -2549,55 +2806,36 @@ __deceptinfect_ecswip_InfectionSystem.handleInfections = function()
           end;
           rate = rate + 1;
           inf[0] = inf[0] + (base * rate);
-          __haxe_Log.trace(Std.string(Std.string(Std.string(Std.string(Std.string("") .. Std.string(base)) .. Std.string(" ")) .. Std.string(rate)) .. Std.string(" ")) .. Std.string(inf[0]), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/InfectionSystem.hx",lineNumber=34,className="deceptinfect.ecswip.InfectionSystem",methodName="handleInfections"}));
           __deceptinfect_ecswip_InfectionSystem.fixUpInfection(infection);
+          local x2 = __deceptinfect_ecswip_PlayerComponent;
+          local comparray4 = __deceptinfect_ecswip_ComponentManager.components.h[x2];
+          if (comparray4 == nil) then 
+            comparray4 = _hx_tab_array({}, 0);
+            local _this2 = __deceptinfect_ecswip_ComponentManager.components;
+            _this2.h[x2] = comparray4;
+            _this2.k[x2] = true;
+            local entity6 = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+            while (entity6:hasNext()) do 
+              local entity7 = entity6:next();
+              comparray4[entity7] = __deceptinfect_ecswip_ComponentState.NONE;
+            end;
+          end;
+          local comparray5 = comparray4;
+          local comp2 = comparray5[entity1];
+          local _g3 = comp2;
+          if (_g3[1] == 1) then 
+            local ply = _g3[2];
+            __deceptinfect_Networking.sendInfectionMessage(_hx_o({__fields__={infection=true},infection=inf[0]}), ply.player);
+          end;
         end;
       end;
     end;
   end;
 end
-__deceptinfect_ecswip_InfectionSystem.calcInfectionFromRates = function(rate) 
-  local total = 0.0;
-  local totalmulti = 0.0;
-  local rate1 = rate.addRates:iterator();
-  while (rate1:hasNext()) do 
-    local rate2 = rate1:next();
-    total = total + rate2;
-  end;
-  local multi = rate.multipliers:iterator();
-  while (multi:hasNext()) do 
-    local multi1 = multi:next();
-    totalmulti = totalmulti + multi1;
-  end;
-  do return total * totalmulti end;
-end
-__deceptinfect_ecswip_InfectionSystem.getBaseInfection = function(inf) 
-  local _g = inf.baseInfection;
-  local tmp = _g[1];
-  if (tmp) == 0 then 
-    do return 0 end;
-  elseif (tmp) == 1 then 
-    do return 0 end;
-  elseif (tmp) == 2 then 
-    local rate = _g[2];
-    do return rate end; end;
-end
-__deceptinfect_ecswip_InfectionSystem.fixUpInfection = function(infection) 
-  local _g = infection.infection;
-  if (_g[1] == 0) then 
-    local _g1 = _g[2];
-    local inf = _g1;
-    if (inf[0] < 0) then 
-      inf[0] = 0;
-    else
-      local inf1 = _g1;
-      if (inf1[0] >= 100) then 
-        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/InfectionSystem.hx",lineNumber=81,className="deceptinfect.ecswip.InfectionSystem",methodName="fixUpInfection"}));
-        infection.infection = __deceptinfect_ecswip_INF_STATE.INFECTED;
-      end;
-    end;
-  end;
-end
+
+__deceptinfect_ecswip_InfectionSystem.prototype.__class__ =  __deceptinfect_ecswip_InfectionSystem
+__deceptinfect_ecswip_InfectionSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_ecswip_InfectionSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
 __deceptinfect_ecswip_PlayerComponent.new = function(x) 
   local self = _hx_new(__deceptinfect_ecswip_PlayerComponent.prototype)
@@ -2680,6 +2918,22 @@ __deceptinfect_ecswip_Spec_Direction.FORWARDS = _hx_tab_array({[0]="FORWARDS",0,
 
 __deceptinfect_ecswip_Spec_Direction.BACKWARDS = _hx_tab_array({[0]="BACKWARDS",1,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
 
+
+__deceptinfect_ecswip_SystemManager.new = {}
+__deceptinfect_ecswip_SystemManager.__name__ = true
+__deceptinfect_ecswip_SystemManager.runAllSystems = function() 
+  local _g = 0;
+  local _g1 = __deceptinfect_ecswip_SystemManager.runSystems;
+  while (_g < _g1.length) do 
+    local clsSystem = _g1[_g];
+    _g = _g + 1;
+    __deceptinfect_ecswip_SystemManager.getSystems.h[clsSystem]:run();
+  end;
+end
+__deceptinfect_ecswip_SystemManager.test_system = function() 
+  __haxe_Log.trace(__deceptinfect_ecswip_SystemManager.getSystems, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/SystemManager.hx",lineNumber=27,className="deceptinfect.ecswip.SystemManager",methodName="test_system"}));
+end
+_hx_exports["test_system"] = __deceptinfect_ecswip_SystemManager.test_system
 
 __deceptinfect_ecswip_VirtualPosition.new = function(_ent,_pos,_ang) 
   local self = _hx_new(__deceptinfect_ecswip_VirtualPosition.prototype)
@@ -5358,7 +5612,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -5375,7 +5629,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -5384,16 +5638,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -5402,7 +5656,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -5462,13 +5716,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g = o[2];
-    local tmp1 = _g[1];
+    local _g1 = o[2];
+    local tmp1 = _g1[1];
     if (tmp1) == 0 then 
-      local d = _g[2];
+      local d = _g1[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g[2];
+      local f = _g1[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -5604,7 +5858,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g = o[2];
+      local _g1 = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -5688,10 +5942,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g = o1[2];
-                local next3 = _g[1];
+                local _g1 = o1[2];
+                local next3 = _g1[1];
                 if (next3) == 0 then 
-                  local ret = _g[2];
+                  local ret = _g1[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;
@@ -6353,13 +6607,29 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SignalStorage.entDamageTrigger = __tink_core_SignalTrigger.new();
   
-  __deceptinfect_radiation_RadiationSystem.nextRadiationID = (function() 
+  __deceptinfect_ecswip_SystemManager.getSystems = (function() 
     local _hx_1
+    
+    local _g = __haxe_ds_ObjectMap.new();
+    
+    local value = __deceptinfect_ecswip_System.new();
+    local key = __deceptinfect_ecswip_System;
+    _g.h[key] = value;
+    _g.k[key] = true;
+    
+    _hx_1 = _g;
+    return _hx_1
+  end )();
+  
+  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({}, 0);
+  
+  __deceptinfect_radiation_RadiationSystem.nextRadiationID = (function() 
+    local _hx_2
     
     local this1 = 0;
     
-    _hx_1 = this1;
-    return _hx_1
+    _hx_2 = this1;
+    return _hx_2
   end )();
   
   __deceptinfect_radiation_RadiationSystem.radRateID = __deceptinfect_ecswip_RateSystem.getAddRateTicket();
@@ -6369,7 +6639,7 @@ local _hx_static_init = function()
   __deceptinfect_radiation_RadiationSystem._produceFamily = __deceptinfect_ecswip_Family.new(_hx_tab_array({[0]=__deceptinfect_radiation_RadiationProducer, __deceptinfect_ecswip_VirtualPosition}, 2));
   
   __deceptinfect_radiation_RadiationTypes.types = (function() 
-    local _hx_2
+    local _hx_3
     
     local _g = __haxe_ds_EnumValueMap.new();
     
@@ -6385,8 +6655,8 @@ local _hx_static_init = function()
     
     _g:set(__deceptinfect_radiation_RadTypes.SPIT, _hx_o({__fields__={maxrate=true,radius=true},maxrate=4.5,radius=200}));
     
-    _hx_2 = _g;
-    return _hx_2
+    _hx_3 = _g;
+    return _hx_3
   end )();
   
   __gmod__EntityClass_EntityClass_Impl_.info_player_start = "info_player_start";
@@ -6702,12 +6972,12 @@ local _hx_static_init = function()
   __tink_core__Future_NeverFuture.inst = __tink_core__Future_NeverFuture.new();
   
   __tink_core__Future_Future_Impl_.NULL = (function() 
-    local _hx_3
+    local _hx_4
     
     local v = nil;
     
-    _hx_3 = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(v));
-    return _hx_3
+    _hx_4 = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(v));
+    return _hx_4
   end )();
   
   __tink_core__Future_Future_Impl_.NOISE = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Noise.Noise));
@@ -6715,12 +6985,12 @@ local _hx_static_init = function()
   __tink_core__Future_Future_Impl_.NEVER = __tink_core__Future_NeverFuture.inst;
   
   __tink_core__Lazy_Lazy_Impl_.NULL = (function() 
-    local _hx_4
+    local _hx_5
     
     local c = nil;
     
-    _hx_4 = __tink_core__Lazy_LazyConst.new(c);
-    return _hx_4
+    _hx_5 = __tink_core__Lazy_LazyConst.new(c);
+    return _hx_5
   end )();
   
   __tink_core__Promise_Promise_Impl_.NULL = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(nil)));
@@ -6728,12 +6998,12 @@ local _hx_static_init = function()
   __tink_core__Promise_Promise_Impl_.NOISE = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(__tink_core_Noise.Noise)));
   
   __tink_core__Promise_Promise_Impl_.NEVER = (function() 
-    local _hx_5
+    local _hx_6
     
     local ret = __tink_core__Future_Future_Impl_.NEVER:map(__tink_core_Outcome.Success);
     
-    _hx_5 = ret:gather();
-    return _hx_5
+    _hx_6 = ret:gather();
+    return _hx_6
   end )();
   
   

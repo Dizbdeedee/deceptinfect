@@ -25,6 +25,13 @@ import deceptinfect.ecswip.SignalStorage;
 class DeceptInfect extends gmod.hooks.Gm {
     
     
+    override function Think() {
+        switch (GameManager.state) {
+            case PLAYING(x):
+                x.think();
+            default:
+        }
+    }
     #if server
     
 
@@ -39,20 +46,7 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
 
     override function PlayerInitialSpawn(player:Player, transition:Bool) {
-        // player.annex = new Annex(player);
-        // var ent = new DI_Entity(player);
-        // ComponentManager.addEnt(ent);
-
-        // new DI_Player(player); //calls get to initalise
-        // new DI_Player(player);
-        //FIXME
-        // switch (currentState) {
-        //     case PLAY(_):
-        //         player.KillSilent();
-        //         GAMEMODE.PlayerSpawnAsSpectator(player);
-        //     default:
-        // }
-
+        ComponentManager.addPlayer(player);
     }
 
     override function PlayerSpawn(player:gmod.types.Player, transition:Bool) {
@@ -112,13 +106,6 @@ class DeceptInfect extends gmod.hooks.Gm {
         return true;
     }
 
-    override function Think() {
-        switch (GameManager.state) {
-            case PLAYING(x):
-                x.think();
-            default:
-        }
-    }
     override function IsSpawnpointSuitable(ply:Player, spawnpoint:Entity, makeSuitable:Bool):Bool {
         var pos = spawnpoint.GetPos();
         var blockers = EntsLib.FindInBox(pos + new Vector(-16,-16,0), pos + new Vector(16,16,72));
