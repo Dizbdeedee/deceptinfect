@@ -1,0 +1,1 @@
+deceptinfect_HAXE_EXPORT = include("haxe_cl_init.lua")

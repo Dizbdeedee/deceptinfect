@@ -4,6 +4,7 @@
 -D server
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
+-D generateLuaInit
 -lib tink_core
 --macro include("deceptinfect")
 --macro gmod.macros.InitMacro.init()

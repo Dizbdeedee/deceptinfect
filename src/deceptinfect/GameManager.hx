@@ -85,6 +85,7 @@ class GameManager {
     #end
     #if client
     public static function init() {
+        
         Networking.GameStateSignal.handle(gameStateChanged);
     }
     

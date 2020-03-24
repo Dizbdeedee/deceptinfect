@@ -10,6 +10,7 @@ class Di_nest extends gmod.sent.ENT_ANIM {
         self.SetModel("models/props_c17/chair02a.mdl");
 
     }
+    #if server
     override function Think():Bool {
         for (player in PlayerManager.getPlayers()) {
             if (player.isInfected()) {
@@ -20,7 +21,7 @@ class Di_nest extends gmod.sent.ENT_ANIM {
         }
         return null;
     }
-
+    #end
     override function TestCollision(startpos:Vector, delta:Vector, isbox:Bool, extents:Vector, mask:Float):TestCollisionData {
         return {
             HitPos: startpos,

@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.ecswip.SystemManager;
 import deceptinfect.GEntCompat;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.GEntCompat.GPlayerCompat;
@@ -31,6 +32,7 @@ class DeceptInfect extends gmod.hooks.Gm {
                 x.think();
             default:
         }
+        SystemManager.runAllSystems();
     }
     #if server
     
@@ -169,14 +171,9 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
     
     #end
+    #if client
+    override function HUDPaint() {
+        deceptinfect.client.Hud.paint();
+    }
+    #end
 }
-
-// enum GAME_STATE {
-//     WAIT;
-//     PLAY(st:PLAY_STATE);
-// }
-
-// enum PLAY_STATE {
-//     NORMAL;
-//     EVAC;
-// }

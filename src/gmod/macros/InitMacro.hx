@@ -90,10 +90,7 @@ class InitMacro {
         
         if (!Context.defined("lua") || Context.defined("display_details") ) {
             return;
-        }
-        
-        trace(Compiler.getOutput());
-        
+        }        
         if (Context.defined("addonName")) {
             
             addonName = Context.definedValue("addonName").toLowerCase();

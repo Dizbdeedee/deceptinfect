@@ -2,7 +2,8 @@
 -D lua-5.1
 -D lua-vanilla
 -D client
--D gmodAddonFolder=C:\steamcmd\gmod\garrysmod\addons
+-D gmodAddonFolder=/home/steam/.steam/SteamApps/common/GarrysModDS/garrysmod/addons/
+-D generateLuaInit
 -lib tink_core
 -D gamemode=deceptinfect
 -D addonName=deceptinfect

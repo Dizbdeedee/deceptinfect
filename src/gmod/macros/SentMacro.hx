@@ -124,7 +124,7 @@ class SentMacro {
             return;
         }
         var exportName = InitMacro.exportName;
-        trace("generating entitity files");
+        //trace("generating entitity files");
         for (gen in generate) {
             
             var filebuf = new StringBuf();

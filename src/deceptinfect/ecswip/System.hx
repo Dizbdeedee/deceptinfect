@@ -25,6 +25,10 @@ class System {
     }
 
     public final function new() {
+        
+    }
+
+    public final function init() {
         #if client
         init_client();
         #elseif server

@@ -12,6 +12,7 @@ class InfectionSystem extends System {
 
     #if client
     override function init_client() {
+        
         Networking.InfectionMessageSignal.handle(recvInfection);
     }
 

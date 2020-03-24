@@ -16,13 +16,18 @@ class SystemManager {
         InfectionSystem,
     ];
 
+
     public static function runAllSystems() {
         for (clsSystem in runSystems) {
             getSystems.get(clsSystem).run();
         }
     }
 
-    
+    public static function initAllSystems() {
+        for (clsSystem in runSystems) {
+            getSystems.get(clsSystem).init();
+        }
+    }    
     
 
     

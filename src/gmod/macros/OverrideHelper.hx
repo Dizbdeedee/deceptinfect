@@ -31,26 +31,18 @@ class OverrideHelper {
     }
     public static function build():Array<Field> {
         var cls = Context.getLocalClass().get();
-        trace('${cls.isExtern}:${cls.name}');
+        //trace('${cls.isExtern}:${cls.name}');
         if (cls.isExtern) {
-            trace(cls.name);
+            //trace(cls.name);
             var fields = Context.getBuildFields();
             for (field in fields) {
                 if (isHook(field)) {
                     field.access.remove(Access.APublic);
                     field.access.push(Access.APrivate);
-
-                    field.meta.push({
-                        name : ":deprecated",
-                        pos: Context.currentPos(),
-                        params : [macro "Hook function. Do not call"]
-                    });
                 }
                 handleMultiReturn(field);
             }
             cls.meta.add(":native",[macro $v{"{} or a"}],Context.currentPos());
-            
-            
             return fields;
         }
         return null;

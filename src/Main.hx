@@ -30,17 +30,15 @@ import deceptinfect.ecswip.SystemManager;
 
 class Main {
     public static function main() {
-        DeceptInfect.initaliseGamemode();
         deceptinfect.Networking.initMessages();
+        SystemManager.initAllSystems();
+        DeceptInfect.initaliseGamemode();
+
         for (ply in PlayerLib.GetAll()) {
             new GPlayerCompat(new PlayerComponent(ply));
         }
-        SystemManager;
         #if client
-        // var b:PanelHelper_DTree;
         SignalStorage.initEvents();
-        // HiddenHealthSystem.init();
-        // InfectionSystem.init();
         ClientOverrides.initaliseGamemode();
         var ent = new GPlayerCompat(new PlayerComponent(GlobalLib.LocalPlayer()));
         ent.id.add_component(new InfectionComponent());

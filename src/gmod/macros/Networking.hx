@@ -90,11 +90,9 @@ class Networking {
                 }
                 fields.push(recvFunc);
             }
-            
             if (Context.defined("server")) {
                 initExpr.push(macro gmod.libs.UtilLib.AddNetworkString($v{msg.name}));
             }
-            //.getParameters()[0];
             if (Context.defined("client")) {
                 var clientSignal:Field = {
                     name : '${msg.name}Signal',
@@ -117,9 +115,6 @@ class Networking {
                 fields.push(clientSignal);
                 fields.push(clientTriggerSignal);
             }
-            
-            
-            
         }
         var initMessagesFunc:Function = {
             args: [],
@@ -134,7 +129,6 @@ class Networking {
             doc : "Call as early as possible to setup network messages. Must be called on both the server and client"
         }
         fields.push(initMessages);
-
         return fields;
     }
 
@@ -155,9 +149,6 @@ class Networking {
             case TType(_.get() => {type : TAnonymous(_.get() => anon)},_) :
                 for (field in anon.fields) {
                     var name = field.name;
-                    
-                    
-                    
                     switch (field.type) {
                         case twoWayUni(_,entity) => true:
                             macArray.push(macro gmod.libs.NetLib.WriteEntity(data.$name));
@@ -168,13 +159,10 @@ class Networking {
                         //NOTE Only one way checked, assumes writetable will be able to handle whatevers put in
                         case _.unify(table) => true:
                             macArray.push(macro gmod.libs.NetLib.WriteTable(data.$name));
-                            // mac = macro ${mac} gmod.libs.NetLib.WriteTable(data.$name);
                         case twoWayUni(_,float) => true:
                             macArray.push(macro gmod.libs.NetLib.WriteFloat(data.$name));
-                            // mac = macro ${mac}; gmod.libs.NetLib.WriteFloat(data.$name);
                         case twoWayUni(_,vector) => true:
                             macArray.push(macro gmod.libs.NetLib.WriteVector(data.$name));
-                            // mac = macro ${mac} gmod.libs.NetLib.WriteVector(data.$name);
                         case twoWayUni(_,angle) => true:
                             macArray.push(macro gmod.libs.NetLib.WriteAngle(data.$name));
                         case twoWayUni(_,bool) => true:
@@ -186,24 +174,15 @@ class Networking {
                     
                     
                 }
-                
-                // for (field in e.fields) {
-                //     trace(field.kind);
-                // }
             default:
                 trace(resolved);
         }
         macArray.push(macro gmod.libs.NetLib.Send(player));
-
-        // var mac = macro {$e{mac} gmod.libs.NetLib.Send(player);}
         return macro $b{macArray};
     }
 
     static function writeNetReciever(anon:ComplexType,name2:String):Expr {
         var resolved = Context.resolveType(anon,Context.currentPos());
-        // var mac:Array<Expr>= [];
-        
-        // var mac = macro {};
         var mac:Array<ObjectField> = [];
         var entity = Context.resolveType((macro : gmod.gclass.Entity),Context.currentPos());
         var string = Context.resolveType((macro : String),Context.currentPos());
@@ -219,24 +198,20 @@ class Networking {
             case TType(_.get() => {type : TAnonymous(_.get() => anon)},_) :
                 for (field in anon.fields) {
                     var name = field.name;
-                    trace(name);
+                    //trace(name);
                     switch (field.type) {
                         case twoWayUni(_,int) => true:
                             mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadInt(32);}});
                         case twoWayUni(_,string) => true:
                             mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadString();}});
-                            // mac.push(macro {$name : });
                         case _.unify(table) => true:
                             mac.push({field : name, expr : macro {cast gmod.libs.NetLib.ReadTable();}});
-                            // mac.push(macro {$name : });
                         case twoWayUni(_,float) => true:
                             mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadFloat();}});
-                            // mac.push(macro {$name : });
                         case twoWayUni(_,vector) => true:
                             mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadVector();}});
                         case twoWayUni(_,angle) => true:
                             mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadAngle();}});
-                            // mac.push(macro {$name : });
                         case twoWayUni(_,bool) => true:
                             mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadBool();}});
                         case twoWayUni(_,entity) => true:
@@ -245,8 +220,6 @@ class Networking {
                             trace('could not generate reciever field:${field.name}');
                             trace(field.type.toString());
                     }
-                    
-                    
                 }
             default:
                 trace(resolved);
@@ -256,11 +229,8 @@ class Networking {
             expr : objdecl,
             pos : Context.currentPos(),
         }
-
         var triggername = '${name2}SignalTrigger';
-        
         var mac2 = macro {$i{triggername}.trigger($e{objdel2});};
-    
         return mac2;
     }
     #end

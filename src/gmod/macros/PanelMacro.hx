@@ -97,7 +97,6 @@ class PanelMacro {
                 } else {
                     expr = macro self.$name($a{exprArgs});
                 }
-
                 {
                     args : _args,
                     ret :  Context.toComplexType(_ret),
@@ -117,11 +116,8 @@ class PanelMacro {
                     expr : expr
                 };
         }
-        
-        
         var access:Array<Access> = switch (isHook) {
             case false:
-                
                 [Access.AFinal,Access.APublic]; //add override here if we revert...
             default:
                 [Access.APrivate];
@@ -134,9 +130,16 @@ class PanelMacro {
             access: access
             
         }
-
+        Context.filterMessages((msg:Message) -> return switch (msg) {
+            case Warning(msg, pos) if (pos == Context.currentPos()):
+                trace('filter $msg');    
+                false;
+            default:
+                true;
+            }
+        );
         if (isHook) {
-            field.meta = [{name : ":deprecated",params : [macro "Hook function, do not use"],pos : Context.currentPos()}];
+            //field.meta = [{name : ":deprecated",params : [macro "Hook function, do not use"],pos : Context.currentPos()}];
         }
         return field;
 
