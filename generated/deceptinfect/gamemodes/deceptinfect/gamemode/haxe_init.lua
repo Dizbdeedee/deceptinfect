@@ -108,6 +108,7 @@ __tink_core_SignalObject = _hx_e()
 __tink_core_SignalTrigger = _hx_e()
 __deceptinfect_ecswip_InfectionSystem = _hx_e()
 __deceptinfect_ecswip_PlayerComponent = _hx_e()
+__deceptinfect_ecswip_DeathTime = _hx_e()
 __deceptinfect_ecswip_RateComponent = _hx_e()
 __deceptinfect_ecswip_RateSystem = _hx_e()
 __deceptinfect_ecswip_SignalStorage = _hx_e()
@@ -1280,7 +1281,7 @@ __deceptinfect_DeceptInfect.prototype.Think = function(self)
   __deceptinfect_ecswip_SystemManager.runAllSystems();
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeath = function(self,victim,inflictor,attacker) 
-  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=42,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
+  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=43,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
 end
 __deceptinfect_DeceptInfect.prototype.EntityKeyValue = function(self,ent,key,value) 
   do return nil end
@@ -1299,7 +1300,7 @@ __deceptinfect_DeceptInfect.prototype.PlayerSpawn = function(self,player,transit
 end
 __deceptinfect_DeceptInfect.prototype.PlayerButtonUp = function(self,ply,button) 
   if (button == _G.KEY_E) then 
-    __haxe_Log.trace("e lol", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=73,className="deceptinfect.DeceptInfect",methodName="PlayerButtonUp"}));
+    __haxe_Log.trace("e lol", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=74,className="deceptinfect.DeceptInfect",methodName="PlayerButtonUp"}));
   end;
 end
 __deceptinfect_DeceptInfect.prototype.PlayerSwitchWeapon = function(self,player,oldWeapon,newWeapon) 
@@ -1310,7 +1311,7 @@ __deceptinfect_DeceptInfect.prototype.PlayerSwitchWeapon = function(self,player,
 end
 __deceptinfect_DeceptInfect.prototype.PlayerButtonDown = function(self,ply,button) 
   if (button == _G.KEY_E) then 
-    __haxe_Log.trace("down", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=89,className="deceptinfect.DeceptInfect",methodName="PlayerButtonDown"}));
+    __haxe_Log.trace("down", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=90,className="deceptinfect.DeceptInfect",methodName="PlayerButtonDown"}));
   end;
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply) 
@@ -1331,15 +1332,49 @@ __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply)
   local comparray1 = comparray;
   local comp = comparray1[this1];
   local comp1 = __deceptinfect_ecswip_ComponentTools.sure(comp);
-  if (comp1.deathTime == 0.0) then 
-    comp1.deathTime = _G.CurTime() + 1;
+  local reviveTime;
+  local revive = false;
+  local _g = comp1.deathTime;
+  local tmp;
+  local tmp1 = _g[1];
+  if (tmp1) == 0 then 
+    reviveTime = _G.CurTime() + 1;
+    tmp = __deceptinfect_ecswip_DeathTime.DEAD(reviveTime);
+  elseif (tmp1) == 1 then 
+    local rev = _g[2];
+    reviveTime = rev;
+    tmp = comp1.deathTime; end;
+  comp1.deathTime = tmp;
+  if ((ply:IsBot() and (_G.CurTime() > reviveTime)) and __deceptinfect_GameManager.shouldAllowRespawn()) then 
+    revive = true;
   end;
-  if (_G.CurTime() > comp1.deathTime) then 
-    comp1.deathTime = 0.0;
+  if (_G.IsValid(ply:GetObserverTarget())) then 
+    ply:SetPos(ply:GetObserverTarget():GetPos());
+  end;
+  if (ply:KeyPressed(_G.IN_ATTACK)) then 
+    if ((_G.CurTime() > reviveTime) and __deceptinfect_GameManager.shouldAllowRespawn()) then 
+      revive = true;
+    end;
+    __deceptinfect_ecswip_SpectateSystem.chooseSpectateTarget(comp1, __deceptinfect_ecswip_Spec_Direction.FORWARDS);
+  else
+    if (ply:KeyPressed(_G.IN_ATTACK2)) then 
+      __deceptinfect_ecswip_SpectateSystem.chooseSpectateTarget(comp1, __deceptinfect_ecswip_Spec_Direction.BACKWARDS);
+    else
+      if (ply:KeyPressed(_G.IN_JUMP) and __deceptinfect_PlayerExt.shouldFreeRoam(ply)) then 
+        ply:UnSpectate();
+        ply:Spectate(_G.OBS_MODE_ROAMING);
+        comp1.spec_next = 1;
+      end;
+    end;
+  end;
+  if (revive) then 
+    comp1.deathTime = __deceptinfect_ecswip_DeathTime.ALIVE;
     ply:UnSpectate();
     ply:Spawn();
+    do return true end;
+  else
+    do return false end;
   end;
-  do return true end
 end
 __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,spawnpoint,makeSuitable) 
   local pos = spawnpoint:GetPos();
@@ -1358,7 +1393,7 @@ __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,s
 end
 __deceptinfect_DeceptInfect.prototype.PlayerSelectSpawn = function(self,ply,transition) 
   local spawns = ents.FindByClass("info_player_start");
-  __haxe_Log.trace(#spawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=124,className="deceptinfect.DeceptInfect",methodName="PlayerSelectSpawn"}));
+  __haxe_Log.trace(#spawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=153,className="deceptinfect.DeceptInfect",methodName="PlayerSelectSpawn"}));
   _G.PrintTable(spawns);
   local random_spawn = math.random(#spawns);
   if (self:IsSpawnpointSuitable(ply, spawns[random_spawn], false)) then 
@@ -1586,8 +1621,8 @@ __deceptinfect_EntityExt.__name__ = true
 __deceptinfect_EntityExt.facingBehind = function(me,target) 
   local this1 = _G.Angle(0, me:EyeAngles().y, 0);
   local vec1 = this1:Forward();
-  local this2 = _G.Angle(0, target:EyeAngles().y, 0);
-  local vec2 = this2:Forward();
+  local this11 = _G.Angle(0, target:EyeAngles().y, 0);
+  local vec2 = this11:Forward();
   local dot = _G.math.acos(vec1:Dot(vec2));
   do return dot < (_G.math.pi / 4) end;
 end
@@ -1857,6 +1892,13 @@ __deceptinfect_GAME_STATE.ENDING = function(x) local _x = _hx_tab_array({[0]="EN
 
 __deceptinfect_GameManager.new = {}
 __deceptinfect_GameManager.__name__ = true
+__deceptinfect_GameManager.shouldAllowRespawn = function() 
+  if (__deceptinfect_GameManager.state[1] == 0) then 
+    do return true end;
+  else
+    do return false end;
+  end;
+end
 __deceptinfect_GameManager.sure = function() 
   local _g = __deceptinfect_GameManager.state;
   local tmp = _g[1];
@@ -1890,7 +1932,7 @@ __deceptinfect_GameManager.set_state = function(x)
     local p1 = p:next();
     __deceptinfect_Networking.sendGameState(_hx_o({__fields__={state=true},state=__deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.fromGAME_STATE(x)}), p1);
   end;
-  __haxe_Log.trace("set state...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=51,className="deceptinfect.GameManager",methodName="set_state"}));
+  __haxe_Log.trace("set state...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=58,className="deceptinfect.GameManager",methodName="set_state"}));
   __deceptinfect_GameManager.state = x do return __deceptinfect_GameManager.state end;
 end
 __deceptinfect_GameManager.initAllPlayers = function() 
@@ -1980,16 +2022,11 @@ end
 __deceptinfect_PlayerExt.shouldFreeRoam = function(p) 
   local wrongMode = p:GetObserverMode() == _G.OBS_MODE_NONE;
   local targetDead = _G.IsValid(p:GetObserverTarget()) and not p:GetObserverTarget():Alive();
-  local keyPressed = p:KeyPressed(_G.IN_JUMP);
   local freeRoaming = p:GetObserverMode() == _G.OBS_MODE_ROAMING;
-  if (not (wrongMode or targetDead)) then 
-    if (keyPressed) then 
-      do return not freeRoaming end;
-    else
-      do return false end;
-    end;
+  if (wrongMode or targetDead) then 
+    do return not freeRoaming end;
   else
-    do return true end;
+    do return false end;
   end;
 end
 __deceptinfect_PlayerExt.randomIncDec = function(x) 
@@ -2867,7 +2904,7 @@ __deceptinfect_ecswip_PlayerComponent.new = function(x)
 end
 __deceptinfect_ecswip_PlayerComponent.super = function(self,x) 
   self.playing = true;
-  self.deathTime = 0;
+  self.deathTime = __deceptinfect_ecswip_DeathTime.ALIVE;
   self.roundModel = "";
   self.spec_next = 1;
   __deceptinfect_ecswip_Component.super(self);
@@ -2879,6 +2916,11 @@ __deceptinfect_ecswip_PlayerComponent.prototype = _hx_a();
 __deceptinfect_ecswip_PlayerComponent.prototype.__class__ =  __deceptinfect_ecswip_PlayerComponent
 __deceptinfect_ecswip_PlayerComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_PlayerComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.ecswip.DeathTime"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ALIVE","DEAD"},2)}
+__deceptinfect_ecswip_DeathTime = _hxClasses["deceptinfect.ecswip.DeathTime"];
+__deceptinfect_ecswip_DeathTime.ALIVE = _hx_tab_array({[0]="ALIVE",0,__enum__ = __deceptinfect_ecswip_DeathTime},2)
+
+__deceptinfect_ecswip_DeathTime.DEAD = function(reviveTime) local _x = _hx_tab_array({[0]="DEAD",1,reviveTime,__enum__=__deceptinfect_ecswip_DeathTime}, 3); return _x; end 
 
 __deceptinfect_ecswip_RateComponent.new = function() 
   local self = _hx_new(__deceptinfect_ecswip_RateComponent.prototype)
@@ -2935,6 +2977,39 @@ setmetatable(__deceptinfect_ecswip_SpectateComponent.prototype,{__index=__decept
 
 __deceptinfect_ecswip_SpectateSystem.new = {}
 __deceptinfect_ecswip_SpectateSystem.__name__ = true
+__deceptinfect_ecswip_SpectateSystem.chooseSpectateTarget = function(x,dir) 
+  local player = x.player;
+  local iter;
+  local iter1 = dir[1];
+  if (iter1) == 0 then 
+    iter = 1;
+  elseif (iter1) == 1 then 
+    iter = -1; end;
+  local specCur = x.spec_next;
+  local specNext = x.spec_next + iter;
+  local players = player.GetAll();
+  local specd = false;
+  while (specNext ~= specCur) do 
+    local target = players[specNext];
+    if (_G.IsValid(target) and target:Alive()) then 
+      player:SpectateEntity(target);
+      player:SetObserverMode(_G.OBS_MODE_CHASE);
+      specd = true;
+    end;
+    specNext = specNext + iter;
+    if (specNext < 1) then 
+      specNext = #players;
+    else
+      if (specNext > #players) then 
+        specNext = 0;
+      end;
+    end;
+  end;
+  if (not specd) then 
+    __haxe_Log.trace("No spectatable players found", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/SpectateSystem.hx",lineNumber=33,className="deceptinfect.ecswip.SpectateSystem",methodName="chooseSpectateTarget"}));
+  end;
+  x.spec_next = specNext;
+end
 _hxClasses["deceptinfect.ecswip.Spec_Direction"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="FORWARDS","BACKWARDS"},2)}
 __deceptinfect_ecswip_Spec_Direction = _hxClasses["deceptinfect.ecswip.Spec_Direction"];
 __deceptinfect_ecswip_Spec_Direction.FORWARDS = _hx_tab_array({[0]="FORWARDS",0,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)

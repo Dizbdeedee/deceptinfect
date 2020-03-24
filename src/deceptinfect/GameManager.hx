@@ -18,7 +18,14 @@ class GameManager {
     public static var state(default,#if server set #else null #end):GAME_STATE = WAIT;
     static var Game:GameInstance;
 
-
+    public static function shouldAllowRespawn() {
+        return switch (state) {
+            case WAIT:
+                true;
+            default:
+                false;
+        }
+    }
     public static function sure():GameInstance {
         return switch (state) {
             case SETTING_UP(x) | PLAYING(x) | ENDING(x):
@@ -85,7 +92,7 @@ class GameManager {
     #end
     #if client
     public static function init() {
-        
+
         Networking.GameStateSignal.handle(gameStateChanged);
     }
     

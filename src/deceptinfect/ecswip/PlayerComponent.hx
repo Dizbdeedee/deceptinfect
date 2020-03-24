@@ -11,7 +11,7 @@ class PlayerComponent extends Component {
 
     public var roundModel:String = "";
 
-    public var deathTime:Float = 0;
+    public var deathTime:DeathTime = ALIVE;
 
     public var playing:Bool = true;
 
@@ -25,4 +25,9 @@ class PlayerComponent extends Component {
 
 
     
+}
+
+enum DeathTime {
+    ALIVE;
+    DEAD(reviveTime:Float);
 }

@@ -1,5 +1,7 @@
 package deceptinfect;
 
+import deceptinfect.GEntCompat;
+
 
 
 class PlayerExt {
@@ -13,9 +15,8 @@ class PlayerExt {
     public static function shouldFreeRoam(p:Player) {
         var wrongMode = p.GetObserverMode() == OBS_MODE_NONE;
         var targetDead = GlobalLib.IsValid(p.GetObserverTarget()) && !(cast p.GetObserverTarget():Player).Alive();
-        var keyPressed = p.KeyPressed(IN_JUMP);
         var freeRoaming = p.GetObserverMode() == OBS_MODE_ROAMING;
-        return wrongMode || targetDead || (keyPressed && !freeRoaming);
+        return (wrongMode || targetDead) && !freeRoaming;
     }
     static function randomIncDec(x:Int):Int {
         return switch (MathLib.random(1,2)) {

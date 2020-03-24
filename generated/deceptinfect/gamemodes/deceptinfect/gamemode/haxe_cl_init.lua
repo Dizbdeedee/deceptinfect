@@ -106,10 +106,13 @@ __tink_core_SignalObject = _hx_e()
 __tink_core_SignalTrigger = _hx_e()
 __deceptinfect_ecswip_InfectionSystem = _hx_e()
 __deceptinfect_ecswip_PlayerComponent = _hx_e()
+__deceptinfect_ecswip_DeathTime = _hx_e()
 __deceptinfect_ecswip_RateComponent = _hx_e()
 __deceptinfect_ecswip_RateSystem = _hx_e()
 __deceptinfect_ecswip_SignalStorage = _hx_e()
 __deceptinfect_ecswip_SpectateComponent = _hx_e()
+__deceptinfect_ecswip_SpectateSystem = _hx_e()
+__deceptinfect_ecswip_Spec_Direction = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __deceptinfect_ecswip_VirtualPosition = _hx_e()
 __deceptinfect_radiation_ContaminationAccepter = _hx_e()
@@ -1884,6 +1887,13 @@ __deceptinfect_GAME_STATE.ENDING = function(x) local _x = _hx_tab_array({[0]="EN
 
 __deceptinfect_GameManager.new = {}
 __deceptinfect_GameManager.__name__ = true
+__deceptinfect_GameManager.shouldAllowRespawn = function() 
+  if (__deceptinfect_GameManager.state[1] == 0) then 
+    do return true end;
+  else
+    do return false end;
+  end;
+end
 __deceptinfect_GameManager.sure = function() 
   local _g = __deceptinfect_GameManager.state;
   local tmp = _g[1];
@@ -1903,7 +1913,7 @@ __deceptinfect_GameManager.init = function()
   __deceptinfect_Networking.GameStateSignal:handle(__deceptinfect_GameManager.gameStateChanged);
 end
 __deceptinfect_GameManager.gameStateChanged = function(x) 
-  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=93,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
+  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=100,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
   local _g = x.state;
   if (_g) == 0 then 
   elseif (_g) == 1 then 
@@ -1970,16 +1980,11 @@ end
 __deceptinfect_PlayerExt.shouldFreeRoam = function(p) 
   local wrongMode = p:GetObserverMode() == _G.OBS_MODE_NONE;
   local targetDead = _G.IsValid(p:GetObserverTarget()) and not p:GetObserverTarget():Alive();
-  local keyPressed = p:KeyPressed(_G.IN_JUMP);
   local freeRoaming = p:GetObserverMode() == _G.OBS_MODE_ROAMING;
-  if (not (wrongMode or targetDead)) then 
-    if (keyPressed) then 
-      do return not freeRoaming end;
-    else
-      do return false end;
-    end;
+  if (wrongMode or targetDead) then 
+    do return not freeRoaming end;
   else
-    do return true end;
+    do return false end;
   end;
 end
 __deceptinfect_PlayerExt.randomIncDec = function(x) 
@@ -2849,7 +2854,7 @@ __deceptinfect_ecswip_PlayerComponent.new = function(x)
 end
 __deceptinfect_ecswip_PlayerComponent.super = function(self,x) 
   self.playing = true;
-  self.deathTime = 0;
+  self.deathTime = __deceptinfect_ecswip_DeathTime.ALIVE;
   self.roundModel = "";
   self.spec_next = 1;
   __deceptinfect_ecswip_Component.super(self);
@@ -2861,6 +2866,11 @@ __deceptinfect_ecswip_PlayerComponent.prototype = _hx_a();
 __deceptinfect_ecswip_PlayerComponent.prototype.__class__ =  __deceptinfect_ecswip_PlayerComponent
 __deceptinfect_ecswip_PlayerComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_PlayerComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.ecswip.DeathTime"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ALIVE","DEAD"},2)}
+__deceptinfect_ecswip_DeathTime = _hxClasses["deceptinfect.ecswip.DeathTime"];
+__deceptinfect_ecswip_DeathTime.ALIVE = _hx_tab_array({[0]="ALIVE",0,__enum__ = __deceptinfect_ecswip_DeathTime},2)
+
+__deceptinfect_ecswip_DeathTime.DEAD = function(reviveTime) local _x = _hx_tab_array({[0]="DEAD",1,reviveTime,__enum__=__deceptinfect_ecswip_DeathTime}, 3); return _x; end 
 
 __deceptinfect_ecswip_RateComponent.new = function() 
   local self = _hx_new(__deceptinfect_ecswip_RateComponent.prototype)
@@ -2914,6 +2924,15 @@ __deceptinfect_ecswip_SpectateComponent.prototype = _hx_a();
 __deceptinfect_ecswip_SpectateComponent.prototype.__class__ =  __deceptinfect_ecswip_SpectateComponent
 __deceptinfect_ecswip_SpectateComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_SpectateComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
+__deceptinfect_ecswip_SpectateSystem.new = {}
+__deceptinfect_ecswip_SpectateSystem.__name__ = true
+_hxClasses["deceptinfect.ecswip.Spec_Direction"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="FORWARDS","BACKWARDS"},2)}
+__deceptinfect_ecswip_Spec_Direction = _hxClasses["deceptinfect.ecswip.Spec_Direction"];
+__deceptinfect_ecswip_Spec_Direction.FORWARDS = _hx_tab_array({[0]="FORWARDS",0,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
+
+__deceptinfect_ecswip_Spec_Direction.BACKWARDS = _hx_tab_array({[0]="BACKWARDS",1,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
+
 
 __deceptinfect_ecswip_SystemManager.new = {}
 __deceptinfect_ecswip_SystemManager.__name__ = true
@@ -5490,7 +5509,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -5507,7 +5526,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -5516,16 +5535,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -5534,7 +5553,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -5594,13 +5613,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g1 = o[2];
-    local tmp1 = _g1[1];
+    local _g = o[2];
+    local tmp1 = _g[1];
     if (tmp1) == 0 then 
-      local d = _g1[2];
+      local d = _g[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g1[2];
+      local f = _g[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -5736,7 +5755,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g1 = o[2];
+      local _g = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -5820,10 +5839,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g1 = o1[2];
-                local next3 = _g1[1];
+                local _g = o1[2];
+                local next3 = _g[1];
                 if (next3) == 0 then 
-                  local ret = _g1[2];
+                  local ret = _g[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;

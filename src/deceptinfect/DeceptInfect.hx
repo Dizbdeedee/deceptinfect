@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.ecswip.SpectateSystem;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.GEntCompat;
 import deceptinfect.ecswip.PlayerComponent;
@@ -97,15 +98,43 @@ class DeceptInfect extends gmod.hooks.Gm {
 
     override function PlayerDeathThink(ply:GPlayerCompat):Bool {
         var comp = ply.id.get(PlayerComponent).sure();
-        if (comp.deathTime == 0.0) {
-            comp.deathTime = GlobalLib.CurTime() + 1;
+        var reviveTime;
+        var revive = false;
+        comp.deathTime = switch(comp.deathTime) {
+            case ALIVE:
+                reviveTime = GlobalLib.CurTime() + 1;
+                DEAD(reviveTime);
+            case DEAD(rev):
+                reviveTime = rev;
+                comp.deathTime;
         }
-        if (GlobalLib.CurTime() > comp.deathTime) {
-            comp.deathTime = 0.0;
+        if (ply.IsBot() && GlobalLib.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
+            revive = true;
+        }
+        if (GlobalLib.IsValid(ply.GetObserverTarget())) {
+            ply.SetPos(ply.GetObserverTarget().GetPos());
+        }
+        if (ply.KeyPressed(IN_ATTACK)) {
+            if (GlobalLib.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
+                revive = true;
+            }
+            SpectateSystem.chooseSpectateTarget(comp,FORWARDS);
+        } else if (ply.KeyPressed(IN_ATTACK2)) {
+
+            SpectateSystem.chooseSpectateTarget(comp,BACKWARDS);
+        } else if (ply.KeyPressed(IN_JUMP) && ply.shouldFreeRoam()) {
+            ply.UnSpectate();
+            ply.Spectate(OBS_MODE_ROAMING);
+            comp.spec_next = 1;
+        }
+        if (revive) {
+            comp.deathTime = ALIVE;
             ply.UnSpectate();
             ply.Spawn();
+            return true;
+        } else {
+            return false;
         }
-        return true;
     }
 
     override function IsSpawnpointSuitable(ply:Player, spawnpoint:Entity, makeSuitable:Bool):Bool {
