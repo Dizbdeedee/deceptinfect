@@ -171,9 +171,5 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
     
     #end
-    #if client
-    override function HUDPaint() {
-        deceptinfect.client.Hud.paint();
-    }
-    #end
+    
 }
