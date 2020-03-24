@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The spawnmenu library is a set of functions that allow you to control the spawn (Q) menu.
 **/
-@:native("spawnmenu")extern class SpawnmenuLib {
+@:native("_G.spawnmenu")extern class SpawnmenuLib {
     
     /**
         Adds a new tool tab to the right side of the spawnmenu via the SANDBOX:AddToolMenuTabs hook. 

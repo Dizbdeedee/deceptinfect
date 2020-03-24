@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The search library.
 **/
-@:native("search")extern class SearchLib {
+@:native("_G.search")extern class SearchLib {
     
     /**
         Adds a search result provider. For examples, see gamemodes/sandbox/gamemode/cl_search_models.lua

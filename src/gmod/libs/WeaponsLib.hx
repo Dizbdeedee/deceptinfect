@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The weapons library allows you to access information about any scripted weapons loaded into the game, as well as register your own weapons.
 **/
-@:native("weapons")extern class WeaponsLib {
+@:native("_G.weapons")extern class WeaponsLib {
     
     /**
         Checks if name is based on base

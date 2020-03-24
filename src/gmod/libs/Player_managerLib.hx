@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The player_manager library lets you manage players, such as setting their models or creating player classes.
 **/
-@:native("player_manager")extern class Player_managerLib {
+@:native("_G.player_manager")extern class Player_managerLib {
     
     /**
         Assigns view model hands to player model.

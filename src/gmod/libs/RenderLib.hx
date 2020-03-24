@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The render library is a powerful set of functions that let you control how the world and its contents are rendered. It can also be used to draw some 3D clientside effects such as beams, boxes and spheres.
 **/
-@:native("render")extern class RenderLib {
+@:native("_G.render")extern class RenderLib {
     
     /**
         Sets lighting mode when rendering something.

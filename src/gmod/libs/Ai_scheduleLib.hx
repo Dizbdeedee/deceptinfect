@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Allows you to set up a schedule for NPCs to follow. This lets you dictate their actions.
 **/
-@:native("ai_schedule")extern class Ai_scheduleLib {
+@:native("_G.ai_schedule")extern class Ai_scheduleLib {
     
     /**
         Creates a schedule for scripted NPC.

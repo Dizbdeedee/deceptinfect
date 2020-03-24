@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The gui library is similar to the input library but features functions that are more focused on the mouse's interaction with GUI panels.
 **/
-@:native("gui")extern class GuiLib {
+@:native("_G.gui")extern class GuiLib {
     
     /**
         Returns x component of the mouse position.

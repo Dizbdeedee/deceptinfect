@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The cvars library allows you to control what happens when a cvar (console variable) is changed.
 **/
-@:native("cvars")extern class CvarsLib {
+@:native("_G.cvars")extern class CvarsLib {
     
     /**
         ***INTERNAL** You are probably looking for cvars. AddChangeCallback.

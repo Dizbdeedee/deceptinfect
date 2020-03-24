@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The chat library's purpose is to interface with the default chatbox.
 **/
-@:native("chat")extern class ChatLib {
+@:native("_G.chat")extern class ChatLib {
     
     /**
         Closes the chat window.

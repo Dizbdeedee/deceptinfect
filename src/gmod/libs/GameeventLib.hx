@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Used to interface with the built in game events system.
 **/
-@:native("gameevent")extern class GameeventLib {
+@:native("_G.gameevent")extern class GameeventLib {
     
     /**
         Add a game event listener.

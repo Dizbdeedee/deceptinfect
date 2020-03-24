@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The physenv library allows you to control the physics environment created by the engine, and lets you modify constants such as gravity and maximum velocity.
 **/
-@:native("physenv")extern class PhysenvLib {
+@:native("_G.physenv")extern class PhysenvLib {
     
     /**
         Adds surface properties to the game's physics environment.

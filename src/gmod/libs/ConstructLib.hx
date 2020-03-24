@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The construct library is used to control the physical properties of entities.
 **/
-@:native("construct")extern class ConstructLib {
+@:native("_G.construct")extern class ConstructLib {
     
     /**
         Creates a magnet.

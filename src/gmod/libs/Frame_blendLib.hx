@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The frame blending library.
 **/
-@:native("frame_blend")extern class Frame_blendLib {
+@:native("_G.frame_blend")extern class Frame_blendLib {
     
     /**
         ***INTERNAL** 

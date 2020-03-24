@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The duplicator library allows you to specify what should be saved when someone attempts to duplicate your custom entity with the duplicator tool. It can also be used by 3rd party duplicator tools to make use of the built in system.
 **/
-@:native("duplicator")extern class DuplicatorLib {
+@:native("_G.duplicator")extern class DuplicatorLib {
     #if server
     /**
         "Given entity list and constraint list, create all entities and return their tables" 

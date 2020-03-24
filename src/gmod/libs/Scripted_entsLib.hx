@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The scripted_ents library allows you to access information about any scripted entities loaded into the game, as well as register your own entities.
 **/
-@:native("scripted_ents")extern class Scripted_entsLib {
+@:native("_G.scripted_ents")extern class Scripted_entsLib {
     
     /**
         Checks if name is based on base

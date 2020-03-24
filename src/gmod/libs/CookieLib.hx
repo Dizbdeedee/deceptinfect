@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Used to store permanent variables/settings on clients that will persist between servers. They are stored in the cl.db SQLite database located in the root Garry's Mod folder.
 **/
-@:native("cookie")extern class CookieLib {
+@:native("_G.cookie")extern class CookieLib {
     
     /**
         Sets the value of a cookie, which is saved automatically by the sql library. 

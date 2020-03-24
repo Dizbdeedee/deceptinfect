@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The markup library only contains a single function to create a MarkupObject.
 **/
-@:native("markup")extern class MarkupLib {
+@:native("_G.markup")extern class MarkupLib {
     
     /**
         Parses markup into a MarkupObject. Currently, this only supports fonts and colors as demonstrated in the example.

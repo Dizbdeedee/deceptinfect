@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Steamworks related functions.
 **/
-@:native("steamworks")extern class SteamworksLib {
+@:native("_G.steamworks")extern class SteamworksLib {
     
     /**
         Sets if an addon should be enabled or disabled. Call steamworks.ApplyAddons afterwards to update.

@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The timer library is a very useful set of functions which allow you to run a function periodically or after a given delay.
 **/
-@:native("timer")extern class TimerLib {
+@:native("_G.timer")extern class TimerLib {
     
     /**
         Stops and removes a timer created by timer.Create.

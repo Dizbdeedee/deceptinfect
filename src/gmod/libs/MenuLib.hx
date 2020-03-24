@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The menu library.
 **/
-@:native("menu")extern class MenuLib {
+@:native("_G.menu")extern class MenuLib {
     
     /**
         Used by "Demo to Video" to record the frame.

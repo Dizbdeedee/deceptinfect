@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The mesh library allows you to create meshes. A mesh is a set of vertices that define a 3D shape, for constant meshes you should use the IMesh object instead.
 **/
-@:native("mesh")extern class MeshLib {
+@:native("_G.mesh")extern class MeshLib {
     
     /**
         Sets the normal to be used for the next vertex.

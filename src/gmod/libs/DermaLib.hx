@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The derma library allows you to add custom derma controls and create & modify derma skins.
 **/
-@:native("derma")extern class DermaLib {
+@:native("_G.derma")extern class DermaLib {
     
     /**
         Clears all cached panels so that they reassess which skin they should be using.

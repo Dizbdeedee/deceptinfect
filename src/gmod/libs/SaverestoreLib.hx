@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The saverestore library contains functions relating to the singleplayer save system built into the game.
 **/
-@:native("saverestore")extern class SaverestoreLib {
+@:native("_G.saverestore")extern class SaverestoreLib {
     
     /**
         ***INTERNAL** 

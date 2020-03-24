@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The ents library provides functions for creating and finding entities in the game.
 **/
-@:native("ents")extern class EntsLib {
+@:native("_G.ents")extern class EntsLib {
     
     /**
         Returns a table of all existing entities.

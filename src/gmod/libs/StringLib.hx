@@ -12,7 +12,7 @@ package gmod.libs;
 	
 	**Warning:** Making changes to the string metatable is not a good idea unless you know what you are doing. Use the string library instead.
 **/
-@:native("string")extern class StringLib {
+@:native("_G.string")extern class StringLib {
     
     /**
         Inserts commas for every third digit.

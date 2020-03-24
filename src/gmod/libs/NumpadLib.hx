@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The numpad module allows you to execute functions on a key press or release.
 **/
-@:native("numpad")extern class NumpadLib {
+@:native("_G.numpad")extern class NumpadLib {
     
     /**
         Removes a function added by either numpad.OnUp or numpad.OnDown

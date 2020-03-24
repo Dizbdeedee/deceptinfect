@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The drag'n'drop library, used internally by certain base panels to allow for drag'n'drop functionality, like spawnmenu's customizations.
 **/
-@:native("dragndrop")extern class DragndropLib {
+@:native("_G.dragndrop")extern class DragndropLib {
     
     /**
         ***INTERNAL** 

@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Used to create tasks for scripted NPCs.
 **/
-@:native("ai_task")extern class Ai_taskLib {
+@:native("_G.ai_task")extern class Ai_taskLib {
     
     /**
         Create a new empty task. Used by Schedule:AddTask and Schedule:EngTask.

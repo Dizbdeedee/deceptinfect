@@ -8,7 +8,7 @@ package gmod.libs;
 	
 	 This category lists the functions available in the table library.
 **/
-@:native("table")extern class TableLib {
+@:native("_G.table")extern class TableLib {
     
     /**
         Returns a key of the supplied table with the highest number value.

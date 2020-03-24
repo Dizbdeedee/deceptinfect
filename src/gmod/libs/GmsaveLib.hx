@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The gmsave library provides functions relating to the singleplayer save system in Garry's Mod.
 **/
-@:native("gmsave")extern class GmsaveLib {
+@:native("_G.gmsave")extern class GmsaveLib {
     
     /**
         Saves the map

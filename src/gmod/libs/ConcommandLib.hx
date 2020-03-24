@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The concommand library is used to create console commands which can be used to network (basic) information & events between the client and the server.
 **/
-@:native("concommand")extern class ConcommandLib {
+@:native("_G.concommand")extern class ConcommandLib {
     
     /**
         Removes a console command.

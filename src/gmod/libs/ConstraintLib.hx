@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The constraint library allows you to control the constraint system built into the physics engine (rope, weld, ballsockets, etc).
 **/
-@:native("constraint")extern class ConstraintLib {
+@:native("_G.constraint")extern class ConstraintLib {
     
     /**
         Attempts to remove all constraints associated with an entity

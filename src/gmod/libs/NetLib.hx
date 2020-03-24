@@ -8,7 +8,7 @@ package gmod.libs;
 	
 	 Refer to Net Library Usage for a short introduction.
 **/
-@:native("net")extern class NetLib {
+@:native("_G.net")extern class NetLib {
     
     /**
         Reads an integer from the received net message.

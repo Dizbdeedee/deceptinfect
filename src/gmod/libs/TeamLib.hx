@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The team library gives you access to the team system built into the Source engine, and allows you to create custom teams and get information about them.
 **/
-@:native("team")extern class TeamLib {
+@:native("_G.team")extern class TeamLib {
     
     /**
         Returns the score of the team.

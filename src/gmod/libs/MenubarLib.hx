@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The menubar library.
 **/
-@:native("menubar")extern class MenubarLib {
+@:native("_G.menubar")extern class MenubarLib {
     
     /**
         Parents the menubar to the panel and displays the menubar.

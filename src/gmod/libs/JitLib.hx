@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Function to work with the LuaJIT functionality of gmod.
 **/
-@:native("jit")extern class JitLib {
+@:native("_G.jit")extern class JitLib {
     
     /**
         Flushes the whole cache of compiled code.

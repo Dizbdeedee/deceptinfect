@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The presets library lets you add and modify the pre-set options for scripted tools (selected via the white bar at the top of each tools control panel).
 **/
-@:native("presets")extern class PresetsLib {
+@:native("_G.presets")extern class PresetsLib {
     
     /**
         Removes a preset entry from a preset group.

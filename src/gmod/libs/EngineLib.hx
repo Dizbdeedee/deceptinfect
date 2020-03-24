@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The engine library provides functions to access various features in the game's engine, most are related to the demo and save systems.
 **/
-@:native("engine")extern class EngineLib {
+@:native("_G.engine")extern class EngineLib {
     #if client
     /**
         Returns video recording settings set by video.Record. Used by Demo-To-Video feature.

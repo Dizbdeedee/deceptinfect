@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The draw library's purpose is to simplify the usage of the surface library.
 **/
-@:native("draw")extern class DrawLib {
+@:native("_G.draw")extern class DrawLib {
     
     /**
         Creates a simple line of text that is outlined.

@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The list library allows you add and retrieve values to and from lists. The list library is basically a fancy wrapper for a table, but with much more limited functionality.
 **/
-@:native("list")extern class ListLib {
+@:native("_G.list")extern class ListLib {
     
     /**
         Returns true if the list contains the value. (as a value - not a key) 

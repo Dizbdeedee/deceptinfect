@@ -8,7 +8,7 @@ package gmod.libs;
 	
 	**Warning:** Usermessages have a limit of only 256 bytes!
 **/
-@:native("usermessage")extern class UsermessageLib {
+@:native("_G.usermessage")extern class UsermessageLib {
     
     /**
         ***INTERNAL** 

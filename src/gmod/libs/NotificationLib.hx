@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Used to display notifications on the screen (mid-right).
 **/
-@:native("notification")extern class NotificationLib {
+@:native("_G.notification")extern class NotificationLib {
     
     /**
         Removes the notification after 0.8 seconds.

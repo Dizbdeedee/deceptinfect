@@ -6,7 +6,7 @@ package gmod.libs;
 	
 	Widgets allow the player to have mouse interaction with entities, such as being able to manipulate the bones of an NPC.
 **/
-@:native("widgets")extern class WidgetsLib {
+@:native("_G.widgets")extern class WidgetsLib {
     
     /**
         ***INTERNAL** 

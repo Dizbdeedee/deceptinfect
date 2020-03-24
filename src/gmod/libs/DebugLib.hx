@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The debug library is intended to help you debug your scripts, however it also has several other powerful uses.
 **/
-@:native("debug")extern class DebugLib {
+@:native("_G.debug")extern class DebugLib {
     
     /**
         Returns the current hook settings of the passed thread. The thread argument can be omitted. This is unrelated to gamemode hooks. More information on hooks can be found at http://www.lua.org/pil/23.2.html

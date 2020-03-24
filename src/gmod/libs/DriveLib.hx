@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The drive library is for adding custom control modes to the new "remote control" entity piloting system in Garry's Mod 13.
 **/
-@:native("drive")extern class DriveLib {
+@:native("_G.drive")extern class DriveLib {
     
     /**
         ***INTERNAL** 

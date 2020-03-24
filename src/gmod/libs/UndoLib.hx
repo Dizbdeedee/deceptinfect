@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The undo library allows you to add custom entities to the undo list, allowing users to "undo" their creation with their undo (default: Z) key.
 **/
-@:native("undo")extern class UndoLib {
+@:native("_G.undo")extern class UndoLib {
     #if server
     /**
         Processes an undo block (in table form). This is used internally by the undo manager when a player presses Z.

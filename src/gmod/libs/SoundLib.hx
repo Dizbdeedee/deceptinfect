@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Used primarily for adding new soundscript entries.
 **/
-@:native("sound")extern class SoundLib {
+@:native("_G.sound")extern class SoundLib {
     
     /**
         Overrides sounds defined inside of a txt file; typically used for adding map-specific sounds.

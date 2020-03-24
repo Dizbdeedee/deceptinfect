@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The gamemode library provides functions relating to the gamemode system in Garry's Mod.
 **/
-@:native("gamemode")extern class GamemodeLib {
+@:native("_G.gamemode")extern class GamemodeLib {
     
     /**
         ***INTERNAL** 

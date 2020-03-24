@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The effects library allows you to manually add scripted effects.
 **/
-@:native("effects")extern class EffectsLib {
+@:native("_G.effects")extern class EffectsLib {
     
     /**
         ***INTERNAL** You are looking for util. Effect.

@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Retrieves the control panel for a given stool in the Q menu.
 **/
-@:native("controlpanel")extern class ControlpanelLib {
+@:native("_G.controlpanel")extern class ControlpanelLib {
     
     /**
         Returns (or creates if not exists) a controlpanel.

@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Menu state library to query the master server list.
 **/
-@:native("serverlist")extern class ServerlistLib {
+@:native("_G.serverlist")extern class ServerlistLib {
     
     /**
         ***INTERNAL** 

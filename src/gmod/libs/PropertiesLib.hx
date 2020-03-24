@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The properties library gives you access to the menu that shows up when right clicking entities while holding C.
 **/
-@:native("properties")extern class PropertiesLib {
+@:native("_G.properties")extern class PropertiesLib {
     
     /**
         Add properties to the properties module

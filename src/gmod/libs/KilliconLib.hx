@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The killicon library is used to add to and control the icons that appear in the top right of your screen when a player is killed.
 **/
-@:native("killicon")extern class KilliconLib {
+@:native("_G.killicon")extern class KilliconLib {
     
     /**
         Creates new kill icon using a texture.

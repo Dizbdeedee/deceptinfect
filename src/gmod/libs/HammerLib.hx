@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The hammer library.
 **/
-@:native("hammer")extern class HammerLib {
+@:native("_G.hammer")extern class HammerLib {
     
     /**
         Sends command to Hammer, if Hammer is running with the current map loaded.

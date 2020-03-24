@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The ai library.
 **/
-@:native("ai")extern class AiLib {
+@:native("_G.ai")extern class AiLib {
     
     /**
         Translates a schedule name to its corresponding ID.

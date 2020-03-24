@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Coroutines are similar to threads, however they do not run simultaneously. They offer a way to split up tasks and dynamically pause & resume functions.
 **/
-@:native("coroutine")extern class CoroutineLib {
+@:native("_G.coroutine")extern class CoroutineLib {
     
     /**
         Creates a coroutine of the given function.

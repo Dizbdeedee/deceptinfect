@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     This is the list of utility functions.
 **/
-@:native("util")extern class UtilLib {
+@:native("_G.util")extern class UtilLib {
     
     /**
         Runs a trace using the entity's collisionmodel between two points. This does not take the entity's angles into account and will trace its unrotated collisionmodel.

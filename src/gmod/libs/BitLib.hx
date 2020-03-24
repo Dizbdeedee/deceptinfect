@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The bitwise library contains useful functions for bitwise operations. Make sure you're familiar with Bitwise Operators
 **/
-@:native("bit")extern class BitLib {
+@:native("_G.bit")extern class BitLib {
     
     /**
         Returns the bitwise not of the value.

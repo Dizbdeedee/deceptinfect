@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The vgui library allows you to script and create your own panels using Valve's GUI system. For an alphabetically ordered list of VGUI panels, see VGUI Element List.
 **/
-@:native("vgui")extern class VguiLib {
+@:native("_G.vgui")extern class VguiLib {
     
     /**
         Returns whenever the cursor is hovering the world panel.

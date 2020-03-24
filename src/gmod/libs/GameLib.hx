@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The game library provides functions to access various features in the game's engine, most of it's functions are related to controlling the map.
 **/
-@:native("game")extern class GameLib {
+@:native("_G.game")extern class GameLib {
     
     /**
         Returns the ammo bullet force that is applied when an entity is hit by a bullet of given ammo type.

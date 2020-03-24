@@ -6,7 +6,7 @@ package gmod.libs;
 	
 	However, this library can also be used by anyone else to forcefully unlock certain achievements.
 **/
-@:native("achievements")extern class AchievementsLib {
+@:native("_G.achievements")extern class AchievementsLib {
     
     /**
         Retrieves description of given achievement

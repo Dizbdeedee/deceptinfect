@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The player library is used to get the Lua objects that represent players in-game.
 **/
-@:native("player")extern class PlayerLib {
+@:native("_G.player")extern class PlayerLib {
     
     /**
         Gets all the current players in the server (not including connecting clients).

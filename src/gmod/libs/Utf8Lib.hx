@@ -6,7 +6,7 @@ package gmod.libs;
 	
 	Unless stated otherwise, all functions that expect a byte position as a parameter assume that the given position is either the start of a byte sequence or one plus the length of the subject string. As in the string library, negative indices count from the end of the string.
 **/
-@:native("utf8")extern class Utf8Lib {
+@:native("_G.utf8")extern class Utf8Lib {
     
     /**
         Returns the codepoints (as numbers) from all characters in the given string that start between byte position startPos and endPos. It raises an error if it meets any invalid byte sequence. This functions similarly to string.byte.

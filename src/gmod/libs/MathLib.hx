@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The math library is a standard Lua library that provides functions for manipulating numbers. In Garry's Mod several additional math functions have been added.
 **/
-@:native("math")extern class MathLib {
+@:native("_G.math")extern class MathLib {
     
     /**
         Returns the hyperbolic sine of the given angle.

@@ -6,7 +6,7 @@ package gmod.libs;
 	
 	The matrix functions exist, but are mostly unusable unless you're familiar with the source engine's layout for each aspect.
 **/
-@:native("cam")extern class CamLib {
+@:native("_G.cam")extern class CamLib {
     
     /**
         Switches the renderer back to the previous drawing mode from a 3D orthographic rendering context.

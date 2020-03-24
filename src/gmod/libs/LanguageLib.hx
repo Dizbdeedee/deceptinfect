@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The language library is used for translation.
 **/
-@:native("language")extern class LanguageLib {
+@:native("_G.language")extern class LanguageLib {
     
     /**
         Adds a language item. Language placeholders preceded with "#" are replaced with full text in Garry's Mod once registered with this function.

@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The surface library allows you to draw text and shapes on the screen. Primarily used for making HUDs & custom GUI panels.
 **/
-@:native("surface")extern class SurfaceLib {
+@:native("_G.surface")extern class SurfaceLib {
     
     /**
         Returns the texture id of the material with the given name/path.

@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The resource library is used to control what files are sent to clients who join a server, this includes models, materials, sounds, text files but not Lua files.
 **/
-@:native("resource")extern class ResourceLib {
+@:native("_G.resource")extern class ResourceLib {
     
     /**
         Adds the specified file to the files the client should download.

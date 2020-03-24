@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The system library provides functions that allow you to gather information about the system running the game, such as operating system, uptime and battery level.
 **/
-@:native("system")extern class SystemLib {
+@:native("_G.system")extern class SystemLib {
     
     /**
         Returns the country code of this computer, determined by the localisation settings of the OS.

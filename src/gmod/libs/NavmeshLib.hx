@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The navigation mesh library. To be used with CNavArea. The navigation mesh is used by NextBot to calculate path to its target.
 **/
-@:native("navmesh")extern class NavmeshLib {
+@:native("_G.navmesh")extern class NavmeshLib {
     
     /**
         Finds the closest standable ground at, above, or below the provided position.

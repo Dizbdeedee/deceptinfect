@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The os library is a standard Lua library originally intended to allow Lua access to various features of the Operating System it's running on, however many of the features and functions have been removed in Garry's Mod due to security issues. It's only used in Garry's Mod for date & time operations.
 **/
-@:native("os")extern class OsLib {
+@:native("_G.os")extern class OsLib {
     
     /**
         Returns the system time in seconds past the unix epoch. If a table is supplied, the function attempts to build a system time with the specified table members.

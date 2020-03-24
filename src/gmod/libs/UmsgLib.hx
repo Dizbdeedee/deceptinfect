@@ -8,7 +8,7 @@ package gmod.libs;
 	
 	**Warning:** Usermessages have a limit of only 256 bytes!
 **/
-@:native("umsg")extern class UmsgLib {
+@:native("_G.umsg")extern class UmsgLib {
     
     /**
         ***Deprecated:** You should be using the net library instead

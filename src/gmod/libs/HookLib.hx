@@ -6,7 +6,7 @@ import gmod.Hooks.Hook;
 /**
     The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function.
 **/
-@:native("hook")extern class HookLib {
+@:native("_G.hook")extern class HookLib {
     
     /**
         Removes the hook with the supplied identifier from the given event.

@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The file library provides functions for finding, reading and writing to files. The following path values are most commonly used:
 **/
-@:native("file")extern class FileLib {
+@:native("_G.file")extern class FileLib {
     
     /**
         Returns when the file or folder was lasted modified in Unix time.

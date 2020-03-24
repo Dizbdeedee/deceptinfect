@@ -8,7 +8,7 @@ package gmod.libs;
 	
 	**Note:** These function appear to not work in singleplayer
 **/
-@:native("debugoverlay")extern class DebugoverlayLib {
+@:native("_G.debugoverlay")extern class DebugoverlayLib {
     
     /**
         Displays 2D text at the specified coordinates.

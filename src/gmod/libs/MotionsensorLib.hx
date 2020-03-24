@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Functions related to Kinect for Windows usage in GMod.
 **/
-@:native("motionsensor")extern class MotionsensorLib {
+@:native("_G.motionsensor")extern class MotionsensorLib {
     #if client
     /**
         Returns true if we have detected that there's a kinect connected to the PC

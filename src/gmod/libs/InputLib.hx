@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The input library allows you to gather information about the clients input devices (mouse & keyboard), such as the cursor position and whether a key is pressed or not.
 **/
-@:native("input")extern class InputLib {
+@:native("_G.input")extern class InputLib {
     
     /**
         Returns whether key trapping is activate and the next key press will be captured.

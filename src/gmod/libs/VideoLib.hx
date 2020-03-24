@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The video library.
 **/
-@:native("video")extern class VideoLib {
+@:native("_G.video")extern class VideoLib {
     
     /**
         Attempts to create an IVideoWriter.

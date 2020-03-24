@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     Add proxies to materials.
 **/
-@:native("matproxy")extern class MatproxyLib {
+@:native("_G.matproxy")extern class MatproxyLib {
     
     /**
         Adds a material proxy.

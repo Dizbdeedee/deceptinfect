@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     The halo library is used to draw glowing outlines around entities, an example of this can be seen by picking up props with the physgun in Garry's Mod 13.
 **/
-@:native("halo")extern class HaloLib {
+@:native("_G.halo")extern class HaloLib {
     
     /**
         Returns the entity the halo library is currently rendering the halo for. 

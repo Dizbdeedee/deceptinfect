@@ -4,7 +4,7 @@ package gmod.libs;
 /**
     GWEN is a system that allows you to load a spritesheet and generate a skin out of it.
 **/
-@:native("GWEN")extern class GWENLib {
+@:native("_G.GWEN")extern class GWENLib {
     
     /**
         Used in derma skins to create a rectangle drawing function from an image. The rectangle will not be scaled, but instead it will be drawn in the center of the box. The texture is taken from SKIN.GwenTexture
