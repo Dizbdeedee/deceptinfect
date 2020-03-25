@@ -66,7 +66,6 @@ __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
 __deceptinfect_Di_battery = _hx_e()
 __deceptinfect_Di_nest = _hx_e()
-__deceptinfect_EntityExt = _hx_e()
 __deceptinfect__GEntCompat_GEntCompat_Impl_ = _hx_e()
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
 __deceptinfect_GameInstance = _hx_e()
@@ -77,10 +76,7 @@ __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_ = _hx_e()
 __deceptinfect_GameValues = _hx_e()
 __deceptinfect_Misc = _hx_e()
 __deceptinfect_Networking = _hx_e()
-__deceptinfect_PlayerExt = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
-__deceptinfect_TimeKeep = _hx_e()
-__deceptinfect_client_Geiger = _hx_e()
 __deceptinfect_ecswip_System = _hx_e()
 __deceptinfect_client_GeigerSystem = _hx_e()
 __deceptinfect_ecswip_Component = _hx_e()
@@ -113,9 +109,9 @@ __deceptinfect_ecswip_DeathTime = _hx_e()
 __deceptinfect_ecswip_RateComponent = _hx_e()
 __deceptinfect_ecswip_RateSystem = _hx_e()
 __deceptinfect_ecswip_SignalStorage = _hx_e()
-__deceptinfect_ecswip_SpectateComponent = _hx_e()
-__deceptinfect_ecswip_SpectateSystem = _hx_e()
+__deceptinfect_ecswip_Spectate = _hx_e()
 __deceptinfect_ecswip_Spec_Direction = _hx_e()
+__deceptinfect_ecswip_SpectateComponent = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __deceptinfect_ecswip_VirtualPosition = _hx_e()
 __deceptinfect_radiation_ContaminationAccepter = _hx_e()
@@ -128,15 +124,16 @@ __deceptinfect_radiation_RadLifetime = _hx_e()
 __deceptinfect_radiation_RadiationSystem = _hx_e()
 __deceptinfect_radiation_RadTypes = _hx_e()
 __deceptinfect_radiation_RadiationTypes = _hx_e()
+__deceptinfect_util_EntityExt = _hx_e()
+__deceptinfect_util_PlayerExt = _hx_e()
+__deceptinfect_util_TimeKeep = _hx_e()
+__deceptinfect_util_Util = _hx_e()
 __gmod__EntityClass_EntityClass_Impl_ = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
 __gmod_Hooks = _hx_e()
-__gmod_OutputRunner = _hx_e()
 __gmod_PairTools = _hx_e()
 __gmod_TableTools = _hx_e()
-__gmod_engine_ents__Game_end_Game_end_Impl_ = _hx_e()
-__gmod_macros_InitMacro = _hx_e()
 __haxe_StackItem = _hx_e()
 __haxe_EntryPoint = _hx_e()
 __haxe_Log = _hx_e()
@@ -149,7 +146,6 @@ __haxe_ds_Either = _hx_e()
 __haxe_ds_EnumValueMap = _hx_e()
 __haxe_ds_IntMap = _hx_e()
 __haxe_ds_Option = _hx_e()
-__haxe_ds_StringMap = _hx_e()
 __lua_Boot = _hx_e()
 __haxe_iterators_MapKeyValueIterator = _hx_e()
 __lua_UserData = _hx_e()
@@ -1361,12 +1357,12 @@ __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply)
     if ((_G.CurTime() > reviveTime) and __deceptinfect_GameManager.shouldAllowRespawn()) then 
       revive = true;
     end;
-    __deceptinfect_ecswip_SpectateSystem.chooseSpectateTarget(comp1, __deceptinfect_ecswip_Spec_Direction.FORWARDS);
+    __deceptinfect_ecswip_Spectate.chooseSpectateTarget(comp1, __deceptinfect_ecswip_Spec_Direction.FORWARDS);
   else
     if (ply:KeyPressed(_G.IN_ATTACK2)) then 
-      __deceptinfect_ecswip_SpectateSystem.chooseSpectateTarget(comp1, __deceptinfect_ecswip_Spec_Direction.BACKWARDS);
+      __deceptinfect_ecswip_Spectate.chooseSpectateTarget(comp1, __deceptinfect_ecswip_Spec_Direction.BACKWARDS);
     else
-      if (ply:KeyPressed(_G.IN_JUMP) and __deceptinfect_PlayerExt.shouldFreeRoam(ply)) then 
+      if (ply:KeyPressed(_G.IN_JUMP) and __deceptinfect_util_PlayerExt.shouldFreeRoam(ply)) then 
         ply:UnSpectate();
         ply:Spectate(_G.OBS_MODE_ROAMING);
         comp1.spec_next = 1;
@@ -1621,17 +1617,6 @@ end
 __deceptinfect_Di_nest.prototype.__class__ =  __deceptinfect_Di_nest
 __deceptinfect_Di_nest.__super__ = __gmod_sent_ENT_ANIM
 setmetatable(__deceptinfect_Di_nest.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__deceptinfect_EntityExt.new = {}
-__deceptinfect_EntityExt.__name__ = true
-__deceptinfect_EntityExt.facingBehind = function(me,target) 
-  local this1 = _G.Angle(0, me:EyeAngles().y, 0);
-  local vec1 = this1:Forward();
-  local this2 = _G.Angle(0, target:EyeAngles().y, 0);
-  local vec2 = this2:Forward();
-  local dot = _G.math.acos(vec1:Dot(vec2));
-  do return dot < (_G.math.pi / 4) end;
-end
 
 __deceptinfect__GEntCompat_GEntCompat_Impl_.new = {}
 __deceptinfect__GEntCompat_GEntCompat_Impl_.__name__ = true
@@ -1938,7 +1923,7 @@ __deceptinfect_GameManager.set_state = function(x)
     local p1 = p:next();
     __deceptinfect_Networking.sendGameState(_hx_o({__fields__={state=true},state=__deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.fromGAME_STATE(x)}), p1);
   end;
-  __haxe_Log.trace("set state...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=58,className="deceptinfect.GameManager",methodName="set_state"}));
+  __haxe_Log.trace("set state...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=57,className="deceptinfect.GameManager",methodName="set_state"}));
   __deceptinfect_GameManager.state = x do return __deceptinfect_GameManager.state end;
 end
 __deceptinfect_GameManager.initAllPlayers = function() 
@@ -2022,53 +2007,6 @@ __deceptinfect_Networking.prototype = _hx_a();
 
 __deceptinfect_Networking.prototype.__class__ =  __deceptinfect_Networking
 
-__deceptinfect_PlayerExt.new = {}
-__deceptinfect_PlayerExt.__name__ = true
-__deceptinfect_PlayerExt.setWalkthroughable = function(p,b) 
-  if (b) then 
-    p:SetCollisionGroup(_G.COLLISION_GROUP_PASSABLE_DOOR);
-  else
-    p:SetCollisionGroup(_G.COLLISION_GROUP_PLAYER);
-  end;
-end
-__deceptinfect_PlayerExt.shouldFreeRoam = function(p) 
-  local wrongMode = p:GetObserverMode() == _G.OBS_MODE_NONE;
-  local targetDead = _G.IsValid(p:GetObserverTarget()) and not p:GetObserverTarget():Alive();
-  local freeRoaming = p:GetObserverMode() == _G.OBS_MODE_ROAMING;
-  if (not (wrongMode or targetDead)) then 
-    do return not freeRoaming end;
-  else
-    do return true end;
-  end;
-end
-__deceptinfect_PlayerExt.randomIncDec = function(x) 
-  local _g = _G.math.random(1, 2);
-  if (_g) == 1 then 
-    do return x end;
-  elseif (_g) == 2 then 
-    do return -x end;else
-  _G.error("Something went spectacularly wrong",0); end;
-end
-__deceptinfect_PlayerExt.disorientate = function(p) 
-  local curangs = p:EyeAngles();
-  local curY = curangs.y;
-  local punchY = __deceptinfect_PlayerExt.randomIncDec(_G.math.random(10, 80));
-  curY = curY + punchY;
-  if (curY >= 90) then 
-    local diff = curY - 90;
-    curY = -90 + diff;
-  else
-    if (curY <= -90) then 
-      local diff1 = curY + 90;
-      curY = 90 + diff1;
-    end;
-  end;
-  local punchR = __deceptinfect_PlayerExt.randomIncDec(_G.math.random(20, 160));
-  local finalR = _G.math.NormalizeAngle(curangs.r + punchR);
-  local this1 = _G.Angle(curY, finalR, 0);
-  p:SetEyeAngles(this1);
-end
-
 __deceptinfect_PlayerManager.new = {}
 __deceptinfect_PlayerManager.__name__ = true
 __deceptinfect_PlayerManager.getPlayers = function() 
@@ -2076,112 +2014,6 @@ __deceptinfect_PlayerManager.getPlayers = function()
 end
 __deceptinfect_PlayerManager.getActivePlayers = function() 
   do return nil end;
-end
-
-__deceptinfect_TimeKeep.new = function(limitZero) 
-  local self = _hx_new(__deceptinfect_TimeKeep.prototype)
-  __deceptinfect_TimeKeep.super(self,limitZero)
-  return self
-end
-__deceptinfect_TimeKeep.super = function(self,limitZero) 
-  if (limitZero == nil) then 
-    limitZero = true;
-  end;
-  self.times = __haxe_ds_IntMap.new();
-  self.limitZero = limitZero;
-end
-__deceptinfect_TimeKeep.__name__ = true
-__deceptinfect_TimeKeep.prototype = _hx_a();
-__deceptinfect_TimeKeep.prototype.addTime = function(self,key) 
-  if (self.times.h[key] ~= nil) then 
-    local difftime = __deceptinfect_GameManager.sure():get_diffTime();
-    local _g = key;
-    local _g1 = self.times;
-    local ret = _g1.h[_g];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    local v = ret + difftime;
-    if (v == nil) then 
-      _g1.h[_g] = __haxe_ds_IntMap.tnull;
-    else
-      _g1.h[_g] = v;
-    end;
-  else
-    local _this = self.times;
-    _this.h[key] = 0;
-  end;
-  local ret1 = self.times.h[key];
-  if (ret1 == __haxe_ds_IntMap.tnull) then 
-    ret1 = nil;
-  end;
-  do return ret1 end
-end
-__deceptinfect_TimeKeep.prototype.setTime = function(self,key,f) 
-  local _this = self.times;
-  if (f == nil) then 
-    _this.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    _this.h[key] = f;
-  end;
-end
-__deceptinfect_TimeKeep.prototype.removeTime = function(self,key) 
-  local difftime = __deceptinfect_GameManager.sure():get_diffTime();
-  local _g = key;
-  local _g1 = self.times;
-  local ret = _g1.h[_g];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  local v = ret - difftime;
-  if (v == nil) then 
-    _g1.h[_g] = __haxe_ds_IntMap.tnull;
-  else
-    _g1.h[_g] = v;
-  end;
-  local ret1 = self.times.h[key];
-  if (ret1 == __haxe_ds_IntMap.tnull) then 
-    ret1 = nil;
-  end;
-  if (ret1 < 0) then 
-    local _this = self.times;
-    _this.h[key] = 0;
-  end;
-  local ret2 = self.times.h[key];
-  if (ret2 == __haxe_ds_IntMap.tnull) then 
-    ret2 = nil;
-  end;
-  do return ret2 end
-end
-__deceptinfect_TimeKeep.prototype.getTime = function(self,key) 
-  local ret = self.times.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-
-__deceptinfect_TimeKeep.prototype.__class__ =  __deceptinfect_TimeKeep
-
-__deceptinfect_client_Geiger.new = {}
-__deceptinfect_client_Geiger.__name__ = true
-__deceptinfect_client_Geiger.geigerThink = function() 
-  if (_G.CurTime() > __deceptinfect_client_Geiger.playTime) then 
-    local x = __deceptinfect_client_Geiger.geiger;
-    local choice = (function() 
-      local _hx_1
-      if (x < 0.2) then 
-      _hx_1 = __deceptinfect_client_Geiger.sounds[0]; else 
-      _hx_1 = __deceptinfect_client_Geiger.sounds[_G.math.random(0, 2)]; end
-      return _hx_1
-    end )();
-    local this1 = _G.Vector(0, 0, 0);
-    _G.EmitSound(choice, this1, -2, _G.CHAN_STATIC, 0.5);
-    local mintime = _G.SoundDuration(__deceptinfect_client_Geiger.sounds[0]) * 0.75;
-    local exponent = (0.5 * _G.math.pow(__deceptinfect_client_Geiger.geiger, -0.5)) - 0.5;
-    local random = _G.math.random();
-    __deceptinfect_client_Geiger.playTime = (_G.CurTime() + mintime) + (exponent * random);
-  end;
 end
 
 __deceptinfect_ecswip_System.new = function() 
@@ -3009,24 +2841,9 @@ __deceptinfect_ecswip_SignalStorage.initEvents = function()
   __deceptinfect_ecswip_SignalStorage.onInfected = __deceptinfect_ecswip_SignalStorage.onInfectedTrigger;
 end
 
-__deceptinfect_ecswip_SpectateComponent.new = function() 
-  local self = _hx_new(__deceptinfect_ecswip_SpectateComponent.prototype)
-  __deceptinfect_ecswip_SpectateComponent.super(self)
-  return self
-end
-__deceptinfect_ecswip_SpectateComponent.super = function(self) 
-  __deceptinfect_ecswip_Component.super(self);
-end
-__deceptinfect_ecswip_SpectateComponent.__name__ = true
-__deceptinfect_ecswip_SpectateComponent.prototype = _hx_a();
-
-__deceptinfect_ecswip_SpectateComponent.prototype.__class__ =  __deceptinfect_ecswip_SpectateComponent
-__deceptinfect_ecswip_SpectateComponent.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_ecswip_SpectateComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_ecswip_SpectateSystem.new = {}
-__deceptinfect_ecswip_SpectateSystem.__name__ = true
-__deceptinfect_ecswip_SpectateSystem.chooseSpectateTarget = function(x,dir) 
+__deceptinfect_ecswip_Spectate.new = {}
+__deceptinfect_ecswip_Spectate.__name__ = true
+__deceptinfect_ecswip_Spectate.chooseSpectateTarget = function(x,dir) 
   local player = x.player;
   local iter;
   local iter1 = dir[1];
@@ -3055,7 +2872,7 @@ __deceptinfect_ecswip_SpectateSystem.chooseSpectateTarget = function(x,dir)
     end;
   end;
   if (not specd) then 
-    __haxe_Log.trace("No spectatable players found", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/SpectateSystem.hx",lineNumber=33,className="deceptinfect.ecswip.SpectateSystem",methodName="chooseSpectateTarget"}));
+    __haxe_Log.trace("No spectatable players found", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/Spectate.hx",lineNumber=33,className="deceptinfect.ecswip.Spectate",methodName="chooseSpectateTarget"}));
   end;
   x.spec_next = specNext;
 end
@@ -3065,6 +2882,21 @@ __deceptinfect_ecswip_Spec_Direction.FORWARDS = _hx_tab_array({[0]="FORWARDS",0,
 
 __deceptinfect_ecswip_Spec_Direction.BACKWARDS = _hx_tab_array({[0]="BACKWARDS",1,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
 
+
+__deceptinfect_ecswip_SpectateComponent.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_SpectateComponent.prototype)
+  __deceptinfect_ecswip_SpectateComponent.super(self)
+  return self
+end
+__deceptinfect_ecswip_SpectateComponent.super = function(self) 
+  __deceptinfect_ecswip_Component.super(self);
+end
+__deceptinfect_ecswip_SpectateComponent.__name__ = true
+__deceptinfect_ecswip_SpectateComponent.prototype = _hx_a();
+
+__deceptinfect_ecswip_SpectateComponent.prototype.__class__ =  __deceptinfect_ecswip_SpectateComponent
+__deceptinfect_ecswip_SpectateComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_ecswip_SpectateComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
 __deceptinfect_ecswip_SystemManager.new = {}
 __deceptinfect_ecswip_SystemManager.__name__ = true
@@ -3159,7 +2991,7 @@ __deceptinfect_radiation_ContaminationAccepter.new = function()
   return self
 end
 __deceptinfect_radiation_ContaminationAccepter.super = function(self) 
-  self.contam_time = __deceptinfect_TimeKeep.new();
+  self.contam_time = __deceptinfect_util_TimeKeep.new();
 end
 __deceptinfect_radiation_ContaminationAccepter.__name__ = true
 __deceptinfect_radiation_ContaminationAccepter.prototype = _hx_a();
@@ -3453,6 +3285,152 @@ __deceptinfect_radiation_RadTypes.SPIT = _hx_tab_array({[0]="SPIT",5,__enum__ = 
 __deceptinfect_radiation_RadiationTypes.new = {}
 __deceptinfect_radiation_RadiationTypes.__name__ = true
 
+__deceptinfect_util_EntityExt.new = {}
+__deceptinfect_util_EntityExt.__name__ = true
+__deceptinfect_util_EntityExt.facingBehind = function(me,target) 
+  local this1 = _G.Angle(0, me:EyeAngles().y, 0);
+  local vec1 = this1:Forward();
+  local this2 = _G.Angle(0, target:EyeAngles().y, 0);
+  local vec2 = this2:Forward();
+  local dot = _G.math.acos(vec1:Dot(vec2));
+  do return dot < (_G.math.pi / 4) end;
+end
+
+__deceptinfect_util_PlayerExt.new = {}
+__deceptinfect_util_PlayerExt.__name__ = true
+__deceptinfect_util_PlayerExt.setWalkthroughable = function(p,b) 
+  if (b) then 
+    p:SetCollisionGroup(_G.COLLISION_GROUP_PASSABLE_DOOR);
+  else
+    p:SetCollisionGroup(_G.COLLISION_GROUP_PLAYER);
+  end;
+end
+__deceptinfect_util_PlayerExt.shouldFreeRoam = function(p) 
+  local wrongMode = p:GetObserverMode() == _G.OBS_MODE_NONE;
+  local targetDead = _G.IsValid(p:GetObserverTarget()) and not p:GetObserverTarget():Alive();
+  local freeRoaming = p:GetObserverMode() == _G.OBS_MODE_ROAMING;
+  if (not (wrongMode or targetDead)) then 
+    do return not freeRoaming end;
+  else
+    do return true end;
+  end;
+end
+__deceptinfect_util_PlayerExt.randomIncDec = function(x) 
+  local _g = _G.math.random(1, 2);
+  if (_g) == 1 then 
+    do return x end;
+  elseif (_g) == 2 then 
+    do return -x end;else
+  _G.error("Something went spectacularly wrong",0); end;
+end
+__deceptinfect_util_PlayerExt.disorientate = function(p) 
+  local curangs = p:EyeAngles();
+  local curY = curangs.y;
+  local punchY = __deceptinfect_util_PlayerExt.randomIncDec(_G.math.random(10, 80));
+  curY = curY + punchY;
+  if (curY >= 90) then 
+    local diff = curY - 90;
+    curY = -90 + diff;
+  else
+    if (curY <= -90) then 
+      local diff1 = curY + 90;
+      curY = 90 + diff1;
+    end;
+  end;
+  local punchR = __deceptinfect_util_PlayerExt.randomIncDec(_G.math.random(20, 160));
+  local finalR = _G.math.NormalizeAngle(curangs.r + punchR);
+  local this1 = _G.Angle(curY, finalR, 0);
+  p:SetEyeAngles(this1);
+end
+
+__deceptinfect_util_TimeKeep.new = function(limitZero) 
+  local self = _hx_new(__deceptinfect_util_TimeKeep.prototype)
+  __deceptinfect_util_TimeKeep.super(self,limitZero)
+  return self
+end
+__deceptinfect_util_TimeKeep.super = function(self,limitZero) 
+  if (limitZero == nil) then 
+    limitZero = true;
+  end;
+  self.times = __haxe_ds_IntMap.new();
+  self.limitZero = limitZero;
+end
+__deceptinfect_util_TimeKeep.__name__ = true
+__deceptinfect_util_TimeKeep.prototype = _hx_a();
+__deceptinfect_util_TimeKeep.prototype.addTime = function(self,key) 
+  if (self.times.h[key] ~= nil) then 
+    local difftime = __deceptinfect_GameManager.sure():get_diffTime();
+    local _g = key;
+    local _g1 = self.times;
+    local ret = _g1.h[_g];
+    if (ret == __haxe_ds_IntMap.tnull) then 
+      ret = nil;
+    end;
+    local v = ret + difftime;
+    if (v == nil) then 
+      _g1.h[_g] = __haxe_ds_IntMap.tnull;
+    else
+      _g1.h[_g] = v;
+    end;
+  else
+    local _this = self.times;
+    _this.h[key] = 0;
+  end;
+  local ret1 = self.times.h[key];
+  if (ret1 == __haxe_ds_IntMap.tnull) then 
+    ret1 = nil;
+  end;
+  do return ret1 end
+end
+__deceptinfect_util_TimeKeep.prototype.setTime = function(self,key,f) 
+  local _this = self.times;
+  if (f == nil) then 
+    _this.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    _this.h[key] = f;
+  end;
+end
+__deceptinfect_util_TimeKeep.prototype.removeTime = function(self,key) 
+  local difftime = __deceptinfect_GameManager.sure():get_diffTime();
+  local _g = key;
+  local _g1 = self.times;
+  local ret = _g1.h[_g];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  local v = ret - difftime;
+  if (v == nil) then 
+    _g1.h[_g] = __haxe_ds_IntMap.tnull;
+  else
+    _g1.h[_g] = v;
+  end;
+  local ret1 = self.times.h[key];
+  if (ret1 == __haxe_ds_IntMap.tnull) then 
+    ret1 = nil;
+  end;
+  if (ret1 < 0) then 
+    local _this = self.times;
+    _this.h[key] = 0;
+  end;
+  local ret2 = self.times.h[key];
+  if (ret2 == __haxe_ds_IntMap.tnull) then 
+    ret2 = nil;
+  end;
+  do return ret2 end
+end
+__deceptinfect_util_TimeKeep.prototype.getTime = function(self,key) 
+  local ret = self.times.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+
+__deceptinfect_util_TimeKeep.prototype.__class__ =  __deceptinfect_util_TimeKeep
+
+__deceptinfect_util_Util.new = {}
+__deceptinfect_util_Util.__name__ = true
+
 __gmod__EntityClass_EntityClass_Impl_.new = {}
 __gmod__EntityClass_EntityClass_Impl_.__name__ = true
 __gmod__EntityClass_EntityClass_Impl_._new = function(name) 
@@ -3488,98 +3466,6 @@ end
 
 __gmod_Hooks.new = {}
 __gmod_Hooks.__name__ = true
-
-__gmod_OutputRunner.new = {}
-__gmod_OutputRunner.__name__ = true
-__gmod_OutputRunner.addOutput = function(e,outputName,cb) 
-  if (__gmod_OutputRunner.outputEnt == nil) then 
-    local this1 = _G.ents.Create("logic_relay");
-    __gmod_OutputRunner.outputEnt = this1;
-    __gmod_OutputRunner.outputEnt:SetName("outputrunner");
-    __gmod_OutputRunner.outputEnt:Activate();
-    __gmod_OutputRunner.outputEnt:Spawn();
-    __gmod_OutputRunner.outputID = __gmod_OutputRunner.outputEnt:EntIndex();
-    local exportName = __gmod_macros_InitMacro.exportName;
-    _G.hook.Add("AcceptInput", Std.string(Std.string("") .. Std.string(exportName)) .. Std.string("AcceptInput"), __gmod_OutputRunner.acceptInput);
-    __haxe_Log.trace("hooked", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=28,className="gmod.OutputRunner",methodName="addOutput"}));
-  end;
-  local id = e:EntIndex();
-  if (__gmod_OutputRunner.callbacks.h[id] == nil) then 
-    local callbacklist = __tink_core_CallbackList.new();
-    local callbackmap = __haxe_ds_StringMap.new();
-    if (callbacklist == nil) then 
-      callbackmap.h[outputName] = __haxe_ds_StringMap.tnull;
-    else
-      callbackmap.h[outputName] = callbacklist;
-    end;
-    local _this = __gmod_OutputRunner.callbacks;
-    if (callbackmap == nil) then 
-      _this.h[id] = __haxe_ds_IntMap.tnull;
-    else
-      _this.h[id] = callbackmap;
-    end;
-    __haxe_Log.trace("New callbacklist + map", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=36,className="gmod.OutputRunner",methodName="addOutput"}));
-    e:SetKeyValue(outputName, "outputrunner:Trigger::0:-1");
-  else
-    local ret = __gmod_OutputRunner.callbacks.h[id];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    if (ret.h[outputName] == nil) then 
-      local callbacklist1 = __tink_core_CallbackList.new();
-      local ret1 = __gmod_OutputRunner.callbacks.h[id];
-      if (ret1 == __haxe_ds_IntMap.tnull) then 
-        ret1 = nil;
-      end;
-      local _this1 = ret1;
-      if (callbacklist1 == nil) then 
-        _this1.h[outputName] = __haxe_ds_StringMap.tnull;
-      else
-        _this1.h[outputName] = callbacklist1;
-      end;
-      e:SetKeyValue(outputName, "outputrunner:Trigger::0:-1");
-      __haxe_Log.trace("New callbacklist", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=44,className="gmod.OutputRunner",methodName="addOutput"}));
-    end;
-  end;
-  __haxe_Log.trace(outputName, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=46,className="gmod.OutputRunner",methodName="addOutput"}));
-  local ret2 = __gmod_OutputRunner.callbacks.h[id];
-  if (ret2 == __haxe_ds_IntMap.tnull) then 
-    ret2 = nil;
-  end;
-  local ret3 = ret2.h[outputName];
-  if (ret3 == __haxe_ds_StringMap.tnull) then 
-    ret3 = nil;
-  end;
-  local _this2 = ret3;
-  local node = __tink_core__Callback_ListCell.new(cb, _this2);
-  _this2.cells:push(node);
-  _this2.used = _this2.used + 1;
-  do return node end;
-end
-__gmod_OutputRunner.acceptInput = function(ent,input,actv,caller,value) 
-  __haxe_Log.trace(Std.string(Std.string(Std.string(Std.string(Std.string(Std.string(Std.string("Entity: ") .. Std.string(ent:GetClass())) .. Std.string(" got sent ")) .. Std.string(input)) .. Std.string(" ")) .. Std.string(_G.tostring(actv))) .. Std.string(" with ")) .. Std.string(Std.string(value)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=51,className="gmod.OutputRunner",methodName="acceptInput"}));
-  if ((ent:EntIndex() == __gmod_OutputRunner.outputID) and _G.IsValid(caller)) then 
-    local this1 = __gmod_OutputRunner.callbacks;
-    local key = caller:EntIndex();
-    local ret = this1.h[key];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    local backs = ret;
-    if (backs ~= nil) then 
-      local ret1 = backs.h[input];
-      if (ret1 == __haxe_ds_StringMap.tnull) then 
-        ret1 = nil;
-      end;
-      local backs2 = ret1;
-      if (backs2 ~= nil) then 
-        backs2:invoke(_hx_o({__fields__={data=true,activator=true},data=value,activator=caller}));
-      end;
-      __haxe_Log.trace(backs2, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/OutputRunner.hx",lineNumber=59,className="gmod.OutputRunner",methodName="acceptInput"}));
-    end;
-  end;
-  do return nil end;
-end
 
 __gmod_PairTools.new = {}
 __gmod_PairTools.__name__ = true
@@ -3637,12 +3523,6 @@ __gmod_TableTools.__name__ = true
 __gmod_TableTools.length = function(table) 
   do return #table end;
 end
-
-__gmod_engine_ents__Game_end_Game_end_Impl_.new = {}
-__gmod_engine_ents__Game_end_Game_end_Impl_.__name__ = true
-
-__gmod_macros_InitMacro.new = {}
-__gmod_macros_InitMacro.__name__ = true
 _hxClasses["haxe.StackItem"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="CFunction","Module","FilePos","Method","LocalFunction"},5)}
 __haxe_StackItem = _hxClasses["haxe.StackItem"];
 __haxe_StackItem.CFunction = _hx_tab_array({[0]="CFunction",0,__enum__ = __haxe_StackItem},2)
@@ -4231,55 +4111,6 @@ __haxe_ds_Option = _hxClasses["haxe.ds.Option"];
 __haxe_ds_Option.Some = function(v) local _x = _hx_tab_array({[0]="Some",0,v,__enum__=__haxe_ds_Option}, 3); return _x; end 
 __haxe_ds_Option.None = _hx_tab_array({[0]="None",1,__enum__ = __haxe_ds_Option},2)
 
-
-__haxe_ds_StringMap.new = function() 
-  local self = _hx_new(__haxe_ds_StringMap.prototype)
-  __haxe_ds_StringMap.super(self)
-  return self
-end
-__haxe_ds_StringMap.super = function(self) 
-  self.h = ({});
-end
-__haxe_ds_StringMap.__name__ = true
-__haxe_ds_StringMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_StringMap.prototype = _hx_a();
-__haxe_ds_StringMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_StringMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_StringMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_StringMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_StringMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_StringMap.prototype.iterator = function(self) 
-  local _gthis = self;
-  local it = self:keys();
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return it:hasNext() end;
-  end,next=function(self) 
-    do return _gthis.h[it:next()] end;
-  end}) end
-end
-
-__haxe_ds_StringMap.prototype.__class__ =  __haxe_ds_StringMap
 
 __lua_Boot.new = {}
 __lua_Boot.__name__ = true
@@ -6744,12 +6575,6 @@ local _hx_static_init = function()
   
   __deceptinfect_Misc.roundWeapons = _hx_tab_array({[0]="weapon_mor_ump"}, 1);
   
-  __deceptinfect_client_Geiger.geiger = 0.0;
-  
-  __deceptinfect_client_Geiger.sounds = _hx_tab_array({[0]=_G.Sound("player/geiger1.wav"), _G.Sound("player/geiger2.wav"), _G.Sound("player/geiger3.wav")}, 3);
-  
-  __deceptinfect_client_Geiger.playTime = 0;
-  
   __deceptinfect_ecswip_ComponentManager.components = __haxe_ds_ObjectMap.new();
   
   __deceptinfect_ecswip_ComponentManager.entities = 0;
@@ -7102,15 +6927,11 @@ local _hx_static_init = function()
   
   __gmod_Hooks.FindUseEntity = "FindUseEntity";
   
-  __gmod_OutputRunner.callbacks = __haxe_ds_IntMap.new();
-  
   __haxe_EntryPoint.pending = Array.new();
   
   __haxe_EntryPoint.threadCount = 0;
   
   __haxe_ds_IntMap.tnull = ({});
-  
-  __haxe_ds_StringMap.tnull = ({});
   
   __lua_Boot.Max_Int32 = 2147483647;
   

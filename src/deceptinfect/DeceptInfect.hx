@@ -1,6 +1,6 @@
 package deceptinfect;
 
-import deceptinfect.ecswip.SpectateSystem;
+import deceptinfect.ecswip.Spectate;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.GEntCompat;
 import deceptinfect.ecswip.PlayerComponent;
@@ -20,7 +20,7 @@ import gmod.gclass.Player;
 import gmod.types.Entity;
 using gmod.PairTools;
 using gmod.TableTools;
-using deceptinfect.PlayerExt;
+using deceptinfect.util.PlayerExt;
 import deceptinfect.ecswip.SignalStorage;
 
 @:build(gmod.macros.GamemodeMacro.build())
@@ -120,10 +120,10 @@ class DeceptInfect extends gmod.hooks.Gm {
             if (GlobalLib.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
                 revive = true;
             }
-            SpectateSystem.chooseSpectateTarget(comp,FORWARDS);
+            Spectate.chooseSpectateTarget(comp,FORWARDS);
         } else if (ply.KeyPressed(IN_ATTACK2)) {
 
-            SpectateSystem.chooseSpectateTarget(comp,BACKWARDS);
+            Spectate.chooseSpectateTarget(comp,BACKWARDS);
         } else if (ply.KeyPressed(IN_JUMP) && ply.shouldFreeRoam()) {
             ply.UnSpectate();
             ply.Spectate(OBS_MODE_ROAMING);

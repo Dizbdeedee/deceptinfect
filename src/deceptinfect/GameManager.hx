@@ -1,7 +1,6 @@
 package deceptinfect;
 import deceptinfect.Networking.N_GameState;
 import deceptinfect.ecswip.PlayerComponent;
-import gmod.engine_ents.Game_end;
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.ecswip.GrabAccepter;
 import deceptinfect.ecswip.HiddenHealthComponent;

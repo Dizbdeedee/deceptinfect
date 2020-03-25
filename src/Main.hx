@@ -4,9 +4,6 @@ import deceptinfect.client.ClientOverrides;
 import deceptinfect.ecswip.Component;
 import deceptinfect.ecswip.ComponentManager;
 import lua.Lua;
-#if server
-import gmod.engine_ents.Prop_thumper.Prop_thumperdustscaleChoices;
-#end
 import gmod.types.Vector;
 import gmod.libs.MathLib.MathLibFrexpReturn;
 import gmod.gclass.*;

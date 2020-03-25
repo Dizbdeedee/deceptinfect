@@ -74,20 +74,14 @@ __deceptinfect_GameManager = _hx_e()
 __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_ = _hx_e()
 __deceptinfect_GameValues = _hx_e()
 __deceptinfect_Networking = _hx_e()
-__deceptinfect_PlayerExt = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
-__deceptinfect_TimeKeep = _hx_e()
 __deceptinfect_client_ClientOverrides = _hx_e()
-__deceptinfect_client_Geiger = _hx_e()
 __deceptinfect_ecswip_System = _hx_e()
 __deceptinfect_client_GeigerSystem = _hx_e()
-__haxe_IMap = _hx_e()
-__haxe_ds_BalancedTree = _hx_e()
-__haxe_ds_EnumValueMap = _hx_e()
 __deceptinfect_client__Hud_Axis = _hx_e()
-__haxe_ds_IntMap = _hx_e()
 __deceptinfect_client_Hud = _hx_e()
 __deceptinfect_ecswip_Component = _hx_e()
+__haxe_IMap = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
 __deceptinfect_ecswip_ComponentManager = _hx_e()
 __deceptinfect_ecswip__ComponentManager_DI_ID_Impl_ = _hx_e()
@@ -114,9 +108,9 @@ __deceptinfect_ecswip_DeathTime = _hx_e()
 __deceptinfect_ecswip_RateComponent = _hx_e()
 __deceptinfect_ecswip_RateSystem = _hx_e()
 __deceptinfect_ecswip_SignalStorage = _hx_e()
-__deceptinfect_ecswip_SpectateComponent = _hx_e()
-__deceptinfect_ecswip_SpectateSystem = _hx_e()
+__deceptinfect_ecswip_Spectate = _hx_e()
 __deceptinfect_ecswip_Spec_Direction = _hx_e()
+__deceptinfect_ecswip_SpectateComponent = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __deceptinfect_ecswip_VirtualPosition = _hx_e()
 __deceptinfect_radiation_ContaminationAccepter = _hx_e()
@@ -129,6 +123,8 @@ __deceptinfect_radiation_RadLifetime = _hx_e()
 __deceptinfect_radiation_RadiationSystem = _hx_e()
 __deceptinfect_radiation_RadTypes = _hx_e()
 __deceptinfect_radiation_RadiationTypes = _hx_e()
+__deceptinfect_util_PlayerExt = _hx_e()
+__deceptinfect_util_TimeKeep = _hx_e()
 __gmod__EntityClass_EntityClass_Impl_ = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
@@ -147,8 +143,11 @@ __haxe_Log = _hx_e()
 __haxe_MainEvent = _hx_e()
 __haxe_MainLoop = _hx_e()
 __haxe_Timer = _hx_e()
+__haxe_ds_BalancedTree = _hx_e()
 __haxe_ds_TreeNode = _hx_e()
 __haxe_ds_Either = _hx_e()
+__haxe_ds_EnumValueMap = _hx_e()
+__haxe_ds_IntMap = _hx_e()
 __haxe_ds_Option = _hx_e()
 __lua_Boot = _hx_e()
 __haxe_iterators_MapKeyValueIterator = _hx_e()
@@ -563,11 +562,11 @@ Main.main = function()
   __deceptinfect_ecswip_SignalStorage.initEvents();
   __deceptinfect_client_ClientOverrides.initaliseGamemode();
   local x1 = __deceptinfect_ecswip_PlayerComponent.new(_G.LocalPlayer());
-  local this11 = x1.player;
-  x1.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this11);
-  local ent = this11;
-  local this2 = ent.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_InfectionComponent.new(), this2);
+  local this2 = x1.player;
+  x1.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this2);
+  local ent = this2;
+  local this3 = ent.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_InfectionComponent.new(), this3);
   __deceptinfect_GameManager.init();
 end
 
@@ -1915,7 +1914,7 @@ __deceptinfect_GameManager.init = function()
   __deceptinfect_Networking.GameStateSignal:handle(__deceptinfect_GameManager.gameStateChanged);
 end
 __deceptinfect_GameManager.gameStateChanged = function(x) 
-  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=100,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
+  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=99,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
   local _g = x.state;
   if (_g) == 0 then 
   elseif (_g) == 1 then 
@@ -1978,53 +1977,6 @@ __deceptinfect_Networking.prototype = _hx_a();
 
 __deceptinfect_Networking.prototype.__class__ =  __deceptinfect_Networking
 
-__deceptinfect_PlayerExt.new = {}
-__deceptinfect_PlayerExt.__name__ = true
-__deceptinfect_PlayerExt.setWalkthroughable = function(p,b) 
-  if (b) then 
-    p:SetCollisionGroup(_G.COLLISION_GROUP_PASSABLE_DOOR);
-  else
-    p:SetCollisionGroup(_G.COLLISION_GROUP_PLAYER);
-  end;
-end
-__deceptinfect_PlayerExt.shouldFreeRoam = function(p) 
-  local wrongMode = p:GetObserverMode() == _G.OBS_MODE_NONE;
-  local targetDead = _G.IsValid(p:GetObserverTarget()) and not p:GetObserverTarget():Alive();
-  local freeRoaming = p:GetObserverMode() == _G.OBS_MODE_ROAMING;
-  if (not (wrongMode or targetDead)) then 
-    do return not freeRoaming end;
-  else
-    do return true end;
-  end;
-end
-__deceptinfect_PlayerExt.randomIncDec = function(x) 
-  local _g = _G.math.random(1, 2);
-  if (_g) == 1 then 
-    do return x end;
-  elseif (_g) == 2 then 
-    do return -x end;else
-  _G.error("Something went spectacularly wrong",0); end;
-end
-__deceptinfect_PlayerExt.disorientate = function(p) 
-  local curangs = p:EyeAngles();
-  local curY = curangs.y;
-  local punchY = __deceptinfect_PlayerExt.randomIncDec(_G.math.random(10, 80));
-  curY = curY + punchY;
-  if (curY >= 90) then 
-    local diff = curY - 90;
-    curY = -90 + diff;
-  else
-    if (curY <= -90) then 
-      local diff1 = curY + 90;
-      curY = 90 + diff1;
-    end;
-  end;
-  local punchR = __deceptinfect_PlayerExt.randomIncDec(_G.math.random(20, 160));
-  local finalR = _G.math.NormalizeAngle(curangs.r + punchR);
-  local this1 = _G.Angle(curY, finalR, 0);
-  p:SetEyeAngles(this1);
-end
-
 __deceptinfect_PlayerManager.new = {}
 __deceptinfect_PlayerManager.__name__ = true
 __deceptinfect_PlayerManager.getPlayers = function() 
@@ -2053,91 +2005,6 @@ __deceptinfect_PlayerManager.getLocalPlayerID = function()
     _G.error("Local player has no id...",0); end;
 end
 
-__deceptinfect_TimeKeep.new = function(limitZero) 
-  local self = _hx_new(__deceptinfect_TimeKeep.prototype)
-  __deceptinfect_TimeKeep.super(self,limitZero)
-  return self
-end
-__deceptinfect_TimeKeep.super = function(self,limitZero) 
-  if (limitZero == nil) then 
-    limitZero = true;
-  end;
-  self.times = __haxe_ds_IntMap.new();
-  self.limitZero = limitZero;
-end
-__deceptinfect_TimeKeep.__name__ = true
-__deceptinfect_TimeKeep.prototype = _hx_a();
-__deceptinfect_TimeKeep.prototype.addTime = function(self,key) 
-  if (self.times.h[key] ~= nil) then 
-    local difftime = __deceptinfect_GameManager.sure():get_diffTime();
-    local _g = key;
-    local _g1 = self.times;
-    local ret = _g1.h[_g];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    local v = ret + difftime;
-    if (v == nil) then 
-      _g1.h[_g] = __haxe_ds_IntMap.tnull;
-    else
-      _g1.h[_g] = v;
-    end;
-  else
-    local _this = self.times;
-    _this.h[key] = 0;
-  end;
-  local ret1 = self.times.h[key];
-  if (ret1 == __haxe_ds_IntMap.tnull) then 
-    ret1 = nil;
-  end;
-  do return ret1 end
-end
-__deceptinfect_TimeKeep.prototype.setTime = function(self,key,f) 
-  local _this = self.times;
-  if (f == nil) then 
-    _this.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    _this.h[key] = f;
-  end;
-end
-__deceptinfect_TimeKeep.prototype.removeTime = function(self,key) 
-  local difftime = __deceptinfect_GameManager.sure():get_diffTime();
-  local _g = key;
-  local _g1 = self.times;
-  local ret = _g1.h[_g];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  local v = ret - difftime;
-  if (v == nil) then 
-    _g1.h[_g] = __haxe_ds_IntMap.tnull;
-  else
-    _g1.h[_g] = v;
-  end;
-  local ret1 = self.times.h[key];
-  if (ret1 == __haxe_ds_IntMap.tnull) then 
-    ret1 = nil;
-  end;
-  if (ret1 < 0) then 
-    local _this = self.times;
-    _this.h[key] = 0;
-  end;
-  local ret2 = self.times.h[key];
-  if (ret2 == __haxe_ds_IntMap.tnull) then 
-    ret2 = nil;
-  end;
-  do return ret2 end
-end
-__deceptinfect_TimeKeep.prototype.getTime = function(self,key) 
-  local ret = self.times.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-
-__deceptinfect_TimeKeep.prototype.__class__ =  __deceptinfect_TimeKeep
-
 __deceptinfect_client_ClientOverrides.new = function(_self) 
   local self = _hx_new(__deceptinfect_client_ClientOverrides.prototype)
   __deceptinfect_client_ClientOverrides.super(self,_self)
@@ -2161,27 +2028,6 @@ end
 __deceptinfect_client_ClientOverrides.prototype.__class__ =  __deceptinfect_client_ClientOverrides
 __deceptinfect_client_ClientOverrides.__super__ = __gmod_hooks_Gm
 setmetatable(__deceptinfect_client_ClientOverrides.prototype,{__index=__gmod_hooks_Gm.prototype})
-
-__deceptinfect_client_Geiger.new = {}
-__deceptinfect_client_Geiger.__name__ = true
-__deceptinfect_client_Geiger.geigerThink = function() 
-  if (_G.CurTime() > __deceptinfect_client_Geiger.playTime) then 
-    local x = __deceptinfect_client_Geiger.geiger;
-    local choice = (function() 
-      local _hx_1
-      if (x < 0.2) then 
-      _hx_1 = __deceptinfect_client_Geiger.sounds[0]; else 
-      _hx_1 = __deceptinfect_client_Geiger.sounds[_G.math.random(0, 2)]; end
-      return _hx_1
-    end )();
-    local this1 = _G.Vector(0, 0, 0);
-    _G.EmitSound(choice, this1, -2, _G.CHAN_STATIC, 0.5);
-    local mintime = _G.SoundDuration(__deceptinfect_client_Geiger.sounds[0]) * 0.75;
-    local exponent = (0.5 * _G.math.pow(__deceptinfect_client_Geiger.geiger, -0.5)) - 0.5;
-    local random = _G.math.random();
-    __deceptinfect_client_Geiger.playTime = (_G.CurTime() + mintime) + (exponent * random);
-  end;
-end
 
 __deceptinfect_ecswip_System.new = function() 
   local self = _hx_new(__deceptinfect_ecswip_System.prototype)
@@ -2220,296 +2066,41 @@ __deceptinfect_client_GeigerSystem.super = function(self)
   __deceptinfect_ecswip_System.super(self);
 end
 __deceptinfect_client_GeigerSystem.__name__ = true
+__deceptinfect_client_GeigerSystem.geigerThink = function() 
+  if (_G.CurTime() > __deceptinfect_client_GeigerSystem.playTime) then 
+    local x = __deceptinfect_client_GeigerSystem.geiger;
+    local choice = (function() 
+      local _hx_1
+      if (x < 0.2) then 
+      _hx_1 = __deceptinfect_client_GeigerSystem.sounds[0]; else 
+      _hx_1 = __deceptinfect_client_GeigerSystem.sounds[_G.math.random(0, 2)]; end
+      return _hx_1
+    end )();
+    local this1 = _G.Vector(0, 0, 0);
+    _G.EmitSound(choice, this1, -2, _G.CHAN_STATIC, 0.5);
+    local mintime = _G.SoundDuration(__deceptinfect_client_GeigerSystem.sounds[0]) * 0.75;
+    local exponent = (0.5 * _G.math.pow(__deceptinfect_client_GeigerSystem.geiger, -0.5)) - 0.5;
+    local random = _G.math.random();
+    __deceptinfect_client_GeigerSystem.playTime = (_G.CurTime() + mintime) + (exponent * random);
+  end;
+end
 __deceptinfect_client_GeigerSystem.prototype = _hx_a();
 __deceptinfect_client_GeigerSystem.prototype.run_client = function(self) 
   __deceptinfect_Networking.GeigerSignal:handle(function(data) 
-    __deceptinfect_client_Geiger.geiger = data.geiger;
-    __deceptinfect_client_Geiger.geigerThink();
+    __deceptinfect_client_GeigerSystem.geiger = data.geiger;
+    __deceptinfect_client_GeigerSystem.geigerThink();
   end);
 end
 
 __deceptinfect_client_GeigerSystem.prototype.__class__ =  __deceptinfect_client_GeigerSystem
 __deceptinfect_client_GeigerSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_client_GeigerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
-
-__haxe_IMap.new = {}
-__haxe_IMap.__name__ = true
-__haxe_IMap.prototype = _hx_a();
-
-__haxe_IMap.prototype.__class__ =  __haxe_IMap
-
-__haxe_ds_BalancedTree.new = function() 
-  local self = _hx_new(__haxe_ds_BalancedTree.prototype)
-  __haxe_ds_BalancedTree.super(self)
-  return self
-end
-__haxe_ds_BalancedTree.super = function(self) 
-end
-__haxe_ds_BalancedTree.__name__ = true
-__haxe_ds_BalancedTree.__interfaces__ = {__haxe_IMap}
-__haxe_ds_BalancedTree.prototype = _hx_a();
-__haxe_ds_BalancedTree.prototype.set = function(self,key,value) 
-  self.root = self:setLoop(key, value, self.root);
-end
-__haxe_ds_BalancedTree.prototype.get = function(self,key) 
-  local node = self.root;
-  while (node ~= nil) do 
-    local c = self:compare(key, node.key);
-    if (c == 0) then 
-      do return node.value end;
-    end;
-    if (c < 0) then 
-      node = node.left;
-    else
-      node = node.right;
-    end;
-  end;
-  do return nil end
-end
-__haxe_ds_BalancedTree.prototype.iterator = function(self) 
-  local ret = _hx_tab_array({}, 0);
-  self:iteratorLoop(self.root, ret);
-  local _gthis = ret;
-  local cur_length = 0;
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return cur_length < _gthis.length end;
-  end,next=function(self) 
-    cur_length = cur_length + 1;
-    do return _gthis[cur_length - 1] end;
-  end}) end
-end
-__haxe_ds_BalancedTree.prototype.keys = function(self) 
-  local ret = _hx_tab_array({}, 0);
-  self:keysLoop(self.root, ret);
-  local _gthis = ret;
-  local cur_length = 0;
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return cur_length < _gthis.length end;
-  end,next=function(self) 
-    cur_length = cur_length + 1;
-    do return _gthis[cur_length - 1] end;
-  end}) end
-end
-__haxe_ds_BalancedTree.prototype.setLoop = function(self,k,v,node) 
-  if (node == nil) then 
-    do return __haxe_ds_TreeNode.new(nil, k, v, nil) end;
-  end;
-  local c = self:compare(k, node.key);
-  if (c == 0) then 
-    do return __haxe_ds_TreeNode.new(node.left, k, v, node.right, (function() 
-      local _hx_1
-      if (node == nil) then 
-      _hx_1 = 0; else 
-      _hx_1 = node._height; end
-      return _hx_1
-    end )()) end;
-  else
-    if (c < 0) then 
-      local nl = self:setLoop(k, v, node.left);
-      do return self:balance(nl, node.key, node.value, node.right) end;
-    else
-      local nr = self:setLoop(k, v, node.right);
-      do return self:balance(node.left, node.key, node.value, nr) end;
-    end;
-  end;
-end
-__haxe_ds_BalancedTree.prototype.iteratorLoop = function(self,node,acc) 
-  if (node ~= nil) then 
-    self:iteratorLoop(node.left, acc);
-    acc:push(node.value);
-    self:iteratorLoop(node.right, acc);
-  end;
-end
-__haxe_ds_BalancedTree.prototype.keysLoop = function(self,node,acc) 
-  if (node ~= nil) then 
-    self:keysLoop(node.left, acc);
-    acc:push(node.key);
-    self:keysLoop(node.right, acc);
-  end;
-end
-__haxe_ds_BalancedTree.prototype.balance = function(self,l,k,v,r) 
-  local hl = (function() 
-    local _hx_1
-    if (l == nil) then 
-    _hx_1 = 0; else 
-    _hx_1 = l._height; end
-    return _hx_1
-  end )();
-  local hr = (function() 
-    local _hx_2
-    if (r == nil) then 
-    _hx_2 = 0; else 
-    _hx_2 = r._height; end
-    return _hx_2
-  end )();
-  if (hl > (hr + 2)) then 
-    local _this = l.left;
-    local _this1 = l.right;
-    if ((function() 
-      local _hx_3
-      if (_this == nil) then 
-      _hx_3 = 0; else 
-      _hx_3 = _this._height; end
-      return _hx_3
-    end )() >= (function() 
-      local _hx_4
-      if (_this1 == nil) then 
-      _hx_4 = 0; else 
-      _hx_4 = _this1._height; end
-      return _hx_4
-    end )()) then 
-      do return __haxe_ds_TreeNode.new(l.left, l.key, l.value, __haxe_ds_TreeNode.new(l.right, k, v, r)) end;
-    else
-      do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l.left, l.key, l.value, l.right.left), l.right.key, l.right.value, __haxe_ds_TreeNode.new(l.right.right, k, v, r)) end;
-    end;
-  else
-    if (hr > (hl + 2)) then 
-      local _this2 = r.right;
-      local _this3 = r.left;
-      if ((function() 
-        local _hx_5
-        if (_this2 == nil) then 
-        _hx_5 = 0; else 
-        _hx_5 = _this2._height; end
-        return _hx_5
-      end )() > (function() 
-        local _hx_6
-        if (_this3 == nil) then 
-        _hx_6 = 0; else 
-        _hx_6 = _this3._height; end
-        return _hx_6
-      end )()) then 
-        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left), r.key, r.value, r.right) end;
-      else
-        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left.left), r.left.key, r.left.value, __haxe_ds_TreeNode.new(r.left.right, r.key, r.value, r.right)) end;
-      end;
-    else
-      do return __haxe_ds_TreeNode.new(l, k, v, r, (function() 
-        local _hx_7
-        if (hl > hr) then 
-        _hx_7 = hl; else 
-        _hx_7 = hr; end
-        return _hx_7
-      end )() + 1) end;
-    end;
-  end;
-end
-__haxe_ds_BalancedTree.prototype.compare = function(self,k1,k2) 
-  do return Reflect.compare(k1, k2) end
-end
-
-__haxe_ds_BalancedTree.prototype.__class__ =  __haxe_ds_BalancedTree
-
-__haxe_ds_EnumValueMap.new = function() 
-  local self = _hx_new(__haxe_ds_EnumValueMap.prototype)
-  __haxe_ds_EnumValueMap.super(self)
-  return self
-end
-__haxe_ds_EnumValueMap.super = function(self) 
-  __haxe_ds_BalancedTree.super(self);
-end
-__haxe_ds_EnumValueMap.__name__ = true
-__haxe_ds_EnumValueMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_EnumValueMap.prototype = _hx_a();
-__haxe_ds_EnumValueMap.prototype.compare = function(self,k1,k2) 
-  local d = k1[1] - k2[1];
-  if (d ~= 0) then 
-    do return d end;
-  end;
-  local p1 = k1:slice(2);
-  local p2 = k2:slice(2);
-  if ((p1.length == 0) and (p2.length == 0)) then 
-    do return 0 end;
-  end;
-  do return self:compareArgs(p1, p2) end
-end
-__haxe_ds_EnumValueMap.prototype.compareArgs = function(self,a1,a2) 
-  local ld = a1.length - a2.length;
-  if (ld ~= 0) then 
-    do return ld end;
-  end;
-  local _g = 0;
-  local _g1 = a1.length;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    local d = self:compareArg(a1[i], a2[i]);
-    if (d ~= 0) then 
-      do return d end;
-    end;
-  end;
-  do return 0 end
-end
-__haxe_ds_EnumValueMap.prototype.compareArg = function(self,v1,v2) 
-  if (Reflect.isEnumValue(v1) and Reflect.isEnumValue(v2)) then 
-    do return self:compare(v1, v2) end;
-  else
-    if (__lua_Boot.__instanceof(v1, Array) and __lua_Boot.__instanceof(v2, Array)) then 
-      do return self:compareArgs(v1, v2) end;
-    else
-      do return Reflect.compare(v1, v2) end;
-    end;
-  end;
-end
-
-__haxe_ds_EnumValueMap.prototype.__class__ =  __haxe_ds_EnumValueMap
-__haxe_ds_EnumValueMap.__super__ = __haxe_ds_BalancedTree
-setmetatable(__haxe_ds_EnumValueMap.prototype,{__index=__haxe_ds_BalancedTree.prototype})
 _hxClasses["deceptinfect.client._Hud.Axis"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="X","Y"},2)}
 __deceptinfect_client__Hud_Axis = _hxClasses["deceptinfect.client._Hud.Axis"];
 __deceptinfect_client__Hud_Axis.X = _hx_tab_array({[0]="X",0,__enum__ = __deceptinfect_client__Hud_Axis},2)
 
 __deceptinfect_client__Hud_Axis.Y = _hx_tab_array({[0]="Y",1,__enum__ = __deceptinfect_client__Hud_Axis},2)
 
-
-__haxe_ds_IntMap.new = function() 
-  local self = _hx_new(__haxe_ds_IntMap.prototype)
-  __haxe_ds_IntMap.super(self)
-  return self
-end
-__haxe_ds_IntMap.super = function(self) 
-  self.h = ({});
-end
-__haxe_ds_IntMap.__name__ = true
-__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_IntMap.prototype = _hx_a();
-__haxe_ds_IntMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_IntMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_IntMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_IntMap.prototype.iterator = function(self) 
-  local _gthis = self;
-  local it = self:keys();
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return it:hasNext() end;
-  end,next=function(self) 
-    do return _gthis.h[it:next()] end;
-  end}) end
-end
-
-__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 
 __deceptinfect_client_Hud.new = {}
 __deceptinfect_client_Hud.__name__ = true
@@ -2629,6 +2220,12 @@ __deceptinfect_ecswip_Component.__name__ = true
 __deceptinfect_ecswip_Component.prototype = _hx_a();
 
 __deceptinfect_ecswip_Component.prototype.__class__ =  __deceptinfect_ecswip_Component
+
+__haxe_IMap.new = {}
+__haxe_IMap.__name__ = true
+__haxe_IMap.prototype = _hx_a();
+
+__haxe_IMap.prototype.__class__ =  __haxe_IMap
 
 __haxe_ds_ObjectMap.new = function() 
   local self = _hx_new(__haxe_ds_ObjectMap.prototype)
@@ -3197,6 +2794,15 @@ __deceptinfect_ecswip_SignalStorage.initEvents = function()
   __deceptinfect_ecswip_SignalStorage.onInfected = __deceptinfect_ecswip_SignalStorage.onInfectedTrigger;
 end
 
+__deceptinfect_ecswip_Spectate.new = {}
+__deceptinfect_ecswip_Spectate.__name__ = true
+_hxClasses["deceptinfect.ecswip.Spec_Direction"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="FORWARDS","BACKWARDS"},2)}
+__deceptinfect_ecswip_Spec_Direction = _hxClasses["deceptinfect.ecswip.Spec_Direction"];
+__deceptinfect_ecswip_Spec_Direction.FORWARDS = _hx_tab_array({[0]="FORWARDS",0,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
+
+__deceptinfect_ecswip_Spec_Direction.BACKWARDS = _hx_tab_array({[0]="BACKWARDS",1,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
+
+
 __deceptinfect_ecswip_SpectateComponent.new = function() 
   local self = _hx_new(__deceptinfect_ecswip_SpectateComponent.prototype)
   __deceptinfect_ecswip_SpectateComponent.super(self)
@@ -3211,15 +2817,6 @@ __deceptinfect_ecswip_SpectateComponent.prototype = _hx_a();
 __deceptinfect_ecswip_SpectateComponent.prototype.__class__ =  __deceptinfect_ecswip_SpectateComponent
 __deceptinfect_ecswip_SpectateComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_SpectateComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_ecswip_SpectateSystem.new = {}
-__deceptinfect_ecswip_SpectateSystem.__name__ = true
-_hxClasses["deceptinfect.ecswip.Spec_Direction"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="FORWARDS","BACKWARDS"},2)}
-__deceptinfect_ecswip_Spec_Direction = _hxClasses["deceptinfect.ecswip.Spec_Direction"];
-__deceptinfect_ecswip_Spec_Direction.FORWARDS = _hx_tab_array({[0]="FORWARDS",0,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
-
-__deceptinfect_ecswip_Spec_Direction.BACKWARDS = _hx_tab_array({[0]="BACKWARDS",1,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
-
 
 __deceptinfect_ecswip_SystemManager.new = {}
 __deceptinfect_ecswip_SystemManager.__name__ = true
@@ -3314,7 +2911,7 @@ __deceptinfect_radiation_ContaminationAccepter.new = function()
   return self
 end
 __deceptinfect_radiation_ContaminationAccepter.super = function(self) 
-  self.contam_time = __deceptinfect_TimeKeep.new();
+  self.contam_time = __deceptinfect_util_TimeKeep.new();
 end
 __deceptinfect_radiation_ContaminationAccepter.__name__ = true
 __deceptinfect_radiation_ContaminationAccepter.prototype = _hx_a();
@@ -3607,6 +3204,138 @@ __deceptinfect_radiation_RadTypes.SPIT = _hx_tab_array({[0]="SPIT",5,__enum__ = 
 
 __deceptinfect_radiation_RadiationTypes.new = {}
 __deceptinfect_radiation_RadiationTypes.__name__ = true
+
+__deceptinfect_util_PlayerExt.new = {}
+__deceptinfect_util_PlayerExt.__name__ = true
+__deceptinfect_util_PlayerExt.setWalkthroughable = function(p,b) 
+  if (b) then 
+    p:SetCollisionGroup(_G.COLLISION_GROUP_PASSABLE_DOOR);
+  else
+    p:SetCollisionGroup(_G.COLLISION_GROUP_PLAYER);
+  end;
+end
+__deceptinfect_util_PlayerExt.shouldFreeRoam = function(p) 
+  local wrongMode = p:GetObserverMode() == _G.OBS_MODE_NONE;
+  local targetDead = _G.IsValid(p:GetObserverTarget()) and not p:GetObserverTarget():Alive();
+  local freeRoaming = p:GetObserverMode() == _G.OBS_MODE_ROAMING;
+  if (not (wrongMode or targetDead)) then 
+    do return not freeRoaming end;
+  else
+    do return true end;
+  end;
+end
+__deceptinfect_util_PlayerExt.randomIncDec = function(x) 
+  local _g = _G.math.random(1, 2);
+  if (_g) == 1 then 
+    do return x end;
+  elseif (_g) == 2 then 
+    do return -x end;else
+  _G.error("Something went spectacularly wrong",0); end;
+end
+__deceptinfect_util_PlayerExt.disorientate = function(p) 
+  local curangs = p:EyeAngles();
+  local curY = curangs.y;
+  local punchY = __deceptinfect_util_PlayerExt.randomIncDec(_G.math.random(10, 80));
+  curY = curY + punchY;
+  if (curY >= 90) then 
+    local diff = curY - 90;
+    curY = -90 + diff;
+  else
+    if (curY <= -90) then 
+      local diff1 = curY + 90;
+      curY = 90 + diff1;
+    end;
+  end;
+  local punchR = __deceptinfect_util_PlayerExt.randomIncDec(_G.math.random(20, 160));
+  local finalR = _G.math.NormalizeAngle(curangs.r + punchR);
+  local this1 = _G.Angle(curY, finalR, 0);
+  p:SetEyeAngles(this1);
+end
+
+__deceptinfect_util_TimeKeep.new = function(limitZero) 
+  local self = _hx_new(__deceptinfect_util_TimeKeep.prototype)
+  __deceptinfect_util_TimeKeep.super(self,limitZero)
+  return self
+end
+__deceptinfect_util_TimeKeep.super = function(self,limitZero) 
+  if (limitZero == nil) then 
+    limitZero = true;
+  end;
+  self.times = __haxe_ds_IntMap.new();
+  self.limitZero = limitZero;
+end
+__deceptinfect_util_TimeKeep.__name__ = true
+__deceptinfect_util_TimeKeep.prototype = _hx_a();
+__deceptinfect_util_TimeKeep.prototype.addTime = function(self,key) 
+  if (self.times.h[key] ~= nil) then 
+    local difftime = __deceptinfect_GameManager.sure():get_diffTime();
+    local _g = key;
+    local _g1 = self.times;
+    local ret = _g1.h[_g];
+    if (ret == __haxe_ds_IntMap.tnull) then 
+      ret = nil;
+    end;
+    local v = ret + difftime;
+    if (v == nil) then 
+      _g1.h[_g] = __haxe_ds_IntMap.tnull;
+    else
+      _g1.h[_g] = v;
+    end;
+  else
+    local _this = self.times;
+    _this.h[key] = 0;
+  end;
+  local ret1 = self.times.h[key];
+  if (ret1 == __haxe_ds_IntMap.tnull) then 
+    ret1 = nil;
+  end;
+  do return ret1 end
+end
+__deceptinfect_util_TimeKeep.prototype.setTime = function(self,key,f) 
+  local _this = self.times;
+  if (f == nil) then 
+    _this.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    _this.h[key] = f;
+  end;
+end
+__deceptinfect_util_TimeKeep.prototype.removeTime = function(self,key) 
+  local difftime = __deceptinfect_GameManager.sure():get_diffTime();
+  local _g = key;
+  local _g1 = self.times;
+  local ret = _g1.h[_g];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  local v = ret - difftime;
+  if (v == nil) then 
+    _g1.h[_g] = __haxe_ds_IntMap.tnull;
+  else
+    _g1.h[_g] = v;
+  end;
+  local ret1 = self.times.h[key];
+  if (ret1 == __haxe_ds_IntMap.tnull) then 
+    ret1 = nil;
+  end;
+  if (ret1 < 0) then 
+    local _this = self.times;
+    _this.h[key] = 0;
+  end;
+  local ret2 = self.times.h[key];
+  if (ret2 == __haxe_ds_IntMap.tnull) then 
+    ret2 = nil;
+  end;
+  do return ret2 end
+end
+__deceptinfect_util_TimeKeep.prototype.getTime = function(self,key) 
+  local ret = self.times.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+
+__deceptinfect_util_TimeKeep.prototype.__class__ =  __deceptinfect_util_TimeKeep
 
 __gmod__EntityClass_EntityClass_Impl_.new = {}
 __gmod__EntityClass_EntityClass_Impl_.__name__ = true
@@ -4028,6 +3757,168 @@ end
 
 __haxe_Timer.prototype.__class__ =  __haxe_Timer
 
+__haxe_ds_BalancedTree.new = function() 
+  local self = _hx_new(__haxe_ds_BalancedTree.prototype)
+  __haxe_ds_BalancedTree.super(self)
+  return self
+end
+__haxe_ds_BalancedTree.super = function(self) 
+end
+__haxe_ds_BalancedTree.__name__ = true
+__haxe_ds_BalancedTree.__interfaces__ = {__haxe_IMap}
+__haxe_ds_BalancedTree.prototype = _hx_a();
+__haxe_ds_BalancedTree.prototype.set = function(self,key,value) 
+  self.root = self:setLoop(key, value, self.root);
+end
+__haxe_ds_BalancedTree.prototype.get = function(self,key) 
+  local node = self.root;
+  while (node ~= nil) do 
+    local c = self:compare(key, node.key);
+    if (c == 0) then 
+      do return node.value end;
+    end;
+    if (c < 0) then 
+      node = node.left;
+    else
+      node = node.right;
+    end;
+  end;
+  do return nil end
+end
+__haxe_ds_BalancedTree.prototype.iterator = function(self) 
+  local ret = _hx_tab_array({}, 0);
+  self:iteratorLoop(self.root, ret);
+  local _gthis = ret;
+  local cur_length = 0;
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return cur_length < _gthis.length end;
+  end,next=function(self) 
+    cur_length = cur_length + 1;
+    do return _gthis[cur_length - 1] end;
+  end}) end
+end
+__haxe_ds_BalancedTree.prototype.keys = function(self) 
+  local ret = _hx_tab_array({}, 0);
+  self:keysLoop(self.root, ret);
+  local _gthis = ret;
+  local cur_length = 0;
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return cur_length < _gthis.length end;
+  end,next=function(self) 
+    cur_length = cur_length + 1;
+    do return _gthis[cur_length - 1] end;
+  end}) end
+end
+__haxe_ds_BalancedTree.prototype.setLoop = function(self,k,v,node) 
+  if (node == nil) then 
+    do return __haxe_ds_TreeNode.new(nil, k, v, nil) end;
+  end;
+  local c = self:compare(k, node.key);
+  if (c == 0) then 
+    do return __haxe_ds_TreeNode.new(node.left, k, v, node.right, (function() 
+      local _hx_1
+      if (node == nil) then 
+      _hx_1 = 0; else 
+      _hx_1 = node._height; end
+      return _hx_1
+    end )()) end;
+  else
+    if (c < 0) then 
+      local nl = self:setLoop(k, v, node.left);
+      do return self:balance(nl, node.key, node.value, node.right) end;
+    else
+      local nr = self:setLoop(k, v, node.right);
+      do return self:balance(node.left, node.key, node.value, nr) end;
+    end;
+  end;
+end
+__haxe_ds_BalancedTree.prototype.iteratorLoop = function(self,node,acc) 
+  if (node ~= nil) then 
+    self:iteratorLoop(node.left, acc);
+    acc:push(node.value);
+    self:iteratorLoop(node.right, acc);
+  end;
+end
+__haxe_ds_BalancedTree.prototype.keysLoop = function(self,node,acc) 
+  if (node ~= nil) then 
+    self:keysLoop(node.left, acc);
+    acc:push(node.key);
+    self:keysLoop(node.right, acc);
+  end;
+end
+__haxe_ds_BalancedTree.prototype.balance = function(self,l,k,v,r) 
+  local hl = (function() 
+    local _hx_1
+    if (l == nil) then 
+    _hx_1 = 0; else 
+    _hx_1 = l._height; end
+    return _hx_1
+  end )();
+  local hr = (function() 
+    local _hx_2
+    if (r == nil) then 
+    _hx_2 = 0; else 
+    _hx_2 = r._height; end
+    return _hx_2
+  end )();
+  if (hl > (hr + 2)) then 
+    local _this = l.left;
+    local _this1 = l.right;
+    if ((function() 
+      local _hx_3
+      if (_this == nil) then 
+      _hx_3 = 0; else 
+      _hx_3 = _this._height; end
+      return _hx_3
+    end )() >= (function() 
+      local _hx_4
+      if (_this1 == nil) then 
+      _hx_4 = 0; else 
+      _hx_4 = _this1._height; end
+      return _hx_4
+    end )()) then 
+      do return __haxe_ds_TreeNode.new(l.left, l.key, l.value, __haxe_ds_TreeNode.new(l.right, k, v, r)) end;
+    else
+      do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l.left, l.key, l.value, l.right.left), l.right.key, l.right.value, __haxe_ds_TreeNode.new(l.right.right, k, v, r)) end;
+    end;
+  else
+    if (hr > (hl + 2)) then 
+      local _this2 = r.right;
+      local _this3 = r.left;
+      if ((function() 
+        local _hx_5
+        if (_this2 == nil) then 
+        _hx_5 = 0; else 
+        _hx_5 = _this2._height; end
+        return _hx_5
+      end )() > (function() 
+        local _hx_6
+        if (_this3 == nil) then 
+        _hx_6 = 0; else 
+        _hx_6 = _this3._height; end
+        return _hx_6
+      end )()) then 
+        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left), r.key, r.value, r.right) end;
+      else
+        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left.left), r.left.key, r.left.value, __haxe_ds_TreeNode.new(r.left.right, r.key, r.value, r.right)) end;
+      end;
+    else
+      do return __haxe_ds_TreeNode.new(l, k, v, r, (function() 
+        local _hx_7
+        if (hl > hr) then 
+        _hx_7 = hl; else 
+        _hx_7 = hr; end
+        return _hx_7
+      end )() + 1) end;
+    end;
+  end;
+end
+__haxe_ds_BalancedTree.prototype.compare = function(self,k1,k2) 
+  do return Reflect.compare(k1, k2) end
+end
+
+__haxe_ds_BalancedTree.prototype.__class__ =  __haxe_ds_BalancedTree
+
 __haxe_ds_TreeNode.new = function(l,k,v,r,h) 
   local self = _hx_new(__haxe_ds_TreeNode.prototype)
   __haxe_ds_TreeNode.super(self,l,k,v,r,h)
@@ -4089,6 +3980,111 @@ _hxClasses["haxe.ds.Either"] = { __ename__ = true, __constructs__ = _hx_tab_arra
 __haxe_ds_Either = _hxClasses["haxe.ds.Either"];
 __haxe_ds_Either.Left = function(v) local _x = _hx_tab_array({[0]="Left",0,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
 __haxe_ds_Either.Right = function(v) local _x = _hx_tab_array({[0]="Right",1,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
+
+__haxe_ds_EnumValueMap.new = function() 
+  local self = _hx_new(__haxe_ds_EnumValueMap.prototype)
+  __haxe_ds_EnumValueMap.super(self)
+  return self
+end
+__haxe_ds_EnumValueMap.super = function(self) 
+  __haxe_ds_BalancedTree.super(self);
+end
+__haxe_ds_EnumValueMap.__name__ = true
+__haxe_ds_EnumValueMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_EnumValueMap.prototype = _hx_a();
+__haxe_ds_EnumValueMap.prototype.compare = function(self,k1,k2) 
+  local d = k1[1] - k2[1];
+  if (d ~= 0) then 
+    do return d end;
+  end;
+  local p1 = k1:slice(2);
+  local p2 = k2:slice(2);
+  if ((p1.length == 0) and (p2.length == 0)) then 
+    do return 0 end;
+  end;
+  do return self:compareArgs(p1, p2) end
+end
+__haxe_ds_EnumValueMap.prototype.compareArgs = function(self,a1,a2) 
+  local ld = a1.length - a2.length;
+  if (ld ~= 0) then 
+    do return ld end;
+  end;
+  local _g = 0;
+  local _g1 = a1.length;
+  while (_g < _g1) do 
+    _g = _g + 1;
+    local i = _g - 1;
+    local d = self:compareArg(a1[i], a2[i]);
+    if (d ~= 0) then 
+      do return d end;
+    end;
+  end;
+  do return 0 end
+end
+__haxe_ds_EnumValueMap.prototype.compareArg = function(self,v1,v2) 
+  if (Reflect.isEnumValue(v1) and Reflect.isEnumValue(v2)) then 
+    do return self:compare(v1, v2) end;
+  else
+    if (__lua_Boot.__instanceof(v1, Array) and __lua_Boot.__instanceof(v2, Array)) then 
+      do return self:compareArgs(v1, v2) end;
+    else
+      do return Reflect.compare(v1, v2) end;
+    end;
+  end;
+end
+
+__haxe_ds_EnumValueMap.prototype.__class__ =  __haxe_ds_EnumValueMap
+__haxe_ds_EnumValueMap.__super__ = __haxe_ds_BalancedTree
+setmetatable(__haxe_ds_EnumValueMap.prototype,{__index=__haxe_ds_BalancedTree.prototype})
+
+__haxe_ds_IntMap.new = function() 
+  local self = _hx_new(__haxe_ds_IntMap.prototype)
+  __haxe_ds_IntMap.super(self)
+  return self
+end
+__haxe_ds_IntMap.super = function(self) 
+  self.h = ({});
+end
+__haxe_ds_IntMap.__name__ = true
+__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_IntMap.prototype = _hx_a();
+__haxe_ds_IntMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_IntMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_IntMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_IntMap.prototype.iterator = function(self) 
+  local _gthis = self;
+  local it = self:keys();
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return it:hasNext() end;
+  end,next=function(self) 
+    do return _gthis.h[it:next()] end;
+  end}) end
+end
+
+__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 _hxClasses["haxe.ds.Option"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Some","None"},2)}
 __haxe_ds_Option = _hxClasses["haxe.ds.Option"];
 __haxe_ds_Option.Some = function(v) local _x = _hx_tab_array({[0]="Some",0,v,__enum__=__haxe_ds_Option}, 3); return _x; end 
@@ -6550,13 +6546,11 @@ local _hx_static_init = function()
   
   __deceptinfect_GameValues.BATTERIES_REQUIRED = 4;
   
-  __deceptinfect_client_Geiger.geiger = 0.0;
+  __deceptinfect_client_GeigerSystem.geiger = 0.0;
   
-  __deceptinfect_client_Geiger.sounds = _hx_tab_array({[0]=_G.Sound("player/geiger1.wav"), _G.Sound("player/geiger2.wav"), _G.Sound("player/geiger3.wav")}, 3);
+  __deceptinfect_client_GeigerSystem.sounds = _hx_tab_array({[0]=_G.Sound("player/geiger1.wav"), _G.Sound("player/geiger2.wav"), _G.Sound("player/geiger3.wav")}, 3);
   
-  __deceptinfect_client_Geiger.playTime = 0;
-  
-  __haxe_ds_IntMap.tnull = ({});
+  __deceptinfect_client_GeigerSystem.playTime = 0;
   
   __deceptinfect_client_Hud.cache = (function() 
     local _hx_1
@@ -6988,6 +6982,8 @@ local _hx_static_init = function()
   __haxe_EntryPoint.pending = Array.new();
   
   __haxe_EntryPoint.threadCount = 0;
+  
+  __haxe_ds_IntMap.tnull = ({});
   
   __lua_Boot.Max_Int32 = 2147483647;
   
