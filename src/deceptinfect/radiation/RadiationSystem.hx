@@ -1,11 +1,8 @@
 package deceptinfect.radiation;
 
-import lua.lib.luv.fs.FileSystemPoll;
 import deceptinfect.ecswip.VirtualPosition;
-import deceptinfect.ecswip.Component;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.RateComponent;
-import deceptinfect.GEntCompat;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.RateSystem;
 import deceptinfect.ecswip.Family;

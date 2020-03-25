@@ -40,6 +40,7 @@ class DeceptInfect extends gmod.hooks.Gm {
 
     
     override function PlayerDeath(victim:Player, inflictor:Entity, attacker:Entity) {
+        
         trace("Player ded!");
     }
     
@@ -92,11 +93,12 @@ class DeceptInfect extends gmod.hooks.Gm {
         }
     }
 
-    // override function PlayerDeathSound():Bool {
-    //     return false;
-    // }
+    override function PlayerDeathSound():Bool {
+        return false;
+    }
 
     override function PlayerDeathThink(ply:GPlayerCompat):Bool {
+        
         var comp = ply.id.get(PlayerComponent).sure();
         var reviveTime;
         var revive = false;

@@ -12,6 +12,7 @@ class ClientOverrides extends gmod.hooks.Gm {
     override function HUDPaint() {
         Hud.paint();
     }
+    
 
 }
 

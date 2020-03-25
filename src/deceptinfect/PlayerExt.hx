@@ -16,7 +16,7 @@ class PlayerExt {
         var wrongMode = p.GetObserverMode() == OBS_MODE_NONE;
         var targetDead = GlobalLib.IsValid(p.GetObserverTarget()) && !(cast p.GetObserverTarget():Player).Alive();
         var freeRoaming = p.GetObserverMode() == OBS_MODE_ROAMING;
-        return (wrongMode || targetDead) && !freeRoaming;
+        return wrongMode || targetDead || !freeRoaming;
     }
     static function randomIncDec(x:Int):Int {
         return switch (MathLib.random(1,2)) {

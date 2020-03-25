@@ -8,11 +8,16 @@ class Networking {
 
     var InfectionMessage:NetMessageServer<N_InfectionMessageDef>;
     var GameState:NetMessageServer<N_GameState>;
+    var Geiger:NetMessageServer<N_Geiger>;
     
 }
 
 typedef N_InfectionMessageDef = {
     infection : Float,
+}
+
+typedef N_Geiger = {
+    geiger : Float
 }
 
 
