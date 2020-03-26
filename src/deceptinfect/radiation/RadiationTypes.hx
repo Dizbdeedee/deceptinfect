@@ -12,7 +12,7 @@ class RadiationTypes {
                 chance: 2/5,
                 dist: 20,
                 time: 60,
-                check: 1,
+                check: 0.8,
                 type : SAME_SOURCE
             },
             lifetime: INFINITE,

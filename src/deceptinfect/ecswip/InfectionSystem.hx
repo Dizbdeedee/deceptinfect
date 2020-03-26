@@ -58,7 +58,8 @@ class InfectionSystem extends System {
                                     Networking.sendInfectionMessage({infection: inf.value},ply.player);
                                 default:
                             }
-                            
+                            infection.rate = rate;
+                            //trace(infection.rate);
                         default:
                     }
                     
@@ -73,7 +74,7 @@ class InfectionSystem extends System {
 
     public static function calcInfectionFromRates(rate:RateComponent):Float {
         var total = 0.0;
-        var totalmulti = 0.0;
+        var totalmulti = 1.0;
         for (rate in rate.addRates) {
             total += rate;
         }

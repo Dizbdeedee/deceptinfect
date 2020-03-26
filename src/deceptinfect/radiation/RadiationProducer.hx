@@ -17,14 +17,20 @@ class RadiationProducer extends Component {
     public var lifetime:RadLifetime;
     
     public static function createFromType(type:RadTypes) {
+        
         return new RadiationProducer(RadiationTypes.types[type]);
+
     }
 
     public function new(options:RadiationProduceOptions) {
         super();
+        
         maxrate = options.maxrate;
         radius = options.radius;
         lifetime = options.lifetime;
+        if (options.contaminate != null) {
+            contamProducer = Some(new ContaminationProducer(options.contaminate));
+        }
     }
 
 }

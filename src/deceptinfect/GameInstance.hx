@@ -40,7 +40,6 @@ class GameInstance {
     public function think() {
         baseInfection.value = calcBaseInfection();
         // InfectionSystem.run();
-        lastTick = GlobalLib.CurTime(); //NOTE should be last thing ran
     }
 
     

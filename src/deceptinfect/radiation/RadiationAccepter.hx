@@ -10,8 +10,14 @@ class RadiationAccepter extends Component {
     
     public var acceptContam:Option<ContaminationAccepter> = None;
     public var accepting:Bool = false;
-    public function new() {
+    public function new(options:RadAcceptOptions) {
         super();
+        if (options.contaminate != null) {
+            acceptContam = Some(options.contaminate);
+        }
+        if (options.diminish != null) {
+            diminish = options.diminish;
+        }
     }
 }
 

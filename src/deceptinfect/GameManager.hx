@@ -1,7 +1,12 @@
 package deceptinfect;
+import deceptinfect.ecswip.VirtualPosition;
+import deceptinfect.radiation.RadiationProducer;
+import deceptinfect.ecswip.GrabProducer;
+import deceptinfect.ecswip.InfectedComponent;
 import deceptinfect.Networking.N_GameState;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.radiation.RadiationAccepter;
+import deceptinfect.radiation.ContaminationAccepter;
 import deceptinfect.ecswip.GrabAccepter;
 import deceptinfect.ecswip.HiddenHealthComponent;
 import deceptinfect.ecswip.RateComponent;
@@ -58,24 +63,36 @@ class GameManager {
         return state = x;
     }
 
+    public static function initPlayer(x:Player) {
+        var ent = new GPlayerCompat(new PlayerComponent(x));
+        var p = ent.id;
+        var infcomp = new InfectionComponent();
+        var spec = new SpectateComponent();
+        var rate = new RateComponent();
+        var health = new HiddenHealthComponent();
+        var grabaccept = new GrabAccepter();
+        var radaccept = new RadiationAccepter({contaminate: new ContaminationAccepter()});
+        var virpos = new VirtualPosition(x);
+        p.add_component(infcomp);
+        p.add_component(spec);
+        p.add_component(rate);
+        p.add_component(health);
+        p.add_component(grabaccept);
+        p.add_component(radaccept);
+        p.add_component(virpos);
+    }
+
+    public static function initInfectedPlayer(x:DI_ID) {
+        x.add_component(new InfectedComponent());
+        x.add_component(new GrabProducer());
+        x.add_component(new HiddenHealthComponent());
+        var rad = RadiationProducer.createFromType(INF);
+        rad.state = DISABLED;
+        x.add_component(rad);
+    }
     public static function initAllPlayers() {
         for (player in PlayerLib.GetAll()) {
-            var ent = new GPlayerCompat(new PlayerComponent(player));
-            var p = ent.id;
-            var infcomp = new InfectionComponent();
-            var spec = new SpectateComponent();
-            var rate = new RateComponent();
-            var health = new HiddenHealthComponent();
-            var grabaccept = new GrabAccepter();
-            var radaccept = new RadiationAccepter();
-            
-            p.add_component(infcomp);
-            p.add_component(spec);
-            p.add_component(rate);
-            p.add_component(health);
-            p.add_component(grabaccept);
-            p.add_component(radaccept);
-
+            initPlayer(player);
         }
     }
 
