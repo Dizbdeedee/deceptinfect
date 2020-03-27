@@ -30,6 +30,7 @@ class GameManager {
                 false;
         }
     }
+    
     public static function sure():GameInstance {
         return switch (state) {
             case SETTING_UP(x) | PLAYING(x) | ENDING(x):
@@ -38,7 +39,26 @@ class GameManager {
                 throw "Game not avaliable at sure statement!";
         }
     }
-    
+   
+    public static function initPlayer(x:Player) {
+        var ent = new GPlayerCompat(new PlayerComponent(x));
+        var p = ent.id;
+        var infcomp = new InfectionComponent();
+        var spec = new SpectateComponent();
+        var rate = new RateComponent();
+        var health = new HiddenHealthComponent();
+        var grabaccept = new GrabAccepter();
+        var radaccept = new RadiationAccepter({contaminate: new ContaminationAccepter()});
+        var virpos = new VirtualPosition(x);
+        p.add_component(infcomp);
+        p.add_component(spec);
+        p.add_component(rate);
+        p.add_component(health);
+        p.add_component(grabaccept);
+        p.add_component(radaccept);
+        p.add_component(virpos);
+    }
+
     #if server
     public static function thinkWait() {
         if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS) {
@@ -63,24 +83,6 @@ class GameManager {
         return state = x;
     }
 
-    public static function initPlayer(x:Player) {
-        var ent = new GPlayerCompat(new PlayerComponent(x));
-        var p = ent.id;
-        var infcomp = new InfectionComponent();
-        var spec = new SpectateComponent();
-        var rate = new RateComponent();
-        var health = new HiddenHealthComponent();
-        var grabaccept = new GrabAccepter();
-        var radaccept = new RadiationAccepter({contaminate: new ContaminationAccepter()});
-        var virpos = new VirtualPosition(x);
-        p.add_component(infcomp);
-        p.add_component(spec);
-        p.add_component(rate);
-        p.add_component(health);
-        p.add_component(grabaccept);
-        p.add_component(radaccept);
-        p.add_component(virpos);
-    }
 
     public static function initInfectedPlayer(x:DI_ID) {
         x.add_component(new InfectedComponent());

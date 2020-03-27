@@ -1,5 +1,7 @@
 package deceptinfect.client;
 
+import deceptinfect.ecswip.PlayerComponent;
+import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.Networking.N_Geiger;
 import deceptinfect.ecswip.InfectionComponent;
 import deceptinfect.ecswip.System;
@@ -53,11 +55,11 @@ class GeigerSystem extends System {
 
     #if server
     override function run_server() {
-        for (plyr in PlayerManager.getPlayers()) {
-            switch (plyr.get(InfectionComponent)) {
-            case Comp(inf):
+        for (plyr in ComponentManager.entities) {
+            switch [plyr.get(InfectionComponent),plyr.get(PlayerComponent)] {
+            case [Comp(inf),Comp(_.player => player)]:
                 var fract = Math.min(((inf.rate - 1) / 3),1);
-                Networking.sendGeiger({geiger: fract},plyr);
+                Networking.sendGeiger({geiger: fract},player);
             default:
             }
         }

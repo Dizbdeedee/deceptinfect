@@ -9,6 +9,7 @@ abstract GEntCompat(Entity) from Entity to Entity {
 
     public var id(get,never):DI_ID;
 
+    @:noCompletion
     public inline function get_id() {
         return untyped this.id;
     }
@@ -64,6 +65,7 @@ abstract GPlayerCompat(Player) from Player to Player {
 
     public var id(get,never):DI_ID;
 
+    @:noCompletion
     public inline function get_id() {
         return untyped this.id;
     }

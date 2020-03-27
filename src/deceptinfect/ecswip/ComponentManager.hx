@@ -13,22 +13,12 @@ class ComponentManager {
     
     public static var activeEntities(default,null):Int = 0;
 
-    //component lookup
-    public static var players(default,null):Map<DI_ID,PlayerComponent> = [];
-    
     public static var gEntityLookup(default,null):Map<DI_ID,GEntCompat> = [];
-    
-    public static var gents(default,null):Array<GEntCompat> = [];
-
-    
     
     //TODO move
     public static function addGEnt(x:GEntCompat):DI_ID {
         var id = addEntity();
         addComponent(new GEntityComponent(x),id);
-        
-        // gEntityLookup.set(id,x);
-        // gents.push(x);
         return id;
     }
 
@@ -44,16 +34,6 @@ class ComponentManager {
         return cast comp;
     }
 
-    public static function getGEnt(x:DI_ID):HasGEnt {
-        var look = gEntityLookup.get(x);
-        if (GlobalLib.IsValid(look)) {
-            return GEnt(look);
-        } else {
-            return NONE;
-        }
-    }
-
-   
     public static function addComponent<T:Component>(x:T,to:DI_ID) {
         var comparray = lazyInit(Type.getClass(x));
         trace(to);
@@ -61,7 +41,7 @@ class ComponentManager {
     }
 
 
-    public static inline function lazyInit(x:Class<Dynamic>):ComponentArray {
+    static function lazyInit(x:Class<Dynamic>):ComponentArray {
         var comparray = components.get(x);
         if (comparray == null) {
             comparray = [];
@@ -101,8 +81,6 @@ class ComponentManager {
         return entities - 1;
     }
 
-    
-
 }
 
 abstract Entities(Int) from Int to Int {
@@ -117,15 +95,9 @@ abstract DI_ID(Int) from Int to Int {
         return ComponentManager.getComponentForID(x,this);
     }
 
-    public extern inline function get_gent():HasGEnt {
-        return ComponentManager.getGEnt(this);
-    }
-
     public extern inline function add_component<T:Component>(x:T) {
         ComponentManager.addComponent(x,this);
     }
-
-    
 
     public inline function new(x:Int) {
         this = x;
@@ -155,9 +127,4 @@ enum ComponentState<T:Component> {
 enum HasGEnt {
     NONE;
     GEnt(e:GEntCompat);
-}
-
-enum HasGPlayer {
-    NONE;
-    GPlayer(p:GPlayerCompat);
 }

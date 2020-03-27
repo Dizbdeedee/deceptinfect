@@ -6,5 +6,6 @@ class GEntityComponent extends Component {
     public function new(e:Entity) {
         super();
         entity = e;
+        
     }
 }

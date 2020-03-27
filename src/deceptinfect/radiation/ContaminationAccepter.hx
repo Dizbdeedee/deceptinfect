@@ -8,8 +8,3 @@ class ContaminationAccepter extends Component {
     
 
 }
-
-// enum ContamAcceptState {
-//     REJECTING;
-//     ACCEPTING(x:ContaminationAccepter);
-// }

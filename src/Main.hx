@@ -28,7 +28,6 @@ import deceptinfect.ecswip.SystemManager;
 class Main {
     public static function main() {
         deceptinfect.Networking.initMessages();
-        SystemManager.initAllSystems();
         DeceptInfect.initaliseGamemode();
 
         for (ply in PlayerLib.GetAll()) {
@@ -37,11 +36,11 @@ class Main {
         #if client
         SignalStorage.initEvents();
         ClientOverrides.initaliseGamemode();
-        var ent = new GPlayerCompat(new PlayerComponent(GlobalLib.LocalPlayer()));
-        ent.id.add_component(new InfectionComponent());
         GameManager.init();
         
+        
         #end
+        SystemManager.initAllSystems();
       
     }
 

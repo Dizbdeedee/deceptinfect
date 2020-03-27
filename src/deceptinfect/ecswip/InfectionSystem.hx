@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.Networking.N_InfectionMessageDef;
 import deceptinfect.ecswip.InfectionComponent;
 
@@ -33,40 +34,44 @@ class InfectionSystem extends System {
     override function run_server() {
         for (entity in ComponentManager.entities) {
             switch (entity.get(InfectionComponent)) {
-                //TODO refactor?
-                case Comp(infection = _.acceptingInfection => ACCEPTING):
-                    switch (infection.infection) {
-                        case NOT_INFECTED(inf):
-                        
-                            var base = getBaseInfection(infection);
-                        
-                            var rate = switch (entity.get(RateComponent)) {
-                                case Comp(rate):
-                                    calcInfectionFromRates(rate);
-                                default:
-                                    infection.rate;
-                            }
-                            rate += 1;
-                            
-                            inf.value += base * rate;
-                            
-                            //trace('$base $rate ${inf.value}');
-                            fixUpInfection(infection);
-                            
-                            switch (entity.get(PlayerComponent)) {
-                                case Comp(ply):
-                                    Networking.sendInfectionMessage({infection: inf.value},ply.player);
-                                default:
-                            }
-                            infection.rate = rate;
-                            //trace(infection.rate);
+            case Comp(infection = _.acceptingInfection => ACCEPTING):
+                switch (infection.infection) {
+                case NOT_INFECTED(inf):
+                
+                    var base = getBaseInfection(infection);
+                
+                    var rate = switch (entity.get(RateComponent)) {
+                        case Comp(rate):
+                            calcInfectionFromRates(rate);
+                        default:
+                            infection.rate;
+                    }
+                    rate += 1;
+                    
+                    inf.value += base * rate;
+                    
+                    //trace('$base $rate ${inf.value}');
+                    fixUpInfection(infection);
+                    
+                    switch (entity.get(PlayerComponent)) {
+                        case Comp(ply):
+                            Networking.sendInfectionMessage({infection: inf.value},ply.player);
                         default:
                     }
-                    
-
-                    
-
+                    infection.rate = rate;
+                    switch (infection.infection) {
+                    case INFECTED:
+                        onInfected(entity);
+                    default:
+                    }
+                    //trace(infection.rate);
                 default:
+                }
+                
+
+                
+
+            default:
             }
         }
     }
@@ -116,6 +121,16 @@ class InfectionSystem extends System {
                 infection.infection = INFECTED;
             default:
         }
+    }
+
+    public static function onInfected(ent:DI_ID) {
+        #if server
+        switch (ent.get(PlayerComponent)) {
+        case Comp(_):
+            GameManager.initInfectedPlayer(ent);
+        default:
+        }
+        #end
     }
     
 }

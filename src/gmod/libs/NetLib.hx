@@ -720,7 +720,8 @@ package gmod.libs;
 		--- | ---
 		`ply` | The player(s) to send the message to. Can be a table of players or a CRecipientFilter.
     **/
-    
+	@:overload(function (tbl:Table<Dynamic,Player>):Void {})
+	@:overload(function (filt:CRecipientFilter):Void {})
     public static function Send(ply:Player):Void;
     #end
     

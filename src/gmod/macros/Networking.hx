@@ -54,7 +54,7 @@ class Networking {
            
             
             if (Context.defined("server")) {
-                var funcArg:FunctionArg = {
+                var dataArg:FunctionArg = {
                     name : "data",
                     type : msg.type,
                 }
@@ -63,18 +63,51 @@ class Networking {
                     name : "player",
                     type : (macro : gmod.gclass.Player)
                 }
-                var sendFuncExpr:Function = {
-                    args:  [funcArg,player],
-                    expr : writeNetConstructer(msg.type,msg.name),
+                var tbl:FunctionArg = {
+                    name : "player",
+                    type : (macro : lua.Table<Dynamic,Player>)
+                }
+                var filter:FunctionArg = {
+                    name : "player",
+                    type : (macro : gmod.gclass.CRecipientFilter)
+                }
+                var funcExpr:Expr = writeNetConstructer(msg.type,msg.name);
+                var sendPlayer:Function = {
+                    args:  [dataArg,player],
+                    expr : funcExpr,
                     ret : null
                 }
-                var sendFunc:Field = {
+                var sendTblFunc:Function = {
+                    args: [dataArg,tbl],
+                    expr : funcExpr,
+                    ret : null
+                }
+                var sendFilterFunc:Function = {
+                    args: [dataArg,filter],
+                    expr : funcExpr,
+                    ret : null
+                }
+                var sendPlayerField:Field = {
                     name : 'send${msg.name}',
-                    kind : FieldType.FFun(sendFuncExpr),
+                    kind : FieldType.FFun(sendPlayer),
                     pos : Context.currentPos(),
                     access: [Access.AStatic,Access.APublic]
                 }
-                fields.push(sendFunc);
+                var sendTblField:Field = {
+                    name : 'sendTbl${msg.name}',
+                    kind : FieldType.FFun(sendTblFunc),
+                    pos : Context.currentPos(),
+                    access: [Access.AStatic,Access.APublic]
+                }
+                var sendFilterField = {
+                    name : 'sendFilter${msg.name}',
+                    kind : FieldType.FFun(sendFilterFunc),
+                    pos : Context.currentPos(),
+                    access: [Access.AStatic,Access.APublic]
+                }
+                fields.push(sendPlayerField);
+                fields.push(sendTblField);
+                fields.push(sendFilterField);
             } else if (Context.defined("client")) {
                 var recvFuncExpr:Function = {
                     args:  [],//player
