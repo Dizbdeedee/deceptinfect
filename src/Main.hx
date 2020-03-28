@@ -33,8 +33,9 @@ class Main {
         for (ply in PlayerLib.GetAll()) {
             GameManager.initPlayer(ply);
         }
-        #if client
+        
         SignalStorage.initEvents();
+        #if client
         ClientOverrides.initaliseGamemode();
         GameManager.init();
        

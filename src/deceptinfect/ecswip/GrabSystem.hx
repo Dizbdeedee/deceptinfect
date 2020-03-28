@@ -1,12 +1,13 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.util.Cooldown;
 import gmod.Hooks;
 import deceptinfect.ecswip.SignalStorage.DamageEvent;
 import deceptinfect.Networking.N_GrabEnd;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.Networking.N_GrabPos;
 import deceptinfect.client.PVS;
-
+using deceptinfect.util.EntityExt;
 class GrabSystem extends System {
 
     
@@ -86,15 +87,12 @@ class GrabSystem extends System {
         for (attack in ComponentManager.entities) {
             switch [attack.get(GrabProducer),attack.get(GEntityComponent)] {
             case [Comp(c_grabProduce),Comp(_.entity => g_attack)]:
-                
                 if (c_grabProduce.grab != null) {
-                    //trace('grab in progress');
                     var victim = c_grabProduce.grab;
                     var g_vic = switch (c_grabProduce.grab.get(GEntityComponent)) {
                     case Comp(gent):
                         gent.entity;
                     default:
-                        
                         return;
                     }
                     var filter = GlobalLib.RecipientFilter();
@@ -108,13 +106,13 @@ class GrabSystem extends System {
                     switch (victim.get(InfectionComponent)) {
                     case Comp(inf):
                         switch (inf.infection) {
-                            case NOT_INFECTED(inf):
-                                trace('infecting');
-                                //TODO move
-                                inf.value += calcGrabIncrease();
-                            case INFECTED:
-                                trace("infected");
-                                grabStop(attack);
+                        case NOT_INFECTED(inf):
+                            trace('infecting');
+                            //TODO move
+                            inf.value += calcGrabIncrease();
+                        case INFECTED:
+                            trace("infected");
+                            grabStop(attack);
                         }
                     default:
                         throw "Victim has no infection component..";
@@ -122,6 +120,7 @@ class GrabSystem extends System {
                     
 
                 }
+
             default:
             }
 
@@ -135,6 +134,8 @@ class GrabSystem extends System {
         var vicPos = vic.get_sure(VirtualPosition).pos;
         var c_accept = vic.get_sure(GrabAccepter);
         c_produce.grab = null;
+        
+        c_produce.grabState = NOT_READY();
         c_accept.grabState = NOT_GRABBED;
         c_accept.grabAttacker.set(c_produce,false);
         switch (vic.get(PlayerComponent)) {
@@ -156,8 +157,7 @@ class GrabSystem extends System {
     public static function attemptGrab(attack:DI_ID,vic:DI_ID) {
         switch [attack.get(GrabProducer),vic.get(GrabAccepter)] {
         case [Comp(c_produce),Comp(c_accept)]:
-            if (c_produce.grab == null) {
-                
+            if (c_produce.grabState == READY) {
                 grabStart(attack,vic);
             }
         default:
@@ -165,8 +165,40 @@ class GrabSystem extends System {
         
     }
 
-    public static function attemptTarget()
+    public static function attemptTarget(attack:DI_ID,vic:DI_ID) {
+        switch [attack.get(GrabProducer),vic.get(GrabAccepter)] {
+        case [Comp(c_produce),Comp(c_accept)]:
+            switch [vic.get(GEntityComponent),attack.get(GEntityComponent)] {
+            case [Comp(_.entity => g_vic),Comp(_.entity => g_attack)]:
+                if (g_attack.facingBehind(g_vic)) {
+                    attemptGrab(attack,vic);
+                    
+                }
+            default:
+            }    
+            if (c_accept.grabState == NOT_GRABBED && 
+                c_produce.grab == null && 
+                c_accept.targeting.get(c_produce) != true 
+            ) {
+                target(c_accept,c_produce);
+                if (c_accept.numTargeting >= c_accept.overwhelm) {
+                    attemptGrab(attack,vic);
+                }
 
+            }
+        default:
+        }
+    
+    }
+    //TODO cleanup
+    static function clearTargetingVic(vic:GrabAccepter) {
+        for (produce in vic.targeting.keys()) {
+            switch (produce.searchState) {
+            case TARGET(vic):
+            }
+        }
+        vic.targeting.clear();
+    }
     
     static function grabStart(attack:DI_ID,vic:DI_ID) {
         trace("starting grab");
@@ -198,6 +230,8 @@ class GrabSystem extends System {
         victim.numTargeting++;
         attacker.targeting = victim;
     }
+
+    
 
     public static function checkOverwhelm(victim:GrabAccepter) {
         return victim.numTargeting >= victim.overwhelm;

@@ -76,11 +76,11 @@ __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_ = _hx_e()
 __deceptinfect_GameValues = _hx_e()
 __deceptinfect_Misc = _hx_e()
 __deceptinfect_Networking = _hx_e()
+__haxe_IMap = _hx_e()
+__haxe_ds_IntMap = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
 __deceptinfect_ecswip_System = _hx_e()
 __deceptinfect_client_GeigerSystem = _hx_e()
-__haxe_IMap = _hx_e()
-__haxe_ds_IntMap = _hx_e()
 __deceptinfect_client_PVS = _hx_e()
 __deceptinfect_ecswip_Component = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
@@ -99,6 +99,7 @@ __deceptinfect_ecswip_GrabAccepter = _hx_e()
 __deceptinfect_ecswip_GrabState = _hx_e()
 __deceptinfect_ecswip_GrabDraw = _hx_e()
 __deceptinfect_ecswip_GrabProducer = _hx_e()
+__deceptinfect_ecswip_TargetState = _hx_e()
 __deceptinfect_ecswip_GrabSystem = _hx_e()
 __deceptinfect_ecswip_HiddenHealthComponent = _hx_e()
 __deceptinfect_ecswip_HiddenHealthSystem = _hx_e()
@@ -558,6 +559,7 @@ Main.main = function()
     local ply1 = ply:next();
     __deceptinfect_GameManager.initPlayer(ply1);
   end;
+  __deceptinfect_ecswip_SignalStorage.initEvents();
   __deceptinfect_ecswip_SystemManager.initAllSystems();
 end
 
@@ -2056,6 +2058,61 @@ __deceptinfect_Networking.prototype = _hx_a();
 
 __deceptinfect_Networking.prototype.__class__ =  __deceptinfect_Networking
 
+__haxe_IMap.new = {}
+__haxe_IMap.__name__ = true
+__haxe_IMap.prototype = _hx_a();
+
+__haxe_IMap.prototype.__class__ =  __haxe_IMap
+
+__haxe_ds_IntMap.new = function() 
+  local self = _hx_new(__haxe_ds_IntMap.prototype)
+  __haxe_ds_IntMap.super(self)
+  return self
+end
+__haxe_ds_IntMap.super = function(self) 
+  self.h = ({});
+end
+__haxe_ds_IntMap.__name__ = true
+__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_IntMap.prototype = _hx_a();
+__haxe_ds_IntMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_IntMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_IntMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_IntMap.prototype.iterator = function(self) 
+  local _gthis = self;
+  local it = self:keys();
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return it:hasNext() end;
+  end,next=function(self) 
+    do return _gthis.h[it:next()] end;
+  end}) end
+end
+
+__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
+
 __deceptinfect_PlayerManager.new = {}
 __deceptinfect_PlayerManager.__name__ = true
 __deceptinfect_PlayerManager.getIDByIndex = function(index) 
@@ -2150,61 +2207,6 @@ end
 __deceptinfect_client_GeigerSystem.prototype.__class__ =  __deceptinfect_client_GeigerSystem
 __deceptinfect_client_GeigerSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_client_GeigerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
-
-__haxe_IMap.new = {}
-__haxe_IMap.__name__ = true
-__haxe_IMap.prototype = _hx_a();
-
-__haxe_IMap.prototype.__class__ =  __haxe_IMap
-
-__haxe_ds_IntMap.new = function() 
-  local self = _hx_new(__haxe_ds_IntMap.prototype)
-  __haxe_ds_IntMap.super(self)
-  return self
-end
-__haxe_ds_IntMap.super = function(self) 
-  self.h = ({});
-end
-__haxe_ds_IntMap.__name__ = true
-__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_IntMap.prototype = _hx_a();
-__haxe_ds_IntMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_IntMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_IntMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_IntMap.prototype.iterator = function(self) 
-  local _gthis = self;
-  local it = self:keys();
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return it:hasNext() end;
-  end,next=function(self) 
-    do return _gthis.h[it:next()] end;
-  end}) end
-end
-
-__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 
 __deceptinfect_client_PVS.new = {}
 __deceptinfect_client_PVS.__name__ = true
@@ -2585,6 +2587,11 @@ __deceptinfect_ecswip_GrabProducer.prototype = _hx_a();
 __deceptinfect_ecswip_GrabProducer.prototype.__class__ =  __deceptinfect_ecswip_GrabProducer
 __deceptinfect_ecswip_GrabProducer.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_GrabProducer.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.ecswip.TargetState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","TARGETING"},2)}
+__deceptinfect_ecswip_TargetState = _hxClasses["deceptinfect.ecswip.TargetState"];
+__deceptinfect_ecswip_TargetState.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_TargetState},2)
+
+__deceptinfect_ecswip_TargetState.TARGETING = function(vic) local _x = _hx_tab_array({[0]="TARGETING",1,vic,__enum__=__deceptinfect_ecswip_TargetState}, 3); return _x; end 
 
 __deceptinfect_ecswip_GrabSystem.new = function() 
   local self = _hx_new(__deceptinfect_ecswip_GrabSystem.prototype)
@@ -2624,41 +2631,41 @@ __deceptinfect_ecswip_GrabSystem.grabStop = function(attack)
   local c_produce = comp1;
   local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
   local comp2 = comparray1[attack];
-  local comp3 = comp2:slice(2)[0];
-  if (comp3 == nil) then 
+  local comp11 = comp2:slice(2)[0];
+  if (comp11 == nil) then 
     _G.error("Component does not exist at sure statement",0);
   end;
-  local attackPos = comp3:get_pos();
+  local attackPos = comp11:get_pos();
   local vic = c_produce.grab;
   local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
-  local comp4 = comparray2[vic];
-  local comp5 = comp4:slice(2)[0];
-  if (comp5 == nil) then 
+  local comp3 = comparray2[vic];
+  local comp12 = comp3:slice(2)[0];
+  if (comp12 == nil) then 
     _G.error("Component does not exist at sure statement",0);
   end;
-  local vicPos = comp5:get_pos();
+  local vicPos = comp12:get_pos();
   local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
-  local comp6 = comparray3[vic];
-  local comp7 = comp6:slice(2)[0];
-  if (comp7 == nil) then 
+  local comp4 = comparray3[vic];
+  local comp13 = comp4:slice(2)[0];
+  if (comp13 == nil) then 
     _G.error("Component does not exist at sure statement",0);
   end;
-  local c_accept = comp7;
+  local c_accept = comp13;
   c_produce.grab = nil;
   c_accept.grabState = __deceptinfect_ecswip_GrabState.NOT_GRABBED;
   local _this = c_accept.grabAttacker;
   _this.h[c_produce] = false;
   _this.k[c_produce] = true;
   local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp8 = comparray4[vic];
-  local _g = comp8;
+  local comp5 = comparray4[vic];
+  local _g = comp5;
   if (_g[1] == 1) then 
     local plyr = _g[2];
     plyr.player:Freeze(false);
   end;
   local comparray5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp9 = comparray5[attack];
-  local _g2 = comp9;
+  local comp6 = comparray5[attack];
+  local _g2 = comp6;
   if (_g2[1] == 1) then 
     local plyr1 = _g2[2];
     plyr1.player:Freeze(false);
@@ -2685,8 +2692,59 @@ __deceptinfect_ecswip_GrabSystem.attemptGrab = function(attack,vic)
     end;
   end;
 end
+__deceptinfect_ecswip_GrabSystem.attemptTarget = function(attack,vic) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
+  local comp = comparray[vic];
+  local _g = comp;
+  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer);
+  local comp1 = comparray1[attack];
+  local _g1 = comp1;
+  if (_g1[1] == 1) then 
+    if (_g[1] == 1) then 
+      local c_produce = _g1[2];
+      local c_accept = _g[2];
+      local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
+      local comp2 = comparray2[attack];
+      local _g2 = comp2;
+      local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
+      local comp3 = comparray3[vic];
+      local _g11 = comp3;
+      if (_g11[1] == 1) then 
+        if (_g2[1] == 1) then 
+          local _hx_tmp;
+          local _hx_tmp1;
+          _hx_tmp1 = _g11[2].entity;
+          local g_vic = _hx_tmp1;
+          _hx_tmp = _g2[2].entity;
+          local g_attack = _hx_tmp;
+          if (__deceptinfect_util_EntityExt.facingBehind(g_attack, g_vic)) then 
+            __deceptinfect_ecswip_GrabSystem.attemptGrab(attack, vic);
+          end;
+        end;
+      end;
+      if (((c_accept.grabState == __deceptinfect_ecswip_GrabState.NOT_GRABBED) and (c_produce.grab == nil)) and (c_accept.targeting.h[c_produce] ~= true)) then 
+        __deceptinfect_ecswip_GrabSystem.target(c_accept, c_produce);
+        if (c_accept.numTargeting >= c_accept.overwhelm) then 
+          __deceptinfect_ecswip_GrabSystem.attemptGrab(attack, vic);
+        end;
+      end;
+    end;
+  end;
+end
+__deceptinfect_ecswip_GrabSystem.clearTargetingVic = function(vic) 
+  local produce = vic.targeting:keys();
+  while (produce:hasNext()) do 
+    local produce1 = produce:next();
+    if (produce1.targeting == vic) then 
+      __deceptinfect_ecswip_GrabSystem.stopTargeting(produce1);
+    end;
+  end;
+  local _this = vic.targeting;
+  _this.h = ({});
+  _this.k = ({});
+end
 __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic) 
-  __haxe_Log.trace("starting grab", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=167,className="deceptinfect.ecswip.GrabSystem",methodName="grabStart"}));
+  __haxe_Log.trace("starting grab", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=203,className="deceptinfect.ecswip.GrabSystem",methodName="grabStart"}));
   local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer);
   local comp = comparray[attack];
   local comp1 = comp:slice(2)[0];
@@ -2696,11 +2754,11 @@ __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic)
   local c_produce = comp1;
   local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
   local comp2 = comparray1[vic];
-  local comp3 = comp2:slice(2)[0];
-  if (comp3 == nil) then 
+  local comp11 = comp2:slice(2)[0];
+  if (comp11 == nil) then 
     _G.error("Component does not exist at sure statement",0);
   end;
-  local c_accept = comp3;
+  local c_accept = comp11;
   c_produce.grab = vic;
   local _this = c_accept.grabAttacker;
   _this.h[c_produce] = true;
@@ -2714,15 +2772,15 @@ __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic)
    return _;
    end)();
   local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp4 = comparray2[vic];
-  local _g = comp4;
+  local comp3 = comparray2[vic];
+  local _g = comp3;
   if (_g[1] == 1) then 
     local plyr = _g[2];
     plyr.player:Freeze(true);
   end;
   local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp5 = comparray3[attack];
-  local _g2 = comp5;
+  local comp4 = comparray3[attack];
+  local _g2 = comp4;
   if (_g2[1] == 1) then 
     local plyr1 = _g2[2];
     plyr1.player:Freeze(true);
@@ -6858,9 +6916,9 @@ local _hx_static_init = function()
   
   __deceptinfect_Misc.roundWeapons = _hx_tab_array({[0]="weapon_mor_ump"}, 1);
   
-  __deceptinfect_PlayerManager.indexLookup = __haxe_ds_IntMap.new();
-  
   __haxe_ds_IntMap.tnull = ({});
+  
+  __deceptinfect_PlayerManager.indexLookup = __haxe_ds_IntMap.new();
   
   __deceptinfect_client_PVS.pvs = __haxe_ds_IntMap.new();
   

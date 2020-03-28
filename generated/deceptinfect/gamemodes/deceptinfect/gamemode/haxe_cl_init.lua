@@ -74,14 +74,14 @@ __deceptinfect_GameManager = _hx_e()
 __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_ = _hx_e()
 __deceptinfect_GameValues = _hx_e()
 __deceptinfect_Networking = _hx_e()
+__haxe_IMap = _hx_e()
+__haxe_ds_IntMap = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
 __deceptinfect_client_ClientOverrides = _hx_e()
 __deceptinfect_ecswip_System = _hx_e()
 __deceptinfect_client_GeigerSystem = _hx_e()
 __deceptinfect_client__Hud_Axis = _hx_e()
 __deceptinfect_client_Hud = _hx_e()
-__haxe_IMap = _hx_e()
-__haxe_ds_IntMap = _hx_e()
 __deceptinfect_client_PVS = _hx_e()
 __deceptinfect_ecswip_Component = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
@@ -100,6 +100,7 @@ __deceptinfect_ecswip_GrabAccepter = _hx_e()
 __deceptinfect_ecswip_GrabState = _hx_e()
 __deceptinfect_ecswip_GrabDraw = _hx_e()
 __deceptinfect_ecswip_GrabProducer = _hx_e()
+__deceptinfect_ecswip_TargetState = _hx_e()
 __deceptinfect_ecswip_GrabSystem = _hx_e()
 __deceptinfect_ecswip_HiddenHealthComponent = _hx_e()
 __deceptinfect_ecswip_HiddenHealthSystem = _hx_e()
@@ -131,6 +132,7 @@ __deceptinfect_radiation_RadiationState = _hx_e()
 __deceptinfect_radiation_RadLifetime = _hx_e()
 __deceptinfect_radiation_RadTypes = _hx_e()
 __deceptinfect_radiation_RadiationTypes = _hx_e()
+__deceptinfect_util_EntityExt = _hx_e()
 __deceptinfect_util_PlayerExt = _hx_e()
 __deceptinfect_util_TimeKeep = _hx_e()
 __gmod__EntityClass_EntityClass_Impl_ = _hx_e()
@@ -1957,6 +1959,61 @@ __deceptinfect_Networking.prototype = _hx_a();
 
 __deceptinfect_Networking.prototype.__class__ =  __deceptinfect_Networking
 
+__haxe_IMap.new = {}
+__haxe_IMap.__name__ = true
+__haxe_IMap.prototype = _hx_a();
+
+__haxe_IMap.prototype.__class__ =  __haxe_IMap
+
+__haxe_ds_IntMap.new = function() 
+  local self = _hx_new(__haxe_ds_IntMap.prototype)
+  __haxe_ds_IntMap.super(self)
+  return self
+end
+__haxe_ds_IntMap.super = function(self) 
+  self.h = ({});
+end
+__haxe_ds_IntMap.__name__ = true
+__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_IntMap.prototype = _hx_a();
+__haxe_ds_IntMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_IntMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_IntMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_IntMap.prototype.iterator = function(self) 
+  local _gthis = self;
+  local it = self:keys();
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return it:hasNext() end;
+  end,next=function(self) 
+    do return _gthis.h[it:next()] end;
+  end}) end
+end
+
+__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
+
 __deceptinfect_PlayerManager.new = {}
 __deceptinfect_PlayerManager.__name__ = true
 __deceptinfect_PlayerManager.getIDByIndex = function(index) 
@@ -2223,61 +2280,6 @@ __deceptinfect_client_Hud.stateText = function()
   _G.surface.SetTextPos(0, __deceptinfect_client_Hud.CSS(__deceptinfect_client__Hud_Axis.Y, 1000));
   _G.surface.DrawText(roundtxt);
 end
-
-__haxe_IMap.new = {}
-__haxe_IMap.__name__ = true
-__haxe_IMap.prototype = _hx_a();
-
-__haxe_IMap.prototype.__class__ =  __haxe_IMap
-
-__haxe_ds_IntMap.new = function() 
-  local self = _hx_new(__haxe_ds_IntMap.prototype)
-  __haxe_ds_IntMap.super(self)
-  return self
-end
-__haxe_ds_IntMap.super = function(self) 
-  self.h = ({});
-end
-__haxe_ds_IntMap.__name__ = true
-__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_IntMap.prototype = _hx_a();
-__haxe_ds_IntMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_IntMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_IntMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_IntMap.prototype.iterator = function(self) 
-  local _gthis = self;
-  local it = self:keys();
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return it:hasNext() end;
-  end,next=function(self) 
-    do return _gthis.h[it:next()] end;
-  end}) end
-end
-
-__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 
 __deceptinfect_client_PVS.new = {}
 __deceptinfect_client_PVS.__name__ = true
@@ -2598,6 +2600,11 @@ __deceptinfect_ecswip_GrabProducer.prototype = _hx_a();
 __deceptinfect_ecswip_GrabProducer.prototype.__class__ =  __deceptinfect_ecswip_GrabProducer
 __deceptinfect_ecswip_GrabProducer.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_GrabProducer.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.ecswip.TargetState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","TARGETING"},2)}
+__deceptinfect_ecswip_TargetState = _hxClasses["deceptinfect.ecswip.TargetState"];
+__deceptinfect_ecswip_TargetState.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_TargetState},2)
+
+__deceptinfect_ecswip_TargetState.TARGETING = function(vic) local _x = _hx_tab_array({[0]="TARGETING",1,vic,__enum__=__deceptinfect_ecswip_TargetState}, 3); return _x; end 
 
 __deceptinfect_ecswip_GrabSystem.new = function() 
   local self = _hx_new(__deceptinfect_ecswip_GrabSystem.prototype)
@@ -3334,6 +3341,17 @@ __deceptinfect_radiation_RadTypes.SPIT = _hx_tab_array({[0]="SPIT",5,__enum__ = 
 
 __deceptinfect_radiation_RadiationTypes.new = {}
 __deceptinfect_radiation_RadiationTypes.__name__ = true
+
+__deceptinfect_util_EntityExt.new = {}
+__deceptinfect_util_EntityExt.__name__ = true
+__deceptinfect_util_EntityExt.facingBehind = function(me,target) 
+  local this1 = _G.Angle(0, me:EyeAngles().y, 0);
+  local vec1 = this1:Forward();
+  local this11 = _G.Angle(0, target:EyeAngles().y, 0);
+  local vec2 = this11:Forward();
+  local dot = _G.math.acos(vec1:Dot(vec2));
+  do return dot < (_G.math.pi / 4) end;
+end
 
 __deceptinfect_util_PlayerExt.new = {}
 __deceptinfect_util_PlayerExt.__name__ = true
@@ -6636,6 +6654,8 @@ local _hx_static_init = function()
   
   __deceptinfect_GameValues.GRAB_TIME = 6;
   
+  __haxe_ds_IntMap.tnull = ({});
+  
   __deceptinfect_PlayerManager.indexLookup = __haxe_ds_IntMap.new();
   
   __deceptinfect_client_GeigerSystem.geiger = 0.0;
@@ -6684,8 +6704,6 @@ local _hx_static_init = function()
     _hx_3 = _g;
     return _hx_3
   end )();
-  
-  __haxe_ds_IntMap.tnull = ({});
   
   __deceptinfect_client_PVS.pvs = __haxe_ds_IntMap.new();
   
