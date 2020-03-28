@@ -43,7 +43,7 @@ class GamemodeMacro {
 
         }
         // exprBuffer.add("\n}");
-        
+        exprBuffer.push(macro postIntialize());
         var constructer:Function = {
             args : [{name : "self",
                     type : superType

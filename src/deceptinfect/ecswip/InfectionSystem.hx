@@ -55,7 +55,7 @@ class InfectionSystem extends System {
                     
                     switch (entity.get(PlayerComponent)) {
                         case Comp(ply):
-                            Networking.sendInfectionMessage({infection: inf.value},ply.player);
+                            Networking.sendInfectionMessage({infection: inf.value},ply.player,true);
                         default:
                     }
                     infection.rate = rate;
@@ -77,7 +77,21 @@ class InfectionSystem extends System {
     }
     #end
 
-    public static function calcInfectionFromRates(rate:RateComponent):Float {
+    public static function makeInfected(ent:DI_ID) {
+        switch (ent.get(InfectionComponent)) {
+        case Comp(inf):
+            inf.infection = switch (inf.infection) {
+            case NOT_INFECTED(_):
+                onInfected(ent);
+                INFECTED;
+            default:
+                INFECTED;
+            }
+        default:
+            
+        }
+    }
+    static function calcInfectionFromRates(rate:RateComponent):Float {
         var total = 0.0;
         var totalmulti = 1.0;
         for (rate in rate.addRates) {
@@ -90,7 +104,7 @@ class InfectionSystem extends System {
     }
 
 
-    public static function getBaseInfection(inf:InfectionComponent):Float {
+    static function getBaseInfection(inf:InfectionComponent):Float {
         return switch (inf.baseInfection) {
             case NOT_USING:
                 0;
@@ -110,7 +124,7 @@ class InfectionSystem extends System {
     }
 
     //TODO needed?
-    public static function fixUpInfection(infection:InfectionComponent) {
+    static function fixUpInfection(infection:InfectionComponent) {
         
         switch (infection.infection) {
             case NOT_INFECTED(inf) if (inf.value < 0):
@@ -123,7 +137,7 @@ class InfectionSystem extends System {
         }
     }
 
-    public static function onInfected(ent:DI_ID) {
+    static function onInfected(ent:DI_ID) {
         #if server
         switch (ent.get(PlayerComponent)) {
         case Comp(_):

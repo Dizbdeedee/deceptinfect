@@ -24,7 +24,7 @@ class GeigerSystem extends System {
     override function init_client() {
         Networking.GeigerSignal.handle(
         function (data:N_Geiger) {
-            trace('geiger $geiger');
+            //trace('geiger $geiger');
             geiger = data.geiger;
         });
 
@@ -59,7 +59,7 @@ class GeigerSystem extends System {
             switch [plyr.get(InfectionComponent),plyr.get(PlayerComponent)] {
             case [Comp(inf),Comp(_.player => player)]:
                 var fract = Math.min(((inf.rate - 1) / 3),1);
-                Networking.sendGeiger({geiger: fract},player);
+                Networking.sendGeiger({geiger: fract},player,true);
             default:
             }
         }

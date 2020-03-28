@@ -58,6 +58,12 @@ class Networking {
                     name : "data",
                     type : msg.type,
                 }
+                var unreliable:FunctionArg = {
+                    name : "unreliable",
+                    type : (macro : Bool),
+                    opt : true,
+                    value : macro false
+                }
     
                 var player:FunctionArg = {
                     name : "player",
@@ -73,17 +79,17 @@ class Networking {
                 }
                 var funcExpr:Expr = writeNetConstructer(msg.type,msg.name);
                 var sendPlayer:Function = {
-                    args:  [dataArg,player],
+                    args:  [dataArg,player,unreliable],
                     expr : funcExpr,
                     ret : null
                 }
                 var sendTblFunc:Function = {
-                    args: [dataArg,tbl],
+                    args: [dataArg,tbl,unreliable],
                     expr : funcExpr,
                     ret : null
                 }
                 var sendFilterFunc:Function = {
-                    args: [dataArg,filter],
+                    args: [dataArg,filter,unreliable],
                     expr : funcExpr,
                     ret : null
                 }
@@ -168,7 +174,7 @@ class Networking {
     static function writeNetConstructer(anon:ComplexType,name:String):Expr {
         var resolved = Context.resolveType(anon,Context.currentPos());
         var macArray:Array<Expr> = [];
-        macArray.push(macro gmod.libs.NetLib.Start($v{name}));
+        macArray.push(macro gmod.libs.NetLib.Start($v{name},unreliable));
         var entity = Context.resolveType((macro : gmod.gclass.Entity),Context.currentPos());
         var string = Context.resolveType((macro : String),Context.currentPos());
         var vector = Context.resolveType((macro : gmod.gclass.Vector),Context.currentPos());

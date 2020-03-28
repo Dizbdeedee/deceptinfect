@@ -25,6 +25,7 @@ class ComponentManager {
     public static function addPlayer(x:GPlayerCompat):DI_ID {
         var id = addGEnt(cast x);
         addComponent(new PlayerComponent(x),id);
+        PlayerManager.addID(x,id);
         return id;
     }
 
@@ -36,7 +37,7 @@ class ComponentManager {
 
     public static function addComponent<T:Component>(x:T,to:DI_ID) {
         var comparray = lazyInit(Type.getClass(x));
-        trace(to);
+        //trace(to);
         comparray[to] = Comp(x);
     }
 
@@ -95,11 +96,21 @@ abstract DI_ID(Int) from Int to Int {
         return ComponentManager.getComponentForID(x,this);
     }
 
+    public inline function get_sure<T:Component>(x:Class<T>):T {
+        var comp = ComponentManager.getComponentForID(x,this).getParameters()[0];
+        if (comp == null) {throw "Component does not exist at sure statement";}
+        return comp; 
+    }
+
     public extern inline function add_component<T:Component>(x:T) {
         ComponentManager.addComponent(x,this);
     }
 
-    public inline function new(x:Int) {
+    public extern inline function remove_component<T:Component>(x:Class<T>) {
+        ComponentManager.removeComponent(x,this);
+    }
+
+    inline function new(x:Int) {
         this = x;
     }
 

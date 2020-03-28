@@ -9,7 +9,8 @@ class Networking {
     var InfectionMessage:NetMessageServer<N_InfectionMessageDef>;
     var GameState:NetMessageServer<N_GameState>;
     var Geiger:NetMessageServer<N_Geiger>;
-    var GrabStart:NetMessageServer<N_GrabStart>;
+    var GrabUpdate:NetMessageServer<N_GrabPos>;
+    var GrabEnd:NetMessageServer<N_GrabEnd>;
     
 }
 
@@ -17,8 +18,14 @@ typedef N_InfectionMessageDef = {
     infection : Float,
 }
 
-typedef N_GrabStart = {
+typedef N_GrabPos = {
+    index : Int,
+    ent : Entity,
+    ent2 : Entity
+}
 
+typedef N_GrabEnd = {
+    index : Int
 }
 
 typedef N_Geiger = {

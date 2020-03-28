@@ -13,13 +13,17 @@ class SystemManager {
     public static var runSystems(default,null):Array<Class<Dynamic>> = [
         InfectionSystem,
         GeigerSystem,
-        RadiationSystem
+        RadiationSystem,
+        GrabSystem,
+        HiddenHealthSystem
     ];
 
     public static function make() {
         getSystems.set(InfectionSystem,new InfectionSystem());
         getSystems.set(GeigerSystem,new GeigerSystem());
         getSystems.set(RadiationSystem,new RadiationSystem());
+        getSystems.set(GrabSystem,new GrabSystem());
+        getSystems.set(HiddenHealthSystem,new HiddenHealthSystem());
     }
 
     public static function runAllSystems() {

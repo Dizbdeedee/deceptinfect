@@ -52,10 +52,10 @@ class RadiationSystem extends System {
                                 //trace('time $time');
                                 if (shouldRoll(time,c_contamProduce)) {
                                     c_contamAccept.contam_time.resetTime(c_radProduce.id);
-                                    trace('roll');
+                                    //trace('roll');
                                     var randRoll = Math.random();
                                     if (randRoll < c_contamProduce.chance) {
-                                        trace("Contaminated");
+                                        //trace("Contaminated");
                                     }
                                 }
                             } else {

@@ -31,13 +31,13 @@ class Main {
         DeceptInfect.initaliseGamemode();
 
         for (ply in PlayerLib.GetAll()) {
-            new GPlayerCompat(new PlayerComponent(ply));
+            GameManager.initPlayer(ply);
         }
         #if client
         SignalStorage.initEvents();
         ClientOverrides.initaliseGamemode();
         GameManager.init();
-        
+       
         
         #end
         SystemManager.initAllSystems();

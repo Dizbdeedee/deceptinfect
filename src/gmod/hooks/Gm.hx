@@ -5148,8 +5148,14 @@ class Gm {
     
     @:hook
     public function FindUseEntity(ply:Player, defaultEnt:Entity):Entity {return null;}
-    
-    
+	
+	/**
+		Not a real function, called after yourGamemode.initaliseGamemode()
+	**/
+	@:hook
+    public function postIntialize() {
+
+	}
 }
 
 

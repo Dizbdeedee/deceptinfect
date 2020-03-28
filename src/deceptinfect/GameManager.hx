@@ -1,4 +1,5 @@
 package deceptinfect;
+import deceptinfect.ecswip.FormComponent;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.radiation.RadiationProducer;
 import deceptinfect.ecswip.GrabProducer;
@@ -30,7 +31,7 @@ class GameManager {
                 false;
         }
     }
-    
+
     public static function sure():GameInstance {
         return switch (state) {
             case SETTING_UP(x) | PLAYING(x) | ENDING(x):
@@ -50,6 +51,7 @@ class GameManager {
         var grabaccept = new GrabAccepter();
         var radaccept = new RadiationAccepter({contaminate: new ContaminationAccepter()});
         var virpos = new VirtualPosition(x);
+        
         p.add_component(infcomp);
         p.add_component(spec);
         p.add_component(rate);
@@ -88,6 +90,7 @@ class GameManager {
         x.add_component(new InfectedComponent());
         x.add_component(new GrabProducer());
         x.add_component(new HiddenHealthComponent());
+        x.add_component(new FormComponent());
         var rad = RadiationProducer.createFromType(INF);
         rad.state = DISABLED;
         x.add_component(rad);

@@ -1,5 +1,9 @@
 package deceptinfect;
 
+import deceptinfect.ecswip.InfectionSystem;
+import deceptinfect.ecswip.FormSystem;
+import deceptinfect.ecswip.GrabSystem;
+import deceptinfect.ecswip.InfectionComponent;
 import deceptinfect.ecswip.Spectate;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.GEntCompat;
@@ -36,6 +40,18 @@ class DeceptInfect extends gmod.hooks.Gm {
             default:
         }
     }
+    override function OnEntityCreated(entity:Entity) {
+        if (entity.IsPlayer()) {
+            var ent = new GPlayerCompat(new PlayerComponent(cast entity));
+            ent.id.add_component(new InfectionComponent());
+        }
+    }
+
+    override function EntityRemoved(ent:GEntCompat) {
+        if (ent.IsPlayer()) {
+            ent.id.remove_component(PlayerComponent);
+        }
+    }
     #if server
     
 
@@ -50,9 +66,6 @@ class DeceptInfect extends gmod.hooks.Gm {
         return null;
     }
 
-    override function PlayerInitialSpawn(player:Player, transition:Bool) {
-        ComponentManager.addPlayer(player);
-    }
 
     override function PlayerSpawn(player:gmod.types.Player, transition:Bool) {
         player.UnSpectate();
@@ -70,10 +83,16 @@ class DeceptInfect extends gmod.hooks.Gm {
         //kill player if round in progress 
     }
 
-    override function PlayerButtonUp(ply:gmod.types.Player, button:BUTTON_CODE) {
+    override function PlayerButtonUp(ply:GPlayerCompat, button:BUTTON_CODE) {
         switch (button) {
             case KEY_E:
-                trace("e lol");
+                //GameManager.initInfectedPlayer(ply.id);
+                GrabSystem.attemptGrab(ply.id,(PlayerLib.GetByID(2):GPlayerCompat).id);
+            case KEY_F:
+                FormSystem.attemptChangeForm(ply.id);
+            case KEY_SEMICOLON:
+                var plyr:GPlayerCompat = PlayerLib.GetByID(1);
+                InfectionSystem.makeInfected(plyr.id);
             default:
             //handle case of infection? use command strategy
         }
@@ -163,6 +182,7 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
 
     override function EntityTakeDamage(target:GEntCompat, dmg:CTakeDamageInfo):Bool {
+        
         switch (target.has_id()) {
             case Some(id):
                 SignalStorage.entDamageTrigger.trigger(
