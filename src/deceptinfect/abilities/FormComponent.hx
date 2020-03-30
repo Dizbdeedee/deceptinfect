@@ -1,4 +1,6 @@
-package deceptinfect.ecswip;
+package deceptinfect.abilities;
+
+import deceptinfect.ecswip.Component;
 
 class FormComponent extends Component {
     public var formHealth:Float = 60.0;

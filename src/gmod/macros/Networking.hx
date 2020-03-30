@@ -185,7 +185,8 @@ class Networking {
         var bool = Context.resolveType((macro : Bool),Context.currentPos());
         var twoWayUni = (x:haxe.macro.Type,y:haxe.macro.Type) -> x.unify(y) && y.unify(x);
         switch (resolved) {
-            case TType(_.get() => {type : TAnonymous(_.get() => anon)},_) :
+            case TType(_.get() => {type : TAnonymous(_.get() => anon)},_) |
+            TAnonymous(_.get() => anon):
                 for (field in anon.fields) {
                     var name = field.name;
                     switch (field.type) {
@@ -234,7 +235,8 @@ class Networking {
         var twoWayUni = (x:haxe.macro.Type,y:haxe.macro.Type) -> x.unify(y) && y.unify(x);
         // var mac:EObjectDecl = EObjectDecl()
         switch (resolved) {
-            case TType(_.get() => {type : TAnonymous(_.get() => anon)},_) :
+            case TType(_.get() => {type : TAnonymous(_.get() => anon)},_)
+            | TAnonymous(_.get() => anon) :
                 for (field in anon.fields) {
                     var name = field.name;
                     //trace(name);

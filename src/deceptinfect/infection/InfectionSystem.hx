@@ -1,9 +1,11 @@
-package deceptinfect.ecswip;
+package deceptinfect.infection;
 
+import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.Networking.N_InfectionMessageDef;
-import deceptinfect.ecswip.InfectionComponent;
-
+import deceptinfect.infection.InfectionComponent;
+import deceptinfect.ecswip.ComponentManager;
+import deceptinfect.ecswip.PlayerComponent;
 
 class InfectionSystem extends System {
 
@@ -83,10 +85,12 @@ class InfectionSystem extends System {
             inf.infection = switch (inf.infection) {
             case NOT_INFECTED(_):
                 onInfected(ent);
+                
                 INFECTED;
             default:
                 INFECTED;
             }
+            trace('infection : ${inf.infection}');
         default:
             
         }
@@ -141,6 +145,7 @@ class InfectionSystem extends System {
         #if server
         switch (ent.get(PlayerComponent)) {
         case Comp(_):
+            trace('INIT INFECTED PLAYER');
             GameManager.initInfectedPlayer(ent);
         default:
         }

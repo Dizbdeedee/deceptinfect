@@ -3,8 +3,8 @@ package deceptinfect.client;
 import deceptinfect.ecswip.GrabSystem;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.GEntCompat.GPlayerCompat;
-import deceptinfect.ecswip.InfectionComponent;
-import deceptinfect.ecswip.InfectedComponent;
+import deceptinfect.infection.InfectionComponent;
+import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 #if client
 @:build(gmod.macros.GamemodeMacro.build())

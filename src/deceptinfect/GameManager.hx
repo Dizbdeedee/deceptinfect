@@ -1,18 +1,18 @@
 package deceptinfect;
-import deceptinfect.ecswip.FormComponent;
+import deceptinfect.abilities.FormComponent;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.radiation.RadiationProducer;
 import deceptinfect.ecswip.GrabProducer;
-import deceptinfect.ecswip.InfectedComponent;
+import deceptinfect.infection.InfectedComponent;
 import deceptinfect.Networking.N_GameState;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.radiation.ContaminationAccepter;
 import deceptinfect.ecswip.GrabAccepter;
 import deceptinfect.ecswip.HiddenHealthComponent;
-import deceptinfect.ecswip.RateComponent;
+import deceptinfect.infection.RateComponent;
 import deceptinfect.ecswip.SpectateComponent;
-import deceptinfect.ecswip.InfectionComponent;
+import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.GEntCompat;
 import deceptinfect.GameInstance;
@@ -41,16 +41,17 @@ class GameManager {
         }
     }
    
-    public static function initPlayer(x:Player) {
-        var ent = new GPlayerCompat(new PlayerComponent(x));
-        var p = ent.id;
+    public static function initPlayer(ply:GPlayerCompat) {
+        var p = ply.id;
+        // var ent = new GPlayerCompat(new PlayerComponent(x));
+        // var p = ent.id;
         var infcomp = new InfectionComponent();
         var spec = new SpectateComponent();
         var rate = new RateComponent();
         var health = new HiddenHealthComponent();
         var grabaccept = new GrabAccepter();
         var radaccept = new RadiationAccepter({contaminate: new ContaminationAccepter()});
-        var virpos = new VirtualPosition(x);
+        var virpos = new VirtualPosition(ply);
         
         p.add_component(infcomp);
         p.add_component(spec);
@@ -91,6 +92,12 @@ class GameManager {
         x.add_component(new GrabProducer());
         x.add_component(new HiddenHealthComponent());
         x.add_component(new FormComponent());
+        var c_inf = x.get_sure(InfectionComponent);
+        c_inf.infection = INFECTED;
+        var c_accept = x.get_sure(GrabAccepter);
+        //x.remove_component(GrabAccepter);
+        c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
+        trace(c_accept.grabState);
         var rad = RadiationProducer.createFromType(INF);
         rad.state = DISABLED;
         x.add_component(rad);
@@ -127,6 +134,7 @@ class GameManager {
                 
             case PLAYING:
                 state = PLAYING(new GameInstance());
+                PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
         }
     }
     #end

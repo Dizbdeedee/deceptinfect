@@ -3,7 +3,7 @@ package deceptinfect.client;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.Networking.N_Geiger;
-import deceptinfect.ecswip.InfectionComponent;
+import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.System;
 
 @:expose("geiger")

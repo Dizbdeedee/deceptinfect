@@ -1,6 +1,7 @@
 package deceptinfect.ecswip;
 
 import deceptinfect.radiation.RadiationSystem;
+import deceptinfect.infection.InfectionSystem;
 import deceptinfect.radiation.RadiationSystem.RadiationID;
 import haxe.ds.ObjectMap;
 import deceptinfect.client.GeigerSystem;

@@ -5,9 +5,9 @@ import haxe.iterators.StringKeyValueIteratorUnicode;
 import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.ecswip.ComponentManager;
-import deceptinfect.ecswip.RateComponent;
+import deceptinfect.infection.RateComponent;
 import deceptinfect.ecswip.GEntityComponent;
-import deceptinfect.ecswip.RateSystem;
+import deceptinfect.infection.RateSystem;
 import deceptinfect.ecswip.Family;
 
 class RadiationSystem extends System {

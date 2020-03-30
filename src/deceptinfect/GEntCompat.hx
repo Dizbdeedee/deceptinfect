@@ -1,6 +1,7 @@
 package deceptinfect;
 import deceptinfect.ecswip.Component;
-import deceptinfect.ecswip.InfectedComponent;
+import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
 import gmod.types.Entity;

@@ -1,7 +1,7 @@
 package deceptinfect;
 
 // import deceptinfect.ecswip.RadiationManager;
-import deceptinfect.ecswip.InfectionSystem;
+import deceptinfect.infection.InfectionSystem;
 using gmod.PairTools;
 using tink.CoreApi;
 /**

@@ -11,6 +11,9 @@ class Networking {
     var Geiger:NetMessageServer<N_Geiger>;
     var GrabUpdate:NetMessageServer<N_GrabPos>;
     var GrabEnd:NetMessageServer<N_GrabEnd>;
+
+    //var GameStart:NetMessageServer<{}>;
+    
     
 }
 

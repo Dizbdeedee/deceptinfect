@@ -31,7 +31,7 @@ class Main {
         DeceptInfect.initaliseGamemode();
 
         for (ply in PlayerLib.GetAll()) {
-            GameManager.initPlayer(ply);
+            new GPlayerCompat(new PlayerComponent(ply));
         }
         
         SignalStorage.initEvents();

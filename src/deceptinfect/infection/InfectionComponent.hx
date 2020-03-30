@@ -1,4 +1,6 @@
-package deceptinfect.ecswip;
+package deceptinfect.infection;
+
+import deceptinfect.ecswip.Component;
 
 class InfectionComponent extends Component {
     

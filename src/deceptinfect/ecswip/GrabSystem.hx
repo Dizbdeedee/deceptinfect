@@ -7,6 +7,8 @@ import deceptinfect.Networking.N_GrabEnd;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.Networking.N_GrabPos;
 import deceptinfect.client.PVS;
+import deceptinfect.infection.InfectionComponent;
+import deceptinfect.infection.InfectionSystem;
 using deceptinfect.util.EntityExt;
 class GrabSystem extends System {
 
@@ -72,11 +74,15 @@ class GrabSystem extends System {
         if (ent.IsPlayer()) {
             switch (ent.id.get(GrabProducer)) {
             case Comp(c_produce):
-                if (c_produce.grab != null) {
+                switch (c_produce.grabState) {
+                case GRABBING(_):
                     c_produce.damage += dmg.GetDamage();
                     if (c_produce.damage >= c_produce.threshold) {
                         grabStop(ent.id);
+                        c_produce.grabState = NOT_READY(COOLDOWN(GlobalLib.CurTime() + c_produce.nextCooldown));
+                        
                     }
+                default:
                 }
             default:
             }
@@ -86,10 +92,64 @@ class GrabSystem extends System {
     override function run_server() {
         for (attack in ComponentManager.entities) {
             switch [attack.get(GrabProducer),attack.get(GEntityComponent)] {
-            case [Comp(c_grabProduce),Comp(_.entity => g_attack)]:
-                if (c_grabProduce.grab != null) {
-                    var victim = c_grabProduce.grab;
-                    var g_vic = switch (c_grabProduce.grab.get(GEntityComponent)) {
+            case [Comp(c_produce),Comp(_.entity => g_attack)]:
+                switch (c_produce.grabState) {
+                case READY(SEARCHING):
+                    for (victim in ComponentManager.entities) {
+                        if (attack != victim) {
+                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition)] {
+                            case [Comp(_),Comp(_.pos => vicPos)]:
+                                if (vicPos.Distance(g_attack.GetPos()) < c_produce.grabDist) {
+                                    attemptTarget(attack,victim);
+                                    //trace('attempting target ${c_produce.grabState}');
+                                    switch (c_produce.grabState) {
+                                    case READY(TARGET(newTarget)) if (newTarget == victim):
+                                        
+                                        break;
+                                    case GRABBING(_):
+                                        break;
+                                    default:
+                                    }
+                                }
+                            default:
+                            }
+                        }
+                    }
+                case READY(TARGET(prevVic)):
+                    var prevPos = prevVic.get_sure(VirtualPosition).pos;
+                    var oldDist = prevPos.Distance(g_attack.GetPos());
+                    if (oldDist > c_produce.grabDist) {
+                        c_produce.grabState = READY(SEARCHING);
+                        break;
+                    }
+                    attemptSneakAttack(attack,prevVic);
+                    for (victim in ComponentManager.entities) {
+                        if (victim != prevVic && attack != victim) {
+                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition)] {
+                            case [Comp(_),Comp(_.pos => vicPos)]:
+                                var newDist = vicPos.Distance(g_attack.GetPos());
+                                if (newDist < oldDist && newDist < c_produce.grabDist) {
+                                    //trace('switching targets ${victim}');
+                                    attemptTarget(attack,victim);
+                                    switch(c_produce.grabState) {
+                                    case READY(TARGET(newTarget)) if (newTarget == victim):
+                                        trace('switching targets $newTarget');
+                                        break;
+                                    case GRABBING(_):
+                                        break;
+                                    default:
+                                    }
+                                }
+                            default:
+                            }
+                        }
+                    }
+                    
+                    
+                case GRABBING(victim):
+                    //trace('grabbing ${c_produce.grabState}');
+
+                    var g_vic = switch (victim.get(GEntityComponent)) {
                     case Comp(gent):
                         gent.entity;
                     default:
@@ -99,7 +159,7 @@ class GrabSystem extends System {
                     filter.AddPVS(g_attack.GetPos());
                     filter.AddPVS(g_vic.GetPos());
                     Networking.sendFilterGrabUpdate({
-                        index : c_grabProduce.grabindex,
+                        index : c_produce.grabindex,
                         ent: g_vic,
                         ent2: g_attack
                     },filter,true);
@@ -107,19 +167,26 @@ class GrabSystem extends System {
                     case Comp(inf):
                         switch (inf.infection) {
                         case NOT_INFECTED(inf):
-                            trace('infecting');
+                            //trace('infecting');
                             //TODO move
                             inf.value += calcGrabIncrease();
                         case INFECTED:
                             trace("infected");
                             grabStop(attack);
+                            var c_accept = victim.get_sure(GrabAccepter);
+                            c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
+                            
                         }
                     default:
                         throw "Victim has no infection component..";
                     }
-                    
+                case NOT_READY(COOLDOWN(cool)) if (GlobalLib.CurTime() > cool):
+                    c_produce.grabState = READY(NOT_SEARCHING);
 
+                default:
                 }
+
+                
 
             default:
             }
@@ -130,13 +197,18 @@ class GrabSystem extends System {
     static function grabStop(attack:DI_ID) {
         var c_produce = attack.get_sure(GrabProducer);
         var attackPos = attack.get_sure(VirtualPosition).pos;
-        var vic = c_produce.grab;
+        var vic = switch (c_produce.grabState) {
+        case GRABBING(victim):
+            victim;
+        default:
+            return;
+        }
         var vicPos = vic.get_sure(VirtualPosition).pos;
         var c_accept = vic.get_sure(GrabAccepter);
-        c_produce.grab = null;
+        //c_produce.grab = null;
         
-        c_produce.grabState = NOT_READY();
-        c_accept.grabState = NOT_GRABBED;
+        c_produce.grabState = NOT_READY(COOLDOWN(GlobalLib.CurTime() + 2)); //change
+        //c_accept.grabState = NOT_GRABBED;
         c_accept.grabAttacker.set(c_produce,false);
         switch (vic.get(PlayerComponent)) {
         case Comp(plyr):
@@ -157,57 +229,90 @@ class GrabSystem extends System {
     public static function attemptGrab(attack:DI_ID,vic:DI_ID) {
         switch [attack.get(GrabProducer),vic.get(GrabAccepter)] {
         case [Comp(c_produce),Comp(c_accept)]:
-            if (c_produce.grabState == READY) {
+            switch [c_produce.grabState,c_accept.grabState] {
+            case [READY(TARGET(vic)),NOT_GRABBED]:
+                trace('c_accpet ${c_accept.grabState}');
                 grabStart(attack,vic);
+            default:
             }
         default:
         }
         
     }
 
+    public static function requestStartSearch(attack:DI_ID) {
+        switch [attack.get(GrabProducer)] {
+        case [Comp(c_produce = _.grabState => READY(NOT_SEARCHING))]:
+            c_produce.grabState = READY(SEARCHING);
+        default:
+        }
+    }
+
+    public static function requestStopSearch(attack:DI_ID) {
+        switch [attack.get(GrabProducer)] {
+        case [Comp(c_produce = _.grabState => READY(SEARCHING | TARGET(_)))]:
+            c_produce.grabState = READY(NOT_SEARCHING);
+        default:
+        }
+    }
+
+    static function attemptSneakAttack(attack:DI_ID,vic:DI_ID) {
+        
+        switch [vic.get(GEntityComponent),attack.get(GEntityComponent)] {
+        case [Comp(_.entity => g_vic),Comp(_.entity => g_attack)]:
+            if (g_vic.facingBehind(g_attack)) {
+                attemptGrab(attack,vic);
+            }
+        default:
+        }    
+    }
+    
     public static function attemptTarget(attack:DI_ID,vic:DI_ID) {
         switch [attack.get(GrabProducer),vic.get(GrabAccepter)] {
         case [Comp(c_produce),Comp(c_accept)]:
-            switch [vic.get(GEntityComponent),attack.get(GEntityComponent)] {
-            case [Comp(_.entity => g_vic),Comp(_.entity => g_attack)]:
-                if (g_attack.facingBehind(g_vic)) {
-                    attemptGrab(attack,vic);
-                    
-                }
-            default:
-            }    
-            if (c_accept.grabState == NOT_GRABBED && 
-                c_produce.grab == null && 
-                c_accept.targeting.get(c_produce) != true 
-            ) {
-                target(c_accept,c_produce);
+            switch [c_accept.grabState,
+                c_produce.grabState,
+                ] {
+            case [NOT_GRABBED,
+                READY(TARGET(_) | SEARCHING)]:
+                trace(c_accept.grabState);
+                attemptSneakAttack(attack,vic);
+                target(attack,vic);
                 if (c_accept.numTargeting >= c_accept.overwhelm) {
                     attemptGrab(attack,vic);
                 }
-
+            default:
             }
         default:
         }
     
     }
     //TODO cleanup
-    static function clearTargetingVic(vic:GrabAccepter) {
-        for (produce in vic.targeting.keys()) {
-            switch (produce.searchState) {
-            case TARGET(vic):
+    static function clearTargetingVic(vic:DI_ID) {
+        var c_accept = vic.get_sure(GrabAccepter);
+        for (c_produce in c_accept.targeting.keys()) {
+            switch (c_produce.grabState) {
+            case READY(TARGET(target)) if (vic == target):
+                
+                c_produce.grabState = READY(SEARCHING);
+            default:
             }
         }
-        vic.targeting.clear();
+        c_accept.targeting.clear();
+        
     }
+
     
     static function grabStart(attack:DI_ID,vic:DI_ID) {
         trace("starting grab");
         var c_produce = attack.get_sure(GrabProducer);
         var c_accept = vic.get_sure(GrabAccepter);
-        c_produce.grab = vic;
+        //c_produce.grab = vic;
         c_accept.grabAttacker.set(c_produce,true);
         c_accept.grabState = GRABBED;
+        c_produce.grabState = GRABBING(vic);
         c_produce.grabindex = grabindex++;
+        clearTargetingVic(vic);
         switch (vic.get(PlayerComponent)) {
         case Comp(plyr):
             plyr.player.Freeze(true);
@@ -224,11 +329,13 @@ class GrabSystem extends System {
     static function calcGrabIncrease():Float {
         return (100 / GameValues.GRAB_TIME) / Math.floor(1 / EngineLib.TickInterval());
     }
-    static function target(victim:GrabAccepter,attacker:GrabProducer) {
-        if (attacker.targeting == victim) {return;}
-        victim.targeting.set(attacker,true);
-        victim.numTargeting++;
-        attacker.targeting = victim;
+    static function target(attacker:DI_ID,victim:DI_ID) {
+        var c_accept = victim.get_sure(GrabAccepter);
+        var c_produce = attacker.get_sure(GrabProducer);
+        c_accept.targeting.set(c_produce,true);
+        c_accept.numTargeting++;
+        c_produce.grabState = READY(TARGET(victim));
+        
     }
 
     
@@ -238,9 +345,11 @@ class GrabSystem extends System {
     }
 
     public static function stopTargeting(attacker:GrabProducer) {
-        if (attacker.targeting != null) {
-            attacker.targeting.targeting.set(attacker,false);
-            attacker.targeting = null;
+        
+        switch (attacker.grabState) {
+        case READY(TARGET(vic)):
+            attacker.grabState = READY(SEARCHING);
+        default:
         }
     }
 

@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.util.Cooldown;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 
 /**
@@ -17,5 +18,7 @@ class GrabAccepter extends Component {
 enum GrabAcceptState {
     NOT_GRABBED;
     GRABBED;
-    UNAVALIABLE(time:Float);
+    UNAVALIABLE(x:Cooldown);
+
+    
 }

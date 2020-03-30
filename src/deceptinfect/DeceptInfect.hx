@@ -1,9 +1,10 @@
 package deceptinfect;
 
-import deceptinfect.ecswip.InfectionSystem;
-import deceptinfect.ecswip.FormSystem;
+import gmod.enums.IN;
+import deceptinfect.infection.InfectionSystem;
+import deceptinfect.abilities.FormSystem;
 import deceptinfect.ecswip.GrabSystem;
-import deceptinfect.ecswip.InfectionComponent;
+import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.Spectate;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.GEntCompat;
@@ -43,13 +44,16 @@ class DeceptInfect extends gmod.hooks.Gm {
     override function OnEntityCreated(entity:Entity) {
         if (entity.IsPlayer()) {
             var ent = new GPlayerCompat(new PlayerComponent(cast entity));
-            ent.id.add_component(new InfectionComponent());
+            //ent.id.add_component(new InfectionComponent());
+        } else {
+            //var ent = new GEntCompat(new GEntityComponent(entity));
+            
         }
     }
 
     override function EntityRemoved(ent:GEntCompat) {
         if (ent.IsPlayer()) {
-            ent.id.remove_component(PlayerComponent);
+            ComponentManager.removeEntity(ent.id);
         }
     }
     #if server
@@ -84,19 +88,43 @@ class DeceptInfect extends gmod.hooks.Gm {
     }
 
     override function PlayerButtonUp(ply:GPlayerCompat, button:BUTTON_CODE) {
+        
         switch (button) {
             case KEY_E:
+                //GrabSystem.requestStopSearch(ply.id);
                 //GameManager.initInfectedPlayer(ply.id);
-                GrabSystem.attemptGrab(ply.id,(PlayerLib.GetByID(2):GPlayerCompat).id);
+                //GrabSystem.attemptGrab(ply.id,(PlayerLib.GetByID(2):GPlayerCompat).id);
             case KEY_F:
                 FormSystem.attemptChangeForm(ply.id);
             case KEY_SEMICOLON:
                 var plyr:GPlayerCompat = PlayerLib.GetByID(1);
                 InfectionSystem.makeInfected(plyr.id);
+            case KEY_M:
+                untyped __lua__("PrintTable({0})",ComponentManager.components.get(PlayerComponent));
             default:
             //handle case of infection? use command strategy
         }
     }
+
+    override function KeyPress(ply:GPlayerCompat, key:IN) {
+        switch (key) {
+            case IN_USE:
+                GrabSystem.requestStartSearch(ply.id);
+            default:
+        }
+    }
+
+    override function KeyRelease(ply:GPlayerCompat, key:IN) {
+        switch (key) {
+            case IN_USE:
+                GrabSystem.requestStopSearch(ply.id);
+            default:
+        }
+
+    }
+
+
+    
     
     override function PlayerSwitchWeapon(player:gmod.types.Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
         if (newWeapon.GetClass() == "weapon_infect") {
@@ -105,10 +133,10 @@ class DeceptInfect extends gmod.hooks.Gm {
         return null;
     }
 
-    override function PlayerButtonDown(ply:gmod.types.Player, button:BUTTON_CODE) {
+    override function PlayerButtonDown(ply:GPlayerCompat, button:BUTTON_CODE) {
         switch (button) {
             case KEY_E:
-                trace("down");
+                //GrabSystem.requestStartSearch(ply.id);
             default:
         }
     }

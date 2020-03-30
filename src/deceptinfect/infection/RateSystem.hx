@@ -1,4 +1,4 @@
-package deceptinfect.ecswip;
+package deceptinfect.infection;
 
 class RateSystem {    
     static var nextAddRate:Int = 0;

@@ -5,8 +5,6 @@ import deceptinfect.ecswip.ComponentManager.DI_ID;
 
 class GrabProducer extends Component {
 
-    public var grab:Null<DI_ID> = null;
-
     public var grabindex = 0;
     public var grabinc:Float = 0.0;
     public var damage:Float = 0.0;
@@ -16,9 +14,22 @@ class GrabProducer extends Component {
 
     public var nextCooldown:Float = 5;
 
-
-    public var searchState:SearchingState = NOT_SEARCHING;
-    public var grabState:GrabProduceState = READY;
+    public var grabDist:Float = 70;
+    public var grabState(default,#if server set #else default #end):GrabProduceState = READY(NOT_SEARCHING);
+    #if server
+    public function set_grabState(newGrabState:GrabProduceState):GrabProduceState {
+        
+        switch [grabState,newGrabState] {
+            case [READY(TARGET(old)),READY(TARGET(newt))] if (old == newt):
+            case [READY(TARGET(old)),x]:
+                var c_accept = old.get_sure(GrabAccepter);
+                c_accept.numTargeting--;
+            default:
+        }
+        return grabState = newGrabState;
+        
+    }
+    #end
     
     
 }
@@ -30,8 +41,8 @@ enum SearchingState {
 }
 
 enum GrabProduceState {
-    READY;
+    READY(search:SearchingState);
     GRABBING(victim:DI_ID);
-    NOT_READY(x:Cooldown)
+    NOT_READY(x:Cooldown);
     
 }

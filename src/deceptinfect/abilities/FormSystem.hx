@@ -1,6 +1,8 @@
-package deceptinfect.ecswip;
+package deceptinfect.abilities;
 
+import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
+import deceptinfect.ecswip.GEntityComponent;
 
 class FormSystem extends System {
 

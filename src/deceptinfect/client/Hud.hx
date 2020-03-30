@@ -1,6 +1,6 @@
 package deceptinfect.client;
 
-import deceptinfect.ecswip.InfectionComponent;
+import deceptinfect.infection.InfectionComponent;
 import deceptinfect.GameManager.GAME_STATE;
 #if client
 class Hud { 
