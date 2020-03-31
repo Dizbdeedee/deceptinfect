@@ -18,7 +18,11 @@ private typedef Generate = {
 
     funcs : Array<Field>,
     properties : {},
-    weapon : Bool
+    weapon : Bool,
+    effect : Bool,
+
+    overridenInit : Bool,
+    overridenThink : Bool
 }
 
 
@@ -26,12 +30,19 @@ class SentMacro {
 
     static var generate:Array<Generate> = [];
     static var onGenerate = false;
-    public static function build(?weapon=false):Array<Field> {
+    public static function build(?weapon:Bool=false,?effect:Bool=false):Array<Field> {
+        switch [effect,Context.defined("server")] {
+            case [true,true]:
+                throw "Effects aren't on the server...";
+            default:
+        }
         var properties = null;
         var cls = Context.getLocalClass().get();
         var type = Context.toComplexType(Context.getLocalType());
         var fields = Context.getBuildFields();
         var overridename;
+        var overridenInit = false;
+        var overridenThink = false;
         
         
         if (cls.meta.has(":expose")) {
@@ -65,10 +76,16 @@ class SentMacro {
                         trace("Unable to get the value of properties");
                         return null;
                     }
-                case [_,FFun(f)]:
+                case [name,FFun(f)]:
                     switch (field.access) {
                         case [Access.AStatic]:
                         case [Access.AOverride]:
+                            switch name {
+                            case "Initialize" | "Init":
+                                overridenInit = true;
+                            case "Think":
+                                overridenThink = true;
+                            }
                             fOverride.push(field);
                         default:
                             if (field.meta.filter((f) -> return f.name == ":entExpose").length > 0) {
@@ -78,7 +95,7 @@ class SentMacro {
                 default:
             }
         }
-        if (properties == null) {
+        if (properties == null && effect == false) {
             throw "No ent propeties found";
         }
 
@@ -112,7 +129,8 @@ class SentMacro {
             }
         }
         var entLuaType;
-        if (!weapon) {
+        switch ([weapon,effect]) {
+        case [false,false]:
             var type = cls.findField("TYPE");
             entLuaType = switch (type.expr().expr) {
                 case TConst(TString(s)):
@@ -120,8 +138,20 @@ class SentMacro {
                 default:
                     throw "no TYPE for ENT definition";
             }
+        default:
         }
-        generate.push({genName : genName,entLuaType : entLuaType,funcs : fOverride,properties : properties,weapon:weapon});
+            
+        
+        generate.push({
+            genName : genName,
+            entLuaType : entLuaType,
+            funcs : fOverride,
+            properties : properties,
+            weapon:weapon,
+            effect:effect,
+            overridenThink: overridenThink,
+            overridenInit: overridenInit
+        });
         if (!onGenerate) {
             Context.onAfterGenerate(afterGenerate);
             onGenerate = true;
@@ -142,12 +172,19 @@ class SentMacro {
         for (gen in generate) {
             var baseIdent:String;
             var _baseStorage:String;
-            if (gen.weapon) {
+            switch [gen.weapon,gen.effect] {
+
+            case [true,false]:
                 _baseStorage = '$baseStorage/weapons';
                 baseIdent = "SWEP";
-            } else {
+            case [false,false]:
                 _baseStorage = '$baseStorage/entities';
                 baseIdent = "ENT";
+            case [false,true]:
+                _baseStorage = '$baseStorage/effects';
+                baseIdent = "EFFECT";
+            default:
+                throw "enums didn't work....";
             }
             var filebuf = new StringBuf();
             var dyn:haxe.DynamicAccess<Dynamic> = cast gen.properties;
@@ -168,35 +205,58 @@ class SentMacro {
             for (key => val in dyn) {
                 addy('$baseIdent.$key',val);
             }
-            if (!gen.weapon) {
+            switch [gen.weapon,gen.effect] {
+            case [false,false]:
                 filebuf.add('$baseIdent.Type = "${gen.entLuaType}"\n');
+            default:
             }
+            
             #if server
                 filebuf.add("AddCSLuaFile(\"cl_init.lua\")\n");
             #end
-            #if client
-                filebuf.add('\nfunction $baseIdent:Think(...)\n');
-                filebuf.add('\tif (not self._gHaxeInit) then\n');
-                filebuf.add('\t\tself._gHaxeBurrow:Initalize()\n');
-                filebuf.add('\tend\n');
-                filebuf.add('\tself._gHaxeBurrow:Think(...)\n');
+            if (!gen.effect) {
+                #if client
+                    filebuf.add('\nfunction $baseIdent:Think()\n');
+                    filebuf.add('\tif (not self._gHaxeInit) then\n');
+                    filebuf.add('\t\tself:Initialize()\n');
+                    filebuf.add('\tend\n');
+                    if (gen.overridenThink) {
+                        filebuf.add('\tself._gHaxeBurrow:Think()\n');
+                    }
+                    filebuf.add('end\n\n');
+                #end
+                filebuf.add('\nfunction $baseIdent:Initialize()\n');
+                filebuf.add('\tlocal ent = $exportName.${gen.genName}.new(self)\n');
+                filebuf.add("\tself._gHaxeBurrow = ent\n");
+                if (gen.overridenInit) {
+                    filebuf.add("\tself._gHaxeBurrow:Initialize()\n");
+                }
+                #if client
+                    filebuf.add("\tself._gHaxeInit = true\n");
+                #end
                 filebuf.add('end\n\n');
-            #end
-            filebuf.add('\nfunction $baseIdent:Initialize(...)\n');
-            filebuf.add('\tlocal ent = $exportName.${gen.genName}.new(self)\n');
-            filebuf.add("\tself._gHaxeBurrow = ent\n");
-            filebuf.add("\tself._gHaxeBurrow:Initialize()\n");
-            #if client
-                filebuf.add("\tself._gHaxeInit = true\n");
-            #end
-            filebuf.add('end\n\n');
+            } else {
+                filebuf.add('\nfunction $baseIdent:Init(...)\n');
+                filebuf.add('\tlocal ent = $exportName.${gen.genName}.new(self)\n');
+                filebuf.add("\tself._gHaxeBurrow = ent\n");
+                if (gen.overridenInit) {
+                    filebuf.add("\tself._gHaxeBurrow:Init(...)\n");
+                }
+                filebuf.add('end\n\n');
+            }
             for (field in gen.funcs) {
                 switch (field.name) {
                     case "Initialize": 
-                        continue;               
+                        continue;
+                    case "Init":
+                        if (gen.effect) {
+                            continue;
+                        }
                     #if client
                     case "Think":
-                        continue;
+                        if (!gen.effect) {
+                            continue;
+                        }
                     #end
                     default:
                 }
@@ -206,9 +266,13 @@ class SentMacro {
             }
             FileSystem.createDirectory('$_baseStorage/${gen.genName}');
             #if client
-                File.saveContent('$_baseStorage/${gen.genName}/cl_init.lua',filebuf.toString());
-            #elseif server
+            if (gen.effect) {
                 File.saveContent('$_baseStorage/${gen.genName}/init.lua',filebuf.toString());
+            } else {
+                File.saveContent('$_baseStorage/${gen.genName}/cl_init.lua',filebuf.toString());
+            }
+            #elseif server
+            File.saveContent('$_baseStorage/${gen.genName}/init.lua',filebuf.toString());
             #end
         }
     }

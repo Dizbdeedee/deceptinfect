@@ -71,6 +71,9 @@ __gmod_sent_SentBuild = _hx_e()
 __deceptinfect_Di_battery = _hx_e()
 __deceptinfect_Di_charger = _hx_e()
 __deceptinfect_Di_nest = _hx_e()
+__gmod_seffects_EFFECT = _hx_e()
+__gmod_seffects_SeffectBuild = _hx_e()
+__deceptinfect_Effect_di_test = _hx_e()
 __deceptinfect__GEntCompat_GEntCompat_Impl_ = _hx_e()
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
 __deceptinfect_GameInstance = _hx_e()
@@ -169,6 +172,7 @@ __gmod_TestTwo = _hx_e()
 __gmod_TestFour = _hx_e()
 __gmod_TableTools = _hx_e()
 __gmod_hooks_Swep = _hx_e()
+__gmod_macros_SentType = _hx_e()
 __gmod_types__Panel_Panel_Impl_ = _hx_e()
 __haxe_StackItem = _hx_e()
 __haxe_EntryPoint = _hx_e()
@@ -1818,6 +1822,52 @@ end
 __deceptinfect_Di_nest.prototype.__class__ =  __deceptinfect_Di_nest
 __deceptinfect_Di_nest.__super__ = __gmod_sent_ENT_ANIM
 setmetatable(__deceptinfect_Di_nest.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
+
+__gmod_seffects_EFFECT.new = {}
+__gmod_seffects_EFFECT.__name__ = "gmod.seffects.EFFECT"
+__gmod_seffects_EFFECT.prototype = _hx_a();
+__gmod_seffects_EFFECT.prototype.EndTouch = function(self) 
+end
+__gmod_seffects_EFFECT.prototype.PhysicsCollide = function(self,colData,collider) 
+end
+__gmod_seffects_EFFECT.prototype.Touch = function(self) 
+end
+__gmod_seffects_EFFECT.prototype.Think = function(self) 
+  do return nil end
+end
+__gmod_seffects_EFFECT.prototype.StartTouch = function(self) 
+end
+__gmod_seffects_EFFECT.prototype.Init = function(self,effectData) 
+end
+__gmod_seffects_EFFECT.prototype.Render = function(self) 
+end
+__gmod_seffects_EFFECT.prototype.GetTracerShootPos = function(self,pos,ent,attachment) 
+  do return nil end
+end
+
+__gmod_seffects_EFFECT.prototype.__class__ =  __gmod_seffects_EFFECT
+
+__gmod_seffects_SeffectBuild.new = {}
+__gmod_seffects_SeffectBuild.__name__ = "gmod.seffects.SeffectBuild"
+
+__deceptinfect_Effect_di_test.new = function(curEnt) 
+  local self = _hx_new(__deceptinfect_Effect_di_test.prototype)
+  __deceptinfect_Effect_di_test.super(self,curEnt)
+  return self
+end
+__deceptinfect_Effect_di_test.super = function(self,curEnt) 
+  self["self"] = curEnt;
+end
+_hx_exports["effect_di_test"] = __deceptinfect_Effect_di_test
+__deceptinfect_Effect_di_test.__name__ = "deceptinfect.Effect_di_test"
+__deceptinfect_Effect_di_test.prototype = _hx_a();
+__deceptinfect_Effect_di_test.prototype.Init = function(self,effectData) 
+  __haxe_Log.trace(effectData:GetOrigin(), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/Effect_di_test.hx",lineNumber=6,className="deceptinfect.Effect_di_test",methodName="Init"}));
+end
+
+__deceptinfect_Effect_di_test.prototype.__class__ =  __deceptinfect_Effect_di_test
+__deceptinfect_Effect_di_test.__super__ = __gmod_seffects_EFFECT
+setmetatable(__deceptinfect_Effect_di_test.prototype,{__index=__gmod_seffects_EFFECT.prototype})
 
 __deceptinfect__GEntCompat_GEntCompat_Impl_.new = {}
 __deceptinfect__GEntCompat_GEntCompat_Impl_.__name__ = "deceptinfect._GEntCompat.GEntCompat_Impl_"
@@ -4489,6 +4539,14 @@ __gmod_hooks_Swep.prototype.DrawHUDBackground = function(self)
 end
 
 __gmod_hooks_Swep.prototype.__class__ =  __gmod_hooks_Swep
+_hxClasses["gmod.macros.SentType"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="SENT","SWEP","EFFECT"},3)}
+__gmod_macros_SentType = _hxClasses["gmod.macros.SentType"];
+__gmod_macros_SentType.SENT = _hx_tab_array({[0]="SENT",0,__enum__ = __gmod_macros_SentType},2)
+
+__gmod_macros_SentType.SWEP = _hx_tab_array({[0]="SWEP",1,__enum__ = __gmod_macros_SentType},2)
+
+__gmod_macros_SentType.EFFECT = _hx_tab_array({[0]="EFFECT",2,__enum__ = __gmod_macros_SentType},2)
+
 
 __gmod_types__Panel_Panel_Impl_.new = {}
 __gmod_types__Panel_Panel_Impl_.__name__ = "gmod.types._Panel.Panel_Impl_"

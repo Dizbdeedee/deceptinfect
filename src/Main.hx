@@ -28,6 +28,9 @@ import deceptinfect.ecswip.SystemManager;
 import deceptinfect.Di_charger;
 import deceptinfect.Di_nest;
 import deceptinfect.Weapon_di_scan;
+#if client
+import deceptinfect.Effect_di_test;
+#end
 class Main {
     public static function main() {
         deceptinfect.Networking.initMessages();

@@ -6,7 +6,7 @@ Ammo = "SMG1",
 }
 AddCSLuaFile("cl_init.lua")
 
-function SWEP:Initialize(...)
+function SWEP:Initialize()
 	local ent = deceptinfect_HAXE_EXPORT.weapon_di_scan.new(self)
 	self._gHaxeBurrow = ent
 	self._gHaxeBurrow:Initialize()

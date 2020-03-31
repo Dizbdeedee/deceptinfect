@@ -1,6 +1,7 @@
 package gmod.swep;
 
 import gmod.hooks.Swep;
+import gmod.macros.SentType;
 
 typedef SwepFields = {
 
@@ -236,7 +237,7 @@ typedef SwepFields = {
     var ?Author : String;
 }
 
-@:autoBuild(gmod.macros.SentMacro.build(true))
+@:autoBuild(gmod.macros.SentMacro.build(true,false))
 interface SwepBuild {
     private final properties:SwepFields;
 }

@@ -5,15 +5,14 @@ DefaultClip = -1,
 Ammo = "SMG1",
 }
 
-function SWEP:Think(...)
+function SWEP:Think()
 	if (not self._gHaxeInit) then
-		self._gHaxeBurrow:Initalize()
+		self:Initialize()
 	end
-	self._gHaxeBurrow:Think(...)
 end
 
 
-function SWEP:Initialize(...)
+function SWEP:Initialize()
 	local ent = deceptinfect_HAXE_EXPORT.weapon_di_scan.new(self)
 	self._gHaxeBurrow = ent
 	self._gHaxeBurrow:Initialize()
