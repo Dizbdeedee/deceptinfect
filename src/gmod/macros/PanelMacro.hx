@@ -142,36 +142,6 @@ class PanelMacro {
             //field.meta = [{name : ":deprecated",params : [macro "Hook function, do not use"],pos : Context.currentPos()}];
         }
         return field;
-
-    }
-    public static function build():Array<Field> {
-        var cls = Context.getLocalClass().get();
-        var type = Context.toComplexType(Context.getLocalType());
-        var fields = Context.getBuildFields();
-        
-        var overridename;
-        
-        var targetClass = cls.interfaces[0].params[0].getClass();
-        var nuClass = macro class {
-            public function lolTest():Int {
-                return 2;
-            }
-        }
-        
-
-        
-
-        trace("meme");
-
-        for (stuff in getSuperFields(targetClass)) {
-            fields.push(classFuncToField(stuff));
-        }
-        
-        
-    
-
-
-        return fields;
     }
     #end
 }

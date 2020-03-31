@@ -71,8 +71,8 @@ __gmod_sent_SentBuild = _hx_e()
 __deceptinfect_Di_battery = _hx_e()
 __deceptinfect_Di_charger = _hx_e()
 __deceptinfect_Di_nest = _hx_e()
-__gmod_seffects_EFFECT = _hx_e()
-__gmod_seffects_SeffectBuild = _hx_e()
+__gmod_effects_EFFECT = _hx_e()
+__gmod_effects_EffectBuild = _hx_e()
 __deceptinfect_Effect_di_test = _hx_e()
 __deceptinfect__GEntCompat_GEntCompat_Impl_ = _hx_e()
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
@@ -171,6 +171,7 @@ __gmod_PanelTest = _hx_e()
 __gmod_TestTwo = _hx_e()
 __gmod_TestFour = _hx_e()
 __gmod_TableTools = _hx_e()
+__gmod_gamemode_GamemodeTXT = _hx_e()
 __gmod_hooks_Swep = _hx_e()
 __gmod_macros_SentType = _hx_e()
 __gmod_types__Panel_Panel_Impl_ = _hx_e()
@@ -584,7 +585,7 @@ Main.new = {}
 Main.__name__ = "Main"
 Main.main = function() 
   __deceptinfect_Networking.initMessages();
-  __deceptinfect_DeceptInfect.initaliseGamemode();
+  __deceptinfect_DeceptInfect.new();
   local ply = __gmod_PairTools.iterator(_G.player.GetAll());
   while (ply:hasNext()) do 
     local ply1 = ply:next();
@@ -593,7 +594,7 @@ Main.main = function()
     x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this1);
   end;
   __deceptinfect_ecswip_SignalStorage.initEvents();
-  __deceptinfect_client_ClientOverrides.initaliseGamemode();
+  __deceptinfect_client_ClientOverrides.new();
   __deceptinfect_GameManager.init();
   __deceptinfect_ecswip_SystemManager.initAllSystems();
 end
@@ -1624,24 +1625,20 @@ end
 
 __gmod_hooks_Gm.prototype.__class__ =  __gmod_hooks_Gm
 
-__deceptinfect_DeceptInfect.new = function(_self) 
+__deceptinfect_DeceptInfect.new = function() 
   local self = _hx_new(__deceptinfect_DeceptInfect.prototype)
-  __deceptinfect_DeceptInfect.super(self,_self)
+  __deceptinfect_DeceptInfect.super(self)
   return self
 end
-__deceptinfect_DeceptInfect.super = function(self,_self) 
-  _self.Think = function(GM,...) return self:Think(...) end;
-  _self.OnEntityCreated = function(GM,...) return self:OnEntityCreated(...) end;
-  _self.EntityRemoved = function(GM,...) return self:EntityRemoved(...) end;
+__deceptinfect_DeceptInfect.super = function(self) 
+  GM.Think = function(GM,...) return self:Think(...) end;
+  GM.OnEntityCreated = function(GM,...) return self:OnEntityCreated(...) end;
+  GM.EntityRemoved = function(GM,...) return self:EntityRemoved(...) end;
+  self["self"] = GM;
+  __deceptinfect_DeceptInfect.instance = self;
   self:postIntialize();
 end
 __deceptinfect_DeceptInfect.__name__ = "deceptinfect.DeceptInfect"
-__deceptinfect_DeceptInfect.initaliseGamemode = function() 
-  local GM = GM;
-  local inst = __deceptinfect_DeceptInfect.new(GM);
-  __deceptinfect_DeceptInfect.GAMEMODE = inst;
-  do return inst end;
-end
 __deceptinfect_DeceptInfect.prototype = _hx_a();
 __deceptinfect_DeceptInfect.prototype.Think = function(self) 
   __deceptinfect_ecswip_SystemManager.runAllSystems();
@@ -1823,32 +1820,32 @@ __deceptinfect_Di_nest.prototype.__class__ =  __deceptinfect_Di_nest
 __deceptinfect_Di_nest.__super__ = __gmod_sent_ENT_ANIM
 setmetatable(__deceptinfect_Di_nest.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
 
-__gmod_seffects_EFFECT.new = {}
-__gmod_seffects_EFFECT.__name__ = "gmod.seffects.EFFECT"
-__gmod_seffects_EFFECT.prototype = _hx_a();
-__gmod_seffects_EFFECT.prototype.EndTouch = function(self) 
+__gmod_effects_EFFECT.new = {}
+__gmod_effects_EFFECT.__name__ = "gmod.effects.EFFECT"
+__gmod_effects_EFFECT.prototype = _hx_a();
+__gmod_effects_EFFECT.prototype.EndTouch = function(self) 
 end
-__gmod_seffects_EFFECT.prototype.PhysicsCollide = function(self,colData,collider) 
+__gmod_effects_EFFECT.prototype.PhysicsCollide = function(self,colData,collider) 
 end
-__gmod_seffects_EFFECT.prototype.Touch = function(self) 
+__gmod_effects_EFFECT.prototype.Touch = function(self) 
 end
-__gmod_seffects_EFFECT.prototype.Think = function(self) 
+__gmod_effects_EFFECT.prototype.Think = function(self) 
   do return nil end
 end
-__gmod_seffects_EFFECT.prototype.StartTouch = function(self) 
+__gmod_effects_EFFECT.prototype.StartTouch = function(self) 
 end
-__gmod_seffects_EFFECT.prototype.Init = function(self,effectData) 
+__gmod_effects_EFFECT.prototype.Init = function(self,effectData) 
 end
-__gmod_seffects_EFFECT.prototype.Render = function(self) 
+__gmod_effects_EFFECT.prototype.Render = function(self) 
 end
-__gmod_seffects_EFFECT.prototype.GetTracerShootPos = function(self,pos,ent,attachment) 
+__gmod_effects_EFFECT.prototype.GetTracerShootPos = function(self,pos,ent,attachment) 
   do return nil end
 end
 
-__gmod_seffects_EFFECT.prototype.__class__ =  __gmod_seffects_EFFECT
+__gmod_effects_EFFECT.prototype.__class__ =  __gmod_effects_EFFECT
 
-__gmod_seffects_SeffectBuild.new = {}
-__gmod_seffects_SeffectBuild.__name__ = "gmod.seffects.SeffectBuild"
+__gmod_effects_EffectBuild.new = {}
+__gmod_effects_EffectBuild.__name__ = "gmod.effects.EffectBuild"
 
 __deceptinfect_Effect_di_test.new = function(curEnt) 
   local self = _hx_new(__deceptinfect_Effect_di_test.prototype)
@@ -1862,12 +1859,12 @@ _hx_exports["effect_di_test"] = __deceptinfect_Effect_di_test
 __deceptinfect_Effect_di_test.__name__ = "deceptinfect.Effect_di_test"
 __deceptinfect_Effect_di_test.prototype = _hx_a();
 __deceptinfect_Effect_di_test.prototype.Init = function(self,effectData) 
-  __haxe_Log.trace(effectData:GetOrigin(), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/Effect_di_test.hx",lineNumber=6,className="deceptinfect.Effect_di_test",methodName="Init"}));
+  __haxe_Log.trace(effectData:GetRadius(), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/Effect_di_test.hx",lineNumber=6,className="deceptinfect.Effect_di_test",methodName="Init"}));
 end
 
 __deceptinfect_Effect_di_test.prototype.__class__ =  __deceptinfect_Effect_di_test
-__deceptinfect_Effect_di_test.__super__ = __gmod_seffects_EFFECT
-setmetatable(__deceptinfect_Effect_di_test.prototype,{__index=__gmod_seffects_EFFECT.prototype})
+__deceptinfect_Effect_di_test.__super__ = __gmod_effects_EFFECT
+setmetatable(__deceptinfect_Effect_di_test.prototype,{__index=__gmod_effects_EFFECT.prototype})
 
 __deceptinfect__GEntCompat_GEntCompat_Impl_.new = {}
 __deceptinfect__GEntCompat_GEntCompat_Impl_.__name__ = "deceptinfect._GEntCompat.GEntCompat_Impl_"
@@ -2515,25 +2512,21 @@ __deceptinfect_abilities_FormSystem.prototype.__class__ =  __deceptinfect_abilit
 __deceptinfect_abilities_FormSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_abilities_FormSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
-__deceptinfect_client_ClientOverrides.new = function(_self) 
+__deceptinfect_client_ClientOverrides.new = function() 
   local self = _hx_new(__deceptinfect_client_ClientOverrides.prototype)
-  __deceptinfect_client_ClientOverrides.super(self,_self)
+  __deceptinfect_client_ClientOverrides.super(self)
   return self
 end
-__deceptinfect_client_ClientOverrides.super = function(self,_self) 
-  _self.HUDPaint = function(GM,...) return self:HUDPaint(...) end;
-  _self.NotifyShouldTransmit = function(GM,...) return self:NotifyShouldTransmit(...) end;
-  _self.PreDrawOpaqueRenderables = function(GM,...) return self:PreDrawOpaqueRenderables(...) end;
-  _self.postIntialize = function(GM,...) return self:postIntialize(...) end;
+__deceptinfect_client_ClientOverrides.super = function(self) 
+  GM.HUDPaint = function(GM,...) return self:HUDPaint(...) end;
+  GM.NotifyShouldTransmit = function(GM,...) return self:NotifyShouldTransmit(...) end;
+  GM.PreDrawOpaqueRenderables = function(GM,...) return self:PreDrawOpaqueRenderables(...) end;
+  GM.postIntialize = function(GM,...) return self:postIntialize(...) end;
+  self["self"] = GM;
+  __deceptinfect_client_ClientOverrides.instance = self;
   self:postIntialize();
 end
 __deceptinfect_client_ClientOverrides.__name__ = "deceptinfect.client.ClientOverrides"
-__deceptinfect_client_ClientOverrides.initaliseGamemode = function() 
-  local GM = GM;
-  local inst = __deceptinfect_client_ClientOverrides.new(GM);
-  __deceptinfect_client_ClientOverrides.GAMEMODE = inst;
-  do return inst end;
-end
 __deceptinfect_client_ClientOverrides.prototype = _hx_a();
 __deceptinfect_client_ClientOverrides.prototype.HUDPaint = function(self) 
   __deceptinfect_client_Hud.paint();
@@ -4420,6 +4413,11 @@ __gmod_TableTools.new = {}
 __gmod_TableTools.__name__ = "gmod.TableTools"
 __gmod_TableTools.length = function(table) 
   do return #table end;
+end
+
+__gmod_gamemode_GamemodeTXT.new = {}
+__gmod_gamemode_GamemodeTXT.__name__ = "gmod.gamemode.GamemodeTXT"
+__gmod_gamemode_GamemodeTXT.generateTXT = function() 
 end
 
 __gmod_hooks_Swep.new = {}
@@ -6371,7 +6369,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -6388,7 +6386,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -6397,16 +6395,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -6415,7 +6413,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -6475,13 +6473,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g1 = o[2];
-    local tmp1 = _g1[1];
+    local _g = o[2];
+    local tmp1 = _g[1];
     if (tmp1) == 0 then 
-      local d = _g1[2];
+      local d = _g[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g1[2];
+      local f = _g[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -6617,7 +6615,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g1 = o[2];
+      local _g = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -6701,10 +6699,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g1 = o1[2];
-                local next3 = _g1[1];
+                local _g = o1[2];
+                local next3 = _g[1];
                 if (next3) == 0 then 
-                  local ret = _g1[2];
+                  local ret = _g[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;

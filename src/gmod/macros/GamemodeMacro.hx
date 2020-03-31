@@ -16,41 +16,27 @@ class GamemodeMacro {
         var complextype = Context.toComplexType(type);
         var inst = haxe.macro.Type.TInst(cls.superClass.t,cls.superClass.params);
         var superType = Context.toComplexType(inst);
-        
-        
-        // var exprBuffer = new StringBuf();
-        
-        // exprBuffer.add("{\n");
         var exprBuffer:Array<Expr> = [];
-        
-        
         for (field in fields) {
             switch (field.kind) {
                 case FFun(f):
-                    if (field.access.indexOf(Access.AOverride) > -1) {
-                        field.access.remove(Access.APublic);
+                    if (field.access.indexOf(Access.AOverride) > -1 ||
+                        field.meta.filter(f -> f.name == "exposeGM").length > 0
+                        ) {
                         var name = field.name;
-                        var str = '{0}.$name = function(GM,...) return {1}:$name(...) end';
-                        exprBuffer.push(macro untyped __lua__($v{str},self,this));
-                        // exprBuffer.push(macro Reflect.setField(self,$v{field.name},this.$name));
-                        // exprBuffer.add('Reflect.setField(self,${field.name},this.${field.name});\n');
+                        var str = 'GM.$name = function(GM,...) return {0}:$name(...) end';
+                        exprBuffer.push(macro untyped __lua__($v{str},this));
                     }
                 default:
-
             }
-            // var func:Function = field.kind.getParameters()[0];
-            
-
         }
-        // exprBuffer.add("\n}");
+        exprBuffer.push(macro untyped self = untyped __lua__("GM"));
+        exprBuffer.push(macro untyped instance = this);
         exprBuffer.push(macro postIntialize());
         var constructer:Function = {
-            args : [{name : "self",
-                    type : superType
-            }],
+            args : [],
             ret : null,
             expr : macro $b{exprBuffer}
-            // expr : Context.parse(exprBuffer.toString(),Context.currentPos()),
         }
         var newField:Field = {
             name:"new",
@@ -58,58 +44,25 @@ class GamemodeMacro {
             kind : FieldType.FFun(constructer),
             pos : Context.currentPos()
         }
-        
         fields.push(newField);
-
-
-        var curClass = switch (complextype) {
-            case TPath(p):
-                p;
-            default:
-                throw ("hmmm");
-                null;
-        }
-        
-        // var _cls = switch () {
-        //     case TPath(p):
-        //         p;
-        //     default:
-        //         null;
-        // }
-        var ename = cls.name;
-        var initGameFunc:Function = {
-            expr : macro {
-                var GM = untyped __lua__("GM");
-                var inst = new $curClass(GM);
-                Reflect.setField($i{ename},"GAMEMODE",inst);
-                return inst;
-            },
-            args : [],
-            ret: complextype,
-        
-        }
-        
-        var initGameField:Field = {
-            name : "initaliseGamemode",
-            kind : FieldType.FFun(initGameFunc),
-            access: [Access.APublic,Access.AStatic],
+        var self:Field = {
+            name : "self",
+            access:[],
+            kind :FieldType.FProp("default","never",superType),
             pos : Context.currentPos(),
-            doc : "Initalises the gamemode, so you can access your gamemode via the GAMEMODE var\n\nThe current gamemodes hooks will be overriden when this method is called"    
+            doc : "Underlying gamemode table"
         }
-        var gamemodeField:Field = {
-            name : "GAMEMODE",
-            access:[Access.APublic,Access.AStatic],
-            kind :FieldType.FProp("default","never",complextype),
-            pos : Context.currentPos(),
-            doc : "Current gamemode. Make sure to intialise using gamemodetools first!"
+        var curInstance:Field = {
+            name : "instance",
+            doc : "Currently active instance of haxe gamemode object",
+            access : [Access.APublic,Access.AStatic],
+            kind : FieldType.FProp("default","never",complextype),
+            pos : Context.currentPos()
         }
-        fields.push(initGameField);
-        fields.push(gamemodeField);
+        fields.push(self);
+        fields.push(curInstance);
         cls.meta.add(":keep",[],Context.currentPos());
         return fields;
     }
-
- 
 }
-
 #end

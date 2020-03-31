@@ -1,4 +1,5 @@
 
+import gmod.gamemode.GamemodeTXT;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.client.ClientOverrides;
 import deceptinfect.ecswip.Component;
@@ -34,15 +35,22 @@ import deceptinfect.Effect_di_test;
 class Main {
     public static function main() {
         deceptinfect.Networking.initMessages();
-        DeceptInfect.initaliseGamemode();
-
+        new DeceptInfect();
+        
+       
+        #if server
+        GamemodeTXT.boo({
+            base : "",
+        
+        });
+        #end    
         for (ply in PlayerLib.GetAll()) {
             new GPlayerCompat(new PlayerComponent(ply));
         }
         
         SignalStorage.initEvents();
         #if client
-        ClientOverrides.initaliseGamemode();
+        new ClientOverrides();
         GameManager.init();
        
         

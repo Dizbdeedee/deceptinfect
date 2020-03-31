@@ -1,4 +1,4 @@
-package gmod.seffects;
+package gmod.effects;
 
 
 #if client

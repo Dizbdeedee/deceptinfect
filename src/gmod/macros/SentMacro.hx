@@ -43,8 +43,6 @@ class SentMacro {
         var overridename;
         var overridenInit = false;
         var overridenThink = false;
-        
-        
         if (cls.meta.has(":expose")) {
             var param = cls.meta.extract(":expose")[0].params[0];
             switch(param.expr) {
