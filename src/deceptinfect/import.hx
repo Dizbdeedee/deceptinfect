@@ -16,4 +16,9 @@ import haxe.Constraints.Function;
 using gmod.PairTools;
 using gmod.TableTools;
 using tink.CoreApi;
+import gmod.libs.GlobalLib.IsValid;
+import deceptinfect.ecswip.Component;
+import deceptinfect.ecswip.System;
+import deceptinfect.ecswip.ComponentManager.entities;
+import deceptinfect.ecswip.ComponentManager;
 #end

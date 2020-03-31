@@ -20,11 +20,14 @@ import gmod.Networking;
 #if client
 import gmod.PanelInterface.TestTwo;
 #end
+import deceptinfect.Di_battery;
 import deceptinfect.*;
 using gmod.PairTools;
 import deceptinfect.ecswip.SystemManager;
 // import deceptinfect.CustomEnt;
-
+import deceptinfect.Di_charger;
+import deceptinfect.Di_nest;
+import deceptinfect.Weapon_di_scan;
 class Main {
     public static function main() {
         deceptinfect.Networking.initMessages();

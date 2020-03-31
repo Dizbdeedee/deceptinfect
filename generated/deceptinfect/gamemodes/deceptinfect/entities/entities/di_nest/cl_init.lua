@@ -1,15 +1,19 @@
 ENT.Base = "base_entity"
 ENT.Type = "anim"
-AddCSLuaFile("cl_init.lua")
+
+function ENT:Think(...)
+	if (not self._gHaxeInit) then
+		self._gHaxeBurrow:Initalize()
+	end
+	self._gHaxeBurrow:Think(...)
+end
+
 
 function ENT:Initialize(...)
 	local ent = deceptinfect_HAXE_EXPORT.di_nest.new(self)
 	self._gHaxeBurrow = ent
 	self._gHaxeBurrow:Initialize()
-end
-
-function ENT:Think(...)
-	self._gHaxeBurrow:Think(...)
+	self._gHaxeInit = true
 end
 
 function ENT:TestCollision(...)

@@ -1,5 +1,5 @@
-ENT.Type = "anim"
 ENT.Base = "base_entity"
+ENT.Type = "anim"
 AddCSLuaFile("cl_init.lua")
 
 function ENT:Initialize(...)

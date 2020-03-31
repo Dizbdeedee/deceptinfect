@@ -54,6 +54,12 @@ class DeceptInfect extends gmod.hooks.Gm {
     override function EntityRemoved(ent:GEntCompat) {
         if (ent.IsPlayer()) {
             ComponentManager.removeEntity(ent.id);
+            return;
+        }
+        switch (ent.has_id()) {
+        case Some(id):
+            ComponentManager.removeEntity(id);
+        default:
         }
     }
     #if server

@@ -2,9 +2,8 @@ package gmod.sent;
 #if server
 class ENT_AI extends gmod.sent.ENT {
     
-	private static var TYPE(default,never) = "ai";
-
-    private var self(default,never):gmod.gclass.NPC;
+    var self(default,never):gmod.gclass.NPC;
+	public final TYPE = "ai";
 
     /**
         ***INTERNAL:**  

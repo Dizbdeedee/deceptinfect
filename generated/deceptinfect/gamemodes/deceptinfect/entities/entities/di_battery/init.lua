@@ -1,5 +1,5 @@
-ENT.Type = "anim"
 ENT.Base = "base_entity"
+ENT.Type = "anim"
 AddCSLuaFile("cl_init.lua")
 
 function ENT:Initialize(...)
@@ -10,5 +10,9 @@ end
 
 function ENT:Use(...)
 	self._gHaxeBurrow:Use(...)
+end
+
+function ENT:Touch(...)
+	self._gHaxeBurrow:Touch(...)
 end
 

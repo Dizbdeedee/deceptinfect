@@ -1,10 +1,6 @@
-package gmod.structs;
-/**
-    Information about the ENT structure.  To learn more about scripted entities, see this page. For list of callbacks, see ENT Hooks. 
-	
-	While some of the fields may be serverside or clientside only, it is recommended to provide them on both so addons could use their values.
-**/
-typedef ENT = {
+package gmod.sent;
+
+typedef EntFields = {
     /**
         (Clientside) Sets the spawnmenu content icon type for the entity, used by spawnmenu in the Sandbox-derived gamemodes. See spawnmenu.AddContentType for more information. 
 		
@@ -69,19 +65,11 @@ typedef ENT = {
     **/
     var ?DoNotDuplicate : Bool;
     /**
-        Type of the entity. This must be one of these:
-    **/
-    var Type : String;
-    /**
         (Clientside) The contacts of the entity creator 
 		
 		Default: ""
     **/
     var ?Contact : String;
-    /**
-        The folder from where the entity was loaded. This should always be "entity/ent_myentity", regardless whether your entity is stored as a file, or multiple files in a folder. This is set automatically before the entity file is loaded.
-    **/
-    var Folder : String;
     /**
         (Clientside) Set this to true if your entity has animations. You should also apply changes to the ENTITY:Think function from the example on that page. 
 		
@@ -100,9 +88,15 @@ typedef ENT = {
 		Default: ""
     **/
     var ?Author : String;
-    /**
-        Entity class name of the entity (File or folder name of your entity). This is set automatically after the entity file is loaded.
-    **/
-    var ClassName : String;
-    
+}
+@:autoBuild(gmod.macros.SentMacro.build())
+@:remove
+
+/**
+    Build your custom scripted entity using this interface.
+    Don't forget to import the file as well
+**/
+interface SentBuild {
+    private final properties:EntFields;
+    private final TYPE:String;
 }

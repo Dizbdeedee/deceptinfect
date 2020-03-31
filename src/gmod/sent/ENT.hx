@@ -1,10 +1,6 @@
 package gmod.sent;
 
-import lua.Lua;
-
-//possible extension using an entity interface, that way you can mix normal entities with these extended ones 
 class ENT {
-	private static var BASE = "base_entity";
     /**
         Called when the entity is created. This is called when you Entity:Spawn the custom entity. 
 		
