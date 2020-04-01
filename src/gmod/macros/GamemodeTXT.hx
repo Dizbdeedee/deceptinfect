@@ -56,7 +56,7 @@ class GamemodeTXT {
                             key_2 = "default";
                         default:
                         }
-                        strBuffer.add('\t\t\t"$key_2"\t\t"$val"\n');
+                        strBuffer.add('\t\t\t"$key_2"\t\t"$val_2"\n');
                     }
                     strBuffer.add('\t\t}\n');
                     id++;

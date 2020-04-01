@@ -9,14 +9,14 @@ import deceptinfect.ecswip.PlayerComponent;
 
 class InfectionSystem extends System {
 
-    
-    static var infectedTrigger:SignalTrigger<Noise> = new SignalTrigger();
-    public static var infectedSig:Signal<Noise> = infectedTrigger.asSignal();
+
+
+    static var net_inf = new gmod.NET_Server<"infection",{infection : Float}>();
 
     #if client
     override function init_client() {
         
-        Networking.InfectionMessageSignal.handle(recvInfection);
+        net_inf.signal.handle(recvInfection);
     }
 
     function recvInfection(data:N_InfectionMessageDef) {
@@ -57,7 +57,9 @@ class InfectionSystem extends System {
                     
                     switch (entity.get(PlayerComponent)) {
                         case Comp(ply):
-                            Networking.sendInfectionMessage({infection: inf.value},ply.player,true);
+                            net_inf.send({infection: inf.value},ply.player,true);    
+                            
+                            // Networking.sendInfectionMessage({infection: inf.value},ply.player,true);
                         default:
                     }
                     infection.rate = rate;

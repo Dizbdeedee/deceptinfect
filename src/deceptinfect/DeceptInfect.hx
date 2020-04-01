@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import gmod.gamemode.BuildOverrides;
 import gmod.enums.IN;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.abilities.FormSystem;
@@ -28,8 +29,8 @@ using gmod.TableTools;
 using deceptinfect.util.PlayerExt;
 import deceptinfect.ecswip.SignalStorage;
 
-@:build(gmod.macros.GamemodeMacro.build())
-class DeceptInfect extends gmod.hooks.Gm {
+
+class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     
     
     override function Think() {

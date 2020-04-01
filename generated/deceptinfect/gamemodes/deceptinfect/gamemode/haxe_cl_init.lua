@@ -56,6 +56,7 @@ local Array = _hx_e()
 local IntIterator = _hx_e()
 local Main = _hx_e()
 local Math = _hx_e()
+local NET_infection = _hx_e()
 __gmod_PanelHelper = _hx_e()
 local PanelHelper_DTree = _hx_e()
 local PanelHelper_DTree_Node = _hx_e()
@@ -64,6 +65,7 @@ local String = _hx_e()
 local Std = _hx_e()
 local Type = _hx_e()
 __gmod_hooks_Gm = _hx_e()
+__gmod_gamemode_BuildOverrides = _hx_e()
 __deceptinfect_DeceptInfect = _hx_e()
 __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
@@ -86,6 +88,8 @@ __deceptinfect_Networking = _hx_e()
 __haxe_IMap = _hx_e()
 __haxe_ds_IntMap = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
+__gmod_gamemode_BuildGamemodeTXT = _hx_e()
+__deceptinfect_TXT = _hx_e()
 __gmod_swep_SWEP = _hx_e()
 __gmod_swep_SwepBuild = _hx_e()
 __deceptinfect_Weapon_di_scan = _hx_e()
@@ -171,7 +175,6 @@ __gmod_PanelTest = _hx_e()
 __gmod_TestTwo = _hx_e()
 __gmod_TestFour = _hx_e()
 __gmod_TableTools = _hx_e()
-__gmod_gamemode_GamemodeTXT = _hx_e()
 __gmod_hooks_Swep = _hx_e()
 __gmod_macros_SentType = _hx_e()
 __gmod_types__Panel_Panel_Impl_ = _hx_e()
@@ -618,6 +621,26 @@ Math.min = function(a,b)
     do return _G.math.min(a, b) end;
   end;
 end
+
+NET_infection.new = function() 
+  local self = _hx_new(NET_infection.prototype)
+  NET_infection.super(self)
+  return self
+end
+NET_infection.super = function(self) 
+  self.signalTrigger = __tink_core_SignalTrigger.new();
+  self.signal = self.signalTrigger;
+  _G.net.Receive("infection", _hx_bind(self,self.receive));
+end
+NET_infection.__name__ = "NET_infection"
+NET_infection.prototype = _hx_a();
+NET_infection.prototype.receive = function(self) 
+  local _this = self.signalTrigger;
+  local event = _hx_o({__fields__={infection=true},infection=_G.net.ReadFloat()});
+  _this.handlers:invoke(event);
+end
+
+NET_infection.prototype.__class__ =  NET_infection
 
 __gmod_PanelHelper.new = function(parent,name) 
   local self = _hx_new(__gmod_PanelHelper.prototype)
@@ -1625,6 +1648,9 @@ end
 
 __gmod_hooks_Gm.prototype.__class__ =  __gmod_hooks_Gm
 
+__gmod_gamemode_BuildOverrides.new = {}
+__gmod_gamemode_BuildOverrides.__name__ = "gmod.gamemode.BuildOverrides"
+
 __deceptinfect_DeceptInfect.new = function() 
   local self = _hx_new(__deceptinfect_DeceptInfect.prototype)
   __deceptinfect_DeceptInfect.super(self)
@@ -1639,6 +1665,7 @@ __deceptinfect_DeceptInfect.super = function(self)
   self:postIntialize();
 end
 __deceptinfect_DeceptInfect.__name__ = "deceptinfect.DeceptInfect"
+__deceptinfect_DeceptInfect.__interfaces__ = {__gmod_gamemode_BuildOverrides}
 __deceptinfect_DeceptInfect.prototype = _hx_a();
 __deceptinfect_DeceptInfect.prototype.Think = function(self) 
   __deceptinfect_ecswip_SystemManager.runAllSystems();
@@ -2280,6 +2307,26 @@ __deceptinfect_PlayerManager.getLocalPlayerID = function()
   elseif (tmp) == 1 then 
     _G.error("Local player has no id...",0); end;
 end
+
+__gmod_gamemode_BuildGamemodeTXT.new = {}
+__gmod_gamemode_BuildGamemodeTXT.__name__ = "gmod.gamemode.BuildGamemodeTXT"
+__gmod_gamemode_BuildGamemodeTXT.prototype = _hx_a();
+
+__gmod_gamemode_BuildGamemodeTXT.prototype.__class__ =  __gmod_gamemode_BuildGamemodeTXT
+
+__deceptinfect_TXT.new = function() 
+  local self = _hx_new(__deceptinfect_TXT.prototype)
+  __deceptinfect_TXT.super(self)
+  return self
+end
+__deceptinfect_TXT.super = function(self) 
+  self.properties = _hx_o({__fields__={base=true,title=true,menusystem=true},base="base",title="Deception infection",menusystem=1});
+end
+__deceptinfect_TXT.__name__ = "deceptinfect.TXT"
+__deceptinfect_TXT.__interfaces__ = {__gmod_gamemode_BuildGamemodeTXT}
+__deceptinfect_TXT.prototype = _hx_a();
+
+__deceptinfect_TXT.prototype.__class__ =  __deceptinfect_TXT
 
 __gmod_swep_SWEP.new = {}
 __gmod_swep_SWEP.__name__ = "gmod.swep.SWEP"
@@ -3290,11 +3337,11 @@ __deceptinfect_ecswip_GrabSystem.target = function(attacker,victim)
   local x1 = __deceptinfect_ecswip_GrabProducer;
   local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
   local comp2 = comparray1[attacker];
-  local comp3 = comp2:slice(2)[0];
-  if (comp3 == nil) then 
+  local comp11 = comp2:slice(2)[0];
+  if (comp11 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
-  local c_produce = comp3;
+  local c_produce = comp11;
   local _this = c_accept.targeting;
   _this.h[c_produce] = true;
   _this.k[c_produce] = true;
@@ -3474,7 +3521,7 @@ __deceptinfect_infection_InfectionSystem.makeInfected = function(ent)
       tmp = __deceptinfect_infection_INF_STATE.INFECTED;
     end;
     inf.infection = tmp;
-    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=93,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
+    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=95,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
   end;
 end
 __deceptinfect_infection_InfectionSystem.calcInfectionFromRates = function(rate) 
@@ -3503,7 +3550,7 @@ __deceptinfect_infection_InfectionSystem.getBaseInfection = function(inf)
       local x = _g1[2];
       do return x.baseInfection[0] end;
     else
-      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=120,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
+      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=122,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
       inf.baseInfection = __deceptinfect_infection_BaseInfection.USING_STATIC(0.0);
       do return 0 end;
     end;
@@ -3521,7 +3568,7 @@ __deceptinfect_infection_InfectionSystem.fixUpInfection = function(infection)
     else
       local inf1 = _g1;
       if (inf1[0] >= 100) then 
-        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=137,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
+        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=139,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
         infection.infection = __deceptinfect_infection_INF_STATE.INFECTED;
       end;
     end;
@@ -3531,7 +3578,7 @@ __deceptinfect_infection_InfectionSystem.onInfected = function(ent)
 end
 __deceptinfect_infection_InfectionSystem.prototype = _hx_a();
 __deceptinfect_infection_InfectionSystem.prototype.init_client = function(self) 
-  __deceptinfect_Networking.InfectionMessageSignal:handle(_hx_bind(self,self.recvInfection));
+  __deceptinfect_infection_InfectionSystem.net_inf.signal:handle(_hx_bind(self,self.recvInfection));
 end
 __deceptinfect_infection_InfectionSystem.prototype.recvInfection = function(self,data) 
   local this1 = __deceptinfect_PlayerManager.getLocalPlayerID();
@@ -4413,11 +4460,6 @@ __gmod_TableTools.new = {}
 __gmod_TableTools.__name__ = "gmod.TableTools"
 __gmod_TableTools.length = function(table) 
   do return #table end;
-end
-
-__gmod_gamemode_GamemodeTXT.new = {}
-__gmod_gamemode_GamemodeTXT.__name__ = "gmod.gamemode.GamemodeTXT"
-__gmod_gamemode_GamemodeTXT.generateTXT = function() 
 end
 
 __gmod_hooks_Swep.new = {}
@@ -6369,7 +6411,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -6386,7 +6428,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -6395,16 +6437,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -6413,7 +6455,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -6473,13 +6515,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g = o[2];
-    local tmp1 = _g[1];
+    local _g1 = o[2];
+    local tmp1 = _g1[1];
     if (tmp1) == 0 then 
-      local d = _g[2];
+      local d = _g1[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g[2];
+      local f = _g1[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -6615,7 +6657,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g = o[2];
+      local _g1 = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -6699,10 +6741,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g = o1[2];
-                local next3 = _g[1];
+                local _g1 = o1[2];
+                local next3 = _g1[1];
                 if (next3) == 0 then 
-                  local ret = _g[2];
+                  local ret = _g1[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;
@@ -7397,9 +7439,7 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SignalStorage.entDamageTrigger = __tink_core_SignalTrigger.new();
   
-  __deceptinfect_infection_InfectionSystem.infectedTrigger = __tink_core_SignalTrigger.new();
-  
-  __deceptinfect_infection_InfectionSystem.infectedSig = __deceptinfect_infection_InfectionSystem.infectedTrigger;
+  __deceptinfect_infection_InfectionSystem.net_inf = NET_infection.new();
   
   __deceptinfect_infection_RateSystem.nextAddRate = 0;
   

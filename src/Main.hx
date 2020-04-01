@@ -1,5 +1,5 @@
 
-import gmod.gamemode.GamemodeTXT;
+//import gmod.gamemode.GamemodeTXT;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.client.ClientOverrides;
 import deceptinfect.ecswip.Component;
@@ -29,6 +29,7 @@ import deceptinfect.ecswip.SystemManager;
 import deceptinfect.Di_charger;
 import deceptinfect.Di_nest;
 import deceptinfect.Weapon_di_scan;
+import deceptinfect.TXT;
 #if client
 import deceptinfect.Effect_di_test;
 #end
@@ -37,13 +38,6 @@ class Main {
         deceptinfect.Networking.initMessages();
         new DeceptInfect();
         
-       
-        #if server
-        GamemodeTXT.boo({
-            base : "",
-        
-        });
-        #end    
         for (ply in PlayerLib.GetAll()) {
             new GPlayerCompat(new PlayerComponent(ply));
         }

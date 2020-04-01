@@ -1,17 +1,6 @@
 "deceptinfect"
 {
-	"settings"
-	{
-		1
-		{
-			"name"		"[{name: sv_cheats, text: Cheats, help: turn on cheats, type: CheckBox, _default: 0}]"
-			"text"		"[{name: sv_cheats, text: Cheats, help: turn on cheats, type: CheckBox, _default: 0}]"
-			"help"		"[{name: sv_cheats, text: Cheats, help: turn on cheats, type: CheckBox, _default: 0}]"
-			"type"		"[{name: sv_cheats, text: Cheats, help: turn on cheats, type: CheckBox, _default: 0}]"
-			"default"		"[{name: sv_cheats, text: Cheats, help: turn on cheats, type: CheckBox, _default: 0}]"
-		}
-	}
 	"base"		"base"
-	"title"		"Deception Infection"
+	"title"		"Deception infection"
 	"menusystem"		"1"
 }
