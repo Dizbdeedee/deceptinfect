@@ -237,8 +237,8 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         
         return "aaaaple";
     }
-    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<GmPlayerCanHearPlayersVoiceHaxeReturn> {
-        
+    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn> {
+        //trace('');
         return {a : false, b: false};
         // if (listener.GetPos().Distance(talker.GetPos()) > 1000) {
         //    return {a : false,b : false};

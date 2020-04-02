@@ -56,7 +56,11 @@ local Array = _hx_e()
 local IntIterator = _hx_e()
 local Main = _hx_e()
 local Math = _hx_e()
-local NET_infection = _hx_e()
+local NETMESSAGE_gamestate = _hx_e()
+local NETMESSAGE_geiger = _hx_e()
+local NETMESSAGE_grabend = _hx_e()
+local NETMESSAGE_grabupdate = _hx_e()
+local NETMESSAGE_infection = _hx_e()
 __gmod_PanelHelper = _hx_e()
 local PanelHelper_DTree = _hx_e()
 local PanelHelper_DTree_Node = _hx_e()
@@ -84,7 +88,6 @@ __deceptinfect_GAME_STATE = _hx_e()
 __deceptinfect_GameManager = _hx_e()
 __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_ = _hx_e()
 __deceptinfect_GameValues = _hx_e()
-__deceptinfect_Networking = _hx_e()
 __haxe_IMap = _hx_e()
 __haxe_ds_IntMap = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
@@ -587,7 +590,6 @@ IntIterator.prototype.__class__ =  IntIterator
 Main.new = {}
 Main.__name__ = "Main"
 Main.main = function() 
-  __deceptinfect_Networking.initMessages();
   __deceptinfect_DeceptInfect.new();
   local ply = __gmod_PairTools.iterator(_G.player.GetAll());
   while (ply:hasNext()) do 
@@ -622,25 +624,105 @@ Math.min = function(a,b)
   end;
 end
 
-NET_infection.new = function() 
-  local self = _hx_new(NET_infection.prototype)
-  NET_infection.super(self)
+NETMESSAGE_gamestate.new = function() 
+  local self = _hx_new(NETMESSAGE_gamestate.prototype)
+  NETMESSAGE_gamestate.super(self)
   return self
 end
-NET_infection.super = function(self) 
+NETMESSAGE_gamestate.super = function(self) 
+  self.signalTrigger = __tink_core_SignalTrigger.new();
+  self.signal = self.signalTrigger;
+  _G.net.Receive("gamestate", _hx_bind(self,self.receive));
+end
+NETMESSAGE_gamestate.__name__ = "NETMESSAGE_gamestate"
+NETMESSAGE_gamestate.prototype = _hx_a();
+NETMESSAGE_gamestate.prototype.receive = function(self) 
+  local _this = self.signalTrigger;
+  local event = _hx_o({__fields__={state=true},state=_G.net.ReadInt(32)});
+  _this.handlers:invoke(event);
+end
+
+NETMESSAGE_gamestate.prototype.__class__ =  NETMESSAGE_gamestate
+
+NETMESSAGE_geiger.new = function() 
+  local self = _hx_new(NETMESSAGE_geiger.prototype)
+  NETMESSAGE_geiger.super(self)
+  return self
+end
+NETMESSAGE_geiger.super = function(self) 
+  self.signalTrigger = __tink_core_SignalTrigger.new();
+  self.signal = self.signalTrigger;
+  _G.net.Receive("geiger", _hx_bind(self,self.receive));
+end
+NETMESSAGE_geiger.__name__ = "NETMESSAGE_geiger"
+NETMESSAGE_geiger.prototype = _hx_a();
+NETMESSAGE_geiger.prototype.receive = function(self) 
+  local _this = self.signalTrigger;
+  local event = _hx_o({__fields__={geiger=true},geiger=_G.net.ReadFloat()});
+  _this.handlers:invoke(event);
+end
+
+NETMESSAGE_geiger.prototype.__class__ =  NETMESSAGE_geiger
+
+NETMESSAGE_grabend.new = function() 
+  local self = _hx_new(NETMESSAGE_grabend.prototype)
+  NETMESSAGE_grabend.super(self)
+  return self
+end
+NETMESSAGE_grabend.super = function(self) 
+  self.signalTrigger = __tink_core_SignalTrigger.new();
+  self.signal = self.signalTrigger;
+  _G.net.Receive("grabend", _hx_bind(self,self.receive));
+end
+NETMESSAGE_grabend.__name__ = "NETMESSAGE_grabend"
+NETMESSAGE_grabend.prototype = _hx_a();
+NETMESSAGE_grabend.prototype.receive = function(self) 
+  local _this = self.signalTrigger;
+  local event = _hx_o({__fields__={index=true},index=_G.net.ReadInt(32)});
+  _this.handlers:invoke(event);
+end
+
+NETMESSAGE_grabend.prototype.__class__ =  NETMESSAGE_grabend
+
+NETMESSAGE_grabupdate.new = function() 
+  local self = _hx_new(NETMESSAGE_grabupdate.prototype)
+  NETMESSAGE_grabupdate.super(self)
+  return self
+end
+NETMESSAGE_grabupdate.super = function(self) 
+  self.signalTrigger = __tink_core_SignalTrigger.new();
+  self.signal = self.signalTrigger;
+  _G.net.Receive("grabupdate", _hx_bind(self,self.receive));
+end
+NETMESSAGE_grabupdate.__name__ = "NETMESSAGE_grabupdate"
+NETMESSAGE_grabupdate.prototype = _hx_a();
+NETMESSAGE_grabupdate.prototype.receive = function(self) 
+  local _this = self.signalTrigger;
+  local event = _hx_o({__fields__={ent=true,ent2=true,index=true},ent=_G.net.ReadEntity(),ent2=_G.net.ReadEntity(),index=_G.net.ReadInt(32)});
+  _this.handlers:invoke(event);
+end
+
+NETMESSAGE_grabupdate.prototype.__class__ =  NETMESSAGE_grabupdate
+
+NETMESSAGE_infection.new = function() 
+  local self = _hx_new(NETMESSAGE_infection.prototype)
+  NETMESSAGE_infection.super(self)
+  return self
+end
+NETMESSAGE_infection.super = function(self) 
   self.signalTrigger = __tink_core_SignalTrigger.new();
   self.signal = self.signalTrigger;
   _G.net.Receive("infection", _hx_bind(self,self.receive));
 end
-NET_infection.__name__ = "NET_infection"
-NET_infection.prototype = _hx_a();
-NET_infection.prototype.receive = function(self) 
+NETMESSAGE_infection.__name__ = "NETMESSAGE_infection"
+NETMESSAGE_infection.prototype = _hx_a();
+NETMESSAGE_infection.prototype.receive = function(self) 
   local _this = self.signalTrigger;
   local event = _hx_o({__fields__={infection=true},infection=_G.net.ReadFloat()});
   _this.handlers:invoke(event);
 end
 
-NET_infection.prototype.__class__ =  NET_infection
+NETMESSAGE_infection.prototype.__class__ =  NETMESSAGE_infection
 
 __gmod_PanelHelper.new = function(parent,name) 
   local self = _hx_new(__gmod_PanelHelper.prototype)
@@ -2121,10 +2203,10 @@ __deceptinfect_GameManager.initPlayer = function(ply)
   __deceptinfect_ecswip_ComponentManager.addComponent(virpos, p);
 end
 __deceptinfect_GameManager.init = function() 
-  __deceptinfect_Networking.GameStateSignal:handle(__deceptinfect_GameManager.gameStateChanged);
+  __deceptinfect_GameManager.net_gamestate.signal:handle(__deceptinfect_GameManager.gameStateChanged);
 end
 __deceptinfect_GameManager.gameStateChanged = function(x) 
-  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=128,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
+  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=129,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
   local _g = x.state;
   if (_g) == 0 then 
   elseif (_g) == 1 then 
@@ -2156,54 +2238,6 @@ end
 __deceptinfect_GameValues.new = {}
 _hx_exports["GameValues"] = __deceptinfect_GameValues
 __deceptinfect_GameValues.__name__ = "deceptinfect.GameValues"
-
-__deceptinfect_Networking.new = {}
-__deceptinfect_Networking.__name__ = "deceptinfect.Networking"
-__deceptinfect_Networking.recvInfectionMessage = function() 
-  local _this = __deceptinfect_Networking.InfectionMessageSignalTrigger;
-  local event = _hx_o({__fields__={infection=true},infection=_G.net.ReadFloat()});
-  _this.handlers:invoke(event);
-end
-__deceptinfect_Networking.recvGameState = function() 
-  local _this = __deceptinfect_Networking.GameStateSignalTrigger;
-  local event = _hx_o({__fields__={state=true},state=_G.net.ReadInt(32)});
-  _this.handlers:invoke(event);
-end
-__deceptinfect_Networking.recvGeiger = function() 
-  local _this = __deceptinfect_Networking.GeigerSignalTrigger;
-  local event = _hx_o({__fields__={geiger=true},geiger=_G.net.ReadFloat()});
-  _this.handlers:invoke(event);
-end
-__deceptinfect_Networking.recvGrabUpdate = function() 
-  local _this = __deceptinfect_Networking.GrabUpdateSignalTrigger;
-  local event = _hx_o({__fields__={ent=true,ent2=true,index=true},ent=_G.net.ReadEntity(),ent2=_G.net.ReadEntity(),index=_G.net.ReadInt(32)});
-  _this.handlers:invoke(event);
-end
-__deceptinfect_Networking.recvGrabEnd = function() 
-  local _this = __deceptinfect_Networking.GrabEndSignalTrigger;
-  local event = _hx_o({__fields__={index=true},index=_G.net.ReadInt(32)});
-  _this.handlers:invoke(event);
-end
-__deceptinfect_Networking.initMessages = function() 
-  __deceptinfect_Networking.InfectionMessageSignalTrigger = __tink_core_SignalTrigger.new();
-  __deceptinfect_Networking.InfectionMessageSignal = __deceptinfect_Networking.InfectionMessageSignalTrigger;
-  _G.net.Receive("InfectionMessage", __deceptinfect_Networking.recvInfectionMessage);
-  __deceptinfect_Networking.GameStateSignalTrigger = __tink_core_SignalTrigger.new();
-  __deceptinfect_Networking.GameStateSignal = __deceptinfect_Networking.GameStateSignalTrigger;
-  _G.net.Receive("GameState", __deceptinfect_Networking.recvGameState);
-  __deceptinfect_Networking.GeigerSignalTrigger = __tink_core_SignalTrigger.new();
-  __deceptinfect_Networking.GeigerSignal = __deceptinfect_Networking.GeigerSignalTrigger;
-  _G.net.Receive("Geiger", __deceptinfect_Networking.recvGeiger);
-  __deceptinfect_Networking.GrabUpdateSignalTrigger = __tink_core_SignalTrigger.new();
-  __deceptinfect_Networking.GrabUpdateSignal = __deceptinfect_Networking.GrabUpdateSignalTrigger;
-  _G.net.Receive("GrabUpdate", __deceptinfect_Networking.recvGrabUpdate);
-  __deceptinfect_Networking.GrabEndSignalTrigger = __tink_core_SignalTrigger.new();
-  __deceptinfect_Networking.GrabEndSignal = __deceptinfect_Networking.GrabEndSignalTrigger;
-  _G.net.Receive("GrabEnd", __deceptinfect_Networking.recvGrabEnd);
-end
-__deceptinfect_Networking.prototype = _hx_a();
-
-__deceptinfect_Networking.prototype.__class__ =  __deceptinfect_Networking
 
 __haxe_IMap.new = {}
 __haxe_IMap.__name__ = "haxe.IMap"
@@ -2635,7 +2669,7 @@ __deceptinfect_client_GeigerSystem.geigerThink = function()
 end
 __deceptinfect_client_GeigerSystem.prototype = _hx_a();
 __deceptinfect_client_GeigerSystem.prototype.init_client = function(self) 
-  __deceptinfect_Networking.GeigerSignal:handle(function(data) 
+  __deceptinfect_client_GeigerSystem.net_geiger.signal:handle(function(data) 
     __deceptinfect_client_GeigerSystem.geiger = data.geiger;
   end);
 end
@@ -3250,7 +3284,7 @@ end
 __deceptinfect_ecswip_GrabSystem.__name__ = "deceptinfect.ecswip.GrabSystem"
 __deceptinfect_ecswip_GrabSystem.updateSig = function(data) 
   if (__deceptinfect_ecswip_GrabSystem.activeDraws.h[data.index] == nil) then 
-    __haxe_Log.trace(Std.string("activated grab ") .. Std.string(data.index), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=28,className="deceptinfect.ecswip.GrabSystem",methodName="updateSig"}));
+    __haxe_Log.trace(Std.string("activated grab ") .. Std.string(data.index), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=38,className="deceptinfect.ecswip.GrabSystem",methodName="updateSig"}));
     local draw = __deceptinfect_ecswip_ComponentManager.addEntity();
     __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_GrabDraw.new(data.ent, data.ent2), draw);
     local key = data.index;
@@ -3263,7 +3297,7 @@ __deceptinfect_ecswip_GrabSystem.updateSig = function(data)
   end;
 end
 __deceptinfect_ecswip_GrabSystem.remove = function(data) 
-  __haxe_Log.trace(Std.string("delete grab ") .. Std.string(data.index), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=36,className="deceptinfect.ecswip.GrabSystem",methodName="remove"}));
+  __haxe_Log.trace(Std.string("delete grab ") .. Std.string(data.index), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=46,className="deceptinfect.ecswip.GrabSystem",methodName="remove"}));
   if (__deceptinfect_ecswip_GrabSystem.activeDraws.h[data.index] ~= nil) then 
     local ret = __deceptinfect_ecswip_GrabSystem.activeDraws.h[data.index];
     if (ret == __haxe_ds_IntMap.tnull) then 
@@ -3363,8 +3397,8 @@ __deceptinfect_ecswip_GrabSystem.stopTargeting = function(attacker)
 end
 __deceptinfect_ecswip_GrabSystem.prototype = _hx_a();
 __deceptinfect_ecswip_GrabSystem.prototype.init_client = function(self) 
-  __deceptinfect_Networking.GrabUpdateSignal:handle(__deceptinfect_ecswip_GrabSystem.updateSig);
-  __deceptinfect_Networking.GrabEndSignal:handle(__deceptinfect_ecswip_GrabSystem.remove);
+  __deceptinfect_ecswip_GrabSystem.net_grabupdate.signal:handle(__deceptinfect_ecswip_GrabSystem.updateSig);
+  __deceptinfect_ecswip_GrabSystem.net_grabend.signal:handle(__deceptinfect_ecswip_GrabSystem.remove);
 end
 
 __deceptinfect_ecswip_GrabSystem.prototype.__class__ =  __deceptinfect_ecswip_GrabSystem
@@ -3521,7 +3555,7 @@ __deceptinfect_infection_InfectionSystem.makeInfected = function(ent)
       tmp = __deceptinfect_infection_INF_STATE.INFECTED;
     end;
     inf.infection = tmp;
-    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=95,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
+    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=94,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
   end;
 end
 __deceptinfect_infection_InfectionSystem.calcInfectionFromRates = function(rate) 
@@ -3550,7 +3584,7 @@ __deceptinfect_infection_InfectionSystem.getBaseInfection = function(inf)
       local x = _g1[2];
       do return x.baseInfection[0] end;
     else
-      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=122,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
+      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=121,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
       inf.baseInfection = __deceptinfect_infection_BaseInfection.USING_STATIC(0.0);
       do return 0 end;
     end;
@@ -3568,7 +3602,7 @@ __deceptinfect_infection_InfectionSystem.fixUpInfection = function(infection)
     else
       local inf1 = _g1;
       if (inf1[0] >= 100) then 
-        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=139,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
+        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=138,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
         infection.infection = __deceptinfect_infection_INF_STATE.INFECTED;
       end;
     end;
@@ -6411,7 +6445,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -6428,7 +6462,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -6437,16 +6471,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -6455,7 +6489,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -6515,13 +6549,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g1 = o[2];
-    local tmp1 = _g1[1];
+    local _g = o[2];
+    local tmp1 = _g[1];
     if (tmp1) == 0 then 
-      local d = _g1[2];
+      local d = _g[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g1[2];
+      local f = _g[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -6657,7 +6691,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g1 = o[2];
+      local _g = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -6741,10 +6775,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g1 = o1[2];
-                local next3 = _g1[1];
+                local _g = o1[2];
+                local next3 = _g[1];
                 if (next3) == 0 then 
-                  local ret = _g1[2];
+                  local ret = _g[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;
@@ -7314,6 +7348,8 @@ _hx_array_mt.__index = Array.prototype
 local _hx_static_init = function()
   __deceptinfect_GameManager.state = __deceptinfect_GAME_STATE.WAIT;
   
+  __deceptinfect_GameManager.net_gamestate = NETMESSAGE_gamestate.new();
+  
   __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.WAIT = 0;
   
   __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.SETTING_UP = 1;
@@ -7376,6 +7412,8 @@ local _hx_static_init = function()
   
   __deceptinfect_PlayerManager.indexLookup = __haxe_ds_IntMap.new();
   
+  __deceptinfect_client_GeigerSystem.net_geiger = NETMESSAGE_geiger.new();
+  
   __deceptinfect_client_GeigerSystem.geiger = 0.0;
   
   __deceptinfect_client_GeigerSystem.sounds = _hx_tab_array({[0]=_G.Sound("player/geiger1.wav"), _G.Sound("player/geiger2.wav"), _G.Sound("player/geiger3.wav")}, 3);
@@ -7433,13 +7471,17 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_ComponentManager.gEntityLookup = __haxe_ds_IntMap.new();
   
+  __deceptinfect_ecswip_GrabSystem.net_grabupdate = NETMESSAGE_grabupdate.new();
+  
+  __deceptinfect_ecswip_GrabSystem.net_grabend = NETMESSAGE_grabend.new();
+  
   __deceptinfect_ecswip_GrabSystem.hycord = _G.Material("cable/new_cable_lit");
   
   __deceptinfect_ecswip_GrabSystem.activeDraws = __haxe_ds_IntMap.new();
   
   __deceptinfect_ecswip_SignalStorage.entDamageTrigger = __tink_core_SignalTrigger.new();
   
-  __deceptinfect_infection_InfectionSystem.net_inf = NET_infection.new();
+  __deceptinfect_infection_InfectionSystem.net_inf = NETMESSAGE_infection.new();
   
   __deceptinfect_infection_RateSystem.nextAddRate = 0;
   

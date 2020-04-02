@@ -4,7 +4,6 @@ import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.radiation.RadiationProducer;
 import deceptinfect.ecswip.GrabProducer;
 import deceptinfect.infection.InfectedComponent;
-import deceptinfect.Networking.N_GameState;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.radiation.ContaminationAccepter;
@@ -23,6 +22,8 @@ class GameManager {
     public static var state(default,#if server set #else null #end):GAME_STATE = WAIT;
     static var Game:GameInstance;
 
+    public static final net_gamestate = new gmod.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL}>();
+    
     public static function shouldAllowRespawn() {
         return switch (state) {
             case WAIT:
@@ -78,7 +79,7 @@ class GameManager {
 
     static function set_state(x:GAME_STATE):GAME_STATE {
         for (p in PlayerLib.GetAll()) {
-            Networking.sendGameState({
+            net_gamestate.send({
                 state : x, 
             },p);
         }
@@ -121,10 +122,10 @@ class GameManager {
     #if client
     public static function init() {
 
-        Networking.GameStateSignal.handle(gameStateChanged);
+        net_gamestate.signal.handle(gameStateChanged);
     }
     
-    static function gameStateChanged(x:N_GameState) {
+    static function gameStateChanged(x:{state : Int}) {
         trace('game state changed $x');
         switch (x.state) {
             case WAIT:

@@ -1,178 +1,98 @@
 package gmod.macros;
 
-import haxe.macro.Expr.ComplexType;
-import haxe.macro.Type.FieldKind;
-import haxe.macro.Expr.TypeParam;
-#if (macro)
+import haxe.macro.Type.ClassField;
+#if macro
 import haxe.macro.Context;
 import haxe.macro.Expr;
 using haxe.macro.ExprTools;
 using haxe.macro.TypeTools;
-using haxe.macro.ExprTools.ExprArrayTools;
-using haxe.macro.TypedExprTools;
-import haxe.macro.Expr.ComplexType;
-#end
+using haxe.macro.ComplexTypeTools;
+using haxe.macro.PositionTools;
 
-private typedef ServerMessages = {
-    name : String,
-    type: ComplexType,
-    param : TypeParam
-}
 class Networking {
-    #if macro
-    public static function build():Array<Field> {
-        var fields = Context.getBuildFields();
-        var serverMessages:Array<ServerMessages> = [];
-        for (field in fields) {
-            switch(field.kind) {
-                
-                case FVar(TPath({name : "NetMessageServer", params : params}), _):
-                    var param = params[0];
-                    switch (param) {
-                        case TPType(t):
-                            serverMessages.push({
-                                name : field.name,
-                                type : t,
-                                param : param
-                            });
-                        default:
-                    }
-                default:
-            }
-        }
-        
-
-        
-        var initExpr:Array<Expr> = [];
-        for (msg in serverMessages) {
-            var signal = (macro : tink.CoreApi.Signal);
-            var signalTrigger = (macro : tink.CoreApi.SignalTrigger);
-            (signal.getParameters()[0] : TypePath).params = [msg.param];
-           
-            (signalTrigger.getParameters()[0] : TypePath).params = [msg.param];
-            
-           
-            
-            if (Context.defined("server")) {
-                var dataArg:FunctionArg = {
-                    name : "data",
-                    type : msg.type,
-                }
-                var unreliable:FunctionArg = {
-                    name : "unreliable",
-                    type : (macro : Bool),
-                    opt : true,
-                    value : macro false
-                }
     
-                var player:FunctionArg = {
-                    name : "player",
-                    type : (macro : gmod.gclass.Player)
-                }
-                var tbl:FunctionArg = {
-                    name : "player",
-                    type : (macro : lua.Table<Dynamic,Player>)
-                }
-                var filter:FunctionArg = {
-                    name : "player",
-                    type : (macro : gmod.gclass.CRecipientFilter)
-                }
-                var funcExpr:Expr = writeNetConstructer(msg.type,msg.name);
-                var sendPlayer:Function = {
-                    args:  [dataArg,player,unreliable],
-                    expr : funcExpr,
-                    ret : null
-                }
-                var sendTblFunc:Function = {
-                    args: [dataArg,tbl,unreliable],
-                    expr : funcExpr,
-                    ret : null
-                }
-                var sendFilterFunc:Function = {
-                    args: [dataArg,filter,unreliable],
-                    expr : funcExpr,
-                    ret : null
-                }
-                var sendPlayerField:Field = {
-                    name : 'send${msg.name}',
-                    kind : FieldType.FFun(sendPlayer),
-                    pos : Context.currentPos(),
-                    access: [Access.AStatic,Access.APublic]
-                }
-                var sendTblField:Field = {
-                    name : 'sendTbl${msg.name}',
-                    kind : FieldType.FFun(sendTblFunc),
-                    pos : Context.currentPos(),
-                    access: [Access.AStatic,Access.APublic]
-                }
-                var sendFilterField = {
-                    name : 'sendFilter${msg.name}',
-                    kind : FieldType.FFun(sendFilterFunc),
-                    pos : Context.currentPos(),
-                    access: [Access.AStatic,Access.APublic]
-                }
-                fields.push(sendPlayerField);
-                fields.push(sendTblField);
-                fields.push(sendFilterField);
-            } else if (Context.defined("client")) {
-                var recvFuncExpr:Function = {
-                    args:  [],//player
-                    // expr : null,
-                    expr : writeNetReciever(msg.type,msg.name),
-                    ret : null
-                }
-                var recvFunc:Field = {
-                    name : 'recv${msg.name}',
-                    kind : FieldType.FFun(recvFuncExpr),
-                    pos : Context.currentPos(),
-                    access : [Access.AStatic]
-                }
-                fields.push(recvFunc);
+    public static function build():ComplexType {
+        var type = Context.getLocalType();
+        var netName:String;
+        var anon:haxe.macro.Type;
+        var fields:Array<ClassField>;
+        
+        switch (type) {
+            case TInst(_,[TInst(_.get() => {kind : KExpr(_.getValue() => s) },_), tdef = _.follow() => a = TAnonymous(_.get() => {fields : f})]):
+                netName = s;
+                fields = f;
+                anon = tdef;
+            default:
+                trace("Could not generate net message");
+                return null;
+        }
+        var complexAnon = Context.toComplexType(anon);
+        var clsName = 'NETMESSAGE_$netName';
+        var cls = macro class $clsName {
+            #if server
+
+            public function send(data:$complexAnon,recv:gmod.gclass.Player,?unreliable=false) {
+
             }
-            if (Context.defined("server")) {
-                initExpr.push(macro gmod.libs.UtilLib.AddNetworkString($v{msg.name}));
+
+            public function sendTable(data:$complexAnon,recv:lua.Table<Dynamic,gmod.gclass.Player>,?unreliable=false) {
+
             }
-            if (Context.defined("client")) {
-                var clientSignal:Field = {
-                    name : '${msg.name}Signal',
-                    kind : FieldType.FVar(signal),
-                    pos : Context.currentPos(),
-                    access: [Access.APublic,Access.AStatic]
-                }
-                var clientTriggerSignal:Field = {
-                    name : '${msg.name}SignalTrigger',
-                    kind : FieldType.FVar(signalTrigger),
-                    pos : Context.currentPos(),
-                    access: [Access.AStatic]
-                }
-                var sigtrig = '${msg.name}SignalTrigger';
-                var sig = '${msg.name}Signal';
-                var exdee:TypePath = ((macro : tink.CoreApi.SignalTrigger)).getParameters()[0];
-                initExpr.push(macro $i{sigtrig} = new $exdee());
-                initExpr.push(macro $i{sig} = $i{sigtrig}.asSignal());
-                initExpr.push(macro gmod.libs.NetLib.Receive($v{msg.name},$i{'recv${msg.name}'}));
-                fields.push(clientSignal);
-                fields.push(clientTriggerSignal);
+
+            public function sendFilter(data:$complexAnon,recv:gmod.gclass.CRecipientFilter,?unreliable=false) {
+
+            }
+            #end
+            #if client
+            #if tink_core
+            public var signal(default,never):tink.CoreApi.Signal<$complexAnon>;
+
+            var signalTrigger = new tink.CoreApi.SignalTrigger<$complexAnon>();
+            #else
+            var recievers:Map<String,(data:$complexAnon) -> Void> = new Map();
+
+            public function addReceiver(ident:String,recv:(data:$complexAnon) -> Void) {
+                recievers.set(ident,recv);
+            }
+
+            public function removeReceiver(ident:String) {
+                recievers.remove(ident);
+            }
+            #end
+            function receive() {
+
+            }
+            #end
+            public function new() {
+                #if client
+                untyped signal = signalTrigger.asSignal();
+                gmod.libs.NetLib.Receive($v{netName},receive);
+                #end
+                #if server
+                gmod.libs.UtilLib.AddNetworkString($v{netName});
+                #end
             }
         }
-        var initMessagesFunc:Function = {
-            args: [],
-            expr : macro $b{initExpr},
-            ret : null
-        }
-        var initMessages:Field = {
-            name : "initMessages",
-            kind : FieldType.FFun(initMessagesFunc),
-            pos : Context.currentPos(),
-            access : [Access.APublic,Access.AStatic],
-            doc : "Call as early as possible to setup network messages. Must be called on both the server and client"
-        }
-        fields.push(initMessages);
-        return fields;
+        
+        #if server
+        var sendExpr = genSendExpr(anon,netName,fields);
+        (cls.fields[0].kind.getParameters()[0]:Function).expr = sendExpr;
+        (cls.fields[1].kind.getParameters()[0]:Function).expr = sendExpr;
+        (cls.fields[2].kind.getParameters()[0]:Function).expr = sendExpr;
+        #end
+        #if client
+        #if tink_core
+        (cls.fields[2].kind.getParameters()[0]:Function).expr = genRecvExpr(anon,fields);
+        #else
+        (cls.fields[3].kind.getParameters()[0]:Function).expr = genRecvExpr(anon,fields);
+        #end
+        #end
+        Context.defineType(cls);
+        
+        return TPath({name : clsName,pack: []});
     }
 
-    static function writeNetConstructer(anon:ComplexType,name:String):Expr {
-        var resolved = Context.resolveType(anon,Context.currentPos());
+    static function genSendExpr(anon:haxe.macro.Type,name:String,fields:Array<ClassField>):Expr {
         var macArray:Array<Expr> = [];
         macArray.push(macro gmod.libs.NetLib.Start($v{name},unreliable));
         var entity = Context.resolveType((macro : gmod.gclass.Entity),Context.currentPos());
@@ -184,46 +104,37 @@ class Networking {
         var table = Context.resolveType((macro : lua.Table.AnyTable),Context.currentPos());
         var bool = Context.resolveType((macro : Bool),Context.currentPos());
         var twoWayUni = (x:haxe.macro.Type,y:haxe.macro.Type) -> x.unify(y) && y.unify(x);
-        switch (resolved) {
-            case TType(_.get() => {type : TAnonymous(_.get() => anon)},_) |
-            TAnonymous(_.get() => anon):
-                for (field in anon.fields) {
-                    var name = field.name;
-                    switch (field.type) {
-                        case twoWayUni(_,entity) => true:
-                            macArray.push(macro gmod.libs.NetLib.WriteEntity(data.$name));
-                        case twoWayUni(_,string) => true:
-                            macArray.push(macro gmod.libs.NetLib.WriteString(data.$name));
-                        case twoWayUni(_,int) => true:
-                            macArray.push(macro gmod.libs.NetLib.WriteInt(data.$name,32));
-                        //NOTE Only one way checked, assumes writetable will be able to handle whatevers put in
-                        case _.unify(table) => true:
-                            macArray.push(macro gmod.libs.NetLib.WriteTable(data.$name));
-                        case twoWayUni(_,float) => true:
-                            macArray.push(macro gmod.libs.NetLib.WriteFloat(data.$name));
-                        case twoWayUni(_,vector) => true:
-                            macArray.push(macro gmod.libs.NetLib.WriteVector(data.$name));
-                        case twoWayUni(_,angle) => true:
-                            macArray.push(macro gmod.libs.NetLib.WriteAngle(data.$name));
-                        case twoWayUni(_,bool) => true:
-                            macArray.push(macro gmod.libs.NetLib.WriteBool(data.$name));
-                        default:
-                            trace('could not generate constructer field:${field.name}');
-                            trace(field.type.toString());
-                    }
-                    
-                    
-                }
-            default:
-                trace(resolved);
+        for (field in fields) {
+            var name = field.name;
+            switch (field.type) {
+                case twoWayUni(_,entity) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteEntity(data.$name));
+                case twoWayUni(_,string) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteString(data.$name));
+                case twoWayUni(_,int) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteInt(data.$name,32));
+                //NOTE Only one way checked, assumes writetable will be able to handle whatevers put in
+                case _.unify(table) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteTable(data.$name));
+                case twoWayUni(_,float) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteFloat(data.$name));
+                case twoWayUni(_,vector) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteVector(data.$name));
+                case twoWayUni(_,angle) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteAngle(data.$name));
+                case twoWayUni(_,bool) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteBool(data.$name));
+                default:
+                    trace('could not generate constructer field:${field.name}');
+                    trace(field.type.toString());
+            }
         }
-        macArray.push(macro gmod.libs.NetLib.Send(player));
+        macArray.push(macro gmod.libs.NetLib.Send(recv));
         return macro $b{macArray};
     }
 
-    static function writeNetReciever(anon:ComplexType,name2:String):Expr {
-        var resolved = Context.resolveType(anon,Context.currentPos());
-        var mac:Array<ObjectField> = [];
+    static function genRecvExpr(anon:haxe.macro.Type,fields:Array<ClassField>):Expr { 
+        var recvAnon:Array<ObjectField> = [];
         var entity = Context.resolveType((macro : gmod.gclass.Entity),Context.currentPos());
         var string = Context.resolveType((macro : String),Context.currentPos());
         var vector = Context.resolveType((macro : gmod.gclass.Vector),Context.currentPos());
@@ -234,45 +145,47 @@ class Networking {
         var bool = Context.resolveType((macro : Bool),Context.currentPos());
         var twoWayUni = (x:haxe.macro.Type,y:haxe.macro.Type) -> x.unify(y) && y.unify(x);
         // var mac:EObjectDecl = EObjectDecl()
-        switch (resolved) {
-            case TType(_.get() => {type : TAnonymous(_.get() => anon)},_)
-            | TAnonymous(_.get() => anon) :
-                for (field in anon.fields) {
-                    var name = field.name;
-                    //trace(name);
-                    switch (field.type) {
-                        case twoWayUni(_,int) => true:
-                            mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadInt(32);}});
-                        case twoWayUni(_,string) => true:
-                            mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadString();}});
-                        case _.unify(table) => true:
-                            mac.push({field : name, expr : macro {cast gmod.libs.NetLib.ReadTable();}});
-                        case twoWayUni(_,float) => true:
-                            mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadFloat();}});
-                        case twoWayUni(_,vector) => true:
-                            mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadVector();}});
-                        case twoWayUni(_,angle) => true:
-                            mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadAngle();}});
-                        case twoWayUni(_,bool) => true:
-                            mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadBool();}});
-                        case twoWayUni(_,entity) => true:
-                            mac.push({field : name, expr : macro {gmod.libs.NetLib.ReadEntity();}});
-                        default:
-                            trace('could not generate reciever field:${field.name}');
-                            trace(field.type.toString());
-                    }
-                }
-            default:
-                trace(resolved);
+    
+        for (field in fields) {
+            var name = field.name;
+            //trace(name);
+            switch (field.type) {
+                case twoWayUni(_,int) => true:
+                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadInt(32)});
+                case twoWayUni(_,string) => true:
+                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadString()});
+                case _.unify(table) => true:
+                    recvAnon.push({field : name, expr : macro cast gmod.libs.NetLib.ReadTable()});
+                case twoWayUni(_,float) => true:
+                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadFloat()});
+                case twoWayUni(_,vector) => true:
+                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadVector()});
+                case twoWayUni(_,angle) => true:
+                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadAngle()});
+                case twoWayUni(_,bool) => true:
+                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadBool()});
+                case twoWayUni(_,entity) => true:
+                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadEntity()});
+                default:
+                    trace('could not generate reciever field:${field.name}');
+                    trace(field.type.toString());
+            }
         }
-        var objdecl = EObjectDecl(mac);
-        var objdel2:Expr = {
-            expr : objdecl,
+        var objdel:Expr = {
+            expr : EObjectDecl(recvAnon),
             pos : Context.currentPos(),
         }
-        var triggername = '${name2}SignalTrigger';
-        var mac2 = macro {$i{triggername}.trigger($e{objdel2});};
-        return mac2;
+        #if tink_core
+        var finalExpr= macro {signalTrigger.trigger($e{objdel});};
+        #else
+        var finalExpr = macro {
+            var data = $e{objdel};
+            for (recv in recievers) {
+                recv(data);
+            }
+        };
+        #end
+        return finalExpr;
     }
-    #end
 }
+#end

@@ -35,7 +35,6 @@ import deceptinfect.Effect_di_test;
 #end
 class Main {
     public static function main() {
-        deceptinfect.Networking.initMessages();
         new DeceptInfect();
         
         for (ply in PlayerLib.GetAll()) {

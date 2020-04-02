@@ -56,7 +56,11 @@ local Array = _hx_e()
 local IntIterator = _hx_e()
 local Main = _hx_e()
 local Math = _hx_e()
-local NET_infection = _hx_e()
+local NETMESSAGE_gamestate = _hx_e()
+local NETMESSAGE_geiger = _hx_e()
+local NETMESSAGE_grabend = _hx_e()
+local NETMESSAGE_grabupdate = _hx_e()
+local NETMESSAGE_infection = _hx_e()
 local Reflect = _hx_e()
 local String = _hx_e()
 local Std = _hx_e()
@@ -79,7 +83,6 @@ __deceptinfect_GameManager = _hx_e()
 __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_ = _hx_e()
 __deceptinfect_GameValues = _hx_e()
 __deceptinfect_Misc = _hx_e()
-__deceptinfect_Networking = _hx_e()
 __haxe_IMap = _hx_e()
 __haxe_ds_IntMap = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
@@ -572,7 +575,6 @@ IntIterator.prototype.__class__ =  IntIterator
 Main.new = {}
 Main.__name__ = "Main"
 Main.main = function() 
-  __deceptinfect_Networking.initMessages();
   __deceptinfect_DeceptInfect.new();
   local ply = __gmod_PairTools.iterator(_G.player.GetAll());
   while (ply:hasNext()) do 
@@ -605,17 +607,171 @@ Math.min = function(a,b)
   end;
 end
 
-NET_infection.new = function() 
-  local self = _hx_new(NET_infection.prototype)
-  NET_infection.super(self)
+NETMESSAGE_gamestate.new = function() 
+  local self = _hx_new(NETMESSAGE_gamestate.prototype)
+  NETMESSAGE_gamestate.super(self)
   return self
 end
-NET_infection.super = function(self) 
+NETMESSAGE_gamestate.super = function(self) 
+  _G.util.AddNetworkString("gamestate");
+end
+NETMESSAGE_gamestate.__name__ = "NETMESSAGE_gamestate"
+NETMESSAGE_gamestate.prototype = _hx_a();
+NETMESSAGE_gamestate.prototype.send = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("gamestate", unreliable);
+  _G.net.WriteInt(data.state, 32);
+  _G.net.Send(recv);
+end
+NETMESSAGE_gamestate.prototype.sendTable = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("gamestate", unreliable);
+  _G.net.WriteInt(data.state, 32);
+  _G.net.Send(recv);
+end
+NETMESSAGE_gamestate.prototype.sendFilter = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("gamestate", unreliable);
+  _G.net.WriteInt(data.state, 32);
+  _G.net.Send(recv);
+end
+
+NETMESSAGE_gamestate.prototype.__class__ =  NETMESSAGE_gamestate
+
+NETMESSAGE_geiger.new = function() 
+  local self = _hx_new(NETMESSAGE_geiger.prototype)
+  NETMESSAGE_geiger.super(self)
+  return self
+end
+NETMESSAGE_geiger.super = function(self) 
+  _G.util.AddNetworkString("geiger");
+end
+NETMESSAGE_geiger.__name__ = "NETMESSAGE_geiger"
+NETMESSAGE_geiger.prototype = _hx_a();
+NETMESSAGE_geiger.prototype.send = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("geiger", unreliable);
+  _G.net.WriteFloat(data.geiger);
+  _G.net.Send(recv);
+end
+NETMESSAGE_geiger.prototype.sendTable = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("geiger", unreliable);
+  _G.net.WriteFloat(data.geiger);
+  _G.net.Send(recv);
+end
+NETMESSAGE_geiger.prototype.sendFilter = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("geiger", unreliable);
+  _G.net.WriteFloat(data.geiger);
+  _G.net.Send(recv);
+end
+
+NETMESSAGE_geiger.prototype.__class__ =  NETMESSAGE_geiger
+
+NETMESSAGE_grabend.new = function() 
+  local self = _hx_new(NETMESSAGE_grabend.prototype)
+  NETMESSAGE_grabend.super(self)
+  return self
+end
+NETMESSAGE_grabend.super = function(self) 
+  _G.util.AddNetworkString("grabend");
+end
+NETMESSAGE_grabend.__name__ = "NETMESSAGE_grabend"
+NETMESSAGE_grabend.prototype = _hx_a();
+NETMESSAGE_grabend.prototype.send = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("grabend", unreliable);
+  _G.net.WriteInt(data.index, 32);
+  _G.net.Send(recv);
+end
+NETMESSAGE_grabend.prototype.sendTable = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("grabend", unreliable);
+  _G.net.WriteInt(data.index, 32);
+  _G.net.Send(recv);
+end
+NETMESSAGE_grabend.prototype.sendFilter = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("grabend", unreliable);
+  _G.net.WriteInt(data.index, 32);
+  _G.net.Send(recv);
+end
+
+NETMESSAGE_grabend.prototype.__class__ =  NETMESSAGE_grabend
+
+NETMESSAGE_grabupdate.new = function() 
+  local self = _hx_new(NETMESSAGE_grabupdate.prototype)
+  NETMESSAGE_grabupdate.super(self)
+  return self
+end
+NETMESSAGE_grabupdate.super = function(self) 
+  _G.util.AddNetworkString("grabupdate");
+end
+NETMESSAGE_grabupdate.__name__ = "NETMESSAGE_grabupdate"
+NETMESSAGE_grabupdate.prototype = _hx_a();
+NETMESSAGE_grabupdate.prototype.send = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("grabupdate", unreliable);
+  _G.net.WriteEntity(data.ent);
+  _G.net.WriteEntity(data.ent2);
+  _G.net.WriteInt(data.index, 32);
+  _G.net.Send(recv);
+end
+NETMESSAGE_grabupdate.prototype.sendTable = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("grabupdate", unreliable);
+  _G.net.WriteEntity(data.ent);
+  _G.net.WriteEntity(data.ent2);
+  _G.net.WriteInt(data.index, 32);
+  _G.net.Send(recv);
+end
+NETMESSAGE_grabupdate.prototype.sendFilter = function(self,data,recv,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("grabupdate", unreliable);
+  _G.net.WriteEntity(data.ent);
+  _G.net.WriteEntity(data.ent2);
+  _G.net.WriteInt(data.index, 32);
+  _G.net.Send(recv);
+end
+
+NETMESSAGE_grabupdate.prototype.__class__ =  NETMESSAGE_grabupdate
+
+NETMESSAGE_infection.new = function() 
+  local self = _hx_new(NETMESSAGE_infection.prototype)
+  NETMESSAGE_infection.super(self)
+  return self
+end
+NETMESSAGE_infection.super = function(self) 
   _G.util.AddNetworkString("infection");
 end
-NET_infection.__name__ = "NET_infection"
-NET_infection.prototype = _hx_a();
-NET_infection.prototype.send = function(self,data,recv,unreliable) 
+NETMESSAGE_infection.__name__ = "NETMESSAGE_infection"
+NETMESSAGE_infection.prototype = _hx_a();
+NETMESSAGE_infection.prototype.send = function(self,data,recv,unreliable) 
   if (unreliable == nil) then 
     unreliable = false;
   end;
@@ -623,7 +779,7 @@ NET_infection.prototype.send = function(self,data,recv,unreliable)
   _G.net.WriteFloat(data.infection);
   _G.net.Send(recv);
 end
-NET_infection.prototype.sendTable = function(self,data,recv,unreliable) 
+NETMESSAGE_infection.prototype.sendTable = function(self,data,recv,unreliable) 
   if (unreliable == nil) then 
     unreliable = false;
   end;
@@ -631,7 +787,7 @@ NET_infection.prototype.sendTable = function(self,data,recv,unreliable)
   _G.net.WriteFloat(data.infection);
   _G.net.Send(recv);
 end
-NET_infection.prototype.sendFilter = function(self,data,recv,unreliable) 
+NETMESSAGE_infection.prototype.sendFilter = function(self,data,recv,unreliable) 
   if (unreliable == nil) then 
     unreliable = false;
   end;
@@ -640,7 +796,7 @@ NET_infection.prototype.sendFilter = function(self,data,recv,unreliable)
   _G.net.Send(recv);
 end
 
-NET_infection.prototype.__class__ =  NET_infection
+NETMESSAGE_infection.prototype.__class__ =  NETMESSAGE_infection
 
 Reflect.new = {}
 Reflect.__name__ = "Reflect"
@@ -1478,8 +1634,8 @@ __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,s
   local this1 = _G.Vector(-16, -16, 0);
   local otherVec = this1;
   local blockers = pos + otherVec;
-  local this2 = _G.Vector(16, 16, 72);
-  local otherVec1 = this2;
+  local this11 = _G.Vector(16, 16, 72);
+  local otherVec1 = this11;
   local blockers1 = _G.ents.FindInBox(blockers, pos + otherVec1);
   local ent = __gmod_PairTools.iterator(blockers1);
   while (ent:hasNext()) do 
@@ -2040,9 +2196,9 @@ __deceptinfect_GameManager.set_state = function(x)
   local p = __gmod_PairTools.iterator(_G.player.GetAll());
   while (p:hasNext()) do 
     local p1 = p:next();
-    __deceptinfect_Networking.sendGameState(_hx_o({__fields__={state=true},state=__deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.fromGAME_STATE(x)}), p1);
+    __deceptinfect_GameManager.net_gamestate:send(_hx_o({__fields__={state=true},state=__deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.fromGAME_STATE(x)}), p1);
   end;
-  __haxe_Log.trace("set state...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=85,className="deceptinfect.GameManager",methodName="set_state"}));
+  __haxe_Log.trace("set state...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=86,className="deceptinfect.GameManager",methodName="set_state"}));
   __deceptinfect_GameManager.state = x do return __deceptinfect_GameManager.state end;
 end
 __deceptinfect_GameManager.initInfectedPlayer = function(x) 
@@ -2062,13 +2218,13 @@ __deceptinfect_GameManager.initInfectedPlayer = function(x)
   local x2 = __deceptinfect_ecswip_GrabAccepter;
   local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x2);
   local comp2 = comparray1[x];
-  local comp3 = comp2:slice(2)[0];
-  if (comp3 == nil) then 
+  local comp11 = comp2:slice(2)[0];
+  if (comp11 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x2.__name__),0);
   end;
-  local c_accept = comp3;
+  local c_accept = comp11;
   c_accept.grabState = __deceptinfect_ecswip_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE);
-  __haxe_Log.trace(c_accept.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=100,className="deceptinfect.GameManager",methodName="initInfectedPlayer"}));
+  __haxe_Log.trace(c_accept.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=101,className="deceptinfect.GameManager",methodName="initInfectedPlayer"}));
   local rad = __deceptinfect_radiation_RadiationProducer.createFromType(__deceptinfect_radiation_RadTypes.INF);
   rad.state = __deceptinfect_radiation_RadiationState.DISABLED;
   __deceptinfect_ecswip_ComponentManager.addComponent(rad, x);
@@ -2111,145 +2267,6 @@ __deceptinfect_GameValues.__name__ = "deceptinfect.GameValues"
 
 __deceptinfect_Misc.new = {}
 __deceptinfect_Misc.__name__ = "deceptinfect.Misc"
-
-__deceptinfect_Networking.new = {}
-__deceptinfect_Networking.__name__ = "deceptinfect.Networking"
-__deceptinfect_Networking.sendInfectionMessage = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("InfectionMessage", unreliable);
-  _G.net.WriteFloat(data.infection);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendTblInfectionMessage = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("InfectionMessage", unreliable);
-  _G.net.WriteFloat(data.infection);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendFilterInfectionMessage = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("InfectionMessage", unreliable);
-  _G.net.WriteFloat(data.infection);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendGameState = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GameState", unreliable);
-  _G.net.WriteInt(data.state, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendTblGameState = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GameState", unreliable);
-  _G.net.WriteInt(data.state, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendFilterGameState = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GameState", unreliable);
-  _G.net.WriteInt(data.state, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendGeiger = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("Geiger", unreliable);
-  _G.net.WriteFloat(data.geiger);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendTblGeiger = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("Geiger", unreliable);
-  _G.net.WriteFloat(data.geiger);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendFilterGeiger = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("Geiger", unreliable);
-  _G.net.WriteFloat(data.geiger);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendGrabUpdate = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GrabUpdate", unreliable);
-  _G.net.WriteEntity(data.ent);
-  _G.net.WriteEntity(data.ent2);
-  _G.net.WriteInt(data.index, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendTblGrabUpdate = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GrabUpdate", unreliable);
-  _G.net.WriteEntity(data.ent);
-  _G.net.WriteEntity(data.ent2);
-  _G.net.WriteInt(data.index, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendFilterGrabUpdate = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GrabUpdate", unreliable);
-  _G.net.WriteEntity(data.ent);
-  _G.net.WriteEntity(data.ent2);
-  _G.net.WriteInt(data.index, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendGrabEnd = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GrabEnd", unreliable);
-  _G.net.WriteInt(data.index, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendTblGrabEnd = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GrabEnd", unreliable);
-  _G.net.WriteInt(data.index, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.sendFilterGrabEnd = function(data,player,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("GrabEnd", unreliable);
-  _G.net.WriteInt(data.index, 32);
-  _G.net.Send(player);
-end
-__deceptinfect_Networking.initMessages = function() 
-  _G.util.AddNetworkString("InfectionMessage");
-  _G.util.AddNetworkString("GameState");
-  _G.util.AddNetworkString("Geiger");
-  _G.util.AddNetworkString("GrabUpdate");
-  _G.util.AddNetworkString("GrabEnd");
-end
-__deceptinfect_Networking.prototype = _hx_a();
-
-__deceptinfect_Networking.prototype.__class__ =  __deceptinfect_Networking
 
 __haxe_IMap.new = {}
 __haxe_IMap.__name__ = "haxe.IMap"
@@ -2656,7 +2673,7 @@ __deceptinfect_client_GeigerSystem.prototype.run_server = function(self)
         _hx_tmp = _g1[2].player;
         local player = _hx_tmp;
         local fract = Math.min((inf.rate - 1) / 3, 1);
-        __deceptinfect_Networking.sendGeiger(_hx_o({__fields__={geiger=true},geiger=fract}), player, true);
+        __deceptinfect_client_GeigerSystem.net_geiger:send(_hx_o({__fields__={geiger=true},geiger=fract}), player, true);
       end;
     end;
   end;
@@ -3021,11 +3038,11 @@ __deceptinfect_ecswip_GrabSystem.grabStop = function(attack)
   local x1 = __deceptinfect_ecswip_VirtualPosition;
   local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
   local comp2 = comparray1[attack];
-  local comp3 = comp2:slice(2)[0];
-  if (comp3 == nil) then 
+  local comp11 = comp2:slice(2)[0];
+  if (comp11 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
-  local attackPos = comp3:get_pos();
+  local attackPos = comp11:get_pos();
   local vic;
   local _g = c_produce.grabState;
   if (_g[1] == 1) then 
@@ -3036,34 +3053,34 @@ __deceptinfect_ecswip_GrabSystem.grabStop = function(attack)
   end;
   local x2 = __deceptinfect_ecswip_VirtualPosition;
   local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(x2);
-  local comp4 = comparray2[vic];
-  local comp5 = comp4:slice(2)[0];
-  if (comp5 == nil) then 
+  local comp3 = comparray2[vic];
+  local comp12 = comp3:slice(2)[0];
+  if (comp12 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x2.__name__),0);
   end;
-  local vicPos = comp5:get_pos();
+  local vicPos = comp12:get_pos();
   local x3 = __deceptinfect_ecswip_GrabAccepter;
   local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(x3);
-  local comp6 = comparray3[vic];
-  local comp7 = comp6:slice(2)[0];
-  if (comp7 == nil) then 
+  local comp4 = comparray3[vic];
+  local comp13 = comp4:slice(2)[0];
+  if (comp13 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x3.__name__),0);
   end;
-  local c_accept = comp7;
+  local c_accept = comp13;
   c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.NOT_READY(__deceptinfect_util_Cooldown.COOLDOWN(_G.CurTime() + 2)));
   local _this = c_accept.grabAttacker;
   _this.h[c_produce] = false;
   _this.k[c_produce] = true;
   local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp8 = comparray4[vic];
-  local _g2 = comp8;
+  local comp5 = comparray4[vic];
+  local _g2 = comp5;
   if (_g2[1] == 1) then 
     local plyr = _g2[2];
     plyr.player:Freeze(false);
   end;
   local comparray5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp9 = comparray5[attack];
-  local _g4 = comp9;
+  local comp6 = comparray5[attack];
+  local _g4 = comp6;
   if (_g4[1] == 1) then 
     local plyr1 = _g4[2];
     plyr1.player:Freeze(false);
@@ -3071,7 +3088,7 @@ __deceptinfect_ecswip_GrabSystem.grabStop = function(attack)
   local filter = _G.RecipientFilter();
   filter:AddPVS(attackPos);
   filter:AddPVS(vicPos);
-  __deceptinfect_Networking.sendFilterGrabEnd(_hx_o({__fields__={index=true},index=c_produce.grabindex}), filter);
+  __deceptinfect_ecswip_GrabSystem.net_grabend:sendFilter(_hx_o({__fields__={index=true},index=c_produce.grabindex}), filter);
 end
 __deceptinfect_ecswip_GrabSystem.attemptGrab = function(attack,vic) 
   local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
@@ -3090,7 +3107,7 @@ __deceptinfect_ecswip_GrabSystem.attemptGrab = function(attack,vic)
         if (_g2[1] == 2) then 
           if (c_accept.grabState[1] == 0) then 
             local vic1 = _g2[2];
-            __haxe_Log.trace(Std.string("c_accpet ") .. Std.string(Std.string(c_accept.grabState)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=234,className="deceptinfect.ecswip.GrabSystem",methodName="attemptGrab"}));
+            __haxe_Log.trace(Std.string("c_accpet ") .. Std.string(Std.string(c_accept.grabState)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=244,className="deceptinfect.ecswip.GrabSystem",methodName="attemptGrab"}));
             __deceptinfect_ecswip_GrabSystem.grabStart(attack, vic1);
           end;
         end;
@@ -3171,7 +3188,7 @@ __deceptinfect_ecswip_GrabSystem.attemptTarget = function(attack,vic)
           local _g21 = _g2[2];
           local tmp = _g21[1];
           if (tmp) == 1 then 
-            __haxe_Log.trace(c_accept.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=278,className="deceptinfect.ecswip.GrabSystem",methodName="attemptTarget"}));
+            __haxe_Log.trace(c_accept.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=288,className="deceptinfect.ecswip.GrabSystem",methodName="attemptTarget"}));
             __deceptinfect_ecswip_GrabSystem.attemptSneakAttack(attack, vic);
             __deceptinfect_ecswip_GrabSystem.target(attack, vic);
             if (c_accept.numTargeting >= c_accept.overwhelm) then 
@@ -3179,7 +3196,7 @@ __deceptinfect_ecswip_GrabSystem.attemptTarget = function(attack,vic)
             end;
           elseif (tmp) == 2 then 
             local _g3 = _g21[2];
-            __haxe_Log.trace(c_accept.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=278,className="deceptinfect.ecswip.GrabSystem",methodName="attemptTarget"}));
+            __haxe_Log.trace(c_accept.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=288,className="deceptinfect.ecswip.GrabSystem",methodName="attemptTarget"}));
             __deceptinfect_ecswip_GrabSystem.attemptSneakAttack(attack, vic);
             __deceptinfect_ecswip_GrabSystem.target(attack, vic);
             if (c_accept.numTargeting >= c_accept.overwhelm) then 
@@ -3218,7 +3235,7 @@ __deceptinfect_ecswip_GrabSystem.clearTargetingVic = function(vic)
   _this.k = ({});
 end
 __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic) 
-  __haxe_Log.trace("starting grab", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=307,className="deceptinfect.ecswip.GrabSystem",methodName="grabStart"}));
+  __haxe_Log.trace("starting grab", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=317,className="deceptinfect.ecswip.GrabSystem",methodName="grabStart"}));
   local x = __deceptinfect_ecswip_GrabProducer;
   local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
   local comp = comparray[attack];
@@ -3230,11 +3247,11 @@ __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic)
   local x1 = __deceptinfect_ecswip_GrabAccepter;
   local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
   local comp2 = comparray1[vic];
-  local comp3 = comp2:slice(2)[0];
-  if (comp3 == nil) then 
+  local comp11 = comp2:slice(2)[0];
+  if (comp11 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
-  local c_accept = comp3;
+  local c_accept = comp11;
   local _this = c_accept.grabAttacker;
   _this.h[c_produce] = true;
   _this.k[c_produce] = true;
@@ -3249,15 +3266,15 @@ __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic)
    end)();
   __deceptinfect_ecswip_GrabSystem.clearTargetingVic(vic);
   local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp4 = comparray2[vic];
-  local _g = comp4;
+  local comp3 = comparray2[vic];
+  local _g = comp3;
   if (_g[1] == 1) then 
     local plyr = _g[2];
     plyr.player:Freeze(true);
   end;
   local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp5 = comparray3[attack];
-  local _g2 = comp5;
+  local comp4 = comparray3[attack];
+  local _g2 = comp4;
   if (_g2[1] == 1) then 
     local plyr1 = _g2[2];
     plyr1.player:Freeze(true);
@@ -3278,11 +3295,11 @@ __deceptinfect_ecswip_GrabSystem.target = function(attacker,victim)
   local x1 = __deceptinfect_ecswip_GrabProducer;
   local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
   local comp2 = comparray1[attacker];
-  local comp3 = comp2:slice(2)[0];
-  if (comp3 == nil) then 
+  local comp11 = comp2:slice(2)[0];
+  if (comp11 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
-  local c_produce = comp3;
+  local c_produce = comp11;
   local _this = c_accept.targeting;
   _this.h[c_produce] = true;
   _this.k[c_produce] = true;
@@ -3325,8 +3342,8 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
         local _g11 = c_produce.grabState;
         local tmp = _g11[1];
         if (tmp) == 0 then 
-          local _g21 = _g11[2];
-          local tmp1 = _g21[1];
+          local _g5 = _g11[2];
+          local tmp1 = _g5[1];
           if (tmp1) == 1 then 
             local victim = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
             while (victim:hasNext()) do 
@@ -3334,30 +3351,30 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
               if (attack1 ~= victim1) then 
                 local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
                 local comp2 = comparray2[victim1];
-                local _g22 = comp2;
+                local _g21 = comp2;
                 local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
                 local comp3 = comparray3[victim1];
                 local _g3 = comp3;
                 if (_g3[1] == 1) then 
                   local _g4 = _g3[2];
-                  if (_g22[1] == 1) then 
+                  if (_g21[1] == 1) then 
                     local _hx_tmp1;
-                    _hx_tmp1 = _g22[2]:get_pos();
+                    _hx_tmp1 = _g21[2]:get_pos();
                     local vicPos = _hx_tmp1;
                     if (vicPos:Distance(g_attack:GetPos()) < c_produce.grabDist) then 
                       __deceptinfect_ecswip_GrabSystem.attemptTarget(attack1, victim1);
-                      local _g23 = c_produce.grabState;
-                      local tmp2 = _g23[1];
+                      local _g22 = c_produce.grabState;
+                      local tmp2 = _g22[1];
                       if (tmp2) == 0 then 
-                        local _g31 = _g23[2];
-                        if (_g31[1] == 2) then 
-                          local newTarget = _g31[2];
+                        local _g41 = _g22[2];
+                        if (_g41[1] == 2) then 
+                          local newTarget = _g41[2];
                           if (newTarget == victim1) then 
                             break;
                           end;
                         end;
                       elseif (tmp2) == 1 then 
-                        local _g5 = _g23[2];
+                        local _g31 = _g22[2];
                         break;else end;
                     end;
                   end;
@@ -3365,15 +3382,15 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
               end;
             end;
           elseif (tmp1) == 2 then 
-            local prevVic = _g21[2];
+            local prevVic = _g5[2];
             local x = __deceptinfect_ecswip_VirtualPosition;
             local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
             local comp4 = comparray4[prevVic];
-            local comp5 = comp4:slice(2)[0];
-            if (comp5 == nil) then 
+            local comp11 = comp4:slice(2)[0];
+            if (comp11 == nil) then 
               _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
             end;
-            local prevPos = comp5:get_pos();
+            local prevPos = comp11:get_pos();
             local oldDist = prevPos:Distance(g_attack:GetPos());
             if (oldDist > c_produce.grabDist) then 
               c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.SEARCHING));
@@ -3385,33 +3402,33 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
               local victim3 = victim2:next();
               if ((victim3 ~= prevVic) and (attack1 ~= victim3)) then 
                 local comparray5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
-                local comp6 = comparray5[victim3];
-                local _g24 = comp6;
+                local comp5 = comparray5[victim3];
+                local _g23 = comp5;
                 local comparray6 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
-                local comp7 = comparray6[victim3];
-                local _g32 = comp7;
+                local comp6 = comparray6[victim3];
+                local _g32 = comp6;
                 if (_g32[1] == 1) then 
-                  local _g41 = _g32[2];
-                  if (_g24[1] == 1) then 
+                  local _g42 = _g32[2];
+                  if (_g23[1] == 1) then 
                     local _hx_tmp2;
-                    _hx_tmp2 = _g24[2]:get_pos();
+                    _hx_tmp2 = _g23[2]:get_pos();
                     local vicPos1 = _hx_tmp2;
                     local newDist = vicPos1:Distance(g_attack:GetPos());
                     if ((newDist < oldDist) and (newDist < c_produce.grabDist)) then 
                       __deceptinfect_ecswip_GrabSystem.attemptTarget(attack1, victim3);
-                      local _g25 = c_produce.grabState;
-                      local tmp3 = _g25[1];
+                      local _g24 = c_produce.grabState;
+                      local tmp3 = _g24[1];
                       if (tmp3) == 0 then 
-                        local _g33 = _g25[2];
-                        if (_g33[1] == 2) then 
-                          local newTarget1 = _g33[2];
+                        local _g43 = _g24[2];
+                        if (_g43[1] == 2) then 
+                          local newTarget1 = _g43[2];
                           if (newTarget1 == victim3) then 
-                            __haxe_Log.trace(Std.string("switching targets ") .. Std.string(newTarget1), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=136,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
+                            __haxe_Log.trace(Std.string("switching targets ") .. Std.string(newTarget1), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=146,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
                             break;
                           end;
                         end;
                       elseif (tmp3) == 1 then 
-                        local _g51 = _g25[2];
+                        local _g33 = _g24[2];
                         break;else end;
                     end;
                   end;
@@ -3422,8 +3439,8 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
           local victim4 = _g11[2];
           local g_vic;
           local comparray7 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-          local comp8 = comparray7[victim4];
-          local _g12 = comp8;
+          local comp7 = comparray7[victim4];
+          local _g12 = comp7;
           if (_g12[1] == 1) then 
             local gent = _g12[2];
             g_vic = gent.entity;
@@ -3433,10 +3450,10 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
           local filter = _G.RecipientFilter();
           filter:AddPVS(g_attack:GetPos());
           filter:AddPVS(g_vic:GetPos());
-          __deceptinfect_Networking.sendFilterGrabUpdate(_hx_o({__fields__={index=true,ent=true,ent2=true},index=c_produce.grabindex,ent=g_vic,ent2=g_attack}), filter, true);
+          __deceptinfect_ecswip_GrabSystem.net_grabupdate:sendFilter(_hx_o({__fields__={index=true,ent=true,ent2=true},index=c_produce.grabindex,ent=g_vic,ent2=g_attack}), filter, true);
           local comparray8 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent);
-          local comp9 = comparray8[victim4];
-          local _g34 = comp9;
+          local comp8 = comparray8[victim4];
+          local _g34 = comp8;
           if (_g34[1] == 1) then 
             local inf = _g34[2];
             local _g35 = inf.infection;
@@ -3446,24 +3463,24 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
               local param = __deceptinfect_ecswip_GrabSystem.calcGrabIncrease();
               inf1[0] = inf1[0] + param;
             elseif (tmp4) == 1 then 
-              __haxe_Log.trace("infected", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=174,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
+              __haxe_Log.trace("infected", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=184,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
               __deceptinfect_ecswip_GrabSystem.grabStop(attack1);
               local x1 = __deceptinfect_ecswip_GrabAccepter;
               local comparray9 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-              local comp10 = comparray9[victim4];
-              local comp11 = comp10:slice(2)[0];
-              if (comp11 == nil) then 
+              local comp9 = comparray9[victim4];
+              local comp12 = comp9:slice(2)[0];
+              if (comp12 == nil) then 
                 _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
               end;
-              local c_accept = comp11;
+              local c_accept = comp12;
               c_accept.grabState = __deceptinfect_ecswip_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE); end;
           else
             _G.error("Victim has no infection component..",0);
           end;
         elseif (tmp) == 2 then 
-          local _g52 = _g11[2];
-          if (_g52[1] == 1) then 
-            local cool = _g52[2];
+          local _g36 = _g11[2];
+          if (_g36[1] == 1) then 
+            local cool = _g36[2];
             if (_G.CurTime() > cool) then 
               c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.NOT_SEARCHING));
             end;
@@ -3694,7 +3711,7 @@ __deceptinfect_infection_InfectionSystem.makeInfected = function(ent)
       tmp = __deceptinfect_infection_INF_STATE.INFECTED;
     end;
     inf.infection = tmp;
-    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=95,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
+    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=94,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
   end;
 end
 __deceptinfect_infection_InfectionSystem.calcInfectionFromRates = function(rate) 
@@ -3723,7 +3740,7 @@ __deceptinfect_infection_InfectionSystem.getBaseInfection = function(inf)
       local x = _g1[2];
       do return x.baseInfection[0] end;
     else
-      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=122,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
+      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=121,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
       inf.baseInfection = __deceptinfect_infection_BaseInfection.USING_STATIC(0.0);
       do return 0 end;
     end;
@@ -3741,7 +3758,7 @@ __deceptinfect_infection_InfectionSystem.fixUpInfection = function(infection)
     else
       local inf1 = _g1;
       if (inf1[0] >= 100) then 
-        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=139,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
+        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=138,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
         infection.infection = __deceptinfect_infection_INF_STATE.INFECTED;
       end;
     end;
@@ -3753,7 +3770,7 @@ __deceptinfect_infection_InfectionSystem.onInfected = function(ent)
   local _g = comp;
   if (_g[1] == 1) then 
     local _g1 = _g[2];
-    __haxe_Log.trace("INIT INFECTED PLAYER", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=150,className="deceptinfect.infection.InfectionSystem",methodName="onInfected"}));
+    __haxe_Log.trace("INIT INFECTED PLAYER", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=149,className="deceptinfect.infection.InfectionSystem",methodName="onInfected"}));
     __deceptinfect_GameManager.initInfectedPlayer(ent);
   end;
 end
@@ -7803,6 +7820,8 @@ _hx_array_mt.__index = Array.prototype
 local _hx_static_init = function()
   __deceptinfect_GameManager.state = __deceptinfect_GAME_STATE.WAIT;
   
+  __deceptinfect_GameManager.net_gamestate = NETMESSAGE_gamestate.new();
+  
   __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.WAIT = 0;
   
   __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.SETTING_UP = 1;
@@ -7869,6 +7888,8 @@ local _hx_static_init = function()
   
   __deceptinfect_PlayerManager.indexLookup = __haxe_ds_IntMap.new();
   
+  __deceptinfect_client_GeigerSystem.net_geiger = NETMESSAGE_geiger.new();
+  
   __deceptinfect_client_PVS.pvs = __haxe_ds_IntMap.new();
   
   __deceptinfect_ecswip_ComponentManager.components = __haxe_ds_ObjectMap.new();
@@ -7879,11 +7900,15 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_ComponentManager.gEntityLookup = __haxe_ds_IntMap.new();
   
+  __deceptinfect_ecswip_GrabSystem.net_grabupdate = NETMESSAGE_grabupdate.new();
+  
+  __deceptinfect_ecswip_GrabSystem.net_grabend = NETMESSAGE_grabend.new();
+  
   __deceptinfect_ecswip_GrabSystem.grabindex = 0;
   
   __deceptinfect_ecswip_SignalStorage.entDamageTrigger = __tink_core_SignalTrigger.new();
   
-  __deceptinfect_infection_InfectionSystem.net_inf = NET_infection.new();
+  __deceptinfect_infection_InfectionSystem.net_inf = NETMESSAGE_infection.new();
   
   __deceptinfect_infection_RateSystem.nextAddRate = 0;
   

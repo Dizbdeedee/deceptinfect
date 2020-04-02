@@ -2,13 +2,13 @@ package deceptinfect.client;
 
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
-import deceptinfect.Networking.N_Geiger;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.System;
 
 @:expose("geiger")
 class GeigerSystem extends System {
     
+    static var net_geiger = new gmod.NET_Server<"geiger",{geiger : Float}>();
     #if client
 
     
@@ -20,10 +20,11 @@ class GeigerSystem extends System {
         GlobalLib.Sound("player/geiger3.wav")
     ];
     static var playTime:Float = 0.0;
+
     
     override function init_client() {
-        Networking.GeigerSignal.handle(
-        function (data:N_Geiger) {
+        net_geiger.signal.handle(
+        function (data:{geiger : Float}) {
             //trace('geiger $geiger');
             geiger = data.geiger;
         });
@@ -59,7 +60,7 @@ class GeigerSystem extends System {
             switch [plyr.get(InfectionComponent),plyr.get(PlayerComponent)] {
             case [Comp(inf),Comp(_.player => player)]:
                 var fract = Math.min(((inf.rate - 1) / 3),1);
-                Networking.sendGeiger({geiger: fract},player,true);
+                net_geiger.send({geiger: fract},player,true);
             default:
             }
         }

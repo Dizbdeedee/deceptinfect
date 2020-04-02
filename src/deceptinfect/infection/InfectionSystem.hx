@@ -2,7 +2,6 @@ package deceptinfect.infection;
 
 import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
-import deceptinfect.Networking.N_InfectionMessageDef;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.PlayerComponent;
@@ -19,7 +18,7 @@ class InfectionSystem extends System {
         net_inf.signal.handle(recvInfection);
     }
 
-    function recvInfection(data:N_InfectionMessageDef) {
+    function recvInfection(data:{infection : Float}) {
         switch PlayerManager.getLocalPlayerID().get(InfectionComponent) {
             case Comp(inf):
                 switch (inf.infection) {

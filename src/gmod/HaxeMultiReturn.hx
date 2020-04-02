@@ -11,7 +11,7 @@ using lua.TableTools;
     This adds a bit of overhead in exchange for typed multireturns
     To have them in order, use a,b,c,d,e.... ect. as the keys for the structure
 **/
-abstract HaxeMultiReturn<T>(Dynamic) {
+abstract HaxeMultiReturn<T>(Dynamic) to T {
     @:from
     public inline static function multiReturn<T:Dynamic>(rtns:T):HaxeMultiReturn<T> {
         var tbl = Table.create();
@@ -20,6 +20,15 @@ abstract HaxeMultiReturn<T>(Dynamic) {
         }
         return tbl.unpack();    
     }
+
+    
+    
+}
+
+
+@:genericBuild(gmod.macros.MultiReturn.build())
+abstract HaxeMultiReturn_2<T>(Dynamic) {
+
 }
 
 

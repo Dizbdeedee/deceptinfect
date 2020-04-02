@@ -3,15 +3,25 @@ package deceptinfect.ecswip;
 import deceptinfect.util.Cooldown;
 import gmod.Hooks;
 import deceptinfect.ecswip.SignalStorage.DamageEvent;
-import deceptinfect.Networking.N_GrabEnd;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
-import deceptinfect.Networking.N_GrabPos;
 import deceptinfect.client.PVS;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.infection.InfectionSystem;
 using deceptinfect.util.EntityExt;
-class GrabSystem extends System {
+typedef Net_GrabPos = {
+    index : Int,
+    ent : Entity,
+    ent2 : Entity
+}
 
+typedef Net_GrabEnd = {
+    index : Int
+}
+
+class GrabSystem extends System {
+    static var net_grabupdate = new gmod.NET_Server<"grabupdate",Net_GrabPos>();
+
+    static var net_grabend = new gmod.NET_Server<"grabend",{index : Int}>();
     
     #if client
     static var hycord = GlobalLib.Material("cable/new_cable_lit").a;
@@ -19,11 +29,11 @@ class GrabSystem extends System {
     static var activeDraws:Map<Int,DI_ID> = [];
     
     override function init_client() {
-        Networking.GrabUpdateSignal.handle(updateSig);
-        Networking.GrabEndSignal.handle(remove);
+        net_grabupdate.signal.handle(updateSig);
+        net_grabend.signal.handle(remove);
     }
 
-    static function updateSig(data:N_GrabPos) {
+    static function updateSig(data:Net_GrabPos) {
         if (!activeDraws.exists(data.index)) {
             trace('activated grab ${data.index}');
             var draw = ComponentManager.addEntity();
@@ -32,7 +42,7 @@ class GrabSystem extends System {
         }
     }
 
-    static function remove(data:N_GrabEnd) {
+    static function remove(data:Net_GrabEnd) {
         trace('delete grab ${data.index}');
         if (activeDraws.exists(data.index)) {
             ComponentManager.removeEntity(activeDraws.get(data.index));
@@ -158,7 +168,7 @@ class GrabSystem extends System {
                     var filter = GlobalLib.RecipientFilter();
                     filter.AddPVS(g_attack.GetPos());
                     filter.AddPVS(g_vic.GetPos());
-                    Networking.sendFilterGrabUpdate({
+                    net_grabupdate.sendFilter({
                         index : c_produce.grabindex,
                         ent: g_vic,
                         ent2: g_attack
@@ -223,7 +233,7 @@ class GrabSystem extends System {
         var filter = GlobalLib.RecipientFilter();
         filter.AddPVS(attackPos);
         filter.AddPVS(vicPos);
-        Networking.sendFilterGrabEnd({index : c_produce.grabindex},filter);
+        net_grabend.sendFilter({index : c_produce.grabindex},filter);
     }
 
     public static function attemptGrab(attack:DI_ID,vic:DI_ID) {
