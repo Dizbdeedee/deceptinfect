@@ -1,5 +1,6 @@
 package gmod.sent;
-
+@:keep
+@:keepSub
 class ENT {
     /**
         Called when the entity is created. This is called when you Entity:Spawn the custom entity. 

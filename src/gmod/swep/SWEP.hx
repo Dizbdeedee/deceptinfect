@@ -1,14 +1,25 @@
 package gmod.swep;
 
+import deceptinfect.GEntCompat.GPlayerCompat;
+
 
 /**
     Default weapon methods, that are available for use in SWEPs. These functions/hooks will not work on non-scripted weapons, such as the Half-Life 2 weapons. 
 	
 	You can find all available SWEP fields here: SWEP structure
 **/
+@:keep
+@:keepInit
+@:keepSub
 class SWEP {
 
 	var self(default,never):gmod.gclass.Weapon;
+	
+	var owner(get,never):Null<GPlayerCompat>;
+
+	extern inline function get_owner() {
+		return untyped self.Owner;
+	}
     #if client
     /**
         Called after the view model has been drawn while the weapon in use. This hook is called from the default implementation of GM:PostDrawViewModel, and as such, will not occur if it has been overridden. 
@@ -670,8 +681,7 @@ class SWEP {
 		```
     **/
     
-    @:hook
-    function CanPrimaryAttack():Bool {return null;}
+    public function CanPrimaryAttack():Bool {return null;}
     
     
     /**

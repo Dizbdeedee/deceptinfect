@@ -1,4 +1,4 @@
-ENT.Base = "base_entity"
+ENT.Base = "base_anim"
 ENT.Type = "anim"
 
 function ENT:Think()

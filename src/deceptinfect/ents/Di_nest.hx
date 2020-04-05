@@ -21,18 +21,24 @@ class Di_nest extends gmod.sent.ENT_ANIM implements SentBuild {
         
     }
     override function Think():Bool {
+
+        var c_nest = id.get_sure(NestComponent);
         for (ent in entities) {
-            switch [ent.get(PlayerComponent),ent.get(InfectedComponent)] {
-            case [Comp(ply),Comp(_)]:
+            switch [ent.get(PlayerComponent),ent.get(InfectedComponent),c_nest.nestState] {
+            case [Comp(ply),_,VISIBLE]:
                 self.SetPreventTransmit(ply.player,false);
-            case [Comp(ply),NONE]:
+            case [Comp(ply),Comp(_),_]:
+                self.SetPreventTransmit(ply.player,false);
+            case [Comp(ply),NONE,_]:
                 self.SetPreventTransmit(ply.player,true);
+
             default:
             }
 
         }
         return null;
     }
+    
     #end
     override function TestCollision(startpos:Vector, delta:Vector, isbox:Bool, extents:Vector, mask:Float):TestCollisionData {
         return {

@@ -1,7 +1,7 @@
 package deceptinfect.ecswip;
 
 import deceptinfect.util.Cooldown;
-import gmod.Hooks;
+import gmod.Hook;
 import deceptinfect.ecswip.SignalStorage.DamageEvent;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.client.PVS;
@@ -78,7 +78,7 @@ class GrabSystem extends System {
 
     
     override function init_server() {
-        HookLib.Add(Hooks.EntityTakeDamage,"grabDamage",grabDamage);
+        HookLib.Add(GMHook.EntityTakeDamage,"grabDamage",grabDamage);
     }
     static function grabDamage(ent:GEntCompat,dmg:CTakeDamageInfo) {
         if (ent.IsPlayer()) {

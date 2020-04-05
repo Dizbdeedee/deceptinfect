@@ -19,14 +19,16 @@ class MultiReturn {
     static public function build():ComplexType {
         trace("lol");
         var type = Context.getLocalType();
-        var cls;
-        switch (type) {
+        var cls = switch (type) {
             case TInst(_, [TInst(_.get() => c = {meta : _.has(":multiReturn") => true}, _)]):
-                cls = c;
+                c;
             default:
                 return null;
         }
+        trace(cls.name);
         if (!storage.exists(cls.name)) {
+            trace(cls.name);
+            storage.set(cls.name,true);
             var anon:TypeDefinition = {
                 pack: [],
                 name: 'A_${cls.name}',
@@ -40,7 +42,6 @@ class MultiReturn {
             }
             anon.fields = fieldArray;
             Context.defineType(anon);
-            storage.set(cls.name,true);
         }
         
         return TPath({pack : [],name : 'A_${cls.name}'});

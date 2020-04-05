@@ -46,25 +46,30 @@ class InfectionSystem extends System {
                     var base = getBaseInfection(infection);
                 
                     var rate = switch (entity.get(RateComponent)) {
-                        case Comp(rate):
-                            calcInfectionFromRates(rate);
-                        default:
-                            infection.rate;
+                    case Comp(rate):
+                        calcInfectionFromRates(rate);
+                    default:
+                        infection.rate;
                     }
                     rate += 1;
                     
-                    inf.value += base * rate;
                     
-                    //trace('$base $rate ${inf.value}');
+                    var vun = switch (entity.get(InfVunerability)) {
+                    case Comp(c_v):
+                        c_v.vun;
+                    default:
+                        1;
+                    }
+                    
+                    inf.value += base * rate * vun;
                     fixUpInfection(infection);
                     
                     switch (entity.get(PlayerComponent)) {
-                        case Comp(ply):
-                            net_inf.send({infection: inf.value},ply.player,true);    
-                            totalInf += infection.getInfValue();
-                            numPlayers++;
-                            // Networking.sendInfectionMessage({infection: inf.value},ply.player,true);
-                        default:
+                    case Comp(ply):
+                        net_inf.send({infection: inf.value},ply.player,true);    
+                        totalInf += infection.getInfValue();
+                        numPlayers++;
+                    default:
                     }
                     infection.rate = rate;
                     switch (infection.infection) {
@@ -116,6 +121,18 @@ class InfectionSystem extends System {
             totalmulti += multi; 
         }
         return total * totalmulti;
+    }
+
+    public function infect(id:DI_ID,x:Float) {
+        var inf = id.get_sure(InfectionComponent);
+        switch [inf.infection,id.get(InfVunerability)] {
+        case [NOT_INFECTED(inf),Comp(c_vun)]:
+            inf.value += x * c_vun.vun;
+        case [NOT_INFECTED(inf),NONE]:
+            inf.value += x;
+        case [INFECTED,_]:
+
+        }
     }
 
 

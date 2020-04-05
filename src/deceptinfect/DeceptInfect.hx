@@ -15,7 +15,7 @@ import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.enums.BUTTON_CODE;
 import deceptinfect.ecswip.ComponentManager;
 
-import gmod.Hooks;
+import gmod.Hook;
 import lua.Lua;
 import tink.core.Annex;
 import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
@@ -108,7 +108,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
                 var plyr:GPlayerCompat = PlayerLib.GetByID(1);
                 InfectionSystem.makeInfected(plyr.id);
             case KEY_M:
-                untyped __lua__("PrintTable({0})",ComponentManager.components.get(PlayerComponent));
+                trace(ComponentManager.components.get(PlayerComponent));
             default:
             //handle case of infection? use command strategy
         }

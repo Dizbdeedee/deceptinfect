@@ -1,7 +1,7 @@
 package gmod.libs;
 
 
-import gmod.Hooks.Hook;
+import gmod.Hook;
 
 /**
     The hook library allows you to add hooks called by the game engine, allowing multiple scripts to modify game function.
@@ -104,8 +104,8 @@ import gmod.Hooks.Hook;
 		
 		"CustomHook table: 0x00000000 Player [1][PotatoMan]"
     **/
-    @:overload(function (eventName:String,identifier:Any,func:Function):Void {})
-    public static function Add<T:Function>(eventName:Hook<T>, identifier:Any, func:T):Void;
+	public static function Add<T:Function>(eventName:Hook<T>, identifier:Any, func:T):Void;
+	
     
     
     /**

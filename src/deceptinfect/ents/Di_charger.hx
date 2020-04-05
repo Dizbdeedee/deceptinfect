@@ -1,4 +1,4 @@
-package deceptinfect;
+package deceptinfect.ents;
 
 import gmod.sent.SentBuild;
 import deceptinfect.game.BatteryAccepter;
@@ -6,7 +6,7 @@ import deceptinfect.ecswip.ComponentManager;
 
 class Di_charger extends gmod.sent.ENT_ANIM implements SentBuild {
     final properties:EntFields = {
-        Base : "base_entity",
+        Base : "base_anim",
     }
     #if client
     override function Draw(flags:Float) {

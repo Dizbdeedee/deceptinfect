@@ -26,6 +26,7 @@ import deceptinfect.*;
 using gmod.PairTools;
 import deceptinfect.ecswip.SystemManager;
 // import deceptinfect.CustomEnt;
+import gmod.Patch;
 import deceptinfect.Weapon_di_scan;
 import deceptinfect.TXT;
 #if client
@@ -45,7 +46,9 @@ class Main {
        
         
         #end
+        trace("looool!!");
         SystemManager.initAllSystems();
+        
       
     }
 

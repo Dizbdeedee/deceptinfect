@@ -18,5 +18,25 @@ class NestSystem extends System {
             }
         }
     }
+
+    public function revealNests() {
+        for (ent in entities) {
+            switch ent.get(NestComponent) {
+            case Comp(c_nest):
+                c_nest.nestState = VISIBLE;
+            default:
+            }
+        }
+    }
+
+    public function hideNests() {
+        for (ent in entities) {
+            switch ent.get(NestComponent) {
+            case Comp(c_nest):
+                c_nest.nestState = INVISIBLE;
+            default:
+            }
+        }
+    }
     #end
 }

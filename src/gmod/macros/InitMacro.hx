@@ -23,6 +23,10 @@ class InitMacro {
     static public function init() {
         Compiler.exclude("lua.lib",true);
         Compiler.exclude("Sys",true);
+        Compiler.addMetadata("@:extern","lua.Boot","__string_rec",true);
+        Compiler.include("gmod.Patch");
+        Compiler.keep("gmod.Patch");
+        
         // Context.onTypeNotFound(testFunc);
         Compiler.includeFile("include.lua",IncludePosition.Top);
         

@@ -289,8 +289,7 @@ package gmod.libs;
 		button:Spawn()
 		```
     **/
-    @:overload(function<T:Entity>(_class:EntityClass<T>):T {})
-    public static function Create(_class:String):Entity;
+    public static function Create<T:Entity>(_class:EntityClass<T>):T;
     #end
     
     /**

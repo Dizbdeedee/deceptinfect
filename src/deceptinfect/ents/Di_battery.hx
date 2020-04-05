@@ -1,4 +1,4 @@
-package deceptinfect;
+package deceptinfect.ents;
 
 import gmod.sent.SentBuild;
 import gmod.sent.SentBuild.EntFields;
@@ -9,7 +9,7 @@ import deceptinfect.ecswip.SystemManager.getSystem;
 
 class Di_battery extends gmod.sent.ENT_ANIM implements SentBuild {
     public final properties:EntFields = {
-        Base: "base_entity",
+        Base: "base_anim",
         
     }
     #if client

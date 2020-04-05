@@ -33,8 +33,27 @@ class WinSystem extends System {
 			winTrig.trigger(WIN_HUMAN);
 			winTrig.clear();
 		} else if (infected >= total) {
-			winTrig.trigger(WIN_ALIEN);
+			winTrig.trigger(WIN_INF);
 			winTrig.clear();
+		}
+
+		var aliveNests = false;
+		var deadNests = false;
+		for (ent in entities) {
+			switch ent.get(NestComponent) {
+			case Comp(c_nest):
+				if (c_nest.health > 0) {
+					aliveNests = true;
+					break;
+				} else {
+					deadNests = true;
+				}
+			default:
+			}
+
+		}
+		if (!aliveNests && deadNests) {
+			winTrig.trigger(WIN_HUMAN);
 		}
 	}
 	#end
@@ -42,6 +61,6 @@ class WinSystem extends System {
 
 enum Win {
 	WIN_HUMAN;
-	WIN_ALIEN;
+	WIN_INF;
 	DRAW;
 }

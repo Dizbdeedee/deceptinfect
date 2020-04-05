@@ -238,6 +238,7 @@ typedef SwepFields = {
 }
 
 @:autoBuild(gmod.macros.SentMacro.build(true,false))
+@:keepSub
 interface SwepBuild {
     private final properties:SwepFields;
 }
