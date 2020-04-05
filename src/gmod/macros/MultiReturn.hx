@@ -14,31 +14,36 @@ class MultiReturn {
             doc : x.doc,
         }
     }
+
+    static var storage:Map<String,Bool> = [];
     static public function build():ComplexType {
+        trace("lol");
         var type = Context.getLocalType();
         var cls;
         switch (type) {
             case TInst(_, [TInst(_.get() => c = {meta : _.has(":multiReturn") => true}, _)]):
                 cls = c;
             default:
+                return null;
         }
-
-        var anon:TypeDefinition = {
-            pack: [],
-            name: 'A_${cls.name}',
-            pos: Context.currentPos(),
-            kind: TypeDefKind.TDStructure,
-            fields : []
+        if (!storage.exists(cls.name)) {
+            var anon:TypeDefinition = {
+                pack: [],
+                name: 'A_${cls.name}',
+                pos: Context.currentPos(),
+                kind: TypeDefKind.TDStructure,
+                fields : []
+            }
+            var fieldArray = [];
+            for (clsfield in cls.fields.get()) {
+                fieldArray.push(classFieldToField(clsfield));
+            }
+            anon.fields = fieldArray;
+            Context.defineType(anon);
+            storage.set(cls.name,true);
         }
-        var abs = macro class {
-
-        }
-        var fieldArray = [];
-        for (clsfield in cls.fields.get()) {
-            fieldArray.push(classFieldToField(clsfield));
-        }
-        anon.fields = fieldArray;
-        return null;
+        
+        return TPath({pack : [],name : 'A_${cls.name}'});
     }
 }
 #end

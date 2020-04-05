@@ -19,60 +19,11 @@ class InitMacro {
     public static var baseEntFolder:String;
     public static var exportName:String;
     #if macro
-    // @:persistent static var firstBuild = true;
-    
-    //TODO Add all gmod.hooks.Panel to gmod.panel.Panel
-    static function testFunc(x:String):TypeDefinition {
-        
-        if (x.startsWith("PanelHelper_")) {
-            var ident = x.substring(12);
-            var lookup:haxe.macro.Type = null;
-            try {
-                lookup = Context.getType('gmod.panels.$ident');
-            } catch (e:String) {
-                Context.warning('Could not find panel...$ident',Context.currentPos());
-                return null;
-            }
-            var _class = macro class $x extends gmod.PanelHelper<gmod.panels.$ident> {
-                
-                /**
-                    The underlying object
-                **/
-                // public var self(default,never):gmod.panels.$ident;
-                function new(x:gmod.panels.$ident) {
-                    
-                }
-                
-                
-            };
-            _class.meta.push({
-                name : ":dce",
-                pos : Context.currentPos()
-            });
-            var fields = gmod.macros.PanelMacro.getSuperFields2(lookup.getClass());
-            var func:Function = _class.fields[0].kind.getParameters()[0];
-            var exprArray = [];
-            exprArray.push(macro super(x));
-            for (field in fields) {
-                var name = field.name;
-                _class.fields.push(gmod.macros.PanelMacro.classFuncToField(field));
-                if (field.meta.has(":hook")) {
-                    exprArray.push(macro untyped x.$name = $i{name});
-                }
-
-            }
-            func.expr = macro $b{exprArray}
-
-            // trace(Context.getMessages());
-            return _class;
-        }
-        return null;
-    }
 
     static public function init() {
         Compiler.exclude("lua.lib",true);
         Compiler.exclude("Sys",true);
-        Context.onTypeNotFound(testFunc);
+        // Context.onTypeNotFound(testFunc);
         Compiler.includeFile("include.lua",IncludePosition.Top);
         
         Compiler.addGlobalMetadata("gmod.engine_ents","@:dce",true);

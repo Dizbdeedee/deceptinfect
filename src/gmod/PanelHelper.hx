@@ -4,14 +4,48 @@ import haxe.ds.BalancedTree.TreeNode;
 import gmod.libs.TableLib;
 import gmod.libs.VguiLib;
 
-class PanelHelper<T:Panel> {
-    public var self(default,never):T;
 
-    function new(?parent:Panel,?name:String) {
-        var tb = VguiLib.RegisterTable(Table.create(),"Panel");//add 
-        var vgui = VguiLib.CreateFromTable(tb,parent,name);
-        Reflect.setField(this,"self",vgui);
+
+#if client
+
+@:dce()
+@:PanelHelper
+class PanelHelper<T:Panel> {
+    public final self:T;
+
+    final function new(x:T) {
+        self = x;
     }
 
     
+
+    
 }
+
+class PanelHelper_2<T:Panel> extends PanelHelper<T> {
+    public function EnableVerticalScrollBar() {
+        // self.EnableVerticalScrollBar();
+    }
+
+    static function nu() {
+        
+    }
+    
+    public function hmm_2() {
+        
+    }
+}
+
+class PanelHelper_3<T:Panel> extends PanelHelper_2<T> {
+    
+    public function hmm() {
+           
+    }
+}
+
+class MyShittyClass extends PanelHelper_2<gmod.panels.DPanel> {
+    public function hmmmmm_3() {
+        
+    }
+}
+#end

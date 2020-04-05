@@ -27,8 +27,7 @@ abstract HaxeMultiReturn<T>(Dynamic) to T {
 
 
 @:genericBuild(gmod.macros.MultiReturn.build())
-abstract HaxeMultiReturn_2<T>(Dynamic) {
-
+class HaxeMultiReturn_2<T> {
 }
 
 

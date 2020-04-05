@@ -32,7 +32,11 @@ class InfectionSystem extends System {
     #end
     
     #if server
+    public static var averageInfection(default,null):Float = 0.0;
+    
     override function run_server() {
+        var numPlayers = 0;
+        var totalInf = 0.0;
         for (entity in ComponentManager.entities) {
             switch (entity.get(InfectionComponent)) {
             case Comp(infection = _.acceptingInfection => ACCEPTING):
@@ -57,7 +61,8 @@ class InfectionSystem extends System {
                     switch (entity.get(PlayerComponent)) {
                         case Comp(ply):
                             net_inf.send({infection: inf.value},ply.player,true);    
-                            
+                            totalInf += infection.getInfValue();
+                            numPlayers++;
                             // Networking.sendInfectionMessage({infection: inf.value},ply.player,true);
                         default:
                     }
@@ -77,8 +82,13 @@ class InfectionSystem extends System {
             default:
             }
         }
+        if (numPlayers > 0) {
+            averageInfection = totalInf / numPlayers;
+        }
     }
     #end
+
+    
 
     public static function makeInfected(ent:DI_ID) {
         switch (ent.get(InfectionComponent)) {

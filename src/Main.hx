@@ -18,20 +18,17 @@ import deceptinfect.ecswip.*;
 // import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
 import gmod.EntityClass;
 import gmod.Networking;
+import deceptinfect.ents.*;
+import deceptinfect.items.*;
 #if client
-import gmod.PanelInterface.TestTwo;
 #end
-import deceptinfect.Di_battery;
 import deceptinfect.*;
 using gmod.PairTools;
 import deceptinfect.ecswip.SystemManager;
 // import deceptinfect.CustomEnt;
-import deceptinfect.Di_charger;
-import deceptinfect.Di_nest;
 import deceptinfect.Weapon_di_scan;
 import deceptinfect.TXT;
 #if client
-import deceptinfect.Effect_di_test;
 #end
 class Main {
     public static function main() {

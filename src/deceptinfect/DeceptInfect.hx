@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceReturn;
 import gmod.gamemode.BuildOverrides;
 import gmod.enums.IN;
 import deceptinfect.infection.InfectionSystem;
@@ -237,24 +238,11 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         
         return "aaaaple";
     }
-    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn> {
-        //trace('');
-        return {a : false, b: false};
-        // if (listener.GetPos().Distance(talker.GetPos()) > 1000) {
-        //    return {a : false,b : false};
-        // }
-        // var _talker:DI_Player = talker;
-        // if (_talker.grab.isGrabbed) {
-        //     return {a : false, b : true}
-        // }
-        // return {a : true, b : true}
+    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn_2<GmPlayerCanHearPlayersVoiceReturn> {
         
-        // 
-        // if (_talker.) {
-        //     return {
-
-        //     }
-        // }
+        
+        return {a: false,b: false};
+        
     }
     
     #end

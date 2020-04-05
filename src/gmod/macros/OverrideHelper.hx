@@ -36,13 +36,13 @@ class OverrideHelper {
             //trace(cls.name);
             var fields = Context.getBuildFields();
             for (field in fields) {
-                if (isHook(field)) {
-                    field.access.remove(Access.APublic);
-                    field.access.push(Access.APrivate);
-                }
+                // if (isHook(field)) {
+                //     field.access.remove(Access.APublic);
+                //     field.access.push(Access.APrivate);
+                // }
                 handleMultiReturn(field);
             }
-            cls.meta.add(":native",[macro $v{"{} or a"}],Context.currentPos());
+            // cls.meta.add(":native",[macro $v{"{} or a"}],Context.currentPos());
             return fields;
         }
         return null;

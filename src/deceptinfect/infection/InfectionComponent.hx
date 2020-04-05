@@ -15,7 +15,7 @@ class InfectionComponent extends Component {
             case NOT_INFECTED(inf):
                 inf.value;
             case INFECTED:
-                -1;
+                100;
         }
     }
     

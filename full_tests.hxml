@@ -4,7 +4,6 @@
 -D server
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
--D dump=pretty
 -lib tink_core
 --macro gmod.macros.InitMacro.init()
 -main Main
@@ -18,6 +17,7 @@
 -D client
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
+-D dump=pretty
 -lib tink_core
 --macro include('gmod')
 --macro keep('gmod')

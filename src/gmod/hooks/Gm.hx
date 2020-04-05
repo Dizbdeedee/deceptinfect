@@ -1,5 +1,7 @@
 package gmod.hooks;
 
+import gmod.HaxeMultiReturn.HaxeMultiReturn_2;
+
 
 /**
     Hooks that are available for all gamemodes based on base gamemode. 
@@ -1251,7 +1253,7 @@ class Gm {
     **/
     
     @:hook
-    public function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<GmPlayerCanHearPlayersVoiceHaxeReturn> {return null;} //return
+    public function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn_2<GmPlayerCanHearPlayersVoiceReturn> {return null;} //return
     #end
     #if server
     /**

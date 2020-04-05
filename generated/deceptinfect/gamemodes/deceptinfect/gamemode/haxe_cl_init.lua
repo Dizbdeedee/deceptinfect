@@ -61,9 +61,6 @@ local NETMESSAGE_geiger = _hx_e()
 local NETMESSAGE_grabend = _hx_e()
 local NETMESSAGE_grabupdate = _hx_e()
 local NETMESSAGE_infection = _hx_e()
-__gmod_PanelHelper = _hx_e()
-local PanelHelper_DTree = _hx_e()
-local PanelHelper_DTree_Node = _hx_e()
 local Reflect = _hx_e()
 local String = _hx_e()
 local Std = _hx_e()
@@ -71,15 +68,6 @@ local Type = _hx_e()
 __gmod_hooks_Gm = _hx_e()
 __gmod_gamemode_BuildOverrides = _hx_e()
 __deceptinfect_DeceptInfect = _hx_e()
-__gmod_sent_ENT = _hx_e()
-__gmod_sent_ENT_ANIM = _hx_e()
-__gmod_sent_SentBuild = _hx_e()
-__deceptinfect_Di_battery = _hx_e()
-__deceptinfect_Di_charger = _hx_e()
-__deceptinfect_Di_nest = _hx_e()
-__gmod_effects_EFFECT = _hx_e()
-__gmod_effects_EffectBuild = _hx_e()
-__deceptinfect_Effect_di_test = _hx_e()
 __deceptinfect__GEntCompat_GEntCompat_Impl_ = _hx_e()
 __deceptinfect__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
 __deceptinfect_GameInstance = _hx_e()
@@ -88,8 +76,6 @@ __deceptinfect_GAME_STATE = _hx_e()
 __deceptinfect_GameManager = _hx_e()
 __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_ = _hx_e()
 __deceptinfect_GameValues = _hx_e()
-__haxe_IMap = _hx_e()
-__haxe_ds_IntMap = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
 __gmod_gamemode_BuildGamemodeTXT = _hx_e()
 __deceptinfect_TXT = _hx_e()
@@ -104,11 +90,10 @@ __deceptinfect_ecswip_System = _hx_e()
 __deceptinfect_abilities_FormSystem = _hx_e()
 __deceptinfect_client_ClientOverrides = _hx_e()
 __deceptinfect_client_GeigerSystem = _hx_e()
-__haxe_ds_BalancedTree = _hx_e()
-__haxe_ds_EnumValueMap = _hx_e()
 __deceptinfect_client__Hud_Axis = _hx_e()
 __deceptinfect_client_Hud = _hx_e()
 __deceptinfect_client_PVS = _hx_e()
+__haxe_IMap = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
 __deceptinfect_ecswip_ComponentManager = _hx_e()
 __deceptinfect_ecswip__ComponentManager_DI_ID_Impl_ = _hx_e()
@@ -146,9 +131,6 @@ __deceptinfect_game_BatterySystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __deceptinfect_game_BatteryAccepter = _hx_e()
 __deceptinfect_game_AccepterStatus = _hx_e()
-__deceptinfect_game_BatterySource = _hx_e()
-__deceptinfect_game_NestComponent = _hx_e()
-__deceptinfect_game_NestState = _hx_e()
 __deceptinfect_game_Win = _hx_e()
 __deceptinfect_infection_InfectedComponent = _hx_e()
 __deceptinfect_infection_InfectionComponent = _hx_e()
@@ -169,26 +151,24 @@ __deceptinfect_util_PlayerExt = _hx_e()
 __deceptinfect_util_TimeKeep = _hx_e()
 __gmod__EntityClass_EntityClass_Impl_ = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
+__gmod_HaxeMultiReturn_2 = _hx_e()
 __gmod__Hooks_Hook_Impl_ = _hx_e()
 __gmod_Hooks = _hx_e()
 __gmod_PairTools = _hx_e()
-__gmod__PanelClass_PanelClass_Impl_ = _hx_e()
-__gmod_PanelInterface = _hx_e()
-__gmod_PanelTest = _hx_e()
-__gmod_TestTwo = _hx_e()
-__gmod_TestFour = _hx_e()
 __gmod_TableTools = _hx_e()
 __gmod_hooks_Swep = _hx_e()
 __gmod_macros_SentType = _hx_e()
-__gmod_types__Panel_Panel_Impl_ = _hx_e()
 __haxe_StackItem = _hx_e()
 __haxe_EntryPoint = _hx_e()
 __haxe_Log = _hx_e()
 __haxe_MainEvent = _hx_e()
 __haxe_MainLoop = _hx_e()
 __haxe_Timer = _hx_e()
+__haxe_ds_BalancedTree = _hx_e()
 __haxe_ds_TreeNode = _hx_e()
 __haxe_ds_Either = _hx_e()
+__haxe_ds_EnumValueMap = _hx_e()
+__haxe_ds_IntMap = _hx_e()
 __haxe_ds_Option = _hx_e()
 __lua_Boot = _hx_e()
 __haxe_iterators_MapKeyValueIterator = _hx_e()
@@ -723,311 +703,6 @@ NETMESSAGE_infection.prototype.receive = function(self)
 end
 
 NETMESSAGE_infection.prototype.__class__ =  NETMESSAGE_infection
-
-__gmod_PanelHelper.new = function(parent,name) 
-  local self = _hx_new(__gmod_PanelHelper.prototype)
-  __gmod_PanelHelper.super(self,parent,name)
-  return self
-end
-__gmod_PanelHelper.super = function(self,parent,name) 
-  local tb = _G.vgui.RegisterTable(({}), "Panel");
-  local vgui = _G.vgui.CreateFromTable(tb, parent, name);
-  self["self"] = vgui;
-end
-__gmod_PanelHelper.__name__ = "gmod.PanelHelper"
-__gmod_PanelHelper.prototype = _hx_a();
-
-__gmod_PanelHelper.prototype.__class__ =  __gmod_PanelHelper
-
-PanelHelper_DTree.new = function(x) 
-  local self = _hx_new(PanelHelper_DTree.prototype)
-  PanelHelper_DTree.super(self,x)
-  return self
-end
-PanelHelper_DTree.super = function(self,x) 
-  __gmod_PanelHelper.super(self,x);
-  x.Think = _hx_funcToField(_hx_bind(self,self.Think));
-  x.PreAutoRefresh = _hx_funcToField(_hx_bind(self,self.PreAutoRefresh));
-  x.PostAutoRefresh = _hx_funcToField(_hx_bind(self,self.PostAutoRefresh));
-  x.PerformLayout = _hx_funcToField(_hx_bind(self,self.PerformLayout));
-  x.PaintOver = _hx_funcToField(_hx_bind(self,self.PaintOver));
-  x.Paint = _hx_funcToField(_hx_bind(self,self.Paint));
-  x.OnStopDragging = _hx_funcToField(_hx_bind(self,self.OnStopDragging));
-  x.OnStartDragging = _hx_funcToField(_hx_bind(self,self.OnStartDragging));
-  x.OnSizeChanged = _hx_funcToField(_hx_bind(self,self.OnSizeChanged));
-  x.OnScreenSizeChanged = _hx_funcToField(_hx_bind(self,self.OnScreenSizeChanged));
-  x.OnRemove = _hx_funcToField(_hx_bind(self,self.OnRemove));
-  x.OnNodeSelected = _hx_funcToField(_hx_bind(self,self.OnNodeSelected));
-  x.OnMouseWheeled = _hx_funcToField(_hx_bind(self,self.OnMouseWheeled));
-  x.OnMouseReleased = _hx_funcToField(_hx_bind(self,self.OnMouseReleased));
-  x.OnMousePressed = _hx_funcToField(_hx_bind(self,self.OnMousePressed));
-  x.OnKeyCodeReleased = _hx_funcToField(_hx_bind(self,self.OnKeyCodeReleased));
-  x.OnKeyCodePressed = _hx_funcToField(_hx_bind(self,self.OnKeyCodePressed));
-  x.OnFocusChanged = _hx_funcToField(_hx_bind(self,self.OnFocusChanged));
-  x.OnDrop = _hx_funcToField(_hx_bind(self,self.OnDrop));
-  x.OnDocumentReady = _hx_funcToField(_hx_bind(self,self.OnDocumentReady));
-  x.OnDeactivate = _hx_funcToField(_hx_bind(self,self.OnDeactivate));
-  x.OnCursorMoved = _hx_funcToField(_hx_bind(self,self.OnCursorMoved));
-  x.OnCursorExited = _hx_funcToField(_hx_bind(self,self.OnCursorExited));
-  x.OnCursorEntered = _hx_funcToField(_hx_bind(self,self.OnCursorEntered));
-  x.OnChildViewCreated = _hx_funcToField(_hx_bind(self,self.OnChildViewCreated));
-  x.OnChildRemoved = _hx_funcToField(_hx_bind(self,self.OnChildRemoved));
-  x.OnChildAdded = _hx_funcToField(_hx_bind(self,self.OnChildAdded));
-  x.OnChangeTitle = _hx_funcToField(_hx_bind(self,self.OnChangeTitle));
-  x.OnChangeTargetURL = _hx_funcToField(_hx_bind(self,self.OnChangeTargetURL));
-  x.OnActivate = _hx_funcToField(_hx_bind(self,self.OnActivate));
-  x.LoadCookies = _hx_funcToField(_hx_bind(self,self.LoadCookies));
-  x.Init = _hx_funcToField(_hx_bind(self,self.Init));
-  x.GenerateExample = _hx_funcToField(_hx_bind(self,self.GenerateExample));
-  x.DroppedOn = _hx_funcToField(_hx_bind(self,self.DroppedOn));
-  x.DragHoverClick = _hx_funcToField(_hx_bind(self,self.DragHoverClick));
-  x.DoRightClick = _hx_funcToField(_hx_bind(self,self.DoRightClick));
-  x.DoClick = _hx_funcToField(_hx_bind(self,self.DoClick));
-  x.ApplySchemeSettings = _hx_funcToField(_hx_bind(self,self.ApplySchemeSettings));
-  x.AnimationThink = _hx_funcToField(_hx_bind(self,self.AnimationThink));
-  x.ActionSignal = _hx_funcToField(_hx_bind(self,self.ActionSignal));
-end
-PanelHelper_DTree.__name__ = "PanelHelper_DTree"
-PanelHelper_DTree.prototype = _hx_a();
-PanelHelper_DTree.prototype.Think = function(self) 
-end
-PanelHelper_DTree.prototype.PreAutoRefresh = function(self) 
-end
-PanelHelper_DTree.prototype.PostAutoRefresh = function(self) 
-end
-PanelHelper_DTree.prototype.PerformLayout = function(self,width,height) 
-end
-PanelHelper_DTree.prototype.PaintOver = function(self,width,height) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.Paint = function(self,width,height) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.OnStopDragging = function(self) 
-end
-PanelHelper_DTree.prototype.OnStartDragging = function(self) 
-end
-PanelHelper_DTree.prototype.OnSizeChanged = function(self,newWidth,newHeight) 
-end
-PanelHelper_DTree.prototype.OnScreenSizeChanged = function(self,oldWidth,oldHeight) 
-end
-PanelHelper_DTree.prototype.OnRemove = function(self) 
-end
-PanelHelper_DTree.prototype.OnNodeSelected = function(self,node) 
-end
-PanelHelper_DTree.prototype.OnMouseWheeled = function(self,scrollDelta) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.OnMouseReleased = function(self,keyCode) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.OnMousePressed = function(self,keyCode) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.OnKeyCodeReleased = function(self,keyCode) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.OnKeyCodePressed = function(self,keyCode) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.OnFocusChanged = function(self,gained) 
-end
-PanelHelper_DTree.prototype.OnDrop = function(self) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.OnDocumentReady = function(self,url) 
-end
-PanelHelper_DTree.prototype.OnDeactivate = function(self) 
-end
-PanelHelper_DTree.prototype.OnCursorMoved = function(self,cursorX,cursorY) 
-  do return nil end
-end
-PanelHelper_DTree.prototype.OnCursorExited = function(self) 
-end
-PanelHelper_DTree.prototype.OnCursorEntered = function(self) 
-end
-PanelHelper_DTree.prototype.OnChildViewCreated = function(self,sourceURL,targetURL,isPopup) 
-end
-PanelHelper_DTree.prototype.OnChildRemoved = function(self,child) 
-end
-PanelHelper_DTree.prototype.OnChildAdded = function(self,child) 
-end
-PanelHelper_DTree.prototype.OnChangeTitle = function(self,newTitle) 
-end
-PanelHelper_DTree.prototype.OnChangeTargetURL = function(self,targetURL) 
-end
-PanelHelper_DTree.prototype.OnActivate = function(self) 
-end
-PanelHelper_DTree.prototype.LoadCookies = function(self) 
-end
-PanelHelper_DTree.prototype.Init = function(self) 
-end
-PanelHelper_DTree.prototype.GenerateExample = function(self,_class,dpropertysheet,width,height) 
-end
-PanelHelper_DTree.prototype.DroppedOn = function(self,pnl) 
-end
-PanelHelper_DTree.prototype.DragHoverClick = function(self,hoverTime) 
-end
-PanelHelper_DTree.prototype.DoRightClick = function(self) 
-end
-PanelHelper_DTree.prototype.DoClick = function(self) 
-end
-PanelHelper_DTree.prototype.ApplySchemeSettings = function(self) 
-end
-PanelHelper_DTree.prototype.AnimationThink = function(self) 
-end
-PanelHelper_DTree.prototype.ActionSignal = function(self,signalName,signalValue) 
-end
-
-PanelHelper_DTree.prototype.__class__ =  PanelHelper_DTree
-PanelHelper_DTree.__super__ = __gmod_PanelHelper
-setmetatable(PanelHelper_DTree.prototype,{__index=__gmod_PanelHelper.prototype})
-
-PanelHelper_DTree_Node.new = function(x) 
-  local self = _hx_new(PanelHelper_DTree_Node.prototype)
-  PanelHelper_DTree_Node.super(self,x)
-  return self
-end
-PanelHelper_DTree_Node.super = function(self,x) 
-  __gmod_PanelHelper.super(self,x);
-  x.Think = _hx_funcToField(_hx_bind(self,self.Think));
-  x.PreAutoRefresh = _hx_funcToField(_hx_bind(self,self.PreAutoRefresh));
-  x.PostAutoRefresh = _hx_funcToField(_hx_bind(self,self.PostAutoRefresh));
-  x.PerformLayout = _hx_funcToField(_hx_bind(self,self.PerformLayout));
-  x.PaintOver = _hx_funcToField(_hx_bind(self,self.PaintOver));
-  x.Paint = _hx_funcToField(_hx_bind(self,self.Paint));
-  x.OnStopDragging = _hx_funcToField(_hx_bind(self,self.OnStopDragging));
-  x.OnStartDragging = _hx_funcToField(_hx_bind(self,self.OnStartDragging));
-  x.OnSizeChanged = _hx_funcToField(_hx_bind(self,self.OnSizeChanged));
-  x.OnScreenSizeChanged = _hx_funcToField(_hx_bind(self,self.OnScreenSizeChanged));
-  x.OnRemove = _hx_funcToField(_hx_bind(self,self.OnRemove));
-  x.OnMouseWheeled = _hx_funcToField(_hx_bind(self,self.OnMouseWheeled));
-  x.OnMouseReleased = _hx_funcToField(_hx_bind(self,self.OnMouseReleased));
-  x.OnMousePressed = _hx_funcToField(_hx_bind(self,self.OnMousePressed));
-  x.OnModified = _hx_funcToField(_hx_bind(self,self.OnModified));
-  x.OnKeyCodeReleased = _hx_funcToField(_hx_bind(self,self.OnKeyCodeReleased));
-  x.OnKeyCodePressed = _hx_funcToField(_hx_bind(self,self.OnKeyCodePressed));
-  x.OnFocusChanged = _hx_funcToField(_hx_bind(self,self.OnFocusChanged));
-  x.OnDrop = _hx_funcToField(_hx_bind(self,self.OnDrop));
-  x.OnDocumentReady = _hx_funcToField(_hx_bind(self,self.OnDocumentReady));
-  x.OnDeactivate = _hx_funcToField(_hx_bind(self,self.OnDeactivate));
-  x.OnCursorMoved = _hx_funcToField(_hx_bind(self,self.OnCursorMoved));
-  x.OnCursorExited = _hx_funcToField(_hx_bind(self,self.OnCursorExited));
-  x.OnCursorEntered = _hx_funcToField(_hx_bind(self,self.OnCursorEntered));
-  x.OnChildViewCreated = _hx_funcToField(_hx_bind(self,self.OnChildViewCreated));
-  x.OnChildRemoved = _hx_funcToField(_hx_bind(self,self.OnChildRemoved));
-  x.OnChildAdded = _hx_funcToField(_hx_bind(self,self.OnChildAdded));
-  x.OnChangeTitle = _hx_funcToField(_hx_bind(self,self.OnChangeTitle));
-  x.OnChangeTargetURL = _hx_funcToField(_hx_bind(self,self.OnChangeTargetURL));
-  x.OnActivate = _hx_funcToField(_hx_bind(self,self.OnActivate));
-  x.LoadCookies = _hx_funcToField(_hx_bind(self,self.LoadCookies));
-  x.Init = _hx_funcToField(_hx_bind(self,self.Init));
-  x.GenerateExample = _hx_funcToField(_hx_bind(self,self.GenerateExample));
-  x.DroppedOn = _hx_funcToField(_hx_bind(self,self.DroppedOn));
-  x.DragHoverClick = _hx_funcToField(_hx_bind(self,self.DragHoverClick));
-  x.DoRightClick = _hx_funcToField(_hx_bind(self,self.DoRightClick));
-  x.DoClick = _hx_funcToField(_hx_bind(self,self.DoClick));
-  x.ApplySchemeSettings = _hx_funcToField(_hx_bind(self,self.ApplySchemeSettings));
-  x.AnimationThink = _hx_funcToField(_hx_bind(self,self.AnimationThink));
-  x.ActionSignal = _hx_funcToField(_hx_bind(self,self.ActionSignal));
-end
-PanelHelper_DTree_Node.__name__ = "PanelHelper_DTree_Node"
-PanelHelper_DTree_Node.prototype = _hx_a();
-PanelHelper_DTree_Node.prototype.Think = function(self) 
-end
-PanelHelper_DTree_Node.prototype.PreAutoRefresh = function(self) 
-end
-PanelHelper_DTree_Node.prototype.PostAutoRefresh = function(self) 
-end
-PanelHelper_DTree_Node.prototype.PerformLayout = function(self,width,height) 
-end
-PanelHelper_DTree_Node.prototype.PaintOver = function(self,width,height) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.Paint = function(self,width,height) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.OnStopDragging = function(self) 
-end
-PanelHelper_DTree_Node.prototype.OnStartDragging = function(self) 
-end
-PanelHelper_DTree_Node.prototype.OnSizeChanged = function(self,newWidth,newHeight) 
-end
-PanelHelper_DTree_Node.prototype.OnScreenSizeChanged = function(self,oldWidth,oldHeight) 
-end
-PanelHelper_DTree_Node.prototype.OnRemove = function(self) 
-end
-PanelHelper_DTree_Node.prototype.OnMouseWheeled = function(self,scrollDelta) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.OnMouseReleased = function(self,keyCode) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.OnMousePressed = function(self,keyCode) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.OnModified = function(self) 
-end
-PanelHelper_DTree_Node.prototype.OnKeyCodeReleased = function(self,keyCode) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.OnKeyCodePressed = function(self,keyCode) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.OnFocusChanged = function(self,gained) 
-end
-PanelHelper_DTree_Node.prototype.OnDrop = function(self) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.OnDocumentReady = function(self,url) 
-end
-PanelHelper_DTree_Node.prototype.OnDeactivate = function(self) 
-end
-PanelHelper_DTree_Node.prototype.OnCursorMoved = function(self,cursorX,cursorY) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.OnCursorExited = function(self) 
-end
-PanelHelper_DTree_Node.prototype.OnCursorEntered = function(self) 
-end
-PanelHelper_DTree_Node.prototype.OnChildViewCreated = function(self,sourceURL,targetURL,isPopup) 
-end
-PanelHelper_DTree_Node.prototype.OnChildRemoved = function(self,child) 
-end
-PanelHelper_DTree_Node.prototype.OnChildAdded = function(self,child) 
-end
-PanelHelper_DTree_Node.prototype.OnChangeTitle = function(self,newTitle) 
-end
-PanelHelper_DTree_Node.prototype.OnChangeTargetURL = function(self,targetURL) 
-end
-PanelHelper_DTree_Node.prototype.OnActivate = function(self) 
-end
-PanelHelper_DTree_Node.prototype.LoadCookies = function(self) 
-end
-PanelHelper_DTree_Node.prototype.Init = function(self) 
-end
-PanelHelper_DTree_Node.prototype.GenerateExample = function(self,_class,dpropertysheet,width,height) 
-end
-PanelHelper_DTree_Node.prototype.DroppedOn = function(self,pnl) 
-end
-PanelHelper_DTree_Node.prototype.DragHoverClick = function(self,hoverTime) 
-end
-PanelHelper_DTree_Node.prototype.DoRightClick = function(self) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.DoClick = function(self) 
-  do return nil end
-end
-PanelHelper_DTree_Node.prototype.ApplySchemeSettings = function(self) 
-end
-PanelHelper_DTree_Node.prototype.AnimationThink = function(self) 
-end
-PanelHelper_DTree_Node.prototype.ActionSignal = function(self,signalName,signalValue) 
-end
-
-PanelHelper_DTree_Node.prototype.__class__ =  PanelHelper_DTree_Node
-PanelHelper_DTree_Node.__super__ = __gmod_PanelHelper
-setmetatable(PanelHelper_DTree_Node.prototype,{__index=__gmod_PanelHelper.prototype})
 
 Reflect.new = {}
 Reflect.__name__ = "Reflect"
@@ -1789,192 +1464,6 @@ __deceptinfect_DeceptInfect.prototype.__class__ =  __deceptinfect_DeceptInfect
 __deceptinfect_DeceptInfect.__super__ = __gmod_hooks_Gm
 setmetatable(__deceptinfect_DeceptInfect.prototype,{__index=__gmod_hooks_Gm.prototype})
 
-__gmod_sent_ENT.new = {}
-__gmod_sent_ENT.__name__ = "gmod.sent.ENT"
-__gmod_sent_ENT.prototype = _hx_a();
-__gmod_sent_ENT.prototype.Initialize = function(self) 
-end
-__gmod_sent_ENT.prototype.OnReloaded = function(self) 
-end
-__gmod_sent_ENT.prototype.OnRemove = function(self) 
-end
-__gmod_sent_ENT.prototype.OnRestore = function(self) 
-end
-__gmod_sent_ENT.prototype.Think = function(self) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.CalcAbsolutePosition = function(self,pos,ang) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.CanProperty = function(self,ply,property) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.DoImpactEffect = function(self,tr,damageType) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.FireAnimationEvent = function(self,pos,ang,event,name) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.GetRenderMesh = function(self) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.GravGunPunt = function(self,ply) 
-  do return nil end
-end
-__gmod_sent_ENT.prototype.RenderOverride = function(self) 
-end
-__gmod_sent_ENT.prototype.SetAutomaticFrameAdvance = function(self,enable) 
-end
-__gmod_sent_ENT.prototype.SetupDataTables = function(self) 
-end
-
-__gmod_sent_ENT.prototype.__class__ =  __gmod_sent_ENT
-
-__gmod_sent_ENT_ANIM.new = function() 
-  local self = _hx_new(__gmod_sent_ENT_ANIM.prototype)
-  __gmod_sent_ENT_ANIM.super(self)
-  return self
-end
-__gmod_sent_ENT_ANIM.super = function(self) 
-  self.TYPE = "anim";
-end
-__gmod_sent_ENT_ANIM.__name__ = "gmod.sent.ENT_ANIM"
-__gmod_sent_ENT_ANIM.prototype = _hx_a();
-__gmod_sent_ENT_ANIM.prototype.Draw = function(self,flags) 
-end
-__gmod_sent_ENT_ANIM.prototype.DrawTranslucent = function(self,flags) 
-end
-__gmod_sent_ENT_ANIM.prototype.ImpactTrace = function(self,traceResult,damageType,customImpactName) 
-  do return nil end
-end
-__gmod_sent_ENT_ANIM.prototype.PhysicsSimulate = function(self,phys,deltaTime) 
-  do return nil end
-end
-__gmod_sent_ENT_ANIM.prototype.PhysicsUpdate = function(self,phys) 
-end
-__gmod_sent_ENT_ANIM.prototype.TestCollision = function(self,startpos,delta,isbox,extents,mask) 
-  do return nil end
-end
-
-__gmod_sent_ENT_ANIM.prototype.__class__ =  __gmod_sent_ENT_ANIM
-__gmod_sent_ENT_ANIM.__super__ = __gmod_sent_ENT
-setmetatable(__gmod_sent_ENT_ANIM.prototype,{__index=__gmod_sent_ENT.prototype})
-
-__gmod_sent_SentBuild.new = {}
-__gmod_sent_SentBuild.__name__ = "gmod.sent.SentBuild"
-__gmod_sent_SentBuild.prototype = _hx_a();
-
-__gmod_sent_SentBuild.prototype.__class__ =  __gmod_sent_SentBuild
-
-__deceptinfect_Di_battery.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_Di_battery.prototype)
-  __deceptinfect_Di_battery.super(self,curEnt)
-  return self
-end
-__deceptinfect_Di_battery.super = function(self,curEnt) 
-  self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
-  __gmod_sent_ENT_ANIM.super(self);
-  self["self"] = curEnt;
-end
-_hx_exports["di_battery"] = __deceptinfect_Di_battery
-__deceptinfect_Di_battery.__name__ = "deceptinfect.Di_battery"
-__deceptinfect_Di_battery.prototype = _hx_a();
-__deceptinfect_Di_battery.prototype.Draw = function(self,flags) 
-  self["self"]:DrawModel();
-end
-
-__deceptinfect_Di_battery.prototype.__class__ =  __deceptinfect_Di_battery
-__deceptinfect_Di_battery.__super__ = __gmod_sent_ENT_ANIM
-setmetatable(__deceptinfect_Di_battery.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__deceptinfect_Di_charger.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_Di_charger.prototype)
-  __deceptinfect_Di_charger.super(self,curEnt)
-  return self
-end
-__deceptinfect_Di_charger.super = function(self,curEnt) 
-  self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
-  __gmod_sent_ENT_ANIM.super(self);
-  self["self"] = curEnt;
-end
-_hx_exports["di_charger"] = __deceptinfect_Di_charger
-__deceptinfect_Di_charger.__name__ = "deceptinfect.Di_charger"
-__deceptinfect_Di_charger.prototype = _hx_a();
-__deceptinfect_Di_charger.prototype.Draw = function(self,flags) 
-  self["self"]:DrawModel();
-end
-
-__deceptinfect_Di_charger.prototype.__class__ =  __deceptinfect_Di_charger
-__deceptinfect_Di_charger.__super__ = __gmod_sent_ENT_ANIM
-setmetatable(__deceptinfect_Di_charger.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__deceptinfect_Di_nest.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_Di_nest.prototype)
-  __deceptinfect_Di_nest.super(self,curEnt)
-  return self
-end
-__deceptinfect_Di_nest.super = function(self,curEnt) 
-  self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
-  __gmod_sent_ENT_ANIM.super(self);
-  self["self"] = curEnt;
-end
-_hx_exports["di_nest"] = __deceptinfect_Di_nest
-__deceptinfect_Di_nest.__name__ = "deceptinfect.Di_nest"
-__deceptinfect_Di_nest.prototype = _hx_a();
-__deceptinfect_Di_nest.prototype.TestCollision = function(self,startpos,delta,isbox,extents,mask) 
-  do return _hx_o({__fields__={HitPos=true,Fraction=true},HitPos=startpos,Fraction=0}) end
-end
-
-__deceptinfect_Di_nest.prototype.__class__ =  __deceptinfect_Di_nest
-__deceptinfect_Di_nest.__super__ = __gmod_sent_ENT_ANIM
-setmetatable(__deceptinfect_Di_nest.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__gmod_effects_EFFECT.new = {}
-__gmod_effects_EFFECT.__name__ = "gmod.effects.EFFECT"
-__gmod_effects_EFFECT.prototype = _hx_a();
-__gmod_effects_EFFECT.prototype.EndTouch = function(self) 
-end
-__gmod_effects_EFFECT.prototype.PhysicsCollide = function(self,colData,collider) 
-end
-__gmod_effects_EFFECT.prototype.Touch = function(self) 
-end
-__gmod_effects_EFFECT.prototype.Think = function(self) 
-  do return nil end
-end
-__gmod_effects_EFFECT.prototype.StartTouch = function(self) 
-end
-__gmod_effects_EFFECT.prototype.Init = function(self,effectData) 
-end
-__gmod_effects_EFFECT.prototype.Render = function(self) 
-end
-__gmod_effects_EFFECT.prototype.GetTracerShootPos = function(self,pos,ent,attachment) 
-  do return nil end
-end
-
-__gmod_effects_EFFECT.prototype.__class__ =  __gmod_effects_EFFECT
-
-__gmod_effects_EffectBuild.new = {}
-__gmod_effects_EffectBuild.__name__ = "gmod.effects.EffectBuild"
-
-__deceptinfect_Effect_di_test.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_Effect_di_test.prototype)
-  __deceptinfect_Effect_di_test.super(self,curEnt)
-  return self
-end
-__deceptinfect_Effect_di_test.super = function(self,curEnt) 
-  self["self"] = curEnt;
-end
-_hx_exports["effect_di_test"] = __deceptinfect_Effect_di_test
-__deceptinfect_Effect_di_test.__name__ = "deceptinfect.Effect_di_test"
-__deceptinfect_Effect_di_test.prototype = _hx_a();
-__deceptinfect_Effect_di_test.prototype.Init = function(self,effectData) 
-  __haxe_Log.trace(effectData:GetRadius(), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/Effect_di_test.hx",lineNumber=6,className="deceptinfect.Effect_di_test",methodName="Init"}));
-end
-
-__deceptinfect_Effect_di_test.prototype.__class__ =  __deceptinfect_Effect_di_test
-__deceptinfect_Effect_di_test.__super__ = __gmod_effects_EFFECT
-setmetatable(__deceptinfect_Effect_di_test.prototype,{__index=__gmod_effects_EFFECT.prototype})
-
 __deceptinfect__GEntCompat_GEntCompat_Impl_.new = {}
 __deceptinfect__GEntCompat_GEntCompat_Impl_.__name__ = "deceptinfect._GEntCompat.GEntCompat_Impl_"
 __deceptinfect__GEntCompat_GEntCompat_Impl_.get_id = function(this1) 
@@ -2238,61 +1727,6 @@ end
 __deceptinfect_GameValues.new = {}
 _hx_exports["GameValues"] = __deceptinfect_GameValues
 __deceptinfect_GameValues.__name__ = "deceptinfect.GameValues"
-
-__haxe_IMap.new = {}
-__haxe_IMap.__name__ = "haxe.IMap"
-__haxe_IMap.prototype = _hx_a();
-
-__haxe_IMap.prototype.__class__ =  __haxe_IMap
-
-__haxe_ds_IntMap.new = function() 
-  local self = _hx_new(__haxe_ds_IntMap.prototype)
-  __haxe_ds_IntMap.super(self)
-  return self
-end
-__haxe_ds_IntMap.super = function(self) 
-  self.h = ({});
-end
-__haxe_ds_IntMap.__name__ = "haxe.ds.IntMap"
-__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_IntMap.prototype = _hx_a();
-__haxe_ds_IntMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_IntMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_IntMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_IntMap.prototype.iterator = function(self) 
-  local _gthis = self;
-  local it = self:keys();
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return it:hasNext() end;
-  end,next=function(self) 
-    do return _gthis.h[it:next()] end;
-  end}) end
-end
-
-__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 
 __deceptinfect_PlayerManager.new = {}
 __deceptinfect_PlayerManager.__name__ = "deceptinfect.PlayerManager"
@@ -2680,224 +2114,6 @@ end
 __deceptinfect_client_GeigerSystem.prototype.__class__ =  __deceptinfect_client_GeigerSystem
 __deceptinfect_client_GeigerSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_client_GeigerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
-
-__haxe_ds_BalancedTree.new = function() 
-  local self = _hx_new(__haxe_ds_BalancedTree.prototype)
-  __haxe_ds_BalancedTree.super(self)
-  return self
-end
-__haxe_ds_BalancedTree.super = function(self) 
-end
-__haxe_ds_BalancedTree.__name__ = "haxe.ds.BalancedTree"
-__haxe_ds_BalancedTree.__interfaces__ = {__haxe_IMap}
-__haxe_ds_BalancedTree.prototype = _hx_a();
-__haxe_ds_BalancedTree.prototype.set = function(self,key,value) 
-  self.root = self:setLoop(key, value, self.root);
-end
-__haxe_ds_BalancedTree.prototype.get = function(self,key) 
-  local node = self.root;
-  while (node ~= nil) do 
-    local c = self:compare(key, node.key);
-    if (c == 0) then 
-      do return node.value end;
-    end;
-    if (c < 0) then 
-      node = node.left;
-    else
-      node = node.right;
-    end;
-  end;
-  do return nil end
-end
-__haxe_ds_BalancedTree.prototype.iterator = function(self) 
-  local ret = _hx_tab_array({}, 0);
-  self:iteratorLoop(self.root, ret);
-  local _gthis = ret;
-  local cur_length = 0;
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return cur_length < _gthis.length end;
-  end,next=function(self) 
-    cur_length = cur_length + 1;
-    do return _gthis[cur_length - 1] end;
-  end}) end
-end
-__haxe_ds_BalancedTree.prototype.keys = function(self) 
-  local ret = _hx_tab_array({}, 0);
-  self:keysLoop(self.root, ret);
-  local _gthis = ret;
-  local cur_length = 0;
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return cur_length < _gthis.length end;
-  end,next=function(self) 
-    cur_length = cur_length + 1;
-    do return _gthis[cur_length - 1] end;
-  end}) end
-end
-__haxe_ds_BalancedTree.prototype.setLoop = function(self,k,v,node) 
-  if (node == nil) then 
-    do return __haxe_ds_TreeNode.new(nil, k, v, nil) end;
-  end;
-  local c = self:compare(k, node.key);
-  if (c == 0) then 
-    do return __haxe_ds_TreeNode.new(node.left, k, v, node.right, (function() 
-      local _hx_1
-      if (node == nil) then 
-      _hx_1 = 0; else 
-      _hx_1 = node._height; end
-      return _hx_1
-    end )()) end;
-  else
-    if (c < 0) then 
-      local nl = self:setLoop(k, v, node.left);
-      do return self:balance(nl, node.key, node.value, node.right) end;
-    else
-      local nr = self:setLoop(k, v, node.right);
-      do return self:balance(node.left, node.key, node.value, nr) end;
-    end;
-  end;
-end
-__haxe_ds_BalancedTree.prototype.iteratorLoop = function(self,node,acc) 
-  if (node ~= nil) then 
-    self:iteratorLoop(node.left, acc);
-    acc:push(node.value);
-    self:iteratorLoop(node.right, acc);
-  end;
-end
-__haxe_ds_BalancedTree.prototype.keysLoop = function(self,node,acc) 
-  if (node ~= nil) then 
-    self:keysLoop(node.left, acc);
-    acc:push(node.key);
-    self:keysLoop(node.right, acc);
-  end;
-end
-__haxe_ds_BalancedTree.prototype.balance = function(self,l,k,v,r) 
-  local hl = (function() 
-    local _hx_1
-    if (l == nil) then 
-    _hx_1 = 0; else 
-    _hx_1 = l._height; end
-    return _hx_1
-  end )();
-  local hr = (function() 
-    local _hx_2
-    if (r == nil) then 
-    _hx_2 = 0; else 
-    _hx_2 = r._height; end
-    return _hx_2
-  end )();
-  if (hl > (hr + 2)) then 
-    local _this = l.left;
-    local _this1 = l.right;
-    if ((function() 
-      local _hx_3
-      if (_this == nil) then 
-      _hx_3 = 0; else 
-      _hx_3 = _this._height; end
-      return _hx_3
-    end )() >= (function() 
-      local _hx_4
-      if (_this1 == nil) then 
-      _hx_4 = 0; else 
-      _hx_4 = _this1._height; end
-      return _hx_4
-    end )()) then 
-      do return __haxe_ds_TreeNode.new(l.left, l.key, l.value, __haxe_ds_TreeNode.new(l.right, k, v, r)) end;
-    else
-      do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l.left, l.key, l.value, l.right.left), l.right.key, l.right.value, __haxe_ds_TreeNode.new(l.right.right, k, v, r)) end;
-    end;
-  else
-    if (hr > (hl + 2)) then 
-      local _this2 = r.right;
-      local _this3 = r.left;
-      if ((function() 
-        local _hx_5
-        if (_this2 == nil) then 
-        _hx_5 = 0; else 
-        _hx_5 = _this2._height; end
-        return _hx_5
-      end )() > (function() 
-        local _hx_6
-        if (_this3 == nil) then 
-        _hx_6 = 0; else 
-        _hx_6 = _this3._height; end
-        return _hx_6
-      end )()) then 
-        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left), r.key, r.value, r.right) end;
-      else
-        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left.left), r.left.key, r.left.value, __haxe_ds_TreeNode.new(r.left.right, r.key, r.value, r.right)) end;
-      end;
-    else
-      do return __haxe_ds_TreeNode.new(l, k, v, r, (function() 
-        local _hx_7
-        if (hl > hr) then 
-        _hx_7 = hl; else 
-        _hx_7 = hr; end
-        return _hx_7
-      end )() + 1) end;
-    end;
-  end;
-end
-__haxe_ds_BalancedTree.prototype.compare = function(self,k1,k2) 
-  do return Reflect.compare(k1, k2) end
-end
-
-__haxe_ds_BalancedTree.prototype.__class__ =  __haxe_ds_BalancedTree
-
-__haxe_ds_EnumValueMap.new = function() 
-  local self = _hx_new(__haxe_ds_EnumValueMap.prototype)
-  __haxe_ds_EnumValueMap.super(self)
-  return self
-end
-__haxe_ds_EnumValueMap.super = function(self) 
-  __haxe_ds_BalancedTree.super(self);
-end
-__haxe_ds_EnumValueMap.__name__ = "haxe.ds.EnumValueMap"
-__haxe_ds_EnumValueMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_EnumValueMap.prototype = _hx_a();
-__haxe_ds_EnumValueMap.prototype.compare = function(self,k1,k2) 
-  local d = k1[1] - k2[1];
-  if (d ~= 0) then 
-    do return d end;
-  end;
-  local p1 = k1:slice(2);
-  local p2 = k2:slice(2);
-  if ((p1.length == 0) and (p2.length == 0)) then 
-    do return 0 end;
-  end;
-  do return self:compareArgs(p1, p2) end
-end
-__haxe_ds_EnumValueMap.prototype.compareArgs = function(self,a1,a2) 
-  local ld = a1.length - a2.length;
-  if (ld ~= 0) then 
-    do return ld end;
-  end;
-  local _g = 0;
-  local _g1 = a1.length;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    local d = self:compareArg(a1[i], a2[i]);
-    if (d ~= 0) then 
-      do return d end;
-    end;
-  end;
-  do return 0 end
-end
-__haxe_ds_EnumValueMap.prototype.compareArg = function(self,v1,v2) 
-  if (Reflect.isEnumValue(v1) and Reflect.isEnumValue(v2)) then 
-    do return self:compare(v1, v2) end;
-  else
-    if (__lua_Boot.__instanceof(v1, Array) and __lua_Boot.__instanceof(v2, Array)) then 
-      do return self:compareArgs(v1, v2) end;
-    else
-      do return Reflect.compare(v1, v2) end;
-    end;
-  end;
-end
-
-__haxe_ds_EnumValueMap.prototype.__class__ =  __haxe_ds_EnumValueMap
-__haxe_ds_EnumValueMap.__super__ = __haxe_ds_BalancedTree
-setmetatable(__haxe_ds_EnumValueMap.prototype,{__index=__haxe_ds_BalancedTree.prototype})
 _hxClasses["deceptinfect.client._Hud.Axis"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="X","Y"},2)}
 __deceptinfect_client__Hud_Axis = _hxClasses["deceptinfect.client._Hud.Axis"];
 __deceptinfect_client__Hud_Axis.X = _hx_tab_array({[0]="X",0,__enum__ = __deceptinfect_client__Hud_Axis},2)
@@ -3000,6 +2216,12 @@ end
 
 __deceptinfect_client_PVS.new = {}
 __deceptinfect_client_PVS.__name__ = "deceptinfect.client.PVS"
+
+__haxe_IMap.new = {}
+__haxe_IMap.__name__ = "haxe.IMap"
+__haxe_IMap.prototype = _hx_a();
+
+__haxe_IMap.prototype.__class__ =  __haxe_IMap
 
 __haxe_ds_ObjectMap.new = function() 
   local self = _hx_new(__haxe_ds_ObjectMap.prototype)
@@ -3371,11 +2593,11 @@ __deceptinfect_ecswip_GrabSystem.target = function(attacker,victim)
   local x1 = __deceptinfect_ecswip_GrabProducer;
   local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
   local comp2 = comparray1[attacker];
-  local comp11 = comp2:slice(2)[0];
-  if (comp11 == nil) then 
+  local comp3 = comp2:slice(2)[0];
+  if (comp3 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
-  local c_produce = comp11;
+  local c_produce = comp3;
   local _this = c_accept.targeting;
   _this.h[c_produce] = true;
   _this.k[c_produce] = true;
@@ -3555,7 +2777,7 @@ __deceptinfect_infection_InfectionSystem.makeInfected = function(ent)
       tmp = __deceptinfect_infection_INF_STATE.INFECTED;
     end;
     inf.infection = tmp;
-    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=94,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
+    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=104,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
   end;
 end
 __deceptinfect_infection_InfectionSystem.calcInfectionFromRates = function(rate) 
@@ -3584,7 +2806,7 @@ __deceptinfect_infection_InfectionSystem.getBaseInfection = function(inf)
       local x = _g1[2];
       do return x.baseInfection[0] end;
     else
-      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=121,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
+      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=131,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
       inf.baseInfection = __deceptinfect_infection_BaseInfection.USING_STATIC(0.0);
       do return 0 end;
     end;
@@ -3602,7 +2824,7 @@ __deceptinfect_infection_InfectionSystem.fixUpInfection = function(infection)
     else
       local inf1 = _g1;
       if (inf1[0] >= 100) then 
-        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=138,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
+        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=148,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
         infection.infection = __deceptinfect_infection_INF_STATE.INFECTED;
       end;
     end;
@@ -3957,46 +3179,6 @@ __deceptinfect_game_AccepterStatus.AVALIABLE = _hx_tab_array({[0]="AVALIABLE",0,
 __deceptinfect_game_AccepterStatus.SATISIFED = _hx_tab_array({[0]="SATISIFED",1,__enum__ = __deceptinfect_game_AccepterStatus},2)
 
 __deceptinfect_game_AccepterStatus.UNAVALIABLE = function(x) local _x = _hx_tab_array({[0]="UNAVALIABLE",2,x,__enum__=__deceptinfect_game_AccepterStatus}, 3); return _x; end 
-
-__deceptinfect_game_BatterySource.new = function() 
-  local self = _hx_new(__deceptinfect_game_BatterySource.prototype)
-  __deceptinfect_game_BatterySource.super(self)
-  return self
-end
-__deceptinfect_game_BatterySource.super = function(self) 
-  self.charge = 25.0;
-  __deceptinfect_ecswip_Component.super(self);
-end
-__deceptinfect_game_BatterySource.__name__ = "deceptinfect.game.BatterySource"
-__deceptinfect_game_BatterySource.prototype = _hx_a();
-
-__deceptinfect_game_BatterySource.prototype.__class__ =  __deceptinfect_game_BatterySource
-__deceptinfect_game_BatterySource.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_game_BatterySource.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_game_NestComponent.new = function() 
-  local self = _hx_new(__deceptinfect_game_NestComponent.prototype)
-  __deceptinfect_game_NestComponent.super(self)
-  return self
-end
-__deceptinfect_game_NestComponent.super = function(self) 
-  self.nestState = __deceptinfect_game_NestState.INVISIBLE;
-  __deceptinfect_ecswip_Component.super(self);
-end
-__deceptinfect_game_NestComponent.__name__ = "deceptinfect.game.NestComponent"
-__deceptinfect_game_NestComponent.prototype = _hx_a();
-
-__deceptinfect_game_NestComponent.prototype.__class__ =  __deceptinfect_game_NestComponent
-__deceptinfect_game_NestComponent.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_game_NestComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.game.NestState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="INVISIBLE","VISIBLE","DEAD"},3)}
-__deceptinfect_game_NestState = _hxClasses["deceptinfect.game.NestState"];
-__deceptinfect_game_NestState.INVISIBLE = _hx_tab_array({[0]="INVISIBLE",0,__enum__ = __deceptinfect_game_NestState},2)
-
-__deceptinfect_game_NestState.VISIBLE = _hx_tab_array({[0]="VISIBLE",1,__enum__ = __deceptinfect_game_NestState},2)
-
-__deceptinfect_game_NestState.DEAD = _hx_tab_array({[0]="DEAD",2,__enum__ = __deceptinfect_game_NestState},2)
-
 _hxClasses["deceptinfect.game.Win"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WIN_HUMAN","WIN_ALIEN","DRAW"},3)}
 __deceptinfect_game_Win = _hxClasses["deceptinfect.game.Win"];
 __deceptinfect_game_Win.WIN_HUMAN = _hx_tab_array({[0]="WIN_HUMAN",0,__enum__ = __deceptinfect_game_Win},2)
@@ -4362,6 +3544,9 @@ __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.multiReturn = function(rtns)
   do return _hx_table.unpack(tbl) end;
 end
 
+__gmod_HaxeMultiReturn_2.new = {}
+__gmod_HaxeMultiReturn_2.__name__ = "gmod.HaxeMultiReturn_2"
+
 __gmod__Hooks_Hook_Impl_.new = {}
 __gmod__Hooks_Hook_Impl_.__name__ = "gmod._Hooks.Hook_Impl_"
 __gmod__Hooks_Hook_Impl_._new = function(name) 
@@ -4422,73 +3607,6 @@ __gmod_PairTools.ipairsIterator = function(table)
     do return _G.select(2, next(table, i)) ~= nil end;
   end}) end;
 end
-
-__gmod__PanelClass_PanelClass_Impl_.new = {}
-__gmod__PanelClass_PanelClass_Impl_.__name__ = "gmod._PanelClass.PanelClass_Impl_"
-__gmod__PanelClass_PanelClass_Impl_._new = function(name) 
-  local this1 = name;
-  do return this1 end;
-end
-
-__gmod_PanelInterface.new = {}
-__gmod_PanelInterface.__name__ = "gmod.PanelInterface"
-
-__gmod_PanelTest.new = {}
-__gmod_PanelTest.__name__ = "gmod.PanelTest"
-__gmod_PanelTest.prototype = _hx_a();
-__gmod_PanelTest.prototype.test = function(self) 
-end
-
-__gmod_PanelTest.prototype.__class__ =  __gmod_PanelTest
-
-__gmod_TestTwo.new = function(x) 
-  local self = _hx_new(__gmod_TestTwo.prototype)
-  __gmod_TestTwo.super(self,x)
-  return self
-end
-__gmod_TestTwo.super = function(self,x) 
-  PanelHelper_DTree.super(self,x);
-end
-__gmod_TestTwo.__name__ = "gmod.TestTwo"
-__gmod_TestTwo.prototype = _hx_a();
-__gmod_TestTwo.prototype.DoClick = function(self) 
-  __haxe_Log.trace("DtreeOverride", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/gmod/PanelInterface.hx",lineNumber=22,className="gmod.TestTwo",methodName="DoClick"}));
-end
-__gmod_TestTwo.prototype.DoRightClick = function(self) 
-end
-__gmod_TestTwo.prototype.OnNodeSelected = function(self,node) 
-end
-__gmod_TestTwo.prototype.Init = function(self) 
-  self:stuff();
-end
-__gmod_TestTwo.prototype.stuff = function(self) 
-  local paneel = __gmod_types__Panel_Panel_Impl_.fromHelper(self);
-end
-
-__gmod_TestTwo.prototype.__class__ =  __gmod_TestTwo
-__gmod_TestTwo.__super__ = PanelHelper_DTree
-setmetatable(__gmod_TestTwo.prototype,{__index=PanelHelper_DTree.prototype})
-
-__gmod_TestFour.new = function(x) 
-  local self = _hx_new(__gmod_TestFour.prototype)
-  __gmod_TestFour.super(self,x)
-  return self
-end
-__gmod_TestFour.super = function(self,x) 
-  PanelHelper_DTree_Node.super(self,x);
-end
-__gmod_TestFour.__name__ = "gmod.TestFour"
-__gmod_TestFour.prototype = _hx_a();
-__gmod_TestFour.prototype.ActionSignal = function(self,signalName,signalValue) 
-  PanelHelper_DTree_Node.prototype.ActionSignal(self,signalName,signalValue);
-end
-__gmod_TestFour.prototype.AnimationThink = function(self) 
-  PanelHelper_DTree_Node.prototype.AnimationThink(self);
-end
-
-__gmod_TestFour.prototype.__class__ =  __gmod_TestFour
-__gmod_TestFour.__super__ = PanelHelper_DTree_Node
-setmetatable(__gmod_TestFour.prototype,{__index=PanelHelper_DTree_Node.prototype})
 
 __gmod_TableTools.new = {}
 __gmod_TableTools.__name__ = "gmod.TableTools"
@@ -4621,12 +3739,6 @@ __gmod_macros_SentType.SWEP = _hx_tab_array({[0]="SWEP",1,__enum__ = __gmod_macr
 
 __gmod_macros_SentType.EFFECT = _hx_tab_array({[0]="EFFECT",2,__enum__ = __gmod_macros_SentType},2)
 
-
-__gmod_types__Panel_Panel_Impl_.new = {}
-__gmod_types__Panel_Panel_Impl_.__name__ = "gmod.types._Panel.Panel_Impl_"
-__gmod_types__Panel_Panel_Impl_.fromHelper = function(x) 
-  do return x["self"] end;
-end
 _hxClasses["haxe.StackItem"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="CFunction","Module","FilePos","Method","LocalFunction"},5)}
 __haxe_StackItem = _hxClasses["haxe.StackItem"];
 __haxe_StackItem.CFunction = _hx_tab_array({[0]="CFunction",0,__enum__ = __haxe_StackItem},2)
@@ -4882,6 +3994,168 @@ end
 
 __haxe_Timer.prototype.__class__ =  __haxe_Timer
 
+__haxe_ds_BalancedTree.new = function() 
+  local self = _hx_new(__haxe_ds_BalancedTree.prototype)
+  __haxe_ds_BalancedTree.super(self)
+  return self
+end
+__haxe_ds_BalancedTree.super = function(self) 
+end
+__haxe_ds_BalancedTree.__name__ = "haxe.ds.BalancedTree"
+__haxe_ds_BalancedTree.__interfaces__ = {__haxe_IMap}
+__haxe_ds_BalancedTree.prototype = _hx_a();
+__haxe_ds_BalancedTree.prototype.set = function(self,key,value) 
+  self.root = self:setLoop(key, value, self.root);
+end
+__haxe_ds_BalancedTree.prototype.get = function(self,key) 
+  local node = self.root;
+  while (node ~= nil) do 
+    local c = self:compare(key, node.key);
+    if (c == 0) then 
+      do return node.value end;
+    end;
+    if (c < 0) then 
+      node = node.left;
+    else
+      node = node.right;
+    end;
+  end;
+  do return nil end
+end
+__haxe_ds_BalancedTree.prototype.iterator = function(self) 
+  local ret = _hx_tab_array({}, 0);
+  self:iteratorLoop(self.root, ret);
+  local _gthis = ret;
+  local cur_length = 0;
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return cur_length < _gthis.length end;
+  end,next=function(self) 
+    cur_length = cur_length + 1;
+    do return _gthis[cur_length - 1] end;
+  end}) end
+end
+__haxe_ds_BalancedTree.prototype.keys = function(self) 
+  local ret = _hx_tab_array({}, 0);
+  self:keysLoop(self.root, ret);
+  local _gthis = ret;
+  local cur_length = 0;
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return cur_length < _gthis.length end;
+  end,next=function(self) 
+    cur_length = cur_length + 1;
+    do return _gthis[cur_length - 1] end;
+  end}) end
+end
+__haxe_ds_BalancedTree.prototype.setLoop = function(self,k,v,node) 
+  if (node == nil) then 
+    do return __haxe_ds_TreeNode.new(nil, k, v, nil) end;
+  end;
+  local c = self:compare(k, node.key);
+  if (c == 0) then 
+    do return __haxe_ds_TreeNode.new(node.left, k, v, node.right, (function() 
+      local _hx_1
+      if (node == nil) then 
+      _hx_1 = 0; else 
+      _hx_1 = node._height; end
+      return _hx_1
+    end )()) end;
+  else
+    if (c < 0) then 
+      local nl = self:setLoop(k, v, node.left);
+      do return self:balance(nl, node.key, node.value, node.right) end;
+    else
+      local nr = self:setLoop(k, v, node.right);
+      do return self:balance(node.left, node.key, node.value, nr) end;
+    end;
+  end;
+end
+__haxe_ds_BalancedTree.prototype.iteratorLoop = function(self,node,acc) 
+  if (node ~= nil) then 
+    self:iteratorLoop(node.left, acc);
+    acc:push(node.value);
+    self:iteratorLoop(node.right, acc);
+  end;
+end
+__haxe_ds_BalancedTree.prototype.keysLoop = function(self,node,acc) 
+  if (node ~= nil) then 
+    self:keysLoop(node.left, acc);
+    acc:push(node.key);
+    self:keysLoop(node.right, acc);
+  end;
+end
+__haxe_ds_BalancedTree.prototype.balance = function(self,l,k,v,r) 
+  local hl = (function() 
+    local _hx_1
+    if (l == nil) then 
+    _hx_1 = 0; else 
+    _hx_1 = l._height; end
+    return _hx_1
+  end )();
+  local hr = (function() 
+    local _hx_2
+    if (r == nil) then 
+    _hx_2 = 0; else 
+    _hx_2 = r._height; end
+    return _hx_2
+  end )();
+  if (hl > (hr + 2)) then 
+    local _this = l.left;
+    local _this1 = l.right;
+    if ((function() 
+      local _hx_3
+      if (_this == nil) then 
+      _hx_3 = 0; else 
+      _hx_3 = _this._height; end
+      return _hx_3
+    end )() >= (function() 
+      local _hx_4
+      if (_this1 == nil) then 
+      _hx_4 = 0; else 
+      _hx_4 = _this1._height; end
+      return _hx_4
+    end )()) then 
+      do return __haxe_ds_TreeNode.new(l.left, l.key, l.value, __haxe_ds_TreeNode.new(l.right, k, v, r)) end;
+    else
+      do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l.left, l.key, l.value, l.right.left), l.right.key, l.right.value, __haxe_ds_TreeNode.new(l.right.right, k, v, r)) end;
+    end;
+  else
+    if (hr > (hl + 2)) then 
+      local _this2 = r.right;
+      local _this3 = r.left;
+      if ((function() 
+        local _hx_5
+        if (_this2 == nil) then 
+        _hx_5 = 0; else 
+        _hx_5 = _this2._height; end
+        return _hx_5
+      end )() > (function() 
+        local _hx_6
+        if (_this3 == nil) then 
+        _hx_6 = 0; else 
+        _hx_6 = _this3._height; end
+        return _hx_6
+      end )()) then 
+        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left), r.key, r.value, r.right) end;
+      else
+        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left.left), r.left.key, r.left.value, __haxe_ds_TreeNode.new(r.left.right, r.key, r.value, r.right)) end;
+      end;
+    else
+      do return __haxe_ds_TreeNode.new(l, k, v, r, (function() 
+        local _hx_7
+        if (hl > hr) then 
+        _hx_7 = hl; else 
+        _hx_7 = hr; end
+        return _hx_7
+      end )() + 1) end;
+    end;
+  end;
+end
+__haxe_ds_BalancedTree.prototype.compare = function(self,k1,k2) 
+  do return Reflect.compare(k1, k2) end
+end
+
+__haxe_ds_BalancedTree.prototype.__class__ =  __haxe_ds_BalancedTree
+
 __haxe_ds_TreeNode.new = function(l,k,v,r,h) 
   local self = _hx_new(__haxe_ds_TreeNode.prototype)
   __haxe_ds_TreeNode.super(self,l,k,v,r,h)
@@ -4943,6 +4217,111 @@ _hxClasses["haxe.ds.Either"] = { __ename__ = true, __constructs__ = _hx_tab_arra
 __haxe_ds_Either = _hxClasses["haxe.ds.Either"];
 __haxe_ds_Either.Left = function(v) local _x = _hx_tab_array({[0]="Left",0,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
 __haxe_ds_Either.Right = function(v) local _x = _hx_tab_array({[0]="Right",1,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
+
+__haxe_ds_EnumValueMap.new = function() 
+  local self = _hx_new(__haxe_ds_EnumValueMap.prototype)
+  __haxe_ds_EnumValueMap.super(self)
+  return self
+end
+__haxe_ds_EnumValueMap.super = function(self) 
+  __haxe_ds_BalancedTree.super(self);
+end
+__haxe_ds_EnumValueMap.__name__ = "haxe.ds.EnumValueMap"
+__haxe_ds_EnumValueMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_EnumValueMap.prototype = _hx_a();
+__haxe_ds_EnumValueMap.prototype.compare = function(self,k1,k2) 
+  local d = k1[1] - k2[1];
+  if (d ~= 0) then 
+    do return d end;
+  end;
+  local p1 = k1:slice(2);
+  local p2 = k2:slice(2);
+  if ((p1.length == 0) and (p2.length == 0)) then 
+    do return 0 end;
+  end;
+  do return self:compareArgs(p1, p2) end
+end
+__haxe_ds_EnumValueMap.prototype.compareArgs = function(self,a1,a2) 
+  local ld = a1.length - a2.length;
+  if (ld ~= 0) then 
+    do return ld end;
+  end;
+  local _g = 0;
+  local _g1 = a1.length;
+  while (_g < _g1) do 
+    _g = _g + 1;
+    local i = _g - 1;
+    local d = self:compareArg(a1[i], a2[i]);
+    if (d ~= 0) then 
+      do return d end;
+    end;
+  end;
+  do return 0 end
+end
+__haxe_ds_EnumValueMap.prototype.compareArg = function(self,v1,v2) 
+  if (Reflect.isEnumValue(v1) and Reflect.isEnumValue(v2)) then 
+    do return self:compare(v1, v2) end;
+  else
+    if (__lua_Boot.__instanceof(v1, Array) and __lua_Boot.__instanceof(v2, Array)) then 
+      do return self:compareArgs(v1, v2) end;
+    else
+      do return Reflect.compare(v1, v2) end;
+    end;
+  end;
+end
+
+__haxe_ds_EnumValueMap.prototype.__class__ =  __haxe_ds_EnumValueMap
+__haxe_ds_EnumValueMap.__super__ = __haxe_ds_BalancedTree
+setmetatable(__haxe_ds_EnumValueMap.prototype,{__index=__haxe_ds_BalancedTree.prototype})
+
+__haxe_ds_IntMap.new = function() 
+  local self = _hx_new(__haxe_ds_IntMap.prototype)
+  __haxe_ds_IntMap.super(self)
+  return self
+end
+__haxe_ds_IntMap.super = function(self) 
+  self.h = ({});
+end
+__haxe_ds_IntMap.__name__ = "haxe.ds.IntMap"
+__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_IntMap.prototype = _hx_a();
+__haxe_ds_IntMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_IntMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_IntMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_IntMap.prototype.iterator = function(self) 
+  local _gthis = self;
+  local it = self:keys();
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return it:hasNext() end;
+  end,next=function(self) 
+    do return _gthis.h[it:next()] end;
+  end}) end
+end
+
+__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 _hxClasses["haxe.ds.Option"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Some","None"},2)}
 __haxe_ds_Option = _hxClasses["haxe.ds.Option"];
 __haxe_ds_Option.Some = function(v) local _x = _hx_tab_array({[0]="Some",0,v,__enum__=__haxe_ds_Option}, 3); return _x; end 
@@ -7408,8 +6787,6 @@ local _hx_static_init = function()
   
   __deceptinfect_GameValues.GRAB_TIME = 6;
   
-  __haxe_ds_IntMap.tnull = ({});
-  
   __deceptinfect_PlayerManager.indexLookup = __haxe_ds_IntMap.new();
   
   __deceptinfect_client_GeigerSystem.net_geiger = NETMESSAGE_geiger.new();
@@ -7856,6 +7233,8 @@ local _hx_static_init = function()
   __haxe_EntryPoint.pending = Array.new();
   
   __haxe_EntryPoint.threadCount = 0;
+  
+  __haxe_ds_IntMap.tnull = ({});
   
   __lua_Boot.Max_Int32 = 2147483647;
   

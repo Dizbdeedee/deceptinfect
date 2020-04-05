@@ -18,12 +18,10 @@ private typedef Generate = {
 #end
 class PanelMacro {
     #if macro
-    static var generate:Array<Generate> = [];
+    static var generate:Map<String,Bool> = [];
     static var onGenerate = false;
     
-
-
-    public static function getSuperFields2(c:ClassType):Map<String,ClassField> {
+    static function getSuperFields2(c:ClassType):Map<String,ClassField> {
         var superFields = [];
         var curClass = c;
         var map:Map<String,ClassField> = [];
@@ -48,7 +46,7 @@ class PanelMacro {
 
     }
 
-    public static function getSuperFields(c:ClassType):Array<ClassField> {
+    static function getSuperFields(c:ClassType):Array<ClassField> {
         trace(c.name);
         var superc = c.superClass;
         var fields = c.fields.get();
@@ -60,7 +58,7 @@ class PanelMacro {
         }
     }
 
-    public static function argToFuncArg(x:{name: String,opt : Bool,t: haxe.macro.Type}):FunctionArg {
+    static function argToFuncArg(x:{name: String,opt : Bool,t: haxe.macro.Type}):FunctionArg {
         var arg:FunctionArg = {
             name: x.name,
             opt: x.opt,
@@ -68,7 +66,8 @@ class PanelMacro {
         }
         return arg;
     }
-    public static function classFuncToField(x:ClassField):Field {
+
+    static function classFuncToField(x:ClassField):Field {
         
         var _args:Array<FunctionArg> = [];
         var exprArgs = [];
@@ -85,8 +84,6 @@ class PanelMacro {
             default:
                 throw "unhandled yet...";
         }
-        
-        // trace(_ret);
         var name = x.name;
         var isHook = x.meta.has(":hook");
         var func:Function = switch (_ret) {
@@ -95,20 +92,21 @@ class PanelMacro {
                 if (isHook) {
                     expr = macro {}
                 } else {
-                    expr = macro self.$name($a{exprArgs});
+                    return null;
+                    // expr = macro self.$name($a{exprArgs});
                 }
-                {
+                {   
                     args : _args,
                     ret :  Context.toComplexType(_ret),
-                    expr : expr,
-                    
+                    expr : expr
                 };
             default:
                 var expr;    
                 if (isHook) {
                     expr = macro return null;
                 } else {
-                    expr = macro return self.$name($a{exprArgs});
+                    return null;
+                    // expr = macro return self.$name($a{exprArgs});
                 }
                 {
                     args : _args,
@@ -120,7 +118,7 @@ class PanelMacro {
             case false:
                 [Access.AFinal,Access.APublic]; //add override here if we revert...
             default:
-                [Access.APrivate];
+                [];
         }
         var field:Field = {
             kind : FieldType.FFun(func),
@@ -128,20 +126,80 @@ class PanelMacro {
             pos : Context.currentPos(),
             doc : x.doc,
             access: access
-            
-        }
-        Context.filterMessages((msg:Message) -> return switch (msg) {
-            case Warning(msg, pos) if (pos == Context.currentPos()):
-                trace('filter $msg');    
-                false;
-            default:
-                true;
-            }
-        );
-        if (isHook) {
-            //field.meta = [{name : ":deprecated",params : [macro "Hook function, do not use"],pos : Context.currentPos()}];
         }
         return field;
+    }
+    static function generateNewClass(cls:ClassType) {
+        if (generate.exists(cls.name)) {return;}
+        var super;
+        var extendname;
+        var newCls;
+        var clsname = 'PanelHelper_${cls.name}';
+        switch (cls.superClass) {
+        case null:
+            extendname = null;
+            newCls = macro class $clsname extends gmod.PanelHelper<T> {
+                
+            }
+
+        case {t: _.get() => superType}:
+            if (!generate.exists(superType.name)) {
+                generateNewClass(superType);
+            }
+            extendname = 'PanelHelper_${superType.name}';
+            var path:TypePath = {pack : [],name : extendname,params: [TPType((macro : T))]};
+            
+            newCls = macro class $clsname extends $path {
+    
+            }
+            
+        }
+        newCls.meta.push({
+            name: ":PanelHelper",
+            pos: Context.currentPos()
+        });
+        var pack = switch (cls.name) {
+            case "Panel":
+                "gclass";
+            default:
+                "panels";
+        }
+        newCls.params = [{name: "T",constraints: [TPath({pack : ["gmod",pack],name : cls.name})]}];
+        for (clsfield in cls.fields.get()) {
+            switch (clsfield.kind) {
+            case FMethod(_):
+                var newfield = classFuncToField(clsfield);
+                if (newfield != null) {
+                    newCls.fields.push(newfield);
+                } 
+            default:
+            }
+        }
+        Context.defineType(newCls);
+        generate.set(cls.name,true);
+        
+    }
+    public static function build():ComplexType {
+        var type = Context.getLocalType(); 
+        var cls;
+        switch (type) {
+            case TInst(_,[TInst(_.get() => c,_)])://
+                // trace(c);
+                cls = c;
+            default:
+                trace("Couldn't find this panel");
+                return null;
+        }
+        generateNewClass(cls);
+        
+        // return (macro : PanelHelper_)
+        var tp2:TypePath = {pack : ["gmod","panels"],name : cls.name}
+        var tp:TypePath = {pack : [],name : 'PanelHelper_${cls.name}',params : 
+        [TPType(TPath(
+           tp2 
+        ))]} 
+        var rtn = TPath(tp);
+        return rtn; 
     }
     #end
 }
