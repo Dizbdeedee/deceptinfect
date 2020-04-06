@@ -261,7 +261,7 @@ package gmod.libs;
 		-3
     **/
     
-    public static function min(numbers:Rest<Dynamic>):Float;
+    public static function min(numbers:Rest<Float>):Float;
     
     
     /**

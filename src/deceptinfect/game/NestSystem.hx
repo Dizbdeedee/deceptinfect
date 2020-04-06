@@ -13,6 +13,7 @@ class NestSystem extends System {
                 var remap = MathLib.Remap.bind(avg,c_nest.rate_threshold_min,c_nest.rate_threshold_max);
                 c_rad.maxrate = remap(c_nest.rate_start,c_nest.rate_end);
                 c_rad.radius = remap(c_nest.radius_start,c_nest.radius_end);
+                // trace(avg);
             // InfectionSystem.averageInfection 
             default:
             }

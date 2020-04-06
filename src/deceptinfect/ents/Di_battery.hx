@@ -1,5 +1,6 @@
 package deceptinfect.ents;
 
+import deceptinfect.game.SpawnSystem.Spawn;
 import gmod.sent.SentBuild;
 import gmod.sent.SentBuild.EntFields;
 import deceptinfect.game.BatterySource;
@@ -23,8 +24,11 @@ class Di_battery extends gmod.sent.ENT_ANIM implements SentBuild {
     
     var lastplayer:Player = null;
     var id:DI_ID = null;
+    var added = false;
+
+    public var spawnLoc:Spawn;
     override function Initialize() {
-        self.SetModel("models/props_c17/chair02a.mdl");
+        self.SetModel("models/items/car_battery01.mdl");
         self.PhysicsInit(SOLID_VPHYSICS);
         var physob = self.GetPhysicsObject();
         if (IsValid(physob)) {
@@ -36,6 +40,9 @@ class Di_battery extends gmod.sent.ENT_ANIM implements SentBuild {
         id.add_component(new BatterySource());
         
     }
+
+    
+
     override function Use(activator:Entity, caller:Entity, useType:Float, value:Float) {
         if (self.IsPlayerHolding() || !activator.IsPlayer()) {return;}
         var _activator:Player = cast activator;
@@ -45,23 +52,18 @@ class Di_battery extends gmod.sent.ENT_ANIM implements SentBuild {
 
     override function Touch(entity:GEntCompat) {
         //trace(id);
+        if (added) {return;} 
         switch (entity.has_id()) {
         case Some(otherID):
             var result = getSystem(BatterySystem).addBattery(id,otherID);
             if (result) {
+                added = true;
+                trace("Battery added :)");
                 self.Remove();
             }
         default:
         }
     }
 
-    // @:entExpose
-    public function funkyTown() {
-        trace("HAAAR");
-    }
-
-    static function freeManyouFool() {
-
-    }
     #end
 }

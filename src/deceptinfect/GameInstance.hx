@@ -36,13 +36,19 @@ class GameInstance {
         calcBaseInfection();
         #if server
         var chargerSpawn = getSystem(SpawnSystem).obj.getRandom();
-        var ent = EntsLib.Create(BaseEntities.di_charger);
+        var ent = EntsLib.Create(Di_entities.di_charger);
         chargerSpawn.spawn(ent);
         var bat1 = EntsLib.Create(Di_entities.di_battery);
         var bat2 = EntsLib.Create(Di_entities.di_battery);
         var spawns = chargerSpawn.getRandomSpawns(2);
+        trace(spawns.length);
+        trace(untyped spawns[1].claimed);
         spawns[0].spawn(bat1);
         spawns[1].spawn(bat2);
+        var nestSpawn = getSystem(SpawnSystem).nest.getRandom();
+        var nest = EntsLib.Create(Di_entities.di_nest);
+        nestSpawn.spawn(nest);
+
         #end
         // var spawns = chargerSpawn.getRandomSpawns(2);
 

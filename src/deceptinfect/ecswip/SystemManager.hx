@@ -1,5 +1,7 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.game.NestSystem;
+import deceptinfect.statuses.Walkthroughable.WalkthroughSystem;
 import deceptinfect.game.WinSystem;
 import deceptinfect.game.BatterySystem;
 import deceptinfect.radiation.RadiationSystem;
@@ -24,7 +26,9 @@ class SystemManager {
         HiddenHealthSystem,
         WinSystem,
         BatterySystem,
-        SpawnSystem
+        SpawnSystem,
+        WalkthroughSystem,
+        NestSystem
     ];
 
     public static function make() {
@@ -36,6 +40,8 @@ class SystemManager {
         getSystems.set(WinSystem,new WinSystem());
         getSystems.set(BatterySystem,new BatterySystem());
         getSystems.set(SpawnSystem,new SpawnSystem());
+        getSystems.set(WalkthroughSystem, new WalkthroughSystem());
+        getSystems.set(NestSystem,new NestSystem());
         
     }
     public static function getSystem<T:System>(cls:Class<T>):T {

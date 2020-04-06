@@ -41,6 +41,7 @@ class Di_cure extends gmod.swep.SWEP implements SwepBuild {
             }
         default:
         }
+        self.Remove();
     }
 
 

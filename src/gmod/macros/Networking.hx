@@ -28,7 +28,7 @@ class Networking {
         }
         var complexAnon = Context.toComplexType(anon);
         var clsName = 'NETMESSAGE_$netName';
-        var cls = macro class $clsName {
+        var cls = macro class $clsName implements gmod.NET_Server.I_NET<$complexAnon> {
             #if server
 
             public function send(data:$complexAnon,recv:gmod.gclass.Player,?unreliable=false) {

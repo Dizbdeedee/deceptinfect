@@ -51,8 +51,8 @@ class Hud {
     }
 
     static function infectionMeter() {
-        var inf = switch (PlayerManager.getLocalPlayer().has_id()) {
-            case Some(_.get(InfectionComponent) => Comp(inf)):
+        var inf = switch [PlayerManager.getLocalPlayer().has_id(),GameManager.state] {
+            case [Some(_.get(InfectionComponent) => Comp(inf)),PLAYING(_)]:
                 inf;
             default:
                 return;

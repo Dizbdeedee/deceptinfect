@@ -19,6 +19,7 @@ class ComponentManager {
     public static function addGEnt(x:GEntCompat):DI_ID {
         var id = addEntity();
         addComponent(new GEntityComponent(x),id);
+        addComponent(new VirtualPosition(x),id);
         return id;
     }
 

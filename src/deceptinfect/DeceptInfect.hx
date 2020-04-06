@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.statuses.Walkthroughable;
 import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceReturn;
 import gmod.gamemode.BuildOverrides;
 import gmod.enums.IN;
@@ -41,6 +42,21 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
                 x.think();
                 x.lastTick = GlobalLib.CurTime();
             default:
+        }
+        #if server
+        checkPerformance();
+        #end
+    }
+
+    var timestart = 0;
+    var underperforming = false;
+    function checkPerformance() {
+        if (GlobalLib.FrameTime() > 0.016666666666667 && !underperforming) {
+            trace("Server underperforming! ");
+            underperforming = true;
+        } else if (underperforming) {
+            trace("Server recovered");
+            underperforming = false;
         }
     }
     override function OnEntityCreated(entity:Entity) {
@@ -106,7 +122,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
                 FormSystem.attemptChangeForm(ply.id);
             case KEY_SEMICOLON:
                 var plyr:GPlayerCompat = PlayerLib.GetByID(1);
-                InfectionSystem.makeInfected(plyr.id);
+                getSystem(InfectionSystem).makeInfected(plyr.id);
             case KEY_M:
                 trace(ComponentManager.components.get(PlayerComponent));
             default:
@@ -200,6 +216,9 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         var blockers = EntsLib.FindInBox(pos + new Vector(-16,-16,0), pos + new Vector(16,16,72));
         for (ent in blockers) {
             if (ent.IsPlayer()) {
+                var blockPly:GPlayerCompat = cast ent;
+                blockPly.setWalkthroughable(true);
+                blockPly.id.add_component(new Walkthroughable());
                 //ply.setWalkthroughable(true);
             }
         }

@@ -1,4 +1,6 @@
 package deceptinfect;
+import deceptinfect.infection.InfectionSystem;
+import deceptinfect.ecswip.DamagePenaltyHidden;
 import deceptinfect.abilities.FormComponent;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.radiation.RadiationProducer;
@@ -93,19 +95,28 @@ class GameManager {
         x.add_component(new GrabProducer());
         x.add_component(new HiddenHealthComponent());
         x.add_component(new FormComponent());
+        x.add_component(new DamagePenaltyHidden());
         var c_inf = x.get_sure(InfectionComponent);
-        c_inf.infection = INFECTED;
+    
+        
+        // getSystem(InfectionSystem).makeInfected(x);
         var c_accept = x.get_sure(GrabAccepter);
         //x.remove_component(GrabAccepter);
         c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
-        trace(c_accept.grabState);
+        // trace(c_accept.grabState);
         var rad = RadiationProducer.createFromType(INF);
         rad.state = DISABLED;
         x.add_component(rad);
     }
     public static function initAllPlayers() {
-        for (player in PlayerLib.GetAll()) {
+        var choose = MathLib.random(1,PlayerLib.GetCount());
+        
+        for (ind => player in PlayerManager.getPlayers()) {
             initPlayer(player);
+            if (ind == choose) {
+                getSystem(InfectionSystem).makeInfected(player.id);
+            }
+            
         }
     }
 
@@ -135,7 +146,7 @@ class GameManager {
                 
             case PLAYING:
                 state = PLAYING(new GameInstance());
-                PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
+                // PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
         }
     }
     #end

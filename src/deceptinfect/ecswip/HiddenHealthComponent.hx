@@ -1,5 +1,5 @@
 package deceptinfect.ecswip;
 
 class HiddenHealthComponent extends Component {
-    public var extraHealth:Float;
+    public var extraHealth:Float = 0.0;
 }

@@ -6,6 +6,8 @@ class SpawnSystem extends System {
     public var obj(default,never) = new SpawnPointTable();
     public var item(default,never)= new SpawnPointTable();
 
+    public var nest(default,never) = new SpawnPointTable();
+
     #if server
     override function init_server() {
         generateSpawns();
@@ -15,6 +17,7 @@ class SpawnSystem extends System {
     public function generateSpawns() {
         obj.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).objectives);
         item.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).items);
+        nest.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).nests);
     }
 
     
@@ -37,7 +40,7 @@ class Spawn {
     var mindistID:Int;
 
     function getRandomFarAwaySpawn():Int {
-        return MathLib.random(Math.floor(distOrder.length / 2),distOrder.length);
+        return MathLib.random(Math.floor(distOrder.length / 2),distOrder.length - 1);
     }
     function getRandomSpawnMinDistAway(curSpawns:Array<SpawnID>):Spawn {
         var total:Map<SpawnID,Float> = [];
@@ -72,18 +75,25 @@ class Spawn {
         }
         var mindist = ((max - min) * 0.4) + min;
         var luckydraw = [];
-        var id = 0;
-        for (dist in total) {
+        for (id => dist in total) {
             if (dist > mindist) {
                 luckydraw.push(id);
             }
-            id++;
+            
         }
         if (luckydraw.length == 0) {
             trace("Not enough spawns far away enough to use algo.");
-            return get(getRandomFarAwaySpawn());
+            var id = getRandomFarAwaySpawn();
+            trace('id chosen $id');
+            return get(id);
         } else {
-            return get(luckydraw[MathLib.random(0,luckydraw.length)]);
+            var index = MathLib.random(0,luckydraw.length - 1);
+            var id = luckydraw[index];
+
+            trace(luckydraw);
+            trace('id chosen $id index $index');
+
+            return get(id);
         }
 
     }
@@ -92,6 +102,7 @@ class Spawn {
         var rtn:Array<Spawn> = [];
         var curspawns:Array<SpawnID> = [id];
         for (i in 0...noSpawns) {
+            trace(curspawns);
             var newspawn = getRandomSpawnMinDistAway(curspawns);
             curspawns[i] = newspawn.id; 
             rtn[i] = newspawn;
@@ -126,7 +137,7 @@ class Spawn {
 
     function insertNewSortedDist(other:Spawn) {
         var i = 0;
-        var insert = distOrder.length;
+        var insert = distOrder.length - 1;
         for (spawnid in distOrder) {
             if (distStore.get(spawnid) > distStore.get(other.id)) {
                 insert = i;
@@ -170,7 +181,9 @@ class SpawnPointTable {
     }
 
     public function getRandom():Spawn {
-        return spawns[MathLib.random(0,spawns.length)];
+        var choose = MathLib.random(0,spawns.length - 1);
+        trace ('index chosen $choose');
+        return spawns[choose];
     }
 
     public function new() {

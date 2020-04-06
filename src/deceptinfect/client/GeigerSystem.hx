@@ -35,7 +35,7 @@ class GeigerSystem extends System {
     }
 
     public static function geigerThink() {
-        if (GlobalLib.CurTime() > playTime && geiger > 0) {
+        if (GlobalLib.CurTime() > playTime && geiger > 0.016) {
             var choice = switch (geiger) {
                 case x if (x < 0.2):
                     sounds[0];
@@ -46,7 +46,8 @@ class GeigerSystem extends System {
             var mintime = GlobalLib.SoundDuration(sounds[0]) * 0.75;
             var exponent = 0.5 * (Math.pow(geiger,-0.5)) - 0.5;
             var random = untyped __lua__("math.random(0.5,1.1)");
-            playTime = GlobalLib.CurTime() + mintime + exponent * random;
+            var maxtime = 3;
+            playTime = MathLib.min(GlobalLib.CurTime() + mintime + exponent * random,GlobalLib.CurTime() + maxtime);
         }
     }
 

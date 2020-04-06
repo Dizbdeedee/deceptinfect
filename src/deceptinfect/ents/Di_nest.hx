@@ -1,5 +1,7 @@
-package deceptinfect;
+package deceptinfect.ents;
 
+import deceptinfect.radiation.RadiationTypes.RadTypes;
+import deceptinfect.radiation.RadiationProducer;
 import gmod.sent.SentBuild;
 import deceptinfect.game.NestComponent;
 import deceptinfect.infection.InfectedComponent;
@@ -18,18 +20,19 @@ class Di_nest extends gmod.sent.ENT_ANIM implements SentBuild {
         var ent = new GEntCompat(self);
         id = ent.id;
         id.add_component(new NestComponent());
+        id.add_component(RadiationProducer.createFromType(RadTypes.NEST));
         
     }
     override function Think():Bool {
 
         var c_nest = id.get_sure(NestComponent);
         for (ent in entities) {
-            switch [ent.get(PlayerComponent),ent.get(InfectedComponent),c_nest.nestState] {
-            case [Comp(ply),_,VISIBLE]:
+            switch [ent.get(PlayerComponent),ent.get(InfectedComponent),id.get(NestComponent)] {
+            case [Comp(ply),_,Comp(_.nestState => VISIBLE)]:
                 self.SetPreventTransmit(ply.player,false);
-            case [Comp(ply),Comp(_),_]:
+            case [Comp(ply),Comp(_),Comp(_)]:
                 self.SetPreventTransmit(ply.player,false);
-            case [Comp(ply),NONE,_]:
+            case [Comp(ply),NONE,Comp(_)]:
                 self.SetPreventTransmit(ply.player,true);
 
             default:

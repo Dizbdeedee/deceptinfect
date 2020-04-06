@@ -6,7 +6,7 @@ class RadiationTypes {
 
     public static var types:Map<RadTypes,RadiationProduceOptions> = [
         NEST => {
-            maxrate: 3,
+            maxrate: 6,
             radius: 500,
             contaminate: {
                 chance: 2/5,

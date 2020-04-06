@@ -10,6 +10,15 @@ class InfectionComponent extends Component {
     public var onInfected(default,null):Signal<Noise>;
     public var acceptingInfection:AcceptingInfection = ACCEPTING;
 
+    
+    // function set_infection(x:INF_STATE):INF_STATE {
+    //     switch [infection,x] {
+    //         case [NOT_INFECTED(_),INFECTED]:
+    //             InfectionSystem.onInfected()
+    //         default:
+    //     }
+    //     return infection = x;
+    // }
     public function getInfValue():Float {
         return switch(infection) {
             case NOT_INFECTED(inf):

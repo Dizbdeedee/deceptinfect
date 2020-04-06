@@ -16,7 +16,7 @@ class RadiationProducer extends Component {
     public var contamProducer:Option<ContaminationProducer> = None;
     public var lifetime:RadLifetime;
     
-    public static function createFromType(type:RadTypes) {
+    public static function createFromType(type:RadTypes):RadiationProducer {
         
         return new RadiationProducer(RadiationTypes.types[type]);
 

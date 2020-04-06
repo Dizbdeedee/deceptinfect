@@ -48,8 +48,21 @@ class Main {
         #end
         trace("looool!!");
         SystemManager.initAllSystems();
+        #if server
+        cleanupEnts();  
+        #end
         
-      
+        MathLib.randomseed(GlobalLib.RealTime());
+    }
+
+    static function cleanupEnts() {
+        for (ent in EntsLib.GetAll()) {
+            switch (ent.GetClass()) {
+            case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest:
+                ent.Remove();
+            default:
+            }
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.PlayerComponent;
 
+@:allow(InfectionComponent)
 class InfectionSystem extends System {
 
 
@@ -19,14 +20,23 @@ class InfectionSystem extends System {
     }
 
     function recvInfection(data:{infection : Float}) {
+        //trace(data);
+
+        
         switch PlayerManager.getLocalPlayerID().get(InfectionComponent) {
             case Comp(inf):
+                
                 switch (inf.infection) {
                     case NOT_INFECTED(val):
+                        //trace('set ${inf.infection}');
                         val.value = data.infection;
                     default:
                 }
             default:
+                var c_inf = new InfectionComponent();
+                PlayerManager.getLocalPlayerID().add_component(c_inf);
+                c_inf.infection = NOT_INFECTED(data.infection);
+
         }
     }
     #end
@@ -79,6 +89,8 @@ class InfectionSystem extends System {
                     }
                     //trace(infection.rate);
                 default:
+                    totalInf += infection.getInfValue();
+                    numPlayers++;
                 }
                 
 
@@ -95,7 +107,7 @@ class InfectionSystem extends System {
 
     
 
-    public static function makeInfected(ent:DI_ID) {
+    public function makeInfected(ent:DI_ID) {
         switch (ent.get(InfectionComponent)) {
         case Comp(inf):
             inf.infection = switch (inf.infection) {
@@ -169,12 +181,15 @@ class InfectionSystem extends System {
         }
     }
 
+    
     static function onInfected(ent:DI_ID) {
         #if server
         switch (ent.get(PlayerComponent)) {
-        case Comp(_):
-            trace('INIT INFECTED PLAYER');
+        case Comp(_.player => p):
+            trace('INIT INFECTED PLAYER $p');
+            net_inf.send({infection: 100},p);
             GameManager.initInfectedPlayer(ent);
+            
         default:
         }
         #end
