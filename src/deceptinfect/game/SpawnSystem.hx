@@ -1,5 +1,7 @@
 package deceptinfect.game;
 
+import deceptinfect.ecswip.VirtualPosition;
+
 
 
 class SpawnSystem extends System {
@@ -8,9 +10,25 @@ class SpawnSystem extends System {
 
     public var nest(default,never) = new SpawnPointTable();
 
+    public var evac(default,never) = new SpawnPointTable();
+
     #if server
     override function init_server() {
         generateSpawns();
+    }
+
+    override function run_server() {
+        for (ent in entities) {
+            switch [ent.get(Spawned),ent.get(VirtualPosition)] {
+            case [Comp(c_spawn),Comp(c_pos)]:
+                if (c_spawn.spawn.vec.DistToSqr(c_pos.pos) > C_square(90)) {
+                    trace("Spawn freed");
+                    c_spawn.spawn.claimed = UNCLAIMED;
+                    ent.remove_component(Spawned);
+                };
+            default:
+            }
+        }
     }
     #end
     
@@ -18,6 +36,7 @@ class SpawnSystem extends System {
         obj.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).objectives);
         item.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).items);
         nest.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).nests);
+        evac.generateBoundSpawns(MapStorage.spawns.get(GameLib.GetMap()).evacs);
     }
 
     
@@ -30,10 +49,10 @@ enum SpawnClaim {
 
 class Spawn {
 
-    final vec:Vector;
+    public final vec:Vector;
     final parent:SpawnPointTable;
     final id:SpawnID;
-    var claimed:SpawnClaim = UNCLAIMED;
+    public var claimed:SpawnClaim = UNCLAIMED;
     var distStore:Map<SpawnID,Float> = [];
     var distOrder:Array<SpawnID> = [];
     var maxdistID:Int;
@@ -110,10 +129,16 @@ class Spawn {
         return rtn;
     }
 
-    public function spawn(ent:Entity) {
+    public function spawn(ent:GEntCompat) {
         claimed = CLAIMED(ent);
         ent.SetPos(vec);
         ent.Spawn();
+        switch (ent.has_id()) {
+        case Some(id):
+            trace(id);
+            id.add_component(new Spawned(this));
+        default:
+        }
 
              
 
@@ -124,7 +149,7 @@ class Spawn {
     }
 
     public function calculateDist(other:Spawn) {
-        var dist = vec.Distance(other.vec);
+        var dist = vec.DistToSqr(other.vec);
         distStore.set(other.id,dist);
         if (maxdistID == null || dist > distStore.get(maxdistID)) {
             maxdistID = other.id;
@@ -158,6 +183,28 @@ class Spawn {
     }
 
 }
+
+class BoundsSpawn extends Spawn {
+    final bounds:MinMax;
+
+    public function new(parent:SpawnPointTable,vec:Vector,bounds:MinMax) {
+        super(parent,vec);
+        this.bounds = bounds;
+    }
+
+    override function spawn(ent:GEntCompat) {
+        claimed = CLAIMED(ent);
+        ent.SetPos(vec);
+        ent.Spawn();
+        switch (ent.has_id()) {
+        case Some(id):
+            trace(id);
+            id.add_component(new Spawned(this));
+        default:
+        }
+        ent.SetCollisionBoundsWS(bounds.mins,bounds.maxs);
+    }
+}
 private typedef SpawnID = Int;
 
 
@@ -178,6 +225,20 @@ class SpawnPointTable {
             }
         }
         trace(spawns);
+    }
+
+    public function generateBoundSpawns(points:Array<MinMax>) {
+        spawns = [];
+        for (minmax in points) {
+            spawns.push(new BoundsSpawn(this,minmax.getCenter(),minmax));
+        }
+
+        for (spawn in spawns) {
+            for (spawn2 in spawns) {
+                spawn.calculateDist(spawn2);
+            }
+        }
+
     }
 
     public function getRandom():Spawn {

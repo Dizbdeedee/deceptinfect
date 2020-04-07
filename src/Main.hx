@@ -58,7 +58,7 @@ class Main {
     static function cleanupEnts() {
         for (ent in EntsLib.GetAll()) {
             switch (ent.GetClass()) {
-            case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest:
+            case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
                 ent.Remove();
             default:
             }

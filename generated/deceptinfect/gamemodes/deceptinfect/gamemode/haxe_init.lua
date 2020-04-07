@@ -131,21 +131,31 @@ __deceptinfect_game_BatterySystem = _hx_e()
 __deceptinfect_game_SpawnSystem = _hx_e()
 __deceptinfect_statuses_WalkthroughSystem = _hx_e()
 __deceptinfect_game_NestSystem = _hx_e()
+__deceptinfect_game_EvacSystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
 __gmod_sent_SentBuild = _hx_e()
 __deceptinfect_ents_Di_battery = _hx_e()
 __deceptinfect_ents_Di_charger = _hx_e()
+__gmod_sent_ENT_BRUSH = _hx_e()
+__deceptinfect_ents_Di_evac_zone = _hx_e()
+__deceptinfect_ents_Di_flare = _hx_e()
 __deceptinfect_ents_Di_nest = _hx_e()
 __deceptinfect_game_BatteryAccepter = _hx_e()
 __deceptinfect_game_AccepterStatus = _hx_e()
 __deceptinfect_game_BatterySource = _hx_e()
+__deceptinfect_game_EvacZone = _hx_e()
+__deceptinfect_game_EvacState = _hx_e()
+__deceptinfect_game_FlareComponent = _hx_e()
+__deceptinfect_game_InEvacZone = _hx_e()
 __deceptinfect_game_NestComponent = _hx_e()
 __deceptinfect_game_NestState = _hx_e()
 __deceptinfect_game_SpawnClaim = _hx_e()
 __deceptinfect_game_Spawn = _hx_e()
+__deceptinfect_game_BoundsSpawn = _hx_e()
 __deceptinfect_game_SpawnPointTable = _hx_e()
+__deceptinfect_game_Spawned = _hx_e()
 __deceptinfect_game_Win = _hx_e()
 __deceptinfect_infection_InfVunerability = _hx_e()
 __deceptinfect_infection_InfectedComponent = _hx_e()
@@ -164,6 +174,7 @@ __deceptinfect_statuses_Walkthroughable = _hx_e()
 __deceptinfect_util_Cooldown = _hx_e()
 __deceptinfect_util_CooldownTools = _hx_e()
 __deceptinfect_util_EntityExt = _hx_e()
+__deceptinfect_util_MinMaxTools = _hx_e()
 __deceptinfect_util_PlayerExt = _hx_e()
 __deceptinfect_util_TimeKeep = _hx_e()
 __gmod__EntityClass_EntityClass_Impl_ = _hx_e()
@@ -612,7 +623,7 @@ Main.cleanupEnts = function()
   while (ent:hasNext()) do 
     local ent1 = ent:next();
     local _g = ent1:GetClass();
-    if (_g) == "di_battery" or (_g) == "di_charger" or (_g) == "di_nest" then 
+    if (_g) == "di_battery" or (_g) == "di_charger" or (_g) == "di_evac_zone" or (_g) == "di_flare" or (_g) == "di_nest" then 
       ent1:Remove();else end;
   end;
 end
@@ -1931,6 +1942,9 @@ __deceptinfect_GameInstance.prototype.start = function(self)
   local nestSpawn = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_SpawnSystem).nest:getRandom();
   local nest = _G.ents.Create("di_nest");
   nestSpawn:spawn(nest);
+  local evacZone = _G.ents.Create("di_evac_zone");
+  local evacZoneSpawn = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_SpawnSystem).evac:getRandom();
+  evacZoneSpawn:spawn(evacZone);
 end
 __deceptinfect_GameInstance.prototype.get_diffTime = function(self) 
   if (self.lastTick ~= nil) then 
@@ -1957,7 +1971,7 @@ __deceptinfect_GameInstance.prototype.setTime = function(self)
   local time = __deceptinfect_GameValues.GAME_TIMER;
   local variance = __deceptinfect_GameValues.GAME_TIMER_VARIANCE;
   self.totalGameTime = time + _G.math.random(-variance, variance);
-  __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=89,className="deceptinfect.GameInstance",methodName="setTime"}));
+  __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=93,className="deceptinfect.GameInstance",methodName="setTime"}));
 end
 
 __deceptinfect_GameInstance.prototype.__class__ =  __deceptinfect_GameInstance
@@ -3582,7 +3596,7 @@ __deceptinfect_infection_InfectionSystem.getBaseInfection = function(inf)
       local x = _g1[2];
       do return x.baseInfection[0] end;
     else
-      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=160,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
+      __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=168,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
       inf.baseInfection = __deceptinfect_infection_BaseInfection.USING_STATIC(0.0);
       do return 0 end;
     end;
@@ -3600,7 +3614,7 @@ __deceptinfect_infection_InfectionSystem.fixUpInfection = function(infection)
     else
       local inf1 = _g1;
       if (inf1[0] >= 100) then 
-        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=177,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
+        __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=185,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
         infection.infection = __deceptinfect_infection_INF_STATE.INFECTED;
       end;
     end;
@@ -3614,9 +3628,10 @@ __deceptinfect_infection_InfectionSystem.onInfected = function(ent)
     local _hx_tmp;
     _hx_tmp = _g[2].player;
     local p = _hx_tmp;
-    __haxe_Log.trace(Std.string("INIT INFECTED PLAYER ") .. Std.string(Std.string(p)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=189,className="deceptinfect.infection.InfectionSystem",methodName="onInfected"}));
+    __haxe_Log.trace(Std.string("INIT INFECTED PLAYER ") .. Std.string(Std.string(p)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=197,className="deceptinfect.infection.InfectionSystem",methodName="onInfected"}));
     __deceptinfect_infection_InfectionSystem.net_inf:send(_hx_o({__fields__={infection=true},infection=100}), p);
     __deceptinfect_GameManager.initInfectedPlayer(ent);
+    __deceptinfect_client_GeigerSystem.net_geiger:send(_hx_o({__fields__={geiger=true},geiger=0}), p);
   end;
 end
 __deceptinfect_infection_InfectionSystem.prototype = _hx_a();
@@ -3648,6 +3663,9 @@ __deceptinfect_infection_InfectionSystem.prototype.run_server = function(self)
             rate = infection.rate;
           end;
           rate = rate + 1;
+          if (_G.CurTime() > __deceptinfect_infection_InfectionSystem.infectionReport) then 
+            __haxe_Log.trace(Std.string(Std.string(Std.string("infection report id : ") .. Std.string(entity1)) .. Std.string(" rate : ")) .. Std.string(rate), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=69,className="deceptinfect.infection.InfectionSystem",methodName="run_server"}));
+          end;
           local vun;
           local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfVunerability);
           local comp2 = comparray2[entity1];
@@ -3679,6 +3697,9 @@ __deceptinfect_infection_InfectionSystem.prototype.run_server = function(self)
         end;
       end;
     end;
+    if (_G.CurTime() > __deceptinfect_infection_InfectionSystem.infectionReport) then 
+      __deceptinfect_infection_InfectionSystem.infectionReport = _G.CurTime() + 5;
+    end;
   end;
   if (numPlayers > 0) then 
     __deceptinfect_infection_InfectionSystem.averageInfection = totalInf / numPlayers;
@@ -3700,7 +3721,7 @@ __deceptinfect_infection_InfectionSystem.prototype.makeInfected = function(self,
       tmp = __deceptinfect_infection_INF_STATE.INFECTED;
     end;
     inf.infection = tmp;
-    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=121,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
+    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=129,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
   end;
 end
 __deceptinfect_infection_InfectionSystem.prototype.infect = function(self,id,x) 
@@ -4047,13 +4068,13 @@ __deceptinfect_game_WinSystem.prototype.run_server = function(self)
     local tmp = _g2[1];
     if (tmp) == 0 then 
       if (_g1[1] == 1) then 
-        local _g5 = _g1[2];
+        local _g3 = _g1[2];
         total = total + 1;
       end;
     elseif (tmp) == 1 then 
-      local _g3 = _g2[2];
+      local _g4 = _g2[2];
       if (_g1[1] == 1) then 
-        local _g4 = _g1[2];
+        local _g5 = _g1[2];
         infected = infected + 1;
         total = total + 1;
       end; end;
@@ -4162,6 +4183,7 @@ __deceptinfect_game_SpawnSystem.new = function()
   return self
 end
 __deceptinfect_game_SpawnSystem.super = function(self) 
+  self.evac = __deceptinfect_game_SpawnPointTable.new();
   self.nest = __deceptinfect_game_SpawnPointTable.new();
   self.item = __deceptinfect_game_SpawnPointTable.new();
   self.obj = __deceptinfect_game_SpawnPointTable.new();
@@ -4172,6 +4194,29 @@ __deceptinfect_game_SpawnSystem.__name__ = "deceptinfect.game.SpawnSystem"
 __deceptinfect_game_SpawnSystem.prototype = _hx_a();
 __deceptinfect_game_SpawnSystem.prototype.init_server = function(self) 
   self:generateSpawns();
+end
+__deceptinfect_game_SpawnSystem.prototype.run_server = function(self) 
+  local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+  while (ent:hasNext()) do 
+    local ent1 = ent:next();
+    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
+    local comp = comparray[ent1];
+    local _g1 = comp;
+    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Spawned);
+    local comp1 = comparray1[ent1];
+    local _g2 = comp1;
+    if (_g2[1] == 1) then 
+      if (_g1[1] == 1) then 
+        local c_spawn = _g2[2];
+        local c_pos = _g1[2];
+        if (c_spawn.spawn.vec:DistToSqr(c_pos:get_pos()) > 8100) then 
+          __haxe_Log.trace("Spawn freed", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=25,className="deceptinfect.game.SpawnSystem",methodName="run_server"}));
+          c_spawn.spawn.claimed = __deceptinfect_game_SpawnClaim.UNCLAIMED;
+          __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_game_Spawned, ent1);
+        end;
+      end;
+    end;
+  end;
 end
 __deceptinfect_game_SpawnSystem.prototype.generateSpawns = function(self) 
   local this1 = __deceptinfect_MapStorage.spawns;
@@ -4195,6 +4240,13 @@ __deceptinfect_game_SpawnSystem.prototype.generateSpawns = function(self)
     ret2 = nil;
   end;
   self.nest:generateSpawns(ret2.nests);
+  local this13 = __deceptinfect_MapStorage.spawns;
+  local key3 = _G.game.GetMap();
+  local ret3 = this13.h[key3];
+  if (ret3 == __haxe_ds_StringMap.tnull) then 
+    ret3 = nil;
+  end;
+  self.evac:generateBoundSpawns(ret3.evacs);
 end
 
 __deceptinfect_game_SpawnSystem.prototype.__class__ =  __deceptinfect_game_SpawnSystem
@@ -4333,6 +4385,165 @@ __deceptinfect_game_NestSystem.prototype.__class__ =  __deceptinfect_game_NestSy
 __deceptinfect_game_NestSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_game_NestSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
+__deceptinfect_game_EvacSystem.new = function() 
+  local self = _hx_new(__deceptinfect_game_EvacSystem.prototype)
+  __deceptinfect_game_EvacSystem.super(self)
+  return self
+end
+__deceptinfect_game_EvacSystem.super = function(self) 
+  self.flaresSpawned = false;
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.game.EvacSystem"] = __deceptinfect_game_EvacSystem
+__deceptinfect_game_EvacSystem.__name__ = "deceptinfect.game.EvacSystem"
+__deceptinfect_game_EvacSystem.prototype = _hx_a();
+__deceptinfect_game_EvacSystem.prototype.run_server = function(self) 
+  local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+  while (ent:hasNext()) do 
+    local ent1 = ent:next();
+    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_EvacZone);
+    local comp = comparray[ent1];
+    local _g1 = comp;
+    if (_g1[1] == 1) then 
+      local c_evac = _g1[2];
+      if ((__deceptinfect_infection_InfectionSystem.averageInfection > 80) and not self.flaresSpawned) then 
+        local flareSpawn = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_SpawnSystem).obj:getRandom();
+        flareSpawn:spawn(_G.ents.Create("di_flare"));
+        local flareSpawn2 = flareSpawn:getRandomSpawns(1);
+        local tmp = _G.ents.Create("di_flare");
+        flareSpawn2[0]:spawn(tmp);
+        self.flaresSpawned = true;
+      end;
+      local _g11 = c_evac.state;
+      local tmp1 = _g11[1];
+      if (tmp1) == 1 then 
+        local time = _g11[2];
+        local param = __deceptinfect_GameManager.sure():get_diffTime();
+        time[0] = time[0] - param;
+        if (time[0] < 0) then 
+          __haxe_Log.trace(c_evac.state, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/EvacSystem.hx",lineNumber=43,className="deceptinfect.game.EvacSystem",methodName="run_server"}));
+          local v = c_evac.leavetime;
+          local this1 = ({length = 1});
+          local this2 = this1;
+          local ret = this2;
+          ret[0] = v;
+          c_evac.state = __deceptinfect_game_EvacState.LEAVING(ret);
+        end;
+      elseif (tmp1) == 2 then 
+        local time1 = _g11[2];
+        local param1 = __deceptinfect_GameManager.sure():get_diffTime();
+        time1[0] = time1[0] - param1;
+        if (time1[0] < 0) then 
+          __haxe_Log.trace(c_evac.state, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/EvacSystem.hx",lineNumber=28,className="deceptinfect.game.EvacSystem",methodName="run_server"}));
+          self:checkWin(c_evac);
+          c_evac.state = __deceptinfect_game_EvacState.NOT_ACTIVE;
+        end;
+        local id = c_evac.in_zone:keys();
+        while (id:hasNext()) do 
+          local id1 = id:next();
+          local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent);
+          local comp1 = comparray1[id1];
+          local _g12 = comp1;
+          if (_g12[1] == 1) then 
+            if (_g12[2].form[1] == 1) then 
+              c_evac.in_zone:remove(id1);
+              local _this = c_evac.blocked;
+              _this.h[id1] = true;
+            end;
+          end;
+        end;else end;
+    end;
+  end;
+end
+__deceptinfect_game_EvacSystem.prototype.checkWin = function(self,evac) 
+  local humanEscape = false;
+  local id = evac.in_zone:keys();
+  while (id:hasNext()) do 
+    local id1 = id:next();
+    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
+    local comp = comparray[id1];
+    local _g = comp;
+    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent);
+    local comp1 = comparray1[id1];
+    local _g1 = comp1;
+    local tmp = _g1[1];
+    if (tmp) == 0 then 
+      if (_g[1] == 1) then 
+        local _g2 = _g[2];
+        humanEscape = true;
+      end;
+    elseif (tmp) == 1 then 
+      local _g3 = _g1[2];
+      if (_g[1] == 1) then 
+        local _g4 = _g[2];
+        __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_WinSystem).winTrig.handlers:invoke(__deceptinfect_game_Win.WIN_INF);
+        do return end;
+      end; end;
+  end;
+  if (humanEscape) then 
+    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_WinSystem).winTrig.handlers:invoke(__deceptinfect_game_Win.WIN_HUMAN);
+  else
+    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_WinSystem).winTrig.handlers:invoke(__deceptinfect_game_Win.DRAW);
+  end;
+end
+__deceptinfect_game_EvacSystem.prototype.touched = function(self,ent,evac) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
+  local comp = comparray[ent];
+  local _g = comp;
+  if (_g[1] == 1) then 
+    local c_player = _g[2];
+    if (evac.blocked.h[ent] ~= nil) then 
+      do return end;
+    end;
+    local _g1 = evac.state;
+    if (_g1[1] == 2) then 
+      local time = _g1[2];
+      if ((evac.touched.h[ent] == nil) and (time[0] < (evac.leavetime / 2))) then 
+        time[0] = evac.leavetime / 2;
+      end;
+    end;
+    local _this = evac.touched;
+    _this.h[ent] = true;
+    local _this1 = evac.in_zone;
+    _this1.h[ent] = false;
+    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_InEvacZone.new(), ent);
+  end;
+end
+__deceptinfect_game_EvacSystem.prototype.addFlare = function(self,flare,evac) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_EvacZone);
+  local comp = comparray[evac];
+  local _g = comp;
+  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_FlareComponent);
+  local comp1 = comparray1[flare];
+  local _g1 = comp1;
+  if (_g1[1] == 1) then 
+    local _g2 = _g1[2];
+    if (_g[1] == 1) then 
+      local c_evac = _g[2];
+      local v = c_evac.arrivetime;
+      local this1 = ({length = 1});
+      local this2 = this1;
+      local ret = this2;
+      ret[0] = v;
+      c_evac.state = __deceptinfect_game_EvacState.ARRIVING(ret);
+    end;
+  end;
+end
+__deceptinfect_game_EvacSystem.prototype.leave = function(self,ent,evac) 
+  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
+  local comp = comparray[ent];
+  local _g = comp;
+  if (_g[1] == 1) then 
+    local _g1 = _g[2];
+    evac.in_zone:remove(ent);
+    __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_game_InEvacZone, ent);
+  end;
+end
+
+__deceptinfect_game_EvacSystem.prototype.__class__ =  __deceptinfect_game_EvacSystem
+__deceptinfect_game_EvacSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_game_EvacSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
 __deceptinfect_ecswip_SystemManager.new = {}
 _hxClasses["deceptinfect.ecswip.SystemManager"] = __deceptinfect_ecswip_SystemManager
 __deceptinfect_ecswip_SystemManager.__name__ = "deceptinfect.ecswip.SystemManager"
@@ -4387,6 +4598,11 @@ __deceptinfect_ecswip_SystemManager.make = function()
   local value9 = __deceptinfect_game_NestSystem.new();
   _this9.h[key9] = value9;
   _this9.k[key9] = true;
+  local _this10 = __deceptinfect_ecswip_SystemManager.getSystems;
+  local key10 = __deceptinfect_game_EvacSystem;
+  local value10 = __deceptinfect_game_EvacSystem.new();
+  _this10.h[key10] = value10;
+  _this10.k[key10] = true;
 end
 __deceptinfect_ecswip_SystemManager.getSystem = function(cls) 
   do return __deceptinfect_ecswip_SystemManager.getSystems.h[cls] end;
@@ -4627,6 +4843,164 @@ __deceptinfect_ents_Di_charger.prototype.__class__ =  __deceptinfect_ents_Di_cha
 __deceptinfect_ents_Di_charger.__super__ = __gmod_sent_ENT_ANIM
 setmetatable(__deceptinfect_ents_Di_charger.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
 
+__gmod_sent_ENT_BRUSH.new = function() 
+  local self = _hx_new(__gmod_sent_ENT_BRUSH.prototype)
+  __gmod_sent_ENT_BRUSH.super(self)
+  return self
+end
+__gmod_sent_ENT_BRUSH.super = function(self) 
+  self.TYPE = "brush";
+end
+_hxClasses["gmod.sent.ENT_BRUSH"] = __gmod_sent_ENT_BRUSH
+__gmod_sent_ENT_BRUSH.__name__ = "gmod.sent.ENT_BRUSH"
+__gmod_sent_ENT_BRUSH.prototype = _hx_a();
+__gmod_sent_ENT_BRUSH.prototype.StartTouch = function(self,ent) 
+end
+__gmod_sent_ENT_BRUSH.prototype.EndTouch = function(self,ent) 
+end
+__gmod_sent_ENT_BRUSH.prototype.Touch = function(self,ent) 
+end
+
+__gmod_sent_ENT_BRUSH.prototype.__class__ =  __gmod_sent_ENT_BRUSH
+__gmod_sent_ENT_BRUSH.__super__ = __gmod_sent_ENT
+setmetatable(__gmod_sent_ENT_BRUSH.prototype,{__index=__gmod_sent_ENT.prototype})
+
+__deceptinfect_ents_Di_evac_zone.new = function(curEnt) 
+  local self = _hx_new(__deceptinfect_ents_Di_evac_zone.prototype)
+  __deceptinfect_ents_Di_evac_zone.super(self,curEnt)
+  return self
+end
+__deceptinfect_ents_Di_evac_zone.super = function(self,curEnt) 
+  self.properties = _hx_o({__fields__={Base=true},Base="base_brush"});
+  __gmod_sent_ENT_BRUSH.super(self);
+  self["self"] = curEnt;
+end
+_hx_exports["di_evac_zone"] = __deceptinfect_ents_Di_evac_zone
+_hxClasses["deceptinfect.ents.Di_evac_zone"] = __deceptinfect_ents_Di_evac_zone
+__deceptinfect_ents_Di_evac_zone.__name__ = "deceptinfect.ents.Di_evac_zone"
+__deceptinfect_ents_Di_evac_zone.prototype = _hx_a();
+__deceptinfect_ents_Di_evac_zone.prototype.Initialize = function(self) 
+  local this1 = _G.Vector(-250, -250, -250);
+  local this11 = _G.Vector(250, 250, 250);
+  self["self"]:SetCollisionBounds(this1, this11);
+  self["self"]:SetTrigger(true);
+  self["self"]:SetCollisionGroup(_G.COLLISION_GROUP_PLAYER);
+  self["self"]:UseTriggerBounds(true, 0);
+  local x = self["self"];
+  local this2 = x;
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this2);
+  self.id = this2.id;
+  local this3 = self.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_EvacZone.new(), this3);
+end
+__deceptinfect_ents_Di_evac_zone.prototype.setPoints = function(self,minmax) 
+  self["self"]:SetCollisionBoundsWS(minmax.mins, minmax.maxs);
+end
+__deceptinfect_ents_Di_evac_zone.prototype.StartTouch = function(self,ent) 
+  local _g;
+  local _g1 = ent.id;
+  if (_g1 == nil) then 
+    _g = __haxe_ds_Option.None;
+  else
+    local x = _g1;
+    _g = __haxe_ds_Option.Some(x);
+  end;
+  if (_g[1] == 0) then 
+    local ent_id = _g[2];
+    local tmp = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem);
+    local this1 = self.id;
+    local x1 = __deceptinfect_game_EvacZone;
+    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
+    local comp = comparray[this1];
+    local comp1 = comp:slice(2)[0];
+    if (comp1 == nil) then 
+      _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
+    end;
+    tmp:touched(ent_id, comp1);
+  end;
+end
+__deceptinfect_ents_Di_evac_zone.prototype.EndTouch = function(self,ent) 
+  local _g;
+  local _g1 = ent.id;
+  if (_g1 == nil) then 
+    _g = __haxe_ds_Option.None;
+  else
+    local x = _g1;
+    _g = __haxe_ds_Option.Some(x);
+  end;
+  if (_g[1] == 0) then 
+    local ent_id = _g[2];
+    local tmp = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem);
+    local this1 = self.id;
+    local x1 = __deceptinfect_game_EvacZone;
+    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
+    local comp = comparray[this1];
+    local comp1 = comp:slice(2)[0];
+    if (comp1 == nil) then 
+      _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
+    end;
+    tmp:leave(ent_id, comp1);
+  end;
+end
+
+__deceptinfect_ents_Di_evac_zone.prototype.__class__ =  __deceptinfect_ents_Di_evac_zone
+__deceptinfect_ents_Di_evac_zone.__super__ = __gmod_sent_ENT_BRUSH
+setmetatable(__deceptinfect_ents_Di_evac_zone.prototype,{__index=__gmod_sent_ENT_BRUSH.prototype})
+
+__deceptinfect_ents_Di_flare.new = function(curEnt) 
+  local self = _hx_new(__deceptinfect_ents_Di_flare.prototype)
+  __deceptinfect_ents_Di_flare.super(self,curEnt)
+  return self
+end
+__deceptinfect_ents_Di_flare.super = function(self,curEnt) 
+  self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
+  __gmod_sent_ENT_ANIM.super(self);
+  self["self"] = curEnt;
+end
+_hx_exports["di_flare"] = __deceptinfect_ents_Di_flare
+_hxClasses["deceptinfect.ents.Di_flare"] = __deceptinfect_ents_Di_flare
+__deceptinfect_ents_Di_flare.__name__ = "deceptinfect.ents.Di_flare"
+__deceptinfect_ents_Di_flare.prototype = _hx_a();
+__deceptinfect_ents_Di_flare.prototype.Initialize = function(self) 
+  self["self"]:SetModel("models/props_c17/chair02a.mdl");
+  self["self"]:PhysicsInit(_G.SOLID_VPHYSICS);
+  local physob = self["self"]:GetPhysicsObject();
+  if (_G.IsValid(physob)) then 
+    physob:Wake();
+  end;
+  local x = self["self"];
+  local this1 = x;
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
+  self.id = this1.id;
+  local this2 = self.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_FlareComponent.new(), this2);
+end
+__deceptinfect_ents_Di_flare.prototype.Touch = function(self,entity) 
+  local _g;
+  local _g1 = entity.id;
+  if (_g1 == nil) then 
+    _g = __haxe_ds_Option.None;
+  else
+    local x = _g1;
+    _g = __haxe_ds_Option.Some(x);
+  end;
+  if (_g[1] == 0) then 
+    local ent_id = _g[2];
+    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem):addFlare(self.id, ent_id);
+  end;
+end
+__deceptinfect_ents_Di_flare.prototype.Use = function(self,activator,caller,useType,value) 
+  if (self["self"]:IsPlayerHolding() or not activator:IsPlayer()) then 
+    do return end;
+  end;
+  local _activator = activator;
+  _activator:PickupObject(self["self"]);
+end
+
+__deceptinfect_ents_Di_flare.prototype.__class__ =  __deceptinfect_ents_Di_flare
+__deceptinfect_ents_Di_flare.__super__ = __gmod_sent_ENT_ANIM
+setmetatable(__deceptinfect_ents_Di_flare.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
+
 __deceptinfect_ents_Di_nest.new = function(curEnt) 
   local self = _hx_new(__deceptinfect_ents_Di_nest.prototype)
   __deceptinfect_ents_Di_nest.super(self,curEnt)
@@ -4749,6 +5123,66 @@ __deceptinfect_game_BatterySource.prototype.__class__ =  __deceptinfect_game_Bat
 __deceptinfect_game_BatterySource.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_game_BatterySource.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
+__deceptinfect_game_EvacZone.new = function() 
+  local self = _hx_new(__deceptinfect_game_EvacZone.prototype)
+  __deceptinfect_game_EvacZone.super(self)
+  return self
+end
+__deceptinfect_game_EvacZone.super = function(self) 
+  self.state = __deceptinfect_game_EvacState.NOT_ACTIVE;
+  self.leavetime = 40.0;
+  self.arrivetime = 30.0;
+  self.blocked = __haxe_ds_IntMap.new();
+  self.in_zone = __haxe_ds_IntMap.new();
+  self.touched = __haxe_ds_IntMap.new();
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.game.EvacZone"] = __deceptinfect_game_EvacZone
+__deceptinfect_game_EvacZone.__name__ = "deceptinfect.game.EvacZone"
+__deceptinfect_game_EvacZone.prototype = _hx_a();
+
+__deceptinfect_game_EvacZone.prototype.__class__ =  __deceptinfect_game_EvacZone
+__deceptinfect_game_EvacZone.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_game_EvacZone.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.game.EvacState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NOT_ACTIVE","ARRIVING","LEAVING"},3)}
+__deceptinfect_game_EvacState = _hxClasses["deceptinfect.game.EvacState"];
+__deceptinfect_game_EvacState.NOT_ACTIVE = _hx_tab_array({[0]="NOT_ACTIVE",0,__enum__ = __deceptinfect_game_EvacState},2)
+
+__deceptinfect_game_EvacState.ARRIVING = function(time) local _x = _hx_tab_array({[0]="ARRIVING",1,time,__enum__=__deceptinfect_game_EvacState}, 3); return _x; end 
+__deceptinfect_game_EvacState.LEAVING = function(time) local _x = _hx_tab_array({[0]="LEAVING",2,time,__enum__=__deceptinfect_game_EvacState}, 3); return _x; end 
+
+__deceptinfect_game_FlareComponent.new = function() 
+  local self = _hx_new(__deceptinfect_game_FlareComponent.prototype)
+  __deceptinfect_game_FlareComponent.super(self)
+  return self
+end
+__deceptinfect_game_FlareComponent.super = function(self) 
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.game.FlareComponent"] = __deceptinfect_game_FlareComponent
+__deceptinfect_game_FlareComponent.__name__ = "deceptinfect.game.FlareComponent"
+__deceptinfect_game_FlareComponent.prototype = _hx_a();
+
+__deceptinfect_game_FlareComponent.prototype.__class__ =  __deceptinfect_game_FlareComponent
+__deceptinfect_game_FlareComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_game_FlareComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
+__deceptinfect_game_InEvacZone.new = function() 
+  local self = _hx_new(__deceptinfect_game_InEvacZone.prototype)
+  __deceptinfect_game_InEvacZone.super(self)
+  return self
+end
+__deceptinfect_game_InEvacZone.super = function(self) 
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.game.InEvacZone"] = __deceptinfect_game_InEvacZone
+__deceptinfect_game_InEvacZone.__name__ = "deceptinfect.game.InEvacZone"
+__deceptinfect_game_InEvacZone.prototype = _hx_a();
+
+__deceptinfect_game_InEvacZone.prototype.__class__ =  __deceptinfect_game_InEvacZone
+__deceptinfect_game_InEvacZone.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_game_InEvacZone.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
 __deceptinfect_game_NestComponent.new = function() 
   local self = _hx_new(__deceptinfect_game_NestComponent.prototype)
   __deceptinfect_game_NestComponent.super(self)
@@ -4757,10 +5191,10 @@ end
 __deceptinfect_game_NestComponent.super = function(self) 
   self.rate_threshold_max = 75.0;
   self.rate_threshold_min = 10.0;
-  self.radius_end = 1200;
-  self.radius_start = 350;
+  self.radius_end = 1000;
+  self.radius_start = 500;
   self.rate_start = 5.0;
-  self.rate_end = 10.0;
+  self.rate_end = 7.0;
   self.health = 1000.0;
   self.nestState = __deceptinfect_game_NestState.INVISIBLE;
   __deceptinfect_ecswip_Component.super(self);
@@ -4814,19 +5248,19 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawnMinDistAway = function(self,cu
     local _sp = curSpawns[_g];
     _g = _g + 1;
     local sp = self.parent.spawns[_sp];
-    __haxe_Log.trace(Std.string(Std.string(Std.string("id : ") .. Std.string(_sp)) .. Std.string(" stuff : ")) .. Std.string(sp.distStore:toString()), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=52,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+    __haxe_Log.trace(Std.string(Std.string(Std.string("id : ") .. Std.string(_sp)) .. Std.string(" stuff : ")) .. Std.string(sp.distStore:toString()), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=71,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
     local _g1 = __haxe_iterators_MapKeyValueIterator.new(sp.distStore);
     while (_g1:hasNext()) do 
       local _g11 = _g1:next();
       local id = _g11.key;
       local dist = _g11.value;
-      __haxe_Log.trace(Std.string(Std.string(Std.string(Std.string(Std.string("my id : ") .. Std.string(_sp)) .. Std.string(" thier id : ")) .. Std.string(id)) .. Std.string(" boogie : ")) .. Std.string(Std.string(self.parent.spawns[id].claimed)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=55,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+      __haxe_Log.trace(Std.string(Std.string(Std.string(Std.string(Std.string("my id : ") .. Std.string(_sp)) .. Std.string(" thier id : ")) .. Std.string(id)) .. Std.string(" boogie : ")) .. Std.string(Std.string(self.parent.spawns[id].claimed)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=74,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
       if (self.parent.spawns[id].claimed == __deceptinfect_game_SpawnClaim.UNCLAIMED) then 
         local ret = total.h[id];
         if (ret == __haxe_ds_IntMap.tnull) then 
           ret = nil;
         end;
-        __haxe_Log.trace(ret, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=57,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+        __haxe_Log.trace(ret, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=76,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
         local v;
         local ret1 = total.h[id];
         if (ret1 == __haxe_ds_IntMap.tnull) then 
@@ -4854,7 +5288,7 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawnMinDistAway = function(self,cu
             ret3 = nil;
           end;
           max = ret3;
-          __haxe_Log.trace(Std.string("new max ") .. Std.string(max), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=66,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+          __haxe_Log.trace(Std.string("new max ") .. Std.string(max), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=85,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
         end;
         local ret4 = total.h[id];
         if (ret4 == __haxe_ds_IntMap.tnull) then 
@@ -4866,7 +5300,7 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawnMinDistAway = function(self,cu
             ret5 = nil;
           end;
           min = ret5;
-          __haxe_Log.trace(Std.string("new min ") .. Std.string(min), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=70,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+          __haxe_Log.trace(Std.string("new min ") .. Std.string(min), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=89,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
         end;
       end;
     end;
@@ -4883,15 +5317,15 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawnMinDistAway = function(self,cu
     end;
   end;
   if (luckydraw.length == 0) then 
-    __haxe_Log.trace("Not enough spawns far away enough to use algo.", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=85,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+    __haxe_Log.trace("Not enough spawns far away enough to use algo.", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=104,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
     local id2 = self:getRandomFarAwaySpawn();
-    __haxe_Log.trace(Std.string("id chosen ") .. Std.string(id2), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=87,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+    __haxe_Log.trace(Std.string("id chosen ") .. Std.string(id2), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=106,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
     do return self.parent.spawns[id2] end;
   else
     local index = _G.math.random(0, luckydraw.length - 1);
     local id3 = luckydraw[index];
-    __haxe_Log.trace(luckydraw, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=93,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
-    __haxe_Log.trace(Std.string(Std.string(Std.string("id chosen ") .. Std.string(id3)) .. Std.string(" index ")) .. Std.string(index), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=94,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+    __haxe_Log.trace(luckydraw, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=112,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+    __haxe_Log.trace(Std.string(Std.string(Std.string("id chosen ") .. Std.string(id3)) .. Std.string(" index ")) .. Std.string(index), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=113,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
     do return self.parent.spawns[id3] end;
   end;
 end
@@ -4903,7 +5337,7 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawns = function(self,noSpawns)
   while (_g < _g1) do 
     _g = _g + 1;
     local i = _g - 1;
-    __haxe_Log.trace(curspawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=105,className="deceptinfect.game.Spawn",methodName="getRandomSpawns"}));
+    __haxe_Log.trace(curspawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=124,className="deceptinfect.game.Spawn",methodName="getRandomSpawns"}));
     local newspawn = self:getRandomSpawnMinDistAway(curspawns);
     curspawns[i] = newspawn.id;
     rtn[i] = newspawn;
@@ -4914,12 +5348,25 @@ __deceptinfect_game_Spawn.prototype.spawn = function(self,ent)
   self.claimed = __deceptinfect_game_SpawnClaim.CLAIMED(ent);
   ent:SetPos(self.vec);
   ent:Spawn();
+  local _g;
+  local _g1 = ent.id;
+  if (_g1 == nil) then 
+    _g = __haxe_ds_Option.None;
+  else
+    local x = _g1;
+    _g = __haxe_ds_Option.Some(x);
+  end;
+  if (_g[1] == 0) then 
+    local id = _g[2];
+    __haxe_Log.trace(id, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=138,className="deceptinfect.game.Spawn",methodName="spawn"}));
+    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Spawned.new(self), id);
+  end;
 end
 __deceptinfect_game_Spawn.prototype.get = function(self,x) 
   do return self.parent.spawns[x] end
 end
 __deceptinfect_game_Spawn.prototype.calculateDist = function(self,other) 
-  local dist = self.vec:Distance(other.vec);
+  local dist = self.vec:DistToSqr(other.vec);
   local key = other.id;
   local _this = self.distStore;
   if (dist == nil) then 
@@ -4982,6 +5429,42 @@ end
 
 __deceptinfect_game_Spawn.prototype.__class__ =  __deceptinfect_game_Spawn
 
+__deceptinfect_game_BoundsSpawn.new = function(parent,vec,bounds) 
+  local self = _hx_new(__deceptinfect_game_BoundsSpawn.prototype)
+  __deceptinfect_game_BoundsSpawn.super(self,parent,vec,bounds)
+  return self
+end
+__deceptinfect_game_BoundsSpawn.super = function(self,parent,vec,bounds) 
+  __deceptinfect_game_Spawn.super(self,parent,vec);
+  self.bounds = bounds;
+end
+_hxClasses["deceptinfect.game.BoundsSpawn"] = __deceptinfect_game_BoundsSpawn
+__deceptinfect_game_BoundsSpawn.__name__ = "deceptinfect.game.BoundsSpawn"
+__deceptinfect_game_BoundsSpawn.prototype = _hx_a();
+__deceptinfect_game_BoundsSpawn.prototype.spawn = function(self,ent) 
+  self.claimed = __deceptinfect_game_SpawnClaim.CLAIMED(ent);
+  ent:SetPos(self.vec);
+  ent:Spawn();
+  local _g;
+  local _g1 = ent.id;
+  if (_g1 == nil) then 
+    _g = __haxe_ds_Option.None;
+  else
+    local x = _g1;
+    _g = __haxe_ds_Option.Some(x);
+  end;
+  if (_g[1] == 0) then 
+    local id = _g[2];
+    __haxe_Log.trace(id, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=201,className="deceptinfect.game.BoundsSpawn",methodName="spawn"}));
+    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Spawned.new(self), id);
+  end;
+  ent:SetCollisionBoundsWS(self.bounds.mins, self.bounds.maxs);
+end
+
+__deceptinfect_game_BoundsSpawn.prototype.__class__ =  __deceptinfect_game_BoundsSpawn
+__deceptinfect_game_BoundsSpawn.__super__ = __deceptinfect_game_Spawn
+setmetatable(__deceptinfect_game_BoundsSpawn.prototype,{__index=__deceptinfect_game_Spawn.prototype})
+
 __deceptinfect_game_SpawnPointTable.new = function() 
   local self = _hx_new(__deceptinfect_game_SpawnPointTable.prototype)
   __deceptinfect_game_SpawnPointTable.super(self)
@@ -5000,7 +5483,7 @@ __deceptinfect_game_SpawnPointTable.prototype.generateSpawns = function(self,poi
     local point = points[_g];
     _g = _g + 1;
     self.spawns:push(__deceptinfect_game_Spawn.new(self, point));
-    __haxe_Log.trace(self.spawns[0], _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=172,className="deceptinfect.game.SpawnPointTable",methodName="generateSpawns"}));
+    __haxe_Log.trace(self.spawns[0], _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=219,className="deceptinfect.game.SpawnPointTable",methodName="generateSpawns"}));
   end;
   local _g1 = 0;
   local _g2 = self.spawns;
@@ -5015,15 +5498,54 @@ __deceptinfect_game_SpawnPointTable.prototype.generateSpawns = function(self,poi
       spawn:calculateDist(spawn2);
     end;
   end;
-  __haxe_Log.trace(self.spawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=180,className="deceptinfect.game.SpawnPointTable",methodName="generateSpawns"}));
+  __haxe_Log.trace(self.spawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=227,className="deceptinfect.game.SpawnPointTable",methodName="generateSpawns"}));
+end
+__deceptinfect_game_SpawnPointTable.prototype.generateBoundSpawns = function(self,points) 
+  self.spawns = _hx_tab_array({}, 0);
+  local _g = 0;
+  while (_g < points.length) do 
+    local minmax = points[_g];
+    _g = _g + 1;
+    self.spawns:push(__deceptinfect_game_BoundsSpawn.new(self, __deceptinfect_util_MinMaxTools.getCenter(minmax), minmax));
+  end;
+  local _g1 = 0;
+  local _g2 = self.spawns;
+  while (_g1 < _g2.length) do 
+    local spawn = _g2[_g1];
+    _g1 = _g1 + 1;
+    local _g11 = 0;
+    local _g21 = self.spawns;
+    while (_g11 < _g21.length) do 
+      local spawn2 = _g21[_g11];
+      _g11 = _g11 + 1;
+      spawn:calculateDist(spawn2);
+    end;
+  end;
 end
 __deceptinfect_game_SpawnPointTable.prototype.getRandom = function(self) 
   local choose = _G.math.random(0, self.spawns.length - 1);
-  __haxe_Log.trace(Std.string("index chosen ") .. Std.string(choose), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=185,className="deceptinfect.game.SpawnPointTable",methodName="getRandom"}));
+  __haxe_Log.trace(Std.string("index chosen ") .. Std.string(choose), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=246,className="deceptinfect.game.SpawnPointTable",methodName="getRandom"}));
   do return self.spawns[choose] end
 end
 
 __deceptinfect_game_SpawnPointTable.prototype.__class__ =  __deceptinfect_game_SpawnPointTable
+
+__deceptinfect_game_Spawned.new = function(sp) 
+  local self = _hx_new(__deceptinfect_game_Spawned.prototype)
+  __deceptinfect_game_Spawned.super(self,sp)
+  return self
+end
+__deceptinfect_game_Spawned.super = function(self,sp) 
+  __deceptinfect_ecswip_Component.super(self);
+  self.spawn = sp;
+end
+_hxClasses["deceptinfect.game.Spawned"] = __deceptinfect_game_Spawned
+__deceptinfect_game_Spawned.__name__ = "deceptinfect.game.Spawned"
+__deceptinfect_game_Spawned.prototype = _hx_a();
+
+__deceptinfect_game_Spawned.prototype.__class__ =  __deceptinfect_game_Spawned
+__deceptinfect_game_Spawned.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_game_Spawned.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 _hxClasses["deceptinfect.game.Win"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WIN_HUMAN","WIN_INF","DRAW"},3)}
 __deceptinfect_game_Win = _hxClasses["deceptinfect.game.Win"];
 __deceptinfect_game_Win.WIN_HUMAN = _hx_tab_array({[0]="WIN_HUMAN",0,__enum__ = __deceptinfect_game_Win},2)
@@ -5263,6 +5785,18 @@ __deceptinfect_util_EntityExt.facingBehind = function(me,target)
   local vec2 = this11:Forward();
   local dot = _G.math.acos(vec1:Dot(vec2));
   do return dot < (_G.math.pi / 4) end;
+end
+
+__deceptinfect_util_MinMaxTools.new = {}
+_hxClasses["deceptinfect.util.MinMaxTools"] = __deceptinfect_util_MinMaxTools
+__deceptinfect_util_MinMaxTools.__name__ = "deceptinfect.util.MinMaxTools"
+__deceptinfect_util_MinMaxTools.getCenter = function(x) 
+  local this1 = x.maxs;
+  local otherVec = x.mins;
+  local this11 = this1 - otherVec;
+  local this12 = this11 / 2;
+  local otherVec1 = x.mins;
+  do return this12 + otherVec1 end;
 end
 
 __deceptinfect_util_PlayerExt.new = {}
@@ -6288,6 +6822,14 @@ __haxe_ds_IntMap.prototype.get = function(self,key)
     ret = nil;
   end;
   do return ret end
+end
+__haxe_ds_IntMap.prototype.remove = function(self,key) 
+  if (self.h[key] == nil) then 
+    do return false end;
+  else
+    self.h[key] = nil;
+    do return true end;
+  end;
 end
 __haxe_ds_IntMap.prototype.keys = function(self) 
   local _gthis = self;
@@ -8868,6 +9410,8 @@ local _hx_static_init = function()
   
   __deceptinfect_infection_InfectionSystem.averageInfection = 0.0;
   
+  __deceptinfect_infection_InfectionSystem.infectionReport = 0.0;
+  
   __deceptinfect_infection_RateSystem.nextAddRate = 0;
   
   __deceptinfect_infection_RateSystem.nextMultiRate = 0;
@@ -8889,7 +9433,7 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SystemManager.getSystems = __haxe_ds_ObjectMap.new();
   
-  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem}, 10);
+  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem}, 11);
   
   __deceptinfect_radiation_RadiationTypes.types = (function() 
     local _hx_3

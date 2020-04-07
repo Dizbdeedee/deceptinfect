@@ -49,6 +49,10 @@ class GameInstance {
         var nest = EntsLib.Create(Di_entities.di_nest);
         nestSpawn.spawn(nest);
 
+        var evacZone = EntsLib.Create(Di_entities.di_evac_zone);
+        var evacZoneSpawn:BoundsSpawn = cast getSystem(SpawnSystem).evac.getRandom();
+        evacZoneSpawn.spawn(evacZone);
+        // evacZone.toHaxe().setPoints(evacZoneSpawn.)
         #end
         // var spawns = chargerSpawn.getRandomSpawns(2);
 

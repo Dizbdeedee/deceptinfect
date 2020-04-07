@@ -1,4 +1,5 @@
 package deceptinfect;
+import gmod.EntityClass.HaxeGeneratedEntity;
 import deceptinfect.ecswip.Component;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.infection.InfectedComponent;
@@ -6,7 +7,7 @@ import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
 import gmod.types.Entity;
 @:forward
-abstract GEntCompat(Entity) from Entity to Entity {
+abstract GEntCompat(Entity) from Entity to Entity from HaxeGeneratedEntity<Dynamic,Entity> {
 
     public var id(get,never):DI_ID;
 

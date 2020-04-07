@@ -1,5 +1,6 @@
 package deceptinfect.infection;
 
+import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.infection.InfectionComponent;
@@ -43,6 +44,8 @@ class InfectionSystem extends System {
     
     #if server
     public static var averageInfection(default,null):Float = 0.0;
+
+    static var infectionReport = 0.0;
     
     override function run_server() {
         var numPlayers = 0;
@@ -62,7 +65,9 @@ class InfectionSystem extends System {
                         infection.rate;
                     }
                     rate += 1;
-                    
+                    if (GlobalLib.CurTime() > infectionReport) {
+                        trace('infection report id : $entity rate : $rate');
+                    }
                     
                     var vun = switch (entity.get(InfVunerability)) {
                     case Comp(c_v):
@@ -97,6 +102,9 @@ class InfectionSystem extends System {
                 
 
             default:
+            }
+            if (GlobalLib.CurTime() > infectionReport) {
+                infectionReport = GlobalLib.CurTime() + 5;
             }
         }
         if (numPlayers > 0) {
@@ -189,7 +197,7 @@ class InfectionSystem extends System {
             trace('INIT INFECTED PLAYER $p');
             net_inf.send({infection: 100},p);
             GameManager.initInfectedPlayer(ent);
-            
+            GeigerSystem.net_geiger.send({geiger : 0},p); 
         default:
         }
         #end

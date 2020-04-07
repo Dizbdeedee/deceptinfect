@@ -9,7 +9,7 @@ import deceptinfect.infection.InfectionComponent;
 class WinSystem extends System {
 	public var newWinner(default, null):Signal<Win>;
 
-	var winTrig(default, never):SignalTrigger<Win> = new SignalTrigger();
+	public var winTrig(default, never):SignalTrigger<Win> = new SignalTrigger();
 
 	#if server
 	override function init_server() {
