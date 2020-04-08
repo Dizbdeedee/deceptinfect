@@ -1,4 +1,5 @@
 package deceptinfect;
+import deceptinfect.ecswip.SystemManager;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.ecswip.DamagePenaltyHidden;
 import deceptinfect.abilities.FormComponent;
@@ -24,7 +25,7 @@ class GameManager {
     public static var state(default,#if server set #else null #end):GAME_STATE = WAIT;
     static var Game:GameInstance;
 
-    public static final net_gamestate = new gmod.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL}>();
+    public static final net_gamestate = new gmod.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL,time : Float}>();
     
     public static function shouldAllowRespawn() {
         return switch (state) {
@@ -34,15 +35,17 @@ class GameManager {
                 false;
         }
     }
-
+    #if server
     public static function sure():GameInstance {
         return switch (state) {
-            case SETTING_UP(x) | PLAYING(x) | ENDING(x):
+            case SETTING_UP(x,_) | PLAYING(x) | ENDING(x,_):
                 x;
             case WAIT:
                 throw "Game not avaliable at sure statement!";
         }
     }
+
+    #end
    
     public static function initPlayer(ply:GPlayerCompat) {
         var p = ply.id;
@@ -66,26 +69,67 @@ class GameManager {
     }
 
     #if server
-    public static function thinkWait() {
+    static function thinkWait() {
         if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS) {
-            initAllPlayers();
+            state = SETTING_UP(new GameInstance(),GlobalLib.CurTime() + GameValues.SETUP_TIME);
         }
     }
 
-    public static function startWait() {
-        for (player in PlayerManager.getPlayers()) {
-            player.KillSilent();
+    
+
+    @:allow(deceptinfect.DeceptInfect.Think)
+    static function think() {
+        switch state {
+        case WAIT:
+            thinkWait();
             
+        case SETTING_UP(x,time):
+            if (GlobalLib.CurTime() > time) {
+                state = PLAYING(x);
+            }
+
+        case PLAYING(x):
+            x.think();
+        case ENDING(x,time):
+            if (GlobalLib.CurTime() > time) {
+                state = WAIT;
+            }
+
         }
     }
 
     static function set_state(x:GAME_STATE):GAME_STATE {
+        var time = 0.0;
+        switch [state,x] {
+        case [ENDING(_),WAIT]:
+            SystemManager.make();
+            for (ent in entities) {
+                ComponentManager.removeEntity(ent);
+            }
+            for (p in PlayerLib.GetAll()) {
+                new GPlayerCompat(new PlayerComponent(p));
+            }
+        case [SETTING_UP(x,_),PLAYING(y)]:
+
+        case [WAIT,PLAYING(x)]:
+            initAllPlayers();
+            x.start();    
+        case [WAIT,SETTING_UP(x,t)]:
+            time = t;
+        case [PLAYING(x),ENDING(y,t)]:
+            time = t;
+
+
+        default:
+            throw "Unsupported state transition";
+        }
         for (p in PlayerLib.GetAll()) {
             net_gamestate.send({
-                state : x, 
+                state : x,
+                time : time
             },p);
         }
-        trace("set state...");
+        trace('set state... $x');
         return state = x;
     }
 
@@ -122,11 +166,14 @@ class GameManager {
 
 
     @:expose("startGame")
-    public static function startGame() {
-        initAllPlayers();
+    public static function startGame(?skipintro=false) {
         var game = new GameInstance();
-        state = PLAYING(game);
-        game.start();
+        if (skipintro) {
+            state = PLAYING(game);
+        } else {
+            state = SETTING_UP(game,GlobalLib.CurTime() + GameValues.SETUP_TIME);
+            
+        }
     }
 
     #end
@@ -136,26 +183,17 @@ class GameManager {
         net_gamestate.signal.handle(gameStateChanged);
     }
     
-    static function gameStateChanged(x:{state : Int}) {
+    static function gameStateChanged(x:{state : Net_GAME_STATE_VAL,time : Float}) {
         trace('game state changed $x');
-        switch (x.state) {
-            case WAIT:
-            case SETTING_UP:
-                state = SETTING_UP(new GameInstance());
-            case ENDING:
-                
-            case PLAYING:
-                state = PLAYING(new GameInstance());
-                // PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
-        }
+        state = x.state;
     }
     #end
 }
 enum GAME_STATE {
     WAIT;
-    SETTING_UP(x:GameInstance);
-    PLAYING(x:GameInstance);
-    ENDING(x:GameInstance);
+    SETTING_UP #if server ( x:GameInstance,time:Float ) #end;
+    PLAYING #if server (x:GameInstance) #end;
+    ENDING #if server (x:GameInstance,time:Float) #end;
 }
 
 enum abstract Net_GAME_STATE_VAL(Int) to Int from Int {
@@ -163,7 +201,7 @@ enum abstract Net_GAME_STATE_VAL(Int) to Int from Int {
     var SETTING_UP = 1;
     var PLAYING = 2;
     var ENDING = 3;
-
+    #if server
     @:from
     public static function fromGAME_STATE(x:GAME_STATE) {
         return switch (x) {
@@ -177,4 +215,23 @@ enum abstract Net_GAME_STATE_VAL(Int) to Int from Int {
                 ENDING;
         }
     }
+    #end
+
+    #if client
+    @:to
+    public function toGAME_STATE():GAME_STATE {
+        return switch (this) {
+        case WAIT:
+            GAME_STATE.WAIT;
+        case SETTING_UP:
+            GAME_STATE.SETTING_UP;
+        case PLAYING:
+            GAME_STATE.PLAYING;
+        case ENDING:
+            GAME_STATE.ENDING;
+        default:
+            throw "Unhandled net game state conversion";
+        }
+    }
+    #end
 }

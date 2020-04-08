@@ -10,4 +10,8 @@ class Misc {
     public static var roundWeapons:Array<String> = [
         "weapon_mor_ump"
     ];
+
+    public static var startingWeapons:Array<String> = [
+        ""
+    ];
 }

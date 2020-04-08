@@ -98,9 +98,9 @@ abstract DI_ID(Int) from Int to Int {
     }
 
     public inline function get_sure<T:Component>(x:Class<T>):T {
-        var comp = ComponentManager.getComponentForID(x,this).getParameters()[0];
-        if (comp == null) {throw 'Component does not exist at sure statement ${Type.getClassName(x)}';}
-        return comp; 
+        var retrieve_comp = ComponentManager.getComponentForID(x,this).getParameters()[0];
+        if (retrieve_comp == null) {throw 'Component does not exist at sure statement ${Type.getClassName(x)}';}
+        return retrieve_comp; 
     }
 
     public extern inline function add_component<T:Component>(x:T) {

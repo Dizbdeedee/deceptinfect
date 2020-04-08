@@ -36,14 +36,10 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     
     
     override function Think() {
+        
         SystemManager.runAllSystems();
-        switch (GameManager.state) {
-            case PLAYING(x):
-                x.think();
-                x.lastTick = GlobalLib.CurTime();
-            default:
-        }
         #if server
+        GameManager.think();
         checkPerformance();
         #end
     }

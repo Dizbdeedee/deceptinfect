@@ -12,6 +12,7 @@ package gmod;
 extern class NET_Server<Const,Data> {
 }
 
+@:keepSub
 interface I_NET<T:{}> {
 
     #if server

@@ -60,7 +60,7 @@ class GeigerSystem extends System {
         for (plyr in ComponentManager.entities) {
             switch [plyr.get(InfectionComponent),plyr.get(PlayerComponent)] {
             case [Comp(inf),Comp(_.player => player)]:
-                var fract = Math.min(((inf.rate - 1) / 3),1);
+                var fract = Math.min(((inf.rate - 1) / 2),1);
                 net_geiger.send({geiger: fract},player,true);
             default:
             }

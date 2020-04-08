@@ -17,7 +17,7 @@ class RadiationProducer extends Component {
     public var lifetime:RadLifetime;
     
     public static function createFromType(type:RadTypes):RadiationProducer {
-        
+        var radProduce = new RadiationProducer(RadiationTypes.types[type]);
         return new RadiationProducer(RadiationTypes.types[type]);
 
     }
@@ -30,6 +30,9 @@ class RadiationProducer extends Component {
         lifetime = options.lifetime;
         if (options.contaminate != null) {
             contamProducer = Some(new ContaminationProducer(options.contaminate));
+        }
+        if (options.type != null) {
+            type = options.type;
         }
     }
 
@@ -53,4 +56,6 @@ typedef RadiationProduceOptions = {
     var ?lifetime:RadLifetime;
     var ?attatch:Entity;
     var ?contaminate:ContaminationProducerOptions;
+
+    var ?type:RadTypes;
 }

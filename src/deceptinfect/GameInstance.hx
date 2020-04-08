@@ -57,6 +57,10 @@ class GameInstance {
         // var spawns = chargerSpawn.getRandomSpawns(2);
 
     }
+
+    public function setup() {
+        
+    }
     public function get_diffTime():Float {
         if (lastTick != null) {
             

@@ -9,8 +9,8 @@ class Hud {
     static var baseReso = [X => 1920,Y => 1080];
     static var statetext:Map<GAME_STATE,String> = [
         WAIT => "Waiting for players...",
-        PLAYING(null) => "Round in progress...",
-        ENDING(null) => "Round has ended.."
+        PLAYING => "Round in progress...",
+        ENDING => "Round has ended.."
     ];
     public static function CSS(axis:Axis,req:Int) {
         var map = cache.get(axis);
@@ -52,7 +52,7 @@ class Hud {
 
     static function infectionMeter() {
         var inf = switch [PlayerManager.getLocalPlayer().has_id(),GameManager.state] {
-            case [Some(_.get(InfectionComponent) => Comp(inf)),PLAYING(_)]:
+            case [Some(_.get(InfectionComponent) => Comp(inf)),PLAYING]:
                 inf;
             default:
                 return;

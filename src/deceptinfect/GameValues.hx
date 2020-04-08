@@ -118,4 +118,6 @@ class GameValues {
     public static var BATTERIES_REQUIRED = 4;
 
     public static var GRAB_TIME = 6;
+
+    public static var SETUP_TIME = 10;
 }

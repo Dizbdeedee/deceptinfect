@@ -1,5 +1,5 @@
 package deceptinfect.util;
-
+#if server
 class TimeKeep<T:Int> {
     var times:Map<T,Float> = [];
     var limitZero:Bool;
@@ -42,3 +42,4 @@ class TimeKeep<T:Int> {
         return times[key];
     }
 }
+#end

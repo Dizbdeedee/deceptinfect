@@ -155,7 +155,7 @@ class InfectionSystem extends System {
         }
     }
 
-
+    #if server
     static function getBaseInfection(inf:InfectionComponent):Float {
         return switch (inf.baseInfection) {
             case NOT_USING:
@@ -174,6 +174,8 @@ class InfectionSystem extends System {
                 // return Game.
         }
     }
+
+    #end
 
     //TODO needed?
     static function fixUpInfection(infection:InfectionComponent) {
