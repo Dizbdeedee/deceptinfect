@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.game.AliveComponent;
 import deceptinfect.statuses.Walkthroughable;
 import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceReturn;
 import gmod.gamemode.BuildOverrides;
@@ -34,7 +35,18 @@ import deceptinfect.ecswip.SignalStorage;
 
 class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     
-    
+    #if client
+    override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
+        // ragdoll.Remove();
+        ragdoll.SetNoDraw(true);
+        
+    }
+    #end
+    #if server
+    override function CreateEntityRagdoll(owner:Entity, ragdoll:Entity) {
+        ragdoll.Remove();
+    }
+    #end
     override function Think() {
         
         SystemManager.runAllSystems();
@@ -42,6 +54,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         GameManager.think();
         checkPerformance();
         #end
+        
     }
 
     var timestart = 0;
@@ -80,8 +93,8 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     
 
     
-    override function PlayerDeath(victim:Player, inflictor:Entity, attacker:Entity) {
-        
+    override function PlayerDeath(victim:GPlayerCompat, inflictor:Entity, attacker:Entity) {
+        victim.id.remove_component(AliveComponent);
         trace("Player ded!");
     }
     
@@ -147,7 +160,8 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     
     
     override function PlayerSwitchWeapon(player:gmod.types.Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
-        if (newWeapon.GetClass() == "weapon_infect") {
+        if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
+        if (oldWeapon.GetClass() == "weapon_infect") {
             return true;
         }
         return null;
@@ -162,7 +176,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     }
 
     override function PlayerDeathSound():Bool {
-        return false;
+        return true;
     }
 
     override function PlayerDeathThink(ply:GPlayerCompat):Bool {
@@ -210,12 +224,23 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     override function IsSpawnpointSuitable(ply:Player, spawnpoint:Entity, makeSuitable:Bool):Bool {
         var pos = spawnpoint.GetPos();
         var blockers = EntsLib.FindInBox(pos + new Vector(-16,-16,0), pos + new Vector(16,16,72));
+        var tracehit = UtilLib.TraceEntity({
+            start: pos,
+            endpos : pos + new Vector(1,1,1),
+
+        },ply);
+        if (tracehit.HitWorld) {
+            return false;
+        }
         for (ent in blockers) {
             if (ent.IsPlayer()) {
                 var blockPly:GPlayerCompat = cast ent;
                 blockPly.setWalkthroughable(true);
                 blockPly.id.add_component(new Walkthroughable());
                 //ply.setWalkthroughable(true);
+            } else {
+                // return false;
+                // return false;
             }
         }
         return true;

@@ -12,8 +12,8 @@ class EvacSystem extends System {
     var flaresSpawned = false;
     override function run_server() {
         for (ent in entities) {
-            switch ent.get(EvacZone) {
-            case Comp(c_evac):
+            switch [ent.get(EvacZone),GameManager.state] {
+            case [Comp(c_evac),PLAYING(_)]:
                 if (InfectionSystem.averageInfection > 80 && !flaresSpawned) {
                     var flareSpawn = getSystem(SpawnSystem).obj.getRandom();
                     flareSpawn.spawn(EntsLib.Create(Di_entities.di_flare));
@@ -23,7 +23,7 @@ class EvacSystem extends System {
                 }
                 switch (c_evac.state) {
                 case LEAVING(time):
-                    time.value -= GameManager.sure().diffTime;
+                    time.value -= GameManager.diffTime;
                     if (time.value < 0) {
                         trace(c_evac.state);
                         checkWin(c_evac);
@@ -38,7 +38,7 @@ class EvacSystem extends System {
                         }
                     }
                 case ARRIVING(time):
-                    time.value -= GameManager.sure().diffTime;
+                    time.value -= GameManager.diffTime;
                     if (time.value < 0) {
                         trace(c_evac.state);
                         c_evac.state = LEAVING(c_evac.leavetime);

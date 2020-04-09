@@ -71,8 +71,9 @@ class GameInstance {
     }
 
     public function think() {
-        baseInfection.value = calcBaseInfection();
         
+        baseInfection.value = calcBaseInfection();
+        // trace('baseInfection $baseInfection');
         // InfectionSystem.run();
     }
 
@@ -85,7 +86,7 @@ class GameInstance {
     }
 
     public function calcBaseInfection():Float {
-        var baseInf = (100 / totalGameTime) * diffTime;
+        var baseInf = (100 / totalGameTime) * GameManager.diffTime;
         //trace(baseInf);
         return baseInf;
     }

@@ -3051,7 +3051,7 @@ extern class Entity {
 		```
     **/
     
-    public function GetPhysicsObjectCount():Float;
+    public function GetPhysicsObjectCount():Int;
     
     
     /**

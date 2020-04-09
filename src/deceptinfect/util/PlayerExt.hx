@@ -46,6 +46,16 @@ class PlayerExt {
         var finalR = MathLib.NormalizeAngle(curangs.r + punchR);
         p.SetEyeAngles(new Angle(curY,finalR,0));
     }
+    #if server
+    public static function giveFullAmmo(p:Player) {
+        for (wep in p.GetWeapons()) {
+            var typ:Int = wep.GetPrimaryAmmoType();
+            var count = wep.GetMaxClip1() * 3;
+            p.GiveAmmo(count,typ);
+        }
+    }
+
+    #end
 
     
 }

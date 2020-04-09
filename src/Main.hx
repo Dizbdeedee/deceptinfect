@@ -34,36 +34,29 @@ import deceptinfect.TXT;
 class Main {
     public static function main() {
         new DeceptInfect();
-        
+        #if client
         for (ply in PlayerLib.GetAll()) {
             new GPlayerCompat(new PlayerComponent(ply));
         }
-        
+        #end
         SignalStorage.initEvents();
+        GameManager.init();
         #if client
         new ClientOverrides();
-        GameManager.init();
        
         
         #end
         trace("looool!!");
+        #if client
         SystemManager.initAllSystems();
+        #end
         #if server
-        cleanupEnts();  
+        GameManager.cleanup();  
         #end
         
         MathLib.randomseed(GlobalLib.RealTime());
     }
 
-    static function cleanupEnts() {
-        for (ent in EntsLib.GetAll()) {
-            switch (ent.GetClass()) {
-            case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
-                ent.Remove();
-            default:
-            }
-        }
-    }
 
 }
 

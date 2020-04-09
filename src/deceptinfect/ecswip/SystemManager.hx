@@ -5,6 +5,7 @@ import deceptinfect.game.NestSystem;
 import deceptinfect.statuses.Walkthroughable.WalkthroughSystem;
 import deceptinfect.game.WinSystem;
 import deceptinfect.game.BatterySystem;
+import deceptinfect.game.RagdollSystem;
 import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.game.SpawnSystem;
@@ -30,10 +31,11 @@ class SystemManager {
         SpawnSystem,
         WalkthroughSystem,
         NestSystem,
-        EvacSystem
+        EvacSystem,
+        RagdollSystem
     ];
 
-    public static function make() {
+    static function make() {
         getSystems.set(InfectionSystem,new InfectionSystem());
         getSystems.set(GeigerSystem,new GeigerSystem());
         getSystems.set(RadiationSystem,new RadiationSystem());
@@ -45,6 +47,7 @@ class SystemManager {
         getSystems.set(WalkthroughSystem, new WalkthroughSystem());
         getSystems.set(NestSystem,new NestSystem());
         getSystems.set(EvacSystem,new EvacSystem());
+        getSystems.set(RagdollSystem,new RagdollSystem());
         
     }
     public static function getSystem<T:System>(cls:Class<T>):T {

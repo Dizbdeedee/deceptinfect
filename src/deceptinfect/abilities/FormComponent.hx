@@ -8,6 +8,8 @@ class FormComponent extends Component {
     public var nextCooldown:Float = 5;
     public var form:CurrentForm = HUMAN;
     public var formMaxHealth:Float = 60.0;
+
+    public var formModel:String = Misc.infModel;
 }
 
 enum CurrentForm {

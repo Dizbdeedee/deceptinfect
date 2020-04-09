@@ -12,5 +12,7 @@ enum abstract Di_entities<T:Entity>(EntityClass<T>) to String to EntityClass<T> 
     var di_evac_zone:Di_entities<HaxeGeneratedEntity<Di_evac_zone,Entity>>;
 
     var di_flare:Di_entities<HaxeGeneratedEntity<Di_flare,Entity>>;
+
+    var di_ragdoll:Di_entities<HaxeGeneratedEntity<Di_ragdoll,Entity>>;
     
 }

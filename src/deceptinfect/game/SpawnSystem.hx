@@ -216,7 +216,7 @@ class SpawnPointTable {
         spawns = [];
         for (point in points) {
             spawns.push(new Spawn(this,point));
-            trace(spawns[0]);
+            // trace(spawns[0]);
         }
 
         for (spawn in spawns) {
@@ -224,7 +224,7 @@ class SpawnPointTable {
                 spawn.calculateDist(spawn2);
             }
         }
-        trace(spawns);
+        // trace(spawns);
     }
 
     public function generateBoundSpawns(points:Array<MinMax>) {

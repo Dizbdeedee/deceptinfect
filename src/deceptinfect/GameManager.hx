@@ -1,4 +1,8 @@
 package deceptinfect;
+import deceptinfect.util.Util;
+import deceptinfect.game.AliveComponent;
+import deceptinfect.ents.Di_entities;
+import deceptinfect.game.WinSystem;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.ecswip.DamagePenaltyHidden;
@@ -18,6 +22,7 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.GEntCompat;
 import deceptinfect.GameInstance;
+using deceptinfect.util.PlayerExt;
 
 class GameManager {
 
@@ -25,16 +30,34 @@ class GameManager {
     public static var state(default,#if server set #else null #end):GAME_STATE = WAIT;
     static var Game:GameInstance;
 
+    public static var diffTime(default,never):Null<Float> = null;
+
+    static var lastTick:Float = 0.0;
+
+    public static var stateChange:Signal<GAME_STATE>;
+
+    static var stateTrig:SignalTrigger<GAME_STATE> = new SignalTrigger();
     public static final net_gamestate = new gmod.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL,time : Float}>();
+    #if server
     
-    public static function shouldAllowRespawn() {
-        return switch (state) {
-            case WAIT:
+    public static function isPlaying() {
+        return switch(state) {
+            case PLAYING(_):
                 true;
             default:
                 false;
         }
     }
+    public static function shouldAllowRespawn() {
+        return switch (state) {
+            case WAIT | SETTING_UP(_,_):
+                true;
+            default:
+                false;
+        }
+    }
+
+    #end
     #if server
     public static function sure():GameInstance {
         return switch (state) {
@@ -66,11 +89,13 @@ class GameManager {
         p.add_component(grabaccept);
         p.add_component(radaccept);
         p.add_component(virpos);
+        p.add_component(new AliveComponent());
     }
 
     #if server
     static function thinkWait() {
-        if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS) {
+        var no = true;
+        if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS && !no) {
             state = SETTING_UP(new GameInstance(),GlobalLib.CurTime() + GameValues.SETUP_TIME);
         }
     }
@@ -90,35 +115,43 @@ class GameManager {
 
         case PLAYING(x):
             x.think();
+            
         case ENDING(x,time):
             if (GlobalLib.CurTime() > time) {
                 state = WAIT;
             }
 
         }
+        if (untyped diffTime == null) {
+            untyped diffTime = 0.0;
+        } else {
+            untyped diffTime = GlobalLib.CurTime() - lastTick;
+        }
+        lastTick = GlobalLib.CurTime();
     }
-
+    #if server
     static function set_state(x:GAME_STATE):GAME_STATE {
         var time = 0.0;
         switch [state,x] {
         case [ENDING(_),WAIT]:
-            SystemManager.make();
-            for (ent in entities) {
-                ComponentManager.removeEntity(ent);
-            }
-            for (p in PlayerLib.GetAll()) {
-                new GPlayerCompat(new PlayerComponent(p));
-            }
+            cleanup();
         case [SETTING_UP(x,_),PLAYING(y)]:
-
+            initAllPlayers();
+            y.start();
+            hookWin();
         case [WAIT,PLAYING(x)]:
             initAllPlayers();
-            x.start();    
+            x.start();
+            hookWin();
         case [WAIT,SETTING_UP(x,t)]:
             time = t;
         case [PLAYING(x),ENDING(y,t)]:
             time = t;
-
+        case [PLAYING(x),PLAYING(y)]:
+            cleanup();
+            initAllPlayers();
+            y.start();
+            hookWin();
 
         default:
             throw "Unsupported state transition";
@@ -130,7 +163,44 @@ class GameManager {
             },p);
         }
         trace('set state... $x');
+        stateTrig.trigger(x);
         return state = x;
+    }
+    #end
+
+    @:expose("cleanup")
+    public static function cleanup() {
+        SystemManager.initAllSystems();
+        for (ent in entities) {
+            ComponentManager.removeEntity(ent);
+        }
+        for (ent in EntsLib.GetAll()) {
+            switch (ent.GetClass()) {
+            case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
+                ent.Remove();
+            default:
+            }
+        }
+        for (p in PlayerLib.GetAll()) {
+            new GPlayerCompat(new PlayerComponent(p));
+            p.KillSilent();
+            p.Spawn();
+        }
+    }
+    static function hookWin() {
+        getSystem(WinSystem).newWinner.handle(newWin);
+    }
+
+    static function newWin(x:Win) {
+        switch (x) {
+        case WIN_HUMAN:
+            trace("Humans win");
+        case WIN_INF:
+            trace("Infected win");
+        case DRAW:
+            trace("Draw. Boring...");
+        }
+        state = ENDING(state.getParameters()[0],GlobalLib.CurTime() + 10);
     }
 
 
@@ -152,6 +222,8 @@ class GameManager {
         rad.state = DISABLED;
         x.add_component(rad);
     }
+
+    #if server
     public static function initAllPlayers() {
         var choose = MathLib.random(1,PlayerLib.GetCount());
         
@@ -160,11 +232,13 @@ class GameManager {
             if (ind == choose) {
                 getSystem(InfectionSystem).makeInfected(player.id);
             }
-            
+            player.StripWeapons();
+            player.Give(Misc.startingWeapons[0]);
+            player.giveFullAmmo();
         }
     }
 
-
+    #end
     @:expose("startGame")
     public static function startGame(?skipintro=false) {
         var game = new GameInstance();
@@ -176,7 +250,12 @@ class GameManager {
         }
     }
 
+    public static function init() {
+        stateChange = stateTrig.asSignal();
+    }
     #end
+
+
     #if client
     public static function init() {
 
@@ -186,6 +265,11 @@ class GameManager {
     static function gameStateChanged(x:{state : Net_GAME_STATE_VAL,time : Float}) {
         trace('game state changed $x');
         state = x.state;
+        switch (x.state) {
+            case PLAYING:
+                PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
+            default:
+        }
     }
     #end
 }

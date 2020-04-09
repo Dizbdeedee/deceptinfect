@@ -74,10 +74,16 @@ __deceptinfect__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
 __deceptinfect_GameInstance = _hx_e()
 __deceptinfect_PLAYING_STATE = _hx_e()
 __deceptinfect_GAME_STATE = _hx_e()
+__tink_core_SignalObject = _hx_e()
+__tink_core_SignalTrigger = _hx_e()
 __deceptinfect_GameManager = _hx_e()
 __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_ = _hx_e()
 __deceptinfect_GameValues = _hx_e()
+__haxe_IMap = _hx_e()
+__haxe_ds_StringMap = _hx_e()
 __deceptinfect_MapStorage = _hx_e()
+__deceptinfect_Misc = _hx_e()
+__haxe_ds_IntMap = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
 __gmod_gamemode_BuildGamemodeTXT = _hx_e()
 __deceptinfect_TXT = _hx_e()
@@ -92,10 +98,11 @@ __deceptinfect_ecswip_System = _hx_e()
 __deceptinfect_abilities_FormSystem = _hx_e()
 __deceptinfect_client_ClientOverrides = _hx_e()
 __deceptinfect_client_GeigerSystem = _hx_e()
+__haxe_ds_BalancedTree = _hx_e()
+__haxe_ds_EnumValueMap = _hx_e()
 __deceptinfect_client__Hud_Axis = _hx_e()
 __deceptinfect_client_Hud = _hx_e()
 __deceptinfect_client_PVS = _hx_e()
-__haxe_IMap = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
 __deceptinfect_ecswip_ComponentManager = _hx_e()
 __deceptinfect_ecswip__ComponentManager_DI_ID_Impl_ = _hx_e()
@@ -116,8 +123,6 @@ __deceptinfect_ecswip_HiddenHealthComponent = _hx_e()
 __deceptinfect_ecswip_HiddenHealthSystem = _hx_e()
 __deceptinfect_ecswip_PlayerComponent = _hx_e()
 __deceptinfect_ecswip_DeathTime = _hx_e()
-__tink_core_SignalObject = _hx_e()
-__tink_core_SignalTrigger = _hx_e()
 __deceptinfect_ecswip_SignalStorage = _hx_e()
 __deceptinfect_ecswip_Spectate = _hx_e()
 __deceptinfect_ecswip_Spec_Direction = _hx_e()
@@ -135,6 +140,7 @@ __deceptinfect_game_SpawnSystem = _hx_e()
 __deceptinfect_statuses_WalkthroughSystem = _hx_e()
 __deceptinfect_game_NestSystem = _hx_e()
 __deceptinfect_game_EvacSystem = _hx_e()
+__deceptinfect_game_RagdollSystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
@@ -145,6 +151,8 @@ __gmod_sent_ENT_BRUSH = _hx_e()
 __deceptinfect_ents_Di_evac_zone = _hx_e()
 __deceptinfect_ents_Di_flare = _hx_e()
 __deceptinfect_ents_Di_nest = _hx_e()
+__deceptinfect_ents_Di_ragdoll = _hx_e()
+__deceptinfect_game_AliveComponent = _hx_e()
 __deceptinfect_game_BatteryAccepter = _hx_e()
 __deceptinfect_game_AccepterStatus = _hx_e()
 __deceptinfect_game_BatterySource = _hx_e()
@@ -153,6 +161,8 @@ __deceptinfect_game_EvacState = _hx_e()
 __deceptinfect_game_FlareComponent = _hx_e()
 __deceptinfect_game_NestComponent = _hx_e()
 __deceptinfect_game_NestState = _hx_e()
+__deceptinfect_game_Ragdoll = _hx_e()
+__deceptinfect_game_RagdollReveal = _hx_e()
 __deceptinfect_game_SpawnClaim = _hx_e()
 __deceptinfect_game_Spawn = _hx_e()
 __deceptinfect_game_BoundsSpawn = _hx_e()
@@ -178,6 +188,7 @@ __deceptinfect_util_CooldownTools = _hx_e()
 __deceptinfect_util_EntityExt = _hx_e()
 __deceptinfect_util_MinMaxTools = _hx_e()
 __deceptinfect_util_PlayerExt = _hx_e()
+__deceptinfect_util_Util = _hx_e()
 __gmod__EntityClass_EntityClass_Impl_ = _hx_e()
 __gmod__EntityClass_HaxeGeneratedEntity_Impl_ = _hx_e()
 __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
@@ -195,13 +206,9 @@ __haxe_Log = _hx_e()
 __haxe_MainEvent = _hx_e()
 __haxe_MainLoop = _hx_e()
 __haxe_Timer = _hx_e()
-__haxe_ds_BalancedTree = _hx_e()
 __haxe_ds_TreeNode = _hx_e()
 __haxe_ds_Either = _hx_e()
-__haxe_ds_EnumValueMap = _hx_e()
-__haxe_ds_IntMap = _hx_e()
 __haxe_ds_Option = _hx_e()
-__haxe_ds_StringMap = _hx_e()
 __lua_Boot = _hx_e()
 __haxe_iterators_MapKeyValueIterator = _hx_e()
 __lua_UserData = _hx_e()
@@ -614,20 +621,11 @@ Main.main = function()
     x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this1);
   end;
   __deceptinfect_ecswip_SignalStorage.initEvents();
-  __deceptinfect_client_ClientOverrides.new();
   __deceptinfect_GameManager.init();
+  __deceptinfect_client_ClientOverrides.new();
   __haxe_Log.trace("looool!!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=49,className="Main",methodName="main"}));
   __deceptinfect_ecswip_SystemManager.initAllSystems();
   _G.math.randomseed(_G.RealTime());
-end
-Main.cleanupEnts = function() 
-  local ent = __gmod_PairTools.iterator(_G.ents.GetAll());
-  while (ent:hasNext()) do 
-    local ent1 = ent:next();
-    local _g = ent1:GetClass();
-    if (_g) == "di_battery" or (_g) == "di_charger" or (_g) == "di_evac_zone" or (_g) == "di_flare" or (_g) == "di_nest" then 
-      ent1:Remove();else end;
-  end;
 end
 
 Math.new = {}
@@ -1506,6 +1504,7 @@ end
 __deceptinfect_DeceptInfect.super = function(self) 
   self.underperforming = false;
   self.timestart = 0;
+  GM.CreateClientsideRagdoll = function(GM,...) return self:CreateClientsideRagdoll(...) end;
   GM.Think = function(GM,...) return self:Think(...) end;
   GM.OnEntityCreated = function(GM,...) return self:OnEntityCreated(...) end;
   GM.EntityRemoved = function(GM,...) return self:EntityRemoved(...) end;
@@ -1516,16 +1515,19 @@ end
 _hxClasses["deceptinfect.DeceptInfect"] = __deceptinfect_DeceptInfect
 __deceptinfect_DeceptInfect.__name__ = "deceptinfect.DeceptInfect"
 __deceptinfect_DeceptInfect.prototype = _hx_a();
+__deceptinfect_DeceptInfect.prototype.CreateClientsideRagdoll = function(self,entity,ragdoll) 
+  ragdoll:SetNoDraw(true);
+end
 __deceptinfect_DeceptInfect.prototype.Think = function(self) 
   __deceptinfect_ecswip_SystemManager.runAllSystems();
 end
 __deceptinfect_DeceptInfect.prototype.checkPerformance = function(self) 
   if ((_G.FrameTime() > 0.016666666666667) and not self.underperforming) then 
-    __haxe_Log.trace("Server underperforming! ", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=51,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
+    __haxe_Log.trace("Server underperforming! ", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=64,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
     self.underperforming = true;
   else
     if (self.underperforming) then 
-      __haxe_Log.trace("Server recovered", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=54,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
+      __haxe_Log.trace("Server recovered", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=67,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
       self.underperforming = false;
     end;
   end;
@@ -1727,14 +1729,14 @@ __deceptinfect_GameInstance.prototype.addPlayers = function(self)
   end;
 end
 __deceptinfect_GameInstance.prototype.calcBaseInfection = function(self) 
-  local baseInf = (100 / self.totalGameTime) * self:get_diffTime();
+  local baseInf = (100 / self.totalGameTime) * __deceptinfect_GameManager.diffTime;
   do return baseInf end
 end
 __deceptinfect_GameInstance.prototype.setTime = function(self) 
   local time = __deceptinfect_GameValues.GAME_TIMER;
   local variance = __deceptinfect_GameValues.GAME_TIMER_VARIANCE;
   self.totalGameTime = time + _G.math.random(-variance, variance);
-  __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=97,className="deceptinfect.GameInstance",methodName="setTime"}));
+  __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=98,className="deceptinfect.GameInstance",methodName="setTime"}));
 end
 
 __deceptinfect_GameInstance.prototype.__class__ =  __deceptinfect_GameInstance
@@ -1755,16 +1757,50 @@ __deceptinfect_GAME_STATE.PLAYING = _hx_tab_array({[0]="PLAYING",2,__enum__ = __
 __deceptinfect_GAME_STATE.ENDING = _hx_tab_array({[0]="ENDING",3,__enum__ = __deceptinfect_GAME_STATE},2)
 
 
+__tink_core_SignalObject.new = {}
+_hxClasses["tink.core.SignalObject"] = __tink_core_SignalObject
+__tink_core_SignalObject.__name__ = "tink.core.SignalObject"
+__tink_core_SignalObject.prototype = _hx_a();
+
+__tink_core_SignalObject.prototype.__class__ =  __tink_core_SignalObject
+
+__tink_core_SignalTrigger.new = function() 
+  local self = _hx_new(__tink_core_SignalTrigger.prototype)
+  __tink_core_SignalTrigger.super(self)
+  return self
+end
+__tink_core_SignalTrigger.super = function(self) 
+  self.handlers = __tink_core_CallbackList.new();
+end
+_hxClasses["tink.core.SignalTrigger"] = __tink_core_SignalTrigger
+__tink_core_SignalTrigger.__name__ = "tink.core.SignalTrigger"
+__tink_core_SignalTrigger.__interfaces__ = {__tink_core_SignalObject}
+__tink_core_SignalTrigger.prototype = _hx_a();
+__tink_core_SignalTrigger.prototype.trigger = function(self,event) 
+  self.handlers:invoke(event);
+end
+__tink_core_SignalTrigger.prototype.getLength = function(self) 
+  do return self.handlers.used end
+end
+__tink_core_SignalTrigger.prototype.handle = function(self,cb) 
+  local _this = self.handlers;
+  local node = __tink_core__Callback_ListCell.new(cb, _this);
+  _this.cells:push(node);
+  _this.used = _this.used + 1;
+  do return node end
+end
+__tink_core_SignalTrigger.prototype.clear = function(self) 
+  self.handlers:clear();
+end
+__tink_core_SignalTrigger.prototype.asSignal = function(self) 
+  do return self end
+end
+
+__tink_core_SignalTrigger.prototype.__class__ =  __tink_core_SignalTrigger
+
 __deceptinfect_GameManager.new = {}
 _hxClasses["deceptinfect.GameManager"] = __deceptinfect_GameManager
 __deceptinfect_GameManager.__name__ = "deceptinfect.GameManager"
-__deceptinfect_GameManager.shouldAllowRespawn = function() 
-  if (__deceptinfect_GameManager.state[1] == 0) then 
-    do return true end;
-  else
-    do return false end;
-  end;
-end
 __deceptinfect_GameManager.initPlayer = function(ply) 
   local p = ply.id;
   local infcomp = __deceptinfect_infection_InfectionComponent.new();
@@ -1781,13 +1817,18 @@ __deceptinfect_GameManager.initPlayer = function(ply)
   __deceptinfect_ecswip_ComponentManager.addComponent(grabaccept, p);
   __deceptinfect_ecswip_ComponentManager.addComponent(radaccept, p);
   __deceptinfect_ecswip_ComponentManager.addComponent(virpos, p);
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_AliveComponent.new(), p);
 end
 __deceptinfect_GameManager.init = function() 
   __deceptinfect_GameManager.net_gamestate.signal:handle(__deceptinfect_GameManager.gameStateChanged);
 end
 __deceptinfect_GameManager.gameStateChanged = function(x) 
-  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=187,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
+  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=266,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
   __deceptinfect_GameManager.state = __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.toGAME_STATE(x.state);
+  if (x.state == 2) then 
+    local this1 = __deceptinfect_PlayerManager.getLocalPlayerID();
+    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_infection_InfectionComponent.new(), this1);
+  end;
 end
 
 __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.new = {}
@@ -1811,9 +1852,154 @@ _hx_exports["GameValues"] = __deceptinfect_GameValues
 _hxClasses["deceptinfect.GameValues"] = __deceptinfect_GameValues
 __deceptinfect_GameValues.__name__ = "deceptinfect.GameValues"
 
+__haxe_IMap.new = {}
+_hxClasses["haxe.IMap"] = __haxe_IMap
+__haxe_IMap.__name__ = "haxe.IMap"
+__haxe_IMap.prototype = _hx_a();
+
+__haxe_IMap.prototype.__class__ =  __haxe_IMap
+
+__haxe_ds_StringMap.new = function() 
+  local self = _hx_new(__haxe_ds_StringMap.prototype)
+  __haxe_ds_StringMap.super(self)
+  return self
+end
+__haxe_ds_StringMap.super = function(self) 
+  self.h = ({});
+end
+_hxClasses["haxe.ds.StringMap"] = __haxe_ds_StringMap
+__haxe_ds_StringMap.__name__ = "haxe.ds.StringMap"
+__haxe_ds_StringMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_StringMap.prototype = _hx_a();
+__haxe_ds_StringMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_StringMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_StringMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_StringMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_StringMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_StringMap.prototype.iterator = function(self) 
+  local _gthis = self;
+  local it = self:keys();
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return it:hasNext() end;
+  end,next=function(self) 
+    do return _gthis.h[it:next()] end;
+  end}) end
+end
+
+__haxe_ds_StringMap.prototype.__class__ =  __haxe_ds_StringMap
+
 __deceptinfect_MapStorage.new = {}
 _hxClasses["deceptinfect.MapStorage"] = __deceptinfect_MapStorage
 __deceptinfect_MapStorage.__name__ = "deceptinfect.MapStorage"
+
+__deceptinfect_Misc.new = {}
+_hxClasses["deceptinfect.Misc"] = __deceptinfect_Misc
+__deceptinfect_Misc.__name__ = "deceptinfect.Misc"
+
+__haxe_ds_IntMap.new = function() 
+  local self = _hx_new(__haxe_ds_IntMap.prototype)
+  __haxe_ds_IntMap.super(self)
+  return self
+end
+__haxe_ds_IntMap.super = function(self) 
+  self.h = ({});
+end
+_hxClasses["haxe.ds.IntMap"] = __haxe_ds_IntMap
+__haxe_ds_IntMap.__name__ = "haxe.ds.IntMap"
+__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_IntMap.prototype = _hx_a();
+__haxe_ds_IntMap.prototype.set = function(self,key,value) 
+  if (value == nil) then 
+    self.h[key] = __haxe_ds_IntMap.tnull;
+  else
+    self.h[key] = value;
+  end;
+end
+__haxe_ds_IntMap.prototype.get = function(self,key) 
+  local ret = self.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
+__haxe_ds_IntMap.prototype.keys = function(self) 
+  local _gthis = self;
+  local next = _G.next;
+  local cur = next(self.h, nil);
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur;
+    cur = next(_gthis.h, cur);
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur ~= nil end;
+  end}) end
+end
+__haxe_ds_IntMap.prototype.iterator = function(self) 
+  local _gthis = self;
+  local it = self:keys();
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return it:hasNext() end;
+  end,next=function(self) 
+    do return _gthis.h[it:next()] end;
+  end}) end
+end
+__haxe_ds_IntMap.prototype.toString = function(self) 
+  local s_b = ({});
+  local s_length = 0;
+  local str = "{";
+  _G.table.insert(s_b, str);
+  s_length = s_length + #str;
+  local it = self:keys();
+  local i = it;
+  while (i:hasNext()) do 
+    local i1 = i:next();
+    local str1 = Std.string(i1);
+    _G.table.insert(s_b, str1);
+    s_length = s_length + #str1;
+    local str2 = " => ";
+    _G.table.insert(s_b, str2);
+    s_length = s_length + #str2;
+    local ret = self.h[i1];
+    if (ret == __haxe_ds_IntMap.tnull) then 
+      ret = nil;
+    end;
+    local str3 = Std.string(ret);
+    _G.table.insert(s_b, str3);
+    s_length = s_length + #str3;
+    if (it:hasNext()) then 
+      local str4 = ", ";
+      _G.table.insert(s_b, str4);
+      s_length = s_length + #str4;
+    end;
+  end;
+  local str5 = "}";
+  _G.table.insert(s_b, str5);
+  s_length = s_length + #str5;
+  do return _G.table.concat(s_b) end
+end
+
+__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 
 __deceptinfect_PlayerManager.new = {}
 _hxClasses["deceptinfect.PlayerManager"] = __deceptinfect_PlayerManager
@@ -2053,6 +2239,7 @@ __deceptinfect_abilities_FormComponent.new = function()
   return self
 end
 __deceptinfect_abilities_FormComponent.super = function(self) 
+  self.formModel = _hx_funcToField(__deceptinfect_Misc.infModel);
   self.formMaxHealth = 60.0;
   self.form = __deceptinfect_abilities_CurrentForm.HUMAN;
   self.nextCooldown = 5;
@@ -2214,6 +2401,226 @@ end
 __deceptinfect_client_GeigerSystem.prototype.__class__ =  __deceptinfect_client_GeigerSystem
 __deceptinfect_client_GeigerSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_client_GeigerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
+__haxe_ds_BalancedTree.new = function() 
+  local self = _hx_new(__haxe_ds_BalancedTree.prototype)
+  __haxe_ds_BalancedTree.super(self)
+  return self
+end
+__haxe_ds_BalancedTree.super = function(self) 
+end
+_hxClasses["haxe.ds.BalancedTree"] = __haxe_ds_BalancedTree
+__haxe_ds_BalancedTree.__name__ = "haxe.ds.BalancedTree"
+__haxe_ds_BalancedTree.__interfaces__ = {__haxe_IMap}
+__haxe_ds_BalancedTree.prototype = _hx_a();
+__haxe_ds_BalancedTree.prototype.set = function(self,key,value) 
+  self.root = self:setLoop(key, value, self.root);
+end
+__haxe_ds_BalancedTree.prototype.get = function(self,key) 
+  local node = self.root;
+  while (node ~= nil) do 
+    local c = self:compare(key, node.key);
+    if (c == 0) then 
+      do return node.value end;
+    end;
+    if (c < 0) then 
+      node = node.left;
+    else
+      node = node.right;
+    end;
+  end;
+  do return nil end
+end
+__haxe_ds_BalancedTree.prototype.iterator = function(self) 
+  local ret = _hx_tab_array({}, 0);
+  self:iteratorLoop(self.root, ret);
+  local _gthis = ret;
+  local cur_length = 0;
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return cur_length < _gthis.length end;
+  end,next=function(self) 
+    cur_length = cur_length + 1;
+    do return _gthis[cur_length - 1] end;
+  end}) end
+end
+__haxe_ds_BalancedTree.prototype.keys = function(self) 
+  local ret = _hx_tab_array({}, 0);
+  self:keysLoop(self.root, ret);
+  local _gthis = ret;
+  local cur_length = 0;
+  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
+    do return cur_length < _gthis.length end;
+  end,next=function(self) 
+    cur_length = cur_length + 1;
+    do return _gthis[cur_length - 1] end;
+  end}) end
+end
+__haxe_ds_BalancedTree.prototype.setLoop = function(self,k,v,node) 
+  if (node == nil) then 
+    do return __haxe_ds_TreeNode.new(nil, k, v, nil) end;
+  end;
+  local c = self:compare(k, node.key);
+  if (c == 0) then 
+    do return __haxe_ds_TreeNode.new(node.left, k, v, node.right, (function() 
+      local _hx_1
+      if (node == nil) then 
+      _hx_1 = 0; else 
+      _hx_1 = node._height; end
+      return _hx_1
+    end )()) end;
+  else
+    if (c < 0) then 
+      local nl = self:setLoop(k, v, node.left);
+      do return self:balance(nl, node.key, node.value, node.right) end;
+    else
+      local nr = self:setLoop(k, v, node.right);
+      do return self:balance(node.left, node.key, node.value, nr) end;
+    end;
+  end;
+end
+__haxe_ds_BalancedTree.prototype.iteratorLoop = function(self,node,acc) 
+  if (node ~= nil) then 
+    self:iteratorLoop(node.left, acc);
+    acc:push(node.value);
+    self:iteratorLoop(node.right, acc);
+  end;
+end
+__haxe_ds_BalancedTree.prototype.keysLoop = function(self,node,acc) 
+  if (node ~= nil) then 
+    self:keysLoop(node.left, acc);
+    acc:push(node.key);
+    self:keysLoop(node.right, acc);
+  end;
+end
+__haxe_ds_BalancedTree.prototype.balance = function(self,l,k,v,r) 
+  local hl = (function() 
+    local _hx_1
+    if (l == nil) then 
+    _hx_1 = 0; else 
+    _hx_1 = l._height; end
+    return _hx_1
+  end )();
+  local hr = (function() 
+    local _hx_2
+    if (r == nil) then 
+    _hx_2 = 0; else 
+    _hx_2 = r._height; end
+    return _hx_2
+  end )();
+  if (hl > (hr + 2)) then 
+    local _this = l.left;
+    local _this1 = l.right;
+    if ((function() 
+      local _hx_3
+      if (_this == nil) then 
+      _hx_3 = 0; else 
+      _hx_3 = _this._height; end
+      return _hx_3
+    end )() >= (function() 
+      local _hx_4
+      if (_this1 == nil) then 
+      _hx_4 = 0; else 
+      _hx_4 = _this1._height; end
+      return _hx_4
+    end )()) then 
+      do return __haxe_ds_TreeNode.new(l.left, l.key, l.value, __haxe_ds_TreeNode.new(l.right, k, v, r)) end;
+    else
+      do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l.left, l.key, l.value, l.right.left), l.right.key, l.right.value, __haxe_ds_TreeNode.new(l.right.right, k, v, r)) end;
+    end;
+  else
+    if (hr > (hl + 2)) then 
+      local _this2 = r.right;
+      local _this3 = r.left;
+      if ((function() 
+        local _hx_5
+        if (_this2 == nil) then 
+        _hx_5 = 0; else 
+        _hx_5 = _this2._height; end
+        return _hx_5
+      end )() > (function() 
+        local _hx_6
+        if (_this3 == nil) then 
+        _hx_6 = 0; else 
+        _hx_6 = _this3._height; end
+        return _hx_6
+      end )()) then 
+        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left), r.key, r.value, r.right) end;
+      else
+        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left.left), r.left.key, r.left.value, __haxe_ds_TreeNode.new(r.left.right, r.key, r.value, r.right)) end;
+      end;
+    else
+      do return __haxe_ds_TreeNode.new(l, k, v, r, (function() 
+        local _hx_7
+        if (hl > hr) then 
+        _hx_7 = hl; else 
+        _hx_7 = hr; end
+        return _hx_7
+      end )() + 1) end;
+    end;
+  end;
+end
+__haxe_ds_BalancedTree.prototype.compare = function(self,k1,k2) 
+  do return Reflect.compare(k1, k2) end
+end
+
+__haxe_ds_BalancedTree.prototype.__class__ =  __haxe_ds_BalancedTree
+
+__haxe_ds_EnumValueMap.new = function() 
+  local self = _hx_new(__haxe_ds_EnumValueMap.prototype)
+  __haxe_ds_EnumValueMap.super(self)
+  return self
+end
+__haxe_ds_EnumValueMap.super = function(self) 
+  __haxe_ds_BalancedTree.super(self);
+end
+_hxClasses["haxe.ds.EnumValueMap"] = __haxe_ds_EnumValueMap
+__haxe_ds_EnumValueMap.__name__ = "haxe.ds.EnumValueMap"
+__haxe_ds_EnumValueMap.__interfaces__ = {__haxe_IMap}
+__haxe_ds_EnumValueMap.prototype = _hx_a();
+__haxe_ds_EnumValueMap.prototype.compare = function(self,k1,k2) 
+  local d = k1[1] - k2[1];
+  if (d ~= 0) then 
+    do return d end;
+  end;
+  local p1 = k1:slice(2);
+  local p2 = k2:slice(2);
+  if ((p1.length == 0) and (p2.length == 0)) then 
+    do return 0 end;
+  end;
+  do return self:compareArgs(p1, p2) end
+end
+__haxe_ds_EnumValueMap.prototype.compareArgs = function(self,a1,a2) 
+  local ld = a1.length - a2.length;
+  if (ld ~= 0) then 
+    do return ld end;
+  end;
+  local _g = 0;
+  local _g1 = a1.length;
+  while (_g < _g1) do 
+    _g = _g + 1;
+    local i = _g - 1;
+    local d = self:compareArg(a1[i], a2[i]);
+    if (d ~= 0) then 
+      do return d end;
+    end;
+  end;
+  do return 0 end
+end
+__haxe_ds_EnumValueMap.prototype.compareArg = function(self,v1,v2) 
+  if (Reflect.isEnumValue(v1) and Reflect.isEnumValue(v2)) then 
+    do return self:compare(v1, v2) end;
+  else
+    if (__lua_Boot.__instanceof(v1, Array) and __lua_Boot.__instanceof(v2, Array)) then 
+      do return self:compareArgs(v1, v2) end;
+    else
+      do return Reflect.compare(v1, v2) end;
+    end;
+  end;
+end
+
+__haxe_ds_EnumValueMap.prototype.__class__ =  __haxe_ds_EnumValueMap
+__haxe_ds_EnumValueMap.__super__ = __haxe_ds_BalancedTree
+setmetatable(__haxe_ds_EnumValueMap.prototype,{__index=__haxe_ds_BalancedTree.prototype})
 _hxClasses["deceptinfect.client._Hud.Axis"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="X","Y"},2)}
 __deceptinfect_client__Hud_Axis = _hxClasses["deceptinfect.client._Hud.Axis"];
 __deceptinfect_client__Hud_Axis.X = _hx_tab_array({[0]="X",0,__enum__ = __deceptinfect_client__Hud_Axis},2)
@@ -2323,13 +2730,6 @@ end
 __deceptinfect_client_PVS.new = {}
 _hxClasses["deceptinfect.client.PVS"] = __deceptinfect_client_PVS
 __deceptinfect_client_PVS.__name__ = "deceptinfect.client.PVS"
-
-__haxe_IMap.new = {}
-_hxClasses["haxe.IMap"] = __haxe_IMap
-__haxe_IMap.__name__ = "haxe.IMap"
-__haxe_IMap.prototype = _hx_a();
-
-__haxe_IMap.prototype.__class__ =  __haxe_IMap
 
 __haxe_ds_ObjectMap.new = function() 
   local self = _hx_new(__haxe_ds_ObjectMap.prototype)
@@ -2822,47 +3222,6 @@ __deceptinfect_ecswip_DeathTime.ALIVE = _hx_tab_array({[0]="ALIVE",0,__enum__ = 
 
 __deceptinfect_ecswip_DeathTime.DEAD = function(reviveTime) local _x = _hx_tab_array({[0]="DEAD",1,reviveTime,__enum__=__deceptinfect_ecswip_DeathTime}, 3); return _x; end 
 
-__tink_core_SignalObject.new = {}
-_hxClasses["tink.core.SignalObject"] = __tink_core_SignalObject
-__tink_core_SignalObject.__name__ = "tink.core.SignalObject"
-__tink_core_SignalObject.prototype = _hx_a();
-
-__tink_core_SignalObject.prototype.__class__ =  __tink_core_SignalObject
-
-__tink_core_SignalTrigger.new = function() 
-  local self = _hx_new(__tink_core_SignalTrigger.prototype)
-  __tink_core_SignalTrigger.super(self)
-  return self
-end
-__tink_core_SignalTrigger.super = function(self) 
-  self.handlers = __tink_core_CallbackList.new();
-end
-_hxClasses["tink.core.SignalTrigger"] = __tink_core_SignalTrigger
-__tink_core_SignalTrigger.__name__ = "tink.core.SignalTrigger"
-__tink_core_SignalTrigger.__interfaces__ = {__tink_core_SignalObject}
-__tink_core_SignalTrigger.prototype = _hx_a();
-__tink_core_SignalTrigger.prototype.trigger = function(self,event) 
-  self.handlers:invoke(event);
-end
-__tink_core_SignalTrigger.prototype.getLength = function(self) 
-  do return self.handlers.used end
-end
-__tink_core_SignalTrigger.prototype.handle = function(self,cb) 
-  local _this = self.handlers;
-  local node = __tink_core__Callback_ListCell.new(cb, _this);
-  _this.cells:push(node);
-  _this.used = _this.used + 1;
-  do return node end
-end
-__tink_core_SignalTrigger.prototype.clear = function(self) 
-  self.handlers:clear();
-end
-__tink_core_SignalTrigger.prototype.asSignal = function(self) 
-  do return self end
-end
-
-__tink_core_SignalTrigger.prototype.__class__ =  __tink_core_SignalTrigger
-
 __deceptinfect_ecswip_SignalStorage.new = {}
 _hxClasses["deceptinfect.ecswip.SignalStorage"] = __deceptinfect_ecswip_SignalStorage
 __deceptinfect_ecswip_SignalStorage.__name__ = "deceptinfect.ecswip.SignalStorage"
@@ -2960,9 +3319,9 @@ __deceptinfect_infection_InfectionSystem.prototype.recvInfection = function(self
     local c_inf = __deceptinfect_infection_InfectionComponent.new();
     __deceptinfect_ecswip_ComponentManager.addComponent(c_inf, __deceptinfect_PlayerManager.getLocalPlayerID());
     local v = data.infection;
-    local this2 = ({length = 1});
-    local this3 = this2;
-    local ret = this3;
+    local this11 = ({length = 1});
+    local this2 = this11;
+    local ret = this2;
     ret[0] = v;
     c_inf.infection = __deceptinfect_infection_INF_STATE.NOT_INFECTED(ret);
   end;
@@ -3289,23 +3648,23 @@ __deceptinfect_game_SpawnSystem.prototype.generateSpawns = function(self)
     ret = nil;
   end;
   self.obj:generateSpawns(ret.objectives);
-  local this2 = __deceptinfect_MapStorage.spawns;
+  local this11 = __deceptinfect_MapStorage.spawns;
   local key1 = _G.game.GetMap();
-  local ret1 = this2.h[key1];
+  local ret1 = this11.h[key1];
   if (ret1 == __haxe_ds_StringMap.tnull) then 
     ret1 = nil;
   end;
   self.item:generateSpawns(ret1.items);
-  local this3 = __deceptinfect_MapStorage.spawns;
+  local this12 = __deceptinfect_MapStorage.spawns;
   local key2 = _G.game.GetMap();
-  local ret2 = this3.h[key2];
+  local ret2 = this12.h[key2];
   if (ret2 == __haxe_ds_StringMap.tnull) then 
     ret2 = nil;
   end;
   self.nest:generateSpawns(ret2.nests);
-  local this4 = __deceptinfect_MapStorage.spawns;
+  local this13 = __deceptinfect_MapStorage.spawns;
   local key3 = _G.game.GetMap();
-  local ret3 = this4.h[key3];
+  local ret3 = this13.h[key3];
   if (ret3 == __haxe_ds_StringMap.tnull) then 
     ret3 = nil;
   end;
@@ -3363,6 +3722,22 @@ __deceptinfect_game_EvacSystem.prototype = _hx_a();
 __deceptinfect_game_EvacSystem.prototype.__class__ =  __deceptinfect_game_EvacSystem
 __deceptinfect_game_EvacSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_game_EvacSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
+__deceptinfect_game_RagdollSystem.new = function() 
+  local self = _hx_new(__deceptinfect_game_RagdollSystem.prototype)
+  __deceptinfect_game_RagdollSystem.super(self)
+  return self
+end
+__deceptinfect_game_RagdollSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.game.RagdollSystem"] = __deceptinfect_game_RagdollSystem
+__deceptinfect_game_RagdollSystem.__name__ = "deceptinfect.game.RagdollSystem"
+__deceptinfect_game_RagdollSystem.prototype = _hx_a();
+
+__deceptinfect_game_RagdollSystem.prototype.__class__ =  __deceptinfect_game_RagdollSystem
+__deceptinfect_game_RagdollSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_game_RagdollSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
 __deceptinfect_ecswip_SystemManager.new = {}
 _hxClasses["deceptinfect.ecswip.SystemManager"] = __deceptinfect_ecswip_SystemManager
@@ -3423,6 +3798,11 @@ __deceptinfect_ecswip_SystemManager.make = function()
   local value10 = __deceptinfect_game_EvacSystem.new();
   _this10.h[key10] = value10;
   _this10.k[key10] = true;
+  local _this11 = __deceptinfect_ecswip_SystemManager.getSystems;
+  local key11 = __deceptinfect_game_RagdollSystem;
+  local value11 = __deceptinfect_game_RagdollSystem.new();
+  _this11.h[key11] = value11;
+  _this11.k[key11] = true;
 end
 __deceptinfect_ecswip_SystemManager.getSystem = function(cls) 
   do return __deceptinfect_ecswip_SystemManager.getSystems.h[cls] end;
@@ -3661,6 +4041,50 @@ __deceptinfect_ents_Di_nest.prototype.__class__ =  __deceptinfect_ents_Di_nest
 __deceptinfect_ents_Di_nest.__super__ = __gmod_sent_ENT_ANIM
 setmetatable(__deceptinfect_ents_Di_nest.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
 
+__deceptinfect_ents_Di_ragdoll.new = function(curEnt) 
+  local self = _hx_new(__deceptinfect_ents_Di_ragdoll.prototype)
+  __deceptinfect_ents_Di_ragdoll.super(self,curEnt)
+  return self
+end
+__deceptinfect_ents_Di_ragdoll.super = function(self,curEnt) 
+  self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
+  __gmod_sent_ENT_ANIM.super(self);
+  self["self"] = curEnt;
+end
+_hx_exports["di_ragdoll"] = __deceptinfect_ents_Di_ragdoll
+_hxClasses["deceptinfect.ents.Di_ragdoll"] = __deceptinfect_ents_Di_ragdoll
+__deceptinfect_ents_Di_ragdoll.__name__ = "deceptinfect.ents.Di_ragdoll"
+__deceptinfect_ents_Di_ragdoll.prototype = _hx_a();
+__deceptinfect_ents_Di_ragdoll.prototype.Initialize = function(self) 
+  self["self"]:SetModel(self.owner:GetModel());
+  local x = self["self"];
+  local this1 = x;
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
+  self.id = this1.id;
+  local this2 = self.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Ragdoll.new(), this2);
+end
+
+__deceptinfect_ents_Di_ragdoll.prototype.__class__ =  __deceptinfect_ents_Di_ragdoll
+__deceptinfect_ents_Di_ragdoll.__super__ = __gmod_sent_ENT_ANIM
+setmetatable(__deceptinfect_ents_Di_ragdoll.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
+
+__deceptinfect_game_AliveComponent.new = function() 
+  local self = _hx_new(__deceptinfect_game_AliveComponent.prototype)
+  __deceptinfect_game_AliveComponent.super(self)
+  return self
+end
+__deceptinfect_game_AliveComponent.super = function(self) 
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.game.AliveComponent"] = __deceptinfect_game_AliveComponent
+__deceptinfect_game_AliveComponent.__name__ = "deceptinfect.game.AliveComponent"
+__deceptinfect_game_AliveComponent.prototype = _hx_a();
+
+__deceptinfect_game_AliveComponent.prototype.__class__ =  __deceptinfect_game_AliveComponent
+__deceptinfect_game_AliveComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_game_AliveComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
 __deceptinfect_game_BatteryAccepter.new = function() 
   local self = _hx_new(__deceptinfect_game_BatteryAccepter.prototype)
   __deceptinfect_game_BatteryAccepter.super(self)
@@ -3779,6 +4203,30 @@ __deceptinfect_game_NestState.INVISIBLE = _hx_tab_array({[0]="INVISIBLE",0,__enu
 __deceptinfect_game_NestState.VISIBLE = _hx_tab_array({[0]="VISIBLE",1,__enum__ = __deceptinfect_game_NestState},2)
 
 __deceptinfect_game_NestState.DEAD = _hx_tab_array({[0]="DEAD",2,__enum__ = __deceptinfect_game_NestState},2)
+
+
+__deceptinfect_game_Ragdoll.new = function() 
+  local self = _hx_new(__deceptinfect_game_Ragdoll.prototype)
+  __deceptinfect_game_Ragdoll.super(self)
+  return self
+end
+__deceptinfect_game_Ragdoll.super = function(self) 
+  self.reveal = __deceptinfect_game_RagdollReveal.NO_REVEAL;
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.game.Ragdoll"] = __deceptinfect_game_Ragdoll
+__deceptinfect_game_Ragdoll.__name__ = "deceptinfect.game.Ragdoll"
+__deceptinfect_game_Ragdoll.prototype = _hx_a();
+
+__deceptinfect_game_Ragdoll.prototype.__class__ =  __deceptinfect_game_Ragdoll
+__deceptinfect_game_Ragdoll.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_game_Ragdoll.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.game.RagdollReveal"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WAIT","REVEAL","NO_REVEAL"},3)}
+__deceptinfect_game_RagdollReveal = _hxClasses["deceptinfect.game.RagdollReveal"];
+__deceptinfect_game_RagdollReveal.WAIT = function(time) local _x = _hx_tab_array({[0]="WAIT",0,time,__enum__=__deceptinfect_game_RagdollReveal}, 3); return _x; end 
+__deceptinfect_game_RagdollReveal.REVEAL = _hx_tab_array({[0]="REVEAL",1,__enum__ = __deceptinfect_game_RagdollReveal},2)
+
+__deceptinfect_game_RagdollReveal.NO_REVEAL = _hx_tab_array({[0]="NO_REVEAL",2,__enum__ = __deceptinfect_game_RagdollReveal},2)
 
 _hxClasses["deceptinfect.game.SpawnClaim"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="UNCLAIMED","CLAIMED"},2)}
 __deceptinfect_game_SpawnClaim = _hxClasses["deceptinfect.game.SpawnClaim"];
@@ -4049,7 +4497,6 @@ __deceptinfect_game_SpawnPointTable.prototype.generateSpawns = function(self,poi
     local point = points[_g];
     _g = _g + 1;
     self.spawns:push(__deceptinfect_game_Spawn.new(self, point));
-    __haxe_Log.trace(self.spawns[0], _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=219,className="deceptinfect.game.SpawnPointTable",methodName="generateSpawns"}));
   end;
   local _g1 = 0;
   local _g2 = self.spawns;
@@ -4064,7 +4511,6 @@ __deceptinfect_game_SpawnPointTable.prototype.generateSpawns = function(self,poi
       spawn:calculateDist(spawn2);
     end;
   end;
-  __haxe_Log.trace(self.spawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=227,className="deceptinfect.game.SpawnPointTable",methodName="generateSpawns"}));
 end
 __deceptinfect_game_SpawnPointTable.prototype.generateBoundSpawns = function(self,points) 
   self.spawns = _hx_tab_array({}, 0);
@@ -4346,8 +4792,8 @@ __deceptinfect_util_EntityExt.__name__ = "deceptinfect.util.EntityExt"
 __deceptinfect_util_EntityExt.facingBehind = function(me,target) 
   local this1 = _G.Angle(0, me:EyeAngles().y, 0);
   local vec1 = this1:Forward();
-  local this2 = _G.Angle(0, target:EyeAngles().y, 0);
-  local vec2 = this2:Forward();
+  local this11 = _G.Angle(0, target:EyeAngles().y, 0);
+  local vec2 = this11:Forward();
   local dot = _G.math.acos(vec1:Dot(vec2));
   do return dot < (_G.math.pi / 4) end;
 end
@@ -4358,10 +4804,10 @@ __deceptinfect_util_MinMaxTools.__name__ = "deceptinfect.util.MinMaxTools"
 __deceptinfect_util_MinMaxTools.getCenter = function(x) 
   local this1 = x.maxs;
   local otherVec = x.mins;
-  local this2 = this1 - otherVec;
-  local this3 = this2 / 2;
+  local this11 = this1 - otherVec;
+  local this12 = this11 / 2;
   local otherVec1 = x.mins;
-  do return this3 + otherVec1 end;
+  do return this12 + otherVec1 end;
 end
 
 __deceptinfect_util_PlayerExt.new = {}
@@ -4410,6 +4856,40 @@ __deceptinfect_util_PlayerExt.disorientate = function(p)
   local finalR = _G.math.NormalizeAngle(curangs.r + punchR);
   local this1 = _G.Angle(curY, finalR, 0);
   p:SetEyeAngles(this1);
+end
+
+__deceptinfect_util_Util.new = {}
+_hxClasses["deceptinfect.util.Util"] = __deceptinfect_util_Util
+__deceptinfect_util_Util.__name__ = "deceptinfect.util.Util"
+__deceptinfect_util_Util.printTimer = function(string,time,run) 
+  if (__deceptinfect_util_Util.mappy.h[string] ~= nil) then 
+    local ret = __deceptinfect_util_Util.mappy.h[string];
+    if (ret == __haxe_ds_StringMap.tnull) then 
+      ret = nil;
+    end;
+    local nextTime = ret;
+    if (_G.CurTime() > nextTime) then 
+      run();
+      local this1 = __deceptinfect_util_Util.mappy;
+      local value = _G.CurTime() + time;
+      local _this = this1;
+      if (value == nil) then 
+        _this.h[string] = __haxe_ds_StringMap.tnull;
+      else
+        _this.h[string] = value;
+      end;
+    end;
+  else
+    run();
+    local this11 = __deceptinfect_util_Util.mappy;
+    local value1 = _G.CurTime() + time;
+    local _this1 = this11;
+    if (value1 == nil) then 
+      _this1.h[string] = __haxe_ds_StringMap.tnull;
+    else
+      _this1.h[string] = value1;
+    end;
+  end;
 end
 
 __gmod__EntityClass_EntityClass_Impl_.new = {}
@@ -5006,169 +5486,6 @@ end
 
 __haxe_Timer.prototype.__class__ =  __haxe_Timer
 
-__haxe_ds_BalancedTree.new = function() 
-  local self = _hx_new(__haxe_ds_BalancedTree.prototype)
-  __haxe_ds_BalancedTree.super(self)
-  return self
-end
-__haxe_ds_BalancedTree.super = function(self) 
-end
-_hxClasses["haxe.ds.BalancedTree"] = __haxe_ds_BalancedTree
-__haxe_ds_BalancedTree.__name__ = "haxe.ds.BalancedTree"
-__haxe_ds_BalancedTree.__interfaces__ = {__haxe_IMap}
-__haxe_ds_BalancedTree.prototype = _hx_a();
-__haxe_ds_BalancedTree.prototype.set = function(self,key,value) 
-  self.root = self:setLoop(key, value, self.root);
-end
-__haxe_ds_BalancedTree.prototype.get = function(self,key) 
-  local node = self.root;
-  while (node ~= nil) do 
-    local c = self:compare(key, node.key);
-    if (c == 0) then 
-      do return node.value end;
-    end;
-    if (c < 0) then 
-      node = node.left;
-    else
-      node = node.right;
-    end;
-  end;
-  do return nil end
-end
-__haxe_ds_BalancedTree.prototype.iterator = function(self) 
-  local ret = _hx_tab_array({}, 0);
-  self:iteratorLoop(self.root, ret);
-  local _gthis = ret;
-  local cur_length = 0;
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return cur_length < _gthis.length end;
-  end,next=function(self) 
-    cur_length = cur_length + 1;
-    do return _gthis[cur_length - 1] end;
-  end}) end
-end
-__haxe_ds_BalancedTree.prototype.keys = function(self) 
-  local ret = _hx_tab_array({}, 0);
-  self:keysLoop(self.root, ret);
-  local _gthis = ret;
-  local cur_length = 0;
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return cur_length < _gthis.length end;
-  end,next=function(self) 
-    cur_length = cur_length + 1;
-    do return _gthis[cur_length - 1] end;
-  end}) end
-end
-__haxe_ds_BalancedTree.prototype.setLoop = function(self,k,v,node) 
-  if (node == nil) then 
-    do return __haxe_ds_TreeNode.new(nil, k, v, nil) end;
-  end;
-  local c = self:compare(k, node.key);
-  if (c == 0) then 
-    do return __haxe_ds_TreeNode.new(node.left, k, v, node.right, (function() 
-      local _hx_1
-      if (node == nil) then 
-      _hx_1 = 0; else 
-      _hx_1 = node._height; end
-      return _hx_1
-    end )()) end;
-  else
-    if (c < 0) then 
-      local nl = self:setLoop(k, v, node.left);
-      do return self:balance(nl, node.key, node.value, node.right) end;
-    else
-      local nr = self:setLoop(k, v, node.right);
-      do return self:balance(node.left, node.key, node.value, nr) end;
-    end;
-  end;
-end
-__haxe_ds_BalancedTree.prototype.iteratorLoop = function(self,node,acc) 
-  if (node ~= nil) then 
-    self:iteratorLoop(node.left, acc);
-    acc:push(node.value);
-    self:iteratorLoop(node.right, acc);
-  end;
-end
-__haxe_ds_BalancedTree.prototype.keysLoop = function(self,node,acc) 
-  if (node ~= nil) then 
-    self:keysLoop(node.left, acc);
-    acc:push(node.key);
-    self:keysLoop(node.right, acc);
-  end;
-end
-__haxe_ds_BalancedTree.prototype.balance = function(self,l,k,v,r) 
-  local hl = (function() 
-    local _hx_1
-    if (l == nil) then 
-    _hx_1 = 0; else 
-    _hx_1 = l._height; end
-    return _hx_1
-  end )();
-  local hr = (function() 
-    local _hx_2
-    if (r == nil) then 
-    _hx_2 = 0; else 
-    _hx_2 = r._height; end
-    return _hx_2
-  end )();
-  if (hl > (hr + 2)) then 
-    local _this = l.left;
-    local _this1 = l.right;
-    if ((function() 
-      local _hx_3
-      if (_this == nil) then 
-      _hx_3 = 0; else 
-      _hx_3 = _this._height; end
-      return _hx_3
-    end )() >= (function() 
-      local _hx_4
-      if (_this1 == nil) then 
-      _hx_4 = 0; else 
-      _hx_4 = _this1._height; end
-      return _hx_4
-    end )()) then 
-      do return __haxe_ds_TreeNode.new(l.left, l.key, l.value, __haxe_ds_TreeNode.new(l.right, k, v, r)) end;
-    else
-      do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l.left, l.key, l.value, l.right.left), l.right.key, l.right.value, __haxe_ds_TreeNode.new(l.right.right, k, v, r)) end;
-    end;
-  else
-    if (hr > (hl + 2)) then 
-      local _this2 = r.right;
-      local _this3 = r.left;
-      if ((function() 
-        local _hx_5
-        if (_this2 == nil) then 
-        _hx_5 = 0; else 
-        _hx_5 = _this2._height; end
-        return _hx_5
-      end )() > (function() 
-        local _hx_6
-        if (_this3 == nil) then 
-        _hx_6 = 0; else 
-        _hx_6 = _this3._height; end
-        return _hx_6
-      end )()) then 
-        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left), r.key, r.value, r.right) end;
-      else
-        do return __haxe_ds_TreeNode.new(__haxe_ds_TreeNode.new(l, k, v, r.left.left), r.left.key, r.left.value, __haxe_ds_TreeNode.new(r.left.right, r.key, r.value, r.right)) end;
-      end;
-    else
-      do return __haxe_ds_TreeNode.new(l, k, v, r, (function() 
-        local _hx_7
-        if (hl > hr) then 
-        _hx_7 = hl; else 
-        _hx_7 = hr; end
-        return _hx_7
-      end )() + 1) end;
-    end;
-  end;
-end
-__haxe_ds_BalancedTree.prototype.compare = function(self,k1,k2) 
-  do return Reflect.compare(k1, k2) end
-end
-
-__haxe_ds_BalancedTree.prototype.__class__ =  __haxe_ds_BalancedTree
-
 __haxe_ds_TreeNode.new = function(l,k,v,r,h) 
   local self = _hx_new(__haxe_ds_TreeNode.prototype)
   __haxe_ds_TreeNode.super(self,l,k,v,r,h)
@@ -5231,202 +5548,11 @@ _hxClasses["haxe.ds.Either"] = { __ename__ = true, __constructs__ = _hx_tab_arra
 __haxe_ds_Either = _hxClasses["haxe.ds.Either"];
 __haxe_ds_Either.Left = function(v) local _x = _hx_tab_array({[0]="Left",0,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
 __haxe_ds_Either.Right = function(v) local _x = _hx_tab_array({[0]="Right",1,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
-
-__haxe_ds_EnumValueMap.new = function() 
-  local self = _hx_new(__haxe_ds_EnumValueMap.prototype)
-  __haxe_ds_EnumValueMap.super(self)
-  return self
-end
-__haxe_ds_EnumValueMap.super = function(self) 
-  __haxe_ds_BalancedTree.super(self);
-end
-_hxClasses["haxe.ds.EnumValueMap"] = __haxe_ds_EnumValueMap
-__haxe_ds_EnumValueMap.__name__ = "haxe.ds.EnumValueMap"
-__haxe_ds_EnumValueMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_EnumValueMap.prototype = _hx_a();
-__haxe_ds_EnumValueMap.prototype.compare = function(self,k1,k2) 
-  local d = k1[1] - k2[1];
-  if (d ~= 0) then 
-    do return d end;
-  end;
-  local p1 = k1:slice(2);
-  local p2 = k2:slice(2);
-  if ((p1.length == 0) and (p2.length == 0)) then 
-    do return 0 end;
-  end;
-  do return self:compareArgs(p1, p2) end
-end
-__haxe_ds_EnumValueMap.prototype.compareArgs = function(self,a1,a2) 
-  local ld = a1.length - a2.length;
-  if (ld ~= 0) then 
-    do return ld end;
-  end;
-  local _g = 0;
-  local _g1 = a1.length;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    local d = self:compareArg(a1[i], a2[i]);
-    if (d ~= 0) then 
-      do return d end;
-    end;
-  end;
-  do return 0 end
-end
-__haxe_ds_EnumValueMap.prototype.compareArg = function(self,v1,v2) 
-  if (Reflect.isEnumValue(v1) and Reflect.isEnumValue(v2)) then 
-    do return self:compare(v1, v2) end;
-  else
-    if (__lua_Boot.__instanceof(v1, Array) and __lua_Boot.__instanceof(v2, Array)) then 
-      do return self:compareArgs(v1, v2) end;
-    else
-      do return Reflect.compare(v1, v2) end;
-    end;
-  end;
-end
-
-__haxe_ds_EnumValueMap.prototype.__class__ =  __haxe_ds_EnumValueMap
-__haxe_ds_EnumValueMap.__super__ = __haxe_ds_BalancedTree
-setmetatable(__haxe_ds_EnumValueMap.prototype,{__index=__haxe_ds_BalancedTree.prototype})
-
-__haxe_ds_IntMap.new = function() 
-  local self = _hx_new(__haxe_ds_IntMap.prototype)
-  __haxe_ds_IntMap.super(self)
-  return self
-end
-__haxe_ds_IntMap.super = function(self) 
-  self.h = ({});
-end
-_hxClasses["haxe.ds.IntMap"] = __haxe_ds_IntMap
-__haxe_ds_IntMap.__name__ = "haxe.ds.IntMap"
-__haxe_ds_IntMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_IntMap.prototype = _hx_a();
-__haxe_ds_IntMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_IntMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_IntMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_IntMap.prototype.iterator = function(self) 
-  local _gthis = self;
-  local it = self:keys();
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return it:hasNext() end;
-  end,next=function(self) 
-    do return _gthis.h[it:next()] end;
-  end}) end
-end
-__haxe_ds_IntMap.prototype.toString = function(self) 
-  local s_b = ({});
-  local s_length = 0;
-  local str = "{";
-  _G.table.insert(s_b, str);
-  s_length = s_length + #str;
-  local it = self:keys();
-  local i = it;
-  while (i:hasNext()) do 
-    local i1 = i:next();
-    local str1 = Std.string(i1);
-    _G.table.insert(s_b, str1);
-    s_length = s_length + #str1;
-    local str2 = " => ";
-    _G.table.insert(s_b, str2);
-    s_length = s_length + #str2;
-    local ret = self.h[i1];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    local str3 = Std.string(ret);
-    _G.table.insert(s_b, str3);
-    s_length = s_length + #str3;
-    if (it:hasNext()) then 
-      local str4 = ", ";
-      _G.table.insert(s_b, str4);
-      s_length = s_length + #str4;
-    end;
-  end;
-  local str5 = "}";
-  _G.table.insert(s_b, str5);
-  s_length = s_length + #str5;
-  do return _G.table.concat(s_b) end
-end
-
-__haxe_ds_IntMap.prototype.__class__ =  __haxe_ds_IntMap
 _hxClasses["haxe.ds.Option"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Some","None"},2)}
 __haxe_ds_Option = _hxClasses["haxe.ds.Option"];
 __haxe_ds_Option.Some = function(v) local _x = _hx_tab_array({[0]="Some",0,v,__enum__=__haxe_ds_Option}, 3); return _x; end 
 __haxe_ds_Option.None = _hx_tab_array({[0]="None",1,__enum__ = __haxe_ds_Option},2)
 
-
-__haxe_ds_StringMap.new = function() 
-  local self = _hx_new(__haxe_ds_StringMap.prototype)
-  __haxe_ds_StringMap.super(self)
-  return self
-end
-__haxe_ds_StringMap.super = function(self) 
-  self.h = ({});
-end
-_hxClasses["haxe.ds.StringMap"] = __haxe_ds_StringMap
-__haxe_ds_StringMap.__name__ = "haxe.ds.StringMap"
-__haxe_ds_StringMap.__interfaces__ = {__haxe_IMap}
-__haxe_ds_StringMap.prototype = _hx_a();
-__haxe_ds_StringMap.prototype.set = function(self,key,value) 
-  if (value == nil) then 
-    self.h[key] = __haxe_ds_StringMap.tnull;
-  else
-    self.h[key] = value;
-  end;
-end
-__haxe_ds_StringMap.prototype.get = function(self,key) 
-  local ret = self.h[key];
-  if (ret == __haxe_ds_StringMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
-end
-__haxe_ds_StringMap.prototype.keys = function(self) 
-  local _gthis = self;
-  local next = _G.next;
-  local cur = next(self.h, nil);
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local ret = cur;
-    cur = next(_gthis.h, cur);
-    do return ret end;
-  end,hasNext=function(self) 
-    do return cur ~= nil end;
-  end}) end
-end
-__haxe_ds_StringMap.prototype.iterator = function(self) 
-  local _gthis = self;
-  local it = self:keys();
-  do return _hx_o({__fields__={hasNext=true,next=true},hasNext=function(self) 
-    do return it:hasNext() end;
-  end,next=function(self) 
-    do return _gthis.h[it:next()] end;
-  end}) end
-end
-
-__haxe_ds_StringMap.prototype.__class__ =  __haxe_ds_StringMap
 
 __lua_Boot.new = {}
 _hxClasses["lua.Boot"] = __lua_Boot
@@ -6862,7 +6988,7 @@ __tink_core_OutcomeTools.toOption = function(outcome)
     local data = outcome[2];
     do return __haxe_ds_Option.Some(data) end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return __haxe_ds_Option.None end; end;
 end
 __tink_core_OutcomeTools.toOutcome = function(option,pos) 
@@ -6879,7 +7005,7 @@ __tink_core_OutcomeTools.orNull = function(outcome)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return nil end; end;
 end
 __tink_core_OutcomeTools.orUse = function(outcome,fallback) 
@@ -6888,16 +7014,16 @@ __tink_core_OutcomeTools.orUse = function(outcome,fallback)
     local data = outcome[2];
     do return data end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.orTry = function(outcome,fallback) 
   local tmp = outcome[1];
   if (tmp) == 0 then 
-    local _g1 = outcome[2];
+    local _g = outcome[2];
     do return outcome end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return fallback:get() end; end;
 end
 __tink_core_OutcomeTools.equals = function(outcome,to) 
@@ -6906,7 +7032,7 @@ __tink_core_OutcomeTools.equals = function(outcome,to)
     local data = outcome[2];
     do return data == to end;
   elseif (tmp) == 1 then 
-    local _g = outcome[2];
+    local _g1 = outcome[2];
     do return false end; end;
 end
 __tink_core_OutcomeTools.map = function(outcome,transform) 
@@ -6966,13 +7092,13 @@ end
 __tink_core_OutcomeTools.flatten = function(o) 
   local tmp = o[1];
   if (tmp) == 0 then 
-    local _g1 = o[2];
-    local tmp1 = _g1[1];
+    local _g = o[2];
+    local tmp1 = _g[1];
     if (tmp1) == 0 then 
-      local d = _g1[2];
+      local d = _g[2];
       do return __tink_core_Outcome.Success(d) end;
     elseif (tmp1) == 1 then 
-      local f = _g1[2];
+      local f = _g[2];
       do return __tink_core_Outcome.Failure(f) end; end;
   elseif (tmp) == 1 then 
     local f1 = o[2];
@@ -7112,7 +7238,7 @@ __tink_core__Promise_Promise_Impl_.mapError = function(this1,f)
   local ret = this1:map(function(o) 
     local ret1 = o[1];
     if (ret1) == 0 then 
-      local _g1 = o[2];
+      local _g = o[2];
       do return o end;
     elseif (ret1) == 1 then 
       local e = o[2];
@@ -7196,10 +7322,10 @@ __tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,la
             yield(v):handle(function(o1) 
               local next2 = o1[1];
               if (next2) == 0 then 
-                local _g1 = o1[2];
-                local next3 = _g1[1];
+                local _g = o1[2];
+                local next3 = _g[1];
                 if (next3) == 0 then 
-                  local ret = _g1[2];
+                  local ret = _g[2];
                   cb(__tink_core_Outcome.Success(ret));
                 elseif (next3) == 1 then 
                   next(); end;
@@ -7777,6 +7903,10 @@ _hx_array_mt.__index = Array.prototype
 local _hx_static_init = function()
   __deceptinfect_GameManager.state = __deceptinfect_GAME_STATE.WAIT;
   
+  __deceptinfect_GameManager.lastTick = 0.0;
+  
+  __deceptinfect_GameManager.stateTrig = __tink_core_SignalTrigger.new();
+  
   __deceptinfect_GameManager.net_gamestate = NETMESSAGE_gamestate.new();
   
   __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.WAIT = 0;
@@ -7839,22 +7969,24 @@ local _hx_static_init = function()
   
   __deceptinfect_GameValues.SETUP_TIME = 10;
   
+  __haxe_ds_StringMap.tnull = ({});
+  
   __deceptinfect_MapStorage.spawns = (function() 
     local _hx_1
     
     local _g = __haxe_ds_StringMap.new();
     
     local this1 = _G.Vector(-20.135118, 293.638184, 62.682350);
-    local this2 = _G.Vector(214.035873, 252.134552, 46.033661);
-    local this3 = _G.Vector(45.967289, -942.858459, 64.031250);
-    local this4 = _G.Vector(-4.848439, -1728.742920, 64.031250);
-    local this5 = _G.Vector(-481.968323, -1022.401917, 64.031250);
-    local this6 = _G.Vector(571.895020, -1031.322632, 64.031250);
-    local this7 = _G.Vector(10.328067, -1039.059570, 64.031250);
-    local this8 = _G.Vector(-64.220894, -989.030090, 60.787186);
-    local this9 = _G.Vector(111.524712, -1094.413208, 110.729080);
-    local this10 = _G.Vector(-4.253020, 1452.940063, 64.031250);
-    local value = _hx_o({__fields__={items=true,objectives=true,evacs=true,nests=true},items=_hx_tab_array({[0]=this1, this2}, 2),objectives=_hx_tab_array({[0]=this3, this4, this5, this6, this7}, 5),evacs=_hx_tab_array({[0]=_hx_o({__fields__={mins=true,maxs=true},mins=this8,maxs=this9})}, 1),nests=_hx_tab_array({[0]=this10}, 1)});
+    local this11 = _G.Vector(214.035873, 252.134552, 46.033661);
+    local this12 = _G.Vector(45.967289, -942.858459, 64.031250);
+    local this13 = _G.Vector(-4.848439, -1728.742920, 64.031250);
+    local this14 = _G.Vector(-481.968323, -1022.401917, 64.031250);
+    local this15 = _G.Vector(571.895020, -1031.322632, 64.031250);
+    local this16 = _G.Vector(10.328067, -1039.059570, 64.031250);
+    local this17 = _G.Vector(-64.220894, -989.030090, 60.787186);
+    local this18 = _G.Vector(111.524712, -1094.413208, 110.729080);
+    local this19 = _G.Vector(-4.253020, 1452.940063, 64.031250);
+    local value = _hx_o({__fields__={items=true,objectives=true,evacs=true,nests=true},items=_hx_tab_array({[0]=this1, this11}, 2),objectives=_hx_tab_array({[0]=this12, this13, this14, this15, this16}, 5),evacs=_hx_tab_array({[0]=_hx_o({__fields__={mins=true,maxs=true},mins=this17,maxs=this18})}, 1),nests=_hx_tab_array({[0]=this19}, 1)});
     local key = "mor_temple_v1";
     if (value == nil) then 
       _g.h[key] = __haxe_ds_StringMap.tnull;
@@ -7865,6 +7997,16 @@ local _hx_static_init = function()
     _hx_1 = _g;
     return _hx_1
   end )();
+  
+  __deceptinfect_Misc.roundModels = _hx_tab_array({[0]="models/player/mossman.mdl"}, 1);
+  
+  __deceptinfect_Misc.roundWeapons = _hx_tab_array({[0]="weapon_mor_ump"}, 1);
+  
+  __deceptinfect_Misc.startingWeapons = _hx_tab_array({[0]="weapon_mor_p229"}, 1);
+  
+  __deceptinfect_Misc.infModel = "models/player/zombie_classic.mdl";
+  
+  __haxe_ds_IntMap.tnull = ({});
   
   __deceptinfect_PlayerManager.indexLookup = __haxe_ds_IntMap.new();
   
@@ -7960,7 +8102,7 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SystemManager.getSystems = __haxe_ds_ObjectMap.new();
   
-  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem}, 11);
+  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem}, 12);
   
   __deceptinfect_radiation_RadiationTypes.types = (function() 
     local _hx_6
@@ -7983,13 +8125,11 @@ local _hx_static_init = function()
     return _hx_6
   end )();
   
+  __deceptinfect_util_Util.mappy = __haxe_ds_StringMap.new();
+  
   __haxe_EntryPoint.pending = Array.new();
   
   __haxe_EntryPoint.threadCount = 0;
-  
-  __haxe_ds_IntMap.tnull = ({});
-  
-  __haxe_ds_StringMap.tnull = ({});
   
   __lua_Boot.Max_Int32 = 2147483647;
   

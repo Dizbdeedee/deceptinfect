@@ -32,8 +32,10 @@ class FormSystem extends System {
         var g_ent = ent.get_sure(GEntityComponent).entity;
         var curHealth = g_ent.Health();
         var curMaxHealth = g_ent.GetMaxHealth();
+        var curModel = g_ent.GetModel();
         g_ent.SetMaxHealth(c_form.formMaxHealth);
         g_ent.SetHealth(c_form.formHealth);
+        g_ent.SetModel(c_form.formModel);
         c_form.form = switch(c_form.form) {
             case HUMAN:
                 INFECTED;
@@ -43,6 +45,7 @@ class FormSystem extends System {
         c_form.formHealth = curHealth;
         c_form.formMaxHealth = curMaxHealth;
         c_form.cooldown = COOLDOWN(GlobalLib.CurTime() + c_form.nextCooldown);
+        c_form.formModel = curModel;
     }
     #end
 }

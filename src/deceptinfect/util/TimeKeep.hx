@@ -9,7 +9,7 @@ class TimeKeep<T:Int> {
 
     public function addTime(key:T):Float {
         initTime(key);
-        var difftime = GameManager.sure().diffTime;
+        var difftime = GameManager.diffTime;
         //trace('difftime $difftime');
         times[key] += difftime;
         return times[key];
@@ -30,7 +30,7 @@ class TimeKeep<T:Int> {
 
     public function removeTime(key:T):Float {
         initTime(key);
-        var difftime = GameManager.sure().diffTime;
+        var difftime = GameManager.diffTime;
         times[key] -= difftime;
         if (times[key] < 0) {
             times[key] = 0;

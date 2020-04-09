@@ -3523,7 +3523,7 @@ extern class Player extends Entity {
 		The number of weapons the player has (e.g. 5).
     **/
     
-    public function GetWeapons():AnyTable;
+    public function GetWeapons():Table<Int,Weapon>;
     
     
     /**
@@ -3727,7 +3727,7 @@ extern class Player extends Entity {
 		```
     **/
     
-    public function GiveAmmo(amount:Float, type:String, ?hidePopup:Bool):Float;
+    public function GiveAmmo(amount:Float, type:haxe.extern.EitherType<Int,String>, ?hidePopup:Bool):Float;
     #end
     
     /**

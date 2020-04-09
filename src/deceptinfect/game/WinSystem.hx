@@ -17,24 +17,34 @@ class WinSystem extends System {
 	}
 
 	override function run_server() {
+		switch (GameManager.state) {
+			case PLAYING(_):
+			default:
+				return;
+		}
 		var total = 0;
 		var infected = 0;
 		for (ent in ComponentManager.entities) {
-			switch [ent.get(InfectedComponent), ent.get(PlayerComponent)] {
-            case [Comp(_), Comp(_)]:
+			switch [ent.get(InfectedComponent), ent.get(PlayerComponent),ent.get(AliveComponent)] {
+            case [Comp(_), Comp(_),Comp(_)]:
                 infected++;
                 total++;
-            case [NONE, Comp(_)]:
+            case [NONE, Comp(_),Comp(_)]:
                 total++;
             default:
 			}
 		}
+		deceptinfect.util.Util.printTimer("win",15,() -> trace('Infected : $infected total : $total'));
 		if (infected == 0) {
+			trace("trigg!");
 			winTrig.trigger(WIN_HUMAN);
 			winTrig.clear();
+			return;
 		} else if (infected >= total) {
+			trace("trugg!");
 			winTrig.trigger(WIN_INF);
 			winTrig.clear();
+			return;
 		}
 
 		var aliveNests = false;
