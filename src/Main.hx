@@ -39,8 +39,15 @@ class Main {
             new GPlayerCompat(new PlayerComponent(ply));
         }
         #end
+
+        FileLib.CreateDir("deceptinfect");
+        GameLib.CleanUpMap();
         SignalStorage.initEvents();
         GameManager.init();
+        for (model in Misc.roundModels) {
+            UtilLib.PrecacheModel(model);
+        }
+        UtilLib.PrecacheModel(Misc.infModel);
         #if client
         new ClientOverrides();
        
@@ -51,6 +58,7 @@ class Main {
         SystemManager.initAllSystems();
         #end
         #if server
+        GameLib.ConsoleCommand("mp_falldamage 1\n");
         GameManager.cleanup();  
         #end
         

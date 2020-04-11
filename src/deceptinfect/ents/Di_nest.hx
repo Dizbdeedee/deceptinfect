@@ -13,6 +13,12 @@ class Di_nest extends gmod.sent.ENT_ANIM implements SentBuild {
     final properties:EntFields = {
         Base : "base_entity"
     }
+
+    #if client
+    override function Draw(flags:Float) {
+        self.DrawModel();
+    }
+    #end
     #if server
     var id:DI_ID;
     override function Initialize() {

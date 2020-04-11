@@ -1,5 +1,7 @@
 package deceptinfect;
 
+import deceptinfect.infection.InfectedComponent;
+import deceptinfect.game.RagdollSystem;
 import deceptinfect.game.AliveComponent;
 import deceptinfect.statuses.Walkthroughable;
 import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceReturn;
@@ -44,7 +46,8 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     #end
     #if server
     override function CreateEntityRagdoll(owner:Entity, ragdoll:Entity) {
-        ragdoll.Remove();
+        getSystem(RagdollSystem).playerRagdoll(owner,ragdoll);
+        
     }
     #end
     override function Think() {
@@ -71,6 +74,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     override function OnEntityCreated(entity:Entity) {
         if (entity.IsPlayer()) {
             var ent = new GPlayerCompat(new PlayerComponent(cast entity));
+
             //ent.id.add_component(new InfectionComponent());
         } else {
             //var ent = new GEntCompat(new GEntityComponent(entity));
@@ -91,10 +95,14 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     }
     #if server
     
-
+    override function PlayerSilentDeath(ply:gmod.types.Player) {
+        // super.PlayerSilentDeath(ply);
+    }
     
     override function PlayerDeath(victim:GPlayerCompat, inflictor:Entity, attacker:Entity) {
         victim.id.remove_component(AliveComponent);
+        // victim.id.remove_component(InfectionComponent);
+        // victim.id.remove_component(InfectedComponent);
         trace("Player ded!");
     }
     
@@ -104,22 +112,26 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     }
 
 
-    override function PlayerSpawn(player:gmod.types.Player, transition:Bool) {
+    override function PlayerSpawn(player:GPlayerCompat, transition:Bool) {
         player.UnSpectate();
-
-        player.SetModel(Misc.roundModels[0]);//TODO make random models
+        
+        player.SetModel(Misc.roundModels[MathLib.random(0,Misc.roundModels.length - 1)]);//TODO make random models
         //player.SetWalkthroughable
+        player.SetShouldServerRagdoll(true);
         player.ShouldDropWeapon(true);
         if (GameManager.state.equals(WAIT)) {
             player.Give(Misc.roundWeapons[0]); //TODO random weapons
-            player.ShouldDropWeapon(false);
+            // player.ShouldDropWeapon(false);
 
         }
+        // player.id.
         //setHiddenHealth
         //lowhealthrate???
         //kill player if round in progress 
     }
-
+    override function PlayerDisconnected(ply:GPlayerCompat) {
+        ComponentManager.removeEntity(ply.id);
+    }
     override function PlayerButtonUp(ply:GPlayerCompat, button:BUTTON_CODE) {
         
         switch (button) {
@@ -134,6 +146,28 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
                 getSystem(InfectionSystem).makeInfected(plyr.id);
             case KEY_M:
                 trace(ComponentManager.components.get(PlayerComponent));
+            case KEY_L:
+                var plyr:GPlayerCompat = PlayerLib.GetByID(1);
+                var ent:Entity = EntsLib.Create("prop_ragdoll");
+                ent.SetModel(plyr.GetModel());
+                ent.SetPos(plyr.GetPos());
+                ent.Spawn();
+                for (physNum in 0...ent.GetPhysicsObjectCount() - 1) {
+                    var physob = ent.GetPhysicsObjectNum(physNum);
+                    var result = plyr.GetBonePosition(ent.TranslatePhysBoneToBone(physNum));
+                    if (IsValid(physob)) {
+                        physob.SetPos(result.a);
+                        physob.SetAngles(result.b);
+                       
+                        physob.EnableMotion(false);
+                        physob.Sleep();
+                    }
+                }
+                ent.SetCollisionGroup(COLLISION_GROUP_WORLD);
+                ent.SetSolid(SOLID_NONE);
+                var plywep:Weapon = ply.GetActiveWeapon();
+                ent.SetNWString("showwep",plywep.GetModel());
+                
             default:
             //handle case of infection? use command strategy
         }
@@ -221,39 +255,46 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         }
     }
 
-    override function IsSpawnpointSuitable(ply:Player, spawnpoint:Entity, makeSuitable:Bool):Bool {
+    override function IsSpawnpointSuitable(ply:GPlayerCompat, spawnpoint:Entity, makeSuitable:Bool):Bool {
         var pos = spawnpoint.GetPos();
-        var blockers = EntsLib.FindInBox(pos + new Vector(-16,-16,0), pos + new Vector(16,16,72));
+        var blockers = EntsLib.FindInBox(pos + new Vector(-30,-30,0), pos + new Vector(30,30,72));
         var tracehit = UtilLib.TraceEntity({
             start: pos,
             endpos : pos + new Vector(1,1,1),
 
         },ply);
-        if (tracehit.HitWorld) {
-            return false;
-        }
         for (ent in blockers) {
             if (ent.IsPlayer()) {
                 var blockPly:GPlayerCompat = cast ent;
                 blockPly.setWalkthroughable(true);
                 blockPly.id.add_component(new Walkthroughable());
+                ply.setWalkthroughable(true);
+                ply.id.add_component(new Walkthroughable());
                 //ply.setWalkthroughable(true);
             } else {
                 // return false;
                 // return false;
             }
         }
+        if (tracehit.HitWorld) {
+            trace("not valid..");
+            return false;
+        }
         return true;
     }
     
     override function PlayerSelectSpawn(ply:Player, transition:Bool):Entity {
+        
         var spawns = EntsLib.FindByClass("info_player_start");
-        trace(spawns.length());
-        GlobalLib.PrintTable(spawns);
+        // trace(spawns.length());
+        // GlobalLib.PrintTable(spawns);
         var random_spawn = MathLib.random(spawns.length());
+        // for (spawn in spawns) {
         if (IsSpawnpointSuitable(ply,spawns[random_spawn],false)) {
             return spawns[random_spawn];
         }
+        // }
+        trace("Could not find a spawn!");
         return null;
     }
 

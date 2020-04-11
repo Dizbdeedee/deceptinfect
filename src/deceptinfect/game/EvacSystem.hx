@@ -1,13 +1,44 @@
 package deceptinfect.game;
 
+import deceptinfect.util.Util;
+import gmod.NET_Server;
+import deceptinfect.game.EvacZone.EvacState;
+import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ents.Di_entities;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.abilities.FormComponent;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 
+typedef NetData_Evac = {
+    state : INT_EvacState,
+    time : Float
+}
+
 class EvacSystem extends System {
 
+    static var evac_state = new NET_Server<"di_evac",NetData_Evac>();
+
+    #if client
+    override function init_client() {
+        evac_state.signal.handle(changeEvacState);
+    }
+
+    function changeEvacState(x:NetData_Evac) {
+        switch (x) {
+            case {state: NOT_ACTIVE}:
+                //stop showing hud
+            case {state: ARRIVING, time : t}:
+                //start showing hud
+            case {state: LEAVING, time: t}:
+                Util.printTimer("BOOOGA",3, () -> trace('leaving!!..$t'));
+            default:
+                Util.printTimer("oogieboogie",5,() -> trace("Invalid state for hud..."));
+        }
+    }
+
+    #end
+    
     #if server
     var flaresSpawned = false;
     override function run_server() {
@@ -37,12 +68,21 @@ class EvacSystem extends System {
                         default:
                         }
                     }
+                    evac_state.broadcast(
+                        {state : c_evac.state,
+                        time : time
+                        },true);
+
                 case ARRIVING(time):
                     time.value -= GameManager.diffTime;
                     if (time.value < 0) {
                         trace(c_evac.state);
                         c_evac.state = LEAVING(c_evac.leavetime);
                     }
+                    evac_state.broadcast(
+                        {state : c_evac.state,
+                        time : time
+                        },true);
                 
                 default:
                 }
@@ -93,9 +133,14 @@ class EvacSystem extends System {
     }
 
     public function addFlare(flare:DI_ID,evac:DI_ID) {
-        switch [flare.get(FlareComponent),evac.get(EvacZone)] {
-        case [Comp(_),Comp(c_evac)]:
-            c_evac.state = ARRIVING(c_evac.arrivetime);
+        switch [flare.get(FlareComponent),flare.get(GEntityComponent),evac.get(EvacZone)] {
+        case [Comp(_),Comp(c_gent),Comp(c_evac)]:
+            switch (c_evac.state) {
+            case NOT_ACTIVE:
+                c_evac.state = ARRIVING(c_evac.arrivetime);
+                c_gent.entity.Remove();
+            default:
+            }
         default:
         }
     }
@@ -108,4 +153,25 @@ class EvacSystem extends System {
         }
     }
     #end
+}
+
+enum abstract INT_EvacState(Int) from Int to Int {
+    var NOT_ACTIVE;
+    var ARRIVING;
+    var LEAVING;
+
+    @:from
+    public static function from(x:EvacState):INT_EvacState {
+        return switch (x) {
+            case EvacState.NOT_ACTIVE:
+                NOT_ACTIVE;
+            case EvacState.ARRIVING(_):
+                ARRIVING;
+            case EvacState.LEAVING(_):
+                LEAVING;
+
+        }
+    }
+
+    
 }

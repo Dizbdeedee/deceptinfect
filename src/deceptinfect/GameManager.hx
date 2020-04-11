@@ -1,4 +1,6 @@
 package deceptinfect;
+import deceptinfect.game.CleanupEnt;
+import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.util.Util;
 import deceptinfect.game.AliveComponent;
 import deceptinfect.ents.Di_entities;
@@ -138,13 +140,16 @@ class GameManager {
         case [SETTING_UP(x,_),PLAYING(y)]:
             initAllPlayers();
             y.start();
+            
             hookWin();
         case [WAIT,PLAYING(x)]:
             initAllPlayers();
             x.start();
+            removePrevStatues();
             hookWin();
         case [WAIT,SETTING_UP(x,t)]:
             time = t;
+            removePrevStatues();
         case [PLAYING(x),ENDING(y,t)]:
             time = t;
         case [PLAYING(x),PLAYING(y)]:
@@ -170,10 +175,21 @@ class GameManager {
 
     @:expose("cleanup")
     public static function cleanup() {
-        SystemManager.initAllSystems();
         for (ent in entities) {
-            ComponentManager.removeEntity(ent);
+            switch [ent.get(CleanupEnt),ent.get(GEntityComponent)] {
+            case [Comp(_),Comp(c_gent)]:
+                trace(ent);
+                c_gent.entity.Remove();
+            default:
+            }
+            switch ent.get(deceptinfect.game.KeepRestart) {
+                case Comp(_):
+                default:
+                    ComponentManager.removeEntity(ent);
+            }
         }
+        stateTrig.clear(); //get rid of stragglers
+        SystemManager.initAllSystems();
         for (ent in EntsLib.GetAll()) {
             switch (ent.GetClass()) {
             case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
@@ -181,11 +197,16 @@ class GameManager {
             default:
             }
         }
+        // GameLib.CleanUpMap();
         for (p in PlayerLib.GetAll()) {
             new GPlayerCompat(new PlayerComponent(p));
             p.KillSilent();
             p.Spawn();
         }
+    }
+
+    static function removePrevStatues() {
+
     }
     static function hookWin() {
         getSystem(WinSystem).newWinner.handle(newWin);
@@ -258,7 +279,7 @@ class GameManager {
 
     #if client
     public static function init() {
-
+        
         net_gamestate.signal.handle(gameStateChanged);
     }
     
@@ -267,7 +288,10 @@ class GameManager {
         state = x.state;
         switch (x.state) {
             case PLAYING:
-                PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
+
+            case WAIT:
+                
+                // PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
             default:
         }
     }

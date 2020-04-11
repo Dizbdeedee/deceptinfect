@@ -7,9 +7,9 @@ class EvacZone extends Component {
 
     var blocked:Map<DI_ID,Bool> = [];
 
-    var arrivetime:Float = 30.0;
+    var arrivetime:Float = 10.0;
 
-    var leavetime:Float = 40.0;
+    var leavetime:Float = 25.0;
 
     var state:EvacState = NOT_ACTIVE;
 

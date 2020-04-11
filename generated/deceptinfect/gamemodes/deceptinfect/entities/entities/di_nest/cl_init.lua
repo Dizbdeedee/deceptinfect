@@ -14,6 +14,10 @@ function ENT:Initialize()
 	self._gHaxeInit = true
 end
 
+function ENT:Draw(...)
+	self._gHaxeBurrow:Draw(...)
+end
+
 function ENT:TestCollision(...)
 	self._gHaxeBurrow:TestCollision(...)
 end

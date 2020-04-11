@@ -4,7 +4,7 @@ import deceptinfect.ecswip.Component;
 
 class InfectionComponent extends Component {
     
-    public var infection:INF_STATE = NOT_INFECTED(0.0);
+    public var infection(default,set):INF_STATE = NOT_INFECTED(0.0);
     public var rate:Float = 1;
     public var baseInfection:BaseInfection = USING_GLOBAL;
     public var onInfected(default,null):Signal<Noise>;
@@ -24,10 +24,14 @@ class InfectionComponent extends Component {
             case NOT_INFECTED(inf):
                 inf.value;
             case INFECTED:
-                100;
+                100.1;
         }
     }
-    
+    public function set_infection(x:INF_STATE):INF_STATE {
+        trace(x);
+        return infection = x;
+        
+    }
 
 }
 

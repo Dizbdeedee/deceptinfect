@@ -24,7 +24,7 @@ class WalkthroughSystem extends System {
                     switch otherEnt.get(PlayerComponent) {
                     case Comp(c_otherPly):
                         var dist = c_otherPly.player.GetPos().DistToSqr(c_ply.player.GetPos());
-                        if (dist < C_square(80)) {
+                        if (dist < C_square(100)) {
                             tooclose = true;
                             break;
                             // ent.remove_component(Walkthroughable);

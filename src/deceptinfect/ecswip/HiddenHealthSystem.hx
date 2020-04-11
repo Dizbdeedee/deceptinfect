@@ -7,6 +7,7 @@ import deceptinfect.ecswip.SignalStorage;
 class HiddenHealthSystem extends GeigerSystem {
     #if server
     override function init_server() {
+        SignalStorage.entDamageTrigger.clear();
         SignalStorage.entDamage.handle(hiddenHealthDamage);
     }
     
@@ -30,6 +31,7 @@ class HiddenHealthSystem extends GeigerSystem {
                     dmgInfo.SetDamage(health);
                 }
             } else {
+               trace('Adding $damageVal to ${damageVal * (1 - c_dmgpnlty.damagepenalty)}');
                c_hidHealth.extraHealth += damageVal * (1 - c_dmgpnlty.damagepenalty);
             }
         default:

@@ -24,7 +24,7 @@ class System {
 
     }
 
-    public final function new() {
+    public function new() {
         
     }
 

@@ -52,11 +52,13 @@ class Hud {
 
     static function infectionMeter() {
         var inf = switch [PlayerManager.getLocalPlayer().has_id(),GameManager.state] {
-            case [Some(_.get(InfectionComponent) => Comp(inf)),PLAYING]:
-                inf;
+            case [Some(id = _.get(InfectionComponent) => Comp(c_i)),PLAYING]:
+                trace(id);
+                c_i;
             default:
                 return;
         }
+        
         SurfaceLib.SetDrawColor(180,180,180,255);
         SurfaceLib.DrawRect(CSS(X,750),CSS(Y,825),CSS(X,300),CSS(Y,30));
         if (inf.getInfValue() < 70) {

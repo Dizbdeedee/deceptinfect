@@ -3,5 +3,5 @@ package deceptinfect.ecswip;
 class DamagePenaltyHidden extends Component {
 
     
-    var damagepenalty = 0.6;
+    var damagepenalty = 0.55;
 }

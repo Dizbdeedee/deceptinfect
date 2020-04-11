@@ -42,6 +42,10 @@ class Networking {
             public function sendFilter(data:$complexAnon,recv:gmod.gclass.CRecipientFilter,?unreliable=false) {
 
             }
+
+            public function broadcast(data:$complexAnon,?unreliable=false) {
+
+            }
             #end
             #if client
             #if tink_core
@@ -79,6 +83,7 @@ class Networking {
         (cls.fields[0].kind.getParameters()[0]:Function).expr = sendExpr;
         (cls.fields[1].kind.getParameters()[0]:Function).expr = sendExpr;
         (cls.fields[2].kind.getParameters()[0]:Function).expr = sendExpr;
+        (cls.fields[3].kind.getParameters()[0]:Function).expr = genSendExpr(anon,netName,fields,true);
         #end
         #if client
         #if tink_core
@@ -92,7 +97,7 @@ class Networking {
         return TPath({name : clsName,pack: []});
     }
 
-    static function genSendExpr(anon:haxe.macro.Type,name:String,fields:Array<ClassField>):Expr {
+    static function genSendExpr(anon:haxe.macro.Type,name:String,fields:Array<ClassField>,?broadcast=false):Expr {
         var macArray:Array<Expr> = [];
         macArray.push(macro gmod.libs.NetLib.Start($v{name},unreliable));
         var entity = Context.resolveType((macro : gmod.gclass.Entity),Context.currentPos());
@@ -129,7 +134,11 @@ class Networking {
                     trace(field.type.toString());
             }
         }
-        macArray.push(macro gmod.libs.NetLib.Send(recv));
+        if (broadcast) {
+            macArray.push(macro gmod.libs.NetLib.Broadcast());
+        } else {
+            macArray.push(macro gmod.libs.NetLib.Send(recv));
+        }
         return macro $b{macArray};
     }
 

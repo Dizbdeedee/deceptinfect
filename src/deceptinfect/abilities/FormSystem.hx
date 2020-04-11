@@ -27,7 +27,7 @@ class FormSystem extends System {
         }
     }
 
-    static function changeForm(ent:DI_ID) {
+    public static function changeForm(ent:DI_ID) {
         var c_form = ent.get_sure(FormComponent);
         var g_ent = ent.get_sure(GEntityComponent).entity;
         var curHealth = g_ent.Health();

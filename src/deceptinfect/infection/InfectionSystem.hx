@@ -1,5 +1,6 @@
 package deceptinfect.infection;
 
+import deceptinfect.game.AliveComponent;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
@@ -7,23 +8,47 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.PlayerComponent;
 
+typedef ND_Infection = {
+    infection:Float,
+}
+
 @:allow(InfectionComponent)
 class InfectionSystem extends System {
 
 
 
-    static var net_inf = new gmod.NET_Server<"infection",{infection : Float}>();
+    static var net_inf = new gmod.NET_Server<"di_infection",ND_Infection>();
+
+    static var net_infected = new gmod.NET_Server<"di_infected",{}>();
 
     #if client
     override function init_client() {
         
         net_inf.signal.handle(recvInfection);
+        net_infected.signal.handle(onInfectedCl);
     }
 
-    function recvInfection(data:{infection : Float}) {
+    function onInfectedCl(data:{}) {
+        trace("Recieved infected data");
+        switch (PlayerManager.getLocalPlayerID().get(InfectionComponent)) {
+        case Comp(c_inf):
+            c_inf.infection = INFECTED;
+            PlayerManager.getLocalPlayerID().add_component(new InfectedComponent());
+            trace(c_inf);
+        default:
+            trace("no...");
+            var c_inf = new InfectionComponent();
+            PlayerManager.getLocalPlayerID().add_component(c_inf);
+            c_inf.infection = INFECTED;
+            
+            // trace(PlayerManager.)
+        }
+    }
+
+    function recvInfection(data:ND_Infection) {
         //trace(data);
 
-        
+        // trace('recv : ${data.infection}');
         switch PlayerManager.getLocalPlayerID().get(InfectionComponent) {
             case Comp(inf):
                 
@@ -34,6 +59,7 @@ class InfectionSystem extends System {
                     default:
                 }
             default:
+                trace("nu shit");
                 var c_inf = new InfectionComponent();
                 PlayerManager.getLocalPlayerID().add_component(c_inf);
                 c_inf.infection = NOT_INFECTED(data.infection);
@@ -53,9 +79,13 @@ class InfectionSystem extends System {
         for (entity in ComponentManager.entities) {
             switch (entity.get(InfectionComponent)) {
             case Comp(infection = _.acceptingInfection => ACCEPTING):
+                switch [entity.get(PlayerComponent),entity.get(AliveComponent)] {
+                    case [Comp(_),NONE]:
+                        continue;
+                    default:
+                }    
                 switch (infection.infection) {
                 case NOT_INFECTED(inf):
-                
                     var base = getBaseInfection(infection);
                 
                     var rate = switch (entity.get(RateComponent)) {
@@ -197,9 +227,10 @@ class InfectionSystem extends System {
         switch (ent.get(PlayerComponent)) {
         case Comp(_.player => p):
             trace('INIT INFECTED PLAYER $p');
-            net_inf.send({infection: 100},p);
+            // net_inf.send({infection: 100.0},p);
+            net_infected.send({},p);
             GameManager.initInfectedPlayer(ent);
-            GeigerSystem.net_geiger.send({geiger : 0},p); 
+            GeigerSystem.net_geiger.send({geiger : 0.0},p); 
         default:
         }
         #end

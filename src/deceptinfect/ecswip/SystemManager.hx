@@ -12,6 +12,7 @@ import deceptinfect.game.SpawnSystem;
 import deceptinfect.radiation.RadiationSystem.RadiationID;
 import haxe.ds.ObjectMap;
 import deceptinfect.client.GeigerSystem;
+import deceptinfect.game.SlowMotionSystem;
 
 class SystemManager {
 
@@ -32,7 +33,8 @@ class SystemManager {
         WalkthroughSystem,
         NestSystem,
         EvacSystem,
-        RagdollSystem
+        RagdollSystem,
+        SlowMotionSystem,
     ];
 
     static function make() {
@@ -48,6 +50,7 @@ class SystemManager {
         getSystems.set(NestSystem,new NestSystem());
         getSystems.set(EvacSystem,new EvacSystem());
         getSystems.set(RagdollSystem,new RagdollSystem());
+        getSystems.set(SlowMotionSystem, new SlowMotionSystem());
         
     }
     public static function getSystem<T:System>(cls:Class<T>):T {
