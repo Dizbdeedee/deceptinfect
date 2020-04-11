@@ -114,8 +114,6 @@ class Networking {
             switch (field.type) {
                 case twoWayUni(_,entity) => true:
                     macArray.push(macro gmod.libs.NetLib.WriteEntity(data.$name));
-                case twoWayUni(_,string) => true:
-                    macArray.push(macro gmod.libs.NetLib.WriteString(data.$name));
                 case twoWayUni(_,int) => true:
                     macArray.push(macro gmod.libs.NetLib.WriteInt(data.$name,32));
                 //NOTE Only one way checked, assumes writetable will be able to handle whatevers put in
@@ -129,6 +127,8 @@ class Networking {
                     macArray.push(macro gmod.libs.NetLib.WriteAngle(data.$name));
                 case twoWayUni(_,bool) => true:
                     macArray.push(macro gmod.libs.NetLib.WriteBool(data.$name));
+                case twoWayUni(_,string) => true:
+                    macArray.push(macro gmod.libs.NetLib.WriteString(data.$name));
                 default:
                     trace('could not generate constructer field:${field.name}');
                     trace(field.type.toString());
@@ -161,8 +161,6 @@ class Networking {
             switch (field.type) {
                 case twoWayUni(_,int) => true:
                     recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadInt(32)});
-                case twoWayUni(_,string) => true:
-                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadString()});
                 case _.unify(table) => true:
                     recvAnon.push({field : name, expr : macro cast gmod.libs.NetLib.ReadTable()});
                 case twoWayUni(_,float) => true:
@@ -175,6 +173,8 @@ class Networking {
                     recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadBool()});
                 case twoWayUni(_,entity) => true:
                     recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadEntity()});
+                case twoWayUni(_,string) => true:
+                    recvAnon.push({field : name, expr : macro gmod.libs.NetLib.ReadString()});
                 default:
                     trace('could not generate reciever field:${field.name}');
                     trace(field.type.toString());

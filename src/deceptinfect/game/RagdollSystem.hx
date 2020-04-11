@@ -143,6 +143,7 @@ class RagdollSystem extends System {
                 default:
             }
         }
+        // writeStatues();
     }
 
     function stateChange(newstate:GAME_STATE) {
@@ -155,16 +156,6 @@ class RagdollSystem extends System {
                     c_ply.player.SetModel(Misc.infModel);
                 default:
                 }
-                // switch [ent.get(PlayerComponent),ent.get(AliveComponent)] {
-                // case [Comp(c_ply),Comp(_)]:
-                //     switch ent.get(InfectedComponent) {
-                //     case Comp(_):
-                //         TimerLib.Simple(0.5,() -> playerStatue(c_ply.player,true));
-                //     default:
-                //         TimerLib.Simple(0.5,() -> playerStatue(c_ply.player));
-                //     }   
-                // default:
-                // }
                 switch [ent.get(GEntityComponent),ent.get(Ragdoll)] {
                 case [Comp(c_ent),Comp(_.reveal => WAIT(_))]:
                     reveal(c_ent.entity);
@@ -172,6 +163,8 @@ class RagdollSystem extends System {
                 }
                 
             }
+        case [_,WAIT]:
+            writeStatues();
         case [WAIT,_]:
             for (ent in entities) {
                 switch [ent.get(Statue),ent.get(GEntityComponent)] {
@@ -186,19 +179,29 @@ class RagdollSystem extends System {
     }
     override function run_server() {
         for (ent in entities) {
-            switch [ent.get(GEntityComponent),ent.get(Ragdoll),ent.get(Statue)] {
-            case [Comp(c_ent),Comp(c_rag),NONE]:
+            switch [ent.get(GEntityComponent),ent.get(Ragdoll)] {
+            case [Comp(c_ent),Comp(c_rag)]:
                 switch (c_rag.reveal) {
                 case WAIT(time) if (GlobalLib.CurTime() > time.value):
                     reveal(c_ent.entity);    
                     // c_ent.entity.SetModel(Misc.infModel);
                 default:
                 }
-                if (c_rag.owner.get_sure(PlayerComponent).player.Alive()) {
-                    c_ent.entity.Remove();
+                
+                switch ent.get(Statue) {
+                case Comp(_):
+                default:
+                    if (c_rag.owner.get_sure(PlayerComponent).player.Alive()) { 
+                        c_ent.entity.Remove();
+                    }
                 }
                 
             default:
+            }
+            switch [ent.get(GEntityComponent),ent.get(Ragdoll),ent.get(Statue)] {
+                case [Comp(c_ent),Comp(_),NONE]:
+                
+                default:
             }
         }
     }
@@ -307,18 +310,7 @@ class RagdollSystem extends System {
         });
 
     }
-    // function playerDeath(vic:GPlayerCompat,inflicter:Entity,attacker:Entity) {
-    //     if (GameManager.state.match(PLAYING(_))) {
-    //         var di_ragdoll = newRagdoll(vic);
-    //         switch vic.get(InfectedComponent) {
-    //         case Comp(_):
-    //             //FIXME FIXME AAAAHHHHH
-    //             var c_rag = di_ragdoll.id.get_sure(Ragdoll);
-    //             c_rag.reveal = WAIT(GlobalLib.CurTime() + 5);
-    //         default:
-    //         }
-    //     }
-    // }
+    
 
     public function newRagdoll(owner:GPlayerCompat,old:Entity):GEntCompat {
         var rag = createProp();
@@ -400,6 +392,7 @@ class RagdollSystem extends System {
                     newphysob.SetAngles(bp.b);
                     if (oldphysob != null) {
                         newphysob.SetVelocityInstantaneous(oldphysob.GetVelocity());
+                        newphysob.SetVelocity(oldphysob.GetVelocity());
                     }
                 } else {
                     var translate = newphysob.GetPos() - newlocpos;  
@@ -414,3 +407,4 @@ class RagdollSystem extends System {
 
     #end
 }
+

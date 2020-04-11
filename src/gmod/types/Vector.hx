@@ -1,5 +1,6 @@
 package gmod.types;
 
+import gmod.libs.UtilLib;
 import gmod.libs.GlobalLib;
 import gmod.gclass.Vector as GVec;
 @:forward
@@ -30,4 +31,12 @@ extern abstract Vector(GVec) from GVec to GVec {
         return untyped __lua__("{0} / {1}",this,other);
     }
 
+    @:to
+    public inline function toString():String {
+        return UtilLib.TypeToString(this);
+    }
+    @:from
+    public static inline function fromString(x:String):Vector {
+        return UtilLib.StringToType(x,"vector");
+    }
 }

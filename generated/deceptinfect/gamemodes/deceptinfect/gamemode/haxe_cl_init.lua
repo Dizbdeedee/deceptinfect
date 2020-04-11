@@ -627,6 +627,7 @@ Main.main = function()
     local this1 = x.player;
     x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this1);
   end;
+  _G.file.CreateDir("deceptinfect");
   _G.game.CleanUpMap();
   __deceptinfect_ecswip_SignalStorage.initEvents();
   __deceptinfect_GameManager.init();
@@ -639,7 +640,7 @@ Main.main = function()
   end;
   _G.util.PrecacheModel(__deceptinfect_Misc.infModel);
   __deceptinfect_client_ClientOverrides.new();
-  __haxe_Log.trace("looool!!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=54,className="Main",methodName="main"}));
+  __haxe_Log.trace("looool!!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=56,className="Main",methodName="main"}));
   __deceptinfect_ecswip_SystemManager.initAllSystems();
   _G.math.randomseed(_G.RealTime());
 end
@@ -3549,7 +3550,7 @@ __deceptinfect_game_RagdollSystem.prototype.run_client = function(self)
     local rag1 = rag:next();
     local mdl = rag1:GetNWString("showwep");
     if (((mdl ~= nil) and (mdl ~= "")) and (rag1.showwep == nil)) then 
-      __haxe_Log.trace(mdl, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/RagdollSystem.hx",lineNumber=74,className="deceptinfect.game.RagdollSystem",methodName="run_client"}));
+      __haxe_Log.trace(mdl, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/RagdollSystem.hx",lineNumber=89,className="deceptinfect.game.RagdollSystem",methodName="run_client"}));
       rag1.showwep = true;
       local ent = _G.ClientsideModel(mdl);
       ent:SetupBones();
