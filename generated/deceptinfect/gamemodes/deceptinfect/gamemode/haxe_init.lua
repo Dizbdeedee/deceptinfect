@@ -66,7 +66,6 @@ local NETMESSAGE_gamestate = _hx_e()
 local NETMESSAGE_geiger = _hx_e()
 local NETMESSAGE_grabend = _hx_e()
 local NETMESSAGE_grabupdate = _hx_e()
-local NETMESSAGE_statue = _hx_e()
 local Reflect = _hx_e()
 local String = _hx_e()
 local Std = _hx_e()
@@ -77,10 +76,7 @@ local Type = _hx_e()
 __gmod_hooks_Gm = _hx_e()
 __gmod_gamemode_BuildOverrides = _hx_e()
 __deceptinfect_DeceptInfect = _hx_e()
-__deceptinfect__GEntCompat_GEntCompat_Impl_ = _hx_e()
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_ = _hx_e()
 __deceptinfect_GameInstance = _hx_e()
-__deceptinfect_PLAYING_STATE = _hx_e()
 __deceptinfect_GAME_STATE = _hx_e()
 __tink_core_SignalObject = _hx_e()
 __tink_core_SignalTrigger = _hx_e()
@@ -90,8 +86,6 @@ __deceptinfect_GameValues = _hx_e()
 __deceptinfect_MapStorage = _hx_e()
 __deceptinfect_Misc = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
-__gmod_gamemode_BuildGamemodeTXT = _hx_e()
-__deceptinfect_TXT = _hx_e()
 __gmod_swep_SWEP = _hx_e()
 __gmod_swep_SwepBuild = _hx_e()
 __deceptinfect_Weapon_di_scan = _hx_e()
@@ -102,16 +96,12 @@ __deceptinfect_abilities_Cooldown = _hx_e()
 __deceptinfect_ecswip_System = _hx_e()
 __deceptinfect_abilities_FormSystem = _hx_e()
 __deceptinfect_client_GeigerSystem = _hx_e()
-__deceptinfect_client_PVS = _hx_e()
 __haxe_IMap = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
 __deceptinfect_ecswip_ComponentManager = _hx_e()
-__deceptinfect_ecswip__ComponentManager_DI_ID_Impl_ = _hx_e()
 __deceptinfect_ecswip_ComponentTools = _hx_e()
 __deceptinfect_ecswip_ComponentState = _hx_e()
-__deceptinfect_ecswip_HasGEnt = _hx_e()
 __deceptinfect_ecswip_DamagePenaltyHidden = _hx_e()
-__deceptinfect_ecswip_Family = _hx_e()
 __deceptinfect_ecswip_GEntityComponent = _hx_e()
 __deceptinfect_ecswip_GrabAccepter = _hx_e()
 __deceptinfect_ecswip_GrabAcceptState = _hx_e()
@@ -145,7 +135,6 @@ __deceptinfect_game_SlowMotionSystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
-__gmod_sent_SentBuild = _hx_e()
 __deceptinfect_ents_Di_battery = _hx_e()
 __deceptinfect_ents_Di_charger = _hx_e()
 __gmod_sent_ENT_BRUSH = _hx_e()
@@ -189,26 +178,16 @@ __deceptinfect_radiation_RadiationState = _hx_e()
 __deceptinfect_radiation_RadLifetime = _hx_e()
 __deceptinfect_radiation_RadTypes = _hx_e()
 __deceptinfect_radiation_RadiationTypes = _hx_e()
+__deceptinfect_sabotage_S_Break = _hx_e()
 __deceptinfect_statuses_Walkthroughable = _hx_e()
 __deceptinfect_util_Cooldown = _hx_e()
-__deceptinfect_util_CooldownTools = _hx_e()
 __deceptinfect_util_EntityExt = _hx_e()
 __deceptinfect_util_MinMaxTools = _hx_e()
 __deceptinfect_util_PlayerExt = _hx_e()
 __deceptinfect_util_TimeKeep = _hx_e()
 __deceptinfect_util_Util = _hx_e()
-__gmod__EntityClass_EntityClass_Impl_ = _hx_e()
-__gmod__EntityClass_HaxeGeneratedEntity_Impl_ = _hx_e()
-__gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_ = _hx_e()
-__gmod_HaxeMultiReturn_2 = _hx_e()
-__gmod__Hook_Hook_Impl_ = _hx_e()
 __gmod_PairTools = _hx_e()
 local __lua_Boot = _hx_e()
-__gmod_TableTools = _hx_e()
-__gmod_hooks_Swep = _hx_e()
-__gmod_macros_CompileTime = _hx_e()
-__gmod_macros_SentType = _hx_e()
-__haxe_StackItem = _hx_e()
 __haxe_EntryPoint = _hx_e()
 __haxe_Json = _hx_e()
 __haxe_Log = _hx_e()
@@ -217,56 +196,21 @@ __haxe_MainLoop = _hx_e()
 __haxe_Timer = _hx_e()
 __haxe_ds_BalancedTree = _hx_e()
 __haxe_ds_TreeNode = _hx_e()
-__haxe_ds_Either = _hx_e()
 __haxe_ds_EnumValueMap = _hx_e()
 __haxe_ds_IntMap = _hx_e()
 __haxe_ds_Option = _hx_e()
 __haxe_ds_StringMap = _hx_e()
-__haxe_format_JsonParser = _hx_e()
 __haxe_format_JsonPrinter = _hx_e()
 __lua_Boot = _hx_e()
 __haxe_iterators_MapKeyValueIterator = _hx_e()
 __lua_UserData = _hx_e()
 __lua_Thread = _hx_e()
 __lua_lib_luasocket_Socket = _G.require("socket")
-__tink_core_Annex = _hx_e()
 __tink_core__Callback_Callback_Impl_ = _hx_e()
 __tink_core_LinkObject = _hx_e()
-__tink_core__Callback_CallbackLink_Impl_ = _hx_e()
-__tink_core_SimpleLink = _hx_e()
-__tink_core__Callback_LinkPair = _hx_e()
 __tink_core__Callback_ListCell = _hx_e()
 __tink_core_CallbackList = _hx_e()
-__tink_core_TypedError = _hx_e()
-__tink_core__Error_Stack_Impl_ = _hx_e()
-__tink_core__Future_FutureObject = _hx_e()
-__tink_core__Future_NeverFuture = _hx_e()
 __tink_core_Noise = _hx_e()
-__tink_core__Lazy_LazyObject = _hx_e()
-__tink_core__Lazy_LazyConst = _hx_e()
-__tink_core__Future_SyncFuture = _hx_e()
-__tink_core__Future_Future_Impl_ = _hx_e()
-__tink_core_FutureTrigger = _hx_e()
-__tink_core__Future_SuspendableFuture = _hx_e()
-__tink_core__Lazy_Lazy_Impl_ = _hx_e()
-__tink_core__Lazy_LazyFunc = _hx_e()
-__tink_core_NamedWith = _hx_e()
-__tink_core_OptionTools = _hx_e()
-__tink_core_OptionIter = _hx_e()
-__tink_core_Outcome = _hx_e()
-__tink_core_OutcomeTools = _hx_e()
-__tink_core__Outcome_OutcomeMapper_Impl_ = _hx_e()
-__tink_core__Pair_Pair_Impl_ = _hx_e()
-__tink_core_MPair = _hx_e()
-__tink_core__Promise_Promise_Impl_ = _hx_e()
-__tink_core__Promise_Next_Impl_ = _hx_e()
-__tink_core__Promise_Recover_Impl_ = _hx_e()
-__tink_core__Promise_Combiner_Impl_ = _hx_e()
-__tink_core__Promise_PromiseTrigger_Impl_ = _hx_e()
-__tink_core__Ref_Ref_Impl_ = _hx_e()
-__tink_core__Signal_Signal_Impl_ = _hx_e()
-__tink_core__Signal_SimpleSignal = _hx_e()
-__tink_core__Signal_Suspendable = _hx_e()
 
 local _hx_bind, _hx_bit, _hx_staticToInstance, _hx_funcToField, _hx_maxn, _hx_print, _hx_apply_self, _hx_box_mr, _hx_bit_clamp, _hx_table, _hx_bit_raw
 local _hx_pcall_default = {};
@@ -293,14 +237,13 @@ Array.prototype.concat = function(self,a)
     _g1 = _g1 + 1;
     _g:push(i);
   end;
-  local ret = _g;
   local _g3 = 0;
   while (_g3 < a.length) do 
     local i1 = a[_g3];
     _g3 = _g3 + 1;
-    ret:push(i1);
+    _g:push(i1);
   end;
-  do return ret end
+  do return _g end
 end
 Array.prototype.join = function(self,sep) 
   local tbl = ({});
@@ -313,8 +256,7 @@ Array.prototype.join = function(self,sep)
     do return _gthis[cur_length - 1] end;
   end});
   while (i:hasNext()) do 
-    local i1 = i:next();
-    _G.table.insert(tbl, Std.string(i1));
+    _G.table.insert(tbl, Std.string(i:next()));
   end;
   do return _G.table.concat(tbl, sep) end
 end
@@ -377,8 +319,7 @@ Array.prototype.slice = function(self,pos,_end)
   local _g1 = _end;
   while (_g < _g1) do 
     _g = _g + 1;
-    local i = _g - 1;
-    ret:push(self[i]);
+    ret:push(self[_g - 1]);
   end;
   do return ret end
 end
@@ -443,8 +384,7 @@ end
 Array.prototype.unshift = function(self,x) 
   local len = self.length;
   local _g = 0;
-  local _g1 = len;
-  while (_g < _g1) do 
+  while (_g < len) do 
     _g = _g + 1;
     local i = _g - 1;
     self[len - i] = self[(len - i) - 1];
@@ -502,8 +442,7 @@ Array.prototype.indexOf = function(self,x,fromIndex)
     end;
   end;
   local _g = fromIndex;
-  local _g1 = _end;
-  while (_g < _g1) do 
+  while (_g < _end) do 
     _g = _g + 1;
     local i = _g - 1;
     if (x == self[i]) then 
@@ -587,8 +526,7 @@ Array.prototype.resize = function(self,len)
       local _g1 = self.length;
       while (_g < _g1) do 
         _g = _g + 1;
-        local i = _g - 1;
-        self[i] = nil;
+        self[_g - 1] = nil;
       end;
       self.length = len;
     end;
@@ -669,8 +607,7 @@ Lambda.__name__ = "Lambda"
 Lambda.has = function(it,elt) 
   local x = it:iterator();
   while (x:hasNext()) do 
-    local x1 = x:next();
-    if (x1 == elt) then 
+    if (x:next() == elt) then 
       do return true end;
     end;
   end;
@@ -694,7 +631,7 @@ Main.main = function()
     _G.util.PrecacheModel(model);
   end;
   _G.util.PrecacheModel(__deceptinfect_Misc.infModel);
-  __haxe_Log.trace("looool!!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=56,className="Main",methodName="main"}));
+  __haxe_Log.trace("looool!!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=57,className="Main",methodName="main"}));
   _G.game.ConsoleCommand("mp_falldamage 1\n");
   __deceptinfect_GameManager.cleanup();
   _G.math.randomseed(_G.RealTime());
@@ -815,13 +752,6 @@ NETMESSAGE_di_infected.prototype.sendFilter = function(self,data,recv,unreliable
   _G.net.Start("di_infected", unreliable);
   _G.net.Send(recv);
 end
-NETMESSAGE_di_infected.prototype.broadcast = function(self,data,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("di_infected", unreliable);
-  _G.net.Broadcast();
-end
 
 NETMESSAGE_di_infected.prototype.__class__ =  NETMESSAGE_di_infected
 
@@ -860,14 +790,6 @@ NETMESSAGE_di_infection.prototype.sendFilter = function(self,data,recv,unreliabl
   _G.net.Start("di_infection", unreliable);
   _G.net.WriteFloat(data.infection);
   _G.net.Send(recv);
-end
-NETMESSAGE_di_infection.prototype.broadcast = function(self,data,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("di_infection", unreliable);
-  _G.net.WriteFloat(data.infection);
-  _G.net.Broadcast();
 end
 
 NETMESSAGE_di_infection.prototype.__class__ =  NETMESSAGE_di_infection
@@ -911,15 +833,6 @@ NETMESSAGE_gamestate.prototype.sendFilter = function(self,data,recv,unreliable)
   _G.net.WriteFloat(data.time);
   _G.net.Send(recv);
 end
-NETMESSAGE_gamestate.prototype.broadcast = function(self,data,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("gamestate", unreliable);
-  _G.net.WriteInt(data.state, 32);
-  _G.net.WriteFloat(data.time);
-  _G.net.Broadcast();
-end
 
 NETMESSAGE_gamestate.prototype.__class__ =  NETMESSAGE_gamestate
 
@@ -959,14 +872,6 @@ NETMESSAGE_geiger.prototype.sendFilter = function(self,data,recv,unreliable)
   _G.net.WriteFloat(data.geiger);
   _G.net.Send(recv);
 end
-NETMESSAGE_geiger.prototype.broadcast = function(self,data,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("geiger", unreliable);
-  _G.net.WriteFloat(data.geiger);
-  _G.net.Broadcast();
-end
 
 NETMESSAGE_geiger.prototype.__class__ =  NETMESSAGE_geiger
 
@@ -1005,14 +910,6 @@ NETMESSAGE_grabend.prototype.sendFilter = function(self,data,recv,unreliable)
   _G.net.Start("grabend", unreliable);
   _G.net.WriteInt(data.index, 32);
   _G.net.Send(recv);
-end
-NETMESSAGE_grabend.prototype.broadcast = function(self,data,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("grabend", unreliable);
-  _G.net.WriteInt(data.index, 32);
-  _G.net.Broadcast();
 end
 
 NETMESSAGE_grabend.prototype.__class__ =  NETMESSAGE_grabend
@@ -1059,81 +956,8 @@ NETMESSAGE_grabupdate.prototype.sendFilter = function(self,data,recv,unreliable)
   _G.net.WriteInt(data.index, 32);
   _G.net.Send(recv);
 end
-NETMESSAGE_grabupdate.prototype.broadcast = function(self,data,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("grabupdate", unreliable);
-  _G.net.WriteEntity(data.ent);
-  _G.net.WriteEntity(data.ent2);
-  _G.net.WriteInt(data.index, 32);
-  _G.net.Broadcast();
-end
 
 NETMESSAGE_grabupdate.prototype.__class__ =  NETMESSAGE_grabupdate
-
-NETMESSAGE_statue.new = function() 
-  local self = _hx_new(NETMESSAGE_statue.prototype)
-  NETMESSAGE_statue.super(self)
-  return self
-end
-NETMESSAGE_statue.super = function(self) 
-  _G.util.AddNetworkString("statue");
-end
-_hxClasses["NETMESSAGE_statue"] = NETMESSAGE_statue
-NETMESSAGE_statue.__name__ = "NETMESSAGE_statue"
-NETMESSAGE_statue.__interfaces__ = {__gmod_I_NET}
-NETMESSAGE_statue.prototype = _hx_a();
-NETMESSAGE_statue.prototype.send = function(self,data,recv,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("statue", unreliable);
-  _G.net.WriteTable(data.playerangle);
-  _G.net.WriteTable(data.playerbones);
-  _G.net.WriteString(data.playermodel);
-  _G.net.WriteVector(data.playerpos);
-  _G.net.WriteString(data.weaponmodel);
-  _G.net.Send(recv);
-end
-NETMESSAGE_statue.prototype.sendTable = function(self,data,recv,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("statue", unreliable);
-  _G.net.WriteTable(data.playerangle);
-  _G.net.WriteTable(data.playerbones);
-  _G.net.WriteString(data.playermodel);
-  _G.net.WriteVector(data.playerpos);
-  _G.net.WriteString(data.weaponmodel);
-  _G.net.Send(recv);
-end
-NETMESSAGE_statue.prototype.sendFilter = function(self,data,recv,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("statue", unreliable);
-  _G.net.WriteTable(data.playerangle);
-  _G.net.WriteTable(data.playerbones);
-  _G.net.WriteString(data.playermodel);
-  _G.net.WriteVector(data.playerpos);
-  _G.net.WriteString(data.weaponmodel);
-  _G.net.Send(recv);
-end
-NETMESSAGE_statue.prototype.broadcast = function(self,data,unreliable) 
-  if (unreliable == nil) then 
-    unreliable = false;
-  end;
-  _G.net.Start("statue", unreliable);
-  _G.net.WriteTable(data.playerangle);
-  _G.net.WriteTable(data.playerbones);
-  _G.net.WriteString(data.playermodel);
-  _G.net.WriteVector(data.playerpos);
-  _G.net.WriteString(data.weaponmodel);
-  _G.net.Broadcast();
-end
-
-NETMESSAGE_statue.prototype.__class__ =  NETMESSAGE_statue
 
 Reflect.new = {}
 _hxClasses["Reflect"] = Reflect
@@ -1287,7 +1111,6 @@ String.prototype.indexOf = function(self,str,startIndex)
   end;
 end
 String.prototype.lastIndexOf = function(self,str,startIndex) 
-  local i = 0;
   local ret = -1;
   if (startIndex == nil) then 
     startIndex = #self;
@@ -1317,13 +1140,6 @@ end
 String.prototype.split = function(self,delimiter) 
   local idx = 1;
   local ret = _hx_tab_array({}, 0);
-  local delim_offset = (function() 
-    local _hx_1
-    if (#delimiter > 0) then 
-    _hx_1 = #delimiter; else 
-    _hx_1 = 1; end
-    return _hx_1
-  end )();
   while (idx ~= nil) do 
     local newidx = 0;
     if (#delimiter > 0) then 
@@ -1336,8 +1152,7 @@ String.prototype.split = function(self,delimiter)
       end;
     end;
     if (newidx ~= nil) then 
-      local match = _G.string.sub(self, idx, newidx - 1);
-      ret:push(match);
+      ret:push(_G.string.sub(self, idx, newidx - 1));
       idx = newidx + #delimiter;
     else
       ret:push(_G.string.sub(self, idx, #self));
@@ -1411,111 +1226,6 @@ Std.int = function(x)
     end;
   end;
 end
-Std.parseInt = function(x) 
-  if (x == nil) then 
-    do return nil end;
-  end;
-  local hexMatch = _G.string.match(x, "^[ \t\r\n]*([%-+]*0[xX][%da-fA-F]*)");
-  if (hexMatch ~= nil) then 
-    local sign;
-    local _g = _G.string.byte(hexMatch, 1);
-    if (_g) == 43 then 
-      sign = 1;
-    elseif (_g) == 45 then 
-      sign = -1;else
-    sign = 0; end;
-    local pos = (function() 
-      local _hx_1
-      if (sign == 0) then 
-      _hx_1 = 2; else 
-      _hx_1 = 3; end
-      return _hx_1
-    end )();
-    local len = nil;
-    if ((len == nil) or (len > (pos + #hexMatch))) then 
-      len = #hexMatch;
-    else
-      if (len < 0) then 
-        len = #hexMatch + len;
-      end;
-    end;
-    if (pos < 0) then 
-      pos = #hexMatch + pos;
-    end;
-    if (pos < 0) then 
-      pos = 0;
-    end;
-    do return (function() 
-      local _hx_2
-      if (sign == -1) then 
-      _hx_2 = -1; else 
-      _hx_2 = 1; end
-      return _hx_2
-    end )() * _G.tonumber(_G.string.sub(hexMatch, pos + 1, pos + len), 16) end;
-  else
-    local intMatch = _G.string.match(x, "^ *[%-+]?%d*");
-    if (intMatch ~= nil) then 
-      do return _G.tonumber(intMatch) end;
-    else
-      do return nil end;
-    end;
-  end;
-end
-Std.parseFloat = function(x) 
-  if ((x == nil) or (x == "")) then 
-    do return (0/0) end;
-  end;
-  local digitMatch = _G.string.match(x, "^ *[%.%-+]?[0-9]%d*");
-  if (digitMatch == nil) then 
-    do return (0/0) end;
-  end;
-  local pos = #digitMatch;
-  local len = nil;
-  if ((len == nil) or (len > (pos + #x))) then 
-    len = #x;
-  else
-    if (len < 0) then 
-      len = #x + len;
-    end;
-  end;
-  if (pos < 0) then 
-    pos = #x + pos;
-  end;
-  if (pos < 0) then 
-    pos = 0;
-  end;
-  x = _G.string.sub(x, pos + 1, pos + len);
-  local decimalMatch = _G.string.match(x, "^%.%d*");
-  if (decimalMatch == nil) then 
-    decimalMatch = "";
-  end;
-  local pos1 = #decimalMatch;
-  local len1 = nil;
-  if ((len1 == nil) or (len1 > (pos1 + #x))) then 
-    len1 = #x;
-  else
-    if (len1 < 0) then 
-      len1 = #x + len1;
-    end;
-  end;
-  if (pos1 < 0) then 
-    pos1 = #x + pos1;
-  end;
-  if (pos1 < 0) then 
-    pos1 = 0;
-  end;
-  x = _G.string.sub(x, pos1 + 1, pos1 + len1);
-  local eMatch = _G.string.match(x, "^[eE][+%-]?%d+");
-  if (eMatch == nil) then 
-    eMatch = "";
-  end;
-  local result = _G.tonumber(Std.string(Std.string(digitMatch) .. Std.string(decimalMatch)) .. Std.string(eMatch));
-  if (result ~= nil) then 
-    do return result end;
-  else
-    do return (0/0) end;
-  end;
-end
 
 StringBuf.new = function() 
   local self = _hx_new(StringBuf.prototype)
@@ -1549,9 +1259,7 @@ StringTools.lpad = function(s,c,l)
     _G.table.insert(buf_b, str);
     buf_length = buf_length + #str;
   end;
-  local str1 = Std.string(s);
-  _G.table.insert(buf_b, str1);
-  buf_length = buf_length + #str1;
+  _G.table.insert(buf_b, Std.string(s));
   do return _G.table.concat(buf_b) end;
 end
 _hxClasses["ValueType"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="TNull","TInt","TFloat","TBool","TObject","TFunction","TClass","TEnum","TUnknown"},9)}
@@ -1733,356 +1441,6 @@ end
 __gmod_hooks_Gm.new = {}
 _hxClasses["gmod.hooks.Gm"] = __gmod_hooks_Gm
 __gmod_hooks_Gm.__name__ = "gmod.hooks.Gm"
-__gmod_hooks_Gm.prototype = _hx_a();
-__gmod_hooks_Gm.prototype.PlayerConnect = function(self,name,ip) 
-end
-__gmod_hooks_Gm.prototype.IsSpawnpointSuitable = function(self,ply,spawnpoint,makeSuitable) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.LoadGModSave = function(self,data,map,timestamp) 
-end
-__gmod_hooks_Gm.prototype.ShowTeam = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.ShouldCollide = function(self,ent1,ent2) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerCanPickupItem = function(self,ply,item) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.CreateEntityRagdoll = function(self,owner,ragdoll) 
-end
-__gmod_hooks_Gm.prototype.Saved = function(self) 
-end
-__gmod_hooks_Gm.prototype.AllowPlayerPickup = function(self,ply,ent) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.ScalePlayerDamage = function(self,ply,hitgroup,dmginfo) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerInitialSpawn = function(self,player,transition) 
-end
-__gmod_hooks_Gm.prototype.PlayerJoinTeam = function(self,ply,team) 
-end
-__gmod_hooks_Gm.prototype.OnPhysgunFreeze = function(self,weapon,physobj,ent,ply) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerLoadout = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.PreCleanupMap = function(self) 
-end
-__gmod_hooks_Gm.prototype.CreateTeams = function(self) 
-end
-__gmod_hooks_Gm.prototype.OnLuaError = function(self,error,realm,name,id) 
-end
-__gmod_hooks_Gm.prototype.GravGunOnDropped = function(self,ply,ent) 
-end
-__gmod_hooks_Gm.prototype.KeyPress = function(self,ply,key) 
-end
-__gmod_hooks_Gm.prototype.HandlePlayerVaulting = function(self,ply,velocity) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerCanSeePlayersChat = function(self,text,teamOnly,listener,speaker) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerDeathThink = function(self,ply) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.EntityKeyValue = function(self,ent,key,value) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.HandlePlayerLanding = function(self,ply,velocity,onGround) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerCanPickupWeapon = function(self,ply,wep) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.WorkshopEnd = function(self) 
-end
-__gmod_hooks_Gm.prototype.PostPlayerDeath = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.SetPlayerSpeed = function(self,ply,walkSpeed,runSpeed) 
-end
-__gmod_hooks_Gm.prototype.FinishMove = function(self,ply,mv) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.CanPlayerSuicide = function(self,player) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.StartEntityDriving = function(self,ent,ply) 
-end
-__gmod_hooks_Gm.prototype.PlayerDeath = function(self,victim,inflictor,attacker) 
-end
-__gmod_hooks_Gm.prototype.PlayerCanHearPlayersVoice = function(self,listener,talker) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.OnPlayerChangedTeam = function(self,ply,oldTeam,newTeam) 
-end
-__gmod_hooks_Gm.prototype.HandlePlayerDriving = function(self,ply) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerEnteredVehicle = function(self,ply,veh,role) 
-end
-__gmod_hooks_Gm.prototype.PlayerSilentDeath = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.OnDamagedByExplosion = function(self,ply,dmginfo) 
-end
-__gmod_hooks_Gm.prototype.PlayerSay = function(self,sender,text,teamChat) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PostCleanupMap = function(self) 
-end
-__gmod_hooks_Gm.prototype.MouthMoveAnimation = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.PlayerPostThink = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.PlayerNoClip = function(self,ply,desiredState) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerDriveAnimate = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.PlayerLeaveVehicle = function(self,ply,veh) 
-end
-__gmod_hooks_Gm.prototype.Restored = function(self) 
-end
-__gmod_hooks_Gm.prototype.EndEntityDriving = function(self,ent,ply) 
-end
-__gmod_hooks_Gm.prototype.ShowSpare2 = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.PlayerSelectTeamSpawn = function(self,team,ply) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.NetworkIDValidated = function(self,name,steamID) 
-end
-__gmod_hooks_Gm.prototype.SetupMove = function(self,ply,mv,cmd) 
-end
-__gmod_hooks_Gm.prototype.PlayerButtonDown = function(self,ply,button) 
-end
-__gmod_hooks_Gm.prototype.DoAnimationEvent = function(self,ply,event,data) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.MenuStart = function(self) 
-end
-__gmod_hooks_Gm.prototype.StartGame = function(self) 
-end
-__gmod_hooks_Gm.prototype.PlayerButtonUp = function(self,ply,button) 
-end
-__gmod_hooks_Gm.prototype.WorkshopDownloadFile = function(self,id,imageID,title,size) 
-end
-__gmod_hooks_Gm.prototype.VariableEdited = function(self,ent,ply,key,val,editor) 
-end
-__gmod_hooks_Gm.prototype.PlayerSwitchFlashlight = function(self,ply,enabled) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.OnNPCKilled = function(self,npc,attacker,inflictor) 
-end
-__gmod_hooks_Gm.prototype.PlayerSpray = function(self,sprayer) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerFootstep = function(self,ply,pos,foot,sound,volume,filter) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.OnViewModelChanged = function(self,viewmodel,oldModel,newModel) 
-end
-__gmod_hooks_Gm.prototype.PropBreak = function(self,attacker,prop) 
-end
-__gmod_hooks_Gm.prototype.GetPreferredCarryAngles = function(self,ent) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.CanPlayerUnfreeze = function(self,player,entity,phys) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PostGamemodeLoaded = function(self) 
-end
-__gmod_hooks_Gm.prototype.PhysgunDrop = function(self,ply,ent) 
-end
-__gmod_hooks_Gm.prototype.PlayerDeathSound = function(self) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.HandlePlayerSwimming = function(self,ply,velocity) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.CalcMainActivity = function(self,ply,vel) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerSetHandsModel = function(self,ply,ent) 
-end
-__gmod_hooks_Gm.prototype.OnGamemodeLoaded = function(self) 
-end
-__gmod_hooks_Gm.prototype.PlayerSpawn = function(self,player,transition) 
-end
-__gmod_hooks_Gm.prototype.GravGunPunt = function(self,ply,ent) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.GetFallDamage = function(self,ply,speed) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.CanExitVehicle = function(self,veh,ply) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.AcceptInput = function(self,ent,input,activator,caller,value) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.OnPhysgunPickup = function(self,ply,ent) 
-end
-__gmod_hooks_Gm.prototype.PhysgunPickup = function(self,player,entity) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.ShowHelp = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.OnPlayerHitGround = function(self,player,inWater,onFloater,speed) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.GravGunOnPickedUp = function(self,ply,ent) 
-end
-__gmod_hooks_Gm.prototype.Move = function(self,ply,mv) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerTick = function(self,player,mv) 
-end
-__gmod_hooks_Gm.prototype.Initialize = function(self) 
-end
-__gmod_hooks_Gm.prototype.StartCommand = function(self,ply,ucmd) 
-end
-__gmod_hooks_Gm.prototype.PlayerCanJoinTeam = function(self,ply,team) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.CaptureVideo = function(self) 
-end
-__gmod_hooks_Gm.prototype.KeyRelease = function(self,ply,key) 
-end
-__gmod_hooks_Gm.prototype.PlayerFrozeObject = function(self,ply,ent,physobj) 
-end
-__gmod_hooks_Gm.prototype.CheckPassword = function(self,steamID64,ipAddress,svPassword,clPassword,name) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.ShowSpare1 = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.WorkshopDownloadProgress = function(self,id,imageID,title,downloaded,expected) 
-end
-__gmod_hooks_Gm.prototype.PlayerUnfrozeObject = function(self,ply,ent,physobj) 
-end
-__gmod_hooks_Gm.prototype.TranslateActivity = function(self,ply,act) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerShouldTaunt = function(self,ply,act) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.VehicleMove = function(self,ply,veh,mv) 
-end
-__gmod_hooks_Gm.prototype.GravGunPickupAllowed = function(self,ply,ent) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.ShutDown = function(self) 
-end
-__gmod_hooks_Gm.prototype.CanEditVariable = function(self,ent,ply,key,val,editor) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.EntityNetworkedVarChanged = function(self,ent,name,oldval,newval) 
-end
-__gmod_hooks_Gm.prototype.EntityFireBullets = function(self,ent,data) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.HandlePlayerJumping = function(self,ply,velocity) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.Think = function(self) 
-end
-__gmod_hooks_Gm.prototype.DoPlayerDeath = function(self,ply,attacker,dmg) 
-end
-__gmod_hooks_Gm.prototype.EntityTakeDamage = function(self,target,dmg) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.ScaleNPCDamage = function(self,npc,hitgroup,dmginfo) 
-end
-__gmod_hooks_Gm.prototype.WeaponEquip = function(self,weapon,owner) 
-end
-__gmod_hooks_Gm.prototype.PreGamemodeLoaded = function(self) 
-end
-__gmod_hooks_Gm.prototype.WorkshopStart = function(self) 
-end
-__gmod_hooks_Gm.prototype.PlayerHurt = function(self,victim,attacker,healthRemaining,damageTaken) 
-end
-__gmod_hooks_Gm.prototype.WorkshopDownloadTotals = function(self,remain,total) 
-end
-__gmod_hooks_Gm.prototype.PlayerShouldTakeDamage = function(self,ply,attacker) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.Tick = function(self) 
-end
-__gmod_hooks_Gm.prototype.UpdateAnimation = function(self,ply,velocity,maxSeqGroundSpeed) 
-end
-__gmod_hooks_Gm.prototype.EntityEmitSound = function(self,data) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.GameContentChanged = function(self) 
-end
-__gmod_hooks_Gm.prototype.CanPlayerEnterVehicle = function(self,player,vehicle,role) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerSpawnAsSpectator = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.SetupPlayerVisibility = function(self,ply,viewEntity) 
-end
-__gmod_hooks_Gm.prototype.PlayerStartTaunt = function(self,ply,act,length) 
-end
-__gmod_hooks_Gm.prototype.PlayerTraceAttack = function(self,ply,dmginfo,dir,trace) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.GetGameDescription = function(self) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerSelectSpawn = function(self,ply,transition) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.InitPostEntity = function(self) 
-end
-__gmod_hooks_Gm.prototype.GrabEarAnimation = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.PlayerSetModel = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.PlayerDroppedWeapon = function(self,owner,wep) 
-end
-__gmod_hooks_Gm.prototype.WorkshopDownloadedFile = function(self,id,title) 
-end
-__gmod_hooks_Gm.prototype.PlayerRequestTeam = function(self,ply,team) 
-end
-__gmod_hooks_Gm.prototype.PlayerUse = function(self,ply,ent) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.HandlePlayerNoClipping = function(self,ply,velocity) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.HandlePlayerDucking = function(self,ply,velocity) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.EntityRemoved = function(self,ent) 
-end
-__gmod_hooks_Gm.prototype.OnReloaded = function(self) 
-end
-__gmod_hooks_Gm.prototype.WorkshopSubscriptionsProgress = function(self,num,max) 
-end
-__gmod_hooks_Gm.prototype.OnEntityCreated = function(self,entity) 
-end
-__gmod_hooks_Gm.prototype.PlayerStepSoundTime = function(self,ply,type,walking) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerSwitchWeapon = function(self,player,oldWeapon,newWeapon) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerDisconnected = function(self,ply) 
-end
-__gmod_hooks_Gm.prototype.OnPhysgunReload = function(self,physgun,ply) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.PlayerAuthed = function(self,ply,steamid,uniqueid) 
-end
-__gmod_hooks_Gm.prototype.FindUseEntity = function(self,ply,defaultEnt) 
-  do return nil end
-end
-__gmod_hooks_Gm.prototype.postIntialize = function(self) 
-end
-
-__gmod_hooks_Gm.prototype.__class__ =  __gmod_hooks_Gm
 
 __gmod_gamemode_BuildOverrides.new = {}
 _hxClasses["gmod.gamemode.BuildOverrides"] = __gmod_gamemode_BuildOverrides
@@ -2119,7 +1477,6 @@ __deceptinfect_DeceptInfect.super = function(self)
   GM.PlayerCanHearPlayersVoice = function(GM,...) return self:PlayerCanHearPlayersVoice(...) end;
   self["self"] = GM;
   __deceptinfect_DeceptInfect.instance = self;
-  self:postIntialize();
 end
 _hxClasses["deceptinfect.DeceptInfect"] = __deceptinfect_DeceptInfect
 __deceptinfect_DeceptInfect.__name__ = "deceptinfect.DeceptInfect"
@@ -2148,9 +1505,7 @@ end
 __deceptinfect_DeceptInfect.prototype.OnEntityCreated = function(self,entity) 
   if (entity:IsPlayer()) then 
     local x = __deceptinfect_ecswip_PlayerComponent.new(entity);
-    local this1 = x.player;
-    x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this1);
-    local ent = this1;
+    x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(x.player);
   end;
 end
 __deceptinfect_DeceptInfect.prototype.EntityRemoved = function(self,ent) 
@@ -2158,17 +1513,16 @@ __deceptinfect_DeceptInfect.prototype.EntityRemoved = function(self,ent)
     __deceptinfect_ecswip_ComponentManager.removeEntity(ent.id);
     do return end;
   end;
-  local _g;
-  local _g1 = ent.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local id = _g[2];
-    __deceptinfect_ecswip_ComponentManager.removeEntity(id);
+  local _g = ent.id;
+  local _g1 = (function() 
+    local _hx_1
+    if (_g == nil) then 
+    _hx_1 = __haxe_ds_Option.None; else 
+    _hx_1 = __haxe_ds_Option.Some(_g); end
+    return _hx_1
+  end )();
+  if (_g1[1] == 0) then 
+    __deceptinfect_ecswip_ComponentManager.removeEntity(_g1[2]);
   end;
 end
 __deceptinfect_DeceptInfect.prototype.PlayerSilentDeath = function(self,ply) 
@@ -2193,11 +1547,10 @@ __deceptinfect_DeceptInfect.prototype.PlayerDisconnected = function(self,ply)
   __deceptinfect_ecswip_ComponentManager.removeEntity(ply.id);
 end
 __deceptinfect_DeceptInfect.prototype.PlayerButtonUp = function(self,ply,button) 
-  local button1 = button;
-  if (button1) == _G.KEY_E then 
-  elseif (button1) == _G.KEY_F then 
+  if (button) == _G.KEY_E then 
+  elseif (button) == _G.KEY_F then 
     __deceptinfect_abilities_FormSystem.attemptChangeForm(ply.id);
-  elseif (button1) == _G.KEY_L then 
+  elseif (button) == _G.KEY_L then 
     local plyr = _G.player.GetByID(1);
     local ent = _G.ents.Create("prop_ragdoll");
     ent:SetModel(plyr:GetModel());
@@ -2219,11 +1572,10 @@ __deceptinfect_DeceptInfect.prototype.PlayerButtonUp = function(self,ply,button)
     end;
     ent:SetCollisionGroup(_G.COLLISION_GROUP_WORLD);
     ent:SetSolid(_G.SOLID_NONE);
-    local plywep = ply:GetActiveWeapon();
-    ent:SetNWString("showwep", plywep:GetModel());
-  elseif (button1) == _G.KEY_M then 
+    ent:SetNWString("showwep", ply:GetActiveWeapon():GetModel());
+  elseif (button) == _G.KEY_M then 
     __haxe_Log.trace(__deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_PlayerComponent], _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=148,className="deceptinfect.DeceptInfect",methodName="PlayerButtonUp"}));
-  elseif (button1) == _G.KEY_SEMICOLON then 
+  elseif (button) == _G.KEY_SEMICOLON then 
     local plyr1 = _G.player.GetByID(1);
     __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_infection_InfectionSystem):makeInfected(plyr1.id);else end;
 end
@@ -2247,29 +1599,25 @@ __deceptinfect_DeceptInfect.prototype.PlayerSwitchWeapon = function(self,player,
   do return nil end
 end
 __deceptinfect_DeceptInfect.prototype.PlayerButtonDown = function(self,ply,button) 
-  local tmp = button == _G.KEY_E;
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeathSound = function(self) 
   do return true end
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply) 
   local this1 = ply.id;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp = comparray[this1];
-  local comp1 = __deceptinfect_ecswip_ComponentTools.sure(comp);
+  local comp = __deceptinfect_ecswip_ComponentTools.sure(__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[this1]);
   local reviveTime;
   local revive = false;
-  local _g = comp1.deathTime;
+  local _g = comp.deathTime;
   local tmp;
   local tmp1 = _g[1];
   if (tmp1) == 0 then 
     reviveTime = _G.CurTime() + 1;
     tmp = __deceptinfect_ecswip_DeathTime.DEAD(reviveTime);
   elseif (tmp1) == 1 then 
-    local rev = _g[2];
-    reviveTime = rev;
-    tmp = comp1.deathTime; end;
-  comp1.deathTime = tmp;
+    reviveTime = _g[2];
+    tmp = comp.deathTime; end;
+  comp.deathTime = tmp;
   if ((ply:IsBot() and (_G.CurTime() > reviveTime)) and __deceptinfect_GameManager.shouldAllowRespawn()) then 
     revive = true;
   end;
@@ -2280,20 +1628,20 @@ __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply)
     if ((_G.CurTime() > reviveTime) and __deceptinfect_GameManager.shouldAllowRespawn()) then 
       revive = true;
     end;
-    __deceptinfect_ecswip_Spectate.chooseSpectateTarget(comp1, __deceptinfect_ecswip_Spec_Direction.FORWARDS);
+    __deceptinfect_ecswip_Spectate.chooseSpectateTarget(comp, __deceptinfect_ecswip_Spec_Direction.FORWARDS);
   else
     if (ply:KeyPressed(_G.IN_ATTACK2)) then 
-      __deceptinfect_ecswip_Spectate.chooseSpectateTarget(comp1, __deceptinfect_ecswip_Spec_Direction.BACKWARDS);
+      __deceptinfect_ecswip_Spectate.chooseSpectateTarget(comp, __deceptinfect_ecswip_Spec_Direction.BACKWARDS);
     else
       if (ply:KeyPressed(_G.IN_JUMP) and __deceptinfect_util_PlayerExt.shouldFreeRoam(ply)) then 
         ply:UnSpectate();
         ply:Spectate(_G.OBS_MODE_ROAMING);
-        comp1.spec_next = 1;
+        comp.spec_next = 1;
       end;
     end;
   end;
   if (revive) then 
-    comp1.deathTime = __deceptinfect_ecswip_DeathTime.ALIVE;
+    comp.deathTime = __deceptinfect_ecswip_DeathTime.ALIVE;
     ply:UnSpectate();
     ply:Spawn();
     do return true end;
@@ -2303,14 +1651,11 @@ __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply)
 end
 __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,spawnpoint,makeSuitable) 
   local pos = spawnpoint:GetPos();
-  local this1 = _G.Vector(-30, -30, 0);
-  local otherVec = this1;
+  local otherVec = _G.Vector(-30, -30, 0);
   local blockers = pos + otherVec;
-  local this11 = _G.Vector(30, 30, 72);
-  local otherVec1 = this11;
+  local otherVec1 = _G.Vector(30, 30, 72);
   local blockers1 = _G.ents.FindInBox(blockers, pos + otherVec1);
-  local this12 = _G.Vector(1, 1, 1);
-  local otherVec2 = this12;
+  local otherVec2 = _G.Vector(1, 1, 1);
   local tracehit = _G.util.TraceEntity(_hx_o({__fields__={start=true,endpos=true},start=pos,endpos=pos + otherVec2}), ply);
   local ent = __gmod_PairTools.iterator(blockers1);
   while (ent:hasNext()) do 
@@ -2318,11 +1663,9 @@ __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,s
     if (ent1:IsPlayer()) then 
       local blockPly = ent1;
       __deceptinfect_util_PlayerExt.setWalkthroughable(blockPly, true);
-      local this2 = blockPly.id;
-      __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_statuses_Walkthroughable.new(), this2);
+      __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_statuses_Walkthroughable.new(), blockPly.id);
       __deceptinfect_util_PlayerExt.setWalkthroughable(ply, true);
-      local this3 = ply.id;
-      __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_statuses_Walkthroughable.new(), this3);
+      __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_statuses_Walkthroughable.new(), ply.id);
     end;
   end;
   if (tracehit.HitWorld) then 
@@ -2341,17 +1684,16 @@ __deceptinfect_DeceptInfect.prototype.PlayerSelectSpawn = function(self,ply,tran
   do return nil end
 end
 __deceptinfect_DeceptInfect.prototype.EntityTakeDamage = function(self,target,dmg) 
-  local _g;
-  local _g1 = target.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local id = _g[2];
-    __deceptinfect_ecswip_SignalStorage.entDamageTrigger.handlers:invoke(_hx_o({__fields__={vicID=true,dmg=true,entity=true},vicID=id,dmg=dmg,entity=target}));
+  local _g = target.id;
+  local _g1 = (function() 
+    local _hx_1
+    if (_g == nil) then 
+    _hx_1 = __haxe_ds_Option.None; else 
+    _hx_1 = __haxe_ds_Option.Some(_g); end
+    return _hx_1
+  end )();
+  if (_g1[1] == 0) then 
+    __deceptinfect_ecswip_SignalStorage.entDamageTrigger.handlers:invoke(_hx_o({__fields__={vicID=true,dmg=true,entity=true},vicID=_g1[2],dmg=dmg,entity=target}));
   end;
   do return nil end
 end
@@ -2367,131 +1709,6 @@ __deceptinfect_DeceptInfect.prototype.__class__ =  __deceptinfect_DeceptInfect
 __deceptinfect_DeceptInfect.__super__ = __gmod_hooks_Gm
 setmetatable(__deceptinfect_DeceptInfect.prototype,{__index=__gmod_hooks_Gm.prototype})
 
-__deceptinfect__GEntCompat_GEntCompat_Impl_.new = {}
-_hxClasses["deceptinfect._GEntCompat.GEntCompat_Impl_"] = __deceptinfect__GEntCompat_GEntCompat_Impl_
-__deceptinfect__GEntCompat_GEntCompat_Impl_.__name__ = "deceptinfect._GEntCompat.GEntCompat_Impl_"
-__deceptinfect__GEntCompat_GEntCompat_Impl_.get_id = function(this1) 
-  do return this1.id end;
-end
-__deceptinfect__GEntCompat_GEntCompat_Impl_.has_id = function(this1) 
-  local _g = this1.id;
-  if (_g == nil) then 
-    do return __haxe_ds_Option.None end;
-  else
-    local x = _g;
-    do return __haxe_ds_Option.Some(x) end;
-  end;
-end
-__deceptinfect__GEntCompat_GEntCompat_Impl_.get = function(this1,x) 
-  local this2 = this1.id;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[this2];
-  do return comp end;
-end
-__deceptinfect__GEntCompat_GEntCompat_Impl_.infectedPlayer = function(this1) 
-  local _g;
-  local _g1 = this1.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local id = _g[2];
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent);
-    local comp = comparray[id];
-    local _g2 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-    local comp1 = comparray1[id];
-    local _g11 = comp1;
-    if (_g11[1] == 1) then 
-      if (_g2[1] == 1) then 
-        local _g3 = _g2[2];
-        local p = _g11[2];
-        do return __haxe_ds_Option.Some(p) end;
-      else
-        do return __haxe_ds_Option.None end;
-      end;
-    else
-      do return __haxe_ds_Option.None end;
-    end;
-  else
-    do return __haxe_ds_Option.None end;
-  end;
-end
-__deceptinfect__GEntCompat_GEntCompat_Impl_.isPlayer = function(this1) 
-  local _g;
-  local _g1 = this1.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local id = _g[2];
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-    local comp = comparray[id];
-    local _g2 = comp;
-    if (_g2[1] == 1) then 
-      local p = _g2[2];
-      do return __haxe_ds_Option.Some(p) end;
-    else
-      do return __haxe_ds_Option.None end;
-    end;
-  else
-    do return __haxe_ds_Option.None end;
-  end;
-end
-__deceptinfect__GEntCompat_GEntCompat_Impl_._new = function(x) 
-  local this1 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  do return this1 end;
-end
-
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_.new = {}
-_hxClasses["deceptinfect._GEntCompat.GPlayerCompat_Impl_"] = __deceptinfect__GEntCompat_GPlayerCompat_Impl_
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_.__name__ = "deceptinfect._GEntCompat.GPlayerCompat_Impl_"
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_.get_id = function(this1) 
-  do return this1.id end;
-end
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_.has_id = function(this1) 
-  local _g = this1.id;
-  if (_g == nil) then 
-    do return __haxe_ds_Option.None end;
-  else
-    local x = _g;
-    do return __haxe_ds_Option.Some(x) end;
-  end;
-end
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_.has_id_2 = function(this1) 
-  local _g = this1.id;
-  if (_g == nil) then 
-    do return false end;
-  else
-    local x = _g;
-    do return true end;
-  end;
-end
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_.get = function(this1,x) 
-  local this2 = this1.id;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[this2];
-  do return comp end;
-end
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_.isInfected = function(this1) 
-  local this2 = this1.id;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent);
-  local comp = comparray[this2];
-  do return Type.enumEq(comp, __deceptinfect_ecswip_ComponentState.Comp(nil)) end;
-end
-__deceptinfect__GEntCompat_GPlayerCompat_Impl_._new = function(x) 
-  local this1 = x.player;
-  x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this1);
-  do return this1 end;
-end
-
 __deceptinfect_GameInstance.new = function() 
   local self = _hx_new(__deceptinfect_GameInstance.prototype)
   __deceptinfect_GameInstance.super(self)
@@ -2501,23 +1718,15 @@ __deceptinfect_GameInstance.super = function(self)
   local ret = ({length = 1});
   ret[0] = 0.0;
   self.baseInfection = ret;
-  self.lastTick = nil;
   self.totalGameTime = 0;
-  self.players = _hx_tab_array({}, 0);
-  self.numPlayers = 0;
 end
 _hxClasses["deceptinfect.GameInstance"] = __deceptinfect_GameInstance
 __deceptinfect_GameInstance.__name__ = "deceptinfect.GameInstance"
 __deceptinfect_GameInstance.prototype = _hx_a();
-__deceptinfect_GameInstance.prototype.numPlayers= nil;
-__deceptinfect_GameInstance.prototype.players= nil;
-__deceptinfect_GameInstance.prototype.queen= nil;
 __deceptinfect_GameInstance.prototype.totalGameTime= nil;
-__deceptinfect_GameInstance.prototype.lastTick= nil;
 __deceptinfect_GameInstance.prototype.baseInfection= nil;
 __deceptinfect_GameInstance.prototype.start = function(self) 
   self:setTime();
-  self:calcBaseInfection();
   local chargerSpawn = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_SpawnSystem).obj:getRandom();
   local ent = _G.ents.Create("di_charger");
   chargerSpawn:spawn(ent);
@@ -2535,43 +1744,19 @@ __deceptinfect_GameInstance.prototype.start = function(self)
   local evacZoneSpawn = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_SpawnSystem).evac:getRandom();
   evacZoneSpawn:spawn(evacZone);
 end
-__deceptinfect_GameInstance.prototype.setup = function(self) 
-end
-__deceptinfect_GameInstance.prototype.get_diffTime = function(self) 
-  if (self.lastTick ~= nil) then 
-    do return _G.CurTime() - self.lastTick end;
-  else
-    do return 0 end;
-  end;
-end
 __deceptinfect_GameInstance.prototype.think = function(self) 
   self.baseInfection[0] = self:calcBaseInfection();
 end
-__deceptinfect_GameInstance.prototype.addPlayers = function(self) 
-  local player = __gmod_PairTools.iterator(_G.player.GetAll());
-  while (player:hasNext()) do 
-    local player1 = player:next();
-    self.players:push(player1);
-  end;
-end
 __deceptinfect_GameInstance.prototype.calcBaseInfection = function(self) 
-  local baseInf = (100 / self.totalGameTime) * __deceptinfect_GameManager.diffTime;
-  do return baseInf end
+  do return (100 / self.totalGameTime) * __deceptinfect_GameManager.diffTime end
 end
 __deceptinfect_GameInstance.prototype.setTime = function(self) 
-  local time = __deceptinfect_GameValues.GAME_TIMER;
   local variance = __deceptinfect_GameValues.GAME_TIMER_VARIANCE;
-  self.totalGameTime = time + _G.math.random(-variance, variance);
+  self.totalGameTime = __deceptinfect_GameValues.GAME_TIMER + _G.math.random(-variance, variance);
   __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=98,className="deceptinfect.GameInstance",methodName="setTime"}));
 end
 
 __deceptinfect_GameInstance.prototype.__class__ =  __deceptinfect_GameInstance
-_hxClasses["deceptinfect.PLAYING_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NORMAL","EVAC"},2)}
-__deceptinfect_PLAYING_STATE = _hxClasses["deceptinfect.PLAYING_STATE"];
-__deceptinfect_PLAYING_STATE.NORMAL = _hx_tab_array({[0]="NORMAL",0,__enum__ = __deceptinfect_PLAYING_STATE},2)
-
-__deceptinfect_PLAYING_STATE.EVAC = _hx_tab_array({[0]="EVAC",1,__enum__ = __deceptinfect_PLAYING_STATE},2)
-
 _hxClasses["deceptinfect.GAME_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WAIT","SETTING_UP","PLAYING","ENDING"},4)}
 __deceptinfect_GAME_STATE = _hxClasses["deceptinfect.GAME_STATE"];
 __deceptinfect_GAME_STATE.WAIT = _hx_tab_array({[0]="WAIT",0,__enum__ = __deceptinfect_GAME_STATE},2)
@@ -2601,12 +1786,6 @@ __tink_core_SignalTrigger.__name__ = "tink.core.SignalTrigger"
 __tink_core_SignalTrigger.__interfaces__ = {__tink_core_SignalObject}
 __tink_core_SignalTrigger.prototype = _hx_a();
 __tink_core_SignalTrigger.prototype.handlers= nil;
-__tink_core_SignalTrigger.prototype.trigger = function(self,event) 
-  self.handlers:invoke(event);
-end
-__tink_core_SignalTrigger.prototype.getLength = function(self) 
-  do return self.handlers.used end
-end
 __tink_core_SignalTrigger.prototype.handle = function(self,cb) 
   local _this = self.handlers;
   local node = __tink_core__Callback_ListCell.new(cb, _this);
@@ -2614,54 +1793,19 @@ __tink_core_SignalTrigger.prototype.handle = function(self,cb)
   _this.used = _this.used + 1;
   do return node end
 end
-__tink_core_SignalTrigger.prototype.clear = function(self) 
-  self.handlers:clear();
-end
-__tink_core_SignalTrigger.prototype.asSignal = function(self) 
-  do return self end
-end
 
 __tink_core_SignalTrigger.prototype.__class__ =  __tink_core_SignalTrigger
 
 __deceptinfect_GameManager.new = {}
 _hxClasses["deceptinfect.GameManager"] = __deceptinfect_GameManager
 __deceptinfect_GameManager.__name__ = "deceptinfect.GameManager"
-__deceptinfect_GameManager.isPlaying = function() 
-  local _g = __deceptinfect_GameManager.state;
-  if (_g[1] == 2) then 
-    local _g1 = _g[2];
-    do return true end;
-  else
-    do return false end;
-  end;
-end
 __deceptinfect_GameManager.shouldAllowRespawn = function() 
-  local _g = __deceptinfect_GameManager.state;
-  local tmp = _g[1];
+  local tmp = __deceptinfect_GameManager.state[1];
   if (tmp) == 0 then 
     do return true end;
   elseif (tmp) == 1 then 
-    local _g2 = _g[3];
-    local _g1 = _g[2];
     do return true end;else
   do return false end; end;
-end
-__deceptinfect_GameManager.sure = function() 
-  local _g = __deceptinfect_GameManager.state;
-  local tmp = _g[1];
-  if (tmp) == 0 then 
-    _G.error("Game not avaliable at sure statement!",0);
-  elseif (tmp) == 1 then 
-    local _g4 = _g[3];
-    local x = _g[2];
-    do return x end;
-  elseif (tmp) == 2 then 
-    local x1 = _g[2];
-    do return x1 end;
-  elseif (tmp) == 3 then 
-    local _g2 = _g[3];
-    local x2 = _g[2];
-    do return x2 end; end;
 end
 __deceptinfect_GameManager.initPlayer = function(ply) 
   local p = ply.id;
@@ -2682,10 +1826,7 @@ __deceptinfect_GameManager.initPlayer = function(ply)
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_AliveComponent.new(), p);
 end
 __deceptinfect_GameManager.thinkWait = function() 
-  local no = true;
-  if ((_G.player.GetCount() > __deceptinfect_GameValues.MIN_PLAYERS) and not no) then 
-    __deceptinfect_GameManager.set_state(__deceptinfect_GAME_STATE.SETTING_UP(__deceptinfect_GameInstance.new(), _G.CurTime() + __deceptinfect_GameValues.SETUP_TIME));
-  end;
+  _G.player.GetCount();
 end
 __deceptinfect_GameManager.think = function() 
   local _g = __deceptinfect_GameManager.state;
@@ -2716,52 +1857,35 @@ __deceptinfect_GameManager.think = function()
 end
 __deceptinfect_GameManager.set_state = function(x) 
   local time = 0.0;
-  local _g = __deceptinfect_GameManager.state;
-  local tmp = _g[1];
+  local tmp = __deceptinfect_GameManager.state[1];
   if (tmp) == 0 then 
     local tmp1 = x[1];
     if (tmp1) == 1 then 
-      local t = x[3];
-      local x1 = x[2];
-      time = t;
-      __deceptinfect_GameManager.removePrevStatues();
+      time = x[3];
     elseif (tmp1) == 2 then 
-      local x2 = x[2];
       __deceptinfect_GameManager.initAllPlayers();
-      x2:start();
-      __deceptinfect_GameManager.removePrevStatues();
+      x[2]:start();
       __deceptinfect_GameManager.hookWin();else
     _G.error("Unsupported state transition",0); end;
   elseif (tmp) == 1 then 
-    local _g7 = _g[3];
     if (x[1] == 2) then 
-      local x3 = _g[2];
-      local y = x[2];
       __deceptinfect_GameManager.initAllPlayers();
-      y:start();
+      x[2]:start();
       __deceptinfect_GameManager.hookWin();
     else
       _G.error("Unsupported state transition",0);
     end;
   elseif (tmp) == 2 then 
-    local _g9 = _g[2];
     local tmp2 = x[1];
     if (tmp2) == 2 then 
-      local x4 = _g9;
-      local y1 = x[2];
       __deceptinfect_GameManager.cleanup();
       __deceptinfect_GameManager.initAllPlayers();
-      y1:start();
+      x[2]:start();
       __deceptinfect_GameManager.hookWin();
     elseif (tmp2) == 3 then 
-      local x5 = _g9;
-      local t1 = x[3];
-      local y2 = x[2];
-      time = t1;else
+      time = x[3];else
     _G.error("Unsupported state transition",0); end;
   elseif (tmp) == 3 then 
-    local _g2 = _g[3];
-    local _g1 = _g[2];
     if (x[1] == 0) then 
       __deceptinfect_GameManager.cleanup();
     else
@@ -2780,26 +1904,14 @@ __deceptinfect_GameManager.cleanup = function()
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_CleanupEnt);
-    local comp1 = comparray1[ent1];
-    local _g2 = comp1;
-    if (_g2[1] == 1) then 
-      local _g3 = _g2[2];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent1];
+    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_CleanupEnt)[ent1][1] == 1) then 
       if (_g1[1] == 1) then 
-        local c_gent = _g1[2];
         __haxe_Log.trace(ent1, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=181,className="deceptinfect.GameManager",methodName="cleanup"}));
-        c_gent.entity:Remove();
+        _g1[2].entity:Remove();
       end;
     end;
-    local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_KeepRestart);
-    local comp2 = comparray2[ent1];
-    local _g5 = comp2;
-    if (_g5[1] == 1) then 
-      local _g6 = _g5[2];
-    else
+    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_KeepRestart)[ent1][1] ~= 1) then 
       __deceptinfect_ecswip_ComponentManager.removeEntity(ent1);
     end;
   end;
@@ -2816,15 +1928,12 @@ __deceptinfect_GameManager.cleanup = function()
   while (p:hasNext()) do 
     local p1 = p:next();
     local x = __deceptinfect_ecswip_PlayerComponent.new(p1);
-    local this1 = x.player;
-    x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(this1);
+    x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(x.player);
     p1:KillSilent();
     p1:Spawn();
   end;
 end
 _hx_exports["cleanup"] = __deceptinfect_GameManager.cleanup
-__deceptinfect_GameManager.removePrevStatues = function() 
-end
 __deceptinfect_GameManager.hookWin = function() 
   __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_WinSystem).newWinner:handle(__deceptinfect_GameManager.newWin);
 end
@@ -2845,22 +1954,15 @@ __deceptinfect_GameManager.initInfectedPlayer = function(x)
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_abilities_FormComponent.new(), x);
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_DamagePenaltyHidden.new(), x);
   local x1 = __deceptinfect_infection_InfectionComponent;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-  local comp = comparray[x];
-  local retrieve_comp = comp:slice(2)[0];
-  if (retrieve_comp == nil) then 
+  if (__deceptinfect_ecswip_ComponentManager.lazyInit(x1)[x]:slice(2)[0] == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
-  local c_inf = retrieve_comp;
   local x2 = __deceptinfect_ecswip_GrabAccepter;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x2);
-  local comp1 = comparray1[x];
-  local retrieve_comp1 = comp1:slice(2)[0];
-  if (retrieve_comp1 == nil) then 
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x2)[x]:slice(2)[0];
+  if (retrieve_comp == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x2.__name__),0);
   end;
-  local c_accept = retrieve_comp1;
-  c_accept.grabState = __deceptinfect_ecswip_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE);
+  retrieve_comp.grabState = __deceptinfect_ecswip_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE);
   local rad = __deceptinfect_radiation_RadiationProducer.createFromType(__deceptinfect_radiation_RadTypes.INF);
   rad.state = __deceptinfect_radiation_RadiationState.DISABLED;
   __deceptinfect_ecswip_ComponentManager.addComponent(rad, x);
@@ -2905,15 +2007,10 @@ __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.fromGAME_STATE = function(x
   if (tmp) == 0 then 
     do return 0 end;
   elseif (tmp) == 1 then 
-    local _g3 = x[3];
-    local _g2 = x[2];
     do return 1 end;
   elseif (tmp) == 2 then 
-    local _g4 = x[2];
     do return 2 end;
   elseif (tmp) == 3 then 
-    local _g1 = x[3];
-    local _g = x[2];
     do return 3 end; end;
 end
 
@@ -2933,16 +2030,6 @@ __deceptinfect_Misc.__name__ = "deceptinfect.Misc"
 __deceptinfect_PlayerManager.new = {}
 _hxClasses["deceptinfect.PlayerManager"] = __deceptinfect_PlayerManager
 __deceptinfect_PlayerManager.__name__ = "deceptinfect.PlayerManager"
-__deceptinfect_PlayerManager.getIDByIndex = function(index) 
-  if (__deceptinfect_PlayerManager.indexLookup.h[index] == nil) then 
-    _G.error(Std.string("Entity lookup failed for ") .. Std.string(index),0);
-  end;
-  local ret = __deceptinfect_PlayerManager.indexLookup.h[index];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end;
-end
 __deceptinfect_PlayerManager.addID = function(ent,id) 
   local this1 = __deceptinfect_PlayerManager.indexLookup;
   local key = ent:EntIndex();
@@ -2953,36 +2040,6 @@ __deceptinfect_PlayerManager.addID = function(ent,id)
     _this.h[key] = id;
   end;
 end
-__deceptinfect_PlayerManager.getPlayers = function() 
-  do return _G.player.GetAll() end;
-end
-__deceptinfect_PlayerManager.getActivePlayers = function() 
-  do return nil end;
-end
-
-__gmod_gamemode_BuildGamemodeTXT.new = {}
-_hxClasses["gmod.gamemode.BuildGamemodeTXT"] = __gmod_gamemode_BuildGamemodeTXT
-__gmod_gamemode_BuildGamemodeTXT.__name__ = "gmod.gamemode.BuildGamemodeTXT"
-__gmod_gamemode_BuildGamemodeTXT.prototype = _hx_a();
-__gmod_gamemode_BuildGamemodeTXT.prototype.properties= nil;
-
-__gmod_gamemode_BuildGamemodeTXT.prototype.__class__ =  __gmod_gamemode_BuildGamemodeTXT
-
-__deceptinfect_TXT.new = function() 
-  local self = _hx_new(__deceptinfect_TXT.prototype)
-  __deceptinfect_TXT.super(self)
-  return self
-end
-__deceptinfect_TXT.super = function(self) 
-  self.properties = _hx_o({__fields__={base=true,title=true,menusystem=true},base="base",title="Deception infection",menusystem=1});
-end
-_hxClasses["deceptinfect.TXT"] = __deceptinfect_TXT
-__deceptinfect_TXT.__name__ = "deceptinfect.TXT"
-__deceptinfect_TXT.__interfaces__ = {__gmod_gamemode_BuildGamemodeTXT}
-__deceptinfect_TXT.prototype = _hx_a();
-__deceptinfect_TXT.prototype.properties= nil;
-
-__deceptinfect_TXT.prototype.__class__ =  __deceptinfect_TXT
 
 __gmod_swep_SWEP.new = {}
 _hxClasses["gmod.swep.SWEP"] = __gmod_swep_SWEP
@@ -3181,17 +2238,11 @@ __deceptinfect_ecswip_System.prototype.init_server = function(self)
 end
 __deceptinfect_ecswip_System.prototype.run_server = function(self) 
 end
-__deceptinfect_ecswip_System.prototype.init_shared = function(self) 
-end
-__deceptinfect_ecswip_System.prototype.run_shared = function(self) 
-end
 __deceptinfect_ecswip_System.prototype.init = function(self) 
   self:init_server();
-  self:init_shared();
 end
 __deceptinfect_ecswip_System.prototype.run = function(self) 
   self:run_server();
-  self:run_shared();
 end
 
 __deceptinfect_ecswip_System.prototype.__class__ =  __deceptinfect_ecswip_System
@@ -3207,29 +2258,23 @@ end
 _hxClasses["deceptinfect.abilities.FormSystem"] = __deceptinfect_abilities_FormSystem
 __deceptinfect_abilities_FormSystem.__name__ = "deceptinfect.abilities.FormSystem"
 __deceptinfect_abilities_FormSystem.attemptChangeForm = function(ent) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-  local comp = comparray[ent];
-  local _g = comp;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent);
-  local comp1 = comparray1[ent];
-  local _g1 = comp1;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent)[ent];
   if (_g1[1] == 1) then 
+    local _g2 = _g1[2];
     if (_g[1] == 1) then 
       local _hx_tmp;
-      local c_form = _g1[2];
       _hx_tmp = _g[2].entity;
-      local g_ent = _hx_tmp;
-      local _g2 = c_form.cooldown;
-      if (_g2[1] == 1) then 
-        local time = _g2[2];
-        if (not (_G.CurTime() < time)) then 
-          c_form.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
+      local _g3 = _g2.cooldown;
+      if (_g3[1] == 1) then 
+        if (not (_G.CurTime() < _g3[2])) then 
+          _g2.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
         end;
       else
-        c_form.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
+        _g2.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
       end;
-      if ((c_form.formHealth > 0) and (c_form.cooldown == __deceptinfect_abilities_Cooldown.ACTIVE)) then 
-        if (g_ent:Health() > 0) then 
+      if ((_g2.formHealth > 0) and (_g2.cooldown == __deceptinfect_abilities_Cooldown.ACTIVE)) then 
+        if (_hx_tmp:Health() > 0) then 
           __deceptinfect_abilities_FormSystem.changeForm(ent);
         end;
       end;
@@ -3238,17 +2283,13 @@ __deceptinfect_abilities_FormSystem.attemptChangeForm = function(ent)
 end
 __deceptinfect_abilities_FormSystem.changeForm = function(ent) 
   local x = __deceptinfect_abilities_FormComponent;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[ent];
-  local retrieve_comp = comp:slice(2)[0];
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[ent]:slice(2)[0];
   if (retrieve_comp == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
   end;
   local c_form = retrieve_comp;
   local x1 = __deceptinfect_ecswip_GEntityComponent;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-  local comp1 = comparray1[ent];
-  local retrieve_comp1 = comp1:slice(2)[0];
+  local retrieve_comp1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[ent]:slice(2)[0];
   if (retrieve_comp1 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
@@ -3293,20 +2334,13 @@ __deceptinfect_client_GeigerSystem.prototype.run_server = function(self)
   local plyr = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (plyr:hasNext()) do 
     local plyr1 = plyr:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-    local comp = comparray[plyr1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent);
-    local comp1 = comparray1[plyr1];
-    local _g2 = comp1;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[plyr1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[plyr1];
     if (_g2[1] == 1) then 
       if (_g1[1] == 1) then 
         local _hx_tmp;
-        local inf = _g2[2];
         _hx_tmp = _g1[2].player;
-        local player = _hx_tmp;
-        local fract = Math.min((inf.rate - 1) / 2, 1);
-        __deceptinfect_client_GeigerSystem.net_geiger:send(_hx_o({__fields__={geiger=true},geiger=fract}), player, true);
+        __deceptinfect_client_GeigerSystem.net_geiger:send(_hx_o({__fields__={geiger=true},geiger=Math.min((_g2[2].rate - 1) / 2, 1)}), _hx_tmp, true);
       end;
     end;
   end;
@@ -3315,10 +2349,6 @@ end
 __deceptinfect_client_GeigerSystem.prototype.__class__ =  __deceptinfect_client_GeigerSystem
 __deceptinfect_client_GeigerSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_client_GeigerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
-
-__deceptinfect_client_PVS.new = {}
-_hxClasses["deceptinfect.client.PVS"] = __deceptinfect_client_PVS
-__deceptinfect_client_PVS.__name__ = "deceptinfect.client.PVS"
 
 __haxe_IMap.new = {}
 _hxClasses["haxe.IMap"] = __haxe_IMap
@@ -3389,14 +2419,8 @@ __deceptinfect_ecswip_ComponentManager.addPlayer = function(x)
   __deceptinfect_PlayerManager.addID(x, id);
   do return id end;
 end
-__deceptinfect_ecswip_ComponentManager.getComponentForID = function(cls,x) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(cls);
-  local comp = comparray[x];
-  do return comp end;
-end
 __deceptinfect_ecswip_ComponentManager.addComponent = function(x,to) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(Type.getClass(x));
-  comparray[to] = __deceptinfect_ecswip_ComponentState.Comp(x);
+  __deceptinfect_ecswip_ComponentManager.lazyInit(Type.getClass(x))[to] = __deceptinfect_ecswip_ComponentState.Comp(x);
 end
 __deceptinfect_ecswip_ComponentManager.lazyInit = function(x) 
   local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
@@ -3407,33 +2431,26 @@ __deceptinfect_ecswip_ComponentManager.lazyInit = function(x)
     _this.k[x] = true;
     local entity = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
     while (entity:hasNext()) do 
-      local entity1 = entity:next();
-      comparray[entity1] = __deceptinfect_ecswip_ComponentState.NONE;
+      comparray[entity:next()] = __deceptinfect_ecswip_ComponentState.NONE;
     end;
   end;
   do return comparray end;
 end
 __deceptinfect_ecswip_ComponentManager.removeComponent = function(x,from) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  comparray[from] = __deceptinfect_ecswip_ComponentState.NONE;
+  __deceptinfect_ecswip_ComponentManager.lazyInit(x)[from] = __deceptinfect_ecswip_ComponentState.NONE;
 end
 __deceptinfect_ecswip_ComponentManager.removeEntity = function(x) 
   local component = __deceptinfect_ecswip_ComponentManager.components:iterator();
   while (component:hasNext()) do 
-    local component1 = component:next();
-    component1[x] = __deceptinfect_ecswip_ComponentState.NONE;
+    component:next()[x] = __deceptinfect_ecswip_ComponentState.NONE;
   end;
   __deceptinfect_ecswip_ComponentManager.activeEntities = __deceptinfect_ecswip_ComponentManager.activeEntities - 1;
 end
 __deceptinfect_ecswip_ComponentManager.addToAllCompArrays = function() 
   local compArray = __deceptinfect_ecswip_ComponentManager.components:iterator();
   while (compArray:hasNext()) do 
-    local compArray1 = compArray:next();
-    compArray1:push(__deceptinfect_ecswip_ComponentState.NONE);
+    compArray:next():push(__deceptinfect_ecswip_ComponentState.NONE);
   end;
-end
-__deceptinfect_ecswip_ComponentManager.getComponents = function(cls) 
-  do return __deceptinfect_ecswip_ComponentManager.components.h[cls] end;
 end
 __deceptinfect_ecswip_ComponentManager.addEntity = function() 
   __deceptinfect_ecswip_ComponentManager.entities = __deceptinfect_ecswip_ComponentManager.entities + 1;
@@ -3442,30 +2459,12 @@ __deceptinfect_ecswip_ComponentManager.addEntity = function()
   do return __deceptinfect_ecswip_ComponentManager.entities - 1 end;
 end
 
-__deceptinfect_ecswip__ComponentManager_DI_ID_Impl_.new = {}
-_hxClasses["deceptinfect.ecswip._ComponentManager.DI_ID_Impl_"] = __deceptinfect_ecswip__ComponentManager_DI_ID_Impl_
-__deceptinfect_ecswip__ComponentManager_DI_ID_Impl_.__name__ = "deceptinfect.ecswip._ComponentManager.DI_ID_Impl_"
-__deceptinfect_ecswip__ComponentManager_DI_ID_Impl_.get_sure = function(this1,x) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[this1];
-  local retrieve_comp = comp:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
-  end;
-  do return retrieve_comp end;
-end
-__deceptinfect_ecswip__ComponentManager_DI_ID_Impl_._new = function(x) 
-  local this1 = x;
-  do return this1 end;
-end
-
 __deceptinfect_ecswip_ComponentTools.new = {}
 _hxClasses["deceptinfect.ecswip.ComponentTools"] = __deceptinfect_ecswip_ComponentTools
 __deceptinfect_ecswip_ComponentTools.__name__ = "deceptinfect.ecswip.ComponentTools"
 __deceptinfect_ecswip_ComponentTools.sure = function(x) 
   if (x[1] == 1) then 
-    local comp = x[2];
-    do return comp end;
+    do return x[2] end;
   else
     _G.error("Component not avaliable...",0);
   end;
@@ -3475,11 +2474,6 @@ __deceptinfect_ecswip_ComponentState = _hxClasses["deceptinfect.ecswip.Component
 __deceptinfect_ecswip_ComponentState.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_ComponentState},2)
 
 __deceptinfect_ecswip_ComponentState.Comp = function(comp) local _x = _hx_tab_array({[0]="Comp",1,comp,__enum__=__deceptinfect_ecswip_ComponentState}, 3); return _x; end 
-_hxClasses["deceptinfect.ecswip.HasGEnt"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","GEnt"},2)}
-__deceptinfect_ecswip_HasGEnt = _hxClasses["deceptinfect.ecswip.HasGEnt"];
-__deceptinfect_ecswip_HasGEnt.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_HasGEnt},2)
-
-__deceptinfect_ecswip_HasGEnt.GEnt = function(e) local _x = _hx_tab_array({[0]="GEnt",1,e,__enum__=__deceptinfect_ecswip_HasGEnt}, 3); return _x; end 
 
 __deceptinfect_ecswip_DamagePenaltyHidden.new = function() 
   local self = _hx_new(__deceptinfect_ecswip_DamagePenaltyHidden.prototype)
@@ -3498,41 +2492,6 @@ __deceptinfect_ecswip_DamagePenaltyHidden.prototype.damagepenalty= nil;
 __deceptinfect_ecswip_DamagePenaltyHidden.prototype.__class__ =  __deceptinfect_ecswip_DamagePenaltyHidden
 __deceptinfect_ecswip_DamagePenaltyHidden.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_DamagePenaltyHidden.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_ecswip_Family.new = function(a) 
-  local self = _hx_new(__deceptinfect_ecswip_Family.prototype)
-  __deceptinfect_ecswip_Family.super(self,a)
-  return self
-end
-__deceptinfect_ecswip_Family.super = function(self,a) 
-  a = self.familyMap;
-end
-_hxClasses["deceptinfect.ecswip.Family"] = __deceptinfect_ecswip_Family
-__deceptinfect_ecswip_Family.__name__ = "deceptinfect.ecswip.Family"
-__deceptinfect_ecswip_Family.prototype = _hx_a();
-__deceptinfect_ecswip_Family.prototype.familyMap= nil;
-__deceptinfect_ecswip_Family.prototype.retrieveComponents = function(self,ent) 
-  local map = __haxe_ds_ObjectMap.new();
-  local _g = 0;
-  local _g1 = self.familyMap;
-  while (_g < _g1.length) do 
-    local component = _g1[_g];
-    _g = _g + 1;
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(component);
-    local comp = comparray[ent];
-    local _g2 = comp;
-    local tmp = _g2[1];
-    if (tmp) == 0 then 
-      do return __haxe_ds_Option.None end;
-    elseif (tmp) == 1 then 
-      local comp1 = _g2[2];
-      map.h[component] = comp1;
-      map.k[component] = true; end;
-  end;
-  do return __haxe_ds_Option.Some(map) end
-end
-
-__deceptinfect_ecswip_Family.prototype.__class__ =  __deceptinfect_ecswip_Family
 
 __deceptinfect_ecswip_GEntityComponent.new = function(e) 
   local self = _hx_new(__deceptinfect_ecswip_GEntityComponent.prototype)
@@ -3594,11 +2553,8 @@ __deceptinfect_ecswip_GrabProducer.super = function(self)
   self.grabState = __deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.NOT_SEARCHING);
   self.grabDist = 70;
   self.nextCooldown = 5;
-  self.targeting = nil;
-  self.looktargets = false;
   self.threshold = 50.0;
   self.damage = 0.0;
-  self.grabinc = 0.0;
   self.grabindex = 0;
   __deceptinfect_ecswip_Component.super(self);
 end
@@ -3606,11 +2562,8 @@ _hxClasses["deceptinfect.ecswip.GrabProducer"] = __deceptinfect_ecswip_GrabProdu
 __deceptinfect_ecswip_GrabProducer.__name__ = "deceptinfect.ecswip.GrabProducer"
 __deceptinfect_ecswip_GrabProducer.prototype = _hx_a();
 __deceptinfect_ecswip_GrabProducer.prototype.grabindex= nil;
-__deceptinfect_ecswip_GrabProducer.prototype.grabinc= nil;
 __deceptinfect_ecswip_GrabProducer.prototype.damage= nil;
 __deceptinfect_ecswip_GrabProducer.prototype.threshold= nil;
-__deceptinfect_ecswip_GrabProducer.prototype.looktargets= nil;
-__deceptinfect_ecswip_GrabProducer.prototype.targeting= nil;
 __deceptinfect_ecswip_GrabProducer.prototype.nextCooldown= nil;
 __deceptinfect_ecswip_GrabProducer.prototype.grabDist= nil;
 __deceptinfect_ecswip_GrabProducer.prototype.grabState= nil;
@@ -3623,46 +2576,29 @@ __deceptinfect_ecswip_GrabProducer.prototype.set_grabState = function(self,newGr
       if (newGrabState[1] == 0) then 
         local _g3 = newGrabState[2];
         if (_g3[1] == 2) then 
-          local old = _g2;
-          local newt = _g3[2];
-          if (old ~= newt) then 
-            local old1 = _g2;
-            local x = newGrabState;
-            local x1 = __deceptinfect_ecswip_GrabAccepter;
-            local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-            local comp = comparray[old1];
-            local retrieve_comp = comp:slice(2)[0];
+          if (_g2 ~= _g3[2]) then 
+            local x = __deceptinfect_ecswip_GrabAccepter;
+            local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[_g2]:slice(2)[0];
             if (retrieve_comp == nil) then 
-              _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
+              _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
             end;
-            local c_accept = retrieve_comp;
-            c_accept.numTargeting = c_accept.numTargeting - 1;
+            retrieve_comp.numTargeting = retrieve_comp.numTargeting - 1;
           end;
         else
-          local old2 = _g2;
-          local x2 = newGrabState;
-          local x3 = __deceptinfect_ecswip_GrabAccepter;
-          local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x3);
-          local comp1 = comparray1[old2];
-          local retrieve_comp1 = comp1:slice(2)[0];
+          local x1 = __deceptinfect_ecswip_GrabAccepter;
+          local retrieve_comp1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[_g2]:slice(2)[0];
           if (retrieve_comp1 == nil) then 
-            _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x3.__name__),0);
+            _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
           end;
-          local c_accept1 = retrieve_comp1;
-          c_accept1.numTargeting = c_accept1.numTargeting - 1;
+          retrieve_comp1.numTargeting = retrieve_comp1.numTargeting - 1;
         end;
       else
-        local old3 = _g2;
-        local x4 = newGrabState;
-        local x5 = __deceptinfect_ecswip_GrabAccepter;
-        local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(x5);
-        local comp2 = comparray2[old3];
-        local retrieve_comp2 = comp2:slice(2)[0];
+        local x2 = __deceptinfect_ecswip_GrabAccepter;
+        local retrieve_comp2 = __deceptinfect_ecswip_ComponentManager.lazyInit(x2)[_g2]:slice(2)[0];
         if (retrieve_comp2 == nil) then 
-          _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x5.__name__),0);
+          _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x2.__name__),0);
         end;
-        local c_accept2 = retrieve_comp2;
-        c_accept2.numTargeting = c_accept2.numTargeting - 1;
+        retrieve_comp2.numTargeting = retrieve_comp2.numTargeting - 1;
       end;
     end;
   end;
@@ -3698,19 +2634,14 @@ __deceptinfect_ecswip_GrabSystem.__name__ = "deceptinfect.ecswip.GrabSystem"
 __deceptinfect_ecswip_GrabSystem.grabDamage = function(ent,dmg) 
   if (ent:IsPlayer()) then 
     local this1 = ent.id;
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer);
-    local comp = comparray[this1];
-    local _g = comp;
+    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer)[this1];
     if (_g[1] == 1) then 
-      local c_produce = _g[2];
-      local _g1 = c_produce.grabState;
-      if (_g1[1] == 1) then 
-        local _g11 = _g1[2];
-        local c_produce1 = c_produce;
-        c_produce1.damage = c_produce1.damage + dmg:GetDamage();
-        if (c_produce.damage >= c_produce.threshold) then 
+      local _g1 = _g[2];
+      if (_g1.grabState[1] == 1) then 
+        _g1.damage = _g1.damage + dmg:GetDamage();
+        if (_g1.damage >= _g1.threshold) then 
           __deceptinfect_ecswip_GrabSystem.grabStop(ent.id);
-          c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.NOT_READY(__deceptinfect_util_Cooldown.COOLDOWN(_G.CurTime() + c_produce.nextCooldown)));
+          _g1:set_grabState(__deceptinfect_ecswip_GrabProduceState.NOT_READY(__deceptinfect_util_Cooldown.COOLDOWN(_G.CurTime() + _g1.nextCooldown)));
         end;
       end;
     end;
@@ -3719,17 +2650,13 @@ __deceptinfect_ecswip_GrabSystem.grabDamage = function(ent,dmg)
 end
 __deceptinfect_ecswip_GrabSystem.grabStop = function(attack) 
   local x = __deceptinfect_ecswip_GrabProducer;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[attack];
-  local retrieve_comp = comp:slice(2)[0];
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[attack]:slice(2)[0];
   if (retrieve_comp == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
   end;
   local c_produce = retrieve_comp;
   local x1 = __deceptinfect_ecswip_VirtualPosition;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-  local comp1 = comparray1[attack];
-  local retrieve_comp1 = comp1:slice(2)[0];
+  local retrieve_comp1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[attack]:slice(2)[0];
   if (retrieve_comp1 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
@@ -3737,44 +2664,32 @@ __deceptinfect_ecswip_GrabSystem.grabStop = function(attack)
   local vic;
   local _g = c_produce.grabState;
   if (_g[1] == 1) then 
-    local victim = _g[2];
-    vic = victim;
+    vic = _g[2];
   else
     do return end;
   end;
   local x2 = __deceptinfect_ecswip_VirtualPosition;
-  local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(x2);
-  local comp2 = comparray2[vic];
-  local retrieve_comp2 = comp2:slice(2)[0];
+  local retrieve_comp2 = __deceptinfect_ecswip_ComponentManager.lazyInit(x2)[vic]:slice(2)[0];
   if (retrieve_comp2 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x2.__name__),0);
   end;
   local vicPos = retrieve_comp2:get_pos();
   local x3 = __deceptinfect_ecswip_GrabAccepter;
-  local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(x3);
-  local comp3 = comparray3[vic];
-  local retrieve_comp3 = comp3:slice(2)[0];
+  local retrieve_comp3 = __deceptinfect_ecswip_ComponentManager.lazyInit(x3)[vic]:slice(2)[0];
   if (retrieve_comp3 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x3.__name__),0);
   end;
-  local c_accept = retrieve_comp3;
   c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.NOT_READY(__deceptinfect_util_Cooldown.COOLDOWN(_G.CurTime() + 2)));
-  local _this = c_accept.grabAttacker;
+  local _this = retrieve_comp3.grabAttacker;
   _this.h[c_produce] = false;
   _this.k[c_produce] = true;
-  local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp4 = comparray4[vic];
-  local _g2 = comp4;
+  local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[vic];
   if (_g2[1] == 1) then 
-    local plyr = _g2[2];
-    plyr.player:Freeze(false);
+    _g2[2].player:Freeze(false);
   end;
-  local comparray5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp5 = comparray5[attack];
-  local _g4 = comp5;
+  local _g4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[attack];
   if (_g4[1] == 1) then 
-    local plyr1 = _g4[2];
-    plyr1.player:Freeze(false);
+    _g4[2].player:Freeze(false);
   end;
   local filter = _G.RecipientFilter();
   filter:AddPVS(attackPos);
@@ -3782,24 +2697,18 @@ __deceptinfect_ecswip_GrabSystem.grabStop = function(attack)
   __deceptinfect_ecswip_GrabSystem.net_grabend:sendFilter(_hx_o({__fields__={index=true},index=c_produce.grabindex}), filter);
 end
 __deceptinfect_ecswip_GrabSystem.attemptGrab = function(attack,vic) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
-  local comp = comparray[vic];
-  local _g = comp;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer);
-  local comp1 = comparray1[attack];
-  local _g1 = comp1;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter)[vic];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer)[attack];
   if (_g1[1] == 1) then 
     if (_g[1] == 1) then 
-      local c_produce = _g1[2];
-      local c_accept = _g[2];
-      local _g11 = c_produce.grabState;
+      local _g3 = _g[2];
+      local _g11 = _g1[2].grabState;
       if (_g11[1] == 0) then 
         local _g2 = _g11[2];
         if (_g2[1] == 2) then 
-          if (c_accept.grabState[1] == 0) then 
-            local vic1 = _g2[2];
-            __haxe_Log.trace(Std.string("c_accpet ") .. Std.string(Std.string(c_accept.grabState)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=244,className="deceptinfect.ecswip.GrabSystem",methodName="attemptGrab"}));
-            __deceptinfect_ecswip_GrabSystem.grabStart(attack, vic1);
+          if (_g3.grabState[1] == 0) then 
+            __haxe_Log.trace(Std.string("c_accpet ") .. Std.string(Std.string(_g3.grabState)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=244,className="deceptinfect.ecswip.GrabSystem",methodName="attemptGrab"}));
+            __deceptinfect_ecswip_GrabSystem.grabStart(attack, _g2[2]);
           end;
         end;
       end;
@@ -3807,90 +2716,68 @@ __deceptinfect_ecswip_GrabSystem.attemptGrab = function(attack,vic)
   end;
 end
 __deceptinfect_ecswip_GrabSystem.requestStartSearch = function(attack) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer);
-  local comp = comparray[attack];
-  local _g = comp;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer)[attack];
   if (_g[1] == 1) then 
     local _g1 = _g[2];
     local _hx_tmp = _g1.grabState;
     if (_hx_tmp[1] == 0) then 
       if (_hx_tmp[2][1] == 0) then 
-        local c_produce = _g1;
-        c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.SEARCHING));
+        _g1:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.SEARCHING));
       end;
     end;
   end;
 end
 __deceptinfect_ecswip_GrabSystem.requestStopSearch = function(attack) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer);
-  local comp = comparray[attack];
-  local _g = comp;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer)[attack];
   if (_g[1] == 1) then 
     local _g1 = _g[2];
     local _hx_tmp = _g1.grabState;
     if (_hx_tmp[1] == 0) then 
-      local _g2 = _hx_tmp[2];
-      local tmp = _g2[1];
+      local tmp = _hx_tmp[2][1];
       if (tmp) == 1 then 
-        local c_produce = _g1;
-        c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.NOT_SEARCHING));
+        _g1:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.NOT_SEARCHING));
       elseif (tmp) == 2 then 
-        local _g3 = _g2[2];
-        local c_produce1 = _g1;
-        c_produce1:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.NOT_SEARCHING));else end;
+        _g1:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.NOT_SEARCHING));else end;
     end;
   end;
 end
 __deceptinfect_ecswip_GrabSystem.attemptSneakAttack = function(attack,vic) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-  local comp = comparray[attack];
-  local _g = comp;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-  local comp1 = comparray1[vic];
-  local _g1 = comp1;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[attack];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[vic];
   if (_g1[1] == 1) then 
     if (_g[1] == 1) then 
       local _hx_tmp;
       local _hx_tmp1;
       _hx_tmp1 = _g1[2].entity;
-      local g_vic = _hx_tmp1;
       _hx_tmp = _g[2].entity;
-      local g_attack = _hx_tmp;
-      if (__deceptinfect_util_EntityExt.facingBehind(g_vic, g_attack)) then 
+      if (__deceptinfect_util_EntityExt.facingBehind(_hx_tmp1, _hx_tmp)) then 
         __deceptinfect_ecswip_GrabSystem.attemptGrab(attack, vic);
       end;
     end;
   end;
 end
 __deceptinfect_ecswip_GrabSystem.attemptTarget = function(attack,vic) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
-  local comp = comparray[vic];
-  local _g = comp;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer);
-  local comp1 = comparray1[attack];
-  local _g1 = comp1;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter)[vic];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer)[attack];
   if (_g1[1] == 1) then 
     if (_g[1] == 1) then 
-      local c_produce = _g1[2];
-      local c_accept = _g[2];
-      local _g2 = c_produce.grabState;
-      if (c_accept.grabState[1] == 0) then 
+      local _g3 = _g[2];
+      local _g2 = _g1[2].grabState;
+      if (_g3.grabState[1] == 0) then 
         if (_g2[1] == 0) then 
-          local _g21 = _g2[2];
-          local tmp = _g21[1];
+          local tmp = _g2[2][1];
           if (tmp) == 1 then 
-            __haxe_Log.trace(c_accept.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=288,className="deceptinfect.ecswip.GrabSystem",methodName="attemptTarget"}));
+            __haxe_Log.trace(_g3.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=288,className="deceptinfect.ecswip.GrabSystem",methodName="attemptTarget"}));
             __deceptinfect_ecswip_GrabSystem.attemptSneakAttack(attack, vic);
             __deceptinfect_ecswip_GrabSystem.target(attack, vic);
-            if (c_accept.numTargeting >= c_accept.overwhelm) then 
+            if (_g3.numTargeting >= _g3.overwhelm) then 
               __deceptinfect_ecswip_GrabSystem.attemptGrab(attack, vic);
             end;
           elseif (tmp) == 2 then 
-            local _g3 = _g21[2];
-            __haxe_Log.trace(c_accept.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=288,className="deceptinfect.ecswip.GrabSystem",methodName="attemptTarget"}));
+            __haxe_Log.trace(_g3.grabState, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=288,className="deceptinfect.ecswip.GrabSystem",methodName="attemptTarget"}));
             __deceptinfect_ecswip_GrabSystem.attemptSneakAttack(attack, vic);
             __deceptinfect_ecswip_GrabSystem.target(attack, vic);
-            if (c_accept.numTargeting >= c_accept.overwhelm) then 
+            if (_g3.numTargeting >= _g3.overwhelm) then 
               __deceptinfect_ecswip_GrabSystem.attemptGrab(attack, vic);
             end;else end;
         end;
@@ -3900,9 +2787,7 @@ __deceptinfect_ecswip_GrabSystem.attemptTarget = function(attack,vic)
 end
 __deceptinfect_ecswip_GrabSystem.clearTargetingVic = function(vic) 
   local x = __deceptinfect_ecswip_GrabAccepter;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[vic];
-  local retrieve_comp = comp:slice(2)[0];
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[vic]:slice(2)[0];
   if (retrieve_comp == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
   end;
@@ -3914,8 +2799,7 @@ __deceptinfect_ecswip_GrabSystem.clearTargetingVic = function(vic)
     if (_g[1] == 0) then 
       local _g1 = _g[2];
       if (_g1[1] == 2) then 
-        local target = _g1[2];
-        if (vic == target) then 
+        if (vic == _g1[2]) then 
           c_produce1:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.SEARCHING));
         end;
       end;
@@ -3928,17 +2812,13 @@ end
 __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic) 
   __haxe_Log.trace("starting grab", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=317,className="deceptinfect.ecswip.GrabSystem",methodName="grabStart"}));
   local x = __deceptinfect_ecswip_GrabProducer;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[attack];
-  local retrieve_comp = comp:slice(2)[0];
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[attack]:slice(2)[0];
   if (retrieve_comp == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
   end;
   local c_produce = retrieve_comp;
   local x1 = __deceptinfect_ecswip_GrabAccepter;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-  local comp1 = comparray1[vic];
-  local retrieve_comp1 = comp1:slice(2)[0];
+  local retrieve_comp1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[vic]:slice(2)[0];
   if (retrieve_comp1 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
@@ -3956,19 +2836,13 @@ __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic)
    return _;
    end)();
   __deceptinfect_ecswip_GrabSystem.clearTargetingVic(vic);
-  local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp2 = comparray2[vic];
-  local _g = comp2;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[vic];
   if (_g[1] == 1) then 
-    local plyr = _g[2];
-    plyr.player:Freeze(true);
+    _g[2].player:Freeze(true);
   end;
-  local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp3 = comparray3[attack];
-  local _g2 = comp3;
+  local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[attack];
   if (_g2[1] == 1) then 
-    local plyr1 = _g2[2];
-    plyr1.player:Freeze(true);
+    _g2[2].player:Freeze(true);
   end;
 end
 __deceptinfect_ecswip_GrabSystem.calcGrabIncrease = function() 
@@ -3976,17 +2850,13 @@ __deceptinfect_ecswip_GrabSystem.calcGrabIncrease = function()
 end
 __deceptinfect_ecswip_GrabSystem.target = function(attacker,victim) 
   local x = __deceptinfect_ecswip_GrabAccepter;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[victim];
-  local retrieve_comp = comp:slice(2)[0];
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[victim]:slice(2)[0];
   if (retrieve_comp == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
   end;
   local c_accept = retrieve_comp;
   local x1 = __deceptinfect_ecswip_GrabProducer;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-  local comp1 = comparray1[attacker];
-  local retrieve_comp1 = comp1:slice(2)[0];
+  local retrieve_comp1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[attacker]:slice(2)[0];
   if (retrieve_comp1 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
@@ -3997,19 +2867,6 @@ __deceptinfect_ecswip_GrabSystem.target = function(attacker,victim)
   c_accept.numTargeting = c_accept.numTargeting + 1;
   c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.TARGET(victim)));
 end
-__deceptinfect_ecswip_GrabSystem.checkOverwhelm = function(victim) 
-  do return victim.numTargeting >= victim.overwhelm end;
-end
-__deceptinfect_ecswip_GrabSystem.stopTargeting = function(attacker) 
-  local _g = attacker.grabState;
-  if (_g[1] == 0) then 
-    local _g1 = _g[2];
-    if (_g1[1] == 2) then 
-      local vic = _g1[2];
-      attacker:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.SEARCHING));
-    end;
-  end;
-end
 __deceptinfect_ecswip_GrabSystem.prototype = _hx_a();
 __deceptinfect_ecswip_GrabSystem.prototype.init_server = function(self) 
   _G.hook.Add("EntityTakeDamage", "grabDamage", __deceptinfect_ecswip_GrabSystem.grabDamage);
@@ -4018,12 +2875,8 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
   local attack = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (attack:hasNext()) do 
     local attack1 = attack:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-    local comp = comparray[attack1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer);
-    local comp1 = comparray1[attack1];
-    local _g2 = comp1;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[attack1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabProducer)[attack1];
     if (_g2[1] == 1) then 
       if (_g1[1] == 1) then 
         local _hx_tmp;
@@ -4040,32 +2893,24 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
             while (victim:hasNext()) do 
               local victim1 = victim:next();
               if (attack1 ~= victim1) then 
-                local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
-                local comp2 = comparray2[victim1];
-                local _g22 = comp2;
-                local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
-                local comp3 = comparray3[victim1];
-                local _g3 = comp3;
+                local _g22 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[victim1];
+                local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter)[victim1];
                 if (_g3[1] == 1) then 
-                  local _g4 = _g3[2];
                   if (_g22[1] == 1) then 
                     local _hx_tmp1;
                     _hx_tmp1 = _g22[2]:get_pos();
-                    local vicPos = _hx_tmp1;
-                    if (vicPos:Distance(g_attack:GetPos()) < c_produce.grabDist) then 
+                    if (_hx_tmp1:Distance(g_attack:GetPos()) < c_produce.grabDist) then 
                       __deceptinfect_ecswip_GrabSystem.attemptTarget(attack1, victim1);
                       local _g23 = c_produce.grabState;
                       local tmp2 = _g23[1];
                       if (tmp2) == 0 then 
                         local _g31 = _g23[2];
                         if (_g31[1] == 2) then 
-                          local newTarget = _g31[2];
-                          if (newTarget == victim1) then 
+                          if (_g31[2] == victim1) then 
                             break;
                           end;
                         end;
                       elseif (tmp2) == 1 then 
-                        local _g5 = _g23[2];
                         break;else end;
                     end;
                   end;
@@ -4075,14 +2920,11 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
           elseif (tmp1) == 2 then 
             local prevVic = _g21[2];
             local x = __deceptinfect_ecswip_VirtualPosition;
-            local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-            local comp4 = comparray4[prevVic];
-            local retrieve_comp = comp4:slice(2)[0];
+            local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[prevVic]:slice(2)[0];
             if (retrieve_comp == nil) then 
               _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
             end;
-            local prevPos = retrieve_comp:get_pos();
-            local oldDist = prevPos:Distance(g_attack:GetPos());
+            local oldDist = retrieve_comp:get_pos():Distance(g_attack:GetPos());
             if (oldDist > c_produce.grabDist) then 
               c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.SEARCHING));
               break;
@@ -4092,19 +2934,13 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
             while (victim2:hasNext()) do 
               local victim3 = victim2:next();
               if ((victim3 ~= prevVic) and (attack1 ~= victim3)) then 
-                local comparray5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
-                local comp5 = comparray5[victim3];
-                local _g24 = comp5;
-                local comparray6 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter);
-                local comp6 = comparray6[victim3];
-                local _g32 = comp6;
+                local _g24 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[victim3];
+                local _g32 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GrabAccepter)[victim3];
                 if (_g32[1] == 1) then 
-                  local _g41 = _g32[2];
                   if (_g24[1] == 1) then 
                     local _hx_tmp2;
                     _hx_tmp2 = _g24[2]:get_pos();
-                    local vicPos1 = _hx_tmp2;
-                    local newDist = vicPos1:Distance(g_attack:GetPos());
+                    local newDist = _hx_tmp2:Distance(g_attack:GetPos());
                     if ((newDist < oldDist) and (newDist < c_produce.grabDist)) then 
                       __deceptinfect_ecswip_GrabSystem.attemptTarget(attack1, victim3);
                       local _g25 = c_produce.grabState;
@@ -4112,14 +2948,13 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
                       if (tmp3) == 0 then 
                         local _g33 = _g25[2];
                         if (_g33[1] == 2) then 
-                          local newTarget1 = _g33[2];
-                          if (newTarget1 == victim3) then 
-                            __haxe_Log.trace(Std.string("switching targets ") .. Std.string(newTarget1), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=146,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
+                          local newTarget = _g33[2];
+                          if (newTarget == victim3) then 
+                            __haxe_Log.trace(Std.string("switching targets ") .. Std.string(newTarget), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=146,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
                             break;
                           end;
                         end;
                       elseif (tmp3) == 1 then 
-                        local _g51 = _g25[2];
                         break;else end;
                     end;
                   end;
@@ -4129,12 +2964,9 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
         elseif (tmp) == 1 then 
           local victim4 = _g11[2];
           local g_vic;
-          local comparray7 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-          local comp7 = comparray7[victim4];
-          local _g12 = comp7;
+          local _g12 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[victim4];
           if (_g12[1] == 1) then 
-            local gent = _g12[2];
-            g_vic = gent.entity;
+            g_vic = _g12[2].entity;
           else
             do return end;
           end;
@@ -4142,37 +2974,30 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
           filter:AddPVS(g_attack:GetPos());
           filter:AddPVS(g_vic:GetPos());
           __deceptinfect_ecswip_GrabSystem.net_grabupdate:sendFilter(_hx_o({__fields__={index=true,ent=true,ent2=true},index=c_produce.grabindex,ent=g_vic,ent2=g_attack}), filter, true);
-          local comparray8 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent);
-          local comp8 = comparray8[victim4];
-          local _g34 = comp8;
+          local _g34 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[victim4];
           if (_g34[1] == 1) then 
-            local inf = _g34[2];
-            local _g35 = inf.infection;
+            local _g35 = _g34[2].infection;
             local tmp4 = _g35[1];
             if (tmp4) == 0 then 
-              local inf1 = _g35[2];
+              local inf = _g35[2];
               local param = __deceptinfect_ecswip_GrabSystem.calcGrabIncrease();
-              inf1[0] = inf1[0] + param;
+              inf[0] = inf[0] + param;
             elseif (tmp4) == 1 then 
               __haxe_Log.trace("infected", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=184,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
               __deceptinfect_ecswip_GrabSystem.grabStop(attack1);
               local x1 = __deceptinfect_ecswip_GrabAccepter;
-              local comparray9 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-              local comp9 = comparray9[victim4];
-              local retrieve_comp1 = comp9:slice(2)[0];
+              local retrieve_comp1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[victim4]:slice(2)[0];
               if (retrieve_comp1 == nil) then 
                 _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
               end;
-              local c_accept = retrieve_comp1;
-              c_accept.grabState = __deceptinfect_ecswip_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE); end;
+              retrieve_comp1.grabState = __deceptinfect_ecswip_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE); end;
           else
             _G.error("Victim has no infection component..",0);
           end;
         elseif (tmp) == 2 then 
-          local _g52 = _g11[2];
-          if (_g52[1] == 1) then 
-            local cool = _g52[2];
-            if (_G.CurTime() > cool) then 
+          local _g5 = _g11[2];
+          if (_g5[1] == 1) then 
+            if (_G.CurTime() > _g5[2]) then 
               c_produce:set_grabState(__deceptinfect_ecswip_GrabProduceState.READY(__deceptinfect_ecswip_SearchingState.NOT_SEARCHING));
             end;
           end;else end;
@@ -4220,37 +3045,28 @@ __deceptinfect_ecswip_HiddenHealthSystem.hiddenHealthDamage = function(data)
     do return end;
   end;
   local this1 = g_attacker.id;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_DamagePenaltyHidden);
-  local comp = comparray[this1];
-  local _g = comp;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-  local comp1 = comparray1[victim];
-  local _g1 = comp1;
-  local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_HiddenHealthComponent);
-  local comp2 = comparray2[victim];
-  local _g2 = comp2;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_DamagePenaltyHidden)[this1];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[victim];
+  local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_HiddenHealthComponent)[victim];
   if (_g2[1] == 1) then 
+    local _g3 = _g2[2];
     if (_g1[1] == 1) then 
       if (_g[1] == 1) then 
-        local g_victim = _g1[2];
-        local c_hidHealth = _g2[2];
-        local c_dmgpnlty = _g[2];
+        local _g5 = _g[2];
         local damageVal = data.dmg:GetDamage();
-        local health = g_victim.entity:Health();
+        local health = _g1[2].entity:Health();
         local dmgInfo = data.dmg;
         if (damageVal >= health) then 
-          __haxe_Log.trace(Std.string(Std.string(Std.string("Did ") .. Std.string(damageVal)) .. Std.string(" points of damage to extra health: ")) .. Std.string(c_hidHealth.extraHealth), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/HiddenHealthSystem.hx",lineNumber=26,className="deceptinfect.ecswip.HiddenHealthSystem",methodName="hiddenHealthDamage"}));
-          local c_hidHealth1 = c_hidHealth;
-          c_hidHealth1.extraHealth = c_hidHealth1.extraHealth - damageVal;
-          if (c_hidHealth.extraHealth > 0) then 
+          __haxe_Log.trace(Std.string(Std.string(Std.string("Did ") .. Std.string(damageVal)) .. Std.string(" points of damage to extra health: ")) .. Std.string(_g3.extraHealth), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/HiddenHealthSystem.hx",lineNumber=26,className="deceptinfect.ecswip.HiddenHealthSystem",methodName="hiddenHealthDamage"}));
+          _g3.extraHealth = _g3.extraHealth - damageVal;
+          if (_g3.extraHealth > 0) then 
             dmgInfo:SetDamage(health - 1);
           else
             dmgInfo:SetDamage(health);
           end;
         else
-          __haxe_Log.trace(Std.string(Std.string(Std.string("Adding ") .. Std.string(damageVal)) .. Std.string(" to ")) .. Std.string(damageVal * (1 - c_dmgpnlty.damagepenalty)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/HiddenHealthSystem.hx",lineNumber=34,className="deceptinfect.ecswip.HiddenHealthSystem",methodName="hiddenHealthDamage"}));
-          local c_hidHealth2 = c_hidHealth;
-          c_hidHealth2.extraHealth = c_hidHealth2.extraHealth + (damageVal * (1 - c_dmgpnlty.damagepenalty));
+          __haxe_Log.trace(Std.string(Std.string(Std.string("Adding ") .. Std.string(damageVal)) .. Std.string(" to ")) .. Std.string(damageVal * (1 - _g5.damagepenalty)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/HiddenHealthSystem.hx",lineNumber=34,className="deceptinfect.ecswip.HiddenHealthSystem",methodName="hiddenHealthDamage"}));
+          _g3.extraHealth = _g3.extraHealth + (damageVal * (1 - _g5.damagepenalty));
         end;
       end;
     end;
@@ -4272,9 +3088,7 @@ __deceptinfect_ecswip_PlayerComponent.new = function(x)
   return self
 end
 __deceptinfect_ecswip_PlayerComponent.super = function(self,x) 
-  self.playing = true;
   self.deathTime = __deceptinfect_ecswip_DeathTime.ALIVE;
-  self.roundModel = "";
   self.spec_next = 1;
   __deceptinfect_ecswip_Component.super(self);
   self.player = x;
@@ -4283,9 +3097,7 @@ _hxClasses["deceptinfect.ecswip.PlayerComponent"] = __deceptinfect_ecswip_Player
 __deceptinfect_ecswip_PlayerComponent.__name__ = "deceptinfect.ecswip.PlayerComponent"
 __deceptinfect_ecswip_PlayerComponent.prototype = _hx_a();
 __deceptinfect_ecswip_PlayerComponent.prototype.spec_next= nil;
-__deceptinfect_ecswip_PlayerComponent.prototype.roundModel= nil;
 __deceptinfect_ecswip_PlayerComponent.prototype.deathTime= nil;
-__deceptinfect_ecswip_PlayerComponent.prototype.playing= nil;
 __deceptinfect_ecswip_PlayerComponent.prototype.player= nil;
 
 __deceptinfect_ecswip_PlayerComponent.prototype.__class__ =  __deceptinfect_ecswip_PlayerComponent
@@ -4379,13 +3191,11 @@ __deceptinfect_infection_InfectionSystem.calcInfectionFromRates = function(rate)
   local totalmulti = 1.0;
   local rate1 = rate.addRates:iterator();
   while (rate1:hasNext()) do 
-    local rate2 = rate1:next();
-    total = total + rate2;
+    total = total + rate1:next();
   end;
   local multi = rate.multipliers:iterator();
   while (multi:hasNext()) do 
-    local multi1 = multi:next();
-    totalmulti = totalmulti + multi1;
+    totalmulti = totalmulti + multi:next();
   end;
   do return total * totalmulti end;
 end
@@ -4397,27 +3207,23 @@ __deceptinfect_infection_InfectionSystem.getBaseInfection = function(inf)
   elseif (tmp) == 1 then 
     local _g1 = __deceptinfect_GameManager.state;
     if (_g1[1] == 2) then 
-      local x = _g1[2];
-      do return x.baseInfection[0] end;
+      do return _g1[2].baseInfection[0] end;
     else
       __haxe_Log.trace("Not currently playing...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=198,className="deceptinfect.infection.InfectionSystem",methodName="getBaseInfection"}));
       inf.baseInfection = __deceptinfect_infection_BaseInfection.USING_STATIC(0.0);
       do return 0 end;
     end;
   elseif (tmp) == 2 then 
-    local rate = _g[2];
-    do return rate end; end;
+    do return _g[2] end; end;
 end
 __deceptinfect_infection_InfectionSystem.fixUpInfection = function(infection) 
   local _g = infection.infection;
   if (_g[1] == 0) then 
     local _g1 = _g[2];
-    local inf = _g1;
-    if (inf[0] < 0) then 
-      inf[0] = 0;
+    if (_g1[0] < 0) then 
+      _g1[0] = 0;
     else
-      local inf1 = _g1;
-      if (inf1[0] >= 100) then 
+      if (_g1[0] >= 100) then 
         __haxe_Log.trace("Now infected :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=217,className="deceptinfect.infection.InfectionSystem",methodName="fixUpInfection"}));
         infection:set_infection(__deceptinfect_infection_INF_STATE.INFECTED);
       end;
@@ -4425,17 +3231,14 @@ __deceptinfect_infection_InfectionSystem.fixUpInfection = function(infection)
   end;
 end
 __deceptinfect_infection_InfectionSystem.onInfected = function(ent) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp = comparray[ent];
-  local _g = comp;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
   if (_g[1] == 1) then 
     local _hx_tmp;
     _hx_tmp = _g[2].player;
-    local p = _hx_tmp;
-    __haxe_Log.trace(Std.string("INIT INFECTED PLAYER ") .. Std.string(Std.string(p)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=229,className="deceptinfect.infection.InfectionSystem",methodName="onInfected"}));
-    __deceptinfect_infection_InfectionSystem.net_infected:send(_hx_e(), p);
+    __haxe_Log.trace(Std.string("INIT INFECTED PLAYER ") .. Std.string(Std.string(_hx_tmp)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=229,className="deceptinfect.infection.InfectionSystem",methodName="onInfected"}));
+    __deceptinfect_infection_InfectionSystem.net_infected:send(_hx_e(), _hx_tmp);
     __deceptinfect_GameManager.initInfectedPlayer(ent);
-    __deceptinfect_client_GeigerSystem.net_geiger:send(_hx_o({__fields__={geiger=true},geiger=0.0}), p);
+    __deceptinfect_client_GeigerSystem.net_geiger:send(_hx_o({__fields__={geiger=true},geiger=0.0}), _hx_tmp);
   end;
 end
 __deceptinfect_infection_InfectionSystem.prototype = _hx_a();
@@ -4446,69 +3249,53 @@ __deceptinfect_infection_InfectionSystem.prototype.run_server = function(self)
   local _hx_continue_1 = false;
   while (entity:hasNext()) do repeat 
     local entity1 = entity:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent);
-    local comp = comparray[entity1];
-    local _g1 = comp;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[entity1];
     if (_g1[1] == 1) then 
       local _g2 = _g1[2];
       if (_g2.acceptingInfection[1] == 0) then 
-        local infection = _g2;
-        local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_AliveComponent);
-        local comp1 = comparray1[entity1];
-        local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-        local comp2 = comparray2[entity1];
-        local _g21 = comp2;
-        if (_g21[1] == 1) then 
-          local _g3 = _g21[2];
-          if (comp1[1] == 0) then 
+        local _g11 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_AliveComponent)[entity1];
+        if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[entity1][1] == 1) then 
+          if (_g11[1] == 0) then 
             break;
           end;
         end;
-        local _g4 = infection.infection;
+        local _g4 = _g2.infection;
         if (_g4[1] == 0) then 
-          local inf = _g4[2];
-          local base = __deceptinfect_infection_InfectionSystem.getBaseInfection(infection);
-          local rate;
-          local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_RateComponent);
-          local comp3 = comparray3[entity1];
-          local _g41 = comp3;
-          if (_g41[1] == 1) then 
-            local rate1 = _g41[2];
-            rate = __deceptinfect_infection_InfectionSystem.calcInfectionFromRates(rate1);
-          else
-            rate = infection.rate;
-          end;
+          local _g5 = _g4[2];
+          local base = __deceptinfect_infection_InfectionSystem.getBaseInfection(_g2);
+          local _g41 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_RateComponent)[entity1];
+          local rate = (function() 
+            local _hx_1
+            if (_g41[1] == 1) then 
+            _hx_1 = __deceptinfect_infection_InfectionSystem.calcInfectionFromRates(_g41[2]); else 
+            _hx_1 = _g2.rate; end
+            return _hx_1
+          end )();
           rate = rate + 1;
           if (_G.CurTime() > __deceptinfect_infection_InfectionSystem.infectionReport) then 
             __haxe_Log.trace(Std.string(Std.string(Std.string("infection report id : ") .. Std.string(entity1)) .. Std.string(" rate : ")) .. Std.string(rate), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=99,className="deceptinfect.infection.InfectionSystem",methodName="run_server"}));
           end;
-          local vun;
-          local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfVunerability);
-          local comp4 = comparray4[entity1];
-          local _g6 = comp4;
-          if (_g6[1] == 1) then 
-            local c_v = _g6[2];
-            vun = c_v.vun;
-          else
-            vun = 1;
-          end;
-          inf[0] = inf[0] + ((base * rate) * vun);
-          __deceptinfect_infection_InfectionSystem.fixUpInfection(infection);
-          local comparray5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-          local comp5 = comparray5[entity1];
-          local _g8 = comp5;
+          local _g6 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfVunerability)[entity1];
+          _g5[0] = _g5[0] + ((base * rate) * (function() 
+            local _hx_2
+            if (_g6[1] == 1) then 
+            _hx_2 = _g6[2].vun; else 
+            _hx_2 = 1; end
+            return _hx_2
+          end )());
+          __deceptinfect_infection_InfectionSystem.fixUpInfection(_g2);
+          local _g8 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[entity1];
           if (_g8[1] == 1) then 
-            local ply = _g8[2];
-            __deceptinfect_infection_InfectionSystem.net_inf:send(_hx_o({__fields__={infection=true},infection=inf[0]}), ply.player, true);
-            totalInf = totalInf + infection:getInfValue();
+            __deceptinfect_infection_InfectionSystem.net_inf:send(_hx_o({__fields__={infection=true},infection=_g5[0]}), _g8[2].player, true);
+            totalInf = totalInf + _g2:getInfValue();
             numPlayers = numPlayers + 1;
           end;
-          infection.rate = rate;
-          if (infection.infection[1] == 1) then 
+          _g2.rate = rate;
+          if (_g2.infection[1] == 1) then 
             __deceptinfect_infection_InfectionSystem.onInfected(entity1);
           end;
         else
-          totalInf = totalInf + infection:getInfValue();
+          totalInf = totalInf + _g2:getInfValue();
           numPlayers = numPlayers + 1;
         end;
       end;
@@ -4527,49 +3314,19 @@ __deceptinfect_infection_InfectionSystem.prototype.run_server = function(self)
   end;
 end
 __deceptinfect_infection_InfectionSystem.prototype.makeInfected = function(self,ent) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent);
-  local comp = comparray[ent];
-  local _g = comp;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[ent];
   if (_g[1] == 1) then 
-    local inf = _g[2];
-    local _g1 = inf.infection;
+    local _g1 = _g[2];
     local tmp;
-    if (_g1[1] == 0) then 
-      local _g11 = _g1[2];
+    if (_g1.infection[1] == 0) then 
       __deceptinfect_infection_InfectionSystem.onInfected(ent);
       tmp = __deceptinfect_infection_INF_STATE.INFECTED;
     else
       tmp = __deceptinfect_infection_INF_STATE.INFECTED;
     end;
-    inf:set_infection(tmp);
-    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(inf.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=159,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
+    _g1:set_infection(tmp);
+    __haxe_Log.trace(Std.string("infection : ") .. Std.string(Std.string(_g1.infection)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/InfectionSystem.hx",lineNumber=159,className="deceptinfect.infection.InfectionSystem",methodName="makeInfected"}));
   end;
-end
-__deceptinfect_infection_InfectionSystem.prototype.infect = function(self,id,x) 
-  local x1 = __deceptinfect_infection_InfectionComponent;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-  local comp = comparray[id];
-  local retrieve_comp = comp:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
-  end;
-  local inf = retrieve_comp;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfVunerability);
-  local comp1 = comparray1[id];
-  local _g = comp1;
-  local _g1 = inf.infection;
-  local tmp = _g1[1];
-  if (tmp) == 0 then 
-    local _g2 = _g1[2];
-    local tmp1 = _g[1];
-    if (tmp1) == 0 then 
-      local inf1 = _g2;
-      inf1[0] = inf1[0] + x;
-    elseif (tmp1) == 1 then 
-      local inf2 = _g2;
-      local c_vun = _g[2];
-      inf2[0] = inf2[0] + (x * c_vun.vun); end;
-  elseif (tmp) == 1 then  end;
 end
 
 __deceptinfect_infection_InfectionSystem.prototype.__class__ =  __deceptinfect_infection_InfectionSystem
@@ -4582,7 +3339,6 @@ __deceptinfect_radiation_RadiationAccepter.new = function(options)
   return self
 end
 __deceptinfect_radiation_RadiationAccepter.super = function(self,options) 
-  self.accepting = false;
   self.acceptContam = __haxe_ds_Option.None;
   self.diminish = 0.75;
   self.radiation = __haxe_ds_IntMap.new();
@@ -4600,7 +3356,6 @@ __deceptinfect_radiation_RadiationAccepter.prototype = _hx_a();
 __deceptinfect_radiation_RadiationAccepter.prototype.radiation= nil;
 __deceptinfect_radiation_RadiationAccepter.prototype.diminish= nil;
 __deceptinfect_radiation_RadiationAccepter.prototype.acceptContam= nil;
-__deceptinfect_radiation_RadiationAccepter.prototype.accepting= nil;
 
 __deceptinfect_radiation_RadiationAccepter.prototype.__class__ =  __deceptinfect_radiation_RadiationAccepter
 __deceptinfect_radiation_RadiationAccepter.__super__ = __deceptinfect_ecswip_Component
@@ -4649,7 +3404,7 @@ end
 _hxClasses["deceptinfect.radiation.RadiationProducer"] = __deceptinfect_radiation_RadiationProducer
 __deceptinfect_radiation_RadiationProducer.__name__ = "deceptinfect.radiation.RadiationProducer"
 __deceptinfect_radiation_RadiationProducer.createFromType = function(type) 
-  local radProduce = __deceptinfect_radiation_RadiationProducer.new(__deceptinfect_radiation_RadiationTypes.types:get(type));
+  __deceptinfect_radiation_RadiationProducer.new(__deceptinfect_radiation_RadiationTypes.types:get(type));
   do return __deceptinfect_radiation_RadiationProducer.new(__deceptinfect_radiation_RadiationTypes.types:get(type)) end;
 end
 __deceptinfect_radiation_RadiationProducer.prototype = _hx_a();
@@ -4694,13 +3449,6 @@ __deceptinfect_ecswip_VirtualPosition.prototype.get_pos = function(self)
     do return self.ent:GetPos() end;
   end;
 end
-__deceptinfect_ecswip_VirtualPosition.prototype.get_ang = function(self) 
-  if (self.ent == nil) then 
-    do return self.ang end;
-  else
-    do return self.ent:GetAngles() end;
-  end;
-end
 __deceptinfect_ecswip_VirtualPosition.prototype.set_pos = function(self,set) 
   if (self.ent == nil) then 
     self.pos = set do return self.pos end;
@@ -4729,13 +3477,6 @@ __deceptinfect_infection_RateSystem.getAddRateTicket = function()
   __deceptinfect_infection_RateSystem.nextAddRate = __deceptinfect_infection_RateSystem.nextAddRate + 1;
   do return __deceptinfect_infection_RateSystem.nextAddRate - 1 end;
 end
-__deceptinfect_infection_RateSystem.getMultiRateTicket = function() 
-  __deceptinfect_infection_RateSystem.nextMultiRate = __deceptinfect_infection_RateSystem.nextMultiRate + 1;
-  do return __deceptinfect_infection_RateSystem.nextMultiRate - 1 end;
-end
-__deceptinfect_infection_RateSystem.addRate = function(rt,id,rate) 
-  rt.addRates:set(id, rate);
-end
 
 __deceptinfect_radiation_RadiationSystem.new = function() 
   local self = _hx_new(__deceptinfect_radiation_RadiationSystem.prototype)
@@ -4753,8 +3494,7 @@ __deceptinfect_radiation_RadiationSystem.getNextRadiatonID = function()
 end
 __deceptinfect_radiation_RadiationSystem.testRadiation = function(vec) 
   local ent = __deceptinfect_ecswip_ComponentManager.addEntity();
-  local this1 = _G.Angle(0, 0, 0);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(nil, vec, this1), ent);
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(nil, vec, _G.Angle(0, 0, 0)), ent);
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_RadiationProducer.createFromType(__deceptinfect_radiation_RadTypes.NEST), ent);
 end
 _hx_exports["testRadiation"] = __deceptinfect_radiation_RadiationSystem.testRadiation
@@ -4764,12 +3504,6 @@ __deceptinfect_radiation_RadiationSystem.getTotalRadiation = function(dist,rad)
   else
     do return __haxe_ds_Option.None end;
   end;
-end
-__deceptinfect_radiation_RadiationSystem.shouldContam = function(dist,contamProduce) 
-  do return dist < contamProduce.dist end;
-end
-__deceptinfect_radiation_RadiationSystem.shouldRoll = function(time,contamProduce) 
-  do return time > contamProduce.check end;
 end
 __deceptinfect_radiation_RadiationSystem.getTotalRadiationRate = function(r) 
   local sortFunc = function(x,y) 
@@ -4786,18 +3520,15 @@ __deceptinfect_radiation_RadiationSystem.getTotalRadiationRate = function(r)
   local sorted = _hx_tab_array({}, 0);
   local _g = __haxe_iterators_MapKeyValueIterator.new(r.radiation);
   while (_g:hasNext()) do 
-    local _g1 = _g:next();
-    local _ = _g1.key;
-    local rate = _g1.value;
-    sorted:push(rate);
+    sorted:push(_g:next().value);
   end;
   sorted:sort(sortFunc);
   local total = 0;
-  local _g2 = 0;
+  local _g1 = 0;
   local _g11 = sorted.length;
-  while (_g2 < _g11) do 
-    _g2 = _g2 + 1;
-    local i = _g2 - 1;
+  while (_g1 < _g11) do 
+    _g1 = _g1 + 1;
+    local i = _g1 - 1;
     total = total + (sorted[i] * _G.math.pow(r.diminish, i));
   end;
   do return total end;
@@ -4807,15 +3538,9 @@ __deceptinfect_radiation_RadiationSystem.prototype.run_server = function(self)
   local acceptEnt = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (acceptEnt:hasNext()) do 
     local acceptEnt1 = acceptEnt:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-    local comp = comparray[acceptEnt1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_RateComponent);
-    local comp1 = comparray1[acceptEnt1];
-    local _g2 = comp1;
-    local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationAccepter);
-    local comp2 = comparray2[acceptEnt1];
-    local _g3 = comp2;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[acceptEnt1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_RateComponent)[acceptEnt1];
+    local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationAccepter)[acceptEnt1];
     if (_g3[1] == 1) then 
       if (_g2[1] == 1) then 
         if (_g1[1] == 1) then 
@@ -4825,17 +3550,12 @@ __deceptinfect_radiation_RadiationSystem.prototype.run_server = function(self)
           local produceEnt = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
           while (produceEnt:hasNext()) do 
             local produceEnt1 = produceEnt:next();
-            local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
-            local comp3 = comparray3[produceEnt1];
-            local _g21 = comp3;
-            local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationProducer);
-            local comp4 = comparray4[produceEnt1];
-            local _g31 = comp4;
+            local _g21 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[produceEnt1];
+            local _g31 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationProducer)[produceEnt1];
             if (_g31[1] == 1) then 
               if (_g21[1] == 1) then 
                 local c_radProduce = _g31[2];
-                local c_producePos = _g21[2];
-                local dist = c_producePos:get_pos():Distance(c_radGEnt.entity:GetPos());
+                local dist = _g21[2]:get_pos():Distance(c_radGEnt.entity:GetPos());
                 local _g22 = __deceptinfect_radiation_RadiationSystem.getTotalRadiation(dist, c_radProduce);
                 if (_g22[1] == 0) then 
                   local rate = _g22[2];
@@ -4854,11 +3574,9 @@ __deceptinfect_radiation_RadiationSystem.prototype.run_server = function(self)
                     local c_contamProduce = _g5[2];
                     local c_contamAccept = _g4[2];
                     if (dist < c_contamProduce.dist) then 
-                      local time = c_contamAccept.contam_time:addTime(c_radProduce.id);
-                      if (time > c_contamProduce.check) then 
+                      if (c_contamAccept.contam_time:addTime(c_radProduce.id) > c_contamProduce.check) then 
                         c_contamAccept.contam_time:resetTime(c_radProduce.id);
-                        local randRoll = _G.math.random();
-                        local tmp = randRoll < c_contamProduce.chance;
+                        _G.math.random();
                       end;
                     else
                       c_contamAccept.contam_time:removeTime(c_radProduce.id);
@@ -4897,10 +3615,7 @@ __deceptinfect_game_WinSystem.prototype.init_server = function(self)
   self.newWinner = self.winTrig;
 end
 __deceptinfect_game_WinSystem.prototype.run_server = function(self) 
-  local _g = __deceptinfect_GameManager.state;
-  if (_g[1] == 2) then 
-    local _g1 = _g[2];
-  else
+  if (__deceptinfect_GameManager.state[1] ~= 2) then 
     do return end;
   end;
   local total = 0;
@@ -4908,30 +3623,18 @@ __deceptinfect_game_WinSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_AliveComponent);
-    local comp = comparray[ent1];
-    local _g3 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-    local comp1 = comparray1[ent1];
-    local _g4 = comp1;
-    local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent);
-    local comp2 = comparray2[ent1];
-    local _g5 = comp2;
-    local tmp = _g5[1];
+    local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_AliveComponent)[ent1];
+    local _g4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent1];
+    local tmp = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[ent1][1];
     if (tmp) == 0 then 
       if (_g4[1] == 1) then 
-        local _g9 = _g4[2];
         if (_g3[1] == 1) then 
-          local _g10 = _g3[2];
           total = total + 1;
         end;
       end;
     elseif (tmp) == 1 then 
-      local _g6 = _g5[2];
       if (_g4[1] == 1) then 
-        local _g7 = _g4[2];
         if (_g3[1] == 1) then 
-          local _g8 = _g3[2];
           infected = infected + 1;
           total = total + 1;
         end;
@@ -4959,12 +3662,9 @@ __deceptinfect_game_WinSystem.prototype.run_server = function(self)
   local ent2 = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent2:hasNext()) do 
     local ent3 = ent2:next();
-    local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_NestComponent);
-    local comp3 = comparray3[ent3];
-    local _g31 = comp3;
+    local _g31 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_NestComponent)[ent3];
     if (_g31[1] == 1) then 
-      local c_nest = _g31[2];
-      if (c_nest.health > 0) then 
+      if (_g31[2].health > 0) then 
         aliveNests = true;
         break;
       else
@@ -4996,40 +3696,36 @@ __deceptinfect_game_BatterySystem.prototype.run_server = function(self)
   local ents = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ents:hasNext()) do 
     local ents1 = ents:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_BatteryAccepter);
-    local comp = comparray[ents1];
-    local _g1 = comp;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_BatteryAccepter)[ents1];
     if (_g1[1] == 1) then 
-      local c_accept = _g1[2];
-      local c_accept1 = c_accept;
-      c_accept1.charge = c_accept1.charge - c_accept.decay;
-      if (c_accept.charge < 0.0) then 
-        c_accept.charge = 0.0;
+      local _g2 = _g1[2];
+      _g2.charge = _g2.charge - _g2.decay;
+      if (_g2.charge < 0.0) then 
+        _g2.charge = 0.0;
       end;
-      if (c_accept.charge > c_accept.satisfy) then 
-        c_accept.status = __deceptinfect_game_AccepterStatus.SATISIFED;
+      if (_g2.charge > _g2.satisfy) then 
+        _g2.status = __deceptinfect_game_AccepterStatus.SATISIFED;
       end;
-      if (c_accept.status[1] == 1) then 
-        if (c_accept.charge < c_accept.satisfy) then 
-          c_accept.status = __deceptinfect_game_AccepterStatus.AVALIABLE;
+      if (_g2.status[1] == 1) then 
+        if (_g2.charge < _g2.satisfy) then 
+          _g2.status = __deceptinfect_game_AccepterStatus.AVALIABLE;
         end;
       end;
     end;
   end;
 end
 __deceptinfect_game_BatterySystem.prototype.addBattery = function(self,source,accepter) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_BatteryAccepter);
-  local comp = comparray[accepter];
-  local _g = comp;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_BatterySource);
-  local comp1 = comparray1[source];
-  local _g1 = comp1;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_BatteryAccepter)[accepter];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_BatterySource)[source];
   if (_g1[1] == 1) then 
+    local _g2 = _g1[2];
     if (_g[1] == 1) then 
-      local c_source = _g1[2];
-      local c_accept = _g[2];
-      local c_accept1 = c_accept;
-      c_accept1.charge = c_accept1.charge + c_source.charge;
+      local _g3 = _g[2];
+      if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_sabotage_S_Break)[source][1] == 1) then 
+        _g3.charge = _g3.charge - (_g2.charge / 2);
+      else
+        _g3.charge = _g3.charge + _g2.charge;
+      end;
       do return true end;
     else
       do return false end;
@@ -5069,19 +3765,14 @@ __deceptinfect_game_SpawnSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Spawned);
-    local comp1 = comparray1[ent1];
-    local _g2 = comp1;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[ent1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Spawned)[ent1];
     if (_g2[1] == 1) then 
+      local _g3 = _g2[2];
       if (_g1[1] == 1) then 
-        local c_spawn = _g2[2];
-        local c_pos = _g1[2];
-        if (c_spawn.spawn.vec:DistToSqr(c_pos:get_pos()) > 8100) then 
+        if (_g3.spawn.vec:DistToSqr(_g1[2]:get_pos()) > 8100) then 
           __haxe_Log.trace("Spawn freed", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=25,className="deceptinfect.game.SpawnSystem",methodName="run_server"}));
-          c_spawn.spawn.claimed = __deceptinfect_game_SpawnClaim.UNCLAIMED;
+          _g3.spawn.claimed = __deceptinfect_game_SpawnClaim.UNCLAIMED;
           __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_game_Spawned, ent1);
         end;
       end;
@@ -5129,27 +3820,19 @@ __deceptinfect_statuses_WalkthroughSystem.new = function()
   return self
 end
 __deceptinfect_statuses_WalkthroughSystem.super = function(self) 
-  self.runtime = 0;
   __deceptinfect_ecswip_System.super(self);
 end
 _hxClasses["deceptinfect.statuses.WalkthroughSystem"] = __deceptinfect_statuses_WalkthroughSystem
 __deceptinfect_statuses_WalkthroughSystem.__name__ = "deceptinfect.statuses.WalkthroughSystem"
 __deceptinfect_statuses_WalkthroughSystem.prototype = _hx_a();
-__deceptinfect_statuses_WalkthroughSystem.prototype.runtime= nil;
 __deceptinfect_statuses_WalkthroughSystem.prototype.run_server = function(self) 
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_statuses_Walkthroughable);
-    local comp1 = comparray1[ent1];
-    local _g2 = comp1;
-    if (_g2[1] == 1) then 
-      local _g3 = _g2[2];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent1];
+    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_statuses_Walkthroughable)[ent1][1] == 1) then 
       if (_g1[1] == 1) then 
-        local c_ply = _g1[2];
+        local _g4 = _g1[2];
         local tooclose = false;
         local otherEnt = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
         local _hx_continue_2 = false;
@@ -5158,13 +3841,9 @@ __deceptinfect_statuses_WalkthroughSystem.prototype.run_server = function(self)
           if (otherEnt1 == ent1) then 
             break;
           end;
-          local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-          local comp2 = comparray2[otherEnt1];
-          local _g21 = comp2;
-          if (_g21[1] == 1) then 
-            local c_otherPly = _g21[2];
-            local dist = c_otherPly.player:GetPos():DistToSqr(c_ply.player:GetPos());
-            if (dist < 10000) then 
+          local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[otherEnt1];
+          if (_g2[1] == 1) then 
+            if (_g2[2].player:GetPos():DistToSqr(_g4.player:GetPos()) < 10000) then 
               tooclose = true;
               _hx_continue_2 = true;break;
             end;
@@ -5176,7 +3855,7 @@ __deceptinfect_statuses_WalkthroughSystem.prototype.run_server = function(self)
           
         end;
         if (not tooclose) then 
-          __deceptinfect_util_PlayerExt.setWalkthroughable(c_ply.player, false);
+          __deceptinfect_util_PlayerExt.setWalkthroughable(_g4.player, false);
           __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_statuses_Walkthroughable, ent1);
         end;
       end;
@@ -5203,51 +3882,20 @@ __deceptinfect_game_NestSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationProducer);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_NestComponent);
-    local comp1 = comparray1[ent1];
-    local _g2 = comp1;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationProducer)[ent1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_NestComponent)[ent1];
     if (_g2[1] == 1) then 
+      local _g3 = _g2[2];
       if (_g1[1] == 1) then 
-        local c_nest = _g2[2];
-        local c_rad = _g1[2];
-        local avg = __deceptinfect_infection_InfectionSystem.averageInfection;
+        local _g4 = _g1[2];
         local remap = (function(inMax,inMin,value) 
           do return function(outMin,outMax) 
             do return _G.math.Remap(value[0], inMin[0], inMax[0], outMin, outMax) end;
           end end;
-        end)(_hx_tab_array({[0]=c_nest.rate_threshold_max}, 1), _hx_tab_array({[0]=c_nest.rate_threshold_min}, 1), _hx_tab_array({[0]=avg}, 1));
-        c_rad.maxrate = remap(c_nest.rate_start, c_nest.rate_end);
-        c_rad.radius = remap(c_nest.radius_start, c_nest.radius_end);
+        end)(_hx_tab_array({[0]=_g3.rate_threshold_max}, 1), _hx_tab_array({[0]=_g3.rate_threshold_min}, 1), _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem.averageInfection}, 1));
+        _g4.maxrate = remap(_g3.rate_start, _g3.rate_end);
+        _g4.radius = remap(_g3.radius_start, _g3.radius_end);
       end;
-    end;
-  end;
-end
-__deceptinfect_game_NestSystem.prototype.revealNests = function(self) 
-  local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
-  while (ent:hasNext()) do 
-    local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_NestComponent);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    if (_g1[1] == 1) then 
-      local c_nest = _g1[2];
-      c_nest.nestState = __deceptinfect_game_NestState.VISIBLE;
-    end;
-  end;
-end
-__deceptinfect_game_NestSystem.prototype.hideNests = function(self) 
-  local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
-  while (ent:hasNext()) do 
-    local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_NestComponent);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    if (_g1[1] == 1) then 
-      local c_nest = _g1[2];
-      c_nest.nestState = __deceptinfect_game_NestState.INVISIBLE;
     end;
   end;
 end
@@ -5274,12 +3922,9 @@ __deceptinfect_game_EvacSystem.prototype.run_server = function(self)
   while (ent:hasNext()) do 
     local ent1 = ent:next();
     local _g1 = __deceptinfect_GameManager.state;
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_EvacZone);
-    local comp = comparray[ent1];
-    local _g2 = comp;
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_EvacZone)[ent1];
     if (_g2[1] == 1) then 
       if (_g1[1] == 2) then 
-        local _g4 = _g1[2];
         local c_evac = _g2[2];
         if ((__deceptinfect_infection_InfectionSystem.averageInfection > 80) and not self.flaresSpawned) then 
           local flareSpawn = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_SpawnSystem).obj:getRandom();
@@ -5297,9 +3942,7 @@ __deceptinfect_game_EvacSystem.prototype.run_server = function(self)
           if (time[0] < 0) then 
             __haxe_Log.trace(c_evac.state, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/EvacSystem.hx",lineNumber=79,className="deceptinfect.game.EvacSystem",methodName="run_server"}));
             local v = c_evac.leavetime;
-            local this1 = ({length = 1});
-            local this2 = this1;
-            local ret = this2;
+            local ret = ({length = 1});
             ret[0] = v;
             c_evac.state = __deceptinfect_game_EvacState.LEAVING(ret);
           end;
@@ -5315,14 +3958,11 @@ __deceptinfect_game_EvacSystem.prototype.run_server = function(self)
           local id = c_evac.in_zone:keys();
           while (id:hasNext()) do 
             local id1 = id:next();
-            local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent);
-            local comp1 = comparray1[id1];
-            local _g12 = comp1;
+            local _g12 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent)[id1];
             if (_g12[1] == 1) then 
               if (_g12[2].form[1] == 1) then 
                 c_evac.in_zone:remove(id1);
-                local _this = c_evac.blocked;
-                _this.h[id1] = true;
+                c_evac.blocked.h[id1] = true;
               end;
             end;
           end;
@@ -5336,22 +3976,14 @@ __deceptinfect_game_EvacSystem.prototype.checkWin = function(self,evac)
   local id = evac.in_zone:keys();
   while (id:hasNext()) do 
     local id1 = id:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-    local comp = comparray[id1];
-    local _g = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent);
-    local comp1 = comparray1[id1];
-    local _g1 = comp1;
-    local tmp = _g1[1];
+    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[id1];
+    local tmp = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[id1][1];
     if (tmp) == 0 then 
       if (_g[1] == 1) then 
-        local _g4 = _g[2];
         humanEscape = true;
       end;
     elseif (tmp) == 1 then 
-      local _g2 = _g1[2];
       if (_g[1] == 1) then 
-        local _g3 = _g[2];
         __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_WinSystem).winTrig.handlers:invoke(__deceptinfect_game_Win.WIN_INF);
         do return end;
       end; end;
@@ -5363,63 +3995,43 @@ __deceptinfect_game_EvacSystem.prototype.checkWin = function(self,evac)
   end;
 end
 __deceptinfect_game_EvacSystem.prototype.touched = function(self,ent,evac) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp = comparray[ent];
-  local _g = comp;
-  if (_g[1] == 1) then 
-    local c_player = _g[2];
+  if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent][1] == 1) then 
     if (evac.blocked.h[ent] ~= nil) then 
       do return end;
     end;
-    local _g1 = evac.state;
-    if (_g1[1] == 2) then 
-      local time = _g1[2];
-      if ((evac.touched.h[ent] == nil) and (time[0] < (evac.leavetime / 2))) then 
-        time[0] = evac.leavetime / 2;
+    local _g = evac.state;
+    if (_g[1] == 2) then 
+      local _g1 = _g[2];
+      if ((evac.touched.h[ent] == nil) and (_g1[0] < (evac.leavetime / 2))) then 
+        _g1[0] = evac.leavetime / 2;
       end;
     end;
-    local _this = evac.touched;
-    _this.h[ent] = true;
-    local _this1 = evac.in_zone;
-    _this1.h[ent] = false;
+    evac.touched.h[ent] = true;
+    evac.in_zone.h[ent] = false;
     __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_InEvacZone.new(), ent);
   end;
 end
 __deceptinfect_game_EvacSystem.prototype.addFlare = function(self,flare,evac) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_EvacZone);
-  local comp = comparray[evac];
-  local _g = comp;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-  local comp1 = comparray1[flare];
-  local _g1 = comp1;
-  local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_FlareComponent);
-  local comp2 = comparray2[flare];
-  local _g2 = comp2;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_EvacZone)[evac];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[flare];
+  local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_FlareComponent)[flare];
   if (_g2[1] == 1) then 
-    local _g3 = _g2[2];
     if (_g1[1] == 1) then 
       if (_g[1] == 1) then 
-        local c_gent = _g1[2];
         local c_evac = _g[2];
         if (c_evac.state[1] == 0) then 
           local v = c_evac.arrivetime;
-          local this1 = ({length = 1});
-          local this2 = this1;
-          local ret = this2;
+          local ret = ({length = 1});
           ret[0] = v;
           c_evac.state = __deceptinfect_game_EvacState.ARRIVING(ret);
-          c_gent.entity:Remove();
+          _g1[2].entity:Remove();
         end;
       end;
     end;
   end;
 end
 __deceptinfect_game_EvacSystem.prototype.leave = function(self,ent,evac) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-  local comp = comparray[ent];
-  local _g = comp;
-  if (_g[1] == 1) then 
-    local _g1 = _g[2];
+  if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent][1] == 1) then 
     evac.in_zone:remove(ent);
     __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_game_InEvacZone, ent);
   end;
@@ -5448,51 +4060,34 @@ __deceptinfect_game_RagdollSystem.prototype.endSlowMotion = function(self,x)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue);
-    local comp1 = comparray1[ent1];
-    local _g2 = comp1;
-    local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Ragdoll);
-    local comp2 = comparray2[ent1];
-    local _g3 = comp2;
-    if (_g3[1] == 1) then 
-      local _g4 = _g3[2];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue)[ent1];
+    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Ragdoll)[ent1][1] == 1) then 
       if (_g2[1] == 1) then 
-        local _g5 = _g2[2];
         if (_g1[1] == 1) then 
           local _hx_tmp;
           _hx_tmp = _g1[2].entity;
-          local gent = _hx_tmp;
           local _g11 = 0;
-          local _g21 = gent:GetPhysicsObjectCount();
+          local _g21 = _hx_tmp:GetPhysicsObjectCount();
           while (_g11 < _g21) do 
             _g11 = _g11 + 1;
-            local physid = _g11 - 1;
-            local physob = gent:GetPhysicsObjectNum(physid);
+            local physob = _hx_tmp:GetPhysicsObjectNum(_g11 - 1);
             physob:EnableMotion(false);
             physob:Sleep();
           end;
-          gent:SetCollisionGroup(_G.COLLISION_GROUP_WORLD);
-          gent:SetSolid(_G.SOLID_NONE);
+          _hx_tmp:SetCollisionGroup(_G.COLLISION_GROUP_WORLD);
+          _hx_tmp:SetSolid(_G.SOLID_NONE);
         end;
       end;
     end;
-    local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_AliveComponent);
-    local comp3 = comparray3[ent1];
-    local _g7 = comp3;
-    local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-    local comp4 = comparray4[ent1];
-    local _g8 = comp4;
+    local _g7 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_AliveComponent)[ent1];
+    local _g8 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent1];
     if (_g8[1] == 1) then 
       if (_g7[1] == 1) then 
-        local _g10 = _g7[2];
         local _hx_tmp1;
         _hx_tmp1 = _g8[2].player;
-        local plyr = _hx_tmp1;
-        self:playerStatue(plyr);
-        plyr:KillSilent();
+        self:playerStatue(_hx_tmp1);
+        _hx_tmp1:KillSilent();
       end;
     end;
   end;
@@ -5503,43 +4098,25 @@ __deceptinfect_game_RagdollSystem.prototype.stateChange = function(self,newstate
   if (tmp) == 0 then 
     self:writeStatues();
   elseif (tmp) == 3 then 
-    local _g2 = newstate[3];
-    local _g1 = newstate[2];
     local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
     while (ent:hasNext()) do 
       local ent1 = ent:next();
-      local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_AliveComponent);
-      local comp = comparray[ent1];
-      local _g11 = comp;
-      local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent);
-      local comp1 = comparray1[ent1];
-      local _g21 = comp1;
-      local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-      local comp2 = comparray2[ent1];
-      local _g3 = comp2;
+      local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_AliveComponent)[ent1];
+      local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[ent1];
+      local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent1];
       if (_g3[1] == 1) then 
-        if (_g21[1] == 1) then 
-          local _g5 = _g21[2];
-          if (_g11[1] == 1) then 
-            local _g6 = _g11[2];
-            local c_ply = _g3[2];
-            c_ply.player:SetModel(__deceptinfect_Misc.infModel);
+        if (_g2[1] == 1) then 
+          if (_g1[1] == 1) then 
+            _g3[2].player:SetModel(__deceptinfect_Misc.infModel);
           end;
         end;
       end;
-      local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Ragdoll);
-      local comp3 = comparray3[ent1];
-      local _g7 = comp3;
-      local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-      local comp4 = comparray4[ent1];
-      local _g8 = comp4;
+      local _g7 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Ragdoll)[ent1];
+      local _g8 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent1];
       if (_g8[1] == 1) then 
         if (_g7[1] == 1) then 
-          local _hx_tmp = _g7[2].reveal;
-          if (_hx_tmp[1] == 0) then 
-            local _g111 = _hx_tmp[2];
-            local c_ent = _g8[2];
-            self:reveal(c_ent.entity);
+          if (_g7[2].reveal[1] == 0) then 
+            self:reveal(_g8[2].entity);
           end;
         end;
       end;
@@ -5548,18 +4125,11 @@ __deceptinfect_game_RagdollSystem.prototype.stateChange = function(self,newstate
     local ent2 = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
     while (ent2:hasNext()) do 
       local ent3 = ent2:next();
-      local comparray5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-      local comp5 = comparray5[ent3];
-      local _g12 = comp5;
-      local comparray6 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue);
-      local comp6 = comparray6[ent3];
-      local _g22 = comp6;
-      if (_g22[1] == 1) then 
-        local _g31 = _g22[2];
-        if (_g12[1] == 1) then 
-          local c_gent = _g12[2];
+      local _g11 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent3];
+      if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue)[ent3][1] == 1) then 
+        if (_g11[1] == 1) then 
           __haxe_Log.trace("removed statue", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/RagdollSystem.hx",lineNumber=172,className="deceptinfect.game.RagdollSystem",methodName="stateChange"}));
-          c_gent.entity:Remove();
+          _g11[2].entity:Remove();
         end;
       end;
     end;
@@ -5569,34 +4139,23 @@ __deceptinfect_game_RagdollSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Ragdoll);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-    local comp1 = comparray1[ent1];
-    local _g2 = comp1;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Ragdoll)[ent1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent1];
     if (_g2[1] == 1) then 
       if (_g1[1] == 1) then 
         local c_ent = _g2[2];
         local c_rag = _g1[2];
         local _g11 = c_rag.reveal;
         if (_g11[1] == 0) then 
-          local time = _g11[2];
-          if (_G.CurTime() > time[0]) then 
+          if (_G.CurTime() > _g11[2][0]) then 
             self:reveal(c_ent.entity);
           end;
         end;
-        local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue);
-        local comp2 = comparray2[ent1];
-        local _g3 = comp2;
-        if (_g3[1] == 1) then 
-          local _g4 = _g3[2];
-        else
+        local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue)[ent1];
+        if (_g3[1] ~= 1) then 
           local this1 = c_rag.owner;
           local x = __deceptinfect_ecswip_PlayerComponent;
-          local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-          local comp3 = comparray3[this1];
-          local retrieve_comp = comp3:slice(2)[0];
+          local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
           if (retrieve_comp == nil) then 
             _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
           end;
@@ -5606,16 +4165,9 @@ __deceptinfect_game_RagdollSystem.prototype.run_server = function(self)
         end;
       end;
     end;
-    local comparray4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue);
-    local comp4 = comparray4[ent1];
-    local _g5 = comp4;
-    local comparray5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Ragdoll);
-    local comp5 = comparray5[ent1];
-    local _g6 = comp5;
-    local comparray6 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-    local comp6 = comparray6[ent1];
-    local _g7 = comp6;
-    local tmp = _g7[1] == 1;
+    local _g5 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue)[ent1];
+    local _g6 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Ragdoll)[ent1];
+    local _g7 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent1];
   end;
 end
 __deceptinfect_game_RagdollSystem.prototype.playerRagdoll = function(self,owner,ragdoll) 
@@ -5623,23 +4175,16 @@ __deceptinfect_game_RagdollSystem.prototype.playerRagdoll = function(self,owner,
     local ply = owner;
     local di_ragdoll = self:newRagdoll(ply, ragdoll);
     local this1 = ply.id;
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent);
-    local comp = comparray[this1];
-    local _g = comp;
+    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[this1];
     if (_g[1] == 1) then 
-      local _g1 = _g[2];
       local this2 = di_ragdoll.id;
       local x = __deceptinfect_game_Ragdoll;
-      local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-      local comp1 = comparray1[this2];
-      local retrieve_comp = comp1:slice(2)[0];
+      local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this2]:slice(2)[0];
       if (retrieve_comp == nil) then 
         _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
       end;
       local v = _G.CurTime() + 5;
-      local this11 = ({length = 1});
-      local this21 = this11;
-      local ret = this21;
+      local ret = ({length = 1});
       ret[0] = v;
       retrieve_comp.reveal = __deceptinfect_game_RagdollReveal.WAIT(ret);
     end;
@@ -5652,13 +4197,10 @@ __deceptinfect_game_RagdollSystem.prototype.playerStatue = function(self,plyr,in
     inf = false;
   end;
   local x = _G.ents.Create("prop_ragdoll");
-  local this1 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  local ent = this1;
-  local this2 = ent.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Statue.new(), this2);
-  local this3 = ent.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_KeepRestart.new(), this3);
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
+  local ent = x;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Statue.new(), ent.id);
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_KeepRestart.new(), ent.id);
   if (inf) then 
     ent:SetModel(__deceptinfect_Misc.infModel);
   else
@@ -5683,66 +4225,31 @@ __deceptinfect_game_RagdollSystem.prototype.playerStatue = function(self,plyr,in
   end;
   ent:SetCollisionGroup(_G.COLLISION_GROUP_WORLD);
   ent:SetSolid(_G.SOLID_NONE);
-  local plywep = plyr:GetActiveWeapon();
-  ent:SetNWString("showwep", plywep:GetModel());
+  ent:SetNWString("showwep", plyr:GetActiveWeapon():GetModel());
 end
 __deceptinfect_game_RagdollSystem.prototype.writeStatues = function(self) 
   local tbl = _hx_tab_array({}, 0);
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent);
-    local comp = comparray[ent1];
-    local _g1 = comp;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue);
-    local comp1 = comparray1[ent1];
-    local _g2 = comp1;
-    if (_g2[1] == 1) then 
-      local _g3 = _g2[2];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent1];
+    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_Statue)[ent1][1] == 1) then 
       if (_g1[1] == 1) then 
         local _hx_tmp;
         _hx_tmp = _g1[2].entity;
-        local gent = _hx_tmp;
         local ar = _hx_tab_array({}, 0);
         local _g11 = 0;
-        local _g21 = gent:GetPhysicsObjectCount();
-        while (_g11 < _g21) do 
+        local _g2 = _hx_tmp:GetPhysicsObjectCount();
+        while (_g11 < _g2) do 
           _g11 = _g11 + 1;
-          local i = _g11 - 1;
-          local physob = gent:GetPhysicsObjectNum(i);
+          local physob = _hx_tmp:GetPhysicsObjectNum(_g11 - 1);
           ar:push(_hx_o({__fields__={pos=true,ang=true},pos=physob:GetPos(),ang=physob:GetAngles()}));
         end;
-        tbl:push(_hx_o({__fields__={model=true,phys=true},model=gent:GetModel(),phys=ar}));
+        tbl:push(_hx_o({__fields__={model=true,phys=true},model=_hx_tmp:GetModel(),phys=ar}));
       end;
     end;
   end;
   _G.file.Write("deceptinfect/lastRoundStatues.txt", __haxe_Json.stringify(tbl));
-end
-__deceptinfect_game_RagdollSystem.prototype.readStatues = function(self) 
-  local file = _G.file.Read("deceptinfect/lastRoundStatues.txt", "DATA");
-  if ((file ~= nil) and (file ~= "")) then 
-    local json = __haxe_Json.parse(file);
-    local _g = 0;
-    while (_g < json.length) do 
-      local stat = json[_g];
-      _g = _g + 1;
-    end;
-    __haxe_Log.trace(json, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/RagdollSystem.hx",lineNumber=292,className="deceptinfect.game.RagdollSystem",methodName="readStatues"}));
-  end;
-end
-__deceptinfect_game_RagdollSystem.prototype.playerStatue2 = function(self,plyr) 
-  local vecs = ({});
-  local angs = ({});
-  local _g = 0;
-  local _g1 = plyr:GetBoneCount() - 1;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local boneid = _g - 1;
-    local _hx_1_bp_a, _hx_1_bp_b = plyr:GetBonePosition(boneid);
-    vecs[boneid] = _hx_1_bp_a;
-    angs[boneid] = _hx_1_bp_b;
-  end;
-  __deceptinfect_game_RagdollSystem.statue:broadcast(_hx_o({__fields__={playerpos=true,playermodel=true,weaponmodel=true,playerangle=true,playerbones=true},playerpos=plyr:GetPos(),playermodel=plyr:GetModel(),weaponmodel=plyr:GetActiveWeapon():GetModel(),playerangle=angs,playerbones=vecs}));
 end
 __deceptinfect_game_RagdollSystem.prototype.newRagdoll = function(self,owner,old) 
   local rag = self:createProp();
@@ -5751,9 +4258,7 @@ __deceptinfect_game_RagdollSystem.prototype.newRagdoll = function(self,owner,old
   rag:Spawn();
   local this1 = rag.id;
   local x = __deceptinfect_game_Ragdoll;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[this1];
-  local retrieve_comp = comp:slice(2)[0];
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
   if (retrieve_comp == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
   end;
@@ -5780,13 +4285,10 @@ __deceptinfect_game_RagdollSystem.prototype.newRagdoll = function(self,owner,old
 end
 __deceptinfect_game_RagdollSystem.prototype.createProp = function(self) 
   local rag = _G.ents.Create("prop_ragdoll");
-  local this1 = rag;
-  rag.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  local id = this1.id;
+  rag.id = __deceptinfect_ecswip_ComponentManager.addGEnt(rag);
+  local id = rag.id;
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Ragdoll.new(), id);
-  local _g = __deceptinfect_GameManager.state;
-  if (_g[1] == 2) then 
-    local _g1 = _g[2];
+  if (__deceptinfect_GameManager.state[1] == 2) then 
     __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Statue.new(), id);
     __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_KeepRestart.new(), id);
   else
@@ -5798,9 +4300,7 @@ __deceptinfect_game_RagdollSystem.prototype.reveal = function(self,rag)
   local newmodel = self:createProp();
   local this1 = newmodel.id;
   local x = __deceptinfect_game_Ragdoll;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[this1];
-  local retrieve_comp = comp:slice(2)[0];
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
   if (retrieve_comp == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
   end;
@@ -5808,9 +4308,7 @@ __deceptinfect_game_RagdollSystem.prototype.reveal = function(self,rag)
   c_rag.reveal = __deceptinfect_game_RagdollReveal.REVEAL;
   local this2 = rag.id;
   local x1 = __deceptinfect_game_Ragdoll;
-  local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-  local comp1 = comparray1[this2];
-  local retrieve_comp1 = comp1:slice(2)[0];
+  local retrieve_comp1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[this2]:slice(2)[0];
   if (retrieve_comp1 == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
   end;
@@ -5825,8 +4323,7 @@ __deceptinfect_game_RagdollSystem.prototype.reveal = function(self,rag)
   local _g1 = rag:GetPhysicsObjectCount() - 1;
   while (_g < _g1) do 
     _g = _g + 1;
-    local i = _g - 1;
-    local oldphysob = rag:GetPhysicsObjectNum(i);
+    local oldphysob = rag:GetPhysicsObjectNum(_g - 1);
     if (_G.IsValid(oldphysob)) then 
       oldphysob:EnableCollisions(false);
     end;
@@ -5835,23 +4332,22 @@ __deceptinfect_game_RagdollSystem.prototype.reveal = function(self,rag)
   local _g3 = newmodel:GetPhysicsObjectCount() - 1;
   while (_g2 < _g3) do 
     _g2 = _g2 + 1;
-    local i1 = _g2 - 1;
-    local newphysob = newmodel:GetPhysicsObjectNum(i1);
+    local i = _g2 - 1;
+    local newphysob = newmodel:GetPhysicsObjectNum(i);
     if (_G.IsValid(newphysob)) then 
-      local bone = newmodel:TranslatePhysBoneToBone(i1);
-      local otherbone = rag:LookupBone(newmodel:GetBoneName(bone));
-      local oldphysob1;
+      local otherbone = rag:LookupBone(newmodel:GetBoneName(newmodel:TranslatePhysBoneToBone(i)));
       local _g21 = rag:TranslateBoneToPhysBone(otherbone);
-      if (_g21 == -1) then 
-        oldphysob1 = nil;
-      else
-        local x2 = _g21;
-        oldphysob1 = rag:GetPhysicsObjectNum(x2);
-      end;
+      local oldphysob1 = (function() 
+        local _hx_1
+        if (_g21 == -1) then 
+        _hx_1 = nil; else 
+        _hx_1 = rag:GetPhysicsObjectNum(_g21); end
+        return _hx_1
+      end )();
       if (otherbone ~= nil) then 
-        local _hx_1_bp_a, _hx_1_bp_b = rag:GetBonePosition(otherbone);
-        newphysob:SetPos(_hx_1_bp_a, true);
-        newphysob:SetAngles(_hx_1_bp_b);
+        local _hx_2_bp_a, _hx_2_bp_b = rag:GetBonePosition(otherbone);
+        newphysob:SetPos(_hx_2_bp_a, true);
+        newphysob:SetAngles(_hx_2_bp_b);
         if (oldphysob1 ~= nil) then 
           newphysob:SetVelocityInstantaneous(oldphysob1:GetVelocity());
           newphysob:SetVelocity(oldphysob1:GetVelocity());
@@ -5894,29 +4390,34 @@ __deceptinfect_game_SlowMotionSystem.prototype.endval= nil;
 __deceptinfect_game_SlowMotionSystem.prototype.slowMotionEnd= nil;
 __deceptinfect_game_SlowMotionSystem.prototype.slowMotionEndTrig= nil;
 __deceptinfect_game_SlowMotionSystem.prototype.init_server = function(self) 
+  __deceptinfect_GameManager.stateChange:handle(_hx_bind(self,self.stateChange));
   __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_WinSystem).newWinner:handle(_hx_bind(self,self.winChange));
 end
 __deceptinfect_game_SlowMotionSystem.prototype.winChange = function(self,x) 
   local tmp = x[1];
   if (tmp) == 0 or (tmp) == 1 then 
-    _G.game.ConsoleCommand(Std.string(Std.string("host_timescale ") .. Std.string(self.startval)) .. Std.string("\n"));
+    _G.game.SetTimeScale(self.startval);
     self.slowMotion = __deceptinfect_game_SlowMotionState.ACTIVE(_G.RealTime() + self.finishtime, _G.RealTime());else end;
+end
+__deceptinfect_game_SlowMotionSystem.prototype.stateChange = function(self,x) 
+  if (__deceptinfect_GameManager.state[1] == 1) then 
+    _G.game.ConsoleCommand("phys_timescale 1\n");
+  end;
 end
 __deceptinfect_game_SlowMotionSystem.prototype.run_server = function(self) 
   local _g = self.slowMotion;
   if (_g[1] == 0) then 
-    local start = _g[3];
-    local target = _g[2];
-    if (_G.RealTime() > target) then 
+    local _g2 = _g[3];
+    local _g1 = _g[2];
+    if (_G.RealTime() > _g1) then 
       self.slowMotion = __deceptinfect_game_SlowMotionState.FINISHED;
-      _G.game.ConsoleCommand("host_timescale 1\n");
+      _G.game.SetTimeScale(1);
+      _G.game.ConsoleCommand("phys_timescale 0\n");
       local event = nil;
       self.slowMotionEndTrig.handlers:invoke(event);
       do return end;
     end;
-    local lp = (_G.RealTime() - start) / (target - start);
-    local val = _G.Lerp(lp, self.startval, self.endval);
-    _G.game.ConsoleCommand(Std.string(Std.string("host_timescale ") .. Std.string(val)) .. Std.string("\n"));
+    _G.game.SetTimeScale(_G.Lerp((_G.RealTime() - _g2) / (_g1 - _g2), self.startval, self.endval));
   end;
 end
 
@@ -5930,68 +4431,55 @@ __deceptinfect_ecswip_SystemManager.__name__ = "deceptinfect.ecswip.SystemManage
 __deceptinfect_ecswip_SystemManager.make = function() 
   local _this = __deceptinfect_ecswip_SystemManager.getSystems;
   local key = __deceptinfect_infection_InfectionSystem;
-  local value = __deceptinfect_infection_InfectionSystem.new();
-  _this.h[key] = value;
+  _this.h[key] = __deceptinfect_infection_InfectionSystem.new();
   _this.k[key] = true;
   local _this1 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key1 = __deceptinfect_client_GeigerSystem;
-  local value1 = __deceptinfect_client_GeigerSystem.new();
-  _this1.h[key1] = value1;
+  _this1.h[key1] = __deceptinfect_client_GeigerSystem.new();
   _this1.k[key1] = true;
   local _this2 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key2 = __deceptinfect_radiation_RadiationSystem;
-  local value2 = __deceptinfect_radiation_RadiationSystem.new();
-  _this2.h[key2] = value2;
+  _this2.h[key2] = __deceptinfect_radiation_RadiationSystem.new();
   _this2.k[key2] = true;
   local _this3 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key3 = __deceptinfect_ecswip_GrabSystem;
-  local value3 = __deceptinfect_ecswip_GrabSystem.new();
-  _this3.h[key3] = value3;
+  _this3.h[key3] = __deceptinfect_ecswip_GrabSystem.new();
   _this3.k[key3] = true;
   local _this4 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key4 = __deceptinfect_ecswip_HiddenHealthSystem;
-  local value4 = __deceptinfect_ecswip_HiddenHealthSystem.new();
-  _this4.h[key4] = value4;
+  _this4.h[key4] = __deceptinfect_ecswip_HiddenHealthSystem.new();
   _this4.k[key4] = true;
   local _this5 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key5 = __deceptinfect_game_WinSystem;
-  local value5 = __deceptinfect_game_WinSystem.new();
-  _this5.h[key5] = value5;
+  _this5.h[key5] = __deceptinfect_game_WinSystem.new();
   _this5.k[key5] = true;
   local _this6 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key6 = __deceptinfect_game_BatterySystem;
-  local value6 = __deceptinfect_game_BatterySystem.new();
-  _this6.h[key6] = value6;
+  _this6.h[key6] = __deceptinfect_game_BatterySystem.new();
   _this6.k[key6] = true;
   local _this7 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key7 = __deceptinfect_game_SpawnSystem;
-  local value7 = __deceptinfect_game_SpawnSystem.new();
-  _this7.h[key7] = value7;
+  _this7.h[key7] = __deceptinfect_game_SpawnSystem.new();
   _this7.k[key7] = true;
   local _this8 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key8 = __deceptinfect_statuses_WalkthroughSystem;
-  local value8 = __deceptinfect_statuses_WalkthroughSystem.new();
-  _this8.h[key8] = value8;
+  _this8.h[key8] = __deceptinfect_statuses_WalkthroughSystem.new();
   _this8.k[key8] = true;
   local _this9 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key9 = __deceptinfect_game_NestSystem;
-  local value9 = __deceptinfect_game_NestSystem.new();
-  _this9.h[key9] = value9;
+  _this9.h[key9] = __deceptinfect_game_NestSystem.new();
   _this9.k[key9] = true;
   local _this10 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key10 = __deceptinfect_game_EvacSystem;
-  local value10 = __deceptinfect_game_EvacSystem.new();
-  _this10.h[key10] = value10;
+  _this10.h[key10] = __deceptinfect_game_EvacSystem.new();
   _this10.k[key10] = true;
   local _this11 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key11 = __deceptinfect_game_RagdollSystem;
-  local value11 = __deceptinfect_game_RagdollSystem.new();
-  _this11.h[key11] = value11;
+  _this11.h[key11] = __deceptinfect_game_RagdollSystem.new();
   _this11.k[key11] = true;
   local _this12 = __deceptinfect_ecswip_SystemManager.getSystems;
   local key12 = __deceptinfect_game_SlowMotionSystem;
-  local value12 = __deceptinfect_game_SlowMotionSystem.new();
-  _this12.h[key12] = value12;
+  _this12.h[key12] = __deceptinfect_game_SlowMotionSystem.new();
   _this12.k[key12] = true;
 end
 __deceptinfect_ecswip_SystemManager.getSystem = function(cls) 
@@ -6125,15 +4613,6 @@ __gmod_sent_ENT_ANIM.prototype.__class__ =  __gmod_sent_ENT_ANIM
 __gmod_sent_ENT_ANIM.__super__ = __gmod_sent_ENT
 setmetatable(__gmod_sent_ENT_ANIM.prototype,{__index=__gmod_sent_ENT.prototype})
 
-__gmod_sent_SentBuild.new = {}
-_hxClasses["gmod.sent.SentBuild"] = __gmod_sent_SentBuild
-__gmod_sent_SentBuild.__name__ = "gmod.sent.SentBuild"
-__gmod_sent_SentBuild.prototype = _hx_a();
-__gmod_sent_SentBuild.prototype.properties= nil;
-__gmod_sent_SentBuild.prototype.TYPE= nil;
-
-__gmod_sent_SentBuild.prototype.__class__ =  __gmod_sent_SentBuild
-
 __deceptinfect_ents_Di_battery.new = function(curEnt) 
   local self = _hx_new(__deceptinfect_ents_Di_battery.prototype)
   __deceptinfect_ents_Di_battery.super(self,curEnt)
@@ -6165,12 +4644,9 @@ __deceptinfect_ents_Di_battery.prototype.Initialize = function(self)
   end;
   self["self"]:SetUseType(_G.SIMPLE_USE);
   local x = self["self"];
-  local this1 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  local ent = this1;
-  self.id = ent.id;
-  local this2 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_BatterySource.new(), this2);
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
+  self.id = x.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_BatterySource.new(), self.id);
 end
 __deceptinfect_ents_Di_battery.prototype.Use = function(self,activator,caller,useType,value) 
   if (self["self"]:IsPlayerHolding() or not activator:IsPlayer()) then 
@@ -6184,18 +4660,16 @@ __deceptinfect_ents_Di_battery.prototype.Touch = function(self,entity)
   if (self.added) then 
     do return end;
   end;
-  local _g;
-  local _g1 = entity.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local otherID = _g[2];
-    local result = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_BatterySystem):addBattery(self.id, otherID);
-    if (result) then 
+  local _g = entity.id;
+  local _g1 = (function() 
+    local _hx_1
+    if (_g == nil) then 
+    _hx_1 = __haxe_ds_Option.None; else 
+    _hx_1 = __haxe_ds_Option.Some(_g); end
+    return _hx_1
+  end )();
+  if (_g1[1] == 0) then 
+    if (__deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_BatterySystem):addBattery(self.id, _g1[2])) then 
       self.added = true;
       __haxe_Log.trace("Battery added :)", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ents/Di_battery.hx",lineNumber=61,className="deceptinfect.ents.Di_battery",methodName="Touch"}));
       self["self"]:Remove();
@@ -6232,12 +4706,9 @@ __deceptinfect_ents_Di_charger.prototype.Initialize = function(self)
   end;
   physob:EnableMotion(false);
   local x = self["self"];
-  local this1 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  local ent = this1;
-  self.id = ent.id;
-  local this2 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_BatteryAccepter.new(), this2);
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
+  self.id = x.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_BatteryAccepter.new(), self.id);
 end
 
 __deceptinfect_ents_Di_charger.prototype.__class__ =  __deceptinfect_ents_Di_charger
@@ -6285,66 +4756,56 @@ __deceptinfect_ents_Di_evac_zone.prototype = _hx_a();
 __deceptinfect_ents_Di_evac_zone.prototype.properties= nil;
 __deceptinfect_ents_Di_evac_zone.prototype.id= nil;
 __deceptinfect_ents_Di_evac_zone.prototype.Initialize = function(self) 
-  local this1 = _G.Vector(-250, -250, -250);
-  local this11 = _G.Vector(250, 250, 250);
-  self["self"]:SetCollisionBounds(this1, this11);
+  self["self"]:SetCollisionBounds(_G.Vector(-250, -250, -250), _G.Vector(250, 250, 250));
   self["self"]:SetTrigger(true);
   self["self"]:SetCollisionGroup(_G.COLLISION_GROUP_PLAYER);
   self["self"]:UseTriggerBounds(true, 0);
   local x = self["self"];
-  local this2 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this2);
-  self.id = this2.id;
-  local this3 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_EvacZone.new(), this3);
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
+  self.id = x.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_EvacZone.new(), self.id);
 end
 __deceptinfect_ents_Di_evac_zone.prototype.setPoints = function(self,minmax) 
   self["self"]:SetCollisionBoundsWS(minmax.mins, minmax.maxs);
 end
 __deceptinfect_ents_Di_evac_zone.prototype.StartTouch = function(self,ent) 
-  local _g;
-  local _g1 = ent.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local ent_id = _g[2];
+  local _g = ent.id;
+  local _g1 = (function() 
+    local _hx_1
+    if (_g == nil) then 
+    _hx_1 = __haxe_ds_Option.None; else 
+    _hx_1 = __haxe_ds_Option.Some(_g); end
+    return _hx_1
+  end )();
+  if (_g1[1] == 0) then 
     local tmp = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem);
     local this1 = self.id;
-    local x1 = __deceptinfect_game_EvacZone;
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-    local comp = comparray[this1];
-    local retrieve_comp = comp:slice(2)[0];
+    local x = __deceptinfect_game_EvacZone;
+    local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
     if (retrieve_comp == nil) then 
-      _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
+      _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
     end;
-    tmp:touched(ent_id, retrieve_comp);
+    tmp:touched(_g1[2], retrieve_comp);
   end;
 end
 __deceptinfect_ents_Di_evac_zone.prototype.EndTouch = function(self,ent) 
-  local _g;
-  local _g1 = ent.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local ent_id = _g[2];
+  local _g = ent.id;
+  local _g1 = (function() 
+    local _hx_1
+    if (_g == nil) then 
+    _hx_1 = __haxe_ds_Option.None; else 
+    _hx_1 = __haxe_ds_Option.Some(_g); end
+    return _hx_1
+  end )();
+  if (_g1[1] == 0) then 
     local tmp = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem);
     local this1 = self.id;
-    local x1 = __deceptinfect_game_EvacZone;
-    local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x1);
-    local comp = comparray[this1];
-    local retrieve_comp = comp:slice(2)[0];
+    local x = __deceptinfect_game_EvacZone;
+    local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
     if (retrieve_comp == nil) then 
-      _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__),0);
+      _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
     end;
-    tmp:leave(ent_id, retrieve_comp);
+    tmp:leave(_g1[2], retrieve_comp);
   end;
 end
 
@@ -6376,32 +4837,28 @@ __deceptinfect_ents_Di_flare.prototype.Initialize = function(self)
     physob:Wake();
   end;
   local x = self["self"];
-  local this1 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  self.id = this1.id;
-  local this2 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_FlareComponent.new(), this2);
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
+  self.id = x.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_FlareComponent.new(), self.id);
 end
 __deceptinfect_ents_Di_flare.prototype.Touch = function(self,entity) 
-  local _g;
-  local _g1 = entity.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local ent_id = _g[2];
-    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem):addFlare(self.id, ent_id);
+  local _g = entity.id;
+  local _g1 = (function() 
+    local _hx_1
+    if (_g == nil) then 
+    _hx_1 = __haxe_ds_Option.None; else 
+    _hx_1 = __haxe_ds_Option.Some(_g); end
+    return _hx_1
+  end )();
+  if (_g1[1] == 0) then 
+    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem):addFlare(self.id, _g1[2]);
   end;
 end
 __deceptinfect_ents_Di_flare.prototype.Use = function(self,activator,caller,useType,value) 
   if (self["self"]:IsPlayerHolding() or not activator:IsPlayer()) then 
     do return end;
   end;
-  local _activator = activator;
-  _activator:PickupObject(self["self"]);
+  activator:PickupObject(self["self"]);
 end
 
 __deceptinfect_ents_Di_flare.prototype.__class__ =  __deceptinfect_ents_Di_flare
@@ -6427,53 +4884,36 @@ __deceptinfect_ents_Di_nest.prototype.id= nil;
 __deceptinfect_ents_Di_nest.prototype.Initialize = function(self) 
   self["self"]:SetModel("models/props_c17/chair02a.mdl");
   local x = self["self"];
-  local this1 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  local ent = this1;
-  self.id = ent.id;
-  local this2 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_NestComponent.new(), this2);
-  local this3 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_RadiationProducer.createFromType(__deceptinfect_radiation_RadTypes.NEST), this3);
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
+  self.id = x.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_NestComponent.new(), self.id);
+  local this1 = self.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_RadiationProducer.createFromType(__deceptinfect_radiation_RadTypes.NEST), this1);
 end
 __deceptinfect_ents_Di_nest.prototype.Think = function(self) 
   local this1 = self.id;
   local x = __deceptinfect_game_NestComponent;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(x);
-  local comp = comparray[this1];
-  local retrieve_comp = comp:slice(2)[0];
-  if (retrieve_comp == nil) then 
+  if (__deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0] == nil) then 
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
   end;
-  local c_nest = retrieve_comp;
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent1 = ent:next();
     local this2 = self.id;
-    local comparray1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_NestComponent);
-    local comp1 = comparray1[this2];
-    local _g1 = comp1;
-    local comparray2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent);
-    local comp2 = comparray2[ent1];
-    local _g2 = comp2;
-    local comparray3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent);
-    local comp3 = comparray3[ent1];
-    local _g3 = comp3;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_NestComponent)[this2];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[ent1];
+    local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent1];
     if (_g3[1] == 1) then 
       local _g4 = _g3[2];
       if (_g1[1] == 1) then 
         if (_g1[2].nestState[1] == 1) then 
-          local ply = _g4;
-          self["self"]:SetPreventTransmit(ply.player, false);
+          self["self"]:SetPreventTransmit(_g4.player, false);
         else
           local tmp = _g2[1];
           if (tmp) == 0 then 
-            local ply1 = _g4;
-            self["self"]:SetPreventTransmit(ply1.player, true);
+            self["self"]:SetPreventTransmit(_g4.player, true);
           elseif (tmp) == 1 then 
-            local _g6 = _g2[2];
-            local ply2 = _g4;
-            self["self"]:SetPreventTransmit(ply2.player, false); end;
+            self["self"]:SetPreventTransmit(_g4.player, false); end;
         end;
       end;
     end;
@@ -6508,13 +4948,10 @@ __deceptinfect_ents_Di_ragdoll.prototype.id= nil;
 __deceptinfect_ents_Di_ragdoll.prototype.Initialize = function(self) 
   self["self"]:SetModel(self.owner:GetModel());
   local x = self["self"];
-  local this1 = x;
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(this1);
-  self.id = this1.id;
-  local this2 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Ragdoll.new(), this2);
-  local this3 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_CleanupEnt.new(), this3);
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
+  self.id = x.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Ragdoll.new(), self.id);
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_CleanupEnt.new(), self.id);
 end
 
 __deceptinfect_ents_Di_ragdoll.prototype.__class__ =  __deceptinfect_ents_Di_ragdoll
@@ -6610,10 +5047,8 @@ __deceptinfect_game__EvacSystem_INT_EvacState_Impl_.from = function(x)
   if (tmp) == 0 then 
     do return 0 end;
   elseif (tmp) == 1 then 
-    local _g1 = x[2];
     do return 1 end;
   elseif (tmp) == 2 then 
-    local _g = x[2];
     do return 2 end; end;
 end
 
@@ -6826,18 +5261,18 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawnMinDistAway = function(self,cu
           ret = nil;
         end;
         __haxe_Log.trace(ret, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=76,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
-        local v;
         local ret1 = total.h[id];
         if (ret1 == __haxe_ds_IntMap.tnull) then 
           ret1 = nil;
         end;
         local _g2 = ret1;
-        if (_g2 == nil) then 
-          v = dist;
-        else
-          local x = _g2;
-          v = x + dist;
-        end;
+        local v = (function() 
+          local _hx_1
+          if (_g2 == nil) then 
+          _hx_1 = dist; else 
+          _hx_1 = _g2 + dist; end
+          return _hx_1
+        end )();
         if (v == nil) then 
           total.h[id] = __haxe_ds_IntMap.tnull;
         else
@@ -6852,8 +5287,9 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawnMinDistAway = function(self,cu
           if (ret3 == __haxe_ds_IntMap.tnull) then 
             ret3 = nil;
           end;
-          max = ret3;
-          __haxe_Log.trace(Std.string("new max ") .. Std.string(max), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=85,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+          local max1 = ret3;
+          max = max1;
+          __haxe_Log.trace(Std.string("new max ") .. Std.string(max1), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=85,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
         end;
         local ret4 = total.h[id];
         if (ret4 == __haxe_ds_IntMap.tnull) then 
@@ -6864,8 +5300,9 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawnMinDistAway = function(self,cu
           if (ret5 == __haxe_ds_IntMap.tnull) then 
             ret5 = nil;
           end;
-          min = ret5;
-          __haxe_Log.trace(Std.string("new min ") .. Std.string(min), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=89,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+          local min1 = ret5;
+          min = min1;
+          __haxe_Log.trace(Std.string("new min ") .. Std.string(min1), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=89,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
         end;
       end;
     end;
@@ -6875,31 +5312,28 @@ __deceptinfect_game_Spawn.prototype.getRandomSpawnMinDistAway = function(self,cu
   local _g12 = __haxe_iterators_MapKeyValueIterator.new(total);
   while (_g12:hasNext()) do 
     local _g21 = _g12:next();
-    local id1 = _g21.key;
-    local dist1 = _g21.value;
-    if (dist1 > mindist) then 
-      luckydraw:push(id1);
+    if (_g21.value > mindist) then 
+      luckydraw:push(_g21.key);
     end;
   end;
   if (luckydraw.length == 0) then 
     __haxe_Log.trace("Not enough spawns far away enough to use algo.", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=104,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
-    local id2 = self:getRandomFarAwaySpawn();
-    __haxe_Log.trace(Std.string("id chosen ") .. Std.string(id2), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=106,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
-    do return self.parent.spawns[id2] end;
+    local id1 = self:getRandomFarAwaySpawn();
+    __haxe_Log.trace(Std.string("id chosen ") .. Std.string(id1), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=106,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+    do return self.parent.spawns[id1] end;
   else
     local index = _G.math.random(0, luckydraw.length - 1);
-    local id3 = luckydraw[index];
+    local id2 = luckydraw[index];
     __haxe_Log.trace(luckydraw, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=112,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
-    __haxe_Log.trace(Std.string(Std.string(Std.string("id chosen ") .. Std.string(id3)) .. Std.string(" index ")) .. Std.string(index), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=113,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
-    do return self.parent.spawns[id3] end;
+    __haxe_Log.trace(Std.string(Std.string(Std.string("id chosen ") .. Std.string(id2)) .. Std.string(" index ")) .. Std.string(index), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=113,className="deceptinfect.game.Spawn",methodName="getRandomSpawnMinDistAway"}));
+    do return self.parent.spawns[id2] end;
   end;
 end
 __deceptinfect_game_Spawn.prototype.getRandomSpawns = function(self,noSpawns) 
   local rtn = _hx_tab_array({}, 0);
   local curspawns = _hx_tab_array({[0]=self.id}, 1);
   local _g = 0;
-  local _g1 = noSpawns;
-  while (_g < _g1) do 
+  while (_g < noSpawns) do 
     _g = _g + 1;
     local i = _g - 1;
     __haxe_Log.trace(curspawns, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=124,className="deceptinfect.game.Spawn",methodName="getRandomSpawns"}));
@@ -6913,22 +5347,19 @@ __deceptinfect_game_Spawn.prototype.spawn = function(self,ent)
   self.claimed = __deceptinfect_game_SpawnClaim.CLAIMED(ent);
   ent:SetPos(self.vec);
   ent:Spawn();
-  local _g;
-  local _g1 = ent.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
+  local _g = ent.id;
+  local _g1 = (function() 
+    local _hx_1
+    if (_g == nil) then 
+    _hx_1 = __haxe_ds_Option.None; else 
+    _hx_1 = __haxe_ds_Option.Some(_g); end
+    return _hx_1
+  end )();
+  if (_g1[1] == 0) then 
+    local _g11 = _g1[2];
+    __haxe_Log.trace(_g11, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=138,className="deceptinfect.game.Spawn",methodName="spawn"}));
+    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Spawned.new(self), _g11);
   end;
-  if (_g[1] == 0) then 
-    local id = _g[2];
-    __haxe_Log.trace(id, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=138,className="deceptinfect.game.Spawn",methodName="spawn"}));
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Spawned.new(self), id);
-  end;
-end
-__deceptinfect_game_Spawn.prototype.get = function(self,x) 
-  do return self.parent.spawns[x] end
 end
 __deceptinfect_game_Spawn.prototype.calculateDist = function(self,other) 
   local dist = self.vec:DistToSqr(other.vec);
@@ -7011,18 +5442,18 @@ __deceptinfect_game_BoundsSpawn.prototype.spawn = function(self,ent)
   self.claimed = __deceptinfect_game_SpawnClaim.CLAIMED(ent);
   ent:SetPos(self.vec);
   ent:Spawn();
-  local _g;
-  local _g1 = ent.id;
-  if (_g1 == nil) then 
-    _g = __haxe_ds_Option.None;
-  else
-    local x = _g1;
-    _g = __haxe_ds_Option.Some(x);
-  end;
-  if (_g[1] == 0) then 
-    local id = _g[2];
-    __haxe_Log.trace(id, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=201,className="deceptinfect.game.BoundsSpawn",methodName="spawn"}));
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Spawned.new(self), id);
+  local _g = ent.id;
+  local _g1 = (function() 
+    local _hx_1
+    if (_g == nil) then 
+    _hx_1 = __haxe_ds_Option.None; else 
+    _hx_1 = __haxe_ds_Option.Some(_g); end
+    return _hx_1
+  end )();
+  if (_g1[1] == 0) then 
+    local _g11 = _g1[2];
+    __haxe_Log.trace(_g11, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=201,className="deceptinfect.game.BoundsSpawn",methodName="spawn"}));
+    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Spawned.new(self), _g11);
   end;
   ent:SetCollisionBoundsWS(self.bounds.mins, self.bounds.maxs);
 end
@@ -7145,13 +5576,12 @@ end
 __deceptinfect_infection_InfVunerability.super = function(self,v,removeTime) 
   __deceptinfect_ecswip_Component.super(self);
   self.vun = v;
-  removeTime = _G.CurTime() + removeTime;
+  _G.CurTime();
 end
 _hxClasses["deceptinfect.infection.InfVunerability"] = __deceptinfect_infection_InfVunerability
 __deceptinfect_infection_InfVunerability.__name__ = "deceptinfect.infection.InfVunerability"
 __deceptinfect_infection_InfVunerability.prototype = _hx_a();
 __deceptinfect_infection_InfVunerability.prototype.vun= nil;
-__deceptinfect_infection_InfVunerability.prototype.removeTime= nil;
 
 __deceptinfect_infection_InfVunerability.prototype.__class__ =  __deceptinfect_infection_InfVunerability
 __deceptinfect_infection_InfVunerability.__super__ = __deceptinfect_ecswip_Component
@@ -7193,14 +5623,12 @@ __deceptinfect_infection_InfectionComponent.prototype = _hx_a();
 __deceptinfect_infection_InfectionComponent.prototype.infection= nil;
 __deceptinfect_infection_InfectionComponent.prototype.rate= nil;
 __deceptinfect_infection_InfectionComponent.prototype.baseInfection= nil;
-__deceptinfect_infection_InfectionComponent.prototype.onInfected= nil;
 __deceptinfect_infection_InfectionComponent.prototype.acceptingInfection= nil;
 __deceptinfect_infection_InfectionComponent.prototype.getInfValue = function(self) 
   local _g = self.infection;
   local tmp = _g[1];
   if (tmp) == 0 then 
-    local inf = _g[2];
-    do return inf[0] end;
+    do return _g[2][0] end;
   elseif (tmp) == 1 then 
     do return 100.1 end; end;
 end
@@ -7314,6 +5742,22 @@ __deceptinfect_radiation_RadiationTypes.new = {}
 _hxClasses["deceptinfect.radiation.RadiationTypes"] = __deceptinfect_radiation_RadiationTypes
 __deceptinfect_radiation_RadiationTypes.__name__ = "deceptinfect.radiation.RadiationTypes"
 
+__deceptinfect_sabotage_S_Break.new = function() 
+  local self = _hx_new(__deceptinfect_sabotage_S_Break.prototype)
+  __deceptinfect_sabotage_S_Break.super(self)
+  return self
+end
+__deceptinfect_sabotage_S_Break.super = function(self) 
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.sabotage.S_Break"] = __deceptinfect_sabotage_S_Break
+__deceptinfect_sabotage_S_Break.__name__ = "deceptinfect.sabotage.S_Break"
+__deceptinfect_sabotage_S_Break.prototype = _hx_a();
+
+__deceptinfect_sabotage_S_Break.prototype.__class__ =  __deceptinfect_sabotage_S_Break
+__deceptinfect_sabotage_S_Break.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_sabotage_S_Break.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
 __deceptinfect_statuses_Walkthroughable.new = function() 
   local self = _hx_new(__deceptinfect_statuses_Walkthroughable.prototype)
   __deceptinfect_statuses_Walkthroughable.super(self)
@@ -7337,53 +5781,11 @@ __deceptinfect_util_Cooldown.COOLDOWN = function(time) local _x = _hx_tab_array(
 __deceptinfect_util_Cooldown.UNAVALIABLE = _hx_tab_array({[0]="UNAVALIABLE",2,__enum__ = __deceptinfect_util_Cooldown},2)
 
 
-__deceptinfect_util_CooldownTools.new = {}
-_hxClasses["deceptinfect.util.CooldownTools"] = __deceptinfect_util_CooldownTools
-__deceptinfect_util_CooldownTools.__name__ = "deceptinfect.util.CooldownTools"
-__deceptinfect_util_CooldownTools.check = function(x) 
-  if (x[1] == 1) then 
-    local time = x[2];
-    if (_G.CurTime() > time) then 
-      do return __deceptinfect_util_Cooldown.AVALIABLE end;
-    else
-      local x1 = x;
-      do return x1 end;
-    end;
-  else
-    local x2 = x;
-    do return x2 end;
-  end;
-end
-__deceptinfect_util_CooldownTools.add = function(x,add) 
-  if (x[1] == 1) then 
-    local time = x[2];
-    do return __deceptinfect_util_Cooldown.COOLDOWN(time + add) end;
-  else
-    local x1 = x;
-    do return x1 end;
-  end;
-end
-__deceptinfect_util_CooldownTools.set = function(x,set) 
-  local tmp = x[1];
-  if (tmp) == 0 then 
-    do return __deceptinfect_util_Cooldown.COOLDOWN(_G.CurTime() + set) end;
-  elseif (tmp) == 1 then 
-    local _g = x[2];
-    do return __deceptinfect_util_Cooldown.COOLDOWN(_G.CurTime() + set) end;else
-  local x1 = x;
-  do return x1 end; end;
-end
-
 __deceptinfect_util_EntityExt.new = {}
 _hxClasses["deceptinfect.util.EntityExt"] = __deceptinfect_util_EntityExt
 __deceptinfect_util_EntityExt.__name__ = "deceptinfect.util.EntityExt"
 __deceptinfect_util_EntityExt.facingBehind = function(me,target) 
-  local this1 = _G.Angle(0, me:EyeAngles().y, 0);
-  local vec1 = this1:Forward();
-  local this11 = _G.Angle(0, target:EyeAngles().y, 0);
-  local vec2 = this11:Forward();
-  local dot = _G.math.acos(vec1:Dot(vec2));
-  do return dot < (_G.math.pi / 4) end;
+  do return _G.math.acos(_G.Angle(0, me:EyeAngles().y, 0):Forward():Dot(_G.Angle(0, target:EyeAngles().y, 0):Forward())) < (_G.math.pi / 4) end;
 end
 
 __deceptinfect_util_MinMaxTools.new = {}
@@ -7418,40 +5820,12 @@ __deceptinfect_util_PlayerExt.shouldFreeRoam = function(p)
     do return true end;
   end;
 end
-__deceptinfect_util_PlayerExt.randomIncDec = function(x) 
-  local _g = _G.math.random(1, 2);
-  if (_g) == 1 then 
-    do return x end;
-  elseif (_g) == 2 then 
-    do return -x end;else
-  _G.error("Something went spectacularly wrong",0); end;
-end
-__deceptinfect_util_PlayerExt.disorientate = function(p) 
-  local curangs = p:EyeAngles();
-  local curY = curangs.y;
-  local punchY = __deceptinfect_util_PlayerExt.randomIncDec(_G.math.random(10, 80));
-  curY = curY + punchY;
-  if (curY >= 90) then 
-    local diff = curY - 90;
-    curY = -90 + diff;
-  else
-    if (curY <= -90) then 
-      local diff1 = curY + 90;
-      curY = 90 + diff1;
-    end;
-  end;
-  local punchR = __deceptinfect_util_PlayerExt.randomIncDec(_G.math.random(20, 160));
-  local finalR = _G.math.NormalizeAngle(curangs.r + punchR);
-  local this1 = _G.Angle(curY, finalR, 0);
-  p:SetEyeAngles(this1);
-end
 __deceptinfect_util_PlayerExt.giveFullAmmo = function(p) 
   local wep = __gmod_PairTools.iterator(p:GetWeapons());
   while (wep:hasNext()) do 
     local wep1 = wep:next();
     local typ = wep1:GetPrimaryAmmoType();
-    local count = wep1:GetMaxClip1() * 3;
-    p:GiveAmmo(count, typ);
+    p:GiveAmmo(wep1:GetMaxClip1() * 3, typ);
   end;
 end
 
@@ -7474,18 +5848,16 @@ __deceptinfect_util_TimeKeep.prototype.times= nil;
 __deceptinfect_util_TimeKeep.prototype.limitZero= nil;
 __deceptinfect_util_TimeKeep.prototype.addTime = function(self,key) 
   self:initTime(key);
-  local difftime = __deceptinfect_GameManager.diffTime;
-  local _g = key;
   local _g1 = self.times;
-  local ret = _g1.h[_g];
+  local ret = _g1.h[key];
   if (ret == __haxe_ds_IntMap.tnull) then 
     ret = nil;
   end;
-  local v = ret + difftime;
+  local v = ret + __deceptinfect_GameManager.diffTime;
   if (v == nil) then 
-    _g1.h[_g] = __haxe_ds_IntMap.tnull;
+    _g1.h[key] = __haxe_ds_IntMap.tnull;
   else
-    _g1.h[_g] = v;
+    _g1.h[key] = v;
   end;
   local ret1 = self.times.h[key];
   if (ret1 == __haxe_ds_IntMap.tnull) then 
@@ -7495,57 +5867,37 @@ __deceptinfect_util_TimeKeep.prototype.addTime = function(self,key)
 end
 __deceptinfect_util_TimeKeep.prototype.initTime = function(self,key) 
   if (self.times.h[key] == nil) then 
-    local _this = self.times;
-    _this.h[key] = 0;
-  end;
-end
-__deceptinfect_util_TimeKeep.prototype.setTime = function(self,key,f) 
-  local _this = self.times;
-  if (f == nil) then 
-    _this.h[key] = __haxe_ds_IntMap.tnull;
-  else
-    _this.h[key] = f;
+    self.times.h[key] = 0;
   end;
 end
 __deceptinfect_util_TimeKeep.prototype.resetTime = function(self,key) 
-  local _this = self.times;
-  _this.h[key] = 0;
+  self.times.h[key] = 0;
 end
 __deceptinfect_util_TimeKeep.prototype.removeTime = function(self,key) 
   self:initTime(key);
-  local difftime = __deceptinfect_GameManager.diffTime;
-  local _g = key;
   local _g1 = self.times;
-  local ret = _g1.h[_g];
+  local ret = _g1.h[key];
   if (ret == __haxe_ds_IntMap.tnull) then 
     ret = nil;
   end;
-  local v = ret - difftime;
+  local v = ret - __deceptinfect_GameManager.diffTime;
   if (v == nil) then 
-    _g1.h[_g] = __haxe_ds_IntMap.tnull;
+    _g1.h[key] = __haxe_ds_IntMap.tnull;
   else
-    _g1.h[_g] = v;
+    _g1.h[key] = v;
   end;
   local ret1 = self.times.h[key];
   if (ret1 == __haxe_ds_IntMap.tnull) then 
     ret1 = nil;
   end;
   if (ret1 < 0) then 
-    local _this = self.times;
-    _this.h[key] = 0;
+    self.times.h[key] = 0;
   end;
   local ret2 = self.times.h[key];
   if (ret2 == __haxe_ds_IntMap.tnull) then 
     ret2 = nil;
   end;
   do return ret2 end
-end
-__deceptinfect_util_TimeKeep.prototype.getTime = function(self,key) 
-  local ret = self.times.h[key];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  do return ret end
 end
 
 __deceptinfect_util_TimeKeep.prototype.__class__ =  __deceptinfect_util_TimeKeep
@@ -7559,8 +5911,7 @@ __deceptinfect_util_Util.printTimer = function(string,time,run)
     if (ret == __haxe_ds_StringMap.tnull) then 
       ret = nil;
     end;
-    local nextTime = ret;
-    if (_G.CurTime() > nextTime) then 
+    if (_G.CurTime() > ret) then 
       run();
       local this1 = __deceptinfect_util_Util.mappy;
       local value = _G.CurTime() + time;
@@ -7582,53 +5933,6 @@ __deceptinfect_util_Util.printTimer = function(string,time,run)
       _this1.h[string] = value1;
     end;
   end;
-end
-
-__gmod__EntityClass_EntityClass_Impl_.new = {}
-_hxClasses["gmod._EntityClass.EntityClass_Impl_"] = __gmod__EntityClass_EntityClass_Impl_
-__gmod__EntityClass_EntityClass_Impl_.__name__ = "gmod._EntityClass.EntityClass_Impl_"
-__gmod__EntityClass_EntityClass_Impl_._new = function(name) 
-  local this1 = name;
-  do return this1 end;
-end
-
-__gmod__EntityClass_HaxeGeneratedEntity_Impl_.new = {}
-_hxClasses["gmod._EntityClass.HaxeGeneratedEntity_Impl_"] = __gmod__EntityClass_HaxeGeneratedEntity_Impl_
-__gmod__EntityClass_HaxeGeneratedEntity_Impl_.__name__ = "gmod._EntityClass.HaxeGeneratedEntity_Impl_"
-__gmod__EntityClass_HaxeGeneratedEntity_Impl_.toHaxe = function(this1) 
-  do return this1._gHaxeBurrow end;
-end
-
-__gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.new = {}
-_hxClasses["gmod._HaxeMultiReturn.HaxeMultiReturn_Impl_"] = __gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_
-__gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.__name__ = "gmod._HaxeMultiReturn.HaxeMultiReturn_Impl_"
-__gmod__HaxeMultiReturn_HaxeMultiReturn_Impl_.multiReturn = function(rtns) 
-  local tbl = ({});
-  local access = rtns;
-  local _g_access = access;
-  local _g_keys = Reflect.fields(access);
-  local _g_index = 0;
-  while (_g_index < _g_keys.length) do 
-    _g_index = _g_index + 1;
-    local key = _g_keys[_g_index - 1];
-    local _g1 = _hx_o({__fields__={value=true,key=true},value=Reflect.field(_g_access, key),key=key});
-    local name = _g1.key;
-    local value = _g1.value;
-    tbl[_G.string.byte(name, 1) - 96] = value;
-  end;
-  do return _hx_table.unpack(tbl) end;
-end
-
-__gmod_HaxeMultiReturn_2.new = {}
-_hxClasses["gmod.HaxeMultiReturn_2"] = __gmod_HaxeMultiReturn_2
-__gmod_HaxeMultiReturn_2.__name__ = "gmod.HaxeMultiReturn_2"
-
-__gmod__Hook_Hook_Impl_.new = {}
-_hxClasses["gmod._Hook.Hook_Impl_"] = __gmod__Hook_Hook_Impl_
-__gmod__Hook_Hook_Impl_.__name__ = "gmod._Hook.Hook_Impl_"
-__gmod__Hook_Hook_Impl_._new = function(name) 
-  local this1 = name;
-  do return this1 end;
 end
 
 __gmod_PairTools.new = {}
@@ -7656,30 +5960,6 @@ __gmod_PairTools.iterator = function(table)
     do return _hx_2_res_value end;
   end,hasNext=function(self) 
     do return _G.select(2, _G.next(table, i)) ~= nil end;
-  end}) end;
-end
-__gmod_PairTools.ipairsIteratorKV = function(table) 
-  local _hx_1_p_next, _hx_1_p_table, _hx_1_p_index = _G.ipairs(table);
-  local next = _hx_1_p_next;
-  local i = _hx_1_p_index;
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local _hx_2_res_index, _hx_2_res_value = next(table, i);
-    i = _hx_2_res_index;
-    do return _hx_o({__fields__={key=true,value=true},key=_hx_2_res_index,value=_hx_2_res_value}) end;
-  end,hasNext=function(self) 
-    do return _G.select(2, next(table, i)) ~= nil end;
-  end}) end;
-end
-__gmod_PairTools.ipairsIterator = function(table) 
-  local _hx_1_p_next, _hx_1_p_table, _hx_1_p_index = _G.ipairs(table);
-  local next = _hx_1_p_next;
-  local i = _hx_1_p_index;
-  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
-    local _hx_2_res_index, _hx_2_res_value = next(table, i);
-    i = _hx_2_res_index;
-    do return _hx_2_res_value end;
-  end,hasNext=function(self) 
-    do return _G.select(2, next(table, i)) ~= nil end;
   end}) end;
 end
 
@@ -7781,132 +6061,6 @@ __lua_Boot.__string_rec = function(o,s)
   end; end;
 end
 
-__gmod_TableTools.new = {}
-_hxClasses["gmod.TableTools"] = __gmod_TableTools
-__gmod_TableTools.__name__ = "gmod.TableTools"
-__gmod_TableTools.length = function(table) 
-  do return #table end;
-end
-
-__gmod_hooks_Swep.new = {}
-_hxClasses["gmod.hooks.Swep"] = __gmod_hooks_Swep
-__gmod_hooks_Swep.__name__ = "gmod.hooks.Swep"
-__gmod_hooks_Swep.prototype = _hx_a();
-__gmod_hooks_Swep.prototype.Deploy = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.TakePrimaryAmmo = function(self,amount) 
-end
-__gmod_hooks_Swep.prototype.CanSecondaryAttack = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.SecondaryAttack = function(self) 
-end
-__gmod_hooks_Swep.prototype.DoImpactEffect = function(self,tr,damageType) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.KeyValue = function(self,key,value) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.TranslateFOV = function(self,fov) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.CanBePickedUpByNPCs = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.GetNPCRestTimes = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.GetNPCBulletSpread = function(self,proficiency) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.GetCapabilities = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.Ammo2 = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.ShootEffects = function(self) 
-end
-__gmod_hooks_Swep.prototype.TakeSecondaryAmmo = function(self,amount) 
-end
-__gmod_hooks_Swep.prototype.CanPrimaryAttack = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.Reload = function(self) 
-end
-__gmod_hooks_Swep.prototype.ShootBullet = function(self,damage,num_bullets,aimcone,ammo_type,force,tracer) 
-end
-__gmod_hooks_Swep.prototype.AcceptInput = function(self,inputName,activator,called,data) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.OnRemove = function(self) 
-end
-__gmod_hooks_Swep.prototype.OwnerChanged = function(self) 
-end
-__gmod_hooks_Swep.prototype.Initialize = function(self) 
-end
-__gmod_hooks_Swep.prototype.EquipAmmo = function(self,ply) 
-end
-__gmod_hooks_Swep.prototype.TranslateActivity = function(self,act) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.Holster = function(self,weapon) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.SetDeploySpeed = function(self,speed) 
-end
-__gmod_hooks_Swep.prototype.Think = function(self) 
-end
-__gmod_hooks_Swep.prototype.FireAnimationEvent = function(self,pos,ang,event,options) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.SetupDataTables = function(self) 
-end
-__gmod_hooks_Swep.prototype.PrimaryAttack = function(self) 
-end
-__gmod_hooks_Swep.prototype.Ammo1 = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.OnDrop = function(self) 
-end
-__gmod_hooks_Swep.prototype.ShouldDropOnDie = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.GetNPCBurstSettings = function(self) 
-  do return nil end
-end
-__gmod_hooks_Swep.prototype.OnRestore = function(self) 
-end
-__gmod_hooks_Swep.prototype.OnReloaded = function(self) 
-end
-__gmod_hooks_Swep.prototype.Equip = function(self,NewOwner) 
-end
-__gmod_hooks_Swep.prototype.SetWeaponHoldType = function(self,name) 
-end
-
-__gmod_hooks_Swep.prototype.__class__ =  __gmod_hooks_Swep
-
-__gmod_macros_CompileTime.new = {}
-_hxClasses["gmod.macros.CompileTime"] = __gmod_macros_CompileTime
-__gmod_macros_CompileTime.__name__ = "gmod.macros.CompileTime"
-_hxClasses["gmod.macros.SentType"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="SENT","SWEP","EFFECT"},3)}
-__gmod_macros_SentType = _hxClasses["gmod.macros.SentType"];
-__gmod_macros_SentType.SENT = _hx_tab_array({[0]="SENT",0,__enum__ = __gmod_macros_SentType},2)
-
-__gmod_macros_SentType.SWEP = _hx_tab_array({[0]="SWEP",1,__enum__ = __gmod_macros_SentType},2)
-
-__gmod_macros_SentType.EFFECT = _hx_tab_array({[0]="EFFECT",2,__enum__ = __gmod_macros_SentType},2)
-
-_hxClasses["haxe.StackItem"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="CFunction","Module","FilePos","Method","LocalFunction"},5)}
-__haxe_StackItem = _hxClasses["haxe.StackItem"];
-__haxe_StackItem.CFunction = _hx_tab_array({[0]="CFunction",0,__enum__ = __haxe_StackItem},2)
-
-__haxe_StackItem.Module = function(m) local _x = _hx_tab_array({[0]="Module",1,m,__enum__=__haxe_StackItem}, 3); return _x; end 
-__haxe_StackItem.FilePos = function(s,file,line,column) local _x = _hx_tab_array({[0]="FilePos",2,s,file,line,column,__enum__=__haxe_StackItem}, 6); return _x; end 
-__haxe_StackItem.Method = function(classname,method) local _x = _hx_tab_array({[0]="Method",3,classname,method,__enum__=__haxe_StackItem}, 4); return _x; end 
-__haxe_StackItem.LocalFunction = function(v) local _x = _hx_tab_array({[0]="LocalFunction",4,v,__enum__=__haxe_StackItem}, 3); return _x; end 
-
 __haxe_EntryPoint.new = {}
 _hxClasses["haxe.EntryPoint"] = __haxe_EntryPoint
 __haxe_EntryPoint.__name__ = "haxe.EntryPoint"
@@ -7925,21 +6079,13 @@ __haxe_EntryPoint.processEvents = function()
   do return time end;
 end
 __haxe_EntryPoint.run = function() 
-  while (true) do 
-    local nextTick = __haxe_EntryPoint.processEvents();
-    if (nextTick < 0) then 
-      break;
-    end;
-    local tmp = nextTick > 0;
+  while (not (__haxe_EntryPoint.processEvents() < 0)) do 
   end;
 end
 
 __haxe_Json.new = {}
 _hxClasses["haxe.Json"] = __haxe_Json
 __haxe_Json.__name__ = "haxe.Json"
-__haxe_Json.parse = function(text) 
-  do return __haxe_format_JsonParser.new(text):doParse() end;
-end
 __haxe_Json.stringify = function(value,replacer,space) 
   do return __haxe_format_JsonPrinter.print(value, replacer, space) end;
 end
@@ -8071,7 +6217,6 @@ __haxe_MainLoop.sortEvents = function()
       local _g1 = insize;
       while (_g < _g1) do 
         _g = _g + 1;
-        local i = _g - 1;
         psize = psize + 1;
         q = q.next;
         if (q == nil) then 
@@ -8244,8 +6389,7 @@ __haxe_ds_BalancedTree.prototype.setLoop = function(self,k,v,node)
     end )()) end;
   else
     if (c < 0) then 
-      local nl = self:setLoop(k, v, node.left);
-      do return self:balance(nl, node.key, node.value, node.right) end;
+      do return self:balance(self:setLoop(k, v, node.left), node.key, node.value, node.right) end;
     else
       local nr = self:setLoop(k, v, node.right);
       do return self:balance(node.left, node.key, node.value, nr) end;
@@ -8402,10 +6546,6 @@ __haxe_ds_TreeNode.prototype.value= nil;
 __haxe_ds_TreeNode.prototype._height= nil;
 
 __haxe_ds_TreeNode.prototype.__class__ =  __haxe_ds_TreeNode
-_hxClasses["haxe.ds.Either"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Left","Right"},2)}
-__haxe_ds_Either = _hxClasses["haxe.ds.Either"];
-__haxe_ds_Either.Left = function(v) local _x = _hx_tab_array({[0]="Left",0,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
-__haxe_ds_Either.Right = function(v) local _x = _hx_tab_array({[0]="Right",1,v,__enum__=__haxe_ds_Either}, 3); return _x; end 
 
 __haxe_ds_EnumValueMap.new = function() 
   local self = _hx_new(__haxe_ds_EnumValueMap.prototype)
@@ -8522,36 +6662,22 @@ __haxe_ds_IntMap.prototype.iterator = function(self)
 end
 __haxe_ds_IntMap.prototype.toString = function(self) 
   local s_b = ({});
-  local s_length = 0;
-  local str = "{";
-  _G.table.insert(s_b, str);
-  s_length = s_length + #str;
+  _G.table.insert(s_b, "{");
   local it = self:keys();
-  local i = it;
-  while (i:hasNext()) do 
-    local i1 = i:next();
-    local str1 = Std.string(i1);
-    _G.table.insert(s_b, str1);
-    s_length = s_length + #str1;
-    local str2 = " => ";
-    _G.table.insert(s_b, str2);
-    s_length = s_length + #str2;
-    local ret = self.h[i1];
+  while (it:hasNext()) do 
+    local i = it:next();
+    _G.table.insert(s_b, Std.string(i));
+    _G.table.insert(s_b, " => ");
+    local ret = self.h[i];
     if (ret == __haxe_ds_IntMap.tnull) then 
       ret = nil;
     end;
-    local str3 = Std.string(ret);
-    _G.table.insert(s_b, str3);
-    s_length = s_length + #str3;
+    _G.table.insert(s_b, Std.string(ret));
     if (it:hasNext()) then 
-      local str4 = ", ";
-      _G.table.insert(s_b, str4);
-      s_length = s_length + #str4;
+      _G.table.insert(s_b, ", ");
     end;
   end;
-  local str5 = "}";
-  _G.table.insert(s_b, str5);
-  s_length = s_length + #str5;
+  _G.table.insert(s_b, "}");
   do return _G.table.concat(s_b) end
 end
 
@@ -8613,595 +6739,6 @@ end
 
 __haxe_ds_StringMap.prototype.__class__ =  __haxe_ds_StringMap
 
-__haxe_format_JsonParser.new = function(str) 
-  local self = _hx_new(__haxe_format_JsonParser.prototype)
-  __haxe_format_JsonParser.super(self,str)
-  return self
-end
-__haxe_format_JsonParser.super = function(self,str) 
-  self.str = str;
-  self.pos = 0;
-end
-_hxClasses["haxe.format.JsonParser"] = __haxe_format_JsonParser
-__haxe_format_JsonParser.__name__ = "haxe.format.JsonParser"
-__haxe_format_JsonParser.prototype = _hx_a();
-__haxe_format_JsonParser.prototype.str= nil;
-__haxe_format_JsonParser.prototype.pos= nil;
-__haxe_format_JsonParser.prototype.doParse = function(self) 
-  local result = self:parseRec();
-  local c;
-  while (true) do 
-    local index = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'pos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    c = _G.string.byte(self.str, index + 1);
-    if (not (c ~= nil)) then 
-      break;
-    end;
-    local c1 = c;
-    if (c1) == 9 or (c1) == 10 or (c1) == 13 or (c1) == 32 then else
-    self:invalidChar(); end;
-  end;
-  do return result end
-end
-__haxe_format_JsonParser.prototype.parseRec = function(self) 
-  while (true) do 
-    local index = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'pos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local c = _G.string.byte(self.str, index + 1);
-    local c1 = c;
-    if (c1) == 9 or (c1) == 10 or (c1) == 13 or (c1) == 32 then 
-    elseif (c1) == 34 then 
-      do return self:parseString() end;
-    elseif (c1) == 45 or (c1) == 48 or (c1) == 49 or (c1) == 50 or (c1) == 51 or (c1) == 52 or (c1) == 53 or (c1) == 54 or (c1) == 55 or (c1) == 56 or (c1) == 57 then 
-      local c2 = c;
-      local start = self.pos - 1;
-      local minus = c2 == 45;
-      local digit = not minus;
-      local zero = c2 == 48;
-      local point = false;
-      local e = false;
-      local pm = false;
-      local _end = false;
-      while (true) do 
-        local index1 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        c2 = _G.string.byte(self.str, index1 + 1);
-        local c3 = c2;
-        if (c3) == 43 or (c3) == 45 then 
-          if (not e or pm) then 
-            self:invalidNumber(start);
-          end;
-          digit = false;
-          pm = true;
-        elseif (c3) == 46 then 
-          if ((minus or point) or e) then 
-            self:invalidNumber(start);
-          end;
-          digit = false;
-          point = true;
-        elseif (c3) == 48 then 
-          if (zero and not point) then 
-            self:invalidNumber(start);
-          end;
-          if (minus) then 
-            minus = false;
-            zero = true;
-          end;
-          digit = true;
-        elseif (c3) == 49 or (c3) == 50 or (c3) == 51 or (c3) == 52 or (c3) == 53 or (c3) == 54 or (c3) == 55 or (c3) == 56 or (c3) == 57 then 
-          if (zero and not point) then 
-            self:invalidNumber(start);
-          end;
-          if (minus) then 
-            minus = false;
-          end;
-          digit = true;
-          zero = false;
-        elseif (c3) == 69 or (c3) == 101 then 
-          if ((minus or zero) or e) then 
-            self:invalidNumber(start);
-          end;
-          digit = false;
-          e = true;else
-        if (not digit) then 
-          self:invalidNumber(start);
-        end;
-        self.pos = self.pos - 1;
-        _end = true; end;
-        if (_end) then 
-          break;
-        end;
-      end;
-      local _this = self.str;
-      local pos = start;
-      local len = self.pos - start;
-      if ((len == nil) or (len > (pos + #_this))) then 
-        len = #_this;
-      else
-        if (len < 0) then 
-          len = #_this + len;
-        end;
-      end;
-      if (pos < 0) then 
-        pos = #_this + pos;
-      end;
-      if (pos < 0) then 
-        pos = 0;
-      end;
-      local f = Std.parseFloat(_G.string.sub(_this, pos + 1, pos + len));
-      local i = Std.int(f);
-      if (i == f) then 
-        do return i end;
-      else
-        do return f end;
-      end;
-    elseif (c1) == 91 then 
-      local arr = _hx_tab_array({}, 0);
-      local comma = nil;
-      while (true) do 
-        local index2 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        local c4 = _G.string.byte(self.str, index2 + 1);
-        local c5 = c4;
-        if (c5) == 9 or (c5) == 10 or (c5) == 13 or (c5) == 32 then 
-        elseif (c5) == 44 then 
-          if (comma) then 
-            comma = false;
-          else
-            self:invalidChar();
-          end;
-        elseif (c5) == 93 then 
-          if (comma == false) then 
-            self:invalidChar();
-          end;
-          do return arr end;else
-        if (comma) then 
-          self:invalidChar();
-        end;
-        self.pos = self.pos - 1;
-        arr:push(self:parseRec());
-        comma = true; end;
-      end;
-    elseif (c1) == 102 then 
-      local save = self.pos;
-      local tmp;
-      local tmp1;
-      local tmp2;
-      local index3 = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'pos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      if (_G.string.byte(self.str, index3 + 1) == 97) then 
-        local index4 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        tmp2 = _G.string.byte(self.str, index4 + 1) ~= 108;
-      else
-        tmp2 = true;
-      end;
-      if (not tmp2) then 
-        local index5 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        tmp1 = _G.string.byte(self.str, index5 + 1) ~= 115;
-      else
-        tmp1 = true;
-      end;
-      if (not tmp1) then 
-        local index6 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        tmp = _G.string.byte(self.str, index6 + 1) ~= 101;
-      else
-        tmp = true;
-      end;
-      if (tmp) then 
-        self.pos = save;
-        self:invalidChar();
-      end;
-      do return false end;
-    elseif (c1) == 110 then 
-      local save1 = self.pos;
-      local tmp3;
-      local tmp4;
-      local index7 = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'pos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      if (_G.string.byte(self.str, index7 + 1) == 117) then 
-        local index8 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        tmp4 = _G.string.byte(self.str, index8 + 1) ~= 108;
-      else
-        tmp4 = true;
-      end;
-      if (not tmp4) then 
-        local index9 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        tmp3 = _G.string.byte(self.str, index9 + 1) ~= 108;
-      else
-        tmp3 = true;
-      end;
-      if (tmp3) then 
-        self.pos = save1;
-        self:invalidChar();
-      end;
-      do return nil end;
-    elseif (c1) == 116 then 
-      local save2 = self.pos;
-      local tmp5;
-      local tmp6;
-      local index10 = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'pos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      if (_G.string.byte(self.str, index10 + 1) == 114) then 
-        local index11 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        tmp6 = _G.string.byte(self.str, index11 + 1) ~= 117;
-      else
-        tmp6 = true;
-      end;
-      if (not tmp6) then 
-        local index12 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        tmp5 = _G.string.byte(self.str, index12 + 1) ~= 101;
-      else
-        tmp5 = true;
-      end;
-      if (tmp5) then 
-        self.pos = save2;
-        self:invalidChar();
-      end;
-      do return true end;
-    elseif (c1) == 123 then 
-      local obj = _hx_e();
-      local field = nil;
-      local comma1 = nil;
-      while (true) do 
-        local index13 = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'pos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        local c6 = _G.string.byte(self.str, index13 + 1);
-        local c7 = c6;
-        if (c7) == 9 or (c7) == 10 or (c7) == 13 or (c7) == 32 then 
-        elseif (c7) == 34 then 
-          if ((field ~= nil) or comma1) then 
-            self:invalidChar();
-          end;
-          field = self:parseString();
-        elseif (c7) == 44 then 
-          if (comma1) then 
-            comma1 = false;
-          else
-            self:invalidChar();
-          end;
-        elseif (c7) == 58 then 
-          if (field == nil) then 
-            self:invalidChar();
-          end;
-          obj[field] = self:parseRec();
-          field = nil;
-          comma1 = true;
-        elseif (c7) == 125 then 
-          if ((field ~= nil) or (comma1 == false)) then 
-            self:invalidChar();
-          end;
-          do return obj end;else
-        self:invalidChar(); end;
-      end;else
-    self:invalidChar(); end;
-  end;
-end
-__haxe_format_JsonParser.prototype.parseString = function(self) 
-  local start = self.pos;
-  local buf = nil;
-  local prev = -1;
-  while (true) do 
-    local index = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'pos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local c = _G.string.byte(self.str, index + 1);
-    if (c == 34) then 
-      break;
-    end;
-    if (c == 92) then 
-      if (buf == nil) then 
-        buf = StringBuf.new();
-      end;
-      local s = self.str;
-      local len = (self.pos - start) - 1;
-      local part;
-      if (len == nil) then 
-        local pos1 = start;
-        local len1 = nil;
-        if ((len1 == nil) or (len1 > (pos1 + #s))) then 
-          len1 = #s;
-        else
-          if (len1 < 0) then 
-            len1 = #s + len1;
-          end;
-        end;
-        if (pos1 < 0) then 
-          pos1 = #s + pos1;
-        end;
-        if (pos1 < 0) then 
-          pos1 = 0;
-        end;
-        part = _G.string.sub(s, pos1 + 1, pos1 + len1);
-      else
-        local pos2 = start;
-        local len2 = len;
-        if ((len2 == nil) or (len2 > (pos2 + #s))) then 
-          len2 = #s;
-        else
-          if (len2 < 0) then 
-            len2 = #s + len2;
-          end;
-        end;
-        if (pos2 < 0) then 
-          pos2 = #s + pos2;
-        end;
-        if (pos2 < 0) then 
-          pos2 = 0;
-        end;
-        part = _G.string.sub(s, pos2 + 1, pos2 + len2);
-      end;
-      _G.table.insert(buf.b, part);
-      local buf1 = buf;
-      buf1.length = buf1.length + #part;
-      local index1 = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'pos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      c = _G.string.byte(self.str, index1 + 1);
-      if ((c ~= 117) and (prev ~= -1)) then 
-        _G.table.insert(buf.b, _G.string.char(65533));
-        local buf2 = buf;
-        buf2.length = buf2.length + 1;
-        prev = -1;
-      end;
-      local c1 = c;
-      if (c1) == 34 or (c1) == 47 or (c1) == 92 then 
-        _G.table.insert(buf.b, _G.string.char(c));
-        local buf3 = buf;
-        buf3.length = buf3.length + 1;
-      elseif (c1) == 98 then 
-        _G.table.insert(buf.b, _G.string.char(8));
-        local buf4 = buf;
-        buf4.length = buf4.length + 1;
-      elseif (c1) == 102 then 
-        _G.table.insert(buf.b, _G.string.char(12));
-        local buf5 = buf;
-        buf5.length = buf5.length + 1;
-      elseif (c1) == 110 then 
-        _G.table.insert(buf.b, _G.string.char(10));
-        local buf6 = buf;
-        buf6.length = buf6.length + 1;
-      elseif (c1) == 114 then 
-        _G.table.insert(buf.b, _G.string.char(13));
-        local buf7 = buf;
-        buf7.length = buf7.length + 1;
-      elseif (c1) == 116 then 
-        _G.table.insert(buf.b, _G.string.char(9));
-        local buf8 = buf;
-        buf8.length = buf8.length + 1;
-      elseif (c1) == 117 then 
-        local _this = self.str;
-        local pos = self.pos;
-        local len3 = 4;
-        if ((len3 == nil) or (len3 > (pos + #_this))) then 
-          len3 = #_this;
-        else
-          if (len3 < 0) then 
-            len3 = #_this + len3;
-          end;
-        end;
-        if (pos < 0) then 
-          pos = #_this + pos;
-        end;
-        if (pos < 0) then 
-          pos = 0;
-        end;
-        local uc = Std.parseInt(Std.string("0x") .. Std.string(_G.string.sub(_this, pos + 1, pos + len3)));
-        local tmp = self;
-        tmp.pos = tmp.pos + 4;
-        if (prev ~= -1) then 
-          if ((uc < 56320) or (uc > 57343)) then 
-            _G.table.insert(buf.b, _G.string.char(65533));
-            local buf9 = buf;
-            buf9.length = buf9.length + 1;
-            prev = -1;
-          else
-            _G.table.insert(buf.b, _G.string.char(((_hx_bit.lshift(prev - 55296,10)) + (uc - 56320)) + 65536));
-            local buf10 = buf;
-            buf10.length = buf10.length + 1;
-            prev = -1;
-          end;
-        else
-          if ((uc >= 55296) and (uc <= 56319)) then 
-            prev = uc;
-          else
-            _G.table.insert(buf.b, _G.string.char(uc));
-            local buf11 = buf;
-            buf11.length = buf11.length + 1;
-          end;
-        end;else
-      _G.error(Std.string(Std.string(Std.string("Invalid escape sequence \\") .. Std.string(_G.string.char(c))) .. Std.string(" at position ")) .. Std.string((self.pos - 1)),0); end;
-      start = self.pos;
-    else
-      if (c == nil) then 
-        _G.error("Unclosed string",0);
-      end;
-    end;
-  end;
-  if (prev ~= -1) then 
-    _G.table.insert(buf.b, _G.string.char(65533));
-    local buf12 = buf;
-    buf12.length = buf12.length + 1;
-    prev = -1;
-  end;
-  if (buf == nil) then 
-    local _this1 = self.str;
-    local pos3 = start;
-    local len4 = (self.pos - start) - 1;
-    if ((len4 == nil) or (len4 > (pos3 + #_this1))) then 
-      len4 = #_this1;
-    else
-      if (len4 < 0) then 
-        len4 = #_this1 + len4;
-      end;
-    end;
-    if (pos3 < 0) then 
-      pos3 = #_this1 + pos3;
-    end;
-    if (pos3 < 0) then 
-      pos3 = 0;
-    end;
-    do return _G.string.sub(_this1, pos3 + 1, pos3 + len4) end;
-  else
-    local s1 = self.str;
-    local len5 = (self.pos - start) - 1;
-    local part1;
-    if (len5 == nil) then 
-      local pos11 = start;
-      local len11 = nil;
-      if ((len11 == nil) or (len11 > (pos11 + #s1))) then 
-        len11 = #s1;
-      else
-        if (len11 < 0) then 
-          len11 = #s1 + len11;
-        end;
-      end;
-      if (pos11 < 0) then 
-        pos11 = #s1 + pos11;
-      end;
-      if (pos11 < 0) then 
-        pos11 = 0;
-      end;
-      part1 = _G.string.sub(s1, pos11 + 1, pos11 + len11);
-    else
-      local pos21 = start;
-      local len21 = len5;
-      if ((len21 == nil) or (len21 > (pos21 + #s1))) then 
-        len21 = #s1;
-      else
-        if (len21 < 0) then 
-          len21 = #s1 + len21;
-        end;
-      end;
-      if (pos21 < 0) then 
-        pos21 = #s1 + pos21;
-      end;
-      if (pos21 < 0) then 
-        pos21 = 0;
-      end;
-      part1 = _G.string.sub(s1, pos21 + 1, pos21 + len21);
-    end;
-    _G.table.insert(buf.b, part1);
-    local buf13 = buf;
-    buf13.length = buf13.length + #part1;
-    do return _G.table.concat(buf.b) end;
-  end;
-end
-__haxe_format_JsonParser.prototype.invalidChar = function(self) 
-  self.pos = self.pos - 1;
-  _G.error(Std.string(Std.string(Std.string("Invalid char ") .. Std.string(_G.string.byte(self.str, self.pos + 1))) .. Std.string(" at position ")) .. Std.string(self.pos),0);
-end
-__haxe_format_JsonParser.prototype.invalidNumber = function(self,start) 
-  local _this = self.str;
-  local pos = start;
-  local len = self.pos - start;
-  if ((len == nil) or (len > (pos + #_this))) then 
-    len = #_this;
-  else
-    if (len < 0) then 
-      len = #_this + len;
-    end;
-  end;
-  if (pos < 0) then 
-    pos = #_this + pos;
-  end;
-  if (pos < 0) then 
-    pos = 0;
-  end;
-  _G.error(Std.string(Std.string(Std.string("Invalid number at position ") .. Std.string(start)) .. Std.string(": ")) .. Std.string(_G.string.sub(_this, pos + 1, pos + len)),0);
-end
-
-__haxe_format_JsonParser.prototype.__class__ =  __haxe_format_JsonParser
-
 __haxe_format_JsonPrinter.new = function(replacer,space) 
   local self = _hx_new(__haxe_format_JsonPrinter.prototype)
   __haxe_format_JsonPrinter.super(self,replacer,space)
@@ -9235,16 +6772,13 @@ __haxe_format_JsonPrinter.prototype.write = function(self,k,v)
   local tmp = _g[1];
   if (tmp) == 0 then 
     local _this = self.buf;
-    local str = "null";
-    _G.table.insert(_this.b, str);
-    local _this1 = _this;
-    _this1.length = _this1.length + #str;
+    _G.table.insert(_this.b, "null");
+    _this.length = _this.length + #"null";
   elseif (tmp) == 1 then 
-    local _this2 = self.buf;
-    local str1 = Std.string(v);
-    _G.table.insert(_this2.b, str1);
-    local _this3 = _this2;
-    _this3.length = _this3.length + #str1;
+    local _this1 = self.buf;
+    local str = Std.string(v);
+    _G.table.insert(_this1.b, str);
+    _this1.length = _this1.length + #str;
   elseif (tmp) == 2 then 
     local v1 = (function() 
       local _hx_1
@@ -9253,90 +6787,78 @@ __haxe_format_JsonPrinter.prototype.write = function(self,k,v)
       _hx_1 = "null"; end
       return _hx_1
     end )();
-    local _this4 = self.buf;
-    local str2 = Std.string(v1);
-    _G.table.insert(_this4.b, str2);
-    local _this5 = _this4;
-    _this5.length = _this5.length + #str2;
+    local _this2 = self.buf;
+    local str1 = Std.string(v1);
+    _G.table.insert(_this2.b, str1);
+    _this2.length = _this2.length + #str1;
   elseif (tmp) == 3 then 
-    local _this6 = self.buf;
-    local str3 = Std.string(v);
-    _G.table.insert(_this6.b, str3);
-    local _this7 = _this6;
-    _this7.length = _this7.length + #str3;
+    local _this3 = self.buf;
+    local str2 = Std.string(v);
+    _G.table.insert(_this3.b, str2);
+    _this3.length = _this3.length + #str2;
   elseif (tmp) == 4 then 
     self:fieldsString(v, Reflect.fields(v));
   elseif (tmp) == 5 then 
-    local _this8 = self.buf;
-    local str4 = "\"<fun>\"";
-    _G.table.insert(_this8.b, str4);
-    local _this9 = _this8;
-    _this9.length = _this9.length + #str4;
+    local _this4 = self.buf;
+    _G.table.insert(_this4.b, "\"<fun>\"");
+    _this4.length = _this4.length + #"\"<fun>\"";
   elseif (tmp) == 6 then 
-    local c = _g[2];
-    if (c == String) then 
+    local _g2 = _g[2];
+    if (_g2 == String) then 
       self:quote(v);
     else
-      if (c == Array) then 
+      if (_g2 == Array) then 
         local v2 = v;
-        local _this10 = self.buf;
-        _G.table.insert(_this10.b, _G.string.char(91));
-        local _this11 = _this10;
-        _this11.length = _this11.length + 1;
+        local _this5 = self.buf;
+        _G.table.insert(_this5.b, _G.string.char(91));
+        _this5.length = _this5.length + 1;
         local len = v2.length;
         local last = len - 1;
         local _g1 = 0;
-        local _g11 = len;
-        while (_g1 < _g11) do 
+        while (_g1 < len) do 
           _g1 = _g1 + 1;
           local i = _g1 - 1;
           if (i > 0) then 
-            local _this12 = self.buf;
-            _G.table.insert(_this12.b, _G.string.char(44));
-            local _this13 = _this12;
-            _this13.length = _this13.length + 1;
+            local _this6 = self.buf;
+            _G.table.insert(_this6.b, _G.string.char(44));
+            _this6.length = _this6.length + 1;
           else
             self.nind = self.nind + 1;
           end;
           if (self.pretty) then 
-            local _this14 = self.buf;
-            _G.table.insert(_this14.b, _G.string.char(10));
-            local _this15 = _this14;
-            _this15.length = _this15.length + 1;
+            local _this7 = self.buf;
+            _G.table.insert(_this7.b, _G.string.char(10));
+            _this7.length = _this7.length + 1;
           end;
           if (self.pretty) then 
             local v3 = StringTools.lpad("", self.indent, self.nind * #self.indent);
-            local _this16 = self.buf;
-            local str5 = Std.string(v3);
-            _G.table.insert(_this16.b, str5);
-            local _this17 = _this16;
-            _this17.length = _this17.length + #str5;
+            local _this8 = self.buf;
+            local str3 = Std.string(v3);
+            _G.table.insert(_this8.b, str3);
+            _this8.length = _this8.length + #str3;
           end;
           self:write(i, v2[i]);
           if (i == last) then 
             self.nind = self.nind - 1;
             if (self.pretty) then 
-              local _this18 = self.buf;
-              _G.table.insert(_this18.b, _G.string.char(10));
-              local _this19 = _this18;
-              _this19.length = _this19.length + 1;
+              local _this9 = self.buf;
+              _G.table.insert(_this9.b, _G.string.char(10));
+              _this9.length = _this9.length + 1;
             end;
             if (self.pretty) then 
               local v4 = StringTools.lpad("", self.indent, self.nind * #self.indent);
-              local _this20 = self.buf;
-              local str6 = Std.string(v4);
-              _G.table.insert(_this20.b, str6);
-              local _this21 = _this20;
-              _this21.length = _this21.length + #str6;
+              local _this10 = self.buf;
+              local str4 = Std.string(v4);
+              _G.table.insert(_this10.b, str4);
+              _this10.length = _this10.length + #str4;
             end;
           end;
         end;
-        local _this22 = self.buf;
-        _G.table.insert(_this22.b, _G.string.char(93));
-        local _this23 = _this22;
-        _this23.length = _this23.length + 1;
+        local _this11 = self.buf;
+        _G.table.insert(_this11.b, _G.string.char(93));
+        _this11.length = _this11.length + 1;
       else
-        if (c == __haxe_ds_StringMap) then 
+        if (_g2 == __haxe_ds_StringMap) then 
           local v5 = v;
           local o = _hx_e();
           local k1 = v5:keys();
@@ -9351,9 +6873,8 @@ __haxe_format_JsonPrinter.prototype.write = function(self,k,v)
           local v6 = o;
           self:fieldsString(v6, Reflect.fields(v6));
         else
-          if (c == Date) then 
-            local v7 = v;
-            self:quote(__lua_Boot.dateStr(v7));
+          if (_g2 == Date) then 
+            self:quote(__lua_Boot.dateStr(v));
           else
             self:classString(v);
           end;
@@ -9361,19 +6882,14 @@ __haxe_format_JsonPrinter.prototype.write = function(self,k,v)
       end;
     end;
   elseif (tmp) == 7 then 
-    local _g12 = _g[2];
-    local i1 = v[1];
-    local _this24 = self.buf;
-    local str7 = Std.string(i1);
-    _G.table.insert(_this24.b, str7);
-    local _this25 = _this24;
-    _this25.length = _this25.length + #str7;
+    local _this12 = self.buf;
+    local str5 = Std.string(v[1]);
+    _G.table.insert(_this12.b, str5);
+    _this12.length = _this12.length + #str5;
   elseif (tmp) == 8 then 
-    local _this26 = self.buf;
-    local str8 = "\"???\"";
-    _G.table.insert(_this26.b, str8);
-    local _this27 = _this26;
-    _this27.length = _this27.length + #str8; end;
+    local _this13 = self.buf;
+    _G.table.insert(_this13.b, "\"???\"");
+    _this13.length = _this13.length + #"\"???\""; end;
 end
 __haxe_format_JsonPrinter.prototype.classString = function(self,v) 
   self:fieldsString(v, Type.getInstanceFields(Type.getClass(v)));
@@ -9381,15 +6897,13 @@ end
 __haxe_format_JsonPrinter.prototype.fieldsString = function(self,v,fields) 
   local _this = self.buf;
   _G.table.insert(_this.b, _G.string.char(123));
-  local _this1 = _this;
-  _this1.length = _this1.length + 1;
+  _this.length = _this.length + 1;
   local len = fields.length;
   local last = len - 1;
   local first = true;
   local _g = 0;
-  local _g1 = len;
   local _hx_continue_1 = false;
-  while (_g < _g1) do repeat 
+  while (_g < len) do repeat 
     _g = _g + 1;
     local i = _g - 1;
     local f = fields[i];
@@ -9401,52 +6915,45 @@ __haxe_format_JsonPrinter.prototype.fieldsString = function(self,v,fields)
       self.nind = self.nind + 1;
       first = false;
     else
-      local _this2 = self.buf;
-      _G.table.insert(_this2.b, _G.string.char(44));
-      local _this3 = _this2;
-      _this3.length = _this3.length + 1;
+      local _this1 = self.buf;
+      _G.table.insert(_this1.b, _G.string.char(44));
+      _this1.length = _this1.length + 1;
     end;
     if (self.pretty) then 
-      local _this4 = self.buf;
-      _G.table.insert(_this4.b, _G.string.char(10));
-      local _this5 = _this4;
-      _this5.length = _this5.length + 1;
+      local _this2 = self.buf;
+      _G.table.insert(_this2.b, _G.string.char(10));
+      _this2.length = _this2.length + 1;
     end;
     if (self.pretty) then 
       local v1 = StringTools.lpad("", self.indent, self.nind * #self.indent);
-      local _this6 = self.buf;
+      local _this3 = self.buf;
       local str = Std.string(v1);
-      _G.table.insert(_this6.b, str);
-      local _this7 = _this6;
-      _this7.length = _this7.length + #str;
+      _G.table.insert(_this3.b, str);
+      _this3.length = _this3.length + #str;
     end;
     self:quote(f);
-    local _this8 = self.buf;
-    _G.table.insert(_this8.b, _G.string.char(58));
-    local _this9 = _this8;
-    _this9.length = _this9.length + 1;
+    local _this4 = self.buf;
+    _G.table.insert(_this4.b, _G.string.char(58));
+    _this4.length = _this4.length + 1;
     if (self.pretty) then 
-      local _this10 = self.buf;
-      _G.table.insert(_this10.b, _G.string.char(32));
-      local _this11 = _this10;
-      _this11.length = _this11.length + 1;
+      local _this5 = self.buf;
+      _G.table.insert(_this5.b, _G.string.char(32));
+      _this5.length = _this5.length + 1;
     end;
     self:write(f, value);
     if (i == last) then 
       self.nind = self.nind - 1;
       if (self.pretty) then 
-        local _this12 = self.buf;
-        _G.table.insert(_this12.b, _G.string.char(10));
-        local _this13 = _this12;
-        _this13.length = _this13.length + 1;
+        local _this6 = self.buf;
+        _G.table.insert(_this6.b, _G.string.char(10));
+        _this6.length = _this6.length + 1;
       end;
       if (self.pretty) then 
         local v2 = StringTools.lpad("", self.indent, self.nind * #self.indent);
-        local _this14 = self.buf;
+        local _this7 = self.buf;
         local str1 = Std.string(v2);
-        _G.table.insert(_this14.b, str1);
-        local _this15 = _this14;
-        _this15.length = _this15.length + #str1;
+        _G.table.insert(_this7.b, str1);
+        _this7.length = _this7.length + #str1;
       end;
     end;until true
     if _hx_continue_1 then 
@@ -9455,16 +6962,14 @@ __haxe_format_JsonPrinter.prototype.fieldsString = function(self,v,fields)
     end;
     
   end;
-  local _this16 = self.buf;
-  _G.table.insert(_this16.b, _G.string.char(125));
-  local _this17 = _this16;
-  _this17.length = _this17.length + 1;
+  local _this8 = self.buf;
+  _G.table.insert(_this8.b, _G.string.char(125));
+  _this8.length = _this8.length + 1;
 end
 __haxe_format_JsonPrinter.prototype.quote = function(self,s) 
   local _this = self.buf;
   _G.table.insert(_this.b, _G.string.char(34));
-  local _this1 = _this;
-  _this1.length = _this1.length + 1;
+  _this.length = _this.length + 1;
   local i = 0;
   while (true) do 
     i = i + 1;
@@ -9472,58 +6977,41 @@ __haxe_format_JsonPrinter.prototype.quote = function(self,s)
     if (c == nil) then 
       break;
     end;
-    local c1 = c;
-    if (c1) == 8 then 
+    if (c) == 8 then 
+      local _this1 = self.buf;
+      _G.table.insert(_this1.b, "\\b");
+      _this1.length = _this1.length + #"\\b";
+    elseif (c) == 9 then 
       local _this2 = self.buf;
-      local str = "\\b";
-      _G.table.insert(_this2.b, str);
-      local _this3 = _this2;
-      _this3.length = _this3.length + #str;
-    elseif (c1) == 9 then 
+      _G.table.insert(_this2.b, "\\t");
+      _this2.length = _this2.length + #"\\t";
+    elseif (c) == 10 then 
+      local _this3 = self.buf;
+      _G.table.insert(_this3.b, "\\n");
+      _this3.length = _this3.length + #"\\n";
+    elseif (c) == 12 then 
       local _this4 = self.buf;
-      local str1 = "\\t";
-      _G.table.insert(_this4.b, str1);
-      local _this5 = _this4;
-      _this5.length = _this5.length + #str1;
-    elseif (c1) == 10 then 
+      _G.table.insert(_this4.b, "\\f");
+      _this4.length = _this4.length + #"\\f";
+    elseif (c) == 13 then 
+      local _this5 = self.buf;
+      _G.table.insert(_this5.b, "\\r");
+      _this5.length = _this5.length + #"\\r";
+    elseif (c) == 34 then 
       local _this6 = self.buf;
-      local str2 = "\\n";
-      _G.table.insert(_this6.b, str2);
-      local _this7 = _this6;
-      _this7.length = _this7.length + #str2;
-    elseif (c1) == 12 then 
-      local _this8 = self.buf;
-      local str3 = "\\f";
-      _G.table.insert(_this8.b, str3);
-      local _this9 = _this8;
-      _this9.length = _this9.length + #str3;
-    elseif (c1) == 13 then 
-      local _this10 = self.buf;
-      local str4 = "\\r";
-      _G.table.insert(_this10.b, str4);
-      local _this11 = _this10;
-      _this11.length = _this11.length + #str4;
-    elseif (c1) == 34 then 
-      local _this12 = self.buf;
-      local str5 = "\\\"";
-      _G.table.insert(_this12.b, str5);
-      local _this13 = _this12;
-      _this13.length = _this13.length + #str5;
-    elseif (c1) == 92 then 
-      local _this14 = self.buf;
-      local str6 = "\\\\";
-      _G.table.insert(_this14.b, str6);
-      local _this15 = _this14;
-      _this15.length = _this15.length + #str6;else
-    local _this16 = self.buf;
-    _G.table.insert(_this16.b, _G.string.char(c));
-    local _this17 = _this16;
-    _this17.length = _this17.length + 1; end;
+      _G.table.insert(_this6.b, "\\\"");
+      _this6.length = _this6.length + #"\\\"";
+    elseif (c) == 92 then 
+      local _this7 = self.buf;
+      _G.table.insert(_this7.b, "\\\\");
+      _this7.length = _this7.length + #"\\\\";else
+    local _this8 = self.buf;
+    _G.table.insert(_this8.b, _G.string.char(c));
+    _this8.length = _this8.length + 1; end;
   end;
-  local _this18 = self.buf;
-  _G.table.insert(_this18.b, _G.string.char(34));
-  local _this19 = _this18;
-  _this19.length = _this19.length + 1;
+  local _this9 = self.buf;
+  _G.table.insert(_this9.b, _G.string.char(34));
+  _this9.length = _this9.length + 1;
 end
 
 __haxe_format_JsonPrinter.prototype.__class__ =  __haxe_format_JsonPrinter
@@ -9774,33 +7262,9 @@ __lua_Thread.new = {}
 _hxClasses["lua.Thread"] = __lua_Thread
 __lua_Thread.__name__ = "lua.Thread"
 
-__tink_core_Annex.new = function(target) 
-  local self = _hx_new(__tink_core_Annex.prototype)
-  __tink_core_Annex.super(self,target)
-  return self
-end
-__tink_core_Annex.super = function(self,target) 
-  self.target = target;
-  self.registry = __haxe_ds_ObjectMap.new();
-end
-_hxClasses["tink.core.Annex"] = __tink_core_Annex
-__tink_core_Annex.__name__ = "tink.core.Annex"
-__tink_core_Annex.prototype = _hx_a();
-__tink_core_Annex.prototype.target= nil;
-__tink_core_Annex.prototype.registry= nil;
-
-__tink_core_Annex.prototype.__class__ =  __tink_core_Annex
-
 __tink_core__Callback_Callback_Impl_.new = {}
 _hxClasses["tink.core._Callback.Callback_Impl_"] = __tink_core__Callback_Callback_Impl_
 __tink_core__Callback_Callback_Impl_.__name__ = "tink.core._Callback.Callback_Impl_"
-__tink_core__Callback_Callback_Impl_._new = function(f) 
-  local this1 = f;
-  do return this1 end;
-end
-__tink_core__Callback_Callback_Impl_.toFunction = function(this1) 
-  do return this1 end;
-end
 __tink_core__Callback_Callback_Impl_.invoke = function(this1,data) 
   if (__tink_core__Callback_Callback_Impl_.depth < 500) then 
     __tink_core__Callback_Callback_Impl_.depth = __tink_core__Callback_Callback_Impl_.depth + 1;
@@ -9817,26 +7281,6 @@ __tink_core__Callback_Callback_Impl_.invoke = function(this1,data)
     end);
   end;
 end
-__tink_core__Callback_Callback_Impl_.ignore = function(cb) 
-  do return function(_) 
-    __tink_core__Callback_Callback_Impl_.invoke(cb, __tink_core_Noise.Noise);
-  end end;
-end
-__tink_core__Callback_Callback_Impl_.fromNiladic = function(f) 
-  do return function(_) 
-    f();
-  end end;
-end
-__tink_core__Callback_Callback_Impl_.fromMany = function(callbacks) 
-  do return function(v) 
-    local _g = 0;
-    while (_g < callbacks.length) do 
-      local callback = callbacks[_g];
-      _g = _g + 1;
-      __tink_core__Callback_Callback_Impl_.invoke(callback, v);
-    end;
-  end end;
-end
 __tink_core__Callback_Callback_Impl_.defer = function(f) 
   __haxe_Timer.delay(f, 0);
 end
@@ -9844,123 +7288,6 @@ end
 __tink_core_LinkObject.new = {}
 _hxClasses["tink.core.LinkObject"] = __tink_core_LinkObject
 __tink_core_LinkObject.__name__ = "tink.core.LinkObject"
-__tink_core_LinkObject.prototype = _hx_a();
-__tink_core_LinkObject.prototype.cancel= nil;
-
-__tink_core_LinkObject.prototype.__class__ =  __tink_core_LinkObject
-
-__tink_core__Callback_CallbackLink_Impl_.new = {}
-_hxClasses["tink.core._Callback.CallbackLink_Impl_"] = __tink_core__Callback_CallbackLink_Impl_
-__tink_core__Callback_CallbackLink_Impl_.__name__ = "tink.core._Callback.CallbackLink_Impl_"
-__tink_core__Callback_CallbackLink_Impl_._new = function(link) 
-  local this1 = __tink_core_SimpleLink.new(link);
-  do return this1 end;
-end
-__tink_core__Callback_CallbackLink_Impl_.cancel = function(this1) 
-  if (this1 ~= nil) then 
-    this1:cancel();
-  end;
-end
-__tink_core__Callback_CallbackLink_Impl_.dissolve = function(this1) 
-  if (this1 ~= nil) then 
-    this1:cancel();
-  end;
-end
-__tink_core__Callback_CallbackLink_Impl_.noop = function() 
-end
-__tink_core__Callback_CallbackLink_Impl_.toFunction = function(this1) 
-  if (this1 == nil) then 
-    do return __tink_core__Callback_CallbackLink_Impl_.noop end;
-  else
-    do return _hx_bind(this1,_hx_bind(this1,this1.cancel)) end;
-  end;
-end
-__tink_core__Callback_CallbackLink_Impl_.toCallback = function(this1) 
-  do return function(_) 
-    this1:cancel();
-  end end;
-end
-__tink_core__Callback_CallbackLink_Impl_.fromFunction = function(f) 
-  local this1 = __tink_core_SimpleLink.new(f);
-  do return this1 end;
-end
-__tink_core__Callback_CallbackLink_Impl_.join = function(a,b) 
-  do return __tink_core__Callback_LinkPair.new(a, b) end;
-end
-__tink_core__Callback_CallbackLink_Impl_.fromMany = function(callbacks) 
-  local this1 = __tink_core_SimpleLink.new(function() 
-    if (callbacks ~= nil) then 
-      local _g = 0;
-      while (_g < callbacks.length) do 
-        local cb = callbacks[_g];
-        _g = _g + 1;
-        if (cb ~= nil) then 
-          cb:cancel();
-        end;
-      end;
-    else
-      callbacks = nil;
-    end;
-  end);
-  do return this1 end;
-end
-
-__tink_core_SimpleLink.new = function(f) 
-  local self = _hx_new(__tink_core_SimpleLink.prototype)
-  __tink_core_SimpleLink.super(self,f)
-  return self
-end
-__tink_core_SimpleLink.super = function(self,f) 
-  self.f = _hx_funcToField(f);
-end
-_hxClasses["tink.core.SimpleLink"] = __tink_core_SimpleLink
-__tink_core_SimpleLink.__name__ = "tink.core.SimpleLink"
-__tink_core_SimpleLink.__interfaces__ = {__tink_core_LinkObject}
-__tink_core_SimpleLink.prototype = _hx_a();
-__tink_core_SimpleLink.prototype.f= nil;
-__tink_core_SimpleLink.prototype.cancel = function(self) 
-  if (self.f ~= nil) then 
-    self:f();
-    self.f = nil;
-  end;
-end
-
-__tink_core_SimpleLink.prototype.__class__ =  __tink_core_SimpleLink
-
-__tink_core__Callback_LinkPair.new = function(a,b) 
-  local self = _hx_new(__tink_core__Callback_LinkPair.prototype)
-  __tink_core__Callback_LinkPair.super(self,a,b)
-  return self
-end
-__tink_core__Callback_LinkPair.super = function(self,a,b) 
-  self.dissolved = false;
-  self.a = a;
-  self.b = b;
-end
-_hxClasses["tink.core._Callback.LinkPair"] = __tink_core__Callback_LinkPair
-__tink_core__Callback_LinkPair.__name__ = "tink.core._Callback.LinkPair"
-__tink_core__Callback_LinkPair.__interfaces__ = {__tink_core_LinkObject}
-__tink_core__Callback_LinkPair.prototype = _hx_a();
-__tink_core__Callback_LinkPair.prototype.a= nil;
-__tink_core__Callback_LinkPair.prototype.b= nil;
-__tink_core__Callback_LinkPair.prototype.dissolved= nil;
-__tink_core__Callback_LinkPair.prototype.cancel = function(self) 
-  if (not self.dissolved) then 
-    self.dissolved = true;
-    local this1 = self.a;
-    if (this1 ~= nil) then 
-      this1:cancel();
-    end;
-    local this2 = self.b;
-    if (this2 ~= nil) then 
-      this2:cancel();
-    end;
-    self.a = nil;
-    self.b = nil;
-  end;
-end
-
-__tink_core__Callback_LinkPair.prototype.__class__ =  __tink_core__Callback_LinkPair
 
 __tink_core__Callback_ListCell.new = function(cb,list) 
   local self = _hx_new(__tink_core__Callback_ListCell.prototype)
@@ -9980,31 +7307,6 @@ __tink_core__Callback_ListCell.__interfaces__ = {__tink_core_LinkObject}
 __tink_core__Callback_ListCell.prototype = _hx_a();
 __tink_core__Callback_ListCell.prototype.cb= nil;
 __tink_core__Callback_ListCell.prototype.list= nil;
-__tink_core__Callback_ListCell.prototype.invoke = function(self,data) 
-  if (self.list ~= nil) then 
-    __tink_core__Callback_Callback_Impl_.invoke(self.cb, data);
-  end;
-end
-__tink_core__Callback_ListCell.prototype.clear = function(self) 
-  self.cb = nil;
-  self.list = nil;
-end
-__tink_core__Callback_ListCell.prototype.cancel = function(self) 
-  if (self.list ~= nil) then 
-    local list = self.list;
-    self.cb = nil;
-    self.list = nil;
-    local tmp = (function() 
-    local _hx_obj = list;
-    local _hx_fld = 'used';
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  - 1;
-     return _hx_obj[_hx_fld];
-     end)();
-    if (tmp < (_hx_bit.arshift(list.used,1))) then 
-      list:compact();
-    end;
-  end;
-end
 
 __tink_core__Callback_ListCell.prototype.__class__ =  __tink_core__Callback_ListCell
 
@@ -10028,26 +7330,6 @@ __tink_core_CallbackList.prototype.queue= nil;
 __tink_core_CallbackList.prototype.busy= nil;
 __tink_core_CallbackList.prototype.ondrain = function(self) 
 end
-__tink_core_CallbackList.prototype.get_length = function(self) 
-  do return self.used end
-end
-__tink_core_CallbackList.prototype.release = function(self) 
-  local tmp = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'used';
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  - 1;
-   return _hx_obj[_hx_fld];
-   end)();
-  if (tmp < (_hx_bit.arshift(self.used,1))) then 
-    self:compact();
-  end;
-end
-__tink_core_CallbackList.prototype.add = function(self,cb) 
-  local node = __tink_core__Callback_ListCell.new(cb, self);
-  self.cells:push(node);
-  self.used = self.used + 1;
-  do return node end
-end
 __tink_core_CallbackList.prototype.invoke = function(self,data,destructive) 
   if (self.busy) then 
     local f = _hx_bind(self,self.invoke);
@@ -10062,11 +7344,9 @@ __tink_core_CallbackList.prototype.invoke = function(self,data,destructive)
     self.busy = true;
     local length = self.cells.length;
     local _g = 0;
-    local _g1 = length;
-    while (_g < _g1) do 
+    while (_g < length) do 
       _g = _g + 1;
-      local i = _g - 1;
-      local _this = self.cells[i];
+      local _this = self.cells[_g - 1];
       if (_this.list ~= nil) then 
         __tink_core__Callback_Callback_Impl_.invoke(_this.cb, data);
       end;
@@ -10075,20 +7355,17 @@ __tink_core_CallbackList.prototype.invoke = function(self,data,destructive)
     if (destructive) then 
       local added = self.cells.length - length;
       local _g2 = 0;
-      local _g3 = length;
-      while (_g2 < _g3) do 
+      while (_g2 < length) do 
         _g2 = _g2 + 1;
-        local i1 = _g2 - 1;
-        local _this1 = self.cells[i1];
+        local _this1 = self.cells[_g2 - 1];
         _this1.cb = nil;
         _this1.list = nil;
       end;
       local _g4 = 0;
-      local _g5 = added;
-      while (_g4 < _g5) do 
+      while (_g4 < added) do 
         _g4 = _g4 + 1;
-        local i2 = _g4 - 1;
-        self.cells[i2] = self.cells[length + i2];
+        local i = _g4 - 1;
+        self.cells[i] = self.cells[length + i];
       end;
       self:resize(added);
     else
@@ -10116,11 +7393,9 @@ __tink_core_CallbackList.prototype.compact = function(self)
         _g = _g + 1;
         local i = _g - 1;
         local _g2 = self.cells[i];
-        local _g21 = _g2.list;
         if (_g2.cb ~= nil) then 
-          local v = _g2;
           if (compacted ~= i) then 
-            self.cells[compacted] = v;
+            self.cells[compacted] = _g2;
           end;
           compacted = compacted + 1;
           if (compacted == self.used) then 
@@ -10151,1817 +7426,9 @@ __tink_core_CallbackList.prototype.clear = function(self)
 end
 
 __tink_core_CallbackList.prototype.__class__ =  __tink_core_CallbackList
-
-__tink_core_TypedError.new = function(code,message,pos) 
-  local self = _hx_new(__tink_core_TypedError.prototype)
-  __tink_core_TypedError.super(self,code,message,pos)
-  return self
-end
-__tink_core_TypedError.super = function(self,code,message,pos) 
-  if (code == nil) then 
-    code = 500;
-  end;
-  self.isTinkError = true;
-  self.code = code;
-  self.message = message;
-  self.pos = pos;
-  self.exceptionStack = _hx_tab_array({}, 0);
-  self.callStack = _hx_tab_array({}, 0);
-end
-_hxClasses["tink.core.TypedError"] = __tink_core_TypedError
-__tink_core_TypedError.__name__ = "tink.core.TypedError"
-__tink_core_TypedError.withData = function(code,message,data,pos) 
-  do return __tink_core_TypedError.typed(code, message, data, pos) end;
-end
-__tink_core_TypedError.typed = function(code,message,data,pos) 
-  local ret = __tink_core_TypedError.new(code, message, pos);
-  ret.data = data;
-  do return ret end;
-end
-__tink_core_TypedError.asError = function(v) 
-  local value = v;
-  if (__lua_Boot.__instanceof(value, __tink_core_TypedError)) then 
-    do return value end;
-  else
-    do return nil end;
-  end;
-end
-__tink_core_TypedError.catchExceptions = function(f,report,pos) 
-  local _hx_status, _hx_result = pcall(function() 
-  
-      do return __tink_core_Outcome.Success(f()) end;
-    return _hx_pcall_default
-  end)
-  if not _hx_status and _hx_result == "_hx_pcall_break" then
-  elseif not _hx_status then 
-  
-    local _hx_1 = _hx_result
-    local e = _hx_1
-    local _g = __tink_core_TypedError.asError(e);
-    local tmp;
-    if (_g == nil) then 
-      tmp = (function() 
-        local _hx_2
-        if (report == nil) then 
-        _hx_2 = __tink_core_TypedError.withData(nil, "Unexpected Error", e, pos); else 
-        _hx_2 = report(e); end
-        return _hx_2
-      end )();
-    else
-      local e1 = _g;
-      tmp = e1;
-    end;
-    do return __tink_core_Outcome.Failure(tmp) end;
-  elseif _hx_result ~= _hx_pcall_default then
-    return _hx_result
-  end;
-end
-__tink_core_TypedError.reporter = function(code,message,pos) 
-  do return function(e) 
-    do return __tink_core_TypedError.withData(code, message, e, pos) end;
-  end end;
-end
-__tink_core_TypedError.rethrow = function(any) 
-  _G.error(any,0);
-end
-__tink_core_TypedError.tryFinally = function(f,cleanup) 
-  local _hx_status, _hx_result = pcall(function() 
-  
-      local ret = f();
-      cleanup();
-      do return ret end;
-    return _hx_pcall_default
-  end)
-  if not _hx_status and _hx_result == "_hx_pcall_break" then
-  elseif not _hx_status then 
-  
-    local _hx_1 = _hx_result
-    local e = _hx_1
-    cleanup();
-    _G.error(e,0);
-  elseif _hx_result ~= _hx_pcall_default then
-    return _hx_result
-  end;
-end
-__tink_core_TypedError.prototype = _hx_a();
-__tink_core_TypedError.prototype.message= nil;
-__tink_core_TypedError.prototype.code= nil;
-__tink_core_TypedError.prototype.data= nil;
-__tink_core_TypedError.prototype.pos= nil;
-__tink_core_TypedError.prototype.callStack= nil;
-__tink_core_TypedError.prototype.exceptionStack= nil;
-__tink_core_TypedError.prototype.isTinkError= nil;
-__tink_core_TypedError.prototype.printPos = function(self) 
-  do return Std.string(Std.string(Std.string(Std.string(self.pos.className) .. Std.string(".")) .. Std.string(self.pos.methodName)) .. Std.string(":")) .. Std.string(self.pos.lineNumber) end
-end
-__tink_core_TypedError.prototype.toString = function(self) 
-  local ret = Std.string(Std.string(Std.string("Error#") .. Std.string(self.code)) .. Std.string(": ")) .. Std.string(self.message);
-  if (self.pos ~= nil) then 
-    ret = Std.string(ret) .. Std.string((Std.string(" @ ") .. Std.string(self:printPos())));
-  end;
-  do return ret end
-end
-__tink_core_TypedError.prototype.throwSelf = function(self) 
-  local any = self;
-  _G.error(any,0);
-end
-
-__tink_core_TypedError.prototype.__class__ =  __tink_core_TypedError
-
-__tink_core__Error_Stack_Impl_.new = {}
-_hxClasses["tink.core._Error.Stack_Impl_"] = __tink_core__Error_Stack_Impl_
-__tink_core__Error_Stack_Impl_.__name__ = "tink.core._Error.Stack_Impl_"
-__tink_core__Error_Stack_Impl_.toString = function(this1) 
-  do return "Error stack not available. Compile with -D error_stack." end;
-end
-
-__tink_core__Future_FutureObject.new = {}
-_hxClasses["tink.core._Future.FutureObject"] = __tink_core__Future_FutureObject
-__tink_core__Future_FutureObject.__name__ = "tink.core._Future.FutureObject"
-__tink_core__Future_FutureObject.prototype = _hx_a();
-__tink_core__Future_FutureObject.prototype.map= nil;
-__tink_core__Future_FutureObject.prototype.flatMap= nil;
-__tink_core__Future_FutureObject.prototype.handle= nil;
-__tink_core__Future_FutureObject.prototype.gather= nil;
-__tink_core__Future_FutureObject.prototype.eager= nil;
-
-__tink_core__Future_FutureObject.prototype.__class__ =  __tink_core__Future_FutureObject
-
-__tink_core__Future_NeverFuture.new = function() 
-  local self = _hx_new(__tink_core__Future_NeverFuture.prototype)
-  __tink_core__Future_NeverFuture.super(self)
-  return self
-end
-__tink_core__Future_NeverFuture.super = function(self) 
-end
-_hxClasses["tink.core._Future.NeverFuture"] = __tink_core__Future_NeverFuture
-__tink_core__Future_NeverFuture.__name__ = "tink.core._Future.NeverFuture"
-__tink_core__Future_NeverFuture.__interfaces__ = {__tink_core__Future_FutureObject}
-__tink_core__Future_NeverFuture.prototype = _hx_a();
-__tink_core__Future_NeverFuture.prototype.map = function(self,f) 
-  do return __tink_core__Future_NeverFuture.inst end
-end
-__tink_core__Future_NeverFuture.prototype.flatMap = function(self,f) 
-  do return __tink_core__Future_NeverFuture.inst end
-end
-__tink_core__Future_NeverFuture.prototype.handle = function(self,callback) 
-  do return nil end
-end
-__tink_core__Future_NeverFuture.prototype.gather = function(self) 
-  do return __tink_core__Future_NeverFuture.inst end
-end
-__tink_core__Future_NeverFuture.prototype.eager = function(self) 
-  do return __tink_core__Future_NeverFuture.inst end
-end
-
-__tink_core__Future_NeverFuture.prototype.__class__ =  __tink_core__Future_NeverFuture
 _hxClasses["tink.core.Noise"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Noise"},1)}
 __tink_core_Noise = _hxClasses["tink.core.Noise"];
 __tink_core_Noise.Noise = _hx_tab_array({[0]="Noise",0,__enum__ = __tink_core_Noise},2)
-
-
-__tink_core__Lazy_LazyObject.new = {}
-_hxClasses["tink.core._Lazy.LazyObject"] = __tink_core__Lazy_LazyObject
-__tink_core__Lazy_LazyObject.__name__ = "tink.core._Lazy.LazyObject"
-__tink_core__Lazy_LazyObject.prototype = _hx_a();
-__tink_core__Lazy_LazyObject.prototype.get= nil;
-__tink_core__Lazy_LazyObject.prototype.map= nil;
-__tink_core__Lazy_LazyObject.prototype.flatMap= nil;
-
-__tink_core__Lazy_LazyObject.prototype.__class__ =  __tink_core__Lazy_LazyObject
-
-__tink_core__Lazy_LazyConst.new = function(value) 
-  local self = _hx_new(__tink_core__Lazy_LazyConst.prototype)
-  __tink_core__Lazy_LazyConst.super(self,value)
-  return self
-end
-__tink_core__Lazy_LazyConst.super = function(self,value) 
-  self.value = value;
-end
-_hxClasses["tink.core._Lazy.LazyConst"] = __tink_core__Lazy_LazyConst
-__tink_core__Lazy_LazyConst.__name__ = "tink.core._Lazy.LazyConst"
-__tink_core__Lazy_LazyConst.__interfaces__ = {__tink_core__Lazy_LazyObject}
-__tink_core__Lazy_LazyConst.prototype = _hx_a();
-__tink_core__Lazy_LazyConst.prototype.value= nil;
-__tink_core__Lazy_LazyConst.prototype.get = function(self) 
-  do return self.value end
-end
-__tink_core__Lazy_LazyConst.prototype.map = function(self,f) 
-  local _gthis = self;
-  do return __tink_core__Lazy_LazyFunc.new(function() 
-    do return f(_gthis.value) end;
-  end) end
-end
-__tink_core__Lazy_LazyConst.prototype.flatMap = function(self,f) 
-  local _gthis = self;
-  do return __tink_core__Lazy_LazyFunc.new(function() 
-    do return f(_gthis.value):get() end;
-  end) end
-end
-
-__tink_core__Lazy_LazyConst.prototype.__class__ =  __tink_core__Lazy_LazyConst
-
-__tink_core__Future_SyncFuture.new = function(value) 
-  local self = _hx_new(__tink_core__Future_SyncFuture.prototype)
-  __tink_core__Future_SyncFuture.super(self,value)
-  return self
-end
-__tink_core__Future_SyncFuture.super = function(self,value) 
-  self.value = value;
-end
-_hxClasses["tink.core._Future.SyncFuture"] = __tink_core__Future_SyncFuture
-__tink_core__Future_SyncFuture.__name__ = "tink.core._Future.SyncFuture"
-__tink_core__Future_SyncFuture.__interfaces__ = {__tink_core__Future_FutureObject}
-__tink_core__Future_SyncFuture.prototype = _hx_a();
-__tink_core__Future_SyncFuture.prototype.value= nil;
-__tink_core__Future_SyncFuture.prototype.map = function(self,f) 
-  do return __tink_core__Future_SyncFuture.new(self.value:map(f)) end
-end
-__tink_core__Future_SyncFuture.prototype.flatMap = function(self,f) 
-  local _gthis = self;
-  do return __tink_core__Future_SuspendableFuture.new(function(yield) 
-    local tmp = _gthis.value:get();
-    do return f(tmp):handle(yield) end;
-  end) end
-end
-__tink_core__Future_SyncFuture.prototype.handle = function(self,cb) 
-  __tink_core__Callback_Callback_Impl_.invoke(cb, self.value:get());
-  do return nil end
-end
-__tink_core__Future_SyncFuture.prototype.eager = function(self) 
-  do return self end
-end
-__tink_core__Future_SyncFuture.prototype.gather = function(self) 
-  do return self end
-end
-
-__tink_core__Future_SyncFuture.prototype.__class__ =  __tink_core__Future_SyncFuture
-
-__tink_core__Future_Future_Impl_.new = {}
-_hxClasses["tink.core._Future.Future_Impl_"] = __tink_core__Future_Future_Impl_
-__tink_core__Future_Future_Impl_.__name__ = "tink.core._Future.Future_Impl_"
-__tink_core__Future_Future_Impl_._new = function(f) 
-  local this1 = __tink_core__Future_SuspendableFuture.new(f);
-  do return this1 end;
-end
-__tink_core__Future_Future_Impl_.first = function(this1,other) 
-  local ret = __tink_core_FutureTrigger.new();
-  local l1 = this1:handle(_hx_bind(ret,ret.trigger));
-  local l2 = other:handle(_hx_bind(ret,ret.trigger));
-  local ret1 = ret;
-  if (l1 ~= nil) then 
-    local this2 = l1;
-    ret1:handle(function(_) 
-      this2:cancel();
-    end);
-  end;
-  if (l2 ~= nil) then 
-    local this3 = l2;
-    ret1:handle(function(_1) 
-      this3:cancel();
-    end);
-  end;
-  do return ret1 end;
-end
-__tink_core__Future_Future_Impl_.map = function(this1,f,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local ret = this1:map(f);
-  if (gather) then 
-    do return ret:gather() end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Future_Future_Impl_.flatMap = function(this1,next,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local ret = this1:flatMap(next);
-  if (gather) then 
-    do return ret:gather() end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Future_Future_Impl_.next = function(this1,n) 
-  do return this1:flatMap(function(v) 
-    do return n(v) end;
-  end) end;
-end
-__tink_core__Future_Future_Impl_.merge = function(this1,other,merger,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local gather1 = gather;
-  if (gather1 == nil) then 
-    gather1 = true;
-  end;
-  local ret = this1:flatMap(function(t) 
-    local gather2 = false;
-    if (gather2 == nil) then 
-      gather2 = true;
-    end;
-    local ret1 = other:map(function(a) 
-      do return merger(t, a) end;
-    end);
-    if (gather2) then 
-      do return ret1:gather() end;
-    else
-      do return ret1 end;
-    end;
-  end);
-  if (gather1) then 
-    do return ret:gather() end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Future_Future_Impl_.flatten = function(f) 
-  do return __tink_core__Future_SuspendableFuture.new(function(yield) 
-    local inner = nil;
-    local outer = f:handle(function(second) 
-      inner = second:handle(yield);
-    end);
-    local this1 = __tink_core_SimpleLink.new(function() 
-      if (inner ~= nil) then 
-        inner:cancel();
-      end;
-    end);
-    do return __tink_core__Callback_LinkPair.new(outer, this1) end;
-  end) end;
-end
-__tink_core__Future_Future_Impl_.ofAny = function(v) 
-  do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(v)) end;
-end
-__tink_core__Future_Future_Impl_.asPromise = function(s) 
-  do return s end;
-end
-__tink_core__Future_Future_Impl_.ofMany = function(futures,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local ret = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(_hx_tab_array({}, 0)));
-  local _g = 0;
-  while (_g < futures.length) do 
-    local f = _hx_tab_array({[0]=futures[_g]}, 1);
-    _g = _g + 1;
-    local gather1 = false;
-    if (gather1 == nil) then 
-      gather1 = true;
-    end;
-    local ret1 = ret:flatMap((function(f1) 
-      do return function(results) 
-        local gather2 = false;
-        if (gather2 == nil) then 
-          gather2 = true;
-        end;
-        local ret2 = (function() 
-          do return function(result) 
-            do return results:concat(_hx_tab_array({[0]=result}, 1)) end;
-          end end;
-        end)();
-        local ret3 = f1[0]:map(ret2);
-        if (gather2) then 
-          do return ret3:gather() end;
-        else
-          do return ret3 end;
-        end;
-      end end;
-    end)(f));
-    ret = (function() 
-      local _hx_1
-      if (gather1) then 
-      _hx_1 = ret1:gather(); else 
-      _hx_1 = ret1; end
-      return _hx_1
-    end )();
-  end;
-  if (gather) then 
-    do return ret:gather() end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Future_Future_Impl_.fromMany = function(futures) 
-  do return __tink_core__Future_Future_Impl_.ofMany(futures) end;
-end
-__tink_core__Future_Future_Impl_.lazy = function(l) 
-  do return __tink_core__Future_SyncFuture.new(l) end;
-end
-__tink_core__Future_Future_Impl_.sync = function(v) 
-  do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(v)) end;
-end
-__tink_core__Future_Future_Impl_.async = function(f,lazy) 
-  if (lazy == nil) then 
-    lazy = false;
-  end;
-  if (lazy) then 
-    do return __tink_core__Future_SuspendableFuture.new(function(yield) 
-      f(yield);
-      do return nil end;
-    end) end;
-  else
-    local op = __tink_core_FutureTrigger.new();
-    local wrapped = f;
-    __tink_core__Callback_Callback_Impl_.invoke(wrapped, _hx_bind(op,op.trigger));
-    do return op end;
-  end;
-end
-__tink_core__Future_Future_Impl_["or"] = function(a,b) 
-  do return __tink_core__Future_Future_Impl_.first(a, b) end;
-end
-__tink_core__Future_Future_Impl_.either = function(a,b) 
-  local gather = false;
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local ret = a:map(__haxe_ds_Either.Left);
-  local tmp = (function() 
-    local _hx_1
-    if (gather) then 
-    _hx_1 = ret:gather(); else 
-    _hx_1 = ret; end
-    return _hx_1
-  end )();
-  local gather1 = false;
-  if (gather1 == nil) then 
-    gather1 = true;
-  end;
-  local ret1 = b:map(__haxe_ds_Either.Right);
-  do return __tink_core__Future_Future_Impl_.first(tmp, (function() 
-    local _hx_2
-    if (gather1) then 
-    _hx_2 = ret1:gather(); else 
-    _hx_2 = ret1; end
-    return _hx_2
-  end )()) end;
-end
-__tink_core__Future_Future_Impl_["and"] = function(a,b) 
-  do return __tink_core__Future_Future_Impl_.merge(a, b, function(a1,b1) 
-    local this1 = __tink_core_MPair.new(a1, b1);
-    do return this1 end;
-  end) end;
-end
-__tink_core__Future_Future_Impl_._tryFailingFlatMap = function(f,map) 
-  local ret = f:flatMap(function(o) 
-    local ret1 = o[1];
-    if (ret1) == 0 then 
-      local d = o[2];
-      do return map(d) end;
-    elseif (ret1) == 1 then 
-      local f1 = o[2];
-      do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Failure(f1))) end; end;
-  end);
-  do return ret:gather() end;
-end
-__tink_core__Future_Future_Impl_._tryFlatMap = function(f,map) 
-  local ret = f:flatMap(function(o) 
-    local ret1 = o[1];
-    if (ret1) == 0 then 
-      local d = o[2];
-      local ret2 = map(d):map(__tink_core_Outcome.Success);
-      do return ret2:gather() end;
-    elseif (ret1) == 1 then 
-      local f1 = o[2];
-      do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Failure(f1))) end; end;
-  end);
-  do return ret:gather() end;
-end
-__tink_core__Future_Future_Impl_._tryFailingMap = function(f,map) 
-  local ret = f:map(function(o) 
-    do return __tink_core_OutcomeTools.flatMap(o, __tink_core__Outcome_OutcomeMapper_Impl_.withSameError(map)) end;
-  end);
-  do return ret:gather() end;
-end
-__tink_core__Future_Future_Impl_._tryMap = function(f,map) 
-  local ret = f:map(function(o) 
-    do return __tink_core_OutcomeTools.map(o, map) end;
-  end);
-  do return ret:gather() end;
-end
-__tink_core__Future_Future_Impl_._flatMap = function(f,map) 
-  local ret = f:flatMap(map);
-  do return ret:gather() end;
-end
-__tink_core__Future_Future_Impl_._map = function(f,map) 
-  local ret = f:map(map);
-  do return ret:gather() end;
-end
-__tink_core__Future_Future_Impl_.trigger = function() 
-  do return __tink_core_FutureTrigger.new() end;
-end
-__tink_core__Future_Future_Impl_.delay = function(ms,value) 
-  do return __tink_core__Future_Future_Impl_.async(function(cb) 
-    __haxe_Timer.delay(function() 
-      cb(value:get());
-    end, ms);
-  end) end;
-end
-
-__tink_core_FutureTrigger.new = function() 
-  local self = _hx_new(__tink_core_FutureTrigger.prototype)
-  __tink_core_FutureTrigger.super(self)
-  return self
-end
-__tink_core_FutureTrigger.super = function(self) 
-  self.list = __tink_core_CallbackList.new();
-end
-_hxClasses["tink.core.FutureTrigger"] = __tink_core_FutureTrigger
-__tink_core_FutureTrigger.__name__ = "tink.core.FutureTrigger"
-__tink_core_FutureTrigger.__interfaces__ = {__tink_core__Future_FutureObject}
-__tink_core_FutureTrigger.gatherFuture = function(f) 
-  do return __tink_core__Future_SuspendableFuture.new(function(yield) 
-    do return f:handle(yield) end;
-  end) end;
-end
-__tink_core_FutureTrigger.prototype = _hx_a();
-__tink_core_FutureTrigger.prototype.result= nil;
-__tink_core_FutureTrigger.prototype.list= nil;
-__tink_core_FutureTrigger.prototype.handle = function(self,callback) 
-  local _g = self.list;
-  if (_g == nil) then 
-    __tink_core__Callback_Callback_Impl_.invoke(callback, self.result);
-    do return nil end;
-  else
-    local v = _g;
-    local node = __tink_core__Callback_ListCell.new(callback, v);
-    v.cells:push(node);
-    v.used = v.used + 1;
-    do return node end;
-  end;
-end
-__tink_core_FutureTrigger.prototype.map = function(self,f) 
-  local _g = self.list;
-  if (_g == nil) then 
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(f(self.result))) end;
-  else
-    local v = _g;
-    local ret = __tink_core_FutureTrigger.new();
-    local _this = self.list;
-    local node = __tink_core__Callback_ListCell.new(function(v1) 
-      local node1 = f(v1);
-      ret:trigger(node1);
-    end, _this);
-    _this.cells:push(node);
-    _this.used = _this.used + 1;
-    do return ret end;
-  end;
-end
-__tink_core_FutureTrigger.prototype.flatMap = function(self,f) 
-  local _g = self.list;
-  if (_g == nil) then 
-    do return f(self.result) end;
-  else
-    local v = _g;
-    local ret = __tink_core_FutureTrigger.new();
-    local _this = self.list;
-    local node = __tink_core__Callback_ListCell.new(function(v1) 
-      f(v1):handle(_hx_bind(ret,ret.trigger));
-    end, _this);
-    _this.cells:push(node);
-    _this.used = _this.used + 1;
-    do return ret end;
-  end;
-end
-__tink_core_FutureTrigger.prototype.gather = function(self) 
-  do return self end
-end
-__tink_core_FutureTrigger.prototype.eager = function(self) 
-  do return self end
-end
-__tink_core_FutureTrigger.prototype.asFuture = function(self) 
-  do return self end
-end
-__tink_core_FutureTrigger.prototype.trigger = function(self,result) 
-  if (self.list == nil) then 
-    do return false end;
-  else
-    local list = self.list;
-    self.list = nil;
-    self.result = result;
-    list:invoke(result, true);
-    do return true end;
-  end;
-end
-
-__tink_core_FutureTrigger.prototype.__class__ =  __tink_core_FutureTrigger
-
-__tink_core__Future_SuspendableFuture.new = function(wakeup) 
-  local self = _hx_new(__tink_core__Future_SuspendableFuture.prototype)
-  __tink_core__Future_SuspendableFuture.super(self,wakeup)
-  return self
-end
-__tink_core__Future_SuspendableFuture.super = function(self,wakeup) 
-  self.suspended = true;
-  local _gthis = self;
-  self.wakeup = _hx_funcToField(wakeup);
-  self.callbacks = __tink_core_CallbackList.new();
-  self.callbacks.ondrain = function(self) 
-    if (_gthis.callbacks ~= nil) then 
-      _gthis.suspended = true;
-      local this1 = _gthis.link;
-      if (this1 ~= nil) then 
-        this1:cancel();
-      end;
-      _gthis.link = nil;
-    end;
-   end;
-end
-_hxClasses["tink.core._Future.SuspendableFuture"] = __tink_core__Future_SuspendableFuture
-__tink_core__Future_SuspendableFuture.__name__ = "tink.core._Future.SuspendableFuture"
-__tink_core__Future_SuspendableFuture.__interfaces__ = {__tink_core__Future_FutureObject}
-__tink_core__Future_SuspendableFuture.prototype = _hx_a();
-__tink_core__Future_SuspendableFuture.prototype.callbacks= nil;
-__tink_core__Future_SuspendableFuture.prototype.result= nil;
-__tink_core__Future_SuspendableFuture.prototype.suspended= nil;
-__tink_core__Future_SuspendableFuture.prototype.link= nil;
-__tink_core__Future_SuspendableFuture.prototype.wakeup= nil;
-__tink_core__Future_SuspendableFuture.prototype.trigger = function(self,value) 
-  local _g = self.callbacks;
-  if (_g ~= nil) then 
-    local list = _g;
-    self.callbacks = nil;
-    self.suspended = false;
-    self.result = value;
-    self.link = nil;
-    self.wakeup = nil;
-    list:invoke(value, true);
-  end;
-end
-__tink_core__Future_SuspendableFuture.prototype.handle = function(self,callback) 
-  local _g = self.callbacks;
-  if (_g == nil) then 
-    __tink_core__Callback_Callback_Impl_.invoke(callback, self.result);
-    do return nil end;
-  else
-    local v = _g;
-    local _this = self.callbacks;
-    local node = __tink_core__Callback_ListCell.new(callback, _this);
-    _this.cells:push(node);
-    _this.used = _this.used + 1;
-    local ret = node;
-    if (self.suspended) then 
-      self.suspended = false;
-      self.link = self:wakeup(_hx_bind(self,self.trigger));
-    end;
-    do return ret end;
-  end;
-end
-__tink_core__Future_SuspendableFuture.prototype.map = function(self,f) 
-  local _gthis = self;
-  do return __tink_core__Future_SuspendableFuture.new(function(yield) 
-    do return _gthis:handle(function(res) 
-      local tmp = f(res);
-      yield(tmp);
-    end) end;
-  end) end
-end
-__tink_core__Future_SuspendableFuture.prototype.flatMap = function(self,f) 
-  do return __tink_core__Future_Future_Impl_.flatten(self:map(f)) end
-end
-__tink_core__Future_SuspendableFuture.prototype.gather = function(self) 
-  do return self end
-end
-__tink_core__Future_SuspendableFuture.prototype.eager = function(self) 
-  self:handle(__tink_core__Callback_Callback_Impl_.fromNiladic(function() 
-  end));
-  do return self end
-end
-
-__tink_core__Future_SuspendableFuture.prototype.__class__ =  __tink_core__Future_SuspendableFuture
-
-__tink_core__Lazy_Lazy_Impl_.new = {}
-_hxClasses["tink.core._Lazy.Lazy_Impl_"] = __tink_core__Lazy_Lazy_Impl_
-__tink_core__Lazy_Lazy_Impl_.__name__ = "tink.core._Lazy.Lazy_Impl_"
-__tink_core__Lazy_Lazy_Impl_.get = function(this1) 
-  do return this1:get() end;
-end
-__tink_core__Lazy_Lazy_Impl_.ofFunc = function(f) 
-  do return __tink_core__Lazy_LazyFunc.new(f) end;
-end
-__tink_core__Lazy_Lazy_Impl_.map = function(this1,f) 
-  do return this1:map(f) end;
-end
-__tink_core__Lazy_Lazy_Impl_.flatMap = function(this1,f) 
-  do return this1:flatMap(f) end;
-end
-__tink_core__Lazy_Lazy_Impl_.ofConst = function(c) 
-  do return __tink_core__Lazy_LazyConst.new(c) end;
-end
-
-__tink_core__Lazy_LazyFunc.new = function(f) 
-  local self = _hx_new(__tink_core__Lazy_LazyFunc.prototype)
-  __tink_core__Lazy_LazyFunc.super(self,f)
-  return self
-end
-__tink_core__Lazy_LazyFunc.super = function(self,f) 
-  self.f = _hx_funcToField(f);
-end
-_hxClasses["tink.core._Lazy.LazyFunc"] = __tink_core__Lazy_LazyFunc
-__tink_core__Lazy_LazyFunc.__name__ = "tink.core._Lazy.LazyFunc"
-__tink_core__Lazy_LazyFunc.__interfaces__ = {__tink_core__Lazy_LazyObject}
-__tink_core__Lazy_LazyFunc.prototype = _hx_a();
-__tink_core__Lazy_LazyFunc.prototype.f= nil;
-__tink_core__Lazy_LazyFunc.prototype.result= nil;
-__tink_core__Lazy_LazyFunc.prototype.get = function(self) 
-  if (self.f ~= nil) then 
-    self.result = self:f();
-    self.f = nil;
-  end;
-  do return self.result end
-end
-__tink_core__Lazy_LazyFunc.prototype.map = function(self,f) 
-  local _gthis = self;
-  do return __tink_core__Lazy_LazyFunc.new(function() 
-    local tmp = _gthis:get();
-    do return f(tmp) end;
-  end) end
-end
-__tink_core__Lazy_LazyFunc.prototype.flatMap = function(self,f) 
-  local _gthis = self;
-  do return __tink_core__Lazy_LazyFunc.new(function() 
-    local this1 = _gthis:get();
-    do return f(this1):get() end;
-  end) end
-end
-
-__tink_core__Lazy_LazyFunc.prototype.__class__ =  __tink_core__Lazy_LazyFunc
-
-__tink_core_NamedWith.new = function(name,value) 
-  local self = _hx_new(__tink_core_NamedWith.prototype)
-  __tink_core_NamedWith.super(self,name,value)
-  return self
-end
-__tink_core_NamedWith.super = function(self,name,value) 
-  self.name = name;
-  self.value = value;
-end
-_hxClasses["tink.core.NamedWith"] = __tink_core_NamedWith
-__tink_core_NamedWith.__name__ = "tink.core.NamedWith"
-__tink_core_NamedWith.prototype = _hx_a();
-__tink_core_NamedWith.prototype.name= nil;
-__tink_core_NamedWith.prototype.value= nil;
-
-__tink_core_NamedWith.prototype.__class__ =  __tink_core_NamedWith
-
-__tink_core_OptionTools.new = {}
-_hxClasses["tink.core.OptionTools"] = __tink_core_OptionTools
-__tink_core_OptionTools.__name__ = "tink.core.OptionTools"
-__tink_core_OptionTools.force = function(o,pos) 
-  if (o[1] == 0) then 
-    local v = o[2];
-    do return v end;
-  else
-    _G.error(__tink_core_TypedError.new(404, "Some value expected but none found", pos),0);
-  end;
-end
-__tink_core_OptionTools["or"] = function(o,l) 
-  if (o[1] == 0) then 
-    local v = o[2];
-    do return v end;
-  else
-    do return l:get() end;
-  end;
-end
-__tink_core_OptionTools.orNull = function(o) 
-  if (o[1] == 0) then 
-    local v = o[2];
-    do return v end;
-  else
-    do return nil end;
-  end;
-end
-__tink_core_OptionTools.filter = function(o,f) 
-  if (o[1] == 0) then 
-    if (f(o[2]) == false) then 
-      do return __haxe_ds_Option.None end;
-    else
-      do return o end;
-    end;
-  else
-    do return o end;
-  end;
-end
-__tink_core_OptionTools.satisfies = function(o,f) 
-  if (o[1] == 0) then 
-    local v = o[2];
-    do return f(v) end;
-  else
-    do return false end;
-  end;
-end
-__tink_core_OptionTools.equals = function(o,v) 
-  if (o[1] == 0) then 
-    local v1 = o[2];
-    do return v1 == v end;
-  else
-    do return false end;
-  end;
-end
-__tink_core_OptionTools.map = function(o,f) 
-  if (o[1] == 0) then 
-    local v = o[2];
-    do return __haxe_ds_Option.Some(f(v)) end;
-  else
-    do return __haxe_ds_Option.None end;
-  end;
-end
-__tink_core_OptionTools.flatMap = function(o,f) 
-  if (o[1] == 0) then 
-    local v = o[2];
-    do return f(v) end;
-  else
-    do return __haxe_ds_Option.None end;
-  end;
-end
-__tink_core_OptionTools.iterator = function(o) 
-  do return __tink_core_OptionIter.new(o) end;
-end
-__tink_core_OptionTools.toArray = function(o) 
-  if (o[1] == 0) then 
-    local v = o[2];
-    do return _hx_tab_array({[0]=v}, 1) end;
-  else
-    do return _hx_tab_array({}, 0) end;
-  end;
-end
-
-__tink_core_OptionIter.new = function(o) 
-  local self = _hx_new(__tink_core_OptionIter.prototype)
-  __tink_core_OptionIter.super(self,o)
-  return self
-end
-__tink_core_OptionIter.super = function(self,o) 
-  self.alive = true;
-  if (o[1] == 0) then 
-    local v = o[2];
-    self.value = v;
-  else
-    self.alive = false;
-  end;
-end
-_hxClasses["tink.core.OptionIter"] = __tink_core_OptionIter
-__tink_core_OptionIter.__name__ = "tink.core.OptionIter"
-__tink_core_OptionIter.prototype = _hx_a();
-__tink_core_OptionIter.prototype.value= nil;
-__tink_core_OptionIter.prototype.alive= nil;
-__tink_core_OptionIter.prototype.hasNext = function(self) 
-  do return self.alive end
-end
-__tink_core_OptionIter.prototype.next = function(self) 
-  self.alive = false;
-  do return self.value end
-end
-
-__tink_core_OptionIter.prototype.__class__ =  __tink_core_OptionIter
-_hxClasses["tink.core.Outcome"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Success","Failure"},2)}
-__tink_core_Outcome = _hxClasses["tink.core.Outcome"];
-__tink_core_Outcome.Success = function(data) local _x = _hx_tab_array({[0]="Success",0,data,__enum__=__tink_core_Outcome}, 3); return _x; end 
-__tink_core_Outcome.Failure = function(failure) local _x = _hx_tab_array({[0]="Failure",1,failure,__enum__=__tink_core_Outcome}, 3); return _x; end 
-
-__tink_core_OutcomeTools.new = {}
-_hxClasses["tink.core.OutcomeTools"] = __tink_core_OutcomeTools
-__tink_core_OutcomeTools.__name__ = "tink.core.OutcomeTools"
-__tink_core_OutcomeTools.sure = function(outcome) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local data = outcome[2];
-    do return data end;
-  elseif (tmp) == 1 then 
-    local failure = outcome[2];
-    local _g = __tink_core_TypedError.asError(failure);
-    if (_g == nil) then 
-      _G.error(failure,0);
-    else
-      local e = _g;
-      do return e:throwSelf() end;
-    end; end;
-end
-__tink_core_OutcomeTools.toOption = function(outcome) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local data = outcome[2];
-    do return __haxe_ds_Option.Some(data) end;
-  elseif (tmp) == 1 then 
-    local _g = outcome[2];
-    do return __haxe_ds_Option.None end; end;
-end
-__tink_core_OutcomeTools.toOutcome = function(option,pos) 
-  local tmp = option[1];
-  if (tmp) == 0 then 
-    local value = option[2];
-    do return __tink_core_Outcome.Success(value) end;
-  elseif (tmp) == 1 then 
-    do return __tink_core_Outcome.Failure(__tink_core_TypedError.new(404, Std.string(Std.string(Std.string("Some value expected but none found in ") .. Std.string(pos.fileName)) .. Std.string("@line ")) .. Std.string(pos.lineNumber), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="tink/core/Outcome.hx",lineNumber=48,className="tink.core.OutcomeTools",methodName="toOutcome"}))) end; end;
-end
-__tink_core_OutcomeTools.orNull = function(outcome) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local data = outcome[2];
-    do return data end;
-  elseif (tmp) == 1 then 
-    local _g = outcome[2];
-    do return nil end; end;
-end
-__tink_core_OutcomeTools.orUse = function(outcome,fallback) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local data = outcome[2];
-    do return data end;
-  elseif (tmp) == 1 then 
-    local _g = outcome[2];
-    do return fallback:get() end; end;
-end
-__tink_core_OutcomeTools.orTry = function(outcome,fallback) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local _g1 = outcome[2];
-    do return outcome end;
-  elseif (tmp) == 1 then 
-    local _g = outcome[2];
-    do return fallback:get() end; end;
-end
-__tink_core_OutcomeTools.equals = function(outcome,to) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local data = outcome[2];
-    do return data == to end;
-  elseif (tmp) == 1 then 
-    local _g = outcome[2];
-    do return false end; end;
-end
-__tink_core_OutcomeTools.map = function(outcome,transform) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local a = outcome[2];
-    do return __tink_core_Outcome.Success(transform(a)) end;
-  elseif (tmp) == 1 then 
-    local f = outcome[2];
-    do return __tink_core_Outcome.Failure(f) end; end;
-end
-__tink_core_OutcomeTools.isSuccess = function(outcome) 
-  if (outcome[1] == 0) then 
-    local _g = outcome[2];
-    do return true end;
-  else
-    do return false end;
-  end;
-end
-__tink_core_OutcomeTools.flatMap = function(o,mapper) 
-  do return __tink_core__Outcome_OutcomeMapper_Impl_.apply(mapper, o) end;
-end
-__tink_core_OutcomeTools.swap = function(outcome,v) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local a = outcome[2];
-    do return __tink_core_Outcome.Success(v) end;
-  elseif (tmp) == 1 then 
-    local f = outcome[2];
-    do return __tink_core_Outcome.Failure(f) end; end;
-end
-__tink_core_OutcomeTools.next = function(outcome,f) 
-  local tmp = outcome[1];
-  if (tmp) == 0 then 
-    local v = outcome[2];
-    do return f(v) end;
-  elseif (tmp) == 1 then 
-    local e = outcome[2];
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Failure(e))) end; end;
-end
-__tink_core_OutcomeTools.attempt = function(f,report) 
-  local _hx_status, _hx_result = pcall(function() 
-  
-      do return __tink_core_Outcome.Success(f()) end;
-    return _hx_pcall_default
-  end)
-  if not _hx_status and _hx_result == "_hx_pcall_break" then
-  elseif not _hx_status then 
-  
-    local _hx_1 = _hx_result
-    local e = _hx_1
-    do return __tink_core_Outcome.Failure(report(e)) end;
-  elseif _hx_result ~= _hx_pcall_default then
-    return _hx_result
-  end;
-end
-__tink_core_OutcomeTools.flatten = function(o) 
-  local tmp = o[1];
-  if (tmp) == 0 then 
-    local _g1 = o[2];
-    local tmp1 = _g1[1];
-    if (tmp1) == 0 then 
-      local d = _g1[2];
-      do return __tink_core_Outcome.Success(d) end;
-    elseif (tmp1) == 1 then 
-      local f = _g1[2];
-      do return __tink_core_Outcome.Failure(f) end; end;
-  elseif (tmp) == 1 then 
-    local f1 = o[2];
-    do return __tink_core_Outcome.Failure(f1) end; end;
-end
-
-__tink_core__Outcome_OutcomeMapper_Impl_.new = {}
-_hxClasses["tink.core._Outcome.OutcomeMapper_Impl_"] = __tink_core__Outcome_OutcomeMapper_Impl_
-__tink_core__Outcome_OutcomeMapper_Impl_.__name__ = "tink.core._Outcome.OutcomeMapper_Impl_"
-__tink_core__Outcome_OutcomeMapper_Impl_._new = function(f) 
-  local this1 = _hx_o({__fields__={f=true},f=function(_,...) return f(...) end});
-  do return this1 end;
-end
-__tink_core__Outcome_OutcomeMapper_Impl_.apply = function(this1,o) 
-  do return this1:f(o) end;
-end
-__tink_core__Outcome_OutcomeMapper_Impl_.withSameError = function(f) 
-  do return __tink_core__Outcome_OutcomeMapper_Impl_._new(function(o) 
-    local tmp = o[1];
-    if (tmp) == 0 then 
-      local d = o[2];
-      do return f(d) end;
-    elseif (tmp) == 1 then 
-      local f1 = o[2];
-      do return __tink_core_Outcome.Failure(f1) end; end;
-  end) end;
-end
-__tink_core__Outcome_OutcomeMapper_Impl_.withEitherError = function(f) 
-  do return __tink_core__Outcome_OutcomeMapper_Impl_._new(function(o) 
-    local tmp = o[1];
-    if (tmp) == 0 then 
-      local d = o[2];
-      local _g = f(d);
-      local tmp1 = _g[1];
-      if (tmp1) == 0 then 
-        local d1 = _g[2];
-        do return __tink_core_Outcome.Success(d1) end;
-      elseif (tmp1) == 1 then 
-        local f1 = _g[2];
-        do return __tink_core_Outcome.Failure(__haxe_ds_Either.Right(f1)) end; end;
-    elseif (tmp) == 1 then 
-      local f2 = o[2];
-      do return __tink_core_Outcome.Failure(__haxe_ds_Either.Left(f2)) end; end;
-  end) end;
-end
-
-__tink_core__Pair_Pair_Impl_.new = {}
-_hxClasses["tink.core._Pair.Pair_Impl_"] = __tink_core__Pair_Pair_Impl_
-__tink_core__Pair_Pair_Impl_.__name__ = "tink.core._Pair.Pair_Impl_"
-__tink_core__Pair_Pair_Impl_._new = function(a,b) 
-  local this1 = __tink_core_MPair.new(a, b);
-  do return this1 end;
-end
-__tink_core__Pair_Pair_Impl_.get_a = function(this1) 
-  do return this1.a end;
-end
-__tink_core__Pair_Pair_Impl_.get_b = function(this1) 
-  do return this1.b end;
-end
-__tink_core__Pair_Pair_Impl_.toBool = function(this1) 
-  do return this1 ~= nil end;
-end
-__tink_core__Pair_Pair_Impl_.isNil = function(this1) 
-  do return this1 == nil end;
-end
-__tink_core__Pair_Pair_Impl_["nil"] = function() 
-  do return nil end;
-end
-
-__tink_core_MPair.new = function(a,b) 
-  local self = _hx_new(__tink_core_MPair.prototype)
-  __tink_core_MPair.super(self,a,b)
-  return self
-end
-__tink_core_MPair.super = function(self,a,b) 
-  self.a = a;
-  self.b = b;
-end
-_hxClasses["tink.core.MPair"] = __tink_core_MPair
-__tink_core_MPair.__name__ = "tink.core.MPair"
-__tink_core_MPair.prototype = _hx_a();
-__tink_core_MPair.prototype.a= nil;
-__tink_core_MPair.prototype.b= nil;
-
-__tink_core_MPair.prototype.__class__ =  __tink_core_MPair
-
-__tink_core__Promise_Promise_Impl_.new = {}
-_hxClasses["tink.core._Promise.Promise_Impl_"] = __tink_core__Promise_Promise_Impl_
-__tink_core__Promise_Promise_Impl_.__name__ = "tink.core._Promise.Promise_Impl_"
-__tink_core__Promise_Promise_Impl_._new = function(f,lazy) 
-  if (lazy == nil) then 
-    lazy = false;
-  end;
-  local this1 = __tink_core__Future_Future_Impl_.async(function(cb) 
-    f(function(v) 
-      cb(__tink_core_Outcome.Success(v));
-    end, function(e) 
-      cb(__tink_core_Outcome.Failure(e));
-    end);
-  end, lazy);
-  do return this1 end;
-end
-__tink_core__Promise_Promise_Impl_.eager = function(this1) 
-  do return this1:eager() end;
-end
-__tink_core__Promise_Promise_Impl_.map = function(this1,f) 
-  local ret = this1:map(f);
-  do return ret:gather() end;
-end
-__tink_core__Promise_Promise_Impl_.flatMap = function(this1,f) 
-  local ret = this1:flatMap(f);
-  do return ret:gather() end;
-end
-__tink_core__Promise_Promise_Impl_.tryRecover = function(this1,f) 
-  local ret = this1:flatMap(function(o) 
-    local ret1 = o[1];
-    if (ret1) == 0 then 
-      local d = o[2];
-      do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(o)) end;
-    elseif (ret1) == 1 then 
-      local e = o[2];
-      do return f(e) end; end;
-  end);
-  do return ret:gather() end;
-end
-__tink_core__Promise_Promise_Impl_.recover = function(this1,f) 
-  local ret = this1:flatMap(function(o) 
-    local ret1 = o[1];
-    if (ret1) == 0 then 
-      local d = o[2];
-      do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(d)) end;
-    elseif (ret1) == 1 then 
-      local e = o[2];
-      do return f(e) end; end;
-  end);
-  do return ret:gather() end;
-end
-__tink_core__Promise_Promise_Impl_.mapError = function(this1,f) 
-  local ret = this1:map(function(o) 
-    local ret1 = o[1];
-    if (ret1) == 0 then 
-      local _g1 = o[2];
-      do return o end;
-    elseif (ret1) == 1 then 
-      local e = o[2];
-      do return __tink_core_Outcome.Failure(f(e)) end; end;
-  end);
-  do return ret:gather() end;
-end
-__tink_core__Promise_Promise_Impl_.handle = function(this1,cb) 
-  do return this1:handle(cb) end;
-end
-__tink_core__Promise_Promise_Impl_.noise = function(this1) 
-  do return __tink_core__Promise_Promise_Impl_.next(this1, function(v) 
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(__tink_core_Noise.Noise))) end;
-  end) end;
-end
-__tink_core__Promise_Promise_Impl_.isSuccess = function(this1) 
-  local ret = this1:map(function(o) 
-    do return __tink_core_OutcomeTools.isSuccess(o) end;
-  end);
-  do return ret:gather() end;
-end
-__tink_core__Promise_Promise_Impl_.next = function(this1,f,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local gather1 = gather;
-  if (gather1 == nil) then 
-    gather1 = true;
-  end;
-  local ret = this1:flatMap(function(o) 
-    local ret1 = o[1];
-    if (ret1) == 0 then 
-      local d = o[2];
-      do return f(d) end;
-    elseif (ret1) == 1 then 
-      local f1 = o[2];
-      do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Failure(f1))) end; end;
-  end);
-  if (gather1) then 
-    do return ret:gather() end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Promise_Promise_Impl_.swap = function(this1,v) 
-  do return __tink_core__Future_Future_Impl_._tryMap(this1, function(_) 
-    do return v end;
-  end) end;
-end
-__tink_core__Promise_Promise_Impl_.swapError = function(this1,e) 
-  do return __tink_core__Promise_Promise_Impl_.mapError(this1, function(_) 
-    do return e end;
-  end) end;
-end
-__tink_core__Promise_Promise_Impl_.merge = function(this1,other,merger,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  do return __tink_core__Promise_Promise_Impl_.next(this1, function(t) 
-    do return __tink_core__Promise_Promise_Impl_.next(other, function(a) 
-      do return merger(t, a) end;
-    end, false) end;
-  end, gather) end;
-end
-__tink_core__Promise_Promise_Impl_["and"] = function(a,b) 
-  do return __tink_core__Promise_Promise_Impl_.merge(a, b, function(a1,b1) 
-    local this1 = __tink_core_MPair.new(a1, b1);
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(this1))) end;
-  end) end;
-end
-__tink_core__Promise_Promise_Impl_.iterate = function(promises,yield,fallback,lazy) 
-  do return __tink_core__Future_Future_Impl_.async(function(cb) 
-    local iter = promises:iterator();
-    local next = nil;
-    next = function() 
-      if (iter:hasNext()) then 
-        iter:next():handle(function(o) 
-          local next1 = o[1];
-          if (next1) == 0 then 
-            local v = o[2];
-            yield(v):handle(function(o1) 
-              local next2 = o1[1];
-              if (next2) == 0 then 
-                local _g1 = o1[2];
-                local next3 = _g1[1];
-                if (next3) == 0 then 
-                  local ret = _g1[2];
-                  cb(__tink_core_Outcome.Success(ret));
-                elseif (next3) == 1 then 
-                  next(); end;
-              elseif (next2) == 1 then 
-                local e = o1[2];
-                cb(__tink_core_Outcome.Failure(e)); end;
-            end);
-          elseif (next1) == 1 then 
-            local e1 = o[2];
-            cb(__tink_core_Outcome.Failure(e1)); end;
-        end);
-      else
-        fallback:handle(cb);
-      end;
-    end;
-    next();
-  end, lazy) end;
-end
-__tink_core__Promise_Promise_Impl_.retry = function(gen,next) 
-  local stamp = function() 
-    do return Sys.time() * 1000 end;
-  end;
-  local start = stamp();
-  local attempt = nil;
-  attempt = function(count) 
-    local f = function(error) 
-      local f1 = stamp() - start;
-      do return __tink_core__Promise_Promise_Impl_.next(next(_hx_o({__fields__={attempt=true,error=true,elapsed=true},attempt=count,error=error,elapsed=f1})), function(_) 
-        do return attempt(count + 1) end;
-      end) end;
-    end;
-    local ret = gen():flatMap(function(o) 
-      local ret1 = o[1];
-      if (ret1) == 0 then 
-        local d = o[2];
-        do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(o)) end;
-      elseif (ret1) == 1 then 
-        local e = o[2];
-        do return f(e) end; end;
-    end);
-    do return ret:gather() end;
-  end;
-  do return attempt(1) end;
-end
-__tink_core__Promise_Promise_Impl_.ofSpecific = function(s) 
-  do return s end;
-end
-__tink_core__Promise_Promise_Impl_.ofFuture = function(f) 
-  local ret = f:map(__tink_core_Outcome.Success);
-  do return ret:gather() end;
-end
-__tink_core__Promise_Promise_Impl_.ofOutcome = function(o) 
-  do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(o)) end;
-end
-__tink_core__Promise_Promise_Impl_.ofError = function(e) 
-  do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Failure(e))) end;
-end
-__tink_core__Promise_Promise_Impl_.ofData = function(d) 
-  do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(d))) end;
-end
-__tink_core__Promise_Promise_Impl_.lazy = function(p) 
-  do return __tink_core__Future_Future_Impl_.async(function(cb) 
-    p:get():handle(cb);
-  end, true) end;
-end
-__tink_core__Promise_Promise_Impl_.inParallel = function(a,concurrency,lazy) 
-  if (a.length == 0) then 
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(_hx_tab_array({}, 0)))) end;
-  else
-    do return __tink_core__Future_Future_Impl_.async(function(cb) 
-      local result = _hx_tab_array({}, 0);
-      local pending = a.length;
-      local links = nil;
-      local linkArray = _hx_tab_array({}, 0);
-      local sync = false;
-      local i = 0;
-      local iter_next;
-      local iter_hasNext;
-      local _gthis = a;
-      local cur_length = 0;
-      iter_hasNext = function() 
-        do return cur_length < _gthis.length end;
-      end;
-      iter_next = function() 
-        cur_length = cur_length + 1;
-        do return _gthis[cur_length - 1] end;
-      end;
-      local next = nil;
-      local done = function(o) 
-        if (links == nil) then 
-          sync = true;
-        else
-          if (links ~= nil) then 
-            links:cancel();
-          end;
-        end;
-        cb(o);
-      end;
-      local fail = function(e) 
-        pending = 0;
-        done(__tink_core_Outcome.Failure(e));
-      end;
-      local set = function(index,value) 
-        result[index] = value;
-        pending = pending - 1;
-        if (pending == 0) then 
-          done(__tink_core_Outcome.Success(result));
-        else
-          if (iter_hasNext() and (pending > 0)) then 
-            next();
-          end;
-        end;
-      end;
-      next = function() 
-        i = i + 1;
-        local index1 = i - 1;
-        local next1 = iter_next():handle(function(o1) 
-          local next2 = o1[1];
-          if (next2) == 0 then 
-            local v = o1[2];
-            set(index1, v);
-          elseif (next2) == 1 then 
-            local e1 = o1[2];
-            fail(e1); end;
-        end);
-        linkArray:push(next1);
-      end;
-      while (true) do 
-        local tmp;
-        if (iter_hasNext() and (pending > 0)) then 
-          if (concurrency ~= nil) then 
-            concurrency = concurrency - 1;
-            tmp = (concurrency + 1) > 0;
-          else
-            tmp = true;
-          end;
-        else
-          tmp = false;
-        end;
-        if (not tmp) then 
-          break;
-        end;
-        next();
-      end;
-      links = __tink_core__Callback_CallbackLink_Impl_.fromMany(linkArray);
-      if (sync) then 
-        if (links ~= nil) then 
-          links:cancel();
-        end;
-      end;
-    end, lazy) end;
-  end;
-end
-__tink_core__Promise_Promise_Impl_.inSequence = function(a) 
-  local loop = nil;
-  loop = function(index) 
-    if (index == a.length) then 
-      do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(_hx_tab_array({}, 0)))) end;
-    else
-      do return __tink_core__Promise_Promise_Impl_.next(a[index], function(head) 
-        do return __tink_core__Promise_Promise_Impl_.next(loop(index + 1), function(tail) 
-          do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(_hx_tab_array({[0]=head}, 1):concat(tail)))) end;
-        end) end;
-      end) end;
-    end;
-  end;
-  do return loop(0) end;
-end
-__tink_core__Promise_Promise_Impl_.cache = function(gen) 
-  local p = nil;
-  do return function() 
-    local ret = p;
-    if (ret == nil) then 
-      local sync = false;
-      ret = __tink_core__Promise_Promise_Impl_.next(gen(), function(o) 
-        o.b:handle(function(_) 
-          sync = true;
-          p = nil;
-        end);
-        do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(o.a))) end;
-      end);
-      if (not sync) then 
-        p = ret;
-      end;
-    end;
-    local ret1 = ret:map(function(o1) 
-      if (not __tink_core_OutcomeTools.isSuccess(o1)) then 
-        p = nil;
-      end;
-      do return o1 end;
-    end);
-    do return ret1:gather() end;
-  end end;
-end
-__tink_core__Promise_Promise_Impl_.lift = function(p) 
-  do return p end;
-end
-__tink_core__Promise_Promise_Impl_.trigger = function() 
-  local this1 = __tink_core_FutureTrigger.new();
-  do return this1 end;
-end
-__tink_core__Promise_Promise_Impl_.resolve = function(v) 
-  do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(v))) end;
-end
-__tink_core__Promise_Promise_Impl_.reject = function(e) 
-  do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Failure(e))) end;
-end
-
-__tink_core__Promise_Next_Impl_.new = {}
-_hxClasses["tink.core._Promise.Next_Impl_"] = __tink_core__Promise_Next_Impl_
-__tink_core__Promise_Next_Impl_.__name__ = "tink.core._Promise.Next_Impl_"
-__tink_core__Promise_Next_Impl_.ofDynamic = function(f) 
-  do return function(x) 
-    local d = f(x);
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(d))) end;
-  end end;
-end
-__tink_core__Promise_Next_Impl_.ofSafe = function(f) 
-  do return function(x) 
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(f(x))) end;
-  end end;
-end
-__tink_core__Promise_Next_Impl_.ofSync = function(f) 
-  do return function(x) 
-    local ret = f(x):map(__tink_core_Outcome.Success);
-    do return ret:gather() end;
-  end end;
-end
-__tink_core__Promise_Next_Impl_.ofSafeSync = function(f) 
-  do return function(x) 
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(f(x)))) end;
-  end end;
-end
-__tink_core__Promise_Next_Impl_._chain = function(a,b) 
-  do return function(v) 
-    do return __tink_core__Promise_Promise_Impl_.next(a(v), b) end;
-  end end;
-end
-
-__tink_core__Promise_Recover_Impl_.new = {}
-_hxClasses["tink.core._Promise.Recover_Impl_"] = __tink_core__Promise_Recover_Impl_
-__tink_core__Promise_Recover_Impl_.__name__ = "tink.core._Promise.Recover_Impl_"
-__tink_core__Promise_Recover_Impl_.ofSync = function(f) 
-  do return function(e) 
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(f(e))) end;
-  end end;
-end
-
-__tink_core__Promise_Combiner_Impl_.new = {}
-_hxClasses["tink.core._Promise.Combiner_Impl_"] = __tink_core__Promise_Combiner_Impl_
-__tink_core__Promise_Combiner_Impl_.__name__ = "tink.core._Promise.Combiner_Impl_"
-__tink_core__Promise_Combiner_Impl_.ofSafe = function(f) 
-  do return function(x1,x2) 
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(f(x1, x2))) end;
-  end end;
-end
-__tink_core__Promise_Combiner_Impl_.ofSync = function(f) 
-  do return function(x1,x2) 
-    local ret = f(x1, x2):map(__tink_core_Outcome.Success);
-    do return ret:gather() end;
-  end end;
-end
-__tink_core__Promise_Combiner_Impl_.ofSafeSync = function(f) 
-  do return function(x1,x2) 
-    do return __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(f(x1, x2)))) end;
-  end end;
-end
-
-__tink_core__Promise_PromiseTrigger_Impl_.new = {}
-_hxClasses["tink.core._Promise.PromiseTrigger_Impl_"] = __tink_core__Promise_PromiseTrigger_Impl_
-__tink_core__Promise_PromiseTrigger_Impl_.__name__ = "tink.core._Promise.PromiseTrigger_Impl_"
-__tink_core__Promise_PromiseTrigger_Impl_._new = function() 
-  local this1 = __tink_core_FutureTrigger.new();
-  do return this1 end;
-end
-__tink_core__Promise_PromiseTrigger_Impl_.resolve = function(this1,v) 
-  do return this1:trigger(__tink_core_Outcome.Success(v)) end;
-end
-__tink_core__Promise_PromiseTrigger_Impl_.reject = function(this1,e) 
-  do return this1:trigger(__tink_core_Outcome.Failure(e)) end;
-end
-__tink_core__Promise_PromiseTrigger_Impl_.asPromise = function(this1) 
-  do return this1 end;
-end
-
-__tink_core__Ref_Ref_Impl_.new = {}
-_hxClasses["tink.core._Ref.Ref_Impl_"] = __tink_core__Ref_Ref_Impl_
-__tink_core__Ref_Ref_Impl_.__name__ = "tink.core._Ref.Ref_Impl_"
-__tink_core__Ref_Ref_Impl_._new = function() 
-  local this1 = ({length = 1});
-  local this2 = this1;
-  do return this2 end;
-end
-__tink_core__Ref_Ref_Impl_.get_value = function(this1) 
-  do return this1[0] end;
-end
-__tink_core__Ref_Ref_Impl_.set_value = function(this1,param) 
-  do return (function() 
-  this1[0] = param; return this1[0] end)() end;
-end
-__tink_core__Ref_Ref_Impl_.toString = function(this1) 
-  do return Std.string(Std.string("@[") .. Std.string(Std.string(this1[0]))) .. Std.string("]") end;
-end
-__tink_core__Ref_Ref_Impl_.to = function(v) 
-  local this1 = ({length = 1});
-  local this2 = this1;
-  local ret = this2;
-  ret[0] = v;
-  do return ret end;
-end
-
-__tink_core__Signal_Signal_Impl_.new = {}
-_hxClasses["tink.core._Signal.Signal_Impl_"] = __tink_core__Signal_Signal_Impl_
-__tink_core__Signal_Signal_Impl_.__name__ = "tink.core._Signal.Signal_Impl_"
-__tink_core__Signal_Signal_Impl_._new = function(f) 
-  local this1 = __tink_core__Signal_SimpleSignal.new(f);
-  do return this1 end;
-end
-__tink_core__Signal_Signal_Impl_.map = function(this1,f,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local this2 = __tink_core__Signal_SimpleSignal.new(function(cb) 
-    do return this1:handle(function(result) 
-      local this3 = f(result);
-      __tink_core__Callback_Callback_Impl_.invoke(cb, this3);
-    end) end;
-  end);
-  local ret = this2;
-  if (gather) then 
-    do return __tink_core__Signal_Signal_Impl_.gather(ret) end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Signal_Signal_Impl_.flatMap = function(this1,f,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local this2 = __tink_core__Signal_SimpleSignal.new(function(cb) 
-    do return this1:handle(function(result) 
-      f(result):handle(cb);
-    end) end;
-  end);
-  local ret = this2;
-  if (gather) then 
-    do return __tink_core__Signal_Signal_Impl_.gather(ret) end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Signal_Signal_Impl_.filter = function(this1,f,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local this2 = __tink_core__Signal_SimpleSignal.new(function(cb) 
-    do return this1:handle(function(result) 
-      if (f(result)) then 
-        __tink_core__Callback_Callback_Impl_.invoke(cb, result);
-      end;
-    end) end;
-  end);
-  local ret = this2;
-  if (gather) then 
-    do return __tink_core__Signal_Signal_Impl_.gather(ret) end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Signal_Signal_Impl_.select = function(this1,selector,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local this2 = __tink_core__Signal_SimpleSignal.new(function(cb) 
-    do return this1:handle(function(result) 
-      local _g = selector(result);
-      local this3 = _g[1];
-      if (this3) == 0 then 
-        local v = _g[2];
-        __tink_core__Callback_Callback_Impl_.invoke(cb, v);
-      elseif (this3) == 1 then  end;
-    end) end;
-  end);
-  local ret = this2;
-  if (gather) then 
-    do return __tink_core__Signal_Signal_Impl_.gather(ret) end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Signal_Signal_Impl_.join = function(this1,other,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local this2 = __tink_core__Signal_SimpleSignal.new(function(cb) 
-    do return __tink_core__Callback_LinkPair.new(this1:handle(cb), other:handle(cb)) end;
-  end);
-  local ret = this2;
-  if (gather) then 
-    do return __tink_core__Signal_Signal_Impl_.gather(ret) end;
-  else
-    do return ret end;
-  end;
-end
-__tink_core__Signal_Signal_Impl_.nextTime = function(this1,condition) 
-  local ret = __tink_core_FutureTrigger.new();
-  local link = nil;
-  local immediate = false;
-  link = this1:handle(function(v) 
-    if ((condition == nil) or condition(v)) then 
-      ret:trigger(v);
-      if (link == nil) then 
-        immediate = true;
-      else
-        if (link ~= nil) then 
-          link:cancel();
-        end;
-      end;
-    end;
-  end);
-  if (immediate) then 
-    if (link ~= nil) then 
-      link:cancel();
-    end;
-  end;
-  do return ret end;
-end
-__tink_core__Signal_Signal_Impl_["until"] = function(this1,_end) 
-  local ret = __tink_core__Signal_Suspendable.new(function(yield) 
-    local this2 = this1:handle(yield);
-    if (this2 == nil) then 
-      do return __tink_core__Callback_CallbackLink_Impl_.noop end;
-    else
-      do return _hx_bind(this2,(function() local __=this2; return _hx_bind(__,__.cancel) end)()) end;
-    end;
-  end);
-  _end:handle(__tink_core__Callback_Callback_Impl_.fromNiladic(_hx_bind(ret,ret.kill)));
-  do return ret end;
-end
-__tink_core__Signal_Signal_Impl_.next = function(this1,condition) 
-  do return __tink_core__Signal_Signal_Impl_.nextTime(this1, condition) end;
-end
-__tink_core__Signal_Signal_Impl_.noise = function(this1) 
-  do return __tink_core__Signal_Signal_Impl_.map(this1, function(_) 
-    do return __tink_core_Noise.Noise end;
-  end) end;
-end
-__tink_core__Signal_Signal_Impl_.gather = function(this1) 
-  local ret = __tink_core__Signal_Signal_Impl_.trigger();
-  this1:handle(function(x) 
-    ret.handlers:invoke(x);
-  end);
-  do return ret end;
-end
-__tink_core__Signal_Signal_Impl_.generate = function(generator) 
-  local ret = __tink_core__Signal_Signal_Impl_.trigger();
-  generator(_hx_bind(ret,ret.trigger));
-  do return ret end;
-end
-__tink_core__Signal_Signal_Impl_.trigger = function() 
-  do return __tink_core_SignalTrigger.new() end;
-end
-__tink_core__Signal_Signal_Impl_.create = function(create) 
-  do return __tink_core__Signal_Suspendable.new(create) end;
-end
-__tink_core__Signal_Signal_Impl_.ofClassical = function(add,remove,gather) 
-  if (gather == nil) then 
-    gather = true;
-  end;
-  local this1 = __tink_core__Signal_SimpleSignal.new(function(cb) 
-    local f = function(a) 
-      __tink_core__Callback_Callback_Impl_.invoke(cb, a);
-    end;
-    add(f);
-    local f1 = remove;
-    local a1 = f;
-    local this2 = __tink_core_SimpleLink.new(function() 
-      f1(a1);
-    end);
-    do return this2 end;
-  end);
-  local ret = this1;
-  if (gather) then 
-    do return __tink_core__Signal_Signal_Impl_.gather(ret) end;
-  else
-    do return ret end;
-  end;
-end
-
-__tink_core__Signal_SimpleSignal.new = function(f) 
-  local self = _hx_new(__tink_core__Signal_SimpleSignal.prototype)
-  __tink_core__Signal_SimpleSignal.super(self,f)
-  return self
-end
-__tink_core__Signal_SimpleSignal.super = function(self,f) 
-  self.f = _hx_funcToField(f);
-end
-_hxClasses["tink.core._Signal.SimpleSignal"] = __tink_core__Signal_SimpleSignal
-__tink_core__Signal_SimpleSignal.__name__ = "tink.core._Signal.SimpleSignal"
-__tink_core__Signal_SimpleSignal.__interfaces__ = {__tink_core_SignalObject}
-__tink_core__Signal_SimpleSignal.prototype = _hx_a();
-__tink_core__Signal_SimpleSignal.prototype.f= nil;
-__tink_core__Signal_SimpleSignal.prototype.handle = function(self,cb) 
-  do return self:f(cb) end
-end
-
-__tink_core__Signal_SimpleSignal.prototype.__class__ =  __tink_core__Signal_SimpleSignal
-
-__tink_core__Signal_Suspendable.new = function(activate) 
-  local self = _hx_new(__tink_core__Signal_Suspendable.prototype)
-  __tink_core__Signal_Suspendable.super(self,activate)
-  return self
-end
-__tink_core__Signal_Suspendable.super = function(self,activate) 
-  self.killed = false;
-  self.trigger = __tink_core_SignalTrigger.new();
-  self.activate = _hx_funcToField(activate);
-end
-_hxClasses["tink.core._Signal.Suspendable"] = __tink_core__Signal_Suspendable
-__tink_core__Signal_Suspendable.__name__ = "tink.core._Signal.Suspendable"
-__tink_core__Signal_Suspendable.__interfaces__ = {__tink_core_SignalObject}
-__tink_core__Signal_Suspendable.prototype = _hx_a();
-__tink_core__Signal_Suspendable.prototype.trigger= nil;
-__tink_core__Signal_Suspendable.prototype.activate= nil;
-__tink_core__Signal_Suspendable.prototype.suspend= nil;
-__tink_core__Signal_Suspendable.prototype.check= nil;
-__tink_core__Signal_Suspendable.prototype.killed= nil;
-__tink_core__Signal_Suspendable.prototype.kill = function(self) 
-  if (not self.killed) then 
-    self.killed = true;
-    self.trigger = nil;
-  end;
-end
-__tink_core__Signal_Suspendable.prototype.handle = function(self,cb) 
-  local _gthis = self;
-  if (self.killed) then 
-    do return nil end;
-  end;
-  if (self.trigger.handlers.used == 0) then 
-    self.suspend = self:activate(_hx_bind(self.trigger,self.trigger.trigger));
-  end;
-  local _this = self.trigger.handlers;
-  local node = __tink_core__Callback_ListCell.new(cb, _this);
-  _this.cells:push(node);
-  _this.used = _this.used + 1;
-  local this1 = __tink_core_SimpleLink.new(function() 
-    if (_gthis.trigger.handlers.used == 0) then 
-      _gthis:suspend();
-      _gthis.suspend = nil;
-    end;
-  end);
-  do return __tink_core__Callback_LinkPair.new(node, this1) end
-end
-
-__tink_core__Signal_Suspendable.prototype.__class__ =  __tink_core__Signal_Suspendable
-_hx_bit_clamp = function(v)
-  if v <= 2147483647 and v >= -2147483648 then
-    if v > 0 then return _G.math.floor(v)
-    else return _G.math.ceil(v)
-    end
-  end
-  if v > 2251798999999999 then v = v*2 end;
-  if (v ~= v or math.abs(v) == _G.math.huge) then return nil end
-  return _hx_bit.band(v, 2147483647 ) - math.abs(_hx_bit.band(v, 2147483648))
-end
-
--- require this for lua 5.1
-pcall(require, 'bit')
-if bit then
-  _hx_bit = bit
-else
-  local _hx_bit_raw = _G.require('bit32')
-  _hx_bit = setmetatable({}, { __index = _hx_bit_raw });
-  -- lua 5.2 weirdness
-  _hx_bit.bnot = function(...) return _hx_bit_clamp(_hx_bit_raw.bnot(...)) end;
-  _hx_bit.bxor = function(...) return _hx_bit_clamp(_hx_bit_raw.bxor(...)) end;
-end
 
 _hx_array_mt.__index = Array.prototype
 
@@ -11973,14 +7440,6 @@ local _hx_static_init = function()
   __deceptinfect_GameManager.stateTrig = __tink_core_SignalTrigger.new();
   
   __deceptinfect_GameManager.net_gamestate = NETMESSAGE_gamestate.new();
-  
-  __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.WAIT = 0;
-  
-  __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.SETTING_UP = 1;
-  
-  __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.PLAYING = 2;
-  
-  __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.ENDING = 3;
   
   __deceptinfect_GameValues.MIN_PLAYERS = 3;
   
@@ -12040,21 +7499,20 @@ local _hx_static_init = function()
     local _g = __haxe_ds_StringMap.new();
     
     local this1 = _G.Vector(-20.135118, 293.638184, 62.682350);
-    local this11 = _G.Vector(214.035873, 252.134552, 46.033661);
-    local this12 = _G.Vector(45.967289, -942.858459, 64.031250);
-    local this13 = _G.Vector(-4.848439, -1728.742920, 64.031250);
-    local this14 = _G.Vector(-481.968323, -1022.401917, 64.031250);
-    local this15 = _G.Vector(571.895020, -1031.322632, 64.031250);
-    local this16 = _G.Vector(10.328067, -1039.059570, 64.031250);
-    local this17 = _G.Vector(-64.220894, -989.030090, 60.787186);
-    local this18 = _G.Vector(111.524712, -1094.413208, 110.729080);
-    local this19 = _G.Vector(29.061092, 1006.951233, 93.697433);
-    local value = _hx_o({__fields__={items=true,objectives=true,evacs=true,nests=true},items=_hx_tab_array({[0]=this1, this11}, 2),objectives=_hx_tab_array({[0]=this12, this13, this14, this15, this16}, 5),evacs=_hx_tab_array({[0]=_hx_o({__fields__={mins=true,maxs=true},mins=this17,maxs=this18})}, 1),nests=_hx_tab_array({[0]=this19}, 1)});
-    local key = "mor_temple_v1";
+    local this2 = _G.Vector(214.035873, 252.134552, 46.033661);
+    local this3 = _G.Vector(45.967289, -942.858459, 64.031250);
+    local this4 = _G.Vector(-4.848439, -1728.742920, 64.031250);
+    local this5 = _G.Vector(-481.968323, -1022.401917, 64.031250);
+    local this6 = _G.Vector(571.895020, -1031.322632, 64.031250);
+    local this7 = _G.Vector(10.328067, -1039.059570, 64.031250);
+    local this8 = _G.Vector(-64.220894, -989.030090, 60.787186);
+    local this9 = _G.Vector(111.524712, -1094.413208, 110.729080);
+    local this10 = _G.Vector(29.061092, 1006.951233, 93.697433);
+    local value = _hx_o({__fields__={items=true,objectives=true,evacs=true,nests=true},items=_hx_tab_array({[0]=this1, this2}, 2),objectives=_hx_tab_array({[0]=this3, this4, this5, this6, this7}, 5),evacs=_hx_tab_array({[0]=_hx_o({__fields__={mins=true,maxs=true},mins=this8,maxs=this9})}, 1),nests=_hx_tab_array({[0]=this10}, 1)});
     if (value == nil) then 
-      _g.h[key] = __haxe_ds_StringMap.tnull;
+      _g.h.mor_temple_v1 = __haxe_ds_StringMap.tnull;
     else
-      _g.h[key] = value;
+      _g.h.mor_temple_v1 = value;
     end;
     
     _hx_1 = _g;
@@ -12073,15 +7531,11 @@ local _hx_static_init = function()
   
   __deceptinfect_client_GeigerSystem.net_geiger = NETMESSAGE_geiger.new();
   
-  __deceptinfect_client_PVS.pvs = __haxe_ds_IntMap.new();
-  
   __deceptinfect_ecswip_ComponentManager.components = __haxe_ds_ObjectMap.new();
   
   __deceptinfect_ecswip_ComponentManager.entities = 0;
   
   __deceptinfect_ecswip_ComponentManager.activeEntities = 0;
-  
-  __deceptinfect_ecswip_ComponentManager.gEntityLookup = __haxe_ds_IntMap.new();
   
   __deceptinfect_ecswip_GrabSystem.net_grabupdate = NETMESSAGE_grabupdate.new();
   
@@ -12101,39 +7555,18 @@ local _hx_static_init = function()
   
   __deceptinfect_infection_RateSystem.nextAddRate = 0;
   
-  __deceptinfect_infection_RateSystem.nextMultiRate = 0;
-  
-  __deceptinfect_radiation_RadiationSystem.nextRadiationID = (function() 
-    local _hx_2
-    
-    local this1 = 0;
-    
-    _hx_2 = this1;
-    return _hx_2
-  end )();
+  __deceptinfect_radiation_RadiationSystem.nextRadiationID = 0;
   
   __deceptinfect_radiation_RadiationSystem.radRateID = __deceptinfect_infection_RateSystem.getAddRateTicket();
   
-  __deceptinfect_radiation_RadiationSystem._acceptFamily = __deceptinfect_ecswip_Family.new(_hx_tab_array({[0]=__deceptinfect_radiation_RadiationAccepter, __deceptinfect_infection_RateComponent, __deceptinfect_ecswip_GEntityComponent}, 3));
-  
-  __deceptinfect_radiation_RadiationSystem._produceFamily = __deceptinfect_ecswip_Family.new(_hx_tab_array({[0]=__deceptinfect_radiation_RadiationProducer, __deceptinfect_ecswip_VirtualPosition}, 2));
-  
   __deceptinfect_game_EvacSystem.evac_state = NETMESSAGE_di_evac.new();
-  
-  __deceptinfect_game_RagdollSystem.statue = NETMESSAGE_statue.new();
   
   __deceptinfect_ecswip_SystemManager.getSystems = __haxe_ds_ObjectMap.new();
   
   __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem}, 13);
   
-  __deceptinfect_game__EvacSystem_INT_EvacState_Impl_.NOT_ACTIVE = 0;
-  
-  __deceptinfect_game__EvacSystem_INT_EvacState_Impl_.ARRIVING = 1;
-  
-  __deceptinfect_game__EvacSystem_INT_EvacState_Impl_.LEAVING = 2;
-  
   __deceptinfect_radiation_RadiationTypes.types = (function() 
-    local _hx_3
+    local _hx_2
     
     local _g = __haxe_ds_EnumValueMap.new();
     
@@ -12149,8 +7582,8 @@ local _hx_static_init = function()
     
     _g:set(__deceptinfect_radiation_RadTypes.SPIT, _hx_o({__fields__={maxrate=true,radius=true},maxrate=4.5,radius=200}));
     
-    _hx_3 = _g;
-    return _hx_3
+    _hx_2 = _g;
+    return _hx_2
   end )();
   
   __deceptinfect_util_Util.mappy = __haxe_ds_StringMap.new();
@@ -12170,45 +7603,6 @@ local _hx_static_init = function()
   __lua_Boot.hiddenFields = {__id__=true, hx__closures=true, super=true, prototype=true, __fields__=true, __ifields__=true, __class__=true, __properties__=true}
   
   __tink_core__Callback_Callback_Impl_.depth = 0;
-  
-  __tink_core__Callback_Callback_Impl_.MAX_DEPTH = 500;
-  
-  __tink_core__Future_NeverFuture.inst = __tink_core__Future_NeverFuture.new();
-  
-  __tink_core__Future_Future_Impl_.NULL = (function() 
-    local _hx_4
-    
-    local v = nil;
-    
-    _hx_4 = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(v));
-    return _hx_4
-  end )();
-  
-  __tink_core__Future_Future_Impl_.NOISE = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Noise.Noise));
-  
-  __tink_core__Future_Future_Impl_.NEVER = __tink_core__Future_NeverFuture.inst;
-  
-  __tink_core__Lazy_Lazy_Impl_.NULL = (function() 
-    local _hx_5
-    
-    local c = nil;
-    
-    _hx_5 = __tink_core__Lazy_LazyConst.new(c);
-    return _hx_5
-  end )();
-  
-  __tink_core__Promise_Promise_Impl_.NULL = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(nil)));
-  
-  __tink_core__Promise_Promise_Impl_.NOISE = __tink_core__Future_SyncFuture.new(__tink_core__Lazy_LazyConst.new(__tink_core_Outcome.Success(__tink_core_Noise.Noise)));
-  
-  __tink_core__Promise_Promise_Impl_.NEVER = (function() 
-    local _hx_6
-    
-    local ret = __tink_core__Future_Future_Impl_.NEVER:map(__tink_core_Outcome.Success);
-    
-    _hx_6 = ret:gather();
-    return _hx_6
-  end )();
   
   
   String.__name__ = "String";

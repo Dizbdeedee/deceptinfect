@@ -42,6 +42,7 @@ class Main {
 
         FileLib.CreateDir("deceptinfect");
         GameLib.CleanUpMap();
+        // GameLib.
         SignalStorage.initEvents();
         GameManager.init();
         for (model in Misc.roundModels) {

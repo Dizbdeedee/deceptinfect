@@ -23,18 +23,25 @@ class SlowMotionSystem extends System {
         untyped slowMotionEnd = slowMotionEndTrig.asSignal();
     }
     override function init_server() {
-        // GameManager.stateChange.handle(stateChange);
+        GameManager.stateChange.handle(stateChange);
         getSystem(WinSystem).newWinner.handle(winChange);
     }
 
     function winChange(x:Win) {
         switch (x) {
         case WIN_HUMAN | WIN_INF:
-            
-            GameLib.ConsoleCommand('host_timescale $startval\n');
+            GameLib.SetTimeScale(startval);
+            // GameLib.ConsoleCommand('host_timescale $startval\n');
             slowMotion = ACTIVE(GlobalLib.RealTime() + finishtime,GlobalLib.RealTime());
 
         default:
+        }
+    }
+    function stateChange(x:GAME_STATE) {
+        switch (GameManager.state) {
+            case SETTING_UP(_, _):
+                GameLib.ConsoleCommand("phys_timescale 1\n");
+            default:
         }
     }
     
@@ -43,13 +50,16 @@ class SlowMotionSystem extends System {
             case ACTIVE(target,start):
                 if (GlobalLib.RealTime() > target) {
                     slowMotion = FINISHED;
-                    GameLib.ConsoleCommand("host_timescale 1\n");
+                    GameLib.SetTimeScale(1);
+                    GameLib.ConsoleCommand("phys_timescale 0\n");
+                    // GameLib.ConsoleCommand("host_timescale 1\n");
                     slowMotionEndTrig.trigger(null);
                     return;
                 }    
                 var lp = (GlobalLib.RealTime() - start) / (target - start);
                 var val = GlobalLib.Lerp(lp,startval,endval);
-                GameLib.ConsoleCommand('host_timescale $val\n');
+                GameLib.SetTimeScale(val);
+                // GameLib.ConsoleCommand('host_timescale $val\n');
             default:
 
         }
