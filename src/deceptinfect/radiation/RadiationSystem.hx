@@ -55,7 +55,17 @@ class RadiationSystem extends System {
                                     //trace('roll');
                                     var randRoll = Math.random();
                                     if (randRoll < c_contamProduce.chance) {
-                                        //trace("Contaminated");
+                                        var rad = ComponentManager.addEntity();
+                                        var c_newRadProduce = new RadiationProducer({
+                                            maxrate: c_radProduce.maxrate, 
+                                            radius: c_radProduce.radius,
+                                            contaminate: c_contamProduce.options,
+                                            type: c_radProduce.type,
+                                            lifetime: c_contamProduce.contam_time
+                                        });
+                                        c_newRadProduce.base = c_radProduce.id;
+                                        rad.add_component(c_newRadProduce);
+                                        rad.add_component(new VirtualPosition(c_radGEnt.entity));
                                     }
                                 }
                             } else {

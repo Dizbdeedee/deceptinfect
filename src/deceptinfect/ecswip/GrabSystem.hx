@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.game.AliveComponent;
 import deceptinfect.util.Cooldown;
 import gmod.Hook;
 import deceptinfect.ecswip.SignalStorage.DamageEvent;
@@ -107,8 +108,8 @@ class GrabSystem extends System {
                 case READY(SEARCHING):
                     for (victim in ComponentManager.entities) {
                         if (attack != victim) {
-                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition)] {
-                            case [Comp(_),Comp(_.pos => vicPos)]:
+                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition),victim.get(AliveComponent)] {
+                            case [Comp(_),Comp(_.pos => vicPos),Comp(_)]:
                                 if (vicPos.Distance(g_attack.GetPos()) < c_produce.grabDist) {
                                     attemptTarget(attack,victim);
                                     //trace('attempting target ${c_produce.grabState}');
@@ -135,8 +136,8 @@ class GrabSystem extends System {
                     attemptSneakAttack(attack,prevVic);
                     for (victim in ComponentManager.entities) {
                         if (victim != prevVic && attack != victim) {
-                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition)] {
-                            case [Comp(_),Comp(_.pos => vicPos)]:
+                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition),victim.get(AliveComponent)] {
+                            case [Comp(_),Comp(_.pos => vicPos),Comp(_)]:
                                 var newDist = vicPos.Distance(g_attack.GetPos());
                                 if (newDist < oldDist && newDist < c_produce.grabDist) {
                                     //trace('switching targets ${victim}');

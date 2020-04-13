@@ -32,10 +32,23 @@ class TimeKeep<T:Int> {
         initTime(key);
         var difftime = GameManager.diffTime;
         times[key] -= difftime;
+        managetime(key);
+        return times[key];
+    }
+
+    inline function managetime(key:T) {
         if (times[key] < 0) {
             times[key] = 0;
         }
-        return times[key];
+    }
+
+    public function removeAllTimes() {
+        var difftime = GameManager.diffTime;
+        for (key in times.keys()) {
+            times[key] -= difftime; 
+            managetime(key);
+        }
+        
     }
 
     public function getTime(key:T):Float {

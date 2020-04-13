@@ -7,4 +7,32 @@ class EntityExt {
         var dot = Math.acos(vec1.Dot(vec2));
         return dot < Math.PI / 4;
     }
+
+    public static inline function validID(x:Entity):Option<DI_ID> {
+        if (IsValid(x)) {
+            return (x:GEntCompat).has_id();
+        } else {
+            return None;
+        }
+    }
+
+    public static function validID2(x:Entity) {
+        if (IsValid(x)) {
+            // return (x:GEntCompat).has_id();
+            return switch (x:GEntCompat).id {
+                case null:
+                    NO_ID;
+                case x:
+                    HAS_ID(x);
+            }
+        } else {
+            return INVALID;
+        }
+    }
+}
+
+enum ValidID { 
+    HAS_ID(id:DI_ID);
+    NO_ID;
+    INVALID;
 }

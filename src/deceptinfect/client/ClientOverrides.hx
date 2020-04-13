@@ -1,5 +1,7 @@
 package deceptinfect.client;
 
+import deceptinfect.game.RagdollSystem;
+import gmod.hooks.Gm.HUDElementList;
 import deceptinfect.ecswip.GrabSystem;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.GEntCompat.GPlayerCompat;
@@ -17,7 +19,10 @@ class ClientOverrides extends gmod.hooks.Gm {
     
     override function NotifyShouldTransmit(ent:Entity, shouldtransmit:Bool) {
         //trace(PVS.pvs);
+        
         PVS.pvs.set(ent.EntIndex(),shouldtransmit);
+        
+        getSystem(RagdollSystem).pvsChange(ent,shouldtransmit);
     }
 
     override function PreDrawOpaqueRenderables(isDrawingDepth:Bool, isDrawSkybox:Bool):Bool {
@@ -31,6 +36,28 @@ class ClientOverrides extends gmod.hooks.Gm {
         }
         //irace(PVS.pvs);
     }
+
+    override function HUDDrawScoreBoard() {
+        return untyped false;
+    }
+
+    override function HUDShouldDraw(name:HUDElementList):Bool {
+        return switch (name) {
+            case CHudDamageIndicator:
+                false;
+            default:
+                true;
+        }
+    }
+    // override function AddDeathNotice(attacker:String, attackerTeam:Float, inflictor:String, victim:String, victimTeam:Float) {
+    //     super.AddDeathNotice(attacker, attackerTeam, inflictor, victim, victimTeam);
+    // }
+
+    //TODO
+    // override function NetworkEntityCreated(ent:Entity) {
+        
+    // }
+
 
 }
 

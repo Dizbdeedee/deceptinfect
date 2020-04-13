@@ -1,5 +1,8 @@
 package deceptinfect.game;
 
+import deceptinfect.util.VectorString;
+import deceptinfect.util.AngleString;
+import deceptinfect.infection.InfectionComponent;
 import haxe.Json;
 import deceptinfect.statuses.Walkthroughable;
 import deceptinfect.abilities.FormSystem;
@@ -11,6 +14,9 @@ import deceptinfect.ents.Di_entities;
 import deceptinfect.GEntCompat;
 import deceptinfect.infection.InfectedComponent;
 import gmod.Hook.GMHook;
+import deceptinfect.game.StatInfo;
+import deceptinfect.game.RagInfo;
+
 
 typedef ND_Statue = {
     playerpos : Vector,
@@ -28,23 +34,97 @@ typedef JsonStatue = {
 }
 
 typedef JsonPhys = {
-    pos : Vector,
-    ang : Angle
+    pos : VectorString,
+    ang : AngleString
 }
 
 
+typedef ND_StatInfo = {
+    stat : Entity,
+    name : String,
+    health : Float,
+    inf : Float
+}
 
+typedef ND_RagInfo = {
+    rag : Entity,
+    name : String,
+    inf : Float,
+    attacker : String,
+    cause : Int
+}
 
 class RagdollSystem extends System {
 
-    static var statue = new gmod.NET_Server<"statue",ND_Statue>();
+    static var statue = new gmod.NET_Server<"statue",ND_Statue>(); //TODO remove
+
+    static var statueinfo = new gmod.NET_Server<"di_statinfo",ND_StatInfo>();
+
+    static var raginfo = new gmod.NET_Server<"di_raginfo",ND_RagInfo>();
     #if client
     static var ranonce = false;
     
     override function init_client() {
         statue.signal.handle(newStatue);
+        raginfo.signal.handle(recvraginfo);
+        statueinfo.signal.handle(recvstatinfo);
     }
 
+    function recvraginfo(x:ND_RagInfo) {
+        var c_raginfo = switch(x.rag.validID()) {
+        case Some(id):
+            id.getOrAdd(RagInfo);
+        default:
+            if (IsValid(x.rag)) {
+                var rag = new GEntCompat(x.rag);
+                var c_rag = new RagInfo();
+                rag.id.add_component(c_rag);
+                c_rag;
+            } else {
+                return;
+            }
+        }
+        c_raginfo.inf = x.inf;
+        c_raginfo.name = x.name;
+        c_raginfo.attacker = x.attacker;
+
+        
+    }
+
+    function recvstatinfo(x:ND_StatInfo) {
+        var c_statinfo = switch (x.stat.validID2()) {
+        case HAS_ID(id):
+            id.getOrAdd(StatInfo);
+        case NO_ID:
+            var stat = new GEntCompat(x.stat);
+            var c_stat = new StatInfo();
+            stat.id.add_component(c_stat);
+            c_stat;
+        case INVALID:
+            return;
+        }
+        c_statinfo.health = x.health;
+        c_statinfo.inf = x.inf;
+        c_statinfo.name = x.name;
+        // trace(x.name);
+    }
+
+    public function pvsChange(ent:GEntCompat,shouldTransmit:Bool) {
+        switch (ent.has_id()) {
+        case Some(id):
+            switch [id.get(GEntityComponent),id.get(Statue)] {
+                case [Comp(_.entity => gent),Comp(c_wep)]:
+                    trace("THing changed");
+                    if (shouldTransmit) {
+                        c_wep.weapon.SetParent();
+                        c_wep.weapon.SetParent(gent);
+                    }
+                default:
+            }
+        default:
+                
+        }
+    }
     function newStatue(x:ND_Statue) {
         var rag = GlobalLib.ClientsideModel(x.playermodel);
         var wep = GlobalLib.ClientsideModel(x.weaponmodel);
@@ -86,33 +166,43 @@ class RagdollSystem extends System {
             
             var mdl:String = rag.GetNWString("showwep");
             if (mdl != null && mdl != "" && untyped rag.showwep == null) {
+                // for (physid in 0...rag.GetPhysicsObjectCount()) {
+                //     var physob = rag.GetPhysicsObjectNum(physid);
+                //     if (IsValid(physob)) {
+                //         physob.EnableMotion(false);
+                //     }
+                // }
+                var _rag = new GEntCompat(rag);
+                var c_stat = new Statue();
+                _rag.id.add_component(c_stat);
+                _rag.id.add_component(new KeepRestart());
                 trace(mdl);
                 untyped rag.showwep = true;
-                var ent = GlobalLib.ClientsideModel(mdl);
+                var ent = new GEntCompat(GlobalLib.ClientsideModel(mdl));
+                var c_wep = new ClientWeaponStatue();
+                c_wep.parent = rag;
+                
+                ent.id.add_component(c_wep);
+                ent.id.add_component(new KeepRestart());
                 ent.SetupBones();
-                // ent.Spawn();
-                // rag.CallOnRemove("derka", (rag:Entity,ent:CSEnt) -> if (IsValid(ent)) ent.Remove(),ent);
                 ent.AddEffects(EF_BONEMERGE);
                 ent.AddEffects(EF_BONEMERGE_FASTCULL);
                 ent.SetParent(rag);
-                // ent.SetPos(rag.GetPos()); 
-                // ent.SetAngles(rag.GetAngles());
-                // ent.Spawn();
-                // var success = false;
-                // for (i in 0...ent.GetBoneCount()) {
-                //     var otherbone = rag.LookupBone(ent.GetBoneName(i));
-                //     if (otherbone != null) {
-                //         // ent.FollowBone(rag,otherbone);
-
-                //         trace(otherbone);
-                //         success = true;
-                //         break;
-                //     }
-                // }
-                // if (!success) trace("Failed to bonemerge wep");
-                // ranonce = true;
+                c_stat.weapon = cast ent;
+               
             }
         }
+        for (ent in entities) {
+            switch [ent.get(GEntityComponent),ent.get(ClientWeaponStatue)] {
+            case [Comp(_.entity => gent),Comp(c_stat)]:
+                if (!IsValid(c_stat.parent)) {
+                    gent.Remove();
+                }
+            default:
+            }
+        }
+
+            
     }
     #end
 
@@ -164,6 +254,7 @@ class RagdollSystem extends System {
                 
             }
         case [_,WAIT]:
+            trace("wrote");
             writeStatues();
         case [WAIT,_]:
             for (ent in entities) {
@@ -198,10 +289,26 @@ class RagdollSystem extends System {
                 
             default:
             }
-            switch [ent.get(GEntityComponent),ent.get(Ragdoll),ent.get(Statue)] {
-                case [Comp(c_ent),Comp(_),NONE]:
+            switch ent.get(PlayerComponent) {
+            case Comp(c_ply):
+                var tr = c_ply.player.GetEyeTrace();
                 
+                switch (tr.Entity.validID2()) {
+                case HAS_ID(id):    
+                    switch [id.get(GEntityComponent),id.get(StatInfo)] {
+                    case [Comp(c_gent),Comp(c_stat)]:
+                        // trace('sending info');
+                        statueinfo.send({
+                            stat: c_gent.entity,
+                            inf: c_stat.inf,
+                            health: c_stat.health,
+                            name: c_stat.name
+                        },c_ply.player);
+                    default:
+                    }
                 default:
+                }
+            default:
             }
         }
     }
@@ -222,16 +329,28 @@ class RagdollSystem extends System {
         ragdoll.Remove();
     }
 
-    public function playerStatue(plyr:Player,?inf=false) {
+    public function playerStatue(plyr:GPlayerCompat,?inf=false) {
         var ent:GEntCompat = new GEntCompat(EntsLib.Create("prop_ragdoll"));
         ent.id.add_component(new Statue());
-        ent.id.add_component(new KeepRestart());
-        if (inf) {
-            ent.SetModel(Misc.infModel);
-            
-        } else {
-            ent.SetModel(plyr.GetModel());
+        var c_stat = new StatInfo();
+
+        c_stat.name = plyr.Name();
+        c_stat.inf = switch (plyr.get(InfectionComponent)) {
+            case Comp(c_inf):
+                c_inf.getInfValue();
+            default:
+                0.0;
         }
+        c_stat.health = plyr.Health();
+        ent.id.add_component(c_stat);
+
+        // var teststr:VectorString = plyr.GetPos();
+        // var tovec:Vector = teststr;
+        
+        ent.id.add_component(new KeepRestart());
+        
+        ent.SetModel(plyr.GetModel());
+        
         ent.SetPos(plyr.GetPos());
         // ent.AddEffects(EF_BONEMERGE);
         // ent.AddEffects(EF_BONEMERGE_FASTCULL);
@@ -245,14 +364,17 @@ class RagdollSystem extends System {
                 physob.SetPos(result.a);
                 physob.SetAngles(result.b);
                 // TimerLib.Simple(0.1,() -> physob.EnableMotion(false));
-                
+                // physob.SetContents(CONTENTS_HITBOX);
                 physob.EnableMotion(false);
                 physob.Sleep();
             }
             
         }
         ent.SetCollisionGroup(COLLISION_GROUP_WORLD);
+        ent.SetTrigger(true);
+    
         ent.SetSolid(SOLID_NONE);
+        
         var plywep:Weapon = plyr.GetActiveWeapon();
         ent.SetNWString("showwep",plywep.GetModel());
     }

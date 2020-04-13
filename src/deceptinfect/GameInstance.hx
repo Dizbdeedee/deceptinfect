@@ -35,7 +35,7 @@ class GameInstance {
         setTime();
         calcBaseInfection();
         #if server
-        var chargerSpawn = getSystem(SpawnSystem).obj.getRandom();
+        var chargerSpawn = SpawnSystem.obj.getRandom();
         var ent = EntsLib.Create(Di_entities.di_charger);
         chargerSpawn.spawn(ent);
         var bat1 = EntsLib.Create(Di_entities.di_battery);
@@ -45,12 +45,12 @@ class GameInstance {
         trace(untyped spawns[1].claimed);
         spawns[0].spawn(bat1);
         spawns[1].spawn(bat2);
-        var nestSpawn = getSystem(SpawnSystem).nest.getRandom();
+        var nestSpawn = SpawnSystem.nest.getRandom();
         var nest = EntsLib.Create(Di_entities.di_nest);
         nestSpawn.spawn(nest);
 
         var evacZone = EntsLib.Create(Di_entities.di_evac_zone);
-        var evacZoneSpawn:BoundsSpawn = cast getSystem(SpawnSystem).evac.getRandom();
+        var evacZoneSpawn:BoundsSpawn = cast SpawnSystem.evac.getRandom();
         evacZoneSpawn.spawn(evacZone);
         // evacZone.toHaxe().setPoints(evacZoneSpawn.)
         #end

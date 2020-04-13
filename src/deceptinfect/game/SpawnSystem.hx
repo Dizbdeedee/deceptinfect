@@ -5,16 +5,16 @@ import deceptinfect.ecswip.VirtualPosition;
 
 
 class SpawnSystem extends System {
-    public var obj(default,never) = new SpawnPointTable();
-    public var item(default,never)= new SpawnPointTable();
+    public static final obj = new SpawnPointTable();
+    public static final item = new SpawnPointTable();
 
-    public var nest(default,never) = new SpawnPointTable();
+    public static final nest = new SpawnPointTable();
 
-    public var evac(default,never) = new SpawnPointTable();
+    public static final evac = new SpawnPointTable();
 
     #if server
     override function init_server() {
-        generateSpawns();
+        // generateSpawns();
     }
 
     override function run_server() {
@@ -32,7 +32,7 @@ class SpawnSystem extends System {
     }
     #end
     
-    public function generateSpawns() {
+    public static function generateSpawns() {
         obj.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).objectives);
         item.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).items);
         nest.generateSpawns(MapStorage.spawns.get(GameLib.GetMap()).nests);

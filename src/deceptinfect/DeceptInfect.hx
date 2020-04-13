@@ -1,5 +1,9 @@
 package deceptinfect;
 
+import gmod.enums.SNDLVL;
+import gmod.enums.SND;
+import gmod.enums.CHAN;
+import deceptinfect.ecswip.GrabAccepter;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.game.RagdollSystem;
 import deceptinfect.game.AliveComponent;
@@ -97,10 +101,31 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     
     override function PlayerSilentDeath(ply:gmod.types.Player) {
         // super.PlayerSilentDeath(ply);
+
+
+    }
+
+    function playerDeath(victim:GPlayerCompat) {
+
+        victim.id.remove_component(AliveComponent);
+        victim.id.remove_component(GrabAccepter);
+        var sounds = Misc.deathSounds.get(HUMAN_MALE);
+        var sound = sounds[MathLib.random(0,sounds.length - 1)];
+        victim.EmitSound(sound,0,null,0);
+        GlobalLib.EmitSound(sound,victim.GetPos(),victim.EntIndex(),CHAN_VOICE);
+        victim.CreateRagdoll();
+    }
+
+    override function DoPlayerDeath(ply:gmod.types.Player, attacker:Entity, dmg:CTakeDamageInfo) {
+        untyped GAMEMODE.PlayerSilentDeath();
+        // ply.KillSilent();
+        ply.KillSilent();
+        
+        playerDeath(ply);
+        return untyped false;
     }
     
     override function PlayerDeath(victim:GPlayerCompat, inflictor:Entity, attacker:Entity) {
-        victim.id.remove_component(AliveComponent);
         // victim.id.remove_component(InfectionComponent);
         // victim.id.remove_component(InfectedComponent);
         trace("Player ded!");
@@ -119,9 +144,9 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         //player.SetWalkthroughable
         player.SetShouldServerRagdoll(true);
         player.ShouldDropWeapon(true);
-        if (GameManager.state.equals(WAIT)) {
+        if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
             player.Give(Misc.roundWeapons[0]); //TODO random weapons
-            // player.ShouldDropWeapon(false);
+            player.ShouldDropWeapon(false);
 
         }
         // player.id.
@@ -319,12 +344,12 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         
         return "aaaaple";
     }
-    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn_2<GmPlayerCanHearPlayersVoiceReturn> {
+    // override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn_2<GmPlayerCanHearPlayersVoiceReturn> {
         
         
-        return {a: false,b: false};
+    //     return {a: false,b: false};
         
-    }
+    // }
     
     #end
     

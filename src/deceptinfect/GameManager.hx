@@ -25,7 +25,7 @@ import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.GEntCompat;
 import deceptinfect.GameInstance;
 using deceptinfect.util.PlayerExt;
-
+import deceptinfect.infection.InfectionLookInfo;
 class GameManager {
 
 
@@ -40,6 +40,9 @@ class GameManager {
 
     static var stateTrig:SignalTrigger<GAME_STATE> = new SignalTrigger();
     public static final net_gamestate = new gmod.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL,time : Float}>();
+
+    static final net_cleanup = new gmod.NET_Server<"di_cleanup",{}>();
+    
     #if server
     
     public static function isPlaying() {
@@ -136,6 +139,7 @@ class GameManager {
         var time = 0.0;
         switch [state,x] {
         case [ENDING(_),WAIT]:
+            stateTrig.trigger(x); //will get cleaned
             cleanup();
         case [SETTING_UP(x,_),PLAYING(y)]:
             initAllPlayers();
@@ -175,6 +179,7 @@ class GameManager {
 
     @:expose("cleanup")
     public static function cleanup() {
+        net_cleanup.broadcast({});
         for (ent in entities) {
             switch [ent.get(CleanupEnt),ent.get(GEntityComponent)] {
             case [Comp(_),Comp(c_gent)]:
@@ -231,6 +236,7 @@ class GameManager {
         x.add_component(new HiddenHealthComponent());
         x.add_component(new FormComponent());
         x.add_component(new DamagePenaltyHidden());
+        x.add_component(new InfectionLookInfo());
         var c_inf = x.get_sure(InfectionComponent);
     
         
@@ -256,6 +262,7 @@ class GameManager {
             player.StripWeapons();
             player.Give(Misc.startingWeapons[0]);
             player.giveFullAmmo();
+            player.Spawn();
         }
     }
 
@@ -281,6 +288,19 @@ class GameManager {
     public static function init() {
         
         net_gamestate.signal.handle(gameStateChanged);
+        net_cleanup.signal.handle(cleanup);
+    }
+
+    static function cleanup() {
+        for (ent in entities) {
+            switch ent.get(deceptinfect.game.KeepRestart) {
+                case Comp(_):
+                default:
+                    ComponentManager.removeEntity(ent);
+            }
+        }
+        stateTrig.clear(); //get rid of stragglers
+        SystemManager.initAllSystems();
     }
     
     static function gameStateChanged(x:{state : Net_GAME_STATE_VAL,time : Float}) {

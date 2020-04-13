@@ -24,11 +24,11 @@ class InfectionComponent extends Component {
             case NOT_INFECTED(inf):
                 inf.value;
             case INFECTED:
-                100.1;
+                100;
         }
     }
     public function set_infection(x:INF_STATE):INF_STATE {
-        trace(x);
+        // trace(x);
         return infection = x;
         
     }

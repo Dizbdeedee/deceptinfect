@@ -38,8 +38,8 @@ class SlowMotionSystem extends System {
         }
     }
     function stateChange(x:GAME_STATE) {
-        switch (GameManager.state) {
-            case SETTING_UP(_, _):
+        switch (x) {
+            case WAIT:
                 GameLib.ConsoleCommand("phys_timescale 1\n");
             default:
         }

@@ -13,6 +13,8 @@ class RadiationProducer extends Component {
     public var type:Null<RadTypes>;
     public var radius:Float;
 
+    public var base:RadiationID;
+
     public var contamProducer:Option<ContaminationProducer> = None;
     public var lifetime:RadLifetime;
     
@@ -34,6 +36,10 @@ class RadiationProducer extends Component {
         if (options.type != null) {
             type = options.type;
         }
+    }
+
+    public function copy() {
+        
     }
 
 }

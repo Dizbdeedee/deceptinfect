@@ -23,6 +23,18 @@ class ComponentManager {
         return id;
     }
 
+    public static function getOrAdd<T:Component>(id:DI_ID,cls:Class<T>,?args:Array<Dynamic>):T {
+        return switch (getComponentForID(cls,id)) {
+            case Comp(comp):
+                comp;
+            case NONE:
+                if (args == null) args = [];
+                var inst = Type.createInstance(cls,args);
+                id.add_component(inst);
+                inst;
+        };
+    }
+
     public static function addPlayer(x:GPlayerCompat):DI_ID {
         var id = addGEnt(cast x);
         addComponent(new PlayerComponent(x),id);
@@ -32,8 +44,7 @@ class ComponentManager {
 
     public static inline function getComponentForID<T:Component>(cls:Class<T>,x:DI_ID):ComponentState<T> {
         var comparray = lazyInit(cls);
-        var comp = comparray[x];
-        return cast comp;
+        return cast comparray[x];
     }
 
     public static function addComponent<T:Component>(x:T,to:DI_ID) {
@@ -105,6 +116,10 @@ abstract DI_ID(Int) from Int to Int {
 
     public extern inline function add_component<T:Component>(x:T) {
         ComponentManager.addComponent(x,this);
+    }
+
+    public extern inline function getOrAdd<T:Component>(x:Class<T>,?args:Array<Dynamic>):T {
+        return ComponentManager.getOrAdd(this,x,args);
     }
 
     public extern inline function remove_component<T:Component>(x:Class<T>) {

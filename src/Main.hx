@@ -1,5 +1,6 @@
 
 //import gmod.gamemode.GamemodeTXT;
+import deceptinfect.game.SpawnSystem;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.client.ClientOverrides;
 import deceptinfect.ecswip.Component;
@@ -48,6 +49,7 @@ class Main {
         for (model in Misc.roundModels) {
             UtilLib.PrecacheModel(model);
         }
+        SpawnSystem.generateSpawns();
         UtilLib.PrecacheModel(Misc.infModel);
         #if client
         new ClientOverrides();

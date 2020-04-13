@@ -38,5 +38,20 @@ class Misc {
     ];
 
 	public static var infModel:String = "models/player/zombie_classic.mdl";
+
+	public static var deathSounds:Map<ModelType,Array<String>> = [
+		ZOMBIE => ["npc/zombie/zombie_die1.wav"],
+		HUMAN_MALE => [
+			"vo/npc/barney/ba_pain06.wav",
+			"vo/npc/male01/pain09.wav",
+			
+		]
+	];
 	// public static var infModel:String = "models/Zombie/Classic.mdl";
+}
+
+enum ModelType {
+	ZOMBIE;
+	HUMAN_MALE;
+
 }

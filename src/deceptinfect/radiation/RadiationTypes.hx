@@ -11,7 +11,7 @@ class RadiationTypes {
             contaminate: {
                 chance: 2/5,
                 dist: 20,
-                time: 60,
+                contam_time: FINITE(10),
                 check: 0.8,
                 type : SAME_SOURCE
             },
@@ -23,7 +23,7 @@ class RadiationTypes {
             radius: 350,
             contaminate: {
                 chance: 0.5,
-                time: 35,
+                contam_time: FINITE(10),
                 check: 0.5,
                 dist: 50,
                 type: SAME_SOURCE

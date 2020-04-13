@@ -1,5 +1,6 @@
 package deceptinfect.client;
 
+import deceptinfect.game.StatInfo;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.GameManager.GAME_STATE;
 #if client
@@ -37,13 +38,41 @@ class Hud {
     }
 
     static function targetID() {
-        var target = GlobalLib.LocalPlayer().GetEyeTrace().Entity;
+        var target:GEntCompat = GlobalLib.LocalPlayer().GetEyeTrace().Entity;
         if (!GlobalLib.IsValid(target) || !target.IsPlayer()) {return;}
         var player:Player = cast target;
         SurfaceLib.SetTextPos(CSS(X,0),CSS(Y,250));
         SurfaceLib.SetFont("TargetID");
         SurfaceLib.DrawText(player.Name());
+
+        switch (target.has_id()) {
+            case Some(_.get(InfectionComponent) => Comp(c_inf)):
+                SurfaceLib.SetTextPos(CSS(X,0),CSS(Y,300));
+                SurfaceLib.SetFont("TargetID");
+                SurfaceLib.DrawText(StringLib.format("Infection: %6.2f%%",c_inf.getInfValue()));
+            default:
+        }
         //isinfected, then draw infection percent ect.
+    }
+
+    static function statueInfo() {
+        var tr = PlayerManager.getLocalPlayer().GetEyeTrace();
+        switch (tr.Entity.validID2()) {
+        case HAS_ID(id):
+            switch id.get(StatInfo) {
+            case Comp(c_stat):
+                SurfaceLib.SetTextPos(0,400);
+                SurfaceLib.SetTextColor(255,255,255);
+                SurfaceLib.DrawText(c_stat.name);
+                SurfaceLib.SetTextPos(0,450);
+                SurfaceLib.DrawText(Std.string(c_stat.health));
+                SurfaceLib.SetTextPos(0,500);
+                SurfaceLib.DrawText(Std.string(c_stat.inf));
+                // trace(c_stat.name);
+            default:
+            }
+        default:
+        }
     }
 
     static function grabbedBlank() {
@@ -53,7 +82,7 @@ class Hud {
     static function infectionMeter() {
         var inf = switch [PlayerManager.getLocalPlayer().has_id(),GameManager.state] {
             case [Some(id = _.get(InfectionComponent) => Comp(c_i)),PLAYING]:
-                trace(id);
+                // trace(id);
                 c_i;
             default:
                 return;

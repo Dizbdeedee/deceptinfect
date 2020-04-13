@@ -1,11 +1,17 @@
 package deceptinfect.radiation;
 
+import deceptinfect.radiation.RadiationProducer.RadLifetime;
+
 class ContaminationProducer {
     public var chance:Float;
-    public var time:Float;
+    // public var time:Float;
     public var check:Float;
     public var dist:Float;
     public var type:ContaminationType = SAME_TYPE;
+
+    public var contam_time:RadLifetime;
+
+    public var options:ContaminationProducerOptions;
 
     public function new(options:ContaminationProducerOptions) {
         chance = options.chance;
@@ -13,6 +19,7 @@ class ContaminationProducer {
         dist = options.dist;
         check = options.check;
         if (options.type != null) {type = options.type;}
+        this.options = options;
         
     }
     
@@ -26,10 +33,6 @@ typedef ContaminationProducerOptions = {
     **/
     var chance:Float;
     /**
-        How long contamination lasts on target
-    **/
-    var time:Float;
-    /**
         Distance to roll for contamination
     **/
     var dist:Float;
@@ -41,6 +44,10 @@ typedef ContaminationProducerOptions = {
         Contamination type.
     **/
     var type:ContaminationType;
+    /**
+        How long should vicitm stay contaminated for
+    **/
+    var contam_time:RadLifetime;
 
 }
 
