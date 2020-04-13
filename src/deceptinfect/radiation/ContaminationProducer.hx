@@ -1,8 +1,11 @@
 package deceptinfect.radiation;
 
+import deceptinfect.radiation.RadSource.RadSourceOptions;
+import deceptinfect.radiation.RadiationTypes.RadTypes;
+import deceptinfect.radiation.RadiationProducer.RadiationProduceOptions;
 import deceptinfect.radiation.RadiationProducer.RadLifetime;
 
-class ContaminationProducer {
+class ContaminationProducer extends Component {
     public var chance:Float;
     // public var time:Float;
     public var check:Float;
@@ -11,15 +14,16 @@ class ContaminationProducer {
 
     public var contam_time:RadLifetime;
 
-    public var options:ContaminationProducerOptions;
+    public var nextoptions:NextOptions;
 
-    public function new(options:ContaminationProducerOptions) {
+
+    public function new(options:ContaminationProducerOptions,?radoptions:RadiationProduceOptions) {
+        super();
         chance = options.chance;
-        time = options.time;
         dist = options.dist;
         check = options.check;
         if (options.type != null) {type = options.type;}
-        this.options = options;
+        nextoptions = options.nextoptions;
         
     }
     
@@ -47,8 +51,32 @@ typedef ContaminationProducerOptions = {
     /**
         How long should vicitm stay contaminated for
     **/
-    var contam_time:RadLifetime;
+    // var contam_time:RadLifetime;
 
+    var nextoptions:NextOptions;
+
+}
+
+
+enum NextOptions {
+    /**
+        Create next radsource from type
+    **/
+    TYPE(radtype:RadTypes);
+    /**
+        Next radsource will be a duplicate of current radsource
+    **/
+    MY_TYPE;
+
+    /**
+        Values will be copied from type if not overridden.
+    **/
+    // OVERRIDE(rso:Option<RadSourceOptions>,rpo:Option<RadiationProduceOptions>,cpo:Option<ContaminationProducerOptions>);
+
+    /**
+
+    **/
+    OVERRIDE_LIFETIME(t:RadLifetime);
 }
 
 

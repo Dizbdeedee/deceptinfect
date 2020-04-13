@@ -80,6 +80,7 @@ __gmod_hooks_Gm = _hx_e()
 __gmod_gamemode_BuildOverrides = _hx_e()
 __deceptinfect_DeceptInfect = _hx_e()
 __deceptinfect_GameInstance = _hx_e()
+__enumExtractor_EnumExtractor = _hx_e()
 __deceptinfect_GAME_STATE = _hx_e()
 __tink_core_SignalObject = _hx_e()
 __tink_core_SignalTrigger = _hx_e()
@@ -138,6 +139,7 @@ __deceptinfect_game_EvacSystem = _hx_e()
 __deceptinfect_game_RagdollSystem = _hx_e()
 __deceptinfect_game_SlowMotionSystem = _hx_e()
 __deceptinfect_infection_InfectionLookSystem = _hx_e()
+__deceptinfect_radiation_ContaminationSystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
@@ -180,10 +182,12 @@ __deceptinfect_infection_INF_STATE = _hx_e()
 __deceptinfect_infection_InfectionLookInfo = _hx_e()
 __deceptinfect_radiation_ContaminationAccepter = _hx_e()
 __deceptinfect_radiation_ContaminationProducer = _hx_e()
+__deceptinfect_radiation_NextOptions = _hx_e()
 __deceptinfect_radiation_ContaminationType = _hx_e()
-__deceptinfect_radiation_RadiationState = _hx_e()
+__deceptinfect_radiation_RadSource = _hx_e()
+__deceptinfect_radiation_RadSourceOp = _hx_e()
+__deceptinfect_radiation_RadVictim = _hx_e()
 __deceptinfect_radiation_RadLifetime = _hx_e()
-__deceptinfect_radiation_RadTypes = _hx_e()
 __deceptinfect_radiation_RadiationTypes = _hx_e()
 __deceptinfect_sabotage_S_Break = _hx_e()
 __deceptinfect_statuses_Walkthroughable = _hx_e()
@@ -1886,6 +1890,10 @@ __deceptinfect_GameInstance.prototype.setTime = function(self)
 end
 
 __deceptinfect_GameInstance.prototype.__class__ =  __deceptinfect_GameInstance
+
+__enumExtractor_EnumExtractor.new = {}
+_hxClasses["enumExtractor.EnumExtractor"] = __enumExtractor_EnumExtractor
+__enumExtractor_EnumExtractor.__name__ = "enumExtractor.EnumExtractor"
 _hxClasses["deceptinfect.GAME_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WAIT","SETTING_UP","PLAYING","ENDING"},4)}
 __deceptinfect_GAME_STATE = _hxClasses["deceptinfect.GAME_STATE"];
 __deceptinfect_GAME_STATE.WAIT = _hx_tab_array({[0]="WAIT",0,__enum__ = __deceptinfect_GAME_STATE},2)
@@ -1928,6 +1936,7 @@ __tink_core_SignalTrigger.prototype.__class__ =  __tink_core_SignalTrigger
 __deceptinfect_GameManager.new = {}
 _hxClasses["deceptinfect.GameManager"] = __deceptinfect_GameManager
 __deceptinfect_GameManager.__name__ = "deceptinfect.GameManager"
+__deceptinfect_GameManager.__interfaces__ = {__enumExtractor_EnumExtractor}
 __deceptinfect_GameManager.shouldAllowRespawn = function() 
   local tmp = __deceptinfect_GameManager.state[1];
   if (tmp) == 0 then 
@@ -1941,9 +1950,11 @@ __deceptinfect_GameManager.initPlayer = function(ply)
   local infcomp = __deceptinfect_infection_InfectionComponent.new();
   local spec = __deceptinfect_ecswip_SpectateComponent.new();
   local rate = __deceptinfect_infection_RateComponent.new();
+  local vic = __deceptinfect_radiation_RadVictim.new();
+  local contam = __deceptinfect_radiation_ContaminationAccepter.new();
   local health = __deceptinfect_ecswip_HiddenHealthComponent.new();
   local grabaccept = __deceptinfect_ecswip_GrabAccepter.new();
-  local radaccept = __deceptinfect_radiation_RadiationAccepter.new(_hx_o({__fields__={contaminate=true},contaminate=__deceptinfect_radiation_ContaminationAccepter.new()}));
+  local radaccept = __deceptinfect_radiation_RadiationAccepter.new(_hx_e());
   local virpos = __deceptinfect_ecswip_VirtualPosition.new(ply);
   __deceptinfect_ecswip_ComponentManager.addComponent(infcomp, p);
   __deceptinfect_ecswip_ComponentManager.addComponent(spec, p);
@@ -1953,6 +1964,8 @@ __deceptinfect_GameManager.initPlayer = function(ply)
   __deceptinfect_ecswip_ComponentManager.addComponent(radaccept, p);
   __deceptinfect_ecswip_ComponentManager.addComponent(virpos, p);
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_AliveComponent.new(), p);
+  __deceptinfect_ecswip_ComponentManager.addComponent(vic, p);
+  __deceptinfect_ecswip_ComponentManager.addComponent(contam, p);
 end
 __deceptinfect_GameManager.thinkWait = function() 
   _G.player.GetCount();
@@ -2026,7 +2039,7 @@ __deceptinfect_GameManager.set_state = function(x)
     local p1 = p:next();
     __deceptinfect_GameManager.net_gamestate:send(_hx_o({__fields__={state=true,time=true},state=__deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.fromGAME_STATE(x),time=time}), p1);
   end;
-  __haxe_Log.trace(Std.string("set state... ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=174,className="deceptinfect.GameManager",methodName="set_state"}));
+  __haxe_Log.trace(Std.string("set state... ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=182,className="deceptinfect.GameManager",methodName="set_state"}));
   __deceptinfect_GameManager.stateTrig.handlers:invoke(x);
   __deceptinfect_GameManager.state = x do return __deceptinfect_GameManager.state end;
 end
@@ -2038,7 +2051,7 @@ __deceptinfect_GameManager.cleanup = function()
     local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent1];
     if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_CleanupEnt)[ent1][1] == 1) then 
       if (_g1[1] == 1) then 
-        __haxe_Log.trace(ent1, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=186,className="deceptinfect.GameManager",methodName="cleanup"}));
+        __haxe_Log.trace(ent1, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=194,className="deceptinfect.GameManager",methodName="cleanup"}));
         _g1[2].entity:Remove();
       end;
     end;
@@ -2071,11 +2084,11 @@ end
 __deceptinfect_GameManager.newWin = function(x) 
   local tmp = x[1];
   if (tmp) == 0 then 
-    __haxe_Log.trace("Humans win", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=223,className="deceptinfect.GameManager",methodName="newWin"}));
+    __haxe_Log.trace("Humans win", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=231,className="deceptinfect.GameManager",methodName="newWin"}));
   elseif (tmp) == 1 then 
-    __haxe_Log.trace("Infected win", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=225,className="deceptinfect.GameManager",methodName="newWin"}));
+    __haxe_Log.trace("Infected win", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=233,className="deceptinfect.GameManager",methodName="newWin"}));
   elseif (tmp) == 2 then 
-    __haxe_Log.trace("Draw. Boring...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=227,className="deceptinfect.GameManager",methodName="newWin"})); end;
+    __haxe_Log.trace("Draw. Boring...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=235,className="deceptinfect.GameManager",methodName="newWin"})); end;
   __deceptinfect_GameManager.set_state(__deceptinfect_GAME_STATE.ENDING(__deceptinfect_GameManager.state:slice(2)[0], _G.CurTime() + 10));
 end
 __deceptinfect_GameManager.initInfectedPlayer = function(x) 
@@ -2095,9 +2108,25 @@ __deceptinfect_GameManager.initInfectedPlayer = function(x)
     _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x2.__name__),0);
   end;
   retrieve_comp.grabState = __deceptinfect_ecswip_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE);
-  local rad = __deceptinfect_radiation_RadiationProducer.createFromType(__deceptinfect_radiation_RadTypes.INF);
-  rad.state = __deceptinfect_radiation_RadiationState.DISABLED;
-  __deceptinfect_ecswip_ComponentManager.addComponent(rad, x);
+  local rad = __deceptinfect_ecswip_ComponentManager.addEntity();
+  local rtn = __deceptinfect_radiation_RadSource.radSourceFromType(3, x, rad);
+  if (rtn.c_rs ~= nil) then 
+    __deceptinfect_ecswip_ComponentManager.addComponent(rtn.c_rs, rad);
+  end;
+  local _g = rtn.c_radproduce;
+  if (_g[1] == 0) then 
+    __deceptinfect_ecswip_ComponentManager.addComponent(_g[2], rad);
+  end;
+  local _g2 = rtn.c_contam;
+  if (_g2[1] == 0) then 
+    __deceptinfect_ecswip_ComponentManager.addComponent(_g2[2], rad);
+  end;
+  local x3 = __deceptinfect_ecswip_GEntityComponent;
+  local retrieve_comp1 = __deceptinfect_ecswip_ComponentManager.lazyInit(x3)[x]:slice(2)[0];
+  if (retrieve_comp1 == nil) then 
+    _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x3.__name__),0);
+  end;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(retrieve_comp1.entity), rad);
 end
 __deceptinfect_GameManager.initAllPlayers = function() 
   local choose = _G.math.random(1, _G.player.GetCount());
@@ -3484,13 +3513,9 @@ __deceptinfect_radiation_RadiationAccepter.new = function(options)
   return self
 end
 __deceptinfect_radiation_RadiationAccepter.super = function(self,options) 
-  self.acceptContam = __haxe_ds_Option.None;
   self.diminish = 0.75;
   self.radiation = __haxe_ds_IntMap.new();
   __deceptinfect_ecswip_Component.super(self);
-  if (options.contaminate ~= nil) then 
-    self.acceptContam = __haxe_ds_Option.Some(options.contaminate);
-  end;
   if (options.diminish ~= nil) then 
     self.diminish = _hx_funcToField(options.diminish);
   end;
@@ -3500,7 +3525,6 @@ __deceptinfect_radiation_RadiationAccepter.__name__ = "deceptinfect.radiation.Ra
 __deceptinfect_radiation_RadiationAccepter.prototype = _hx_a();
 __deceptinfect_radiation_RadiationAccepter.prototype.radiation= nil;
 __deceptinfect_radiation_RadiationAccepter.prototype.diminish= nil;
-__deceptinfect_radiation_RadiationAccepter.prototype.acceptContam= nil;
 
 __deceptinfect_radiation_RadiationAccepter.prototype.__class__ =  __deceptinfect_radiation_RadiationAccepter
 __deceptinfect_radiation_RadiationAccepter.__super__ = __deceptinfect_ecswip_Component
@@ -3532,34 +3556,15 @@ __deceptinfect_radiation_RadiationProducer.new = function(options)
   return self
 end
 __deceptinfect_radiation_RadiationProducer.super = function(self,options) 
-  self.contamProducer = __haxe_ds_Option.None;
-  self.state = __deceptinfect_radiation_RadiationState.ENABLED;
-  self.id = __deceptinfect_radiation_RadiationSystem.getNextRadiatonID();
   __deceptinfect_ecswip_Component.super(self);
   self.maxrate = _hx_funcToField(options.maxrate);
   self.radius = _hx_funcToField(options.radius);
-  self.lifetime = _hx_funcToField(options.lifetime);
-  if (options.contaminate ~= nil) then 
-    self.contamProducer = __haxe_ds_Option.Some(__deceptinfect_radiation_ContaminationProducer.new(options.contaminate));
-  end;
-  if (options.type ~= nil) then 
-    self.type = _hx_funcToField(options.type);
-  end;
 end
 _hxClasses["deceptinfect.radiation.RadiationProducer"] = __deceptinfect_radiation_RadiationProducer
 __deceptinfect_radiation_RadiationProducer.__name__ = "deceptinfect.radiation.RadiationProducer"
-__deceptinfect_radiation_RadiationProducer.createFromType = function(type) 
-  __deceptinfect_radiation_RadiationProducer.new(__deceptinfect_radiation_RadiationTypes.types:get(type));
-  do return __deceptinfect_radiation_RadiationProducer.new(__deceptinfect_radiation_RadiationTypes.types:get(type)) end;
-end
 __deceptinfect_radiation_RadiationProducer.prototype = _hx_a();
-__deceptinfect_radiation_RadiationProducer.prototype.id= nil;
-__deceptinfect_radiation_RadiationProducer.prototype.state= nil;
 __deceptinfect_radiation_RadiationProducer.prototype.maxrate= nil;
-__deceptinfect_radiation_RadiationProducer.prototype.type= nil;
 __deceptinfect_radiation_RadiationProducer.prototype.radius= nil;
-__deceptinfect_radiation_RadiationProducer.prototype.contamProducer= nil;
-__deceptinfect_radiation_RadiationProducer.prototype.lifetime= nil;
 
 __deceptinfect_radiation_RadiationProducer.prototype.__class__ =  __deceptinfect_radiation_RadiationProducer
 __deceptinfect_radiation_RadiationProducer.__super__ = __deceptinfect_ecswip_Component
@@ -3633,14 +3638,9 @@ __deceptinfect_radiation_RadiationSystem.super = function(self)
 end
 _hxClasses["deceptinfect.radiation.RadiationSystem"] = __deceptinfect_radiation_RadiationSystem
 __deceptinfect_radiation_RadiationSystem.__name__ = "deceptinfect.radiation.RadiationSystem"
-__deceptinfect_radiation_RadiationSystem.getNextRadiatonID = function() 
-  __deceptinfect_radiation_RadiationSystem.nextRadiationID = __deceptinfect_radiation_RadiationSystem.nextRadiationID + 1;
-  do return __deceptinfect_radiation_RadiationSystem.nextRadiationID - 1 end;
-end
 __deceptinfect_radiation_RadiationSystem.testRadiation = function(vec) 
   local ent = __deceptinfect_ecswip_ComponentManager.addEntity();
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(nil, vec, _G.Angle(0, 0, 0)), ent);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_RadiationProducer.createFromType(__deceptinfect_radiation_RadTypes.NEST), ent);
 end
 _hx_exports["testRadiation"] = __deceptinfect_radiation_RadiationSystem.testRadiation
 __deceptinfect_radiation_RadiationSystem.getTotalRadiation = function(dist,rad) 
@@ -3683,55 +3683,42 @@ __deceptinfect_radiation_RadiationSystem.prototype.run_server = function(self)
   local acceptEnt = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (acceptEnt:hasNext()) do 
     local acceptEnt1 = acceptEnt:next();
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[acceptEnt1];
-    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_RateComponent)[acceptEnt1];
-    local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationAccepter)[acceptEnt1];
-    if (_g3[1] == 1) then 
-      if (_g2[1] == 1) then 
-        if (_g1[1] == 1) then 
-          local c_rateAccept = _g2[2];
-          local c_radAccept = _g3[2];
-          local c_radGEnt = _g1[2];
-          local produceEnt = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
-          while (produceEnt:hasNext()) do 
-            local produceEnt1 = produceEnt:next();
-            local _g21 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[produceEnt1];
-            local _g31 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationProducer)[produceEnt1];
-            if (_g31[1] == 1) then 
-              if (_g21[1] == 1) then 
-                local c_radProduce = _g31[2];
-                local dist = _g21[2]:get_pos():Distance(c_radGEnt.entity:GetPos());
-                local _g22 = __deceptinfect_radiation_RadiationSystem.getTotalRadiation(dist, c_radProduce);
-                if (_g22[1] == 0) then 
-                  local rate = _g22[2];
-                  local key = c_radProduce.id;
-                  local _this = c_radAccept.radiation;
-                  if (rate == nil) then 
-                    _this.h[key] = __haxe_ds_IntMap.tnull;
-                  else
-                    _this.h[key] = rate;
-                  end;
-                end;
-                local _g4 = c_radAccept.acceptContam;
-                local _g5 = c_radProduce.contamProducer;
-                if (_g5[1] == 0) then 
-                  if (_g4[1] == 0) then 
-                    local c_contamProduce = _g5[2];
-                    local c_contamAccept = _g4[2];
-                    if (dist < c_contamProduce.dist) then 
-                      if (c_contamAccept.contam_time:addTime(c_radProduce.id) > c_contamProduce.check) then 
-                        c_contamAccept.contam_time:resetTime(c_radProduce.id);
-                        _G.math.random();
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadVictim)[acceptEnt1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[acceptEnt1];
+    local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_RateComponent)[acceptEnt1];
+    local _g4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationAccepter)[acceptEnt1];
+    if (_g4[1] == 1) then 
+      local _g5 = _g4[2];
+      if (_g3[1] == 1) then 
+        local _g6 = _g3[2];
+        if (_g2[1] == 1) then 
+          local _g7 = _g2[2];
+          if (_g1[1] == 1) then 
+            local produceEnt = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+            while (produceEnt:hasNext()) do 
+              local produceEnt1 = produceEnt:next();
+              local _g21 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadSource)[produceEnt1];
+              local _g31 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[produceEnt1];
+              local _g41 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationProducer)[produceEnt1];
+              if (_g41[1] == 1) then 
+                if (_g31[1] == 1) then 
+                  if (_g21[1] == 1) then 
+                    local _g22 = __deceptinfect_radiation_RadiationSystem.getTotalRadiation(_g31[2]:get_pos():Distance(_g7:get_pos()), _g41[2]);
+                    if (_g22[1] == 0) then 
+                      local _g32 = _g22[2];
+                      local _this = _g5.radiation;
+                      if (_g32 == nil) then 
+                        _this.h[produceEnt1] = __haxe_ds_IntMap.tnull;
+                      else
+                        _this.h[produceEnt1] = _g32;
                       end;
-                    else
-                      c_contamAccept.contam_time:removeTime(c_radProduce.id);
                     end;
                   end;
                 end;
               end;
             end;
+            _g6.addRates:set(__deceptinfect_radiation_RadiationSystem.radRateID, __deceptinfect_radiation_RadiationSystem.getTotalRadiationRate(_g5));
           end;
-          c_rateAccept.addRates:set(__deceptinfect_radiation_RadiationSystem.radRateID, __deceptinfect_radiation_RadiationSystem.getTotalRadiationRate(c_radAccept));
         end;
       end;
     end;
@@ -4726,6 +4713,115 @@ __deceptinfect_infection_InfectionLookSystem.prototype.__class__ =  __deceptinfe
 __deceptinfect_infection_InfectionLookSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_infection_InfectionLookSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
+__deceptinfect_radiation_ContaminationSystem.new = function() 
+  local self = _hx_new(__deceptinfect_radiation_ContaminationSystem.prototype)
+  __deceptinfect_radiation_ContaminationSystem.super(self)
+  return self
+end
+__deceptinfect_radiation_ContaminationSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.radiation.ContaminationSystem"] = __deceptinfect_radiation_ContaminationSystem
+__deceptinfect_radiation_ContaminationSystem.__name__ = "deceptinfect.radiation.ContaminationSystem"
+__deceptinfect_radiation_ContaminationSystem.__interfaces__ = {__enumExtractor_EnumExtractor}
+__deceptinfect_radiation_ContaminationSystem.prototype = _hx_a();
+__deceptinfect_radiation_ContaminationSystem.prototype.run_server = function(self) 
+  local vic = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+  while (vic:hasNext()) do 
+    local vic1 = vic:next();
+    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[vic1];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_ContaminationAccepter)[vic1];
+    local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadVictim)[vic1];
+    if (_g3[1] == 1) then 
+      if (_g2[1] == 1) then 
+        if (_g1[1] == 1) then 
+          local c_contamAccept = _g2[2];
+          local c_rv = _g3[2];
+          local c_vicpos = _g1[2];
+          local produce = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+          local _hx_continue_2 = false;
+          while (produce:hasNext()) do repeat 
+            local produce1 = produce:next();
+            local _g21 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[produce1];
+            local _g31 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_ContaminationProducer)[produce1];
+            local _g4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadSource)[produce1];
+            if (_g4[1] == 1) then 
+              if (_g31[1] == 1) then 
+                if (_g21[1] == 1) then 
+                  local c_contamProduce = _g31[2];
+                  local c_rs = _g4[2];
+                  if (c_rs.attatch == vic1) then 
+                    break;
+                  end;
+                  if (_g21[2]:get_pos():Distance(c_vicpos:get_pos()) < c_contamProduce.dist) then 
+                    if (c_contamAccept.contam_time:addTime(produce1) > c_contamProduce.check) then 
+                      c_contamAccept.contam_time:resetTime(produce1);
+                      if (_G.math.random() < c_contamProduce.chance) then 
+                        local tmp = c_contamProduce.type[1];
+                        if (tmp) == 0 then 
+                        elseif (tmp) == 1 then 
+                          if (c_rv.affectedtype.h[c_rs.type] ~= nil) then 
+                            break;
+                          end;
+                        elseif (tmp) == 2 then 
+                          if (c_rv.affected.h[c_rs.base] ~= nil) then 
+                            c_rs.lifetime = _hx_funcToField(c_rs.rso.lifetime);
+                            break;
+                          end; end;
+                        c_rv.affected.h[produce1] = true;
+                        local key = c_rs.type;
+                        local _this = c_rv.affectedtype;
+                        if (produce1 == nil) then 
+                          _this.h[key] = __haxe_ds_IntMap.tnull;
+                        else
+                          _this.h[key] = produce1;
+                        end;
+                        __haxe_Log.trace("Rolled successfully", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/radiation/ContaminationSystem.hx",lineNumber=47,className="deceptinfect.radiation.ContaminationSystem",methodName="run_server"}));
+                        local rad = __deceptinfect_ecswip_ComponentManager.addEntity();
+                        local rtn;
+                        local _g32 = c_contamProduce.nextoptions;
+                        local rtn1 = _g32[1];
+                        if (rtn1) == 0 then 
+                          rtn = __deceptinfect_radiation_RadSource.radSourceFromType(_g32[2], vic1, c_rs.base);
+                        elseif (rtn1) == 1 then 
+                          rtn = __deceptinfect_radiation_RadSource.radSourceFromType(c_rs.type, vic1, c_rs.base);
+                        elseif (rtn1) == 2 then 
+                          local rsrtn = __deceptinfect_radiation_RadSource.radSourceFromType(c_rs.type, vic1, c_rs.base);
+                          rsrtn.c_rs.lifetime = _g32[2];
+                          rtn = rsrtn; end;
+                        __deceptinfect_ecswip_ComponentManager.addComponent(rtn.c_rs, rad);
+                        local _g6 = rtn.c_radproduce;
+                        if (_g6[1] == 0) then 
+                          __deceptinfect_ecswip_ComponentManager.addComponent(_g6[2], rad);
+                        end;
+                        local _g8 = rtn.c_contam;
+                        if (_g8[1] == 0) then 
+                          __deceptinfect_ecswip_ComponentManager.addComponent(_g8[2], rad);
+                        end;
+                      end;
+                    end;
+                  else
+                    c_contamAccept.contam_time:removeTime(produce1);
+                  end;
+                end;
+              end;
+            end;until true
+            if _hx_continue_2 then 
+            _hx_continue_2 = false;
+            break;
+            end;
+            
+          end;
+        end;
+      end;
+    end;
+  end;
+end
+
+__deceptinfect_radiation_ContaminationSystem.prototype.__class__ =  __deceptinfect_radiation_ContaminationSystem
+__deceptinfect_radiation_ContaminationSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_radiation_ContaminationSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
 __deceptinfect_ecswip_SystemManager.new = {}
 _hxClasses["deceptinfect.ecswip.SystemManager"] = __deceptinfect_ecswip_SystemManager
 __deceptinfect_ecswip_SystemManager.__name__ = "deceptinfect.ecswip.SystemManager"
@@ -4786,6 +4882,10 @@ __deceptinfect_ecswip_SystemManager.make = function()
   local key13 = __deceptinfect_infection_InfectionLookSystem;
   _this13.h[key13] = __deceptinfect_infection_InfectionLookSystem.new();
   _this13.k[key13] = true;
+  local _this14 = __deceptinfect_ecswip_SystemManager.getSystems;
+  local key14 = __deceptinfect_radiation_ContaminationSystem;
+  _this14.h[key14] = __deceptinfect_radiation_ContaminationSystem.new();
+  _this14.k[key14] = true;
 end
 __deceptinfect_ecswip_SystemManager.getSystem = function(cls) 
   do return __deceptinfect_ecswip_SystemManager.getSystems.h[cls] end;
@@ -5192,8 +5292,6 @@ __deceptinfect_ents_Di_nest.prototype.Initialize = function(self)
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   self.id = x.id;
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_NestComponent.new(), self.id);
-  local this1 = self.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_RadiationProducer.createFromType(__deceptinfect_radiation_RadTypes.NEST), this1);
 end
 __deceptinfect_ents_Di_nest.prototype.Think = function(self) 
   local this1 = self.id;
@@ -5956,31 +6054,40 @@ __deceptinfect_radiation_ContaminationAccepter.prototype.__class__ =  __deceptin
 __deceptinfect_radiation_ContaminationAccepter.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_radiation_ContaminationAccepter.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
-__deceptinfect_radiation_ContaminationProducer.new = function(options) 
+__deceptinfect_radiation_ContaminationProducer.new = function(options,radoptions) 
   local self = _hx_new(__deceptinfect_radiation_ContaminationProducer.prototype)
-  __deceptinfect_radiation_ContaminationProducer.super(self,options)
+  __deceptinfect_radiation_ContaminationProducer.super(self,options,radoptions)
   return self
 end
-__deceptinfect_radiation_ContaminationProducer.super = function(self,options) 
+__deceptinfect_radiation_ContaminationProducer.super = function(self,options,radoptions) 
   self.type = __deceptinfect_radiation_ContaminationType.SAME_TYPE;
+  __deceptinfect_ecswip_Component.super(self);
   self.chance = _hx_funcToField(options.chance);
-  self.time = _hx_funcToField(options.time);
   self.dist = _hx_funcToField(options.dist);
   self.check = _hx_funcToField(options.check);
   if (options.type ~= nil) then 
     self.type = _hx_funcToField(options.type);
   end;
+  self.nextoptions = _hx_funcToField(options.nextoptions);
 end
 _hxClasses["deceptinfect.radiation.ContaminationProducer"] = __deceptinfect_radiation_ContaminationProducer
 __deceptinfect_radiation_ContaminationProducer.__name__ = "deceptinfect.radiation.ContaminationProducer"
 __deceptinfect_radiation_ContaminationProducer.prototype = _hx_a();
 __deceptinfect_radiation_ContaminationProducer.prototype.chance= nil;
-__deceptinfect_radiation_ContaminationProducer.prototype.time= nil;
 __deceptinfect_radiation_ContaminationProducer.prototype.check= nil;
 __deceptinfect_radiation_ContaminationProducer.prototype.dist= nil;
 __deceptinfect_radiation_ContaminationProducer.prototype.type= nil;
+__deceptinfect_radiation_ContaminationProducer.prototype.nextoptions= nil;
 
 __deceptinfect_radiation_ContaminationProducer.prototype.__class__ =  __deceptinfect_radiation_ContaminationProducer
+__deceptinfect_radiation_ContaminationProducer.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_radiation_ContaminationProducer.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.radiation.NextOptions"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="TYPE","MY_TYPE","OVERRIDE_LIFETIME"},3)}
+__deceptinfect_radiation_NextOptions = _hxClasses["deceptinfect.radiation.NextOptions"];
+__deceptinfect_radiation_NextOptions.TYPE = function(radtype) local _x = _hx_tab_array({[0]="TYPE",0,radtype,__enum__=__deceptinfect_radiation_NextOptions}, 3); return _x; end 
+__deceptinfect_radiation_NextOptions.MY_TYPE = _hx_tab_array({[0]="MY_TYPE",1,__enum__ = __deceptinfect_radiation_NextOptions},2)
+
+__deceptinfect_radiation_NextOptions.OVERRIDE_LIFETIME = function(t) local _x = _hx_tab_array({[0]="OVERRIDE_LIFETIME",2,t,__enum__=__deceptinfect_radiation_NextOptions}, 3); return _x; end 
 _hxClasses["deceptinfect.radiation.ContaminationType"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ALWAYS","SAME_TYPE","SAME_SOURCE"},3)}
 __deceptinfect_radiation_ContaminationType = _hxClasses["deceptinfect.radiation.ContaminationType"];
 __deceptinfect_radiation_ContaminationType.ALWAYS = _hx_tab_array({[0]="ALWAYS",0,__enum__ = __deceptinfect_radiation_ContaminationType},2)
@@ -5989,32 +6096,89 @@ __deceptinfect_radiation_ContaminationType.SAME_TYPE = _hx_tab_array({[0]="SAME_
 
 __deceptinfect_radiation_ContaminationType.SAME_SOURCE = _hx_tab_array({[0]="SAME_SOURCE",2,__enum__ = __deceptinfect_radiation_ContaminationType},2)
 
-_hxClasses["deceptinfect.radiation.RadiationState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ENABLED","DISABLED","DESTROYED"},3)}
-__deceptinfect_radiation_RadiationState = _hxClasses["deceptinfect.radiation.RadiationState"];
-__deceptinfect_radiation_RadiationState.ENABLED = _hx_tab_array({[0]="ENABLED",0,__enum__ = __deceptinfect_radiation_RadiationState},2)
 
-__deceptinfect_radiation_RadiationState.DISABLED = _hx_tab_array({[0]="DISABLED",1,__enum__ = __deceptinfect_radiation_RadiationState},2)
+__deceptinfect_radiation_RadSource.new = function(rso) 
+  local self = _hx_new(__deceptinfect_radiation_RadSource.prototype)
+  __deceptinfect_radiation_RadSource.super(self,rso)
+  return self
+end
+__deceptinfect_radiation_RadSource.super = function(self,rso) 
+  __deceptinfect_ecswip_Component.super(self);
+  self.attatch = _hx_funcToField(rso.attatch);
+  self.type = _hx_funcToField(rso.type);
+  self.lifetime = _hx_funcToField(rso.lifetime);
+  self.rso = rso;
+end
+_hxClasses["deceptinfect.radiation.RadSource"] = __deceptinfect_radiation_RadSource
+__deceptinfect_radiation_RadSource.__name__ = "deceptinfect.radiation.RadSource"
+__deceptinfect_radiation_RadSource.radSourceFromType = function(x,attatch,base) 
+  local ret = __deceptinfect_radiation_RadiationTypes.types.h[x];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return __deceptinfect_radiation_RadSource.newRadSource(ret, attatch, base) end;
+end
+__deceptinfect_radiation_RadSource.newRadSource = function(rso,attatch,base) 
+  local c_rs = __deceptinfect_radiation_RadSource.new(rso);
+  c_rs.attatch = attatch;
+  c_rs.base = base;
+  local c_produce;
+  local _g = rso.options;
+  local c_produce1 = _g[1];
+  if (c_produce1) == 1 then 
+    c_produce = __haxe_ds_Option.Some(__deceptinfect_radiation_RadiationProducer.new(_g[2]));
+  elseif (c_produce1) == 2 then 
+    c_produce = __haxe_ds_Option.Some(__deceptinfect_radiation_RadiationProducer.new(_g[2]));else
+  c_produce = __haxe_ds_Option.None; end;
+  local c_contam;
+  local _g4 = rso.options;
+  local c_contam1 = _g4[1];
+  if (c_contam1) == 0 then 
+    c_contam = __haxe_ds_Option.Some(__deceptinfect_radiation_ContaminationProducer.new(_g4[2]));
+  elseif (c_contam1) == 2 then 
+    c_contam = __haxe_ds_Option.Some(__deceptinfect_radiation_ContaminationProducer.new(_g4[3]));else
+  c_contam = __haxe_ds_Option.None; end;
+  do return _hx_o({__fields__={c_rs=true,c_radproduce=true,c_contam=true},c_rs=c_rs,c_radproduce=c_produce,c_contam=c_contam}) end;
+end
+__deceptinfect_radiation_RadSource.prototype = _hx_a();
+__deceptinfect_radiation_RadSource.prototype.base= nil;
+__deceptinfect_radiation_RadSource.prototype.type= nil;
+__deceptinfect_radiation_RadSource.prototype.attatch= nil;
+__deceptinfect_radiation_RadSource.prototype.lifetime= nil;
+__deceptinfect_radiation_RadSource.prototype.rso= nil;
 
-__deceptinfect_radiation_RadiationState.DESTROYED = _hx_tab_array({[0]="DESTROYED",2,__enum__ = __deceptinfect_radiation_RadiationState},2)
+__deceptinfect_radiation_RadSource.prototype.__class__ =  __deceptinfect_radiation_RadSource
+__deceptinfect_radiation_RadSource.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_radiation_RadSource.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.radiation.RadSourceOp"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="CONTAM","RAD","BOTH"},3)}
+__deceptinfect_radiation_RadSourceOp = _hxClasses["deceptinfect.radiation.RadSourceOp"];
+__deceptinfect_radiation_RadSourceOp.CONTAM = function(op) local _x = _hx_tab_array({[0]="CONTAM",0,op,__enum__=__deceptinfect_radiation_RadSourceOp}, 3); return _x; end 
+__deceptinfect_radiation_RadSourceOp.RAD = function(op) local _x = _hx_tab_array({[0]="RAD",1,op,__enum__=__deceptinfect_radiation_RadSourceOp}, 3); return _x; end 
+__deceptinfect_radiation_RadSourceOp.BOTH = function(rpo,cpo) local _x = _hx_tab_array({[0]="BOTH",2,rpo,cpo,__enum__=__deceptinfect_radiation_RadSourceOp}, 4); return _x; end 
 
+__deceptinfect_radiation_RadVictim.new = function() 
+  local self = _hx_new(__deceptinfect_radiation_RadVictim.prototype)
+  __deceptinfect_radiation_RadVictim.super(self)
+  return self
+end
+__deceptinfect_radiation_RadVictim.super = function(self) 
+  self.affectedtype = __haxe_ds_IntMap.new();
+  self.affected = __haxe_ds_IntMap.new();
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.radiation.RadVictim"] = __deceptinfect_radiation_RadVictim
+__deceptinfect_radiation_RadVictim.__name__ = "deceptinfect.radiation.RadVictim"
+__deceptinfect_radiation_RadVictim.prototype = _hx_a();
+__deceptinfect_radiation_RadVictim.prototype.affected= nil;
+__deceptinfect_radiation_RadVictim.prototype.affectedtype= nil;
+
+__deceptinfect_radiation_RadVictim.prototype.__class__ =  __deceptinfect_radiation_RadVictim
+__deceptinfect_radiation_RadVictim.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_radiation_RadVictim.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 _hxClasses["deceptinfect.radiation.RadLifetime"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="FINITE","INFINITE"},2)}
 __deceptinfect_radiation_RadLifetime = _hxClasses["deceptinfect.radiation.RadLifetime"];
 __deceptinfect_radiation_RadLifetime.FINITE = function(x) local _x = _hx_tab_array({[0]="FINITE",0,x,__enum__=__deceptinfect_radiation_RadLifetime}, 3); return _x; end 
 __deceptinfect_radiation_RadLifetime.INFINITE = _hx_tab_array({[0]="INFINITE",1,__enum__ = __deceptinfect_radiation_RadLifetime},2)
-
-_hxClasses["deceptinfect.radiation.RadTypes"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NEST","CORPSE","INF","PUSTLE","SPIT_HIT","SPIT"},6)}
-__deceptinfect_radiation_RadTypes = _hxClasses["deceptinfect.radiation.RadTypes"];
-__deceptinfect_radiation_RadTypes.NEST = _hx_tab_array({[0]="NEST",0,__enum__ = __deceptinfect_radiation_RadTypes},2)
-
-__deceptinfect_radiation_RadTypes.CORPSE = _hx_tab_array({[0]="CORPSE",1,__enum__ = __deceptinfect_radiation_RadTypes},2)
-
-__deceptinfect_radiation_RadTypes.INF = _hx_tab_array({[0]="INF",2,__enum__ = __deceptinfect_radiation_RadTypes},2)
-
-__deceptinfect_radiation_RadTypes.PUSTLE = _hx_tab_array({[0]="PUSTLE",3,__enum__ = __deceptinfect_radiation_RadTypes},2)
-
-__deceptinfect_radiation_RadTypes.SPIT_HIT = _hx_tab_array({[0]="SPIT_HIT",4,__enum__ = __deceptinfect_radiation_RadTypes},2)
-
-__deceptinfect_radiation_RadTypes.SPIT = _hx_tab_array({[0]="SPIT",5,__enum__ = __deceptinfect_radiation_RadTypes},2)
 
 
 __deceptinfect_radiation_RadiationTypes.new = {}
@@ -7901,8 +8065,6 @@ local _hx_static_init = function()
   
   __deceptinfect_infection_RateSystem.nextAddRate = 0;
   
-  __deceptinfect_radiation_RadiationSystem.nextRadiationID = 0;
-  
   __deceptinfect_radiation_RadiationSystem.radRateID = __deceptinfect_infection_RateSystem.getAddRateTicket();
   
   __deceptinfect_game_SpawnSystem.obj = __deceptinfect_game_SpawnPointTable.new();
@@ -7921,24 +8083,33 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SystemManager.getSystems = __haxe_ds_ObjectMap.new();
   
-  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_InfectionLookSystem}, 14);
+  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem}, 15);
   
   __deceptinfect_radiation_RadiationTypes.types = (function() 
     local _hx_3
     
-    local _g = __haxe_ds_EnumValueMap.new();
+    local _g = __haxe_ds_IntMap.new();
     
-    _g:set(__deceptinfect_radiation_RadTypes.NEST, _hx_o({__fields__={maxrate=true,radius=true,contaminate=true,lifetime=true},maxrate=6,radius=500,contaminate=_hx_o({__fields__={chance=true,dist=true,time=true,check=true,type=true},chance=0.4,dist=20,time=60,check=0.8,type=__deceptinfect_radiation_ContaminationType.SAME_SOURCE}),lifetime=__deceptinfect_radiation_RadLifetime.INFINITE}));
+    local value = _hx_o({__fields__={type=true,lifetime=true,options=true},type=1,lifetime=__deceptinfect_radiation_RadLifetime.INFINITE,options=__deceptinfect_radiation_RadSourceOp.BOTH(_hx_o({__fields__={maxrate=true,radius=true},maxrate=6,radius=500}), _hx_o({__fields__={chance=true,dist=true,check=true,type=true,nextoptions=true},chance=0.4,dist=20,check=0.8,type=__deceptinfect_radiation_ContaminationType.SAME_SOURCE,nextoptions=__deceptinfect_radiation_NextOptions.TYPE(0)}))});
+    if (value == nil) then 
+      _g.h[1] = __haxe_ds_IntMap.tnull;
+    else
+      _g.h[1] = value;
+    end;
     
-    _g:set(__deceptinfect_radiation_RadTypes.CORPSE, _hx_o({__fields__={maxrate=true,radius=true,contaminate=true,lifetime=true},maxrate=6,radius=350,contaminate=_hx_o({__fields__={chance=true,time=true,check=true,dist=true,type=true},chance=0.5,time=35,check=0.5,dist=50,type=__deceptinfect_radiation_ContaminationType.SAME_SOURCE}),lifetime=__deceptinfect_radiation_RadLifetime.FINITE(25)}));
+    local value1 = _hx_o({__fields__={type=true,lifetime=true,options=true},type=0,lifetime=__deceptinfect_radiation_RadLifetime.FINITE(10),options=__deceptinfect_radiation_RadSourceOp.BOTH(_hx_o({__fields__={maxrate=true,radius=true},maxrate=4,radius=300}), _hx_o({__fields__={chance=true,dist=true,check=true,type=true,nextoptions=true},chance=0.4,dist=20,check=0.8,type=__deceptinfect_radiation_ContaminationType.SAME_SOURCE,nextoptions=__deceptinfect_radiation_NextOptions.MY_TYPE}))});
+    if (value1 == nil) then 
+      _g.h[0] = __haxe_ds_IntMap.tnull;
+    else
+      _g.h[0] = value1;
+    end;
     
-    _g:set(__deceptinfect_radiation_RadTypes.INF, _hx_o({__fields__={maxrate=true,radius=true,contaminate=true,lifetime=true},maxrate=4.5,radius=300,contaminate=_hx_o({__fields__={chance=true,time=true,check=true,dist=true,type=true},chance=0.4,time=20,check=0.3,dist=50,type=__deceptinfect_radiation_ContaminationType.SAME_SOURCE}),lifetime=__deceptinfect_radiation_RadLifetime.INFINITE}));
-    
-    _g:set(__deceptinfect_radiation_RadTypes.PUSTLE, _hx_o({__fields__={maxrate=true,radius=true},maxrate=3,radius=400}));
-    
-    _g:set(__deceptinfect_radiation_RadTypes.SPIT_HIT, _hx_o({__fields__={maxrate=true,radius=true,contaminate=true},maxrate=5,radius=250,contaminate=_hx_o({__fields__={chance=true,time=true,check=true,dist=true,type=true},chance=0.8,time=7,check=0.3,dist=60,type=__deceptinfect_radiation_ContaminationType.ALWAYS})}));
-    
-    _g:set(__deceptinfect_radiation_RadTypes.SPIT, _hx_o({__fields__={maxrate=true,radius=true},maxrate=4.5,radius=200}));
+    local value2 = _hx_o({__fields__={type=true,lifetime=true,options=true},type=3,lifetime=__deceptinfect_radiation_RadLifetime.INFINITE,options=__deceptinfect_radiation_RadSourceOp.BOTH(_hx_o({__fields__={maxrate=true,radius=true},maxrate=5,radius=500}), _hx_o({__fields__={chance=true,dist=true,check=true,type=true,nextoptions=true},chance=0.4,dist=20,check=0.8,type=__deceptinfect_radiation_ContaminationType.SAME_SOURCE,nextoptions=__deceptinfect_radiation_NextOptions.OVERRIDE_LIFETIME(__deceptinfect_radiation_RadLifetime.FINITE(10))}))});
+    if (value2 == nil) then 
+      _g.h[3] = __haxe_ds_IntMap.tnull;
+    else
+      _g.h[3] = value2;
+    end;
     
     _hx_3 = _g;
     return _hx_3

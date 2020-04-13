@@ -1,4 +1,8 @@
 package deceptinfect;
+import deceptinfect.radiation.ContaminationProducer;
+import deceptinfect.radiation.RadVictim;
+import deceptinfect.radiation.RadiationTypes;
+import deceptinfect.radiation.RadSource;
 import deceptinfect.game.CleanupEnt;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.util.Util;
@@ -26,7 +30,7 @@ import deceptinfect.GEntCompat;
 import deceptinfect.GameInstance;
 using deceptinfect.util.PlayerExt;
 import deceptinfect.infection.InfectionLookInfo;
-class GameManager {
+class GameManager implements enumExtractor.EnumExtractor {
 
 
     public static var state(default,#if server set #else null #end):GAME_STATE = WAIT;
@@ -82,9 +86,11 @@ class GameManager {
         var infcomp = new InfectionComponent();
         var spec = new SpectateComponent();
         var rate = new RateComponent();
+        var vic = new RadVictim();
+        var contam = new ContaminationAccepter();
         var health = new HiddenHealthComponent();
         var grabaccept = new GrabAccepter();
-        var radaccept = new RadiationAccepter({contaminate: new ContaminationAccepter()});
+        var radaccept = new RadiationAccepter({});
         var virpos = new VirtualPosition(ply);
         
         p.add_component(infcomp);
@@ -95,6 +101,8 @@ class GameManager {
         p.add_component(radaccept);
         p.add_component(virpos);
         p.add_component(new AliveComponent());
+        p.add_component(vic);
+        p.add_component(contam);
     }
 
     #if server
@@ -245,9 +253,25 @@ class GameManager {
         //x.remove_component(GrabAccepter);
         c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
         // trace(c_accept.grabState);
-        var rad = RadiationProducer.createFromType(INF);
-        rad.state = DISABLED;
-        x.add_component(rad);
+        var rad = ComponentManager.addEntity();
+        var rtn = RadSource.radSourceFromType(INF,x,rad);
+        if (rtn.c_rs != null) {
+
+            rad.add_component(rtn.c_rs);
+        }
+        @as(rtn.c_radproduce => Some(c_rad)) {
+            rad.add_component(c_rad);
+        }
+        @as(rtn.c_contam => Some(c_cont)) {
+            rad.add_component(c_cont);
+        }
+        // rad.add_component(rtn.c_radproduce);
+        // rad.add_component(rtn.c_contam);
+        rad.add_component(new VirtualPosition(x.get_sure(GEntityComponent).entity));
+        // rad.add_component()
+        // var rad = RadiationProducer.createFromType(INF);
+        // rad.state = DISABLED;
+        // x.add_component(rad);
     }
 
     #if server

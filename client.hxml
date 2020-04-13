@@ -5,6 +5,7 @@
 -D gmodAddonFolder=/home/steam/.steam/SteamApps/common/GarrysModDS/garrysmod/addons/
 -D generateLuaInit
 -lib tink_core
+-lib singlePatternSwitch
 -D dce=full
 -D analyzer-optimize
 -D gamemode=deceptinfect

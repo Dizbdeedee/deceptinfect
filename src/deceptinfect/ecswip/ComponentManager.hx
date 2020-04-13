@@ -49,7 +49,6 @@ class ComponentManager {
 
     public static function addComponent<T:Component>(x:T,to:DI_ID) {
         var comparray = lazyInit(Type.getClass(x));
-        //trace(to);
         comparray[to] = Comp(x);
     }
 

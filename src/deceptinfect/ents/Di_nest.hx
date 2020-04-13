@@ -26,7 +26,7 @@ class Di_nest extends gmod.sent.ENT_ANIM implements SentBuild {
         var ent = new GEntCompat(self);
         id = ent.id;
         id.add_component(new NestComponent());
-        id.add_component(RadiationProducer.createFromType(RadTypes.NEST));
+        // id.add_component(RadiationProducer.createFromType(RadTypes.NEST));
         
     }
     override function Think():Bool {

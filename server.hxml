@@ -8,6 +8,7 @@
 -D macro-times
 -D dce=full
 -D analyzer-optimize
+-lib singlePatternSwitch
 -lib tink_core
 --macro gmod.macros.InitMacro.init()
 -main Main

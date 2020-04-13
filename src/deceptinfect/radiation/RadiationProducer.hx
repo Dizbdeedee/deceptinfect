@@ -5,37 +5,32 @@ import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.ecswip.Component;
 import deceptinfect.radiation.RadiationTypes;
 class RadiationProducer extends Component {
-    //public var attatched:RadiationAttatched = NOT_ATTATCHED;
-    public var id:RadiationID = RadiationSystem.getNextRadiatonID();   
+
     public var state:RadiationState = ENABLED;
     public var maxrate:Float;
 
-    public var type:Null<RadTypes>;
+    // public var type:Null<RadTypes>;
     public var radius:Float;
 
-    public var base:RadiationID;
+    // var options:RadiationProduceOptions;
 
-    public var contamProducer:Option<ContaminationProducer> = None;
-    public var lifetime:RadLifetime;
-    
-    public static function createFromType(type:RadTypes):RadiationProducer {
-        var radProduce = new RadiationProducer(RadiationTypes.types[type]);
-        return new RadiationProducer(RadiationTypes.types[type]);
+    // public static function createFromType(type:RadTypes):RadiationProducer {
+    //     // var radProduce = new RadiationProducer(RadiationTypes.types[type]);
+    //     return new RadiationProducer(RadiationTypes.types[type]);
+    // }
 
-    }
+
 
     public function new(options:RadiationProduceOptions) {
         super();
         
         maxrate = options.maxrate;
         radius = options.radius;
-        lifetime = options.lifetime;
-        if (options.contaminate != null) {
-            contamProducer = Some(new ContaminationProducer(options.contaminate));
-        }
-        if (options.type != null) {
-            type = options.type;
-        }
+        // lifetime = options.lifetime;
+        // this.options = options;
+        // if (options.contaminate != null) {
+        //     contamProducer = Some(new ContaminationProducer(options.contaminate));
+        // }
     }
 
     public function copy() {
@@ -59,9 +54,5 @@ enum RadLifetime {
 typedef RadiationProduceOptions = {
     var maxrate:Float;
     var radius:Float;
-    var ?lifetime:RadLifetime;
-    var ?attatch:Entity;
-    var ?contaminate:ContaminationProducerOptions;
 
-    var ?type:RadTypes;
 }

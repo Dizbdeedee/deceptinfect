@@ -29,53 +29,26 @@ class RadiationSystem extends System {
     override function run_server() {
         
         for (acceptEnt in ComponentManager.entities) {
-            switch [acceptEnt.get(RadiationAccepter),acceptEnt.get(RateComponent),acceptEnt.get(GEntityComponent)] {
-            case [Comp(c_radAccept),Comp(c_rateAccept),Comp(c_radGEnt)]:
+            switch [acceptEnt.get(RadiationAccepter),acceptEnt.get(RateComponent),acceptEnt.get(VirtualPosition),acceptEnt.get(RadVictim)] {
+            case [Comp(c_radAccept),Comp(c_rateAccept),Comp(c_radGEnt),Comp(c_radvic)]:
                 //trace("radiationaccepter");
                 for (produceEnt in ComponentManager.entities) {
-                    switch [produceEnt.get(RadiationProducer),produceEnt.get(VirtualPosition)] {
-                    case [Comp(c_radProduce),Comp(c_producePos)]:
+                    switch [produceEnt.get(RadiationProducer),produceEnt.get(VirtualPosition),produceEnt.get(RadSource)] {
+                    case [Comp(c_radProduce),Comp(c_producePos),Comp(c_radsource)]:
+                        //c_radsource /c_radvic might be needed to prevent radiation from source when contaminated from source
 
-                        var dist = c_producePos.pos.Distance(c_radGEnt.entity.GetPos());
+                        var dist = c_producePos.pos.Distance(c_radGEnt.pos);
                         //trace('producing $dist');
                         switch getTotalRadiation(dist,c_radProduce) {
                         case Some(rate):
                             //trace('rate $rate');
-                            c_radAccept.radiation.set(c_radProduce.id,rate);
+                            c_radAccept.radiation.set(produceEnt,rate);
                         default:
                         }
-                        switch [c_radProduce.contamProducer,c_radAccept.acceptContam] {
-                        case [Some(c_contamProduce),Some(c_contamAccept)]:
-                            //trace("contamination working");
-                            if (shouldContam(dist,c_contamProduce)) {
-                                var time = c_contamAccept.contam_time.addTime(c_radProduce.id);
-                                //trace('time $time');
-                                if (shouldRoll(time,c_contamProduce)) {
-                                    c_contamAccept.contam_time.resetTime(c_radProduce.id);
-                                    //trace('roll');
-                                    var randRoll = Math.random();
-                                    if (randRoll < c_contamProduce.chance) {
-                                        var rad = ComponentManager.addEntity();
-                                        var c_newRadProduce = new RadiationProducer({
-                                            maxrate: c_radProduce.maxrate, 
-                                            radius: c_radProduce.radius,
-                                            contaminate: c_contamProduce.options,
-                                            type: c_radProduce.type,
-                                            lifetime: c_contamProduce.contam_time
-                                        });
-                                        c_newRadProduce.base = c_radProduce.id;
-                                        rad.add_component(c_newRadProduce);
-                                        rad.add_component(new VirtualPosition(c_radGEnt.entity));
-                                    }
-                                }
-                            } else {
-                                c_contamAccept.contam_time.removeTime(c_radProduce.id);
-                            }
-                            
-                        default:
-                        }
+                       
                     default:
                     }
+                    
 
                 }
                 c_rateAccept.addRates.set(radRateID,getTotalRadiationRate(c_radAccept));
@@ -91,7 +64,7 @@ class RadiationSystem extends System {
     static function testRadiation(vec:Vector) {
         var ent = ComponentManager.addEntity();
         ent.add_component(new VirtualPosition(null,vec,new Angle(0,0,0)));
-        ent.add_component(RadiationProducer.createFromType(RadTypes.NEST));
+        // ent.add_component(RadiationProducer.createFromType(RadTypes.NEST));
 
     }
     
@@ -103,13 +76,6 @@ class RadiationSystem extends System {
         }
     }
 
-    static inline function shouldContam(dist:Float,contamProduce:ContaminationProducer):Bool {
-        return dist < contamProduce.dist;
-    }
-
-    static inline function shouldRoll(time:Float,contamProduce:ContaminationProducer):Bool {
-        return time > contamProduce.check;
-    }
 
     
     
