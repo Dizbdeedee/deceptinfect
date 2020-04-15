@@ -22,6 +22,7 @@ import gmod.Networking;
 import deceptinfect.ents.*;
 import deceptinfect.items.*;
 #if client
+import deceptinfect.client.SabotagePanel;
 #end
 import deceptinfect.*;
 using gmod.PairTools;
@@ -49,11 +50,12 @@ class Main {
         for (model in Misc.roundModels) {
             UtilLib.PrecacheModel(model);
         }
+        Misc.hmm();
         SpawnSystem.generateSpawns();
         UtilLib.PrecacheModel(Misc.infModel);
         #if client
         new ClientOverrides();
-       
+        SabotagePanel.register();
         
         #end
         trace("looool!!");

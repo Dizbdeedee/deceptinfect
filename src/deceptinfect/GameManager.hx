@@ -1,4 +1,5 @@
 package deceptinfect;
+import deceptinfect.radiation.RadSourceSystem;
 import deceptinfect.radiation.ContaminationProducer;
 import deceptinfect.radiation.RadVictim;
 import deceptinfect.radiation.RadiationTypes;
@@ -91,7 +92,7 @@ class GameManager implements enumExtractor.EnumExtractor {
         var health = new HiddenHealthComponent();
         var grabaccept = new GrabAccepter();
         var radaccept = new RadiationAccepter({});
-        var virpos = new VirtualPosition(ply);
+        var virpos = new VirtualPosition(ENT(ply));
         
         p.add_component(infcomp);
         p.add_component(spec);
@@ -103,6 +104,7 @@ class GameManager implements enumExtractor.EnumExtractor {
         p.add_component(new AliveComponent());
         p.add_component(vic);
         p.add_component(contam);
+        
     }
 
     #if server
@@ -253,21 +255,13 @@ class GameManager implements enumExtractor.EnumExtractor {
         //x.remove_component(GrabAccepter);
         c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
         // trace(c_accept.grabState);
-        var rad = ComponentManager.addEntity();
-        var rtn = RadSource.radSourceFromType(INF,x,rad);
-        if (rtn.c_rs != null) {
-
-            rad.add_component(rtn.c_rs);
-        }
-        @as(rtn.c_radproduce => Some(c_rad)) {
-            rad.add_component(c_rad);
-        }
-        @as(rtn.c_contam => Some(c_cont)) {
-            rad.add_component(c_cont);
-        }
+        // var rad = ComponentManager.addEntity();
+        var rad = getSystem(RadSourceSystem).radSourceFromType(INF,x);
+        var rv = new RadVictim();
+        // x.add_com        
         // rad.add_component(rtn.c_radproduce);
         // rad.add_component(rtn.c_contam);
-        rad.add_component(new VirtualPosition(x.get_sure(GEntityComponent).entity));
+        rad.add_component(new VirtualPosition(ENT(x.get_sure(GEntityComponent).entity)));
         // rad.add_component()
         // var rad = RadiationProducer.createFromType(INF);
         // rad.state = DISABLED;

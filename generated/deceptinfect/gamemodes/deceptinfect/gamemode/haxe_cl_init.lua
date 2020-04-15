@@ -56,6 +56,7 @@ local Array = _hx_e()
 local IntIterator = _hx_e()
 local Main = _hx_e()
 local Math = _hx_e()
+local NETMESSAGECL_di_testnet = _hx_e()
 __gmod_I_NET = _hx_e()
 local NETMESSAGE_di_cleanup = _hx_e()
 local NETMESSAGE_di_evac = _hx_e()
@@ -69,6 +70,10 @@ local NETMESSAGE_geiger = _hx_e()
 local NETMESSAGE_grabend = _hx_e()
 local NETMESSAGE_grabupdate = _hx_e()
 local NETMESSAGE_statue = _hx_e()
+__gmod_PanelHelper = _hx_e()
+local PanelHelper_Panel = _hx_e()
+local PanelHelper_EditablePanel = _hx_e()
+local PanelHelper_DFrame = _hx_e()
 local Reflect = _hx_e()
 local String = _hx_e()
 local Std = _hx_e()
@@ -96,6 +101,7 @@ __deceptinfect_client_GeigerSystem = _hx_e()
 __deceptinfect_client__Hud_Axis = _hx_e()
 __deceptinfect_client_Hud = _hx_e()
 __deceptinfect_client_PVS = _hx_e()
+__deceptinfect_client_SabotagePanel = _hx_e()
 __haxe_IMap = _hx_e()
 __haxe_ds_ObjectMap = _hx_e()
 __deceptinfect_ecswip_ComponentManager = _hx_e()
@@ -120,7 +126,10 @@ __deceptinfect_game_RagdollSystem = _hx_e()
 __deceptinfect_game_SlowMotionSystem = _hx_e()
 __deceptinfect_infection_InfectionLookSystem = _hx_e()
 __deceptinfect_radiation_ContaminationSystem = _hx_e()
+__deceptinfect_radiation_RadSourceSystem = _hx_e()
+__deceptinfect_game_LowHealthSystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
+__deceptinfect_ecswip_ChooseVirPos = _hx_e()
 __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
 __deceptinfect_ents_Di_battery = _hx_e()
@@ -147,6 +156,10 @@ __deceptinfect_util_ValidID = _hx_e()
 __deceptinfect_util_MinMaxTools = _hx_e()
 __deceptinfect_util_Util = _hx_e()
 __gmod_PairTools = _hx_e()
+__gmod_PanelBuild = _hx_e()
+__gmod_PanelHelper_2 = _hx_e()
+__gmod_PanelHelper_3 = _hx_e()
+__gmod_MyShittyClass = _hx_e()
 local __lua_Boot = _hx_e()
 __haxe_EntryPoint = _hx_e()
 __haxe_Log = _hx_e()
@@ -538,10 +551,12 @@ Main.main = function()
     _g = _g + 1;
     _G.util.PrecacheModel(model);
   end;
+  __deceptinfect_Misc.hmm();
   __deceptinfect_game_SpawnSystem.generateSpawns();
   _G.util.PrecacheModel(__deceptinfect_Misc.infModel);
   __deceptinfect_client_ClientOverrides.new();
-  __haxe_Log.trace("looool!!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=59,className="Main",methodName="main"}));
+  __deceptinfect_client_SabotagePanel.register();
+  __haxe_Log.trace("looool!!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=61,className="Main",methodName="main"}));
   __deceptinfect_ecswip_SystemManager.initAllSystems();
   _G.math.randomseed(_G.RealTime());
 end
@@ -567,12 +582,30 @@ Math.min = function(a,b)
   end;
 end
 
+NETMESSAGECL_di_testnet.new = function() 
+  local self = _hx_new(NETMESSAGECL_di_testnet.prototype)
+  NETMESSAGECL_di_testnet.super(self)
+  return self
+end
+NETMESSAGECL_di_testnet.super = function(self) 
+end
+_hxClasses["NETMESSAGECL_di_testnet"] = NETMESSAGECL_di_testnet
+NETMESSAGECL_di_testnet.__name__ = true
+NETMESSAGECL_di_testnet.prototype = _hx_a();
+NETMESSAGECL_di_testnet.prototype.send = function(self,data,unreliable) 
+  if (unreliable == nil) then 
+    unreliable = false;
+  end;
+  _G.net.Start("di_testnet", unreliable);
+  _G.net.WriteString(data.name);
+  _G.net.SendToServer();
+end
+
+NETMESSAGECL_di_testnet.prototype.__class__ =  NETMESSAGECL_di_testnet
+
 __gmod_I_NET.new = {}
 _hxClasses["gmod.I_NET"] = __gmod_I_NET
 __gmod_I_NET.__name__ = true
-__gmod_I_NET.prototype = _hx_a();
-
-__gmod_I_NET.prototype.__class__ =  __gmod_I_NET
 
 NETMESSAGE_di_cleanup.new = function() 
   local self = _hx_new(NETMESSAGE_di_cleanup.prototype)
@@ -833,6 +866,68 @@ NETMESSAGE_statue.prototype.receive = function(self)
 end
 
 NETMESSAGE_statue.prototype.__class__ =  NETMESSAGE_statue
+
+__gmod_PanelHelper.new = function(x) 
+  local self = _hx_new(__gmod_PanelHelper.prototype)
+  __gmod_PanelHelper.super(self,x)
+  return self
+end
+__gmod_PanelHelper.super = function(self,x) 
+  self["self"] = x;
+end
+_hxClasses["gmod.PanelHelper"] = __gmod_PanelHelper
+__gmod_PanelHelper.__name__ = true
+__gmod_PanelHelper.prototype = _hx_a();
+
+__gmod_PanelHelper.prototype.__class__ =  __gmod_PanelHelper
+
+PanelHelper_Panel.new = function(x) 
+  local self = _hx_new(PanelHelper_Panel.prototype)
+  PanelHelper_Panel.super(self,x)
+  return self
+end
+PanelHelper_Panel.super = function(self,x) 
+  __gmod_PanelHelper.super(self,x);
+end
+_hxClasses["PanelHelper_Panel"] = PanelHelper_Panel
+PanelHelper_Panel.__name__ = true
+PanelHelper_Panel.prototype = _hx_a();
+
+PanelHelper_Panel.prototype.__class__ =  PanelHelper_Panel
+PanelHelper_Panel.__super__ = __gmod_PanelHelper
+setmetatable(PanelHelper_Panel.prototype,{__index=__gmod_PanelHelper.prototype})
+
+PanelHelper_EditablePanel.new = function(x) 
+  local self = _hx_new(PanelHelper_EditablePanel.prototype)
+  PanelHelper_EditablePanel.super(self,x)
+  return self
+end
+PanelHelper_EditablePanel.super = function(self,x) 
+  PanelHelper_Panel.super(self,x);
+end
+_hxClasses["PanelHelper_EditablePanel"] = PanelHelper_EditablePanel
+PanelHelper_EditablePanel.__name__ = true
+PanelHelper_EditablePanel.prototype = _hx_a();
+
+PanelHelper_EditablePanel.prototype.__class__ =  PanelHelper_EditablePanel
+PanelHelper_EditablePanel.__super__ = PanelHelper_Panel
+setmetatable(PanelHelper_EditablePanel.prototype,{__index=PanelHelper_Panel.prototype})
+
+PanelHelper_DFrame.new = function(x) 
+  local self = _hx_new(PanelHelper_DFrame.prototype)
+  PanelHelper_DFrame.super(self,x)
+  return self
+end
+PanelHelper_DFrame.super = function(self,x) 
+  PanelHelper_EditablePanel.super(self,x);
+end
+_hxClasses["PanelHelper_DFrame"] = PanelHelper_DFrame
+PanelHelper_DFrame.__name__ = true
+PanelHelper_DFrame.prototype = _hx_a();
+
+PanelHelper_DFrame.prototype.__class__ =  PanelHelper_DFrame
+PanelHelper_DFrame.__super__ = PanelHelper_EditablePanel
+setmetatable(PanelHelper_DFrame.prototype,{__index=PanelHelper_EditablePanel.prototype})
 
 Reflect.new = {}
 _hxClasses["Reflect"] = Reflect
@@ -1132,11 +1227,11 @@ __deceptinfect_DeceptInfect.prototype.Think = function(self)
 end
 __deceptinfect_DeceptInfect.prototype.checkPerformance = function(self) 
   if ((_G.FrameTime() > 0.016666666666667) and not self.underperforming) then 
-    __haxe_Log.trace("Server underperforming! ", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=71,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
+    __haxe_Log.trace("Server underperforming! ", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=72,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
     self.underperforming = true;
   else
     if (self.underperforming) then 
-      __haxe_Log.trace("Server recovered", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=74,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
+      __haxe_Log.trace("Server recovered", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=75,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
       self.underperforming = false;
     end;
   end;
@@ -1232,7 +1327,7 @@ __deceptinfect_GameManager.cleanup = function()
   __deceptinfect_ecswip_SystemManager.initAllSystems();
 end
 __deceptinfect_GameManager.gameStateChanged = function(x) 
-  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=331,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
+  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=325,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
   __deceptinfect_GameManager.state = __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.toGAME_STATE(x.state);
   local _g = x.state;
   if (_g) == 0 then 
@@ -1266,6 +1361,9 @@ __deceptinfect_MapStorage.__name__ = true
 __deceptinfect_Misc.new = {}
 _hxClasses["deceptinfect.Misc"] = __deceptinfect_Misc
 __deceptinfect_Misc.__name__ = true
+__deceptinfect_Misc.hmm = function() 
+  __deceptinfect_Misc.net_testcl:send(_hx_o({__fields__={name=true},name="lol!!"}));
+end
 
 __deceptinfect_PlayerManager.new = {}
 _hxClasses["deceptinfect.PlayerManager"] = __deceptinfect_PlayerManager
@@ -1488,6 +1586,7 @@ end
 __deceptinfect_client_ClientOverrides.super = function(self) 
   GM.HUDPaint = function(GM,...) return self:HUDPaint(...) end;
   GM.NotifyShouldTransmit = function(GM,...) return self:NotifyShouldTransmit(...) end;
+  GM.PlayerButtonDown = function(GM,...) return self:PlayerButtonDown(...) end;
   GM.PreDrawOpaqueRenderables = function(GM,...) return self:PreDrawOpaqueRenderables(...) end;
   GM.postIntialize = function(GM,...) return self:postIntialize(...) end;
   GM.HUDDrawScoreBoard = function(GM,...) return self:HUDDrawScoreBoard(...) end;
@@ -1511,6 +1610,16 @@ __deceptinfect_client_ClientOverrides.prototype.NotifyShouldTransmit = function(
     _this.h[key] = shouldtransmit;
   end;
   __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_RagdollSystem):pvsChange(ent, shouldtransmit);
+end
+__deceptinfect_client_ClientOverrides.prototype.PlayerButtonDown = function(self,ply,button) 
+  if (button == _G.KEY_L) then 
+    local sab = __deceptinfect_client_SabotagePanel.get_inst();
+    if (sab:IsVisible()) then 
+      sab:SetVisible(false);
+    else
+      sab:SetVisible(true);
+    end;
+  end;
 end
 __deceptinfect_client_ClientOverrides.prototype.PreDrawOpaqueRenderables = function(self,isDrawingDepth,isDrawSkybox) 
   __deceptinfect_ecswip_GrabSystem.drawCylinders();
@@ -1695,6 +1804,43 @@ __deceptinfect_client_PVS.new = {}
 _hxClasses["deceptinfect.client.PVS"] = __deceptinfect_client_PVS
 __deceptinfect_client_PVS.__name__ = true
 
+__deceptinfect_client_SabotagePanel.new = function(x) 
+  local self = _hx_new(__deceptinfect_client_SabotagePanel.prototype)
+  __deceptinfect_client_SabotagePanel.super(self,x)
+  return self
+end
+__deceptinfect_client_SabotagePanel.super = function(self,x) 
+  PanelHelper_DFrame.super(self,x);
+end
+_hxClasses["deceptinfect.client.SabotagePanel"] = __deceptinfect_client_SabotagePanel
+__deceptinfect_client_SabotagePanel.__name__ = true
+__deceptinfect_client_SabotagePanel.get_inst = function() 
+  if (__deceptinfect_client_SabotagePanel.inst == nil) then 
+    __deceptinfect_client_SabotagePanel.inst = _G.vgui.Create("SabotagePanel");
+  end;
+  do return __deceptinfect_client_SabotagePanel.inst end;
+end
+__deceptinfect_client_SabotagePanel.register = function() 
+  local PANEL = ({});
+  PANEL.Init = function(dis,...) dis._gHaxeBurrow = __deceptinfect_client_SabotagePanel.new(dis) dis._gHaxeBurrow:Init(...) end;
+  _G.vgui.Register("SabotagePanel", PANEL, "DFrame");
+end
+__deceptinfect_client_SabotagePanel.prototype = _hx_a();
+__deceptinfect_client_SabotagePanel.prototype.Init = function(self) 
+  __haxe_Log.trace("Panel created", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/client/SabotagePanel.hx",lineNumber=22,className="deceptinfect.client.SabotagePanel",methodName="Init"}));
+  self["self"]:SetPos(960., 540.);
+  self["self"]:SetSize(600, 400);
+  self["self"]:SetTitle("Sabotage");
+  self["self"]:MouseCapture(true);
+  self["self"]:SetVisible(false);
+  self["self"]:SetDraggable(true);
+  self["self"]:ShowCloseButton(true);
+end
+
+__deceptinfect_client_SabotagePanel.prototype.__class__ =  __deceptinfect_client_SabotagePanel
+__deceptinfect_client_SabotagePanel.__super__ = PanelHelper_DFrame
+setmetatable(__deceptinfect_client_SabotagePanel.prototype,{__index=PanelHelper_DFrame.prototype})
+
 __haxe_IMap.new = {}
 _hxClasses["haxe.IMap"] = __haxe_IMap
 __haxe_IMap.__name__ = true
@@ -1739,7 +1885,7 @@ __deceptinfect_ecswip_ComponentManager.__name__ = true
 __deceptinfect_ecswip_ComponentManager.addGEnt = function(x) 
   local id = __deceptinfect_ecswip_ComponentManager.addEntity();
   __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_GEntityComponent.new(x), id);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(x), id);
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.ENT(x)), id);
   do return id end;
 end
 __deceptinfect_ecswip_ComponentManager.getOrAdd = function(id,cls,args) 
@@ -1762,7 +1908,12 @@ __deceptinfect_ecswip_ComponentManager.addPlayer = function(x)
   do return id end;
 end
 __deceptinfect_ecswip_ComponentManager.addComponent = function(x,to) 
-  __deceptinfect_ecswip_ComponentManager.lazyInit(Type.getClass(x))[to] = __deceptinfect_ecswip_ComponentState.Comp(x);
+  local cls = Type.getClass(x);
+  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(cls);
+  if (__deceptinfect_ecswip_ComponentManager.componentSignals.k[cls] ~= nil) then 
+    __deceptinfect_ecswip_ComponentManager.componentSignals.h[cls].handlers:invoke(_hx_o({__fields__={ent=true,comp=true},ent=to,comp=x}));
+  end;
+  comparray[to] = __deceptinfect_ecswip_ComponentState.Comp(x);
 end
 __deceptinfect_ecswip_ComponentManager.lazyInit = function(x) 
   local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
@@ -2015,21 +2166,19 @@ __deceptinfect_infection_InfectionSystem.prototype.__class__ =  __deceptinfect_i
 __deceptinfect_infection_InfectionSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_infection_InfectionSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
-__deceptinfect_ecswip_VirtualPosition.new = function(_ent,_pos,_ang) 
+__deceptinfect_ecswip_VirtualPosition.new = function(choice) 
   local self = _hx_new(__deceptinfect_ecswip_VirtualPosition.prototype)
-  __deceptinfect_ecswip_VirtualPosition.super(self,_ent,_pos,_ang)
+  __deceptinfect_ecswip_VirtualPosition.super(self,choice)
   return self
 end
-__deceptinfect_ecswip_VirtualPosition.super = function(self,_ent,_pos,_ang) 
+__deceptinfect_ecswip_VirtualPosition.super = function(self,choice) 
   __deceptinfect_ecswip_Component.super(self);
-  if (_ent == nil) then 
-    self:set_pos(_pos);
-    self:set_ang(_ang);
-  else
-    if (_pos == nil) then 
-      self.ent = _ent;
-    end;
-  end;
+  local tmp = choice[1];
+  if (tmp) == 0 then 
+    self.ent = choice[2];
+  elseif (tmp) == 1 then 
+    self:set_pos(choice[2]);
+    self:set_ang(choice[3]); end;
 end
 _hxClasses["deceptinfect.ecswip.VirtualPosition"] = __deceptinfect_ecswip_VirtualPosition
 __deceptinfect_ecswip_VirtualPosition.__name__ = true
@@ -2067,7 +2216,7 @@ _hxClasses["deceptinfect.radiation.RadiationSystem"] = __deceptinfect_radiation_
 __deceptinfect_radiation_RadiationSystem.__name__ = true
 __deceptinfect_radiation_RadiationSystem.testRadiation = function(vec) 
   local ent = __deceptinfect_ecswip_ComponentManager.addEntity();
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(nil, vec, _G.Angle(0, 0, 0)), ent);
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.REAL(vec, _G.Angle(0, 0, 0))), ent);
 end
 _hx_exports["testRadiation"] = __deceptinfect_radiation_RadiationSystem.testRadiation
 __deceptinfect_radiation_RadiationSystem.prototype = _hx_a();
@@ -2526,6 +2675,40 @@ __deceptinfect_radiation_ContaminationSystem.prototype.__class__ =  __deceptinfe
 __deceptinfect_radiation_ContaminationSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_radiation_ContaminationSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
+__deceptinfect_radiation_RadSourceSystem.new = function() 
+  local self = _hx_new(__deceptinfect_radiation_RadSourceSystem.prototype)
+  __deceptinfect_radiation_RadSourceSystem.super(self)
+  return self
+end
+__deceptinfect_radiation_RadSourceSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.radiation.RadSourceSystem"] = __deceptinfect_radiation_RadSourceSystem
+__deceptinfect_radiation_RadSourceSystem.__name__ = true
+__deceptinfect_radiation_RadSourceSystem.__interfaces__ = {__enumExtractor_EnumExtractor}
+__deceptinfect_radiation_RadSourceSystem.prototype = _hx_a();
+
+__deceptinfect_radiation_RadSourceSystem.prototype.__class__ =  __deceptinfect_radiation_RadSourceSystem
+__deceptinfect_radiation_RadSourceSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_radiation_RadSourceSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
+__deceptinfect_game_LowHealthSystem.new = function() 
+  local self = _hx_new(__deceptinfect_game_LowHealthSystem.prototype)
+  __deceptinfect_game_LowHealthSystem.super(self)
+  return self
+end
+__deceptinfect_game_LowHealthSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.game.LowHealthSystem"] = __deceptinfect_game_LowHealthSystem
+__deceptinfect_game_LowHealthSystem.__name__ = true
+__deceptinfect_game_LowHealthSystem.__interfaces__ = {__enumExtractor_EnumExtractor}
+__deceptinfect_game_LowHealthSystem.prototype = _hx_a();
+
+__deceptinfect_game_LowHealthSystem.prototype.__class__ =  __deceptinfect_game_LowHealthSystem
+__deceptinfect_game_LowHealthSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_game_LowHealthSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
 __deceptinfect_ecswip_SystemManager.new = {}
 _hxClasses["deceptinfect.ecswip.SystemManager"] = __deceptinfect_ecswip_SystemManager
 __deceptinfect_ecswip_SystemManager.__name__ = true
@@ -2590,6 +2773,14 @@ __deceptinfect_ecswip_SystemManager.make = function()
   local key14 = __deceptinfect_radiation_ContaminationSystem;
   _this14.h[key14] = __deceptinfect_radiation_ContaminationSystem.new();
   _this14.k[key14] = true;
+  local _this15 = __deceptinfect_ecswip_SystemManager.getSystems;
+  local key15 = __deceptinfect_radiation_RadSourceSystem;
+  _this15.h[key15] = __deceptinfect_radiation_RadSourceSystem.new();
+  _this15.k[key15] = true;
+  local _this16 = __deceptinfect_ecswip_SystemManager.getSystems;
+  local key16 = __deceptinfect_game_LowHealthSystem;
+  _this16.h[key16] = __deceptinfect_game_LowHealthSystem.new();
+  _this16.k[key16] = true;
 end
 __deceptinfect_ecswip_SystemManager.getSystem = function(cls) 
   do return __deceptinfect_ecswip_SystemManager.getSystems.h[cls] end;
@@ -2618,6 +2809,10 @@ __deceptinfect_ecswip_SystemManager.initAllSystems = function()
     __deceptinfect_ecswip_SystemManager.getSystems.h[clsSystem]:init();
   end;
 end
+_hxClasses["deceptinfect.ecswip.ChooseVirPos"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ENT","REAL"},2)}
+__deceptinfect_ecswip_ChooseVirPos = _hxClasses["deceptinfect.ecswip.ChooseVirPos"];
+__deceptinfect_ecswip_ChooseVirPos.ENT = function(x) local _x = _hx_tab_array({[0]="ENT",0,x,__enum__=__deceptinfect_ecswip_ChooseVirPos}, 3); return _x; end 
+__deceptinfect_ecswip_ChooseVirPos.REAL = function(vec,ang) local _x = _hx_tab_array({[0]="REAL",1,vec,ang,__enum__=__deceptinfect_ecswip_ChooseVirPos}, 4); return _x; end 
 
 __gmod_sent_ENT.new = {}
 _hxClasses["gmod.sent.ENT"] = __gmod_sent_ENT
@@ -3205,6 +3400,58 @@ __gmod_PairTools.iterator = function(table)
     do return _G.select(2, _G.next(table, i)) ~= nil end;
   end}) end;
 end
+
+__gmod_PanelBuild.new = {}
+_hxClasses["gmod.PanelBuild"] = __gmod_PanelBuild
+__gmod_PanelBuild.__name__ = true
+
+__gmod_PanelHelper_2.new = function(x) 
+  local self = _hx_new(__gmod_PanelHelper_2.prototype)
+  __gmod_PanelHelper_2.super(self,x)
+  return self
+end
+__gmod_PanelHelper_2.super = function(self,x) 
+  __gmod_PanelHelper.super(self,x);
+end
+_hxClasses["gmod.PanelHelper_2"] = __gmod_PanelHelper_2
+__gmod_PanelHelper_2.__name__ = true
+__gmod_PanelHelper_2.prototype = _hx_a();
+
+__gmod_PanelHelper_2.prototype.__class__ =  __gmod_PanelHelper_2
+__gmod_PanelHelper_2.__super__ = __gmod_PanelHelper
+setmetatable(__gmod_PanelHelper_2.prototype,{__index=__gmod_PanelHelper.prototype})
+
+__gmod_PanelHelper_3.new = function(x) 
+  local self = _hx_new(__gmod_PanelHelper_3.prototype)
+  __gmod_PanelHelper_3.super(self,x)
+  return self
+end
+__gmod_PanelHelper_3.super = function(self,x) 
+  __gmod_PanelHelper_2.super(self,x);
+end
+_hxClasses["gmod.PanelHelper_3"] = __gmod_PanelHelper_3
+__gmod_PanelHelper_3.__name__ = true
+__gmod_PanelHelper_3.prototype = _hx_a();
+
+__gmod_PanelHelper_3.prototype.__class__ =  __gmod_PanelHelper_3
+__gmod_PanelHelper_3.__super__ = __gmod_PanelHelper_2
+setmetatable(__gmod_PanelHelper_3.prototype,{__index=__gmod_PanelHelper_2.prototype})
+
+__gmod_MyShittyClass.new = function(x) 
+  local self = _hx_new(__gmod_MyShittyClass.prototype)
+  __gmod_MyShittyClass.super(self,x)
+  return self
+end
+__gmod_MyShittyClass.super = function(self,x) 
+  __gmod_PanelHelper_2.super(self,x);
+end
+_hxClasses["gmod.MyShittyClass"] = __gmod_MyShittyClass
+__gmod_MyShittyClass.__name__ = true
+__gmod_MyShittyClass.prototype = _hx_a();
+
+__gmod_MyShittyClass.prototype.__class__ =  __gmod_MyShittyClass
+__gmod_MyShittyClass.__super__ = __gmod_PanelHelper_2
+setmetatable(__gmod_MyShittyClass.prototype,{__index=__gmod_PanelHelper_2.prototype})
 
 __lua_Boot.new = {}
 _hxClasses["__lua_Boot"] = __lua_Boot
@@ -4174,6 +4421,8 @@ __tink_core_CallbackList.prototype.__class__ =  __tink_core_CallbackList
 _hx_array_mt.__index = Array.prototype
 
 local _hx_static_init = function()
+  __deceptinfect_DeceptInfect.hmm = 12;
+  
   __deceptinfect_GameManager.state = __deceptinfect_GAME_STATE.WAIT;
   
   __deceptinfect_GameManager.stateTrig = __tink_core_SignalTrigger.new();
@@ -4260,6 +4509,8 @@ local _hx_static_init = function()
     return _hx_1
   end )();
   
+  __deceptinfect_Misc.net_testcl = NETMESSAGECL_di_testnet.new();
+  
   __deceptinfect_Misc.roundModels = _hx_tab_array({[0]="models/player/mossman.mdl", "models/player/alyx.mdl", "models/player/barney.mdl", "models/player/breen.mdl", "models/player/Eli.mdl", "models/player/gman_high.mdl", "models/player/kleiner.mdl", "models/player/monk.mdl", "models/player/odessa.mdl", "models/player/Group03/Female_01.mdl", "models/player/Group03/Female_02.mdl", "models/player/Group03/Female_03.mdl", "models/player/Group03/Female_04.mdl", "models/player/Group03/Female_06.mdl", "models/player/Group03/Male_01.mdl", "models/player/Group03/Male_02.mdl", "models/player/Group03/Male_03.mdl", "models/player/Group03/Male_04.mdl", "models/player/Group03/Male_05.mdl", "models/player/Group03/Male_06.mdl", "models/player/Group03/Male_07.mdl", "models/player/Group03/Male_08.mdl", "models/player/Group03/Male_09.mdl"}, 23);
   
   __deceptinfect_Misc.infModel = "models/player/zombie_classic.mdl";
@@ -4304,6 +4555,8 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_ComponentManager.components = __haxe_ds_ObjectMap.new();
   
+  __deceptinfect_ecswip_ComponentManager.componentSignals = __haxe_ds_ObjectMap.new();
+  
   __deceptinfect_ecswip_ComponentManager.entities = 0;
   
   __deceptinfect_ecswip_ComponentManager.activeEntities = 0;
@@ -4342,7 +4595,7 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SystemManager.getSystems = __haxe_ds_ObjectMap.new();
   
-  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem}, 15);
+  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem, __deceptinfect_radiation_RadSourceSystem, __deceptinfect_game_LowHealthSystem}, 17);
   
   __deceptinfect_util_Util.mappy = __haxe_ds_StringMap.new();
   

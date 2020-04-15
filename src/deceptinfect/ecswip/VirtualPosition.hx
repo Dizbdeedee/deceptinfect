@@ -5,7 +5,10 @@ class VirtualPosition extends Component {
     public var pos(get,set):Vector;
     @:isVar
     public var ang(get,set):Angle;
+    @:noCompletion
     public var ent(default,null):Null<Entity>;
+
+    @:noCompletion
     public function get_pos() {
         if (ent == null) {
             return pos;
@@ -13,7 +16,7 @@ class VirtualPosition extends Component {
             return ent.GetPos();
         }
     }
-
+    @:noCompletion
     public function get_ang() {
         if (ent == null) {
             return ang;
@@ -21,7 +24,7 @@ class VirtualPosition extends Component {
             return ent.GetAngles();
         }
     }
-
+    @:noCompletion
     public function set_pos(set:Vector):Vector {
         if (ent == null) {
             return pos = set;
@@ -30,7 +33,7 @@ class VirtualPosition extends Component {
             return set;
         }
     }
-
+    @:noCompletion
     public function set_ang(set:Angle):Angle {
         if (ent == null) {
             return ang = set;
@@ -39,13 +42,19 @@ class VirtualPosition extends Component {
             return set;
         }
     }
-    public function new(?_ent:Entity,?_pos:Vector,?_ang:Angle) {
+    public function new(choice:ChooseVirPos) {
         super();
-        if (_ent == null) {
-            pos = _pos;
-            ang = _ang;
-        } else if (_pos == null) {
-            ent = _ent;
-        }
+        switch (choice) {
+            case ENT(x):
+                ent = x;
+            case REAL(vec, ang):
+                pos = vec;
+                this.ang = ang;
+        } 
     }
+}
+
+enum ChooseVirPos {
+    ENT(x:Entity);
+    REAL(vec:Vector,ang:Angle);
 }

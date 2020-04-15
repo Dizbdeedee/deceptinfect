@@ -9,10 +9,9 @@ package gmod;
     ```
 **/
 @:genericBuild(gmod.macros.Networking.build())
-extern class NET_Server<Const,Data> {
+extern class NET_Server<Const:String,Data:{}> {
 }
 
-@:keepSub
 interface I_NET<T:{}> {
 
     #if server

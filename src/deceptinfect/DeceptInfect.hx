@@ -40,6 +40,7 @@ import deceptinfect.ecswip.SignalStorage;
 
 
 class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
+    public static var hmm = 12;
     
     #if client
     override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
@@ -87,6 +88,10 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     }
 
     override function EntityRemoved(ent:GEntCompat) {
+
+        var di = DeceptInfect;
+        
+        
         if (ent.IsPlayer()) {
             ComponentManager.removeEntity(ent.id);
             return;

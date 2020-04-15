@@ -16,6 +16,8 @@ import haxe.ds.ObjectMap;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.game.SlowMotionSystem;
 import deceptinfect.infection.InfectionLookSystem;
+import deceptinfect.radiation.RadSourceSystem;
+import deceptinfect.game.LowHealthSystem;
 
 class SystemManager {
 
@@ -39,7 +41,9 @@ class SystemManager {
         RagdollSystem,
         SlowMotionSystem,
         InfectionLookSystem,
-        ContaminationSystem
+        ContaminationSystem,
+        RadSourceSystem,
+        LowHealthSystem
     ];
 
     static function make() {
@@ -58,12 +62,15 @@ class SystemManager {
         getSystems.set(SlowMotionSystem, new SlowMotionSystem());
         getSystems.set(InfectionLookSystem,new InfectionLookSystem());
         getSystems.set(ContaminationSystem,new ContaminationSystem());
+        getSystems.set(RadSourceSystem, new RadSourceSystem());
+        getSystems.set(LowHealthSystem, new LowHealthSystem());
     }
     public static function getSystem<T:System>(cls:Class<T>):T {
         return cast getSystems.get(cls);
     }
 
     @:expose("getSystem")
+    @:noCompletion
     static function getSystemExp(name:String) {
         return cast getSystems.get(Type.resolveClass(name));
     }

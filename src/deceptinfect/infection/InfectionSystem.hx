@@ -95,9 +95,6 @@ class InfectionSystem extends System {
                         infection.rate;
                     }
                     rate += 1;
-                    if (GlobalLib.CurTime() > infectionReport) {
-                        trace('infection report id : $entity rate : $rate');
-                    }
                     
                     var vun = switch (entity.get(InfVunerability)) {
                     case Comp(c_v):
@@ -107,6 +104,10 @@ class InfectionSystem extends System {
                     }
                     
                     inf.value += base * rate * vun;
+                    // trace('$base $rate $vun')
+                    if (GlobalLib.CurTime() > infectionReport) {
+                        trace('$base $rate $vun');
+                    }
                     fixUpInfection(infection);
                     
                     switch (entity.get(PlayerComponent)) {
@@ -133,12 +134,12 @@ class InfectionSystem extends System {
 
             default:
             }
-            if (GlobalLib.CurTime() > infectionReport) {
-                infectionReport = GlobalLib.CurTime() + 5;
-            }
         }
         if (numPlayers > 0) {
             averageInfection = totalInf / numPlayers;
+        }
+        if (GlobalLib.CurTime() > infectionReport) {
+            infectionReport = GlobalLib.CurTime() + 5;
         }
     }
     #end

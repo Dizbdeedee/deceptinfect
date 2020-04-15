@@ -45,7 +45,7 @@ class RadiationTypes {
                 radius : 500
             }, {
                 chance : 0.4,
-                dist: 20,
+                dist: 40,
                 check : 0.8,
                 type : SAME_SOURCE,
                 nextoptions : OVERRIDE_LIFETIME(FINITE(10))

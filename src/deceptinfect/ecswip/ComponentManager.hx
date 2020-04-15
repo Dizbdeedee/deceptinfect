@@ -1,14 +1,27 @@
 package deceptinfect.ecswip;
+import haxe.ds.ObjectMap;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.ecswip.Component;
 
 typedef ComponentArray = Array<ComponentState<Component>>;
 typedef SComponentArray<T:Component> = Array<ComponentState<T>>;
+
+typedef CompAddSignal ={
+    ent :DI_ID,
+
+    comp : Component
+}
+typedef SCompAddSignal<T:Component> = {
+    ent : DI_ID,
+    comp : T
+}
+
 class ComponentManager {
     
     public static var components(default,null):haxe.ds.ObjectMap<Class<Dynamic>,ComponentArray> = new haxe.ds.ObjectMap();
     
-    // public static var bitset(default,null):Map<DI_ID,
+    public static var componentSignals(default,null):haxe.ds.ObjectMap<Class<Dynamic>,SignalTrigger<CompAddSignal>> = new haxe.ds.ObjectMap();
+
     public static var entities(default,null):Entities = 0;     
     
     public static var activeEntities(default,null):Int = 0;
@@ -19,7 +32,7 @@ class ComponentManager {
     public static function addGEnt(x:GEntCompat):DI_ID {
         var id = addEntity();
         addComponent(new GEntityComponent(x),id);
-        addComponent(new VirtualPosition(x),id);
+        addComponent(new VirtualPosition(ENT(x)),id);
         return id;
     }
 
@@ -48,8 +61,25 @@ class ComponentManager {
     }
 
     public static function addComponent<T:Component>(x:T,to:DI_ID) {
-        var comparray = lazyInit(Type.getClass(x));
+        var cls = Type.getClass(x);
+        var comparray = lazyInit(cls);
+        if (componentSignals.exists(cls)) {
+            componentSignals.get(cls).trigger({
+                ent: to,
+                comp: x
+            });
+        } 
         comparray[to] = Comp(x);
+    }
+
+    public static function getCreateSignal<T:Component>(cls:Class<T>):Signal<SCompAddSignal<T>> {
+        var sigtrig = componentSignals.get(cls);
+        if (sigtrig == null) {
+            sigtrig = new SignalTrigger();
+            componentSignals.set(cls,sigtrig);            
+        }
+        return cast sigtrig.asSignal();
+        
     }
 
 

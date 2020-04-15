@@ -46,17 +46,6 @@ class PanelMacro {
 
     }
 
-    static function getSuperFields(c:ClassType):Array<ClassField> {
-        trace(c.name);
-        var superc = c.superClass;
-        var fields = c.fields.get();
-        if (superc != null) {
-            var _superc = superc.t.get();
-            return fields.concat(getSuperFields(_superc));
-        } else {
-            return fields;
-        }
-    }
 
     static function argToFuncArg(x:{name: String,opt : Bool,t: haxe.macro.Type}):FunctionArg {
         var arg:FunctionArg = {
@@ -90,7 +79,9 @@ class PanelMacro {
             case TAbstract(_.get().name => "Void", params):
                 var expr;    
                 if (isHook) {
-                    expr = macro {}
+                    expr = macro return untyped self.$name($a{exprArgs});
+                    
+                    // expr = macro {}
                 } else {
                     return null;
                     // expr = macro self.$name($a{exprArgs});
@@ -103,7 +94,7 @@ class PanelMacro {
             default:
                 var expr;    
                 if (isHook) {
-                    expr = macro return null;
+                    expr = macro return untyped self.$name($a{exprArgs});
                 } else {
                     return null;
                     // expr = macro return self.$name($a{exprArgs});
@@ -113,6 +104,9 @@ class PanelMacro {
                     ret :  Context.toComplexType(_ret),
                     expr : expr
                 };
+        }
+        if (isHook) {
+
         }
         var access:Array<Access> = switch (isHook) {
             case false:
@@ -126,7 +120,9 @@ class PanelMacro {
             pos : Context.currentPos(),
             doc : x.doc,
             access: access
+            
         }
+    
         return field;
     }
     static function generateNewClass(cls:ClassType) {
@@ -150,7 +146,7 @@ class PanelMacro {
             var path:TypePath = {pack : [],name : extendname,params: [TPType((macro : T))]};
             
             newCls = macro class $clsname extends $path {
-    
+                
             }
             
         }
@@ -158,6 +154,9 @@ class PanelMacro {
             name: ":PanelHelper",
             pos: Context.currentPos()
         });
+
+
+        
         var pack = switch (cls.name) {
             case "Panel":
                 "gclass";

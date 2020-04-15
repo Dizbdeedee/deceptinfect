@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.game.BatteryAccepter;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.System;
@@ -42,6 +43,14 @@ class BatterySystem extends System {
                     c_accept.charge -= (c_source.charge / 2);
                 default:
                     c_accept.charge += c_source.charge;
+            }
+            switch [source.get(deceptinfect.sabotage.S_Explode),source.get(GEntityComponent)] {
+                case [Comp(s_explode),Comp(c_gent)]:
+                    UtilLib.BlastDamage(c_gent.entity,c_gent.entity,c_gent.entity.GetPos(),500,75);    
+                    // var e = EntsLib.Create("explosion");
+                    
+                    // s_explode.dmg
+                default:
             }
             true;
         default:

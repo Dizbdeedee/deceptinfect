@@ -1,7 +1,11 @@
 package deceptinfect;
 
-class Misc {
+typedef Dubious = gmod.NET_Client.NET_CL_Message & {
+	name : String
+}
 
+class Misc {
+	public static var net_testcl = new gmod.NET_Client<"di_testnet",Dubious>();
     public static var roundModels:Array<String> = [
         "models/player/mossman.mdl",
 		"models/player/alyx.mdl",
@@ -47,6 +51,17 @@ class Misc {
 			
 		]
 	];
+
+	public static function hmm() {
+		#if client
+		net_testcl.send({name : "lol!!"});
+		#end
+		#if server 
+		net_testcl.signal.handle(function (x:Dubious) {
+			
+		});
+		#end
+	}
 	// public static var infModel:String = "models/Zombie/Classic.mdl";
 }
 

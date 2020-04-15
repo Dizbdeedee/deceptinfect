@@ -1,5 +1,6 @@
 package deceptinfect.client;
 
+import gmod.enums.BUTTON_CODE;
 import deceptinfect.game.RagdollSystem;
 import gmod.hooks.Gm.HUDElementList;
 import deceptinfect.ecswip.GrabSystem;
@@ -24,7 +25,21 @@ class ClientOverrides extends gmod.hooks.Gm {
         
         getSystem(RagdollSystem).pvsChange(ent,shouldtransmit);
     }
-
+    override function PlayerButtonDown(ply:Player, button:BUTTON_CODE) {
+        switch (button) {
+            case KEY_L:
+                
+                var sab = SabotagePanel.inst;
+                switch (sab.IsVisible()) {
+                    case true:
+                        sab.SetVisible(false);
+                    case false:
+                        sab.SetVisible(true);
+                }
+                // sab.SetVisible(true);
+            default:
+        }
+    }
     override function PreDrawOpaqueRenderables(isDrawingDepth:Bool, isDrawSkybox:Bool):Bool {
         GrabSystem.drawCylinders();
         return null;

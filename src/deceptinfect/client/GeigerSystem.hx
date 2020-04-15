@@ -10,7 +10,6 @@ class GeigerSystem extends System {
     
     public static var net_geiger(default,never) = new gmod.NET_Server<"geiger",{geiger : Float}>();
     #if client
-
     
     public static var geiger:Float = 0.0;
 

@@ -1,7 +1,7 @@
 package deceptinfect.ents;
 
 import gmod.EntityClass;
-
+import gmod.HaxeGen;
 enum abstract Di_entities<T:Entity>(EntityClass<T>) to String to EntityClass<T> {
     var di_battery:Di_entities<HaxeGeneratedEntity<Di_battery,Entity>>;
 

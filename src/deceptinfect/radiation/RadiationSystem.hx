@@ -1,5 +1,6 @@
 package deceptinfect.radiation;
 
+import deceptinfect.util.Util;
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import haxe.iterators.StringKeyValueIteratorUnicode;
 import deceptinfect.ecswip.System;
@@ -32,13 +33,16 @@ class RadiationSystem extends System {
             switch [acceptEnt.get(RadiationAccepter),acceptEnt.get(RateComponent),acceptEnt.get(VirtualPosition),acceptEnt.get(RadVictim)] {
             case [Comp(c_radAccept),Comp(c_rateAccept),Comp(c_radGEnt),Comp(c_radvic)]:
                 //trace("radiationaccepter");
+                c_radAccept.radiation.clear();
+                // c_rateAccept.addRates.clear();
                 for (produceEnt in ComponentManager.entities) {
                     switch [produceEnt.get(RadiationProducer),produceEnt.get(VirtualPosition),produceEnt.get(RadSource)] {
                     case [Comp(c_radProduce),Comp(c_producePos),Comp(c_radsource)]:
                         //c_radsource /c_radvic might be needed to prevent radiation from source when contaminated from source
 
                         var dist = c_producePos.pos.Distance(c_radGEnt.pos);
-                        //trace('producing $dist');
+                        // Util.printTimer("stuff",3, () -> 
+                        // trace('$produceEnt producing $dist');
                         switch getTotalRadiation(dist,c_radProduce) {
                         case Some(rate):
                             //trace('rate $rate');
@@ -63,7 +67,7 @@ class RadiationSystem extends System {
     @:expose("testRadiation")
     static function testRadiation(vec:Vector) {
         var ent = ComponentManager.addEntity();
-        ent.add_component(new VirtualPosition(null,vec,new Angle(0,0,0)));
+        ent.add_component(new VirtualPosition(REAL(vec,new Angle(0,0,0))));
         // ent.add_component(RadiationProducer.createFromType(RadTypes.NEST));
 
     }

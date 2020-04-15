@@ -10,11 +10,14 @@ import gmod.libs.VguiLib;
 
 @:dce()
 @:PanelHelper
+@:autoBuild(gmod.macros.PanelMacroOverride.build())
 class PanelHelper<T:Panel> {
     public final self:T;
 
-    final function new(x:T) {
+    @:noCompletion
+    function new(x:T) {
         self = x;
+        
     }
 
     
