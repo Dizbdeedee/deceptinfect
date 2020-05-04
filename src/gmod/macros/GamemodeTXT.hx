@@ -1,4 +1,5 @@
 package gmod.macros;
+import haxe.macro.Expr.ComplexType;
 #if macro
 
 import sys.io.File;
@@ -34,6 +35,7 @@ class GamemodeTXT {
         #end
         return null;
     }
+
 
 
     static function generateTXT() {

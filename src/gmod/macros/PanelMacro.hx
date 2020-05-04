@@ -79,9 +79,9 @@ class PanelMacro {
             case TAbstract(_.get().name => "Void", params):
                 var expr;    
                 if (isHook) {
-                    expr = macro return untyped self.$name($a{exprArgs});
+                    // expr = macro return untyped self.$name($a{exprArgs});
                     
-                    // expr = macro {}
+                    expr = macro {}
                 } else {
                     return null;
                     // expr = macro self.$name($a{exprArgs});
@@ -94,7 +94,8 @@ class PanelMacro {
             default:
                 var expr;    
                 if (isHook) {
-                    expr = macro return untyped self.$name($a{exprArgs});
+                    expr = macro return null;
+                    // expr = macro return untyped self.$name($a{exprArgs});
                 } else {
                     return null;
                     // expr = macro return self.$name($a{exprArgs});

@@ -3,7 +3,6 @@ package deceptinfect.infection;
 import deceptinfect.game.AliveComponent;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.System;
-import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.PlayerComponent;
@@ -14,8 +13,6 @@ typedef ND_Infection = {
 
 @:allow(InfectionComponent)
 class InfectionSystem extends System {
-
-
 
     static var net_inf = new gmod.NET_Server<"di_infection",ND_Infection>();
 
@@ -40,15 +37,10 @@ class InfectionSystem extends System {
             var c_inf = new InfectionComponent();
             PlayerManager.getLocalPlayerID().add_component(c_inf);
             c_inf.infection = INFECTED;
-            
-            // trace(PlayerManager.)
         }
     }
 
     function recvInfection(data:ND_Infection) {
-        //trace(data);
-
-        // trace('recv : ${data.infection}');
         switch PlayerManager.getLocalPlayerID().get(InfectionComponent) {
             case Comp(inf):
                 
@@ -63,7 +55,6 @@ class InfectionSystem extends System {
                 var c_inf = new InfectionComponent();
                 PlayerManager.getLocalPlayerID().add_component(c_inf);
                 c_inf.infection = NOT_INFECTED(data.infection);
-
         }
     }
     #end
@@ -102,14 +93,11 @@ class InfectionSystem extends System {
                     default:
                         1;
                     }
-                    
                     inf.value += base * rate * vun;
-                    // trace('$base $rate $vun')
                     if (GlobalLib.CurTime() > infectionReport) {
                         trace('$base $rate $vun');
                     }
                     fixUpInfection(infection);
-                    
                     switch (entity.get(PlayerComponent)) {
                     case Comp(ply):
                         net_inf.send({infection: inf.value},ply.player,true);    
@@ -128,10 +116,6 @@ class InfectionSystem extends System {
                     totalInf += infection.getInfValue();
                     numPlayers++;
                 }
-                
-
-                
-
             default:
             }
         }
@@ -144,24 +128,21 @@ class InfectionSystem extends System {
     }
     #end
 
-    
-
     public function makeInfected(ent:DI_ID) {
         switch (ent.get(InfectionComponent)) {
         case Comp(inf):
             inf.infection = switch (inf.infection) {
             case NOT_INFECTED(_):
                 onInfected(ent);
-                
                 INFECTED;
             default:
                 INFECTED;
             }
             trace('infection : ${inf.infection}');
         default:
-            
         }
     }
+
     static function calcInfectionFromRates(rate:RateComponent):Float {
         var total = 0.0;
         var totalmulti = 1.0;
@@ -202,27 +183,22 @@ class InfectionSystem extends System {
                 }
             case USING_STATIC(rate):
                 rate;
-                // return Game.
         }
     }
-
     #end
 
     //TODO needed?
     static function fixUpInfection(infection:InfectionComponent) {
-        
         switch (infection.infection) {
             case NOT_INFECTED(inf) if (inf.value < 0):
                 inf.value = 0;
             case NOT_INFECTED(inf) if (inf.value >= 100):
                 trace("Now infected :)");    
-                // infectedTrigger.trigger(Noise);
                 infection.infection = INFECTED;
             default:
         }
     }
 
-    
     static function onInfected(ent:DI_ID) {
         #if server
         switch (ent.get(PlayerComponent)) {
@@ -236,5 +212,4 @@ class InfectionSystem extends System {
         }
         #end
     }
-    
 }

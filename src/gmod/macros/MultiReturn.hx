@@ -14,7 +14,7 @@ class MultiReturn {
             doc : x.doc,
         }
     }
-
+    @:persistent
     static var storage:Map<String,Bool> = [];
     static public function build():ComplexType {
         trace("lol");
@@ -27,8 +27,8 @@ class MultiReturn {
         }
         trace(cls.name);
         if (!storage.exists(cls.name)) {
-            trace(cls.name);
             storage.set(cls.name,true);
+            trace(cls.name);
             var anon:TypeDefinition = {
                 pack: [],
                 name: 'A_${cls.name}',
@@ -41,6 +41,7 @@ class MultiReturn {
                 fieldArray.push(classFieldToField(clsfield));
             }
             anon.fields = fieldArray;
+            // Context.getLocalModule()
             Context.defineType(anon);
         }
         

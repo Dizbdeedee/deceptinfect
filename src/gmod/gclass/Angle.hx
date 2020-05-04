@@ -8,9 +8,9 @@ package gmod.gclass;
 **/
 extern class Angle {
     
-    public var p:Float;
-    public var y:Float;
-    public var r:Float;
+    var p:Float;
+    var y:Float;
+    var r:Float;
 
     /**
         Adds the values of the argument angle to the orignal angle. This functions the same as angle1 + angle2 without creating a new angle object, skipping object construction and garbage collection.

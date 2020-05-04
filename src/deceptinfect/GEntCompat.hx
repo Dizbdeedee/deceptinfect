@@ -2,7 +2,6 @@ package deceptinfect;
 import gmod.EntityClass.HaxeGeneratedEntity;
 import deceptinfect.ecswip.Component;
 import deceptinfect.infection.InfectedComponent;
-import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
 import gmod.types.Entity;

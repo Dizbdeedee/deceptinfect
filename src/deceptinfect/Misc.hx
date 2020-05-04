@@ -52,17 +52,6 @@ class Misc {
 		]
 	];
 
-	public static function hmm() {
-		#if client
-		net_testcl.send({name : "lol!!"});
-		#end
-		#if server 
-		net_testcl.signal.handle(function (x:Dubious) {
-			
-		});
-		#end
-	}
-	// public static var infModel:String = "models/Zombie/Classic.mdl";
 }
 
 enum ModelType {

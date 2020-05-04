@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.util.PrintTimer;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
@@ -34,7 +35,7 @@ class WinSystem extends System {
             default:
 			}
 		}
-		deceptinfect.util.Util.printTimer("win",15,() -> trace('Infected : $infected total : $total'));
+		PrintTimer.print_time(15,() -> trace('Infected : $infected total : $total'));
 		if (infected == 0) {
 			trace("trigg!");
 			winTrig.trigger(WIN_HUMAN);

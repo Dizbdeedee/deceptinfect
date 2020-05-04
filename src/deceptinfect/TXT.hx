@@ -7,6 +7,7 @@ class TXT implements BuildGamemodeTXT {
         base : "base",
         title : "Deception infection",
         menusystem: 1,
+    
     }
 
 

@@ -30,13 +30,15 @@ class ClientOverrides extends gmod.hooks.Gm {
             case KEY_L:
                 
                 var sab = SabotagePanel.inst;
+                // var x:SabotagePanel = sab;
+                // var sub:gmod.panels.DPanel = x;
                 switch (sab.IsVisible()) {
                     case true:
                         sab.SetVisible(false);
                     case false:
                         sab.SetVisible(true);
                 }
-                // sab.SetVisible(true);
+                sab.SetVisible(true);
             default:
         }
     }

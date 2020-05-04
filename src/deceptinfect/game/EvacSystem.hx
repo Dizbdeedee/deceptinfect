@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.util.PrintTimer;
 import deceptinfect.util.Util;
 import gmod.NET_Server;
 import deceptinfect.game.EvacZone.EvacState;
@@ -31,9 +32,13 @@ class EvacSystem extends System {
             case {state: ARRIVING, time : t}:
                 //start showing hud
             case {state: LEAVING, time: t}:
-                Util.printTimer("BOOOGA",3, () -> trace('leaving!!..$t'));
+                // Util.printTimer("BOOOGA",3, () -> trace('leaving!!..$t'));
+                PrintTimer.print_time(3,() -> trace('leaving!!.. $t'));
+                // Util.printTime(3,() -> trace('leaving!!..$t'));
             default:
-                Util.printTimer("oogieboogie",5,() -> trace("Invalid state for hud..."));
+                PrintTimer.print_time(5,() -> trace("Invalid state for hud...."));
+                // Util.printTime(5,() -> trace("Invalid state for hud...."));
+                // Util.printTimer("oogieboogie",5,() -> trace("Invalid state for hud..."));
         }
     }
 
