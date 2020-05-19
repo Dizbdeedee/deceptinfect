@@ -12,7 +12,7 @@ extern class Bf_read {
 		`**Returns:** asciiVal
     **/
     
-    public function ReadChar():Float;
+    function ReadChar():Float;
     
     
     /**

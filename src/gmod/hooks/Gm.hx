@@ -1,6 +1,5 @@
 package gmod.hooks;
 
-import gmod.HaxeMultiReturn.HaxeMultiReturn_2;
 
 
 /**
@@ -1253,7 +1252,7 @@ class Gm {
     **/
     
     @:hook
-    public function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn_2<GmPlayerCanHearPlayersVoiceReturn> {return null;} //return
+    public function PlayerCanHearPlayersVoice(listener:Player, talker:Player):Dynamic {return null;} //return
     #end
     #if server
     /**

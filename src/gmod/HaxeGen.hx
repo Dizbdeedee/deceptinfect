@@ -1,5 +1,6 @@
 package gmod;
 
+
 typedef HaxeExtend<X> = {
     final self:X;
 }

@@ -27,7 +27,13 @@ class GeigerSystem extends System {
             //trace('geiger $geiger');
             geiger = data.geiger;
         });
-
+        GameManager.stateChange.handle(function (x) {
+            switch (x) {
+            case WAIT:
+               geiger = 0.0;
+            default:
+            }
+        });
     }
     override function run_client() {
         geigerThink();

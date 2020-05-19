@@ -44,8 +44,8 @@ class MultiReturn {
             // Context.getLocalModule()
             Context.defineType(anon);
         }
-        
-        return TPath({pack : [],name : 'A_${cls.name}'});
+        return null;
+        // return TPath({pack : [],name : 'A_${cls.name}'});
     }
 }
 #end

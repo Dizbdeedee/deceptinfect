@@ -1,13 +1,10 @@
 package gmod;
-import haxe.ds.BalancedTree.TreeNode;
 import haxe.DynamicAccess;
 import lua.Table;
 using lua.TableTools;
 
-
-
 /**
-    Use this with a typedef to define the ability to multireturn from a haxe function.
+    Use this with a typedef to add the ability to multireturn from a haxe function.
     This adds a bit of overhead in exchange for typed multireturns
     To have them in order, use a,b,c,d,e.... ect. as the keys for the structure
 **/
@@ -20,14 +17,6 @@ abstract HaxeMultiReturn<T>(Dynamic) to T {
         }
         return tbl.unpack();    
     }
-
-    
-    
-}
-
-
-@:genericBuild(gmod.macros.MultiReturn.build())
-class HaxeMultiReturn_2<T> {
 }
 
 

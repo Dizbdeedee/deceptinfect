@@ -4,13 +4,14 @@ import gmod.libs.GlobalLib;
 
 
 @:native("__lua_Boot")
+@:keep
 class Patch {
-
     /**
         Needed to print gmod types
         @see lua.Boot
     **/
     @:access(lua.Boot)
+    @:keep
     static function __string_rec(o:Dynamic,s:String = "") {
         if (s.length >= 5)
             return "<...>";
@@ -77,5 +78,6 @@ class Patch {
                         untyped tostring(o);
                 }
         }
+    
     }
 }

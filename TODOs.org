@@ -1,3 +1,30 @@
 
-* TODO Huh?
+* Cleanup
+** TODO GameInstance
+** TODO Move classes out of ecswip
+* TODO Bugs [0%]
+** TODO Error message end of round evac zone
+** TODO [#C] Zombie model screws up as statue
+** TODO Geiger carrys over after round
+** TODO Walkthroughable fails sometimes
 
+* TODO MVP [14%]
+** TODO Items [1/4]
+*** DONE Scanner
+*** TODO Cure
+*** TODO Antirad
+*** TODO
+** TODO Upgrades
+** TODO info
+
+* TODO Hud Elements [12%]
+** TODO Admin menu
+** TODO Sabotage
+** TODO Upgrade menu
+** TODO Message/info system
+** TODO Grab target
+** TODO Grab state/cooldown
+** DONE Infection hud
+   CLOSED: [2020-05-05 Tue 21:52]
+
+** TODO Geiger hud

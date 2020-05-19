@@ -139,6 +139,7 @@ __deceptinfect_infection_InfectionLookSystem = _hx_e()
 __deceptinfect_radiation_ContaminationSystem = _hx_e()
 __deceptinfect_radiation_RadSourceSystem = _hx_e()
 __deceptinfect_game_LowHealthSystem = _hx_e()
+__deceptinfect_items_ScannerSystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __deceptinfect_ecswip_ChooseVirPos = _hx_e()
 __gmod_sent_ENT = _hx_e()
@@ -180,6 +181,12 @@ __deceptinfect_infection_AcceptingInfection = _hx_e()
 __deceptinfect_infection_BaseInfection = _hx_e()
 __deceptinfect_infection_INF_STATE = _hx_e()
 __deceptinfect_infection_InfectionLookInfo = _hx_e()
+__gmod_swep_SWEP = _hx_e()
+__gmod_swep_SwepBuild = _hx_e()
+__deceptinfect_items_Di_cure = _hx_e()
+__deceptinfect_items_ScannerComponent = _hx_e()
+__deceptinfect_items_ScanResult = _hx_e()
+__deceptinfect_items_Weapon_Di_Scan = _hx_e()
 __deceptinfect_radiation_ContaminationAccepter = _hx_e()
 __deceptinfect_radiation_ContaminationProducer = _hx_e()
 __deceptinfect_radiation_NextOptions = _hx_e()
@@ -203,6 +210,8 @@ __deceptinfect_util_PlayerExt = _hx_e()
 __deceptinfect_util_TimeKeep = _hx_e()
 __deceptinfect_util_Util = _hx_e()
 __gmod_PairTools = _hx_e()
+local __lua_Boot = _hx_e()
+__gmod_Trace = _hx_e()
 __haxe_EntryPoint = _hx_e()
 __haxe_Json = _hx_e()
 __haxe_Log = _hx_e()
@@ -633,7 +642,9 @@ Main.new = {}
 _hxClasses["Main"] = Main
 Main.__name__ = "Main"
 Main.main = function() 
+  __gmod_Trace.overridetrace();
   __deceptinfect_DeceptInfect.new();
+  __haxe_Log.trace("hm", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=28,className="Main",methodName="main"}));
   _G.file.CreateDir("deceptinfect");
   _G.game.CleanUpMap();
   __deceptinfect_ecswip_SignalStorage.initEvents();
@@ -650,6 +661,7 @@ Main.main = function()
   _G.game.ConsoleCommand("mp_falldamage 1\n");
   __deceptinfect_GameManager.cleanup();
   _G.math.randomseed(_G.RealTime());
+  __haxe_Log.trace("Deceptinfect server reinit!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=50,className="Main",methodName="main"}));
 end
 
 Math.new = {}
@@ -1675,8 +1687,8 @@ __deceptinfect_GameInstance.prototype.start = function(self)
   local bat1 = _G.ents.Create("di_battery");
   local bat2 = _G.ents.Create("di_battery");
   local spawns = chargerSpawn:getRandomSpawns(2);
-  __haxe_Log.trace(spawns.length, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=39,className="deceptinfect.GameInstance",methodName="start"}));
-  __haxe_Log.trace(spawns[1].claimed, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=40,className="deceptinfect.GameInstance",methodName="start"}));
+  __haxe_Log.trace(spawns.length, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=38,className="deceptinfect.GameInstance",methodName="start"}));
+  __haxe_Log.trace(spawns[1].claimed, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=39,className="deceptinfect.GameInstance",methodName="start"}));
   spawns[0]:spawn(bat1);
   spawns[1]:spawn(bat2);
   local nestSpawn = __deceptinfect_game_SpawnSystem.nest:getRandom();
@@ -1695,8 +1707,8 @@ end
 __deceptinfect_GameInstance.prototype.setTime = function(self) 
   local variance = __deceptinfect_GameValues.GAME_TIMER_VARIANCE;
   self.totalGameTime = __deceptinfect_GameValues.GAME_TIMER + _G.math.random(-variance, variance);
-  __haxe_Log.trace("", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=66,className="deceptinfect.GameInstance",methodName="setTime"}));
-  __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=67,className="deceptinfect.GameInstance",methodName="setTime"}));
+  __haxe_Log.trace("", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=65,className="deceptinfect.GameInstance",methodName="setTime"}));
+  __haxe_Log.trace(Std.string("Time until infection: ") .. Std.string(self.totalGameTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameInstance.hx",lineNumber=66,className="deceptinfect.GameInstance",methodName="setTime"}));
 end
 
 __deceptinfect_GameInstance.prototype.__class__ =  __deceptinfect_GameInstance
@@ -3645,23 +3657,23 @@ __deceptinfect_game_SpawnSystem.generateSpawns = function()
     ret = nil;
   end;
   __deceptinfect_game_SpawnSystem.obj:generateSpawns(ret.objectives);
-  local this2 = __deceptinfect_MapStorage.spawns;
+  local this11 = __deceptinfect_MapStorage.spawns;
   local key1 = _G.game.GetMap();
-  local ret1 = this2.h[key1];
+  local ret1 = this11.h[key1];
   if (ret1 == __haxe_ds_StringMap.tnull) then 
     ret1 = nil;
   end;
   __deceptinfect_game_SpawnSystem.item:generateSpawns(ret1.items);
-  local this3 = __deceptinfect_MapStorage.spawns;
+  local this12 = __deceptinfect_MapStorage.spawns;
   local key2 = _G.game.GetMap();
-  local ret2 = this3.h[key2];
+  local ret2 = this12.h[key2];
   if (ret2 == __haxe_ds_StringMap.tnull) then 
     ret2 = nil;
   end;
   __deceptinfect_game_SpawnSystem.nest:generateSpawns(ret2.nests);
-  local this4 = __deceptinfect_MapStorage.spawns;
+  local this13 = __deceptinfect_MapStorage.spawns;
   local key3 = _G.game.GetMap();
-  local ret3 = this4.h[key3];
+  local ret3 = this13.h[key3];
   if (ret3 == __haxe_ds_StringMap.tnull) then 
     ret3 = nil;
   end;
@@ -4256,8 +4268,8 @@ __deceptinfect_game_RagdollSystem.prototype.reveal = function(self,rag)
           newphysob:SetVelocity(oldphysob1:GetVelocity());
         end;
       else
-        local this3 = newphysob:GetPos();
-        local translate = this3 - newlocpos;
+        local this11 = newphysob:GetPos();
+        local translate = this11 - newlocpos;
         newphysob:SetPos(translate + oldlocpos, true);
       end;
     end;
@@ -4691,6 +4703,74 @@ __deceptinfect_game_LowHealthSystem.prototype.__class__ =  __deceptinfect_game_L
 __deceptinfect_game_LowHealthSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_game_LowHealthSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
+__deceptinfect_items_ScannerSystem.new = function() 
+  local self = _hx_new(__deceptinfect_items_ScannerSystem.prototype)
+  __deceptinfect_items_ScannerSystem.super(self)
+  return self
+end
+__deceptinfect_items_ScannerSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.items.ScannerSystem"] = __deceptinfect_items_ScannerSystem
+__deceptinfect_items_ScannerSystem.__name__ = "deceptinfect.items.ScannerSystem"
+__deceptinfect_items_ScannerSystem.prototype = _hx_a();
+__deceptinfect_items_ScannerSystem.prototype.scan_target = function(self,scan,target) 
+  local x = __deceptinfect_items_ScannerComponent;
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[scan]:slice(2)[0];
+  if (retrieve_comp == nil) then 
+    _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
+  end;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[target];
+  if (_g[1] == 1) then 
+    retrieve_comp.scanProgress:addTime(target);
+  end;
+end
+__deceptinfect_items_ScannerSystem.prototype.get_reliability = function(self,scan,target) 
+  local x = __deceptinfect_items_ScannerComponent;
+  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[scan]:slice(2)[0];
+  if (retrieve_comp == nil) then 
+    _G.error(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__),0);
+  end;
+  local c_scan = retrieve_comp;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[target];
+  if (_g[1] == 1) then 
+    do return __haxe_ds_Option.Some(_G.math.Remap(_G.math.Clamp(c_scan.scanProgress:getTime(target), 0, c_scan.time), 0, c_scan.time, c_scan.reliability_min, c_scan.reliability_max)) end;
+  else
+    do return __haxe_ds_Option.None end;
+  end;
+end
+__deceptinfect_items_ScannerSystem.prototype.final_scan = function(self,scan,target) 
+  local c_reliab = self:get_reliability(scan, target);
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[target];
+  if (c_reliab[1] == 0) then 
+    local _g1 = c_reliab[2];
+    local tmp = _g[1];
+    if (tmp) == 0 then 
+      if (_G.math.random() < _g1) then 
+        __haxe_Log.trace("right: human", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=44,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
+        do return __deceptinfect_items_ScanResult.HUMAN end;
+      else
+        __haxe_Log.trace("wrong: human", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=47,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
+        do return __deceptinfect_items_ScanResult.INFECTED end;
+      end;
+    elseif (tmp) == 1 then 
+      __haxe_Log.trace(_g1, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=34,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
+      if (_G.math.random() < _g1) then 
+        __haxe_Log.trace("right : infected", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=36,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
+        do return __deceptinfect_items_ScanResult.INFECTED end;
+      else
+        __haxe_Log.trace("wrong : infected", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=39,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
+        do return __deceptinfect_items_ScanResult.HUMAN end;
+      end; end;
+  else
+    do return __deceptinfect_items_ScanResult.NO_SCAN end;
+  end;
+end
+
+__deceptinfect_items_ScannerSystem.prototype.__class__ =  __deceptinfect_items_ScannerSystem
+__deceptinfect_items_ScannerSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_items_ScannerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
 __deceptinfect_ecswip_SystemManager.new = {}
 _hxClasses["deceptinfect.ecswip.SystemManager"] = __deceptinfect_ecswip_SystemManager
 __deceptinfect_ecswip_SystemManager.__name__ = "deceptinfect.ecswip.SystemManager"
@@ -4763,6 +4843,10 @@ __deceptinfect_ecswip_SystemManager.make = function()
   local key16 = __deceptinfect_game_LowHealthSystem;
   _this16.h[key16] = __deceptinfect_game_LowHealthSystem.new();
   _this16.k[key16] = true;
+  local _this17 = __deceptinfect_ecswip_SystemManager.getSystems;
+  local key17 = __deceptinfect_items_ScannerSystem;
+  _this17.h[key17] = __deceptinfect_items_ScannerSystem.new();
+  _this17.k[key17] = true;
 end
 __deceptinfect_ecswip_SystemManager.getSystem = function(cls) 
   do return __deceptinfect_ecswip_SystemManager.getSystems.h[cls] end;
@@ -5917,6 +6001,260 @@ __deceptinfect_infection_InfectionLookInfo.prototype.__class__ =  __deceptinfect
 __deceptinfect_infection_InfectionLookInfo.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_infection_InfectionLookInfo.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
+__gmod_swep_SWEP.new = {}
+_hxClasses["gmod.swep.SWEP"] = __gmod_swep_SWEP
+__gmod_swep_SWEP.__name__ = "gmod.swep.SWEP"
+__gmod_swep_SWEP.prototype = _hx_a();
+__gmod_swep_SWEP.prototype["self"]= nil;
+__gmod_swep_SWEP.prototype.Deploy = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.TakePrimaryAmmo = function(self,amount) 
+end
+__gmod_swep_SWEP.prototype.CanSecondaryAttack = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.SecondaryAttack = function(self) 
+end
+__gmod_swep_SWEP.prototype.DoImpactEffect = function(self,tr,damageType) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.KeyValue = function(self,key,value) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.TranslateFOV = function(self,fov) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.CanBePickedUpByNPCs = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.GetNPCRestTimes = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.GetNPCBulletSpread = function(self,proficiency) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.GetCapabilities = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.Ammo2 = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.ShootEffects = function(self) 
+end
+__gmod_swep_SWEP.prototype.TakeSecondaryAmmo = function(self,amount) 
+end
+__gmod_swep_SWEP.prototype.CanPrimaryAttack = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.Reload = function(self) 
+end
+__gmod_swep_SWEP.prototype.ShootBullet = function(self,damage,num_bullets,aimcone,ammo_type,force,tracer) 
+end
+__gmod_swep_SWEP.prototype.AcceptInput = function(self,inputName,activator,called,data) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.OnRemove = function(self) 
+end
+__gmod_swep_SWEP.prototype.OwnerChanged = function(self) 
+end
+__gmod_swep_SWEP.prototype.Initialize = function(self) 
+end
+__gmod_swep_SWEP.prototype.EquipAmmo = function(self,ply) 
+end
+__gmod_swep_SWEP.prototype.TranslateActivity = function(self,act) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.Holster = function(self,weapon) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.SetDeploySpeed = function(self,speed) 
+end
+__gmod_swep_SWEP.prototype.Think = function(self) 
+end
+__gmod_swep_SWEP.prototype.FireAnimationEvent = function(self,pos,ang,event,options) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.SetupDataTables = function(self) 
+end
+__gmod_swep_SWEP.prototype.PrimaryAttack = function(self) 
+end
+__gmod_swep_SWEP.prototype.Ammo1 = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.OnDrop = function(self) 
+end
+__gmod_swep_SWEP.prototype.ShouldDropOnDie = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.GetNPCBurstSettings = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.OnRestore = function(self) 
+end
+__gmod_swep_SWEP.prototype.OnReloaded = function(self) 
+end
+__gmod_swep_SWEP.prototype.Equip = function(self,NewOwner) 
+end
+__gmod_swep_SWEP.prototype.SetWeaponHoldType = function(self,name) 
+end
+
+__gmod_swep_SWEP.prototype.__class__ =  __gmod_swep_SWEP
+
+__gmod_swep_SwepBuild.new = {}
+_hxClasses["gmod.swep.SwepBuild"] = __gmod_swep_SwepBuild
+__gmod_swep_SwepBuild.__name__ = "gmod.swep.SwepBuild"
+__gmod_swep_SwepBuild.prototype = _hx_a();
+__gmod_swep_SwepBuild.prototype.properties= nil;
+
+__gmod_swep_SwepBuild.prototype.__class__ =  __gmod_swep_SwepBuild
+
+__deceptinfect_items_Di_cure.new = function(curEnt) 
+  local self = _hx_new(__deceptinfect_items_Di_cure.prototype)
+  __deceptinfect_items_Di_cure.super(self,curEnt)
+  return self
+end
+__deceptinfect_items_Di_cure.super = function(self,curEnt) 
+  self.properties = _hx_o({__fields__={Primary=true},Primary=_hx_o({__fields__={Ammo=true,ClipSize=true,DefaultClip=true,Automatic=true},Ammo="None",ClipSize=-1,DefaultClip=-1,Automatic=true})});
+  self["self"] = curEnt;
+end
+_hx_exports["di_cure"] = __deceptinfect_items_Di_cure
+_hxClasses["deceptinfect.items.Di_cure"] = __deceptinfect_items_Di_cure
+__deceptinfect_items_Di_cure.__name__ = "deceptinfect.items.Di_cure"
+__deceptinfect_items_Di_cure.__interfaces__ = {__gmod_swep_SwepBuild}
+__deceptinfect_items_Di_cure.prototype = _hx_a();
+__deceptinfect_items_Di_cure.prototype.properties= nil;
+__deceptinfect_items_Di_cure.prototype.Initialize = function(self) 
+end
+__deceptinfect_items_Di_cure.prototype.PrimaryAttack = function(self) 
+  self["self"]:SetNextPrimaryFire(_G.CurTime() + 999);
+  local this1 = self["self"].Owner.id;
+  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[this1];
+  if (_g[1] == 1) then 
+    local _g1 = _g[2].infection;
+    local tmp = _g1[1];
+    if (tmp) == 0 then 
+      local _g11 = _g1[2];
+      _g11[0] = _g11[0] - 12.5;
+      local this2 = self["self"].Owner.id;
+      __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_infection_InfVunerability.new(3, 10), this2);
+    elseif (tmp) == 1 then 
+      local this3 = self["self"].Owner.id;
+      local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent)[this3];
+      if (_g2[1] == 1) then 
+        local _g12 = _g2[2];
+        _g12.formMaxHealth = _g12.formMaxHealth / 2;
+        _g12.cooldown = __deceptinfect_abilities_Cooldown.COOLDOWN(_G.CurTime() + 15);
+      end; end;
+  end;
+  self["self"]:Remove();
+end
+
+__deceptinfect_items_Di_cure.prototype.__class__ =  __deceptinfect_items_Di_cure
+__deceptinfect_items_Di_cure.__super__ = __gmod_swep_SWEP
+setmetatable(__deceptinfect_items_Di_cure.prototype,{__index=__gmod_swep_SWEP.prototype})
+
+__deceptinfect_items_ScannerComponent.new = function() 
+  local self = _hx_new(__deceptinfect_items_ScannerComponent.prototype)
+  __deceptinfect_items_ScannerComponent.super(self)
+  return self
+end
+__deceptinfect_items_ScannerComponent.super = function(self) 
+  self.reliability_min = 0.5;
+  self.reliability_max = 0.7;
+  self.time = 30;
+  self.scanProgress = __deceptinfect_util_TimeKeep.new();
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.items.ScannerComponent"] = __deceptinfect_items_ScannerComponent
+__deceptinfect_items_ScannerComponent.__name__ = "deceptinfect.items.ScannerComponent"
+__deceptinfect_items_ScannerComponent.prototype = _hx_a();
+__deceptinfect_items_ScannerComponent.prototype.scanProgress= nil;
+__deceptinfect_items_ScannerComponent.prototype.time= nil;
+__deceptinfect_items_ScannerComponent.prototype.reliability_max= nil;
+__deceptinfect_items_ScannerComponent.prototype.reliability_min= nil;
+
+__deceptinfect_items_ScannerComponent.prototype.__class__ =  __deceptinfect_items_ScannerComponent
+__deceptinfect_items_ScannerComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_items_ScannerComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.items.ScanResult"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NO_SCAN","HUMAN","INFECTED"},3)}
+__deceptinfect_items_ScanResult = _hxClasses["deceptinfect.items.ScanResult"];
+__deceptinfect_items_ScanResult.NO_SCAN = _hx_tab_array({[0]="NO_SCAN",0,__enum__ = __deceptinfect_items_ScanResult},2)
+
+__deceptinfect_items_ScanResult.HUMAN = _hx_tab_array({[0]="HUMAN",1,__enum__ = __deceptinfect_items_ScanResult},2)
+
+__deceptinfect_items_ScanResult.INFECTED = _hx_tab_array({[0]="INFECTED",2,__enum__ = __deceptinfect_items_ScanResult},2)
+
+
+__deceptinfect_items_Weapon_Di_Scan.new = function(curEnt) 
+  local self = _hx_new(__deceptinfect_items_Weapon_Di_Scan.prototype)
+  __deceptinfect_items_Weapon_Di_Scan.super(self,curEnt)
+  return self
+end
+__deceptinfect_items_Weapon_Di_Scan.super = function(self,curEnt) 
+  self.properties = _hx_o({__fields__={Primary=true},Primary=_hx_o({__fields__={Ammo=true,ClipSize=true,DefaultClip=true,Automatic=true},Ammo="Smg1",ClipSize=-1,DefaultClip=-1,Automatic=true})});
+  self["self"] = curEnt;
+end
+_hx_exports["weapon_di_scan"] = __deceptinfect_items_Weapon_Di_Scan
+_hxClasses["deceptinfect.items.Weapon_Di_Scan"] = __deceptinfect_items_Weapon_Di_Scan
+__deceptinfect_items_Weapon_Di_Scan.__name__ = "deceptinfect.items.Weapon_Di_Scan"
+__deceptinfect_items_Weapon_Di_Scan.__interfaces__ = {__gmod_swep_SwepBuild}
+__deceptinfect_items_Weapon_Di_Scan.prototype = _hx_a();
+__deceptinfect_items_Weapon_Di_Scan.prototype.properties= nil;
+__deceptinfect_items_Weapon_Di_Scan.prototype.id= nil;
+__deceptinfect_items_Weapon_Di_Scan.prototype.Initialize = function(self) 
+  local x = self["self"];
+  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
+  self.id = x.id;
+  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_items_ScannerComponent.new(), self.id);
+end
+__deceptinfect_items_Weapon_Di_Scan.prototype.PrimaryAttack = function(self) 
+  local owner = self["self"].Owner;
+  local tr = owner:GetEyeTrace();
+  local x = tr.Entity;
+  local _g;
+  if (_G.IsValid(x)) then 
+    local _g1 = x.id;
+    if (_g1 == nil) then 
+      _g = __haxe_ds_Option.None;
+    else
+      local x1 = _g1;
+      _g = __haxe_ds_Option.Some(x1);
+    end;
+  else
+    _g = __haxe_ds_Option.None;
+  end;
+  if (_g[1] == 0) then 
+    local ent_id = _g[2];
+    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_items_ScannerSystem):scan_target(self.id, ent_id);
+  end;
+end
+__deceptinfect_items_Weapon_Di_Scan.prototype.SecondaryAttack = function(self) 
+  local owner = self["self"].Owner;
+  local tr = owner:GetEyeTrace();
+  local x = tr.Entity;
+  local _g;
+  if (_G.IsValid(x)) then 
+    local _g1 = x.id;
+    if (_g1 == nil) then 
+      _g = __haxe_ds_Option.None;
+    else
+      local x1 = _g1;
+      _g = __haxe_ds_Option.Some(x1);
+    end;
+  else
+    _g = __haxe_ds_Option.None;
+  end;
+  if (_g[1] == 0) then 
+    local ent_id = _g[2];
+    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_items_ScannerSystem):final_scan(self.id, ent_id);
+  end;
+end
+
+__deceptinfect_items_Weapon_Di_Scan.prototype.__class__ =  __deceptinfect_items_Weapon_Di_Scan
+__deceptinfect_items_Weapon_Di_Scan.__super__ = __gmod_swep_SWEP
+setmetatable(__deceptinfect_items_Weapon_Di_Scan.prototype,{__index=__gmod_swep_SWEP.prototype})
+
 __deceptinfect_radiation_ContaminationAccepter.new = function() 
   local self = _hx_new(__deceptinfect_radiation_ContaminationAccepter.prototype)
   __deceptinfect_radiation_ContaminationAccepter.super(self)
@@ -6154,10 +6492,10 @@ __deceptinfect_util_MinMaxTools.__name__ = "deceptinfect.util.MinMaxTools"
 __deceptinfect_util_MinMaxTools.getCenter = function(x) 
   local this1 = x.maxs;
   local otherVec = x.mins;
-  local this2 = this1 - otherVec;
-  local this3 = this2 / 2;
+  local this11 = this1 - otherVec;
+  local this12 = this11 / 2;
   local otherVec1 = x.mins;
-  do return this3 + otherVec1 end;
+  do return this12 + otherVec1 end;
 end
 
 __deceptinfect_util_PlayerExt.new = {}
@@ -6292,6 +6630,13 @@ __deceptinfect_util_TimeKeep.prototype.removeAllTimes = function(self)
     end;
   end;
 end
+__deceptinfect_util_TimeKeep.prototype.getTime = function(self,key) 
+  local ret = self.times.h[key];
+  if (ret == __haxe_ds_IntMap.tnull) then 
+    ret = nil;
+  end;
+  do return ret end
+end
 
 __deceptinfect_util_TimeKeep.prototype.__class__ =  __deceptinfect_util_TimeKeep
 
@@ -6317,9 +6662,9 @@ __deceptinfect_util_Util.printTimer_2 = function(ident,time,run)
     end;
   else
     run();
-    local this2 = __deceptinfect_util_Util.mappy_2;
+    local this11 = __deceptinfect_util_Util.mappy_2;
     local value1 = _G.CurTime() + time;
-    local _this1 = this2;
+    local _this1 = this11;
     if (value1 == nil) then 
       _this1.h[ident] = __haxe_ds_IntMap.tnull;
     else
@@ -6354,6 +6699,116 @@ __gmod_PairTools.iterator = function(table)
   end,hasNext=function(self) 
     do return _G.select(2, _G.next(table, i)) ~= nil end;
   end}) end;
+end
+
+__lua_Boot.new = {}
+_hxClasses["__lua_Boot"] = __lua_Boot
+__lua_Boot.__name__ = "__lua_Boot"
+__lua_Boot.__string_rec = function(o,s) 
+  if (s == nil) then 
+    s = "";
+  end;
+  if (#s >= 5) then 
+    do return "<...>" end;
+  end;
+  local _g = type(o);
+  if (_g) == "boolean" then 
+    do return tostring(o) end;
+  elseif (_g) == "function" then 
+    do return "<function>" end;
+  elseif (_g) == "nil" then 
+    do return "null" end;
+  elseif (_g) == "number" then 
+    if (o == _G.math.huge) then 
+      do return "Infinity" end;
+    else
+      if (o == -_G.math.huge) then 
+        do return "-Infinity" end;
+      else
+        if (o == 0) then 
+          do return "0" end;
+        else
+          if (o ~= o) then 
+            do return "NaN" end;
+          else
+            do return tostring(o) end;
+          end;
+        end;
+      end;
+    end;
+  elseif (_g) == "string" then 
+    do return o end;
+  elseif (_g) == "table" then 
+    if (o.__enum__ ~= nil) then 
+      do return __lua_Boot.printEnum(o, s) end;
+    else
+      if ((_hx_wrap_if_string_field(o,'toString') ~= nil) and not __lua_Boot.isArray(o)) then 
+        do return _hx_wrap_if_string_field(o,'toString')(o) end;
+      else
+        if (__lua_Boot.isArray(o)) then 
+          local o2 = o;
+          if (#s > 5) then 
+            do return "[...]" end;
+          else
+            local _g1 = _hx_tab_array({}, 0);
+            local _g11 = 0;
+            while (_g11 < o2.length) do 
+              local i = o2[_g11];
+              _g11 = _g11 + 1;
+              _g1:push(__lua_Boot.__string_rec(i, Std.string(s) .. Std.string(1)));
+            end;
+            do return Std.string(Std.string("[") .. Std.string(_g1:join(","))) .. Std.string("]") end;
+          end;
+        else
+          if (o.__class__ ~= nil) then 
+            do return Std.string(Std.string("{") .. Std.string(__lua_Boot.printClassRec(o, "", Std.string(s) .. Std.string("\t")))) .. Std.string("}") end;
+          else
+            local fields = __lua_Boot.fieldIterator(o);
+            local buffer = ({});
+            local first = true;
+            _G.table.insert(buffer, "{ ");
+            local f = fields;
+            while (f:hasNext()) do 
+              local f1 = f:next();
+              if (first) then 
+                first = false;
+              else
+                _G.table.insert(buffer, ", ");
+              end;
+              _G.table.insert(buffer, Std.string(Std.string(Std.string("") .. Std.string(Std.string(f1))) .. Std.string(" : ")) .. Std.string(__lua_Boot.__string_rec(o[f1], Std.string(s) .. Std.string("\t"))));
+            end;
+            _G.table.insert(buffer, " }");
+            do return _G.table.concat(buffer, "") end;
+          end;
+        end;
+      end;
+    end;
+  elseif (_g) == "thread" then 
+    do return "<thread>" end;
+  elseif (_g) == "userdata" then 
+    local mt = _G.getmetatable(o);
+    if ((mt ~= nil) and (mt.__tostring ~= nil)) then 
+      do return _G.tostring(o) end;
+    else
+      do return "<userdata>" end;
+    end;else
+  if (_G.TypeID(o) == _G.TYPE_NONE) then 
+    _G.error("Invalid type",0);
+  else
+    do return tostring(o) end;
+  end; end;
+end
+
+__gmod_Trace.new = {}
+_hxClasses["gmod.Trace"] = __gmod_Trace
+__gmod_Trace.__name__ = "gmod.Trace"
+__gmod_Trace.overridetrace = function() 
+  local oldtrace = __haxe_Log.trace;
+  __haxe_Log.trace = function(v,infos) 
+    local str = __haxe_Log.formatOutput(v, infos);
+    str = Std.string(Std.string("\027[94m") .. Std.string(str)) .. Std.string("\027[0m");
+    _hx_print(str);
+  end;
 end
 
 __haxe_EntryPoint.new = {}
@@ -7404,6 +7859,34 @@ __lua_Boot.isArray = function(o)
     do return false end;
   end;
 end
+__lua_Boot.printEnum = function(o,s) 
+  if (o.length == 2) then 
+    do return o[0] end;
+  else
+    local str = Std.string(Std.string(o[0])) .. Std.string("(");
+    s = Std.string(s) .. Std.string("\t");
+    local _g = 2;
+    local _g1 = o.length;
+    while (_g < _g1) do 
+      _g = _g + 1;
+      local i = _g - 1;
+      if (i ~= 2) then 
+        str = Std.string(str) .. Std.string((Std.string(",") .. Std.string(__lua_Boot.__string_rec(o[i], s))));
+      else
+        str = Std.string(str) .. Std.string(__lua_Boot.__string_rec(o[i], s));
+      end;
+    end;
+    do return Std.string(str) .. Std.string(")") end;
+  end;
+end
+__lua_Boot.printClassRec = function(c,result,s) 
+  if (result == nil) then 
+    result = "";
+  end;
+  local f = __lua_Boot.__string_rec;
+  for k,v in pairs(c) do if result ~= '' then result = result .. ', ' end result = result .. k .. ':' .. f(v, s.. '	') end;
+  do return result end;
+end
 __lua_Boot.dateStr = function(date) 
   local m = date:getMonth() + 1;
   local d = date:getDate();
@@ -7859,7 +8342,7 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SystemManager.getSystems = __haxe_ds_ObjectMap.new();
   
-  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem, __deceptinfect_radiation_RadSourceSystem, __deceptinfect_game_LowHealthSystem}, 17);
+  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem, __deceptinfect_radiation_RadSourceSystem, __deceptinfect_game_LowHealthSystem, __deceptinfect_items_ScannerSystem}, 18);
   
   __deceptinfect_radiation_RadiationTypes.types = (function() 
     local _hx_3

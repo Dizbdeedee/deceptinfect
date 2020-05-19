@@ -20,10 +20,9 @@ class GameInstance {
     public var totalGameTime(default,null):Int = 0;
     public var baseInfection:Ref<Float> = 0.0;
 
-    // public var charger:Spawn;
 
     public function new() {
-        
+
     }
 
     public function start() {
@@ -66,7 +65,7 @@ class GameInstance {
         trace('');
         trace('Time until infection: $totalGameTime');
     }
-    
+
 }
 
 enum PLAYING_STATE {

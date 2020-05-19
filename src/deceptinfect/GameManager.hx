@@ -296,19 +296,18 @@ class GameManager implements enumExtractor.EnumExtractor {
         }
     }
 
-    public static function init() {
-        stateChange = stateTrig.asSignal();
-    }
     #end
 
 
-    #if client
     public static function init() {
-        
+        stateChange = stateTrig.asSignal();
+        #if client
         net_gamestate.signal.handle(gameStateChanged);
         net_cleanup.signal.handle(cleanup);
+        #end
     }
 
+    #if client
     static function cleanup() {
         for (ent in entities) {
             switch ent.get(deceptinfect.game.KeepRestart) {
@@ -332,6 +331,7 @@ class GameManager implements enumExtractor.EnumExtractor {
                 // PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
             default:
         }
+        stateTrig.trigger(x.state);
     }
     #end
 }

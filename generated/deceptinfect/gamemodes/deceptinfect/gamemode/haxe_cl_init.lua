@@ -124,22 +124,16 @@ __deceptinfect_infection_InfectionLookSystem = _hx_e()
 __deceptinfect_radiation_ContaminationSystem = _hx_e()
 __deceptinfect_radiation_RadSourceSystem = _hx_e()
 __deceptinfect_game_LowHealthSystem = _hx_e()
+__deceptinfect_items_ScannerSystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
 __deceptinfect_ecswip_ChooseVirPos = _hx_e()
+__gmod_HaxeHelper = _hx_e()
 __gmod_sent_ENT = _hx_e()
 __gmod_sent_ENT_ANIM = _hx_e()
-__deceptinfect_ents_Di_battery = _hx_e()
 __deceptinfect_ents_Di_charger = _hx_e()
-__gmod_sent_ENT_BRUSH = _hx_e()
-__deceptinfect_ents_Di_evac_zone = _hx_e()
-__deceptinfect_ents_Di_flare = _hx_e()
-__deceptinfect_ents_Di_nest = _hx_e()
-__deceptinfect_ents_Di_ragdoll = _hx_e()
-__deceptinfect_game_CleanupEnt = _hx_e()
 __deceptinfect_game_ClientWeaponStatue = _hx_e()
 __deceptinfect_game_KeepRestart = _hx_e()
 __deceptinfect_game_RagInfo = _hx_e()
-__deceptinfect_game_Ragdoll = _hx_e()
 __deceptinfect_game_Spawn = _hx_e()
 __deceptinfect_game_BoundsSpawn = _hx_e()
 __deceptinfect_game_StatInfo = _hx_e()
@@ -147,15 +141,17 @@ __deceptinfect_game_Statue = _hx_e()
 __deceptinfect_infection_InfectedComponent = _hx_e()
 __deceptinfect_infection_InfectionComponent = _hx_e()
 __deceptinfect_infection_INF_STATE = _hx_e()
+__gmod_swep_SWEP = _hx_e()
+__gmod_swep_SwepBuild = _hx_e()
+__deceptinfect_items_Di_cure = _hx_e()
+__deceptinfect_items_Weapon_Di_Scan = _hx_e()
 __deceptinfect_util_EntityExt = _hx_e()
 __deceptinfect_util_ValidID = _hx_e()
 __deceptinfect_util_MinMaxTools = _hx_e()
 __deceptinfect_util_Util = _hx_e()
 __gmod_PairTools = _hx_e()
 __gmod_PanelBuild = _hx_e()
-__gmod_PanelHelper_2 = _hx_e()
-__gmod_PanelHelper_3 = _hx_e()
-__gmod_MyShittyClass = _hx_e()
+local __lua_Boot = _hx_e()
 __haxe_EntryPoint = _hx_e()
 __haxe_Log = _hx_e()
 __haxe_MainEvent = _hx_e()
@@ -535,6 +531,7 @@ Main.main = function()
     local x = __deceptinfect_ecswip_PlayerComponent.new(ply:next());
     x.player.id = __deceptinfect_ecswip_ComponentManager.addPlayer(x.player);
   end;
+  __haxe_Log.trace("hm", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=28,className="Main",methodName="main"}));
   _G.file.CreateDir("deceptinfect");
   _G.game.CleanUpMap();
   __deceptinfect_ecswip_SignalStorage.initEvents();
@@ -552,6 +549,7 @@ Main.main = function()
   __deceptinfect_client_SabotagePanel.register();
   __deceptinfect_ecswip_SystemManager.initAllSystems();
   _G.math.randomseed(_G.RealTime());
+  __haxe_Log.trace("Deceptinfect server reinit!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/Main.hx",lineNumber=50,className="Main",methodName="main"}));
 end
 
 Math.new = {}
@@ -1190,6 +1188,7 @@ __deceptinfect_DeceptInfect.super = function(self)
 end
 _hxClasses["deceptinfect.DeceptInfect"] = __deceptinfect_DeceptInfect
 __deceptinfect_DeceptInfect.__name__ = true
+__deceptinfect_DeceptInfect.__interfaces__ = {__gmod_gamemode_BuildOverrides}
 __deceptinfect_DeceptInfect.prototype = _hx_a();
 __deceptinfect_DeceptInfect.prototype.CreateClientsideRagdoll = function(self,entity,ragdoll) 
   ragdoll:SetNoDraw(true);
@@ -1284,6 +1283,7 @@ _hxClasses["deceptinfect.GameManager"] = __deceptinfect_GameManager
 __deceptinfect_GameManager.__name__ = true
 __deceptinfect_GameManager.__interfaces__ = {__enumExtractor_EnumExtractor}
 __deceptinfect_GameManager.init = function() 
+  __deceptinfect_GameManager.stateChange = __deceptinfect_GameManager.stateTrig;
   __deceptinfect_GameManager.net_gamestate.signal:listen(__deceptinfect_GameManager.gameStateChanged);
   __deceptinfect_GameManager.net_cleanup.signal:listen(__tink_core__Callback_Callback_Impl_.fromNiladic(__deceptinfect_GameManager.cleanup));
 end
@@ -1299,11 +1299,14 @@ __deceptinfect_GameManager.cleanup = function()
   __deceptinfect_ecswip_SystemManager.initAllSystems();
 end
 __deceptinfect_GameManager.gameStateChanged = function(x) 
-  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=325,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
+  __haxe_Log.trace(Std.string("game state changed ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=324,className="deceptinfect.GameManager",methodName="gameStateChanged"}));
   __deceptinfect_GameManager.state = __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.toGAME_STATE(x.state);
   local _g = x.state;
   if (_g) == 0 then 
   elseif (_g) == 2 then else end;
+  local _this = __deceptinfect_GameManager.stateTrig;
+  local event = __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.toGAME_STATE(x.state);
+  _this.handlers:invoke(event);
 end
 
 __deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.new = {}
@@ -1503,6 +1506,11 @@ __deceptinfect_client_GeigerSystem.prototype = _hx_a();
 __deceptinfect_client_GeigerSystem.prototype.init_client = function(self) 
   __deceptinfect_client_GeigerSystem.net_geiger.signal:listen(function(data) 
     __deceptinfect_client_GeigerSystem.geiger = data.geiger;
+  end);
+  __deceptinfect_GameManager.stateChange:listen(function(x) 
+    if (x[1] == 0) then 
+      __deceptinfect_client_GeigerSystem.geiger = 0.0;
+    end;
   end);
 end
 __deceptinfect_client_GeigerSystem.prototype.run_client = function(self) 
@@ -2531,6 +2539,22 @@ __deceptinfect_game_LowHealthSystem.prototype.__class__ =  __deceptinfect_game_L
 __deceptinfect_game_LowHealthSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_game_LowHealthSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
+__deceptinfect_items_ScannerSystem.new = function() 
+  local self = _hx_new(__deceptinfect_items_ScannerSystem.prototype)
+  __deceptinfect_items_ScannerSystem.super(self)
+  return self
+end
+__deceptinfect_items_ScannerSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.items.ScannerSystem"] = __deceptinfect_items_ScannerSystem
+__deceptinfect_items_ScannerSystem.__name__ = true
+__deceptinfect_items_ScannerSystem.prototype = _hx_a();
+
+__deceptinfect_items_ScannerSystem.prototype.__class__ =  __deceptinfect_items_ScannerSystem
+__deceptinfect_items_ScannerSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_items_ScannerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
 __deceptinfect_ecswip_SystemManager.new = {}
 _hxClasses["deceptinfect.ecswip.SystemManager"] = __deceptinfect_ecswip_SystemManager
 __deceptinfect_ecswip_SystemManager.__name__ = true
@@ -2603,6 +2627,10 @@ __deceptinfect_ecswip_SystemManager.make = function()
   local key16 = __deceptinfect_game_LowHealthSystem;
   _this16.h[key16] = __deceptinfect_game_LowHealthSystem.new();
   _this16.k[key16] = true;
+  local _this17 = __deceptinfect_ecswip_SystemManager.getSystems;
+  local key17 = __deceptinfect_items_ScannerSystem;
+  _this17.h[key17] = __deceptinfect_items_ScannerSystem.new();
+  _this17.k[key17] = true;
 end
 __deceptinfect_ecswip_SystemManager.getSystem = function(cls) 
   do return __deceptinfect_ecswip_SystemManager.getSystems.h[cls] end;
@@ -2636,7 +2664,28 @@ __deceptinfect_ecswip_ChooseVirPos = _hxClasses["deceptinfect.ecswip.ChooseVirPo
 __deceptinfect_ecswip_ChooseVirPos.ENT = function(x) local _x = _hx_tab_array({[0]="ENT",0,x,__enum__=__deceptinfect_ecswip_ChooseVirPos}, 3); return _x; end 
 __deceptinfect_ecswip_ChooseVirPos.REAL = function(vec,ang) local _x = _hx_tab_array({[0]="REAL",1,vec,ang,__enum__=__deceptinfect_ecswip_ChooseVirPos}, 4); return _x; end 
 
-__gmod_sent_ENT.new = {}
+__gmod_HaxeHelper.new = function(x) 
+  local self = _hx_new(__gmod_HaxeHelper.prototype)
+  __gmod_HaxeHelper.super(self,x)
+  return self
+end
+__gmod_HaxeHelper.super = function(self,x) 
+  self["self"] = x;
+end
+_hxClasses["gmod.HaxeHelper"] = __gmod_HaxeHelper
+__gmod_HaxeHelper.__name__ = true
+__gmod_HaxeHelper.prototype = _hx_a();
+
+__gmod_HaxeHelper.prototype.__class__ =  __gmod_HaxeHelper
+
+__gmod_sent_ENT.new = function(x) 
+  local self = _hx_new(__gmod_sent_ENT.prototype)
+  __gmod_sent_ENT.super(self,x)
+  return self
+end
+__gmod_sent_ENT.super = function(self,x) 
+  __gmod_HaxeHelper.super(self,x);
+end
 _hxClasses["gmod.sent.ENT"] = __gmod_sent_ENT
 __gmod_sent_ENT.__name__ = true
 __gmod_sent_ENT.prototype = _hx_a();
@@ -2677,14 +2726,17 @@ __gmod_sent_ENT.prototype.SetupDataTables = function(self)
 end
 
 __gmod_sent_ENT.prototype.__class__ =  __gmod_sent_ENT
+__gmod_sent_ENT.__super__ = __gmod_HaxeHelper
+setmetatable(__gmod_sent_ENT.prototype,{__index=__gmod_HaxeHelper.prototype})
 
-__gmod_sent_ENT_ANIM.new = function() 
+__gmod_sent_ENT_ANIM.new = function(x) 
   local self = _hx_new(__gmod_sent_ENT_ANIM.prototype)
-  __gmod_sent_ENT_ANIM.super(self)
+  __gmod_sent_ENT_ANIM.super(self,x)
   return self
 end
-__gmod_sent_ENT_ANIM.super = function(self) 
+__gmod_sent_ENT_ANIM.super = function(self,x) 
   self.TYPE = "anim";
+  __gmod_sent_ENT.super(self,x);
 end
 _hxClasses["gmod.sent.ENT_ANIM"] = __gmod_sent_ENT_ANIM
 __gmod_sent_ENT_ANIM.__name__ = true
@@ -2709,37 +2761,14 @@ __gmod_sent_ENT_ANIM.prototype.__class__ =  __gmod_sent_ENT_ANIM
 __gmod_sent_ENT_ANIM.__super__ = __gmod_sent_ENT
 setmetatable(__gmod_sent_ENT_ANIM.prototype,{__index=__gmod_sent_ENT.prototype})
 
-__deceptinfect_ents_Di_battery.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_ents_Di_battery.prototype)
-  __deceptinfect_ents_Di_battery.super(self,curEnt)
-  return self
-end
-__deceptinfect_ents_Di_battery.super = function(self,curEnt) 
-  self.properties = _hx_o({__fields__={Base=true},Base="base_anim"});
-  __gmod_sent_ENT_ANIM.super(self);
-  self["self"] = curEnt;
-end
-_hx_exports["di_battery"] = __deceptinfect_ents_Di_battery
-_hxClasses["deceptinfect.ents.Di_battery"] = __deceptinfect_ents_Di_battery
-__deceptinfect_ents_Di_battery.__name__ = true
-__deceptinfect_ents_Di_battery.prototype = _hx_a();
-__deceptinfect_ents_Di_battery.prototype.Draw = function(self,flags) 
-  self["self"]:DrawModel();
-end
-
-__deceptinfect_ents_Di_battery.prototype.__class__ =  __deceptinfect_ents_Di_battery
-__deceptinfect_ents_Di_battery.__super__ = __gmod_sent_ENT_ANIM
-setmetatable(__deceptinfect_ents_Di_battery.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__deceptinfect_ents_Di_charger.new = function(curEnt) 
+__deceptinfect_ents_Di_charger.new = function(x) 
   local self = _hx_new(__deceptinfect_ents_Di_charger.prototype)
-  __deceptinfect_ents_Di_charger.super(self,curEnt)
+  __deceptinfect_ents_Di_charger.super(self,x)
   return self
 end
-__deceptinfect_ents_Di_charger.super = function(self,curEnt) 
+__deceptinfect_ents_Di_charger.super = function(self,x) 
   self.properties = _hx_o({__fields__={Base=true},Base="base_anim"});
-  __gmod_sent_ENT_ANIM.super(self);
-  self["self"] = curEnt;
+  __gmod_sent_ENT_ANIM.super(self,x);
 end
 _hx_exports["di_charger"] = __deceptinfect_ents_Di_charger
 _hxClasses["deceptinfect.ents.Di_charger"] = __deceptinfect_ents_Di_charger
@@ -2752,137 +2781,6 @@ end
 __deceptinfect_ents_Di_charger.prototype.__class__ =  __deceptinfect_ents_Di_charger
 __deceptinfect_ents_Di_charger.__super__ = __gmod_sent_ENT_ANIM
 setmetatable(__deceptinfect_ents_Di_charger.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__gmod_sent_ENT_BRUSH.new = function() 
-  local self = _hx_new(__gmod_sent_ENT_BRUSH.prototype)
-  __gmod_sent_ENT_BRUSH.super(self)
-  return self
-end
-__gmod_sent_ENT_BRUSH.super = function(self) 
-  self.TYPE = "brush";
-end
-_hxClasses["gmod.sent.ENT_BRUSH"] = __gmod_sent_ENT_BRUSH
-__gmod_sent_ENT_BRUSH.__name__ = true
-__gmod_sent_ENT_BRUSH.prototype = _hx_a();
-__gmod_sent_ENT_BRUSH.prototype.StartTouch = function(self,ent) 
-end
-__gmod_sent_ENT_BRUSH.prototype.EndTouch = function(self,ent) 
-end
-__gmod_sent_ENT_BRUSH.prototype.Touch = function(self,ent) 
-end
-
-__gmod_sent_ENT_BRUSH.prototype.__class__ =  __gmod_sent_ENT_BRUSH
-__gmod_sent_ENT_BRUSH.__super__ = __gmod_sent_ENT
-setmetatable(__gmod_sent_ENT_BRUSH.prototype,{__index=__gmod_sent_ENT.prototype})
-
-__deceptinfect_ents_Di_evac_zone.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_ents_Di_evac_zone.prototype)
-  __deceptinfect_ents_Di_evac_zone.super(self,curEnt)
-  return self
-end
-__deceptinfect_ents_Di_evac_zone.super = function(self,curEnt) 
-  self.properties = _hx_o({__fields__={Base=true},Base="base_brush"});
-  __gmod_sent_ENT_BRUSH.super(self);
-  self["self"] = curEnt;
-end
-_hx_exports["di_evac_zone"] = __deceptinfect_ents_Di_evac_zone
-_hxClasses["deceptinfect.ents.Di_evac_zone"] = __deceptinfect_ents_Di_evac_zone
-__deceptinfect_ents_Di_evac_zone.__name__ = true
-__deceptinfect_ents_Di_evac_zone.prototype = _hx_a();
-
-__deceptinfect_ents_Di_evac_zone.prototype.__class__ =  __deceptinfect_ents_Di_evac_zone
-__deceptinfect_ents_Di_evac_zone.__super__ = __gmod_sent_ENT_BRUSH
-setmetatable(__deceptinfect_ents_Di_evac_zone.prototype,{__index=__gmod_sent_ENT_BRUSH.prototype})
-
-__deceptinfect_ents_Di_flare.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_ents_Di_flare.prototype)
-  __deceptinfect_ents_Di_flare.super(self,curEnt)
-  return self
-end
-__deceptinfect_ents_Di_flare.super = function(self,curEnt) 
-  self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
-  __gmod_sent_ENT_ANIM.super(self);
-  self["self"] = curEnt;
-end
-_hx_exports["di_flare"] = __deceptinfect_ents_Di_flare
-_hxClasses["deceptinfect.ents.Di_flare"] = __deceptinfect_ents_Di_flare
-__deceptinfect_ents_Di_flare.__name__ = true
-__deceptinfect_ents_Di_flare.prototype = _hx_a();
-__deceptinfect_ents_Di_flare.prototype.Draw = function(self,flags) 
-  self["self"]:DrawModel();
-end
-
-__deceptinfect_ents_Di_flare.prototype.__class__ =  __deceptinfect_ents_Di_flare
-__deceptinfect_ents_Di_flare.__super__ = __gmod_sent_ENT_ANIM
-setmetatable(__deceptinfect_ents_Di_flare.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__deceptinfect_ents_Di_nest.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_ents_Di_nest.prototype)
-  __deceptinfect_ents_Di_nest.super(self,curEnt)
-  return self
-end
-__deceptinfect_ents_Di_nest.super = function(self,curEnt) 
-  self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
-  __gmod_sent_ENT_ANIM.super(self);
-  self["self"] = curEnt;
-end
-_hx_exports["di_nest"] = __deceptinfect_ents_Di_nest
-_hxClasses["deceptinfect.ents.Di_nest"] = __deceptinfect_ents_Di_nest
-__deceptinfect_ents_Di_nest.__name__ = true
-__deceptinfect_ents_Di_nest.prototype = _hx_a();
-__deceptinfect_ents_Di_nest.prototype.Draw = function(self,flags) 
-  self["self"]:DrawModel();
-end
-__deceptinfect_ents_Di_nest.prototype.TestCollision = function(self,startpos,delta,isbox,extents,mask) 
-  do return _hx_o({__fields__={HitPos=true,Fraction=true},HitPos=startpos,Fraction=0}) end
-end
-
-__deceptinfect_ents_Di_nest.prototype.__class__ =  __deceptinfect_ents_Di_nest
-__deceptinfect_ents_Di_nest.__super__ = __gmod_sent_ENT_ANIM
-setmetatable(__deceptinfect_ents_Di_nest.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__deceptinfect_ents_Di_ragdoll.new = function(curEnt) 
-  local self = _hx_new(__deceptinfect_ents_Di_ragdoll.prototype)
-  __deceptinfect_ents_Di_ragdoll.super(self,curEnt)
-  return self
-end
-__deceptinfect_ents_Di_ragdoll.super = function(self,curEnt) 
-  self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
-  __gmod_sent_ENT_ANIM.super(self);
-  self["self"] = curEnt;
-end
-_hx_exports["di_ragdoll"] = __deceptinfect_ents_Di_ragdoll
-_hxClasses["deceptinfect.ents.Di_ragdoll"] = __deceptinfect_ents_Di_ragdoll
-__deceptinfect_ents_Di_ragdoll.__name__ = true
-__deceptinfect_ents_Di_ragdoll.prototype = _hx_a();
-__deceptinfect_ents_Di_ragdoll.prototype.Initialize = function(self) 
-  self["self"]:SetModel(self.owner:GetModel());
-  local x = self["self"];
-  x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
-  self.id = x.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_Ragdoll.new(), self.id);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_CleanupEnt.new(), self.id);
-end
-
-__deceptinfect_ents_Di_ragdoll.prototype.__class__ =  __deceptinfect_ents_Di_ragdoll
-__deceptinfect_ents_Di_ragdoll.__super__ = __gmod_sent_ENT_ANIM
-setmetatable(__deceptinfect_ents_Di_ragdoll.prototype,{__index=__gmod_sent_ENT_ANIM.prototype})
-
-__deceptinfect_game_CleanupEnt.new = function() 
-  local self = _hx_new(__deceptinfect_game_CleanupEnt.prototype)
-  __deceptinfect_game_CleanupEnt.super(self)
-  return self
-end
-__deceptinfect_game_CleanupEnt.super = function(self) 
-  __deceptinfect_ecswip_Component.super(self);
-end
-_hxClasses["deceptinfect.game.CleanupEnt"] = __deceptinfect_game_CleanupEnt
-__deceptinfect_game_CleanupEnt.__name__ = true
-__deceptinfect_game_CleanupEnt.prototype = _hx_a();
-
-__deceptinfect_game_CleanupEnt.prototype.__class__ =  __deceptinfect_game_CleanupEnt
-__deceptinfect_game_CleanupEnt.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_game_CleanupEnt.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
 __deceptinfect_game_ClientWeaponStatue.new = function() 
   local self = _hx_new(__deceptinfect_game_ClientWeaponStatue.prototype)
@@ -2931,22 +2829,6 @@ __deceptinfect_game_RagInfo.prototype = _hx_a();
 __deceptinfect_game_RagInfo.prototype.__class__ =  __deceptinfect_game_RagInfo
 __deceptinfect_game_RagInfo.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_game_RagInfo.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_game_Ragdoll.new = function() 
-  local self = _hx_new(__deceptinfect_game_Ragdoll.prototype)
-  __deceptinfect_game_Ragdoll.super(self)
-  return self
-end
-__deceptinfect_game_Ragdoll.super = function(self) 
-  __deceptinfect_ecswip_Component.super(self);
-end
-_hxClasses["deceptinfect.game.Ragdoll"] = __deceptinfect_game_Ragdoll
-__deceptinfect_game_Ragdoll.__name__ = true
-__deceptinfect_game_Ragdoll.prototype = _hx_a();
-
-__deceptinfect_game_Ragdoll.prototype.__class__ =  __deceptinfect_game_Ragdoll
-__deceptinfect_game_Ragdoll.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_game_Ragdoll.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
 __deceptinfect_game_Spawn.new = function(parent,vec) 
   local self = _hx_new(__deceptinfect_game_Spawn.prototype)
@@ -3127,6 +3009,168 @@ __deceptinfect_infection_INF_STATE.NOT_INFECTED = function(inf) local _x = _hx_t
 __deceptinfect_infection_INF_STATE.INFECTED = _hx_tab_array({[0]="INFECTED",1,__enum__ = __deceptinfect_infection_INF_STATE},2)
 
 
+__gmod_swep_SWEP.new = {}
+_hxClasses["gmod.swep.SWEP"] = __gmod_swep_SWEP
+__gmod_swep_SWEP.__name__ = true
+__gmod_swep_SWEP.prototype = _hx_a();
+__gmod_swep_SWEP.prototype.PostDrawViewModel = function(self,vm,weapon,ply) 
+end
+__gmod_swep_SWEP.prototype.Deploy = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.GetViewModelPosition = function(self,EyePos,EyeAng) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.TakePrimaryAmmo = function(self,amount) 
+end
+__gmod_swep_SWEP.prototype.PreDrawViewModel = function(self,vm,weapon,ply) 
+end
+__gmod_swep_SWEP.prototype.CanSecondaryAttack = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.DrawHUD = function(self) 
+end
+__gmod_swep_SWEP.prototype.SecondaryAttack = function(self) 
+end
+__gmod_swep_SWEP.prototype.DrawWeaponSelection = function(self,x,y,width,height,alpha) 
+end
+__gmod_swep_SWEP.prototype.PrintWeaponInfo = function(self,x,y,alpha) 
+end
+__gmod_swep_SWEP.prototype.DoImpactEffect = function(self,tr,damageType) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.TranslateFOV = function(self,fov) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.RenderScreen = function(self) 
+end
+__gmod_swep_SWEP.prototype.HUDShouldDraw = function(self,element) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.DrawWorldModelTranslucent = function(self) 
+end
+__gmod_swep_SWEP.prototype.Ammo2 = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.ShootEffects = function(self) 
+end
+__gmod_swep_SWEP.prototype.TakeSecondaryAmmo = function(self,amount) 
+end
+__gmod_swep_SWEP.prototype.CanPrimaryAttack = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.Reload = function(self) 
+end
+__gmod_swep_SWEP.prototype.ShootBullet = function(self,damage,num_bullets,aimcone,ammo_type,force,tracer) 
+end
+__gmod_swep_SWEP.prototype.AdjustMouseSensitivity = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.CustomAmmoDisplay = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.OnRemove = function(self) 
+end
+__gmod_swep_SWEP.prototype.OwnerChanged = function(self) 
+end
+__gmod_swep_SWEP.prototype.Initialize = function(self) 
+end
+__gmod_swep_SWEP.prototype.CalcViewModelView = function(self,ViewModel,OldEyePos,OldEyeAng,EyePos,EyeAng) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.GetTracerOrigin = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.CalcView = function(self,ply,pos,ang,fov) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.TranslateActivity = function(self,act) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.Holster = function(self,weapon) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.SetDeploySpeed = function(self,speed) 
+end
+__gmod_swep_SWEP.prototype.Think = function(self) 
+end
+__gmod_swep_SWEP.prototype.FireAnimationEvent = function(self,pos,ang,event,options) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.DrawWorldModel = function(self) 
+end
+__gmod_swep_SWEP.prototype.SetupDataTables = function(self) 
+end
+__gmod_swep_SWEP.prototype.PrimaryAttack = function(self) 
+end
+__gmod_swep_SWEP.prototype.ViewModelDrawn = function(self,ViewModel) 
+end
+__gmod_swep_SWEP.prototype.Ammo1 = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.DoDrawCrosshair = function(self,x,y) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.ShouldDrawViewModel = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.OnRestore = function(self) 
+end
+__gmod_swep_SWEP.prototype.OnReloaded = function(self) 
+end
+__gmod_swep_SWEP.prototype.FreezeMovement = function(self) 
+  do return nil end
+end
+__gmod_swep_SWEP.prototype.SetWeaponHoldType = function(self,name) 
+end
+__gmod_swep_SWEP.prototype.DrawHUDBackground = function(self) 
+end
+
+__gmod_swep_SWEP.prototype.__class__ =  __gmod_swep_SWEP
+
+__gmod_swep_SwepBuild.new = {}
+_hxClasses["gmod.swep.SwepBuild"] = __gmod_swep_SwepBuild
+__gmod_swep_SwepBuild.__name__ = true
+__gmod_swep_SwepBuild.prototype = _hx_a();
+
+__gmod_swep_SwepBuild.prototype.__class__ =  __gmod_swep_SwepBuild
+
+__deceptinfect_items_Di_cure.new = function() 
+  local self = _hx_new(__deceptinfect_items_Di_cure.prototype)
+  __deceptinfect_items_Di_cure.super(self)
+  return self
+end
+__deceptinfect_items_Di_cure.super = function(self) 
+  self.properties = _hx_o({__fields__={Primary=true},Primary=_hx_o({__fields__={Ammo=true,ClipSize=true,DefaultClip=true,Automatic=true},Ammo="None",ClipSize=-1,DefaultClip=-1,Automatic=true})});
+end
+_hx_exports["di_cure"] = __deceptinfect_items_Di_cure
+_hxClasses["deceptinfect.items.Di_cure"] = __deceptinfect_items_Di_cure
+__deceptinfect_items_Di_cure.__name__ = true
+__deceptinfect_items_Di_cure.__interfaces__ = {__gmod_swep_SwepBuild}
+__deceptinfect_items_Di_cure.prototype = _hx_a();
+
+__deceptinfect_items_Di_cure.prototype.__class__ =  __deceptinfect_items_Di_cure
+__deceptinfect_items_Di_cure.__super__ = __gmod_swep_SWEP
+setmetatable(__deceptinfect_items_Di_cure.prototype,{__index=__gmod_swep_SWEP.prototype})
+
+__deceptinfect_items_Weapon_Di_Scan.new = function() 
+  local self = _hx_new(__deceptinfect_items_Weapon_Di_Scan.prototype)
+  __deceptinfect_items_Weapon_Di_Scan.super(self)
+  return self
+end
+__deceptinfect_items_Weapon_Di_Scan.super = function(self) 
+  self.properties = _hx_o({__fields__={Primary=true},Primary=_hx_o({__fields__={Ammo=true,ClipSize=true,DefaultClip=true,Automatic=true},Ammo="Smg1",ClipSize=-1,DefaultClip=-1,Automatic=true})});
+end
+_hx_exports["weapon_di_scan"] = __deceptinfect_items_Weapon_Di_Scan
+_hxClasses["deceptinfect.items.Weapon_Di_Scan"] = __deceptinfect_items_Weapon_Di_Scan
+__deceptinfect_items_Weapon_Di_Scan.__name__ = true
+__deceptinfect_items_Weapon_Di_Scan.__interfaces__ = {__gmod_swep_SwepBuild}
+__deceptinfect_items_Weapon_Di_Scan.prototype = _hx_a();
+
+__deceptinfect_items_Weapon_Di_Scan.prototype.__class__ =  __deceptinfect_items_Weapon_Di_Scan
+__deceptinfect_items_Weapon_Di_Scan.__super__ = __gmod_swep_SWEP
+setmetatable(__deceptinfect_items_Weapon_Di_Scan.prototype,{__index=__gmod_swep_SWEP.prototype})
+
 __deceptinfect_util_EntityExt.new = {}
 _hxClasses["deceptinfect.util.EntityExt"] = __deceptinfect_util_EntityExt
 __deceptinfect_util_EntityExt.__name__ = true
@@ -3227,53 +3271,103 @@ __gmod_PanelBuild.new = {}
 _hxClasses["gmod.PanelBuild"] = __gmod_PanelBuild
 __gmod_PanelBuild.__name__ = true
 
-__gmod_PanelHelper_2.new = function(x) 
-  local self = _hx_new(__gmod_PanelHelper_2.prototype)
-  __gmod_PanelHelper_2.super(self,x)
-  return self
+__lua_Boot.new = {}
+_hxClasses["__lua_Boot"] = __lua_Boot
+__lua_Boot.__name__ = true
+__lua_Boot.__string_rec = function(o,s) 
+  if (s == nil) then 
+    s = "";
+  end;
+  if (#s >= 5) then 
+    do return "<...>" end;
+  end;
+  local _g = type(o);
+  if (_g) == "boolean" then 
+    do return tostring(o) end;
+  elseif (_g) == "function" then 
+    do return "<function>" end;
+  elseif (_g) == "nil" then 
+    do return "null" end;
+  elseif (_g) == "number" then 
+    if (o == _G.math.huge) then 
+      do return "Infinity" end;
+    else
+      if (o == -_G.math.huge) then 
+        do return "-Infinity" end;
+      else
+        if (o == 0) then 
+          do return "0" end;
+        else
+          if (o ~= o) then 
+            do return "NaN" end;
+          else
+            do return tostring(o) end;
+          end;
+        end;
+      end;
+    end;
+  elseif (_g) == "string" then 
+    do return o end;
+  elseif (_g) == "table" then 
+    if (o.__enum__ ~= nil) then 
+      do return __lua_Boot.printEnum(o, s) end;
+    else
+      if ((_hx_wrap_if_string_field(o,'toString') ~= nil) and not __lua_Boot.isArray(o)) then 
+        do return _hx_wrap_if_string_field(o,'toString')(o) end;
+      else
+        if (__lua_Boot.isArray(o)) then 
+          local o2 = o;
+          if (#s > 5) then 
+            do return "[...]" end;
+          else
+            local _g1 = _hx_tab_array({}, 0);
+            local _g11 = 0;
+            while (_g11 < o2.length) do 
+              local i = o2[_g11];
+              _g11 = _g11 + 1;
+              _g1:push(__lua_Boot.__string_rec(i, Std.string(s) .. Std.string(1)));
+            end;
+            do return Std.string(Std.string("[") .. Std.string(_g1:join(","))) .. Std.string("]") end;
+          end;
+        else
+          if (o.__class__ ~= nil) then 
+            do return Std.string(Std.string("{") .. Std.string(__lua_Boot.printClassRec(o, "", Std.string(s) .. Std.string("\t")))) .. Std.string("}") end;
+          else
+            local fields = __lua_Boot.fieldIterator(o);
+            local buffer = ({});
+            local first = true;
+            _G.table.insert(buffer, "{ ");
+            local f = fields;
+            while (f:hasNext()) do 
+              local f1 = f:next();
+              if (first) then 
+                first = false;
+              else
+                _G.table.insert(buffer, ", ");
+              end;
+              _G.table.insert(buffer, Std.string(Std.string(Std.string("") .. Std.string(Std.string(f1))) .. Std.string(" : ")) .. Std.string(__lua_Boot.__string_rec(o[f1], Std.string(s) .. Std.string("\t"))));
+            end;
+            _G.table.insert(buffer, " }");
+            do return _G.table.concat(buffer, "") end;
+          end;
+        end;
+      end;
+    end;
+  elseif (_g) == "thread" then 
+    do return "<thread>" end;
+  elseif (_g) == "userdata" then 
+    local mt = _G.getmetatable(o);
+    if ((mt ~= nil) and (mt.__tostring ~= nil)) then 
+      do return _G.tostring(o) end;
+    else
+      do return "<userdata>" end;
+    end;else
+  if (_G.TypeID(o) == _G.TYPE_NONE) then 
+    _G.error("Invalid type",0);
+  else
+    do return tostring(o) end;
+  end; end;
 end
-__gmod_PanelHelper_2.super = function(self,x) 
-  __gmod_PanelHelper.super(self,x);
-end
-_hxClasses["gmod.PanelHelper_2"] = __gmod_PanelHelper_2
-__gmod_PanelHelper_2.__name__ = true
-__gmod_PanelHelper_2.prototype = _hx_a();
-
-__gmod_PanelHelper_2.prototype.__class__ =  __gmod_PanelHelper_2
-__gmod_PanelHelper_2.__super__ = __gmod_PanelHelper
-setmetatable(__gmod_PanelHelper_2.prototype,{__index=__gmod_PanelHelper.prototype})
-
-__gmod_PanelHelper_3.new = function(x) 
-  local self = _hx_new(__gmod_PanelHelper_3.prototype)
-  __gmod_PanelHelper_3.super(self,x)
-  return self
-end
-__gmod_PanelHelper_3.super = function(self,x) 
-  __gmod_PanelHelper_2.super(self,x);
-end
-_hxClasses["gmod.PanelHelper_3"] = __gmod_PanelHelper_3
-__gmod_PanelHelper_3.__name__ = true
-__gmod_PanelHelper_3.prototype = _hx_a();
-
-__gmod_PanelHelper_3.prototype.__class__ =  __gmod_PanelHelper_3
-__gmod_PanelHelper_3.__super__ = __gmod_PanelHelper_2
-setmetatable(__gmod_PanelHelper_3.prototype,{__index=__gmod_PanelHelper_2.prototype})
-
-__gmod_MyShittyClass.new = function(x) 
-  local self = _hx_new(__gmod_MyShittyClass.prototype)
-  __gmod_MyShittyClass.super(self,x)
-  return self
-end
-__gmod_MyShittyClass.super = function(self,x) 
-  __gmod_PanelHelper_2.super(self,x);
-end
-_hxClasses["gmod.MyShittyClass"] = __gmod_MyShittyClass
-__gmod_MyShittyClass.__name__ = true
-__gmod_MyShittyClass.prototype = _hx_a();
-
-__gmod_MyShittyClass.prototype.__class__ =  __gmod_MyShittyClass
-__gmod_MyShittyClass.__super__ = __gmod_PanelHelper_2
-setmetatable(__gmod_MyShittyClass.prototype,{__index=__gmod_PanelHelper_2.prototype})
 
 __haxe_EntryPoint.new = {}
 _hxClasses["haxe.EntryPoint"] = __haxe_EntryPoint
@@ -3888,6 +3982,34 @@ __lua_Boot.isArray = function(o)
     do return false end;
   end;
 end
+__lua_Boot.printEnum = function(o,s) 
+  if (o.length == 2) then 
+    do return o[0] end;
+  else
+    local str = Std.string(Std.string(o[0])) .. Std.string("(");
+    s = Std.string(s) .. Std.string("\t");
+    local _g = 2;
+    local _g1 = o.length;
+    while (_g < _g1) do 
+      _g = _g + 1;
+      local i = _g - 1;
+      if (i ~= 2) then 
+        str = Std.string(str) .. Std.string((Std.string(",") .. Std.string(__lua_Boot.__string_rec(o[i], s))));
+      else
+        str = Std.string(str) .. Std.string(__lua_Boot.__string_rec(o[i], s));
+      end;
+    end;
+    do return Std.string(str) .. Std.string(")") end;
+  end;
+end
+__lua_Boot.printClassRec = function(c,result,s) 
+  if (result == nil) then 
+    result = "";
+  end;
+  local f = __lua_Boot.__string_rec;
+  for k,v in pairs(c) do if result ~= '' then result = result .. ', ' end result = result .. k .. ':' .. f(v, s.. '	') end;
+  do return result end;
+end
 __lua_Boot.extendsOrImplements = function(cl1,cl2) 
   if ((cl1 == nil) or (cl2 == nil)) then 
     do return false end;
@@ -3910,6 +4032,37 @@ __lua_Boot.extendsOrImplements = function(cl1,cl2)
     end;
   end;
   do return __lua_Boot.extendsOrImplements(cl1.__super__, cl2) end;
+end
+__lua_Boot.fieldIterator = function(o) 
+  if (_G.type(o) ~= "table") then 
+    do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+      do return nil end;
+    end,hasNext=function(self) 
+      do return false end;
+    end}) end;
+  end;
+  local tbl = (function() 
+    local _hx_1
+    if (o.__fields__ ~= nil) then 
+    _hx_1 = o.__fields__; else 
+    _hx_1 = o; end
+    return _hx_1
+  end )();
+  local cur = _G.pairs(tbl);
+  local next_valid = function(tbl1,val) 
+    while (__lua_Boot.hiddenFields[val] ~= nil) do 
+      val = cur(tbl1, val);
+    end;
+    do return val end;
+  end;
+  local cur_val = next_valid(tbl, cur(tbl, nil));
+  do return _hx_o({__fields__={next=true,hasNext=true},next=function(self) 
+    local ret = cur_val;
+    cur_val = next_valid(tbl, cur(tbl, cur_val));
+    do return ret end;
+  end,hasNext=function(self) 
+    do return cur_val ~= nil end;
+  end}) end;
 end
 
 __lua_UserData.new = {}
@@ -4258,7 +4411,7 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SystemManager.getSystems = __haxe_ds_ObjectMap.new();
   
-  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem, __deceptinfect_radiation_RadSourceSystem, __deceptinfect_game_LowHealthSystem}, 17);
+  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem, __deceptinfect_radiation_RadSourceSystem, __deceptinfect_game_LowHealthSystem, __deceptinfect_items_ScannerSystem}, 18);
   
   __deceptinfect_util_Util.mappy_2 = __haxe_ds_IntMap.new();
   
@@ -4273,6 +4426,8 @@ local _hx_static_init = function()
   __lua_Boot.Max_Int32 = 2147483647;
   
   __lua_Boot.Min_Int32 = -2147483648;
+  
+  __lua_Boot.hiddenFields = {__id__=true, hx__closures=true, super=true, prototype=true, __fields__=true, __ifields__=true, __class__=true, __properties__=true}
   
   __tink_core__Callback_Callback_Impl_.depth = 0;
   
@@ -4321,6 +4476,18 @@ _hx_table.maxn = _G.table.maxn or function(t)
   end
   return maxn
 end;
+
+_hx_wrap_if_string_field = function(o, fld)
+  if _G.type(o) == 'string' then
+    if fld == 'length' then
+      return _G.string.len(o)
+    else
+      return String.prototype[fld]
+    end
+  else
+    return o[fld]
+  end
+end
 
 _hx_static_init();
 

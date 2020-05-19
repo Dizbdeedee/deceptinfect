@@ -7,10 +7,29 @@ package gmod.gclass;
 	Created by Angle & many more functions.
 **/
 extern class Angle {
-    
+    /**
+        The pitch component of the angle
+    **/
     var p:Float;
+    /**
+        The yaw component of the angle
+    **/
     var y:Float;
+    /**
+        The roll component of the angle
+    **/
     var r:Float;
+
+    @:noCompletion
+    var pitch:Float;
+    @:noCompletion
+    var yaw:Float;
+    @:noCompletion
+    var roll:Float;    
+    @:noCompletion
+    var x:Float;
+    @:noCompletion
+    var z:Float;
 
     /**
         Adds the values of the argument angle to the orignal angle. This functions the same as angle1 + angle2 without creating a new angle object, skipping object construction and garbage collection.
@@ -20,7 +39,7 @@ extern class Angle {
 		`angle` | The angle to add.
     **/
     
-    public function Add(angle:Angle):Void;
+    function Add(angle:Angle):Void;
     
     
     /**
@@ -41,7 +60,7 @@ extern class Angle {
 		0.000 -179.000 1.000
     **/
     
-    public function Normalize():Void;
+    function Normalize():Void;
     
     
     /**
@@ -54,7 +73,7 @@ extern class Angle {
 		`r` | 
     **/
     
-    public function SetUnpacked(p:Float, y:Float, r:Float):Void;
+    function SetUnpacked(p:Float, y:Float, r:Float):Void;
     
     
     /**
@@ -65,7 +84,7 @@ extern class Angle {
 		`originalAngle` | The angle to copy the values from.
     **/
     
-    public function Set(originalAngle:Angle):Void;
+    function Set(originalAngle:Angle):Void;
     
     
     /**
@@ -74,7 +93,7 @@ extern class Angle {
 		`**Returns:** Whether the pitch, yaw and roll are 0 or not.
     **/
     
-    public function IsZero():Bool;
+    function IsZero():Bool;
     
     
     /**
@@ -83,7 +102,7 @@ extern class Angle {
 		`**Returns:** The up direction of the angle.
     **/
     
-    public function Up():Vector;
+    function Up():Vector;
     
     
     /**
@@ -94,7 +113,7 @@ extern class Angle {
 		`angle` | The angle to subtract.
     **/
     
-    public function Sub(angle:Angle):Void;
+    function Sub(angle:Angle):Void;
     
     
     /**
@@ -103,7 +122,7 @@ extern class Angle {
 		`**Returns:** The right direction of the angle
     **/
     
-    public function Right():Vector;
+    function Right():Vector;
     
     
     /**
@@ -114,7 +133,7 @@ extern class Angle {
 		`scalar` | The number to divide by.
     **/
     
-    public function Div(scalar:Float):Void;
+    function Div(scalar:Float):Void;
     
     
     /**
@@ -126,7 +145,7 @@ extern class Angle {
 		`rotation` | The degrees to rotate around the specified axis.
     **/
     
-    public function RotateAroundAxis(axis:Vector, rotation:Float):Void;
+    function RotateAroundAxis(axis:Vector, rotation:Float):Void;
     
     
     /**
@@ -135,14 +154,14 @@ extern class Angle {
 		`**Returns:** The forward direction of the angle
     **/
     
-    public function Forward():Vector;
+    function Forward():Vector;
     
     
     /**
         Sets pitch, yaw and roll to 0. This function is faster than doing it manually.
     **/
     
-    public function Zero():Void;
+    function Zero():Void;
     
     
     /**
@@ -151,7 +170,7 @@ extern class Angle {
 		`**Returns:** The table with elements 1 = p, 2 = y, 3 = r.
     **/
     
-    public function ToTable():AnyTable;
+    function ToTable():AnyTable;
     
     
     /**
@@ -164,7 +183,7 @@ extern class Angle {
 		`c` | r, roll, r, or Angle[3].
     **/
     
-    public function Unpack():AngleUnpackReturn;
+    function Unpack():AngleUnpackReturn;
     
     
     /**
@@ -197,7 +216,7 @@ extern class Angle {
 		Angle( 0, 90, -180 )
     **/
     
-    public function SnapTo(axis:String, target:Float):Angle;
+    function SnapTo(axis:String, target:Float):Angle;
     
     
     /**
@@ -208,7 +227,7 @@ extern class Angle {
 		`scalar` | The number to multiply.
     **/
     
-    public function Mul(scalar:Float):Void;
+    function Mul(scalar:Float):Void;
     
     
 }

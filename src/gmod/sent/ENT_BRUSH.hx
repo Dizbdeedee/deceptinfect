@@ -1,10 +1,9 @@
 package gmod.sent;
 
 
-class ENT_BRUSH extends gmod.sent.ENT {
+class ENT_BRUSH extends gmod.sent.ENT<Entity> {
 	
 	public final TYPE = "brush";
-    var self(default,never):gmod.gclass.Entity;
 
     function StartTouch(ent:Entity) {}
 

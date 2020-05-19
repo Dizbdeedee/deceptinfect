@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.items.ScannerSystem;
 import deceptinfect.radiation.ContaminationSystem;
 // import deceptinfect.radiation.ContaminationSystem;
 import deceptinfect.game.EvacSystem;
@@ -18,7 +19,7 @@ import deceptinfect.game.SlowMotionSystem;
 import deceptinfect.infection.InfectionLookSystem;
 import deceptinfect.radiation.RadSourceSystem;
 import deceptinfect.game.LowHealthSystem;
-
+import deceptinfect.items.ScannerSystem;
 class SystemManager {
 
    
@@ -43,7 +44,8 @@ class SystemManager {
         InfectionLookSystem,
         ContaminationSystem,
         RadSourceSystem,
-        LowHealthSystem
+        LowHealthSystem,
+        ScannerSystem
     ];
 
     static function make() {
@@ -64,6 +66,7 @@ class SystemManager {
         getSystems.set(ContaminationSystem,new ContaminationSystem());
         getSystems.set(RadSourceSystem, new RadSourceSystem());
         getSystems.set(LowHealthSystem, new LowHealthSystem());
+        getSystems.set(ScannerSystem, new ScannerSystem());
     }
     public static function getSystem<T:System>(cls:Class<T>):T {
         return cast getSystems.get(cls);

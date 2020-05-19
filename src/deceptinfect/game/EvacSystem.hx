@@ -43,7 +43,7 @@ class EvacSystem extends System {
     }
 
     #end
-    
+
     #if server
     var flaresSpawned = false;
     override function run_server() {
@@ -88,12 +88,12 @@ class EvacSystem extends System {
                         {state : c_evac.state,
                         time : time
                         },true);
-                
+
                 default:
                 }
             default:
             }
-        
+
 
         }
     }
@@ -101,7 +101,7 @@ class EvacSystem extends System {
     public function checkWin(evac:EvacZone) {
         var humanEscape = false;
         for (id in evac.in_zone.keys()) {
-            
+
             switch([id.get(InfectedComponent),id.get(PlayerComponent)]) {
             case [Comp(_),Comp(_)]:
                 getSystem(WinSystem).winTrig.trigger(WIN_INF);
@@ -178,5 +178,5 @@ enum abstract INT_EvacState(Int) from Int to Int {
         }
     }
 
-    
+
 }

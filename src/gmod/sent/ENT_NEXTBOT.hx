@@ -2,7 +2,7 @@ package gmod.sent;
 
 
 #if server
-class ENT_NEXTBOT extends gmod.sent.ENT {
+class ENT_NEXTBOT extends gmod.sent.ENT<NextBot> {
     public final TYPE = "nextbot";
 
     /**

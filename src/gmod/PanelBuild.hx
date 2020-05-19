@@ -1,6 +1,6 @@
 package gmod;
 
-import gmod.panels.DTree;
+// import gmod.panels.DTree;
 
 @:genericBuild(gmod.macros.PanelMacro.build())
 @:keepSub

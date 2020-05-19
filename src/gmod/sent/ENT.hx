@@ -1,7 +1,7 @@
 package gmod.sent;
 @:keep
 @:keepSub
-class ENT {
+class ENT<T> extends gmod.HaxeHelper<T> {
     /**
         Called when the entity is created. This is called when you Entity:Spawn the custom entity. 
 		

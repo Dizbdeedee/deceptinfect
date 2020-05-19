@@ -16,7 +16,7 @@ class Di_cure extends gmod.swep.SWEP implements SwepBuild {
             Automatic: true
         }
     }
-
+    #if server
     override function Initialize() {
         
     }
@@ -27,8 +27,8 @@ class Di_cure extends gmod.swep.SWEP implements SwepBuild {
         case Comp(c_inf):
             switch (c_inf.infection) {
             case NOT_INFECTED(inf):
-                inf.value -= 7.5;
-                owner.id.add_component(new InfVunerability(2,10));
+                inf.value -= 12.5;
+                owner.id.add_component(new InfVunerability(3,10));
             case INFECTED:
                 switch (owner.get(FormComponent)) {
                 case Comp(c_form):
@@ -36,14 +36,13 @@ class Di_cure extends gmod.swep.SWEP implements SwepBuild {
                     c_form.cooldown = COOLDOWN(GlobalLib.CurTime() + 15);
                 default:
 
-
                 }
             }
         default:
         }
         self.Remove();
     }
-
+    #end
 
 
 }

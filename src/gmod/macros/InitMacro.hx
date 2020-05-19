@@ -26,23 +26,10 @@ class InitMacro {
         Compiler.addMetadata("@:extern","lua.Boot","__string_rec",true);
         Compiler.include("gmod.Patch");
         Compiler.keep("gmod.Patch");
-        
-        // Context.onTypeNotFound(testFunc);
-        Compiler.includeFile("include.lua",IncludePosition.Top);
-        
-        Compiler.addGlobalMetadata("gmod.engine_ents","@:dce",true);
-        #if (!display)
-        // if (firstBuild) {
-        //     trace("skipping first build");
-        //     firstBuild = false;
-        //     return;
-        // }
-        
-        var addonName:String;
 
-        
-        
-        
+        Compiler.includeFile("include.lua",IncludePosition.Top);
+        #if (!display)
+        var addonName:String;
         if (!Context.defined("lua") || Context.defined("display_details") ) {
             return;
         }        
@@ -53,11 +40,8 @@ class InitMacro {
         } else {
             Context.warning("InitMacro : No \"-D addonName=your_addon_name_here\" defined in .hxml file. Will not generate folder structure",Context.currentPos());
             return;
-            // Context.fatalError("InitMacro : No \"-d addonName=your_addon_name_here\" defined in .hxml file. Cannot continue",Context.currentPos());
         }
         
-       
-        //trace(Context.getDefines());
         var serverName = "haxe_init";
         var clientName = "haxe_cl_init";
         if (Context.defined("gamemode")) {

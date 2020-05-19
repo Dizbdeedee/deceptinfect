@@ -11,6 +11,6 @@
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
 --macro gmod.macros.InitMacro.init()
--main Main
+-main Main 
 --lua lua/client.lua
 

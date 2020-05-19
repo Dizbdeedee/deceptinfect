@@ -3,6 +3,7 @@ package deceptinfect.util;
 class TimeKeep<T:Int> {
     var times:Map<T,Float> = [];
     var limitZero:Bool;
+
     public function new(limitZero = true) {
         this.limitZero = limitZero;
     }
@@ -10,7 +11,6 @@ class TimeKeep<T:Int> {
     public function addTime(key:T):Float {
         initTime(key);
         var difftime = GameManager.diffTime;
-        //trace('difftime $difftime');
         times[key] += difftime;
         return times[key];
     }
@@ -45,10 +45,10 @@ class TimeKeep<T:Int> {
     public function removeAllTimes() {
         var difftime = GameManager.diffTime;
         for (key in times.keys()) {
-            times[key] -= difftime; 
+            times[key] -= difftime;
             managetime(key);
         }
-        
+
     }
 
     public function getTime(key:T):Float {

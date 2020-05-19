@@ -76,25 +76,25 @@ class SentMacro {
                     }
                 case [name,FFun(f)]:
                     switch (field.access) {
-                        case [Access.AStatic]:
-                        case [Access.AOverride]:
-                            switch name {
-                            case "Initialize" | "Init":
-                                overridenInit = true;
-                            case "Think":
-                                overridenThink = true;
-                            }
+                    case [Access.AStatic]:
+                    case [Access.AOverride]:
+                        switch name {
+                        case "Initialize" | "Init":
+                            overridenInit = true;
+                        case "Think":
+                            overridenThink = true;
+                        }
+                        fOverride.push(field);
+                    default:
+                        if (field.meta.filter((f) -> return f.name == ":entExpose").length > 0) {
                             fOverride.push(field);
-                        default:
-                            if (field.meta.filter((f) -> return f.name == ":entExpose").length > 0) {
-                                fOverride.push(field);
-                            }
+                        }
                     }
                 default:
             }
         }
         if (properties == null && effect == false) {
-            throw "No ent propeties found";
+            throw "No ent properties found";
         }
 
         var curEnt:FunctionArg = {
@@ -103,20 +103,20 @@ class SentMacro {
         }
         var constructerFunc:Function = {
             args: [curEnt],
-            expr : macro {untyped self = curEnt;},
+            expr : macro {},
             ret : null,
         }
-        fields.push({
-            name : "new",
-            pos : Context.currentPos(),
-            kind : FieldType.FFun(constructerFunc),
-            access : [Access.APrivate]
-        });
+        // fields.push({
+        //     name : "new",
+        //     pos : Context.currentPos(),
+        //     kind : FieldType.FFun(constructerFunc),
+        //     access : [Access.APrivate],
+        // });
         var genName;
         if (!cls.meta.has(":expose")) {
-            var newname = '${cls.name}';
-            cls.meta.add(":expose",[macro $v{cls.name.toLowerCase()}],Context.currentPos());
-            genName = newname.toLowerCase();
+            var newname = cls.name.toLowerCase();
+            cls.meta.add(":expose",[macro $v{newname}],Context.currentPos());
+            genName = newname;
         } else {
             var expr = cls.meta.extract(":expose")[0].params[0];
             switch (expr.expr) {
