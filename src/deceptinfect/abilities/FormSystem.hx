@@ -13,7 +13,7 @@ class FormSystem extends System {
         switch [ent.get(FormComponent),ent.get(GEntityComponent)] {
         case [Comp(c_form),Comp(_.entity => g_ent)]:
             switch(c_form.cooldown) {
-                case COOLDOWN(time) if (GlobalLib.CurTime() < time):
+                case COOLDOWN(time) if (Gmod.CurTime() < time):
         
                 default:
                     c_form.cooldown = ACTIVE;
@@ -44,7 +44,7 @@ class FormSystem extends System {
         }
         c_form.formHealth = curHealth;
         c_form.formMaxHealth = curMaxHealth;
-        c_form.cooldown = COOLDOWN(GlobalLib.CurTime() + c_form.nextCooldown);
+        c_form.cooldown = COOLDOWN(Gmod.CurTime() + c_form.nextCooldown);
         c_form.formModel = curModel;
     }
     #end

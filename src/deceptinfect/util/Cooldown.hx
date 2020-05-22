@@ -11,7 +11,7 @@ class CooldownTools {
     
     public static function check(x:Cooldown):Cooldown {
         return switch(x) {
-            case COOLDOWN(time) if (GlobalLib.CurTime() > time):
+            case COOLDOWN(time) if (Gmod.CurTime() > time):
                 AVALIABLE;
             case x:
                 x;
@@ -30,7 +30,7 @@ class CooldownTools {
     public static function set(x:Cooldown,set:Float) {
         return switch(x) {
             case AVALIABLE | COOLDOWN(_):
-                COOLDOWN(GlobalLib.CurTime() + set);
+                COOLDOWN(Gmod.CurTime() + set);
             case x:
                 x;
         }

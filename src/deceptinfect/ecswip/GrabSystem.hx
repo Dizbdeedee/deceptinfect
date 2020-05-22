@@ -20,12 +20,12 @@ typedef Net_GrabEnd = {
 }
 
 class GrabSystem extends System {
-    static var net_grabupdate = new gmod.NET_Server<"grabupdate",Net_GrabPos>();
+    static var net_grabupdate = new gmod.net.NET_Server<"grabupdate",Net_GrabPos>();
 
-    static var net_grabend = new gmod.NET_Server<"grabend",{index : Int}>();
+    static var net_grabend = new gmod.net.NET_Server<"grabend",{index : Int}>();
     
     #if client
-    static var hycord = GlobalLib.Material("cable/new_cable_lit").a;
+    static var hycord = Gmod.Material("cable/new_cable_lit").a;
 
     static var activeDraws:Map<Int,DI_ID> = [];
     
@@ -90,7 +90,7 @@ class GrabSystem extends System {
                     c_produce.damage += dmg.GetDamage();
                     if (c_produce.damage >= c_produce.threshold) {
                         grabStop(ent.id);
-                        c_produce.grabState = NOT_READY(COOLDOWN(GlobalLib.CurTime() + c_produce.nextCooldown));
+                        c_produce.grabState = NOT_READY(COOLDOWN(Gmod.CurTime() + c_produce.nextCooldown));
                         
                     }
                 default:
@@ -166,7 +166,7 @@ class GrabSystem extends System {
                     default:
                         return;
                     }
-                    var filter = GlobalLib.RecipientFilter();
+                    var filter = Gmod.RecipientFilter();
                     filter.AddPVS(g_attack.GetPos());
                     filter.AddPVS(g_vic.GetPos());
                     net_grabupdate.sendFilter({
@@ -191,7 +191,7 @@ class GrabSystem extends System {
                     default:
                         throw "Victim has no infection component..";
                     }
-                case NOT_READY(COOLDOWN(cool)) if (GlobalLib.CurTime() > cool):
+                case NOT_READY(COOLDOWN(cool)) if (Gmod.CurTime() > cool):
                     c_produce.grabState = READY(NOT_SEARCHING);
 
                 default:
@@ -218,7 +218,7 @@ class GrabSystem extends System {
         var c_accept = vic.get_sure(GrabAccepter);
         //c_produce.grab = null;
         
-        c_produce.grabState = NOT_READY(COOLDOWN(GlobalLib.CurTime() + 2)); //change
+        c_produce.grabState = NOT_READY(COOLDOWN(Gmod.CurTime() + 2)); //change
         //c_accept.grabState = NOT_GRABBED;
         c_accept.grabAttacker.set(c_produce,false);
         switch (vic.get(PlayerComponent)) {
@@ -231,7 +231,7 @@ class GrabSystem extends System {
             plyr.player.Freeze(false);
         default:
         }
-        var filter = GlobalLib.RecipientFilter();
+        var filter = Gmod.RecipientFilter();
         filter.AddPVS(attackPos);
         filter.AddPVS(vicPos);
         net_grabend.sendFilter({index : c_produce.grabindex},filter);

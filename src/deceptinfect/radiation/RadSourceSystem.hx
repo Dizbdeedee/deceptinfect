@@ -15,7 +15,7 @@ class RadSourceSystem extends System implements EnumExtractor  {
             case [Comp(c_rs)]:
                 switch (c_rs.state) {
                 case ACTIVE(FINITE(time)):
-                    if (GlobalLib.CurTime() > time) {
+                    if (Gmod.CurTime() > time) {
                         switch (c_rs.attatch.get(RadVictim)) {
                             case Comp(_):
                                 disengage(ent,c_rs.attatch);
@@ -39,7 +39,7 @@ class RadSourceSystem extends System implements EnumExtractor  {
     public function refreshTime(x:RadSource) {
         x.state = switch(x.lifetime) {
             case FINITE(x):
-                ACTIVE(FINITE(GlobalLib.CurTime() + x));
+                ACTIVE(FINITE(Gmod.CurTime() + x));
             case INFINITE:
                 ACTIVE(INFINITE);
         }

@@ -1,5 +1,6 @@
 package deceptinfect.items;
 
+import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.infection.InfVunerability;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.abilities.FormComponent;
@@ -22,7 +23,8 @@ class Di_cure extends gmod.swep.SWEP implements SwepBuild {
     }
 
     override function PrimaryAttack() {
-        self.SetNextPrimaryFire(GlobalLib.CurTime() + 999);
+        var owner:GPlayerCompat = untyped self.Owner;
+        self.SetNextPrimaryFire(Gmod.CurTime() + 999);
         switch (owner.get(InfectionComponent)) {
         case Comp(c_inf):
             switch (c_inf.infection) {
@@ -33,7 +35,7 @@ class Di_cure extends gmod.swep.SWEP implements SwepBuild {
                 switch (owner.get(FormComponent)) {
                 case Comp(c_form):
                     c_form.formMaxHealth /= 2;
-                    c_form.cooldown = COOLDOWN(GlobalLib.CurTime() + 15);
+                    c_form.cooldown = COOLDOWN(Gmod.CurTime() + 15);
                 default:
 
                 }

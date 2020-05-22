@@ -14,9 +14,9 @@ typedef ND_Infection = {
 @:allow(InfectionComponent)
 class InfectionSystem extends System {
 
-    static var net_inf = new gmod.NET_Server<"di_infection",ND_Infection>();
+    static var net_inf = new gmod.net.NET_Server<"di_infection",ND_Infection>();
 
-    static var net_infected = new gmod.NET_Server<"di_infected",{}>();
+    static var net_infected = new gmod.net.NET_Server<"di_infected",{}>();
 
     #if client
     override function init_client() {
@@ -94,7 +94,7 @@ class InfectionSystem extends System {
                         1;
                     }
                     inf.value += base * rate * vun;
-                    if (GlobalLib.CurTime() > infectionReport) {
+                    if (Gmod.CurTime() > infectionReport) {
                         trace('$base $rate $vun');
                     }
                     fixUpInfection(infection);
@@ -122,8 +122,8 @@ class InfectionSystem extends System {
         if (numPlayers > 0) {
             averageInfection = totalInf / numPlayers;
         }
-        if (GlobalLib.CurTime() > infectionReport) {
-            infectionReport = GlobalLib.CurTime() + 5;
+        if (Gmod.CurTime() > infectionReport) {
+            infectionReport = Gmod.CurTime() + 5;
         }
     }
     #end

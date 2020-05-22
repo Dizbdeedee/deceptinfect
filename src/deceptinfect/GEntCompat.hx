@@ -3,7 +3,6 @@ import deceptinfect.ecswip.Component;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
-import gmod.types.Entity;
 @:forward
 abstract GEntCompat(Entity) from Entity to Entity {
 

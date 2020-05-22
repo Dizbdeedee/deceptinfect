@@ -26,9 +26,9 @@ class Hud {
     static function axisToMultiplier(axis:Axis) {
         return switch (axis) {
             case X:
-                GlobalLib.ScrW();
+                Gmod.ScrW();
             case Y:
-                GlobalLib.ScrH();
+                Gmod.ScrH();
         }
     }
 
@@ -38,8 +38,8 @@ class Hud {
     }
 
     static function targetID() {
-        var target:GEntCompat = GlobalLib.LocalPlayer().GetEyeTrace().Entity;
-        if (!GlobalLib.IsValid(target) || !target.IsPlayer()) {return;}
+        var target:GEntCompat = Gmod.LocalPlayer().GetEyeTrace().Entity;
+        if (!Gmod.IsValid(target) || !target.IsPlayer()) {return;}
         var player:Player = cast target;
         SurfaceLib.SetTextPos(CSS(X,0),CSS(Y,250));
         SurfaceLib.SetFont("TargetID");

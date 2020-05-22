@@ -19,7 +19,7 @@ class Di_charger extends gmod.sent.ENT_ANIM implements SentBuild {
         self.SetModel("models/props_c17/chair02a.mdl");
         self.PhysicsInit(SOLID_VPHYSICS);
         var physob = self.GetPhysicsObject();
-        if (GlobalLib.IsValid(physob)) {
+        if (Gmod.IsValid(physob)) {
             physob.Wake();
         }
         physob.EnableMotion(false);

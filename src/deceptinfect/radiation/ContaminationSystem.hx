@@ -42,7 +42,7 @@ class ContaminationSystem extends System implements enumExtractor.EnumExtractor 
                                             
                                             switch [c_rs.state,c_rs.lifetime] {
                                                 case [ACTIVE(FINITE(removetime)),FINITE(time)]:
-                                                    c_rs.state = ACTIVE(FINITE(GlobalLib.CurTime() + time));
+                                                    c_rs.state = ACTIVE(FINITE(Gmod.CurTime() + time));
                                                 default:
                                             }
                             

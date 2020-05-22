@@ -29,7 +29,7 @@ class PlayerManager {
     
     #if client
     public static inline function getLocalPlayer():GPlayerCompat {
-        return GlobalLib.LocalPlayer();
+        return Gmod.LocalPlayer();
     }
 
     

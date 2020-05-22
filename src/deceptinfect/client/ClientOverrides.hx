@@ -2,7 +2,6 @@ package deceptinfect.client;
 
 import gmod.enums.BUTTON_CODE;
 import deceptinfect.game.RagdollSystem;
-import gmod.hooks.Gm.HUDElementList;
 import deceptinfect.ecswip.GrabSystem;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.GEntCompat.GPlayerCompat;
@@ -11,7 +10,7 @@ import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 #if client
 @:build(gmod.macros.GamemodeMacro.build())
-class ClientOverrides extends gmod.hooks.Gm {
+class ClientOverrides extends gmod.gamemode.GM {
      
     
     override function HUDPaint() {
@@ -47,18 +46,18 @@ class ClientOverrides extends gmod.hooks.Gm {
         return null;
     }
     
-    override function postIntialize() {
-        for (entity in EntsLib.GetAll()) {
-            PVS.pvs.set(entity.EntIndex(),true);
-        }
-        //irace(PVS.pvs);
-    }
+    // override function postIntialize() {
+    //     for (entity in EntsLib.GetAll()) {
+    //         PVS.pvs.set(entity.EntIndex(),true);
+    //     }
+    //     //irace(PVS.pvs);
+    // }
 
     override function HUDDrawScoreBoard() {
         return untyped false;
     }
 
-    override function HUDShouldDraw(name:HUDElementList):Bool {
+    override function HUDShouldDraw(name:gmod.gamemode.GM.HUDElementList):Bool {
         return switch (name) {
             case CHudDamageIndicator:
                 false;

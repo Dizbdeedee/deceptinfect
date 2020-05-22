@@ -32,7 +32,7 @@ class SlowMotionSystem extends System {
         case WIN_HUMAN | WIN_INF:
             GameLib.SetTimeScale(startval);
             // GameLib.ConsoleCommand('host_timescale $startval\n');
-            slowMotion = ACTIVE(GlobalLib.RealTime() + finishtime,GlobalLib.RealTime());
+            slowMotion = ACTIVE(Gmod.RealTime() + finishtime,Gmod.RealTime());
 
         default:
         }
@@ -48,7 +48,7 @@ class SlowMotionSystem extends System {
     override function run_server() {
         switch (slowMotion) {
             case ACTIVE(target,start):
-                if (GlobalLib.RealTime() > target) {
+                if (Gmod.RealTime() > target) {
                     slowMotion = FINISHED;
                     GameLib.SetTimeScale(1);
                     GameLib.ConsoleCommand("phys_timescale 0\n");
@@ -56,8 +56,8 @@ class SlowMotionSystem extends System {
                     slowMotionEndTrig.trigger(null);
                     return;
                 }    
-                var lp = (GlobalLib.RealTime() - start) / (target - start);
-                var val = GlobalLib.Lerp(lp,startval,endval);
+                var lp = (Gmod.RealTime() - start) / (target - start);
+                var val = Gmod.Lerp(lp,startval,endval);
                 GameLib.SetTimeScale(val);
                 // GameLib.ConsoleCommand('host_timescale $val\n');
             default:

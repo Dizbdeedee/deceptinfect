@@ -5,12 +5,14 @@
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
 -D generateLuaInit
--D macro-times
 -D dce=full
 -D analyzer-optimize
 -lib singlePatternSwitch
+--times
+-D macro-times
+-lib gmodhaxe
 -lib tink_core
---macro gmod.macros.InitMacro.init()
+-lib no-spoon
 -main Main
 --lua lua/server.lua
 

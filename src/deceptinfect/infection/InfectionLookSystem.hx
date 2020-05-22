@@ -13,7 +13,7 @@ typedef ND_InfInfo = {
 class InfectionLookSystem extends System {
 
 
-    static var infectioninfo = new gmod.NET_Server<"di_infinfo",ND_InfInfo>();
+    static var infectioninfo = new gmod.net.NET_Server<"di_infinfo",ND_InfInfo>();
 
     #if client
 

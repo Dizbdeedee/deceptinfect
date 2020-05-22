@@ -17,7 +17,7 @@ class Spectate {
         var specd = false;
         while (specNext != specCur) {
             var target = players[specNext];
-            if (GlobalLib.IsValid(target) && target.Alive()) {
+            if (Gmod.IsValid(target) && target.Alive()) {
                 player.SpectateEntity(target);
                 player.SetObserverMode(OBS_MODE_CHASE);
                 specd = true;

@@ -1,11 +1,6 @@
 package deceptinfect;
 
-typedef Dubious = gmod.NET_Client.NET_CL_Message & {
-	name : String
-}
-
 class Misc {
-	public static var net_testcl = new gmod.NET_Client<"di_testnet",Dubious>();
     public static var roundModels:Array<String> = [
         "models/player/mossman.mdl",
 		"models/player/alyx.mdl",

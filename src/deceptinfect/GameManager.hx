@@ -44,9 +44,9 @@ class GameManager implements enumExtractor.EnumExtractor {
     public static var stateChange:Signal<GAME_STATE>;
 
     static var stateTrig:SignalTrigger<GAME_STATE> = new SignalTrigger();
-    public static final net_gamestate = new gmod.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL,time : Float}>();
+    public static final net_gamestate = new gmod.net.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL,time : Float}>();
 
-    static final net_cleanup = new gmod.NET_Server<"di_cleanup",{}>();
+    static final net_cleanup = new gmod.net.NET_Server<"di_cleanup",{}>();
     
     #if server
     
@@ -111,7 +111,7 @@ class GameManager implements enumExtractor.EnumExtractor {
     static function thinkWait() {
         var no = true;
         if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS && !no) {
-            state = SETTING_UP(new GameInstance(),GlobalLib.CurTime() + GameValues.SETUP_TIME);
+            state = SETTING_UP(new GameInstance(),Gmod.CurTime() + GameValues.SETUP_TIME);
         }
     }
 
@@ -124,7 +124,7 @@ class GameManager implements enumExtractor.EnumExtractor {
             thinkWait();
             
         case SETTING_UP(x,time):
-            if (GlobalLib.CurTime() > time) {
+            if (Gmod.CurTime() > time) {
                 state = PLAYING(x);
             }
 
@@ -132,7 +132,7 @@ class GameManager implements enumExtractor.EnumExtractor {
             x.think();
             
         case ENDING(x,time):
-            if (GlobalLib.CurTime() > time) {
+            if (Gmod.CurTime() > time) {
                 state = WAIT;
             }
 
@@ -140,9 +140,9 @@ class GameManager implements enumExtractor.EnumExtractor {
         if (untyped diffTime == null) {
             untyped diffTime = 0.0;
         } else {
-            untyped diffTime = GlobalLib.CurTime() - lastTick;
+            untyped diffTime = Gmod.CurTime() - lastTick;
         }
-        lastTick = GlobalLib.CurTime();
+        lastTick = Gmod.CurTime();
     }
     #if server
     static function set_state(x:GAME_STATE):GAME_STATE {
@@ -236,7 +236,7 @@ class GameManager implements enumExtractor.EnumExtractor {
         case DRAW:
             trace("Draw. Boring...");
         }
-        state = ENDING(state.getParameters()[0],GlobalLib.CurTime() + 10);
+        state = ENDING(state.getParameters()[0],Gmod.CurTime() + 10);
     }
 
 
@@ -291,7 +291,7 @@ class GameManager implements enumExtractor.EnumExtractor {
         if (skipintro) {
             state = PLAYING(game);
         } else {
-            state = SETTING_UP(game,GlobalLib.CurTime() + GameValues.SETUP_TIME);
+            state = SETTING_UP(game,Gmod.CurTime() + GameValues.SETUP_TIME);
             
         }
     }

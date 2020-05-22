@@ -1,7 +1,7 @@
 package deceptinfect.game;
 
-import gmod.NET_Server;
-import gmod.NET_Server.I_NET;
+import gmod.net.NET_Server;
+import gmod.net.NET_Server.I_NET;
 
 interface Info<T:{}> {
 

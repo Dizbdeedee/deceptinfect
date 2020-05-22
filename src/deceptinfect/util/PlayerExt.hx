@@ -14,7 +14,7 @@ class PlayerExt {
     }
     public static function shouldFreeRoam(p:Player) {
         var wrongMode = p.GetObserverMode() == OBS_MODE_NONE;
-        var targetDead = GlobalLib.IsValid(p.GetObserverTarget()) && !(cast p.GetObserverTarget():Player).Alive();
+        var targetDead = Gmod.IsValid(p.GetObserverTarget()) && !(cast p.GetObserverTarget():Player).Alive();
         var freeRoaming = p.GetObserverMode() == OBS_MODE_ROAMING;
         return wrongMode || targetDead || !freeRoaming;
     }

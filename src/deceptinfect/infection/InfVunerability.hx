@@ -9,6 +9,6 @@ class InfVunerability extends Component {
     public function new(v:Float,removeTime:Float) {
         super();
         vun = v;
-        removeTime = GlobalLib.CurTime() + removeTime;
+        removeTime = Gmod.CurTime() + removeTime;
     }
 }

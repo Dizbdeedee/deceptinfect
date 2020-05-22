@@ -56,11 +56,11 @@ typedef ND_RagInfo = {
 
 class RagdollSystem extends System {
 
-    static var statue = new gmod.NET_Server<"statue",ND_Statue>(); //TODO remove
+    static var statue = new gmod.net.NET_Server<"statue",ND_Statue>(); //TODO remove
 
-    static var statueinfo = new gmod.NET_Server<"di_statinfo",ND_StatInfo>();
+    static var statueinfo = new gmod.net.NET_Server<"di_statinfo",ND_StatInfo>();
 
-    static var raginfo = new gmod.NET_Server<"di_raginfo",ND_RagInfo>();
+    static var raginfo = new gmod.net.NET_Server<"di_raginfo",ND_RagInfo>();
     #if client
     static var ranonce = false;
     
@@ -126,8 +126,8 @@ class RagdollSystem extends System {
         }
     }
     function newStatue(x:ND_Statue) {
-        var rag = GlobalLib.ClientsideModel(x.playermodel);
-        var wep = GlobalLib.ClientsideModel(x.weaponmodel);
+        var rag = Gmod.ClientsideModel(x.playermodel);
+        var wep = Gmod.ClientsideModel(x.weaponmodel);
         rag.SetPos(x.playerpos);
         // rag.SetupBones();
         rag.AddCallback("BuildBonePositions",
@@ -178,7 +178,7 @@ class RagdollSystem extends System {
                 _rag.id.add_component(new KeepRestart());
                 trace(mdl);
                 untyped rag.showwep = true;
-                var ent = new GEntCompat(GlobalLib.ClientsideModel(mdl));
+                var ent = new GEntCompat(Gmod.ClientsideModel(mdl));
                 var c_wep = new ClientWeaponStatue();
                 c_wep.parent = rag;
                 
@@ -273,7 +273,7 @@ class RagdollSystem extends System {
             switch [ent.get(GEntityComponent),ent.get(Ragdoll)] {
             case [Comp(c_ent),Comp(c_rag)]:
                 switch (c_rag.reveal) {
-                case WAIT(time) if (GlobalLib.CurTime() > time.value):
+                case WAIT(time) if (Gmod.CurTime() > time.value):
                     reveal(c_ent.entity);    
                     // c_ent.entity.SetModel(Misc.infModel);
                 default:
@@ -320,7 +320,7 @@ class RagdollSystem extends System {
             var di_ragdoll = newRagdoll(ply,ragdoll);
             switch (ply.get(InfectedComponent)) {
             case Comp(_):
-                di_ragdoll.id.get_sure(Ragdoll).reveal = WAIT(GlobalLib.CurTime() + 5);
+                di_ragdoll.id.get_sure(Ragdoll).reveal = WAIT(Gmod.CurTime() + 5);
             default:
             }
 

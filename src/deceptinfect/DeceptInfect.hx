@@ -8,7 +8,7 @@ import deceptinfect.infection.InfectedComponent;
 import deceptinfect.game.RagdollSystem;
 import deceptinfect.game.AliveComponent;
 import deceptinfect.statuses.Walkthroughable;
-import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceReturn;
+import gmod.gamemode.GM.GmPlayerCanHearPlayersVoiceReturn;
 import gmod.gamemode.BuildOverrides;
 import gmod.enums.IN;
 import deceptinfect.infection.InfectionSystem;
@@ -26,20 +26,19 @@ import deceptinfect.ecswip.ComponentManager;
 import gmod.Hook;
 import lua.Lua;
 import tink.core.Annex;
-import gmod.hooks.Gm.GmPlayerCanHearPlayersVoiceHaxeReturn;
+import gmod.gamemode.GM.GmPlayerCanHearPlayersVoiceHaxeReturn;
 import gmod.HaxeMultiReturn;
 import gmod.libs.MathLib;
 import gmod.types.Vector;
 import gmod.libs.EntsLib;
 import gmod.gclass.Player;
-import gmod.types.Entity;
 using gmod.PairTools;
 using gmod.TableTools;
 using deceptinfect.util.PlayerExt;
 import deceptinfect.ecswip.SignalStorage;
 
 
-class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
+class DeceptInfect extends gmod.gamemode.GM implements BuildOverrides {
     public static var hmm = 12;
     
     #if client
@@ -68,7 +67,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     var timestart = 0;
     var underperforming = false;
     function checkPerformance() {
-        if (GlobalLib.FrameTime() > 0.016666666666667 && !underperforming) {
+        if (Gmod.FrameTime() > 0.016666666666667 && !underperforming) {
             trace("Server underperforming! ");
             underperforming = true;
         } else if (underperforming) {
@@ -101,7 +100,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
     }
     #if server
     
-    override function PlayerSilentDeath(ply:gmod.types.Player) {
+    override function PlayerSilentDeath(ply:Player) {
         // super.PlayerSilentDeath(ply);
 
 
@@ -114,11 +113,11 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         var sounds = Misc.deathSounds.get(HUMAN_MALE);
         var sound = sounds[MathLib.random(0,sounds.length - 1)];
         victim.EmitSound(sound,0,null,0);
-        GlobalLib.EmitSound(sound,victim.GetPos(),victim.EntIndex(),CHAN_VOICE);
+        Gmod.EmitSound(sound,victim.GetPos(),victim.EntIndex(),CHAN_VOICE);
         victim.CreateRagdoll();
     }
 
-    override function DoPlayerDeath(ply:gmod.types.Player, attacker:Entity, dmg:CTakeDamageInfo) {
+    override function DoPlayerDeath(ply:Player, attacker:Entity, dmg:CTakeDamageInfo) {
         untyped GAMEMODE.PlayerSilentDeath();
         // ply.KillSilent();
         ply.KillSilent();
@@ -220,7 +219,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
 
     
     
-    override function PlayerSwitchWeapon(player:gmod.types.Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
+    override function PlayerSwitchWeapon(player:Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
         if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
         if (oldWeapon.GetClass() == "weapon_infect") {
             return true;
@@ -247,20 +246,20 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         var revive = false;
         comp.deathTime = switch(comp.deathTime) {
             case ALIVE:
-                reviveTime = GlobalLib.CurTime() + 1;
+                reviveTime = Gmod.CurTime() + 1;
                 DEAD(reviveTime);
             case DEAD(rev):
                 reviveTime = rev;
                 comp.deathTime;
         }
-        if (ply.IsBot() && GlobalLib.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
+        if (ply.IsBot() && Gmod.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
             revive = true;
         }
-        if (GlobalLib.IsValid(ply.GetObserverTarget())) {
+        if (Gmod.IsValid(ply.GetObserverTarget())) {
             ply.SetPos(ply.GetObserverTarget().GetPos());
         }
         if (ply.KeyPressed(IN_ATTACK)) {
-            if (GlobalLib.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
+            if (Gmod.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
                 revive = true;
             }
             Spectate.chooseSpectateTarget(comp,FORWARDS);
@@ -314,7 +313,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
         
         var spawns = EntsLib.FindByClass("info_player_start");
         // trace(spawns.length());
-        // GlobalLib.PrintTable(spawns);
+        // Gmod.PrintTable(spawns);
         var random_spawn = MathLib.random(spawns.length());
         // for (spawn in spawns) {
         if (IsSpawnpointSuitable(ply,spawns[random_spawn],false)) {
@@ -342,7 +341,7 @@ class DeceptInfect extends gmod.hooks.Gm implements BuildOverrides {
 
     
 
-    override function PlayerSay(sender:gmod.types.Player, text:String, teamChat:Bool):String {
+    override function PlayerSay(sender:Player, text:String, teamChat:Bool):String {
         
         return "aaaaple";
     }

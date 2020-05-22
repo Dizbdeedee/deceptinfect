@@ -2,7 +2,7 @@ package deceptinfect.client;
 
 import gmod.HaxeGen;
 import gmod.panels.DFrame;
-import gmod.PanelBuild;
+import gmod.cpanel.PanelBuild;
 
 typedef GSabotagePanel = HaxeGen<DFrame,SabotagePanel>;
 class SabotagePanel extends PanelBuild<gmod.panels.DFrame> {
@@ -20,6 +20,7 @@ class SabotagePanel extends PanelBuild<gmod.panels.DFrame> {
 
     override function Init() {
         trace("Panel created");
+
         self.SetPos(1920 / 2,1080 / 2);
         self.SetSize(600,400);
         
