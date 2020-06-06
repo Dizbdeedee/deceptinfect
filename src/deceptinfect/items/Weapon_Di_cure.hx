@@ -2,7 +2,7 @@ package deceptinfect.items;
 
 import gmod.swep.SwepBuild.SwepFields;
 
-class Weapon_Di_cure extends gmod.swep.SWEP implements gmod.swep.SwepBuild {
+class Weapon_Di_cure extends gmod.swep.SwepBuild<gmod.swep.SWEP> {
     final properties:SwepFields = {
     Primary: {
             Ammo: "Smg1",

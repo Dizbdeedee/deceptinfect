@@ -4,7 +4,7 @@ import deceptinfect.game.EvacZone;
 import deceptinfect.game.EvacSystem;
 import gmod.sent.SentBuild;
 
-class Di_evac_zone extends gmod.sent.ENT_BRUSH implements SentBuild {
+class Di_evac_zone extends gmod.sent.SentBuild<gmod.sent.ENT_BRUSH> {
     final properties:EntFields = {
         Base : "base_brush"
     }
@@ -27,12 +27,10 @@ class Di_evac_zone extends gmod.sent.ENT_BRUSH implements SentBuild {
     public function setPoints(minmax:MinMax) {
         self.SetCollisionBoundsWS(minmax.mins,minmax.maxs);
     }
-
     override function StartTouch(ent:GEntCompat) {
         switch (ent.has_id()){
         case Some(ent_id):
             getSystem(EvacSystem).touched(ent_id,id.get_sure(EvacZone));
-
         default:
         }
     }
@@ -43,7 +41,6 @@ class Di_evac_zone extends gmod.sent.ENT_BRUSH implements SentBuild {
             getSystem(EvacSystem).leave(ent_id,id.get_sure(EvacZone));
         default:
         }
-
     }
 
     #end

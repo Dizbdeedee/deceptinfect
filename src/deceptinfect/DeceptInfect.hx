@@ -9,7 +9,6 @@ import deceptinfect.game.RagdollSystem;
 import deceptinfect.game.AliveComponent;
 import deceptinfect.statuses.Walkthroughable;
 import gmod.gamemode.GM.GmPlayerCanHearPlayersVoiceReturn;
-import gmod.gamemode.BuildOverrides;
 import gmod.enums.IN;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.abilities.FormSystem;
@@ -26,7 +25,6 @@ import deceptinfect.ecswip.ComponentManager;
 import gmod.Hook;
 import lua.Lua;
 import tink.core.Annex;
-import gmod.gamemode.GM.GmPlayerCanHearPlayersVoiceHaxeReturn;
 import gmod.HaxeMultiReturn;
 import gmod.libs.MathLib;
 import gmod.types.Vector;
@@ -38,9 +36,8 @@ using deceptinfect.util.PlayerExt;
 import deceptinfect.ecswip.SignalStorage;
 
 
-class DeceptInfect extends gmod.gamemode.GM implements BuildOverrides {
-    public static var hmm = 12;
-    
+class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> {
+
     #if client
     override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
         // ragdoll.Remove();
@@ -51,17 +48,19 @@ class DeceptInfect extends gmod.gamemode.GM implements BuildOverrides {
     #if server
     override function CreateEntityRagdoll(owner:Entity, ragdoll:Entity) {
         getSystem(RagdollSystem).playerRagdoll(owner,ragdoll);
-        
     }
     #end
     override function Think() {
-        
+        var nethost = Main.nethost;
         SystemManager.runAllSystems();
         #if server
         GameManager.think();
         checkPerformance();
         #end
-        
+        for (c in nethost.clients) {
+            c.sync();
+        }
+        nethost.flush();
     }
 
     var timestart = 0;
@@ -78,16 +77,11 @@ class DeceptInfect extends gmod.gamemode.GM implements BuildOverrides {
     override function OnEntityCreated(entity:Entity) {
         if (entity.IsPlayer()) {
             var ent = new GPlayerCompat(new PlayerComponent(cast entity));
-
-            //ent.id.add_component(new InfectionComponent());
         } else {
-            //var ent = new GEntCompat(new GEntityComponent(entity));
-            
         }
     }
 
     override function EntityRemoved(ent:GEntCompat) {
-        
         if (ent.IsPlayer()) {
             ComponentManager.removeEntity(ent.id);
             return;
@@ -101,8 +95,6 @@ class DeceptInfect extends gmod.gamemode.GM implements BuildOverrides {
     #if server
     
     override function PlayerSilentDeath(ply:Player) {
-        // super.PlayerSilentDeath(ply);
-
 
     }
 
@@ -345,12 +337,11 @@ class DeceptInfect extends gmod.gamemode.GM implements BuildOverrides {
         
         return "aaaaple";
     }
-    // override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn_2<GmPlayerCanHearPlayersVoiceReturn> {
-        
-        
-    //     return {a: false,b: false};
-        
-    // }
+    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<A_GmPlayerCanHearPlayersVoiceReturn> {
+        return {a : false,
+                b : false};
+
+    }
     
     #end
     

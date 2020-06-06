@@ -1,18 +1,3 @@
--cp src
--D lua-5.1
--D lua-vanilla
+args.hxml
 -D server
--D gamemode=deceptinfect
--D addonName=deceptinfect
--D generateLuaInit
--D dce=full
--D analyzer-optimize
--lib singlePatternSwitch
---times
--D macro-times
--lib gmodhaxe
--lib tink_core
--lib no-spoon
--main Main
 --lua lua/server.lua
-

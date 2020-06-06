@@ -1,6 +1,6 @@
 package deceptinfect;
 
-import gmod.gamemode.BuildGamemodeTXT; 
+import deceptinfect.macros.BuildGamemodeTXT;
 
 class TXT implements BuildGamemodeTXT {
     public final properties:GamemodeTXT = {

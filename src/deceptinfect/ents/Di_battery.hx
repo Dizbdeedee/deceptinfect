@@ -8,7 +8,8 @@ import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.game.BatterySystem;
 import deceptinfect.ecswip.SystemManager.getSystem;
 
-class Di_battery extends gmod.sent.ENT_ANIM implements SentBuild {
+@:keep
+class Di_battery extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM>  {
     public final properties:EntFields = {
         Base: "base_anim",
         
@@ -30,6 +31,7 @@ class Di_battery extends gmod.sent.ENT_ANIM implements SentBuild {
     override function Initialize() {
         self.SetModel("models/items/car_battery01.mdl");
         self.PhysicsInit(SOLID_VPHYSICS);
+       
         var physob = self.GetPhysicsObject();
         if (IsValid(physob)) {
             physob.Wake();
@@ -38,10 +40,8 @@ class Di_battery extends gmod.sent.ENT_ANIM implements SentBuild {
         var ent = new GEntCompat(self);
         id = ent.id;
         id.add_component(new BatterySource());
-        
-    }
 
-    
+    }
 
     override function Use(activator:Entity, caller:Entity, useType:Float, value:Float) {
         if (self.IsPlayerHolding() || !activator.IsPlayer()) {return;}
@@ -64,6 +64,6 @@ class Di_battery extends gmod.sent.ENT_ANIM implements SentBuild {
         default:
         }
     }
-
     #end
 }
+

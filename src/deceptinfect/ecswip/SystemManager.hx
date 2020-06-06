@@ -79,7 +79,7 @@ class SystemManager {
     }
     public static function runAllSystems() {
         for (clsSystem in runSystems) {
-           // getSystems.get(clsSystem).run();
+           getSystems.get(clsSystem).run();
         }
     }
 

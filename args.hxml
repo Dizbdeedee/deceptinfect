@@ -1,0 +1,18 @@
+-cp src
+-D lua-5.1
+-D lua-vanilla
+-D gamemode=deceptinfect
+-D addonName=deceptinfect
+-D generateLuaInit
+-D analyzer-optimize
+-dce full
+-lib singlePatternSwitch
+--times
+-D gmodAddonFolder=/home/steam/.steam/SteamApps/common/GarrysModDS/garrysmod/addons/
+-D macro-times
+--macro gmod.macros.InitMacro.init()
+-lib hxbit
+-lib tink_core
+-lib gmodhaxe
+-lib no-spoon
+-main Main

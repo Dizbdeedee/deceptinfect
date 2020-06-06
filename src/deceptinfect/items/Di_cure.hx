@@ -7,7 +7,7 @@ import deceptinfect.abilities.FormComponent;
 import deceptinfect.infection.InfectionComponent;
 import gmod.swep.SwepBuild;
 
-class Di_cure extends gmod.swep.SWEP implements SwepBuild {
+class Di_cure extends SwepBuild<gmod.swep.SWEP> {
 
     final properties:SwepFields = {
         Primary: {

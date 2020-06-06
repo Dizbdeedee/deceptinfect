@@ -3,7 +3,7 @@ package deceptinfect.items;
 import deceptinfect.GEntCompat.GPlayerCompat;
 using deceptinfect.util.EntityExt;
 
-class Weapon_Di_Scan implements gmod.swep.SwepBuild extends gmod.swep.SWEP {
+class Weapon_Di_Scan extends gmod.swep.SwepBuild<gmod.swep.SWEP> {
 
     final properties:gmod.swep.SwepBuild.SwepFields = {
     Primary: {

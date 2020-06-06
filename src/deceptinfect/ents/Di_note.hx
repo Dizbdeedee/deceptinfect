@@ -4,7 +4,7 @@ import deceptinfect.game.InfoStorage;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.sent.ENT_ANIM;
 
-class Di_note extends gmod.sent.ENT_ANIM implements gmod.sent.SentBuild {
+class Di_note extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
 
     final properties = {
         Base : "base_anim"
@@ -13,7 +13,7 @@ class Di_note extends gmod.sent.ENT_ANIM implements gmod.sent.SentBuild {
     override function Initialize() {
         
     }
-    
+    #if server
     override function Use(activator:Entity, caller:Entity, useType:Float, value:Float) {
         if (!activator.IsPlayer()) {return;}
         var ply:GPlayerCompat = cast activator;
@@ -24,5 +24,6 @@ class Di_note extends gmod.sent.ENT_ANIM implements gmod.sent.SentBuild {
         default:
         }
     }
+    #end
     
 }

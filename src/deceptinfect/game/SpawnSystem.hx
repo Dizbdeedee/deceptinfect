@@ -39,7 +39,6 @@ class SpawnSystem extends System {
         evac.generateBoundSpawns(MapStorage.spawns.get(GameLib.GetMap()).evacs);
     }
 
-    
 }
 
 enum SpawnClaim {

@@ -1,16 +1,17 @@
 package deceptinfect.infection;
 
 import deceptinfect.ecswip.Component;
-
-class InfectionComponent extends Component {
+import deceptinfect.SeralizableRef;
+class InfectionComponent extends Component implements hxbit.NetworkSerializable {
     
-    public var infection(default,set):INF_STATE = NOT_INFECTED(0.0);
+  @:s public var infection(default,set):INF_STATE = NOT_INFECTED(0.0);
     public var rate:Float = 1;
+
+   public var player:SeraliazablePlayer;
     public var baseInfection:BaseInfection = USING_GLOBAL;
     public var onInfected(default,null):Signal<Noise>;
     public var acceptingInfection:AcceptingInfection = ACCEPTING;
 
-    
     // function set_infection(x:INF_STATE):INF_STATE {
     //     switch [infection,x] {
     //         case [NOT_INFECTED(_),INFECTED]:
@@ -33,10 +34,10 @@ class InfectionComponent extends Component {
         
     }
 
+    public function new() {
+        super();
+    }
 }
-
-
-
 
 typedef InfectionMessageInfo = {
     infection : Float,
@@ -52,7 +53,6 @@ enum BaseInfection {
     USING_GLOBAL;
     USING_STATIC(rate:Float);
 }
-
 
 
 enum INF_STATE {

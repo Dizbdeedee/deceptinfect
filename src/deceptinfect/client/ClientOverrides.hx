@@ -9,28 +9,21 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 #if client
-@:build(gmod.macros.GamemodeMacro.build())
-class ClientOverrides extends gmod.gamemode.GM {
-     
-    
+class ClientOverrides extends gmod.gamemode.GMBuild<gmod.gamemode.GM> {
+
     override function HUDPaint() {
         Hud.paint();
     }
     
     override function NotifyShouldTransmit(ent:Entity, shouldtransmit:Bool) {
-        //trace(PVS.pvs);
-        
         PVS.pvs.set(ent.EntIndex(),shouldtransmit);
-        
         getSystem(RagdollSystem).pvsChange(ent,shouldtransmit);
     }
+
     override function PlayerButtonDown(ply:Player, button:BUTTON_CODE) {
         switch (button) {
             case KEY_L:
-                
                 var sab = SabotagePanel.inst;
-                // var x:SabotagePanel = sab;
-                // var sub:gmod.panels.DPanel = x;
                 switch (sab.IsVisible()) {
                     case true:
                         sab.SetVisible(false);
@@ -46,18 +39,11 @@ class ClientOverrides extends gmod.gamemode.GM {
         return null;
     }
     
-    // override function postIntialize() {
-    //     for (entity in EntsLib.GetAll()) {
-    //         PVS.pvs.set(entity.EntIndex(),true);
-    //     }
-    //     //irace(PVS.pvs);
-    // }
-
     override function HUDDrawScoreBoard() {
         return untyped false;
     }
 
-    override function HUDShouldDraw(name:gmod.gamemode.GM.HUDElementList):Bool {
+    override function HUDShouldDraw(name:gmod.enums.HUDElementList):Bool {
         return switch (name) {
             case CHudDamageIndicator:
                 false;
@@ -65,16 +51,6 @@ class ClientOverrides extends gmod.gamemode.GM {
                 true;
         }
     }
-    // override function AddDeathNotice(attacker:String, attackerTeam:Float, inflictor:String, victim:String, victimTeam:Float) {
-    //     super.AddDeathNotice(attacker, attackerTeam, inflictor, victim, victimTeam);
-    // }
-
-    //TODO
-    // override function NetworkEntityCreated(ent:Entity) {
-        
-    // }
-
-
 }
 
 #end

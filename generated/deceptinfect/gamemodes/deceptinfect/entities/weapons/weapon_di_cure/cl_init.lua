@@ -4,19 +4,21 @@ ClipSize = -1,
 DefaultClip = -1,
 Ammo = "Smg1",
 }
-AddCSLuaFile("cl_init.lua")
+
+function SWEP:Think()
+	if (not self._gHaxeInit) then
+		self:Initialize()
+	end
+end
+
 
 function SWEP:Initialize()
-	local ent = deceptinfect_HAXE_EXPORT.weapon_di_scan.new(self)
+	local ent = deceptinfect_HAXE_EXPORT.weapon_di_cure.new(self)
 	self._gHaxeBurrow = ent
-	self._gHaxeBurrow:Initialize()
+	self._gHaxeInit = true
 end
 
 function SWEP:PrimaryAttack(...)
 	self._gHaxeBurrow:PrimaryAttack(...)
-end
-
-function SWEP:SecondaryAttack(...)
-	self._gHaxeBurrow:SecondaryAttack(...)
 end
 

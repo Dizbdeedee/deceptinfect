@@ -1,3 +1,4 @@
+import gmod.hxbit.GmodNetHost;
 import gmod.Gmod;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.game.SpawnSystem;
@@ -13,9 +14,13 @@ import gmod.libs.PlayerLib;
 using gmod.PairTools;
 import deceptinfect.items.Weapon_Di_Scan;
 import deceptinfect.items.Di_cure;
+import deceptinfect.ents.Di_battery;
 #if client
 #end
 class Main {
+
+    @:expose("nethost") public static var nethost(default,null):GmodNetHost;
+
     public static function main() {
         deceptinfect.Trace.overridetrace();
         new DeceptInfect();
@@ -24,14 +29,20 @@ class Main {
             new GPlayerCompat(new PlayerComponent(ply));
         }
         #end
+        nethost = new gmod.hxbit.GmodNetHost();
         FileLib.CreateDir("deceptinfect");
-        trace(Gmod.Entity(1));
         GameLib.CleanUpMap();
         SignalStorage.initEvents();
         GameManager.init();
         for (model in Misc.roundModels) {
             UtilLib.PrecacheModel(model);
         }
+        #if server
+        new deceptinfect.TestObject();
+        #end
+        #if client
+        deceptinfect.TestObject;
+        #end
         SpawnSystem.generateSpawns();
         UtilLib.PrecacheModel(Misc.infModel);
         #if client
