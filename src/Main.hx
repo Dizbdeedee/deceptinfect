@@ -1,3 +1,4 @@
+import gmod.EntityClass;
 import gmod.hxbit.GmodNetHost;
 import gmod.Gmod;
 import deceptinfect.GEntCompat.GPlayerCompat;
@@ -38,7 +39,7 @@ class Main {
             UtilLib.PrecacheModel(model);
         }
         #if server
-        new deceptinfect.TestObject();
+        // new deceptinfect.TestObject();
         #end
         #if client
         deceptinfect.TestObject;
@@ -55,7 +56,10 @@ class Main {
         GameManager.cleanup();  
         #end
         MathLib.randomseed(Gmod.RealTime()); //FIXME
+        #if server
+        #end
+        // gmod.macros.GenEnts.genEnts();
+        // gmod.macros.GenEnts.genAutos();
         trace("Deceptinfect server reinit!");
     }
 }
-

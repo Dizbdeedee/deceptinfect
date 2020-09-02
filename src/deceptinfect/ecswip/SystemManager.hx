@@ -20,12 +20,11 @@ import deceptinfect.infection.InfectionLookSystem;
 import deceptinfect.radiation.RadSourceSystem;
 import deceptinfect.game.LowHealthSystem;
 import deceptinfect.items.ScannerSystem;
+import deceptinfect.WeaponSystem;
+
 class SystemManager {
 
-   
     static var getSystems(default,never):ObjectMap<Class<Dynamic>,System> = new ObjectMap();
-
-
 
     public static var runSystems(default,null):Array<Class<Dynamic>> = [
         InfectionSystem,
@@ -45,7 +44,8 @@ class SystemManager {
         ContaminationSystem,
         RadSourceSystem,
         LowHealthSystem,
-        ScannerSystem
+        ScannerSystem,
+        WeaponSystem
     ];
 
     static function make() {
@@ -67,7 +67,9 @@ class SystemManager {
         getSystems.set(RadSourceSystem, new RadSourceSystem());
         getSystems.set(LowHealthSystem, new LowHealthSystem());
         getSystems.set(ScannerSystem, new ScannerSystem());
+        getSystems.set(WeaponSystem, new WeaponSystem());
     }
+
     public static function getSystem<T:System>(cls:Class<T>):T {
         return cast getSystems.get(cls);
     }

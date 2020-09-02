@@ -31,6 +31,7 @@ import deceptinfect.GEntCompat;
 import deceptinfect.GameInstance;
 using deceptinfect.util.PlayerExt;
 import deceptinfect.infection.InfectionLookInfo;
+
 class GameManager implements enumExtractor.EnumExtractor {
 
 

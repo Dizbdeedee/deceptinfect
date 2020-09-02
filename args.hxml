@@ -10,9 +10,10 @@
 --times
 -D gmodAddonFolder=/home/steam/.steam/SteamApps/common/GarrysModDS/garrysmod/addons/
 -D macro-times
---macro gmod.macros.InitMacro.init()
 -lib hxbit
+-D debug
 -lib tink_core
 -lib gmodhaxe
 -lib no-spoon
+--macro gmod.macros.InitMacro.init()
 -main Main

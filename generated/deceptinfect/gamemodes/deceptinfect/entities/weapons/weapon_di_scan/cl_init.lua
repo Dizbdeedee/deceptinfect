@@ -13,7 +13,7 @@ end
 
 
 function SWEP:Initialize()
-	local ent = deceptinfect_HAXE_EXPORT.weapon_di_scan.new(self)
+	local ent = deceptinfect.weapon_di_scan.new(self)
 	self._gHaxeBurrow = ent
 	self._gHaxeInit = true
 end

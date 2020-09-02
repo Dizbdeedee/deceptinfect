@@ -8,11 +8,13 @@ import deceptinfect.ecswip.System;
 import deceptinfect.infection.InfectionComponent;
 
 class WinSystem extends System {
+
 	public var newWinner(default, null):Signal<Win>;
 
 	public var winTrig(default, never):SignalTrigger<Win> = new SignalTrigger();
 
 	#if server
+
 	override function init_server() {
 		newWinner = winTrig.asSignal();
 	}
@@ -26,8 +28,8 @@ class WinSystem extends System {
 		var total = 0;
 		var infected = 0;
 		for (ent in ComponentManager.entities) {
-			switch [ent.get(InfectedComponent), ent.get(PlayerComponent),ent.get(AliveComponent)] {
-            case [Comp(_), Comp(_),Comp(_)]:
+			switch [ent.get(InfectedComponent),ent.get(PlayerComponent),ent.get(AliveComponent)] {
+            case [Comp(_),Comp(_),Comp(_)]:
                 infected++;
                 total++;
             case [NONE, Comp(_),Comp(_)]:

@@ -27,3 +27,24 @@
    CLOSED: [2020-05-05 Tue 21:52]
 
 ** TODO Geiger hud
+* Ideas
+** Energy weapons. Do they add anything? Do they make things simpler? Do people even like energy weapons?
+*** Shared charge between all weapons. Once it runs out, screwed?
+Regenerates over time?
+* Weapon system
+** Weapon list
+ - Shotgun
+ - Assault rifle
+ - Pistol (2 kinds)
+ - Semi auto
+** Distribution
+*** Inital
+Give pistols.
+Make humans weak at start, strong at end
+*** Progression
+Options for unlock better guns
+- Percentage of infection
+- Time
+Infection gun effectiveness decreases as gun effectivness increases :)
+Possible inital values 0.9 -> 0.3
+Still has normal system, so gimpedness is always same.

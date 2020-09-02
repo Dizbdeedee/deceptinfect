@@ -1,5 +1,7 @@
 package deceptinfect;
 
+import haxe.io.Bytes;
+import haxe.crypto.Crc32;
 import gmod.enums.SNDLVL;
 import gmod.enums.SND;
 import gmod.enums.CHAN;
@@ -36,7 +38,8 @@ using deceptinfect.util.PlayerExt;
 import deceptinfect.ecswip.SignalStorage;
 
 
-class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> {
+@:keep
+class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements deceptinfect.macros.SpamTracker.Spam {
 
     #if client
     override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
@@ -50,7 +53,8 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> {
         getSystem(RagdollSystem).playerRagdoll(owner,ragdoll);
     }
     #end
-    override function Think() {
+    var lastcrc:Int = 0;
+    @:spam override function Think() {
         var nethost = Main.nethost;
         SystemManager.runAllSystems();
         #if server
@@ -65,7 +69,7 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> {
 
     var timestart = 0;
     var underperforming = false;
-    function checkPerformance() {
+    @:exposeGM function checkPerformance() {
         if (Gmod.FrameTime() > 0.016666666666667 && !underperforming) {
             trace("Server underperforming! ");
             underperforming = true;

@@ -10,10 +10,12 @@ import deceptinfect.ecswip.SystemManager.getSystem;
 
 @:keep
 class Di_battery extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM>  {
+
     public final properties:EntFields = {
         Base: "base_anim",
         
     }
+
     #if client
     override function Draw(flags:Float) {
         self.DrawModel();
@@ -24,7 +26,9 @@ class Di_battery extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM>  {
     
     
     var lastplayer:Player = null;
+
     var id:DI_ID = null;
+
     var added = false;
 
     public var spawnLoc:Spawn;

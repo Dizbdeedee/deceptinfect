@@ -9,7 +9,7 @@ end
 
 
 function ENT:Initialize()
-	local ent = deceptinfect_HAXE_EXPORT.di_ragdoll.new(self)
+	local ent = deceptinfect.di_ragdoll.new(self)
 	self._gHaxeBurrow = ent
 	self._gHaxeBurrow:Initialize()
 	self._gHaxeInit = true

@@ -3,7 +3,7 @@ ENT.Type = "anim"
 AddCSLuaFile("cl_init.lua")
 
 function ENT:Initialize()
-	local ent = deceptinfect_HAXE_EXPORT.di_nest.new(self)
+	local ent = deceptinfect.di_nest.new(self)
 	self._gHaxeBurrow = ent
 	self._gHaxeBurrow:Initialize()
 end

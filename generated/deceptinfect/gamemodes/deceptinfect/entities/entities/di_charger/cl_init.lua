@@ -9,7 +9,7 @@ end
 
 
 function ENT:Initialize()
-	local ent = deceptinfect_HAXE_EXPORT.di_charger.new(self)
+	local ent = deceptinfect.di_charger.new(self)
 	self._gHaxeBurrow = ent
 	self._gHaxeInit = true
 end

@@ -5,7 +5,9 @@ import deceptinfect.ecswip.VirtualPosition;
 
 
 class SpawnSystem extends System {
+
     public static final obj = new SpawnPointTable();
+
     public static final item = new SpawnPointTable();
 
     public static final nest = new SpawnPointTable();

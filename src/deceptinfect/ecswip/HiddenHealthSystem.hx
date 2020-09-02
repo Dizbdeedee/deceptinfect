@@ -6,6 +6,7 @@ import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SignalStorage;
 class HiddenHealthSystem extends GeigerSystem {
     #if server
+
     override function init_server() {
         SignalStorage.entDamageTrigger.clear();
         SignalStorage.entDamage.handle(hiddenHealthDamage);
@@ -13,9 +14,8 @@ class HiddenHealthSystem extends GeigerSystem {
     
     @:keep
     static function hiddenHealthDamage(data:DamageEvent) {
-        var victim = data.vicID;
+        final victim = data.vicID;
         var g_attacker:GEntCompat = data.dmg.GetAttacker();
-        
         if (!g_attacker.IsPlayer()) return;
         switch [victim.get(HiddenHealthComponent),victim.get(GEntityComponent),g_attacker.get(DamagePenaltyHidden)] {
         case [Comp(c_hidHealth),Comp(g_victim),Comp(c_dmgpnlty)]:
@@ -37,5 +37,6 @@ class HiddenHealthSystem extends GeigerSystem {
         default:
         }
     }
+
     #end
 }

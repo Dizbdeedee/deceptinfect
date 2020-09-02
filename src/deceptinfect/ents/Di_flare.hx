@@ -5,14 +5,17 @@ import gmod.sent.SentBuild;
 import deceptinfect.game.FlareComponent;
 
 class Di_flare extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
+
     final properties:EntFields = {
         Base: "base_entity"
     }    
+
     #if client
     override function Draw(flags:Float) {
         self.DrawModel();
     }
     #end
+
     #if server
     var id:DI_ID;
     override function Initialize() {
@@ -38,7 +41,6 @@ class Di_flare extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
         if (self.IsPlayerHolding() || !activator.IsPlayer()) {return;}
         var _activator:Player = cast activator;
         _activator.PickupObject(self);
-       // lastplayer = _activator;
     }
 
     #end

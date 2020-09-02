@@ -405,7 +405,7 @@ class RagdollSystem extends System {
         FileLib.Write("deceptinfect/lastRoundStatues.txt",Json.stringify(tbl));
     }
     function readStatues() {
-        var file = FileLib.Read("deceptinfect/lastRoundStatues.txt","DATA");
+        var file = FileLib.Read("deceptinfect/lastRoundStatues.txt",DATA);
         if (file != null && file != "") {
             var json:JsonStatues = Json.parse(file);
             for (stat in json) {
