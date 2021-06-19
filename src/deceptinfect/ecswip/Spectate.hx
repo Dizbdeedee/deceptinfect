@@ -5,14 +5,8 @@ class Spectate {
 	#if server
 	public static function chooseSpectateTarget(x:PlayerComponent, dir:Spec_Direction) {
 		var player = x.player;
-		var iter = switch (dir) {
-			case FORWARDS:
-				1;
-			case BACKWARDS:
-				-1;
-		}
 		var specCur = x.spec_next;
-		var specNext = x.spec_next + iter;
+		var specNext = x.spec_next + dir;
 		var players = PlayerLib.GetAll();
 		var specd = false;
 		while (specNext != specCur) {
@@ -22,7 +16,7 @@ class Spectate {
 				player.SetObserverMode(OBS_MODE_CHASE);
 				specd = true;
 			}
-			specNext += iter;
+			specNext += dir;
 			if (specNext < 1) {
 				specNext = players.length();
 			} else if (specNext > players.length()) {
@@ -37,7 +31,7 @@ class Spectate {
 	#end
 }
 
-enum Spec_Direction {
-	FORWARDS;
-	BACKWARDS;
+enum abstract Spec_Direction(Int) to Int {
+	var FORWARDS = 1;
+	var BACKWARDS = -1;
 }
