@@ -1,5 +1,6 @@
 package deceptinfect.radiation;
 
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.util.Util;
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import haxe.iterators.StringKeyValueIteratorUnicode;
@@ -11,6 +12,12 @@ import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.infection.systems.RateSystem;
 import deceptinfect.ecswip.Family;
 
+class Famile<A,B,C,D> {
+
+}
+
+//finish?
+var derka:Famile<RadiationProducer,VirtualPosition,RadSource,RadSource>;
 class RadiationSystem extends System {
    
     static var nextRadiationID:RadiationID = new RadiationID();
@@ -24,43 +31,26 @@ class RadiationSystem extends System {
 
     }
 
-    static var _acceptFamily:Family = new Family([RadiationAccepter,RateComponent,GEntityComponent]);
-    static var _produceFamily:Family = new Family([RadiationProducer,VirtualPosition]);
     #if server
     override function run_server() {
-        
-        for (acceptEnt in ComponentManager.entities) {
-            switch [acceptEnt.get(RadiationAccepter),acceptEnt.get(RateComponent),acceptEnt.get(VirtualPosition),acceptEnt.get(RadVictim)] {
-            case [Comp(c_radAccept),Comp(c_rateAccept),Comp(c_radGEnt),Comp(c_radvic)]:
-                //trace("radiationaccepter");
-                c_radAccept.radiation.clear();
-                // c_rateAccept.addRates.clear();
-                for (produceEnt in ComponentManager.entities) {
-                    switch [produceEnt.get(RadiationProducer),produceEnt.get(VirtualPosition),produceEnt.get(RadSource)] {
-                    case [Comp(c_radProduce),Comp(c_producePos),Comp(c_radsource)]:
-                        //c_radsource /c_radvic might be needed to prevent radiation from source when contaminated from source
-
-                        var dist = c_producePos.pos.Distance(c_radGEnt.pos);
-                        // Util.printTimer("stuff",3, () -> 
-                        // trace('$produceEnt producing $dist');
-                        switch getTotalRadiation(dist,c_radProduce) {
+        IterateEnt.iterGet(derka,
+            [accept_accept,accept_rate,accept_pos,_],
+            () -> {
+                accept_accept.radiation.clear();
+                IterateEnt.iterGet([RadiationProducer,VirtualPosition,RadSource],
+                    [produce_produce,produce_pos,_],
+                    (produce) -> {
+                        var dist = produce_pos.pos.Distance(accept_pos.pos);
+                        
+                        switch getTotalRadiation(dist,produce_produce) {
                         case Some(rate):
                             //trace('rate $rate');
-                            c_radAccept.radiation.set(produceEnt,rate);
+                            accept_accept.radiation.set(produce,rate);
                         default:
                         }
-                       
-                    default:
-                    }
-                    
-
-                }
-                c_rateAccept.addRates.set(radRateID,getTotalRadiationRate(c_radAccept));
-                //trace(c_rateAccept.addRates);
-            default:
-            }
-        }
-        
+                    });
+                accept_rate.addRates.set(radRateID,getTotalRadiationRate(accept_accept));
+        });
     }
     #end
 

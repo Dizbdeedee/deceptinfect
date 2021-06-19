@@ -101,20 +101,70 @@ class IterateEnt {
         }
     }
 
+    static function renameVar(map:Map<String,Dynamic>,pos:haxe.macro.Expr.Position) {
+        var name = "ent";
+        if (!map.exists(name)) {
+            return name;
+        }
+        var success = false;
+        var tries = 1;
+        while (tries < 100) {
+            if (!map.exists(name + tries)) {
+                success = true;
+                break;
+            }
+            tries++;
+        }
+        return if (!success) {
+            Context.error("Could not rename var..?",pos);
+            throw "woah";
+        } else {
+            return name + tries;
+        }
+    }
+
+    static function getFamilyFromExpr(get:Expr,pos:haxe.macro.Expr.Position) {
+        try {
+            final type = Context.typeExpr(get);
+            //blah blah
+            trace(type);
+            Context.error("Unable to find type for get argument",pos);
+            throw "OOgaa";
+        } catch (e) {
+            Context.error("Unable to find type for get argument",pos);
+            throw "OOgaa";
+        }
+        return macro null;
+
+    }
+
     #end
+
 
     public static macro function iterGet(getArr:Expr,cases:Expr,func:Expr) {
         var name;
         var expr;
+        
         switch (func) {
             case {expr: EFunction(FArrow, {args: [{name: _argName}], expr: _expr})}:
                 name = _argName;
                 expr = _expr;
+            case {expr: EFunction(FArrow, {args: [], expr: _expr}),pos : pos}:
+                name = renameVar(Context.getLocalTVars(),pos);
+                expr = _expr;
+            case {pos : pos}:
+                Context.error("Incorrect format",pos);
             default:
-                Context.error("Incorrect format",Context.currentPos());
+                throw "hmm";
 
         }
-        final getExprs:haxe.macro.Expr = getArrToExpr(getArr,name);
+        final getExprs = switch (getArr) {
+            case {expr: EArrayDecl(_)}:
+                getArrToExpr(getArr,name);
+            case {pos : pos}:
+                getFamilyFromExpr(getArr,pos);
+
+        }
         final cases:haxe.macro.Expr = caseArrToExpr(cases);
 
 
