@@ -9,8 +9,9 @@ import deceptinfect.infection.InfectionComponent;
 @:keep
 class Di_puddle extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
 
-    static final material = Gmod.Material("editor/wireframe");
+    // static final material = Gmod.Material("nature/water_canals_cheap001_dx70").a;
 
+    static final material = Gmod.Material("nature/water_coast01").a;
     final cooldown:Map<InfectionComponent,Float> = [];
 
     final properties:EntFields = {
@@ -26,26 +27,32 @@ class Di_puddle extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
     #end
 
     override function Initialize() {
+	self.SetCollisionBounds(new Vector(0,0,0),new Vector(100,100,0));
+	self.PhysicsInit(SOLID_BBOX);
+	if (Gmod.IsValid(self.GetPhysicsObject()) ) {
+	    self.SetMoveType(MOVETYPE_NONE);
+	    self.SetCollisionGroup(COLLISION_GROUP_DEBRIS);
+	}
+	// self.SetNoDraw(true);
 	#if client
 	
         // mesh = Gmod.Mesh(material.a);
 	    
+
 	#end
        
     }
     #if client
     override function Draw(flags:Float) {
-	CamLib.Start3D();
-	final mins = self.GetPos() + new Vector(100,10,100);
-	final maxs = self.GetPos() - new Vector(100,10,100);
-	RenderLib.DrawBox(self.GetPos(),self.GetAngles(),mins,maxs,{
-		    r: 128 
-		    g: 0,
-		    b: 128,
-		    a: 255,
-		    });
-	CamLib.End3D();
+	self.SetRenderBounds(new Vector (0,0,0),new Vector(100,100,0));
+	// self.SetCollisionBounds(new Vector (0,0,0),new Vector(100,100,0));
+	CamLib.Start3D2D(self.GetPos(),new Angle(0,0,0),1.0);
+	
+	SurfaceLib.SetDrawColor(128,0,128);
+	SurfaceLib.DrawRect(0,0,100,100); 
+	CamLib.End3D2D();
     }
+
     #end
 
     #if server
