@@ -5,6 +5,7 @@
 -D addonName=deceptinfect
 -D generateLuaInit
 -D analyzer-optimize
+-D profile
 -dce full
 -lib singlePatternSwitch
 --times

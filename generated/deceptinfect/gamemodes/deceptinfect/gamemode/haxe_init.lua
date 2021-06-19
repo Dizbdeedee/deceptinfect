@@ -361,20 +361,23 @@ __deceptinfect_MapStorage = _hx_e()
 __deceptinfect_ModelType = _hx_e()
 __deceptinfect_Misc = _hx_e()
 __deceptinfect_PlayerManager = _hx_e()
+__deceptinfect_ProfilingState = _hx_e()
+__deceptinfect_Profiler = _hx_e()
 __deceptinfect_Trace = _hx_e()
 __deceptinfect_ecswip_System = _hx_e()
 __deceptinfect_WeaponSystem = _hx_e()
 __deceptinfect_WeaponStage = _hx_e()
 __deceptinfect_ecswip_Component = _hx_e()
+__haxe_ds_ObjectMap = _hx_e()
+__deceptinfect_ecswip_ComponentManager = _hx_e()
 __deceptinfect_abilities_FormComponent = _hx_e()
 __deceptinfect_abilities_CurrentForm = _hx_e()
 __deceptinfect_abilities_Cooldown = _hx_e()
 __deceptinfect_abilities_FormSystem = _hx_e()
 __deceptinfect_client_GeigerSystem = _hx_e()
-__haxe_ds_ObjectMap = _hx_e()
-__deceptinfect_ecswip_ComponentManager = _hx_e()
 __deceptinfect_ecswip_ComponentTools = _hx_e()
 __deceptinfect_ecswip_ComponentState = _hx_e()
+__deceptinfect_ecswip_DummySystem = _hx_e()
 __deceptinfect_ecswip_GEntityComponent = _hx_e()
 __deceptinfect_ecswip_GrabSystem = _hx_e()
 __deceptinfect_ecswip_HiddenHealthSystem = _hx_e()
@@ -384,10 +387,6 @@ __deceptinfect_ecswip_SignalStorage = _hx_e()
 __deceptinfect_ecswip_Spectate = _hx_e()
 __deceptinfect_ecswip_Spec_Direction = _hx_e()
 __deceptinfect_infection_systems_InfectionSystem = _hx_e()
-__deceptinfect_radiation_RadiationAccepter = _hx_e()
-__deceptinfect_infection_RateComponent = _hx_e()
-__deceptinfect_radiation_RadiationProducer = _hx_e()
-__deceptinfect_ecswip_VirtualPosition = _hx_e()
 __deceptinfect_infection_systems_RateSystem = _hx_e()
 __deceptinfect_radiation_RadiationSystem = _hx_e()
 __deceptinfect_game_WinSystem = _hx_e()
@@ -405,6 +404,7 @@ __deceptinfect_radiation_RadSourceSystem = _hx_e()
 __deceptinfect_game_LowHealthSystem = _hx_e()
 __deceptinfect_items_ScannerSystem = _hx_e()
 __deceptinfect_ecswip_SystemManager = _hx_e()
+__deceptinfect_ecswip_VirtualPosition = _hx_e()
 __deceptinfect_ecswip_ChooseVirPos = _hx_e()
 __deceptinfect_ents_Di_barrel = _hx_e()
 __deceptinfect_ents_Di_battery = _hx_e()
@@ -448,6 +448,7 @@ __deceptinfect_infection_AcceptingInfection = _hx_e()
 __deceptinfect_infection_BaseInfection = _hx_e()
 __deceptinfect_infection_INF_STATE = _hx_e()
 __deceptinfect_infection_InfectionLookInfo = _hx_e()
+__deceptinfect_infection_RateComponent = _hx_e()
 __deceptinfect_infection_components_DamagePenaltyHidden = _hx_e()
 __deceptinfect_infection_components_GrabAccepter = _hx_e()
 __deceptinfect_infection_components_GrabAcceptState = _hx_e()
@@ -460,7 +461,6 @@ __deceptinfect_items_Di_cure = _hx_e()
 __deceptinfect_items_ScannerComponent = _hx_e()
 __deceptinfect_items_ScanResult = _hx_e()
 __deceptinfect_items_Weapon_Di_Scan = _hx_e()
-__haxe_ds_List = _hx_e()
 __deceptinfect_radiation_ContaminationAccepter = _hx_e()
 __deceptinfect_radiation_ContaminationProducer = _hx_e()
 __deceptinfect_radiation_NextOptions = _hx_e()
@@ -470,6 +470,8 @@ __deceptinfect_radiation_RadSourceOp = _hx_e()
 __deceptinfect_radiation_RadSourceState = _hx_e()
 __deceptinfect_radiation_RadTime = _hx_e()
 __deceptinfect_radiation_RadVictim = _hx_e()
+__deceptinfect_radiation_RadiationAccepter = _hx_e()
+__deceptinfect_radiation_RadiationProducer = _hx_e()
 __deceptinfect_radiation_RadLifetime = _hx_e()
 __deceptinfect_radiation_RadiationTypes = _hx_e()
 __deceptinfect_sabotage_S_Break = _hx_e()
@@ -487,50 +489,25 @@ __gmod__LuaArray_LuaArray_Impl_ = _hx_e()
 __hxbit_NetworkHost = _hx_e()
 __haxe_ds_IntMap = _hx_e()
 __gmod_hxbit_GmodNetHost = _hx_e()
-__haxe_io_Input = _hx_e()
-__gmod_hxbit_GmodNetworkInput = _hx_e()
 __hxbit_NetworkClient = _hx_e()
-__gmod_hxbit_Client = _hx_e()
 __gmod_macros_include___ForceExpose = _hx_e()
 __haxe_EntryPoint = _hx_e()
-__haxe__Int64____Int64 = _hx_e()
 __haxe_Json = _hx_e()
 __haxe_Log = _hx_e()
 __haxe_MainEvent = _hx_e()
 __haxe_MainLoop = _hx_e()
 __haxe_Timer = _hx_e()
-__haxe__Unserializer_DefaultResolver = _hx_e()
-__haxe_Unserializer = _hx_e()
-__haxe_crypto_Crc32 = _hx_e()
-__haxe_crypto_Md5 = _hx_e()
 __haxe_ds_BalancedTree = _hx_e()
 __haxe_ds_TreeNode = _hx_e()
 __haxe_ds_EnumValueMap = _hx_e()
-__haxe_ds__List_ListNode = _hx_e()
-__haxe_ds__List_ListIterator = _hx_e()
 __haxe_ds_Option = _hx_e()
 __haxe_format_JsonPrinter = _hx_e()
-__haxe_io_Bytes = _hx_e()
 __haxe_io_BytesBuffer = _hx_e()
-__haxe_io_Encoding = _hx_e()
-__haxe_io_Eof = _hx_e()
-__haxe_io_Error = _hx_e()
-__haxe_io_FPHelper = _hx_e()
 __haxe_iterators_ArrayIterator = _hx_e()
 __haxe_iterators_ArrayKeyValueIterator = _hx_e()
 __haxe_iterators_MapKeyValueIterator = _hx_e()
-__haxe_rtti_Meta = _hx_e()
-__hxbit_ConvertField = _hx_e()
-__hxbit_Convert = _hx_e()
-__hxbit_PropTypeDesc = _hx_e()
-__hxbit_ProxyChild = _hx_e()
-__hxbit_BaseProxy = _hx_e()
 __hxbit_NetworkSerializer = _hx_e()
-__hxbit_NetworkStats = _hx_e()
-__hxbit_Schema = _hx_e()
 __hxbit_StructSerializable = _hx_e()
-__hxbit_enumSer_Deceptinfect_infection_INF_STATE = _hx_e()
-__hxbit_enumSer_Hxbit_PropTypeDesc = _hx_e()
 __tink_core__Callback_Callback_Impl_ = _hx_e()
 __tink_core_LinkObject = _hx_e()
 __tink_core__Callback_ListCell = _hx_e()
@@ -919,13 +896,6 @@ __haxe_Exception.super = function(self,message,previous,native)
 end
 _hxClasses["haxe.Exception"] = __haxe_Exception
 __haxe_Exception.__name__ = "haxe.Exception"
-__haxe_Exception.caught = function(value) 
-  if (__lua_Boot.__instanceof(value, __haxe_Exception)) then 
-    do return value end;
-  else
-    do return __haxe_ValueException.new(value, nil, value) end;
-  end;
-end
 __haxe_Exception.thrown = function(value) 
   if (__lua_Boot.__instanceof(value, __haxe_Exception)) then 
     do return value:get_native() end;
@@ -941,9 +911,6 @@ __haxe_Exception.prototype.__nativeStack= nil;
 __haxe_Exception.prototype.__skipStack= nil;
 __haxe_Exception.prototype.__nativeException= nil;
 __haxe_Exception.prototype.__previousException= nil;
-__haxe_Exception.prototype.unwrap = function(self) 
-  do return self.__nativeException end
-end
 __haxe_Exception.prototype.get_native = function(self) 
   do return self.__nativeException end
 end
@@ -1134,129 +1101,6 @@ __lua_Boot.dateStr = function(date)
     _hx_5 = Std.string("") .. Std.string(s); end
     return _hx_5
   end )())) end;
-end
-__lua_Boot.strDate = function(s) 
-  local _g = #s;
-  if (_g) == 8 then 
-    local idx = 1;
-    local ret = _hx_tab_array({}, 0);
-    while (idx ~= nil) do 
-      local newidx = 0;
-      if (#":" > 0) then 
-        newidx = _G.string.find(s, ":", idx, true);
-      else
-        if (idx >= #s) then 
-          newidx = nil;
-        else
-          newidx = idx + 1;
-        end;
-      end;
-      if (newidx ~= nil) then 
-        ret:push(_G.string.sub(s, idx, newidx - 1));
-        idx = newidx + #":";
-      else
-        ret:push(_G.string.sub(s, idx, #s));
-        idx = nil;
-      end;
-    end;
-    local t = ((_G.tonumber(ret[0]) * 3600000.) + (_G.tonumber(ret[1]) * 60000.)) + (_G.tonumber(ret[2]) * 1000.);
-    local d = _hx_e();
-    _G.setmetatable(d, _hx_o({__fields__={__index=true},__index=Date.prototype}));
-    d.t = t / 1000;
-    d.d = _G.os.date("*t", Std.int(d.t));
-    d.dUTC = _G.os.date("!*t", Std.int(d.t));
-    do return d end;
-  elseif (_g) == 10 then 
-    local idx = 1;
-    local ret = _hx_tab_array({}, 0);
-    while (idx ~= nil) do 
-      local newidx = 0;
-      if (#"-" > 0) then 
-        newidx = _G.string.find(s, "-", idx, true);
-      else
-        if (idx >= #s) then 
-          newidx = nil;
-        else
-          newidx = idx + 1;
-        end;
-      end;
-      if (newidx ~= nil) then 
-        ret:push(_G.string.sub(s, idx, newidx - 1));
-        idx = newidx + #"-";
-      else
-        ret:push(_G.string.sub(s, idx, #s));
-        idx = nil;
-      end;
-    end;
-    do return Date.new(_G.tonumber(ret[0]), _G.tonumber(ret[1]) - 1, _G.tonumber(ret[2]), 0, 0, 0) end;
-  elseif (_g) == 19 then 
-    local idx = 1;
-    local ret = _hx_tab_array({}, 0);
-    while (idx ~= nil) do 
-      local newidx = 0;
-      if (#" " > 0) then 
-        newidx = _G.string.find(s, " ", idx, true);
-      else
-        if (idx >= #s) then 
-          newidx = nil;
-        else
-          newidx = idx + 1;
-        end;
-      end;
-      if (newidx ~= nil) then 
-        ret:push(_G.string.sub(s, idx, newidx - 1));
-        idx = newidx + #" ";
-      else
-        ret:push(_G.string.sub(s, idx, #s));
-        idx = nil;
-      end;
-    end;
-    local _this = ret[0];
-    local idx = 1;
-    local ret1 = _hx_tab_array({}, 0);
-    while (idx ~= nil) do 
-      local newidx = 0;
-      if (#"-" > 0) then 
-        newidx = _G.string.find(_this, "-", idx, true);
-      else
-        if (idx >= #_this) then 
-          newidx = nil;
-        else
-          newidx = idx + 1;
-        end;
-      end;
-      if (newidx ~= nil) then 
-        ret1:push(_G.string.sub(_this, idx, newidx - 1));
-        idx = newidx + #"-";
-      else
-        ret1:push(_G.string.sub(_this, idx, #_this));
-        idx = nil;
-      end;
-    end;
-    local _this = ret[1];
-    local idx = 1;
-    local ret = _hx_tab_array({}, 0);
-    while (idx ~= nil) do 
-      local newidx = 0;
-      if (#":" > 0) then 
-        newidx = _G.string.find(_this, ":", idx, true);
-      else
-        if (idx >= #_this) then 
-          newidx = nil;
-        else
-          newidx = idx + 1;
-        end;
-      end;
-      if (newidx ~= nil) then 
-        ret:push(_G.string.sub(_this, idx, newidx - 1));
-        idx = newidx + #":";
-      else
-        ret:push(_G.string.sub(_this, idx, #_this));
-        idx = nil;
-      end;
-    end;
-    do return Date.new(_G.tonumber(ret1[0]), _G.tonumber(ret1[1]) - 1, _G.tonumber(ret1[2]), _G.tonumber(ret[0]), _G.tonumber(ret[1]), _G.tonumber(ret[2])) end;else
-  _G.error(__haxe_Exception.thrown(Std.string("Invalid date format : ") .. Std.string(s)),0); end;
 end
 __lua_Boot.extendsOrImplements = function(cl1,cl2) 
   while (true) do 
@@ -1487,9 +1331,6 @@ _hxClasses["haxe.ValueException"] = __haxe_ValueException
 __haxe_ValueException.__name__ = "haxe.ValueException"
 __haxe_ValueException.prototype = _hx_e();
 __haxe_ValueException.prototype.value= nil;
-__haxe_ValueException.prototype.unwrap = function(self) 
-  do return self.value end
-end
 
 __haxe_ValueException.prototype.__class__ =  __haxe_ValueException
 __haxe_ValueException.__super__ = __haxe_Exception
@@ -1506,61 +1347,6 @@ Std.int = function(x)
     do return 0 end;
   else
     do return _hx_bit_clamp(x) end;
-  end;
-end
-Std.parseFloat = function(x) 
-  if ((x == nil) or (x == "")) then 
-    do return (0/0) end;
-  end;
-  local digitMatch = _G.string.match(x, "^ *[%.%-+]?[0-9]%d*");
-  if (digitMatch == nil) then 
-    do return (0/0) end;
-  end;
-  local pos = #digitMatch;
-  local len = nil;
-  if ((len == nil) or (len > (pos + #x))) then 
-    len = #x;
-  else
-    if (len < 0) then 
-      len = #x + len;
-    end;
-  end;
-  if (pos < 0) then 
-    pos = #x + pos;
-  end;
-  if (pos < 0) then 
-    pos = 0;
-  end;
-  x = _G.string.sub(x, pos + 1, pos + len);
-  local decimalMatch = _G.string.match(x, "^%.%d*");
-  if (decimalMatch == nil) then 
-    decimalMatch = "";
-  end;
-  local pos = #decimalMatch;
-  local len = nil;
-  if ((len == nil) or (len > (pos + #x))) then 
-    len = #x;
-  else
-    if (len < 0) then 
-      len = #x + len;
-    end;
-  end;
-  if (pos < 0) then 
-    pos = #x + pos;
-  end;
-  if (pos < 0) then 
-    pos = 0;
-  end;
-  x = _G.string.sub(x, pos + 1, pos + len);
-  local eMatch = _G.string.match(x, "^[eE][+%-]?%d+");
-  if (eMatch == nil) then 
-    eMatch = "";
-  end;
-  local result = _G.tonumber(Std.string(Std.string(digitMatch) .. Std.string(decimalMatch)) .. Std.string(eMatch));
-  if (result ~= nil) then 
-    do return result end;
-  else
-    do return (0/0) end;
   end;
 end
 
@@ -1650,7 +1436,6 @@ Main.__name__ = "Main"
 Main.main = function() 
   __deceptinfect_Trace.overridetrace();
   __deceptinfect_DeceptInfect.new();
-  Main.nethost = __gmod_hxbit_GmodNetHost.new();
   _G.file.CreateDir("deceptinfect");
   _G.game.CleanUpMap();
   __deceptinfect_ecswip_SignalStorage.initEvents();
@@ -2040,14 +1825,6 @@ StringBuf.prototype.__class__ =  StringBuf
 StringTools.new = {}
 _hxClasses["StringTools"] = StringTools
 StringTools.__name__ = "StringTools"
-StringTools.urlDecode = function(s) 
-  s = _G.string.gsub(s, "+", " ");
-  s = _G.string.gsub(s, "%%(%x%x)", function(h) 
-    do return _G.string.char(_G.tonumber(h, 16)) end;
-  end);
-  s = _G.string.gsub(s, "\r\n", "\n");
-  do return s end;
-end
 StringTools.lpad = function(s,c,l) 
   if (#c <= 0) then 
     do return s end;
@@ -2070,7 +1847,6 @@ Sys.__name__ = "Sys"
 Sys.time = function() 
   do return _G.SysTime() end;
 end
-_hxClasses["ValueType"] = ValueType;
 _hxClasses["ValueType"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="TNull","TInt","TFloat","TBool","TObject","TFunction","TClass","TEnum","TUnknown"},9)}
 ValueType = _hxClasses["ValueType"];
 ValueType.TNull = _hx_tab_array({[0]="TNull",0,__enum__ = ValueType},2)
@@ -2136,27 +1912,6 @@ Type.resolveClass = function(name)
   end;
   do return cl end;
 end
-Type.resolveEnum = function(name) 
-  local e = _hxClasses[name];
-  if ((e == nil) or not ((function() 
-    local _hx_1
-    if (_G.type(e) ~= "table") then 
-    _hx_1 = false; else 
-    _hx_1 = e.__ename__; end
-    return _hx_1
-  end )())) then 
-    do return nil end;
-  end;
-  do return e end;
-end
-Type.createInstance = function(cl,args) 
-  do return cl.new(_hx_table.unpack(args, 0)) end;
-end
-Type.createEmptyInstance = function(cl) 
-  local ret = ({});
-  _G.setmetatable(ret, _hx_o({__fields__={__index=true},__index=cl.prototype}));
-  do return ret end;
-end
 Type.createEnum = function(e,constr,params) 
   local f = Reflect.field(e, constr);
   if (f == nil) then 
@@ -2201,18 +1956,6 @@ Type.getInstanceFields = function(c)
     end;
   end;
   do return a end;
-end
-Type.getEnumConstructs = function(e) 
-  local a = e.__constructs__;
-  local _g = _hx_tab_array({}, 0);
-  local _g1 = 0;
-  local _g2 = a;
-  while (_g1 < _g2.length) do 
-    local i = _g2[_g1];
-    _g1 = _g1 + 1;
-    _g:push(i);
-  end;
-  do return _g end;
 end
 Type.typeof = function(v) 
   local _g = _G.type(v);
@@ -2354,30 +2097,17 @@ __deceptinfect_DeceptInfect.prototype.CreateEntityRagdoll = function(self,owner,
 end
 __deceptinfect_DeceptInfect.prototype.lastcrc= nil;
 __deceptinfect_DeceptInfect.prototype.Think = function(self) 
-  local nethost = Main.nethost;
   __deceptinfect_ecswip_SystemManager.runAllSystems();
   __deceptinfect_GameManager.think();
   self:checkPerformance();
-  local _g = 0;
-  local _g1 = nethost.clients;
-  while (_g < _g1.length) do 
-    local c = _g1[_g];
-    _g = _g + 1;
-    c:sync();
-  end;
-  nethost:flush();
 end
 __deceptinfect_DeceptInfect.prototype.timestart= nil;
 __deceptinfect_DeceptInfect.prototype.underperforming= nil;
 __deceptinfect_DeceptInfect.prototype.checkPerformance = function(self) 
-  if ((_G.FrameTime() > 0.016666666666667) and not self.underperforming) then 
-    __haxe_Log.trace("Server underperforming! ", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=75,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
-    self.underperforming = true;
-  else
-    if (self.underperforming) then 
-      __haxe_Log.trace("Server recovered", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=78,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
-      self.underperforming = false;
-    end;
+  if ((1 / _G.FrameTime()) < 66.6) then 
+    __deceptinfect_util_Util.printTimer_2(1, 5, function() 
+      __haxe_Log.trace("Server is underperforming! ${1 / Gmod.FrameTime()}", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=76,className="deceptinfect.DeceptInfect",methodName="checkPerformance"}));
+    end);
   end;
 end
 __deceptinfect_DeceptInfect.prototype.OnEntityCreated = function(self,entity) 
@@ -2406,8 +2136,8 @@ end
 __deceptinfect_DeceptInfect.prototype.PlayerSilentDeath = function(self,ply) 
 end
 __deceptinfect_DeceptInfect.prototype.playerDeath = function(self,victim) 
-  __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_game_components_AliveComponent, victim.id);
-  __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_infection_components_GrabAccepter, victim.id);
+  __deceptinfect_ecswip_ComponentManager.removeComponent(24, victim.id);
+  __deceptinfect_ecswip_ComponentManager.removeComponent(8, victim.id);
   local sounds = __deceptinfect_Misc.deathSounds:get(__deceptinfect_ModelType.HUMAN_MALE);
   local sound = sounds[_G.math.random(0, sounds.length - 1)];
   victim:EmitSound(sound, 0, nil, 0);
@@ -2420,7 +2150,7 @@ __deceptinfect_DeceptInfect.prototype.DoPlayerDeath = function(self,ply,attacker
   self:playerDeath(ply);
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeath = function(self,victim,inflictor,attacker) 
-  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=129,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
+  __haxe_Log.trace("Player ded!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=132,className="deceptinfect.DeceptInfect",methodName="PlayerDeath"}));
 end
 __deceptinfect_DeceptInfect.prototype.EntityKeyValue = function(self,ent,key,value) 
   do return nil end
@@ -2449,9 +2179,7 @@ __deceptinfect_DeceptInfect.prototype.PlayerButtonUp = function(self,ply,button)
   if (button) == _G.KEY_E then 
   elseif (button) == _G.KEY_F then 
     __deceptinfect_abilities_FormSystem.attemptChangeForm(ply.id);
-  elseif (button) == _G.KEY_L then 
   elseif (button) == _G.KEY_M then 
-    __haxe_Log.trace(__deceptinfect_ecswip_ComponentManager.components.h[__deceptinfect_ecswip_PlayerComponent], _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=171,className="deceptinfect.DeceptInfect",methodName="PlayerButtonUp"}));
   elseif (button) == _G.KEY_SEMICOLON then 
     local plyr = _G.player.GetByID(1);
     __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_infection_systems_InfectionSystem):makeInfected(plyr.id);else end;
@@ -2481,8 +2209,7 @@ __deceptinfect_DeceptInfect.prototype.PlayerDeathSound = function(self)
   do return true end
 end
 __deceptinfect_DeceptInfect.prototype.PlayerDeathThink = function(self,ply) 
-  local this1 = ply.id;
-  local comp = __deceptinfect_ecswip_ComponentTools.sure(__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[this1]);
+  local comp = __deceptinfect_ecswip_ComponentTools.sure(__deceptinfect_ecswip_ComponentManager.components_2[31][ply.id]);
   local reviveTime;
   local revive = false;
   local _g = comp.deathTime;
@@ -2540,13 +2267,13 @@ __deceptinfect_DeceptInfect.prototype.IsSpawnpointSuitable = function(self,ply,s
     if (ent:IsPlayer()) then 
       local blockPly = ent;
       __deceptinfect_util_PlayerExt.setWalkthroughable(blockPly, true);
-      __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_statuses_Walkthroughable.new(), blockPly.id);
+      __deceptinfect_ecswip_ComponentManager.components_2[17][blockPly.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_statuses_Walkthroughable.new());
       __deceptinfect_util_PlayerExt.setWalkthroughable(ply, true);
-      __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_statuses_Walkthroughable.new(), ply.id);
+      __deceptinfect_ecswip_ComponentManager.components_2[17][ply.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_statuses_Walkthroughable.new());
     end;
   end;
   if (tracehit.HitWorld) then 
-    __haxe_Log.trace("not valid..", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=303,className="deceptinfect.DeceptInfect",methodName="IsSpawnpointSuitable"}));
+    __haxe_Log.trace("not valid..", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=284,className="deceptinfect.DeceptInfect",methodName="IsSpawnpointSuitable"}));
     do return false end;
   end;
   do return true end
@@ -2557,7 +2284,7 @@ __deceptinfect_DeceptInfect.prototype.PlayerSelectSpawn = function(self,ply,tran
   if (self:IsSpawnpointSuitable(ply, spawns[random_spawn], false)) then 
     do return spawns[random_spawn] end;
   end;
-  __haxe_Log.trace("Could not find a spawn!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=320,className="deceptinfect.DeceptInfect",methodName="PlayerSelectSpawn"}));
+  __haxe_Log.trace("Could not find a spawn!", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/DeceptInfect.hx",lineNumber=301,className="deceptinfect.DeceptInfect",methodName="PlayerSelectSpawn"}));
   do return nil end
 end
 __deceptinfect_DeceptInfect.prototype.EntityTakeDamage = function(self,target,dmg) 
@@ -2654,7 +2381,6 @@ __deceptinfect_GameInstance.prototype.__class__ =  __deceptinfect_GameInstance
 __enumExtractor_EnumExtractor.new = {}
 _hxClasses["enumExtractor.EnumExtractor"] = __enumExtractor_EnumExtractor
 __enumExtractor_EnumExtractor.__name__ = "enumExtractor.EnumExtractor"
-_hxClasses["deceptinfect.GAME_STATE"] = __deceptinfect_GAME_STATE;
 _hxClasses["deceptinfect.GAME_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WAIT","SETTING_UP","PLAYING","ENDING"},4)}
 __deceptinfect_GAME_STATE = _hxClasses["deceptinfect.GAME_STATE"];
 __deceptinfect_GAME_STATE.WAIT = _hx_tab_array({[0]="WAIT",0,__enum__ = __deceptinfect_GAME_STATE},2)
@@ -2726,16 +2452,16 @@ __deceptinfect_GameManager.initPlayer = function(ply)
   local grabaccept = __deceptinfect_infection_components_GrabAccepter.new();
   local radaccept = __deceptinfect_radiation_RadiationAccepter.new(_hx_e());
   local virpos = __deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.ENT(ply));
-  __deceptinfect_ecswip_ComponentManager.addComponent(infcomp, p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(spec, p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(rate, p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(health, p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(grabaccept, p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(radaccept, p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(virpos, p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_AliveComponent.new(), p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(vic, p);
-  __deceptinfect_ecswip_ComponentManager.addComponent(contam, p);
+  __deceptinfect_ecswip_ComponentManager.components_2[23][p] = __deceptinfect_ecswip_ComponentState.Comp(infcomp);
+  __deceptinfect_ecswip_ComponentManager.components_2[6][p] = __deceptinfect_ecswip_ComponentState.Comp(spec);
+  __deceptinfect_ecswip_ComponentManager.components_2[19][p] = __deceptinfect_ecswip_ComponentState.Comp(rate);
+  __deceptinfect_ecswip_ComponentManager.components_2[7][p] = __deceptinfect_ecswip_ComponentState.Comp(health);
+  __deceptinfect_ecswip_ComponentManager.components_2[8][p] = __deceptinfect_ecswip_ComponentState.Comp(grabaccept);
+  __deceptinfect_ecswip_ComponentManager.components_2[9][p] = __deceptinfect_ecswip_ComponentState.Comp(radaccept);
+  __deceptinfect_ecswip_ComponentManager.components_2[30][p] = __deceptinfect_ecswip_ComponentState.Comp(virpos);
+  __deceptinfect_ecswip_ComponentManager.components_2[24][p] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_AliveComponent.new());
+  __deceptinfect_ecswip_ComponentManager.components_2[14][p] = __deceptinfect_ecswip_ComponentState.Comp(vic);
+  __deceptinfect_ecswip_ComponentManager.components_2[10][p] = __deceptinfect_ecswip_ComponentState.Comp(contam);
 end
 __deceptinfect_GameManager.thinkWait = function() 
   _G.player.GetCount();
@@ -2809,7 +2535,7 @@ __deceptinfect_GameManager.set_state = function(x)
     local p = p:next();
     __deceptinfect_GameManager.net_gamestate:send(_hx_o({__fields__={state=true,time=true},state=__deceptinfect__GameManager_Net_GAME_STATE_VAL_Impl_.fromGAME_STATE(x),time=time}), p);
   end;
-  __haxe_Log.trace(Std.string("set state... ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=181,className="deceptinfect.GameManager",methodName="set_state"}));
+  __haxe_Log.trace(Std.string("set state... ") .. Std.string(Std.string(x)), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=179,className="deceptinfect.GameManager",methodName="set_state"}));
   __deceptinfect_GameManager.stateTrig.handlers:invoke(x);
   __deceptinfect_GameManager.state = x do return __deceptinfect_GameManager.state end;
 end
@@ -2818,26 +2544,26 @@ __deceptinfect_GameManager.cleanup = function()
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent];
-    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_CleanupEnt)[ent][1] == 1) then 
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][ent];
+    if (__deceptinfect_ecswip_ComponentManager.components_2[13][ent][1] == 1) then 
       if (_g[1] == 1) then 
-        __haxe_Log.trace(ent, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=193,className="deceptinfect.GameManager",methodName="cleanup"}));
         _g[2].entity:Remove();
       end;
     end;
-    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_KeepRestart)[ent][1] ~= 1) then 
-      __deceptinfect_ecswip_ComponentManager.removeEntity(ent);
-    end;
+    __deceptinfect_ecswip_ComponentManager.removeEntity(ent);
   end;
   __deceptinfect_GameManager.stateTrig.handlers:clear();
+  __deceptinfect_ecswip_SystemManager.destroySystems();
   __deceptinfect_ecswip_SystemManager.initAllSystems();
   local ent = __gmod__LuaArray_LuaArray_Impl_.iterator(_G.ents.GetAll());
   while (ent:hasNext()) do 
     local ent = ent:next();
     local _g = ent:GetClass();
     if (_g) == "di_battery" or (_g) == "di_charger" or (_g) == "di_evac_zone" or (_g) == "di_flare" or (_g) == "di_nest" then 
+      __haxe_Log.trace("removing entiti", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=211,className="deceptinfect.GameManager",methodName="cleanup"}));
       ent:Remove();else end;
   end;
+  _G.game.CleanUpMap();
   local p = __gmod__LuaArray_LuaArray_Impl_.iterator(_G.player.GetAll());
   while (p:hasNext()) do 
     local p = p:next();
@@ -2854,37 +2580,25 @@ end
 __deceptinfect_GameManager.newWin = function(x) 
   local tmp = x[1];
   if (tmp) == 0 then 
-    __haxe_Log.trace("Humans win", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=230,className="deceptinfect.GameManager",methodName="newWin"}));
+    __haxe_Log.trace("Humans win", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=232,className="deceptinfect.GameManager",methodName="newWin"}));
   elseif (tmp) == 1 then 
-    __haxe_Log.trace("Infected win", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=232,className="deceptinfect.GameManager",methodName="newWin"}));
+    __haxe_Log.trace("Infected win", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=234,className="deceptinfect.GameManager",methodName="newWin"}));
   elseif (tmp) == 2 then 
-    __haxe_Log.trace("Draw. Boring...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=234,className="deceptinfect.GameManager",methodName="newWin"})); end;
+    __haxe_Log.trace("Draw. Boring...", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/GameManager.hx",lineNumber=236,className="deceptinfect.GameManager",methodName="newWin"})); end;
   __deceptinfect_GameManager.set_state(__deceptinfect_GAME_STATE.ENDING(__deceptinfect_GameManager.state:slice(2)[0], _G.CurTime() + 10));
 end
 __deceptinfect_GameManager.initInfectedPlayer = function(x) 
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_infection_InfectedComponent.new(), x);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_infection_components_GrabProducer.new(), x);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_infection_components_HiddenHealthComponent.new(), x);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_abilities_FormComponent.new(), x);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_infection_components_DamagePenaltyHidden.new(), x);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_infection_InfectionLookInfo.new(), x);
-  local x1 = __deceptinfect_infection_InfectionComponent;
-  if (__deceptinfect_ecswip_ComponentManager.lazyInit(x1)[x]:slice(2)[0] == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__)),0);
-  end;
-  local x1 = __deceptinfect_infection_components_GrabAccepter;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[x]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__)),0);
-  end;
-  retrieve_comp.grabState = __deceptinfect_infection_components_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE);
+  __deceptinfect_ecswip_ComponentManager.components_2[32][x] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_infection_InfectedComponent.new());
+  __deceptinfect_ecswip_ComponentManager.components_2[11][x] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_infection_components_GrabProducer.new());
+  __deceptinfect_ecswip_ComponentManager.components_2[7][x] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_infection_components_HiddenHealthComponent.new());
+  __deceptinfect_ecswip_ComponentManager.components_2[22][x] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_abilities_FormComponent.new());
+  __deceptinfect_ecswip_ComponentManager.components_2[12][x] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_infection_components_DamagePenaltyHidden.new());
+  __deceptinfect_ecswip_ComponentManager.components_2[5][x] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_infection_InfectionLookInfo.new());
+  __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(23, x);
+  __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, x).grabState = __deceptinfect_infection_components_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE);
   local rad = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_radiation_RadSourceSystem):radSourceFromType(3, x);
-  local x1 = __deceptinfect_ecswip_GEntityComponent;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x1)[x]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x1.__name__)),0);
-  end;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.ENT(retrieve_comp.entity)), rad);
+  local x = __deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.ENT(__deceptinfect_ecswip_ComponentManager.getComponentForIDSure(28, x).entity));
+  __deceptinfect_ecswip_ComponentManager.components_2[30][rad] = __deceptinfect_ecswip_ComponentState.Comp(x);
 end
 __deceptinfect_GameManager.initAllPlayers = function() 
   local choose = _G.math.random(1, _G.player.GetCount());
@@ -2953,7 +2667,6 @@ __deceptinfect_GameValues.__name__ = "deceptinfect.GameValues"
 __deceptinfect_MapStorage.new = {}
 _hxClasses["deceptinfect.MapStorage"] = __deceptinfect_MapStorage
 __deceptinfect_MapStorage.__name__ = "deceptinfect.MapStorage"
-_hxClasses["deceptinfect.ModelType"] = __deceptinfect_ModelType;
 _hxClasses["deceptinfect.ModelType"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ZOMBIE","HUMAN_MALE"},2)}
 __deceptinfect_ModelType = _hxClasses["deceptinfect.ModelType"];
 __deceptinfect_ModelType.ZOMBIE = _hx_tab_array({[0]="ZOMBIE",0,__enum__ = __deceptinfect_ModelType},2)
@@ -2977,6 +2690,123 @@ __deceptinfect_PlayerManager.addID = function(ent,id)
   else
     _this.h[key] = id;
   end;
+end
+_hxClasses["deceptinfect.ProfilingState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NOT_PROFILING","PROFILING","PROFILE_FINISHED"},3)}
+__deceptinfect_ProfilingState = _hxClasses["deceptinfect.ProfilingState"];
+__deceptinfect_ProfilingState.NOT_PROFILING = _hx_tab_array({[0]="NOT_PROFILING",0,__enum__ = __deceptinfect_ProfilingState},2)
+
+__deceptinfect_ProfilingState.PROFILING = _hx_tab_array({[0]="PROFILING",1,__enum__ = __deceptinfect_ProfilingState},2)
+
+__deceptinfect_ProfilingState.PROFILE_FINISHED = _hx_tab_array({[0]="PROFILE_FINISHED",2,__enum__ = __deceptinfect_ProfilingState},2)
+
+
+__deceptinfect_Profiler.new = {}
+_hxClasses["deceptinfect.Profiler"] = __deceptinfect_Profiler
+__deceptinfect_Profiler.__name__ = "deceptinfect.Profiler"
+__deceptinfect_Profiler.beginProfiling = function() 
+  __deceptinfect_Profiler.pass = 0;
+  __deceptinfect_Profiler.totalProfileTime = _G.SysTime();
+  __deceptinfect_Profiler.cumulativeTime = 0.0;
+  __deceptinfect_Profiler.profileState = __deceptinfect_ProfilingState.PROFILING;
+end
+__deceptinfect_Profiler.report = function() 
+  if (__deceptinfect_Profiler.profileState ~= __deceptinfect_ProfilingState.PROFILE_FINISHED) then 
+    do return end;
+  end;
+  local total = __haxe_ds_StringMap.new();
+  __haxe_Log.trace("report", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/Profiler.hx",lineNumber=34,className="deceptinfect.Profiler",methodName="report"}));
+  local _g = 0;
+  local _g1 = __deceptinfect_Profiler.vinal;
+  while (_g < _g1.length) do 
+    local pass = _g1[_g];
+    _g = _g + 1;
+    local _g = __haxe_iterators_MapKeyValueIterator.new(pass);
+    while (_g:hasNext()) do 
+      local _g = _g:next();
+      local str = _g.key;
+      local ret = total.h[str];
+      if (ret == __haxe_ds_StringMap.tnull) then 
+        ret = nil;
+      end;
+      local value = ret;
+      local value = (function() 
+        local _hx_1
+        if (value == nil) then 
+        _hx_1 = 0.0; else 
+        _hx_1 = value; end
+        return _hx_1
+      end )() + _g.value;
+      if (value == nil) then 
+        total.h[str] = __haxe_ds_StringMap.tnull;
+      else
+        total.h[str] = value;
+      end;
+    end;
+  end;
+  local _g = __haxe_iterators_MapKeyValueIterator.new(total);
+  while (_g:hasNext()) do 
+    local _g = _g:next();
+    local time = _g.value;
+    __haxe_Log.trace(Std.string(Std.string(Std.string(Std.string(Std.string(Std.string(Std.string("total ") .. Std.string(_g.key)) .. Std.string(" : ")) .. Std.string(time)) .. Std.string(" | avg: ")) .. Std.string(time / __deceptinfect_Profiler.pass)) .. Std.string(" | prcnt: ")) .. Std.string((time / __deceptinfect_Profiler.cumulativeTime) * 100), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/Profiler.hx",lineNumber=41,className="deceptinfect.Profiler",methodName="report"}));
+  end;
+  __haxe_Log.trace(Std.string(Std.string(Std.string("Cumulative time ") .. Std.string(__deceptinfect_Profiler.cumulativeTime)) .. Std.string(" / Total time ")) .. Std.string(__deceptinfect_Profiler.totalProfileTime), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/Profiler.hx",lineNumber=43,className="deceptinfect.Profiler",methodName="report"}));
+  local percent = _G.math.Round((__deceptinfect_Profiler.cumulativeTime / __deceptinfect_Profiler.totalProfileTime) * 100, 3);
+  __haxe_Log.trace(Std.string("Overall runtime impact ") .. Std.string(percent), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/Profiler.hx",lineNumber=45,className="deceptinfect.Profiler",methodName="report"}));
+  __deceptinfect_Profiler.profileState = __deceptinfect_ProfilingState.NOT_PROFILING;
+end
+__deceptinfect_Profiler.profile = function(zone,first) 
+  if (first == nil) then 
+    first = false;
+  end;
+  if (__deceptinfect_Profiler.profileState ~= __deceptinfect_ProfilingState.PROFILING) then 
+    do return end;
+  end;
+  if (not first) then 
+    __deceptinfect_Profiler.profileend();
+  end;
+  if (__deceptinfect_Profiler.inital[__deceptinfect_Profiler.pass] == nil) then 
+    __deceptinfect_Profiler.inital[__deceptinfect_Profiler.pass] = __haxe_ds_StringMap.new();
+    __deceptinfect_Profiler.vinal[__deceptinfect_Profiler.pass] = __haxe_ds_StringMap.new();
+  end;
+  local this1 = __deceptinfect_Profiler.inital[__deceptinfect_Profiler.pass];
+  local value = _G.SysTime();
+  local _this = this1;
+  if (value == nil) then 
+    _this.h[zone] = __haxe_ds_StringMap.tnull;
+  else
+    _this.h[zone] = value;
+  end;
+  __deceptinfect_Profiler.lastname = zone;
+end
+__deceptinfect_Profiler.profileend = function() 
+  if (__deceptinfect_Profiler.profileState ~= __deceptinfect_ProfilingState.PROFILING) then 
+    do return end;
+  end;
+  local diff = _G.SysTime();
+  local ret = __deceptinfect_Profiler.inital[__deceptinfect_Profiler.pass].h[__deceptinfect_Profiler.lastname];
+  if (ret == __haxe_ds_StringMap.tnull) then 
+    ret = nil;
+  end;
+  local diff = diff - ret;
+  local key = __deceptinfect_Profiler.lastname;
+  local _this = __deceptinfect_Profiler.vinal[__deceptinfect_Profiler.pass];
+  if (diff == nil) then 
+    _this.h[key] = __haxe_ds_StringMap.tnull;
+  else
+    _this.h[key] = diff;
+  end;
+  __deceptinfect_Profiler.cumulativeTime = __deceptinfect_Profiler.cumulativeTime + diff;
+end
+__deceptinfect_Profiler.resetprofile = function() 
+  if (__deceptinfect_Profiler.profileState ~= __deceptinfect_ProfilingState.PROFILING) then 
+    do return end;
+  end;
+  __deceptinfect_Profiler.profileend();
+  if (__deceptinfect_Profiler.pass > __deceptinfect_Profiler.totalPasses) then 
+    __deceptinfect_Profiler.totalProfileTime = _G.SysTime() - __deceptinfect_Profiler.totalProfileTime;
+    __deceptinfect_Profiler.profileState = __deceptinfect_ProfilingState.PROFILE_FINISHED;
+  end;
+  __deceptinfect_Profiler.pass = __deceptinfect_Profiler.pass + 1;
 end
 
 __deceptinfect_Trace.new = {}
@@ -3056,11 +2886,10 @@ __deceptinfect_WeaponSystem.prototype.run_server = function(self)
       local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
       while (ent:hasNext()) do 
         local ent = ent:next();
-        local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_AliveComponent)[ent];
-        local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
-        if (_g1[1] == 1) then 
-          if (_g[1] == 1) then 
-            local c_ply = _g1[2].player;
+        local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
+        if (_g[1] == 1) then 
+          if (__deceptinfect_ecswip_ComponentManager.components_2[24][ent][1] == 1) then 
+            local c_ply = _g[2].player;
             local x = self.weapons_give:get(self.currentStage);
             c_ply:Give(x[_G.math.random(0, x.length - 1)]);
           end;
@@ -3074,11 +2903,10 @@ __deceptinfect_WeaponSystem.prototype.giveInitalWeapons = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_AliveComponent)[ent];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
-    if (_g1[1] == 1) then 
-      if (_g[1] == 1) then 
-        local c_ply = _g1[2].player;
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
+    if (_g[1] == 1) then 
+      if (__deceptinfect_ecswip_ComponentManager.components_2[24][ent][1] == 1) then 
+        local c_ply = _g[2].player;
         local x = self.weapons_give:get(__deceptinfect_WeaponStage.INITAL);
         c_ply:Give(x[_G.math.random(0, x.length - 1)]);
       end;
@@ -3100,7 +2928,6 @@ end
 __deceptinfect_WeaponSystem.prototype.__class__ =  __deceptinfect_WeaponSystem
 __deceptinfect_WeaponSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_WeaponSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
-_hxClasses["deceptinfect.WeaponStage"] = __deceptinfect_WeaponStage;
 _hxClasses["deceptinfect.WeaponStage"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="INITAL","TWO","THREE","FINAL"},4)}
 __deceptinfect_WeaponStage = _hxClasses["deceptinfect.WeaponStage"];
 __deceptinfect_WeaponStage.INITAL = _hx_tab_array({[0]="INITAL",0,__enum__ = __deceptinfect_WeaponStage},2)
@@ -3124,150 +2951,6 @@ __deceptinfect_ecswip_Component.__name__ = "deceptinfect.ecswip.Component"
 __deceptinfect_ecswip_Component.prototype = _hx_e();
 
 __deceptinfect_ecswip_Component.prototype.__class__ =  __deceptinfect_ecswip_Component
-
-__deceptinfect_abilities_FormComponent.new = function() 
-  local self = _hx_new(__deceptinfect_abilities_FormComponent.prototype)
-  __deceptinfect_abilities_FormComponent.super(self)
-  return self
-end
-__deceptinfect_abilities_FormComponent.super = function(self) 
-  self.formModel = _hx_funcToField(__deceptinfect_Misc.infModel);
-  self.formMaxHealth = 60.0;
-  self.form = __deceptinfect_abilities_CurrentForm.HUMAN;
-  self.nextCooldown = 5;
-  self.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
-  self.formHealth = 60.0;
-  __deceptinfect_ecswip_Component.super(self);
-end
-_hxClasses["deceptinfect.abilities.FormComponent"] = __deceptinfect_abilities_FormComponent
-__deceptinfect_abilities_FormComponent.__name__ = "deceptinfect.abilities.FormComponent"
-__deceptinfect_abilities_FormComponent.prototype = _hx_e();
-__deceptinfect_abilities_FormComponent.prototype.formHealth= nil;
-__deceptinfect_abilities_FormComponent.prototype.cooldown= nil;
-__deceptinfect_abilities_FormComponent.prototype.nextCooldown= nil;
-__deceptinfect_abilities_FormComponent.prototype.form= nil;
-__deceptinfect_abilities_FormComponent.prototype.formMaxHealth= nil;
-__deceptinfect_abilities_FormComponent.prototype.formModel= nil;
-
-__deceptinfect_abilities_FormComponent.prototype.__class__ =  __deceptinfect_abilities_FormComponent
-__deceptinfect_abilities_FormComponent.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_abilities_FormComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.abilities.CurrentForm"] = __deceptinfect_abilities_CurrentForm;
-_hxClasses["deceptinfect.abilities.CurrentForm"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="HUMAN","INFECTED"},2)}
-__deceptinfect_abilities_CurrentForm = _hxClasses["deceptinfect.abilities.CurrentForm"];
-__deceptinfect_abilities_CurrentForm.HUMAN = _hx_tab_array({[0]="HUMAN",0,__enum__ = __deceptinfect_abilities_CurrentForm},2)
-
-__deceptinfect_abilities_CurrentForm.INFECTED = _hx_tab_array({[0]="INFECTED",1,__enum__ = __deceptinfect_abilities_CurrentForm},2)
-
-_hxClasses["deceptinfect.abilities.Cooldown"] = __deceptinfect_abilities_Cooldown;
-_hxClasses["deceptinfect.abilities.Cooldown"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ACTIVE","COOLDOWN"},2)}
-__deceptinfect_abilities_Cooldown = _hxClasses["deceptinfect.abilities.Cooldown"];
-__deceptinfect_abilities_Cooldown.ACTIVE = _hx_tab_array({[0]="ACTIVE",0,__enum__ = __deceptinfect_abilities_Cooldown},2)
-
-__deceptinfect_abilities_Cooldown.COOLDOWN = function(time) local _x = _hx_tab_array({[0]="COOLDOWN",1,time,__enum__=__deceptinfect_abilities_Cooldown}, 3); return _x; end 
-
-__deceptinfect_abilities_FormSystem.new = function() 
-  local self = _hx_new(__deceptinfect_abilities_FormSystem.prototype)
-  __deceptinfect_abilities_FormSystem.super(self)
-  return self
-end
-__deceptinfect_abilities_FormSystem.super = function(self) 
-  __deceptinfect_ecswip_System.super(self);
-end
-_hxClasses["deceptinfect.abilities.FormSystem"] = __deceptinfect_abilities_FormSystem
-__deceptinfect_abilities_FormSystem.__name__ = "deceptinfect.abilities.FormSystem"
-__deceptinfect_abilities_FormSystem.attemptChangeForm = function(ent) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent];
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent)[ent];
-  if (_g1[1] == 1) then 
-    local _g1 = _g1[2];
-    if (_g[1] == 1) then 
-      local _hx_tmp;
-      _hx_tmp = _g[2].entity;
-      local _g = _g1.cooldown;
-      if (_g[1] == 1) then 
-        if (not (_G.CurTime() < _g[2])) then 
-          _g1.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
-        end;
-      else
-        _g1.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
-      end;
-      if ((_g1.formHealth > 0) and (_g1.cooldown == __deceptinfect_abilities_Cooldown.ACTIVE)) then 
-        if (_hx_tmp:Health() > 0) then 
-          __deceptinfect_abilities_FormSystem.changeForm(ent);
-        end;
-      end;
-    end;
-  end;
-end
-__deceptinfect_abilities_FormSystem.changeForm = function(ent) 
-  local x = __deceptinfect_abilities_FormComponent;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[ent]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_form = retrieve_comp;
-  local x = __deceptinfect_ecswip_GEntityComponent;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[ent]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local g_ent = retrieve_comp.entity;
-  local curHealth = g_ent:Health();
-  local curMaxHealth = g_ent:GetMaxHealth();
-  local curModel = g_ent:GetModel();
-  g_ent:SetMaxHealth(c_form.formMaxHealth);
-  g_ent:SetHealth(c_form.formHealth);
-  g_ent:SetModel(c_form.formModel);
-  local tmp;
-  local tmp1 = c_form.form[1];
-  if (tmp1) == 0 then 
-    tmp = __deceptinfect_abilities_CurrentForm.INFECTED;
-  elseif (tmp1) == 1 then 
-    tmp = __deceptinfect_abilities_CurrentForm.HUMAN; end;
-  c_form.form = tmp;
-  c_form.formHealth = curHealth;
-  c_form.formMaxHealth = curMaxHealth;
-  c_form.cooldown = __deceptinfect_abilities_Cooldown.COOLDOWN(_G.CurTime() + c_form.nextCooldown);
-  c_form.formModel = curModel;
-end
-__deceptinfect_abilities_FormSystem.prototype = _hx_e();
-
-__deceptinfect_abilities_FormSystem.prototype.__class__ =  __deceptinfect_abilities_FormSystem
-__deceptinfect_abilities_FormSystem.__super__ = __deceptinfect_ecswip_System
-setmetatable(__deceptinfect_abilities_FormSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
-
-__deceptinfect_client_GeigerSystem.new = function() 
-  local self = _hx_new(__deceptinfect_client_GeigerSystem.prototype)
-  __deceptinfect_client_GeigerSystem.super(self)
-  return self
-end
-__deceptinfect_client_GeigerSystem.super = function(self) 
-  __deceptinfect_ecswip_System.super(self);
-end
-_hx_exports["geiger"] = __deceptinfect_client_GeigerSystem
-_hxClasses["deceptinfect.client.GeigerSystem"] = __deceptinfect_client_GeigerSystem
-__deceptinfect_client_GeigerSystem.__name__ = "deceptinfect.client.GeigerSystem"
-__deceptinfect_client_GeigerSystem.prototype = _hx_e();
-__deceptinfect_client_GeigerSystem.prototype.run_server = function(self) 
-  local plyr = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
-  while (plyr:hasNext()) do 
-    local plyr = plyr:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[plyr];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[plyr];
-    if (_g1[1] == 1) then 
-      if (_g[1] == 1) then 
-        local _hx_tmp;
-        _hx_tmp = _g[2].player;
-        __deceptinfect_client_GeigerSystem.net_geiger:send(_hx_o({__fields__={geiger=true},geiger=Math.min((_g1[2].rate - 1) / 2, 1)}), _hx_tmp, true);
-      end;
-    end;
-  end;
-end
-
-__deceptinfect_client_GeigerSystem.prototype.__class__ =  __deceptinfect_client_GeigerSystem
-__deceptinfect_client_GeigerSystem.__super__ = __deceptinfect_ecswip_System
-setmetatable(__deceptinfect_client_GeigerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
 __haxe_ds_ObjectMap.new = function() 
   local self = _hx_new(__haxe_ds_ObjectMap.prototype)
@@ -3317,73 +3000,207 @@ _hxClasses["deceptinfect.ecswip.ComponentManager"] = __deceptinfect_ecswip_Compo
 __deceptinfect_ecswip_ComponentManager.__name__ = "deceptinfect.ecswip.ComponentManager"
 __deceptinfect_ecswip_ComponentManager.addGEnt = function(x) 
   local id = __deceptinfect_ecswip_ComponentManager.addEntity();
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_GEntityComponent.new(x), id);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.ENT(x)), id);
+  __deceptinfect_ecswip_ComponentManager.components_2[28][id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_ecswip_GEntityComponent.new(x));
+  local x = __deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.ENT(x));
+  __deceptinfect_ecswip_ComponentManager.components_2[30][id] = __deceptinfect_ecswip_ComponentState.Comp(x);
   do return id end;
-end
-__deceptinfect_ecswip_ComponentManager.getOrAdd = function(id,cls,args) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(cls)[id];
-  local tmp = _g[1];
-  if (tmp) == 0 then 
-    if (args == nil) then 
-      args = _hx_tab_array({}, 0);
-    end;
-    local inst = Type.createInstance(cls, args);
-    __deceptinfect_ecswip_ComponentManager.addComponent(inst, id);
-    do return inst end;
-  elseif (tmp) == 1 then 
-    do return _g[2] end; end;
 end
 __deceptinfect_ecswip_ComponentManager.addPlayer = function(x) 
   local id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_PlayerComponent.new(x), id);
+  __deceptinfect_ecswip_ComponentManager.components_2[31][id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_ecswip_PlayerComponent.new(x));
   __deceptinfect_PlayerManager.addID(x, id);
   do return id end;
 end
-__deceptinfect_ecswip_ComponentManager.addComponent = function(x,to) 
-  local cls = Type.getClass(x);
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(cls);
-  if (__deceptinfect_ecswip_ComponentManager.componentSignals.k[cls] ~= nil) then 
-    __deceptinfect_ecswip_ComponentManager.componentSignals.h[cls].handlers:invoke(_hx_o({__fields__={ent=true,comp=true},ent=to,comp=x}));
+__deceptinfect_ecswip_ComponentManager.initComponent = function(id) 
+  if (__deceptinfect_ecswip_ComponentManager.components_2 == nil) then 
+    __deceptinfect_ecswip_ComponentManager.components_2 = _hx_tab_array({}, 0);
   end;
-  comparray[to] = __deceptinfect_ecswip_ComponentState.Comp(x);
-end
-__deceptinfect_ecswip_ComponentManager.lazyInit = function(x) 
-  local comparray = __deceptinfect_ecswip_ComponentManager.components.h[x];
-  if (comparray == nil) then 
-    comparray = _hx_tab_array({}, 0);
-    local _this = __deceptinfect_ecswip_ComponentManager.components;
-    _this.h[x] = comparray;
-    _this.k[x] = true;
-    local entity = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
-    while (entity:hasNext()) do 
-      comparray[entity:next()] = __deceptinfect_ecswip_ComponentState.NONE;
+  if (__deceptinfect_ecswip_ComponentManager.lastID == nil) then 
+    __deceptinfect_ecswip_ComponentManager.lastID = 0;
+  end;
+  if (id > __deceptinfect_ecswip_ComponentManager.lastID) then 
+    local _g = __deceptinfect_ecswip_ComponentManager.lastID;
+    local _g1 = id + 1;
+    while (_g < _g1) do 
+      _g = _g + 1;
+      __deceptinfect_ecswip_ComponentManager.components_2[_g - 1] = _hx_tab_array({}, 0);
     end;
+    __deceptinfect_ecswip_ComponentManager.lastID = id;
   end;
-  do return comparray end;
 end
-__deceptinfect_ecswip_ComponentManager.removeComponent = function(x,from) 
-  __deceptinfect_ecswip_ComponentManager.lazyInit(x)[from] = __deceptinfect_ecswip_ComponentState.NONE;
+__deceptinfect_ecswip_ComponentManager.getComponentForIDSure = function(id,diID) 
+  local comp = __deceptinfect_ecswip_ComponentManager.components_2[id][diID]:slice(2)[0];
+  if (comp == nil) then 
+    _G.error(__haxe_Exception.thrown("Component did not exist at sure statement!"),0);
+  end;
+  do return comp end;
+end
+__deceptinfect_ecswip_ComponentManager.removeComponent = function(id,diID) 
+  __deceptinfect_ecswip_ComponentManager.components_2[id][diID] = __deceptinfect_ecswip_ComponentState.NONE do return __deceptinfect_ecswip_ComponentManager.components_2[id][diID] end;
 end
 __deceptinfect_ecswip_ComponentManager.removeEntity = function(x) 
-  local component = __deceptinfect_ecswip_ComponentManager.components:iterator();
-  while (component:hasNext()) do 
-    component:next()[x] = __deceptinfect_ecswip_ComponentState.NONE;
+  local _g = 0;
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2;
+  while (_g < _g1.length) do 
+    local component = _g1[_g];
+    _g = _g + 1;
+    component[x] = __deceptinfect_ecswip_ComponentState.NONE;
   end;
   __deceptinfect_ecswip_ComponentManager.activeEntities = __deceptinfect_ecswip_ComponentManager.activeEntities - 1;
 end
-__deceptinfect_ecswip_ComponentManager.addToAllCompArrays = function() 
-  local compArray = __deceptinfect_ecswip_ComponentManager.components:iterator();
-  while (compArray:hasNext()) do 
-    compArray:next():push(__deceptinfect_ecswip_ComponentState.NONE);
+__deceptinfect_ecswip_ComponentManager.addToAllCompArrays = function(x) 
+  local _g = 0;
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2;
+  while (_g < _g1.length) do 
+    local compArray = _g1[_g];
+    _g = _g + 1;
+    compArray[x] = __deceptinfect_ecswip_ComponentState.NONE;
   end;
 end
 __deceptinfect_ecswip_ComponentManager.addEntity = function() 
-  __deceptinfect_ecswip_ComponentManager.entities = __deceptinfect_ecswip_ComponentManager.entities + 1;
+  local id = (function() 
+  local _hx_obj = __deceptinfect_ecswip_ComponentManager;
+  local _hx_fld = 'entities';
+  local _ = _hx_obj[_hx_fld];
+  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
+   return _;
+   end)();
   __deceptinfect_ecswip_ComponentManager.activeEntities = __deceptinfect_ecswip_ComponentManager.activeEntities + 1;
-  __deceptinfect_ecswip_ComponentManager.addToAllCompArrays();
-  do return __deceptinfect_ecswip_ComponentManager.entities - 1 end;
+  __deceptinfect_ecswip_ComponentManager.addToAllCompArrays(id);
+  do return id end;
 end
+
+__deceptinfect_abilities_FormComponent.new = function() 
+  local self = _hx_new(__deceptinfect_abilities_FormComponent.prototype)
+  __deceptinfect_abilities_FormComponent.super(self)
+  return self
+end
+__deceptinfect_abilities_FormComponent.super = function(self) 
+  self.formModel = _hx_funcToField(__deceptinfect_Misc.infModel);
+  self.formMaxHealth = 60.0;
+  self.form = __deceptinfect_abilities_CurrentForm.HUMAN;
+  self.nextCooldown = 5;
+  self.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
+  self.formHealth = 60.0;
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.abilities.FormComponent"] = __deceptinfect_abilities_FormComponent
+__deceptinfect_abilities_FormComponent.__name__ = "deceptinfect.abilities.FormComponent"
+__deceptinfect_abilities_FormComponent.prototype = _hx_e();
+__deceptinfect_abilities_FormComponent.prototype.formHealth= nil;
+__deceptinfect_abilities_FormComponent.prototype.cooldown= nil;
+__deceptinfect_abilities_FormComponent.prototype.nextCooldown= nil;
+__deceptinfect_abilities_FormComponent.prototype.form= nil;
+__deceptinfect_abilities_FormComponent.prototype.formMaxHealth= nil;
+__deceptinfect_abilities_FormComponent.prototype.formModel= nil;
+
+__deceptinfect_abilities_FormComponent.prototype.__class__ =  __deceptinfect_abilities_FormComponent
+__deceptinfect_abilities_FormComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_abilities_FormComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+_hxClasses["deceptinfect.abilities.CurrentForm"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="HUMAN","INFECTED"},2)}
+__deceptinfect_abilities_CurrentForm = _hxClasses["deceptinfect.abilities.CurrentForm"];
+__deceptinfect_abilities_CurrentForm.HUMAN = _hx_tab_array({[0]="HUMAN",0,__enum__ = __deceptinfect_abilities_CurrentForm},2)
+
+__deceptinfect_abilities_CurrentForm.INFECTED = _hx_tab_array({[0]="INFECTED",1,__enum__ = __deceptinfect_abilities_CurrentForm},2)
+
+_hxClasses["deceptinfect.abilities.Cooldown"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ACTIVE","COOLDOWN"},2)}
+__deceptinfect_abilities_Cooldown = _hxClasses["deceptinfect.abilities.Cooldown"];
+__deceptinfect_abilities_Cooldown.ACTIVE = _hx_tab_array({[0]="ACTIVE",0,__enum__ = __deceptinfect_abilities_Cooldown},2)
+
+__deceptinfect_abilities_Cooldown.COOLDOWN = function(time) local _x = _hx_tab_array({[0]="COOLDOWN",1,time,__enum__=__deceptinfect_abilities_Cooldown}, 3); return _x; end 
+
+__deceptinfect_abilities_FormSystem.new = function() 
+  local self = _hx_new(__deceptinfect_abilities_FormSystem.prototype)
+  __deceptinfect_abilities_FormSystem.super(self)
+  return self
+end
+__deceptinfect_abilities_FormSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.abilities.FormSystem"] = __deceptinfect_abilities_FormSystem
+__deceptinfect_abilities_FormSystem.__name__ = "deceptinfect.abilities.FormSystem"
+__deceptinfect_abilities_FormSystem.attemptChangeForm = function(ent) 
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][ent];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[22][ent];
+  if (_g1[1] == 1) then 
+    local _g1 = _g1[2];
+    if (_g[1] == 1) then 
+      local _hx_tmp;
+      _hx_tmp = _g[2].entity;
+      local _g = _g1.cooldown;
+      if (_g[1] == 1) then 
+        if (not (_G.CurTime() < _g[2])) then 
+          _g1.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
+        end;
+      else
+        _g1.cooldown = __deceptinfect_abilities_Cooldown.ACTIVE;
+      end;
+      if ((_g1.formHealth > 0) and (_g1.cooldown == __deceptinfect_abilities_Cooldown.ACTIVE)) then 
+        if (_hx_tmp:Health() > 0) then 
+          __deceptinfect_abilities_FormSystem.changeForm(ent);
+        end;
+      end;
+    end;
+  end;
+end
+__deceptinfect_abilities_FormSystem.changeForm = function(ent) 
+  local c_form = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(22, ent);
+  local g_ent = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(28, ent).entity;
+  local curHealth = g_ent:Health();
+  local curMaxHealth = g_ent:GetMaxHealth();
+  local curModel = g_ent:GetModel();
+  g_ent:SetMaxHealth(c_form.formMaxHealth);
+  g_ent:SetHealth(c_form.formHealth);
+  g_ent:SetModel(c_form.formModel);
+  local tmp;
+  local tmp1 = c_form.form[1];
+  if (tmp1) == 0 then 
+    tmp = __deceptinfect_abilities_CurrentForm.INFECTED;
+  elseif (tmp1) == 1 then 
+    tmp = __deceptinfect_abilities_CurrentForm.HUMAN; end;
+  c_form.form = tmp;
+  c_form.formHealth = curHealth;
+  c_form.formMaxHealth = curMaxHealth;
+  c_form.cooldown = __deceptinfect_abilities_Cooldown.COOLDOWN(_G.CurTime() + c_form.nextCooldown);
+  c_form.formModel = curModel;
+end
+__deceptinfect_abilities_FormSystem.prototype = _hx_e();
+
+__deceptinfect_abilities_FormSystem.prototype.__class__ =  __deceptinfect_abilities_FormSystem
+__deceptinfect_abilities_FormSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_abilities_FormSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
+
+__deceptinfect_client_GeigerSystem.new = function() 
+  local self = _hx_new(__deceptinfect_client_GeigerSystem.prototype)
+  __deceptinfect_client_GeigerSystem.super(self)
+  return self
+end
+__deceptinfect_client_GeigerSystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hx_exports["geiger"] = __deceptinfect_client_GeigerSystem
+_hxClasses["deceptinfect.client.GeigerSystem"] = __deceptinfect_client_GeigerSystem
+__deceptinfect_client_GeigerSystem.__name__ = "deceptinfect.client.GeigerSystem"
+__deceptinfect_client_GeigerSystem.prototype = _hx_e();
+__deceptinfect_client_GeigerSystem.prototype.run_server = function(self) 
+  local plyr = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
+  while (plyr:hasNext()) do 
+    local plyr = plyr:next();
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][plyr];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[23][plyr];
+    if (_g1[1] == 1) then 
+      if (_g[1] == 1) then 
+        local _hx_tmp;
+        _hx_tmp = _g[2].player;
+        __deceptinfect_client_GeigerSystem.net_geiger:send(_hx_o({__fields__={geiger=true},geiger=Math.min((_g1[2].rate - 1) / 2, 1)}), _hx_tmp, true);
+      end;
+    end;
+  end;
+end
+
+__deceptinfect_client_GeigerSystem.prototype.__class__ =  __deceptinfect_client_GeigerSystem
+__deceptinfect_client_GeigerSystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_client_GeigerSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
 __deceptinfect_ecswip_ComponentTools.new = {}
 _hxClasses["deceptinfect.ecswip.ComponentTools"] = __deceptinfect_ecswip_ComponentTools
@@ -3395,12 +3212,39 @@ __deceptinfect_ecswip_ComponentTools.sure = function(x)
     _G.error(__haxe_Exception.thrown("Component not avaliable..."),0);
   end;
 end
-_hxClasses["deceptinfect.ecswip.ComponentState"] = __deceptinfect_ecswip_ComponentState;
 _hxClasses["deceptinfect.ecswip.ComponentState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NONE","Comp"},2)}
 __deceptinfect_ecswip_ComponentState = _hxClasses["deceptinfect.ecswip.ComponentState"];
 __deceptinfect_ecswip_ComponentState.NONE = _hx_tab_array({[0]="NONE",0,__enum__ = __deceptinfect_ecswip_ComponentState},2)
 
 __deceptinfect_ecswip_ComponentState.Comp = function(comp) local _x = _hx_tab_array({[0]="Comp",1,comp,__enum__=__deceptinfect_ecswip_ComponentState}, 3); return _x; end 
+
+__deceptinfect_ecswip_DummySystem.new = function() 
+  local self = _hx_new(__deceptinfect_ecswip_DummySystem.prototype)
+  __deceptinfect_ecswip_DummySystem.super(self)
+  return self
+end
+__deceptinfect_ecswip_DummySystem.super = function(self) 
+  __deceptinfect_ecswip_System.super(self);
+end
+_hxClasses["deceptinfect.ecswip.DummySystem"] = __deceptinfect_ecswip_DummySystem
+__deceptinfect_ecswip_DummySystem.__name__ = "deceptinfect.ecswip.DummySystem"
+__deceptinfect_ecswip_DummySystem.prototype = _hx_e();
+__deceptinfect_ecswip_DummySystem.prototype.run_server = function(self) 
+  local _g = 0;
+  local _g1 = __deceptinfect_ecswip_ComponentManager.entities;
+  while (_g < _g1) do 
+    _g = _g + 1;
+    local _g = 1;
+    local _g1 = __deceptinfect_ecswip_ComponentManager.entities;
+    while (_g < _g1) do 
+      _g = _g + 1;
+    end;
+  end;
+end
+
+__deceptinfect_ecswip_DummySystem.prototype.__class__ =  __deceptinfect_ecswip_DummySystem
+__deceptinfect_ecswip_DummySystem.__super__ = __deceptinfect_ecswip_System
+setmetatable(__deceptinfect_ecswip_DummySystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
 
 __deceptinfect_ecswip_GEntityComponent.new = function(e) 
   local self = _hx_new(__deceptinfect_ecswip_GEntityComponent.prototype)
@@ -3432,8 +3276,7 @@ _hxClasses["deceptinfect.ecswip.GrabSystem"] = __deceptinfect_ecswip_GrabSystem
 __deceptinfect_ecswip_GrabSystem.__name__ = "deceptinfect.ecswip.GrabSystem"
 __deceptinfect_ecswip_GrabSystem.grabDamage = function(ent,dmg) 
   if (ent:IsPlayer()) then 
-    local this1 = ent.id;
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabProducer)[this1];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[11][ent.id];
     if (_g[1] == 1) then 
       local _g = _g[2];
       if (_g.grabState[1] == 1) then 
@@ -3448,18 +3291,8 @@ __deceptinfect_ecswip_GrabSystem.grabDamage = function(ent,dmg)
   do return nil end;
 end
 __deceptinfect_ecswip_GrabSystem.grabStop = function(attack) 
-  local x = __deceptinfect_infection_components_GrabProducer;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[attack]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_produce = retrieve_comp;
-  local x = __deceptinfect_ecswip_VirtualPosition;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[attack]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local attackPos = retrieve_comp:get_pos();
+  local c_produce = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(11, attack);
+  local attackPos = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(30, attack):get_pos();
   local vic;
   local _g = c_produce.grabState;
   if (_g[1] == 1) then 
@@ -3467,26 +3300,17 @@ __deceptinfect_ecswip_GrabSystem.grabStop = function(attack)
   else
     do return end;
   end;
-  local x = __deceptinfect_ecswip_VirtualPosition;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[vic]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local vicPos = retrieve_comp:get_pos();
-  local x = __deceptinfect_infection_components_GrabAccepter;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[vic]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
+  local vicPos = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(30, vic):get_pos();
+  local c_accept = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, vic);
   c_produce:set_grabState(__deceptinfect_infection_components_GrabProduceState.NOT_READY(__deceptinfect_util_Cooldown.COOLDOWN(_G.CurTime() + 2)));
-  local _this = retrieve_comp.grabAttacker;
+  local _this = c_accept.grabAttacker;
   _this.h[c_produce] = false;
   _this.k[c_produce] = true;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[vic];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][vic];
   if (_g[1] == 1) then 
     _g[2].player:Freeze(false);
   end;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[attack];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][attack];
   if (_g[1] == 1) then 
     _g[2].player:Freeze(false);
   end;
@@ -3496,8 +3320,8 @@ __deceptinfect_ecswip_GrabSystem.grabStop = function(attack)
   __deceptinfect_ecswip_GrabSystem.net_grabend:sendFilter(_hx_o({__fields__={index=true},index=c_produce.grabindex}), filter);
 end
 __deceptinfect_ecswip_GrabSystem.attemptGrab = function(attack,vic) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabAccepter)[vic];
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabProducer)[attack];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[8][vic];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[11][attack];
   if (_g1[1] == 1) then 
     if (_g[1] == 1) then 
       local _g = _g[2];
@@ -3515,7 +3339,7 @@ __deceptinfect_ecswip_GrabSystem.attemptGrab = function(attack,vic)
   end;
 end
 __deceptinfect_ecswip_GrabSystem.requestStartSearch = function(attack) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabProducer)[attack];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[11][attack];
   if (_g[1] == 1) then 
     local _g = _g[2];
     local _hx_tmp = _g.grabState;
@@ -3527,7 +3351,7 @@ __deceptinfect_ecswip_GrabSystem.requestStartSearch = function(attack)
   end;
 end
 __deceptinfect_ecswip_GrabSystem.requestStopSearch = function(attack) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabProducer)[attack];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[11][attack];
   if (_g[1] == 1) then 
     local _g = _g[2];
     local _hx_tmp = _g.grabState;
@@ -3541,8 +3365,8 @@ __deceptinfect_ecswip_GrabSystem.requestStopSearch = function(attack)
   end;
 end
 __deceptinfect_ecswip_GrabSystem.attemptSneakAttack = function(attack,vic) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[attack];
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[vic];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][attack];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[28][vic];
   if (_g1[1] == 1) then 
     if (_g[1] == 1) then 
       local _hx_tmp;
@@ -3556,8 +3380,8 @@ __deceptinfect_ecswip_GrabSystem.attemptSneakAttack = function(attack,vic)
   end;
 end
 __deceptinfect_ecswip_GrabSystem.attemptTarget = function(attack,vic) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabAccepter)[vic];
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabProducer)[attack];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[8][vic];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[11][attack];
   if (_g1[1] == 1) then 
     if (_g[1] == 1) then 
       local _g = _g[2];
@@ -3587,12 +3411,7 @@ __deceptinfect_ecswip_GrabSystem.attemptTarget = function(attack,vic)
   end;
 end
 __deceptinfect_ecswip_GrabSystem.clearTargetingVic = function(vic) 
-  local x = __deceptinfect_infection_components_GrabAccepter;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[vic]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_accept = retrieve_comp;
+  local c_accept = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, vic);
   local c_produce = c_accept.targeting:keys();
   while (c_produce:hasNext()) do 
     local c_produce = c_produce:next();
@@ -3612,18 +3431,8 @@ __deceptinfect_ecswip_GrabSystem.clearTargetingVic = function(vic)
 end
 __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic) 
   __haxe_Log.trace("starting grab", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=320,className="deceptinfect.ecswip.GrabSystem",methodName="grabStart"}));
-  local x = __deceptinfect_infection_components_GrabProducer;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[attack]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_produce = retrieve_comp;
-  local x = __deceptinfect_infection_components_GrabAccepter;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[vic]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_accept = retrieve_comp;
+  local c_produce = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(11, attack);
+  local c_accept = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, vic);
   local _this = c_accept.grabAttacker;
   _this.h[c_produce] = true;
   _this.k[c_produce] = true;
@@ -3637,11 +3446,11 @@ __deceptinfect_ecswip_GrabSystem.grabStart = function(attack,vic)
    return _;
    end)();
   __deceptinfect_ecswip_GrabSystem.clearTargetingVic(vic);
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[vic];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][vic];
   if (_g[1] == 1) then 
     _g[2].player:Freeze(true);
   end;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[attack];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][attack];
   if (_g[1] == 1) then 
     _g[2].player:Freeze(true);
   end;
@@ -3650,25 +3459,15 @@ __deceptinfect_ecswip_GrabSystem.calcGrabIncrease = function()
   do return (100 / __deceptinfect_GameValues.GRAB_TIME) / _G.math.floor(1 / _G.engine.TickInterval()) end;
 end
 __deceptinfect_ecswip_GrabSystem.target = function(attacker,victim) 
-  local x = __deceptinfect_infection_components_GrabAccepter;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[victim]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_accept = retrieve_comp;
-  local x = __deceptinfect_infection_components_GrabProducer;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[attacker]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_produce = retrieve_comp;
+  local c_accept = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, victim);
+  local c_produce = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(11, attacker);
   local _this = c_accept.targeting;
   _this.h[c_produce] = true;
   _this.k[c_produce] = true;
   local _g = c_accept.grabState;
   if (_g[1] == 0) then 
-    local x = _g[2];
-    x[0] = x[0] + 1;
+    local _g = _g[2];
+    _g[0] = _g[0] + 1;
   else
     _G.error(__haxe_Exception.thrown("XD"),0);
   end;
@@ -3682,15 +3481,14 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
   local attack = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (attack:hasNext()) do 
     local attack = attack:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[attack];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabProducer)[attack];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][attack];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[11][attack];
     if (_g1[1] == 1) then 
+      local _g1 = _g1[2];
       if (_g[1] == 1) then 
         local _hx_tmp;
-        local c_produce = _g1[2];
         _hx_tmp = _g[2].entity;
-        local g_attack = _hx_tmp;
-        local _g = c_produce.grabState;
+        local _g = _g1.grabState;
         local tmp = _g[1];
         if (tmp) == 0 then 
           local _g = _g[2];
@@ -3700,17 +3498,15 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
             while (victim:hasNext()) do 
               local victim = victim:next();
               if (attack ~= victim) then 
-                local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_AliveComponent)[victim];
-                local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[victim];
-                local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabAccepter)[victim];
-                if (_g2[1] == 1) then 
-                  if (_g1[1] == 1) then 
-                    if (_g[1] == 1) then 
-                      local _hx_tmp;
-                      _hx_tmp = _g1[2]:get_pos();
-                      if (_hx_tmp:Distance(g_attack:GetPos()) < c_produce.grabDist) then 
+                local _g = __deceptinfect_ecswip_ComponentManager.components_2[30][victim];
+                if (__deceptinfect_ecswip_ComponentManager.components_2[8][victim][1] == 1) then 
+                  if (_g[1] == 1) then 
+                    if (__deceptinfect_ecswip_ComponentManager.components_2[24][victim][1] == 1) then 
+                      local _hx_tmp1;
+                      _hx_tmp1 = _g[2]:get_pos();
+                      if (_hx_tmp1:Distance(_hx_tmp:GetPos()) < _g1.grabDist) then 
                         __deceptinfect_ecswip_GrabSystem.attemptTarget(attack, victim);
-                        local _g = c_produce.grabState;
+                        local _g = _g1.grabState;
                         local tmp = _g[1];
                         if (tmp) == 0 then 
                           local _g = _g[2];
@@ -3728,41 +3524,34 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
               end;
             end;
           elseif (tmp) == 2 then 
-            local prevVic = _g[2];
-            local x = __deceptinfect_ecswip_VirtualPosition;
-            local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[prevVic]:slice(2)[0];
-            if (retrieve_comp == nil) then 
-              _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-            end;
-            local oldDist = retrieve_comp:get_pos():Distance(g_attack:GetPos());
-            if (oldDist > c_produce.grabDist) then 
-              c_produce:set_grabState(__deceptinfect_infection_components_GrabProduceState.READY(__deceptinfect_infection_components_SearchingState.SEARCHING));
+            local _g = _g[2];
+            local oldDist = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(30, _g):get_pos():Distance(_hx_tmp:GetPos());
+            if (oldDist > _g1.grabDist) then 
+              _g1:set_grabState(__deceptinfect_infection_components_GrabProduceState.READY(__deceptinfect_infection_components_SearchingState.SEARCHING));
               break;
             end;
-            __deceptinfect_ecswip_GrabSystem.attemptSneakAttack(attack, prevVic);
+            __deceptinfect_ecswip_GrabSystem.attemptSneakAttack(attack, _g);
             local victim = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
             while (victim:hasNext()) do 
               local victim = victim:next();
-              if ((victim ~= prevVic) and (attack ~= victim)) then 
-                local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_AliveComponent)[victim];
-                local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[victim];
-                local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_GrabAccepter)[victim];
-                if (_g2[1] == 1) then 
-                  if (_g1[1] == 1) then 
-                    if (_g[1] == 1) then 
-                      local _hx_tmp;
-                      _hx_tmp = _g1[2]:get_pos();
-                      local newDist = _hx_tmp:Distance(g_attack:GetPos());
-                      if ((newDist < oldDist) and (newDist < c_produce.grabDist)) then 
+              if ((victim ~= _g) and (attack ~= victim)) then 
+                local _g = __deceptinfect_ecswip_ComponentManager.components_2[30][victim];
+                if (__deceptinfect_ecswip_ComponentManager.components_2[8][victim][1] == 1) then 
+                  if (_g[1] == 1) then 
+                    if (__deceptinfect_ecswip_ComponentManager.components_2[24][victim][1] == 1) then 
+                      local _hx_tmp1;
+                      _hx_tmp1 = _g[2]:get_pos();
+                      local newDist = _hx_tmp1:Distance(_hx_tmp:GetPos());
+                      if ((newDist < oldDist) and (newDist < _g1.grabDist)) then 
                         __deceptinfect_ecswip_GrabSystem.attemptTarget(attack, victim);
-                        local _g = c_produce.grabState;
+                        local _g = _g1.grabState;
                         local tmp = _g[1];
                         if (tmp) == 0 then 
                           local _g = _g[2];
                           if (_g[1] == 2) then 
-                            local newTarget = _g[2];
-                            if (newTarget == victim) then 
-                              __haxe_Log.trace(Std.string("switching targets ") .. Std.string(newTarget), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=150,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
+                            local _g = _g[2];
+                            if (_g == victim) then 
+                              __haxe_Log.trace(Std.string("switching targets ") .. Std.string(_g), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=150,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
                               break;
                             end;
                           end;
@@ -3775,34 +3564,29 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
               end;
             end;else end;
         elseif (tmp) == 1 then 
-          local victim = _g[2];
+          local _g = _g[2];
           local g_vic;
-          local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[victim];
-          if (_g[1] == 1) then 
-            g_vic = _g[2].entity;
+          local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[28][_g];
+          if (_g2[1] == 1) then 
+            g_vic = _g2[2].entity;
           else
             do return end;
           end;
           local filter = _G.RecipientFilter();
-          filter:AddPVS(g_attack:GetPos());
+          filter:AddPVS(_hx_tmp:GetPos());
           filter:AddPVS(g_vic:GetPos());
-          __deceptinfect_ecswip_GrabSystem.net_grabupdate:sendFilter(_hx_o({__fields__={index=true,ent=true,ent2=true},index=c_produce.grabindex,ent=g_vic,ent2=g_attack}), filter, true);
-          local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[victim];
-          if (_g[1] == 1) then 
-            local _g = _g[2].infection;
-            local tmp = _g[1];
+          __deceptinfect_ecswip_GrabSystem.net_grabupdate:sendFilter(_hx_o({__fields__={index=true,ent=true,ent2=true},index=_g1.grabindex,ent=g_vic,ent2=_hx_tmp}), filter, true);
+          local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[23][_g];
+          if (_g1[1] == 1) then 
+            local _g1 = _g1[2].infection;
+            local tmp = _g1[1];
             if (tmp) == 0 then 
-              local inf = _g[2];
-              inf[0] = inf[0] + __deceptinfect_ecswip_GrabSystem.calcGrabIncrease();
+              local _g = _g1[2];
+              _g[0] = _g[0] + __deceptinfect_ecswip_GrabSystem.calcGrabIncrease();
             elseif (tmp) == 1 then 
               __haxe_Log.trace("infected", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/ecswip/GrabSystem.hx",lineNumber=188,className="deceptinfect.ecswip.GrabSystem",methodName="run_server"}));
               __deceptinfect_ecswip_GrabSystem.grabStop(attack);
-              local x = __deceptinfect_infection_components_GrabAccepter;
-              local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[victim]:slice(2)[0];
-              if (retrieve_comp == nil) then 
-                _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-              end;
-              retrieve_comp.grabState = __deceptinfect_infection_components_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE); end;
+              __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, _g).grabState = __deceptinfect_infection_components_GrabAcceptState.UNAVALIABLE(__deceptinfect_util_Cooldown.UNAVALIABLE); end;
           else
             _G.error(__haxe_Exception.thrown("Victim has no infection component.."),0);
           end;
@@ -3810,7 +3594,7 @@ __deceptinfect_ecswip_GrabSystem.prototype.run_server = function(self)
           local _g = _g[2];
           if (_g[1] == 1) then 
             if (_G.CurTime() > _g[2]) then 
-              c_produce:set_grabState(__deceptinfect_infection_components_GrabProduceState.READY(__deceptinfect_infection_components_SearchingState.NOT_SEARCHING));
+              _g1:set_grabState(__deceptinfect_infection_components_GrabProduceState.READY(__deceptinfect_infection_components_SearchingState.NOT_SEARCHING));
             end;
           end;else end;
       end;
@@ -3832,16 +3616,20 @@ __deceptinfect_ecswip_HiddenHealthSystem.super = function(self)
 end
 _hxClasses["deceptinfect.ecswip.HiddenHealthSystem"] = __deceptinfect_ecswip_HiddenHealthSystem
 __deceptinfect_ecswip_HiddenHealthSystem.__name__ = "deceptinfect.ecswip.HiddenHealthSystem"
-__deceptinfect_ecswip_HiddenHealthSystem.hiddenHealthDamage = function(data) 
+__deceptinfect_ecswip_HiddenHealthSystem.prototype = _hx_e();
+__deceptinfect_ecswip_HiddenHealthSystem.prototype.init_server = function(self) 
+  __deceptinfect_ecswip_SignalStorage.entDamageTrigger.handlers:clear();
+  __deceptinfect_ecswip_SignalStorage.entDamage:listen(_hx_bind(self,self.hiddenHealthDamage));
+end
+__deceptinfect_ecswip_HiddenHealthSystem.prototype.hiddenHealthDamage = function(self,data) 
   local victim = data.vicID;
   local g_attacker = data.dmg:GetAttacker();
   if (not g_attacker:IsPlayer()) then 
     do return end;
   end;
-  local this1 = g_attacker.id;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_DamagePenaltyHidden)[this1];
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[victim];
-  local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_components_HiddenHealthComponent)[victim];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[12][g_attacker.id];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[28][victim];
+  local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[7][victim];
   if (_g2[1] == 1) then 
     local _g2 = _g2[2];
     if (_g1[1] == 1) then 
@@ -3865,11 +3653,6 @@ __deceptinfect_ecswip_HiddenHealthSystem.hiddenHealthDamage = function(data)
       end;
     end;
   end;
-end
-__deceptinfect_ecswip_HiddenHealthSystem.prototype = _hx_e();
-__deceptinfect_ecswip_HiddenHealthSystem.prototype.init_server = function(self) 
-  __deceptinfect_ecswip_SignalStorage.entDamageTrigger.handlers:clear();
-  __deceptinfect_ecswip_SignalStorage.entDamage:listen(__deceptinfect_ecswip_HiddenHealthSystem.hiddenHealthDamage);
 end
 
 __deceptinfect_ecswip_HiddenHealthSystem.prototype.__class__ =  __deceptinfect_ecswip_HiddenHealthSystem
@@ -3897,7 +3680,6 @@ __deceptinfect_ecswip_PlayerComponent.prototype.player= nil;
 __deceptinfect_ecswip_PlayerComponent.prototype.__class__ =  __deceptinfect_ecswip_PlayerComponent
 __deceptinfect_ecswip_PlayerComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_ecswip_PlayerComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.ecswip.DeathTime"] = __deceptinfect_ecswip_DeathTime;
 _hxClasses["deceptinfect.ecswip.DeathTime"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ALIVE","DEAD"},2)}
 __deceptinfect_ecswip_DeathTime = _hxClasses["deceptinfect.ecswip.DeathTime"];
 __deceptinfect_ecswip_DeathTime.ALIVE = _hx_tab_array({[0]="ALIVE",0,__enum__ = __deceptinfect_ecswip_DeathTime},2)
@@ -3948,7 +3730,6 @@ __deceptinfect_ecswip_Spectate.chooseSpectateTarget = function(x,dir)
   end;
   x.spec_next = specNext;
 end
-_hxClasses["deceptinfect.ecswip.Spec_Direction"] = __deceptinfect_ecswip_Spec_Direction;
 _hxClasses["deceptinfect.ecswip.Spec_Direction"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="FORWARDS","BACKWARDS"},2)}
 __deceptinfect_ecswip_Spec_Direction = _hxClasses["deceptinfect.ecswip.Spec_Direction"];
 __deceptinfect_ecswip_Spec_Direction.FORWARDS = _hx_tab_array({[0]="FORWARDS",0,__enum__ = __deceptinfect_ecswip_Spec_Direction},2)
@@ -4011,7 +3792,7 @@ __deceptinfect_infection_systems_InfectionSystem.fixUpInfection = function(infec
   end;
 end
 __deceptinfect_infection_systems_InfectionSystem.onInfected = function(ent) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
   if (_g[1] == 1) then 
     local _hx_tmp;
     _hx_tmp = _g[2].player;
@@ -4029,13 +3810,12 @@ __deceptinfect_infection_systems_InfectionSystem.prototype.run_server = function
   local _hx_continue_1 = false;
   while (entity:hasNext()) do repeat 
     local entity = entity:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[entity];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[23][entity];
     if (_g[1] == 1) then 
       local _g = _g[2];
       if (_g.acceptingInfection[1] == 0) then 
-        local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_AliveComponent)[entity];
-        if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[entity][1] == 1) then 
-          if (_g1[1] == 0) then 
+        if (__deceptinfect_ecswip_ComponentManager.components_2[31][entity][1] == 1) then 
+          if (__deceptinfect_ecswip_ComponentManager.components_2[24][entity][1] == 0) then 
             break;
           end;
         end;
@@ -4043,7 +3823,7 @@ __deceptinfect_infection_systems_InfectionSystem.prototype.run_server = function
         if (_g1[1] == 0) then 
           local _g1 = _g1[2];
           local base = __deceptinfect_infection_systems_InfectionSystem.getBaseInfection(_g);
-          local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_RateComponent)[entity];
+          local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[19][entity];
           local rate = (function() 
             local _hx_1
             if (_g2[1] == 1) then 
@@ -4052,7 +3832,7 @@ __deceptinfect_infection_systems_InfectionSystem.prototype.run_server = function
             return _hx_1
           end )();
           rate = rate + 1;
-          local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfVunerability)[entity];
+          local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[2][entity];
           local vun = (function() 
             local _hx_2
             if (_g2[1] == 1) then 
@@ -4065,7 +3845,7 @@ __deceptinfect_infection_systems_InfectionSystem.prototype.run_server = function
             __haxe_Log.trace(Std.string(Std.string(Std.string(Std.string(Std.string("") .. Std.string(base)) .. Std.string(" ")) .. Std.string(rate)) .. Std.string(" ")) .. Std.string(vun), _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/infection/systems/InfectionSystem.hx",lineNumber=98,className="deceptinfect.infection.systems.InfectionSystem",methodName="run_server"}));
           end;
           __deceptinfect_infection_systems_InfectionSystem.fixUpInfection(_g);
-          local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[entity];
+          local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[31][entity];
           if (_g2[1] == 1) then 
             __deceptinfect_infection_systems_InfectionSystem.net_inf:send(_hx_o({__fields__={infection=true},infection=_g1[0]}), _g2[2].player, true);
             totalInf = totalInf + _g:getInfValue();
@@ -4095,7 +3875,7 @@ __deceptinfect_infection_systems_InfectionSystem.prototype.run_server = function
   end;
 end
 __deceptinfect_infection_systems_InfectionSystem.prototype.makeInfected = function(self,ent) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[ent];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[23][ent];
   if (_g[1] == 1) then 
     local _g = _g[2];
     local tmp;
@@ -4113,117 +3893,6 @@ end
 __deceptinfect_infection_systems_InfectionSystem.prototype.__class__ =  __deceptinfect_infection_systems_InfectionSystem
 __deceptinfect_infection_systems_InfectionSystem.__super__ = __deceptinfect_ecswip_System
 setmetatable(__deceptinfect_infection_systems_InfectionSystem.prototype,{__index=__deceptinfect_ecswip_System.prototype})
-
-__deceptinfect_radiation_RadiationAccepter.new = function(options) 
-  local self = _hx_new(__deceptinfect_radiation_RadiationAccepter.prototype)
-  __deceptinfect_radiation_RadiationAccepter.super(self,options)
-  return self
-end
-__deceptinfect_radiation_RadiationAccepter.super = function(self,options) 
-  self.diminish = 0.75;
-  self.radiation = __haxe_ds_IntMap.new();
-  __deceptinfect_ecswip_Component.super(self);
-  if (options.diminish ~= nil) then 
-    self.diminish = _hx_funcToField(options.diminish);
-  end;
-end
-_hxClasses["deceptinfect.radiation.RadiationAccepter"] = __deceptinfect_radiation_RadiationAccepter
-__deceptinfect_radiation_RadiationAccepter.__name__ = "deceptinfect.radiation.RadiationAccepter"
-__deceptinfect_radiation_RadiationAccepter.prototype = _hx_e();
-__deceptinfect_radiation_RadiationAccepter.prototype.radiation= nil;
-__deceptinfect_radiation_RadiationAccepter.prototype.diminish= nil;
-
-__deceptinfect_radiation_RadiationAccepter.prototype.__class__ =  __deceptinfect_radiation_RadiationAccepter
-__deceptinfect_radiation_RadiationAccepter.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_radiation_RadiationAccepter.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_infection_RateComponent.new = function() 
-  local self = _hx_new(__deceptinfect_infection_RateComponent.prototype)
-  __deceptinfect_infection_RateComponent.super(self)
-  return self
-end
-__deceptinfect_infection_RateComponent.super = function(self) 
-  self.multipliers = __haxe_ds_IntMap.new();
-  self.addRates = __haxe_ds_IntMap.new();
-  __deceptinfect_ecswip_Component.super(self);
-end
-_hxClasses["deceptinfect.infection.RateComponent"] = __deceptinfect_infection_RateComponent
-__deceptinfect_infection_RateComponent.__name__ = "deceptinfect.infection.RateComponent"
-__deceptinfect_infection_RateComponent.prototype = _hx_e();
-__deceptinfect_infection_RateComponent.prototype.addRates= nil;
-__deceptinfect_infection_RateComponent.prototype.multipliers= nil;
-
-__deceptinfect_infection_RateComponent.prototype.__class__ =  __deceptinfect_infection_RateComponent
-__deceptinfect_infection_RateComponent.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_infection_RateComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_radiation_RadiationProducer.new = function(options) 
-  local self = _hx_new(__deceptinfect_radiation_RadiationProducer.prototype)
-  __deceptinfect_radiation_RadiationProducer.super(self,options)
-  return self
-end
-__deceptinfect_radiation_RadiationProducer.super = function(self,options) 
-  __deceptinfect_ecswip_Component.super(self);
-  self.maxrate = _hx_funcToField(options.maxrate);
-  self.radius = _hx_funcToField(options.radius);
-end
-_hxClasses["deceptinfect.radiation.RadiationProducer"] = __deceptinfect_radiation_RadiationProducer
-__deceptinfect_radiation_RadiationProducer.__name__ = "deceptinfect.radiation.RadiationProducer"
-__deceptinfect_radiation_RadiationProducer.prototype = _hx_e();
-__deceptinfect_radiation_RadiationProducer.prototype.maxrate= nil;
-__deceptinfect_radiation_RadiationProducer.prototype.radius= nil;
-
-__deceptinfect_radiation_RadiationProducer.prototype.__class__ =  __deceptinfect_radiation_RadiationProducer
-__deceptinfect_radiation_RadiationProducer.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_radiation_RadiationProducer.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-
-__deceptinfect_ecswip_VirtualPosition.new = function(choice) 
-  local self = _hx_new(__deceptinfect_ecswip_VirtualPosition.prototype)
-  __deceptinfect_ecswip_VirtualPosition.super(self,choice)
-  return self
-end
-__deceptinfect_ecswip_VirtualPosition.super = function(self,choice) 
-  __deceptinfect_ecswip_Component.super(self);
-  local tmp = choice[1];
-  if (tmp) == 0 then 
-    self.ent = choice[2];
-  elseif (tmp) == 1 then 
-    self:set_pos(choice[2]);
-    self:set_ang(choice[3]); end;
-end
-_hxClasses["deceptinfect.ecswip.VirtualPosition"] = __deceptinfect_ecswip_VirtualPosition
-__deceptinfect_ecswip_VirtualPosition.__name__ = "deceptinfect.ecswip.VirtualPosition"
-__deceptinfect_ecswip_VirtualPosition.prototype = _hx_e();
-__deceptinfect_ecswip_VirtualPosition.prototype.pos= nil;
-__deceptinfect_ecswip_VirtualPosition.prototype.ang= nil;
-__deceptinfect_ecswip_VirtualPosition.prototype.ent= nil;
-__deceptinfect_ecswip_VirtualPosition.prototype.get_pos = function(self) 
-  if (self.ent == nil) then 
-    do return self.pos end;
-  else
-    do return self.ent:GetPos() end;
-  end;
-end
-__deceptinfect_ecswip_VirtualPosition.prototype.set_pos = function(self,set) 
-  if (self.ent == nil) then 
-    self.pos = set do return self.pos end;
-  else
-    self.ent:SetPos(set);
-    do return set end;
-  end;
-end
-__deceptinfect_ecswip_VirtualPosition.prototype.set_ang = function(self,set) 
-  if (self.ent == nil) then 
-    self.ang = set do return self.ang end;
-  else
-    self.ent:SetAngles(set);
-    do return set end;
-  end;
-end
-
-__deceptinfect_ecswip_VirtualPosition.prototype.__class__ =  __deceptinfect_ecswip_VirtualPosition
-__deceptinfect_ecswip_VirtualPosition.__super__ = __deceptinfect_ecswip_Component
-setmetatable(__deceptinfect_ecswip_VirtualPosition.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
 __deceptinfect_infection_systems_RateSystem.new = {}
 _hxClasses["deceptinfect.infection.systems.RateSystem"] = __deceptinfect_infection_systems_RateSystem
@@ -4245,7 +3914,8 @@ _hxClasses["deceptinfect.radiation.RadiationSystem"] = __deceptinfect_radiation_
 __deceptinfect_radiation_RadiationSystem.__name__ = "deceptinfect.radiation.RadiationSystem"
 __deceptinfect_radiation_RadiationSystem.testRadiation = function(vec) 
   local ent = __deceptinfect_ecswip_ComponentManager.addEntity();
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.REAL(vec, _G.Angle(0, 0, 0))), ent);
+  local x = __deceptinfect_ecswip_VirtualPosition.new(__deceptinfect_ecswip_ChooseVirPos.REAL(vec, _G.Angle(0, 0, 0)));
+  __deceptinfect_ecswip_ComponentManager.components_2[30][ent] = __deceptinfect_ecswip_ComponentState.Comp(x);
 end
 _hx_exports["testRadiation"] = __deceptinfect_radiation_RadiationSystem.testRadiation
 __deceptinfect_radiation_RadiationSystem.getTotalRadiation = function(dist,rad) 
@@ -4288,31 +3958,29 @@ __deceptinfect_radiation_RadiationSystem.prototype.run_server = function(self)
   local acceptEnt = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (acceptEnt:hasNext()) do 
     local acceptEnt = acceptEnt:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadVictim)[acceptEnt];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[acceptEnt];
-    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_RateComponent)[acceptEnt];
-    local _g3 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationAccepter)[acceptEnt];
-    if (_g3[1] == 1) then 
-      local _g3 = _g3[2];
-      if (_g2[1] == 1) then 
-        local _g2 = _g2[2];
-        if (_g1[1] == 1) then 
-          local _g1 = _g1[2];
-          if (_g[1] == 1) then 
-            _g3.radiation.h = ({});
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[30][acceptEnt];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[19][acceptEnt];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[9][acceptEnt];
+    if (_g2[1] == 1) then 
+      local _g2 = _g2[2];
+      if (_g1[1] == 1) then 
+        local _g1 = _g1[2];
+        if (_g[1] == 1) then 
+          local _g = _g[2];
+          if (__deceptinfect_ecswip_ComponentManager.components_2[14][acceptEnt][1] == 1) then 
+            _g2.radiation.h = ({});
             local produceEnt = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
             while (produceEnt:hasNext()) do 
               local produceEnt = produceEnt:next();
-              local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadSource)[produceEnt];
-              local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[produceEnt];
-              local _g4 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationProducer)[produceEnt];
-              if (_g4[1] == 1) then 
-                if (_g2[1] == 1) then 
-                  if (_g[1] == 1) then 
-                    local _g = __deceptinfect_radiation_RadiationSystem.getTotalRadiation(_g2[2]:get_pos():Distance(_g1:get_pos()), _g4[2]);
+              local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[30][produceEnt];
+              local _g3 = __deceptinfect_ecswip_ComponentManager.components_2[18][produceEnt];
+              if (_g3[1] == 1) then 
+                if (_g1[1] == 1) then 
+                  if (__deceptinfect_ecswip_ComponentManager.components_2[21][produceEnt][1] == 1) then 
+                    local _g = __deceptinfect_radiation_RadiationSystem.getTotalRadiation(_g1[2]:get_pos():Distance(_g:get_pos()), _g3[2]);
                     if (_g[1] == 0) then 
                       local _g = _g[2];
-                      local _this = _g3.radiation;
+                      local _this = _g2.radiation;
                       if (_g == nil) then 
                         _this.h[produceEnt] = __haxe_ds_IntMap.tnull;
                       else
@@ -4323,7 +3991,7 @@ __deceptinfect_radiation_RadiationSystem.prototype.run_server = function(self)
                 end;
               end;
             end;
-            _g2.addRates:set(__deceptinfect_radiation_RadiationSystem.radRateID, __deceptinfect_radiation_RadiationSystem.getTotalRadiationRate(_g3));
+            _g1.addRates:set(__deceptinfect_radiation_RadiationSystem.radRateID, __deceptinfect_radiation_RadiationSystem.getTotalRadiationRate(_g2));
           end;
         end;
       end;
@@ -4361,9 +4029,9 @@ __deceptinfect_game_WinSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_AliveComponent)[ent];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
-    local tmp = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[ent][1];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[24][ent];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
+    local tmp = __deceptinfect_ecswip_ComponentManager.components_2[32][ent][1];
     if (tmp) == 0 then 
       if (_g1[1] == 1) then 
         if (_g[1] == 1) then 
@@ -4399,7 +4067,7 @@ __deceptinfect_game_WinSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_NestComponent)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[27][ent];
     if (_g[1] == 1) then 
       if (_g[2].health > 0) then 
         aliveNests = true;
@@ -4433,7 +4101,7 @@ __deceptinfect_game_BatterySystem.prototype.run_server = function(self)
   local ents = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ents:hasNext()) do 
     local ents = ents:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_BatteryAccepter)[ents];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[16][ents];
     if (_g[1] == 1) then 
       local _g = _g[2];
       _g.charge = _g.charge - _g.decay;
@@ -4452,19 +4120,19 @@ __deceptinfect_game_BatterySystem.prototype.run_server = function(self)
   end;
 end
 __deceptinfect_game_BatterySystem.prototype.addBattery = function(self,source,accepter) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_BatteryAccepter)[accepter];
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_BatterySource)[source];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[16][accepter];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[0][source];
   if (_g1[1] == 1) then 
     local _g1 = _g1[2];
     if (_g[1] == 1) then 
       local _g = _g[2];
-      if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_sabotage_S_Break)[source][1] == 1) then 
+      if (__deceptinfect_ecswip_ComponentManager.components_2[34][source][1] == 1) then 
         _g.charge = _g.charge - (_g1.charge / 2);
       else
         _g.charge = _g.charge + _g1.charge;
       end;
-      local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[source];
-      if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_sabotage_S_Explode)[source][1] == 1) then 
+      local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][source];
+      if (__deceptinfect_ecswip_ComponentManager.components_2[35][source][1] == 1) then 
         if (_g[1] == 1) then 
           local _g = _g[2];
           _G.util.BlastDamage(_g.entity, _g.entity, _g.entity:GetPos(), 500, 75);
@@ -4594,15 +4262,15 @@ __deceptinfect_game_SpawnSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[ent];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_Spawned)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[30][ent];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[33][ent];
     if (_g1[1] == 1) then 
       local _g1 = _g1[2];
       if (_g[1] == 1) then 
         if (_g1.spawn.vec:DistToSqr(_g[2]:get_pos()) > 8100) then 
           __haxe_Log.trace("Spawn freed", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=27,className="deceptinfect.game.SpawnSystem",methodName="run_server"}));
           _g1.spawn.claimed = __deceptinfect_game_SpawnClaim.UNCLAIMED;
-          __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_game_components_Spawned, ent);
+          __deceptinfect_ecswip_ComponentManager.removeComponent(33, ent);
         end;
       end;
     end;
@@ -4628,8 +4296,8 @@ __deceptinfect_statuses_WalkthroughSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
-    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_statuses_Walkthroughable)[ent][1] == 1) then 
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
+    if (__deceptinfect_ecswip_ComponentManager.components_2[17][ent][1] == 1) then 
       if (_g[1] == 1) then 
         local _g = _g[2];
         local tooclose = false;
@@ -4640,7 +4308,7 @@ __deceptinfect_statuses_WalkthroughSystem.prototype.run_server = function(self)
           if (otherEnt == ent) then 
             break;
           end;
-          local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[otherEnt];
+          local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[31][otherEnt];
           if (_g1[1] == 1) then 
             if (_g1[2].player:GetPos():DistToSqr(_g.player:GetPos()) < 10000) then 
               tooclose = true;
@@ -4655,7 +4323,7 @@ __deceptinfect_statuses_WalkthroughSystem.prototype.run_server = function(self)
         end;
         if (not tooclose) then 
           __deceptinfect_util_PlayerExt.setWalkthroughable(_g.player, false);
-          __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_statuses_Walkthroughable, ent);
+          __deceptinfect_ecswip_ComponentManager.removeComponent(17, ent);
         end;
       end;
     end;
@@ -4681,8 +4349,8 @@ __deceptinfect_game_NestSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadiationProducer)[ent];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_NestComponent)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[18][ent];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[27][ent];
     if (_g1[1] == 1) then 
       local _g1 = _g1[2];
       if (_g[1] == 1) then 
@@ -4721,7 +4389,7 @@ __deceptinfect_game_EvacSystem.prototype.run_server = function(self)
   while (ent:hasNext()) do 
     local ent = ent:next();
     local _g = __deceptinfect_GameManager.state;
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_EvacZone)[ent];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[29][ent];
     if (_g1[1] == 1) then 
       if (_g[1] == 2) then 
         local c_evac = _g1[2];
@@ -4757,7 +4425,7 @@ __deceptinfect_game_EvacSystem.prototype.run_server = function(self)
           local id = c_evac.in_zone:keys();
           while (id:hasNext()) do 
             local id = id:next();
-            local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent)[id];
+            local _g = __deceptinfect_ecswip_ComponentManager.components_2[22][id];
             if (_g[1] == 1) then 
               if (_g[2].form[1] == 1) then 
                 c_evac.in_zone:remove(id);
@@ -4775,8 +4443,8 @@ __deceptinfect_game_EvacSystem.prototype.checkWin = function(self,evac)
   local id = evac.in_zone:keys();
   while (id:hasNext()) do 
     local id = id:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[id];
-    local tmp = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[id][1];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][id];
+    local tmp = __deceptinfect_ecswip_ComponentManager.components_2[32][id][1];
     if (tmp) == 0 then 
       if (_g[1] == 1) then 
         humanEscape = true;
@@ -4794,7 +4462,7 @@ __deceptinfect_game_EvacSystem.prototype.checkWin = function(self,evac)
   end;
 end
 __deceptinfect_game_EvacSystem.prototype.touched = function(self,ent,evac) 
-  if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent][1] == 1) then 
+  if (__deceptinfect_ecswip_ComponentManager.components_2[31][ent][1] == 1) then 
     if (evac.blocked.h[ent] ~= nil) then 
       do return end;
     end;
@@ -4807,13 +4475,13 @@ __deceptinfect_game_EvacSystem.prototype.touched = function(self,ent,evac)
     end;
     evac.touched.h[ent] = true;
     evac.in_zone.h[ent] = false;
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_InEvacZone.new(), ent);
+    __deceptinfect_ecswip_ComponentManager.components_2[37][ent] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_InEvacZone.new());
   end;
 end
 __deceptinfect_game_EvacSystem.prototype.addFlare = function(self,flare,evac) 
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_EvacZone)[evac];
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[flare];
-  local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_FlareComponent)[flare];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[29][evac];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[28][flare];
+  local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[26][flare];
   if (_g2[1] == 1) then 
     if (_g1[1] == 1) then 
       if (_g[1] == 1) then 
@@ -4830,9 +4498,9 @@ __deceptinfect_game_EvacSystem.prototype.addFlare = function(self,flare,evac)
   end;
 end
 __deceptinfect_game_EvacSystem.prototype.leave = function(self,ent,evac) 
-  if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent][1] == 1) then 
+  if (__deceptinfect_ecswip_ComponentManager.components_2[31][ent][1] == 1) then 
     evac.in_zone:remove(ent);
-    __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_game_components_InEvacZone, ent);
+    __deceptinfect_ecswip_ComponentManager.removeComponent(37, ent);
   end;
 end
 
@@ -4859,10 +4527,9 @@ __deceptinfect_game_RagdollSystem.prototype.endSlowMotion = function(self,x)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_Statue)[ent];
-    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_Ragdoll)[ent][1] == 1) then 
-      if (_g1[1] == 1) then 
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][ent];
+    if (__deceptinfect_ecswip_ComponentManager.components_2[25][ent][1] == 1) then 
+      if (__deceptinfect_ecswip_ComponentManager.components_2[38][ent][1] == 1) then 
         if (_g[1] == 1) then 
           local _hx_tmp;
           _hx_tmp = _g[2].entity;
@@ -4879,12 +4546,11 @@ __deceptinfect_game_RagdollSystem.prototype.endSlowMotion = function(self,x)
         end;
       end;
     end;
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_AliveComponent)[ent];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
-    if (_g1[1] == 1) then 
-      if (_g[1] == 1) then 
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
+    if (_g[1] == 1) then 
+      if (__deceptinfect_ecswip_ComponentManager.components_2[24][ent][1] == 1) then 
         local _hx_tmp;
-        _hx_tmp = _g1[2].player;
+        _hx_tmp = _g[2].player;
         self:playerStatue(_hx_tmp);
         _hx_tmp:KillSilent();
       end;
@@ -4901,18 +4567,16 @@ __deceptinfect_game_RagdollSystem.prototype.stateChange = function(self,newstate
     local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
     while (ent:hasNext()) do 
       local ent = ent:next();
-      local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_AliveComponent)[ent];
-      local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[ent];
-      local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
-      if (_g2[1] == 1) then 
-        if (_g1[1] == 1) then 
-          if (_g[1] == 1) then 
-            _g2[2].player:SetModel(__deceptinfect_Misc.infModel);
+      local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
+      if (_g[1] == 1) then 
+        if (__deceptinfect_ecswip_ComponentManager.components_2[32][ent][1] == 1) then 
+          if (__deceptinfect_ecswip_ComponentManager.components_2[24][ent][1] == 1) then 
+            _g[2].player:SetModel(__deceptinfect_Misc.infModel);
           end;
         end;
       end;
-      local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_Ragdoll)[ent];
-      local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent];
+      local _g = __deceptinfect_ecswip_ComponentManager.components_2[25][ent];
+      local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[28][ent];
       if (_g1[1] == 1) then 
         if (_g[1] == 1) then 
           if (_g[2].reveal[1] == 0) then 
@@ -4925,8 +4589,8 @@ __deceptinfect_game_RagdollSystem.prototype.stateChange = function(self,newstate
     local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
     while (ent:hasNext()) do 
       local ent = ent:next();
-      local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent];
-      if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_Statue)[ent][1] == 1) then 
+      local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][ent];
+      if (__deceptinfect_ecswip_ComponentManager.components_2[38][ent][1] == 1) then 
         if (_g[1] == 1) then 
           __haxe_Log.trace("removed statue", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/RagdollSystem.hx",lineNumber=263,className="deceptinfect.game.RagdollSystem",methodName="stateChange"}));
           _g[2].entity:Remove();
@@ -4939,44 +4603,37 @@ __deceptinfect_game_RagdollSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_Ragdoll)[ent];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[25][ent];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[28][ent];
     if (_g1[1] == 1) then 
+      local _g1 = _g1[2];
       if (_g[1] == 1) then 
-        local c_ent = _g1[2];
-        local c_rag = _g[2];
-        local _g = c_rag.reveal;
-        if (_g[1] == 0) then 
-          if (_G.CurTime() > _g[2][0]) then 
-            self:reveal(c_ent.entity);
+        local _g = _g[2];
+        local _g2 = _g.reveal;
+        if (_g2[1] == 0) then 
+          if (_G.CurTime() > _g2[2][0]) then 
+            self:reveal(_g1.entity);
           end;
         end;
-        local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_Statue)[ent];
-        if (_g[1] ~= 1) then 
-          local this1 = c_rag.owner;
-          local x = __deceptinfect_ecswip_PlayerComponent;
-          local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
-          if (retrieve_comp == nil) then 
-            _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-          end;
-          if (retrieve_comp.player:Alive()) then 
-            c_ent.entity:Remove();
+        if (__deceptinfect_ecswip_ComponentManager.components_2[38][ent][1] ~= 1) then 
+          if (__deceptinfect_ecswip_ComponentManager.getComponentForIDSure(31, _g.owner).player:Alive()) then 
+            _g1.entity:Remove();
           end;
         end;
       end;
     end;
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
     if (_g[1] == 1) then 
-      local c_ply = _g[2];
-      local _g = __deceptinfect_util_EntityExt.validID2(c_ply.player:GetEyeTrace().Entity);
-      if (_g[1] == 0) then 
-        local id = _g[2];
-        local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_StatInfo)[id];
-        local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[id];
+      local _g = _g[2];
+      local _g1 = __deceptinfect_util_EntityExt.validID2(_g.player:GetEyeTrace().Entity);
+      if (_g1[1] == 0) then 
+        local _g1 = _g1[2];
+        local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[4][_g1];
+        local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[28][_g1];
         if (_g1[1] == 1) then 
-          if (_g[1] == 1) then 
-            local c_stat = _g[2];
-            __deceptinfect_game_RagdollSystem.statueinfo:send(_hx_o({__fields__={stat=true,inf=true,health=true,name=true},stat=_g1[2].entity,inf=c_stat.inf,health=c_stat.health,name=c_stat.name}), c_ply.player);
+          if (_g2[1] == 1) then 
+            local _g2 = _g2[2];
+            __deceptinfect_game_RagdollSystem.statueinfo:send(_hx_o({__fields__={stat=true,inf=true,health=true,name=true},stat=_g1[2].entity,inf=_g2.inf,health=_g2.health,name=_g2.name}), _g.player);
           end;
         end;
       end;
@@ -4987,19 +4644,12 @@ __deceptinfect_game_RagdollSystem.prototype.playerRagdoll = function(self,owner,
   if (owner:IsPlayer()) then 
     local ply = owner;
     local di_ragdoll = self:newRagdoll(ply, ragdoll);
-    local this1 = ply.id;
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[this1];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[32][ply.id];
     if (_g[1] == 1) then 
-      local this1 = di_ragdoll.id;
-      local x = __deceptinfect_game_components_Ragdoll;
-      local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
-      if (retrieve_comp == nil) then 
-        _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-      end;
       local v = _G.CurTime() + 5;
       local ret = ({length = 1});
       ret[0] = v;
-      retrieve_comp.reveal = __deceptinfect_game_components_RagdollReveal.WAIT(ret);
+      __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(25, di_ragdoll.id).reveal = __deceptinfect_game_components_RagdollReveal.WAIT(ret);
     end;
   end;
   ragdoll:SetNoDraw(true);
@@ -5012,11 +4662,10 @@ __deceptinfect_game_RagdollSystem.prototype.playerStatue = function(self,plyr,in
   local x = _G.ents.Create("prop_ragdoll");
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   local ent = x;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_Statue.new(), ent.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[38][ent.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_Statue.new());
   local c_stat = __deceptinfect_game_components_StatInfo.new();
   c_stat.name = plyr:Name();
-  local this1 = plyr.id;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[this1];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[23][plyr.id];
   c_stat.inf = (function() 
     local _hx_1
     if (_g[1] == 1) then 
@@ -5025,8 +4674,8 @@ __deceptinfect_game_RagdollSystem.prototype.playerStatue = function(self,plyr,in
     return _hx_1
   end )();
   c_stat.health = plyr:Health();
-  __deceptinfect_ecswip_ComponentManager.addComponent(c_stat, ent.id);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_KeepRestart.new(), ent.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[4][ent.id] = __deceptinfect_ecswip_ComponentState.Comp(c_stat);
+  __deceptinfect_ecswip_ComponentManager.components_2[39][ent.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_KeepRestart.new());
   ent:SetModel(plyr:GetModel());
   ent:SetPos(plyr:GetPos());
   __haxe_Log.trace("hmm i wonder whats for dinner", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/RagdollSystem.hx",lineNumber=357,className="deceptinfect.game.RagdollSystem",methodName="playerStatue"}));
@@ -5055,8 +4704,8 @@ __deceptinfect_game_RagdollSystem.prototype.writeStatues = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[ent];
-    if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_Statue)[ent][1] == 1) then 
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][ent];
+    if (__deceptinfect_ecswip_ComponentManager.components_2[38][ent][1] == 1) then 
       if (_g[1] == 1) then 
         local _hx_tmp;
         _hx_tmp = _g[2].entity;
@@ -5079,13 +4728,7 @@ __deceptinfect_game_RagdollSystem.prototype.newRagdoll = function(self,owner,old
   rag:SetPos(owner:GetPos());
   rag:SetModel(owner:GetModel());
   rag:Spawn();
-  local this1 = rag.id;
-  local x = __deceptinfect_game_components_Ragdoll;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  retrieve_comp.owner = owner.id;
+  __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(25, rag.id).owner = owner.id;
   local _g = 0;
   local _g1 = rag:GetPhysicsObjectCount() - 1;
   while (_g < _g1) do 
@@ -5110,32 +4753,20 @@ __deceptinfect_game_RagdollSystem.prototype.createProp = function(self)
   local rag = _G.ents.Create("prop_ragdoll");
   rag.id = __deceptinfect_ecswip_ComponentManager.addGEnt(rag);
   local id = rag.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_Ragdoll.new(), id);
+  __deceptinfect_ecswip_ComponentManager.components_2[25][id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_Ragdoll.new());
   if (__deceptinfect_GameManager.state[1] == 2) then 
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_Statue.new(), id);
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_KeepRestart.new(), id);
+    __deceptinfect_ecswip_ComponentManager.components_2[38][id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_Statue.new());
+    __deceptinfect_ecswip_ComponentManager.components_2[39][id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_KeepRestart.new());
   else
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_CleanupEnt.new(), id);
+    __deceptinfect_ecswip_ComponentManager.components_2[13][id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_CleanupEnt.new());
   end;
   do return rag end
 end
 __deceptinfect_game_RagdollSystem.prototype.reveal = function(self,rag) 
   local newmodel = self:createProp();
-  local this1 = newmodel.id;
-  local x = __deceptinfect_game_components_Ragdoll;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_rag = retrieve_comp;
+  local c_rag = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(25, newmodel.id);
   c_rag.reveal = __deceptinfect_game_components_RagdollReveal.REVEAL;
-  local this1 = rag.id;
-  local x = __deceptinfect_game_components_Ragdoll;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  c_rag.owner = retrieve_comp.owner;
+  c_rag.owner = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(25, rag.id).owner;
   newmodel:SetModel(__deceptinfect_Misc.infModel);
   newmodel:SetPos(rag:GetPos());
   newmodel:Spawn();
@@ -5263,15 +4894,14 @@ __deceptinfect_infection_systems_InfectionLookSystem.prototype.run_server = func
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionLookInfo)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[5][ent];
     if (_g1[1] == 1) then 
+      local _g1 = _g1[2];
       if (_g[1] == 1) then 
         local _hx_tmp;
-        local c_look = _g1[2];
         _hx_tmp = _g[2].player;
-        local ply = _hx_tmp;
-        local x = ply:GetEyeTrace().Entity;
+        local x = _hx_tmp:GetEyeTrace().Entity;
         local _g;
         if (_G.IsValid(x)) then 
           local _g1 = x.id;
@@ -5287,34 +4917,27 @@ __deceptinfect_infection_systems_InfectionLookSystem.prototype.run_server = func
         end;
         if (_g[1] == 0) then 
           local _g = _g[2];
-          local _hx_tmp = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[_g];
-          if (_hx_tmp[1] == 1) then 
-            local id = _g;
-            if (c_look.lookat:addTime(id) > c_look.threshold) then 
+          local _hx_tmp1 = __deceptinfect_ecswip_ComponentManager.components_2[23][_g];
+          if (_hx_tmp1[1] == 1) then 
+            if (_g1.lookat:addTime(_g) > _g1.threshold) then 
               local isinfected;
               local inf;
-              local _g = _hx_tmp[2].infection;
-              local inf1 = _g[1];
+              local _g2 = _hx_tmp1[2].infection;
+              local inf1 = _g2[1];
               if (inf1) == 0 then 
                 isinfected = false;
-                inf = _g[2][0];
+                inf = _g2[2][0];
               elseif (inf1) == 1 then 
                 isinfected = true;
                 inf = 100.0; end;
-              local tmp = __deceptinfect_infection_systems_InfectionLookSystem.infectioninfo;
-              local x = __deceptinfect_ecswip_PlayerComponent;
-              local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[id]:slice(2)[0];
-              if (retrieve_comp == nil) then 
-                _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-              end;
-              tmp:send(_hx_o({__fields__={target=true,isinfected=true,inf=true},target=retrieve_comp.player,isinfected=isinfected,inf=inf}), ply, true);
-              c_look.lookat:setTime(id, 2.0);
+              __deceptinfect_infection_systems_InfectionLookSystem.infectioninfo:send(_hx_o({__fields__={target=true,isinfected=true,inf=true},target=__deceptinfect_ecswip_ComponentManager.getComponentForIDSure(31, _g).player,isinfected=isinfected,inf=inf}), _hx_tmp, true);
+              _g1.lookat:setTime(_g, 2.0);
             end;
           else
-            c_look.lookat:removeAllTimes();
+            _g1.lookat:removeAllTimes();
           end;
         else
-          c_look.lookat:removeAllTimes();
+          _g1.lookat:removeAllTimes();
         end;
       end;
     end;
@@ -5341,9 +4964,9 @@ __deceptinfect_radiation_ContaminationSystem.prototype.run_server = function(sel
   local vic = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (vic:hasNext()) do 
     local vic = vic:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[vic];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_ContaminationAccepter)[vic];
-    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadVictim)[vic];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[30][vic];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[10][vic];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[14][vic];
     if (_g2[1] == 1) then 
       if (_g1[1] == 1) then 
         if (_g[1] == 1) then 
@@ -5354,9 +4977,9 @@ __deceptinfect_radiation_ContaminationSystem.prototype.run_server = function(sel
           local _hx_continue_2 = false;
           while (produce:hasNext()) do repeat 
             local produce = produce:next();
-            local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[produce];
-            local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_ContaminationProducer)[produce];
-            local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadSource)[produce];
+            local _g = __deceptinfect_ecswip_ComponentManager.components_2[30][produce];
+            local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[20][produce];
+            local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[21][produce];
             if (_g2[1] == 1) then 
               if (_g1[1] == 1) then 
                 if (_g[1] == 1) then 
@@ -5399,12 +5022,7 @@ __deceptinfect_radiation_ContaminationSystem.prototype.run_server = function(sel
                           rad = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_radiation_RadSourceSystem):radSourceFromType(c_rs.type, vic, c_rs.base);
                         elseif (rad1) == 2 then 
                           local rad1 = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_radiation_RadSourceSystem):radSourceFromType(c_rs.type, vic, c_rs.base);
-                          local x = __deceptinfect_radiation_RadSource;
-                          local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[rad1]:slice(2)[0];
-                          if (retrieve_comp == nil) then 
-                            _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-                          end;
-                          local c_rs = retrieve_comp;
+                          local c_rs = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(21, rad1);
                           c_rs.lifetime = _g[2];
                           __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_radiation_RadSourceSystem):refreshTime(c_rs);
                           rad = rad1; end;
@@ -5448,7 +5066,7 @@ __deceptinfect_radiation_RadSourceSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadSource)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[21][ent];
     if (_g[1] == 1) then 
       local _g = _g[2];
       local _g1 = _g.state;
@@ -5456,8 +5074,7 @@ __deceptinfect_radiation_RadSourceSystem.prototype.run_server = function(self)
         local _g1 = _g1[2];
         if (_g1[1] == 1) then 
           if (_G.CurTime() > _g1[2]) then 
-            local this1 = _g.attatch;
-            if (__deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadVictim)[this1][1] == 1) then 
+            if (__deceptinfect_ecswip_ComponentManager.components_2[14][_g.attatch][1] == 1) then 
               self:disengage(ent, _g.attatch);
             end;
             __deceptinfect_ecswip_ComponentManager.removeEntity(ent);
@@ -5487,7 +5104,7 @@ end
 __deceptinfect_radiation_RadSourceSystem.prototype.newRadSource = function(self,rso,attatch,base) 
   local rad = __deceptinfect_ecswip_ComponentManager.addEntity();
   local c_rs = __deceptinfect_radiation_RadSource.new(rso);
-  __deceptinfect_ecswip_ComponentManager.addComponent(c_rs, rad);
+  __deceptinfect_ecswip_ComponentManager.components_2[21][rad] = __deceptinfect_ecswip_ComponentState.Comp(c_rs);
   c_rs.base = (function() 
     local _hx_1
     if (base == nil) then 
@@ -5500,27 +5117,22 @@ __deceptinfect_radiation_RadSourceSystem.prototype.newRadSource = function(self,
   local _g = rso.options;
   local tmp = _g[1];
   if (tmp) == 1 then 
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_RadiationProducer.new(_g[2]), rad);
+    __deceptinfect_ecswip_ComponentManager.components_2[18][rad] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_radiation_RadiationProducer.new(_g[2]));
   elseif (tmp) == 2 then 
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_RadiationProducer.new(_g[2]), rad);else end;
+    __deceptinfect_ecswip_ComponentManager.components_2[18][rad] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_radiation_RadiationProducer.new(_g[2]));else end;
   local _g = rso.options;
   local tmp = _g[1];
   if (tmp) == 0 then 
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_ContaminationProducer.new(_g[2]), rad);
+    __deceptinfect_ecswip_ComponentManager.components_2[20][rad] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_radiation_ContaminationProducer.new(_g[2]));
   elseif (tmp) == 2 then 
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_radiation_ContaminationProducer.new(_g[3]), rad);else end;
+    __deceptinfect_ecswip_ComponentManager.components_2[20][rad] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_radiation_ContaminationProducer.new(_g[3]));else end;
   do return rad end
 end
 __deceptinfect_radiation_RadSourceSystem.prototype.attatchRad = function(self,rad,vic) 
-  local x = __deceptinfect_radiation_RadSource;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[rad]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_rs = retrieve_comp;
+  local c_rs = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(21, rad);
   c_rs.attatch = vic;
   local c_rv;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadVictim)[vic];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[14][vic];
   if (_g[1] == 1) then 
     c_rv = _g[2];
   else
@@ -5537,8 +5149,8 @@ __deceptinfect_radiation_RadSourceSystem.prototype.attatchRad = function(self,ra
     _this.h[key] = rad;
   end;
   local c_vir;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_GEntityComponent)[vic];
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_VirtualPosition)[vic];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[28][vic];
+  local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[30][vic];
   if (_g1[1] == 1) then 
     c_vir = _g1[2];
   else
@@ -5549,26 +5161,25 @@ __deceptinfect_radiation_RadSourceSystem.prototype.attatchRad = function(self,ra
       do return end;
     end;
   end;
-  __deceptinfect_ecswip_ComponentManager.addComponent(c_vir, rad);
-  local args = nil;
-  __deceptinfect_ecswip_ComponentManager.getOrAdd(c_rs.attatch, __deceptinfect_statuses_Contaminated, args);
+  __deceptinfect_ecswip_ComponentManager.components_2[30][rad] = __deceptinfect_ecswip_ComponentState.Comp(c_vir);
+  local result = __deceptinfect_ecswip_ComponentManager.components_2[15][c_rs.attatch];
+  if (result == __deceptinfect_ecswip_ComponentState.NONE) then 
+    __deceptinfect_ecswip_ComponentManager.components_2[15][c_rs.attatch] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_statuses_Contaminated.new());
+  else
+    result:slice(2);
+  end;
 end
 __deceptinfect_radiation_RadSourceSystem.prototype.disengage = function(self,radsource,vic) 
-  local x = __deceptinfect_radiation_RadSource;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[radsource]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_rs = retrieve_comp;
+  local c_rs = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(21, radsource);
   c_rs.attatch = nil;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_radiation_RadVictim)[vic];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[14][vic];
   if (_g[1] == 1) then 
-    local c_rv = _g[2];
-    c_rv.radiation:remove(radsource);
-    c_rv.affected:remove(c_rs.base);
-    c_rv.affectedtype:remove(c_rs.type);
+    local _g = _g[2];
+    _g.radiation:remove(radsource);
+    _g.affected:remove(c_rs.base);
+    _g.affectedtype:remove(c_rs.type);
   end;
-  __deceptinfect_ecswip_ComponentManager.removeComponent(__deceptinfect_ecswip_VirtualPosition, radsource);
+  __deceptinfect_ecswip_ComponentManager.removeComponent(30, radsource);
 end
 
 __deceptinfect_radiation_RadSourceSystem.prototype.__class__ =  __deceptinfect_radiation_RadSourceSystem
@@ -5591,7 +5202,7 @@ __deceptinfect_game_LowHealthSystem.prototype.run_server = function(self)
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
     if (_g[1] == 1) then 
       local _g = _g[2];
       if (_g.player:Health() < 25) then 
@@ -5600,8 +5211,13 @@ __deceptinfect_game_LowHealthSystem.prototype.run_server = function(self)
             do return _G.math.Remap(value[0], inMin[0], inMax[0], outMin, outMax) end;
           end end;
         end)(_hx_tab_array({[0]=25}, 1), _hx_tab_array({[0]=1}, 1), _hx_tab_array({[0]=25 - _g.player:Health()}, 1));
-        local args = nil;
-        __deceptinfect_ecswip_ComponentManager.getOrAdd(ent, __deceptinfect_infection_InfVunerability, args).vun = remap(1.0, 1.6);
+        local result = __deceptinfect_ecswip_ComponentManager.components_2[2][ent];
+        if (result == __deceptinfect_ecswip_ComponentState.NONE) then 
+          local x = __deceptinfect_infection_InfVunerability.new(remap(1.0, 1.6), 99999);
+          __deceptinfect_ecswip_ComponentManager.components_2[2][ent] = __deceptinfect_ecswip_ComponentState.Comp(x);
+        else
+          result:slice(2);
+        end;
       end;
     end;
   end;
@@ -5623,25 +5239,14 @@ _hxClasses["deceptinfect.items.ScannerSystem"] = __deceptinfect_items_ScannerSys
 __deceptinfect_items_ScannerSystem.__name__ = "deceptinfect.items.ScannerSystem"
 __deceptinfect_items_ScannerSystem.prototype = _hx_e();
 __deceptinfect_items_ScannerSystem.prototype.scan_target = function(self,scan,target) 
-  local x = __deceptinfect_items_ScannerComponent;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[scan]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[target];
-  if (_g[1] == 1) then 
-    retrieve_comp.scanProgress:addTime(target);
+  local c_scan = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(36, scan);
+  if (__deceptinfect_ecswip_ComponentManager.components_2[31][target][1] == 1) then 
+    c_scan.scanProgress:addTime(target);
   end;
 end
 __deceptinfect_items_ScannerSystem.prototype.get_reliability = function(self,scan,target) 
-  local x = __deceptinfect_items_ScannerComponent;
-  local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[scan]:slice(2)[0];
-  if (retrieve_comp == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
-  local c_scan = retrieve_comp;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[target];
-  if (_g[1] == 1) then 
+  local c_scan = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(36, scan);
+  if (__deceptinfect_ecswip_ComponentManager.components_2[31][target][1] == 1) then 
     do return __haxe_ds_Option.Some(_G.math.Remap(_G.math.Clamp(c_scan.scanProgress:getTime(target), 0, c_scan.time), 0, c_scan.time, c_scan.reliability_min, c_scan.reliability_max)) end;
   else
     do return __haxe_ds_Option.None end;
@@ -5649,12 +5254,11 @@ __deceptinfect_items_ScannerSystem.prototype.get_reliability = function(self,sca
 end
 __deceptinfect_items_ScannerSystem.prototype.final_scan = function(self,scan,target) 
   local c_reliab = self:get_reliability(scan, target);
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[target];
   if (c_reliab[1] == 0) then 
-    local _g1 = c_reliab[2];
-    local tmp = _g[1];
+    local _g = c_reliab[2];
+    local tmp = __deceptinfect_ecswip_ComponentManager.components_2[32][target][1];
     if (tmp) == 0 then 
-      if (_G.math.random() < _g1) then 
+      if (_G.math.random() < _g) then 
         __haxe_Log.trace("right: human", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=44,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
         do return __deceptinfect_items_ScanResult.HUMAN end;
       else
@@ -5662,8 +5266,8 @@ __deceptinfect_items_ScannerSystem.prototype.final_scan = function(self,scan,tar
         do return __deceptinfect_items_ScanResult.INFECTED end;
       end;
     elseif (tmp) == 1 then 
-      __haxe_Log.trace(_g1, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=34,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
-      if (_G.math.random() < _g1) then 
+      __haxe_Log.trace(_g, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=34,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
+      if (_G.math.random() < _g) then 
         __haxe_Log.trace("right : infected", _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/items/ScannerSystem.hx",lineNumber=36,className="deceptinfect.items.ScannerSystem",methodName="final_scan"}));
         do return __deceptinfect_items_ScanResult.INFECTED end;
       else
@@ -5759,6 +5363,10 @@ __deceptinfect_ecswip_SystemManager.make = function()
   local key = __deceptinfect_WeaponSystem;
   _this.h[key] = __deceptinfect_WeaponSystem.new();
   _this.k[key] = true;
+  local _this = __deceptinfect_ecswip_SystemManager.getSystems;
+  local key = __deceptinfect_ecswip_DummySystem;
+  _this.h[key] = __deceptinfect_ecswip_DummySystem.new();
+  _this.k[key] = true;
 end
 __deceptinfect_ecswip_SystemManager.getSystem = function(cls) 
   do return __deceptinfect_ecswip_SystemManager.getSystems.h[cls] end;
@@ -5769,14 +5377,22 @@ __deceptinfect_ecswip_SystemManager.getSystemExp = function(name)
 end
 _hx_exports["getSystem"] = __deceptinfect_ecswip_SystemManager.getSystemExp
 __deceptinfect_ecswip_SystemManager.runAllSystems = function() 
+  __deceptinfect_Profiler.profile("start", true);
   local _g = 0;
   local _g1 = __deceptinfect_ecswip_SystemManager.runSystems;
   while (_g < _g1.length) do 
     local clsSystem = _g1[_g];
     _g = _g + 1;
+    __deceptinfect_Profiler.profile(clsSystem.__name__);
     __deceptinfect_ecswip_SystemManager.getSystems.h[clsSystem]:run();
   end;
+  __deceptinfect_Profiler.resetprofile();
+  __deceptinfect_Profiler.report();
 end
+__deceptinfect_ecswip_SystemManager.beginReporting = function() 
+  __deceptinfect_Profiler.beginProfiling();
+end
+_hx_exports["systemReport"] = __deceptinfect_ecswip_SystemManager.beginReporting
 __deceptinfect_ecswip_SystemManager.initAllSystems = function() 
   __deceptinfect_ecswip_SystemManager.make();
   local _g = 0;
@@ -5787,7 +5403,59 @@ __deceptinfect_ecswip_SystemManager.initAllSystems = function()
     __deceptinfect_ecswip_SystemManager.getSystems.h[clsSystem]:init();
   end;
 end
-_hxClasses["deceptinfect.ecswip.ChooseVirPos"] = __deceptinfect_ecswip_ChooseVirPos;
+__deceptinfect_ecswip_SystemManager.destroySystems = function() 
+  local _this = __deceptinfect_ecswip_SystemManager.getSystems;
+  _this.h = ({});
+  _this.k = ({});
+end
+
+__deceptinfect_ecswip_VirtualPosition.new = function(choice) 
+  local self = _hx_new(__deceptinfect_ecswip_VirtualPosition.prototype)
+  __deceptinfect_ecswip_VirtualPosition.super(self,choice)
+  return self
+end
+__deceptinfect_ecswip_VirtualPosition.super = function(self,choice) 
+  __deceptinfect_ecswip_Component.super(self);
+  local tmp = choice[1];
+  if (tmp) == 0 then 
+    self.ent = choice[2];
+  elseif (tmp) == 1 then 
+    self:set_pos(choice[2]);
+    self:set_ang(choice[3]); end;
+end
+_hxClasses["deceptinfect.ecswip.VirtualPosition"] = __deceptinfect_ecswip_VirtualPosition
+__deceptinfect_ecswip_VirtualPosition.__name__ = "deceptinfect.ecswip.VirtualPosition"
+__deceptinfect_ecswip_VirtualPosition.prototype = _hx_e();
+__deceptinfect_ecswip_VirtualPosition.prototype.pos= nil;
+__deceptinfect_ecswip_VirtualPosition.prototype.ang= nil;
+__deceptinfect_ecswip_VirtualPosition.prototype.ent= nil;
+__deceptinfect_ecswip_VirtualPosition.prototype.get_pos = function(self) 
+  if (self.ent == nil) then 
+    do return self.pos end;
+  else
+    do return self.ent:GetPos() end;
+  end;
+end
+__deceptinfect_ecswip_VirtualPosition.prototype.set_pos = function(self,set) 
+  if (self.ent == nil) then 
+    self.pos = set do return self.pos end;
+  else
+    self.ent:SetPos(set);
+    do return set end;
+  end;
+end
+__deceptinfect_ecswip_VirtualPosition.prototype.set_ang = function(self,set) 
+  if (self.ent == nil) then 
+    self.ang = set do return self.ang end;
+  else
+    self.ent:SetAngles(set);
+    do return set end;
+  end;
+end
+
+__deceptinfect_ecswip_VirtualPosition.prototype.__class__ =  __deceptinfect_ecswip_VirtualPosition
+__deceptinfect_ecswip_VirtualPosition.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_ecswip_VirtualPosition.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 _hxClasses["deceptinfect.ecswip.ChooseVirPos"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ENT","REAL"},2)}
 __deceptinfect_ecswip_ChooseVirPos = _hxClasses["deceptinfect.ecswip.ChooseVirPos"];
 __deceptinfect_ecswip_ChooseVirPos.ENT = function(x) local _x = _hx_tab_array({[0]="ENT",0,x,__enum__=__deceptinfect_ecswip_ChooseVirPos}, 3); return _x; end 
@@ -5881,7 +5549,7 @@ __deceptinfect_ents_Di_battery.prototype.Initialize = function(self)
   local x = self["self"];
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   self.id = x.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_BatterySource.new(), self.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[0][self.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_BatterySource.new());
 end
 __deceptinfect_ents_Di_battery.prototype.Use = function(self,activator,caller,useType,value) 
   if (self["self"]:IsPlayerHolding() or not activator:IsPlayer()) then 
@@ -5943,7 +5611,7 @@ __deceptinfect_ents_Di_charger.prototype.Initialize = function(self)
   local x = self["self"];
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   self.id = x.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_BatteryAccepter.new(), self.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[16][self.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_BatteryAccepter.new());
 end
 __deceptinfect_ents_Di_charger.prototype["self"]= nil;
 
@@ -5974,7 +5642,7 @@ __deceptinfect_ents_Di_evac_zone.prototype.Initialize = function(self)
   local x = self["self"];
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   self.id = x.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_EvacZone.new(), self.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[29][self.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_EvacZone.new());
 end
 __deceptinfect_ents_Di_evac_zone.prototype.setPoints = function(self,minmax) 
   self["self"]:SetCollisionBoundsWS(minmax.mins, minmax.maxs);
@@ -5989,14 +5657,7 @@ __deceptinfect_ents_Di_evac_zone.prototype.StartTouch = function(self,ent)
     return _hx_1
   end )();
   if (_g[1] == 0) then 
-    local tmp = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem);
-    local this1 = self.id;
-    local x = __deceptinfect_game_components_EvacZone;
-    local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
-    if (retrieve_comp == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-    end;
-    tmp:touched(_g[2], retrieve_comp);
+    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem):touched(_g[2], __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(29, self.id));
   end;
 end
 __deceptinfect_ents_Di_evac_zone.prototype.EndTouch = function(self,ent) 
@@ -6009,14 +5670,7 @@ __deceptinfect_ents_Di_evac_zone.prototype.EndTouch = function(self,ent)
     return _hx_1
   end )();
   if (_g[1] == 0) then 
-    local tmp = __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem);
-    local this1 = self.id;
-    local x = __deceptinfect_game_components_EvacZone;
-    local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0];
-    if (retrieve_comp == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-    end;
-    tmp:leave(_g[2], retrieve_comp);
+    __deceptinfect_ecswip_SystemManager.getSystem(__deceptinfect_game_EvacSystem):leave(_g[2], __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(29, self.id));
   end;
 end
 __deceptinfect_ents_Di_evac_zone.prototype["self"]= nil;
@@ -6050,7 +5704,7 @@ __deceptinfect_ents_Di_flare.prototype.Initialize = function(self)
   local x = self["self"];
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   self.id = x.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_FlareComponent.new(), self.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[26][self.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_FlareComponent.new());
 end
 __deceptinfect_ents_Di_flare.prototype.Touch = function(self,entity) 
   local _g = entity.id;
@@ -6097,21 +5751,16 @@ __deceptinfect_ents_Di_nest.prototype.Initialize = function(self)
   local x = self["self"];
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   self.id = x.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_NestComponent.new(), self.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[27][self.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_NestComponent.new());
 end
 __deceptinfect_ents_Di_nest.prototype.Think = function(self) 
-  local this1 = self.id;
-  local x = __deceptinfect_game_components_NestComponent;
-  if (__deceptinfect_ecswip_ComponentManager.lazyInit(x)[this1]:slice(2)[0] == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-  end;
+  __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(27, self.id);
   local ent = IntIterator.new(0, __deceptinfect_ecswip_ComponentManager.entities);
   while (ent:hasNext()) do 
     local ent = ent:next();
-    local this1 = self.id;
-    local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_game_components_NestComponent)[this1];
-    local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectedComponent)[ent];
-    local _g2 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[ent];
+    local _g = __deceptinfect_ecswip_ComponentManager.components_2[27][self.id];
+    local _g1 = __deceptinfect_ecswip_ComponentManager.components_2[32][ent];
+    local _g2 = __deceptinfect_ecswip_ComponentManager.components_2[31][ent];
     if (_g2[1] == 1) then 
       local _g2 = _g2[2];
       if (_g[1] == 1) then 
@@ -6144,6 +5793,9 @@ __deceptinfect_ents_Di_puddle.new = function(x)
   return self
 end
 __deceptinfect_ents_Di_puddle.super = function(self,x) 
+  self.visualHeight = 1;
+  self.collideHeight = 40;
+  self.size = 100;
   self.totalInfection = 25.0;
   self.totalCooldown = 5.0;
   self.properties = _hx_o({__fields__={Base=true},Base="base_entity"});
@@ -6158,33 +5810,48 @@ __deceptinfect_ents_Di_puddle.prototype.cooldown= nil;
 __deceptinfect_ents_Di_puddle.prototype.properties= nil;
 __deceptinfect_ents_Di_puddle.prototype.totalCooldown= nil;
 __deceptinfect_ents_Di_puddle.prototype.totalInfection= nil;
+__deceptinfect_ents_Di_puddle.prototype.size= nil;
+__deceptinfect_ents_Di_puddle.prototype.sizeVector= nil;
+__deceptinfect_ents_Di_puddle.prototype.collideHeightVector= nil;
+__deceptinfect_ents_Di_puddle.prototype.visualHeightVector= nil;
+__deceptinfect_ents_Di_puddle.prototype.collideHeight= nil;
+__deceptinfect_ents_Di_puddle.prototype.visualHeight= nil;
 __deceptinfect_ents_Di_puddle.prototype.Initialize = function(self) 
-  self["self"]:SetCollisionBounds(_G.Vector(0, 0, 0), _G.Vector(100, 100, 0));
+  self.sizeVector = _G.Vector(self.size / 2, self.size / 2, 0);
+  self.collideHeightVector = _G.Vector(0, 0, self.collideHeight);
+  self.visualHeightVector = _G.Vector(0, 0, self.visualHeight);
+  self["self"]:SetModel("models/props_c17/oildrum001_explosive.mdl");
   self["self"]:PhysicsInit(_G.SOLID_BBOX);
+  self["self"]:SetTrigger(true);
   if (_G.IsValid(self["self"]:GetPhysicsObject())) then 
-    self["self"]:SetMoveType(_G.MOVETYPE_NONE);
+    self["self"]:GetPhysicsObject():EnableMotion(false);
+    self["self"]:GetPhysicsObject():Wake();
     self["self"]:SetCollisionGroup(_G.COLLISION_GROUP_DEBRIS);
   end;
+  self["self"]:DropToFloor();
+  local tmp = self["self"];
+  local this1 = self.sizeVector;
+  local tmp1 = -this1;
+  local this1 = self.sizeVector;
+  local otherVec = self.collideHeightVector;
+  tmp:SetCollisionBounds(tmp1, this1 + otherVec);
 end
 __deceptinfect_ents_Di_puddle.prototype.Touch = function(self,ent) 
-  local this1 = ent.id;
-  local _g = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_ecswip_PlayerComponent)[this1];
-  local this1 = ent.id;
-  local _g1 = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent)[this1];
-  if (_g1[1] == 1) then 
-    local _g1 = _g1[2];
-    local _g2 = _g1.infection;
-    if (_g2[1] == 0) then 
-      local _g2 = _g2[2];
-      if (_g[1] == 1) then 
-        local curCooldown = self.cooldown.h[_g1];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[23][ent.id];
+  if (_g[1] == 1) then 
+    local _g = _g[2];
+    local _g1 = _g.infection;
+    if (_g1[1] == 0) then 
+      local _g1 = _g1[2];
+      if (__deceptinfect_ecswip_ComponentManager.components_2[31][ent.id][1] == 1) then 
+        local curCooldown = self.cooldown.h[_g];
         if ((curCooldown == nil) or (_G.CurTime() > curCooldown)) then 
-          _g2[0] = _g2[0] + self.totalInfection;
+          _g1[0] = _g1[0] + self.totalInfection;
           local this1 = self.cooldown;
           local value = _G.CurTime() + self.totalCooldown;
           local _this = this1;
-          _this.h[_g1] = value;
-          _this.k[_g1] = true;
+          _this.h[_g] = value;
+          _this.k[_g] = true;
         end;
       end;
     end;
@@ -6217,8 +5884,8 @@ __deceptinfect_ents_Di_ragdoll.prototype.Initialize = function(self)
   local x = self["self"];
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   self.id = x.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_Ragdoll.new(), self.id);
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_CleanupEnt.new(), self.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[25][self.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_Ragdoll.new());
+  __deceptinfect_ecswip_ComponentManager.components_2[13][self.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_CleanupEnt.new());
 end
 __deceptinfect_ents_Di_ragdoll.prototype["self"]= nil;
 
@@ -6238,7 +5905,6 @@ __deceptinfect_game__EvacSystem_INT_EvacState_Impl_.from = function(x)
   elseif (tmp) == 2 then 
     do return 2 end; end;
 end
-_hxClasses["deceptinfect.game.SlowMotionState"] = __deceptinfect_game_SlowMotionState;
 _hxClasses["deceptinfect.game.SlowMotionState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ACTIVE","INACTIVE","FINISHED"},3)}
 __deceptinfect_game_SlowMotionState = _hxClasses["deceptinfect.game.SlowMotionState"];
 __deceptinfect_game_SlowMotionState.ACTIVE = function(target,start) local _x = _hx_tab_array({[0]="ACTIVE",0,target,start,__enum__=__deceptinfect_game_SlowMotionState}, 4); return _x; end 
@@ -6246,7 +5912,6 @@ __deceptinfect_game_SlowMotionState.INACTIVE = _hx_tab_array({[0]="INACTIVE",1,_
 
 __deceptinfect_game_SlowMotionState.FINISHED = _hx_tab_array({[0]="FINISHED",2,__enum__ = __deceptinfect_game_SlowMotionState},2)
 
-_hxClasses["deceptinfect.game.SpawnClaim"] = __deceptinfect_game_SpawnClaim;
 _hxClasses["deceptinfect.game.SpawnClaim"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="UNCLAIMED","CLAIMED"},2)}
 __deceptinfect_game_SpawnClaim = _hxClasses["deceptinfect.game.SpawnClaim"];
 __deceptinfect_game_SpawnClaim.UNCLAIMED = _hx_tab_array({[0]="UNCLAIMED",0,__enum__ = __deceptinfect_game_SpawnClaim},2)
@@ -6405,7 +6070,7 @@ __deceptinfect_game_Spawn.prototype.spawn = function(self,ent)
   if (_g[1] == 0) then 
     local _g = _g[2];
     __haxe_Log.trace(_g, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=139,className="deceptinfect.game.Spawn",methodName="spawn"}));
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_Spawned.new(self), _g);
+    __deceptinfect_ecswip_ComponentManager.components_2[33][_g] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_Spawned.new(self));
   end;
 end
 __deceptinfect_game_Spawn.prototype.calculateDist = function(self,other) 
@@ -6500,7 +6165,7 @@ __deceptinfect_game_BoundsSpawn.prototype.spawn = function(self,ent)
   if (_g[1] == 0) then 
     local _g = _g[2];
     __haxe_Log.trace(_g, _hx_o({__fields__={fileName=true,lineNumber=true,className=true,methodName=true},fileName="src/deceptinfect/game/SpawnSystem.hx",lineNumber=202,className="deceptinfect.game.BoundsSpawn",methodName="spawn"}));
-    __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_game_components_Spawned.new(self), _g);
+    __deceptinfect_ecswip_ComponentManager.components_2[33][_g] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_game_components_Spawned.new(self));
   end;
   ent:SetCollisionBoundsWS(self.bounds.mins, self.bounds.maxs);
 end
@@ -6508,7 +6173,6 @@ end
 __deceptinfect_game_BoundsSpawn.prototype.__class__ =  __deceptinfect_game_BoundsSpawn
 __deceptinfect_game_BoundsSpawn.__super__ = __deceptinfect_game_Spawn
 setmetatable(__deceptinfect_game_BoundsSpawn.prototype,{__index=__deceptinfect_game_Spawn.prototype})
-_hxClasses["deceptinfect.game.Win"] = __deceptinfect_game_Win;
 _hxClasses["deceptinfect.game.Win"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WIN_HUMAN","WIN_INF","DRAW"},3)}
 __deceptinfect_game_Win = _hxClasses["deceptinfect.game.Win"];
 __deceptinfect_game_Win.WIN_HUMAN = _hx_tab_array({[0]="WIN_HUMAN",0,__enum__ = __deceptinfect_game_Win},2)
@@ -6557,7 +6221,6 @@ __deceptinfect_game_components_BatteryAccepter.prototype.status= nil;
 __deceptinfect_game_components_BatteryAccepter.prototype.__class__ =  __deceptinfect_game_components_BatteryAccepter
 __deceptinfect_game_components_BatteryAccepter.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_game_components_BatteryAccepter.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.game.components.AccepterStatus"] = __deceptinfect_game_components_AccepterStatus;
 _hxClasses["deceptinfect.game.components.AccepterStatus"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="AVALIABLE","SATISIFED","UNAVALIABLE"},3)}
 __deceptinfect_game_components_AccepterStatus = _hxClasses["deceptinfect.game.components.AccepterStatus"];
 __deceptinfect_game_components_AccepterStatus.AVALIABLE = _hx_tab_array({[0]="AVALIABLE",0,__enum__ = __deceptinfect_game_components_AccepterStatus},2)
@@ -6627,7 +6290,6 @@ __deceptinfect_game_components_EvacZone.prototype.state= nil;
 __deceptinfect_game_components_EvacZone.prototype.__class__ =  __deceptinfect_game_components_EvacZone
 __deceptinfect_game_components_EvacZone.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_game_components_EvacZone.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.game.components.EvacState"] = __deceptinfect_game_components_EvacState;
 _hxClasses["deceptinfect.game.components.EvacState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NOT_ACTIVE","ARRIVING","LEAVING"},3)}
 __deceptinfect_game_components_EvacState = _hxClasses["deceptinfect.game.components.EvacState"];
 __deceptinfect_game_components_EvacState.NOT_ACTIVE = _hx_tab_array({[0]="NOT_ACTIVE",0,__enum__ = __deceptinfect_game_components_EvacState},2)
@@ -6714,7 +6376,6 @@ __deceptinfect_game_components_NestComponent.prototype.rate_threshold_max= nil;
 __deceptinfect_game_components_NestComponent.prototype.__class__ =  __deceptinfect_game_components_NestComponent
 __deceptinfect_game_components_NestComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_game_components_NestComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.game.components.NestState"] = __deceptinfect_game_components_NestState;
 _hxClasses["deceptinfect.game.components.NestState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="INVISIBLE","VISIBLE","DEAD"},3)}
 __deceptinfect_game_components_NestState = _hxClasses["deceptinfect.game.components.NestState"];
 __deceptinfect_game_components_NestState.INVISIBLE = _hx_tab_array({[0]="INVISIBLE",0,__enum__ = __deceptinfect_game_components_NestState},2)
@@ -6742,7 +6403,6 @@ __deceptinfect_game_components_Ragdoll.prototype.owner= nil;
 __deceptinfect_game_components_Ragdoll.prototype.__class__ =  __deceptinfect_game_components_Ragdoll
 __deceptinfect_game_components_Ragdoll.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_game_components_Ragdoll.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.game.components.RagdollReveal"] = __deceptinfect_game_components_RagdollReveal;
 _hxClasses["deceptinfect.game.components.RagdollReveal"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="WAIT","REVEAL","NO_REVEAL"},3)}
 __deceptinfect_game_components_RagdollReveal = _hxClasses["deceptinfect.game.components.RagdollReveal"];
 __deceptinfect_game_components_RagdollReveal.WAIT = function(time) local _x = _hx_tab_array({[0]="WAIT",0,time,__enum__=__deceptinfect_game_components_RagdollReveal}, 3); return _x; end 
@@ -6848,11 +6508,6 @@ _hxClasses["hxbit.Serializable"] = __hxbit_Serializable
 __hxbit_Serializable.__name__ = "hxbit.Serializable"
 __hxbit_Serializable.prototype = _hx_e();
 __hxbit_Serializable.prototype.__uid= nil;
-__hxbit_Serializable.prototype.getCLID= nil;
-__hxbit_Serializable.prototype.serialize= nil;
-__hxbit_Serializable.prototype.unserializeInit= nil;
-__hxbit_Serializable.prototype.unserialize= nil;
-__hxbit_Serializable.prototype.getSerializeSchema= nil;
 
 __hxbit_Serializable.prototype.__class__ =  __hxbit_Serializable
 
@@ -6861,15 +6516,8 @@ _hxClasses["hxbit.NetworkSerializable"] = __hxbit_NetworkSerializable
 __hxbit_NetworkSerializable.__name__ = "hxbit.NetworkSerializable"
 __hxbit_NetworkSerializable.__interfaces__ = {__hxbit_ProxyHost,__hxbit_Serializable}
 __hxbit_NetworkSerializable.prototype = _hx_e();
-__hxbit_NetworkSerializable.prototype.__host= nil;
-__hxbit_NetworkSerializable.prototype.__bits= nil;
 __hxbit_NetworkSerializable.prototype.__next= nil;
-__hxbit_NetworkSerializable.prototype.alive= nil;
-__hxbit_NetworkSerializable.prototype.networkFlush= nil;
-__hxbit_NetworkSerializable.prototype.networkSync= nil;
-__hxbit_NetworkSerializable.prototype.networkRPC= nil;
 __hxbit_NetworkSerializable.prototype.networkAllow= nil;
-__hxbit_NetworkSerializable.prototype.networkGetName= nil;
 
 __hxbit_NetworkSerializable.prototype.__class__ =  __hxbit_NetworkSerializable
 
@@ -6879,7 +6527,6 @@ __hxbit_Serializer.new = function()
   return self
 end
 __hxbit_Serializer.super = function(self) 
-  self.usedClasses = _hx_tab_array({}, 0);
   if (__hxbit_Serializer.CLIDS == nil) then 
     __hxbit_Serializer.initClassIDS();
   end;
@@ -6889,14 +6536,6 @@ __hxbit_Serializer.__name__ = "hxbit.Serializer"
 __hxbit_Serializer.resetCounters = function() 
   __hxbit_Serializer.UID = 0;
   __hxbit_Serializer.SEQ = 0;
-end
-__hxbit_Serializer.registerClass = function(c) 
-  if (__hxbit_Serializer.CLIDS ~= nil) then 
-    _G.error(__haxe_Exception.thrown("Too late to register class"),0);
-  end;
-  local idx = __hxbit_Serializer.CLASSES.length;
-  __hxbit_Serializer.CLASSES:push(c);
-  do return idx end;
 end
 __hxbit_Serializer.initClassIDS = function() 
   local cl = __hxbit_Serializer.CLASSES;
@@ -6972,1882 +6611,15 @@ __hxbit_Serializer.initClassIDS = function()
     
   end;
 end
-__hxbit_Serializer.getSignature = function() 
-  if (__hxbit_Serializer.__SIGN ~= nil) then 
-    do return __hxbit_Serializer.__SIGN end;
-  end;
-  local s = __hxbit_Serializer.new();
-  s:begin();
-  local v = __hxbit_Serializer.CLASSES.length;
-  if ((v >= 0) and (v < 128)) then 
-    s.out.b:push(v);
-  else
-    s.out.b:push(128);
-    s.out:addInt32(v);
-  end;
-  local _g = 0;
-  local _g1 = __hxbit_Serializer.CLASSES.length;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    local v = __hxbit_Serializer.CLIDS[i];
-    if ((v >= 0) and (v < 128)) then 
-      s.out.b:push(v);
-    else
-      s.out.b:push(128);
-      s.out:addInt32(v);
-    end;
-    local v = Type.createEmptyInstance(__hxbit_Serializer.CLASSES[i]):getSerializeSchema():get_checkSum();
-    s.out:addInt32(v);
-  end;
-  __hxbit_Serializer.__SIGN = __haxe_crypto_Md5.make(_hx_apply_self(s,"end")) do return __hxbit_Serializer.__SIGN end;
-end
-__hxbit_Serializer.isClassFinal = function(index) 
-  do return __hxbit_Serializer.CLIDS[index] == 0 end;
-end
 __hxbit_Serializer.prototype = _hx_e();
 __hxbit_Serializer.prototype.refs= nil;
-__hxbit_Serializer.prototype.remapObjs= nil;
 __hxbit_Serializer.prototype.newObjects= nil;
 __hxbit_Serializer.prototype.out= nil;
-__hxbit_Serializer.prototype.input= nil;
-__hxbit_Serializer.prototype.inPos= nil;
-__hxbit_Serializer.prototype.usedClasses= nil;
-__hxbit_Serializer.prototype.convert= nil;
-__hxbit_Serializer.prototype.mapIndexes= nil;
 __hxbit_Serializer.prototype.knownStructs= nil;
-__hxbit_Serializer.prototype.remap = function(self,s) 
-  if (self.remapObjs.k[s] ~= nil) then 
-    do return end;
-  end;
-  local _this = self.remapObjs;
-  _this.h[s] = s.__uid;
-  _this.k[s] = true;
-  s.__uid = _hx_bit.bor(_hx_bit.lshift(__hxbit_Serializer.SEQ,24),(function() 
-  local _hx_obj = __hxbit_Serializer;
-  local _hx_fld = 'UID';
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _hx_obj[_hx_fld];
-   end)());
-end
 __hxbit_Serializer.prototype.begin = function(self) 
   self.out = __haxe_io_BytesBuffer.new();
   self.refs = __haxe_ds_IntMap.new();
   self.knownStructs = _hx_tab_array({}, 0);
-end
-__hxbit_Serializer.prototype["end"] = function(self) 
-  local bytes = self.out:getBytes();
-  self.out = nil;
-  self.refs = nil;
-  self.knownStructs = nil;
-  do return bytes end
-end
-__hxbit_Serializer.prototype.setInput = function(self,data,pos) 
-  self.input = data;
-  self.inPos = pos;
-  if (self.refs == nil) then 
-    self.refs = __haxe_ds_IntMap.new();
-  end;
-  if (self.knownStructs == nil) then 
-    self.knownStructs = _hx_tab_array({}, 0);
-  end;
-end
-__hxbit_Serializer.prototype.getDynamic = function(self) 
-  local pos = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local _g = self.input.b[pos];
-  local _g1 = _g;
-  if (_g1) == 0 then 
-    do return nil end;
-  elseif (_g1) == 1 then 
-    do return false end;
-  elseif (_g1) == 2 then 
-    do return true end;
-  elseif (_g1) == 3 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_1
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_1 = v1; end
-        return _hx_1
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    do return v end;
-  elseif (_g1) == 4 then 
-    local v = self.input:getFloat(self.inPos);
-    local tmp = self;
-    tmp.inPos = tmp.inPos + 4;
-    do return v end;
-  elseif (_g1) == 5 then 
-    local o = _hx_e();
-    local _g = 0;
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_2
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_2 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_2 = v1; end
-        return _hx_2
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local _g1 = v;
-    while (_g < _g1) do 
-      _g = _g + 1;
-      local pos = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      local v = self.input.b[pos];
-      if (v == 128) then 
-        local _this = self.input;
-        local pos = self.inPos;
-        local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-        v = _hx_bit_clamp((function() 
-          local _hx_3
-          if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-          _hx_3 = _hx_bit.bor(v1,-2147483648); else 
-          _hx_3 = v1; end
-          return _hx_3
-        end )());
-        local tmp = self;
-        tmp.inPos = tmp.inPos + 4;
-      end;
-      local len = v;
-      local field;
-      if (len == 0) then 
-        field = nil;
-      else
-        len = len - 1;
-        local s = self.input:getString(self.inPos, len);
-        local field1 = self;
-        field1.inPos = field1.inPos + len;
-        field = s;
-      end;
-      o[field] = self:getDynamic();
-    end;
-    do return o end;
-  elseif (_g1) == 6 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_4
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_4 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_4 = v1; end
-        return _hx_4
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      do return nil end;
-    else
-      len = len - 1;
-      local s = self.input:getString(self.inPos, len);
-      local tmp = self;
-      tmp.inPos = tmp.inPos + len;
-      do return s end;
-    end;
-  elseif (_g1) == 7 then 
-    local _g = _hx_tab_array({}, 0);
-    local _g1 = 0;
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_5
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_5 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_5 = v1; end
-        return _hx_5
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local _g2 = v;
-    while (_g1 < _g2) do 
-      _g1 = _g1 + 1;
-      _g:push(self:getDynamic());
-    end;
-    do return _g end;
-  elseif (_g1) == 8 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_6
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_6 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_6 = v1; end
-        return _hx_6
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      do return nil end;
-    else
-      len = len - 1;
-      local s = self.input:sub(self.inPos, len);
-      local tmp = self;
-      tmp.inPos = tmp.inPos + len;
-      do return s end;
-    end;else
-  _G.error(__haxe_Exception.thrown(Std.string("Invalid dynamic prefix ") .. Std.string(_g)),0); end;
-end
-__hxbit_Serializer.prototype.addDynamic = function(self,v) 
-  if (v == nil) then 
-    self.out.b:push(0);
-    do return end;
-  end;
-  local _g = Type.typeof(v);
-  local tmp = _g[1];
-  if (tmp) == 1 then 
-    self.out.b:push(3);
-    local v = v;
-    if ((v >= 0) and (v < 128)) then 
-      self.out.b:push(v);
-    else
-      self.out.b:push(128);
-      self.out:addInt32(v);
-    end;
-  elseif (tmp) == 2 then 
-    self.out.b:push(4);
-    self.out:addInt32(__haxe_io_FPHelper.floatToI32(v));
-  elseif (tmp) == 3 then 
-    self.out.b:push((function() 
-      local _hx_1
-      if (v) then 
-      _hx_1 = 2; else 
-      _hx_1 = 1; end
-      return _hx_1
-    end )());
-  elseif (tmp) == 4 then 
-    local fields = Reflect.fields(v);
-    self.out.b:push(5);
-    local v1 = fields.length;
-    if ((v1 >= 0) and (v1 < 128)) then 
-      self.out.b:push(v1);
-    else
-      self.out.b:push(128);
-      self.out:addInt32(v1);
-    end;
-    local _g = 0;
-    while (_g < fields.length) do 
-      local f = fields[_g];
-      _g = _g + 1;
-      if (f == nil) then 
-        self.out.b:push(0);
-      else
-        local b = __haxe_io_Bytes.ofString(f);
-        local v = b.length + 1;
-        if ((v >= 0) and (v < 128)) then 
-          self.out.b:push(v);
-        else
-          self.out.b:push(128);
-          self.out:addInt32(v);
-        end;
-        local _this = self.out;
-        local b2 = b.b;
-        local _g = 0;
-        local _g1 = b.length;
-        while (_g < _g1) do 
-          _g = _g + 1;
-          _this.b:push(b2[_g - 1]);
-        end;
-      end;
-      self:addDynamic(Reflect.field(v, f));
-    end;
-  elseif (tmp) == 6 then 
-    local _g = _g[2];
-    if (_g) == Array then 
-      self.out.b:push(7);
-      local a = v;
-      local v = a.length;
-      if ((v >= 0) and (v < 128)) then 
-        self.out.b:push(v);
-      else
-        self.out.b:push(128);
-        self.out:addInt32(v);
-      end;
-      local _g = 0;
-      while (_g < a.length) do 
-        local v = a[_g];
-        _g = _g + 1;
-        self:addDynamic(v);
-      end;
-    elseif (_g) == String then 
-      self.out.b:push(6);
-      local s = v;
-      if (s == nil) then 
-        self.out.b:push(0);
-      else
-        local b = __haxe_io_Bytes.ofString(s);
-        local v = b.length + 1;
-        if ((v >= 0) and (v < 128)) then 
-          self.out.b:push(v);
-        else
-          self.out.b:push(128);
-          self.out:addInt32(v);
-        end;
-        local _this = self.out;
-        local b2 = b.b;
-        local _g = 0;
-        local _g1 = b.length;
-        while (_g < _g1) do 
-          _g = _g + 1;
-          _this.b:push(b2[_g - 1]);
-        end;
-      end;
-    elseif (_g) == __haxe_io_Bytes then 
-      self.out.b:push(8);
-      local b = v;
-      if (b == nil) then 
-        self.out.b:push(0);
-      else
-        local v = b.length + 1;
-        if ((v >= 0) and (v < 128)) then 
-          self.out.b:push(v);
-        else
-          self.out.b:push(128);
-          self.out:addInt32(v);
-        end;
-        local _this = self.out;
-        local b2 = b.b;
-        local _g = 0;
-        local _g1 = b.length;
-        while (_g < _g1) do 
-          _g = _g + 1;
-          _this.b:push(b2[_g - 1]);
-        end;
-      end;else
-    _G.error(__haxe_Exception.thrown(Std.string("Unsupported dynamic ") .. Std.string(Std.string(_g))),0); end;else
-  _G.error(__haxe_Exception.thrown(Std.string("Unsupported dynamic ") .. Std.string(Std.string(_g))),0); end;
-end
-__hxbit_Serializer.prototype.addStruct = function(self,s) 
-  if (s == nil) then 
-    self.out.b:push(0);
-    do return end;
-  end;
-  local c = (function() 
-    local _hx_1
-    if (__lua_Boot.__instanceof(s, __hxbit_Serializable)) then 
-    _hx_1 = s; else 
-    _hx_1 = nil; end
-    return _hx_1
-  end )();
-  if (c ~= nil) then 
-    self.out.b:push(1);
-    self:addAnyRef(c);
-    do return end;
-  end;
-  local index = self.knownStructs:indexOf(s);
-  if (index >= 0) then 
-    self.out.b:push(2);
-    if ((index >= 0) and (index < 128)) then 
-      self.out.b:push(index);
-    else
-      self.out.b:push(128);
-      self.out:addInt32(index);
-    end;
-    do return end;
-  end;
-  self.knownStructs:push(s);
-  self.out.b:push(3);
-  local c = Type.getClass(s);
-  if (c == nil) then 
-    _G.error(__haxe_Exception.thrown(Std.string(Std.string(s)) .. Std.string(" does not have a class ?")),0);
-  end;
-  local s1 = c.__name__;
-  if (s1 == nil) then 
-    self.out.b:push(0);
-  else
-    local b = __haxe_io_Bytes.ofString(s1);
-    local v = b.length + 1;
-    if ((v >= 0) and (v < 128)) then 
-      self.out.b:push(v);
-    else
-      self.out.b:push(128);
-      self.out:addInt32(v);
-    end;
-    local _this = self.out;
-    local b2 = b.b;
-    local _g = 0;
-    local _g1 = b.length;
-    while (_g < _g1) do 
-      _g = _g + 1;
-      _this.b:push(b2[_g - 1]);
-    end;
-  end;
-  s:customSerialize(self);
-  self.out.b:push(255);
-end
-__hxbit_Serializer.prototype.getStruct = function(self) 
-  local pos = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local _g = self.input.b[pos];
-  if (_g) == 0 then 
-    do return nil end;
-  elseif (_g) == 1 then 
-    do return self:getAnyRef() end;
-  elseif (_g) == 2 then 
-    local tmp = self.knownStructs;
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_1
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_1 = v1; end
-        return _hx_1
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    do return tmp[v] end;
-  elseif (_g) == 3 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_2
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_2 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_2 = v1; end
-        return _hx_2
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local len = v;
-    local cname;
-    if (len == 0) then 
-      cname = nil;
-    else
-      len = len - 1;
-      local s = self.input:getString(self.inPos, len);
-      local cname1 = self;
-      cname1.inPos = cname1.inPos + len;
-      cname = s;
-    end;
-    local cl = Type.resolveClass(cname);
-    if (cl == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Missing struct class ") .. Std.string(cname)),0);
-    end;
-    local s = Type.createEmptyInstance(cl);
-    self.knownStructs:push(s);
-    s:customUnserialize(self);
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    if (self.input.b[pos] ~= 255) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Invalid customUnserialize for ") .. Std.string(Std.string(s))),0);
-    end;
-    do return s end;else
-  _G.error(__haxe_Exception.thrown("assert"),0); end;
-end
-__hxbit_Serializer.prototype.addObjRef = function(self,s) 
-  local v = s.__uid;
-  if ((v >= 0) and (v < 128)) then 
-    self.out.b:push(v);
-  else
-    self.out.b:push(128);
-    self.out:addInt32(v);
-  end;
-end
-__hxbit_Serializer.prototype.getObjRef = function(self) 
-  local pos = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local v = self.input.b[pos];
-  if (v == 128) then 
-    local _this = self.input;
-    local pos = self.inPos;
-    local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-    v = _hx_bit_clamp((function() 
-      local _hx_1
-      if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-      _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-      _hx_1 = v1; end
-      return _hx_1
-    end )());
-    local tmp = self;
-    tmp.inPos = tmp.inPos + 4;
-  end;
-  do return v end
-end
-__hxbit_Serializer.prototype.addAnyRef = function(self,s) 
-  if (s == nil) then 
-    self.out.b:push(0);
-    do return end;
-  end;
-  if (self.remapObjs ~= nil) then 
-    self:remap(s);
-  end;
-  self:addObjRef(s);
-  local ret = self.refs.h[s.__uid];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  if (ret ~= nil) then 
-    do return end;
-  end;
-  local k = s.__uid;
-  local _this = self.refs;
-  if (s == nil) then 
-    _this.h[k] = __haxe_ds_IntMap.tnull;
-  else
-    _this.h[k] = s;
-  end;
-  local index = s:getCLID();
-  self.usedClasses[index] = true;
-  self.out.b:push(_hx_bit.arshift(index,8));
-  self.out.b:push(_hx_bit.band(index,255));
-  s:serialize(self);
-end
-__hxbit_Serializer.prototype.addKnownRef = function(self,s) 
-  if (s == nil) then 
-    self.out.b:push(0);
-    do return end;
-  end;
-  if (self.remapObjs ~= nil) then 
-    self:remap(s);
-  end;
-  self:addObjRef(s);
-  local ret = self.refs.h[s.__uid];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  if (ret ~= nil) then 
-    do return end;
-  end;
-  local k = s.__uid;
-  local _this = self.refs;
-  if (s == nil) then 
-    _this.h[k] = __haxe_ds_IntMap.tnull;
-  else
-    _this.h[k] = s;
-  end;
-  local index = s:getCLID();
-  self.usedClasses[index] = true;
-  local clid = __hxbit_Serializer.CLIDS[index];
-  if (clid ~= 0) then 
-    self.out.b:push(_hx_bit.arshift(clid,8));
-    self.out.b:push(_hx_bit.band(clid,255));
-  end;
-  s:serialize(self);
-end
-__hxbit_Serializer.prototype.getAnyRef = function(self) 
-  local id = self:getObjRef();
-  if (id == 0) then 
-    do return nil end;
-  end;
-  local ret = self.refs.h[id];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  if (ret ~= nil) then 
-    local ret = self.refs.h[id];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    do return ret end;
-  end;
-  local rid = _hx_bit.band(id,16777215);
-  if (__hxbit_Serializer.UID < rid) then 
-    __hxbit_Serializer.UID = rid;
-  end;
-  local pos = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local clidx = _hx_bit.lshift(self.input.b[pos],8);
-  local pos = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local clidx = _hx_bit.bor(clidx,self.input.b[pos]);
-  if (self.mapIndexes ~= nil) then 
-    clidx = self.mapIndexes[clidx];
-  end;
-  local i = Type.createEmptyInstance(__hxbit_Serializer.CLASSES[clidx]);
-  if (self.newObjects ~= nil) then 
-    self.newObjects:push(i);
-  end;
-  i.__uid = id;
-  i:unserializeInit();
-  local _this = self.refs;
-  if (i == nil) then 
-    _this.h[id] = __haxe_ds_IntMap.tnull;
-  else
-    _this.h[id] = i;
-  end;
-  if ((self.convert ~= nil) and (self.convert[clidx] ~= nil)) then 
-    self:convertRef(i, self.convert[clidx]);
-  else
-    i:unserialize(self);
-  end;
-  do return i end
-end
-__hxbit_Serializer.prototype.getRef = function(self,c,clidx) 
-  local id = self:getObjRef();
-  if (id == 0) then 
-    do return nil end;
-  end;
-  local ret = self.refs.h[id];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  if (ret ~= nil) then 
-    local ret = self.refs.h[id];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    do return ret end;
-  end;
-  local rid = _hx_bit.band(id,16777215);
-  if (__hxbit_Serializer.UID < rid) then 
-    __hxbit_Serializer.UID = rid;
-  end;
-  if ((self.convert ~= nil) and (self.convert[clidx] ~= nil)) then 
-    local conv = self.convert[clidx];
-    if (conv.hadCID) then 
-      local pos = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      local realIdx = _hx_bit.lshift(self.input.b[pos],8);
-      local pos = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      if (conv.hasCID) then 
-        c = __hxbit_Serializer.CL_BYID[_hx_bit.bor(realIdx,self.input.b[pos])];
-        clidx = c.__clid;
-      end;
-    end;
-  else
-    if (__hxbit_Serializer.CLIDS[clidx] ~= 0) then 
-      local pos = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      local realIdx = _hx_bit.lshift(self.input.b[pos],8);
-      local pos = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      c = __hxbit_Serializer.CL_BYID[_hx_bit.bor(realIdx,self.input.b[pos])];
-      if (self.convert ~= nil) then 
-        clidx = c.__clid;
-      end;
-    end;
-  end;
-  local i = Type.createEmptyInstance(c);
-  if (self.newObjects ~= nil) then 
-    self.newObjects:push(i);
-  end;
-  i.__uid = id;
-  i:unserializeInit();
-  local _this = self.refs;
-  if (i == nil) then 
-    _this.h[id] = __haxe_ds_IntMap.tnull;
-  else
-    _this.h[id] = i;
-  end;
-  if ((self.convert ~= nil) and (self.convert[clidx] ~= nil)) then 
-    self:convertRef(i, self.convert[clidx]);
-  else
-    i:unserialize(self);
-  end;
-  do return i end
-end
-__hxbit_Serializer.prototype.convertRef = function(self,i,c) 
-  local length = c.read.length;
-  local values = ({length = length});
-  local _g = 0;
-  local _g1 = c.read;
-  while (_g < _g1.length) do 
-    local r = _g1[_g];
-    _g = _g + 1;
-    values[r.index] = self:readValue(r.from);
-  end;
-  local oldOut = self.out;
-  self.out = __haxe_io_BytesBuffer.new();
-  local _g = 0;
-  local _g1 = c.write;
-  while (_g < _g1.length) do 
-    local w = _g1[_g];
-    _g = _g + 1;
-    local v;
-    if (w.from == nil) then 
-      v = w.defaultValue;
-    else
-      v = values[w.index];
-      if (not w.same) then 
-        if (v == nil) then 
-          v = w.defaultValue;
-        else
-          if (w.conv ~= nil) then 
-            v = w:conv(v);
-          else
-            v = self:convertValue(w.path, v, w.from, w.to);
-          end;
-        end;
-      end;
-    end;
-    self:writeValue(v, w.to);
-  end;
-  local bytes = self.out:getBytes();
-  self.out = oldOut;
-  local oldIn = self.input;
-  local oldPos = self.inPos;
-  self:setInput(bytes, 0);
-  i:unserialize(self);
-  self:setInput(oldIn, oldPos);
-end
-__hxbit_Serializer.prototype.isNullable = function(self,t) 
-  local tmp = t[1];
-  if (tmp) == 0 or (tmp) == 1 or (tmp) == 2 then 
-    do return false end;else
-  do return true end; end;
-end
-__hxbit_Serializer.prototype.convertValue = function(self,path,v,from,to) 
-  if (v == nil) then 
-    do return __hxbit_Convert.getDefault(to) end;
-  end;
-  if (__hxbit_Convert.sameType(from, to)) then 
-    do return v end;
-  end;
-  local ret = __hxbit_Convert.convFuns.h[path];
-  if (ret == __haxe_ds_StringMap.tnull) then 
-    ret = nil;
-  end;
-  local conv = ret;
-  if (conv ~= nil) then 
-    do return conv(v) end;
-  end;
-  local tmp = from[1];
-  if (tmp) == 0 then 
-    local tmp = to[1];
-    if (tmp) == 1 then 
-      do return v * 1.0 end;
-    elseif (tmp) == 10 then 
-      do return self:convertValue(path, v, from, to[2]) end;
-    elseif (tmp) == 12 then 
-      do return self:convertValue(path, v, from, to[2]) end;else end;
-  elseif (tmp) == 1 then 
-    local tmp = to[1];
-    if (tmp) == 0 then 
-      do return Std.int(v) end;
-    elseif (tmp) == 10 then 
-      do return self:convertValue(path, v, from, to[2]) end;
-    elseif (tmp) == 12 then 
-      do return self:convertValue(path, v, from, to[2]) end;else end;
-  elseif (tmp) == 2 then 
-    local tmp = to[1];
-    if (tmp) == 0 then 
-      if (v) then 
-        do return 1 end;
-      else
-        do return 0 end;
-      end;
-    elseif (tmp) == 1 then 
-      if (v) then 
-        do return 1. end;
-      else
-        do return 0. end;
-      end;
-    elseif (tmp) == 10 then 
-      do return self:convertValue(path, v, from, to[2]) end;
-    elseif (tmp) == 12 then 
-      do return self:convertValue(path, v, from, to[2]) end;else end;
-  elseif (tmp) == 5 then 
-    local tmp = to[1];
-    if (tmp) == 5 then 
-      local v2 = (function() 
-        local _hx_1
-        if (__lua_Boot.__instanceof(v, Type.resolveClass(to[2]))) then 
-        _hx_1 = v; else 
-        _hx_1 = nil; end
-        return _hx_1
-      end )();
-      if (v2 ~= nil) then 
-        do return v2 end;
-      end;
-    elseif (tmp) == 10 then 
-      do return self:convertValue(path, v, from, to[2]) end;
-    elseif (tmp) == 12 then 
-      do return self:convertValue(path, v, from, to[2]) end;else end;
-  elseif (tmp) == 8 then 
-    local _g = from[2];
-    local tmp = to[1];
-    if (tmp) == 8 then 
-      local _g1 = to[2];
-      local arr = v;
-      local _g2 = _hx_tab_array({}, 0);
-      local _g3 = 0;
-      while (_g3 < arr.length) do 
-        local v = arr[_g3];
-        _g3 = _g3 + 1;
-        _g2:push(self:convertValue(Std.string(path) .. Std.string("[]"), v, _g, _g1));
-      end;
-      do return _g2 end;
-    elseif (tmp) == 10 then 
-      do return self:convertValue(path, v, from, to[2]) end;
-    elseif (tmp) == 12 then 
-      do return self:convertValue(path, v, from, to[2]) end;else end;
-  elseif (tmp) == 9 then 
-    local _g = from[2];
-    local tmp = to[1];
-    if (tmp) == 9 then 
-      local _g1 = to[2];
-      local v2 = _hx_e();
-      local _g2 = 0;
-      local _hx_continue_1 = false;
-      while (_g2 < _g1.length) do repeat 
-        local f = _g1[_g2];
-        _g2 = _g2 + 1;
-        local found = false;
-        local field = nil;
-        local _g1 = 0;
-        while (_g1 < _g.length) do 
-          local f2 = _g[_g1];
-          _g1 = _g1 + 1;
-          if (f2.name == f.name) then 
-            found = true;
-            field = self:convertValue(Std.string(Std.string(path) .. Std.string(".")) .. Std.string(f2.name), Reflect.field(v, f2.name), f2.type, f.type);
-            break;
-          end;
-        end;
-        if (not found) then 
-          if (f.opt) then 
-            break;
-          end;
-          field = __hxbit_Convert.getDefault(f.type);
-        else
-          if ((field == nil) and f.opt) then 
-            break;
-          end;
-        end;
-        v2[f.name] = field;until true
-        if _hx_continue_1 then 
-        _hx_continue_1 = false;
-        break;
-        end;
-        
-      end;
-      do return v2 end;
-    elseif (tmp) == 10 then 
-      do return self:convertValue(path, v, from, to[2]) end;
-    elseif (tmp) == 12 then 
-      do return self:convertValue(path, v, from, to[2]) end;else end;
-  elseif (tmp) == 10 then 
-    local _g = from[2];
-    local tmp = to[1];
-    if (tmp) == 10 then 
-      do return self:convertValue(path, v, _g, to) end;
-    elseif (tmp) == 12 then 
-      do return self:convertValue(path, v, from, to[2]) end;else
-    do return self:convertValue(path, v, _g, to) end; end;
-  elseif (tmp) == 12 then 
-    do return self:convertValue(path, v, from[2], to) end;else
-  local tmp = to[1];
-  if (tmp) == 10 then 
-    do return self:convertValue(path, v, from, to[2]) end;
-  elseif (tmp) == 12 then 
-    do return self:convertValue(path, v, from, to[2]) end;else end; end;
-  _G.error(__haxe_Exception.thrown(Std.string(Std.string(Std.string(Std.string(Std.string(Std.string(Std.string("Cannot convert ") .. Std.string(path)) .. Std.string("(")) .. Std.string(Std.string(v))) .. Std.string(") from ")) .. Std.string(Std.string(from))) .. Std.string(" to ")) .. Std.string(Std.string(to))),0);
-end
-__hxbit_Serializer.prototype.getEnumClass = function(self,name) 
-  local ret = __hxbit_Serializer.ENUM_CLASSES.h[name];
-  if (ret == __haxe_ds_StringMap.tnull) then 
-    ret = nil;
-  end;
-  local cl = ret;
-  local cl1 = cl;
-  if (cl ~= nil) then 
-    do return cl end;
-  end;
-  local idx = 1;
-  local ret = _hx_tab_array({}, 0);
-  while (idx ~= nil) do 
-    local newidx = 0;
-    if (#"." > 0) then 
-      newidx = _G.string.find(name, ".", idx, true);
-    else
-      if (idx >= #name) then 
-        newidx = nil;
-      else
-        newidx = idx + 1;
-      end;
-    end;
-    if (newidx ~= nil) then 
-      ret:push(_G.string.sub(name, idx, newidx - 1));
-      idx = newidx + #".";
-    else
-      ret:push(_G.string.sub(name, idx, #name));
-      idx = nil;
-    end;
-  end;
-  local path = ret:join("_");
-  local path1 = _G.string.upper(_G.string.sub(path, 1, 1));
-  local len = nil;
-  len = #path;
-  path = Std.string(path1) .. Std.string(_G.string.sub(path, 2, 1 + len));
-  cl1 = Type.resolveClass(Std.string("hxbit.enumSer.") .. Std.string(path));
-  if (cl1 ~= nil) then 
-    local _this = __hxbit_Serializer.ENUM_CLASSES;
-    if (cl1 == nil) then 
-      _this.h[name] = __haxe_ds_StringMap.tnull;
-    else
-      _this.h[name] = cl1;
-    end;
-  end;
-  do return cl1 end
-end
-__hxbit_Serializer.prototype.readValue = function(self,t) 
-  local _gthis = self;
-  local tmp = t[1];
-  if (tmp) == 0 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_1
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_1 = v1; end
-        return _hx_1
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    do return v end;
-  elseif (tmp) == 1 then 
-    local v = self.input:getFloat(self.inPos);
-    local tmp = self;
-    tmp.inPos = tmp.inPos + 4;
-    do return v end;
-  elseif (tmp) == 2 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    do return self.input.b[pos] ~= 0 end;
-  elseif (tmp) == 3 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_2
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_2 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_2 = v1; end
-        return _hx_2
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      do return nil end;
-    else
-      len = len - 1;
-      local s = self.input:getString(self.inPos, len);
-      local tmp = self;
-      tmp.inPos = tmp.inPos + len;
-      do return s end;
-    end;
-  elseif (tmp) == 4 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_3
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_3 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_3 = v1; end
-        return _hx_3
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      do return nil end;
-    else
-      len = len - 1;
-      local s = self.input:sub(self.inPos, len);
-      local tmp = self;
-      tmp.inPos = tmp.inPos + len;
-      do return s end;
-    end;
-  elseif (tmp) == 5 then 
-    local c = Type.resolveClass(t[2]);
-    do return self:getRef(c, c.__clid) end;
-  elseif (tmp) == 6 then 
-    local name = t[2];
-    local ser = self:getEnumClass(name);
-    if (ser == nil) then 
-      local e = Type.resolveEnum(name);
-      local tmp;
-      if (e ~= nil) then 
-        local o = __haxe_rtti_Meta.getType(e);
-        tmp = (function() 
-          local _hx_4
-          if ((_G.type(o) == "string") and (String.prototype.skipSerialize ~= nil)) then 
-          _hx_4 = true; elseif (o.__fields__ ~= nil) then 
-          _hx_4 = o.__fields__.skipSerialize ~= nil; else 
-          _hx_4 = o.skipSerialize ~= nil; end
-          return _hx_4
-        end )();
-      else
-        tmp = false;
-      end;
-      if (tmp) then 
-        local pos = (function() 
-        local _hx_obj = self;
-        local _hx_fld = 'inPos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        local v = self.input.b[pos];
-        if (v == 128) then 
-          local _this = self.input;
-          local pos = self.inPos;
-          local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-          v = _hx_bit_clamp((function() 
-            local _hx_5
-            if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-            _hx_5 = _hx_bit.bor(v1,-2147483648); else 
-            _hx_5 = v1; end
-            return _hx_5
-          end )());
-          local tmp = self;
-          tmp.inPos = tmp.inPos + 4;
-        end;
-        do return nil end;
-      end;
-      _G.error(__haxe_Exception.thrown(Std.string("No enum unserializer found for ") .. Std.string(name)),0);
-    end;
-    do return ser:doUnserialize(self) end;
-  elseif (tmp) == 7 then 
-    local v = t[3];
-    local k = t[2];
-    local tmp = k[1];
-    if (tmp) == 0 then 
-      local pos = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      local v1 = self.input.b[pos];
-      if (v1 == 128) then 
-        local _this = self.input;
-        local pos = self.inPos;
-        local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-        v1 = _hx_bit_clamp((function() 
-          local _hx_6
-          if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-          _hx_6 = _hx_bit.bor(v,-2147483648); else 
-          _hx_6 = v; end
-          return _hx_6
-        end )());
-        local tmp = self;
-        tmp.inPos = tmp.inPos + 4;
-      end;
-      local len = v1;
-      local tmp;
-      if (len == 0) then 
-        tmp = nil;
-      else
-        local m = __haxe_ds_IntMap.new();
-        while (true) do 
-          len = len - 1;
-          if (not (len > 0)) then 
-            break;
-          end;
-          local k = _gthis:readValue(k);
-          local v = _gthis:readValue(v);
-          if (v == nil) then 
-            m.h[k] = __haxe_ds_IntMap.tnull;
-          else
-            m.h[k] = v;
-          end;
-        end;
-        tmp = m;
-      end;
-      do return tmp end;
-    elseif (tmp) == 3 then 
-      local pos = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      local v1 = self.input.b[pos];
-      if (v1 == 128) then 
-        local _this = self.input;
-        local pos = self.inPos;
-        local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-        v1 = _hx_bit_clamp((function() 
-          local _hx_7
-          if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-          _hx_7 = _hx_bit.bor(v,-2147483648); else 
-          _hx_7 = v; end
-          return _hx_7
-        end )());
-        local tmp = self;
-        tmp.inPos = tmp.inPos + 4;
-      end;
-      local len = v1;
-      local tmp;
-      if (len == 0) then 
-        tmp = nil;
-      else
-        local m = __haxe_ds_StringMap.new();
-        while (true) do 
-          len = len - 1;
-          if (not (len > 0)) then 
-            break;
-          end;
-          local k = _gthis:readValue(k);
-          local v = _gthis:readValue(v);
-          if (v == nil) then 
-            m.h[k] = __haxe_ds_StringMap.tnull;
-          else
-            m.h[k] = v;
-          end;
-        end;
-        tmp = m;
-      end;
-      do return tmp end;
-    elseif (tmp) == 6 then 
-      local pos = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      local v1 = self.input.b[pos];
-      if (v1 == 128) then 
-        local _this = self.input;
-        local pos = self.inPos;
-        local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-        v1 = _hx_bit_clamp((function() 
-          local _hx_8
-          if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-          _hx_8 = _hx_bit.bor(v,-2147483648); else 
-          _hx_8 = v; end
-          return _hx_8
-        end )());
-        local tmp = self;
-        tmp.inPos = tmp.inPos + 4;
-      end;
-      local len = v1;
-      if (len == 0) then 
-        do return nil end;
-      end;
-      local m = __haxe_ds_EnumValueMap.new();
-      while (true) do 
-        len = len - 1;
-        if (not (len > 0)) then 
-          break;
-        end;
-        m:set(self:readValue(k), self:readValue(v));
-      end;
-      do return m end;else
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v1 = self.input.b[pos];
-    if (v1 == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v1 = _hx_bit_clamp((function() 
-        local _hx_9
-        if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-        _hx_9 = _hx_bit.bor(v,-2147483648); else 
-        _hx_9 = v; end
-        return _hx_9
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local len = v1;
-    local tmp;
-    if (len == 0) then 
-      tmp = nil;
-    else
-      local m = __haxe_ds_ObjectMap.new();
-      while (true) do 
-        len = len - 1;
-        if (not (len > 0)) then 
-          break;
-        end;
-        local k = _gthis:readValue(k);
-        local v = _gthis:readValue(v);
-        m.h[k] = v;
-        m.k[k] = true;
-      end;
-      tmp = m;
-    end;
-    do return tmp end; end;
-  elseif (tmp) == 8 then 
-    local t = t[2];
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_10
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_10 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_10 = v1; end
-        return _hx_10
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      do return nil end;
-    else
-      len = len - 1;
-      local a = _hx_tab_array({}, 0);
-      local _g = 0;
-      local _g1 = len;
-      while (_g < _g1) do 
-        _g = _g + 1;
-        a[_g - 1] = _gthis:readValue(t);
-      end;
-      do return a end;
-    end;
-  elseif (tmp) == 9 then 
-    local fields = t[2];
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_11
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_11 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_11 = v1; end
-        return _hx_11
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local bits = v;
-    if (bits == 0) then 
-      do return nil end;
-    end;
-    local o = _hx_e();
-    bits = bits - 1;
-    local _g = _hx_tab_array({}, 0);
-    local _g1 = 0;
-    while (_g1 < fields.length) do 
-      local f = fields[_g1];
-      _g1 = _g1 + 1;
-      if (self:isNullable(f.type)) then 
-        _g:push(f);
-      end;
-    end;
-    local nullables = _g;
-    local _g = 0;
-    local _hx_continue_1 = false;
-    while (_g < fields.length) do repeat 
-      local f = fields[_g];
-      _g = _g + 1;
-      local nidx = nullables:indexOf(f);
-      if ((nidx >= 0) and ((_hx_bit.band(bits,_hx_bit.lshift(1,nidx))) == 0)) then 
-        break;
-      end;
-      o[f.name] = self:readValue(f.type);until true
-      if _hx_continue_1 then 
-      _hx_continue_1 = false;
-      break;
-      end;
-      
-    end;
-    do return o end;
-  elseif (tmp) == 10 then 
-    do return self:readValue(t[2]) end;
-  elseif (tmp) == 11 then 
-    local t = t[2];
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_12
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_12 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_12 = v1; end
-        return _hx_12
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      do return nil end;
-    else
-      len = len - 1;
-      local a = ({length = len});
-      local _g = 0;
-      local _g1 = len;
-      while (_g < _g1) do 
-        _g = _g + 1;
-        a[_g - 1] = _gthis:readValue(t);
-      end;
-      do return a end;
-    end;
-  elseif (tmp) == 12 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    if (self.input.b[pos] == 0) then 
-      do return nil end;
-    else
-      do return self:readValue(t[2]) end;
-    end;
-  elseif (tmp) == 13 then 
-    _G.error(__haxe_Exception.thrown("assert"),0);
-  elseif (tmp) == 14 then 
-    do return self:getDynamic() end;
-  elseif (tmp) == 15 then 
-    local _this = self.input;
-    local pos = self.inPos;
-    local pos1 = pos + 4;
-    local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos1],_hx_bit.lshift(_this.b[pos1 + 1],8)),_hx_bit.lshift(_this.b[pos1 + 2],16)),_hx_bit.lshift(_this.b[pos1 + 3],24));
-    local high = _hx_bit_clamp((function() 
-      local _hx_13
-      if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-      _hx_13 = _hx_bit.bor(v,-2147483648); else 
-      _hx_13 = v; end
-      return _hx_13
-    end )());
-    local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-    local this1 = __haxe__Int64____Int64.new(high, _hx_bit_clamp((function() 
-      local _hx_14
-      if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-      _hx_14 = _hx_bit.bor(v,-2147483648); else 
-      _hx_14 = v; end
-      return _hx_14
-    end )()));
-    local tmp = self;
-    tmp.inPos = tmp.inPos + 8;
-    do return this1 end;
-  elseif (tmp) == 16 then 
-    local pos = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = self.input.b[pos];
-    if (v == 128) then 
-      local _this = self.input;
-      local pos = self.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_15
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_15 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_15 = v1; end
-        return _hx_15
-      end )());
-      local tmp = self;
-      tmp.inPos = tmp.inPos + 4;
-    end;
-    do return v end;
-  elseif (tmp) == 17 then 
-    do return self:getStruct() end; end;
-end
-__hxbit_Serializer.prototype.writeValue = function(self,v,t) 
-  local _gthis = self;
-  local tmp = t[1];
-  if (tmp) == 0 then 
-    local v = v;
-    if ((v >= 0) and (v < 128)) then 
-      self.out.b:push(v);
-    else
-      self.out.b:push(128);
-      self.out:addInt32(v);
-    end;
-  elseif (tmp) == 1 then 
-    self.out:addInt32(__haxe_io_FPHelper.floatToI32(v));
-  elseif (tmp) == 2 then 
-    self.out.b:push((function() 
-      local _hx_1
-      if (v) then 
-      _hx_1 = 1; else 
-      _hx_1 = 0; end
-      return _hx_1
-    end )());
-  elseif (tmp) == 3 then 
-    local s = v;
-    if (s == nil) then 
-      self.out.b:push(0);
-    else
-      local b = __haxe_io_Bytes.ofString(s);
-      local v = b.length + 1;
-      if ((v >= 0) and (v < 128)) then 
-        self.out.b:push(v);
-      else
-        self.out.b:push(128);
-        self.out:addInt32(v);
-      end;
-      local _this = self.out;
-      local b2 = b.b;
-      local _g = 0;
-      local _g1 = b.length;
-      while (_g < _g1) do 
-        _g = _g + 1;
-        _this.b:push(b2[_g - 1]);
-      end;
-    end;
-  elseif (tmp) == 4 then 
-    local b = v;
-    if (b == nil) then 
-      self.out.b:push(0);
-    else
-      local v = b.length + 1;
-      if ((v >= 0) and (v < 128)) then 
-        self.out.b:push(v);
-      else
-        self.out.b:push(128);
-        self.out:addInt32(v);
-      end;
-      local _this = self.out;
-      local b2 = b.b;
-      local _g = 0;
-      local _g1 = b.length;
-      while (_g < _g1) do 
-        _g = _g + 1;
-        _this.b:push(b2[_g - 1]);
-      end;
-    end;
-  elseif (tmp) == 5 then 
-    self:addKnownRef(v);
-  elseif (tmp) == 6 then 
-    local _g = t[2];
-    local ser = self:getEnumClass(_g);
-    if (ser == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("No enum unserializer found for ") .. Std.string(_g)),0);
-    end;
-    ser:doSerialize(self, v);
-  elseif (tmp) == 7 then 
-    local _g = t[3];
-    local _g1 = t[2];
-    local tmp = _g1[1];
-    if (tmp) == 0 then 
-      local v = v;
-      if (v == nil) then 
-        self.out.b:push(0);
-      else
-        local _g2 = _hx_tab_array({}, 0);
-        local k = v:keys();
-        while (k:hasNext()) do 
-          _g2:push(k:next());
-        end;
-        local v1 = _g2.length + 1;
-        if ((v1 >= 0) and (v1 < 128)) then 
-          self.out.b:push(v1);
-        else
-          self.out.b:push(128);
-          self.out:addInt32(v1);
-        end;
-        local _g3 = 0;
-        while (_g3 < _g2.length) do 
-          local k = _g2[_g3];
-          _g3 = _g3 + 1;
-          _gthis:writeValue(k, _g1);
-          local ret = v.h[k];
-          if (ret == __haxe_ds_IntMap.tnull) then 
-            ret = nil;
-          end;
-          _gthis:writeValue(ret, _g);
-        end;
-      end;
-    elseif (tmp) == 3 then 
-      local v = v;
-      if (v == nil) then 
-        self.out.b:push(0);
-      else
-        local _g2 = _hx_tab_array({}, 0);
-        local k = v:keys();
-        while (k:hasNext()) do 
-          _g2:push(k:next());
-        end;
-        local v1 = _g2.length + 1;
-        if ((v1 >= 0) and (v1 < 128)) then 
-          self.out.b:push(v1);
-        else
-          self.out.b:push(128);
-          self.out:addInt32(v1);
-        end;
-        local _g3 = 0;
-        while (_g3 < _g2.length) do 
-          local k = _g2[_g3];
-          _g3 = _g3 + 1;
-          _gthis:writeValue(k, _g1);
-          local ret = v.h[k];
-          if (ret == __haxe_ds_StringMap.tnull) then 
-            ret = nil;
-          end;
-          _gthis:writeValue(ret, _g);
-        end;
-      end;
-    elseif (tmp) == 6 then 
-      local v = v;
-      if (v == nil) then 
-        self.out.b:push(0);
-        do return end;
-      end;
-      local _g2 = _hx_tab_array({}, 0);
-      local k = v:keys();
-      while (k:hasNext()) do 
-        _g2:push(k:next());
-      end;
-      local v1 = _g2.length + 1;
-      if ((v1 >= 0) and (v1 < 128)) then 
-        self.out.b:push(v1);
-      else
-        self.out.b:push(128);
-        self.out:addInt32(v1);
-      end;
-      local _g3 = 0;
-      while (_g3 < _g2.length) do 
-        local vk = _g2[_g3];
-        _g3 = _g3 + 1;
-        self:writeValue(vk, _g1);
-        self:writeValue(v:get(vk), _g);
-      end;else
-    local v = v;
-    if (v == nil) then 
-      self.out.b:push(0);
-    else
-      local _g2 = _hx_tab_array({}, 0);
-      local k = v:keys();
-      while (k:hasNext()) do 
-        _g2:push(k:next());
-      end;
-      local v1 = _g2.length + 1;
-      if ((v1 >= 0) and (v1 < 128)) then 
-        self.out.b:push(v1);
-      else
-        self.out.b:push(128);
-        self.out:addInt32(v1);
-      end;
-      local _g3 = 0;
-      while (_g3 < _g2.length) do 
-        local k = _g2[_g3];
-        _g3 = _g3 + 1;
-        _gthis:writeValue(k, _g1);
-        _gthis:writeValue(v.h[k], _g);
-      end;
-    end; end;
-  elseif (tmp) == 8 then 
-    local _g = t[2];
-    local a = v;
-    if (a == nil) then 
-      self.out.b:push(0);
-    else
-      local v = a.length + 1;
-      if ((v >= 0) and (v < 128)) then 
-        self.out.b:push(v);
-      else
-        self.out.b:push(128);
-        self.out:addInt32(v);
-      end;
-      local _g1 = 0;
-      while (_g1 < a.length) do 
-        local v = a[_g1];
-        _g1 = _g1 + 1;
-        _gthis:writeValue(v, _g);
-      end;
-    end;
-  elseif (tmp) == 9 then 
-    local _g = t[2];
-    if (v == nil) then 
-      self.out.b:push(0);
-    else
-      local fbits = 0;
-      local _g1 = _hx_tab_array({}, 0);
-      local _g2 = 0;
-      while (_g2 < _g.length) do 
-        local f = _g[_g2];
-        _g2 = _g2 + 1;
-        if (self:isNullable(f.type)) then 
-          _g1:push(f);
-        end;
-      end;
-      local _g2 = 0;
-      local _g3 = _g1.length;
-      while (_g2 < _g3) do 
-        _g2 = _g2 + 1;
-        local i = _g2 - 1;
-        if (Reflect.field(v, _g1[i].name) ~= nil) then 
-          fbits = _hx_bit.bor(fbits,_hx_bit.lshift(1,i));
-        end;
-      end;
-      local v1 = fbits + 1;
-      if ((v1 >= 0) and (v1 < 128)) then 
-        self.out.b:push(v1);
-      else
-        self.out.b:push(128);
-        self.out:addInt32(v1);
-      end;
-      local _g2 = 0;
-      local _hx_continue_1 = false;
-      while (_g2 < _g.length) do repeat 
-        local f = _g[_g2];
-        _g2 = _g2 + 1;
-        local nidx = _g1:indexOf(f);
-        if ((nidx >= 0) and ((_hx_bit.band(fbits,_hx_bit.lshift(1,nidx))) == 0)) then 
-          break;
-        end;
-        self:writeValue(Reflect.field(v, f.name), f.type);until true
-        if _hx_continue_1 then 
-        _hx_continue_1 = false;
-        break;
-        end;
-        
-      end;
-    end;
-  elseif (tmp) == 10 then 
-    self:writeValue(v, t[2]);
-  elseif (tmp) == 11 then 
-    local _g = t[2];
-    local a = v;
-    if (a == nil) then 
-      self.out.b:push(0);
-    else
-      local v = a.length + 1;
-      if ((v >= 0) and (v < 128)) then 
-        self.out.b:push(v);
-      else
-        self.out.b:push(128);
-        self.out:addInt32(v);
-      end;
-      local _g1 = 0;
-      while (_g1 < a.length) do 
-        local v = a[_g1];
-        _g1 = _g1 + 1;
-        _gthis:writeValue(v, _g);
-      end;
-    end;
-  elseif (tmp) == 12 then 
-    if (v == nil) then 
-      self.out.b:push(0);
-    else
-      self.out.b:push(1);
-      self:writeValue(v, t[2]);
-    end;
-  elseif (tmp) == 13 then 
-    _G.error(__haxe_Exception.thrown("assert"),0);
-  elseif (tmp) == 14 then 
-    self:addDynamic(v);
-  elseif (tmp) == 15 then 
-    self.out:addInt64(v);
-  elseif (tmp) == 16 then 
-    local v = v;
-    if ((v >= 0) and (v < 128)) then 
-      self.out.b:push(v);
-    else
-      self.out.b:push(128);
-      self.out:addInt32(v);
-    end;
-  elseif (tmp) == 17 then 
-    self:addStruct(v); end;
 end
 
 __hxbit_Serializer.prototype.__class__ =  __hxbit_Serializer
@@ -8902,94 +6674,22 @@ end
 __deceptinfect_infection_InfectionComponent.prototype.__host= nil;
 __deceptinfect_infection_InfectionComponent.prototype.__bits= nil;
 __deceptinfect_infection_InfectionComponent.prototype.__next= nil;
-__deceptinfect_infection_InfectionComponent.prototype.set_enableReplication = function(self,b) 
-  __hxbit_NetworkHost.enableReplication(self, b);
-  do return b end
-end
 __deceptinfect_infection_InfectionComponent.prototype.networkAllow = function(self,mode,prop,client) 
   do return false end
 end
-__deceptinfect_infection_InfectionComponent.prototype.alive = function(self) 
-  self:set_enableReplication(true);
-end
-__deceptinfect_infection_InfectionComponent.prototype.networkFlush = function(self,ctx) 
-  local b = self.__bits;
-  local v = self.__bits;
-  if ((v >= 0) and (v < 128)) then 
-    ctx.out.b:push(v);
-  else
-    ctx.out.b:push(128);
-    ctx.out:addInt32(v);
-  end;
-  if ((_hx_bit.band(b,1)) ~= 0) then 
-    __hxbit_enumSer_Deceptinfect_infection_INF_STATE.doSerialize(ctx, self.infection);
-  end;
-  self.__bits = 0;
-end
-__deceptinfect_infection_InfectionComponent.prototype.networkSync = function(self,ctx) 
-  if ((_hx_bit.band(self.__bits,1)) ~= 0) then 
-    self:set_infection(__hxbit_enumSer_Deceptinfect_infection_INF_STATE.doUnserialize(ctx));
-  end;
-end
 __deceptinfect_infection_InfectionComponent.prototype.networkInitProxys = function(self) 
 end
-__deceptinfect_infection_InfectionComponent.prototype.networkRPC = function(self,__ctx,__id,__clientResult) 
-  _G.error(__haxe_Exception.thrown(Std.string("Unknown RPC identifier ") .. Std.string(__id)),0);
-end
-__deceptinfect_infection_InfectionComponent.prototype.networkGetName = function(self,id,isRPC) 
-  if (isRPC == nil) then 
-    isRPC = false;
-  end;
-  if ((function() 
-    local _hx_1
-    if (isRPC) then 
-    _hx_1 = id + 1; else 
-    _hx_1 = id; end
-    return _hx_1
-  end )() == 0) then 
-    do return "infection" end;
-  else
-    do return nil end;
-  end;
-end
 __deceptinfect_infection_InfectionComponent.prototype.__uid= nil;
-__deceptinfect_infection_InfectionComponent.prototype.getCLID = function(self) 
-  do return __deceptinfect_infection_InfectionComponent.__clid end
-end
-__deceptinfect_infection_InfectionComponent.prototype.serialize = function(self,__ctx) 
-  __hxbit_enumSer_Deceptinfect_infection_INF_STATE.doSerialize(__ctx, self.infection);
-end
-__deceptinfect_infection_InfectionComponent.prototype.getSerializeSchema = function(self) 
-  local schema = __hxbit_Schema.new();
-  schema.fieldsNames:push("infection");
-  schema.fieldsTypes:push(__hxbit_PropTypeDesc.PEnum("deceptinfect.infection.INF_STATE"));
-  schema.isFinal = __hxbit_Serializer.isClassFinal(__deceptinfect_infection_InfectionComponent.__clid);
-  do return schema end
-end
-__deceptinfect_infection_InfectionComponent.prototype.unserializeInit = function(self) 
-  local ret = ({length = 1});
-  ret[0] = 0.0;
-  self:set_infection(__deceptinfect_infection_INF_STATE.NOT_INFECTED(ret));
-  self.rate = 1;
-  self.baseInfection = __deceptinfect_infection_BaseInfection.USING_GLOBAL;
-  self.acceptingInfection = __deceptinfect_infection_AcceptingInfection.ACCEPTING;
-  self.__bits = 0;
-end
-__deceptinfect_infection_InfectionComponent.prototype.unserialize = function(self,__ctx) 
-  self:set_infection(__hxbit_enumSer_Deceptinfect_infection_INF_STATE.doUnserialize(__ctx));
-end
 
 __deceptinfect_infection_InfectionComponent.prototype.__class__ =  __deceptinfect_infection_InfectionComponent
 __deceptinfect_infection_InfectionComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_infection_InfectionComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.infection.AcceptingInfection"] = __deceptinfect_infection_AcceptingInfection;
 _hxClasses["deceptinfect.infection.AcceptingInfection"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ACCEPTING","REJECTING"},2)}
 __deceptinfect_infection_AcceptingInfection = _hxClasses["deceptinfect.infection.AcceptingInfection"];
 __deceptinfect_infection_AcceptingInfection.ACCEPTING = _hx_tab_array({[0]="ACCEPTING",0,__enum__ = __deceptinfect_infection_AcceptingInfection},2)
 
 __deceptinfect_infection_AcceptingInfection.REJECTING = _hx_tab_array({[0]="REJECTING",1,__enum__ = __deceptinfect_infection_AcceptingInfection},2)
 
-_hxClasses["deceptinfect.infection.BaseInfection"] = __deceptinfect_infection_BaseInfection;
 _hxClasses["deceptinfect.infection.BaseInfection"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NOT_USING","USING_GLOBAL","USING_STATIC"},3)}
 __deceptinfect_infection_BaseInfection = _hxClasses["deceptinfect.infection.BaseInfection"];
 __deceptinfect_infection_BaseInfection.NOT_USING = _hx_tab_array({[0]="NOT_USING",0,__enum__ = __deceptinfect_infection_BaseInfection},2)
@@ -8997,7 +6697,6 @@ __deceptinfect_infection_BaseInfection.NOT_USING = _hx_tab_array({[0]="NOT_USING
 __deceptinfect_infection_BaseInfection.USING_GLOBAL = _hx_tab_array({[0]="USING_GLOBAL",1,__enum__ = __deceptinfect_infection_BaseInfection},2)
 
 __deceptinfect_infection_BaseInfection.USING_STATIC = function(rate) local _x = _hx_tab_array({[0]="USING_STATIC",2,rate,__enum__=__deceptinfect_infection_BaseInfection}, 3); return _x; end 
-_hxClasses["deceptinfect.infection.INF_STATE"] = __deceptinfect_infection_INF_STATE;
 _hxClasses["deceptinfect.infection.INF_STATE"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NOT_INFECTED","INFECTED"},2)}
 __deceptinfect_infection_INF_STATE = _hxClasses["deceptinfect.infection.INF_STATE"];
 __deceptinfect_infection_INF_STATE.NOT_INFECTED = function(inf) local _x = _hx_tab_array({[0]="NOT_INFECTED",0,inf,__enum__=__deceptinfect_infection_INF_STATE}, 3); return _x; end 
@@ -9023,6 +6722,26 @@ __deceptinfect_infection_InfectionLookInfo.prototype.threshold= nil;
 __deceptinfect_infection_InfectionLookInfo.prototype.__class__ =  __deceptinfect_infection_InfectionLookInfo
 __deceptinfect_infection_InfectionLookInfo.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_infection_InfectionLookInfo.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
+__deceptinfect_infection_RateComponent.new = function() 
+  local self = _hx_new(__deceptinfect_infection_RateComponent.prototype)
+  __deceptinfect_infection_RateComponent.super(self)
+  return self
+end
+__deceptinfect_infection_RateComponent.super = function(self) 
+  self.multipliers = __haxe_ds_IntMap.new();
+  self.addRates = __haxe_ds_IntMap.new();
+  __deceptinfect_ecswip_Component.super(self);
+end
+_hxClasses["deceptinfect.infection.RateComponent"] = __deceptinfect_infection_RateComponent
+__deceptinfect_infection_RateComponent.__name__ = "deceptinfect.infection.RateComponent"
+__deceptinfect_infection_RateComponent.prototype = _hx_e();
+__deceptinfect_infection_RateComponent.prototype.addRates= nil;
+__deceptinfect_infection_RateComponent.prototype.multipliers= nil;
+
+__deceptinfect_infection_RateComponent.prototype.__class__ =  __deceptinfect_infection_RateComponent
+__deceptinfect_infection_RateComponent.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_infection_RateComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 
 __deceptinfect_infection_components_DamagePenaltyHidden.new = function() 
   local self = _hx_new(__deceptinfect_infection_components_DamagePenaltyHidden.prototype)
@@ -9067,7 +6786,6 @@ __deceptinfect_infection_components_GrabAccepter.prototype.overwhelm= nil;
 __deceptinfect_infection_components_GrabAccepter.prototype.__class__ =  __deceptinfect_infection_components_GrabAccepter
 __deceptinfect_infection_components_GrabAccepter.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_infection_components_GrabAccepter.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.infection.components.GrabAcceptState"] = __deceptinfect_infection_components_GrabAcceptState;
 _hxClasses["deceptinfect.infection.components.GrabAcceptState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NOT_GRABBED","GRABBED","UNAVALIABLE"},3)}
 __deceptinfect_infection_components_GrabAcceptState = _hxClasses["deceptinfect.infection.components.GrabAcceptState"];
 __deceptinfect_infection_components_GrabAcceptState.NOT_GRABBED = function(numTargeting) local _x = _hx_tab_array({[0]="NOT_GRABBED",0,numTargeting,__enum__=__deceptinfect_infection_components_GrabAcceptState}, 3); return _x; end 
@@ -9108,39 +6826,24 @@ __deceptinfect_infection_components_GrabProducer.prototype.set_grabState = funct
         local _g1 = newGrabState[2];
         if (_g1[1] == 2) then 
           if (_g ~= _g1[2]) then 
-            local x = __deceptinfect_infection_components_GrabAccepter;
-            local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[_g]:slice(2)[0];
-            if (retrieve_comp == nil) then 
-              _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-            end;
-            local _g = retrieve_comp.grabState;
+            local _g = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, _g).grabState;
             if (_g[1] == 0) then 
-              local num = _g[2];
-              num[0] = num[0] - 1;
+              local _g = _g[2];
+              _g[0] = _g[0] - 1;
             end;
           end;
         else
-          local x = __deceptinfect_infection_components_GrabAccepter;
-          local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[_g]:slice(2)[0];
-          if (retrieve_comp == nil) then 
-            _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-          end;
-          local _g = retrieve_comp.grabState;
+          local _g = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, _g).grabState;
           if (_g[1] == 0) then 
-            local num = _g[2];
-            num[0] = num[0] - 1;
+            local _g = _g[2];
+            _g[0] = _g[0] - 1;
           end;
         end;
       else
-        local x = __deceptinfect_infection_components_GrabAccepter;
-        local retrieve_comp = __deceptinfect_ecswip_ComponentManager.lazyInit(x)[_g]:slice(2)[0];
-        if (retrieve_comp == nil) then 
-          _G.error(__haxe_Exception.thrown(Std.string("Component does not exist at sure statement ") .. Std.string(x.__name__)),0);
-        end;
-        local _g = retrieve_comp.grabState;
+        local _g = __deceptinfect_ecswip_ComponentManager.getComponentForIDSure(8, _g).grabState;
         if (_g[1] == 0) then 
-          local num = _g[2];
-          num[0] = num[0] - 1;
+          local _g = _g[2];
+          _g[0] = _g[0] - 1;
         end;
       end;
     end;
@@ -9151,7 +6854,6 @@ end
 __deceptinfect_infection_components_GrabProducer.prototype.__class__ =  __deceptinfect_infection_components_GrabProducer
 __deceptinfect_infection_components_GrabProducer.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_infection_components_GrabProducer.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.infection.components.SearchingState"] = __deceptinfect_infection_components_SearchingState;
 _hxClasses["deceptinfect.infection.components.SearchingState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NOT_SEARCHING","SEARCHING","TARGET"},3)}
 __deceptinfect_infection_components_SearchingState = _hxClasses["deceptinfect.infection.components.SearchingState"];
 __deceptinfect_infection_components_SearchingState.NOT_SEARCHING = _hx_tab_array({[0]="NOT_SEARCHING",0,__enum__ = __deceptinfect_infection_components_SearchingState},2)
@@ -9159,7 +6861,6 @@ __deceptinfect_infection_components_SearchingState.NOT_SEARCHING = _hx_tab_array
 __deceptinfect_infection_components_SearchingState.SEARCHING = _hx_tab_array({[0]="SEARCHING",1,__enum__ = __deceptinfect_infection_components_SearchingState},2)
 
 __deceptinfect_infection_components_SearchingState.TARGET = function(vic) local _x = _hx_tab_array({[0]="TARGET",2,vic,__enum__=__deceptinfect_infection_components_SearchingState}, 3); return _x; end 
-_hxClasses["deceptinfect.infection.components.GrabProduceState"] = __deceptinfect_infection_components_GrabProduceState;
 _hxClasses["deceptinfect.infection.components.GrabProduceState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="READY","GRABBING","NOT_READY"},3)}
 __deceptinfect_infection_components_GrabProduceState = _hxClasses["deceptinfect.infection.components.GrabProduceState"];
 __deceptinfect_infection_components_GrabProduceState.READY = function(search) local _x = _hx_tab_array({[0]="READY",0,search,__enum__=__deceptinfect_infection_components_GrabProduceState}, 3); return _x; end 
@@ -9219,9 +6920,7 @@ end
 __deceptinfect_items_Di_cure.prototype.PrimaryAttack = function(self) 
   local owner = self["self"].Owner;
   self["self"]:SetNextPrimaryFire(_G.CurTime() + 999);
-  local this1 = owner.id;
-  local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_infection_InfectionComponent);
-  local _g = comparray[this1];
+  local _g = __deceptinfect_ecswip_ComponentManager.components_2[23][owner.id];
   if (_g[1] == 1) then 
     local c_inf = _g[2];
     local _g = c_inf.infection;
@@ -9229,12 +6928,10 @@ __deceptinfect_items_Di_cure.prototype.PrimaryAttack = function(self)
     if (tmp) == 0 then 
       local inf = _g[2];
       inf[0] = inf[0] - 12.5;
-      local this1 = owner.id;
-      __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_infection_InfVunerability.new(3, 10), this1);
+      local x = __deceptinfect_infection_InfVunerability.new(3, 10);
+      __deceptinfect_ecswip_ComponentManager.components_2[2][owner.id] = __deceptinfect_ecswip_ComponentState.Comp(x);
     elseif (tmp) == 1 then 
-      local this1 = owner.id;
-      local comparray = __deceptinfect_ecswip_ComponentManager.lazyInit(__deceptinfect_abilities_FormComponent);
-      local _g = comparray[this1];
+      local _g = __deceptinfect_ecswip_ComponentManager.components_2[22][owner.id];
       if (_g[1] == 1) then 
         local c_form = _g[2];
         local c_form1 = c_form;
@@ -9273,7 +6970,6 @@ __deceptinfect_items_ScannerComponent.prototype.reliability_min= nil;
 __deceptinfect_items_ScannerComponent.prototype.__class__ =  __deceptinfect_items_ScannerComponent
 __deceptinfect_items_ScannerComponent.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_items_ScannerComponent.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.items.ScanResult"] = __deceptinfect_items_ScanResult;
 _hxClasses["deceptinfect.items.ScanResult"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="NO_SCAN","HUMAN","INFECTED"},3)}
 __deceptinfect_items_ScanResult = _hxClasses["deceptinfect.items.ScanResult"];
 __deceptinfect_items_ScanResult.NO_SCAN = _hx_tab_array({[0]="NO_SCAN",0,__enum__ = __deceptinfect_items_ScanResult},2)
@@ -9302,7 +6998,7 @@ __deceptinfect_items_Weapon_Di_Scan.prototype.Initialize = function(self)
   local x = self["self"];
   x.id = __deceptinfect_ecswip_ComponentManager.addGEnt(x);
   self.id = x.id;
-  __deceptinfect_ecswip_ComponentManager.addComponent(__deceptinfect_items_ScannerComponent.new(), self.id);
+  __deceptinfect_ecswip_ComponentManager.components_2[36][self.id] = __deceptinfect_ecswip_ComponentState.Comp(__deceptinfect_items_ScannerComponent.new());
 end
 __deceptinfect_items_Weapon_Di_Scan.prototype.PrimaryAttack = function(self) 
   local owner = self["self"].Owner;
@@ -9352,37 +7048,6 @@ __deceptinfect_items_Weapon_Di_Scan.prototype.__class__ =  __deceptinfect_items_
 __deceptinfect_items_Weapon_Di_Scan.__super__ = {} or a
 setmetatable(__deceptinfect_items_Weapon_Di_Scan.prototype,{__index={} or a.prototype})
 
-__haxe_ds_List.new = function() 
-  local self = _hx_new(__haxe_ds_List.prototype)
-  __haxe_ds_List.super(self)
-  return self
-end
-__haxe_ds_List.super = function(self) 
-  self.length = 0;
-end
-_hxClasses["haxe.ds.List"] = __haxe_ds_List
-__haxe_ds_List.__name__ = "haxe.ds.List"
-__haxe_ds_List.prototype = _hx_e();
-__haxe_ds_List.prototype.h= nil;
-__haxe_ds_List.prototype.q= nil;
-__haxe_ds_List.prototype.length= nil;
-__haxe_ds_List.prototype.add = function(self,item) 
-  local next = nil;
-  local x = __haxe_ds__List_ListNode.new(item, next);
-  if (self.h == nil) then 
-    self.h = x;
-  else
-    self.q.next = x;
-  end;
-  self.q = x;
-  self.length = self.length + 1;
-end
-__haxe_ds_List.prototype.iterator = function(self) 
-  do return __haxe_ds__List_ListIterator.new(self.h) end
-end
-
-__haxe_ds_List.prototype.__class__ =  __haxe_ds_List
-
 __deceptinfect_radiation_ContaminationAccepter.new = function() 
   local self = _hx_new(__deceptinfect_radiation_ContaminationAccepter.prototype)
   __deceptinfect_radiation_ContaminationAccepter.super(self)
@@ -9429,14 +7094,12 @@ __deceptinfect_radiation_ContaminationProducer.prototype.nextoptions= nil;
 __deceptinfect_radiation_ContaminationProducer.prototype.__class__ =  __deceptinfect_radiation_ContaminationProducer
 __deceptinfect_radiation_ContaminationProducer.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_radiation_ContaminationProducer.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.radiation.NextOptions"] = __deceptinfect_radiation_NextOptions;
 _hxClasses["deceptinfect.radiation.NextOptions"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="TYPE","MY_TYPE","OVERRIDE_LIFETIME"},3)}
 __deceptinfect_radiation_NextOptions = _hxClasses["deceptinfect.radiation.NextOptions"];
 __deceptinfect_radiation_NextOptions.TYPE = function(radtype) local _x = _hx_tab_array({[0]="TYPE",0,radtype,__enum__=__deceptinfect_radiation_NextOptions}, 3); return _x; end 
 __deceptinfect_radiation_NextOptions.MY_TYPE = _hx_tab_array({[0]="MY_TYPE",1,__enum__ = __deceptinfect_radiation_NextOptions},2)
 
 __deceptinfect_radiation_NextOptions.OVERRIDE_LIFETIME = function(t) local _x = _hx_tab_array({[0]="OVERRIDE_LIFETIME",2,t,__enum__=__deceptinfect_radiation_NextOptions}, 3); return _x; end 
-_hxClasses["deceptinfect.radiation.ContaminationType"] = __deceptinfect_radiation_ContaminationType;
 _hxClasses["deceptinfect.radiation.ContaminationType"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ALWAYS","SAME_TYPE","SAME_SOURCE"},3)}
 __deceptinfect_radiation_ContaminationType = _hxClasses["deceptinfect.radiation.ContaminationType"];
 __deceptinfect_radiation_ContaminationType.ALWAYS = _hx_tab_array({[0]="ALWAYS",0,__enum__ = __deceptinfect_radiation_ContaminationType},2)
@@ -9472,19 +7135,16 @@ __deceptinfect_radiation_RadSource.prototype.rso= nil;
 __deceptinfect_radiation_RadSource.prototype.__class__ =  __deceptinfect_radiation_RadSource
 __deceptinfect_radiation_RadSource.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_radiation_RadSource.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.radiation.RadSourceOp"] = __deceptinfect_radiation_RadSourceOp;
 _hxClasses["deceptinfect.radiation.RadSourceOp"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="CONTAM","RAD","BOTH"},3)}
 __deceptinfect_radiation_RadSourceOp = _hxClasses["deceptinfect.radiation.RadSourceOp"];
 __deceptinfect_radiation_RadSourceOp.CONTAM = function(op) local _x = _hx_tab_array({[0]="CONTAM",0,op,__enum__=__deceptinfect_radiation_RadSourceOp}, 3); return _x; end 
 __deceptinfect_radiation_RadSourceOp.RAD = function(op) local _x = _hx_tab_array({[0]="RAD",1,op,__enum__=__deceptinfect_radiation_RadSourceOp}, 3); return _x; end 
 __deceptinfect_radiation_RadSourceOp.BOTH = function(rpo,cpo) local _x = _hx_tab_array({[0]="BOTH",2,rpo,cpo,__enum__=__deceptinfect_radiation_RadSourceOp}, 4); return _x; end 
-_hxClasses["deceptinfect.radiation.RadSourceState"] = __deceptinfect_radiation_RadSourceState;
 _hxClasses["deceptinfect.radiation.RadSourceState"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="ACTIVE","INACTIVE"},2)}
 __deceptinfect_radiation_RadSourceState = _hxClasses["deceptinfect.radiation.RadSourceState"];
 __deceptinfect_radiation_RadSourceState.ACTIVE = function(x) local _x = _hx_tab_array({[0]="ACTIVE",0,x,__enum__=__deceptinfect_radiation_RadSourceState}, 3); return _x; end 
 __deceptinfect_radiation_RadSourceState.INACTIVE = _hx_tab_array({[0]="INACTIVE",1,__enum__ = __deceptinfect_radiation_RadSourceState},2)
 
-_hxClasses["deceptinfect.radiation.RadTime"] = __deceptinfect_radiation_RadTime;
 _hxClasses["deceptinfect.radiation.RadTime"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="INFINITE","FINITE"},2)}
 __deceptinfect_radiation_RadTime = _hxClasses["deceptinfect.radiation.RadTime"];
 __deceptinfect_radiation_RadTime.INFINITE = _hx_tab_array({[0]="INFINITE",0,__enum__ = __deceptinfect_radiation_RadTime},2)
@@ -9512,7 +7172,49 @@ __deceptinfect_radiation_RadVictim.prototype.radiation= nil;
 __deceptinfect_radiation_RadVictim.prototype.__class__ =  __deceptinfect_radiation_RadVictim
 __deceptinfect_radiation_RadVictim.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_radiation_RadVictim.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.radiation.RadLifetime"] = __deceptinfect_radiation_RadLifetime;
+
+__deceptinfect_radiation_RadiationAccepter.new = function(options) 
+  local self = _hx_new(__deceptinfect_radiation_RadiationAccepter.prototype)
+  __deceptinfect_radiation_RadiationAccepter.super(self,options)
+  return self
+end
+__deceptinfect_radiation_RadiationAccepter.super = function(self,options) 
+  self.diminish = 0.75;
+  self.radiation = __haxe_ds_IntMap.new();
+  __deceptinfect_ecswip_Component.super(self);
+  if (options.diminish ~= nil) then 
+    self.diminish = _hx_funcToField(options.diminish);
+  end;
+end
+_hxClasses["deceptinfect.radiation.RadiationAccepter"] = __deceptinfect_radiation_RadiationAccepter
+__deceptinfect_radiation_RadiationAccepter.__name__ = "deceptinfect.radiation.RadiationAccepter"
+__deceptinfect_radiation_RadiationAccepter.prototype = _hx_e();
+__deceptinfect_radiation_RadiationAccepter.prototype.radiation= nil;
+__deceptinfect_radiation_RadiationAccepter.prototype.diminish= nil;
+
+__deceptinfect_radiation_RadiationAccepter.prototype.__class__ =  __deceptinfect_radiation_RadiationAccepter
+__deceptinfect_radiation_RadiationAccepter.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_radiation_RadiationAccepter.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
+
+__deceptinfect_radiation_RadiationProducer.new = function(options) 
+  local self = _hx_new(__deceptinfect_radiation_RadiationProducer.prototype)
+  __deceptinfect_radiation_RadiationProducer.super(self,options)
+  return self
+end
+__deceptinfect_radiation_RadiationProducer.super = function(self,options) 
+  __deceptinfect_ecswip_Component.super(self);
+  self.maxrate = _hx_funcToField(options.maxrate);
+  self.radius = _hx_funcToField(options.radius);
+end
+_hxClasses["deceptinfect.radiation.RadiationProducer"] = __deceptinfect_radiation_RadiationProducer
+__deceptinfect_radiation_RadiationProducer.__name__ = "deceptinfect.radiation.RadiationProducer"
+__deceptinfect_radiation_RadiationProducer.prototype = _hx_e();
+__deceptinfect_radiation_RadiationProducer.prototype.maxrate= nil;
+__deceptinfect_radiation_RadiationProducer.prototype.radius= nil;
+
+__deceptinfect_radiation_RadiationProducer.prototype.__class__ =  __deceptinfect_radiation_RadiationProducer
+__deceptinfect_radiation_RadiationProducer.__super__ = __deceptinfect_ecswip_Component
+setmetatable(__deceptinfect_radiation_RadiationProducer.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
 _hxClasses["deceptinfect.radiation.RadLifetime"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="FINITE","INFINITE"},2)}
 __deceptinfect_radiation_RadLifetime = _hxClasses["deceptinfect.radiation.RadLifetime"];
 __deceptinfect_radiation_RadLifetime.FINITE = function(x) local _x = _hx_tab_array({[0]="FINITE",0,x,__enum__=__deceptinfect_radiation_RadLifetime}, 3); return _x; end 
@@ -9586,7 +7288,6 @@ __deceptinfect_statuses_Walkthroughable.prototype = _hx_e();
 __deceptinfect_statuses_Walkthroughable.prototype.__class__ =  __deceptinfect_statuses_Walkthroughable
 __deceptinfect_statuses_Walkthroughable.__super__ = __deceptinfect_ecswip_Component
 setmetatable(__deceptinfect_statuses_Walkthroughable.prototype,{__index=__deceptinfect_ecswip_Component.prototype})
-_hxClasses["deceptinfect.util.Cooldown"] = __deceptinfect_util_Cooldown;
 _hxClasses["deceptinfect.util.Cooldown"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="AVALIABLE","COOLDOWN","UNAVALIABLE"},3)}
 __deceptinfect_util_Cooldown = _hxClasses["deceptinfect.util.Cooldown"];
 __deceptinfect_util_Cooldown.AVALIABLE = _hx_tab_array({[0]="AVALIABLE",0,__enum__ = __deceptinfect_util_Cooldown},2)
@@ -9613,7 +7314,6 @@ __deceptinfect_util_EntityExt.validID2 = function(x)
     do return __deceptinfect_util_ValidID.INVALID end;
   end;
 end
-_hxClasses["deceptinfect.util.ValidID"] = __deceptinfect_util_ValidID;
 _hxClasses["deceptinfect.util.ValidID"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="HAS_ID","NO_ID","INVALID"},3)}
 __deceptinfect_util_ValidID = _hxClasses["deceptinfect.util.ValidID"];
 __deceptinfect_util_ValidID.HAS_ID = function(id) local _x = _hx_tab_array({[0]="HAS_ID",0,id,__enum__=__deceptinfect_util_ValidID}, 3); return _x; end 
@@ -9831,13 +7531,6 @@ __hxbit_NetworkHost.new = function()
   return self
 end
 __hxbit_NetworkHost.super = function(self) 
-  self.rpcWaits = __haxe_ds_IntMap.new();
-  self.lastSentBytes = 0;
-  self.lastSentTime = 0.;
-  self.perPacketBytes = 20;
-  self.syncingProperties = false;
-  self.totalSentBytes = 0;
-  self.sendRate = 0.;
   __hxbit_NetworkHost.current = self;
   self.isAuth = true;
   self["self"] = __hxbit_NetworkClient.new(self);
@@ -9848,44 +7541,11 @@ __hxbit_NetworkHost.super = function(self)
 end
 _hxClasses["hxbit.NetworkHost"] = __hxbit_NetworkHost
 __hxbit_NetworkHost.__name__ = "hxbit.NetworkHost"
-__hxbit_NetworkHost.sortByUID = function(o1,o2) 
-  do return o1.__uid - o2.__uid end;
-end
-__hxbit_NetworkHost.sortByUIDDesc = function(o1,o2) 
-  do return o2.__uid - o1.__uid end;
-end
-__hxbit_NetworkHost.enableReplication = function(o,b) 
-  if (b) then 
-    if (o.__host ~= nil) then 
-      do return end;
-    end;
-    if (__hxbit_NetworkHost.current == nil) then 
-      _G.error(__haxe_Exception.thrown("No NetworkHost defined"),0);
-    end;
-    __hxbit_NetworkHost.current:register(o);
-  else
-    if (o.__host == nil) then 
-      do return end;
-    end;
-    o.__host:unregister(o);
-  end;
-end
 __hxbit_NetworkHost.prototype = _hx_e();
 __hxbit_NetworkHost.prototype.isAuth= nil;
-__hxbit_NetworkHost.prototype.sendRate= nil;
-__hxbit_NetworkHost.prototype.totalSentBytes= nil;
-__hxbit_NetworkHost.prototype.syncingProperties= nil;
-__hxbit_NetworkHost.prototype.perPacketBytes= nil;
-__hxbit_NetworkHost.prototype.lastSentTime= nil;
-__hxbit_NetworkHost.prototype.lastSentBytes= nil;
 __hxbit_NetworkHost.prototype.markHead= nil;
 __hxbit_NetworkHost.prototype.ctx= nil;
 __hxbit_NetworkHost.prototype.pendingClients= nil;
-__hxbit_NetworkHost.prototype.logger= nil;
-__hxbit_NetworkHost.prototype.stats= nil;
-__hxbit_NetworkHost.prototype.rpcWaits= nil;
-__hxbit_NetworkHost.prototype.targetClient= nil;
-__hxbit_NetworkHost.prototype.rpcClientValue= nil;
 __hxbit_NetworkHost.prototype.aliveEvents= nil;
 __hxbit_NetworkHost.prototype.clients= nil;
 __hxbit_NetworkHost.prototype["self"]= nil;
@@ -9915,304 +7575,6 @@ __hxbit_NetworkHost.prototype.logError = function(self,msg,objectId)
     _hx_1 = Std.string(Std.string("(") .. Std.string(objectId)) .. Std.string(")"); end
     return _hx_1
   end )()))),0);
-end
-__hxbit_NetworkHost.prototype.onMessage = function(self,from,msg) 
-end
-__hxbit_NetworkHost.prototype.onUnregister = function(self,o) 
-end
-__hxbit_NetworkHost.prototype.onCustom = function(self,from,id,data) 
-end
-__hxbit_NetworkHost.prototype.fullSync = function(self,c) 
-  if (not self.pendingClients:remove(c)) then 
-    do return end;
-  end;
-  self:flush();
-  local seq = self.clients.length + 1;
-  while (true) do 
-    local found = false;
-    local _g = 0;
-    local _g1 = self.clients;
-    while (_g < _g1.length) do 
-      local c = _g1[_g];
-      _g = _g + 1;
-      if (c.seqID == seq) then 
-        found = true;
-        break;
-      end;
-    end;
-    if (not found) then 
-      break;
-    end;
-    seq = seq + 1;
-  end;
-  if (seq > 255) then 
-    _G.error(__haxe_Exception.thrown("Out of sequence number"),0);
-  end;
-  self.ctx.out.b:push(seq);
-  c.seqID = seq;
-  self.clients:push(c);
-  local refs = self.ctx.refs;
-  self.ctx.enableChecks = false;
-  self.ctx:begin();
-  self.ctx.out.b:push(4);
-  self.ctx.out.b:push(c.seqID);
-  local _this = self.ctx;
-  local b = __hxbit_Serializer.getSignature();
-  if (b == nil) then 
-    _this.out.b:push(0);
-  else
-    local v = b.length + 1;
-    if ((v >= 0) and (v < 128)) then 
-      _this.out.b:push(v);
-    else
-      _this.out.b:push(128);
-      _this.out:addInt32(v);
-    end;
-    local _this = _this.out;
-    local b2 = b.b;
-    local _g = 0;
-    local _g1 = b.length;
-    while (_g < _g1) do 
-      _g = _g + 1;
-      _this.b:push(b2[_g - 1]);
-    end;
-  end;
-  local _g = _hx_tab_array({}, 0);
-  local o = refs:iterator();
-  while (o:hasNext()) do 
-    local o = o:next();
-    if (o ~= nil) then 
-      _g:push(o);
-    end;
-  end;
-  _g:sort(__hxbit_NetworkHost.sortByUID);
-  local _g1 = 0;
-  while (_g1 < _g.length) do 
-    local o = _g[_g1];
-    _g1 = _g1 + 1;
-    self.ctx:addAnyRef(o);
-  end;
-  self.ctx:addAnyRef(nil);
-  self.ctx.out.b:push(255);
-  self.ctx.enableChecks = true;
-  self.targetClient = c;
-  self:doSend();
-  self.targetClient = nil;
-end
-__hxbit_NetworkHost.prototype.defaultLogger = function(self,filter) 
-  local _gthis = self;
-  local t0 = Sys.time();
-  self:setLogger(function(str) 
-    if ((filter ~= nil) and not filter(str)) then 
-      do return end;
-    end;
-    str = Std.string(((function() 
-      local _hx_1
-      if (_gthis.isAuth) then 
-      _hx_1 = "[S] "; else 
-      _hx_1 = "[C] "; end
-      return _hx_1
-    end )())) .. Std.string(str);
-    str = Std.string(Std.string(Std.int((Sys.time() - t0) * 100) / 100) .. Std.string(" ")) .. Std.string(str);
-    _G.print(Std.string(str));
-  end);
-end
-__hxbit_NetworkHost.prototype.makeAlive = function(self) 
-  local objs = self.ctx.newObjects;
-  if (objs.length == 0) then 
-    do return end;
-  end;
-  objs:sort(__hxbit_NetworkHost.sortByUIDDesc);
-  local _hx_continue_1 = false;
-  while (true) do repeat 
-    local o = objs:pop();
-    if (o == nil) then 
-      _hx_continue_1 = true;break;
-    end;
-    local n = (function() 
-      local _hx_1
-      if (__lua_Boot.__instanceof(o, __hxbit_NetworkSerializable)) then 
-      _hx_1 = o; else 
-      _hx_1 = nil; end
-      return _hx_1
-    end )();
-    if (n == nil) then 
-      break;
-    end;
-    if (self.logger ~= nil) then 
-      self:logger(Std.string(Std.string(Std.string("Alive ") .. Std.string(Std.string(n))) .. Std.string("#")) .. Std.string(n.__uid));
-    end;
-    n.__host = self;
-    n:alive();until true
-    if _hx_continue_1 then 
-    _hx_continue_1 = false;
-    break;
-    end;
-    
-  end;
-  while (self.aliveEvents.length > 0) do 
-    (self.aliveEvents:shift())();
-  end;
-end
-__hxbit_NetworkHost.prototype.setLogger = function(self,log) 
-  self.logger = _hx_funcToField(log);
-end
-__hxbit_NetworkHost.prototype.register = function(self,o) 
-  o.__host = self;
-  local ret = self.ctx.refs.h[o.__uid];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  local o2 = ret;
-  if (o2 ~= nil) then 
-    if (o2 ~= o) then 
-      self:logError("Register conflict between objects", o.__uid);
-    end;
-    do return end;
-  end;
-  if (not self.isAuth and not o:networkAllow(4, 0, self["self"].ownerObject)) then 
-    _G.error(__haxe_Exception.thrown(Std.string(Std.string("Can't register ") .. Std.string(Std.string(o))) .. Std.string(" without ownership")),0);
-  end;
-  if (self.logger ~= nil) then 
-    self:logger(Std.string(Std.string(Std.string("Register ") .. Std.string(Std.string(o))) .. Std.string("#")) .. Std.string(o.__uid));
-  end;
-  self.ctx.out.b:push(2);
-  self.ctx:addAnyRef(o);
-  self.ctx.out.b:push(255);
-end
-__hxbit_NetworkHost.prototype.unmark = function(self,o) 
-  if (o.__next == nil) then 
-    do return end;
-  end;
-  local prev = nil;
-  local h = self.markHead;
-  while (h ~= o) do 
-    prev = h;
-    h = h.__next;
-  end;
-  if (prev == nil) then 
-    self.markHead = o.__next;
-  else
-    prev.__next = o.__next;
-  end;
-  o.__next = nil;
-end
-__hxbit_NetworkHost.prototype.unregister = function(self,o) 
-  if (o.__host == nil) then 
-    do return end;
-  end;
-  if (not self.isAuth and not o:networkAllow(5, 0, self["self"].ownerObject)) then 
-    _G.error(__haxe_Exception.thrown(Std.string(Std.string("Can't unregister ") .. Std.string(Std.string(o))) .. Std.string(" without ownership")),0);
-  end;
-  self:flushProps();
-  o.__host = nil;
-  o.__bits = 0;
-  self:unmark(o);
-  if (self.logger ~= nil) then 
-    self:logger(Std.string(Std.string(Std.string("Unregister ") .. Std.string(Std.string(o))) .. Std.string("#")) .. Std.string(o.__uid));
-  end;
-  self.ctx.out.b:push(3);
-  local _this = self.ctx;
-  local v = o.__uid;
-  if ((v >= 0) and (v < 128)) then 
-    _this.out.b:push(v);
-  else
-    _this.out.b:push(128);
-    _this.out:addInt32(v);
-  end;
-  self.ctx.out.b:push(255);
-  self.ctx.refs:remove(o.__uid);
-end
-__hxbit_NetworkHost.prototype.doSend = function(self) 
-  local bytes;
-  bytes = self.ctx.out:getBytes();
-  self.ctx.out = __haxe_io_BytesBuffer.new();
-  self:send(bytes);
-end
-__hxbit_NetworkHost.prototype.send = function(self,bytes) 
-  if (self.targetClient ~= nil) then 
-    local tmp = self;
-    tmp.totalSentBytes = tmp.totalSentBytes + (bytes.length + self.perPacketBytes);
-    self.targetClient:send(bytes);
-  else
-    local tmp = self;
-    tmp.totalSentBytes = tmp.totalSentBytes + ((bytes.length + self.perPacketBytes) * self.clients.length);
-    if (self.clients.length == 0) then 
-      local tmp = self;
-      tmp.totalSentBytes = tmp.totalSentBytes + (bytes.length + self.perPacketBytes);
-    end;
-    local _g = 0;
-    local _g1 = self.clients;
-    while (_g < _g1.length) do 
-      local c = _g1[_g];
-      _g = _g + 1;
-      c:send(bytes);
-    end;
-  end;
-end
-__hxbit_NetworkHost.prototype.flushProps = function(self) 
-  local o = self.markHead;
-  while (o ~= nil) do 
-    if (o.__bits ~= 0) then 
-      if (self.logger ~= nil) then 
-        local props = _hx_tab_array({}, 0);
-        local i = 0;
-        while ((_hx_bit.lshift(1,i)) <= o.__bits) do 
-          if ((_hx_bit.band(o.__bits,_hx_bit.lshift(1,i))) ~= 0) then 
-            props:push(o:networkGetName(i));
-          end;
-          i = i + 1;
-        end;
-        self:logger(Std.string(Std.string(Std.string(Std.string(Std.string("SYNC > ") .. Std.string(Std.string(o))) .. Std.string("#")) .. Std.string(o.__uid)) .. Std.string(" ")) .. Std.string(props:join("|")));
-      end;
-      if (self.stats ~= nil) then 
-        self.stats:sync(o);
-      end;
-      self.ctx.out.b:push(1);
-      local _this = self.ctx;
-      local v = o.__uid;
-      if ((v >= 0) and (v < 128)) then 
-        _this.out.b:push(v);
-      else
-        _this.out.b:push(128);
-        _this.out:addInt32(v);
-      end;
-      o:networkFlush(self.ctx);
-      self.ctx.out.b:push(255);
-    end;
-    local n = o.__next;
-    o.__next = nil;
-    o = n;
-  end;
-  self.markHead = nil;
-end
-__hxbit_NetworkHost.prototype.flush = function(self) 
-  self:flushProps();
-  if (self.ctx.out.b.length > 0) then 
-    self:doSend();
-  end;
-  local now = Sys.time();
-  local dt = now - self.lastSentTime;
-  if (dt < 1) then 
-    do return end;
-  end;
-  local rate = (self.totalSentBytes - self.lastSentBytes) / dt;
-  if ((((self.sendRate == 0) or (rate == 0)) or ((rate / self.sendRate) > 3)) or ((self.sendRate / rate) > 3)) then 
-    self.sendRate = rate;
-  else
-    self.sendRate = (self.sendRate * 0.8) + (rate * 0.2);
-  end;
-  self.lastSentTime = now;
-  self.lastSentBytes = self.totalSentBytes;
-  local _g = 0;
-  local _g1 = self.clients;
-  while (_g < _g1.length) do 
-    local c = _g1[_g];
-    _g = _g + 1;
-    if ((now - c.lastMessage) > __hxbit_NetworkHost.CLIENT_TIMEOUT) then 
-      c:stop();
-    end;
-  end;
 end
 
 __hxbit_NetworkHost.prototype.__class__ =  __hxbit_NetworkHost
@@ -10319,118 +7681,10 @@ end
 _hxClasses["gmod.hxbit.GmodNetHost"] = __gmod_hxbit_GmodNetHost
 __gmod_hxbit_GmodNetHost.__name__ = "gmod.hxbit.GmodNetHost"
 __gmod_hxbit_GmodNetHost.prototype = _hx_e();
-__gmod_hxbit_GmodNetHost.prototype.wait = function(self,onConnect) 
-  local _gthis = self;
-  self.isAuth = false;
-  self["self"] = __gmod_hxbit_Client.new(self, nil);
-  _G.hook.Add("PlayerInitialSpawn", "hxbitconnect", function(ply,tran) 
-    local c = __gmod_hxbit_Client.new(_gthis, ply);
-    _gthis.pendingClients:push(c);
-    onConnect(c);
-  end);
-  _G.hook.Add("PlayerDisconnected", "hxbitdisconnect", function(ply) 
-    local this1 = __gmod_hxbit_GmodNetHost.players;
-    local key = ply:UserID();
-    if (this1.h[key] ~= nil) then 
-      local this1 = __gmod_hxbit_GmodNetHost.players;
-      local key = ply:UserID();
-      local ret = this1.h[key];
-      if (ret == __haxe_ds_IntMap.tnull) then 
-        ret = nil;
-      end;
-      ret:stop();
-    end;
-  end);
-  self.isAuth = true;
-  local ply = __gmod__LuaArray_LuaArray_Impl_.iterator(_G.player.GetAll());
-  while (ply:hasNext()) do 
-    local c = __gmod_hxbit_Client.new(self, ply:next());
-    self.pendingClients:push(c);
-    onConnect(c);
-  end;
-  self:makeAlive();
-  self.onMessage = function(self,client,msg) 
-    if ((msg == 1024) and _gthis.pendingClients:contains(client)) then 
-      client:sync();
-    end;
-   end;
-end
 
 __gmod_hxbit_GmodNetHost.prototype.__class__ =  __gmod_hxbit_GmodNetHost
 __gmod_hxbit_GmodNetHost.__super__ = __hxbit_NetworkHost
 setmetatable(__gmod_hxbit_GmodNetHost.prototype,{__index=__hxbit_NetworkHost.prototype})
-
-__haxe_io_Input.new = {}
-_hxClasses["haxe.io.Input"] = __haxe_io_Input
-__haxe_io_Input.__name__ = "haxe.io.Input"
-__haxe_io_Input.prototype = _hx_e();
-__haxe_io_Input.prototype.bigEndian= nil;
-__haxe_io_Input.prototype.readByte = function(self) 
-  _G.error(__haxe_Exception.thrown("Not implemented"),0);
-end
-__haxe_io_Input.prototype.readBytes = function(self,s,pos,len) 
-  local k = len;
-  local b = s.b;
-  if (((pos < 0) or (len < 0)) or ((pos + len) > s.length)) then 
-    _G.error(__haxe_Exception.thrown(__haxe_io_Error.OutsideBounds),0);
-  end;
-  local _hx_status, _hx_result = pcall(function() 
-  
-      while (k > 0) do 
-        b[pos] = self:readByte();
-        pos = pos + 1;
-        k = k - 1;
-      end;
-    return _hx_pcall_default
-  end)
-  if not _hx_status and _hx_result == "_hx_pcall_break" then
-  elseif not _hx_status then 
-    local _g = _hx_result;
-    if (not __lua_Boot.__instanceof(__haxe_Exception.caught(_g):unwrap(), __haxe_io_Eof)) then 
-      _G.error(_g,0);
-    end;
-  elseif _hx_result ~= _hx_pcall_default then
-    return _hx_result
-  end;
-  do return len - k end
-end
-__haxe_io_Input.prototype.readInt32 = function(self) 
-  local ch1 = self:readByte();
-  local ch2 = self:readByte();
-  local ch3 = self:readByte();
-  local ch4 = self:readByte();
-  local n = (function() 
-    local _hx_1
-    if (self.bigEndian) then 
-    _hx_1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(ch4,_hx_bit.lshift(ch3,8)),_hx_bit.lshift(ch2,16)),_hx_bit.lshift(ch1,24)); else 
-    _hx_1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(ch1,_hx_bit.lshift(ch2,8)),_hx_bit.lshift(ch3,16)),_hx_bit.lshift(ch4,24)); end
-    return _hx_1
-  end )();
-  do return _hx_bit_clamp(n) end
-end
-
-__haxe_io_Input.prototype.__class__ =  __haxe_io_Input
-
-__gmod_hxbit_GmodNetworkInput.new = function() 
-  local self = _hx_new(__gmod_hxbit_GmodNetworkInput.prototype)
-  __gmod_hxbit_GmodNetworkInput.super(self)
-  return self
-end
-__gmod_hxbit_GmodNetworkInput.super = function(self) 
-end
-_hxClasses["gmod.hxbit.GmodNetworkInput"] = __gmod_hxbit_GmodNetworkInput
-__gmod_hxbit_GmodNetworkInput.__name__ = "gmod.hxbit.GmodNetworkInput"
-__gmod_hxbit_GmodNetworkInput.prototype = _hx_e();
-__gmod_hxbit_GmodNetworkInput.prototype.readInt32 = function(self) 
-  do return _G.net.ReadUInt(32) end
-end
-__gmod_hxbit_GmodNetworkInput.prototype.readByte = function(self) 
-  do return _G.net.ReadUInt(8) end
-end
-
-__gmod_hxbit_GmodNetworkInput.prototype.__class__ =  __gmod_hxbit_GmodNetworkInput
-__gmod_hxbit_GmodNetworkInput.__super__ = __haxe_io_Input
-setmetatable(__gmod_hxbit_GmodNetworkInput.prototype,{__index=__haxe_io_Input.prototype})
 
 __hxbit_NetworkClient.new = function(h) 
   local self = _hx_new(__hxbit_NetworkClient.prototype)
@@ -10438,7 +7692,6 @@ __hxbit_NetworkClient.new = function(h)
   return self
 end
 __hxbit_NetworkClient.super = function(self,h) 
-  self.messageLength = -1;
   self.host = h;
   self.lastMessage = Sys.time();
 end
@@ -10446,737 +7699,10 @@ _hxClasses["hxbit.NetworkClient"] = __hxbit_NetworkClient
 __hxbit_NetworkClient.__name__ = "hxbit.NetworkClient"
 __hxbit_NetworkClient.prototype = _hx_e();
 __hxbit_NetworkClient.prototype.host= nil;
-__hxbit_NetworkClient.prototype.resultID= nil;
-__hxbit_NetworkClient.prototype.needAlive= nil;
-__hxbit_NetworkClient.prototype.wasSync= nil;
-__hxbit_NetworkClient.prototype.seqID= nil;
 __hxbit_NetworkClient.prototype.ownerObject= nil;
 __hxbit_NetworkClient.prototype.lastMessage= nil;
-__hxbit_NetworkClient.prototype.sync = function(self) 
-  self.host:fullSync(self);
-end
-__hxbit_NetworkClient.prototype.send = function(self,bytes) 
-end
-__hxbit_NetworkClient.prototype.error = function(self,msg) 
-  _G.error(__haxe_Exception.thrown(msg),0);
-end
-__hxbit_NetworkClient.prototype.processMessage = function(self,bytes,pos) 
-  local ctx = self.host.ctx;
-  ctx:setInput(bytes, pos);
-  if (ctx:get_error()) then 
-    self.host:logError("Unhandled previous error");
-  end;
-  local pos1 = (function() 
-  local _hx_obj = ctx;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local mid = ctx.input.b[pos1];
-  if (self.needAlive and (mid ~= 2)) then 
-    self.needAlive = false;
-    self.host:makeAlive();
-  end;
-  if (not self.wasSync and not self.host.isAuth) then 
-    local mid1 = mid;
-    if (mid1) == 4 or (mid1) == 8 or (mid1) == 9 or (mid1) == 10 or (mid1) == 11 then else
-    self.host:logError(Std.string(Std.string("Message ") .. Std.string(mid)) .. Std.string(" was received before sync")); end;
-  end;
-  local mid1 = mid;
-  if (mid1) == 1 then 
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_1
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_1 = v1; end
-        return _hx_1
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local oid = v;
-    local ret = ctx.refs.h[oid];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    local o = ret;
-    if (o == nil) then 
-      self.host:logError("Could not sync object", oid);
-      do return -1 end;
-    end;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_2
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_2 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_2 = v1; end
-        return _hx_2
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local bits = v;
-    if (self.host.isAuth) then 
-      local _g = 0;
-      while (_g < 32) do 
-        _g = _g + 1;
-        local i = _g - 1;
-        if (((_hx_bit.band(bits,_hx_bit.lshift(1,i))) ~= 0) and not o:networkAllow(3, i, self.ownerObject)) then 
-          self.host:logError(Std.string(Std.string(Std.string("Client setting unallowed property ") .. Std.string(o:networkGetName(i))) .. Std.string(" on ")) .. Std.string(Std.string(o)), o.__uid);
-          do return -1 end;
-        end;
-      end;
-    end;
-    if (self.host.logger ~= nil) then 
-      local props = _hx_tab_array({}, 0);
-      local i = 0;
-      while ((_hx_bit.lshift(1,i)) <= bits) do 
-        if ((_hx_bit.band(bits,_hx_bit.lshift(1,i))) ~= 0) then 
-          props:push(o:networkGetName(i));
-        end;
-        i = i + 1;
-      end;
-      self.host:logger(Std.string(Std.string(Std.string(Std.string(Std.string("SYNC < ") .. Std.string(Std.string(o))) .. Std.string("#")) .. Std.string(o.__uid)) .. Std.string(" ")) .. Std.string(props:join("|")));
-    end;
-    local old = o.__bits;
-    local oldH = o.__host;
-    o.__host = nil;
-    o.__bits = bits;
-    self.host.syncingProperties = true;
-    o:networkSync(ctx);
-    self.host.syncingProperties = false;
-    o.__host = oldH;
-    o.__bits = old;
-    if (self.host.isAuth and ((o.__next ~= nil) or self.host:mark(o))) then 
-      local o = o;
-      o.__bits = _hx_bit.bor(o.__bits,bits);
-    end;
-    if (ctx:get_error()) then 
-      self.host:logError(Std.string("Found unreferenced object while syncing ") .. Std.string(Std.string(o)));
-    end;
-  elseif (mid1) == 2 then 
-    local o = ctx:getAnyRef();
-    if (ctx:get_error()) then 
-      self.host:logError(Std.string("Found unreferenced object while registering ") .. Std.string(Std.string(o)));
-    end;
-    self.needAlive = true;
-  elseif (mid1) == 3 then 
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_3
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_3 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_3 = v1; end
-        return _hx_3
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local oid = v;
-    local ret = ctx.refs.h[oid];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    local o = ret;
-    if (o == nil) then 
-      self.host:logError("Could not unregister object", oid);
-    else
-      o.__host = nil;
-      ctx.refs:remove(o.__uid);
-      self.host:onUnregister(o);
-    end;
-  elseif (mid1) == 4 then 
-    self.wasSync = true;
-    ctx.refs = __haxe_ds_IntMap.new();
-    __hxbit_Serializer.UID = 0;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    __hxbit_Serializer.SEQ = ctx.input.b[pos];
-    ctx.newObjects = _hx_tab_array({}, 0);
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_4
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_4 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_4 = v1; end
-        return _hx_4
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local len = v;
-    local sign;
-    if (len == 0) then 
-      sign = nil;
-    else
-      len = len - 1;
-      local s = ctx.input:sub(ctx.inPos, len);
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + len;
-      sign = s;
-    end;
-    if (sign:compare(__hxbit_Serializer.getSignature()) ~= 0) then 
-      self.host:logError("Network signature mismatch");
-    end;
-    ctx.enableChecks = false;
-    while (ctx:getAnyRef() ~= nil) do 
-    end;
-    ctx.enableChecks = true;
-    self.host:makeAlive();
-  elseif (mid1) == 5 then 
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_5
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_5 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_5 = v1; end
-        return _hx_5
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local oid = v;
-    local ret = ctx.refs.h[oid];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    local o = ret;
-    local _this = ctx.input;
-    local pos = ctx.inPos;
-    local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-    local v = _hx_bit_clamp((function() 
-      local _hx_6
-      if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-      _hx_6 = _hx_bit.bor(v,-2147483648); else 
-      _hx_6 = v; end
-      return _hx_6
-    end )());
-    local ctx1 = ctx;
-    ctx1.inPos = ctx1.inPos + 4;
-    local size = v;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local fid = ctx.input.b[pos];
-    if (o == nil) then 
-      if (size < 0) then 
-        _G.error(__haxe_Exception.thrown("RPC on unreferenced object cannot be skip on this platform"),0);
-      end;
-      if (not self.host.isAuth) then 
-        self.host:logError(Std.string(Std.string("RPC @") .. Std.string(fid)) .. Std.string(" on unreferenced object"), oid);
-      end;
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + size;
-    else
-      if (not self.host.isAuth) then 
-        if (not o:networkRPC(ctx, fid, self)) then 
-          self.host:logError(Std.string(Std.string(Std.string(Std.string("RPC @") .. Std.string(fid)) .. Std.string(" on ")) .. Std.string(Std.string(o))) .. Std.string(" has unreferenced object parameter"));
-        end;
-      else
-        self.host.rpcClientValue = self;
-        o:networkRPC(ctx, fid, self);
-        self.host.rpcClientValue = nil;
-      end;
-    end;
-    if (self.host.logger ~= nil) then 
-      self.host:logger(Std.string(Std.string(Std.string(Std.string(Std.string("RPC < ") .. Std.string(Std.string(o))) .. Std.string("#")) .. Std.string(o.__uid)) .. Std.string(" ")) .. Std.string(o:networkGetName(fid, true)));
-    end;
-  elseif (mid1) == 6 then 
-    local old = self.resultID;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_7
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_7 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_7 = v1; end
-        return _hx_7
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    self.resultID = v;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_8
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_8 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_8 = v1; end
-        return _hx_8
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local oid = v;
-    local ret = ctx.refs.h[oid];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    local o = ret;
-    local _this = ctx.input;
-    local pos = ctx.inPos;
-    local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-    local v = _hx_bit_clamp((function() 
-      local _hx_9
-      if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-      _hx_9 = _hx_bit.bor(v,-2147483648); else 
-      _hx_9 = v; end
-      return _hx_9
-    end )());
-    local ctx1 = ctx;
-    ctx1.inPos = ctx1.inPos + 4;
-    local size = v;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local fid = ctx.input.b[pos];
-    if (o == nil) then 
-      if (size < 0) then 
-        _G.error(__haxe_Exception.thrown("RPC on unreferenced object cannot be skip on this platform"),0);
-      end;
-      if (not self.host.isAuth) then 
-        self.host:logError(Std.string(Std.string("RPC @") .. Std.string(fid)) .. Std.string(" on unreferenced object"), oid);
-      end;
-      local ctx1 = ctx;
-      ctx1.inPos = ctx1.inPos + size;
-      ctx.out.b:push(12);
-      local v = self.resultID;
-      if ((v >= 0) and (v < 128)) then 
-        ctx.out.b:push(v);
-      else
-        ctx.out.b:push(128);
-        ctx.out:addInt32(v);
-      end;
-    else
-      if (not self.host.isAuth) then 
-        local old = o.__host;
-        o.__host = nil;
-        if (not o:networkRPC(ctx, fid, self)) then 
-          self.host:logError(Std.string(Std.string(Std.string(Std.string("RPC @") .. Std.string(fid)) .. Std.string(" on ")) .. Std.string(Std.string(o))) .. Std.string(" has unreferenced object parameter"));
-          ctx.out.b:push(12);
-          local v = self.resultID;
-          if ((v >= 0) and (v < 128)) then 
-            ctx.out.b:push(v);
-          else
-            ctx.out.b:push(128);
-            ctx.out:addInt32(v);
-          end;
-        end;
-        o.__host = old;
-      else
-        self.host.rpcClientValue = self;
-        if (not o:networkRPC(ctx, fid, self)) then 
-          ctx.out.b:push(12);
-          local v = self.resultID;
-          if ((v >= 0) and (v < 128)) then 
-            ctx.out.b:push(v);
-          else
-            ctx.out.b:push(128);
-            ctx.out:addInt32(v);
-          end;
-        end;
-        self.host.rpcClientValue = nil;
-      end;
-    end;
-    ctx.out.b:push(255);
-    self.host:doSend();
-    self.host.targetClient = nil;
-    self.resultID = old;
-  elseif (mid1) == 7 then 
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_10
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_10 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_10 = v1; end
-        return _hx_10
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local resultID = v;
-    local ret = self.host.rpcWaits.h[resultID];
-    if (ret == __haxe_ds_IntMap.tnull) then 
-      ret = nil;
-    end;
-    self.host.rpcWaits:remove(resultID);
-    ret(ctx);
-  elseif (mid1) == 8 then 
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_11
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_11 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_11 = v1; end
-        return _hx_11
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local len = v;
-    local msg;
-    if (len == 0) then 
-      msg = nil;
-    else
-      len = len - 1;
-      local s = ctx.input:getString(ctx.inPos, len);
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + len;
-      msg = s;
-    end;
-    local msg = __haxe_Unserializer.run(msg);
-    self.host:onMessage(self, msg);
-  elseif (mid1) == 9 then 
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_12
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_12 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_12 = v1; end
-        return _hx_12
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local len = v;
-    local msg;
-    if (len == 0) then 
-      msg = nil;
-    else
-      len = len - 1;
-      local s = ctx.input:sub(ctx.inPos, len);
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + len;
-      msg = s;
-    end;
-    self.host:onMessage(self, msg);
-  elseif (mid1) == 10 then 
-    local tmp = self.host;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_13
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_13 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_13 = v1; end
-        return _hx_13
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    tmp:onCustom(self, v, nil);
-  elseif (mid1) == 11 then 
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_14
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_14 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_14 = v1; end
-        return _hx_14
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local tmp = self.host;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v1 = ctx.input.b[pos];
-    if (v1 == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v1 = _hx_bit_clamp((function() 
-        local _hx_15
-        if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-        _hx_15 = _hx_bit.bor(v,-2147483648); else 
-        _hx_15 = v; end
-        return _hx_15
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local len = v1;
-    local tmp1;
-    if (len == 0) then 
-      tmp1 = nil;
-    else
-      len = len - 1;
-      local s = ctx.input:sub(ctx.inPos, len);
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + len;
-      tmp1 = s;
-    end;
-    tmp:onCustom(self, v, tmp1);
-  elseif (mid1) == 12 then 
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_16
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_16 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_16 = v1; end
-        return _hx_16
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    self.host.rpcWaits:remove(v);else
-  self:error(Std.string(Std.string(Std.string(Std.string(Std.string("Unknown message code ") .. Std.string(mid)) .. Std.string(" @")) .. Std.string(pos)) .. Std.string(":")) .. Std.string(bytes:toHex())); end;
-  do return ctx.inPos end
-end
-__hxbit_NetworkClient.prototype.pendingBuffer= nil;
-__hxbit_NetworkClient.prototype.pendingPos= nil;
-__hxbit_NetworkClient.prototype.messageLength= nil;
-__hxbit_NetworkClient.prototype.readData = function(self,input,available) 
-  if (self.messageLength < 0) then 
-    if (available < 4) then 
-      do return false end;
-    end;
-    self.messageLength = input:readInt32();
-    if ((self.pendingBuffer == nil) or (self.pendingBuffer.length < self.messageLength)) then 
-      self.pendingBuffer = __haxe_io_Bytes.alloc(self.messageLength);
-    end;
-    self.pendingPos = 0;
-  end;
-  local len = input:readBytes(self.pendingBuffer, self.pendingPos, self.messageLength - self.pendingPos);
-  local tmp = self;
-  tmp.pendingPos = tmp.pendingPos + len;
-  if (self.pendingPos == self.messageLength) then 
-    self:processMessagesData(self.pendingBuffer, 0, self.messageLength);
-    self.messageLength = -1;
-    do return true end;
-  end;
-  do return false end
-end
-__hxbit_NetworkClient.prototype.processMessagesData = function(self,data,pos,length) 
-  if (length > 0) then 
-    self.lastMessage = Sys.time();
-  end;
-  local _end = pos + length;
-  while (pos < _end) do 
-    local oldPos = pos;
-    pos = self:processMessage(data, pos);
-    if (pos < 0) then 
-      break;
-    end;
-    if (data.b[pos] ~= 255) then 
-      local len = _end - oldPos;
-      if (len > 128) then 
-        len = 128;
-      end;
-      _G.error(__haxe_Exception.thrown(Std.string(Std.string(Std.string("Message missing EOM @") .. Std.string((pos - oldPos))) .. Std.string(":")) .. Std.string(data:sub(oldPos, len):toHex())),0);
-    end;
-    pos = pos + 1;
-  end;
-  if (self.needAlive) then 
-    self.needAlive = false;
-    self.host:makeAlive();
-  end;
-end
-__hxbit_NetworkClient.prototype.stop = function(self) 
-  if (self.host == nil) then 
-    do return end;
-  end;
-  self.host.clients:remove(self);
-  self.host.pendingClients:remove(self);
-  self.host = nil;
-end
 
 __hxbit_NetworkClient.prototype.__class__ =  __hxbit_NetworkClient
-
-__gmod_hxbit_Client.new = function(host,ply) 
-  local self = _hx_new(__gmod_hxbit_Client.prototype)
-  __gmod_hxbit_Client.super(self,host,ply)
-  return self
-end
-__gmod_hxbit_Client.super = function(self,host,ply) 
-  __hxbit_NetworkClient.super(self,host);
-  _G.net.Receive("hxbit", _hx_bind(self,self.recieve));
-  self.ply = ply;
-end
-_hxClasses["gmod.hxbit.Client"] = __gmod_hxbit_Client
-__gmod_hxbit_Client.__name__ = "gmod.hxbit.Client"
-__gmod_hxbit_Client.prototype = _hx_e();
-__gmod_hxbit_Client.prototype.ply= nil;
-__gmod_hxbit_Client.prototype.recieve = function(self,len) 
-  self:readData(__gmod_hxbit_GmodNetworkInput.new(), _G.net.BytesLeft());
-end
-__gmod_hxbit_Client.prototype.send = function(self,bytes) 
-  _G.net.Start("hxbit", true);
-  _G.net.WriteUInt(bytes.length, 32);
-  local _g = 0;
-  local _g1 = bytes.b;
-  while (_g < _g1.length) do 
-    local byt = _g1[_g];
-    _g = _g + 1;
-    _G.net.WriteUInt(byt, 8);
-  end;
-  _G.net.Send(self.ply);
-end
-
-__gmod_hxbit_Client.prototype.__class__ =  __gmod_hxbit_Client
-__gmod_hxbit_Client.__super__ = __hxbit_NetworkClient
-setmetatable(__gmod_hxbit_Client.prototype,{__index=__hxbit_NetworkClient.prototype})
 
 __gmod_macros_include___ForceExpose.new = {}
 _hx_exports["__forceExpose"] = __gmod_macros_include___ForceExpose
@@ -11204,23 +7730,6 @@ __haxe_EntryPoint.run = function()
   while (not (__haxe_EntryPoint.processEvents() < 0)) do 
   end;
 end
-
-__haxe__Int64____Int64.new = function(high,low) 
-  local self = _hx_new(__haxe__Int64____Int64.prototype)
-  __haxe__Int64____Int64.super(self,high,low)
-  return self
-end
-__haxe__Int64____Int64.super = function(self,high,low) 
-  self.high = high;
-  self.low = low;
-end
-_hxClasses["haxe._Int64.___Int64"] = __haxe__Int64____Int64
-__haxe__Int64____Int64.__name__ = "haxe._Int64.___Int64"
-__haxe__Int64____Int64.prototype = _hx_e();
-__haxe__Int64____Int64.prototype.high= nil;
-__haxe__Int64____Int64.prototype.low= nil;
-
-__haxe__Int64____Int64.prototype.__class__ =  __haxe__Int64____Int64
 
 __haxe_Json.new = {}
 _hxClasses["haxe.Json"] = __haxe_Json
@@ -11458,703 +7967,6 @@ __haxe_Timer.prototype.run = function(self)
 end
 
 __haxe_Timer.prototype.__class__ =  __haxe_Timer
-
-__haxe__Unserializer_DefaultResolver.new = function() 
-  local self = _hx_new(__haxe__Unserializer_DefaultResolver.prototype)
-  __haxe__Unserializer_DefaultResolver.super(self)
-  return self
-end
-__haxe__Unserializer_DefaultResolver.super = function(self) 
-end
-_hxClasses["haxe._Unserializer.DefaultResolver"] = __haxe__Unserializer_DefaultResolver
-__haxe__Unserializer_DefaultResolver.__name__ = "haxe._Unserializer.DefaultResolver"
-__haxe__Unserializer_DefaultResolver.prototype = _hx_e();
-__haxe__Unserializer_DefaultResolver.prototype.resolveClass = function(self,name) 
-  do return Type.resolveClass(name) end
-end
-__haxe__Unserializer_DefaultResolver.prototype.resolveEnum = function(self,name) 
-  do return Type.resolveEnum(name) end
-end
-
-__haxe__Unserializer_DefaultResolver.prototype.__class__ =  __haxe__Unserializer_DefaultResolver
-
-__haxe_Unserializer.new = function(buf) 
-  local self = _hx_new(__haxe_Unserializer.prototype)
-  __haxe_Unserializer.super(self,buf)
-  return self
-end
-__haxe_Unserializer.super = function(self,buf) 
-  self.buf = buf;
-  self.length = #buf;
-  self.pos = 0;
-  self.scache = Array.new();
-  self.cache = Array.new();
-  local r = __haxe_Unserializer.DEFAULT_RESOLVER;
-  if (r == nil) then 
-    r = __haxe__Unserializer_DefaultResolver.new();
-    __haxe_Unserializer.DEFAULT_RESOLVER = r;
-  end;
-  self.resolver = r;
-end
-_hxClasses["haxe.Unserializer"] = __haxe_Unserializer
-__haxe_Unserializer.__name__ = "haxe.Unserializer"
-__haxe_Unserializer.initCodes = function() 
-  local codes = Array.new();
-  local _g = 0;
-  local _g1 = #__haxe_Unserializer.BASE64;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    codes[_G.string.byte(__haxe_Unserializer.BASE64, i + 1)] = i;
-  end;
-  do return codes end;
-end
-__haxe_Unserializer.run = function(v) 
-  do return __haxe_Unserializer.new(v):unserialize() end;
-end
-__haxe_Unserializer.prototype = _hx_e();
-__haxe_Unserializer.prototype.buf= nil;
-__haxe_Unserializer.prototype.pos= nil;
-__haxe_Unserializer.prototype.length= nil;
-__haxe_Unserializer.prototype.cache= nil;
-__haxe_Unserializer.prototype.scache= nil;
-__haxe_Unserializer.prototype.resolver= nil;
-__haxe_Unserializer.prototype.readDigits = function(self) 
-  local k = 0;
-  local s = false;
-  local fpos = self.pos;
-  local _hx_continue_1 = false;
-  while (true) do repeat 
-    local c = _G.string.byte(self.buf, self.pos + 1);
-    if (c == nil) then 
-      _hx_continue_1 = true;break;
-    end;
-    if (c == 45) then 
-      if (self.pos ~= fpos) then 
-        _hx_continue_1 = true;break;
-      end;
-      s = true;
-      self.pos = self.pos + 1;
-      break;
-    end;
-    if ((c < 48) or (c > 57)) then 
-      _hx_continue_1 = true;break;
-    end;
-    k = (k * 10) + (c - 48);
-    self.pos = self.pos + 1;until true
-    if _hx_continue_1 then 
-    _hx_continue_1 = false;
-    break;
-    end;
-    
-  end;
-  if (s) then 
-    k = k * -1;
-  end;
-  do return k end
-end
-__haxe_Unserializer.prototype.readFloat = function(self) 
-  local p1 = self.pos;
-  while (true) do 
-    local c = _G.string.byte(self.buf, self.pos + 1);
-    if (c == nil) then 
-      break;
-    end;
-    if ((((c >= 43) and (c < 58)) or (c == 101)) or (c == 69)) then 
-      self.pos = self.pos + 1;
-    else
-      break;
-    end;
-  end;
-  local _this = self.buf;
-  local pos = p1;
-  local len = self.pos - p1;
-  if ((len == nil) or (len > (p1 + #_this))) then 
-    len = #_this;
-  else
-    if (len < 0) then 
-      len = #_this + len;
-    end;
-  end;
-  if (p1 < 0) then 
-    pos = #_this + p1;
-  end;
-  if (pos < 0) then 
-    pos = 0;
-  end;
-  do return Std.parseFloat(_G.string.sub(_this, pos + 1, pos + len)) end
-end
-__haxe_Unserializer.prototype.unserializeObject = function(self,o) 
-  while (true) do 
-    if (self.pos >= self.length) then 
-      _G.error(__haxe_Exception.thrown("Invalid object"),0);
-    end;
-    if (_G.string.byte(self.buf, self.pos + 1) == 103) then 
-      break;
-    end;
-    local k = self:unserialize();
-    if (not __lua_Boot.__instanceof(k, String)) then 
-      _G.error(__haxe_Exception.thrown("Invalid object key"),0);
-    end;
-    o[k] = self:unserialize();
-  end;
-  self.pos = self.pos + 1;
-end
-__haxe_Unserializer.prototype.unserializeEnum = function(self,edecl,tag) 
-  local p = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'pos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  if (_G.string.byte(self.buf, p + 1) ~= 58) then 
-    _G.error(__haxe_Exception.thrown("Invalid enum format"),0);
-  end;
-  local nargs = self:readDigits();
-  if (nargs == 0) then 
-    do return Type.createEnum(edecl, tag) end;
-  end;
-  local args = Array.new();
-  while (true) do 
-    nargs = nargs - 1;
-    if (not ((nargs + 1) > 0)) then 
-      break;
-    end;
-    args:push(self:unserialize());
-  end;
-  do return Type.createEnum(edecl, tag, args) end
-end
-__haxe_Unserializer.prototype.unserialize = function(self) 
-  local p = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'pos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local _g = _G.string.byte(self.buf, p + 1);
-  if (_g) == 65 then 
-    local name = self:unserialize();
-    local cl = self.resolver:resolveClass(name);
-    if (cl == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Class not found ") .. Std.string(name)),0);
-    end;
-    do return cl end;
-  elseif (_g) == 66 then 
-    local name = self:unserialize();
-    local e = self.resolver:resolveEnum(name);
-    if (e == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Enum not found ") .. Std.string(name)),0);
-    end;
-    do return e end;
-  elseif (_g) == 67 then 
-    local name = self:unserialize();
-    local cl = self.resolver:resolveClass(name);
-    if (cl == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Class not found ") .. Std.string(name)),0);
-    end;
-    local o = Type.createEmptyInstance(cl);
-    self.cache:push(o);
-    o:hxUnserialize(self);
-    local p = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'pos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    if (_G.string.byte(self.buf, p + 1) ~= 103) then 
-      _G.error(__haxe_Exception.thrown("Invalid custom data"),0);
-    end;
-    do return o end;
-  elseif (_g) == 77 then 
-    local h = __haxe_ds_ObjectMap.new();
-    self.cache:push(h);
-    while (_G.string.byte(self.buf, self.pos + 1) ~= 104) do 
-      local s = self:unserialize();
-      local value = self:unserialize();
-      h.h[s] = value;
-      h.k[s] = true;
-    end;
-    self.pos = self.pos + 1;
-    do return h end;
-  elseif (_g) == 82 then 
-    local n = self:readDigits();
-    if ((n < 0) or (n >= self.scache.length)) then 
-      _G.error(__haxe_Exception.thrown("Invalid string reference"),0);
-    end;
-    do return self.scache[n] end;
-  elseif (_g) == 97 then 
-    local a = Array.new();
-    self.cache:push(a);
-    while (true) do 
-      local c = _G.string.byte(self.buf, self.pos + 1);
-      if (c == 104) then 
-        self.pos = self.pos + 1;
-        break;
-      end;
-      if (c == 117) then 
-        self.pos = self.pos + 1;
-        local n = self:readDigits();
-        a[(a.length + n) - 1] = nil;
-      else
-        a:push(self:unserialize());
-      end;
-    end;
-    do return a end;
-  elseif (_g) == 98 then 
-    local h = __haxe_ds_StringMap.new();
-    self.cache:push(h);
-    while (_G.string.byte(self.buf, self.pos + 1) ~= 104) do 
-      local s = self:unserialize();
-      local value = self:unserialize();
-      if (value == nil) then 
-        h.h[s] = __haxe_ds_StringMap.tnull;
-      else
-        h.h[s] = value;
-      end;
-    end;
-    self.pos = self.pos + 1;
-    do return h end;
-  elseif (_g) == 99 then 
-    local name = self:unserialize();
-    local cl = self.resolver:resolveClass(name);
-    if (cl == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Class not found ") .. Std.string(name)),0);
-    end;
-    local o = Type.createEmptyInstance(cl);
-    self.cache:push(o);
-    self:unserializeObject(o);
-    do return o end;
-  elseif (_g) == 100 then 
-    do return self:readFloat() end;
-  elseif (_g) == 102 then 
-    do return false end;
-  elseif (_g) == 105 then 
-    do return self:readDigits() end;
-  elseif (_g) == 106 then 
-    local name = self:unserialize();
-    local edecl = self.resolver:resolveEnum(name);
-    if (edecl == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Enum not found ") .. Std.string(name)),0);
-    end;
-    self.pos = self.pos + 1;
-    local index = self:readDigits();
-    local tag = Type.getEnumConstructs(edecl)[index];
-    if (tag == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string(Std.string(Std.string("Unknown enum index ") .. Std.string(name)) .. Std.string("@")) .. Std.string(index)),0);
-    end;
-    local e = self:unserializeEnum(edecl, tag);
-    self.cache:push(e);
-    do return e end;
-  elseif (_g) == 107 then 
-    do return (0/0) end;
-  elseif (_g) == 108 then 
-    local l = __haxe_ds_List.new();
-    self.cache:push(l);
-    while (_G.string.byte(self.buf, self.pos + 1) ~= 104) do 
-      l:add(self:unserialize());
-    end;
-    self.pos = self.pos + 1;
-    do return l end;
-  elseif (_g) == 109 then 
-    do return -_G.math.huge end;
-  elseif (_g) == 110 then 
-    do return nil end;
-  elseif (_g) == 111 then 
-    local o = _hx_e();
-    self.cache:push(o);
-    self:unserializeObject(o);
-    do return o end;
-  elseif (_g) == 112 then 
-    do return _G.math.huge end;
-  elseif (_g) == 113 then 
-    local h = __haxe_ds_IntMap.new();
-    self.cache:push(h);
-    local p = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'pos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local c = _G.string.byte(self.buf, p + 1);
-    while (c == 58) do 
-      local i = self:readDigits();
-      local value = self:unserialize();
-      if (value == nil) then 
-        h.h[i] = __haxe_ds_IntMap.tnull;
-      else
-        h.h[i] = value;
-      end;
-      local p = (function() 
-      local _hx_obj = self;
-      local _hx_fld = 'pos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      c = _G.string.byte(self.buf, p + 1);
-    end;
-    if (c ~= 104) then 
-      _G.error(__haxe_Exception.thrown("Invalid IntMap format"),0);
-    end;
-    do return h end;
-  elseif (_g) == 114 then 
-    local n = self:readDigits();
-    if ((n < 0) or (n >= self.cache.length)) then 
-      _G.error(__haxe_Exception.thrown("Invalid reference"),0);
-    end;
-    do return self.cache[n] end;
-  elseif (_g) == 115 then 
-    local len = self:readDigits();
-    local buf = self.buf;
-    local p = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'pos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    if ((_G.string.byte(self.buf, p + 1) ~= 58) or ((self.length - self.pos) < len)) then 
-      _G.error(__haxe_Exception.thrown("Invalid bytes length"),0);
-    end;
-    local codes = __haxe_Unserializer.CODES;
-    if (codes == nil) then 
-      codes = __haxe_Unserializer.initCodes();
-      __haxe_Unserializer.CODES = codes;
-    end;
-    local i = self.pos;
-    local rest = _hx_bit.band(len,3);
-    local max = i + (len - rest);
-    local bytes = __haxe_io_Bytes.alloc(((_hx_bit.arshift(len,2)) * 3) + (function() 
-      local _hx_1
-      if (rest >= 2) then 
-      _hx_1 = rest - 1; else 
-      _hx_1 = 0; end
-      return _hx_1
-    end )());
-    local bpos = 0;
-    while (i < max) do 
-      i = i + 1;
-      local c1 = codes[_G.string.byte(buf, (i - 1) + 1)];
-      i = i + 1;
-      local c2 = codes[_G.string.byte(buf, (i - 1) + 1)];
-      bpos = bpos + 1;
-      bytes.b[bpos - 1] = _hx_bit.band((_hx_bit.bor(_hx_bit.lshift(c1,2),_hx_bit.arshift(c2,4))),255);
-      i = i + 1;
-      local c3 = codes[_G.string.byte(buf, (i - 1) + 1)];
-      bpos = bpos + 1;
-      bytes.b[bpos - 1] = _hx_bit.band((_hx_bit.bor(_hx_bit.lshift(c2,4),_hx_bit.arshift(c3,2))),255);
-      i = i + 1;
-      local c4 = codes[_G.string.byte(buf, (i - 1) + 1)];
-      bpos = bpos + 1;
-      bytes.b[bpos - 1] = _hx_bit.band((_hx_bit.bor(_hx_bit.lshift(c3,6),c4)),255);
-    end;
-    if (rest >= 2) then 
-      i = i + 1;
-      local c1 = codes[_G.string.byte(buf, (i - 1) + 1)];
-      i = i + 1;
-      local c2 = codes[_G.string.byte(buf, (i - 1) + 1)];
-      bpos = bpos + 1;
-      bytes.b[bpos - 1] = _hx_bit.band((_hx_bit.bor(_hx_bit.lshift(c1,2),_hx_bit.arshift(c2,4))),255);
-      if (rest == 3) then 
-        i = i + 1;
-        local c3 = codes[_G.string.byte(buf, (i - 1) + 1)];
-        bpos = bpos + 1;
-        bytes.b[bpos - 1] = _hx_bit.band((_hx_bit.bor(_hx_bit.lshift(c2,4),_hx_bit.arshift(c3,2))),255);
-      end;
-    end;
-    local tmp = self;
-    tmp.pos = tmp.pos + len;
-    self.cache:push(bytes);
-    do return bytes end;
-  elseif (_g) == 116 then 
-    do return true end;
-  elseif (_g) == 118 then 
-    local d;
-    if (((((((((_G.string.byte(self.buf, self.pos + 1) >= 48) and (_G.string.byte(self.buf, self.pos + 1) <= 57)) and (_G.string.byte(self.buf, (self.pos + 1) + 1) >= 48)) and (_G.string.byte(self.buf, (self.pos + 1) + 1) <= 57)) and (_G.string.byte(self.buf, (self.pos + 2) + 1) >= 48)) and (_G.string.byte(self.buf, (self.pos + 2) + 1) <= 57)) and (_G.string.byte(self.buf, (self.pos + 3) + 1) >= 48)) and (_G.string.byte(self.buf, (self.pos + 3) + 1) <= 57)) and (_G.string.byte(self.buf, (self.pos + 4) + 1) == 45)) then 
-      local _this = self.buf;
-      local pos = self.pos;
-      local len = 19;
-      if ((len == nil) or (len > (pos + #_this))) then 
-        len = #_this;
-      else
-        if (len < 0) then 
-          len = #_this + len;
-        end;
-      end;
-      if (pos < 0) then 
-        pos = #_this + pos;
-      end;
-      if (pos < 0) then 
-        pos = 0;
-      end;
-      d = __lua_Boot.strDate(_G.string.sub(_this, pos + 1, pos + len));
-      local tmp = self;
-      tmp.pos = tmp.pos + 19;
-    else
-      local t = self:readFloat();
-      local d1 = _hx_e();
-      _G.setmetatable(d1, _hx_o({__fields__={__index=true},__index=Date.prototype}));
-      d1.t = t / 1000;
-      d1.d = _G.os.date("*t", Std.int(d1.t));
-      d1.dUTC = _G.os.date("!*t", Std.int(d1.t));
-      d = d1;
-    end;
-    self.cache:push(d);
-    do return d end;
-  elseif (_g) == 119 then 
-    local name = self:unserialize();
-    local edecl = self.resolver:resolveEnum(name);
-    if (edecl == nil) then 
-      _G.error(__haxe_Exception.thrown(Std.string("Enum not found ") .. Std.string(name)),0);
-    end;
-    local e = self:unserializeEnum(edecl, self:unserialize());
-    self.cache:push(e);
-    do return e end;
-  elseif (_g) == 120 then 
-    _G.error(__haxe_Exception.thrown(self:unserialize()),0);
-  elseif (_g) == 121 then 
-    local len = self:readDigits();
-    local p = (function() 
-    local _hx_obj = self;
-    local _hx_fld = 'pos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    if ((_G.string.byte(self.buf, p + 1) ~= 58) or ((self.length - self.pos) < len)) then 
-      _G.error(__haxe_Exception.thrown("Invalid string length"),0);
-    end;
-    local _this = self.buf;
-    local pos = self.pos;
-    local len1 = len;
-    if ((len1 == nil) or (len1 > (pos + #_this))) then 
-      len1 = #_this;
-    else
-      if (len1 < 0) then 
-        len1 = #_this + len1;
-      end;
-    end;
-    if (pos < 0) then 
-      pos = #_this + pos;
-    end;
-    if (pos < 0) then 
-      pos = 0;
-    end;
-    local s = _G.string.sub(_this, pos + 1, pos + len1);
-    local tmp = self;
-    tmp.pos = tmp.pos + len;
-    s = StringTools.urlDecode(s);
-    self.scache:push(s);
-    do return s end;
-  elseif (_g) == 122 then 
-    do return 0 end;else end;
-  self.pos = self.pos - 1;
-  local index = self.pos;
-  _G.error(__haxe_Exception.thrown(Std.string(Std.string(Std.string("Invalid char ") .. Std.string(_G.string.sub(self.buf, index + 1, index + 1))) .. Std.string(" at position ")) .. Std.string(self.pos)),0);
-end
-
-__haxe_Unserializer.prototype.__class__ =  __haxe_Unserializer
-
-__haxe_crypto_Crc32.new = {}
-_hxClasses["haxe.crypto.Crc32"] = __haxe_crypto_Crc32
-__haxe_crypto_Crc32.__name__ = "haxe.crypto.Crc32"
-__haxe_crypto_Crc32.make = function(data) 
-  local c_crc = -1;
-  local len = data.length;
-  local b = data.b;
-  local _g = 0;
-  while (_g < len) do 
-    _g = _g + 1;
-    local tmp = _hx_bit.band((_hx_bit.bxor(c_crc,b[_g - 1])),255);
-    tmp = _hx_bit.bxor(_hx_bit.rshift(tmp,1),_hx_bit.band(-(_hx_bit.band(tmp,1)),-306674912));
-    tmp = _hx_bit.bxor(_hx_bit.rshift(tmp,1),_hx_bit.band(-(_hx_bit.band(tmp,1)),-306674912));
-    tmp = _hx_bit.bxor(_hx_bit.rshift(tmp,1),_hx_bit.band(-(_hx_bit.band(tmp,1)),-306674912));
-    tmp = _hx_bit.bxor(_hx_bit.rshift(tmp,1),_hx_bit.band(-(_hx_bit.band(tmp,1)),-306674912));
-    tmp = _hx_bit.bxor(_hx_bit.rshift(tmp,1),_hx_bit.band(-(_hx_bit.band(tmp,1)),-306674912));
-    tmp = _hx_bit.bxor(_hx_bit.rshift(tmp,1),_hx_bit.band(-(_hx_bit.band(tmp,1)),-306674912));
-    tmp = _hx_bit.bxor(_hx_bit.rshift(tmp,1),_hx_bit.band(-(_hx_bit.band(tmp,1)),-306674912));
-    tmp = _hx_bit.bxor(_hx_bit.rshift(tmp,1),_hx_bit.band(-(_hx_bit.band(tmp,1)),-306674912));
-    c_crc = _hx_bit.bxor(_hx_bit.rshift(c_crc,8),tmp);
-  end;
-  do return _hx_bit.bxor(c_crc,-1) end;
-end
-
-__haxe_crypto_Md5.new = function() 
-  local self = _hx_new(__haxe_crypto_Md5.prototype)
-  __haxe_crypto_Md5.super(self)
-  return self
-end
-__haxe_crypto_Md5.super = function(self) 
-end
-_hxClasses["haxe.crypto.Md5"] = __haxe_crypto_Md5
-__haxe_crypto_Md5.__name__ = "haxe.crypto.Md5"
-__haxe_crypto_Md5.make = function(b) 
-  local h = __haxe_crypto_Md5.new():doEncode(__haxe_crypto_Md5.bytes2blks(b));
-  local out = __haxe_io_Bytes.alloc(16);
-  out.b[0] = _hx_bit.band(_hx_bit.band(h[0],255),255);
-  out.b[1] = _hx_bit.band(_hx_bit.band(_hx_bit.arshift(h[0],8),255),255);
-  out.b[2] = _hx_bit.band(_hx_bit.band(_hx_bit.arshift(h[0],16),255),255);
-  out.b[3] = _hx_bit.band(_hx_bit.rshift(h[0],24),255);
-  out.b[4] = _hx_bit.band(_hx_bit.band(h[1],255),255);
-  out.b[5] = _hx_bit.band(_hx_bit.band(_hx_bit.arshift(h[1],8),255),255);
-  out.b[6] = _hx_bit.band(_hx_bit.band(_hx_bit.arshift(h[1],16),255),255);
-  out.b[7] = _hx_bit.band(_hx_bit.rshift(h[1],24),255);
-  out.b[8] = _hx_bit.band(_hx_bit.band(h[2],255),255);
-  out.b[9] = _hx_bit.band(_hx_bit.band(_hx_bit.arshift(h[2],8),255),255);
-  out.b[10] = _hx_bit.band(_hx_bit.band(_hx_bit.arshift(h[2],16),255),255);
-  out.b[11] = _hx_bit.band(_hx_bit.rshift(h[2],24),255);
-  out.b[12] = _hx_bit.band(_hx_bit.band(h[3],255),255);
-  out.b[13] = _hx_bit.band(_hx_bit.band(_hx_bit.arshift(h[3],8),255),255);
-  out.b[14] = _hx_bit.band(_hx_bit.band(_hx_bit.arshift(h[3],16),255),255);
-  out.b[15] = _hx_bit.band(_hx_bit.rshift(h[3],24),255);
-  do return out end;
-end
-__haxe_crypto_Md5.bytes2blks = function(b) 
-  local nblk = (_hx_bit.arshift(b.length + 8,6)) + 1;
-  local blks = Array.new();
-  local blksSize = nblk * 16;
-  local _g = 0;
-  while (_g < blksSize) do 
-    _g = _g + 1;
-    blks[_g - 1] = 0;
-  end;
-  local i = 0;
-  while (i < b.length) do 
-    local tmp = _hx_bit.arshift(i,2);
-    blks[tmp] = _hx_bit.bor(blks[tmp],_hx_bit.lshift(b.b[i],(_hx_bit.lshift((_hx_bit.band((_hx_bit.lshift(b.length,3)) + i,3)),3))));
-    i = i + 1;
-  end;
-  local tmp = _hx_bit.arshift(i,2);
-  blks[tmp] = _hx_bit.bor(blks[tmp],_hx_bit.lshift(128,(_G.math.fmod(((b.length * 8) + i), 4)) * 8));
-  local l = b.length * 8;
-  local k = (nblk * 16) - 2;
-  blks[k] = _hx_bit.band(l,255);
-  blks[k] = _hx_bit.bor(blks[k],_hx_bit.lshift((_hx_bit.band(_hx_bit.rshift(l,8),255)),8));
-  blks[k] = _hx_bit.bor(blks[k],_hx_bit.lshift((_hx_bit.band(_hx_bit.rshift(l,16),255)),16));
-  blks[k] = _hx_bit.bor(blks[k],_hx_bit.lshift((_hx_bit.band(_hx_bit.rshift(l,24),255)),24));
-  do return blks end;
-end
-__haxe_crypto_Md5.prototype = _hx_e();
-__haxe_crypto_Md5.prototype.bitOR = function(self,a,b) 
-  do return _hx_bit.bor(_hx_bit.lshift((_hx_bit.bor(_hx_bit.rshift(a,1),_hx_bit.rshift(b,1))),1),(_hx_bit.bor(_hx_bit.band(a,1),_hx_bit.band(b,1)))) end
-end
-__haxe_crypto_Md5.prototype.bitXOR = function(self,a,b) 
-  do return _hx_bit.bor(_hx_bit.lshift((_hx_bit.bxor(_hx_bit.rshift(a,1),_hx_bit.rshift(b,1))),1),_hx_bit.bxor(_hx_bit.band(a,1),_hx_bit.band(b,1))) end
-end
-__haxe_crypto_Md5.prototype.bitAND = function(self,a,b) 
-  do return _hx_bit.bor(_hx_bit.lshift((_hx_bit.band(_hx_bit.rshift(a,1),_hx_bit.rshift(b,1))),1),_hx_bit.band(_hx_bit.band(a,1),(_hx_bit.band(b,1)))) end
-end
-__haxe_crypto_Md5.prototype.addme = function(self,x,y) 
-  local lsw = (_hx_bit.band(x,65535)) + (_hx_bit.band(y,65535));
-  do return _hx_bit.bor(_hx_bit.lshift(((_hx_bit.arshift(x,16)) + (_hx_bit.arshift(y,16))) + (_hx_bit.arshift(lsw,16)),16),_hx_bit.band(lsw,65535)) end
-end
-__haxe_crypto_Md5.prototype.rol = function(self,num,cnt) 
-  do return _hx_bit.bor(_hx_bit.lshift(num,cnt),_hx_bit.rshift(num,32 - cnt)) end
-end
-__haxe_crypto_Md5.prototype.cmn = function(self,q,a,b,x,s,t) 
-  do return self:addme(self:rol(self:addme(self:addme(a, q), self:addme(x, t)), s), b) end
-end
-__haxe_crypto_Md5.prototype.ff = function(self,a,b,c,d,x,s,t) 
-  do return self:cmn(self:bitOR(self:bitAND(b, c), self:bitAND(_hx_bit.bnot(b), d)), a, b, x, s, t) end
-end
-__haxe_crypto_Md5.prototype.gg = function(self,a,b,c,d,x,s,t) 
-  do return self:cmn(self:bitOR(self:bitAND(b, d), self:bitAND(c, _hx_bit.bnot(d))), a, b, x, s, t) end
-end
-__haxe_crypto_Md5.prototype.hh = function(self,a,b,c,d,x,s,t) 
-  do return self:cmn(self:bitXOR(self:bitXOR(b, c), d), a, b, x, s, t) end
-end
-__haxe_crypto_Md5.prototype.ii = function(self,a,b,c,d,x,s,t) 
-  do return self:cmn(self:bitXOR(c, self:bitOR(b, _hx_bit.bnot(d))), a, b, x, s, t) end
-end
-__haxe_crypto_Md5.prototype.doEncode = function(self,x) 
-  local a = 1732584193;
-  local b = -271733879;
-  local c = -1732584194;
-  local d = 271733878;
-  local i = 0;
-  while (i < x.length) do 
-    local olda = a;
-    local oldb = b;
-    local oldc = c;
-    local oldd = d;
-    a = self:ff(a, b, c, d, x[i], 7, -680876936);
-    d = self:ff(d, a, b, c, x[i + 1], 12, -389564586);
-    c = self:ff(c, d, a, b, x[i + 2], 17, 606105819);
-    b = self:ff(b, c, d, a, x[i + 3], 22, -1044525330);
-    a = self:ff(a, b, c, d, x[i + 4], 7, -176418897);
-    d = self:ff(d, a, b, c, x[i + 5], 12, 1200080426);
-    c = self:ff(c, d, a, b, x[i + 6], 17, -1473231341);
-    b = self:ff(b, c, d, a, x[i + 7], 22, -45705983);
-    a = self:ff(a, b, c, d, x[i + 8], 7, 1770035416);
-    d = self:ff(d, a, b, c, x[i + 9], 12, -1958414417);
-    c = self:ff(c, d, a, b, x[i + 10], 17, -42063);
-    b = self:ff(b, c, d, a, x[i + 11], 22, -1990404162);
-    a = self:ff(a, b, c, d, x[i + 12], 7, 1804603682);
-    d = self:ff(d, a, b, c, x[i + 13], 12, -40341101);
-    c = self:ff(c, d, a, b, x[i + 14], 17, -1502002290);
-    b = self:ff(b, c, d, a, x[i + 15], 22, 1236535329);
-    a = self:gg(a, b, c, d, x[i + 1], 5, -165796510);
-    d = self:gg(d, a, b, c, x[i + 6], 9, -1069501632);
-    c = self:gg(c, d, a, b, x[i + 11], 14, 643717713);
-    b = self:gg(b, c, d, a, x[i], 20, -373897302);
-    a = self:gg(a, b, c, d, x[i + 5], 5, -701558691);
-    d = self:gg(d, a, b, c, x[i + 10], 9, 38016083);
-    c = self:gg(c, d, a, b, x[i + 15], 14, -660478335);
-    b = self:gg(b, c, d, a, x[i + 4], 20, -405537848);
-    a = self:gg(a, b, c, d, x[i + 9], 5, 568446438);
-    d = self:gg(d, a, b, c, x[i + 14], 9, -1019803690);
-    c = self:gg(c, d, a, b, x[i + 3], 14, -187363961);
-    b = self:gg(b, c, d, a, x[i + 8], 20, 1163531501);
-    a = self:gg(a, b, c, d, x[i + 13], 5, -1444681467);
-    d = self:gg(d, a, b, c, x[i + 2], 9, -51403784);
-    c = self:gg(c, d, a, b, x[i + 7], 14, 1735328473);
-    b = self:gg(b, c, d, a, x[i + 12], 20, -1926607734);
-    a = self:hh(a, b, c, d, x[i + 5], 4, -378558);
-    d = self:hh(d, a, b, c, x[i + 8], 11, -2022574463);
-    c = self:hh(c, d, a, b, x[i + 11], 16, 1839030562);
-    b = self:hh(b, c, d, a, x[i + 14], 23, -35309556);
-    a = self:hh(a, b, c, d, x[i + 1], 4, -1530992060);
-    d = self:hh(d, a, b, c, x[i + 4], 11, 1272893353);
-    c = self:hh(c, d, a, b, x[i + 7], 16, -155497632);
-    b = self:hh(b, c, d, a, x[i + 10], 23, -1094730640);
-    a = self:hh(a, b, c, d, x[i + 13], 4, 681279174);
-    d = self:hh(d, a, b, c, x[i], 11, -358537222);
-    c = self:hh(c, d, a, b, x[i + 3], 16, -722521979);
-    b = self:hh(b, c, d, a, x[i + 6], 23, 76029189);
-    a = self:hh(a, b, c, d, x[i + 9], 4, -640364487);
-    d = self:hh(d, a, b, c, x[i + 12], 11, -421815835);
-    c = self:hh(c, d, a, b, x[i + 15], 16, 530742520);
-    b = self:hh(b, c, d, a, x[i + 2], 23, -995338651);
-    a = self:ii(a, b, c, d, x[i], 6, -198630844);
-    d = self:ii(d, a, b, c, x[i + 7], 10, 1126891415);
-    c = self:ii(c, d, a, b, x[i + 14], 15, -1416354905);
-    b = self:ii(b, c, d, a, x[i + 5], 21, -57434055);
-    a = self:ii(a, b, c, d, x[i + 12], 6, 1700485571);
-    d = self:ii(d, a, b, c, x[i + 3], 10, -1894986606);
-    c = self:ii(c, d, a, b, x[i + 10], 15, -1051523);
-    b = self:ii(b, c, d, a, x[i + 1], 21, -2054922799);
-    a = self:ii(a, b, c, d, x[i + 8], 6, 1873313359);
-    d = self:ii(d, a, b, c, x[i + 15], 10, -30611744);
-    c = self:ii(c, d, a, b, x[i + 6], 15, -1560198380);
-    b = self:ii(b, c, d, a, x[i + 13], 21, 1309151649);
-    a = self:ii(a, b, c, d, x[i + 4], 6, -145523070);
-    d = self:ii(d, a, b, c, x[i + 11], 10, -1120210379);
-    c = self:ii(c, d, a, b, x[i + 2], 15, 718787259);
-    b = self:ii(b, c, d, a, x[i + 9], 21, -343485551);
-    a = self:addme(a, olda);
-    b = self:addme(b, oldb);
-    c = self:addme(c, oldc);
-    d = self:addme(d, oldd);
-    i = i + 16;
-  end;
-  do return _hx_tab_array({[0]=a, b, c, d}, 4) end
-end
-
-__haxe_crypto_Md5.prototype.__class__ =  __haxe_crypto_Md5
 
 __haxe_ds_BalancedTree.new = function() 
   local self = _hx_new(__haxe_ds_BalancedTree.prototype)
@@ -12435,47 +8247,6 @@ end
 __haxe_ds_EnumValueMap.prototype.__class__ =  __haxe_ds_EnumValueMap
 __haxe_ds_EnumValueMap.__super__ = __haxe_ds_BalancedTree
 setmetatable(__haxe_ds_EnumValueMap.prototype,{__index=__haxe_ds_BalancedTree.prototype})
-
-__haxe_ds__List_ListNode.new = function(item,next) 
-  local self = _hx_new(__haxe_ds__List_ListNode.prototype)
-  __haxe_ds__List_ListNode.super(self,item,next)
-  return self
-end
-__haxe_ds__List_ListNode.super = function(self,item,next) 
-  self.item = item;
-  self.next = next;
-end
-_hxClasses["haxe.ds._List.ListNode"] = __haxe_ds__List_ListNode
-__haxe_ds__List_ListNode.__name__ = "haxe.ds._List.ListNode"
-__haxe_ds__List_ListNode.prototype = _hx_e();
-__haxe_ds__List_ListNode.prototype.item= nil;
-__haxe_ds__List_ListNode.prototype.next= nil;
-
-__haxe_ds__List_ListNode.prototype.__class__ =  __haxe_ds__List_ListNode
-
-__haxe_ds__List_ListIterator.new = function(head) 
-  local self = _hx_new(__haxe_ds__List_ListIterator.prototype)
-  __haxe_ds__List_ListIterator.super(self,head)
-  return self
-end
-__haxe_ds__List_ListIterator.super = function(self,head) 
-  self.head = head;
-end
-_hxClasses["haxe.ds._List.ListIterator"] = __haxe_ds__List_ListIterator
-__haxe_ds__List_ListIterator.__name__ = "haxe.ds._List.ListIterator"
-__haxe_ds__List_ListIterator.prototype = _hx_e();
-__haxe_ds__List_ListIterator.prototype.head= nil;
-__haxe_ds__List_ListIterator.prototype.hasNext = function(self) 
-  do return self.head ~= nil end
-end
-__haxe_ds__List_ListIterator.prototype.next = function(self) 
-  local val = self.head.item;
-  self.head = self.head.next;
-  do return val end
-end
-
-__haxe_ds__List_ListIterator.prototype.__class__ =  __haxe_ds__List_ListIterator
-_hxClasses["haxe.ds.Option"] = __haxe_ds_Option;
 _hxClasses["haxe.ds.Option"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Some","None"},2)}
 __haxe_ds_Option = _hxClasses["haxe.ds.Option"];
 __haxe_ds_Option.Some = function(v) local _x = _hx_tab_array({[0]="Some",0,v,__enum__=__haxe_ds_Option}, 3); return _x; end 
@@ -12759,121 +8530,6 @@ end
 
 __haxe_format_JsonPrinter.prototype.__class__ =  __haxe_format_JsonPrinter
 
-__haxe_io_Bytes.new = function(length,b) 
-  local self = _hx_new(__haxe_io_Bytes.prototype)
-  __haxe_io_Bytes.super(self,length,b)
-  return self
-end
-__haxe_io_Bytes.super = function(self,length,b) 
-  self.length = length;
-  self.b = b;
-end
-_hxClasses["haxe.io.Bytes"] = __haxe_io_Bytes
-__haxe_io_Bytes.__name__ = "haxe.io.Bytes"
-__haxe_io_Bytes.alloc = function(length) 
-  local a = Array.new();
-  local _g = 0;
-  while (_g < length) do 
-    _g = _g + 1;
-    a:push(0);
-  end;
-  do return __haxe_io_Bytes.new(length, a) end;
-end
-__haxe_io_Bytes.ofString = function(s,encoding) 
-  local _g = _hx_tab_array({}, 0);
-  local _g1 = 0;
-  local _g2 = _G.string.len(s);
-  while (_g1 < _g2) do 
-    _g1 = _g1 + 1;
-    _g:push(_G.string.byte(s, (_g1 - 1) + 1));
-  end;
-  do return __haxe_io_Bytes.new(_g.length, _g) end;
-end
-__haxe_io_Bytes.prototype = _hx_e();
-__haxe_io_Bytes.prototype.length= nil;
-__haxe_io_Bytes.prototype.b= nil;
-__haxe_io_Bytes.prototype.sub = function(self,pos,len) 
-  if (((pos < 0) or (len < 0)) or ((pos + len) > self.length)) then 
-    _G.error(__haxe_Exception.thrown(__haxe_io_Error.OutsideBounds),0);
-  end;
-  do return __haxe_io_Bytes.new(len, self.b:slice(pos, pos + len)) end
-end
-__haxe_io_Bytes.prototype.compare = function(self,other) 
-  local b1 = self.b;
-  local b2 = other.b;
-  local len = (function() 
-    local _hx_1
-    if (self.length < other.length) then 
-    _hx_1 = self.length; else 
-    _hx_1 = other.length; end
-    return _hx_1
-  end )();
-  local _g = 0;
-  local _g1 = len;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    if (b1[i] ~= b2[i]) then 
-      do return b1[i] - b2[i] end;
-    end;
-  end;
-  do return self.length - other.length end
-end
-__haxe_io_Bytes.prototype.getFloat = function(self,pos) 
-  local v = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(self.b[pos],_hx_bit.lshift(self.b[pos + 1],8)),_hx_bit.lshift(self.b[pos + 2],16)),_hx_bit.lshift(self.b[pos + 3],24));
-  do return __haxe_io_FPHelper.i32ToFloat(_hx_bit_clamp((function() 
-    local _hx_1
-    if ((_hx_bit.band(v,-2147483648)) ~= 0) then 
-    _hx_1 = _hx_bit.bor(v,-2147483648); else 
-    _hx_1 = v; end
-    return _hx_1
-  end )())) end
-end
-__haxe_io_Bytes.prototype.getString = function(self,pos,len,encoding) 
-  local tmp = encoding == nil;
-  if (((pos < 0) or (len < 0)) or ((pos + len) > self.length)) then 
-    _G.error(__haxe_Exception.thrown(__haxe_io_Error.OutsideBounds),0);
-  end;
-  if ((self.b.length - pos) <= __lua_Boot.MAXSTACKSIZE) then 
-    local _end = Math.min(self.b.length, pos + len) - 1;
-    do return _G.string.char(_hx_table.unpack(self.b, pos, _end)) end;
-  else
-    local tbl = ({});
-    local _g = pos;
-    local _g1 = pos + len;
-    while (_g < _g1) do 
-      _g = _g + 1;
-      local idx = _g - 1;
-      _G.table.insert(tbl, _G.string.char(self.b[idx]));
-    end;
-    do return _G.table.concat(tbl, "") end;
-  end;
-end
-__haxe_io_Bytes.prototype.toString = function(self) 
-  do return self:getString(0, self.length) end
-end
-__haxe_io_Bytes.prototype.toHex = function(self) 
-  local s_b = ({});
-  local chars = _hx_tab_array({}, 0);
-  local _g = 0;
-  local _g1 = #"0123456789abcdef";
-  while (_g < _g1) do 
-    _g = _g + 1;
-    chars:push(_G.string.byte("0123456789abcdef", (_g - 1) + 1));
-  end;
-  local _g = 0;
-  local _g1 = self.length;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local c = self.b[_g - 1];
-    _G.table.insert(s_b, _G.string.char(chars[_hx_bit.arshift(c,4)]));
-    _G.table.insert(s_b, _G.string.char(chars[_hx_bit.band(c,15)]));
-  end;
-  do return _G.table.concat(s_b) end
-end
-
-__haxe_io_Bytes.prototype.__class__ =  __haxe_io_Bytes
-
 __haxe_io_BytesBuffer.new = function() 
   local self = _hx_new(__haxe_io_BytesBuffer.prototype)
   __haxe_io_BytesBuffer.super(self)
@@ -12886,114 +8542,8 @@ _hxClasses["haxe.io.BytesBuffer"] = __haxe_io_BytesBuffer
 __haxe_io_BytesBuffer.__name__ = "haxe.io.BytesBuffer"
 __haxe_io_BytesBuffer.prototype = _hx_e();
 __haxe_io_BytesBuffer.prototype.b= nil;
-__haxe_io_BytesBuffer.prototype.addInt32 = function(self,v) 
-  self.b:push(_hx_bit.band(v,255));
-  self.b:push(_hx_bit.band(_hx_bit.arshift(v,8),255));
-  self.b:push(_hx_bit.band(_hx_bit.arshift(v,16),255));
-  self.b:push(_hx_bit.rshift(v,24));
-end
-__haxe_io_BytesBuffer.prototype.addInt64 = function(self,v) 
-  self:addInt32(v.low);
-  self:addInt32(v.high);
-end
-__haxe_io_BytesBuffer.prototype.getBytes = function(self) 
-  local bytes = __haxe_io_Bytes.new(self.b.length, self.b);
-  self.b = nil;
-  do return bytes end
-end
 
 __haxe_io_BytesBuffer.prototype.__class__ =  __haxe_io_BytesBuffer
-_hxClasses["haxe.io.Encoding"] = __haxe_io_Encoding;
-_hxClasses["haxe.io.Encoding"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="UTF8","RawNative"},2)}
-__haxe_io_Encoding = _hxClasses["haxe.io.Encoding"];
-__haxe_io_Encoding.UTF8 = _hx_tab_array({[0]="UTF8",0,__enum__ = __haxe_io_Encoding},2)
-
-__haxe_io_Encoding.RawNative = _hx_tab_array({[0]="RawNative",1,__enum__ = __haxe_io_Encoding},2)
-
-
-__haxe_io_Eof.new = function() 
-  local self = _hx_new(__haxe_io_Eof.prototype)
-  __haxe_io_Eof.super(self)
-  return self
-end
-__haxe_io_Eof.super = function(self) 
-end
-_hxClasses["haxe.io.Eof"] = __haxe_io_Eof
-__haxe_io_Eof.__name__ = "haxe.io.Eof"
-__haxe_io_Eof.prototype = _hx_e();
-__haxe_io_Eof.prototype.toString = function(self) 
-  do return "Eof" end
-end
-
-__haxe_io_Eof.prototype.__class__ =  __haxe_io_Eof
-_hxClasses["haxe.io.Error"] = __haxe_io_Error;
-_hxClasses["haxe.io.Error"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Blocked","Overflow","OutsideBounds","Custom"},4)}
-__haxe_io_Error = _hxClasses["haxe.io.Error"];
-__haxe_io_Error.Blocked = _hx_tab_array({[0]="Blocked",0,__enum__ = __haxe_io_Error},2)
-
-__haxe_io_Error.Overflow = _hx_tab_array({[0]="Overflow",1,__enum__ = __haxe_io_Error},2)
-
-__haxe_io_Error.OutsideBounds = _hx_tab_array({[0]="OutsideBounds",2,__enum__ = __haxe_io_Error},2)
-
-__haxe_io_Error.Custom = function(e) local _x = _hx_tab_array({[0]="Custom",3,e,__enum__=__haxe_io_Error}, 3); return _x; end 
-
-__haxe_io_FPHelper.new = {}
-_hxClasses["haxe.io.FPHelper"] = __haxe_io_FPHelper
-__haxe_io_FPHelper.__name__ = "haxe.io.FPHelper"
-__haxe_io_FPHelper.i32ToFloat = function(i) 
-  local sign = 1 - (_hx_bit.lshift(_hx_bit.rshift(i,31),1));
-  local e = _hx_bit.band(_hx_bit.arshift(i,23),255);
-  if (e == 255) then 
-    if ((_hx_bit.band(i,8388607)) == 0) then 
-      if (sign > 0) then 
-        do return _G.math.huge end;
-      else
-        do return -_G.math.huge end;
-      end;
-    else
-      do return (0/0) end;
-    end;
-  else
-    do return (sign * (function() 
-      local _hx_1
-      if (e == 0) then 
-      _hx_1 = _hx_bit.lshift((_hx_bit.band(i,8388607)),1); else 
-      _hx_1 = _hx_bit.bor(_hx_bit.band(i,8388607),8388608); end
-      return _hx_1
-    end )()) * _G.math.pow(2, e - 150) end;
-  end;
-end
-__haxe_io_FPHelper.floatToI32 = function(f) 
-  if (f == 0) then 
-    do return 0 end;
-  else
-    local af = (function() 
-      local _hx_1
-      if (f < 0) then 
-      _hx_1 = -f; else 
-      _hx_1 = f; end
-      return _hx_1
-    end )();
-    local exp = _G.math.floor(_G.math.log(af) / 0.6931471805599453);
-    if (exp > 127) then 
-      do return 2139095040 end;
-    else
-      if (exp <= -127) then 
-        exp = -127;
-        af = af * 7.1362384635298e+44;
-      else
-        af = ((af / _G.math.pow(2, exp)) - 1.0) * 8388608;
-      end;
-      do return _hx_bit.bor(_hx_bit.bor(((function() 
-        local _hx_2
-        if (f < 0) then 
-        _hx_2 = -2147483648; else 
-        _hx_2 = 0; end
-        return _hx_2
-      end )()),_hx_bit.lshift(exp + 127,23)),_G.math.floor(af + 0.5)) end;
-    end;
-  end;
-end
 
 __haxe_iterators_ArrayIterator.new = function(array) 
   local self = _hx_new(__haxe_iterators_ArrayIterator.prototype)
@@ -13063,1528 +8613,25 @@ end
 
 __haxe_iterators_MapKeyValueIterator.prototype.__class__ =  __haxe_iterators_MapKeyValueIterator
 
-__haxe_rtti_Meta.new = {}
-_hxClasses["haxe.rtti.Meta"] = __haxe_rtti_Meta
-__haxe_rtti_Meta.__name__ = "haxe.rtti.Meta"
-__haxe_rtti_Meta.getType = function(t) 
-  local meta = __haxe_rtti_Meta.getMeta(t);
-  if ((meta == nil) or (meta.obj == nil)) then 
-    do return _hx_e() end;
-  else
-    do return meta.obj end;
-  end;
-end
-__haxe_rtti_Meta.getMeta = function(t) 
-  do return t.__meta__ end;
-end
-
-__hxbit_ConvertField.new = function(path,from,to) 
-  local self = _hx_new(__hxbit_ConvertField.prototype)
-  __hxbit_ConvertField.super(self,path,from,to)
-  return self
-end
-__hxbit_ConvertField.super = function(self,path,from,to) 
-  self.path = path;
-  self.from = from;
-  self.to = to;
-end
-_hxClasses["hxbit.ConvertField"] = __hxbit_ConvertField
-__hxbit_ConvertField.__name__ = "hxbit.ConvertField"
-__hxbit_ConvertField.prototype = _hx_e();
-__hxbit_ConvertField.prototype.path= nil;
-__hxbit_ConvertField.prototype.index= nil;
-__hxbit_ConvertField.prototype.same= nil;
-__hxbit_ConvertField.prototype.defaultValue= nil;
-__hxbit_ConvertField.prototype.from= nil;
-__hxbit_ConvertField.prototype.to= nil;
-__hxbit_ConvertField.prototype.conv= nil;
-
-__hxbit_ConvertField.prototype.__class__ =  __hxbit_ConvertField
-
-__hxbit_Convert.new = function(classPath,ourSchema,schema) 
-  local self = _hx_new(__hxbit_Convert.prototype)
-  __hxbit_Convert.super(self,classPath,ourSchema,schema)
-  return self
-end
-__hxbit_Convert.super = function(self,classPath,ourSchema,schema) 
-  local ourMap_h = ({});
-  local _g = 0;
-  local _g1 = ourSchema.fieldsNames.length;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    local key = ourSchema.fieldsNames[i];
-    local value = ourSchema.fieldsTypes[i];
-    if (value == nil) then 
-      ourMap_h[key] = __haxe_ds_StringMap.tnull;
-    else
-      ourMap_h[key] = value;
-    end;
-  end;
-  self.read = _hx_tab_array({}, 0);
-  self.hadCID = not schema.isFinal;
-  self.hasCID = not ourSchema.isFinal;
-  local map_h = ({});
-  local _g = 0;
-  local _g1 = schema.fieldsNames.length;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    local oldT = schema.fieldsTypes[i];
-    local ret = ourMap_h[schema.fieldsNames[i]];
-    if (ret == __haxe_ds_StringMap.tnull) then 
-      ret = nil;
-    end;
-    local newT = ret;
-    local c = __hxbit_ConvertField.new(Std.string(Std.string(classPath) .. Std.string(".")) .. Std.string(schema.fieldsNames[i]), oldT, newT);
-    if (newT ~= nil) then 
-      if (__hxbit_Convert.sameType(oldT, newT)) then 
-        c.same = true;
-      else
-        local ret = __hxbit_Convert.convFuns.h[c.path];
-        if (ret == __haxe_ds_StringMap.tnull) then 
-          ret = nil;
-        end;
-        c.conv = _hx_funcToField(ret);
-        c.defaultValue = __hxbit_Convert.getDefault(newT);
-      end;
-    end;
-    c.index = self.read.length;
-    self.read:push(c);
-    local key = schema.fieldsNames[i];
-    if (c == nil) then 
-      map_h[key] = __haxe_ds_StringMap.tnull;
-    else
-      map_h[key] = c;
-    end;
-  end;
-  self.write = _hx_tab_array({}, 0);
-  local _g = 0;
-  local _g1 = ourSchema.fieldsNames.length;
-  while (_g < _g1) do 
-    _g = _g + 1;
-    local i = _g - 1;
-    local newT = ourSchema.fieldsTypes[i];
-    local ret = map_h[ourSchema.fieldsNames[i]];
-    if (ret == __haxe_ds_StringMap.tnull) then 
-      ret = nil;
-    end;
-    local c = ret;
-    local c1 = c;
-    if (c == nil) then 
-      c1 = __hxbit_ConvertField.new(nil, nil, newT);
-      c1.defaultValue = __hxbit_Convert.getDefault(newT);
-    end;
-    self.write:push(c1);
-  end;
-end
-_hxClasses["hxbit.Convert"] = __hxbit_Convert
-__hxbit_Convert.__name__ = "hxbit.Convert"
-__hxbit_Convert.sameType = function(a,b) 
-  local _hx_continue_1 = false;
-  while (true) do repeat 
-    local tmp = a[1];
-    if (tmp) == 0 then 
-      local tmp = b[1];
-      if (tmp) == 10 then 
-        b = b[2];
-        break;
-      elseif (tmp) == 16 then 
-        do return true end;else
-      do return Type.enumEq(a, b) end; end;
-    elseif (tmp) == 7 then 
-      local _g = a[3];
-      local _g1 = a[2];
-      local tmp = b[1];
-      if (tmp) == 7 then 
-        if (__hxbit_Convert.sameType(_g1, b[2])) then 
-          do return __hxbit_Convert.sameType(_g, b[3]) end;
-        else
-          do return false end;
-        end;
-      elseif (tmp) == 10 then 
-        b = b[2];
-        break;else
-      do return Type.enumEq(a, b) end; end;
-    elseif (tmp) == 8 then 
-      local _g = a[2];
-      local tmp = b[1];
-      if (tmp) == 8 then 
-        a = _g;
-        b = b[2];
-        break;
-      elseif (tmp) == 10 then 
-        b = b[2];
-        break;else
-      do return Type.enumEq(a, b) end; end;
-    elseif (tmp) == 9 then 
-      local _g = a[2];
-      local tmp = b[1];
-      if (tmp) == 9 then 
-        local _g1 = b[2];
-        if (_g.length ~= _g1.length) then 
-          do return false end;
-        end;
-        local _g2 = 0;
-        local _g3 = _g.length;
-        while (_g2 < _g3) do 
-          _g2 = _g2 + 1;
-          local i = _g2 - 1;
-          local a = _g[i];
-          local b = _g1[i];
-          if (((a.name ~= b.name) or (a.opt ~= b.opt)) or not __hxbit_Convert.sameType(a.type, b.type)) then 
-            do return false end;
-          end;
-        end;
-        do return true end;
-      elseif (tmp) == 10 then 
-        b = b[2];
-        break;else
-      do return Type.enumEq(a, b) end; end;
-    elseif (tmp) == 10 then 
-      local _g = a[2];
-      if (b[1] == 10) then 
-        a = _g;
-        b = b[2];
-        break;
-      else
-        a = _g;
-        break;
-      end;
-    elseif (tmp) == 11 then 
-      local _g = a[2];
-      local tmp = b[1];
-      if (tmp) == 10 then 
-        b = b[2];
-        break;
-      elseif (tmp) == 11 then 
-        a = _g;
-        b = b[2];
-        break;else
-      do return Type.enumEq(a, b) end; end;
-    elseif (tmp) == 12 then 
-      local _g = a[2];
-      local tmp = b[1];
-      if (tmp) == 10 then 
-        b = b[2];
-        break;
-      elseif (tmp) == 12 then 
-        a = _g;
-        b = b[2];
-        break;else
-      do return Type.enumEq(a, b) end; end;
-    elseif (tmp) == 16 then 
-      local tmp = b[1];
-      if (tmp) == 0 then 
-        do return true end;
-      elseif (tmp) == 10 then 
-        b = b[2];
-        break;else
-      do return Type.enumEq(a, b) end; end;else
-    if (b[1] == 10) then 
-      b = b[2];
-      break;
-    else
-      do return Type.enumEq(a, b) end;
-    end; end;until true
-    if _hx_continue_1 then 
-    _hx_continue_1 = false;
-    break;
-    end;
-    
-  end;
-end
-__hxbit_Convert.getDefault = function(t) 
-  local _hx_continue_1 = false;
-  while (true) do repeat 
-    local tmp = t[1];
-    if (tmp) == 0 then 
-      do return 0 end;
-    elseif (tmp) == 1 then 
-      do return 0. end;
-    elseif (tmp) == 2 then 
-      do return false end;
-    elseif (tmp) == 5 then 
-      do return nil end;
-    elseif (tmp) == 6 then 
-      do return nil end;
-    elseif (tmp) == 7 then 
-      local tmp = t[2][1];
-      if (tmp) == 0 then 
-        do return __haxe_ds_IntMap.new() end;
-      elseif (tmp) == 3 then 
-        do return __haxe_ds_StringMap.new() end;else
-      do return __haxe_ds_ObjectMap.new() end; end;
-    elseif (tmp) == 8 then 
-      do return _hx_tab_array({}, 0) end;
-    elseif (tmp) == 9 then 
-      do return nil end;
-    elseif (tmp) == 10 then 
-      t = t[2];
-      break;
-    elseif (tmp) == 11 then 
-      do return ({length = 0}) end;
-    elseif (tmp) == 12 then 
-      do return nil end;
-    elseif (tmp) == 15 then 
-      do return __haxe__Int64____Int64.new(0, 0) end;
-    elseif (tmp) == 16 then 
-      do return 0 end;
-    elseif (tmp) == 3 or (tmp) == 4 or (tmp) == 13 or (tmp) == 14 or (tmp) == 17 then 
-      do return nil end; end;until true
-    if _hx_continue_1 then 
-    _hx_continue_1 = false;
-    break;
-    end;
-    
-  end;
-end
-__hxbit_Convert.prototype = _hx_e();
-__hxbit_Convert.prototype.read= nil;
-__hxbit_Convert.prototype.write= nil;
-__hxbit_Convert.prototype.hasCID= nil;
-__hxbit_Convert.prototype.hadCID= nil;
-
-__hxbit_Convert.prototype.__class__ =  __hxbit_Convert
-_hxClasses["hxbit.PropTypeDesc"] = __hxbit_PropTypeDesc;
-_hxClasses["hxbit.PropTypeDesc"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="PInt","PFloat","PBool","PString","PBytes","PSerializable","PEnum","PMap","PArray","PObj","PAlias","PVector","PNull","PUnknown","PDynamic","PInt64","PFlags","PStruct"},18)}
-__hxbit_PropTypeDesc = _hxClasses["hxbit.PropTypeDesc"];
-__hxbit_PropTypeDesc.PInt = _hx_tab_array({[0]="PInt",0,__enum__ = __hxbit_PropTypeDesc},2)
-
-__hxbit_PropTypeDesc.PFloat = _hx_tab_array({[0]="PFloat",1,__enum__ = __hxbit_PropTypeDesc},2)
-
-__hxbit_PropTypeDesc.PBool = _hx_tab_array({[0]="PBool",2,__enum__ = __hxbit_PropTypeDesc},2)
-
-__hxbit_PropTypeDesc.PString = _hx_tab_array({[0]="PString",3,__enum__ = __hxbit_PropTypeDesc},2)
-
-__hxbit_PropTypeDesc.PBytes = _hx_tab_array({[0]="PBytes",4,__enum__ = __hxbit_PropTypeDesc},2)
-
-__hxbit_PropTypeDesc.PSerializable = function(name) local _x = _hx_tab_array({[0]="PSerializable",5,name,__enum__=__hxbit_PropTypeDesc}, 3); return _x; end 
-__hxbit_PropTypeDesc.PEnum = function(name) local _x = _hx_tab_array({[0]="PEnum",6,name,__enum__=__hxbit_PropTypeDesc}, 3); return _x; end 
-__hxbit_PropTypeDesc.PMap = function(k,v) local _x = _hx_tab_array({[0]="PMap",7,k,v,__enum__=__hxbit_PropTypeDesc}, 4); return _x; end 
-__hxbit_PropTypeDesc.PArray = function(k) local _x = _hx_tab_array({[0]="PArray",8,k,__enum__=__hxbit_PropTypeDesc}, 3); return _x; end 
-__hxbit_PropTypeDesc.PObj = function(fields) local _x = _hx_tab_array({[0]="PObj",9,fields,__enum__=__hxbit_PropTypeDesc}, 3); return _x; end 
-__hxbit_PropTypeDesc.PAlias = function(k) local _x = _hx_tab_array({[0]="PAlias",10,k,__enum__=__hxbit_PropTypeDesc}, 3); return _x; end 
-__hxbit_PropTypeDesc.PVector = function(k) local _x = _hx_tab_array({[0]="PVector",11,k,__enum__=__hxbit_PropTypeDesc}, 3); return _x; end 
-__hxbit_PropTypeDesc.PNull = function(t) local _x = _hx_tab_array({[0]="PNull",12,t,__enum__=__hxbit_PropTypeDesc}, 3); return _x; end 
-__hxbit_PropTypeDesc.PUnknown = _hx_tab_array({[0]="PUnknown",13,__enum__ = __hxbit_PropTypeDesc},2)
-
-__hxbit_PropTypeDesc.PDynamic = _hx_tab_array({[0]="PDynamic",14,__enum__ = __hxbit_PropTypeDesc},2)
-
-__hxbit_PropTypeDesc.PInt64 = _hx_tab_array({[0]="PInt64",15,__enum__ = __hxbit_PropTypeDesc},2)
-
-__hxbit_PropTypeDesc.PFlags = function(t) local _x = _hx_tab_array({[0]="PFlags",16,t,__enum__=__hxbit_PropTypeDesc}, 3); return _x; end 
-__hxbit_PropTypeDesc.PStruct = _hx_tab_array({[0]="PStruct",17,__enum__ = __hxbit_PropTypeDesc},2)
-
-
-__hxbit_ProxyChild.new = {}
-_hxClasses["hxbit.ProxyChild"] = __hxbit_ProxyChild
-__hxbit_ProxyChild.__name__ = "hxbit.ProxyChild"
-
-__hxbit_BaseProxy.new = {}
-_hxClasses["hxbit.BaseProxy"] = __hxbit_BaseProxy
-__hxbit_BaseProxy.__name__ = "hxbit.BaseProxy"
-__hxbit_BaseProxy.__interfaces__ = {__hxbit_ProxyChild,__hxbit_ProxyHost}
-
 __hxbit_NetworkSerializer.new = function() 
   local self = _hx_new(__hxbit_NetworkSerializer.prototype)
   __hxbit_NetworkSerializer.super(self)
   return self
 end
 __hxbit_NetworkSerializer.super = function(self) 
-  self.enableChecks = true;
-  self.hasError = false;
   __hxbit_Serializer.super(self);
 end
 _hxClasses["hxbit.NetworkSerializer"] = __hxbit_NetworkSerializer
 __hxbit_NetworkSerializer.__name__ = "hxbit.NetworkSerializer"
 __hxbit_NetworkSerializer.prototype = _hx_e();
-__hxbit_NetworkSerializer.prototype.hasError= nil;
-__hxbit_NetworkSerializer.prototype.enableChecks= nil;
-__hxbit_NetworkSerializer.prototype.get_error = function(self) 
-  if (not self.hasError) then 
-    do return false end;
-  end;
-  self.hasError = false;
-  do return true end
-end
-__hxbit_NetworkSerializer.prototype.addObjRef = function(self,s) 
-  if (not self.enableChecks) then 
-    __hxbit_Serializer.prototype.addObjRef(self,s);
-    do return end;
-  end;
-  local v = s.__uid;
-  if ((v >= 0) and (v < 128)) then 
-    self.out.b:push(v);
-  else
-    self.out.b:push(128);
-    self.out:addInt32(v);
-  end;
-  local ns = (function() 
-    local _hx_1
-    if (__lua_Boot.__instanceof(s, __hxbit_NetworkSerializable)) then 
-    _hx_1 = s; else 
-    _hx_1 = nil; end
-    return _hx_1
-  end )();
-  if ((ns ~= nil) and (ns.__host == nil)) then 
-    self.out = __haxe_io_BytesBuffer.new();
-    _G.error(__haxe_Exception.thrown(Std.string(Std.string("Can't send unbound object ") .. Std.string(Std.string(s))) .. Std.string(" over network")),0);
-  end;
-  self.out.b:push((function() 
-    local _hx_2
-    if (self.refs.h[s.__uid] ~= nil) then 
-    _hx_2 = 1; else 
-    _hx_2 = 0; end
-    return _hx_2
-  end )());
-end
-__hxbit_NetworkSerializer.prototype.getObjRef = function(self) 
-  if (not self.enableChecks) then 
-    do return __hxbit_Serializer.prototype.getObjRef(self) end;
-  end;
-  local pos = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local v = self.input.b[pos];
-  if (v == 128) then 
-    local _this = self.input;
-    local pos = self.inPos;
-    local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-    v = _hx_bit_clamp((function() 
-      local _hx_1
-      if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-      _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-      _hx_1 = v1; end
-      return _hx_1
-    end )());
-    local tmp = self;
-    tmp.inPos = tmp.inPos + 4;
-  end;
-  local id = v;
-  if (id == 0) then 
-    do return 0 end;
-  end;
-  local pos = (function() 
-  local _hx_obj = self;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  if ((self.input.b[pos] ~= 0) and (self.refs.h[id] == nil)) then 
-    self.hasError = true;
-    do return 0 end;
-  end;
-  do return id end
-end
 
 __hxbit_NetworkSerializer.prototype.__class__ =  __hxbit_NetworkSerializer
 __hxbit_NetworkSerializer.__super__ = __hxbit_Serializer
 setmetatable(__hxbit_NetworkSerializer.prototype,{__index=__hxbit_Serializer.prototype})
 
-__hxbit_NetworkStats.new = function() 
-  local self = _hx_new(__hxbit_NetworkStats.prototype)
-  __hxbit_NetworkStats.super(self)
-  return self
-end
-__hxbit_NetworkStats.super = function(self) 
-  self.classes = __haxe_ds_IntMap.new();
-end
-_hxClasses["hxbit.NetworkStats"] = __hxbit_NetworkStats
-__hxbit_NetworkStats.__name__ = "hxbit.NetworkStats"
-__hxbit_NetworkStats.prototype = _hx_e();
-__hxbit_NetworkStats.prototype.classes= nil;
-__hxbit_NetworkStats.prototype.getClass = function(self,o) 
-  local cid = o:getCLID();
-  local ret = self.classes.h[cid];
-  if (ret == __haxe_ds_IntMap.tnull) then 
-    ret = nil;
-  end;
-  local c = ret;
-  if (c == nil) then 
-    local c1 = Type.getClass(o);
-    c = _hx_o({__fields__={name=true,props=true,rpcs=true,schema=true},name=c1.__name__,props=_hx_tab_array({}, 0),rpcs=_hx_tab_array({}, 0),schema=o:getSerializeSchema()});
-    local _this = self.classes;
-    if (c == nil) then 
-      _this.h[cid] = __haxe_ds_IntMap.tnull;
-    else
-      _this.h[cid] = c;
-    end;
-  end;
-  do return c end
-end
-__hxbit_NetworkStats.prototype.isNullable = function(self,t) 
-  local tmp = t[1];
-  if (tmp) == 0 or (tmp) == 1 or (tmp) == 2 then 
-    do return false end;else
-  do return true end; end;
-end
-__hxbit_NetworkStats.prototype.calcPropSize = function(self,t,v) 
-  local size = 0;
-  local tmp = t[1];
-  if (tmp) == 0 then 
-    local v = v;
-    size = (function() 
-      local _hx_1
-      if ((v >= 0) and (v < 128)) then 
-      _hx_1 = 1; else 
-      _hx_1 = 5; end
-      return _hx_1
-    end )();
-  elseif (tmp) == 1 then 
-    size = 4;
-  elseif (tmp) == 2 then 
-    size = 1;
-  elseif (tmp) == 3 then 
-    if (v == nil) then 
-      size = 1;
-    else
-      local b = __haxe_io_Bytes.ofString(v);
-      local v = b.length + 1;
-      size = (function() 
-        local _hx_2
-        if ((v >= 0) and (v < 128)) then 
-        _hx_2 = 1; else 
-        _hx_2 = 5; end
-        return _hx_2
-      end )() + b.length;
-    end;
-  elseif (tmp) == 4 then 
-    if (v == nil) then 
-      size = 1;
-    else
-      local b = v;
-      local v = b.length + 1;
-      size = (function() 
-        local _hx_3
-        if ((v >= 0) and (v < 128)) then 
-        _hx_3 = 1; else 
-        _hx_3 = 5; end
-        return _hx_3
-      end )() + b.length;
-    end;
-  elseif (tmp) == 5 then 
-    local size1;
-    if (v == nil) then 
-      size1 = 1;
-    else
-      local v = v.__uid;
-      size1 = (function() 
-        local _hx_4
-        if ((v >= 0) and (v < 128)) then 
-        _hx_4 = 1; else 
-        _hx_4 = 5; end
-        return _hx_4
-      end )();
-    end;
-    size = size1;
-  elseif (tmp) == 6 then 
-    local size1;
-    if (v == nil) then 
-      size1 = 1;
-    else
-      local v = v[1] + 1;
-      size1 = (function() 
-        local _hx_5
-        if ((v >= 0) and (v < 128)) then 
-        _hx_5 = 1; else 
-        _hx_5 = 5; end
-        return _hx_5
-      end )();
-    end;
-    size = size1;
-  elseif (tmp) == 7 then 
-    local _g = t[3];
-    local _g1 = t[2];
-    if (v == nil) then 
-      size = 1;
-    else
-      if (__lua_Boot.__instanceof(v, __hxbit_BaseProxy)) then 
-        v = v.map;
-      end;
-      local tmp = _g1[1];
-      if (tmp) == 0 then 
-        local m = v;
-        local _g1 = _hx_tab_array({}, 0);
-        local k = m:keys();
-        while (k:hasNext()) do 
-          _g1:push(k:next());
-        end;
-        local v = _g1.length + 1;
-        size = (function() 
-          local _hx_6
-          if ((v >= 0) and (v < 128)) then 
-          _hx_6 = 1; else 
-          _hx_6 = 5; end
-          return _hx_6
-        end )();
-        local _g2 = 0;
-        while (_g2 < _g1.length) do 
-          local v = _g1[_g2];
-          _g2 = _g2 + 1;
-          local ret = m.h[v];
-          if (ret == __haxe_ds_IntMap.tnull) then 
-            ret = nil;
-          end;
-          size = size + ((function() 
-            local _hx_7
-            if ((v >= 0) and (v < 128)) then 
-            _hx_7 = 1; else 
-            _hx_7 = 5; end
-            return _hx_7
-          end )() + self:calcPropSize(_g, ret));
-        end;
-      elseif (tmp) == 3 then 
-        local m = v;
-        local _g2 = _hx_tab_array({}, 0);
-        local k = m:keys();
-        while (k:hasNext()) do 
-          _g2:push(k:next());
-        end;
-        local v = _g2.length + 1;
-        size = (function() 
-          local _hx_8
-          if ((v >= 0) and (v < 128)) then 
-          _hx_8 = 1; else 
-          _hx_8 = 5; end
-          return _hx_8
-        end )();
-        local _g3 = 0;
-        while (_g3 < _g2.length) do 
-          local v = _g2[_g3];
-          _g3 = _g3 + 1;
-          local size1 = self:calcPropSize(_g1, v);
-          local ret = m.h[v];
-          if (ret == __haxe_ds_StringMap.tnull) then 
-            ret = nil;
-          end;
-          size = size + (size1 + self:calcPropSize(_g, ret));
-        end;else
-      local m = v;
-      local _g2 = _hx_tab_array({}, 0);
-      local k = m:keys();
-      while (k:hasNext()) do 
-        _g2:push(k:next());
-      end;
-      local v = _g2.length + 1;
-      size = (function() 
-        local _hx_9
-        if ((v >= 0) and (v < 128)) then 
-        _hx_9 = 1; else 
-        _hx_9 = 5; end
-        return _hx_9
-      end )();
-      local _g3 = 0;
-      while (_g3 < _g2.length) do 
-        local v = _g2[_g3];
-        _g3 = _g3 + 1;
-        size = size + (self:calcPropSize(_g1, v) + self:calcPropSize(_g, m:get(v)));
-      end; end;
-    end;
-  elseif (tmp) == 8 then 
-    local _g = t[2];
-    if (__lua_Boot.__instanceof(v, __hxbit_BaseProxy)) then 
-      v = v.array;
-    end;
-    local a = v;
-    if (a == nil) then 
-      size = 1;
-    else
-      local v = a.length + 1;
-      size = (function() 
-        local _hx_10
-        if ((v >= 0) and (v < 128)) then 
-        _hx_10 = 1; else 
-        _hx_10 = 5; end
-        return _hx_10
-      end )();
-      local _g1 = 0;
-      while (_g1 < a.length) do 
-        local v = a[_g1];
-        _g1 = _g1 + 1;
-        size = size + self:calcPropSize(_g, v);
-      end;
-    end;
-  elseif (tmp) == 9 then 
-    local _g = t[2];
-    if (v == nil) then 
-      size = 1;
-    else
-      local fbits = 0;
-      local _g1 = _hx_tab_array({}, 0);
-      local _g2 = 0;
-      while (_g2 < _g.length) do 
-        local f = _g[_g2];
-        _g2 = _g2 + 1;
-        if (self:isNullable(f.type)) then 
-          _g1:push(f);
-        end;
-      end;
-      local _g2 = 0;
-      local _g3 = _g1.length;
-      while (_g2 < _g3) do 
-        _g2 = _g2 + 1;
-        local i = _g2 - 1;
-        if (Reflect.field(v, _g1[i].name) ~= nil) then 
-          fbits = _hx_bit.bor(fbits,_hx_bit.lshift(1,i));
-        end;
-      end;
-      local v1 = fbits + 1;
-      size = (function() 
-        local _hx_11
-        if ((v1 >= 0) and (v1 < 128)) then 
-        _hx_11 = 1; else 
-        _hx_11 = 5; end
-        return _hx_11
-      end )();
-      local _g2 = 0;
-      local _hx_continue_1 = false;
-      while (_g2 < _g.length) do repeat 
-        local f = _g[_g2];
-        _g2 = _g2 + 1;
-        local nidx = _g1:indexOf(f);
-        if ((nidx >= 0) and ((_hx_bit.band(fbits,_hx_bit.lshift(1,nidx))) == 0)) then 
-          break;
-        end;
-        size = size + self:calcPropSize(f.type, Reflect.field(v, f.name));until true
-        if _hx_continue_1 then 
-        _hx_continue_1 = false;
-        break;
-        end;
-        
-      end;
-    end;
-  elseif (tmp) == 10 then 
-    do return self:calcPropSize(t[2], v) end;
-  elseif (tmp) == 11 then 
-    local _g = t[2];
-    if (v == nil) then 
-      size = 1;
-    else
-      local v = v;
-      local v1 = v.length + 1;
-      size = (function() 
-        local _hx_12
-        if ((v1 >= 0) and (v1 < 128)) then 
-        _hx_12 = 1; else 
-        _hx_12 = 5; end
-        return _hx_12
-      end )();
-      local _g1 = 0;
-      while (_g1 < v.length) do 
-        local e = v[_g1];
-        _g1 = _g1 + 1;
-        size = size + self:calcPropSize(_g, e);
-      end;
-    end;
-  elseif (tmp) == 12 then 
-    size = 1 + self:calcPropSize(t[2], v);
-  elseif (tmp) == 13 then 
-    _G.error(__haxe_Exception.thrown("assert"),0);
-  elseif (tmp) == 14 then 
-    local s = __hxbit_Serializer.new();
-    s:begin();
-    s:addDynamic(v);
-    size = s.out.b.length;
-  elseif (tmp) == 15 then 
-    size = 8;
-  elseif (tmp) == 16 then 
-    if (__lua_Boot.__instanceof(v, __hxbit_BaseProxy)) then 
-      v = v.value;
-    end;
-    local v = v;
-    size = (function() 
-      local _hx_13
-      if ((v >= 0) and (v < 128)) then 
-      _hx_13 = 1; else 
-      _hx_13 = 5; end
-      return _hx_13
-    end )();
-  elseif (tmp) == 17 then  end;
-  do return size end
-end
-__hxbit_NetworkStats.prototype.sync = function(self,o) 
-  local c = self:getClass(o);
-  local i = 0;
-  while ((_hx_bit.lshift(1,i)) <= o.__bits) do 
-    if ((_hx_bit.band(o.__bits,_hx_bit.lshift(1,i))) ~= 0) then 
-      local p = c.props[i];
-      if (p == nil) then 
-        p = _hx_o({__fields__={cl=true,name=true,count=true,bytes=true,size=true},cl=c,name=o:networkGetName(i),count=0,bytes=0,size=0});
-        c.props[i] = p;
-      end;
-      p.count = p.count + 1;
-      local p1 = p;
-      p1.bytes = p1.bytes + self:calcPropSize(c.schema.fieldsTypes[i], Reflect.field(o, p.name));
-    end;
-    i = i + 1;
-  end;
-end
-
-__hxbit_NetworkStats.prototype.__class__ =  __hxbit_NetworkStats
-
-__hxbit_Schema.new = function() 
-  local self = _hx_new(__hxbit_Schema.prototype)
-  __hxbit_Schema.super(self)
-  return self
-end
-__hxbit_Schema.super = function(self) 
-  self.__uid = _hx_bit.bor(_hx_bit.lshift(__hxbit_Serializer.SEQ,24),(function() 
-  local _hx_obj = __hxbit_Serializer;
-  local _hx_fld = 'UID';
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _hx_obj[_hx_fld];
-   end)());
-  self.fieldsNames = _hx_tab_array({}, 0);
-  self.fieldsTypes = _hx_tab_array({}, 0);
-end
-_hxClasses["hxbit.Schema"] = __hxbit_Schema
-__hxbit_Schema.__name__ = "hxbit.Schema"
-__hxbit_Schema.__interfaces__ = {__hxbit_Serializable}
-__hxbit_Schema.prototype = _hx_e();
-__hxbit_Schema.prototype.isFinal= nil;
-__hxbit_Schema.prototype.fieldsNames= nil;
-__hxbit_Schema.prototype.fieldsTypes= nil;
-__hxbit_Schema.prototype.get_checkSum = function(self) 
-  local s = __hxbit_Serializer.new();
-  s:begin();
-  local old = self.__uid;
-  self.__uid = 0;
-  s:addKnownRef(self);
-  self.__uid = old;
-  do return __haxe_crypto_Crc32.make(_hx_apply_self(s,"end")) end
-end
-__hxbit_Schema.prototype.__uid= nil;
-__hxbit_Schema.prototype.getCLID = function(self) 
-  do return __hxbit_Schema.__clid end
-end
-__hxbit_Schema.prototype.serialize = function(self,__ctx) 
-  __ctx.out.b:push((function() 
-    local _hx_1
-    if (self.isFinal) then 
-    _hx_1 = 1; else 
-    _hx_1 = 0; end
-    return _hx_1
-  end )());
-  local a = self.fieldsNames;
-  if (a == nil) then 
-    __ctx.out.b:push(0);
-  else
-    local v = a.length + 1;
-    if ((v >= 0) and (v < 128)) then 
-      __ctx.out.b:push(v);
-    else
-      __ctx.out.b:push(128);
-      __ctx.out:addInt32(v);
-    end;
-    local _g = 0;
-    while (_g < a.length) do 
-      local v = a[_g];
-      _g = _g + 1;
-      if (v == nil) then 
-        __ctx.out.b:push(0);
-      else
-        local b = __haxe_io_Bytes.ofString(v);
-        local v = b.length + 1;
-        if ((v >= 0) and (v < 128)) then 
-          __ctx.out.b:push(v);
-        else
-          __ctx.out.b:push(128);
-          __ctx.out:addInt32(v);
-        end;
-        local _this = __ctx.out;
-        local b2 = b.b;
-        local _g = 0;
-        local _g1 = b.length;
-        while (_g < _g1) do 
-          _g = _g + 1;
-          _this.b:push(b2[_g - 1]);
-        end;
-      end;
-    end;
-  end;
-  local a = self.fieldsTypes;
-  if (a == nil) then 
-    __ctx.out.b:push(0);
-  else
-    local v = a.length + 1;
-    if ((v >= 0) and (v < 128)) then 
-      __ctx.out.b:push(v);
-    else
-      __ctx.out.b:push(128);
-      __ctx.out:addInt32(v);
-    end;
-    local _g = 0;
-    while (_g < a.length) do 
-      local v = a[_g];
-      _g = _g + 1;
-      __hxbit_enumSer_Hxbit_PropTypeDesc.doSerialize(__ctx, v);
-    end;
-  end;
-end
-__hxbit_Schema.prototype.getSerializeSchema = function(self) 
-  local schema = __hxbit_Schema.new();
-  schema.fieldsNames:push("isFinal");
-  schema.fieldsTypes:push(__hxbit_PropTypeDesc.PBool);
-  schema.fieldsNames:push("fieldsNames");
-  schema.fieldsTypes:push(__hxbit_PropTypeDesc.PArray(__hxbit_PropTypeDesc.PString));
-  schema.fieldsNames:push("fieldsTypes");
-  schema.fieldsTypes:push(__hxbit_PropTypeDesc.PArray(__hxbit_PropTypeDesc.PEnum("hxbit.PropTypeDesc")));
-  schema.isFinal = __hxbit_Serializer.isClassFinal(__hxbit_Schema.__clid);
-  do return schema end
-end
-__hxbit_Schema.prototype.unserializeInit = function(self) 
-end
-__hxbit_Schema.prototype.unserialize = function(self,__ctx) 
-  local pos = (function() 
-  local _hx_obj = __ctx;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  self.isFinal = __ctx.input.b[pos] ~= 0;
-  local e0;
-  local pos = (function() 
-  local _hx_obj = __ctx;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local v = __ctx.input.b[pos];
-  if (v == 128) then 
-    local _this = __ctx.input;
-    local pos = __ctx.inPos;
-    local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-    v = _hx_bit_clamp((function() 
-      local _hx_1
-      if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-      _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-      _hx_1 = v1; end
-      return _hx_1
-    end )());
-    local __ctx = __ctx;
-    __ctx.inPos = __ctx.inPos + 4;
-  end;
-  local len = v;
-  local tmp;
-  if (len == 0) then 
-    tmp = nil;
-  else
-    len = len - 1;
-    local a = _hx_tab_array({}, 0);
-    local _g = 0;
-    local _g1 = len;
-    while (_g < _g1) do 
-      _g = _g + 1;
-      local pos = (function() 
-      local _hx_obj = __ctx;
-      local _hx_fld = 'inPos';
-      local _ = _hx_obj[_hx_fld];
-      _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-       return _;
-       end)();
-      local v = __ctx.input.b[pos];
-      if (v == 128) then 
-        local _this = __ctx.input;
-        local pos = __ctx.inPos;
-        local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-        v = _hx_bit_clamp((function() 
-          local _hx_2
-          if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-          _hx_2 = _hx_bit.bor(v1,-2147483648); else 
-          _hx_2 = v1; end
-          return _hx_2
-        end )());
-        local __ctx = __ctx;
-        __ctx.inPos = __ctx.inPos + 4;
-      end;
-      local len = v;
-      if (len == 0) then 
-        e0 = nil;
-      else
-        len = len - 1;
-        local s = __ctx.input:getString(__ctx.inPos, len);
-        local __ctx = __ctx;
-        __ctx.inPos = __ctx.inPos + len;
-        e0 = s;
-      end;
-      a[_g - 1] = e0;
-    end;
-    tmp = a;
-  end;
-  self.fieldsNames = tmp;
-  local e0;
-  local pos = (function() 
-  local _hx_obj = __ctx;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local v = __ctx.input.b[pos];
-  if (v == 128) then 
-    local _this = __ctx.input;
-    local pos = __ctx.inPos;
-    local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-    v = _hx_bit_clamp((function() 
-      local _hx_3
-      if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-      _hx_3 = _hx_bit.bor(v1,-2147483648); else 
-      _hx_3 = v1; end
-      return _hx_3
-    end )());
-    local __ctx = __ctx;
-    __ctx.inPos = __ctx.inPos + 4;
-  end;
-  local len = v;
-  local tmp;
-  if (len == 0) then 
-    tmp = nil;
-  else
-    len = len - 1;
-    local a = _hx_tab_array({}, 0);
-    local _g = 0;
-    local _g1 = len;
-    while (_g < _g1) do 
-      _g = _g + 1;
-      e0 = __hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(__ctx);
-      a[_g - 1] = e0;
-    end;
-    tmp = a;
-  end;
-  self.fieldsTypes = tmp;
-end
-
-__hxbit_Schema.prototype.__class__ =  __hxbit_Schema
-
 __hxbit_StructSerializable.new = {}
 _hxClasses["hxbit.StructSerializable"] = __hxbit_StructSerializable
 __hxbit_StructSerializable.__name__ = "hxbit.StructSerializable"
-__hxbit_StructSerializable.prototype = _hx_e();
-__hxbit_StructSerializable.prototype.customSerialize= nil;
-__hxbit_StructSerializable.prototype.customUnserialize= nil;
-
-__hxbit_StructSerializable.prototype.__class__ =  __hxbit_StructSerializable
-
-__hxbit_enumSer_Deceptinfect_infection_INF_STATE.new = {}
-_hxClasses["hxbit.enumSer.Deceptinfect_infection_INF_STATE"] = __hxbit_enumSer_Deceptinfect_infection_INF_STATE
-__hxbit_enumSer_Deceptinfect_infection_INF_STATE.__name__ = "hxbit.enumSer.Deceptinfect_infection_INF_STATE"
-__hxbit_enumSer_Deceptinfect_infection_INF_STATE.doSerialize = function(ctx,v) 
-  if (v == nil) then 
-    ctx.out.b:push(0);
-  else
-    local tmp = v[1];
-    if (tmp) == 0 then 
-      ctx.out.b:push(1);
-      local a = v[2];
-      if (a == nil) then 
-        ctx.out.b:push(0);
-      else
-        local v = a.length + 1;
-        if ((v >= 0) and (v < 128)) then 
-          ctx.out.b:push(v);
-        else
-          ctx.out.b:push(128);
-          ctx.out:addInt32(v);
-        end;
-        local _g = 0;
-        while (_g < a.length) do 
-          local v = a[_g];
-          _g = _g + 1;
-          ctx.out:addInt32(__haxe_io_FPHelper.floatToI32(v));
-        end;
-      end;
-    elseif (tmp) == 1 then 
-      ctx.out.b:push(2); end;
-  end;
-end
-__hxbit_enumSer_Deceptinfect_infection_INF_STATE.doUnserialize = function(ctx) 
-  local pos = (function() 
-  local _hx_obj = ctx;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local b = ctx.input.b[pos];
-  if (b == 0) then 
-    do return nil end;
-  end;
-  local b1 = b;
-  if (b1) == 1 then 
-    local _inf;
-    local v0;
-    local e1;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_1
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_1 = v1; end
-        return _hx_1
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      v0 = nil;
-    else
-      len = len - 1;
-      local a = ({length = len});
-      local _g = 0;
-      local _g1 = len;
-      while (_g < _g1) do 
-        _g = _g + 1;
-        local v = ctx.input:getFloat(ctx.inPos);
-        local ctx = ctx;
-        ctx.inPos = ctx.inPos + 4;
-        e1 = v;
-        a[_g - 1] = e1;
-      end;
-      v0 = a;
-    end;
-    _inf = v0;
-    do return __deceptinfect_infection_INF_STATE.NOT_INFECTED(_inf) end;
-  elseif (b1) == 2 then 
-    do return __deceptinfect_infection_INF_STATE.INFECTED end;else
-  _G.error(__haxe_Exception.thrown(Std.string("Invalid enum index ") .. Std.string(b)),0); end;
-end
-
-__hxbit_enumSer_Hxbit_PropTypeDesc.new = {}
-_hxClasses["hxbit.enumSer.Hxbit_PropTypeDesc"] = __hxbit_enumSer_Hxbit_PropTypeDesc
-__hxbit_enumSer_Hxbit_PropTypeDesc.__name__ = "hxbit.enumSer.Hxbit_PropTypeDesc"
-__hxbit_enumSer_Hxbit_PropTypeDesc.doSerialize = function(ctx,v) 
-  local _hx_continue_1 = false;
-  while (true) do repeat 
-    local _gctx = ctx;
-    if (v == nil) then 
-      _gctx.out.b:push(0);
-    else
-      local tmp = v[1];
-      if (tmp) == 0 then 
-        _gctx.out.b:push(1);
-      elseif (tmp) == 1 then 
-        _gctx.out.b:push(2);
-      elseif (tmp) == 2 then 
-        _gctx.out.b:push(3);
-      elseif (tmp) == 3 then 
-        _gctx.out.b:push(4);
-      elseif (tmp) == 4 then 
-        _gctx.out.b:push(5);
-      elseif (tmp) == 5 then 
-        local _g = v[2];
-        _gctx.out.b:push(6);
-        if (_g == nil) then 
-          _gctx.out.b:push(0);
-        else
-          local b = __haxe_io_Bytes.ofString(_g);
-          local v = b.length + 1;
-          if ((v >= 0) and (v < 128)) then 
-            _gctx.out.b:push(v);
-          else
-            _gctx.out.b:push(128);
-            _gctx.out:addInt32(v);
-          end;
-          local _this = _gctx.out;
-          local b2 = b.b;
-          local _g = 0;
-          local _g1 = b.length;
-          while (_g < _g1) do 
-            _g = _g + 1;
-            _this.b:push(b2[_g - 1]);
-          end;
-        end;
-      elseif (tmp) == 6 then 
-        local _g = v[2];
-        _gctx.out.b:push(7);
-        if (_g == nil) then 
-          _gctx.out.b:push(0);
-        else
-          local b = __haxe_io_Bytes.ofString(_g);
-          local v = b.length + 1;
-          if ((v >= 0) and (v < 128)) then 
-            _gctx.out.b:push(v);
-          else
-            _gctx.out.b:push(128);
-            _gctx.out:addInt32(v);
-          end;
-          local _this = _gctx.out;
-          local b2 = b.b;
-          local _g = 0;
-          local _g1 = b.length;
-          while (_g < _g1) do 
-            _g = _g + 1;
-            _this.b:push(b2[_g - 1]);
-          end;
-        end;
-      elseif (tmp) == 7 then 
-        _gctx.out.b:push(8);
-        __hxbit_enumSer_Hxbit_PropTypeDesc.doSerialize(_gctx, v[2]);
-        ctx = _gctx;
-        v = v[3];
-        break;
-      elseif (tmp) == 8 then 
-        _gctx.out.b:push(9);
-        ctx = _gctx;
-        v = v[2];
-        break;
-      elseif (tmp) == 9 then 
-        local _g = v[2];
-        _gctx.out.b:push(10);
-        if (_g == nil) then 
-          _gctx.out.b:push(0);
-        else
-          local v = _g.length + 1;
-          if ((v >= 0) and (v < 128)) then 
-            _gctx.out.b:push(v);
-          else
-            _gctx.out.b:push(128);
-            _gctx.out:addInt32(v);
-          end;
-          local _g1 = 0;
-          while (_g1 < _g.length) do 
-            local v = _g[_g1];
-            _g1 = _g1 + 1;
-            if (v == nil) then 
-              _gctx.out.b:push(0);
-            else
-              local fbits = 0;
-              if (v.name ~= nil) then 
-                fbits = 1;
-              end;
-              if (v.type ~= nil) then 
-                fbits = _hx_bit.bor(fbits,2);
-              end;
-              local v1 = fbits + 1;
-              if ((v1 >= 0) and (v1 < 128)) then 
-                _gctx.out.b:push(v1);
-              else
-                _gctx.out.b:push(128);
-                _gctx.out:addInt32(v1);
-              end;
-              if ((_hx_bit.band(fbits,1)) ~= 0) then 
-                local s = v.name;
-                if (s == nil) then 
-                  _gctx.out.b:push(0);
-                else
-                  local b = __haxe_io_Bytes.ofString(s);
-                  local v = b.length + 1;
-                  if ((v >= 0) and (v < 128)) then 
-                    _gctx.out.b:push(v);
-                  else
-                    _gctx.out.b:push(128);
-                    _gctx.out:addInt32(v);
-                  end;
-                  local _this = _gctx.out;
-                  local b2 = b.b;
-                  local _g = 0;
-                  local _g1 = b.length;
-                  while (_g < _g1) do 
-                    _g = _g + 1;
-                    _this.b:push(b2[_g - 1]);
-                  end;
-                end;
-              end;
-              _gctx.out.b:push((function() 
-                local _hx_1
-                if (v.opt) then 
-                _hx_1 = 1; else 
-                _hx_1 = 0; end
-                return _hx_1
-              end )());
-              if ((_hx_bit.band(fbits,2)) ~= 0) then 
-                __hxbit_enumSer_Hxbit_PropTypeDesc.doSerialize(_gctx, v.type);
-              end;
-            end;
-          end;
-        end;
-      elseif (tmp) == 10 then 
-        _gctx.out.b:push(11);
-        ctx = _gctx;
-        v = v[2];
-        break;
-      elseif (tmp) == 11 then 
-        _gctx.out.b:push(12);
-        ctx = _gctx;
-        v = v[2];
-        break;
-      elseif (tmp) == 12 then 
-        _gctx.out.b:push(13);
-        ctx = _gctx;
-        v = v[2];
-        break;
-      elseif (tmp) == 13 then 
-        _gctx.out.b:push(14);
-      elseif (tmp) == 14 then 
-        _gctx.out.b:push(15);
-      elseif (tmp) == 15 then 
-        _gctx.out.b:push(16);
-      elseif (tmp) == 16 then 
-        _gctx.out.b:push(17);
-        ctx = _gctx;
-        v = v[2];
-        break;
-      elseif (tmp) == 17 then 
-        _gctx.out.b:push(18); end;
-    end;
-    do return end;until true
-    if _hx_continue_1 then 
-    _hx_continue_1 = false;
-    break;
-    end;
-    
-  end;
-end
-__hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize = function(ctx) 
-  local pos = (function() 
-  local _hx_obj = ctx;
-  local _hx_fld = 'inPos';
-  local _ = _hx_obj[_hx_fld];
-  _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-   return _;
-   end)();
-  local b = ctx.input.b[pos];
-  if (b == 0) then 
-    do return nil end;
-  end;
-  local b1 = b;
-  if (b1) == 1 then 
-    do return __hxbit_PropTypeDesc.PInt end;
-  elseif (b1) == 2 then 
-    do return __hxbit_PropTypeDesc.PFloat end;
-  elseif (b1) == 3 then 
-    do return __hxbit_PropTypeDesc.PBool end;
-  elseif (b1) == 4 then 
-    do return __hxbit_PropTypeDesc.PString end;
-  elseif (b1) == 5 then 
-    do return __hxbit_PropTypeDesc.PBytes end;
-  elseif (b1) == 6 then 
-    local _name;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_1
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_1 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_1 = v1; end
-        return _hx_1
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      _name = nil;
-    else
-      len = len - 1;
-      local s = ctx.input:getString(ctx.inPos, len);
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + len;
-      _name = s;
-    end;
-    do return __hxbit_PropTypeDesc.PSerializable(_name) end;
-  elseif (b1) == 7 then 
-    local _name;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_2
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_2 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_2 = v1; end
-        return _hx_2
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      _name = nil;
-    else
-      len = len - 1;
-      local s = ctx.input:getString(ctx.inPos, len);
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + len;
-      _name = s;
-    end;
-    do return __hxbit_PropTypeDesc.PEnum(_name) end;
-  elseif (b1) == 8 then 
-    do return __hxbit_PropTypeDesc.PMap(__hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(ctx), __hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(ctx)) end;
-  elseif (b1) == 9 then 
-    do return __hxbit_PropTypeDesc.PArray(__hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(ctx)) end;
-  elseif (b1) == 10 then 
-    local _fields;
-    local e0;
-    local pos = (function() 
-    local _hx_obj = ctx;
-    local _hx_fld = 'inPos';
-    local _ = _hx_obj[_hx_fld];
-    _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-     return _;
-     end)();
-    local v = ctx.input.b[pos];
-    if (v == 128) then 
-      local _this = ctx.input;
-      local pos = ctx.inPos;
-      local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-      v = _hx_bit_clamp((function() 
-        local _hx_3
-        if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-        _hx_3 = _hx_bit.bor(v1,-2147483648); else 
-        _hx_3 = v1; end
-        return _hx_3
-      end )());
-      local ctx = ctx;
-      ctx.inPos = ctx.inPos + 4;
-    end;
-    local len = v;
-    if (len == 0) then 
-      _fields = nil;
-    else
-      len = len - 1;
-      local a = _hx_tab_array({}, 0);
-      local _g = 0;
-      local _g1 = len;
-      while (_g < _g1) do 
-        _g = _g + 1;
-        local pos = (function() 
-        local _hx_obj = ctx;
-        local _hx_fld = 'inPos';
-        local _ = _hx_obj[_hx_fld];
-        _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-         return _;
-         end)();
-        local v = ctx.input.b[pos];
-        if (v == 128) then 
-          local _this = ctx.input;
-          local pos = ctx.inPos;
-          local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-          v = _hx_bit_clamp((function() 
-            local _hx_4
-            if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-            _hx_4 = _hx_bit.bor(v1,-2147483648); else 
-            _hx_4 = v1; end
-            return _hx_4
-          end )());
-          local ctx = ctx;
-          ctx.inPos = ctx.inPos + 4;
-        end;
-        local fbits = v;
-        if (fbits == 0) then 
-          e0 = nil;
-        else
-          fbits = fbits - 1;
-          local type = nil;
-          local name = nil;
-          if ((_hx_bit.band(fbits,1)) ~= 0) then 
-            local pos = (function() 
-            local _hx_obj = ctx;
-            local _hx_fld = 'inPos';
-            local _ = _hx_obj[_hx_fld];
-            _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-             return _;
-             end)();
-            local v = ctx.input.b[pos];
-            if (v == 128) then 
-              local _this = ctx.input;
-              local pos = ctx.inPos;
-              local v1 = _hx_bit.bor(_hx_bit.bor(_hx_bit.bor(_this.b[pos],_hx_bit.lshift(_this.b[pos + 1],8)),_hx_bit.lshift(_this.b[pos + 2],16)),_hx_bit.lshift(_this.b[pos + 3],24));
-              v = _hx_bit_clamp((function() 
-                local _hx_5
-                if ((_hx_bit.band(v1,-2147483648)) ~= 0) then 
-                _hx_5 = _hx_bit.bor(v1,-2147483648); else 
-                _hx_5 = v1; end
-                return _hx_5
-              end )());
-              local ctx = ctx;
-              ctx.inPos = ctx.inPos + 4;
-            end;
-            local len = v;
-            if (len == 0) then 
-              name = nil;
-            else
-              len = len - 1;
-              local s = ctx.input:getString(ctx.inPos, len);
-              local ctx = ctx;
-              ctx.inPos = ctx.inPos + len;
-              name = s;
-            end;
-          end;
-          local pos = (function() 
-          local _hx_obj = ctx;
-          local _hx_fld = 'inPos';
-          local _ = _hx_obj[_hx_fld];
-          _hx_obj[_hx_fld] = _hx_obj[_hx_fld]  + 1;
-           return _;
-           end)();
-          local opt = ctx.input.b[pos] ~= 0;
-          if ((_hx_bit.band(fbits,2)) ~= 0) then 
-            type = __hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(ctx);
-          end;
-          e0 = _hx_o({__fields__={name=true,opt=true,type=true},name=name,opt=opt,type=type});
-        end;
-        a[_g - 1] = e0;
-      end;
-      _fields = a;
-    end;
-    do return __hxbit_PropTypeDesc.PObj(_fields) end;
-  elseif (b1) == 11 then 
-    do return __hxbit_PropTypeDesc.PAlias(__hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(ctx)) end;
-  elseif (b1) == 12 then 
-    do return __hxbit_PropTypeDesc.PVector(__hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(ctx)) end;
-  elseif (b1) == 13 then 
-    do return __hxbit_PropTypeDesc.PNull(__hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(ctx)) end;
-  elseif (b1) == 14 then 
-    do return __hxbit_PropTypeDesc.PUnknown end;
-  elseif (b1) == 15 then 
-    do return __hxbit_PropTypeDesc.PDynamic end;
-  elseif (b1) == 16 then 
-    do return __hxbit_PropTypeDesc.PInt64 end;
-  elseif (b1) == 17 then 
-    do return __hxbit_PropTypeDesc.PFlags(__hxbit_enumSer_Hxbit_PropTypeDesc.doUnserialize(ctx)) end;
-  elseif (b1) == 18 then 
-    do return __hxbit_PropTypeDesc.PStruct end;else
-  _G.error(__haxe_Exception.thrown(Std.string("Invalid enum index ") .. Std.string(b)),0); end;
-end
 
 __tink_core__Callback_Callback_Impl_.new = {}
 _hxClasses["tink.core._Callback.Callback_Impl_"] = __tink_core__Callback_Callback_Impl_
@@ -14751,7 +8798,6 @@ __tink_core_CallbackList.prototype.clear = function(self)
 end
 
 __tink_core_CallbackList.prototype.__class__ =  __tink_core_CallbackList
-_hxClasses["tink.core.Noise"] = __tink_core_Noise;
 _hxClasses["tink.core.Noise"] = { __ename__ = true, __constructs__ = _hx_tab_array({[0]="Noise"},1)}
 __tink_core_Noise = _hxClasses["tink.core.Noise"];
 __tink_core_Noise.Noise = _hx_tab_array({[0]="Noise",0,__enum__ = __tink_core_Noise},2)
@@ -14806,9 +8852,45 @@ local _hx_static_init = function()
   
   String.__name__ = "String";
   _hxClasses.Array = Array;
-  Array.__name__ = "Array";__haxe_ds_StringMap.tnull = ({});
-  
-  __lua_Boot.MAXSTACKSIZE = 1000;
+  Array.__name__ = "Array";
+  __deceptinfect_ecswip_ComponentManager.initComponent(22);
+  __deceptinfect_ecswip_ComponentManager.initComponent(28);
+  __deceptinfect_ecswip_ComponentManager.initComponent(31);
+  __deceptinfect_ecswip_ComponentManager.initComponent(30);
+  __deceptinfect_ecswip_ComponentManager.initComponent(24);
+  __deceptinfect_ecswip_ComponentManager.initComponent(16);
+  __deceptinfect_ecswip_ComponentManager.initComponent(0);
+  __deceptinfect_ecswip_ComponentManager.initComponent(13);
+  __deceptinfect_ecswip_ComponentManager.initComponent(29);
+  __deceptinfect_ecswip_ComponentManager.initComponent(26);
+  __deceptinfect_ecswip_ComponentManager.initComponent(37);
+  __deceptinfect_ecswip_ComponentManager.initComponent(39);
+  __deceptinfect_ecswip_ComponentManager.initComponent(27);
+  __deceptinfect_ecswip_ComponentManager.initComponent(25);
+  __deceptinfect_ecswip_ComponentManager.initComponent(33);
+  __deceptinfect_ecswip_ComponentManager.initComponent(4);
+  __deceptinfect_ecswip_ComponentManager.initComponent(38);
+  __deceptinfect_ecswip_ComponentManager.initComponent(2);
+  __deceptinfect_ecswip_ComponentManager.initComponent(32);
+  __deceptinfect_ecswip_ComponentManager.initComponent(23);
+  __deceptinfect_ecswip_ComponentManager.initComponent(5);
+  __deceptinfect_ecswip_ComponentManager.initComponent(19);
+  __deceptinfect_ecswip_ComponentManager.initComponent(12);
+  __deceptinfect_ecswip_ComponentManager.initComponent(8);
+  __deceptinfect_ecswip_ComponentManager.initComponent(11);
+  __deceptinfect_ecswip_ComponentManager.initComponent(7);
+  __deceptinfect_ecswip_ComponentManager.initComponent(6);
+  __deceptinfect_ecswip_ComponentManager.initComponent(36);
+  __deceptinfect_ecswip_ComponentManager.initComponent(10);
+  __deceptinfect_ecswip_ComponentManager.initComponent(20);
+  __deceptinfect_ecswip_ComponentManager.initComponent(21);
+  __deceptinfect_ecswip_ComponentManager.initComponent(14);
+  __deceptinfect_ecswip_ComponentManager.initComponent(9);
+  __deceptinfect_ecswip_ComponentManager.initComponent(18);
+  __deceptinfect_ecswip_ComponentManager.initComponent(34);
+  __deceptinfect_ecswip_ComponentManager.initComponent(35);
+  __deceptinfect_ecswip_ComponentManager.initComponent(15);
+  __deceptinfect_ecswip_ComponentManager.initComponent(17);__haxe_ds_StringMap.tnull = ({});
   
   __deceptinfect_GameManager.state = __deceptinfect_GAME_STATE.WAIT;
   
@@ -14921,15 +9003,27 @@ local _hx_static_init = function()
   
   __deceptinfect_PlayerManager.indexLookup = __haxe_ds_IntMap.new();
   
-  __deceptinfect_client_GeigerSystem.net_geiger = NETMESSAGE_geiger.new();
+  __deceptinfect_Profiler.inital = _hx_tab_array({}, 0);
   
-  __deceptinfect_ecswip_ComponentManager.components = __haxe_ds_ObjectMap.new();
+  __deceptinfect_Profiler.vinal = _hx_tab_array({}, 0);
   
-  __deceptinfect_ecswip_ComponentManager.componentSignals = __haxe_ds_ObjectMap.new();
+  __deceptinfect_Profiler.pass = 0;
+  
+  __deceptinfect_Profiler.lastname = "";
+  
+  __deceptinfect_Profiler.profileState = __deceptinfect_ProfilingState.NOT_PROFILING;
+  
+  __deceptinfect_Profiler.cumulativeTime = 0.0;
+  
+  __deceptinfect_Profiler.totalProfileTime = 0.0;
+  
+  __deceptinfect_Profiler.totalPasses = 500;
   
   __deceptinfect_ecswip_ComponentManager.entities = 0;
   
   __deceptinfect_ecswip_ComponentManager.activeEntities = 0;
+  
+  __deceptinfect_client_GeigerSystem.net_geiger = NETMESSAGE_geiger.new();
   
   __deceptinfect_ecswip_GrabSystem.net_grabupdate = NETMESSAGE_grabupdate.new();
   
@@ -14967,7 +9061,7 @@ local _hx_static_init = function()
   
   __deceptinfect_ecswip_SystemManager.getSystems = __haxe_ds_ObjectMap.new();
   
-  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_systems_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_systems_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem, __deceptinfect_radiation_RadSourceSystem, __deceptinfect_game_LowHealthSystem, __deceptinfect_items_ScannerSystem, __deceptinfect_WeaponSystem}, 19);
+  __deceptinfect_ecswip_SystemManager.runSystems = _hx_tab_array({[0]=__deceptinfect_infection_systems_InfectionSystem, __deceptinfect_client_GeigerSystem, __deceptinfect_radiation_RadiationSystem, __deceptinfect_ecswip_GrabSystem, __deceptinfect_ecswip_HiddenHealthSystem, __deceptinfect_game_WinSystem, __deceptinfect_game_BatterySystem, __deceptinfect_game_SpawnSystem, __deceptinfect_statuses_WalkthroughSystem, __deceptinfect_game_NestSystem, __deceptinfect_game_EvacSystem, __deceptinfect_game_RagdollSystem, __deceptinfect_game_SlowMotionSystem, __deceptinfect_infection_systems_InfectionLookSystem, __deceptinfect_radiation_ContaminationSystem, __deceptinfect_radiation_RadSourceSystem, __deceptinfect_game_LowHealthSystem, __deceptinfect_items_ScannerSystem, __deceptinfect_WeaponSystem, __deceptinfect_ecswip_DummySystem}, 20);
   
   __deceptinfect_ents_Di_puddle.material = _G.Material("nature/water_coast01");
   
@@ -14976,10 +9070,6 @@ local _hx_static_init = function()
   __hxbit_Serializer.SEQ = 0;
   
   __hxbit_Serializer.CLASSES = _hx_tab_array({}, 0);
-  
-  __hxbit_Serializer.ENUM_CLASSES = __haxe_ds_StringMap.new();
-  
-  __deceptinfect_infection_InfectionComponent.__clid = __hxbit_Serializer.registerClass(__deceptinfect_infection_InfectionComponent);
   
   __deceptinfect_radiation_RadiationTypes.types = (function() 
     local _hx_3
@@ -15013,23 +9103,11 @@ local _hx_static_init = function()
   
   __deceptinfect_util_Util.mappy_2 = __haxe_ds_IntMap.new();
   
-  __hxbit_NetworkHost.CLIENT_TIMEOUT = 3600.;
-  
   __haxe_ds_IntMap.tnull = ({});
-  
-  __gmod_hxbit_GmodNetHost.players = __haxe_ds_IntMap.new();
   
   __haxe_EntryPoint.pending = Array.new();
   
   __haxe_EntryPoint.threadCount = 0;
-  
-  __haxe_Unserializer.DEFAULT_RESOLVER = __haxe__Unserializer_DefaultResolver.new();
-  
-  __haxe_Unserializer.BASE64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%:";
-  
-  __hxbit_Convert.convFuns = __haxe_ds_StringMap.new();
-  
-  __hxbit_Schema.__clid = __hxbit_Serializer.registerClass(__hxbit_Schema);
   
   __tink_core__Callback_Callback_Impl_.depth = 0;
   
@@ -15064,10 +9142,6 @@ end
 _G.math.randomseed(_G.os.time());
 
 _hx_print = print or (function() end)
-
-_hx_apply_self = function(self, f, ...)
-  return self[f](self,...)
-end
 
 _hx_table = {}
 _hx_table.pack = _G.table.pack or function(...)

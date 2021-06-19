@@ -13,7 +13,7 @@ class ContaminationSystem extends System implements enumExtractor.EnumExtractor 
             case [Comp(c_rv),Comp(c_contamAccept),Comp(c_vicpos)]:
                 
             
-                for (produce in entities){
+                for (produce in entities) {
                     switch [produce.get(RadSource),produce.get(ContaminationProducer),produce.get(VirtualPosition)] {
                     case [Comp(c_rs),Comp(c_contamProduce),Comp(c_producePos)]:
                         if (c_rs.attatch == vic) {

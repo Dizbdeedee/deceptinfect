@@ -41,11 +41,12 @@ class SystemManager {
         RagdollSystem,
         SlowMotionSystem,
         InfectionLookSystem,
-        ContaminationSystem,
+	ContaminationSystem, //Problem!
         RadSourceSystem,
         LowHealthSystem,
         ScannerSystem,
-        WeaponSystem
+        WeaponSystem,
+	DummySystem
     ];
 
     static function make() {
@@ -68,6 +69,7 @@ class SystemManager {
         getSystems.set(LowHealthSystem, new LowHealthSystem());
         getSystems.set(ScannerSystem, new ScannerSystem());
         getSystems.set(WeaponSystem, new WeaponSystem());
+        getSystems.set(DummySystem, new DummySystem());
     }
 
     public static function getSystem<T:System>(cls:Class<T>):T {
@@ -79,10 +81,23 @@ class SystemManager {
     static function getSystemExp(name:String) {
         return cast getSystems.get(Type.resolveClass(name));
     }
+
+
     public static function runAllSystems() {
+	Profiler.profile("start",true);
         for (clsSystem in runSystems) {
-           getSystems.get(clsSystem).run();
+
+	    final name = Type.getClassName(clsSystem);
+	    Profiler.profile(name);
+	    getSystems.get(clsSystem).run();
         }
+	Profiler.resetprofile();
+	Profiler.report();
+    }
+
+    @:expose("systemReport")
+    public static function beginReporting() {
+	Profiler.beginProfiling();
     }
 
     public static function initAllSystems() {
@@ -91,6 +106,10 @@ class SystemManager {
             getSystems.get(clsSystem).init();
         }
     }    
+
+    public static function destroySystems() {
+	getSystems.clear();
+    }
     
 
     

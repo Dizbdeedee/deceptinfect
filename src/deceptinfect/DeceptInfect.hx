@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.util.PrintTimer;
 import haxe.io.Bytes;
 import haxe.crypto.Crc32;
 import gmod.enums.SNDLVL;
@@ -56,28 +57,30 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
     var lastcrc:Int = 0;
 
     override function Think() {
-        var nethost = Main.nethost;
+        // var nethost = Main.nethost;
         SystemManager.runAllSystems();
         #if server
         GameManager.think();
         checkPerformance();
         #end
-        for (c in nethost.clients) {
-            c.sync();
-        }
-        nethost.flush();
+        // for (c in nethost.clients) {
+        //     c.sync();
+        // }
+        // nethost.flush();
     }
 
     var timestart = 0;
     var underperforming = false;
     @:exposeGM function checkPerformance() {
-        if (Gmod.FrameTime() > 0.016666666666667 && !underperforming) {
-            trace("Server underperforming! ");
-            underperforming = true;
-        } else if (underperforming) {
-            trace("Server recovered");
-            underperforming = false;
-        }
+        if ((1 / Gmod.FrameTime()) < 66.6 ) {
+	    PrintTimer.print_time(5,() -> trace("Server is underperforming! ${1 / Gmod.FrameTime()}"));
+	    
+	}
+            // underperforming = true;
+        // } else if (underperforming) {
+        //     trace("Server recovered");
+        //     underperforming = false;
+        // }
     }
     override function OnEntityCreated(entity:Entity) {
         if (entity.IsPlayer()) {
@@ -168,7 +171,7 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
                 var plyr:GPlayerCompat = PlayerLib.GetByID(1);
                 getSystem(InfectionSystem).makeInfected(plyr.id);
             case KEY_M:
-                trace(ComponentManager.components.get(PlayerComponent));
+                // trace(ComponentManager.components.get(PlayerComponent));
             default:
             //handle case of infection? use command strategy
         }

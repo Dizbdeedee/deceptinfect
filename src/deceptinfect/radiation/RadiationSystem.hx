@@ -24,8 +24,8 @@ class RadiationSystem extends System {
 
     }
 
-    static var _acceptFamily:Family = new Family([RadiationAccepter,RateComponent,GEntityComponent]);
-    static var _produceFamily:Family = new Family([RadiationProducer,VirtualPosition]);
+    // static var _acceptFamily:Family = new Family([RadiationAccepter,RateComponent,GEntityComponent]);
+    // static var _produceFamily:Family = new Family([RadiationProducer,VirtualPosition]);
     #if server
     override function run_server() {
         

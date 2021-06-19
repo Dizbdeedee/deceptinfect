@@ -35,7 +35,8 @@ class WeaponSystem extends System {
 	    final timeElapsed = Gmod.CurTime() - x.gameStarted;
 	    final minsElapsed = timeElapsed / 60;
             if (minsElapsed > timevalues.get(currentStage)) { //mins, secs, conversion :)
-                for (ent in entities) {
+                for (x in entities) {
+		    final ent:DI_ID = x;
                     switch [ent.get(PlayerComponent),ent.get(AliveComponent)] {
                     case [Comp(c_ply),Comp(_)]:
                         c_ply.player.Give(weapons_give.get(currentStage).getRandom()); //give weapon? upgrade weapon? hmmm

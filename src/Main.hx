@@ -33,7 +33,7 @@ class Main {
             new GPlayerCompat(new PlayerComponent(ply));
         }
         #end
-        nethost = new gmod.hxbit.GmodNetHost();
+        // nethost = new gmod.hxbit.GmodNetHost();
         FileLib.CreateDir("deceptinfect");
         GameLib.CleanUpMap();
         SignalStorage.initEvents();
@@ -45,7 +45,7 @@ class Main {
         // new deceptinfect.TestObject();
         #end
         #if client
-        deceptinfect.TestObject;
+        // deceptinfect.TestObject;
         #end
         SpawnSystem.generateSpawns();
         UtilLib.PrecacheModel(Misc.infModel);

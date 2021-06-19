@@ -19,7 +19,7 @@ class WalkthroughSystem extends System {
             switch[ent.get(Walkthroughable),ent.get(PlayerComponent)] {
             case [Comp(_),Comp(c_ply)]:
                 var tooclose = false;    
-                for (otherEnt in entities) {
+                for ((otherEnt : DI_ID) in entities) {
                     if (otherEnt == ent) {continue;}
                     switch otherEnt.get(PlayerComponent) {
                     case Comp(c_otherPly):
