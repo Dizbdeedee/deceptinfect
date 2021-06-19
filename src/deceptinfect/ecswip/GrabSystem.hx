@@ -1,13 +1,16 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.game.AliveComponent;
+import deceptinfect.game.components.AliveComponent;
 import deceptinfect.util.Cooldown;
 import gmod.Hook;
 import deceptinfect.ecswip.SignalStorage.DamageEvent;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.client.PVS;
+import deceptinfect.infection.components.GrabAccepter;
+import deceptinfect.infection.components.GrabProducer;
+import deceptinfect.infection.components.GrabDraw;
 import deceptinfect.infection.InfectionComponent;
-import deceptinfect.infection.InfectionSystem;
+import deceptinfect.infection.systems.InfectionSystem;
 using deceptinfect.util.EntityExt;
 typedef Net_GrabPos = {
     index : Int,
@@ -241,7 +244,7 @@ class GrabSystem extends System {
         switch [attack.get(GrabProducer),vic.get(GrabAccepter)] {
         case [Comp(c_produce),Comp(c_accept)]:
             switch [c_produce.grabState,c_accept.grabState] {
-            case [READY(TARGET(vic)),NOT_GRABBED]:
+		case [READY(TARGET(vic)),NOT_GRABBED(_)]:
                 trace('c_accpet ${c_accept.grabState}');
                 grabStart(attack,vic);
             default:
@@ -284,12 +287,12 @@ class GrabSystem extends System {
             switch [c_accept.grabState,
                 c_produce.grabState,
                 ] {
-            case [NOT_GRABBED,
+		case [NOT_GRABBED(numTargeting),
                 READY(TARGET(_) | SEARCHING)]:
                 trace(c_accept.grabState);
                 attemptSneakAttack(attack,vic);
                 target(attack,vic);
-                if (c_accept.numTargeting >= c_accept.overwhelm) {
+                if (numTargeting.value >= c_accept.overwhelm) {
                     attemptGrab(attack,vic);
                 }
             default:
@@ -344,15 +347,14 @@ class GrabSystem extends System {
         var c_accept = victim.get_sure(GrabAccepter);
         var c_produce = attacker.get_sure(GrabProducer);
         c_accept.targeting.set(c_produce,true);
-        c_accept.numTargeting++;
+	switch (c_accept.grabState) {
+	    case NOT_GRABBED(x):
+		x.value += 1;
+	    default:
+		throw "XD";
+	}
         c_produce.grabState = READY(TARGET(victim));
         
-    }
-
-    
-
-    public static function checkOverwhelm(victim:GrabAccepter) {
-        return victim.numTargeting >= victim.overwhelm;
     }
 
     public static function stopTargeting(attacker:GrabProducer) {

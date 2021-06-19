@@ -1,6 +1,6 @@
 package deceptinfect.ents;
 
-import deceptinfect.game.EvacZone;
+import deceptinfect.game.components.EvacZone;
 import deceptinfect.game.EvacSystem;
 import gmod.sent.SentBuild;
 

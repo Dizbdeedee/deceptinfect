@@ -1,8 +1,11 @@
-package deceptinfect.infection;
+package deceptinfect.infection.systems;
 
 class RateSystem {    
+
     static var nextAddRate:Int = 0;
+
     static var nextMultiRate:Int = 0;    
+    
     public static function getAddRateTicket():AddRateID {
         nextAddRate++;
         return nextAddRate - 1;

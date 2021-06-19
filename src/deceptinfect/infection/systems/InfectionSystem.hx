@@ -1,6 +1,6 @@
-package deceptinfect.infection;
+package deceptinfect.infection.systems;
 
-import deceptinfect.game.AliveComponent;
+import deceptinfect.game.components.AliveComponent;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.System;
 import deceptinfect.infection.InfectionComponent;

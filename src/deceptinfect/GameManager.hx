@@ -4,27 +4,27 @@ import deceptinfect.radiation.ContaminationProducer;
 import deceptinfect.radiation.RadVictim;
 import deceptinfect.radiation.RadiationTypes;
 import deceptinfect.radiation.RadSource;
-import deceptinfect.game.CleanupEnt;
+import deceptinfect.game.components.CleanupEnt;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.util.Util;
-import deceptinfect.game.AliveComponent;
+import deceptinfect.game.components.AliveComponent;
 import deceptinfect.ents.Di_entities;
 import deceptinfect.game.WinSystem;
 import deceptinfect.ecswip.SystemManager;
-import deceptinfect.infection.InfectionSystem;
-import deceptinfect.ecswip.DamagePenaltyHidden;
+import deceptinfect.infection.systems.InfectionSystem;
+import deceptinfect.infection.components.DamagePenaltyHidden;
 import deceptinfect.abilities.FormComponent;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.radiation.RadiationProducer;
-import deceptinfect.ecswip.GrabProducer;
+import deceptinfect.infection.components.GrabProducer;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.radiation.ContaminationAccepter;
-import deceptinfect.ecswip.GrabAccepter;
-import deceptinfect.ecswip.HiddenHealthComponent;
+import deceptinfect.infection.components.GrabAccepter;
+import deceptinfect.infection.components.HiddenHealthComponent;
 import deceptinfect.infection.RateComponent;
-import deceptinfect.ecswip.SpectateComponent;
+import deceptinfect.infection.components.SpectateComponent;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.GEntCompat;
@@ -194,7 +194,7 @@ class GameManager implements enumExtractor.EnumExtractor {
                 c_gent.entity.Remove();
             default:
             }
-            switch ent.get(deceptinfect.game.KeepRestart) {
+            switch ent.get(deceptinfect.game.components.KeepRestart) {
                 case Comp(_):
                 default:
                     ComponentManager.removeEntity(ent);
@@ -295,7 +295,6 @@ class GameManager implements enumExtractor.EnumExtractor {
 
     #end
 
-
     public static function init() {
         stateChange = stateTrig.asSignal();
         #if client
@@ -307,7 +306,7 @@ class GameManager implements enumExtractor.EnumExtractor {
     #if client
     static function cleanup() {
         for (ent in entities) {
-            switch ent.get(deceptinfect.game.KeepRestart) {
+            switch ent.get(deceptinfect.game.components.KeepRestart) {
                 case Comp(_):
                 default:
                     ComponentManager.removeEntity(ent);

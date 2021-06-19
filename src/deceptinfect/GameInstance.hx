@@ -5,7 +5,7 @@ import deceptinfect.ents.Di_entities;
 import deceptinfect.ents.Di_charger;
 import gmod.EntityClass.BaseEntities;
 import deceptinfect.game.SpawnSystem;
-import deceptinfect.infection.InfectionSystem;
+import deceptinfect.infection.systems.InfectionSystem;
 using gmod.PairTools;
 using tink.CoreApi;
 /**

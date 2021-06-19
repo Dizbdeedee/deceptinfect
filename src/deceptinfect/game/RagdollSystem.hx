@@ -14,8 +14,8 @@ import deceptinfect.ents.Di_entities;
 import deceptinfect.GEntCompat;
 import deceptinfect.infection.InfectedComponent;
 import gmod.Hook.GMHook;
-import deceptinfect.game.StatInfo;
-import deceptinfect.game.RagInfo;
+import deceptinfect.game.components.StatInfo;
+import deceptinfect.game.components.RagInfo;
 
 
 typedef ND_Statue = {

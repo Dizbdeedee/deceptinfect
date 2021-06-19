@@ -1,7 +1,7 @@
 package deceptinfect.game;
 
 import deceptinfect.ecswip.GEntityComponent;
-import deceptinfect.game.BatteryAccepter;
+import deceptinfect.game.components.BatteryAccepter;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.System;
 

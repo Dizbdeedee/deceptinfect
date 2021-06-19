@@ -1,4 +1,4 @@
-package deceptinfect.infection;
+package deceptinfect.infection.systems;
 
 import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.gclass.Entity.EntityGetHitBoxBoundsReturn;
@@ -31,7 +31,9 @@ class InfectionLookSystem extends System {
         }
     }
     #end
+
     #if server
+
     override function run_server() {
         for (ent in entities) {
             switch [ent.get(InfectionLookInfo),ent.get(PlayerComponent)] {

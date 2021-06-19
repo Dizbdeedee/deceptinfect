@@ -1,6 +1,6 @@
 package deceptinfect.client;
 
-import deceptinfect.game.StatInfo;
+import deceptinfect.game.components.StatInfo;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.GameManager.GAME_STATE;
 #if client

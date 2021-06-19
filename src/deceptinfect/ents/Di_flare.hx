@@ -2,7 +2,7 @@ package deceptinfect.ents;
 
 import deceptinfect.game.EvacSystem;
 import gmod.sent.SentBuild;
-import deceptinfect.game.FlareComponent;
+import deceptinfect.game.components.FlareComponent;
 
 class Di_flare extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
 

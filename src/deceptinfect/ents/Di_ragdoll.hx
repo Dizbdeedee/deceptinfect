@@ -1,7 +1,7 @@
 package deceptinfect.ents;
 
-import deceptinfect.game.CleanupEnt;
-import deceptinfect.game.Ragdoll;
+import deceptinfect.game.components.CleanupEnt;
+import deceptinfect.game.components.Ragdoll;
 import deceptinfect.ecswip.GEntityComponent;
 import gmod.sent.SentBuild;
 

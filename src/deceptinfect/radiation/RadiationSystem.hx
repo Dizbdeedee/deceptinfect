@@ -8,7 +8,7 @@ import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.infection.RateComponent;
 import deceptinfect.ecswip.GEntityComponent;
-import deceptinfect.infection.RateSystem;
+import deceptinfect.infection.systems.RateSystem;
 import deceptinfect.ecswip.Family;
 
 class RadiationSystem extends System {

@@ -4,6 +4,8 @@ import deceptinfect.infection.InfectedComponent;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SignalStorage;
+import deceptinfect.infection.components.HiddenHealthComponent;
+import deceptinfect.infection.components.DamagePenaltyHidden;
 class HiddenHealthSystem extends GeigerSystem {
     #if server
 

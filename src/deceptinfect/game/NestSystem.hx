@@ -1,7 +1,7 @@
 package deceptinfect.game;
 
 import deceptinfect.radiation.RadiationProducer;
-import deceptinfect.infection.InfectionSystem;
+import deceptinfect.infection.systems.InfectionSystem;
 
 class NestSystem extends System {
     #if server

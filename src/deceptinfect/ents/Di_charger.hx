@@ -1,7 +1,7 @@
 package deceptinfect.ents;
 
 import gmod.sent.SentBuild;
-import deceptinfect.game.BatteryAccepter;
+import deceptinfect.game.components.BatteryAccepter;
 import deceptinfect.ecswip.ComponentManager;
 
 class Di_charger extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {

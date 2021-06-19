@@ -3,7 +3,7 @@ package deceptinfect.ents;
 import deceptinfect.game.SpawnSystem.Spawn;
 import gmod.sent.SentBuild;
 import gmod.sent.SentBuild.EntFields;
-import deceptinfect.game.BatterySource;
+import deceptinfect.game.components.BatterySource;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.game.BatterySystem;
 import deceptinfect.ecswip.SystemManager.getSystem;

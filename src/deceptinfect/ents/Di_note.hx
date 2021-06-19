@@ -1,6 +1,6 @@
 package deceptinfect.ents;
 
-import deceptinfect.game.InfoStorage;
+import deceptinfect.game.components.InfoStorage;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.sent.ENT_ANIM;
 

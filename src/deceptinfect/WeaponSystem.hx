@@ -1,6 +1,6 @@
 package deceptinfect;
 
-import deceptinfect.game.AliveComponent;
+import deceptinfect.game.components.AliveComponent;
 import deceptinfect.Classes.Weapons;
 import deceptinfect.ecswip.PlayerComponent;
 using deceptinfect.util.ArrayTools;
