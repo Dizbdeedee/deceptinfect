@@ -1,7 +1,7 @@
 * Active work
 
 ** Cleanup most unused code. Enforce proper commit messages
-** Finish networking implementation using hxbit
+** Redo radiation systems
 ** Despaghettify Main entry points
 ** Cleanup first level heirachy
 
@@ -9,6 +9,8 @@
 
 ** Spread logic!
 ** Spread gameplay impact on humans/infected
+
+** Finish networking implementation using hxbit
 
 ** Finish weapon system
 
