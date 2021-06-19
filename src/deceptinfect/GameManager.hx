@@ -36,6 +36,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 
 
     public static var state(default,#if server set #else null #end):GAME_STATE = WAIT;
+
     static var Game:GameInstance;
 
     public static var diffTime(default,never):Null<Float> = null;
@@ -68,8 +69,6 @@ class GameManager implements enumExtractor.EnumExtractor {
         }
     }
 
-    #end
-    #if server
     public static function sure():GameInstance {
         return switch (state) {
             case SETTING_UP(x,_) | PLAYING(x) | ENDING(x,_):
@@ -83,17 +82,15 @@ class GameManager implements enumExtractor.EnumExtractor {
    
     public static function initPlayer(ply:GPlayerCompat) {
         var p = ply.id;
-        // var ent = new GPlayerCompat(new PlayerComponent(x));
-        // var p = ent.id;
-        var infcomp = new InfectionComponent();
-        var spec = new SpectateComponent();
-        var rate = new RateComponent();
-        var vic = new RadVictim();
-        var contam = new ContaminationAccepter();
-        var health = new HiddenHealthComponent();
-        var grabaccept = new GrabAccepter();
-        var radaccept = new RadiationAccepter({});
-        var virpos = new VirtualPosition(ENT(ply));
+        final infcomp = new InfectionComponent();
+        final spec = new SpectateComponent();
+        final rate = new RateComponent();
+        final vic = new RadVictim();
+        final contam = new ContaminationAccepter();
+        final health = new HiddenHealthComponent();
+        final grabaccept = new GrabAccepter();
+        final radaccept = new RadiationAccepter({});
+        final virpos = new VirtualPosition(ENT(ply));
         
         p.add_component(infcomp);
         p.add_component(spec);
@@ -115,8 +112,6 @@ class GameManager implements enumExtractor.EnumExtractor {
             state = SETTING_UP(new GameInstance(),Gmod.CurTime() + GameValues.SETUP_TIME);
         }
     }
-
-    
 
     @:allow(deceptinfect.DeceptInfect.Think)
     static function think() {
@@ -145,6 +140,7 @@ class GameManager implements enumExtractor.EnumExtractor {
         }
         lastTick = Gmod.CurTime();
     }
+
     #if server
     static function set_state(x:GAME_STATE):GAME_STATE {
         var time = 0.0;
@@ -336,6 +332,7 @@ class GameManager implements enumExtractor.EnumExtractor {
     }
     #end
 }
+
 enum GAME_STATE {
     WAIT;
     SETTING_UP #if server ( x:GameInstance,time:Float ) #end;

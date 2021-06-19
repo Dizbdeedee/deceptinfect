@@ -47,9 +47,6 @@ class BatterySystem extends System {
             switch [source.get(deceptinfect.sabotage.S_Explode),source.get(GEntityComponent)] {
                 case [Comp(s_explode),Comp(c_gent)]:
                     UtilLib.BlastDamage(c_gent.entity,c_gent.entity,c_gent.entity.GetPos(),500,75);    
-                    // var e = EntsLib.Create("explosion");
-                    
-                    // s_explode.dmg
                 default:
             }
             true;

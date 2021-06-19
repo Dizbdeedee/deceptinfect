@@ -9,6 +9,7 @@ import deceptinfect.ecswip.PlayerComponent;
 import gmod.structs.TestCollisionData;
 
 class Di_nest extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
+
     final properties:EntFields = {
         Base : "base_entity"
     }
@@ -17,6 +18,7 @@ class Di_nest extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
     override function Draw(flags:Float) {
         self.DrawModel();
     }
+ 
     #end
     #if server
     var id:DI_ID;

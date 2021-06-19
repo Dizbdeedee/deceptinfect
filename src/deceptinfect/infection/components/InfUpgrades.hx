@@ -1,7 +1,9 @@
 package deceptinfect.infection;
 
 class InfUpgrades extends Component {
+
     var upgrades:Array<UpgradeStatus> = [];
+
 }
 
 enum UpgradeStatus {
@@ -12,6 +14,7 @@ enum UpgradeStatus {
 class Upgrade {
 
     public var type:UpgradeType;
+
 }
 
 enum UpgradeType {
