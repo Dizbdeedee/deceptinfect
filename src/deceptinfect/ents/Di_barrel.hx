@@ -23,6 +23,7 @@ class Di_barrel extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	    self.GetPhysicsObject().Wake();
 	}
         self.SetUseType(SIMPLE_USE);
+	
 	#end
     }
     #if server
