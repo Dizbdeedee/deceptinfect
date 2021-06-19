@@ -10,7 +10,7 @@ class NestSystem extends System {
 			final ent:DI_ID = x;
 			switch [ent.get(NestComponent), ent.get(RadiationProducer)] {
 				case [Comp(c_nest), Comp(c_rad)]:
-					var avg = InfectionSystem.averageInfection;
+					var avg = InfectionSystem.get().getAverageInfection();
 					var remap = MathLib.Remap.bind(avg, c_nest.rate_threshold_min, c_nest.rate_threshold_max);
 					c_rad.maxrate = remap(c_nest.rate_start, c_nest.rate_end);
 					c_rad.radius = (cast remap(c_nest.radius_start, c_nest.radius_end) : DistSquared);

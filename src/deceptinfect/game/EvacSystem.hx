@@ -51,7 +51,7 @@ class EvacSystem extends System {
 			final ent:DI_ID = x;
 			switch [ent.get(EvacZone), GameManager.state] {
 				case [Comp(c_evac), PLAYING(_)]:
-					if (InfectionSystem.averageInfection > 80 && !flaresSpawned) {
+					if (InfectionSystem.get().getAverageInfection() > 80 && !flaresSpawned) {
 						var flareSpawn = SpawnSystem.obj.getRandom();
 						flareSpawn.spawn(EntsLib.Create(Di_entities.di_flare));
 						var flareSpawn2 = flareSpawn.getRandomSpawns(1);

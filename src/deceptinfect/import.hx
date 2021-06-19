@@ -29,7 +29,7 @@ import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SystemManager;
 // import deceptinfect.ecswip.SystemManager.getSystem;
 // import deceptinfect.ecswip.SystemManager.getSystem2;
-
+import deceptinfect.game.components.KeepRestart;
 using deceptinfect.util.MinMax;
 using deceptinfect.util.EntityExt;
 #end

@@ -40,9 +40,3 @@ class System {
 		run_shared();
 	}
 }
-
-class System_Use {
-	
-
-	
-}

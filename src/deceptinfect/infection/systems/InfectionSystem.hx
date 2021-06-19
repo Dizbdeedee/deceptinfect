@@ -8,6 +8,7 @@ import deceptinfect.ecswip.System;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.PlayerComponent;
+import deceptinfect.infection.components.InfectionManager;
 
 
 @:allow(InfectionComponent)
@@ -15,43 +16,10 @@ class InfectionSystem extends System {
 
 	#if client
 	override function init_client() {
-		// net_inf.signal.handle(recvInfection);
-		// net_infected.signal.handle(onInfectedCl);
+
 	}
 
 	
-
-	// function onInfectedCl(data:{}) {
-	// 	trace("Recieved infected data");
-	// 	switch (PlayerManager.getLocalPlayerID().get(InfectionComponent)) {
-	// 		case Comp(c_inf):
-	// 			c_inf.infection = INFECTED;
-	// 			PlayerManager.getLocalPlayerID().add_component(new InfectedComponent());
-	// 			trace(c_inf);
-	// 		default:
-	// 			trace("no...");
-	// 			var c_inf = new InfectionComponent();
-	// 			PlayerManager.getLocalPlayerID().add_component(c_inf);
-	// 			c_inf.infection = INFECTED;
-	// 	}
-	// }
-
-	// function recvInfection(data:ND_Infection) {
-	// 	switch PlayerManager.getLocalPlayerID().get(InfectionComponent) {
-	// 		case Comp(inf):
-	// 			switch (inf.infection) {
-	// 				case NOT_INFECTED(val):
-	// 					// trace('set ${inf.infection}');
-	// 					val.value = data.infection;
-	// 				default:
-	// 			}
-	// 		default:
-	// 			trace("nu shit");
-	// 			var c_inf = new InfectionComponent();
-	// 			PlayerManager.getLocalPlayerID().add_component(c_inf);
-	// 			c_inf.infection = NOT_INFECTED(data.infection);
-	// 	}
-	// }
 	#end
 
 	#if server
@@ -59,6 +27,16 @@ class InfectionSystem extends System {
 
 	static var infectionReport = 0.0;
 
+	override function init_server() {
+		var ent = ComponentManager.addEntity();
+		ent.add_component(new InfectionManager());
+		ent.add_component(new KeepRestart());
+	}
+
+	public function getAverageInfection() {
+		IterateEnt2.iterGet([InfectionManager],[{averageInfection : avg}],() -> {return avg;});
+		throw "Average infection not here...";
+	}
 
 	override function run_server() {
 		var numPlayers = 0;
@@ -105,7 +83,9 @@ class InfectionSystem extends System {
 
 		});
 		if (numPlayers > 0) {
-			averageInfection = totalInf / numPlayers;
+			IterateEnt2.iterGet([InfectionManager],[infMan],() -> {
+				infMan.averageInfection = totalInf / numPlayers;
+			})
 		}
 		if (Gmod.CurTime() > infectionReport) {
 			infectionReport = Gmod.CurTime() + 5;
