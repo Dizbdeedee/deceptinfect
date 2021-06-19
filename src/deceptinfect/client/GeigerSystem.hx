@@ -57,7 +57,7 @@ class GeigerSystem extends System {
 	static function testGeiger(x:GPlayerCompat) {
 		final xdee = new GeigerCounter();
 		x.id.add_component(xdee);
-		x.id.replicate(xdee,SOME(CURRENT_PLAYER));
+		xdee.replicate(SOME(CURRENT_PLAYER));
 		xdee.geiger = 0.5;
 	}
 
@@ -65,9 +65,8 @@ class GeigerSystem extends System {
 	static function testGeiger2(x:GPlayerCompat) {
 		final count = x.id.get_sure(GeigerCounter);
 		count.geiger = 0;
-		count.replicated = NONE;
-		count.send(x.id,SOME(CURRENT_PLAYER));
-
+		count.replicate(NONE);
+		count.send(SOME(CURRENT_PLAYER));
 	}
 
 	

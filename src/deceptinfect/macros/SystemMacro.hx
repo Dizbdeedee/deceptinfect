@@ -21,11 +21,11 @@ class SystemMacro {
 		// final initexpr = macro deceptinfect.ecswip.ComponentManager.initComponent($v{id},$v{clsType.name});
 		fields.push({
 			name: "get",
-			access: [AFinal, APublic, AStatic, AInline],
+			access: [APublic, AStatic, AInline],
 			pos: Context.currentPos(),
             kind: FFun({
                 args: [],
-                expr: macro return SystemManager.getSystem($v{clsType.name}),
+                expr: macro return SystemManager.getSystem($i{clsType.name}),
                 
             })
 		});

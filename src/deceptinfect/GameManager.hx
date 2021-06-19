@@ -83,7 +83,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 	public static function initPlayer(ply:GPlayerCompat) {
 		var p = ply.id;
 		final infcomp = new InfectionComponent();
-		infcomp.replicated = SOME(CURRENT_PLAYER);
+		// infcomp.replicated = SOME(CURRENT_PLAYER);
 		
 		final spec = new SpectateComponent();
 		final rate = new RateComponent();
@@ -93,7 +93,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 		final grabaccept = new GrabAccepter();
 		final radaccept = new RadiationAccepter({});
 		final virpos = new VirtualPosition(ENT(ply));
-
+		
 		p.add_component(infcomp);
 		p.add_component(spec);
 		p.add_component(rate);
@@ -104,6 +104,9 @@ class GameManager implements enumExtractor.EnumExtractor {
 		p.add_component(new AliveComponent());
 		p.add_component(vic);
 		p.add_component(contam);
+		#if server
+		infcomp.replicate(SOME(CURRENT_PLAYER));
+		#end
 		final g = new deceptinfect.game.GeigerCounter();
 		p.add_component(g);
 		
@@ -244,7 +247,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 		x.add_component(new DamagePenaltyHidden());
 		x.add_component(new InfectionLookInfo());
 		var c_inf = x.get_sure(InfectionComponent);
-
+		
 		// getSystem(InfectionSystem).makeInfected(x);
 		var c_accept = x.get_sure(GrabAccepter);
 		// x.remove_component(GrabAccepter);
@@ -270,7 +273,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 		for (ind => player in PlayerManager.getPlayers()) {
 			initPlayer(player);
 			if (ind == choose) {
-				SystemManager.getSystem(InfectionSystem).makeInfected(player.id);
+				InfectionSystem.get().makeInfected(player.id);
 			}
 			// player.StripWeapons();
 			player.Give(Misc.startingWeapons[0]);

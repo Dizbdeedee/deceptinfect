@@ -82,7 +82,6 @@ class IterateEnt2 {
 			case {expr: EArrayDecl(values), pos: pos}:
                 values.map((x) -> {
                     final id = ClassToID.idMacro(x);
-
                     macro __compArr[$id].has_component($i{name}); 
                 }).fold((cur, prev) -> 
                     if (prev == null) {
@@ -141,11 +140,10 @@ class IterateEnt2 {
                         case $cases:
                             $expr;
                         default:
-                            var a:Int = 5;
+                            null;
                     }
                 }
 			}
-            null;
         }
         final expr:Expr = insert(block,comparisons);
 		return expr;

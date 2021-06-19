@@ -18,6 +18,7 @@ class Di_barrel extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 		#if server
 		self.SetModel("models/props_c17/oildrum001_explosive.mdl");
 		self.PhysicsInit(SOLID_VPHYSICS);
+		
 		if (Gmod.IsValid(self.GetPhysicsObject())) {
 			self.GetPhysicsObject().Wake();
 		}

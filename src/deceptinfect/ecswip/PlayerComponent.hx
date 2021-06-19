@@ -3,10 +3,11 @@ package deceptinfect.ecswip;
 /**
 	Misc, one off bits of data that can only ever belong to players anyway
 **/
-class PlayerComponent extends Component {
+class PlayerComponent extends ReplicatedComponent {
 	/**
 
 	**/
+	#if server
 	public var spec_next = 1;
 
 	public var roundModel:String = "";
@@ -15,7 +16,8 @@ class PlayerComponent extends Component {
 
 	public var playing:Bool = true;
 
-	public var player:Player;
+	#end
+	@:s public var player:deceptinfect.hxbit.NPlayer;
 
 	public function new(x:Player) {
 		super();

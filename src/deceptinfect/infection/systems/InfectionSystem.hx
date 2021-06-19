@@ -76,7 +76,6 @@ class InfectionSystem extends System {
 					c_inf.rate;
 			}
 			rate += 1;
-
 			var vun = switch (ent.get(InfVunerability)) {
 				case Comp(c_v):
 					c_v.vun;

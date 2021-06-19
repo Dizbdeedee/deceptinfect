@@ -8,12 +8,13 @@ abstract class ReplicatedComponent extends Component implements hxbit.Serializab
     var replicated:ReplicatedTarget = NONE;
 
     var unreliable:Bool = false;
-    public inline extern function send(curOwner:DI_ID,target:ReplicatedTarget) {
-        SystemManager.getSystem(ClientTranslateSystem).enqueueComponent(curOwner,this,target);
+    
+    public inline extern function send(target:ReplicatedTarget,?unreliable:Bool) {
+        ClientTranslateSystem.get().enqueueComponent(this,target,unreliable);
     }
 
-    public inline extern function replicate(curOwner:DI_ID,target:ReplicatedTarget) {
-        SystemManager.getSystem(ClientTranslateSystem).setReplicate(curOwner,this,target);
+    public inline extern function replicate(target:ReplicatedTarget) {
+        ClientTranslateSystem.get().setReplicate(this,target);
     }
     #end
 
@@ -26,6 +27,11 @@ enum ReplicatedTarget {
     NONE;
     SOME(target:SomeTargets);
     ALL;
+}
+enum ReplicateOnceTarget {
+    NONE(unreliable:Bool);
+    SOME(target:SomeTargets,unreliable:Bool);
+    ALL(unreliable:Bool);
 }
 
 enum SomeTargets {

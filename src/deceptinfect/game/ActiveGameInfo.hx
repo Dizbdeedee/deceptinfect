@@ -10,5 +10,4 @@ class ActiveGameInfo extends Component {
 
     var allowRespawn:Bool;
 
-    var state:
 }

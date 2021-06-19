@@ -58,18 +58,9 @@ abstract GPlayerCompat(Player) from Player to Player {
 		}
 	}
 
-	// public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
-	//     return id.get(x);
-	// }
-	// public inline function add_component<T:Component>(x:Class<T>):ComponentState<T> {
-	//     return
-	// }
-	// public inline function isInfected():Bool {
-	//     return id.get(InfectedComponent).equals(Comp(null));
-	// }
-
 	public inline function new(x:PlayerComponent) {
 		this = x.player;
 		untyped x.player.id = ComponentManager.addPlayer(this);
+		untyped (cast this.id : DI_ID).add_component(new deceptinfect.ecswip.ReplicatedEntity());
 	}
 }

@@ -1,3 +1,8 @@
+-lib hxbit
+-lib safety
+-lib tink_core
+-lib gmodhaxe
+-lib no-spoon
 -cp src
 -D lua-5.1
 -D lua-vanilla
@@ -13,12 +18,8 @@
 --times
 -D gmodAddonFolder=/home/g/gmodDS/garrysmod/addons/
 -D macro-times
--lib hxbit
 --debug
--lib safety
--lib tink_core
--lib gmodhaxe
--lib no-spoon
+
 --macro gmod.helpers.macros.InitMacro.init()
 --cmd haxe -lib gmodhaxe --run gmod.helpers.macros.PostCompileMacro
 -main Main

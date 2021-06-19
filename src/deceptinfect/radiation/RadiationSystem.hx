@@ -14,12 +14,8 @@ import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.infection.RateComponent;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.infection.systems.RateSystem;
-import deceptinfect.ecswip.Family;
 using gmod.helpers.LuaArray;
-// class Famile<A, B, C, D> {}
 
-// finish?
-// var derka:Famile<RadiationProducer, VirtualPosition, RadSource, RadSource>;
 
 class RadiationSystem extends System {
 	static var nextRadiationID:RadiationID = new RadiationID();
@@ -68,7 +64,7 @@ class RadiationSystem extends System {
 	}
 
 	static function getTotalRadiationRate(r:RadiationAccepter):Float {
-		var sortFunc = (x:Float, y:Float) -> if (x == y) return 0; else if (x < y) return -1; else return 1;
+		var sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;
 		var sorted:Array<Float> = [];
 		// TODO optimise???
 		for (_ => rate in r.radiation) {

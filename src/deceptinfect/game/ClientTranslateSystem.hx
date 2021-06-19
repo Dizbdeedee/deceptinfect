@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.ReplicatedComponent;
@@ -15,6 +16,7 @@ import hxbit.Serializer;
 
 using Lambda;
 using Safety;
+using gmod.helpers.WeakTools;
 
 
 @:structInit
@@ -31,6 +33,14 @@ class Net_UpdateServerEnt implements hxbit.Serializable {
 	
 }
 
+#if client
+enum ClientClasses {
+	Player;
+	Entity;
+	Other;
+}
+#end
+
 class ClientTranslateSystem extends System {
 
 	@:keep
@@ -42,25 +52,62 @@ class ClientTranslateSystem extends System {
 
 	static final serverIDToClientID:Map<Int,DI_ID> = [];
 
-	static final components:Map<Int,Component> = [];
+	static final components:Map<Int,Component> = componentsC();
+
+	public static function componentsC() {
+		final comp:Map<Int,Component> = [];
+		
+		return comp;
+	}
 
 	//TODO make it more efficient, use move instead of copy...
 	public static function updateEnt(x:Net_UpdateServerEnt) {
 		for (ent in x.replEntities) {
 			// trace(ent);
+			// trace(ent);
 			final clientID = serverIDToClientID.get(ent.serverID);
 			if (clientID != null) {
 				for (comp in ent.comp) {
 					final other = components.get(comp.__uid);
+					if (!components.exists(comp.__uid)) {
+						components.set(comp.__uid,comp);
+						ComponentManager.addComponent(comp.getCompID(),comp,clientID);
+					}
 					for (field in Reflect.fields(comp)) {
 						Reflect.setField(other,field,Reflect.field(comp,field));
-						trace(field);
+						// trace(field);
 					}
-					// trace('$comp $other');
+
+					trace('$comp $other');
 				}
 			} else {
-				final id = ComponentManager.addEntity();
+				var id = null;
 				for (comp in ent.comp) {
+					final compClass = Type.getClass(comp);
+					if (compClass == PlayerComponent || compClass == GEntityComponent) {
+						IterateEnt2.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) {
+							untyped {
+								if (comp.entity == ent) {
+									id = c_currentEnt.getOwner();
+								}
+							}
+						});
+						IterateEnt2.iterGet([PlayerComponent],[c_currentPlayer = {player : ply}],function (plyEnt) {
+							untyped {
+								if (comp.player == ply) {
+									id = c_currentPlayer.getOwner();
+								}
+							}
+						});
+					}
+				}
+				if (id == null) id = ComponentManager.addEntity();
+				
+				// final id = ComponentManager.addEntity();
+				// for (comp in )
+
+				for (comp in ent.comp) {
+					
 					components.set(comp.__uid,comp);
 					ComponentManager.addComponent(comp.getCompID(),comp,id);
 				}
@@ -77,19 +124,24 @@ class ClientTranslateSystem extends System {
 		
 	// }
 
-	public function setReplicate(owner:DI_ID,comp:ReplicatedComponent,target:ReplicatedTarget) {
-		final repl = new ReplicatedEntity();
-		owner.add_component(repl)
+	public function setReplicate(comp:ReplicatedComponent,target:ReplicatedTarget) {
+		final owner = comp.getOwner();
+		final repl = owner.getOrAdd(ReplicatedEntity);
+		if (target == NONE) {
+			repl.ids.remove(comp.getCompID());
+		} else {
+			repl.ids.set(comp.getCompID(),true);
+		}
+		
 	}
 
-	public function enqueueComponent(owner:DI_ID,comp:ReplicatedComponent,target:ReplicatedTarget) {
-		final repl = new ReplicateOnce();
-		owner.add_component(repl);
-		repl.ids.
-
+	public function enqueueComponent(comp:ReplicatedComponent,target:ReplicatedTarget,?unreliable:Bool=false) {
+		if (target == NONE) throw "What's the next step of your master plan..?";
+		final owner = comp.getOwner();
+		final repl = owner.getOrAdd(ReplicateOnce);
+		comp.unreliable = unreliable;
+		repl.ids.set(comp.getCompID(),true);
 		
-		// final queueArr = queue.get(owner).orGet(() -> {var x = []; queue.set(owner,x); x;});
-		// queueArr.push({component: comp,repl: target});
 	}
 
 	override function run_server() {
@@ -118,10 +170,6 @@ class ClientReplicationMachine {
 	var addedReliable:Map<Player,Array<ReplicatedComponent>> = [];
 	
 	public function new() {}
-
-	function reset() {
-
-	}
 
 	inline static function replToPlayers(x:ReplicatedTarget,diid:DI_ID):Array<Player> {
 		var arr:Array<Player> = [];
@@ -157,7 +205,6 @@ class ClientReplicationMachine {
 	}
 
 	public function iterate():Map<Player,Net_UpdateServerEnt> {
-		reset();
 		IterateEnt2.iterGet([ReplicatedEntity],[{ids : arr}],
 			function (ent) {
 				added = [];

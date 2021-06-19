@@ -8,7 +8,7 @@ import haxe.ds.ObjectMap;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.ecswip.Component;
 import deceptinfect.ecswip.SystemManager.getSystem2;
-
+using gmod.helpers.WeakTools;
 
 typedef ComponentArray = Array<ComponentState<Component>>;
 typedef SComponentArray<T:Component> = Array<ComponentState<T>>;
@@ -154,9 +154,15 @@ class ComponentManager {
 
 	public static var activeEntities(default, null):Int = 0;
 
-	public static var lookupEntity(default, null):Map<Component, DI_ID> = [];
+	public static var lookupEntity(default, null):Map<Component, DI_ID> = lookupEntityC();
 
 	public static var gEntityLookup(default, null):Map<DI_ID, GEntCompat> = [];
+
+	static function lookupEntityC() {
+		var map:Map<Component,DI_ID> = [];
+		map.setWeakKeysM();
+		return map;
+	}
 
 	// TODO move
 	public static function addGEnt(x:GEntCompat):DI_ID {
@@ -172,8 +178,6 @@ class ComponentManager {
 		PlayerManager.addID(x, id);
 		return id;
 	}
-
-	static var lastID:Int;
 
 	public static function initComponent(id:Int,str:String) {
 		if (components_3 == null) {
@@ -206,14 +210,32 @@ class ComponentManager {
 		}
 	}
 
-	public static inline function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
+	public static function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
 		final fam = components_3.get_component(id);
+		if (x is ReplicatedComponent) {
+			switch (getComponentForID(ReplicatedEntity.compID,to)) {
+				case Comp(replEnt):
+					replEnt.ids.set(x.getCompID(),true);
+				default:
+					
+			}
+		} else if (x is ReplicatedEntity) {
+			for (componentArr in components_3) {
+				if (componentArr.has_component(to)) {
+					final comp = componentArr.get_component(to);
+					if (comp is ReplicatedComponent) {
+						(cast x : ReplicatedEntity).ids.set((comp : ReplicatedComponent).getCompID(),true);
+					}
+				}
+			}
+		}
+		
 		if (!fam.has_component(id)) {
 			fam.init_entity(to,x);
 		} else {
 			fam.set_component(to,x);
 		}
-		// 		lookupEntity.set(x, to);
+		lookupEntity.set(x, to);
 		return x;
 	}
 
@@ -274,9 +296,9 @@ class ComponentManager {
 		}
 		#end
 		for (component in components_3) {
-			if (component.has_component(x)) {
-				component.remove_entity_comp(x);
-			}
+			
+			component.remove_entity_comp(x);
+			
 		}
 		activeEntities--;
 	}
@@ -308,22 +330,7 @@ abstract DI_ID(Int) from Int to Int {
 	
 }
 
-class ComponentTools {
-	public static function sure<T:Component>(x:ComponentState<T>):T {
-		return switch (x) {
-			case Comp(comp):
-				comp;
-			default:
-				throw "Component not avaliable...";
-		}
-	}
-}
 
-@:using(deceptinfect.ecswip.ComponentManager.ComponentTools)
-enum ComponentState<T:Component> {
-	NONE;
-	Comp(comp:T);
-}
 
 enum HasGEnt {
 	NONE;

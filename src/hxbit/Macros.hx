@@ -1,5 +1,3 @@
-package hxbit;
-
 /*
  * Copyright (C)2015-2016 Nicolas Cannasse
  *
@@ -28,6 +26,7 @@ package hxbit;
  import haxe.macro.Context;
  using haxe.macro.TypeTools;
  using haxe.macro.ComplexTypeTools;
+ using Lambda;
  
  enum RpcMode {
      /*
@@ -70,6 +69,7 @@ package hxbit;
      PArray( k : PropType );
      PObj( fields : Array<{ name : String, type : PropType, opt : Bool }> );
      PAlias( k : PropType );
+     PAbs(k : PropType);
      PVector( k : PropType );
      PNull( t : PropType );
      PUnknown;
@@ -138,6 +138,7 @@ package hxbit;
          case PArray(v): PArray(toFieldType(v));
          case PObj(fields): PObj([for( f in fields ) { name : f.name, type : toFieldType(f.type), opt : f.opt }]);
          case PAlias(t): return toFieldType(t);
+         case PAbs(t): return toFieldType(t);
          case PVector(k): PVector(toFieldType(k));
          case PNull(t): PNull(toFieldType(t));
          case PFlags(t): PFlags(toFieldType(t));
@@ -212,75 +213,97 @@ package hxbit;
          }
          return t;
      }
+
+     static function getPropTypeFromAbstract(t : haxe.macro.Type) : PropTypeDesc<PropType> {
+        switch (t) {
+			case TAbstract({get: _() => {from : from, to : to}}, params):
+			
+				final selectedFrom = from.find((str) -> str.field != null && str.field.meta.has(":s"));
+				if (selectedFrom == null || getPropType(selectedFrom.t) == null) return null;
+				final selectedTo = to.find((str) -> str.field != null && str.field.meta.has(":s"));
+				if (selectedTo == null || !TypeTools.unify(selectedFrom.t,selectedTo.t) || !TypeTools.unify(selectedTo.t,selectedFrom.t)) return null;
+				return PAbs(getPropType(selectedFrom.t));
+			default:
+				return null;
+		}
+     } 
  
      static function getPropType( t : haxe.macro.Type ) : PropType {
          var isProxy = false;
          var isMutable = true;
          var desc = switch( t ) {
          case TAbstract(a, pl):
-             switch( a.toString() ) {
-             case "haxe.Int64":
-                 PInt64;
-             case "Float":
-                 PFloat;
-             case "Int","UInt":
-                 PInt;
-             case "Bool":
-                 PBool;
-             case "Map", "haxe.ds.Map":
-                 var tk = getPropType(pl[0]);
-                 var tv = getPropType(pl[1]);
-                 if( tk == null || tv == null )
-                     return null;
-                 PMap(tk, tv);
-             case "haxe.ds.Vector":
-                 var tk = getPropType(pl[0]);
-                 if( tk == null )
-                     return null;
-                 PVector(tk);
-             case "hxbit.VectorProxy":
-                 var t = getPropType(pl[0]);
-                 if( t == null )
-                     return null;
-                 isProxy = true;
-                 PVector(t);
-             case "hxbit.ArrayProxy", "hxbit.ArrayProxy2":
-                 var t = getPropType(pl[0]);
-                 if( t == null )
-                     return null;
-                 isProxy = true;
-                 PArray(t);
-             case "hxbit.MapProxy", "hxbit.MapProxy2":
-                 var k = getPropType(pl[0]);
-                 var v = getPropType(pl[1]);
-                 if( k == null || v == null ) return null;
-                 isProxy = true;
-                 PMap(k, v);
-             case "hxbit.EnumFlagsProxy":
-                 var e = getPropType(pl[0]);
-                 if( e == null ) return null;
-                 isProxy = true;
-                 PFlags(e);
-             case "haxe.EnumFlags":
-                 var e = getPropType(pl[0]);
-                 if( e == null ) return null;
-                 PFlags(e);
-             case "Null":
-                 var p = getPropType(pl[0]);
-                 if( p != null && !isNullable(p) )
-                     p = { d : PNull(p), t : TPath( { pack : [], name : "Null", params : [TPType(p.t)] } ) };
-                 return p;
-             case name:
-                 var t2 = Context.followWithAbstracts(t, true);
-                 switch( t2 ) {
-                 case TAbstract(a2, _) if( a2.toString() == name ):
-                     return null;
-                 default:
-                 }
-                 var pt = getPropType(t2);
-                 if( pt == null ) return null;
-                 PAlias(pt);
+             final result = getPropTypeFromAbstract(t);
+             if (result == null) {
+                switch( a.toString() ) {
+                    case "haxe.Int64":
+                        PInt64;
+                    case "Float":
+                        PFloat;
+                    case "Int","UInt":
+                        PInt;
+                    case "Bool":
+                        PBool;
+                    case "Map", "haxe.ds.Map":
+                        var tk = getPropType(pl[0]);
+                        var tv = getPropType(pl[1]);
+                        if( tk == null || tv == null )
+                            return null;
+                        PMap(tk, tv);
+                    case "haxe.ds.Vector":
+                        var tk = getPropType(pl[0]);
+                        if( tk == null )
+                            return null;
+                        PVector(tk);
+                    case "hxbit.VectorProxy":
+                        var t = getPropType(pl[0]);
+                        if( t == null )
+                            return null;
+                        isProxy = true;
+                        PVector(t);
+                    case "hxbit.ArrayProxy", "hxbit.ArrayProxy2":
+                        var t = getPropType(pl[0]);
+                        if( t == null )
+                            return null;
+                        isProxy = true;
+                        PArray(t);
+                    case "hxbit.MapProxy", "hxbit.MapProxy2":
+                        var k = getPropType(pl[0]);
+                        var v = getPropType(pl[1]);
+                        if( k == null || v == null ) return null;
+                        isProxy = true;
+                        PMap(k, v);
+                    case "hxbit.EnumFlagsProxy":
+                        var e = getPropType(pl[0]);
+                        if( e == null ) return null;
+                        isProxy = true;
+                        PFlags(e);
+                    case "haxe.EnumFlags":
+                        var e = getPropType(pl[0]);
+                        if( e == null ) return null;
+                        PFlags(e);
+                    case "Null":
+                        var p = getPropType(pl[0]);
+                        if( p != null && !isNullable(p) )
+                            p = { d : PNull(p), t : TPath( { pack : [], name : "Null", params : [TPType(p.t)] } ) };
+                        return p;
+                    case name:
+                                       
+                        var t2 = Context.followWithAbstracts(t, true);
+                        switch( t2 ) {
+                        case TAbstract(a2, _) if( a2.toString() == name ):
+                            return null;
+                        default:
+                        }
+                        var pt = getPropType(t2);
+                    
+                       PAlias(pt);
+                        
+                    }
+             } else {
+                 result;
              }
+          
          case TEnum(e,_):
              PEnum(e.toString());
          case TDynamic(_):
@@ -366,6 +389,8 @@ package hxbit;
              return false;
          case PAlias(t):
              return isNullable(t);
+         case PAbs(t):
+             return isNullable(t);
          // case PInt64: -- might depend on the platform ?
          default:
              return true;
@@ -448,6 +473,8 @@ package hxbit;
              return macro $ctx.addKnownRef($v);
          case PAlias(t):
              return serializeExpr(ctx, { expr : ECast(v, null), pos : v.pos }, t);
+         case PAbs(t):
+             return serializeExpr(ctx, {expr : ECheckType(v , t.t), pos : v.pos}, t);
          case PNull(t):
              var e = serializeExpr(ctx, v, t);
              return macro if( $v == null ) $ctx.addByte(0) else { $ctx.addByte(1); $e; };
@@ -563,6 +590,14 @@ package hxbit;
                  ${unserializeExpr(ctx,macro $i{vname},at,depth+1)};
                  $v = cast $i{vname};
              };
+         case PAbs(at):
+            var cvt = at.t;
+            var vname = "v" + depth;
+            return macro {
+                var $vname : $cvt;
+                ${unserializeExpr(ctx,macro $i{vname},at,depth+1)};
+                $v = $i{vname};
+            };
          case PNull(t):
              var e = unserializeExpr(ctx, v, t, depth);
              return macro if( $ctx.getByte() == 0 ) $v = null else $e;

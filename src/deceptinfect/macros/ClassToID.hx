@@ -7,6 +7,7 @@ import haxe.macro.Expr;
 using haxe.macro.ExprTools;
 
 import haxe.macro.Type;
+using Lambda;
 #end
 
 class ClassToID {
@@ -59,6 +60,9 @@ class ClassToID {
 		return retId;
 	}
 
+	public static function test(t:haxe.macro.Type) {
+	}
+
 	public static function idMacroObj(obj:Expr):Expr {
 		final ident = switch (Context.typeof(obj)) {
 			case TInst(_.get() => {name: n}, _):
@@ -107,11 +111,11 @@ class DI_ID_Use {
 	}
 
 	
-	public static macro function replicate(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>,replState) {
-		#if macro
+	// public static macro function replicate(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>,replState) {
+	// 	#if macro
 		
-		#end
-	}
+	// 	#end
+	// }
 
 	
 

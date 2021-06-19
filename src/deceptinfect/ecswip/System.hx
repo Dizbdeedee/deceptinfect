@@ -2,6 +2,7 @@ package deceptinfect.ecswip;
 
 using Safety;
 @:using(deceptinfect.ecswip.System.System_Use)
+@:autoBuild(deceptinfect.macros.SystemMacro.build())
 class System {
 	#if client
 	function init_client() {}
@@ -41,9 +42,7 @@ class System {
 }
 
 class System_Use {
-	public static inline function get<T:System>(x:Class<T>) {
-		return SystemManager.getSystem(x).sure();
-	}
+	
 
 	
 }

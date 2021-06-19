@@ -2,9 +2,9 @@ package deceptinfect.ecswip;
 
 class VirtualPosition extends Component {
 	@:isVar
-	public var pos(get, set):Vector;
+	public var pos(get, set):Null<deceptinfect.hxbit.NVector>;
 	@:isVar
-	public var ang(get, set):Angle;
+	public var ang(get, set):Null<Angle>;
 	@:noCompletion
 	public var ent(default, null):Null<Entity>;
 
@@ -27,7 +27,7 @@ class VirtualPosition extends Component {
 	}
 
 	@:noCompletion
-	public function set_pos(set:Vector):Vector {
+	public function set_pos(set:deceptinfect.hxbit.NVector):deceptinfect.hxbit.NVector {
 		if (ent == null) {
 			return pos = set;
 		} else {
@@ -52,7 +52,7 @@ class VirtualPosition extends Component {
 			case ENT(x):
 				ent = x;
 			case REAL(vec, ang):
-				pos = vec;
+				this.pos = vec;
 				this.ang = ang;
 		}
 	}
@@ -62,3 +62,4 @@ enum ChooseVirPos {
 	ENT(x:Entity);
 	REAL(vec:Vector, ang:Angle);
 }
+

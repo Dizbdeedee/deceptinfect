@@ -12,7 +12,6 @@ class InfectionComponent extends ReplicatedComponent {
 	
 	var rate:Float = 1;
 
-	var player:SeraliazablePlayer;
 	var baseInfection:BaseInfection = USING_GLOBAL;
 	var onInfected(default, null):Signal<Noise>;
 	var acceptingInfection:AcceptingInfection = ACCEPTING;
@@ -33,6 +32,9 @@ class InfectionComponent extends ReplicatedComponent {
 
 	public function new() {
 		super();
+		#if server
+		replicated = SOME(CURRENT_PLAYER);
+		#end
 	}
 }
 

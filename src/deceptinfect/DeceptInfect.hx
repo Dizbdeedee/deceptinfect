@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.util.PrintTimer;
 import haxe.io.Bytes;
 import haxe.crypto.Crc32;
@@ -93,8 +94,10 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 			ComponentManager.removeEntity(ent.id);
 			return;
 		}
+		
 		switch (ent.has_id()) {
 			case Some(id):
+				
 				ComponentManager.removeEntity(id);
 			default:
 		}
@@ -158,7 +161,9 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 
 	override function PlayerDisconnected(ply:GPlayerCompat) {
-		ComponentManager.removeEntity(ply.id);
+		ply.id.remove_component(PlayerComponent);
+		ply.id.remove_component(GEntityComponent);
+		//previous player component?
 	}
 
 	override function PlayerButtonUp(ply:GPlayerCompat, button:BUTTON_CODE) {
