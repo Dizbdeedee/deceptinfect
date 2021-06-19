@@ -64,16 +64,12 @@ class IterateEnt {
 	static function getArrToExpr(getArr:Expr, name:String) {
 		return switch (getArr) {
 			case {expr: EArrayDecl(values), pos: pos}:
-				{
-					expr: EArrayDecl(values.map((x) -> switch (x) {
-						case {expr: EConst(CIdent(_))}:
-							macro $i{name}.get($x);
-						default:
-							x;
-					})),
-
-					pos: pos
-				};
+				macro $a{values.map((x) -> switch (x) {
+					case {expr: EConst(CIdent(_))}:
+						macro $i{name}.get($x);
+					default:
+						x;
+				})}
 			default:
 				Context.error("Nope", Context.currentPos());
 				return macro null;
@@ -83,25 +79,16 @@ class IterateEnt {
 	static function caseArrToExpr(caseArr:Expr) {
 		return switch (caseArr) {
 			case {expr: EArrayDecl(values), pos: pos}:
-				{
-					expr: EArrayDecl(values.map((val) -> {
-						// trace(val);
-						return switch (val) {
-							case ident = {expr: EConst(CIdent(_))}:
-								macro Comp($ident);
-							default:
-								val;
-						}
-					})),
-					pos: pos
-				};
+				macro $a{values.map((val) -> {
+					macro Comp($val);
+				})}
 			default:
 				Context.error("Nope", Context.currentPos());
 				throw "Garbage";
 		}
 	}
 
-	static function renameVar(map:Map<String, Dynamic>, pos:haxe.macro.Expr.Position) {
+	public static function renameVar(map:Map<String, Dynamic>, pos:haxe.macro.Expr.Position) {
 		var name = "ent";
 		if (!map.exists(name)) {
 			return name;

@@ -1,10 +1,12 @@
 package deceptinfect.ecswip;
 
+using gmod.helpers.LuaArray;
 import deceptinfect.game.ClientTranslateSystem;
 import deceptinfect.macros.ClassToID;
 import haxe.ds.ObjectMap;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.ecswip.Component;
+
 
 typedef ComponentArray = Array<ComponentState<Component>>;
 typedef SComponentArray<T:Component> = Array<ComponentState<T>>;
@@ -19,13 +21,155 @@ typedef CompAddSignal<T:Component> = {
 	comp:T
 }
 
+@:transitive
 abstract ComponentID<T:Component>(Int) from Int to Int {
 	// extern inline function new<T:Component>(int:Int,x:Class<T>) {
 	// 	this = int;
 	// }
 }
 
+
+abstract Component_<T:Component>(LuaArray<Dynamic>) {
+
+	public var external(get,set):LuaArray<Int>;
+
+	public var internal(get,set):LuaArray<Int>;
+
+	public var components(get,set):LuaArray<Component>;
+
+	public var n(get,set):Int;
+
+	// var n_entities(get,set):Int;
+
+	inline function get_external() {
+		return this[1];
+	}
+	inline function get_internal() {
+		return this[2];
+	}
+	inline function get_components() {
+		return this[3];
+	}
+	inline function get_n() {
+		return this[4];
+	}
+	inline function get_n_entities() {
+		return this[5];
+	}
+
+	inline function set_external(x:LuaArray<Int>) {
+		return this[1] = x;
+	}
+	inline function set_internal(x:LuaArray<Int>) {
+		return this[2] = x;
+	}
+	inline function set_components(x:LuaArray<Component>) {
+		return this[3] = x;
+	}
+	inline function set_n(x:Int) {
+		return this[4] = x;
+	}
+	inline function set_n_entities(x:Int) {
+		return this[5] = x;
+	}
+
+	
+
+	public function new() {
+		this = new LuaArray();
+		external = new LuaArray();
+		internal = new LuaArray();
+		components = new LuaArray();
+		n = 1;
+		// n_entities = 0;
+
+	}
+
+	public function init_entity(x:DI_ID,comp:Component) {
+		final int_id = n++;
+		external[x] = int_id;
+		internal[int_id] = x;
+		components[int_id] = comp;
+	}
+
+	public function remove_entity_comp(x:DI_ID) {
+		final last_index = n--;
+		final int_id = external[x];
+		final last_ent_id = internal[last_index];
+		internal[int_id] = internal[last_index];
+		components[int_id] = components[last_index];
+		external[last_ent_id] = int_id;
+		external[x] = null;
+	}
+
+	public inline function has_component(x:DI_ID) {
+		return external[x] != null;
+	}
+
+	public inline function get_component(x:DI_ID):T {
+		return cast components[external[x]];
+	}
+
+}
+
+@:forward
+abstract ComponentStorage(LuaArray<Component_<Dynamic>>) {
+
+	public function new() {
+		this = new LuaArray();
+	}
+
+	@:op([])
+	function get(x:Int):Component_<Dynamic>;
+	@:op([])
+	function set(x:Int,v:Component_<Dynamic>):Component_<Dynamic>;
+
+	// @:op([])
+	// function get_<T:Component>(x:ComponentID<T>):Component_<T> {
+	// 	return cast this[x];
+	// }
+	// @:op([])
+	// function set_<T:Component>(x:ComponentID<T>,v:Component_<T>):Component_<T> {
+	// 	return cast this[x] = v;
+	// }
+
+
+	public inline function get_component<T:Component>(x:ComponentID<T>):Component_<T> {
+		return cast this[x];
+	}
+
+	
+	public function initComponent(id:Int) {
+		this[id] = new Component_();
+	}
+
+	public function getFamily(family:Array<Int>) {
+		// var lowest = Math.POSITIVE_INFINITY;
+		// var lowest_comps = null;
+		// for (fam in family) {
+		// 	final comps = this[fam];
+		// 	if (comps.n < lowest) {
+		// 		lowest = comps.n;
+		// 		lowest_comps = comps;
+		// 	}
+		// }
+		// final comp1 = this[1];
+		// for (int_id in 1...lowest_comps.n) {
+		// 	final di_id:DI_ID = lowest_comps.internal[int_id];
+		// 	// final comp_lowest = lowest_comps.components[int_id];
+		// 	if (comp1.has_component(di_id) && comp2.has_component(di_id) && comp3.has_component(di_id)) {
+
+		// 	}
+		// }
+	}
+
+	
+}
+
 class ComponentManager {
+
+	public static var components_3(default,null):ComponentStorage;
+
 	public static var components_2(default, null):Array<ComponentArray>;
 
 	public static var componentSignals(default, null):Array<SignalTrigger<SCompAddSignal>> = [];
@@ -68,6 +212,8 @@ class ComponentManager {
 		}
 	}
 
+	
+
 	public static inline function getComponentForID<T:Component>(id:ComponentID<T>, diID:DI_ID):ComponentState<T> {
 		return cast components_2[id][diID];
 	}
@@ -109,8 +255,8 @@ class ComponentManager {
 			case Comp(comp):
 				comp.onRemove();
 				ComponentState.NONE;
-			case non = NONE:
-				non;
+			default:
+				x;
 		}
 	}
 
@@ -140,46 +286,27 @@ class ComponentManager {
 		addToAllCompArrays(id);
 		return id;
 	}
+
+	// public static function addEntity3():DI_ID {
+	// 	com
+	// }
+
+	// public static function initComponent3(id:Int) { 
+		
+	// }
 }
 
-@:forward
-abstract Entities(Int) from Int to Int {}
+abstract Entities(Int) from Int to Int {
+    public extern inline function iterator():Iterator<DI_ID> {
+        return new IntIterator(0,this);
+    }
+}
 
-// class DI_ID_Iterator {
-//     var current:Int;
-//     public extern inline function new() {
-// 	current = 0;
-//     }
-//     public inline function hasNext() {
-// 	return current < (ComponentManager.entities : Int);
-//     }
-//     public extern inline function next() {
-// 	return (current++ : DI_ID);
-//     }
-// }
-// @:using(deceptinfect.ecswip.ComponentFamily)
 
 @:using(deceptinfect.macros.ClassToID.DI_ID_Use)
 abstract DI_ID(Int) from Int to Int {
-	// public extern inline function get<T:Component>(x:Class<T>):ComponentState<T> {
-	//     return ComponentManager.getComponentForID(x,this);
-	// }
-	// public inline function get_sure<T:Component>(x:Class<T>):T {
-	//     var retrieve_comp = ComponentManager.getOldComponentForID(x,this).getParameters()[0];
-	//     if (retrieve_comp == null) {throw 'Component does not exist at sure statement ${Type.getClassName(x)}';}
-	//     return retrieve_comp;
-	// }
-	// public extern inline function add_component<T:Component>(x:T) {
-	//     ComponentManager.addComponent(x,this);
-	// }
+	
 	public extern inline function destroy() {}
-
-	// public extern inline function getOrAdd<T:Component>(x:Class<T>,?args:Array<Dynamic>):T {
-	//     return ComponentManager.getOrAdd(this,x,args);
-	// }
-	// public extern inline function remove_component<T:Component>(x:Class<T>) {
-	//     ComponentManager.removeComponent(x,this);
-	// }
 
 	inline function new(x:Int) {
 		this = x;

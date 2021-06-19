@@ -1,6 +1,7 @@
 package deceptinfect.radiation;
 
 import deceptinfect.macros.IterateEnt;
+import deceptinfect.macros.IterateEnt2;
 
 using deceptinfect.DistSquared;
 
@@ -14,7 +15,7 @@ import deceptinfect.infection.RateComponent;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.infection.systems.RateSystem;
 import deceptinfect.ecswip.Family;
-
+using gmod.helpers.LuaArray;
 class Famile<A, B, C, D> {}
 
 // finish?
@@ -32,10 +33,20 @@ class RadiationSystem extends System {
 
 	#if server
 	override function run_server() {
-		IterateEnt.iterGet(derka, [accept_accept, accept_rate, accept_pos, _], () -> {
+        [1,2,3].createFromArray();
+		
+        IterateEnt2.iterGet([RadiationAccepter, RateComponent, VirtualPosition, RadVictim],
+			[accept_accept, rate_comp, {pos : pos}, _], () -> {
+				trace(pos);
+				
+
+		});
+        IterateEnt.iterGet([RadiationAccepter, RateComponent, VirtualPosition, RadVictim], 
+            [accept_accept, accept_rate, {pos : accept_pos}, _], () -> {
 			accept_accept.radiation.clear();
-			IterateEnt.iterGet([RadiationProducer, VirtualPosition, RadSource], [produce_produce, produce_pos, _], (produce) -> {
-				var dist = produce_pos.pos.Distance(accept_pos.pos);
+            IterateEnt.iterGet([RadiationProducer, VirtualPosition, RadSource], 
+                [produce_produce, {pos : produce_pos}, _], (produce) -> {
+				var dist = produce_pos.Distance(accept_pos);
 
 				switch getTotalRadiation(dist, produce_produce) {
 					case Some(rate):

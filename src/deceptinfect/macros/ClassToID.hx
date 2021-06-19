@@ -50,6 +50,15 @@ class ClassToID {
 		return idMacro;
 	}
 
+	public static function getRawID(cls:Expr):Int {
+		getIdent(cls);
+		if (ident == null)
+			throw "not valid type";
+		final type = getInstanceTypeFromClass(cls);
+		final retId = getIDStr(ident);
+		return retId;
+	}
+
 	public static function idMacroObj(obj:Expr):Expr {
 		final ident = switch (Context.typeof(obj)) {
 			case TInst(_.get() => {name: n}, _):
@@ -86,6 +95,13 @@ class DI_ID_Use {
 		#if macro
 		final idMacro = ClassToID.idMacro(cls);
 		return macro deceptinfect.ecswip.ComponentManager.getComponentForID($idMacro, $diid);
+		#end
+	}
+
+	public static macro function get_2(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>) {
+		#if macro
+		final idMacro = ClassToID.idMacro(cls);
+		return macro deceptinfect.ecswip.ComponentManager.components_3[$idMacro].get_component($diid);
 		#end
 	}
 

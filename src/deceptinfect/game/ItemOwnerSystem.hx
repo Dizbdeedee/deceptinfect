@@ -23,7 +23,7 @@ class ItemOwnerSystem extends System {
 	#if client
 	override function init_client() {
 		HookLib.Add(GMHook.PreDrawHalos, "di_drawitemhalos", drawHalos);
-		deceptinfect.game.components.ItemReveal.proxyInit();
+		// deceptinfect.game.components.ItemReveal.proxyInit();
 	}
 
 	static function drawHalos() {

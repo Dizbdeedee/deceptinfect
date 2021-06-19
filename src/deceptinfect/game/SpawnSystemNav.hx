@@ -24,48 +24,45 @@ class SpawnSystemNav extends System {
 	public static function spawnItem(x:GPlayerCompat) {
 		final navmesh = NavmeshLib.GetNearestNavArea(x.GetPos(), null, null, true);
 		final processing:GenericStack<CNavArea> = new GenericStack<CNavArea>();
-		switch (navmesh.check()) {
-			case VALID(navarea):
-				playerPos = x.GetPos();
-				navarea.GetAdjacentAreas().iter(processing.add);
-				while (!processing.isEmpty()) {
-					final nav = processing.pop();
-					if (filterAreas(nav)) {
-						if (filterAreaResults(nav)) {
-							result.push(nav);
-						}
-						nav.GetAdjacentAreas().iter(processing.add);
+		if (Gmod.IsValid(navmesh)) {
+			playerPos = x.GetPos();
+			navmesh.GetAdjacentAreas().iter(processing.add);
+			while (!processing.isEmpty()) {
+				final nav = processing.pop();
+				if (filterAreas(nav)) {
+					if (filterAreaResults(nav)) {
+						result.push(nav);
 					}
+					nav.GetAdjacentAreas().iter(processing.add);
 				}
+			}
 
-				if (result.length == 0)
-					throw "bad";
-				final point = result.getRandom().GetRandomPoint();
+			if (result.length == 0)
+				throw "bad";
+			final point = result.getRandom().GetRandomPoint();
 
-				final ent:GEntCompat = EntsLib.Create("di_battery");
+			final ent:GEntCompat = EntsLib.Create("di_battery");
 
-				final bounds = ent.GetCollisionBounds();
-				final traceResult = UtilLib.TraceHull({
-					ignoreworld: false,
-					start: point + new Vector(0, 0, 50),
-					endpos: point + new Vector(0, 0, 49),
-					mins: bounds.mins,
-					maxs: bounds.maxs
-				});
-				if (traceResult.Hit) {
-					trace("failed");
-				} else {
-					ent.SetPos(point + new Vector(0, 0, 50));
-					ent.Spawn();
-					final c_itemOwner = new ItemOwner(Gmod.CurTime(), x.id);
-					trace(x.id);
-					ent.id.add_component(c_itemOwner);
-					trace("success!");
-					// DebugoverlayLib.Cross(ent.GetPos(),10,30,null,true);
-					// DebugoverlayLib.Box(ent.GetPos(),bounds.mins,bounds.maxs,30);
-				}
-
-			default:
+			final bounds = ent.GetCollisionBounds();
+			final traceResult = UtilLib.TraceHull({
+				ignoreworld: false,
+				start: point + new Vector(0, 0, 50),
+				endpos: point + new Vector(0, 0, 49),
+				mins: bounds.mins,
+				maxs: bounds.maxs
+			});
+			if (traceResult.Hit) {
+				trace("failed");
+			} else {
+				ent.SetPos(point + new Vector(0, 0, 50));
+				ent.Spawn();
+				final c_itemOwner = new ItemOwner(Gmod.CurTime(), x.id);
+				trace(x.id);
+				ent.id.add_component(c_itemOwner);
+				trace("success!");
+				// DebugoverlayLib.Cross(ent.GetPos(),10,30,null,true);
+				// DebugoverlayLib.Box(ent.GetPos(),bounds.mins,bounds.maxs,30);
+			}
 		}
 	}
 
