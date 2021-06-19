@@ -16,5 +16,6 @@ class Util {
             mappy_2.set(ident,Gmod.CurTime() + time);
         }
     }
+
 }
 

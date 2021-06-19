@@ -1,13 +1,14 @@
 package deceptinfect.infection;
 
+import hxbit.Serializer;
 import deceptinfect.ecswip.Component;
 import deceptinfect.SeralizableRef;
-class InfectionComponent extends Component implements hxbit.NetworkSerializable {
+class InfectionComponent extends Component {
     
   @:s public var infection(default,set):INF_STATE = NOT_INFECTED(0.0);
     public var rate:Float = 1;
 
-   public var player:SeraliazablePlayer;
+    public var player:SeraliazablePlayer;
     public var baseInfection:BaseInfection = USING_GLOBAL;
     public var onInfected(default,null):Signal<Noise>;
     public var acceptingInfection:AcceptingInfection = ACCEPTING;

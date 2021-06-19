@@ -8,7 +8,7 @@ class DeathInfoSystem extends System {
 
     #if server
     override function run_server() {
-        for (ent in entities) {
+        for (ent in 0...entities) {
             switch ent.get(PlayerComponent) {
             case Comp(_.player => ply):
                 var tr = ply.GetEyeTrace();

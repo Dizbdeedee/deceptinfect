@@ -54,10 +54,12 @@ class ClassToID {
     public static function idMacroObj(obj:Expr):Expr {
 	final ident = switch (Context.typeof(obj)) {
 	    case TInst(_.get() => {name : n},_):
-		// trace(n);
 		n;
-	    default:
-	    throw "not accepted";
+	    case TType(_.get() => {name : n},_):
+		n; 
+	    case x:
+		trace(x);
+		throw "not accepted";
 	}
 	final type = Context.toComplexType(Context.typeof(obj));
 	final retId = getIDStr(ident);
@@ -127,6 +129,43 @@ class DI_ID_Use {
 	return macro deceptinfect.ecswip.ComponentManager.getComponentForIDSure($idMacro,$diid);
 	#end
     }
+
+    public static macro function getRetInd(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>,cls:Expr) {
+	#if macro
+	final idMacro = ClassToID.idMacro(cls);
+	return macro switch (deceptinfect.ecswip.ComponentManager.getComponentForID($idMacro, $diid)) {
+	    case Comp(c_capt):
+		c_capt;
+	    default:
+		return;
+	}
+	#end
+    }
+    
+    public static macro function getRet(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>,cls:Expr,caseExpr:Expr,capture:Expr) {
+	#if macro
+	final idMacro = ClassToID.idMacro(cls);
+	return macro switch (deceptinfect.ecswip.ComponentManager.getComponentForID($idMacro, $diid)) {
+	    case Comp($e{caseExpr}):
+		$e{capture};
+	    default:
+		return;
+	}
+	#end
+    }
+
+    #if macro
+    static function checkNullExpr(expr:Expr) {
+	return switch (expr.expr) {
+	    case EConst(CIdent(s)) if (s == s) :
+		trace(s);
+		true;
+	    default:
+		false;
+	};
+
+    }
+    #end
 
     public static macro function remove_component(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>,cls:ExprOf<Class<Dynamic>>) {
 	#if macro

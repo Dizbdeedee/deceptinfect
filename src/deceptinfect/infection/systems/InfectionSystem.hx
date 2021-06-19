@@ -67,9 +67,10 @@ class InfectionSystem extends System {
     override function run_server() {
         var numPlayers = 0;
         var totalInf = 0.0;
-        for (entity in ComponentManager.entities) {
+        for (x in 0...ComponentManager.entities) {
+	    final entity:DI_ID = x;
             switch (entity.get(InfectionComponent)) {
-            case Comp(infection = _.acceptingInfection => ACCEPTING):
+            case Comp(infection = {acceptingInfection : ACCEPTING}):
                 switch [entity.get(PlayerComponent),entity.get(AliveComponent)] {
                     case [Comp(_),NONE]:
                         continue;
@@ -202,7 +203,7 @@ class InfectionSystem extends System {
     static function onInfected(ent:DI_ID) {
         #if server
         switch (ent.get(PlayerComponent)) {
-        case Comp(_.player => p):
+        case Comp({player : p}):
             trace('INIT INFECTED PLAYER $p');
             // net_inf.send({infection: 100.0},p);
             net_infected.send({},p);

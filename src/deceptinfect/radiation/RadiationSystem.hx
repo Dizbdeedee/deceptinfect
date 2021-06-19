@@ -1,5 +1,6 @@
 package deceptinfect.radiation;
 
+using deceptinfect.DistSquared;
 import deceptinfect.util.Util;
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import haxe.iterators.StringKeyValueIteratorUnicode;
@@ -29,18 +30,20 @@ class RadiationSystem extends System {
     #if server
     override function run_server() {
         
-        for (acceptEnt in ComponentManager.entities) {
+        for (x in 0...ComponentManager.entities) {
+	    final acceptEnt:DI_ID = x;
             switch [acceptEnt.get(RadiationAccepter),acceptEnt.get(RateComponent),acceptEnt.get(VirtualPosition),acceptEnt.get(RadVictim)] {
             case [Comp(c_radAccept),Comp(c_rateAccept),Comp(c_radGEnt),Comp(c_radvic)]:
                 //trace("radiationaccepter");
                 c_radAccept.radiation.clear();
                 // c_rateAccept.addRates.clear();
-                for (produceEnt in ComponentManager.entities) {
+                for (x in 0...ComponentManager.entities) {
+		    final produceEnt:DI_ID = x;
                     switch [produceEnt.get(RadiationProducer),produceEnt.get(VirtualPosition),produceEnt.get(RadSource)] {
                     case [Comp(c_radProduce),Comp(c_producePos),Comp(c_radsource)]:
                         //c_radsource /c_radvic might be needed to prevent radiation from source when contaminated from source
 
-                        var dist = c_producePos.pos.Distance(c_radGEnt.pos);
+                        var dist = c_producePos.pos.distSq(c_radGEnt.pos);
                         // Util.printTimer("stuff",3, () -> 
                         // trace('$produceEnt producing $dist');
                         switch getTotalRadiation(dist,c_radProduce) {
@@ -72,7 +75,7 @@ class RadiationSystem extends System {
 
     }
     
-    static function getTotalRadiation(dist:Float,rad:RadiationProducer):Option<Float> {
+    static function getTotalRadiation(dist:DistSquared,rad:RadiationProducer):Option<Float> {
         if (dist < rad.radius) {
             return Some((rad.maxrate - 1) * ((rad.radius - dist) / rad.radius));
         } else {

@@ -8,7 +8,8 @@ class LowHealthSystem extends System implements EnumExtractor {
 
     #if server
     override function run_server():Void {
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             // PlayerComponentp
             @as(ent.get(PlayerComponent) => Comp(c_ply)) {
                 if (c_ply.player.Health() < 25) {

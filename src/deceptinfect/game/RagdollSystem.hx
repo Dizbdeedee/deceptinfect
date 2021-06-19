@@ -192,7 +192,8 @@ class RagdollSystem extends System {
                
             }
         }
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(GEntityComponent),ent.get(ClientWeaponStatue)] {
             case [Comp(_.entity => gent),Comp(c_stat)]:
                 if (!IsValid(c_stat.parent)) {
@@ -214,7 +215,8 @@ class RagdollSystem extends System {
     }
 
     function endSlowMotion(x:Noise) {
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(Ragdoll),ent.get(Statue),ent.get(GEntityComponent)] {
                 case [Comp(_),Comp(_),Comp(_.entity => gent)]:
                     for (physid in 0...gent.GetPhysicsObjectCount()) {
@@ -239,8 +241,8 @@ class RagdollSystem extends System {
     function stateChange(newstate:GAME_STATE) {
         switch [GameManager.state,newstate] {
         case [_,ENDING(_, _)]:
-            for (ent in entities) {
-
+            for (x in 0...entities) {
+		final ent:DI_ID = x;
                 switch [ent.get(PlayerComponent),ent.get(InfectedComponent),ent.get(AliveComponent)] {
                 case [Comp(c_ply),Comp(_),Comp(_)]:
                     c_ply.player.SetModel(Misc.infModel);
@@ -257,7 +259,8 @@ class RagdollSystem extends System {
             trace("wrote");
             writeStatues();
         case [WAIT,_]:
-            for (ent in entities) {
+            for (x in 0...entities) {
+		final ent:DI_ID = x;
                 switch [ent.get(Statue),ent.get(GEntityComponent)] {
                 case [Comp(_),Comp(c_gent)]:
                     trace("removed statue");
@@ -269,7 +272,8 @@ class RagdollSystem extends System {
         }
     }
     override function run_server() {
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(GEntityComponent),ent.get(Ragdoll)] {
             case [Comp(c_ent),Comp(c_rag)]:
                 switch (c_rag.reveal) {
@@ -382,8 +386,8 @@ class RagdollSystem extends System {
     function writeStatues() {
         var tbl:JsonStatues = [];
 
-        for (ent in entities) {
-
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(Statue),ent.get(GEntityComponent)] {
             case [Comp(_),Comp(_.entity => gent)]:
                 var ar:Array<JsonPhys> = [];

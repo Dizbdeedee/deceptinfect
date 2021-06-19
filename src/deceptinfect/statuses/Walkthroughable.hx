@@ -15,16 +15,18 @@ class WalkthroughSystem extends System {
 
     override function run_server() {
 
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch[ent.get(Walkthroughable),ent.get(PlayerComponent)] {
             case [Comp(_),Comp(c_ply)]:
                 var tooclose = false;    
-                for ((otherEnt : DI_ID) in entities) {
+                for (x in 0...entities) {
+		    final otherEnt:DI_ID = x;
                     if (otherEnt == ent) {continue;}
                     switch otherEnt.get(PlayerComponent) {
                     case Comp(c_otherPly):
                         var dist = c_otherPly.player.GetPos().DistToSqr(c_ply.player.GetPos());
-                        if (dist < C_square(100)) {
+                        if (dist < C_square(125)) {
                             tooclose = true;
                             break;
                             // ent.remove_component(Walkthroughable);

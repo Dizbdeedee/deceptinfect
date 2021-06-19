@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.infection.components.GrabbableProp;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.util.Cooldown;
 import gmod.Hook;
@@ -55,7 +56,8 @@ class GrabSystem extends System {
         }
     }
     public static function drawCylinders() {
-        for (ent in ComponentManager.entities) {
+        for (x in 0...ComponentManager.entities) {
+	    final ent:DI_ID = x;
             switch ent.get(GrabDraw) {
             case Comp(draw):
                 if (PVS.pvs.get(draw.ent1.EntIndex()) || PVS.pvs.get(draw.ent2.EntIndex())) {
@@ -87,33 +89,33 @@ class GrabSystem extends System {
     static function grabDamage(ent:GEntCompat,dmg:CTakeDamageInfo) {
         if (ent.IsPlayer()) {
             switch (ent.id.get(GrabProducer)) {
-            case Comp(c_produce):
-                switch (c_produce.grabState) {
-                case GRABBING(_):
-                    c_produce.damage += dmg.GetDamage();
-                    if (c_produce.damage >= c_produce.threshold) {
-                        grabStop(ent.id);
-                        c_produce.grabState = NOT_READY(COOLDOWN(Gmod.CurTime() + c_produce.nextCooldown));
-                        
-                    }
-                default:
-                }
+            case Comp(c_produce = {grabState : GRABBING(_)}):
+		c_produce.damage += dmg.GetDamage();
+		if (c_produce.damage >= c_produce.threshold) {
+		    grabStop(ent.id);
+		    c_produce.grabState = NOT_READY(COOLDOWN(Gmod.CurTime() + c_produce.nextCooldown));
+		}
             default:
             }
         }
         return null;
     }
+
     override function run_server() {
-        for (attack in ComponentManager.entities) {
+        for (x in 0...ComponentManager.entities) {
+	    final attack:DI_ID = x;
             switch [attack.get(GrabProducer),attack.get(GEntityComponent)] {
             case [Comp(c_produce),Comp(_.entity => g_attack)]:
                 switch (c_produce.grabState) {
                 case READY(SEARCHING):
-                    for (victim in ComponentManager.entities) {
+                    for (x in 0...ComponentManager.entities) {
+			final victim:DI_ID = x;
                         if (attack != victim) {
-                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition),victim.get(AliveComponent)] {
-                            case [Comp(_),Comp(_.pos => vicPos),Comp(_)]:
+                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition),victim.get(AliveComponent),victim.get(GrabbableProp)] {
+			    case [Comp(_),Comp({pos : vicPos}),Comp(_),_]
+				| [Comp(_),Comp({pos : vicPos}),_,Comp(_)]:
                                 if (vicPos.Distance(g_attack.GetPos()) < c_produce.grabDist) {
+
                                     attemptTarget(attack,victim);
                                     //trace('attempting target ${c_produce.grabState}');
                                     switch (c_produce.grabState) {
@@ -137,10 +139,12 @@ class GrabSystem extends System {
                         break;
                     }
                     attemptSneakAttack(attack,prevVic);
-                    for (victim in ComponentManager.entities) {
+                    for (x in 0...ComponentManager.entities) {
+			final victim:DI_ID = x;
                         if (victim != prevVic && attack != victim) {
-                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition),victim.get(AliveComponent)] {
-                            case [Comp(_),Comp(_.pos => vicPos),Comp(_)]:
+                            switch [victim.get(GrabAccepter),victim.get(VirtualPosition),victim.get(AliveComponent),victim.get(GrabbableProp)] {
+				case [Comp(_),Comp({pos : vicPos}),Comp(_),_] 
+				| [Comp(_),Comp({pos : vicPos}),_,Comp(_)]:
                                 var newDist = vicPos.Distance(g_attack.GetPos());
                                 if (newDist < oldDist && newDist < c_produce.grabDist) {
                                     //trace('switching targets ${victim}');
@@ -158,8 +162,6 @@ class GrabSystem extends System {
                             }
                         }
                     }
-                    
-                    
                 case GRABBING(victim):
                     //trace('grabbing ${c_produce.grabState}');
 
@@ -178,22 +180,17 @@ class GrabSystem extends System {
                         ent2: g_attack
                     },filter,true);
                     switch (victim.get(InfectionComponent)) {
-                    case Comp(inf):
-                        switch (inf.infection) {
-                        case NOT_INFECTED(inf):
-                            //trace('infecting');
-                            //TODO move
-                            inf.value += calcGrabIncrease();
-                        case INFECTED:
-                            trace("infected");
-                            grabStop(attack);
-                            var c_accept = victim.get_sure(GrabAccepter);
-                            c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
-                            
-                        }
+                    case Comp({infection : NOT_INFECTED(inf)}):
+			inf.value += calcGrabIncrease();
+		    case Comp({infection : INFECTED}):
+			trace("infected");
+			grabStop(attack);
+			var c_accept = victim.get_sure(GrabAccepter);
+			c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
                     default:
-                        throw "Victim has no infection component..";
+                        // throw "Victim has no infection component..";
                     }
+
                 case NOT_READY(COOLDOWN(cool)) if (Gmod.CurTime() > cool):
                     c_produce.grabState = READY(NOT_SEARCHING);
 
@@ -229,8 +226,8 @@ class GrabSystem extends System {
         default:
         }
         switch (attack.get(PlayerComponent)) {
-        case Comp(plyr):
-            plyr.player.Freeze(false);
+        case Comp({player : ply}):
+            ply.Freeze(false);
         default:
         }
         var filter = Gmod.RecipientFilter();
@@ -241,38 +238,39 @@ class GrabSystem extends System {
 
     public static function attemptGrab(attack:DI_ID,vic:DI_ID) {
         switch [attack.get(GrabProducer),vic.get(GrabAccepter)] {
-        case [Comp(c_produce),Comp(c_accept)]:
-            switch [c_produce.grabState,c_accept.grabState] {
-		case [READY(TARGET(vic)),NOT_GRABBED(_)]:
-                trace('c_accpet ${c_accept.grabState}');
-                grabStart(attack,vic);
-            default:
-            }
+	    case [Comp({
+		    grabState : READY(TARGET(vic))
+		 }),
+		  Comp({
+		    grabState : NOT_GRABBED(_)
+		 })]:
+		// trace('c_accpet ${c_accept.grabState}');
+		grabStart(attack,vic);
         default:
         }
         
     }
 
     public static function requestStartSearch(attack:DI_ID) {
-        switch [attack.get(GrabProducer)] {
-        case [Comp(c_produce = _.grabState => READY(NOT_SEARCHING))]:
-            c_produce.grabState = READY(SEARCHING);
+        switch attack.get(GrabProducer) {
+	    case Comp(c_produce = {grabState : READY(NOT_SEARCHING)}):
+		c_produce.grabState = READY(SEARCHING);
         default:
         }
     }
 
     public static function requestStopSearch(attack:DI_ID) {
-        switch [attack.get(GrabProducer)] {
-        case [Comp(c_produce = _.grabState => READY(SEARCHING | TARGET(_)))]:
-            c_produce.grabState = READY(NOT_SEARCHING);
+        switch attack.get(GrabProducer) {
+	    case Comp(c_produce = {grabState : READY(SEARCHING | TARGET(_))}):
+		c_produce.grabState = READY(NOT_SEARCHING);
         default:
         }
     }
 
     static function attemptSneakAttack(attack:DI_ID,vic:DI_ID) {
         
-        switch [vic.get(GEntityComponent),attack.get(GEntityComponent)] {
-        case [Comp(_.entity => g_vic),Comp(_.entity => g_attack)]:
+        switch [vic.get(GEntityComponent),vic.get(GrabAccepter),attack.get(GEntityComponent)] {
+	case [Comp({entity : g_vic}),Comp({canGrabBack : true}),Comp({entity : g_attack})]:
             if (g_vic.facingBehind(g_attack)) {
                 attemptGrab(attack,vic);
             }
@@ -282,20 +280,18 @@ class GrabSystem extends System {
     
     public static function attemptTarget(attack:DI_ID,vic:DI_ID) {
         switch [attack.get(GrabProducer),vic.get(GrabAccepter)] {
-        case [Comp(c_produce),Comp(c_accept)]:
-            switch [c_accept.grabState,
-                c_produce.grabState,
-                ] {
-		case [NOT_GRABBED(numTargeting),
-                READY(TARGET(_) | SEARCHING)]:
+	    case [Comp(c_attack = {
+		    grabState : READY(TARGET(_) | SEARCHING)
+		 }),
+		  Comp(c_accept = {
+		    grabState : NOT_GRABBED(numTargeting)
+		 })]:
                 trace(c_accept.grabState);
                 attemptSneakAttack(attack,vic);
                 target(attack,vic);
                 if (numTargeting.value >= c_accept.overwhelm) {
                     attemptGrab(attack,vic);
                 }
-            default:
-            }
         default:
         }
     
@@ -306,7 +302,6 @@ class GrabSystem extends System {
         for (c_produce in c_accept.targeting.keys()) {
             switch (c_produce.grabState) {
             case READY(TARGET(target)) if (vic == target):
-                
                 c_produce.grabState = READY(SEARCHING);
             default:
             }
@@ -343,7 +338,6 @@ class GrabSystem extends System {
         return (100 / GameValues.GRAB_TIME) / Math.floor(1 / EngineLib.TickInterval());
     }
     static function target(attacker:DI_ID,victim:DI_ID) {
-
         var c_accept = victim.get_sure(GrabAccepter);
         var c_produce = attacker.get_sure(GrabProducer);
         c_accept.targeting.set(c_produce,true);

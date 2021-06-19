@@ -185,23 +185,18 @@ class GameManager implements enumExtractor.EnumExtractor {
     @:expose("cleanup")
     public static function cleanup() {
         net_cleanup.broadcast({});
-        for (x in entities.it()) {
+        for (x in 0...entities) {
 	    final ent:DI_ID = x;
             switch [ent.get(CleanupEnt),ent.get(GEntityComponent)] {
             case [Comp(_),Comp(c_gent)]:
                 c_gent.entity.Remove();
             default:
             }
-	    ComponentManager.removeEntity(ent);
-	    // ComponentManager.entities = 0;
-	    // for (ent in entities.it()) {
-	    // 	ComponentManager.removeEntity(ent);
-	    // }
-            // switch ent.get(deceptinfect.game.components.KeepRestart) {
-            //     case Comp(_):
-            //     default:
-            //         ComponentManager.removeEntity(ent);
-            // }
+            switch ent.get(deceptinfect.game.components.KeepRestart) {
+                case Comp(_):
+                default:
+                    ComponentManager.removeEntity(ent);
+            }
         }
         stateTrig.clear(); //get rid of stragglers
 	SystemManager.destroySystems();
@@ -214,7 +209,7 @@ class GameManager implements enumExtractor.EnumExtractor {
             default:
             }
         }
-        GameLib.CleanUpMap();
+        // GameLib.CleanUpMap();
         for (p in PlayerLib.GetAll()) {
             new GPlayerCompat(new PlayerComponent(p));
             p.KillSilent();
@@ -277,7 +272,7 @@ class GameManager implements enumExtractor.EnumExtractor {
             if (ind == choose) {
                 getSystem(InfectionSystem).makeInfected(player.id);
             }
-            player.StripWeapons();
+            // player.StripWeapons();
             player.Give(Misc.startingWeapons[0]);
             player.giveFullAmmo();
             player.Spawn();
@@ -308,7 +303,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 
     #if client
     static function cleanup() {
-        for (x in entities.it()) {
+        for (x in 0...entities) {
 	    final ent:DI_ID = x;
             switch ent.get(deceptinfect.game.components.KeepRestart) {
                 case Comp(_):

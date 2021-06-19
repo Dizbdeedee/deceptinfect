@@ -1,5 +1,5 @@
 import gmod.EntityClass;
-import gmod.hxbit.GmodNetHost;
+// import gmod.hxbit.GmodNetHost;
 import gmod.Gmod;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.game.SpawnSystem;
@@ -19,11 +19,14 @@ import deceptinfect.items.Di_cure;
 import deceptinfect.ents.Di_battery;
 import deceptinfect.ents.Di_barrel;
 import deceptinfect.ents.Di_puddle;
+import deceptinfect.ents.Di_spitball;
+import deceptinfect.weapons.Weapon_di_spit;
+import deceptinfect.game.SpawnSystemNav;
 #if client
 #end
 class Main {
 
-    @:expose("nethost") public static var nethost(default,null):GmodNetHost;
+    // @:expose("nethost") public static var nethost(default,null):GmodNetHost;
 
     public static function main() {
         deceptinfect.Trace.overridetrace();
@@ -34,6 +37,7 @@ class Main {
         }
         #end
         // nethost = new gmod.hxbit.GmodNetHost();
+	// nethost.rpcClient
         FileLib.CreateDir("deceptinfect");
         GameLib.CleanUpMap();
         SignalStorage.initEvents();

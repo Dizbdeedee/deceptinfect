@@ -35,9 +35,10 @@ class InfectionLookSystem extends System {
     #if server
 
     override function run_server() {
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(InfectionLookInfo),ent.get(PlayerComponent)] {
-                case [Comp(c_look),Comp(_.player => ply)]:
+		case [Comp(c_look),Comp({player : ply})]:
                     switch (ply.GetEyeTrace().Entity.validID()) {
                         case Some(id = _.get(InfectionComponent) => Comp(c_inf)):
                             var t = c_look.lookat.addTime(id);
@@ -59,10 +60,8 @@ class InfectionLookSystem extends System {
                                 },ply,true);
                                 c_look.lookat.setTime(id,2.0);
                             }
-
                         default:
                             c_look.lookat.removeAllTimes();
-                            
                     }
                 default:
             }

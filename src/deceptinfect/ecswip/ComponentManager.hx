@@ -1,4 +1,5 @@
 package deceptinfect.ecswip;
+import deceptinfect.game.ClientTranslateSystem;
 import deceptinfect.macros.ClassToID;
 import haxe.ds.ObjectMap;
 import deceptinfect.GEntCompat.GPlayerCompat;
@@ -7,12 +8,11 @@ import deceptinfect.ecswip.Component;
 typedef ComponentArray = Array<ComponentState<Component>>;
 typedef SComponentArray<T:Component> = Array<ComponentState<T>>;
 
-typedef CompAddSignal ={
+typedef SCompAddSignal ={
     ent :DI_ID,
-
     comp : Component
 }
-typedef SCompAddSignal<T:Component> = {
+typedef CompAddSignal<T:Component> = {
     ent : DI_ID,
     comp : T
 }
@@ -25,17 +25,15 @@ abstract ComponentID<T:Component>(Int) from Int to Int {
 
 class ComponentManager {
     
-    public static var components(default,null):haxe.ds.ObjectMap<Class<Dynamic>,ComponentArray> = new haxe.ds.ObjectMap();
-    
     public static var components_2(default,null):Array<ComponentArray>;
 
-    // public static var familyArrays(default,null):Array<
-
-    public static var componentSignals(default,null):haxe.ds.ObjectMap<Class<Dynamic>,SignalTrigger<CompAddSignal>> = new haxe.ds.ObjectMap();
+    public static var componentSignals(default,null):Array<SignalTrigger<SCompAddSignal>> = [];  
 
     public static var entities:Entities = 0;     //default,null
     
     public static var activeEntities(default,null):Int = 0;
+
+    public static var lookupEntity(default,null):Map<Component,DI_ID> = [];
 
     public static var gEntityLookup(default,null):Map<DI_ID,GEntCompat> = [];
     
@@ -47,18 +45,6 @@ class ComponentManager {
         return id;
     }
 
-    // public static function getOrAdd<T:Component>(id:DI_ID,comp:ComponentID<T>,?args:Array<Dynamic>):T {
-    //     return switch (getComponentForID(comp,id)) {
-    //         case Comp(comp):
-    //             comp;
-    //         case NONE:
-    //             if (args == null) args = [];
-    //             var inst = Type.createInstance(cls,args);
-    //             id.add_component(inst);
-    //             inst;
-    //     };
-    // }
-
     public static function addPlayer(x:GPlayerCompat):DI_ID {
         var id = addGEnt(cast x);
         addComponent(PlayerComponent.compID,new PlayerComponent(x),id);
@@ -66,12 +52,6 @@ class ComponentManager {
         return id;
     }
 
-    public static inline function getOldComponentForID<T:Component>(cls:Class<T>,x:DI_ID):ComponentState<T> {
-        var comparray = lazyInit(cls);
-        return cast comparray[x];
-    }
-
-    
     static var lastID:Int;
     public static function initComponent(id:Int) {
 	if (components_2 == null) components_2 = [];
@@ -90,14 +70,19 @@ class ComponentManager {
 
     public static inline function addComponent<T:Component>(id:ComponentID<T>,x:T,to:DI_ID) {
 	components_2[id][to] = Comp(x);
+	lookupEntity.set(x,to);
 	return x;
     }
 
-    public static function getCreateSignal<T:Component>(cls:Class<T>):Signal<SCompAddSignal<T>> {
-        var sigtrig = componentSignals.get(cls);
+    public static inline function getIDFromComponent(comp:Component):DI_ID {
+	return lookupEntity.get(comp);
+    }
+
+    public static function getCreateSignal<T:Component>(cls:ComponentID<T>):Signal<CompAddSignal<T>> {
+        var sigtrig = componentSignals[cls];
         if (sigtrig == null) {
             sigtrig = new SignalTrigger();
-            componentSignals.set(cls,sigtrig);            
+            componentSignals[cls] = sigtrig;            
         }
         return cast sigtrig.asSignal();
         
@@ -111,29 +96,35 @@ class ComponentManager {
 	return comp;
     }
 
-
-    inline static function lazyInit(x:Class<Dynamic>):ComponentArray {
-        var comparray = components.get(x);
-        if (comparray == null) {
-            comparray = [];
-            components.set(x,comparray);
-            for (entity in entities) {
-                comparray[entity] = NONE;
-            }
-        }        
-        return comparray;
+    @:privateAccess(deceptinfect.ecswip.Component)
+    public static function removeComponent<T:Component>(id:ComponentID<T>,diID:DI_ID) {
+	return components_2[id][diID] = removing(components_2[id][diID]);
     }
 
-    public static function removeComponent<T:Component>(id:ComponentID<T>,diID:DI_ID) {
-        return components_2[id][diID] = NONE;
+    inline static function removing(x:ComponentState<Component>) {
+	return switch (x) {
+	    case Comp(comp):
+		comp.onRemove();
+		ComponentState.NONE;
+	    case non = NONE:
+		non;
+	}
     }
 
     public static function removeEntity(x:DI_ID) {
+	#if server
+	switch (getSystem2(ClientTranslateSystem)) {
+	    case Some(clientTranslate):
+		clientTranslate.removeEntity(x);
+	    default:
+	}
+	#end	
         for (component in components_2) {
-            component[x] = NONE;
+            component[x] = removing(component[x]);
         }
         activeEntities--;
     }
+
     public static function addToAllCompArrays(x:DI_ID) {
         for (compArray in components_2) {
             compArray[x] = NONE;
@@ -147,35 +138,33 @@ class ComponentManager {
         return id;
     }
 
+
 }
 
 
 @:forward
 abstract Entities(Int) from Int to Int {
     
-    public inline function iterator() {
-	return new DI_ID_Iterator();
-    }
 }
 
-class DI_ID_Iterator {
+// class DI_ID_Iterator {
     
-    var current:Int;
+//     var current:Int;
 
-    public extern inline function new() {
-	current = 0;
-    }
+//     public extern inline function new() {
+// 	current = 0;
+//     }
 
-    public inline function hasNext() {
-	return current < (ComponentManager.entities : Int); 
-    }
+//     public inline function hasNext() {
+// 	return current < (ComponentManager.entities : Int); 
+//     }
 
-    public extern inline function next() {
-	return (current++ : DI_ID);
-    }
+//     public extern inline function next() {
+// 	return (current++ : DI_ID);
+//     }
 
     
-}
+// }
 
 // @:using(deceptinfect.ecswip.ComponentFamily)
 @:using(deceptinfect.macros.ClassToID.DI_ID_Use)

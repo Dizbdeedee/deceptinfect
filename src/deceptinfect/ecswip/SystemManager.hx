@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.game.ItemOwnerSystem;
 import deceptinfect.items.ScannerSystem;
 import deceptinfect.radiation.ContaminationSystem;
 // import deceptinfect.radiation.ContaminationSystem;
@@ -46,6 +47,7 @@ class SystemManager {
         LowHealthSystem,
         ScannerSystem,
         WeaponSystem,
+	ItemOwnerSystem,
 	DummySystem
     ];
 
@@ -69,11 +71,21 @@ class SystemManager {
         getSystems.set(LowHealthSystem, new LowHealthSystem());
         getSystems.set(ScannerSystem, new ScannerSystem());
         getSystems.set(WeaponSystem, new WeaponSystem());
+        getSystems.set(ItemOwnerSystem, new ItemOwnerSystem());
         getSystems.set(DummySystem, new DummySystem());
     }
 
     public static function getSystem<T:System>(cls:Class<T>):T {
         return cast getSystems.get(cls);
+    }
+
+    public static function getSystem2<T:System>(cls:Class<T>):Option<T> {
+	final result = getSystems.get(cls);
+	return if (getSystems.get(cls) == null) {
+	    None;
+	} else {
+	    Some(cast result);
+	}
     }
 
     @:expose("getSystem")
@@ -86,7 +98,6 @@ class SystemManager {
     public static function runAllSystems() {
 	Profiler.profile("start",true);
         for (clsSystem in runSystems) {
-
 	    final name = Type.getClassName(clsSystem);
 	    Profiler.profile(name);
 	    getSystems.get(clsSystem).run();

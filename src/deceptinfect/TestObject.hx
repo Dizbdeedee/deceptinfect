@@ -31,8 +31,11 @@ import deceptinfect.infection.InfectionComponent.INF_STATE;
 //     }
 
 //     public function alive() {
+       
 //         inst = this;
 //         trace("I am... alive!");
 //     }
 
 // }
+
+

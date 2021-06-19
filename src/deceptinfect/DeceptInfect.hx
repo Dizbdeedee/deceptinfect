@@ -61,7 +61,7 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
         SystemManager.runAllSystems();
         #if server
         GameManager.think();
-        checkPerformance();
+        // checkPerformance();
         #end
         // for (c in nethost.clients) {
         //     c.sync();
@@ -145,11 +145,17 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
         //player.SetWalkthroughable
         player.SetShouldServerRagdoll(true);
         player.ShouldDropWeapon(true);
-        if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
-            player.Give(Misc.roundWeapons[0]); //TODO random weapons
-            player.ShouldDropWeapon(false);
+        // if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
 
-        }
+        // }
+	switch (GameManager.state) {
+	    case WAIT | SETTING_UP(_,_):
+		player.Give(Misc.roundWeapons[0]); //TODO random weapons
+		player.ShouldDropWeapon(false);
+	    case ENDING(_) | PLAYING(_):
+		player.KillSilent();
+	    
+	}
         // player.id.
         //setHiddenHealth
         //lowhealthrate???
@@ -197,13 +203,13 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
 
     
     
-    override function PlayerSwitchWeapon(player:Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
-        if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
-        if (oldWeapon.GetClass() == "weapon_infect") {
-            return true;
-        }
-        return null;
-    }
+    // override function PlayerSwitchWeapon(player:Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
+    //     if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
+    //     if (oldWeapon.GetClass() == "weapon_infect") {
+    //         return true;
+    //     }
+    //     return null;
+    // }
 
     override function PlayerButtonDown(ply:GPlayerCompat, button:BUTTON_CODE) {
         switch (button) {
@@ -211,6 +217,10 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
                 //GrabSystem.requestStartSearch(ply.id);
             default:
         }
+    }
+
+    override function PlayerInitialSpawn(player:Player, transition:Bool) {
+	
     }
 
     override function PlayerDeathSound():Bool {
@@ -249,13 +259,13 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
             ply.Spectate(OBS_MODE_ROAMING);
             comp.spec_next = 1;
         }
-        if (revive) {
+        return if (revive) {
             comp.deathTime = ALIVE;
             ply.UnSpectate();
             ply.Spawn();
-            return true;
+            true;
         } else {
-            return false;
+            false;
         }
     }
 

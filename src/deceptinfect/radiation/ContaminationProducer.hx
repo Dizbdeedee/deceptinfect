@@ -9,7 +9,8 @@ class ContaminationProducer extends Component {
     public var chance:Float;
     // public var time:Float;
     public var check:Float;
-    public var dist:Float;
+    public var dist:DistSquared;
+
     public var type:ContaminationType = SAME_TYPE;
 
     public var contam_time:RadLifetime;
