@@ -90,6 +90,7 @@ class ClassToID {
 	#end
 }
 
+
 class DI_ID_Use {
 	public static macro function get(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>) {
 		#if macro
@@ -101,9 +102,18 @@ class DI_ID_Use {
 	public static macro function get_2(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>) {
 		#if macro
 		final idMacro = ClassToID.idMacro(cls);
-		return macro deceptinfect.ecswip.ComponentManager.components_3[$idMacro].get_component($diid);
+		return macro deceptinfect.ecswip.ComponentManager.getComponent($idMacro,$diid);
 		#end
 	}
+
+	
+	public static macro function replicate(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>,replState) {
+		#if macro
+		
+		#end
+	}
+
+	
 
 	public static macro function getAll(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, arr:Array<Expr>) {
 		#if macro
@@ -209,6 +219,18 @@ class DI_ID_Use {
 		return macro deceptinfect.ecswip.ComponentManager.addComponent($idMacro, $obj, $diid);
 		#end
 	}
+}
+
+class Component_Use {
+	/**
+		ID from component
+	**/
+	public static macro function idm(cls:ExprOf<deceptinfect.ecswip.Component>) {
+		#if macro
+		return macro $e{ClassToID.idMacroObj(cls)};
+		#end
+	}
+	
 }
 
 class GEntCompat_Use {

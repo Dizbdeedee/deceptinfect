@@ -116,10 +116,10 @@ class IterateEnt2 {
 		var expr;
 
 		switch (func) {
-			case {expr: EFunction(FArrow, {args: [{name: _argName}], expr: _expr})}:
+			case {expr: EFunction(_, {args: [{name: _argName}], expr: _expr})}:
 				name = _argName;
 				expr = _expr;
-			case {expr: EFunction(FArrow, {args: [], expr: _expr}), pos: pos}:
+			case {expr: EFunction(_, {args: [], expr: _expr}), pos: pos}:
 				name = IterateEnt.renameVar(Context.getLocalTVars(), pos);
 				expr = _expr;
 			case {pos: pos}:
@@ -129,24 +129,25 @@ class IterateEnt2 {
 		}
 		// trace(getArr);
         final comparisons = comparisons(getArr);
-
-        final expr = insert(macro {
+        
+        final block = macro {
             final __compArr = deceptinfect.ecswip.ComponentManager.components_3;
             @:a(0) null;
             final __lowestInt = __compArr[__lowest_comp].internal;
 			for (__int_id in 1...__lowest) {
-                final $name:DI_ID = __lowestInt[__int_id];
-                if (${if_statement(getArr,name)}) {
-                    switch (${switch_head(getArr,name)}) {
+                final $name:deceptinfect.ecswip.ComponentManager.DI_ID = __lowestInt[__int_id];
+                if ($e{if_statement(getArr,name)}) {
+                    switch ($e{switch_head(getArr,name)}) {
                         case $cases:
                             $expr;
                         default:
-                            null;
+                            var a:Int = 5;
                     }
                 }
-				
 			}
-		},comparisons);
+            null;
+        }
+        final expr:Expr = insert(block,comparisons);
 		return expr;
 	}
     

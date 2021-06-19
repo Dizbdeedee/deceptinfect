@@ -1,5 +1,6 @@
 package deceptinfect.infection.systems;
 
+import deceptinfect.game.GeigerCounter;
 import deceptinfect.macros.IterateEnt2;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.client.GeigerSystem;
@@ -8,53 +9,49 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.PlayerComponent;
 
-typedef ND_Infection = {
-	infection:Float,
-}
 
 @:allow(InfectionComponent)
 class InfectionSystem extends System {
-	static var net_inf = new gmod.helpers.net.NET_Server<"di_infection", ND_Infection>();
-
-	static var net_infected = new gmod.helpers.net.NET_Server<"di_infected", {}>();
 
 	#if client
 	override function init_client() {
-		net_inf.signal.handle(recvInfection);
-		net_infected.signal.handle(onInfectedCl);
+		// net_inf.signal.handle(recvInfection);
+		// net_infected.signal.handle(onInfectedCl);
 	}
 
-	function onInfectedCl(data:{}) {
-		trace("Recieved infected data");
-		switch (PlayerManager.getLocalPlayerID().get(InfectionComponent)) {
-			case Comp(c_inf):
-				c_inf.infection = INFECTED;
-				PlayerManager.getLocalPlayerID().add_component(new InfectedComponent());
-				trace(c_inf);
-			default:
-				trace("no...");
-				var c_inf = new InfectionComponent();
-				PlayerManager.getLocalPlayerID().add_component(c_inf);
-				c_inf.infection = INFECTED;
-		}
-	}
+	
 
-	function recvInfection(data:ND_Infection) {
-		switch PlayerManager.getLocalPlayerID().get(InfectionComponent) {
-			case Comp(inf):
-				switch (inf.infection) {
-					case NOT_INFECTED(val):
-						// trace('set ${inf.infection}');
-						val.value = data.infection;
-					default:
-				}
-			default:
-				trace("nu shit");
-				var c_inf = new InfectionComponent();
-				PlayerManager.getLocalPlayerID().add_component(c_inf);
-				c_inf.infection = NOT_INFECTED(data.infection);
-		}
-	}
+	// function onInfectedCl(data:{}) {
+	// 	trace("Recieved infected data");
+	// 	switch (PlayerManager.getLocalPlayerID().get(InfectionComponent)) {
+	// 		case Comp(c_inf):
+	// 			c_inf.infection = INFECTED;
+	// 			PlayerManager.getLocalPlayerID().add_component(new InfectedComponent());
+	// 			trace(c_inf);
+	// 		default:
+	// 			trace("no...");
+	// 			var c_inf = new InfectionComponent();
+	// 			PlayerManager.getLocalPlayerID().add_component(c_inf);
+	// 			c_inf.infection = INFECTED;
+	// 	}
+	// }
+
+	// function recvInfection(data:ND_Infection) {
+	// 	switch PlayerManager.getLocalPlayerID().get(InfectionComponent) {
+	// 		case Comp(inf):
+	// 			switch (inf.infection) {
+	// 				case NOT_INFECTED(val):
+	// 					// trace('set ${inf.infection}');
+	// 					val.value = data.infection;
+	// 				default:
+	// 			}
+	// 		default:
+	// 			trace("nu shit");
+	// 			var c_inf = new InfectionComponent();
+	// 			PlayerManager.getLocalPlayerID().add_component(c_inf);
+	// 			c_inf.infection = NOT_INFECTED(data.infection);
+	// 	}
+	// }
 	#end
 
 	#if server
@@ -93,7 +90,8 @@ class InfectionSystem extends System {
 			fixUpInfection(c_inf);
 			switch (ent.get(PlayerComponent)) {
 				case Comp(ply):
-					net_inf.send({infection: inf.value}, ply.player, true);
+					
+					// net_inf.send({infection: inf.value}, ply.player, true);
 					totalInf += c_inf.getInfValue();
 					numPlayers++;
 				default:
@@ -191,9 +189,10 @@ class InfectionSystem extends System {
 			case Comp({player: p}):
 				trace('INIT INFECTED PLAYER $p');
 				// net_inf.send({infection: 100.0},p);
-				net_infected.send({}, p);
+				// net_infected.send({}, p);
 				GameManager.initInfectedPlayer(ent);
-				GeigerSystem.net_geiger.send({geiger: 0.0}, p);
+				ent.remove_component(GeigerCounter);
+				// GeigerSystem.net_geiger.send({geiger: 0.0}, p);
 			default:
 		}
 		#end

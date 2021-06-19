@@ -3,63 +3,40 @@ package deceptinfect.game.components;
 import gmod.Gmod;
 import deceptinfect.ecswip.ProxyComponent.ComponentProxy;
 
-class ItemReveal extends ComponentProxy implements hxbit.Serializable {
-	@:s var vec:NVec;
 
-	@:s var model:String;
 
-	#if client
-	var clientEnt:CSEnt;
-	#end
+// class SerializableVector implements hxbit.Serializable {
+// 	public var vec:Vector;
 
-	#if server
-	public function new(pos:Vector, model:String) {
-		super();
-		this.vec = pos;
-		this.model = model;
-	}
-	#end
+// 	@:keep
+// 	public function customSerialize(ctx:hxbit.Serializer) {
+// 		ctx.addFloat(vec.x);
+// 		ctx.addFloat(vec.y);
+// 		ctx.addFloat(vec.z);
+// 	}
 
-	#if client
-	public function proxyCreated() {
-		clientEnt = Gmod.ClientsideModel(model);
-		clientEnt.SetPos(vec);
-	}
-	#end
-}
+// 	@:keep
+// 	public function customUnserialize(ctx:hxbit.Serializer) {
+// 		vec = new Vector(ctx.getFloat(), ctx.getFloat(), ctx.getFloat());
+// 	}
 
-class SerializableVector implements hxbit.Serializable {
-	public var vec:Vector;
+// 	public inline function new(x:gmod.gclass.Vector) {
+// 		vec = x;
+// 	}
+// }
 
-	@:keep
-	public function customSerialize(ctx:hxbit.Serializer) {
-		ctx.addFloat(vec.x);
-		ctx.addFloat(vec.y);
-		ctx.addFloat(vec.z);
-	}
+// @:forward
+// abstract NVec(SerializableVector) {
+// 	@:to
+// 	public function toVec():Vector {
+// 		return this.vec;
+// 	}
 
-	@:keep
-	public function customUnserialize(ctx:hxbit.Serializer) {
-		vec = new Vector(ctx.getFloat(), ctx.getFloat(), ctx.getFloat());
-	}
-
-	public inline function new(x:gmod.gclass.Vector) {
-		vec = x;
-	}
-}
-
-@:forward
-abstract NVec(SerializableVector) {
-	@:to
-	public function toVec():Vector {
-		return this.vec;
-	}
-
-	@:from
-	public static function fromVec(x:Vector) {
-		return cast new SerializableVector(x);
-	}
-}
+// 	@:from
+// 	public static function fromVec(x:Vector) {
+// 		return cast new SerializableVector(x);
+// 	}
+// }
 
 // abstract NetVector(gmod.gclass.Vector) {
 //     @:to

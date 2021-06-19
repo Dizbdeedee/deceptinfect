@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.ecswip.ReplicatedComponent;
 using gmod.helpers.LuaArray;
 import deceptinfect.game.ClientTranslateSystem;
 import deceptinfect.macros.ClassToID;
@@ -88,6 +89,10 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 		external[x] = int_id;
 		internal[int_id] = x;
 		components[int_id] = comp;
+	}
+
+	public function set_component(x:DI_ID,comp:Component) {
+		components[external[x]] = comp;
 	}
 
 	public function remove_entity_comp(x:DI_ID) {
@@ -189,10 +194,26 @@ class ComponentManager {
 		}
 	}
 
+	/**
+		Updated
+	**/
+	public static inline function getComponent<T:Component>(id:ComponentID<T>,diid:DI_ID):T {
+		final fam = components_3.get_component(id);
+		return if (!fam.has_component(diid))
+			null;
+		else {
+			fam.get_component(diid);
+		}
+	}
 
 	public static inline function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
-		components_3[id].init_entity(to,x);
-		lookupEntity.set(x, to);
+		final fam = components_3.get_component(id);
+		if (!fam.has_component(id)) {
+			fam.init_entity(to,x);
+		} else {
+			fam.set_component(to,x);
+		}
+		// 		lookupEntity.set(x, to);
 		return x;
 	}
 
@@ -214,12 +235,15 @@ class ComponentManager {
 		return cast sigtrig.asSignal();
 	}
 
-	/** What... Depercated**/
+	
 	public static function getComponentForIDSure<T:Component>(id:ComponentID<T>, diID:DI_ID):T {
-		
+		#if !final
 		final fam = components_3.get_component(id);
 		if (!fam.has_component(diID)) throw "Component did not exist at sure statement!";
 		return fam.get_component(diID);
+		#else
+		return fam.get_component(diID);
+		#end
 	}
 
 	@:privateAccess(deceptinfect.ecswip.Component)
@@ -280,6 +304,8 @@ abstract DI_ID(Int) from Int to Int {
 	inline function new(x:Int) {
 		this = x;
 	}
+
+	
 }
 
 class ComponentTools {

@@ -28,6 +28,7 @@ class SpawnSystem extends System {
 						ent.remove_component(Spawned);
 					};
 				default:
+					
 			}
 		}
 	}

@@ -83,6 +83,8 @@ class GameManager implements enumExtractor.EnumExtractor {
 	public static function initPlayer(ply:GPlayerCompat) {
 		var p = ply.id;
 		final infcomp = new InfectionComponent();
+		infcomp.replicated = SOME(CURRENT_PLAYER);
+		
 		final spec = new SpectateComponent();
 		final rate = new RateComponent();
 		final vic = new RadVictim();
@@ -102,6 +104,9 @@ class GameManager implements enumExtractor.EnumExtractor {
 		p.add_component(new AliveComponent());
 		p.add_component(vic);
 		p.add_component(contam);
+		final g = new deceptinfect.game.GeigerCounter();
+		p.add_component(g);
+		
 	}
 
 	#if server

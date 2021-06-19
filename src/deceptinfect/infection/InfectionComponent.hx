@@ -1,17 +1,21 @@
 package deceptinfect.infection;
 
+import gmod.helpers.net.NVector;
+import deceptinfect.ecswip.ReplicatedComponent;
 import hxbit.Serializer;
 import deceptinfect.ecswip.Component;
 import deceptinfect.SeralizableRef;
 
-class InfectionComponent extends Component {
-	public var infection(default, set):INF_STATE = NOT_INFECTED(0.0);
-	public var rate:Float = 1;
+class InfectionComponent extends ReplicatedComponent {
+	@:s var infection(default, set):INF_STATE = NOT_INFECTED(0.0);
 
-	public var player:SeraliazablePlayer;
-	public var baseInfection:BaseInfection = USING_GLOBAL;
-	public var onInfected(default, null):Signal<Noise>;
-	public var acceptingInfection:AcceptingInfection = ACCEPTING;
+	
+	var rate:Float = 1;
+
+	var player:SeraliazablePlayer;
+	var baseInfection:BaseInfection = USING_GLOBAL;
+	var onInfected(default, null):Signal<Noise>;
+	var acceptingInfection:AcceptingInfection = ACCEPTING;
 
 	public function getInfValue():Float {
 		return switch (infection) {
@@ -47,7 +51,16 @@ enum BaseInfection {
 	USING_STATIC(rate:Float);
 }
 
+// @:forward
+// @:transitive
+// @:forwardStatics
+// @:forward.new
+// @:forward.variance
+// abstract BetterRef<T>(tink.core.Ref<T>) {
+
+// }
+
 enum INF_STATE {
-	NOT_INFECTED(inf:Ref<Float>);
+	NOT_INFECTED(inf:SeralizableRef);
 	INFECTED;
 }

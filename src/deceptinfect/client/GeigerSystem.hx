@@ -1,5 +1,8 @@
 package deceptinfect.client;
 
+import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.game.GeigerCounter;
+import deceptinfect.macros.IterateEnt2;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.infection.InfectionComponent;
@@ -7,37 +10,28 @@ import deceptinfect.ecswip.System;
 
 @:expose("geiger")
 class GeigerSystem extends System {
-	public static var net_geiger(default, never) = new gmod.helpers.net.NET_Server<"geiger", {geiger:Float}>();
 
 	#if client
-	public static var geiger:Float = 0.0;
+	var geiger:Float = 0.0;
 
 	static var sounds = [
 		Gmod.Sound("player/geiger1.wav"),
 		Gmod.Sound("player/geiger2.wav"),
 		Gmod.Sound("player/geiger3.wav")
 	];
-	static var playTime:Float = 0.0;
-
-	override function init_client() {
-		net_geiger.signal.handle(function(data:{geiger:Float}) {
-			// trace('geiger $geiger');
-			geiger = data.geiger;
-		});
-		GameManager.stateChange.handle(function(x) {
-			switch (x) {
-				case WAIT:
-					geiger = 0.0;
-				default:
-			}
-		});
-	}
+	
+	var playTime:Float = 0.0;
 
 	override function run_client() {
+		IterateEnt2.iterGet([GeigerCounter],[{geiger : g}],
+		function () {
+			trace("Running");
+			geiger = g;
+		});
 		geigerThink();
 	}
 
-	public static function geigerThink() {
+	public function geigerThink() {
 		if (Gmod.CurTime() > playTime && geiger > 0.016) {
 			var choice = switch (geiger) {
 				case x if (x < 0.2):
@@ -55,17 +49,34 @@ class GeigerSystem extends System {
 	}
 	#end
 
+
+
 	#if server
+
+	@:expose("testGeiger")
+	static function testGeiger(x:GPlayerCompat) {
+		final xdee = new GeigerCounter();
+		x.id.add_component(xdee);
+		x.id.replicate(xdee,SOME(CURRENT_PLAYER));
+		xdee.geiger = 0.5;
+	}
+
+	@:expose("testGeiger2")
+	static function testGeiger2(x:GPlayerCompat) {
+		final count = x.id.get_sure(GeigerCounter);
+		count.geiger = 0;
+		count.replicated = NONE;
+		count.send(x.id,SOME(CURRENT_PLAYER));
+
+	}
+
+	
 	override function run_server() {
-		for (x in 0...ComponentManager.entities) {
-			final plyr:DI_ID = x;
-			switch [plyr.get(InfectionComponent), plyr.get(PlayerComponent)] {
-				case [Comp(inf), Comp(_.player => player)]:
-					var fract = Math.min(((inf.rate - 1) / 2), 1);
-					net_geiger.send({geiger: fract}, player, true);
-				default:
-			}
-		}
+		IterateEnt2.iterGet([GeigerCounter,InfectionComponent,PlayerComponent],[geig,{rate : r},_],
+		function () {
+			geig.geiger = Math.min(((r - 1) / 2),1);
+		});
+		
 	}
 	#end
 }

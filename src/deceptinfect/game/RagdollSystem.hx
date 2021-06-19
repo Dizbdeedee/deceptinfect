@@ -272,13 +272,13 @@ class RagdollSystem extends System {
 						default:
 					}
 
-					switch ent.get(Statue) {
-						case Comp(_):
-						default:
-							if (c_rag.owner.get_sure(PlayerComponent).player.Alive()) {
-								c_ent.entity.Remove();
-							}
-					}
+					// switch ent.get(Statue) {
+					// 	case Comp(_):
+					// 	default:
+					// 		if (c_rag.owner.get_sure(PlayerComponent).player.Alive()) {
+					// 			c_ent.entity.Remove(); //TODO invalid entity here??
+					// 		}
+					// }
 
 				default:
 			}

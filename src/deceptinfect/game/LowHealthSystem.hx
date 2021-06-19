@@ -15,6 +15,7 @@ class LowHealthSystem extends System implements EnumExtractor {
 					var remap = MathLib.Remap.bind(25 - c_ply.player.Health(), 1, 25);
 					var c_inf = ent.getOrAdd(InfVunerability, remap(1.0, 1.6), 99999);
 				}
+				
 				// c_ply.player.SetWalkSpeed(remap(225,))
 			}
 		}

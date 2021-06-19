@@ -1,16 +1,18 @@
 package deceptinfect.ecswip;
 
+using Safety;
+@:using(deceptinfect.ecswip.System.System_Use)
 class System {
 	#if client
 	function init_client() {}
 
-	function run_client() {}
+	function run_client():Void {}
 	#end
 
 	#if server
 	function init_server() {}
 
-	function run_server() {}
+	function run_server():Void {}
 	#end
 
 	function init_shared() {}
@@ -36,4 +38,12 @@ class System {
 		#end
 		run_shared();
 	}
+}
+
+class System_Use {
+	public static inline function get<T:System>(x:Class<T>) {
+		return SystemManager.getSystem(x).sure();
+	}
+
+	
 }

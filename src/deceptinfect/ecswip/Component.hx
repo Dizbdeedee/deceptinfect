@@ -5,9 +5,12 @@ package deceptinfect.ecswip;
 @:publicFields
 @:autoBuild(deceptinfect.macros.ComponentMacro.build())
 @:keepSub
-class Component {
+@:using(deceptinfect.macros.ClassToID.Component_Use)
+abstract class Component {
 	public function new() {
 	}
+
+	abstract function getCompID():Int;
 
 	function onRemove() {}
 }
