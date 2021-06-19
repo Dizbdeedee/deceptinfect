@@ -12,6 +12,7 @@
 -D macro-times
 -lib hxbit
 -D debug
+-lib safety
 -lib tink_core
 -lib gmodhaxe
 -lib no-spoon
