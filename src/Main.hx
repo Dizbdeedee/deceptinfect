@@ -39,7 +39,6 @@ class Main {
 		for (ply in PlayerLib.GetAll()) {
 			new GPlayerCompat(new PlayerComponent(ply));
 		}
-		
 		#end
 
 		FileLib.CreateDir("deceptinfect");
@@ -49,12 +48,6 @@ class Main {
 		for (model in Misc.roundModels) {
 			UtilLib.PrecacheModel(model);
 		}
-		#if server
-		// new deceptinfect.TestObject();
-		#end
-		#if client
-		deceptinfect.TestObject;
-		#end
 		SpawnSystem.generateSpawns();
 		UtilLib.PrecacheModel(Misc.infModel);
 		#if client
@@ -67,37 +60,7 @@ class Main {
 		GameManager.cleanup();
 		#end
 		MathLib.randomseed(Gmod.RealTime()); // FIXME
-		#if server
-		#end
-		// gmod.macros.GenEnts.genEnts();
-		// gmod.macros.GenEnts.genAutos();
-		trace("Deceptinfect server reinit!");
-		// GameLib.GetWorld().SetMaterial("color/white");
-		
-		#if server
-		for (ent in EntsLib.FindByClass("light")) {
-			(ent:Entity).Fire("TurnOn");
-		}
-		#end
-
-			
-		// 	// trace(Gmod.Material("1"))
-		// 	Gmod.Material(cast 1499);
-			
-		// }
-		#if server
-		// Gmod.collectgarbage("collect");
-		// Mri.DumpMemorySnapshot("gmdebugdump", "after", -1);
-		// Mri.DumpMemorySnapshotComparedFile("gmdebugdump", "Compared", -1, "gmdebugdump/luamemrefinfo-all-[]-[before].txt",
-		// 	"gmdebugdump/luamemrefinfo-all-[]-[after].txt");
-		#end
-		
+		trace('Deceptinfect ${#if server "server" #else "client" #end} reinit!');
 	}
-
-	#if client
-	// public static function derka() {
-	// 	Material()
-	// }
-	#end
 
 }

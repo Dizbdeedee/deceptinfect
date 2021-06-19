@@ -1,9 +1,69 @@
+* Active work
+
+** Cleanup most unused code. Enforce proper commit messages
+** Finish networking implementation using hxbit
+** Despaghettify Main entry points
+** Cleanup first level heirachy
+
+* Planned
+
+** Spread logic!
+** Spread gameplay impact on humans/infected
+
+** Finish weapon system
+
+** Finish game loop/logic. All win conditions must be performable
+*** TODO Kill nest
+*** DONE Kill/infect humans
+*** DONE Kill infected
+*** DONE Evacuate with infected
+*** DONE Evacuate no infected
+*** TODO No one evacuates?
+
+** GUIs (so it feels like an actual gamemode)
+** Do first playtest???
+** Cleanup grab system, fix bugs
+** Music
+** Upgrade system
+** Item system (what is it? where are they going to come from?)
+
+** Initial items
+*** Scanner
+*** Cure
+** Initial upgrades
+*** Pustle
+*** Trap
+*** Body bomb?
+*** Misc stat upgrades
+** Initial environmental features
+*** Barrel/puddle
+
+** Nest model
+
+* Sometime in the future
+
+** Message/info idea?
+** Sabotage system
+** >1 map supported
+** Map maker
+** Obligatory Karmaish system
+** More weapons
+** More upgrades
+** More environmental features
+** Customisation, admin menu, ect.
+
+* Recently done
+** Spread inital visuals (kind of ugly, lag but gets the job done)
+
+
+
+//old todos
 * Cleanup
 ** TODO GameInstance
 ** TODO Move classes out of ecswip
 * TODO Bugs [0%]
 ** TODO Error message end of round evac zone
-** TODO [#C] Zombie model screws up as statue
+** TODO Zombie model screws up as statue
 ** TODO Geiger carrys over after round
 ** TODO Walkthroughable fails sometimes
 
