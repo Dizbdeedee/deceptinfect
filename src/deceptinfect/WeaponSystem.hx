@@ -32,7 +32,9 @@ class WeaponSystem extends System {
     override function run_server() {
         switch (GameManager.state) { // replace with weapon menu
         case PLAYING(x):
-            if (x.totalGameTime > timevalues.get(currentStage)) { //mins, secs, conversion :)
+	    final timeElapsed = Gmod.CurTime() - x.gameStarted;
+	    final minsElapsed = timeElapsed / 60;
+            if (minsElapsed > timevalues.get(currentStage)) { //mins, secs, conversion :)
                 for (ent in entities) {
                     switch [ent.get(PlayerComponent),ent.get(AliveComponent)] {
                     case [Comp(c_ply),Comp(_)]:

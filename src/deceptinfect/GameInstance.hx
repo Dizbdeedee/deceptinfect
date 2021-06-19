@@ -18,6 +18,9 @@ class GameInstance {
         Maximum amount of time until everyone's infected
     **/
     public var totalGameTime(default,null):Int = 0;
+
+    public var gameStarted(default,null):Float = 0.0;
+
     public var baseInfection:Ref<Float> = 0.0;
 
 
@@ -62,6 +65,7 @@ class GameInstance {
         var time = GameValues.GAME_TIMER;
         var variance = GameValues.GAME_TIMER_VARIANCE;
         totalGameTime = time + MathLib.random(-variance,variance);
+	gameStarted = Gmod.CurTime();
         trace('');
         trace('Time until infection: $totalGameTime');
     }
