@@ -28,6 +28,7 @@ class ScannerSystem extends System {
 
 	public function final_scan(scan:DI_ID, target:DI_ID):ScanResult {
 		final c_reliab = get_reliability(scan, target);
+		//something does not seem right with the probabilities here. i'm pretty sure you can game the system, or game a similar system
 		return switch [c_reliab, target.get(InfectedComponent)] {
 			case [Some(r), Comp(_)]:
 				trace(r);
