@@ -1,9 +1,9 @@
 package deceptinfect.ents;
 
-import gmod.sent.SentBuild.EntFields;
+import gmod.helpers.sent.SentBuild.EntFields;
 import deceptinfect.infection.InfectionComponent;
 
-class Di_spitball extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
+class Di_spitball extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 
     public final properties:EntFields = {
         Base: "base_anim",

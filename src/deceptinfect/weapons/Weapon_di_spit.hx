@@ -1,11 +1,11 @@
 package deceptinfect.weapons;
 
 import deceptinfect.abilities.FormComponent;
-import gmod.swep.SwepBuild.SwepFields;
+import gmod.helpers.swep.SwepBuild.SwepFields;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.GEntCompat;
 
-class Weapon_di_spit extends gmod.swep.SwepBuild<gmod.swep.SWEP> {
+class Weapon_di_spit extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {
     
     final properties:SwepFields = {
         Primary: {

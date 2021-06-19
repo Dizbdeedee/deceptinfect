@@ -9,7 +9,8 @@ class ContaminationSystem extends System implements enumExtractor.EnumExtractor 
     override function run_server() {
         
         
-        for (vic in entities) {
+        for (x in 0...entities) {
+            final vic:DI_ID = x; 
             switch [vic.get(RadVictim),vic.get(ContaminationAccepter),vic.get(VirtualPosition)] {
             case [Comp(c_rv),Comp(c_contamAccept),Comp(c_vicpos)]:
                 for (y in 0...entities) {

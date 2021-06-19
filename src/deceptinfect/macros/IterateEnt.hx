@@ -127,7 +127,7 @@ class IterateEnt {
         try {
             final type = Context.typeExpr(get);
             //blah blah
-            trace(type);
+            // trace(type);
             Context.error("Unable to find type for get argument",pos);
             throw "OOgaa";
         } catch (e) {

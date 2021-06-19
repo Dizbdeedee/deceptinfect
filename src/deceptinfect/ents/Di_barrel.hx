@@ -1,9 +1,9 @@
 package deceptinfect.ents;
 
-import gmod.sent.SentBuild;
+import gmod.helpers.sent.SentBuild;
 using Safety;
 
-class Di_barrel extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
+class Di_barrel extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 
     
     public final properties:EntFields = {

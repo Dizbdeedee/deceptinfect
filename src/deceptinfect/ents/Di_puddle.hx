@@ -4,13 +4,13 @@ import deceptinfect.infection.components.GrabbableProp;
 import deceptinfect.infection.components.GrabAccepter;
 import deceptinfect.ecswip.PlayerComponent;
 import gmod.structs.MeshVertex;
-import gmod.sent.SentBuild.EntFields;
+import gmod.helpers.sent.SentBuild.EntFields;
 import gmod.gclass.IMesh;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.infection.InfectionComponent;
 
 @:keep
-class Di_puddle extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
+class Di_puddle extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 
     // static final material = Gmod.Material("nature/water_canals_cheap001_dx70").a;
 

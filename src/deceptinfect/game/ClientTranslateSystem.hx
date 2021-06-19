@@ -15,9 +15,9 @@ class Net_RemoveClientEnt implements hxbit.Serializable {
 
 class ClientTranslateSystem extends System {
 
-    static final net_removeClientEnt = new gmod.net.NET_Server<"di_removeclientent",{id : Int}>();
+    static final net_removeClientEnt = new gmod.helpers.net.NET_Server<"di_removeclientent",{id : Int}>();
 
-    static final net_removeClientEnt2 = new gmod.net.hxbit.NET_Server<"di_removeclientEnt",Net_RemoveClientEnt>();
+    static final net_removeClientEnt2 = new gmod.helpers.net.NET_Server.NET_Sv<Net_RemoveClientEnt>();
 
     // public final map
     #if client

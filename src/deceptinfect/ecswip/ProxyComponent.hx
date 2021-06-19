@@ -20,7 +20,7 @@ class ProxyComponent extends Component {
     
 }
 
-@:autoBuild(deceptinfect.macros.ProxyMacros.build())
+// @:autoBuild(deceptinfect.macros.ProxyMacros.build())
 class ComponentProxy extends Component {
 
     // public function proxyCreated(x:Component):Component {
