@@ -21,5 +21,6 @@
 --debug
 
 --macro gmod.helpers.macros.InitMacro.init()
+--cmd cp -r build/deceptinfect generated
 --cmd haxe -lib gmodhaxe --run gmod.helpers.macros.PostCompileMacro
 -main Main
