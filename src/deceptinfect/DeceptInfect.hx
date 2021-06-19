@@ -169,28 +169,6 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
                 getSystem(InfectionSystem).makeInfected(plyr.id);
             case KEY_M:
                 trace(ComponentManager.components.get(PlayerComponent));
-            case KEY_L:
-                var plyr:GPlayerCompat = PlayerLib.GetByID(1);
-                var ent:Entity = EntsLib.Create("prop_ragdoll");
-                ent.SetModel(plyr.GetModel());
-                ent.SetPos(plyr.GetPos());
-                ent.Spawn();
-                for (physNum in 0...ent.GetPhysicsObjectCount() - 1) {
-                    var physob = ent.GetPhysicsObjectNum(physNum);
-                    var result = plyr.GetBonePosition(ent.TranslatePhysBoneToBone(physNum));
-                    if (IsValid(physob)) {
-                        physob.SetPos(result.a);
-                        physob.SetAngles(result.b);
-                       
-                        physob.EnableMotion(false);
-                        physob.Sleep();
-                    }
-                }
-                ent.SetCollisionGroup(COLLISION_GROUP_WORLD);
-                ent.SetSolid(SOLID_NONE);
-                var plywep:Weapon = ply.GetActiveWeapon();
-                ent.SetNWString("showwep",plywep.GetModel());
-                
             default:
             //handle case of infection? use command strategy
         }
