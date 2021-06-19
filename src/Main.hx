@@ -1,3 +1,5 @@
+import deceptinfect.lib.Mri;
+import tink.CoreApi.Callback;
 import gmod.gclass.Entity;
 import lua.Lua;
 import deceptinfect.lib.BSP;
@@ -26,7 +28,8 @@ import deceptinfect.ents.Di_puddle;
 import deceptinfect.ents.Di_spitball;
 import deceptinfect.weapons.Weapon_di_spit;
 import deceptinfect.game.SpawnSystemNav;
-
+import deceptinfect.Spread;
+import deceptinfect.Darken;
 class Main {
 
 	
@@ -34,6 +37,12 @@ class Main {
 
 	public static function main() {
 		// nethost = new GmodNetHost();
+		#if server
+		FileLib.CreateDir("gmdebugdump");
+		// Gmod.collectgarbage("collect");
+		// Mri.DumpMemorySnapshot("gmdebugdump", "Before", -1);
+		#end
+		Spread;
 		deceptinfect.Trace.overridetrace();
 		new DeceptInfect();
 		#if client
@@ -51,7 +60,7 @@ class Main {
 			UtilLib.PrecacheModel(model);
 		}
 		#if server
-		new deceptinfect.TestObject();
+		// new deceptinfect.TestObject();
 		#end
 		#if client
 		deceptinfect.TestObject;
@@ -74,39 +83,7 @@ class Main {
 		// gmod.macros.GenEnts.genAutos();
 		trace("Deceptinfect server reinit!");
 		// GameLib.GetWorld().SetMaterial("color/white");
-		final eck = MRBsp.OpenBSP();
-		// trace(eck);
-		if (eck != false) {
-			final b:BSP = eck;
-			for (um in b.ReadLumpPlanes()) {
-				// um.
-				// trace(um.firstedge);
-			}
-			for (face in b.ReadLumpTexData()) {
-				
-				trace(face.nameStringTableID);	
-				// trace(face.texinfo);
-			}
-
-			for (str in b.ReadLumpTextDataStringData()) {
-				final mat = Gmod.Material(str);
-				trace(mat.a);
-				if (!mat.a.IsError()) {
-					if (mat.a.GetName().indexOf("tools") == -1
-						&& mat.a.GetName().indexOf("lights") == -1
-					&& mat.a.GetName().indexOf("water") == -1) {
-						mat.a.SetString("$basetexture","color/white");
-						mat.a.SetVector("$color", new Vector(0.005,0.005,0.005));
-					}
-					
-				}
-				
-				// if (Gmod.IsValid(mat.a)) {
-					
-				// }
-			}
-		}
-
+		
 		#if server
 		for (ent in EntsLib.FindByClass("light")) {
 			(ent:Entity).Fire("TurnOn");
@@ -118,8 +95,12 @@ class Main {
 		// 	Gmod.Material(cast 1499);
 			
 		// }
-		
-			
+		#if server
+		// Gmod.collectgarbage("collect");
+		// Mri.DumpMemorySnapshot("gmdebugdump", "after", -1);
+		// Mri.DumpMemorySnapshotComparedFile("gmdebugdump", "Compared", -1, "gmdebugdump/luamemrefinfo-all-[]-[before].txt",
+		// 	"gmdebugdump/luamemrefinfo-all-[]-[after].txt");
+		#end
 		
 	}
 

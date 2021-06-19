@@ -1,5 +1,6 @@
 package deceptinfect.client;
 
+import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.GameManager.GAME_STATE;
@@ -33,6 +34,7 @@ class Hud {
 		}
 	}
 
+	// @:gmodHook(GMHook.HUDPaint)
 	public static function paint() {
 		targetID();
 		infectionMeter();
@@ -44,13 +46,14 @@ class Hud {
 			return;
 		}
 		var player:Player = cast target;
-		SurfaceLib.SetTextPos(CSS(X, 0), CSS(Y, 250));
+		SurfaceLib.SetTextPos(CSS(X,900), CSS(Y,540));
 		SurfaceLib.SetFont("TargetID");
+		SurfaceLib.SetTextColor(255,255,255);
 		SurfaceLib.DrawText(player.Name());
 
 		switch (target.has_id()) {
 			case Some(_.get(InfectionComponent) => Comp(c_inf)):
-				SurfaceLib.SetTextPos(CSS(X, 0), CSS(Y, 300));
+				SurfaceLib.SetTextPos(CSS(X,900),CSS(Y,500));
 				SurfaceLib.SetFont("TargetID");
 				SurfaceLib.DrawText(StringLib.format("Infection: %6.2f%%", c_inf.getInfValue()));
 			default:

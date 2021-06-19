@@ -1,17 +1,17 @@
 package deceptinfect.ecswip;
 
 import hxbit.Serializable;
-import deceptinfect.game.ClientTranslateSystem.ServerID;
+// import deceptinfect.game.ClientTranslateSystem.ServerID;
 
 class NetProxy implements hxbit.Serializable {
-	@:s public var id:DI_ID;
+	// @:s public var id:DI_ID;
 
-	@:s public var componentID:Int;
+	// @:s public var componentID:Int;
 
-	public function new(id:DI_ID, compID:Int) {
-		this.id = id;
-		componentID = compID;
-	}
+	// public function new(id:DI_ID, compID:Int) {
+	// 	this.id = id;
+	// 	componentID = compID;
+	// }
 }
 
 class ProxyComponent extends Component {

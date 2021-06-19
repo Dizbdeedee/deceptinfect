@@ -7,7 +7,7 @@ import deceptinfect.ecswip.PlayerComponent;
 class LowHealthSystem extends System implements EnumExtractor {
 	#if server
 	override function run_server():Void {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			// PlayerComponentp
 			@as(ent.get(PlayerComponent) => Comp(c_ply)) {

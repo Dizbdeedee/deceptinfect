@@ -1,6 +1,7 @@
 package deceptinfect.statuses;
 
 import deceptinfect.ecswip.PlayerComponent;
+import deceptinfect.macros.CompileTime.C_square;
 
 using deceptinfect.util.PlayerExt;
 
@@ -11,12 +12,12 @@ class WalkthroughSystem extends System {
 	var runtime = 0;
 
 	override function run_server() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(Walkthroughable), ent.get(PlayerComponent)] {
 				case [Comp(_), Comp(c_ply)]:
 					var tooclose = false;
-					for (x in 0...entities) {
+					for (x in 0...ComponentManager.entities) {
 						final otherEnt:DI_ID = x;
 						if (otherEnt == ent) {
 							continue;

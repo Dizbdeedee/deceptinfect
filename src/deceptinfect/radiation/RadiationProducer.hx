@@ -5,6 +5,8 @@ import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.ecswip.Component;
 import deceptinfect.radiation.RadiationTypes;
 
+
+
 class RadiationProducer extends Component {
 	public var state:RadiationState = ENABLED;
 	public var maxrate:Float;

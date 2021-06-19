@@ -1,5 +1,6 @@
 package deceptinfect.radiation;
 
+import deceptinfect.ecswip.SystemManager;
 import deceptinfect.macros.IterateEnt2;
 import deceptinfect.ecswip.VirtualPosition;
 
@@ -45,14 +46,14 @@ class ContaminationSystem extends System {
 							trace("Rolled successfully");
 							var rad = switch (c_contamProduce.nextoptions) {
 								case TYPE(radtype):
-									getSystem(RadSourceSystem).radSourceFromType(radtype, vic, c_rs.base);
+									SystemManager.getSystem(RadSourceSystem).radSourceFromType(radtype, vic, c_rs.base);
 								case MY_TYPE:
-									getSystem(RadSourceSystem).radSourceFromType(c_rs.type, vic, c_rs.base);
+									SystemManager.getSystem(RadSourceSystem).radSourceFromType(c_rs.type, vic, c_rs.base);
 								case OVERRIDE_LIFETIME(t):
-									var rad = getSystem(RadSourceSystem).radSourceFromType(c_rs.type, vic, c_rs.base);
+									var rad = SystemManager.getSystem(RadSourceSystem).radSourceFromType(c_rs.type, vic, c_rs.base);
 									var c_rs = rad.get_sure(RadSource);
 									c_rs.lifetime = t;
-									getSystem(RadSourceSystem).refreshTime(c_rs);
+									SystemManager.getSystem(RadSourceSystem).refreshTime(c_rs);
 									rad;
 							}
 						}

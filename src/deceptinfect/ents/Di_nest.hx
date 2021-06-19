@@ -32,7 +32,7 @@ class Di_nest extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 
 	override function Think():Bool {
 		var c_nest = id.get_sure(NestComponent);
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(PlayerComponent), ent.get(InfectedComponent), id.get(NestComponent)] {
 				case [Comp(ply), _, Comp({nestState: VISIBLE})]:

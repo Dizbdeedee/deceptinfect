@@ -18,7 +18,7 @@ class ClientOverrides extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> {
 
 	override function NotifyShouldTransmit(ent:Entity, shouldtransmit:Bool) {
 		PVS.pvs.set(ent.EntIndex(), shouldtransmit);
-		getSystem(RagdollSystem).pvsChange(ent, shouldtransmit);
+		SystemManager.getSystem(RagdollSystem).pvsChange(ent, shouldtransmit);
 	}
 
 	override function PlayerButtonDown(ply:Player, button:BUTTON_CODE) {

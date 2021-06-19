@@ -51,7 +51,7 @@ class WinSystem extends System {
 
 		var aliveNests = false;
 		var deadNests = false;
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch ent.get(NestComponent) {
 				case Comp(c_nest):

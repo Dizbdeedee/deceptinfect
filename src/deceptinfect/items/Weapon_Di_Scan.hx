@@ -1,6 +1,7 @@
 package deceptinfect.items;
 
 import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.SystemManager.getSystem;
 
 using deceptinfect.util.EntityExt;
 

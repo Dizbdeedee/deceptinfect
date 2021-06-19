@@ -6,9 +6,8 @@ package deceptinfect.ecswip;
 @:autoBuild(deceptinfect.macros.ComponentMacro.build())
 @:keepSub
 class Component {
-	public function new() {}
-
-	@:s var serverID:DI_ID;
+	public function new() {
+	}
 
 	function onRemove() {}
 }

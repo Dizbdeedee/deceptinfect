@@ -1,12 +1,13 @@
 package deceptinfect.ents;
 
+import deceptinfect.ecswip.SystemManager;
 import deceptinfect.game.SpawnSystem.Spawn;
 import gmod.helpers.sent.SentBuild;
 import gmod.helpers.sent.SentBuild.EntFields;
 import deceptinfect.game.components.BatterySource;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.game.BatterySystem;
-import deceptinfect.ecswip.SystemManager.getSystem;
+
 
 @:keep
 class Di_battery extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
@@ -59,7 +60,7 @@ class Di_battery extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 		}
 		switch (entity.has_id()) {
 			case Some(otherID):
-				var result = getSystem(BatterySystem).addBattery(id, otherID);
+				var result = SystemManager.getSystem(BatterySystem).addBattery(id, otherID);
 				if (result) {
 					added = true;
 					trace("Battery added :)");

@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.ecswip.SystemManager;
 import deceptinfect.util.PrintTimer;
 import deceptinfect.util.Util;
 import gmod.helpers.net.NET_Server;
@@ -46,7 +47,7 @@ class EvacSystem extends System {
 	var flaresSpawned = false;
 
 	override function run_server() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(EvacZone), GameManager.state] {
 				case [Comp(c_evac), PLAYING(_)]:
@@ -101,7 +102,7 @@ class EvacSystem extends System {
 		for (id in evac.in_zone.keys()) {
 			switch ([id.get(InfectedComponent), id.get(PlayerComponent)]) {
 				case [Comp(_), Comp(_)]:
-					getSystem(WinSystem).winTrig.trigger(WIN_INF);
+					SystemManager.getSystem(WinSystem).winTrig.trigger(WIN_INF);
 					return;
 				case [NONE, Comp(_)]:
 					humanEscape = true;
@@ -109,9 +110,9 @@ class EvacSystem extends System {
 			}
 		}
 		if (humanEscape) {
-			getSystem(WinSystem).winTrig.trigger(WIN_HUMAN);
+			SystemManager.getSystem(WinSystem).winTrig.trigger(WIN_HUMAN);
 		} else {
-			getSystem(WinSystem).winTrig.trigger(DRAW);
+			SystemManager.getSystem(WinSystem).winTrig.trigger(DRAW);
 		}
 	}
 

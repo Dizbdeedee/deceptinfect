@@ -33,12 +33,12 @@ class ComponentMacro {
 				ret: null
 			}),
 			pos: Context.currentPos(),
-			meta: [
-				{
-					name: ":keep",
-					pos: Context.currentPos()
-				}
-			]
+			// meta: [
+			// 	{
+			// 		name: ":keep",
+			// 		pos: Context.currentPos()
+			// 	}
+			// ]
 		});
 		return fields;
 	}

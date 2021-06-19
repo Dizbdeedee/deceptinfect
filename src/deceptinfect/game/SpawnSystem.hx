@@ -1,6 +1,7 @@
 package deceptinfect.game;
 
 import deceptinfect.ecswip.VirtualPosition;
+import deceptinfect.macros.CompileTime.C_square;
 
 class SpawnSystem extends System {
 	public static final obj = new SpawnPointTable();
@@ -17,7 +18,7 @@ class SpawnSystem extends System {
 	}
 
 	override function run_server() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(Spawned), ent.get(VirtualPosition)] {
 				case [Comp(c_spawn), Comp(c_pos)]:

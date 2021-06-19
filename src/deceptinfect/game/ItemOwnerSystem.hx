@@ -10,15 +10,15 @@ import deceptinfect.ecswip.VirtualPosition;
 
 using deceptinfect.DistSquared;
 
-typedef Net_ItemReveal = {
-	// itemType ect.
-	id:ServerID,
-	pos:Vector,
-	model:String
-}
+// typedef Net_ItemReveal = {
+// 	// itemType ect.
+// 	id:ServerID,
+// 	pos:Vector,
+// 	model:String
+// }
 
 class ItemOwnerSystem extends System {
-	public static final net_itemReveal = new gmod.helpers.net.NET_Server<"di_itemreveal", Net_ItemReveal>();
+	// public static final net_itemReveal = new gmod.helpers.net.NET_Server<"di_itemreveal", Net_ItemReveal>();
 
 	#if client
 	override function init_client() {
@@ -26,7 +26,7 @@ class ItemOwnerSystem extends System {
 		// deceptinfect.game.components.ItemReveal.proxyInit();
 	}
 
-	static function drawHalos() {
+	function drawHalos() {
 		final table = lua.Table.create();
 		var x = 0;
 		deceptinfect.macros.ForEntities.forEnts(switch (ent.get(ItemReveal)) {

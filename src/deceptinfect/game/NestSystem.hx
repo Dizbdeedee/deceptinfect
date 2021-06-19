@@ -6,7 +6,7 @@ import deceptinfect.infection.systems.InfectionSystem;
 class NestSystem extends System {
 	#if server
 	override function run_server() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(NestComponent), ent.get(RadiationProducer)] {
 				case [Comp(c_nest), Comp(c_rad)]:
@@ -22,7 +22,7 @@ class NestSystem extends System {
 	}
 
 	public function revealNests() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch ent.get(NestComponent) {
 				case Comp(c_nest):
@@ -33,7 +33,7 @@ class NestSystem extends System {
 	}
 
 	public function hideNests() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch ent.get(NestComponent) {
 				case Comp(c_nest):

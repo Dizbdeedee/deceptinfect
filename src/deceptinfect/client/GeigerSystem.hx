@@ -57,7 +57,7 @@ class GeigerSystem extends System {
 
 	#if server
 	override function run_server() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final plyr:DI_ID = x;
 			switch [plyr.get(InfectionComponent), plyr.get(PlayerComponent)] {
 				case [Comp(inf), Comp(_.player => player)]:

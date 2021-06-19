@@ -3,6 +3,8 @@ package deceptinfect.ents;
 import deceptinfect.game.EvacSystem;
 import gmod.helpers.sent.SentBuild;
 import deceptinfect.game.components.FlareComponent;
+import deceptinfect.ecswip.SystemManager;
+
 
 class Di_flare extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	final properties:EntFields = {
@@ -32,7 +34,7 @@ class Di_flare extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	override function Touch(entity:GEntCompat) {
 		switch (entity.has_id()) {
 			case Some(ent_id):
-				getSystem(EvacSystem).addFlare(id, ent_id);
+				SystemManager.getSystem(EvacSystem).addFlare(id, ent_id);
 			default:
 		}
 	}

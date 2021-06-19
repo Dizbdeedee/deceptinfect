@@ -16,10 +16,10 @@ import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.infection.systems.RateSystem;
 import deceptinfect.ecswip.Family;
 using gmod.helpers.LuaArray;
-class Famile<A, B, C, D> {}
+// class Famile<A, B, C, D> {}
 
 // finish?
-var derka:Famile<RadiationProducer, VirtualPosition, RadSource, RadSource>;
+// var derka:Famile<RadiationProducer, VirtualPosition, RadSource, RadSource>;
 
 class RadiationSystem extends System {
 	static var nextRadiationID:RadiationID = new RadiationID();

@@ -48,7 +48,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 
 	#if server
 	override function CreateEntityRagdoll(owner:Entity, ragdoll:Entity) {
-		getSystem(RagdollSystem).playerRagdoll(owner, ragdoll);
+		SystemManager.getSystem(RagdollSystem).playerRagdoll(owner, ragdoll);
 	}
 	#end
 
@@ -171,7 +171,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 				FormSystem.attemptChangeForm(ply.id);
 			case KEY_SEMICOLON:
 				var plyr:GPlayerCompat = PlayerLib.GetByID(1);
-				getSystem(InfectionSystem).makeInfected(plyr.id);
+				SystemManager.getSystem(InfectionSystem).makeInfected(plyr.id);
 			case KEY_M:
 			// trace(ComponentManager.components.get(PlayerComponent));
 			default:

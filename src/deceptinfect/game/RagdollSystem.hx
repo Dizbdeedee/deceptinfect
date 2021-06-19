@@ -17,6 +17,7 @@ import deceptinfect.infection.InfectedComponent;
 import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.game.components.RagInfo;
+// import deceptinfect.ecswip.ComponentManager.entities;
 
 typedef ND_Statue = {
 	playerpos:Vector,
@@ -182,7 +183,7 @@ class RagdollSystem extends System {
 				c_stat.weapon = cast ent;
 			}
 		}
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(GEntityComponent), ent.get(ClientWeaponStatue)] {
 				case [Comp(_.entity => gent), Comp(c_stat)]:
@@ -199,11 +200,11 @@ class RagdollSystem extends System {
 	override function init_server() {
 		// HookLib.Add(GMHook.CreateEntityRagdoll,"di_ragdoll",playerRagdoll);
 		GameManager.stateChange.handle(stateChange);
-		getSystem(SlowMotionSystem).slowMotionEnd.handle(endSlowMotion);
+		SystemManager.getSystem(SlowMotionSystem).slowMotionEnd.handle(endSlowMotion);
 	}
 
 	function endSlowMotion(x:Noise) {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(Ragdoll), ent.get(Statue), ent.get(GEntityComponent)] {
 				case [Comp(_), Comp(_), Comp(_.entity => gent)]:
@@ -229,7 +230,7 @@ class RagdollSystem extends System {
 	function stateChange(newstate:GAME_STATE) {
 		switch [GameManager.state, newstate] {
 			case [_, ENDING(_, _)]:
-				for (x in 0...entities) {
+				for (x in 0...ComponentManager.entities) {
 					final ent:DI_ID = x;
 					switch [ent.get(PlayerComponent), ent.get(InfectedComponent), ent.get(AliveComponent)] {
 						case [Comp(c_ply), Comp(_), Comp(_)]:
@@ -246,7 +247,7 @@ class RagdollSystem extends System {
 				trace("wrote");
 				writeStatues();
 			case [WAIT, _]:
-				for (x in 0...entities) {
+				for (x in 0...ComponentManager.entities) {
 					final ent:DI_ID = x;
 					switch [ent.get(Statue), ent.get(GEntityComponent)] {
 						case [Comp(_), Comp(c_gent)]:
@@ -260,7 +261,7 @@ class RagdollSystem extends System {
 	}
 
 	override function run_server() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(GEntityComponent), ent.get(Ragdoll)] {
 				case [Comp(c_ent), Comp(c_rag)]:
@@ -370,7 +371,7 @@ class RagdollSystem extends System {
 	function writeStatues() {
 		var tbl:JsonStatues = [];
 
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(Statue), ent.get(GEntityComponent)] {
 				case [Comp(_), Comp(_.entity => gent)]:

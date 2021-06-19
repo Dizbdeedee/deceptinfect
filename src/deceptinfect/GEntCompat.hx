@@ -24,36 +24,6 @@ abstract GEntCompat(Entity) from Entity to Entity {
 		}
 	}
 
-	// public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
-	//     return id.get(x);
-	// }
-	// public function infectedPlayer():Option<PlayerComponent> {
-	//     return switch(has_id()) {
-	//         case Some(id):
-	//             switch [id.get(PlayerComponent),id.get(InfectedComponent)] {
-	//                 case [Comp(p),Comp(_)]:
-	//                     Some(p);
-	//                 default:
-	//                     None;
-	//             };
-	//         default:
-	//             None;
-	//     };
-	// }
-	// public inline function isPlayer():Option<PlayerComponent> {
-	//     return switch(has_id()) {
-	//         case Some(id):
-	//             switch id.get(PlayerComponent) {
-	//                 case Comp(p):
-	//                     Some(p);
-	//                 default:
-	//                     None;
-	//             }
-	//         default:
-	//             None;
-	//     }
-	// }
-
 	public inline function new(x:Entity) {
 		this = x;
 		untyped x.id = ComponentManager.addGEnt(this);

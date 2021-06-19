@@ -2,6 +2,7 @@ package deceptinfect.game;
 
 import deceptinfect.game.WinSystem.Win;
 import deceptinfect.GameManager.GAME_STATE;
+import deceptinfect.ecswip.SystemManager;
 
 class SlowMotionSystem extends System {
 	#if server
@@ -24,7 +25,7 @@ class SlowMotionSystem extends System {
 
 	override function init_server() {
 		GameManager.stateChange.handle(stateChange);
-		getSystem(WinSystem).newWinner.handle(winChange);
+		SystemManager.getSystem(WinSystem).newWinner.handle(winChange);
 	}
 
 	function winChange(x:Win) {

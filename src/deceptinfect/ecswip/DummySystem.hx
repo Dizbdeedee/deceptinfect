@@ -13,8 +13,8 @@ class DummySystem extends System {
 		//     trace(enb);
 		// }
 
-		for (i in 0...entities) {
-			for (p in 1...entities) {
+		for (i in 0...ComponentManager.entities) {
+			for (p in 1...ComponentManager.entities) {
 				i + p;
 			}
 		}

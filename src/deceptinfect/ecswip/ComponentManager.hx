@@ -6,6 +6,7 @@ import deceptinfect.macros.ClassToID;
 import haxe.ds.ObjectMap;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.ecswip.Component;
+import deceptinfect.ecswip.SystemManager.getSystem2;
 
 
 typedef ComponentArray = Array<ComponentState<Component>>;
@@ -244,7 +245,7 @@ class ComponentManager {
 		#if server
 		switch (getSystem2(ClientTranslateSystem)) {
 			case Some(clientTranslate):
-				clientTranslate.removeEntity(x);
+				// clientTranslate.removeEntity(x);
 			default:
 		}
 		#end

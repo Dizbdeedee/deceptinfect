@@ -31,7 +31,7 @@ class InfectionLookSystem extends System {
 
 	#if server
 	override function run_server() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(InfectionLookInfo), ent.get(PlayerComponent)] {
 				case [Comp(c_look), Comp({player: ply})]:

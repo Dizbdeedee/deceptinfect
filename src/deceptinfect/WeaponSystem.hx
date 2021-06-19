@@ -28,7 +28,7 @@ class WeaponSystem extends System {
 				final timeElapsed = Gmod.CurTime() - x.gameStarted;
 				final minsElapsed = timeElapsed / 60;
 				if (minsElapsed > timevalues.get(currentStage)) { // mins, secs, conversion :)
-					for (x in 0...entities) {
+					for (x in 0...ComponentManager.entities) {
 						final ent:DI_ID = x;
 						switch [ent.get(PlayerComponent), ent.get(AliveComponent)] {
 							case [Comp(c_ply), Comp(_)]:
@@ -43,7 +43,7 @@ class WeaponSystem extends System {
 	}
 
 	public function giveInitalWeapons() {
-		for (ent in 0...entities) {
+		for (ent in 0...ComponentManager.entities) {
 			final ent:DI_ID = ent;
 			switch [ent.get(PlayerComponent), ent.get(AliveComponent)] {
 				case [Comp(c_ply), Comp(_)]:

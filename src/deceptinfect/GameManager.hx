@@ -183,7 +183,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 	@:expose("cleanup")
 	public static function cleanup() {
 		net_cleanup.broadcast({});
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(CleanupEnt), ent.get(GEntityComponent)] {
 				case [Comp(_), Comp(c_gent)]:
@@ -216,7 +216,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 	}
 
 	static function hookWin() {
-		getSystem(WinSystem).newWinner.handle(newWin);
+		SystemManager.getSystem(WinSystem).newWinner.handle(newWin);
 	}
 
 	static function newWin(x:Win) {
@@ -246,7 +246,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 		c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
 		// trace(c_accept.grabState);
 		// var rad = ComponentManager.addEntity();
-		var rad = getSystem(RadSourceSystem).radSourceFromType(INF, x);
+		var rad = SystemManager.getSystem(RadSourceSystem).radSourceFromType(INF, x);
 		var rv = new RadVictim();
 		// x.add_com
 		// rad.add_component(rtn.c_radproduce);
@@ -265,7 +265,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 		for (ind => player in PlayerManager.getPlayers()) {
 			initPlayer(player);
 			if (ind == choose) {
-				getSystem(InfectionSystem).makeInfected(player.id);
+				SystemManager.getSystem(InfectionSystem).makeInfected(player.id);
 			}
 			// player.StripWeapons();
 			player.Give(Misc.startingWeapons[0]);
@@ -296,7 +296,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 
 	#if client
 	static function cleanup() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch ent.get(deceptinfect.game.components.KeepRestart) {
 				case Comp(_):

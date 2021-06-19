@@ -1,5 +1,6 @@
 package deceptinfect.ents;
 
+import deceptinfect.ecswip.SystemManager;
 import deceptinfect.game.components.EvacZone;
 import deceptinfect.game.EvacSystem;
 import gmod.helpers.sent.SentBuild;
@@ -29,7 +30,7 @@ class Di_evac_zone extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_BRUSH> {
 		switch (ent.has_id()) {
 			case Some(ent_id):
 				if (id.has_comp(EvacZone)) {
-					getSystem(EvacSystem).leave(ent_id, id.get_sure(EvacZone));
+					SystemManager.getSystem(EvacSystem).leave(ent_id, id.get_sure(EvacZone));
 				}
 			default:
 		}
@@ -39,7 +40,7 @@ class Di_evac_zone extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_BRUSH> {
 		switch (ent.has_id()) {
 			case Some(ent_id):
 				if (id.has_comp(EvacZone)) {
-					getSystem(EvacSystem).leave(ent_id, id.get_sure(EvacZone));
+					SystemManager.getSystem(EvacSystem).leave(ent_id, id.get_sure(EvacZone));
 				}
 			default:
 		}

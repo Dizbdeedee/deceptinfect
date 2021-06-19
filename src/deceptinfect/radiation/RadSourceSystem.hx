@@ -10,7 +10,7 @@ import deceptinfect.statuses.Contaminated;
 class RadSourceSystem extends System implements EnumExtractor {
 	#if server
 	override function run_server() {
-		for (x in 0...entities) {
+		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch [ent.get(RadSource)] {
 				case [Comp(c_rs)]:
