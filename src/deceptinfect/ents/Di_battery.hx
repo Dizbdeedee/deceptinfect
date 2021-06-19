@@ -1,15 +1,15 @@
 package deceptinfect.ents;
 
 import deceptinfect.game.SpawnSystem.Spawn;
-import gmod.sent.SentBuild;
-import gmod.sent.SentBuild.EntFields;
+import gmod.helpers.sent.SentBuild;
+import gmod.helpers.sent.SentBuild.EntFields;
 import deceptinfect.game.components.BatterySource;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.game.BatterySystem;
 import deceptinfect.ecswip.SystemManager.getSystem;
 
 @:keep
-class Di_battery extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM>  {
+class Di_battery extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM>  {
 
     public final properties:EntFields = {
         Base: "base_anim",

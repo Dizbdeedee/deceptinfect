@@ -2,7 +2,7 @@ package deceptinfect.game;
 
 import deceptinfect.util.PrintTimer;
 import deceptinfect.util.Util;
-import gmod.net.NET_Server;
+import gmod.helpers.net.NET_Server;
 import deceptinfect.game.components.EvacZone;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ents.Di_entities;

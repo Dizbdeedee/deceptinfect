@@ -3,10 +3,9 @@ package deceptinfect;
 // import deceptinfect.ecswip.RadiationManager;
 import deceptinfect.ents.Di_entities;
 import deceptinfect.ents.Di_charger;
-import gmod.EntityClass.BaseEntities;
+import gmod.stringtypes.EntityClass.BaseEntities;
 import deceptinfect.game.SpawnSystem;
 import deceptinfect.infection.systems.InfectionSystem;
-using gmod.PairTools;
 using tink.CoreApi;
 /**
     Contains instance of running game. Active during waiting for players.

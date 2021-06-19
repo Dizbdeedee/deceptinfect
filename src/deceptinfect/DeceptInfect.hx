@@ -24,22 +24,20 @@ import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.enums.BUTTON_CODE;
 import deceptinfect.ecswip.ComponentManager;
 
-import gmod.Hook;
+import gmod.stringtypes.Hook;
 import lua.Lua;
 import tink.core.Annex;
-import gmod.HaxeMultiReturn;
+import gmod.helpers.HaxeMultiReturn;
 import gmod.libs.MathLib;
-import gmod.types.Vector;
 import gmod.libs.EntsLib;
 import gmod.gclass.Player;
-using gmod.PairTools;
-using gmod.TableTools;
+
 using deceptinfect.util.PlayerExt;
 import deceptinfect.ecswip.SignalStorage;
 
 
 @:keep
-class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements deceptinfect.macros.SpamTracker.Spam {
+class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> implements deceptinfect.macros.SpamTracker.Spam {
 
     #if client
     override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
@@ -56,16 +54,16 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
     var lastcrc:Int = 0;
 
     override function Think() {
-        var nethost = Main.nethost;
+        // var nethost = Main.nethost;
         SystemManager.runAllSystems();
         #if server
         GameManager.think();
         checkPerformance();
         #end
-        for (c in nethost.clients) {
-            c.sync();
-        }
-        nethost.flush();
+        // for (c in nethost.clients) {
+        //     c.sync();
+        // }
+        // nethost.flush();
     }
 
     var timestart = 0;

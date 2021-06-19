@@ -1,11 +1,14 @@
 package deceptinfect.ecswip;
 
+
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SignalStorage;
 import deceptinfect.infection.components.HiddenHealthComponent;
 import deceptinfect.infection.components.DamagePenaltyHidden;
+
+using deceptinfect.macros.IterateEnt;
 class HiddenHealthSystem extends GeigerSystem {
     #if server
 
@@ -19,8 +22,22 @@ class HiddenHealthSystem extends GeigerSystem {
         final victim = data.vicID;
         var g_attacker:GEntCompat = data.dmg.GetAttacker();
         if (!g_attacker.IsPlayer()) return;
-        switch [victim.get(HiddenHealthComponent),victim.get(GEntityComponent),g_attacker.get(DamagePenaltyHidden)] {
-        case [Comp(c_hidHealth),Comp(g_victim),Comp(c_dmgpnlty)]:
+        // IterateEnt.iter([ent.get(HiddenHealthComponent),ent.get(GEntityComponent),ent.get(DamagePenaltyHidden)],
+        // [c_hidHealth,g_victim,c_dmgpnlty],
+        // (ent) -> {
+        //     trace(ent);
+            
+        // });
+        IterateEnt.iterGet([HiddenHealthComponent,GEntityComponent,DamagePenaltyHidden],
+        [c_hidHealth,g_victim,c_dmgpnlty],
+        (gaywayd) -> {
+            trace(c_dmgpnlty.damagepenalty);
+            
+            
+        });
+        victim.m_getAll([HiddenHealthComponent,GEntityComponent,g_attacker.get(DamagePenaltyHidden)],
+        [c_hidHealth,g_victim,c_dmgpnlty],
+        () -> {
             var damageVal = data.dmg.GetDamage();
             var health = g_victim.entity.Health();
             var dmgInfo = data.dmg;
@@ -36,8 +53,9 @@ class HiddenHealthSystem extends GeigerSystem {
                trace('Adding $damageVal to ${damageVal * (1 - c_dmgpnlty.damagepenalty)}');
                c_hidHealth.extraHealth += damageVal * (1 - c_dmgpnlty.damagepenalty);
             }
-        default:
-        }
+
+        });
+        trace("SEPERATION");
     }
 
     #end

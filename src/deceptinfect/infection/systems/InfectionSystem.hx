@@ -14,9 +14,9 @@ typedef ND_Infection = {
 @:allow(InfectionComponent)
 class InfectionSystem extends System {
 
-    static var net_inf = new gmod.net.NET_Server<"di_infection",ND_Infection>();
+    static var net_inf = new gmod.helpers.net.NET_Server<"di_infection",ND_Infection>();
 
-    static var net_infected = new gmod.net.NET_Server<"di_infected",{}>();
+    static var net_infected = new gmod.helpers.net.NET_Server<"di_infected",{}>();
 
     #if client
     override function init_client() {

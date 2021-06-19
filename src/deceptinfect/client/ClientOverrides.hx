@@ -9,7 +9,7 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 #if client
-class ClientOverrides extends gmod.gamemode.GMBuild<gmod.gamemode.GM> {
+class ClientOverrides extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> {
 
     override function HUDPaint() {
         Hud.paint();

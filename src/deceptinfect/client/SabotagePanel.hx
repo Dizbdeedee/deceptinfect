@@ -1,10 +1,10 @@
 package deceptinfect.client;
 
-import gmod.HaxeGen;
+import gmod.helpers.GLinked;
 import gmod.panels.DFrame;
-import gmod.cpanel.PanelBuild;
+import gmod.helpers.panel.PanelBuild;
 
-typedef GSabotagePanel = HaxeGen<DFrame,SabotagePanel>;
+typedef GSabotagePanel = GLinked<DFrame,SabotagePanel>;
 @:expose("sabopanel")
 class SabotagePanel extends PanelBuild<gmod.panels.DFrame> {
     
@@ -42,7 +42,7 @@ class SaboPanel4 extends PanelBuild<gmod.panels.DFrame> {
     }
 }
 
-typedef GSaboPanel2 = HaxeGen<gmod.panels.DFrame,SaboPanel2>;
+typedef GSaboPanel2 = GLinked<gmod.panels.DFrame,SaboPanel2>;
 @:expose("sabopanel2")
 class SaboPanel2 extends SabotagePanel {
 

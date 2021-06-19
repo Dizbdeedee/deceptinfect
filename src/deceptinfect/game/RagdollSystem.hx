@@ -13,7 +13,7 @@ import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ents.Di_entities;
 import deceptinfect.GEntCompat;
 import deceptinfect.infection.InfectedComponent;
-import gmod.Hook.GMHook;
+import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.game.components.RagInfo;
 
@@ -56,11 +56,11 @@ typedef ND_RagInfo = {
 
 class RagdollSystem extends System {
 
-    static var statue = new gmod.net.NET_Server<"statue",ND_Statue>(); //TODO remove
+    static var statue = new gmod.helpers.net.NET_Server<"statue",ND_Statue>(); //TODO remove
 
-    static var statueinfo = new gmod.net.NET_Server<"di_statinfo",ND_StatInfo>();
+    static var statueinfo = new gmod.helpers.net.NET_Server<"di_statinfo",ND_StatInfo>();
 
-    static var raginfo = new gmod.net.NET_Server<"di_raginfo",ND_RagInfo>();
+    static var raginfo = new gmod.helpers.net.NET_Server<"di_raginfo",ND_RagInfo>();
     #if client
     static var ranonce = false;
     

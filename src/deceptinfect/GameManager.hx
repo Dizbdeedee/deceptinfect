@@ -46,9 +46,9 @@ class GameManager implements enumExtractor.EnumExtractor {
     public static var stateChange:Signal<GAME_STATE>;
 
     static var stateTrig:SignalTrigger<GAME_STATE> = new SignalTrigger();
-    public static final net_gamestate = new gmod.net.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL,time : Float}>();
+    public static final net_gamestate = new gmod.helpers.net.NET_Server<"gamestate",{state : Net_GAME_STATE_VAL,time : Float}>();
 
-    static final net_cleanup = new gmod.net.NET_Server<"di_cleanup",{}>();
+    static final net_cleanup = new gmod.helpers.net.NET_Server<"di_cleanup",{}>();
     
     #if server
     

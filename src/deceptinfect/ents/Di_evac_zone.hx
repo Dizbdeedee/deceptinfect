@@ -2,9 +2,9 @@ package deceptinfect.ents;
 
 import deceptinfect.game.components.EvacZone;
 import deceptinfect.game.EvacSystem;
-import gmod.sent.SentBuild;
+import gmod.helpers.sent.SentBuild;
 
-class Di_evac_zone extends gmod.sent.SentBuild<gmod.sent.ENT_BRUSH> {
+class Di_evac_zone extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_BRUSH> {
     final properties:EntFields = {
         Base : "base_brush"
     }

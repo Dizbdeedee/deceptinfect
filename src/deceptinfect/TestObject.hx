@@ -10,7 +10,7 @@ class TestObject implements NetworkSerializable {
     @:keep
     public static var inst:TestObject;
 
-    @:s public var testplayer:gmod.hxbit.NPlayer;
+    // @:s public var testplayer:gmod.hxbit.NPlayer;
 
     @:s public var testString:String;
 

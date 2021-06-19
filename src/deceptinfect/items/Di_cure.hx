@@ -5,7 +5,7 @@ import deceptinfect.infection.InfVunerability;
 import deceptinfect.infection.systems.InfectionSystem;
 import deceptinfect.abilities.FormComponent;
 import deceptinfect.infection.InfectionComponent;
-import gmod.swep.SwepBuild;
+import gmod.helpers.swep.SwepBuild;
 
 class Di_cure extends SwepBuild<gmod.swep.SWEP> {
 

@@ -2,7 +2,7 @@ package deceptinfect.ecswip;
 
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.util.Cooldown;
-import gmod.Hook;
+import gmod.stringtypes.Hook;
 import deceptinfect.ecswip.SignalStorage.DamageEvent;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.client.PVS;
@@ -23,9 +23,9 @@ typedef Net_GrabEnd = {
 }
 
 class GrabSystem extends System {
-    static var net_grabupdate = new gmod.net.NET_Server<"grabupdate",Net_GrabPos>();
+    static var net_grabupdate = new gmod.helpers.net.NET_Server<"grabupdate",Net_GrabPos>();
 
-    static var net_grabend = new gmod.net.NET_Server<"grabend",{index : Int}>();
+    static var net_grabend = new gmod.helpers.net.NET_Server<"grabend",{index : Int}>();
     
     #if client
     static var hycord = Gmod.Material("cable/new_cable_lit").a;

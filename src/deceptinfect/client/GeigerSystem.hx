@@ -8,7 +8,7 @@ import deceptinfect.ecswip.System;
 @:expose("geiger")
 class GeigerSystem extends System {
     
-    public static var net_geiger(default,never) = new gmod.net.NET_Server<"geiger",{geiger : Float}>();
+    public static var net_geiger(default,never) = new gmod.helpers.net.NET_Server<"geiger",{geiger : Float}>();
     #if client
     
     public static var geiger:Float = 0.0;

@@ -1,10 +1,10 @@
 package deceptinfect.ents;
 
 import deceptinfect.game.EvacSystem;
-import gmod.sent.SentBuild;
+import gmod.helpers.sent.SentBuild;
 import deceptinfect.game.components.FlareComponent;
 
-class Di_flare extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
+class Di_flare extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 
     final properties:EntFields = {
         Base: "base_entity"

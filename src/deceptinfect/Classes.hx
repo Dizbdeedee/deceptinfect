@@ -1,6 +1,6 @@
 package deceptinfect;
 
-import gmod.EntityClass;
+import gmod.stringtypes.EntityClass;
 
 
 enum abstract Weapons(EntityClass<Weapon>) to String to EntityClass<Weapon> {

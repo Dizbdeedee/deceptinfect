@@ -1,9 +1,8 @@
-import gmod.EntityClass;
-import gmod.hxbit.GmodNetHost;
+import gmod.stringtypes.EntityClass;
 import gmod.Gmod;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.game.SpawnSystem;
-import gmod.types.Vector;
+import gmod.helpers.types.Vector;
 import gmod.libs.*;
 import deceptinfect.ecswip.*;
 import deceptinfect.ents.*;
@@ -13,15 +12,12 @@ import deceptinfect.client.SabotagePanel;
 import deceptinfect.*;
 import deceptinfect.client.ClientOverrides;
 import gmod.libs.PlayerLib;
-using gmod.PairTools;
 import deceptinfect.items.Weapon_Di_Scan;
 import deceptinfect.items.Di_cure;
 import deceptinfect.ents.Di_battery;
 #if client
 #end
 class Main {
-
-    @:expose("nethost") public static var nethost(default,null):GmodNetHost;
 
     public static function main() {
         deceptinfect.Trace.overridetrace();
@@ -31,7 +27,8 @@ class Main {
             new GPlayerCompat(new PlayerComponent(ply));
         }
         #end
-        nethost = new gmod.hxbit.GmodNetHost();
+
+        
         FileLib.CreateDir("deceptinfect");
         GameLib.CleanUpMap();
         SignalStorage.initEvents();

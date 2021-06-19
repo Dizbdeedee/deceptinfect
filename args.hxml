@@ -8,12 +8,12 @@
 -dce full
 -lib singlePatternSwitch
 --times
--D gmodAddonFolder=/home/steam/.steam/SteamApps/common/GarrysModDS/garrysmod/addons/
+#-D gmodAddonFolder=/home/steam/.steam/SteamApps/common/GarrysModDS/garrysmod/addons/
 -D macro-times
 -lib hxbit
 -D debug
 -lib tink_core
 -lib gmodhaxe
 -lib no-spoon
---macro gmod.macros.InitMacro.init()
+--macro gmod.helpers.macros.InitMacro.init()
 -main Main
