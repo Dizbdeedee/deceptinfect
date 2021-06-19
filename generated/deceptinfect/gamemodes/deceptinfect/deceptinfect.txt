@@ -1,0 +1,7 @@
+"deceptinfect"
+{
+	"base"	"base"
+	"title" "Deception Infection"
+	"menusystem" "1"
+
+}

@@ -17,6 +17,8 @@ using gmod.PairTools;
 import deceptinfect.items.Weapon_Di_Scan;
 import deceptinfect.items.Di_cure;
 import deceptinfect.ents.Di_battery;
+import deceptinfect.ents.Di_barrel;
+import deceptinfect.ents.Di_puddle;
 #if client
 #end
 class Main {

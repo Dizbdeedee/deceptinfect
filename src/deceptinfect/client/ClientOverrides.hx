@@ -23,14 +23,14 @@ class ClientOverrides extends gmod.gamemode.GMBuild<gmod.gamemode.GM> {
     override function PlayerButtonDown(ply:Player, button:BUTTON_CODE) {
         switch (button) {
             case KEY_L:
-                var sab = SabotagePanel.inst;
-                switch (sab.IsVisible()) {
-                    case true:
-                        sab.SetVisible(false);
-                    case false:
-                        sab.SetVisible(true);
-                }
-                sab.SetVisible(true);
+                // var sab = SabotagePanel.inst;
+                // switch (sab.IsVisible()) {
+                //     case true:
+                //         sab.SetVisible(false);
+                //     case false:
+                //         sab.SetVisible(true);
+                // }
+                // sab.SetVisible(true);
             default:
         }
     }
