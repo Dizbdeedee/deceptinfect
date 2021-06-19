@@ -27,7 +27,8 @@ class WinSystem extends System {
 	    }
 	    var total = 0;
 	    var infected = 0;
-	    for (ent in ComponentManager.entities) {
+	    for (x in 0...ComponentManager.entities) {
+		final ent:DI_ID = x;
 		switch [ent.get(InfectedComponent),ent.get(PlayerComponent),ent.get(AliveComponent)] {
 		    case [Comp(_),Comp(_),Comp(_)]:
 			infected++;
@@ -52,7 +53,8 @@ class WinSystem extends System {
 
 	    var aliveNests = false;
 	    var deadNests = false;
-	    for (ent in entities) {
+	    for (x in 0...entities) {
+		final ent:DI_ID = x;
 		switch ent.get(NestComponent) {
 			case Comp(c_nest):
 			    if (c_nest.health > 0) {

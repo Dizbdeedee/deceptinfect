@@ -3,7 +3,9 @@ import deceptinfect.ecswip.Component;
 import deceptinfect.infection.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
+
 @:forward
+@:using(deceptinfect.macros.ClassToID.GEntCompat_Use)
 abstract GEntCompat(Entity) from Entity to Entity {
 
     public var id(get,never):DI_ID;
@@ -22,44 +24,46 @@ abstract GEntCompat(Entity) from Entity to Entity {
         }
     }
 
-    public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
-        return id.get(x);
-    }
+    // public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
+    //     return id.get(x);
+    // }
 
-    public function infectedPlayer():Option<PlayerComponent> {
-        return switch(has_id()) {
-            case Some(id):
-                switch [id.get(PlayerComponent),id.get(InfectedComponent)] {
-                    case [Comp(p),Comp(_)]:
-                        Some(p);
-                    default:
-                        None;
-                };
-            default:
-                None;
-        };
-    }
+    // public function infectedPlayer():Option<PlayerComponent> {
+    //     return switch(has_id()) {
+    //         case Some(id):
+    //             switch [id.get(PlayerComponent),id.get(InfectedComponent)] {
+    //                 case [Comp(p),Comp(_)]:
+    //                     Some(p);
+    //                 default:
+    //                     None;
+    //             };
+    //         default:
+    //             None;
+    //     };
+    // }
 
-    public inline function isPlayer():Option<PlayerComponent> {
-        return switch(has_id()) {
-            case Some(id):
-                switch id.get(PlayerComponent) {
-                    case Comp(p):
-                        Some(p);
-                    default:
-                        None;
-                }
-            default:
-                None;
-        }
-    }
+    // public inline function isPlayer():Option<PlayerComponent> {
+    //     return switch(has_id()) {
+    //         case Some(id):
+    //             switch id.get(PlayerComponent) {
+    //                 case Comp(p):
+    //                     Some(p);
+    //                 default:
+    //                     None;
+    //             }
+    //         default:
+    //             None;
+    //     }
+    // }
 
     public inline function new(x:Entity) {
         this = x;
         untyped x.id = ComponentManager.addGEnt(this);
     } 
 }
+
 @:forward
+@:using(deceptinfect.macros.ClassToID.GPlayerCompat_Use)
 abstract GPlayerCompat(Player) from Player to Player {
 
     public var id(get,never):DI_ID;
@@ -86,17 +90,17 @@ abstract GPlayerCompat(Player) from Player to Player {
                 true;
         }
     }
-    public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
-        return id.get(x);
-    }
+    // public inline function get<T:Component>(x:Class<T>):ComponentState<T> {
+    //     return id.get(x);
+    // }
 
     // public inline function add_component<T:Component>(x:Class<T>):ComponentState<T> {
     //     return 
     // }
 
-    public inline function isInfected():Bool {
-        return id.get(InfectedComponent).equals(Comp(null));
-    }
+    // public inline function isInfected():Bool {
+    //     return id.get(InfectedComponent).equals(Comp(null));
+    // }
 
     public inline function new(x:PlayerComponent) {
         this = x.player;

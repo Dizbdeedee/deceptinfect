@@ -11,17 +11,17 @@ class WeaponSystem extends System {
 
     var timevalues:Map<WeaponStage,Float> = [
 	INITAL => 0.0,				     
-        TWO => 2.0,
-        THREE => 5.0,
-        FINAL => 8.0
+        TWO => 1.0,
+        THREE => 2.0,
+        FINAL => 3.0
     ];
 
     var weapons_give:Map<WeaponStage,Array<Weapons>> = [
 
         INITAL => [weapon_mor_p229],
         TWO => [weapon_mor_ump],
-        THREE => [],
-        FINAL => []
+        THREE => [weapon_mor_m418],
+        FINAL => [weapon_mor_bulldog]
     ];
 
     #if server
@@ -32,8 +32,11 @@ class WeaponSystem extends System {
     override function run_server() {
         switch (GameManager.state) { // replace with weapon menu
         case PLAYING(x):
-            if (x.totalGameTime > timevalues.get(currentStage)) { //mins, secs, conversion :)
-                for (ent in entities) {
+	    final timeElapsed = Gmod.CurTime() - x.gameStarted;
+	    final minsElapsed = timeElapsed / 60;
+            if (minsElapsed > timevalues.get(currentStage)) { //mins, secs, conversion :)
+                for (x in 0...entities) {
+		    final ent:DI_ID = x;
                     switch [ent.get(PlayerComponent),ent.get(AliveComponent)] {
                     case [Comp(c_ply),Comp(_)]:
                         c_ply.player.Give(weapons_give.get(currentStage).getRandom()); //give weapon? upgrade weapon? hmmm
@@ -47,7 +50,8 @@ class WeaponSystem extends System {
     }
 
     public function giveInitalWeapons() {
-        for (ent in entities) {
+        for (ent in 0...entities) {
+	    final ent:DI_ID = ent;
             switch [ent.get(PlayerComponent),ent.get(AliveComponent)] {
                 case [Comp(c_ply),Comp(_)]:
                     c_ply.player.Give(weapons_give.get(INITAL).getRandom());

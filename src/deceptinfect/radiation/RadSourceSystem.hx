@@ -10,7 +10,8 @@ class RadSourceSystem extends System implements EnumExtractor  {
 
     #if server
     override function run_server() {
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(RadSource)] {
             case [Comp(c_rs)]:
                 switch (c_rs.state) {

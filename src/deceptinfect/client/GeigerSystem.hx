@@ -62,7 +62,8 @@ class GeigerSystem extends System {
 
     #if server
     override function run_server() {
-        for (plyr in ComponentManager.entities) {
+        for (x in 0...entities) {
+	    final plyr:DI_ID = x;
             switch [plyr.get(InfectionComponent),plyr.get(PlayerComponent)] {
             case [Comp(inf),Comp(_.player => player)]:
                 var fract = Math.min(((inf.rate - 1) / 2),1);

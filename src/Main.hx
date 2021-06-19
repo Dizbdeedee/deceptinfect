@@ -15,6 +15,11 @@ import gmod.libs.PlayerLib;
 import deceptinfect.items.Weapon_Di_Scan;
 import deceptinfect.items.Di_cure;
 import deceptinfect.ents.Di_battery;
+import deceptinfect.ents.Di_barrel;
+import deceptinfect.ents.Di_puddle;
+import deceptinfect.ents.Di_spitball;
+import deceptinfect.weapons.Weapon_di_spit;
+import deceptinfect.game.SpawnSystemNav;
 #if client
 #end
 class Main {
@@ -40,7 +45,7 @@ class Main {
         // new deceptinfect.TestObject();
         #end
         #if client
-        deceptinfect.TestObject;
+        // deceptinfect.TestObject;
         #end
         SpawnSystem.generateSpawns();
         UtilLib.PrecacheModel(Misc.infModel);

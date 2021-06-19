@@ -18,7 +18,7 @@ class HiddenHealthSystem extends GeigerSystem {
     }
     
     @:keep
-    static function hiddenHealthDamage(data:DamageEvent) {
+    function hiddenHealthDamage(data:DamageEvent) {
         final victim = data.vicID;
         var g_attacker:GEntCompat = data.dmg.GetAttacker();
         if (!g_attacker.IsPlayer()) return;

@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.game.ItemOwnerSystem;
 import deceptinfect.items.ScannerSystem;
 import deceptinfect.radiation.ContaminationSystem;
 // import deceptinfect.radiation.ContaminationSystem;
@@ -41,11 +42,13 @@ class SystemManager {
         RagdollSystem,
         SlowMotionSystem,
         InfectionLookSystem,
-        ContaminationSystem,
+	ContaminationSystem, //Problem!
         RadSourceSystem,
         LowHealthSystem,
         ScannerSystem,
-        WeaponSystem
+        WeaponSystem,
+	ItemOwnerSystem,
+	DummySystem
     ];
 
     static function make() {
@@ -68,10 +71,21 @@ class SystemManager {
         getSystems.set(LowHealthSystem, new LowHealthSystem());
         getSystems.set(ScannerSystem, new ScannerSystem());
         getSystems.set(WeaponSystem, new WeaponSystem());
+        getSystems.set(ItemOwnerSystem, new ItemOwnerSystem());
+        getSystems.set(DummySystem, new DummySystem());
     }
 
     public static function getSystem<T:System>(cls:Class<T>):T {
         return cast getSystems.get(cls);
+    }
+
+    public static function getSystem2<T:System>(cls:Class<T>):Option<T> {
+	final result = getSystems.get(cls);
+	return if (getSystems.get(cls) == null) {
+	    None;
+	} else {
+	    Some(cast result);
+	}
     }
 
     @:expose("getSystem")
@@ -79,10 +93,22 @@ class SystemManager {
     static function getSystemExp(name:String) {
         return cast getSystems.get(Type.resolveClass(name));
     }
+
+
     public static function runAllSystems() {
+	Profiler.profile("start",true);
         for (clsSystem in runSystems) {
-           getSystems.get(clsSystem).run();
+	    final name = Type.getClassName(clsSystem);
+	    Profiler.profile(name);
+	    getSystems.get(clsSystem).run();
         }
+	Profiler.resetprofile();
+	Profiler.report();
+    }
+
+    @:expose("systemReport")
+    public static function beginReporting() {
+	Profiler.beginProfiling();
     }
 
     public static function initAllSystems() {
@@ -91,6 +117,10 @@ class SystemManager {
             getSystems.get(clsSystem).init();
         }
     }    
+
+    public static function destroySystems() {
+	getSystems.clear();
+    }
     
 
     

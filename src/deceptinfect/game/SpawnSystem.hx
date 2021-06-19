@@ -20,7 +20,8 @@ class SpawnSystem extends System {
     }
 
     override function run_server() {
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(Spawned),ent.get(VirtualPosition)] {
             case [Comp(c_spawn),Comp(c_pos)]:
                 if (c_spawn.spawn.vec.DistToSqr(c_pos.pos) > C_square(90)) {
@@ -55,6 +56,7 @@ class Spawn {
     final id:SpawnID;
     public var claimed:SpawnClaim = UNCLAIMED;
     var distStore:Map<SpawnID,Float> = [];
+
     var distOrder:Array<SpawnID> = [];
     var maxdistID:Int;
     var mindistID:Int;
@@ -206,6 +208,7 @@ class BoundsSpawn extends Spawn {
         ent.SetCollisionBoundsWS(bounds.mins,bounds.maxs);
     }
 }
+
 private typedef SpawnID = Int;
 
 
@@ -219,13 +222,11 @@ class SpawnPointTable {
             spawns.push(new Spawn(this,point));
             // trace(spawns[0]);
         }
-
         for (spawn in spawns) {
             for (spawn2 in spawns) {
                 spawn.calculateDist(spawn2);
             }
         }
-        // trace(spawns);
     }
 
     public function generateBoundSpawns(points:Array<MinMax>) {

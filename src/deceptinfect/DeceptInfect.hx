@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.util.PrintTimer;
 import haxe.io.Bytes;
 import haxe.crypto.Crc32;
 import gmod.enums.SNDLVL;
@@ -58,7 +59,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
         SystemManager.runAllSystems();
         #if server
         GameManager.think();
-        checkPerformance();
+        // checkPerformance();
         #end
         // for (c in nethost.clients) {
         //     c.sync();
@@ -69,13 +70,15 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
     var timestart = 0;
     var underperforming = false;
     @:exposeGM function checkPerformance() {
-        if (Gmod.FrameTime() > 0.016666666666667 && !underperforming) {
-            trace("Server underperforming! ");
-            underperforming = true;
-        } else if (underperforming) {
-            trace("Server recovered");
-            underperforming = false;
-        }
+        if ((1 / Gmod.FrameTime()) < 66.6 ) {
+	    PrintTimer.print_time(5,() -> trace("Server is underperforming! ${1 / Gmod.FrameTime()}"));
+	    
+	}
+            // underperforming = true;
+        // } else if (underperforming) {
+        //     trace("Server recovered");
+        //     underperforming = false;
+        // }
     }
     override function OnEntityCreated(entity:Entity) {
         if (entity.IsPlayer()) {
@@ -140,11 +143,17 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
         //player.SetWalkthroughable
         player.SetShouldServerRagdoll(true);
         player.ShouldDropWeapon(true);
-        if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
-            player.Give(Misc.roundWeapons[0]); //TODO random weapons
-            player.ShouldDropWeapon(false);
+        // if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
 
-        }
+        // }
+	switch (GameManager.state) {
+	    case WAIT | SETTING_UP(_,_):
+		player.Give(Misc.roundWeapons[0]); //TODO random weapons
+		player.ShouldDropWeapon(false);
+	    case ENDING(_) | PLAYING(_):
+		player.KillSilent();
+	    
+	}
         // player.id.
         //setHiddenHealth
         //lowhealthrate???
@@ -166,29 +175,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
                 var plyr:GPlayerCompat = PlayerLib.GetByID(1);
                 getSystem(InfectionSystem).makeInfected(plyr.id);
             case KEY_M:
-                trace(ComponentManager.components.get(PlayerComponent));
-            case KEY_L:
-                var plyr:GPlayerCompat = PlayerLib.GetByID(1);
-                var ent:Entity = EntsLib.Create("prop_ragdoll");
-                ent.SetModel(plyr.GetModel());
-                ent.SetPos(plyr.GetPos());
-                ent.Spawn();
-                for (physNum in 0...ent.GetPhysicsObjectCount() - 1) {
-                    var physob = ent.GetPhysicsObjectNum(physNum);
-                    var result = plyr.GetBonePosition(ent.TranslatePhysBoneToBone(physNum));
-                    if (IsValid(physob)) {
-                        physob.SetPos(result.a);
-                        physob.SetAngles(result.b);
-                       
-                        physob.EnableMotion(false);
-                        physob.Sleep();
-                    }
-                }
-                ent.SetCollisionGroup(COLLISION_GROUP_WORLD);
-                ent.SetSolid(SOLID_NONE);
-                var plywep:Weapon = ply.GetActiveWeapon();
-                ent.SetNWString("showwep",plywep.GetModel());
-                
+                // trace(ComponentManager.components.get(PlayerComponent));
             default:
             //handle case of infection? use command strategy
         }
@@ -214,13 +201,13 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 
     
     
-    override function PlayerSwitchWeapon(player:Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
-        if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
-        if (oldWeapon.GetClass() == "weapon_infect") {
-            return true;
-        }
-        return null;
-    }
+    // override function PlayerSwitchWeapon(player:Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
+    //     if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
+    //     if (oldWeapon.GetClass() == "weapon_infect") {
+    //         return true;
+    //     }
+    //     return null;
+    // }
 
     override function PlayerButtonDown(ply:GPlayerCompat, button:BUTTON_CODE) {
         switch (button) {
@@ -228,6 +215,10 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
                 //GrabSystem.requestStartSearch(ply.id);
             default:
         }
+    }
+
+    override function PlayerInitialSpawn(player:Player, transition:Bool) {
+	
     }
 
     override function PlayerDeathSound():Bool {
@@ -266,13 +257,13 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
             ply.Spectate(OBS_MODE_ROAMING);
             comp.spec_next = 1;
         }
-        if (revive) {
+        return if (revive) {
             comp.deathTime = ALIVE;
             ply.UnSpectate();
             ply.Spawn();
-            return true;
+            true;
         } else {
-            return false;
+            false;
         }
     }
 

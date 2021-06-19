@@ -1,6 +1,7 @@
 package deceptinfect.radiation;
 
 import deceptinfect.ecswip.VirtualPosition;
+using deceptinfect.DistSquared.DistSqSafe;
 
 class ContaminationSystem extends System implements enumExtractor.EnumExtractor {
 
@@ -11,9 +12,8 @@ class ContaminationSystem extends System implements enumExtractor.EnumExtractor 
         for (vic in entities) {
             switch [vic.get(RadVictim),vic.get(ContaminationAccepter),vic.get(VirtualPosition)] {
             case [Comp(c_rv),Comp(c_contamAccept),Comp(c_vicpos)]:
-                
-            
-                for (produce in entities){
+                for (y in 0...entities) {
+		    final produce:DI_ID = y;
                     switch [produce.get(RadSource),produce.get(ContaminationProducer),produce.get(VirtualPosition)] {
                     case [Comp(c_rs),Comp(c_contamProduce),Comp(c_producePos)]:
                         if (c_rs.attatch == vic) {
@@ -21,7 +21,7 @@ class ContaminationSystem extends System implements enumExtractor.EnumExtractor 
                             continue;
                         }
                         
-                        var dist = c_producePos.pos.Distance(c_vicpos.pos);
+                        var dist = c_producePos.pos.distSq(c_vicpos.pos);
                         if (shouldContam(dist,c_contamProduce)) {
                             var time = c_contamAccept.contam_time.addTime(produce);
                             //trace('time $time');
@@ -82,7 +82,7 @@ class ContaminationSystem extends System implements enumExtractor.EnumExtractor 
     }
 
 
-    static inline function shouldContam(dist:Float,contamProduce:ContaminationProducer):Bool {
+    static inline function shouldContam(dist:DistSquared,contamProduce:ContaminationProducer):Bool {
         return dist < contamProduce.dist;
     }
 

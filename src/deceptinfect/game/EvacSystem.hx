@@ -47,7 +47,8 @@ class EvacSystem extends System {
     #if server
     var flaresSpawned = false;
     override function run_server() {
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(EvacZone),GameManager.state] {
             case [Comp(c_evac),PLAYING(_)]:
                 if (InfectionSystem.averageInfection > 80 && !flaresSpawned) {

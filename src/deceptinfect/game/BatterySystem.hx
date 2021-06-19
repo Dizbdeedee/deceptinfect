@@ -9,7 +9,8 @@ class BatterySystem extends System {
 
     #if server
     override function run_server() {
-        for (ents in ComponentManager.entities) {
+        for (x in 0...ComponentManager.entities) {
+	    final ents:DI_ID = x;
             switch [ents.get(BatteryAccepter)] {
             case [Comp(c_accept)]:
                 c_accept.charge -= c_accept.decay;

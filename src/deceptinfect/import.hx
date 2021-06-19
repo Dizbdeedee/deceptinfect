@@ -24,6 +24,7 @@ import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.entities;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SystemManager.getSystem;
+import deceptinfect.ecswip.SystemManager.getSystem2;
 using deceptinfect.util.MinMax;
 using deceptinfect.util.EntityExt;
 #end

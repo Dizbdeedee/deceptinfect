@@ -13,8 +13,10 @@ class GrabAccepter extends Component {
 
     public var targeting:Map<GrabProducer,Bool> = [];
 
+    public var canGrabBack = true;
 
     public var overwhelm = 2;
+
     
 }
 

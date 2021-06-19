@@ -1,6 +1,7 @@
 package deceptinfect.radiation;
 
 import deceptinfect.macros.IterateEnt;
+using deceptinfect.DistSquared;
 import deceptinfect.util.Util;
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import haxe.iterators.StringKeyValueIteratorUnicode;
@@ -62,7 +63,7 @@ class RadiationSystem extends System {
 
     }
     
-    static function getTotalRadiation(dist:Float,rad:RadiationProducer):Option<Float> {
+    static function getTotalRadiation(dist:DistSquared,rad:RadiationProducer):Option<Float> {
         if (dist < rad.radius) {
             return Some((rad.maxrate - 1) * ((rad.radius - dist) / rad.radius));
         } else {

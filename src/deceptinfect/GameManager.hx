@@ -156,17 +156,15 @@ class GameManager implements enumExtractor.EnumExtractor {
         case [WAIT,PLAYING(x)]:
             initAllPlayers();
             x.start();
-            removePrevStatues();
             hookWin();
         case [WAIT,SETTING_UP(x,t)]:
             time = t;
-            removePrevStatues();
         case [PLAYING(x),ENDING(y,t)]:
             time = t;
         case [PLAYING(x),PLAYING(y)]:
             cleanup();
             initAllPlayers();
-            y.start();
+            y.start(); //not this
             hookWin();
 
         default:
@@ -187,10 +185,10 @@ class GameManager implements enumExtractor.EnumExtractor {
     @:expose("cleanup")
     public static function cleanup() {
         net_cleanup.broadcast({});
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch [ent.get(CleanupEnt),ent.get(GEntityComponent)] {
             case [Comp(_),Comp(c_gent)]:
-                trace(ent);
                 c_gent.entity.Remove();
             default:
             }
@@ -201,10 +199,12 @@ class GameManager implements enumExtractor.EnumExtractor {
             }
         }
         stateTrig.clear(); //get rid of stragglers
+	SystemManager.destroySystems();
         SystemManager.initAllSystems();
         for (ent in EntsLib.GetAll()) {
             switch (ent.GetClass()) {
             case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
+		trace("removing entiti");
                 ent.Remove();
             default:
             }
@@ -217,10 +217,8 @@ class GameManager implements enumExtractor.EnumExtractor {
         }
     }
 
-    static function removePrevStatues() {
-
-    }
     static function hookWin() {
+
         getSystem(WinSystem).newWinner.handle(newWin);
     }
 
@@ -274,7 +272,7 @@ class GameManager implements enumExtractor.EnumExtractor {
             if (ind == choose) {
                 getSystem(InfectionSystem).makeInfected(player.id);
             }
-            player.StripWeapons();
+            // player.StripWeapons();
             player.Give(Misc.startingWeapons[0]);
             player.giveFullAmmo();
             player.Spawn();
@@ -305,7 +303,8 @@ class GameManager implements enumExtractor.EnumExtractor {
 
     #if client
     static function cleanup() {
-        for (ent in entities) {
+        for (x in 0...entities) {
+	    final ent:DI_ID = x;
             switch ent.get(deceptinfect.game.components.KeepRestart) {
                 case Comp(_):
                 default:

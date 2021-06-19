@@ -1,9 +1,11 @@
 package deceptinfect.abilities;
 
+import deceptinfect.GEntCompat.GPlayerCompat;
+import gmod.Hook.GMHook;
 import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.ecswip.GEntityComponent;
-
+import deceptinfect.ecswip.PlayerComponent;
 class FormSystem extends System {
 
 
@@ -14,7 +16,7 @@ class FormSystem extends System {
         case [Comp(c_form),Comp(_.entity => g_ent)]:
             switch(c_form.cooldown) {
                 case COOLDOWN(time) if (Gmod.CurTime() < time):
-        
+		    
                 default:
                     c_form.cooldown = ACTIVE;
             }
@@ -25,6 +27,30 @@ class FormSystem extends System {
             }
         default:
         }
+    }
+
+    override function init_server() {
+	HookLib.Add(GMHook.PlayerSwitchWeapon,"di_supressweapon",supressWeapons);
+    }
+    
+    static function supressWeapons(ply:GPlayerCompat,oldWeapon:Weapon,newWeapon:Weapon):Bool {
+	return switch (ply.validID()) {
+	    case Some(id):
+		switch (id.get(FormComponent)) {
+		    case Comp({form : INFECTED}):
+			if (oldWeapon.GetName() == "weapon_di_spit") {
+			    true;
+			} else if (newWeapon.GetName() != "weapon_di_spit") {
+			    true;
+			} else {
+			    false;
+			}
+		    default:
+			false;
+		}
+	    default:
+		false;
+	}
     }
 
     public static function changeForm(ent:DI_ID) {
@@ -42,6 +68,14 @@ class FormSystem extends System {
             case INFECTED:
                 HUMAN;
         }
+	switch [ent.get(PlayerComponent),c_form.form] {
+	    case [Comp({player : ply}),INFECTED]:
+		ply.Give("weapon_di_spit");
+		ply.SelectWeapon("weapon_di_spit");
+	    case [Comp({player : ply}),HUMAN]:
+		ply.StripWeapon("weapon_di_spit");
+	    default:
+	}
         c_form.formHealth = curHealth;
         c_form.formMaxHealth = curMaxHealth;
         c_form.cooldown = COOLDOWN(Gmod.CurTime() + c_form.nextCooldown);

@@ -10,7 +10,9 @@ class RadiationProducer extends Component {
     public var maxrate:Float;
 
     // public var type:Null<RadTypes>;
-    public var radius:Float;
+
+    public var radius:DistSquared;
+
 
     // var options:RadiationProduceOptions;
 

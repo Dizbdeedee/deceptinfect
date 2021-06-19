@@ -27,7 +27,7 @@ class Di_battery extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM>  {
     
     var lastplayer:Player = null;
 
-    var id:DI_ID = null;
+    public var id:DI_ID = null;
 
     var added = false;
 
