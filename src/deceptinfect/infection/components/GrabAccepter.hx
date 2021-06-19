@@ -3,27 +3,22 @@ package deceptinfect.infection.components;
 import deceptinfect.util.Cooldown;
 
 /**
-    More of a tag... really
+	More of a tag... really
 **/
 class GrabAccepter extends Component {
+	public var grabAttacker:Map<GrabProducer, Bool> = [];
 
-    public var grabAttacker:Map<GrabProducer,Bool> = [];
+	public var grabState:GrabAcceptState = NOT_GRABBED(0);
 
-    public var grabState:GrabAcceptState = NOT_GRABBED(0);
+	public var targeting:Map<GrabProducer, Bool> = [];
 
-    public var targeting:Map<GrabProducer,Bool> = [];
+	public var canGrabBack = true;
 
-    public var canGrabBack = true;
-
-    public var overwhelm = 2;
-
-    
+	public var overwhelm = 2;
 }
 
 enum GrabAcceptState {
-    NOT_GRABBED(numTargeting:Ref<Int>);
-    GRABBED;
-    UNAVALIABLE(x:Cooldown);
-
-    
+	NOT_GRABBED(numTargeting:Ref<Int>);
+	GRABBED;
+	UNAVALIABLE(x:Cooldown);
 }

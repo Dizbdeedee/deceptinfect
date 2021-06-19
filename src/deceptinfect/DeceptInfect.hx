@@ -24,7 +24,6 @@ import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.enums.BUTTON_CODE;
 import deceptinfect.ecswip.ComponentManager;
-
 import gmod.stringtypes.Hook;
 import lua.Lua;
 import tink.core.Annex;
@@ -34,309 +33,290 @@ import gmod.libs.EntsLib;
 import gmod.gclass.Player;
 
 using deceptinfect.util.PlayerExt;
-import deceptinfect.ecswip.SignalStorage;
 
+import deceptinfect.ecswip.SignalStorage;
 
 @:keep
 class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> implements deceptinfect.macros.SpamTracker.Spam {
-
-    #if client
-    override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
-        // ragdoll.Remove();
-        ragdoll.SetNoDraw(true);
-        
-    }
-    #end
-    #if server
-    override function CreateEntityRagdoll(owner:Entity, ragdoll:Entity) {
-        getSystem(RagdollSystem).playerRagdoll(owner,ragdoll);
-    }
-    #end
-    var lastcrc:Int = 0;
-
-    override function Think() {
-        // var nethost = Main.nethost;
-        SystemManager.runAllSystems();
-        #if server
-        GameManager.think();
-        // checkPerformance();
-        #end
-        // for (c in nethost.clients) {
-        //     c.sync();
-        // }
-        // nethost.flush();
-    }
-
-    var timestart = 0;
-    var underperforming = false;
-    @:exposeGM function checkPerformance() {
-        if ((1 / Gmod.FrameTime()) < 66.6 ) {
-	    PrintTimer.print_time(5,() -> trace("Server is underperforming! ${1 / Gmod.FrameTime()}"));
-	    
+	#if client
+	override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
+		// ragdoll.Remove();
+		ragdoll.SetNoDraw(true);
 	}
-            // underperforming = true;
-        // } else if (underperforming) {
-        //     trace("Server recovered");
-        //     underperforming = false;
-        // }
-    }
-    override function OnEntityCreated(entity:Entity) {
-        if (entity.IsPlayer()) {
-            var ent = new GPlayerCompat(new PlayerComponent(cast entity));
-        } else {
-        }
-    }
+	#end
 
-    override function EntityRemoved(ent:GEntCompat) {
-        if (ent.IsPlayer()) {
-            ComponentManager.removeEntity(ent.id);
-            return;
-        }
-        switch (ent.has_id()) {
-        case Some(id):
-            ComponentManager.removeEntity(id);
-        default:
-        }
-    }
-    #if server
-    
-    override function PlayerSilentDeath(ply:Player) {
-
-    }
-
-    function playerDeath(victim:GPlayerCompat) {
-
-        victim.id.remove_component(AliveComponent);
-        victim.id.remove_component(GrabAccepter);
-        var sounds = Misc.deathSounds.get(HUMAN_MALE);
-        var sound = sounds[MathLib.random(0,sounds.length - 1)];
-        victim.EmitSound(sound,0,null,0);
-        Gmod.EmitSound(sound,victim.GetPos(),victim.EntIndex(),CHAN_VOICE);
-        victim.CreateRagdoll();
-    }
-
-    override function DoPlayerDeath(ply:Player, attacker:Entity, dmg:CTakeDamageInfo) {
-        untyped GAMEMODE.PlayerSilentDeath();
-        // ply.KillSilent();
-        ply.KillSilent();
-        
-        playerDeath(ply);
-        return untyped false;
-    }
-    
-    override function PlayerDeath(victim:GPlayerCompat, inflictor:Entity, attacker:Entity) {
-        // victim.id.remove_component(InfectionComponent);
-        // victim.id.remove_component(InfectedComponent);
-        trace("Player ded!");
-    }
-    
-    override function EntityKeyValue(ent:Entity, key:String, value:String):String {
-        // trace(Lua.tostring(ent),key,value);
-        return null;
-    }
-
-
-    override function PlayerSpawn(player:GPlayerCompat, transition:Bool) {
-        player.UnSpectate();
-        
-        player.SetModel(Misc.roundModels[MathLib.random(0,Misc.roundModels.length - 1)]);//TODO make random models
-        //player.SetWalkthroughable
-        player.SetShouldServerRagdoll(true);
-        player.ShouldDropWeapon(true);
-        // if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
-
-        // }
-	switch (GameManager.state) {
-	    case WAIT | SETTING_UP(_,_):
-		player.Give(Misc.roundWeapons[0]); //TODO random weapons
-		player.ShouldDropWeapon(false);
-	    case ENDING(_) | PLAYING(_):
-		player.KillSilent();
-	    
+	#if server
+	override function CreateEntityRagdoll(owner:Entity, ragdoll:Entity) {
+		getSystem(RagdollSystem).playerRagdoll(owner, ragdoll);
 	}
-        // player.id.
-        //setHiddenHealth
-        //lowhealthrate???
-        //kill player if round in progress 
-    }
-    override function PlayerDisconnected(ply:GPlayerCompat) {
-        ComponentManager.removeEntity(ply.id);
-    }
-    override function PlayerButtonUp(ply:GPlayerCompat, button:BUTTON_CODE) {
-        
-        switch (button) {
-            case KEY_E:
-                //GrabSystem.requestStopSearch(ply.id);
-                //GameManager.initInfectedPlayer(ply.id);
-                //GrabSystem.attemptGrab(ply.id,(PlayerLib.GetByID(2):GPlayerCompat).id);
-            case KEY_F:
-                FormSystem.attemptChangeForm(ply.id);
-            case KEY_SEMICOLON:
-                var plyr:GPlayerCompat = PlayerLib.GetByID(1);
-                getSystem(InfectionSystem).makeInfected(plyr.id);
-            case KEY_M:
-                // trace(ComponentManager.components.get(PlayerComponent));
-            default:
-            //handle case of infection? use command strategy
-        }
-    }
+	#end
 
-    override function KeyPress(ply:GPlayerCompat, key:IN) {
-        switch (key) {
-            case IN_USE:
-                GrabSystem.requestStartSearch(ply.id);
-            default:
-        }
-    }
+	var lastcrc:Int = 0;
 
-    override function KeyRelease(ply:GPlayerCompat, key:IN) {
-        switch (key) {
-            case IN_USE:
-                GrabSystem.requestStopSearch(ply.id);
-            default:
-        }
+	override function Think() {
+		// var nethost = Main.nethost;
+		SystemManager.runAllSystems();
+		#if server
+		GameManager.think();
+		// checkPerformance();
+		#end
+		// for (c in nethost.clients) {
+		//     c.sync();
+		// }
+		// nethost.flush();
+	}
 
-    }
+	var timestart = 0;
+	var underperforming = false;
 
+	@:exposeGM function checkPerformance() {
+		if ((1 / Gmod.FrameTime()) < 66.6) {
+			PrintTimer.print_time(5, () -> trace("Server is underperforming! ${1 / Gmod.FrameTime()}"));
+		}
+		// underperforming = true;
+		// } else if (underperforming) {
+		//     trace("Server recovered");
+		//     underperforming = false;
+		// }
+	}
 
-    
-    
-    // override function PlayerSwitchWeapon(player:Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
-    //     if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
-    //     if (oldWeapon.GetClass() == "weapon_infect") {
-    //         return true;
-    //     }
-    //     return null;
-    // }
+	override function OnEntityCreated(entity:Entity) {
+		if (entity.IsPlayer()) {
+			var ent = new GPlayerCompat(new PlayerComponent(cast entity));
+		} else {}
+	}
 
-    override function PlayerButtonDown(ply:GPlayerCompat, button:BUTTON_CODE) {
-        switch (button) {
-            case KEY_E:
-                //GrabSystem.requestStartSearch(ply.id);
-            default:
-        }
-    }
+	override function EntityRemoved(ent:GEntCompat) {
+		if (ent.IsPlayer()) {
+			ComponentManager.removeEntity(ent.id);
+			return;
+		}
+		switch (ent.has_id()) {
+			case Some(id):
+				ComponentManager.removeEntity(id);
+			default:
+		}
+	}
 
-    override function PlayerInitialSpawn(player:Player, transition:Bool) {
-	
-    }
+	#if server
+	override function PlayerSilentDeath(ply:Player) {}
 
-    override function PlayerDeathSound():Bool {
-        return true;
-    }
+	function playerDeath(victim:GPlayerCompat) {
+		victim.id.remove_component(AliveComponent);
+		victim.id.remove_component(GrabAccepter);
+		var sounds = Misc.deathSounds.get(HUMAN_MALE);
+		var sound = sounds[MathLib.random(0, sounds.length - 1)];
+		victim.EmitSound(sound, 0, null, 0);
+		Gmod.EmitSound(sound, victim.GetPos(), victim.EntIndex(), CHAN_VOICE);
+		victim.CreateRagdoll();
+	}
 
-    override function PlayerDeathThink(ply:GPlayerCompat):Bool {
-        
-        var comp = ply.id.get(PlayerComponent).sure();
-        var reviveTime;
-        var revive = false;
-        comp.deathTime = switch(comp.deathTime) {
-            case ALIVE:
-                reviveTime = Gmod.CurTime() + 1;
-                DEAD(reviveTime);
-            case DEAD(rev):
-                reviveTime = rev;
-                comp.deathTime;
-        }
-        if (ply.IsBot() && Gmod.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
-            revive = true;
-        }
-        if (Gmod.IsValid(ply.GetObserverTarget())) {
-            ply.SetPos(ply.GetObserverTarget().GetPos());
-        }
-        if (ply.KeyPressed(IN_ATTACK)) {
-            if (Gmod.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
-                revive = true;
-            }
-            Spectate.chooseSpectateTarget(comp,FORWARDS);
-        } else if (ply.KeyPressed(IN_ATTACK2)) {
+	override function DoPlayerDeath(ply:Player, attacker:Entity, dmg:CTakeDamageInfo) {
+		untyped GAMEMODE.PlayerSilentDeath();
+		// ply.KillSilent();
+		ply.KillSilent();
 
-            Spectate.chooseSpectateTarget(comp,BACKWARDS);
-        } else if (ply.KeyPressed(IN_JUMP) && ply.shouldFreeRoam()) {
-            ply.UnSpectate();
-            ply.Spectate(OBS_MODE_ROAMING);
-            comp.spec_next = 1;
-        }
-        return if (revive) {
-            comp.deathTime = ALIVE;
-            ply.UnSpectate();
-            ply.Spawn();
-            true;
-        } else {
-            false;
-        }
-    }
+		playerDeath(ply);
+		return untyped false;
+	}
 
-    override function IsSpawnpointSuitable(ply:GPlayerCompat, spawnpoint:Entity, makeSuitable:Bool):Bool {
-        var pos = spawnpoint.GetPos();
-        var blockers = EntsLib.FindInBox(pos + new Vector(-30,-30,0), pos + new Vector(30,30,72));
-        var tracehit = UtilLib.TraceEntity({
-            start: pos,
-            endpos : pos + new Vector(1,1,1),
+	override function PlayerDeath(victim:GPlayerCompat, inflictor:Entity, attacker:Entity) {
+		// victim.id.remove_component(InfectionComponent);
+		// victim.id.remove_component(InfectedComponent);
+		trace("Player ded!");
+	}
 
-        },ply);
-        for (ent in blockers) {
-            if (ent.IsPlayer()) {
-                var blockPly:GPlayerCompat = cast ent;
-                blockPly.setWalkthroughable(true);
-                blockPly.id.add_component(new Walkthroughable());
-                ply.setWalkthroughable(true);
-                ply.id.add_component(new Walkthroughable());
-                //ply.setWalkthroughable(true);
-            } else {
-                // return false;
-                // return false;
-            }
-        }
-        if (tracehit.HitWorld) {
-            trace("not valid..");
-            return false;
-        }
-        return true;
-    }
-    
-    override function PlayerSelectSpawn(ply:Player, transition:Bool):Entity {
-        
-        var spawns = EntsLib.FindByClass("info_player_start");
-        // trace(spawns.length());
-        // Gmod.PrintTable(spawns);
-        var random_spawn = MathLib.random(spawns.length());
-        // for (spawn in spawns) {
-        if (IsSpawnpointSuitable(ply,spawns[random_spawn],false)) {
-            return spawns[random_spawn];
-        }
-        // }
-        trace("Could not find a spawn!");
-        return null;
-    }
+	override function EntityKeyValue(ent:Entity, key:String, value:String):String {
+		// trace(Lua.tostring(ent),key,value);
+		return null;
+	}
 
-    override function EntityTakeDamage(target:GEntCompat, dmg:CTakeDamageInfo):Bool {
-        
-        switch (target.has_id()) {
-            case Some(id):
-                SignalStorage.entDamageTrigger.trigger(
-                    {
-                        vicID: id,
-                        dmg: dmg,
-                        entity: target
-                    });
-            default:
-        } 
-        return null;
-    }
+	override function PlayerSpawn(player:GPlayerCompat, transition:Bool) {
+		player.UnSpectate();
 
-    
+		player.SetModel(Misc.roundModels[MathLib.random(0, Misc.roundModels.length - 1)]); // TODO make random models
+		// player.SetWalkthroughable
+		player.SetShouldServerRagdoll(true);
+		player.ShouldDropWeapon(true);
+		// if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
 
-    override function PlayerSay(sender:Player, text:String, teamChat:Bool):String {
-        
-        return "aaaaple";
-    }
-    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<A_GmPlayerCanHearPlayersVoiceReturn> {
-        return {a : false,
-                b : false};
+		// }
+		switch (GameManager.state) {
+			case WAIT | SETTING_UP(_, _):
+				player.Give(Misc.roundWeapons[0]); // TODO random weapons
+				player.ShouldDropWeapon(false);
+			case ENDING(_) | PLAYING(_):
+				player.KillSilent();
+		}
+		// player.id.
+		// setHiddenHealth
+		// lowhealthrate???
+		// kill player if round in progress
+	}
 
-    }
-    
-    #end
-    
+	override function PlayerDisconnected(ply:GPlayerCompat) {
+		ComponentManager.removeEntity(ply.id);
+	}
+
+	override function PlayerButtonUp(ply:GPlayerCompat, button:BUTTON_CODE) {
+		switch (button) {
+			case KEY_E:
+			// GrabSystem.requestStopSearch(ply.id);
+			// GameManager.initInfectedPlayer(ply.id);
+			// GrabSystem.attemptGrab(ply.id,(PlayerLib.GetByID(2):GPlayerCompat).id);
+			case KEY_F:
+				FormSystem.attemptChangeForm(ply.id);
+			case KEY_SEMICOLON:
+				var plyr:GPlayerCompat = PlayerLib.GetByID(1);
+				getSystem(InfectionSystem).makeInfected(plyr.id);
+			case KEY_M:
+			// trace(ComponentManager.components.get(PlayerComponent));
+			default:
+				// handle case of infection? use command strategy
+		}
+	}
+
+	override function KeyPress(ply:GPlayerCompat, key:IN) {
+		switch (key) {
+			case IN_USE:
+				GrabSystem.requestStartSearch(ply.id);
+			default:
+		}
+	}
+
+	override function KeyRelease(ply:GPlayerCompat, key:IN) {
+		switch (key) {
+			case IN_USE:
+				GrabSystem.requestStopSearch(ply.id);
+			default:
+		}
+	}
+
+	// override function PlayerSwitchWeapon(player:Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
+	//     if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
+	//     if (oldWeapon.GetClass() == "weapon_infect") {
+	//         return true;
+	//     }
+	//     return null;
+	// }
+
+	override function PlayerButtonDown(ply:GPlayerCompat, button:BUTTON_CODE) {
+		switch (button) {
+			case KEY_E:
+			// GrabSystem.requestStartSearch(ply.id);
+			default:
+		}
+	}
+
+	override function PlayerInitialSpawn(player:Player, transition:Bool) {}
+
+	override function PlayerDeathSound():Bool {
+		return true;
+	}
+
+	override function PlayerDeathThink(ply:GPlayerCompat):Bool {
+		var comp = ply.id.get(PlayerComponent).sure();
+		var reviveTime;
+		var revive = false;
+		comp.deathTime = switch (comp.deathTime) {
+			case ALIVE:
+				reviveTime = Gmod.CurTime() + 1;
+				DEAD(reviveTime);
+			case DEAD(rev):
+				reviveTime = rev;
+				comp.deathTime;
+		}
+		if (ply.IsBot() && Gmod.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
+			revive = true;
+		}
+		if (Gmod.IsValid(ply.GetObserverTarget())) {
+			ply.SetPos(ply.GetObserverTarget().GetPos());
+		}
+		if (ply.KeyPressed(IN_ATTACK)) {
+			if (Gmod.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
+				revive = true;
+			}
+			Spectate.chooseSpectateTarget(comp, FORWARDS);
+		} else if (ply.KeyPressed(IN_ATTACK2)) {
+			Spectate.chooseSpectateTarget(comp, BACKWARDS);
+		} else if (ply.KeyPressed(IN_JUMP) && ply.shouldFreeRoam()) {
+			ply.UnSpectate();
+			ply.Spectate(OBS_MODE_ROAMING);
+			comp.spec_next = 1;
+		}
+		return if (revive) {
+			comp.deathTime = ALIVE;
+			ply.UnSpectate();
+			ply.Spawn();
+			true;
+		} else {
+			false;
+		}
+	}
+
+	override function IsSpawnpointSuitable(ply:GPlayerCompat, spawnpoint:Entity, makeSuitable:Bool):Bool {
+		var pos = spawnpoint.GetPos();
+		var blockers = EntsLib.FindInBox(pos + new Vector(-30, -30, 0), pos + new Vector(30, 30, 72));
+		var tracehit = UtilLib.TraceEntity({
+			start: pos,
+			endpos: pos + new Vector(1, 1, 1),
+		}, ply);
+		for (ent in blockers) {
+			if (ent.IsPlayer()) {
+				var blockPly:GPlayerCompat = cast ent;
+				blockPly.setWalkthroughable(true);
+				blockPly.id.add_component(new Walkthroughable());
+				ply.setWalkthroughable(true);
+				ply.id.add_component(new Walkthroughable());
+				// ply.setWalkthroughable(true);
+			} else {
+				// return false;
+				// return false;
+			}
+		}
+		if (tracehit.HitWorld) {
+			trace("not valid..");
+			return false;
+		}
+		return true;
+	}
+
+	override function PlayerSelectSpawn(ply:Player, transition:Bool):Entity {
+		var spawns = EntsLib.FindByClass("info_player_start");
+		// trace(spawns.length());
+		// Gmod.PrintTable(spawns);
+		var random_spawn = MathLib.random(spawns.length());
+		// for (spawn in spawns) {
+		if (IsSpawnpointSuitable(ply, spawns[random_spawn], false)) {
+			return spawns[random_spawn];
+		}
+		// }
+		trace("Could not find a spawn!");
+		return null;
+	}
+
+	override function EntityTakeDamage(target:GEntCompat, dmg:CTakeDamageInfo):Bool {
+		switch (target.has_id()) {
+			case Some(id):
+				SignalStorage.entDamageTrigger.trigger({
+					vicID: id,
+					dmg: dmg,
+					entity: target
+				});
+			default:
+		}
+		return null;
+	}
+
+	override function PlayerSay(sender:Player, text:String, teamChat:Bool):String {
+		return "aaaaple";
+	}
+
+	override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<A_GmPlayerCanHearPlayersVoiceReturn> {
+		return {
+			a: false,
+			b: false
+		};
+	}
+	#end
 }

@@ -1,5 +1,3 @@
 package deceptinfect.infection;
 
-class Queen extends Component {
-    
-}
+class Queen extends Component {}

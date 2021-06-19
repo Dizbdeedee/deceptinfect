@@ -2,6 +2,4 @@ package deceptinfect.statuses;
 
 import deceptinfect.ecswip.Component;
 
-class Sabotaged extends Component {
-    
-}
+class Sabotaged extends Component {}

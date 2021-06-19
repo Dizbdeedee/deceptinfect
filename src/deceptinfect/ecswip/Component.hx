@@ -4,12 +4,7 @@ package deceptinfect.ecswip;
 @:autoBuild(deceptinfect.macros.ComponentMacro.build())
 @:keepSub
 class Component {
+	public function new() {}
 
-    public function new() {
-        
-    }
-
-    function onRemove() {
-	
-    }
+	function onRemove() {}
 }

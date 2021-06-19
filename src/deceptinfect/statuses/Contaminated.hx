@@ -1,5 +1,3 @@
 package deceptinfect.statuses;
 
-class Contaminated extends Component {
-
-}
+class Contaminated extends Component {}

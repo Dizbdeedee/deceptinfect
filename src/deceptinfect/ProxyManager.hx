@@ -1,9 +1,5 @@
 package deceptinfect;
 
 class ProxyManager {
-
-    
-    public static function newProxy() {
-	
-    }
+	public static function newProxy() {}
 }

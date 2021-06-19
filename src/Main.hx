@@ -20,49 +20,48 @@ import deceptinfect.ents.Di_puddle;
 import deceptinfect.ents.Di_spitball;
 import deceptinfect.weapons.Weapon_di_spit;
 import deceptinfect.game.SpawnSystemNav;
+
 #if client
 #end
 class Main {
+	public static function main() {
+		deceptinfect.Trace.overridetrace();
+		new DeceptInfect();
+		#if client
+		for (ply in PlayerLib.GetAll()) {
+			new GPlayerCompat(new PlayerComponent(ply));
+		}
+		#end
 
-    public static function main() {
-        deceptinfect.Trace.overridetrace();
-        new DeceptInfect();
-        #if client
-        for (ply in PlayerLib.GetAll()) {
-            new GPlayerCompat(new PlayerComponent(ply));
-        }
-        #end
-
-        
-        FileLib.CreateDir("deceptinfect");
-        GameLib.CleanUpMap();
-        SignalStorage.initEvents();
-        GameManager.init();
-        for (model in Misc.roundModels) {
-            UtilLib.PrecacheModel(model);
-        }
-        #if server
-        // new deceptinfect.TestObject();
-        #end
-        #if client
-        // deceptinfect.TestObject;
-        #end
-        SpawnSystem.generateSpawns();
-        UtilLib.PrecacheModel(Misc.infModel);
-        #if client
-        new ClientOverrides();
-        SabotagePanel.register();
-        SystemManager.initAllSystems();
-        #end
-        #if server
-        GameLib.ConsoleCommand("mp_falldamage 1\n");
-        GameManager.cleanup();  
-        #end
-        MathLib.randomseed(Gmod.RealTime()); //FIXME
-        #if server
-        #end
-        // gmod.macros.GenEnts.genEnts();
-        // gmod.macros.GenEnts.genAutos();
-        trace("Deceptinfect server reinit!");
-    }
+		FileLib.CreateDir("deceptinfect");
+		GameLib.CleanUpMap();
+		SignalStorage.initEvents();
+		GameManager.init();
+		for (model in Misc.roundModels) {
+			UtilLib.PrecacheModel(model);
+		}
+		#if server
+		// new deceptinfect.TestObject();
+		#end
+		#if client
+		// deceptinfect.TestObject;
+		#end
+		SpawnSystem.generateSpawns();
+		UtilLib.PrecacheModel(Misc.infModel);
+		#if client
+		new ClientOverrides();
+		SabotagePanel.register();
+		SystemManager.initAllSystems();
+		#end
+		#if server
+		GameLib.ConsoleCommand("mp_falldamage 1\n");
+		GameManager.cleanup();
+		#end
+		MathLib.randomseed(Gmod.RealTime()); // FIXME
+		#if server
+		#end
+		// gmod.macros.GenEnts.genEnts();
+		// gmod.macros.GenEnts.genAutos();
+		trace("Deceptinfect server reinit!");
+	}
 }

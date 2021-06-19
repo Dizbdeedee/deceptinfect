@@ -1,15 +1,13 @@
 package deceptinfect.sabotage;
 
 class Sabotage {
+	static var nextid = 0;
 
-    static var nextid = 0;
-    final id:SabotageID;
+	final id:SabotageID;
 
-    public function new() {
-        id = nextid++;
-    }
+	public function new() {
+		id = nextid++;
+	}
 }
 
-abstract SabotageID(Int) from Int to Int {
-
-}
+abstract SabotageID(Int) from Int to Int {}

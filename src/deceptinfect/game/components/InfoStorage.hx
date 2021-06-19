@@ -1,7 +1,3 @@
 package deceptinfect.game.components;
 
-
-class InfoStorage extends Component {
-
-
-}
+class InfoStorage extends Component {}

@@ -1,6 +1,3 @@
 package deceptinfect.infection.components;
 
-class SpectateComponent extends Component {
-    
-
-}
+class SpectateComponent extends Component {}

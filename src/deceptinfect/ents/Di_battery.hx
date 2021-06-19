@@ -9,65 +9,64 @@ import deceptinfect.game.BatterySystem;
 import deceptinfect.ecswip.SystemManager.getSystem;
 
 @:keep
-class Di_battery extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM>  {
+class Di_battery extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
+	public final properties:EntFields = {
+		Base: "base_anim",
+	}
 
-    public final properties:EntFields = {
-        Base: "base_anim",
-        
-    }
+	#if client
+	override function Draw(flags:Float) {
+		self.DrawModel();
+	}
+	#end
 
-    #if client
-    override function Draw(flags:Float) {
-        self.DrawModel();
-    }
-    #end
-    
-    #if server
-    
-    
-    var lastplayer:Player = null;
+	#if server
+	var lastplayer:Player = null;
 
-    public var id:DI_ID = null;
+	public var id:DI_ID = null;
 
-    var added = false;
+	var added = false;
 
-    public var spawnLoc:Spawn;
-    override function Initialize() {
-        self.SetModel("models/items/car_battery01.mdl");
-        self.PhysicsInit(SOLID_VPHYSICS);
-       
-        var physob = self.GetPhysicsObject();
-        if (IsValid(physob)) {
-            physob.Wake();
-        }
-        self.SetUseType(SIMPLE_USE);
-        var ent = new GEntCompat(self);
-        id = ent.id;
-        id.add_component(new BatterySource());
+	public var spawnLoc:Spawn;
 
-    }
+	override function Initialize() {
+		self.SetModel("models/items/car_battery01.mdl");
+		self.PhysicsInit(SOLID_VPHYSICS);
 
-    override function Use(activator:Entity, caller:Entity, useType:Float, value:Float) {
-        if (self.IsPlayerHolding() || !activator.IsPlayer()) {return;}
-        var _activator:Player = cast activator;
-        _activator.PickupObject(self);
-        lastplayer = _activator;
-    }
+		var physob = self.GetPhysicsObject();
+		if (IsValid(physob)) {
+			physob.Wake();
+		}
+		self.SetUseType(SIMPLE_USE);
+		var ent = new GEntCompat(self);
+		id = ent.id;
+		id.add_component(new BatterySource());
+	}
 
-    override function Touch(entity:GEntCompat) {
-        //trace(id);
-        if (added) {return;} 
-        switch (entity.has_id()) {
-        case Some(otherID):
-            var result = getSystem(BatterySystem).addBattery(id,otherID);
-            if (result) {
-                added = true;
-                trace("Battery added :)");
-                self.Remove();
-            }
-        default:
-        }
-    }
-    #end
+	override function Use(activator:Entity, caller:Entity, useType:Float, value:Float) {
+		if (self.IsPlayerHolding() || !activator.IsPlayer()) {
+			return;
+		}
+		var _activator:Player = cast activator;
+		_activator.PickupObject(self);
+		lastplayer = _activator;
+	}
+
+	override function Touch(entity:GEntCompat) {
+		// trace(id);
+		if (added) {
+			return;
+		}
+		switch (entity.has_id()) {
+			case Some(otherID):
+				var result = getSystem(BatterySystem).addBattery(id, otherID);
+				if (result) {
+					added = true;
+					trace("Battery added :)");
+					self.Remove();
+				}
+			default:
+		}
+	}
+	#end
 }
-

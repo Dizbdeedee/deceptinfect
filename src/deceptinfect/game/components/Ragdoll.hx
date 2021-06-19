@@ -5,16 +5,13 @@ import deceptinfect.infection.InfectionComponent.INF_STATE;
 import deceptinfect.util.Cooldown;
 
 class Ragdoll extends Component {
+	var reveal:RagdollReveal = NO_REVEAL;
 
-    var reveal:RagdollReveal = NO_REVEAL;
-
-    var owner:DI_ID;
-
+	var owner:DI_ID;
 }
 
-
 enum RagdollReveal {
-    WAIT(time:Ref<Float>);
-    REVEAL;
-    NO_REVEAL;
+	WAIT(time:Ref<Float>);
+	REVEAL;
+	NO_REVEAL;
 }

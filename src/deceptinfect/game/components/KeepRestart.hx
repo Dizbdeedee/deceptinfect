@@ -1,5 +1,3 @@
 package deceptinfect.game.components;
 
-class KeepRestart extends Component {
-    
-}
+class KeepRestart extends Component {}

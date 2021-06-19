@@ -1,6 +1,3 @@
 package deceptinfect.game.components;
 
-class FlareComponent extends Component {
-
-    
-}
+class FlareComponent extends Component {}

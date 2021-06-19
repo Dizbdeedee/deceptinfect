@@ -1,5 +1,3 @@
 package deceptinfect.game.components;
 
-class InEvacZone extends Component {
-
-}
+class InEvacZone extends Component {}
