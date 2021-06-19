@@ -73,14 +73,10 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	var underperforming = false;
 
 	@:exposeGM function checkPerformance() {
+		
 		if ((1 / Gmod.FrameTime()) < 66.6) {
 			PrintTimer.print_time(5, () -> trace("Server is underperforming! ${1 / Gmod.FrameTime()}"));
 		}
-		// underperforming = true;
-		// } else if (underperforming) {
-		//     trace("Server recovered");
-		//     underperforming = false;
-		// }
 	}
 
 	override function OnEntityCreated(entity:Entity) {
@@ -138,15 +134,10 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 
 	override function PlayerSpawn(player:GPlayerCompat, transition:Bool) {
 		player.UnSpectate();
-
 		player.SetModel(Misc.roundModels[MathLib.random(0, Misc.roundModels.length - 1)]); // TODO make random models
-		// player.SetWalkthroughable
 		player.SetShouldServerRagdoll(true);
 		player.ShouldDropWeapon(true);
 		player.AllowFlashlight(true);
-		// if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
-
-		// }
 		switch (GameManager.state) {
 			case WAIT | SETTING_UP(_, _):
 				player.Give(Misc.roundWeapons[0]); // TODO random weapons

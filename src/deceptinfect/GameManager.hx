@@ -35,7 +35,7 @@ using deceptinfect.util.PlayerExt;
 
 import deceptinfect.infection.InfectionLookInfo;
 
-class GameManager implements enumExtractor.EnumExtractor {
+class GameManager {
 	public static var state(default, #if server set #else null #end):GAME_STATE = WAIT;
 
 	static var Game:GameInstance;
@@ -210,7 +210,6 @@ class GameManager implements enumExtractor.EnumExtractor {
 		for (ent in EntsLib.GetAll()) {
 			switch (ent.GetClass()) {
 				case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
-					trace("removing entiti");
 					ent.Remove();
 				default:
 			}
@@ -218,7 +217,7 @@ class GameManager implements enumExtractor.EnumExtractor {
 		// GameLib.CleanUpMap();
 		for (p in PlayerLib.GetAll()) {
 			new GPlayerCompat(new PlayerComponent(p));
-			p.KillSilent();
+			p.Kill();
 			p.Spawn();
 		}
 	}
@@ -247,23 +246,11 @@ class GameManager implements enumExtractor.EnumExtractor {
 		x.add_component(new DamagePenaltyHidden());
 		x.add_component(new InfectionLookInfo());
 		var c_inf = x.get_sure(InfectionComponent);
-		
-		// getSystem(InfectionSystem).makeInfected(x);
 		var c_accept = x.get_sure(GrabAccepter);
-		// x.remove_component(GrabAccepter);
 		c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
-		// trace(c_accept.grabState);
-		// var rad = ComponentManager.addEntity();
 		var rad = SystemManager.getSystem(RadSourceSystem).radSourceFromType(INF, x);
 		var rv = new RadVictim();
-		// x.add_com
-		// rad.add_component(rtn.c_radproduce);
-		// rad.add_component(rtn.c_contam);
 		rad.add_component(new VirtualPosition(ENT(x.get_sure(GEntityComponent).entity)));
-		// rad.add_component()
-		// var rad = RadiationProducer.createFromType(INF);
-		// rad.state = DISABLED;
-		// x.add_component(rad);
 	}
 
 	#if server

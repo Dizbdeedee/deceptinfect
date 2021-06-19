@@ -59,6 +59,7 @@ class InfectionSystem extends System {
 
 	static var infectionReport = 0.0;
 
+
 	override function run_server() {
 		var numPlayers = 0;
 		var totalInf = 0.0;

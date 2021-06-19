@@ -203,29 +203,4 @@ class ClientOverrides extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> {
 	}
 }
 
-
-// @:forward
-// @:transitive
-// abstract IterateArr<T>(LuaArray<T>) to LuaArray<T> {
-
-// 	public var length(get,set):Int;
-
-// 	public inline function get_length() {
-// 		return untyped this.length;
-// 	}
-
-// 	public inline function set_length(x:Int) {
-// 		return untyped this.length = x;
-// 	}
-
-// 	public inline function iterator():T {
-// 		return new IntIterator(1,length);
-// 	}
-
-// 	public inline function add() {
-
-// 	}
-
-// }
-
 #end

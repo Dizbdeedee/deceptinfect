@@ -30,6 +30,7 @@ import deceptinfect.weapons.Weapon_di_spit;
 import deceptinfect.game.SpawnSystemNav;
 import deceptinfect.Spread;
 import deceptinfect.Darken;
+
 class Main {
 
 	public static function main() {
