@@ -32,18 +32,8 @@ import deceptinfect.Spread;
 import deceptinfect.Darken;
 class Main {
 
-	
-	// public static var nethost:GmodNetHost;
-
 	public static function main() {
-		// nethost = new GmodNetHost();
-		#if server
-		FileLib.CreateDir("gmdebugdump");
-		// Gmod.collectgarbage("collect");
-		// Mri.DumpMemorySnapshot("gmdebugdump", "Before", -1);
-		#end
-		Spread;
-		deceptinfect.Trace.overridetrace();
+		
 		new DeceptInfect();
 		#if client
 		for (ply in PlayerLib.GetAll()) {
