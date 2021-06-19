@@ -1,0 +1,3 @@
+-cp /home/g/Documents/projects/gmodhaxe/gmodhaxe/src
+--main gmod.helpers.macros.PostCompileMacro
+--interp

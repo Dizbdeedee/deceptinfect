@@ -1,5 +1,6 @@
 package deceptinfect.infection.systems;
 
+import deceptinfect.macros.IterateEnt2;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.System;
@@ -64,59 +65,47 @@ class InfectionSystem extends System {
 	override function run_server() {
 		var numPlayers = 0;
 		var totalInf = 0.0;
-		for (x in 0...ComponentManager.entities) {
-			final entity:DI_ID = x;
-			switch (entity.get(InfectionComponent)) {
-				case Comp(infection = {acceptingInfection: ACCEPTING}):
-					switch [entity.get(PlayerComponent), entity.get(AliveComponent)] {
-						case [Comp(_), NONE]:
-							continue;
-						default:
-					}
-					switch (infection.infection) {
-						case NOT_INFECTED(inf):
-							var base = getBaseInfection(infection);
+		IterateEnt2.iterGet([InfectionComponent],
+		[c_inf = {acceptingInfection : ACCEPTING, infection : NOT_INFECTED(inf)}],
+		(ent) -> {
+			if (ent.has_comp(PlayerComponent) && !ent.has_comp(AliveComponent)) {
+				continue;
+			}
+			var base = getBaseInfection(c_inf);
+			var rate = switch (ent.get(RateComponent)) {
+				case Comp(rate):
+					calcInfectionFromRates(rate);
+				default:
+					c_inf.rate;
+			}
+			rate += 1;
 
-							var rate = switch (entity.get(RateComponent)) {
-								case Comp(rate):
-									calcInfectionFromRates(rate);
-								default:
-									infection.rate;
-							}
-							rate += 1;
-
-							var vun = switch (entity.get(InfVunerability)) {
-								case Comp(c_v):
-									c_v.vun;
-								default:
-									1;
-							}
-							inf.value += base * rate * vun;
-							if (Gmod.CurTime() > infectionReport) {
-								trace('$base $rate $vun');
-							}
-							fixUpInfection(infection);
-							switch (entity.get(PlayerComponent)) {
-								case Comp(ply):
-									net_inf.send({infection: inf.value}, ply.player, true);
-									totalInf += infection.getInfValue();
-									numPlayers++;
-								default:
-							}
-							infection.rate = rate;
-							switch (infection.infection) {
-								case INFECTED:
-									onInfected(entity);
-								default:
-							}
-						// trace(infection.rate);
-						default:
-							totalInf += infection.getInfValue();
-							numPlayers++;
-					}
+			var vun = switch (ent.get(InfVunerability)) {
+				case Comp(c_v):
+					c_v.vun;
+				default:
+					1;
+			}
+			inf.value += base * rate * vun;
+			if (Gmod.CurTime() > infectionReport) {
+				trace('$base $rate $vun');
+			}
+			fixUpInfection(c_inf);
+			switch (ent.get(PlayerComponent)) {
+				case Comp(ply):
+					net_inf.send({infection: inf.value}, ply.player, true);
+					totalInf += c_inf.getInfValue();
+					numPlayers++;
 				default:
 			}
-		}
+			c_inf.rate = rate;
+			switch (c_inf.infection) {
+				case INFECTED:
+					onInfected(ent);
+				default:
+			}
+
+		});
 		if (numPlayers > 0) {
 			averageInfection = totalInf / numPlayers;
 		}

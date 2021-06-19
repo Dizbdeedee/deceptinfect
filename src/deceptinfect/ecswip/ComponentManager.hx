@@ -73,15 +73,12 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 		return this[5] = x;
 	}
 
-	
-
 	public function new() {
 		this = new LuaArray();
 		external = new LuaArray();
 		internal = new LuaArray();
 		components = new LuaArray();
 		n = 1;
-		// n_entities = 0;
 
 	}
 
@@ -93,7 +90,10 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 	}
 
 	public function remove_entity_comp(x:DI_ID) {
-		final last_index = n--;
+		if (!has_component(x)) {
+			return;
+		}
+		final last_index = --n;
 		final int_id = external[x];
 		final last_ent_id = internal[last_index];
 		internal[int_id] = internal[last_index];
@@ -119,58 +119,28 @@ abstract ComponentStorage(LuaArray<Component_<Dynamic>>) {
 		this = new LuaArray();
 	}
 
+	// public var external(get,set):LuaArray<Int>;
+
 	@:op([])
 	function get(x:Int):Component_<Dynamic>;
 	@:op([])
 	function set(x:Int,v:Component_<Dynamic>):Component_<Dynamic>;
 
-	// @:op([])
-	// function get_<T:Component>(x:ComponentID<T>):Component_<T> {
-	// 	return cast this[x];
-	// }
-	// @:op([])
-	// function set_<T:Component>(x:ComponentID<T>,v:Component_<T>):Component_<T> {
-	// 	return cast this[x] = v;
-	// }
-
-
-	public inline function get_component<T:Component>(x:ComponentID<T>):Component_<T> {
+	public extern inline function get_component<T:Component>(x:ComponentID<T>):Component_<T> {
 		return cast this[x];
 	}
 
-	
-	public function initComponent(id:Int) {
+	public extern inline function initComponent(id:Int) {
 		this[id] = new Component_();
 	}
 
-	public function getFamily(family:Array<Int>) {
-		// var lowest = Math.POSITIVE_INFINITY;
-		// var lowest_comps = null;
-		// for (fam in family) {
-		// 	final comps = this[fam];
-		// 	if (comps.n < lowest) {
-		// 		lowest = comps.n;
-		// 		lowest_comps = comps;
-		// 	}
-		// }
-		// final comp1 = this[1];
-		// for (int_id in 1...lowest_comps.n) {
-		// 	final di_id:DI_ID = lowest_comps.internal[int_id];
-		// 	// final comp_lowest = lowest_comps.components[int_id];
-		// 	if (comp1.has_component(di_id) && comp2.has_component(di_id) && comp3.has_component(di_id)) {
-
-		// 	}
-		// }
-	}
-
-	
 }
+
+
 
 class ComponentManager {
 
 	public static var components_3(default,null):ComponentStorage;
-
-	public static var components_2(default, null):Array<ComponentArray>;
 
 	public static var componentSignals(default, null):Array<SignalTrigger<SCompAddSignal>> = [];
 
@@ -199,33 +169,39 @@ class ComponentManager {
 
 	static var lastID:Int;
 
-	public static function initComponent(id:Int) {
-		if (components_2 == null)
-			components_2 = [];
-		if (lastID == null)
-			lastID = 0;
-		if (id > lastID) {
-			for (i in lastID...id + 1) {
-				components_2[i] = [];
-			}
-			lastID = id;
+	public static function initComponent(id:Int,str:String) {
+		if (components_3 == null) {
+			components_3 = new ComponentStorage();
+		}
+		components_3.initComponent(id);
+	}
+	
+	/**
+		. **Deprecated**
+	**/
+	public static inline function getComponentForID<T:Component>(id:ComponentID<T>, diID:DI_ID):ComponentState<T> {
+		return switch (components_3[id].has_component(diID)) {
+			case false:
+				NONE;
+			case true:
+				Comp(components_3[id].get_component(diID));
 		}
 	}
 
-	
-
-	public static inline function getComponentForID<T:Component>(id:ComponentID<T>, diID:DI_ID):ComponentState<T> {
-		return cast components_2[id][diID];
-	}
 
 	public static inline function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
-		components_2[id][to] = Comp(x);
+		components_3[id].init_entity(to,x);
 		lookupEntity.set(x, to);
 		return x;
 	}
 
 	public static inline function getIDFromComponent(comp:Component):DI_ID {
 		return lookupEntity.get(comp);
+	}
+
+	public static inline function has_component(id:ComponentID<Dynamic>, diID:DI_ID):Bool {
+		return components_3[id].external[diID] != null;
+
 	}
 
 	public static function getCreateSignal<T:Component>(cls:ComponentID<T>):Signal<CompAddSignal<T>> {
@@ -237,17 +213,21 @@ class ComponentManager {
 		return cast sigtrig.asSignal();
 	}
 
+	/** What... Depercated**/
 	public static function getComponentForIDSure<T:Component>(id:ComponentID<T>, diID:DI_ID):T {
-		final comp:T = cast components_2[id][diID].getParameters()[0];
-		if (comp == null) {
-			throw "Component did not exist at sure statement!";
-		}
-		return comp;
+		
+		final fam = components_3.get_component(id);
+		if (!fam.has_component(diID)) throw "Component did not exist at sure statement!";
+		return fam.get_component(diID);
 	}
 
 	@:privateAccess(deceptinfect.ecswip.Component)
+	/**
+		Deprecated
+	**/
 	public static function removeComponent<T:Component>(id:ComponentID<T>, diID:DI_ID) {
-		return components_2[id][diID] = removing(components_2[id][diID]);
+		removing(cast getComponentForID(id, diID)); //we don't use this anyway...
+		components_3[id].remove_entity_comp(diID);	
 	}
 
 	inline static function removing(x:ComponentState<Component>) {
@@ -268,32 +248,20 @@ class ComponentManager {
 			default:
 		}
 		#end
-		for (component in components_2) {
-			component[x] = removing(component[x]);
+		for (component in components_3) {
+			if (component.has_component(x)) {
+				component.remove_entity_comp(x);
+			}
 		}
 		activeEntities--;
-	}
-
-	public static function addToAllCompArrays(x:DI_ID) {
-		for (compArray in components_2) {
-			compArray[x] = NONE;
-		}
 	}
 
 	public static function addEntity():DI_ID {
 		final id = entities++;
 		activeEntities++;
-		addToAllCompArrays(id);
 		return id;
 	}
 
-	// public static function addEntity3():DI_ID {
-	// 	com
-	// }
-
-	// public static function initComponent3(id:Int) { 
-		
-	// }
 }
 
 abstract Entities(Int) from Int to Int {

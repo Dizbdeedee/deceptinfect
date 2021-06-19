@@ -126,6 +126,13 @@ class DI_ID_Use {
 		#end
 	}
 
+	public static macro function has_comp(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>) {
+		#if macro
+		final idMacro = ClassToID.idMacro(cls);
+		return macro deceptinfect.ecswip.ComponentManager.has_component($idMacro, $diid);
+		#end
+	}
+
 	public static macro function get_sure(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>) {
 		#if macro
 		final idMacro = ClassToID.idMacro(cls);

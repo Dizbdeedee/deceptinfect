@@ -6,16 +6,19 @@
 -D generateLuaInit
 -D analyzer-optimize
 -D profile
--dce full
+-D printBuildIdent
+-D noGenInit
+--dce full
 -lib singlePatternSwitch
 --times
-#-D gmodAddonFolder=/home/steam/.steam/SteamApps/common/GarrysModDS/garrysmod/addons/
+-D gmodAddonFolder=/home/g/gmodDS/garrysmod/addons/
 -D macro-times
 -lib hxbit
--D debug
+--debug
 -lib safety
 -lib tink_core
 -lib gmodhaxe
 -lib no-spoon
 --macro gmod.helpers.macros.InitMacro.init()
+--cmd haxe -lib gmodhaxe --run gmod.helpers.macros.PostCompileMacro
 -main Main

@@ -5,7 +5,7 @@ import deceptinfect.ecswip.Component;
 import deceptinfect.SeralizableRef;
 
 class InfectionComponent extends Component {
-	@:s public var infection(default, set):INF_STATE = NOT_INFECTED(0.0);
+	public var infection(default, set):INF_STATE = NOT_INFECTED(0.0);
 	public var rate:Float = 1;
 
 	public var player:SeraliazablePlayer;

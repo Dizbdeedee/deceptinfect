@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.macros.IterateEnt2;
 import deceptinfect.infection.components.GrabbableProp;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.util.Cooldown;
@@ -108,110 +109,91 @@ class GrabSystem extends System {
 	}
 
 	override function run_server() {
-		for (x in 0...ComponentManager.entities) {
-			final attack:DI_ID = x;
-			switch [attack.get(GrabProducer), attack.get(GEntityComponent)] {
-				case [Comp(c_produce), Comp(_.entity => g_attack)]:
-					switch (c_produce.grabState) {
-						case READY(SEARCHING):
-							for (x in 0...ComponentManager.entities) {
-								final victim:DI_ID = x;
-								if (attack != victim) {
-									switch [
-										victim.get(GrabAccepter),
-										victim.get(VirtualPosition),
-										victim.get(AliveComponent),
-										victim.get(GrabbableProp)
-									] {
-										case [Comp(_), Comp({pos: vicPos}), Comp(_), _] | [Comp(_), Comp({pos: vicPos}), _, Comp(_)]:
-											if (vicPos.Distance(g_attack.GetPos()) < c_produce.grabDist) {
-												attemptTarget(attack, victim);
-												// trace('attempting target ${c_produce.grabState}');
-												switch (c_produce.grabState) {
-													case READY(TARGET(newTarget)) if (newTarget == victim):
-														break;
-													case GRABBING(_):
-														break;
-													default:
-												}
-											}
-										default:
-									}
+		IterateEnt2.iterGet([GrabProducer,GEntityComponent],
+		[c_produce, {entity : g_attack}],
+		(attack) -> {
+			switch (c_produce.grabState) {
+				case READY(SEARCHING):
+					IterateEnt2.iterGet([GrabAccepter,VirtualPosition],
+						[_,{pos : vicPos}],
+						(victim) -> {
+							if (victim == attack) continue;
+							if (!victim.has_comp(AliveComponent) && !victim.has_comp(GrabbableProp)) continue;
+							if (vicPos.Distance(g_attack.GetPos()) < c_produce.grabDist) {
+								attemptTarget(attack, victim);
+								// trace('attempting target ${c_produce.grabState}');
+								switch (c_produce.grabState) {
+									case READY(TARGET(newTarget)) if (newTarget == victim):
+										break;
+									case GRABBING(_):
+										break;
+									default:
 								}
 							}
-						case READY(TARGET(prevVic)):
-							var prevPos = prevVic.get_sure(VirtualPosition).pos;
-							var oldDist = prevPos.Distance(g_attack.GetPos());
-							if (oldDist > c_produce.grabDist) {
-								c_produce.grabState = READY(SEARCHING);
-								break;
-							}
-							attemptSneakAttack(attack, prevVic);
-							for (x in 0...ComponentManager.entities) {
-								final victim:DI_ID = x;
-								if (victim != prevVic && attack != victim) {
-									switch [
-										victim.get(GrabAccepter),
-										victim.get(VirtualPosition),
-										victim.get(AliveComponent),
-										victim.get(GrabbableProp)
-									] {
-										case [Comp(_), Comp({pos: vicPos}), Comp(_), _] | [Comp(_), Comp({pos: vicPos}), _, Comp(_)]:
-											var newDist = vicPos.Distance(g_attack.GetPos());
-											if (newDist < oldDist && newDist < c_produce.grabDist) {
-												// trace('switching targets ${victim}');
-												attemptTarget(attack, victim);
-												switch (c_produce.grabState) {
-													case READY(TARGET(newTarget)) if (newTarget == victim):
-														trace('switching targets $newTarget');
-														break;
-													case GRABBING(_):
-														break;
-													default:
-												}
-											}
-										default:
-									}
-								}
-							}
-						case GRABBING(victim):
-							// trace('grabbing ${c_produce.grabState}');
-
-							var g_vic = switch (victim.get(GEntityComponent)) {
-								case Comp(gent):
-									gent.entity;
-								default:
-									return;
-							}
-							var filter = Gmod.RecipientFilter();
-							filter.AddPVS(g_attack.GetPos());
-							filter.AddPVS(g_vic.GetPos());
-							net_grabupdate.sendFilter({
-								index: c_produce.grabindex,
-								ent: g_vic,
-								ent2: g_attack
-							}, filter, true);
-							switch (victim.get(InfectionComponent)) {
-								case Comp({infection: NOT_INFECTED(inf)}):
-									inf.value += calcGrabIncrease();
-								case Comp({infection: INFECTED}):
-									trace("infected");
-									grabStop(attack);
-									var c_accept = victim.get_sure(GrabAccepter);
-									c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
-								default:
-									// throw "Victim has no infection component..";
-							}
-
-						case NOT_READY(COOLDOWN(cool)) if (Gmod.CurTime() > cool):
-							c_produce.grabState = READY(NOT_SEARCHING);
-
-						default:
+						});
+					
+				case READY(TARGET(prevVic)):
+					var prevPos = prevVic.get_sure(VirtualPosition).pos;
+					var oldDist = prevPos.Distance(g_attack.GetPos());
+					if (oldDist > c_produce.grabDist) {
+						c_produce.grabState = READY(SEARCHING);
+						break;
 					}
+					attemptSneakAttack(attack, prevVic);
+					IterateEnt2.iterGet([GrabAccepter,VirtualPosition],
+					[_, {pos : vicPos}],
+					(victim) -> {
+						if (victim == prevVic || attack == victim) continue;
+						if (!victim.has_comp(AliveComponent) && !victim.has_comp(GrabbableProp)) continue;
+						var newDist = vicPos.Distance(g_attack.GetPos());
+						if (newDist < oldDist && newDist < c_produce.grabDist) {
+							// trace('switching targets ${victim}');
+							attemptTarget(attack, victim);
+							switch (c_produce.grabState) {
+								case READY(TARGET(newTarget)) if (newTarget == victim):
+									trace('switching targets $newTarget');
+									break;
+								case GRABBING(_):
+									break;
+								default:
+							}
+						}
+					});
+				case GRABBING(victim):
+					var g_vic = switch (victim.get(GEntityComponent)) {
+						case Comp(gent):
+							gent.entity;
+						default:
+							return;
+					}
+					var filter = Gmod.RecipientFilter();
+					filter.AddPVS(g_attack.GetPos());
+					filter.AddPVS(g_vic.GetPos());
+					net_grabupdate.sendFilter({
+						index: c_produce.grabindex,
+						ent: g_vic,
+						ent2: g_attack
+					}, filter, true);
+					
+					switch (victim.get(InfectionComponent)) {
+						case Comp({infection: NOT_INFECTED(inf)}):
+							inf.value += calcGrabIncrease();
+						case Comp({infection: INFECTED}):
+							trace("infected");
+							grabStop(attack);
+							// var c_accept = victim.get_sure(GrabAccepter);
+							// c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
+						default:
+							// throw "Victim has no infection component..";
+					}
+					1;
 
+				case NOT_READY(COOLDOWN(cool)) if (Gmod.CurTime() > cool):
+					c_produce.grabState = READY(NOT_SEARCHING);
+					
 				default:
 			}
-		}
+		});
 	}
 
 	static function grabStop(attack:DI_ID) {

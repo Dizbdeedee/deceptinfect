@@ -32,19 +32,11 @@ class RadiationSystem extends System {
 	}
 
 	#if server
-	override function run_server() {
-        [1,2,3].createFromArray();
-		
-        IterateEnt2.iterGet([RadiationAccepter, RateComponent, VirtualPosition, RadVictim],
-			[accept_accept, rate_comp, {pos : pos}, _], () -> {
-				trace(pos);
-				
-
-		});
-        IterateEnt.iterGet([RadiationAccepter, RateComponent, VirtualPosition, RadVictim], 
+	override function run_server() {		
+        IterateEnt2.iterGet([RadiationAccepter, RateComponent, VirtualPosition, RadVictim], 
             [accept_accept, accept_rate, {pos : accept_pos}, _], () -> {
 			accept_accept.radiation.clear();
-            IterateEnt.iterGet([RadiationProducer, VirtualPosition, RadSource], 
+            IterateEnt2.iterGet([RadiationProducer, VirtualPosition, RadSource], 
                 [produce_produce, {pos : produce_pos}, _], (produce) -> {
 				var dist = produce_pos.Distance(accept_pos);
 

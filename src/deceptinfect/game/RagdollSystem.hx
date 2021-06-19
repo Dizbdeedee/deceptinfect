@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+// import hxbit.NetworkSerializable;
 import deceptinfect.util.VectorString;
 import deceptinfect.util.AngleString;
 import deceptinfect.infection.InfectionComponent;
@@ -343,7 +344,6 @@ class RagdollSystem extends System {
 		ent.SetPos(plyr.GetPos());
 		// ent.AddEffects(EF_BONEMERGE);
 		// ent.AddEffects(EF_BONEMERGE_FASTCULL);
-		trace("hmm i wonder whats for dinner");
 		// ent.SetParent(plyr);
 		ent.Spawn();
 		for (physNum in 0...ent.GetPhysicsObjectCount() - 1) {

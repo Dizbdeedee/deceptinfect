@@ -42,6 +42,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
 		// ragdoll.Remove();
 		ragdoll.SetNoDraw(true);
+	
 	}
 	#end
 
@@ -54,6 +55,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	var lastcrc:Int = 0;
 
 	override function Think() {
+		
 		// var nethost = Main.nethost;
 		SystemManager.runAllSystems();
 		#if server
@@ -138,6 +140,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		// player.SetWalkthroughable
 		player.SetShouldServerRagdoll(true);
 		player.ShouldDropWeapon(true);
+		player.AllowFlashlight(true);
 		// if (GameManager.state.match(WAIT | SETTING_UP(_,_)) ) {
 
 		// }

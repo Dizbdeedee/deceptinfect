@@ -1,0 +1,32 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+        
+            "type": "gmdebug",
+            "request": "launch",
+            "name": "gmdebug : Launch server",
+            "serverFolder": "/home/g/gmodDS/garrysmod/",
+            "programArgs": [
+                "+gamemode",
+                "deceptinfect",
+                "+map",
+                "mor_temple_v1",
+                
+                "+sv_lan",
+                "1",
+                "+sv_password",
+                "iouiou"
+            ],
+            "clientFolders": [
+                "/home/g/.local/share/Steam/steamapps/common/GarrysMod/garrysmod/"
+            ],
+            "programPath": "auto",
+            "autoConnectLocalGmodClient": true
+            
+        }
+    ]
+}

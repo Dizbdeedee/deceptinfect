@@ -17,7 +17,7 @@ class ComponentMacro {
 		}
 		final typ = Context.toComplexType(Context.getLocalType());
 		// trace('init $cls with $id');
-		final initexpr = macro deceptinfect.ecswip.ComponentManager.initComponent($v{id});
+		final initexpr = macro deceptinfect.ecswip.ComponentManager.initComponent($v{id},$v{clsType.name});
 		fields.push({
 			name: "compID",
 			access: [AFinal, APublic, AStatic, AInline],

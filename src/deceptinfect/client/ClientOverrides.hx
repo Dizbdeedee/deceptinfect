@@ -40,8 +40,11 @@ class ClientOverrides extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> {
 	override function PreDrawOpaqueRenderables(isDrawingDepth:Bool, isDrawSkybox:Bool):Bool {
 		// RenderLib.SetColorMaterial();
 		// RenderLib.SetColorModulation(0,0,0);
-		// GrabSystem.drawCylinders();
 		
+		GrabSystem.drawCylinders();
+		// RenderLib.SetMaterial();
+		// RenderLib.MaterialOverride(Gmod.Material("color").a);
+		// RenderLib.BrushMaterialOverride(Gmod.Material("color").a);
 		return null;
 	}
 
@@ -50,12 +53,12 @@ class ClientOverrides extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> {
 		if (vectors == null) {
 			vectors = new LuaArrayFast();
 			var tbl:AnyTable = untyped GameLib.GetWorld().GetBrushSurfaces();
-			for (si in tbl) {
+			for (id => si in tbl) {
 				// final si:Dynamic = exdee;
 				// final ftbl:LuaArrayFast<Vector> = new LuaArrayFast();
 				final vtbl:LuaArray<Vector> = si.GetVertices();
-				// final isnodraw:Bool = si.IsNoDraw();
-				// if (isnodraw) continue;
+				final isnodraw:Bool = si.IsNoDraw();
+				if (isnodraw) continue;
 				final len = vtbl.length();
 				final remain = len % 3;
 				final upto = Math.floor(len / 3);
@@ -63,85 +66,122 @@ class ClientOverrides extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> {
 				if (len < 3) {
 					continue;
 				}
-				if (remain == 0) {
+				// if (remain == 0) {
+					DebugoverlayLib.Line(vtbl[1],vtbl[vtbl.length()],120);
 					DebugoverlayLib.Cross(vtbl[1],2,120,Gmod.Color(255,0,0));
 					DebugoverlayLib.Cross(vtbl[vtbl.length()],5,120,Gmod.Color(0,255,0));
 					// DebugoverlayLib.Cross(vtbl[1],2,120,Gmod.Color(255,0,0));
 					// DebugoverlayLib.Cross(vtbl[vtbl.length()],5,120,Gmod.Color(0,255,0));
-				} else if (remain == 1) {
+				// } else if (remain == 1) {
 					
 					// DebugoverlayLib.Cross(vtbl[1],2,120,Gmod.Color(0,255,0));
-				} else {
+				// } else {
 					
-				}
+				// }
 				
 				DebugoverlayLib.Text(vtbl[1],Gmod.tostring(vtbl.length()),120,false);
-				if (len == 3) {
-					vectors.add(vtbl[1]);
+				// if (len == 3) {
+				// 	vectors.add(vtbl[1]);
+				// 	vectors.add(vtbl[3]);
+				// 	vectors.add(vtbl[2]);
+				// 	vectors.add(vtbl[2]);
+				// 	continue;
+				// }
+				final uno = vtbl[2] - vtbl[1];
+				final uno2 = uno.Cross(vtbl[3] - vtbl[1]);
+				// trace('normal $uno2');
+				final x = GameLib.GetWorld().GetBrushPlane(id - 1);
+				final windingA = x.b.Dot(uno2) > 0;
+				
+				if (windingA) {
 					vectors.add(vtbl[3]);
 					vectors.add(vtbl[2]);
+					vectors.add(vtbl[1]);
+					vectors.add(vtbl[1]);
+				} else {
+					vectors.add(vtbl[1]);
 					vectors.add(vtbl[2]);
-					continue;
+					vectors.add(vtbl[3]);
+					vectors.add(vtbl[3]);
 				}
-				vectors.add(vtbl[1]);
-				vectors.add(vtbl[3]);
-				vectors.add(vtbl[2]);
-				vectors.add(vtbl[2]);
+				
 				// vectors.add(vtbl[1]);
 				// vectors.add(vtbl[3]);
 				// vectors.add(vtbl[2]);
 				// vectors.add(vtbl[2]);
 				for (i in 1...upto) {
-					vectors.add(vtbl[1]);
-					vectors.add(vtbl[i * 3]); //0
-					vectors.add(vtbl[i * 3 + 1]); //1 
-					vectors.add(vtbl[i * 3 + 2]); //2
-					vectors.add(vtbl[1]);
-					vectors.add(vtbl[i*3+1]);
-					vectors.add(vtbl[i*3+2]);
-					vectors.add(vtbl[i*3+3]);
+
+					if (!windingA) {
+						vectors.add(vtbl[1]); //0
+						vectors.add(vtbl[i * 3]); //1
+						vectors.add(vtbl[i * 3+1]); //2 
+						vectors.add(vtbl[i * 3+2]); //3
+						vectors.add(vtbl[1]);
+						vectors.add(vtbl[i*3+1]);
+						vectors.add(vtbl[i*3+2]);
+						vectors.add(vtbl[i*3+3]);
+					} else {
+						vectors.add(vtbl[i*3+2]); //0
+						vectors.add(vtbl[i*3+1]); //1
+						vectors.add(vtbl[i*3]); //2 
+						vectors.add(vtbl[1]); //3
+						vectors.add(vtbl[i*3+3]);
+						vectors.add(vtbl[i*3+2]);
+						vectors.add(vtbl[i*3+1]);
+						vectors.add(vtbl[1]);
+					}
+					
 				}
-				if (remain == 1) {
-					vectors.add(vtbl[1]);
-					vectors.add(vtbl[upto*3]);
-					vectors.add(vtbl[upto*3+1]);
-					vectors.add(vtbl[upto*3+1]);
-				} else if (remain == 2) {
-					vectors.add(vtbl[1]);
-					vectors.add(vtbl[upto*3]);
-					vectors.add(vtbl[upto*3+1]);
-					vectors.add(vtbl[upto*3+2]);
-					// vectors.add(vtbl[1]);
-					// vectors.add(vtbl[upto*3+1]);
-					// vectors.add(vtbl[upto*3+2]);
-					// vectors.add(vtbl[upto*3+2]);
-				}
+				// if (remain == 1) {
+				// 	vectors.add(vtbl[1]);
+				// 	vectors.add(vtbl[upto*3]);
+				// 	vectors.add(vtbl[upto*3+1]);
+				// 	vectors.add(vtbl[upto*3+1]);
+				// } else if (remain == 2) {
+				// 	vectors.add(vtbl[1]);
+				// 	vectors.add(vtbl[upto*3]);
+				// 	vectors.add(vtbl[upto*3+1]);
+				// 	vectors.add(vtbl[upto*3+2]);
+				// 	// vectors.add(vtbl[1]);
+				// 	// vectors.add(vtbl[upto*3+1]);
+				// 	// vectors.add(vtbl[upto*3+2]);
+				// 	// vectors.add(vtbl[upto*3+2]);
+				// }
 			}
 
 		}
 		return vectors;
 	}
+
+
 	
 
 	override function PostDrawTranslucentRenderables(bDrawingDepth:Bool, bDrawingSkybox:Bool) {
 		if (bDrawingDepth || bDrawingSkybox) return;
+		// var b:Int = cast GameLib.GetWorld().GetBrushPlaneCount();
+		// RenderLib.SetColorMaterial();
+		// for (i in 0...b) {
+		// 	var box = GameLib.GetWorld().GetBrushPlane(i);
+			
+		// 	RenderLib.DrawQuadEasy(box.a,box.b,10,10,Gmod.Color(0,0,0));
+		// }
 		// CamLib.Start3D();
 		// CamLib.IgnoreZ(true);
-		RenderLib.SetColorMaterial();
-		final getVec:LuaArrayFast<Vector> = getVectors();
-		var total = getVec.length;
-		var i = 1;
-		var c = Gmod.Color(0,0,0,200);
-		while (i <= total) {
+		// RenderLib.SetColorMaterial();
+		// final getVec:LuaArrayFast<Vector> = getVectors();
+		// var total = getVec.length;
+		// var i = 1;
+		// var c = Gmod.Color(0,0,0,200);
+		// while (i <= total) {
 			
-			RenderLib.DrawQuad(getVec[i],getVec[i + 1],getVec[i + 2],getVec[i + 3],c);
-			i += 4;
-		}
-		// var gayness = 0;
-		// for (i in 1...untyped getVec._len) {
-		// 	RenderLib.DrawQuad(i)
+		// 	RenderLib.DrawQuad(getVec[i],getVec[i + 1],getVec[i + 2],getVec[i + 3],c);
+		// 	i += 4;
 		// }
-		CamLib.IgnoreZ(false);
+		// // var gayness = 0;
+		// // for (i in 1...untyped getVec._len) {
+		// // 	RenderLib.DrawQuad(i)
+		// // }
+		// CamLib.IgnoreZ(false);
 		// CamLib.End3D();
 	}
 	

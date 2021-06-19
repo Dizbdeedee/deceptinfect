@@ -131,7 +131,7 @@ class IterateEnt2 {
         final comparisons = comparisons(getArr);
 
         final expr = insert(macro {
-            @:noCompletion final __compArr = deceptinfect.ecswip.ComponentManager.components_3;
+            final __compArr = deceptinfect.ecswip.ComponentManager.components_3;
             @:a(0) null;
             final __lowestInt = __compArr[__lowest_comp].internal;
 			for (__int_id in 1...__lowest) {
@@ -141,7 +141,7 @@ class IterateEnt2 {
                         case $cases:
                             $expr;
                         default:
-                            $i{name};
+                            null;
                     }
                 }
 				

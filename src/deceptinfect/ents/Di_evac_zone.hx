@@ -28,7 +28,9 @@ class Di_evac_zone extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_BRUSH> {
 	override function StartTouch(ent:GEntCompat) {
 		switch (ent.has_id()) {
 			case Some(ent_id):
-				getSystem(EvacSystem).touched(ent_id, id.get_sure(EvacZone));
+				if (id.has_comp(EvacZone)) {
+					getSystem(EvacSystem).leave(ent_id, id.get_sure(EvacZone));
+				}
 			default:
 		}
 	}
@@ -36,7 +38,9 @@ class Di_evac_zone extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_BRUSH> {
 	override function EndTouch(ent:GEntCompat) {
 		switch (ent.has_id()) {
 			case Some(ent_id):
-				getSystem(EvacSystem).leave(ent_id, id.get_sure(EvacZone));
+				if (id.has_comp(EvacZone)) {
+					getSystem(EvacSystem).leave(ent_id, id.get_sure(EvacZone));
+				}
 			default:
 		}
 	}

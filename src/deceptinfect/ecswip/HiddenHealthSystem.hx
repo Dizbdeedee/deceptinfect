@@ -22,15 +22,6 @@ class HiddenHealthSystem extends GeigerSystem {
 		var g_attacker:GEntCompat = data.dmg.GetAttacker();
 		if (!g_attacker.IsPlayer())
 			return;
-		// IterateEnt.iter([ent.get(HiddenHealthComponent),ent.get(GEntityComponent),ent.get(DamagePenaltyHidden)],
-		// [c_hidHealth,g_victim,c_dmgpnlty],
-		// (ent) -> {
-		//     trace(ent);
-
-		// });
-		IterateEnt.iterGet([HiddenHealthComponent, GEntityComponent, DamagePenaltyHidden], [c_hidHealth, g_victim, c_dmgpnlty], (gaywayd) -> {
-			trace(c_dmgpnlty.damagepenalty);
-		});
 		victim.m_getAll([HiddenHealthComponent, GEntityComponent, g_attacker.get(DamagePenaltyHidden)], [c_hidHealth, g_victim, c_dmgpnlty], () -> {
 			var damageVal = data.dmg.GetDamage();
 			var health = g_victim.entity.Health();
