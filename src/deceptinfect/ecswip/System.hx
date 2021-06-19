@@ -1,7 +1,6 @@
 package deceptinfect.ecswip;
 
 using Safety;
-@:using(deceptinfect.ecswip.System.System_Use)
 @:autoBuild(deceptinfect.macros.SystemMacro.build())
 class System {
 	#if client

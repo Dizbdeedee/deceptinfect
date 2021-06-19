@@ -17,11 +17,6 @@ class LowHealthSystem extends System {
 					}
 				default:
 			}
-			@as(ent.get(PlayerComponent) => Comp(c_ply)) {
-				
-				
-				// c_ply.player.SetWalkSpeed(remap(225,))
-			}
 		}
 	}
 	#end

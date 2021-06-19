@@ -427,9 +427,6 @@ class RagdollSystem extends System {
 		rag.SetModel(owner.GetModel());
 		rag.Spawn();
 		rag.id.get_sure(Ragdoll).owner = owner.id;
-		// var inertia = owner.GetPhysicsObject().GetInertia();
-		// trace(inertia);
-		// var vel =owner.GetVelocity();
 		for (physNum in 0...rag.GetPhysicsObjectCount() - 1) {
 			var physob = rag.GetPhysicsObjectNum(physNum);
 			var oldphysob = old.GetPhysicsObjectNum(physNum);
