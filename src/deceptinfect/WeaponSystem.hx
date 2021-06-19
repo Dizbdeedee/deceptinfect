@@ -10,6 +10,7 @@ class WeaponSystem extends System {
     var currentStage:WeaponStage = INITAL;
 
     var timevalues:Map<WeaponStage,Float> = [
+	INITAL => 0.0,				     
         TWO => 2.0,
         THREE => 5.0,
         FINAL => 8.0
@@ -17,7 +18,7 @@ class WeaponSystem extends System {
 
     var weapons_give:Map<WeaponStage,Array<Weapons>> = [
 
-        INITAL => [weapon_mor_usp],
+        INITAL => [weapon_mor_p229],
         TWO => [weapon_mor_ump],
         THREE => [],
         FINAL => []

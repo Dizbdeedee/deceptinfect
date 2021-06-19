@@ -54,7 +54,8 @@ class DeceptInfect extends gmod.gamemode.GMBuild<gmod.gamemode.GM> implements de
     }
     #end
     var lastcrc:Int = 0;
-    @:spam override function Think() {
+
+    override function Think() {
         var nethost = Main.nethost;
         SystemManager.runAllSystems();
         #if server

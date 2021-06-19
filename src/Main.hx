@@ -6,6 +6,7 @@ import deceptinfect.game.SpawnSystem;
 import gmod.types.Vector;
 import gmod.libs.*;
 import deceptinfect.ecswip.*;
+import deceptinfect.ents.*;
 #if client
 import deceptinfect.client.SabotagePanel;
 #end

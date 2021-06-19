@@ -219,7 +219,6 @@ class GrabSystem extends System {
         }
         var vicPos = vic.get_sure(VirtualPosition).pos;
         var c_accept = vic.get_sure(GrabAccepter);
-        //c_produce.grab = null;
         
         c_produce.grabState = NOT_READY(COOLDOWN(Gmod.CurTime() + 2)); //change
         //c_accept.grabState = NOT_GRABBED;
@@ -344,6 +343,7 @@ class GrabSystem extends System {
         return (100 / GameValues.GRAB_TIME) / Math.floor(1 / EngineLib.TickInterval());
     }
     static function target(attacker:DI_ID,victim:DI_ID) {
+
         var c_accept = victim.get_sure(GrabAccepter);
         var c_produce = attacker.get_sure(GrabProducer);
         c_accept.targeting.set(c_produce,true);

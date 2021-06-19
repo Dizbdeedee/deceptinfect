@@ -35,7 +35,7 @@ class Di_nest extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
         var c_nest = id.get_sure(NestComponent);
         for (ent in entities) {
             switch [ent.get(PlayerComponent),ent.get(InfectedComponent),id.get(NestComponent)] {
-            case [Comp(ply),_,Comp(_.nestState => VISIBLE)]:
+	    case [Comp(ply),_,Comp({nestState : VISIBLE})]:
                 self.SetPreventTransmit(ply.player,false);
             case [Comp(ply),Comp(_),Comp(_)]:
                 self.SetPreventTransmit(ply.player,false);

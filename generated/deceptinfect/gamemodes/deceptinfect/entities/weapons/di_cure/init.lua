@@ -7,7 +7,7 @@ Ammo = "None",
 AddCSLuaFile("cl_init.lua")
 
 function SWEP:Initialize()
-	local ent = deceptinfect.di_cure.new(self)
+	local ent = __deceptinfect_ents.di_cure.new(self)
 	self._gHaxeBurrow = ent
 	self._gHaxeBurrow:Initialize()
 end
