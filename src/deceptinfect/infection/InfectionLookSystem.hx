@@ -1,4 +1,4 @@
-package deceptinfect.infection.systems;
+package deceptinfect.infection;
 
 import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.gclass.Entity.EntityGetHitBoxBoundsReturn;

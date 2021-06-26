@@ -18,9 +18,19 @@ typedef SCompAddSignal = {
 	comp:Component
 }
 
+typedef SCompRemoveSignal = {
+	ent:DI_ID,
+	comp:Component
+}
+
 typedef CompAddSignal<T:Component> = {
 	ent:DI_ID,
 	comp:T
+}
+
+typedef CompRemoveSignal<T:Component> = {
+	ent:DI_ID,
+	comp:T 
 }
 
 @:transitive
@@ -28,6 +38,10 @@ abstract ComponentID<T:Component>(Int) from Int to Int {
 	// extern inline function new<T:Component>(int:Int,x:Class<T>) {
 	// 	this = int;
 	// }
+	@:to
+	public function toString():String {
+		return ComponentManager.components_3.getName(this);
+	}
 }
 
 
@@ -38,6 +52,10 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 	public var internal(get,set):LuaArray<Int>;
 
 	public var components(get,set):LuaArray<Component>;
+
+	public var signalAdd(get,set):SignalTrigger<CompAddSignal<Component>>;
+
+	public var signalRemove(get,set):SignalTrigger<CompRemoveSignal<Component>>;
 
 	public var n(get,set):Int;
 
@@ -59,6 +77,14 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 		return this[5];
 	}
 
+	inline function get_signalAdd() {
+		return this[6];
+	}
+
+	inline function get_signalRemove() {
+		return this[7];
+	}
+
 	inline function set_external(x:LuaArray<Int>) {
 		return this[1] = x;
 	}
@@ -74,14 +100,36 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 	inline function set_n_entities(x:Int) {
 		return this[5] = x;
 	}
+	inline function set_signalAdd(x:Signal<Dynamic>) {
+		return this[6] = x;
+	}
+	inline function set_signalRemove(x:Signal<Dynamic>) {
+		return this[7] = x;
+	}
+
 
 	public function new() {
 		this = new LuaArray();
 		external = new LuaArray();
 		internal = new LuaArray();
 		components = new LuaArray();
+		signalAdd = new SignalTrigger();
+		signalRemove = new SignalTrigger();
 		n = 1;
+		
 
+	}
+
+	public inline function get_active():Int {
+		return n - 1;
+	}
+
+	public inline function getAddSignal():Signal<CompAddSignal<T>> {
+		return cast signalAdd.asSignal();
+	}
+
+	public inline function getRemoveSignal():Signal<CompRemoveSignal<T>> {
+		return cast signalRemove.asSignal();
 	}
 
 	public function init_entity(x:DI_ID,comp:Component) {
@@ -89,9 +137,11 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 		external[x] = int_id;
 		internal[int_id] = x;
 		components[int_id] = comp;
+		signalAdd.trigger({ent: x, comp: comp});
 	}
 
 	public function set_component(x:DI_ID,comp:Component) {
+		signalAdd.trigger({ent: x, comp: comp});
 		components[external[x]] = comp;
 	}
 
@@ -99,6 +149,7 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 		if (!has_component(x)) {
 			return;
 		}
+		signalRemove.trigger({ent: x, comp: components[external[x]]});
 		final last_index = --n;
 		final int_id = external[x];
 		final last_ent_id = internal[last_index];
@@ -118,14 +169,18 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 
 }
 
+
+
 @:forward
-abstract ComponentStorage(LuaArray<Component_<Dynamic>>) {
+abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) {
 
 	public function new() {
 		this = new LuaArray();
+		// getByName = new Map<Int,String>();
+
 	}
 
-	// public var external(get,set):LuaArray<Int>;
+	// public var getByName(get,set):Map<Int,String>;
 
 	@:op([])
 	function get(x:Int):Component_<Dynamic>;
@@ -136,8 +191,21 @@ abstract ComponentStorage(LuaArray<Component_<Dynamic>>) {
 		return cast this[x];
 	}
 
-	public extern inline function initComponent(id:Int) {
+	// inline function get_getByName() {
+	// 	return untyped this.getByName;
+	// }
+
+	// inline function set_getByName(x) {
+	// 	return untyped this.getByName = x;
+	// }
+
+	public extern inline function initComponent(id:Int,str) {
 		this[id] = new Component_();
+		// getByName.set(id,str);
+	}
+
+	public extern inline function getName(id:Int) {
+		return ComponentManager.componentsName.get(id); //ARGH
 	}
 
 }
@@ -148,7 +216,8 @@ class ComponentManager {
 
 	public static var components_3(default,null):ComponentStorage;
 
-	public static var componentSignals(default, null):Array<SignalTrigger<SCompAddSignal>> = [];
+	public static var componentsName(default,null):Map<Int,String> = new Map();
+
 
 	public static var entities:Entities = 0; // default,null
 
@@ -183,7 +252,9 @@ class ComponentManager {
 		if (components_3 == null) {
 			components_3 = new ComponentStorage();
 		}
-		components_3.initComponent(id);
+		if (componentsName == null) componentsName = new Map();
+		componentsName.set(id,str);
+		components_3.initComponent(id,str);
 	}
 	
 	/**
@@ -215,6 +286,7 @@ class ComponentManager {
 		if (x is ReplicatedComponent) {
 			switch (getComponentForID(ReplicatedEntity.compID,to)) {
 				case Comp(replEnt):
+					trace('replcomponent added to replentity ${x.getCompID()} to $to');
 					replEnt.ids.set(x.getCompID(),true);
 				default:
 					
@@ -224,6 +296,7 @@ class ComponentManager {
 				if (componentArr.has_component(to)) {
 					final comp = componentArr.get_component(to);
 					if (comp is ReplicatedComponent) {
+						trace('replentity added and updated ${(comp : ReplicatedComponent).getCompID()}');
 						(cast x : ReplicatedEntity).ids.set((comp : ReplicatedComponent).getCompID(),true);
 					}
 				}
@@ -248,13 +321,14 @@ class ComponentManager {
 
 	}
 
-	public static function getCreateSignal<T:Component>(cls:ComponentID<T>):Signal<CompAddSignal<T>> {
-		var sigtrig = componentSignals[cls];
-		if (sigtrig == null) {
-			sigtrig = new SignalTrigger();
-			componentSignals[cls] = sigtrig;
-		}
-		return cast sigtrig.asSignal();
+	public static inline function getAddSignal<T:Component>(cls:ComponentID<T>):Signal<CompAddSignal<T>> {
+		return components_3.get_component(cls).getAddSignal();
+		
+	}
+
+	public static inline function getRemoveSignal<T:Component>(cls:ComponentID<T>):Signal<CompRemoveSignal<T>> {
+		return components_3.get_component(cls).getRemoveSignal();
+
 	}
 
 	
@@ -268,24 +342,10 @@ class ComponentManager {
 		#end
 	}
 
-	@:privateAccess(deceptinfect.ecswip.Component)
-	/**
-		Deprecated
-	**/
-	public static function removeComponent<T:Component>(id:ComponentID<T>, diID:DI_ID) {
-		removing(cast getComponentForID(id, diID)); //we don't use this anyway...
+	public static function removeComponent<T:Component>(id:ComponentID<T>, diID:DI_ID) {	
 		components_3[id].remove_entity_comp(diID);	
 	}
 
-	inline static function removing(x:ComponentState<Component>) {
-		return switch (x) {
-			case Comp(comp):
-				comp.onRemove();
-				ComponentState.NONE;
-			default:
-				x;
-		}
-	}
 
 	public static function removeEntity(x:DI_ID) {
 		#if server
@@ -295,10 +355,8 @@ class ComponentManager {
 			default:
 		}
 		#end
-		for (component in components_3) {
-			
+		for (id => component in components_3) {
 			component.remove_entity_comp(x);
-			
 		}
 		activeEntities--;
 	}
@@ -307,6 +365,11 @@ class ComponentManager {
 		final id = entities++;
 		activeEntities++;
 		return id;
+	}
+	
+	@:expose("COMP_NAME")
+	static function getComponentName(id) {
+		return components_3.getName(id);
 	}
 
 }
@@ -321,8 +384,6 @@ abstract Entities(Int) from Int to Int {
 @:using(deceptinfect.macros.ClassToID.DI_ID_Use)
 abstract DI_ID(Int) from Int to Int {
 	
-	public extern inline function destroy() {}
-
 	inline function new(x:Int) {
 		this = x;
 	}

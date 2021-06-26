@@ -5,8 +5,9 @@ import deceptinfect.ecswip.Component;
 import deceptinfect.radiation.ContaminationAccepter;
 
 class RadiationAccepter extends Component {
-	public var radiation:Map<DI_ID, Float> = []; // fill in
 	public var diminish:Float = 0.75;
+
+	var rate:Float = 0;
 
 	public function new(options:RadAcceptOptions) {
 		super();

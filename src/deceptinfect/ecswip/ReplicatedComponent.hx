@@ -2,12 +2,20 @@ package deceptinfect.ecswip;
 
 import deceptinfect.game.ClientTranslateSystem;
 
+@:autoBuild(deceptinfect.macros.ReplicatedComponentMacro.build())
 abstract class ReplicatedComponent extends Component implements hxbit.Serializable {
 
     #if server
-    var replicated:ReplicatedTarget = NONE;
+    var replicated(default,set):ReplicatedTarget = NONE;
 
     var unreliable:Bool = false;
+
+    var fieldsChanged = true;
+
+    public function set_replicated(x) {
+        fieldsChanged = true;
+        return replicated = x;
+    }
     
     public inline extern function send(target:ReplicatedTarget,?unreliable:Bool) {
         ClientTranslateSystem.get().enqueueComponent(this,target,unreliable);

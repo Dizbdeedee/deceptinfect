@@ -12,7 +12,7 @@ import deceptinfect.infection.components.GrabAccepter;
 import deceptinfect.infection.components.GrabProducer;
 import deceptinfect.infection.components.GrabDraw;
 import deceptinfect.infection.InfectionComponent;
-import deceptinfect.infection.systems.InfectionSystem;
+import deceptinfect.infection.InfectionSystem;
 
 using deceptinfect.util.EntityExt;
 

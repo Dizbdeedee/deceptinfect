@@ -1,5 +1,7 @@
-package deceptinfect.infection.systems;
+package deceptinfect.infection;
 
+import deceptinfect.radiation.RadiationAccepter;
+import deceptinfect.radiation.RadiationRate;
 import deceptinfect.game.GeigerCounter;
 import deceptinfect.macros.IterateEnt2;
 import deceptinfect.game.components.AliveComponent;
@@ -48,9 +50,9 @@ class InfectionSystem extends System {
 				continue;
 			}
 			var base = getBaseInfection(c_inf);
-			var rate = switch (ent.get(RateComponent)) {
+			var rate = switch (ent.get(RateAccepter)) {
 				case Comp(rate):
-					calcInfectionFromRates(rate);
+					calcInfectionFromRates(rate,ent);
 				default:
 					c_inf.rate;
 			}
@@ -85,7 +87,7 @@ class InfectionSystem extends System {
 		if (numPlayers > 0) {
 			IterateEnt2.iterGet([InfectionManager],[infMan],() -> {
 				infMan.averageInfection = totalInf / numPlayers;
-			})
+			});
 		}
 		if (Gmod.CurTime() > infectionReport) {
 			infectionReport = Gmod.CurTime() + 5;
@@ -108,15 +110,29 @@ class InfectionSystem extends System {
 		}
 	}
 
-	static function calcInfectionFromRates(rate:RateComponent):Float {
+	static function calcInfectionFromRates(rate:RateAccepter,target:DI_ID):Float {
 		var total = 0.0;
 		var totalmulti = 1.0;
-		for (rate in rate.addRates) {
-			total += rate;
+		IterateEnt2.iterGet([Rate],[{affecting : affecting, value : value, multiplier : multi}],function () {
+			if (affecting == target) {
+				if (!multi) {
+					total += value;
+				} else {
+					totalmulti += value;
+				}
+			}
+		});
+		switch (target.get(RadiationAccepter)) {
+			case Comp(c_radAccept):
+				total += c_radAccept.rate;
+			default:
 		}
-		for (multi in rate.multipliers) {
-			totalmulti += multi;
-		}
+		// for (rate in rate.addRates) {
+		// 	total += rate;
+		// }
+		// for (multi in rate.multipliers) {
+		// 	totalmulti += multi;
+		// }
 		return total * totalmulti;
 	}
 

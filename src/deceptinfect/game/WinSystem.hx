@@ -2,7 +2,7 @@ package deceptinfect.game;
 
 import deceptinfect.util.PrintTimer;
 import deceptinfect.ecswip.PlayerComponent;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.System;
 import deceptinfect.infection.InfectionComponent;

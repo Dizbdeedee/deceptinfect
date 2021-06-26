@@ -4,7 +4,7 @@ import deceptinfect.radiation.RadiationTypes.RadTypes;
 import deceptinfect.radiation.RadiationProducer;
 import gmod.helpers.sent.SentBuild;
 import deceptinfect.game.components.NestComponent;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import gmod.structs.TestCollisionData;
 

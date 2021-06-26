@@ -13,7 +13,6 @@ abstract class Component {
 
 	abstract function getCompID():Int;
 
-	function onRemove() {}
 }
 
 class ComponentTools {

@@ -1,6 +1,6 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SignalStorage;
@@ -9,7 +9,7 @@ import deceptinfect.infection.components.DamagePenaltyHidden;
 
 using deceptinfect.macros.IterateEnt;
 
-class HiddenHealthSystem extends GeigerSystem {
+class HiddenHealthSystem extends System {
 	#if server
 	override function init_server() {
 		SignalStorage.entDamageTrigger.clear();

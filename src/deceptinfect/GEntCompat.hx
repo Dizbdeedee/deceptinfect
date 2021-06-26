@@ -1,7 +1,7 @@
 package deceptinfect;
 
 import deceptinfect.ecswip.Component;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
 

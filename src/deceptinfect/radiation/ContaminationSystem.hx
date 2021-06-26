@@ -8,7 +8,16 @@ using deceptinfect.DistSquared.DistSqSafe;
 
 class ContaminationSystem extends System {
 	#if server
+
+	override function init_server() {
+		
+	}
+
+	function run_server_() {
+		// IterateEnt2.iterGet([ContaminationProducer,])
+	}
 	override function run_server() {
+		
 		IterateEnt2.iterGet([RadVictim,ContaminationAccepter,VirtualPosition],
 		[c_rv,c_contamAccept,{pos : victimPos}],
 		(vic) -> {
@@ -33,9 +42,17 @@ class ContaminationSystem extends System {
 										continue;
 									}
 								case SAME_SOURCE:
-									if (c_rv.affected.exists(c_rs.base)) {
+									var abort = false;
+									IterateEnt2.iterGet([RadSource],[{base : b}],() -> {
+										if (b == c_rs.base) {
+											abort = true;
+											break;
+										}
+									});
+
+									if (abort) {
 										switch [c_rs.state, c_rs.lifetime] {
-											case [ACTIVE(FINITE(removetime)), FINITE(time)]:
+											case [ACTIVE(FINITE(_)), FINITE(time)]:
 												c_rs.state = ACTIVE(FINITE(Gmod.CurTime() + time));
 											default:
 										}

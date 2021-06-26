@@ -8,13 +8,13 @@ import gmod.enums.SNDLVL;
 import gmod.enums.SND;
 import gmod.enums.CHAN;
 import deceptinfect.infection.components.GrabAccepter;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.game.RagdollSystem;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.statuses.Walkthroughable;
 import gmod.gamemode.GM.GmPlayerCanHearPlayersVoiceReturn;
 import gmod.enums.IN;
-import deceptinfect.infection.systems.InfectionSystem;
+import deceptinfect.infection.InfectionSystem;
 import deceptinfect.abilities.FormSystem;
 import deceptinfect.ecswip.GrabSystem;
 import deceptinfect.infection.InfectionComponent;
@@ -93,7 +93,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		
 		switch (ent.has_id()) {
 			case Some(id):
-				
+				trace('killing ent $id because gent is being removed');
 				ComponentManager.removeEntity(id);
 			default:
 		}

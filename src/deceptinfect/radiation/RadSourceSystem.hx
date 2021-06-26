@@ -54,7 +54,7 @@ class RadSourceSystem extends System implements EnumExtractor {
 			case x:
 				x;
 		};
-		attatchRad(rad, attatch);
+		attachRad(rad, attatch);
 		refreshTime(c_rs);
 		switch (rso.options) {
 			case BOTH(rpo, _) | RAD(rpo):
@@ -69,7 +69,7 @@ class RadSourceSystem extends System implements EnumExtractor {
 		return rad;
 	}
 
-	public function attatchRad(rad:DI_ID, vic:DI_ID) {
+	public function attatchRad_(rad:DI_ID, vic:DI_ID) {
 		var c_rs = rad.get_sure(RadSource);
 		c_rs.attatch = vic;
 		var c_rv = switch (vic.get(RadVictim)) {
@@ -95,7 +95,7 @@ class RadSourceSystem extends System implements EnumExtractor {
 		c_rs.attatch.getOrAdd(Contaminated);
 	}
 
-	public function disengage(radsource:DI_ID, vic:DI_ID) {
+	public function disengage_(radsource:DI_ID, vic:DI_ID) {
 		var c_rs = radsource.get_sure(RadSource);
 		c_rs.attatch = null;
 		@as(vic.get(RadVictim) => Comp(c_rv)) {
@@ -105,5 +105,30 @@ class RadSourceSystem extends System implements EnumExtractor {
 		}
 		radsource.remove_component(VirtualPosition);
 	}
+
+	public function disengage(radsource:DI_ID, vic:DI_ID) {
+		var c_rs = radsource.get_sure(RadSource);
+		c_rs.attatch = null;
+	}
+	
+	public function attachRad(rad:DI_ID, vic:DI_ID) {
+		
+		var c_rs = rad.get_sure(RadSource);
+		c_rs.attatch = vic;
+		var c_vir = switch [vic.get(VirtualPosition), vic.get(GEntityComponent)] {
+			case [Comp(c_vir), _]:
+				c_vir;
+			case [_, Comp(c_gent)]:
+				new VirtualPosition(ENT(c_gent.entity));
+			default:
+				trace('Could not attatch to ent $vic');
+				return;
+		}
+		rad.add_component(c_vir);
+		c_rs.attatch.getOrAdd(Contaminated);
+	}
+
+   
+	
 	#end
 }

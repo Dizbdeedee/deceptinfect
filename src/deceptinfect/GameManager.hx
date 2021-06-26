@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.infection.RateAccepter;
 import deceptinfect.radiation.RadSourceSystem;
 import deceptinfect.radiation.ContaminationProducer;
 import deceptinfect.radiation.RadVictim;
@@ -12,19 +13,18 @@ import deceptinfect.game.components.AliveComponent;
 import deceptinfect.ents.Di_entities;
 import deceptinfect.game.WinSystem;
 import deceptinfect.ecswip.SystemManager;
-import deceptinfect.infection.systems.InfectionSystem;
+import deceptinfect.infection.InfectionSystem;
 import deceptinfect.infection.components.DamagePenaltyHidden;
 import deceptinfect.abilities.FormComponent;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.radiation.RadiationProducer;
 import deceptinfect.infection.components.GrabProducer;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.radiation.ContaminationAccepter;
 import deceptinfect.infection.components.GrabAccepter;
 import deceptinfect.infection.components.HiddenHealthComponent;
-import deceptinfect.infection.RateComponent;
 import deceptinfect.infection.components.SpectateComponent;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
@@ -86,7 +86,7 @@ class GameManager {
 		// infcomp.replicated = SOME(CURRENT_PLAYER);
 		
 		final spec = new SpectateComponent();
-		final rate = new RateComponent();
+		final rate = new RateAccepter();
 		final vic = new RadVictim();
 		final contam = new ContaminationAccepter();
 		final health = new HiddenHealthComponent();

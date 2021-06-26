@@ -7,7 +7,7 @@ import deceptinfect.ecswip.GrabSystem;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.infection.InfectionComponent;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 import gmod.gclass.Vector;
 #if client

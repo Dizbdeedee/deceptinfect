@@ -1,6 +1,6 @@
 package deceptinfect.items;
 
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 
 class ScannerSystem extends System {

@@ -2,7 +2,7 @@ package deceptinfect.game;
 
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.PlayerComponent;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.ReplicatedComponent;
 import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.macros.IterateEnt2;
@@ -62,6 +62,7 @@ class ClientTranslateSystem extends System {
 
 	//TODO make it more efficient, use move instead of copy...
 	public static function updateEnt(x:Net_UpdateServerEnt) {
+		trace("uh huh");
 		for (ent in x.replEntities) {
 			// trace(ent);
 			// trace(ent);
@@ -144,6 +145,10 @@ class ClientTranslateSystem extends System {
 		
 	}
 
+	override function init_server() {
+		
+	}
+
 	override function run_server() {
 		final cr = new ClientReplicationMachine();
 		final unreliables = cr.iterate();
@@ -208,13 +213,32 @@ class ClientReplicationMachine {
 		IterateEnt2.iterGet([ReplicatedEntity],[{ids : arr}],
 			function (ent) {
 				added = [];
-				for (compID in arr.keys()) {
-					final repl:ReplicatedComponent = deceptinfect.ecswip.ComponentManager.components_3[compID].get_component(ent);
-					final players = replToPlayers(repl.replicated,ent);
-					for (ply in players) {
-						addToArray(ply,repl);
+				for (compStore in ComponentManager.components_3) {
+					if (compStore.has_component(ent)) {
+						var comp = compStore.get_component(ent);
+						if (comp is ReplicatedComponent) {
+							var repl:ReplicatedComponent = comp;
+							if (!repl.fieldsChanged) continue;
+							repl.fieldsChanged = false;
+							final players = replToPlayers(repl.replicated,ent);
+							for (ply in players) {
+								trace('sending to $ply');
+								addToArray(ply,repl);
+							}
+						}
 					}
 				}
+				// for (compID in arr.keys()) {
+				// 	final repl:ReplicatedComponent = deceptinfect.ecswip.ComponentManager.components_3[compID].get_component(ent);
+				// 	if (repl == null) {trace('${ComponentManager.components_3.getName(compID)} missing on ${ent}'); continue;}
+				// 	if (!repl.fieldsChanged) continue;
+					
+				// 	repl.fieldsChanged = false;
+				// 	final players = replToPlayers(repl.replicated,ent);
+				// 	for (ply in players) {
+				// 		addToArray(ply,repl);
+				// 	}
+				// }
 				for (ply => arr in added) {
 					final replEntities = sentArray.get(ply).orGet(() -> {final x:Net_UpdateServerEnt = {replEntities : []}; sentArray.set(ply,x); x;}).replEntities;
 					replEntities.push({
@@ -231,17 +255,36 @@ class ClientReplicationMachine {
 		function (ent) {
 			added = [];
 			addedReliable = [];
-			for (compID in arr.keys()) {
-				final repl:ReplicatedComponent = deceptinfect.ecswip.ComponentManager.components_3[compID].get_component(ent);
-				final players = replToPlayers(repl.replicated,ent);
-				for (ply in players) {
-					if (repl.unreliable) {
-						addToArray(ply,repl);
-					} else {
-						addToReliable(ply,repl);
+			for (compStore in ComponentManager.components_3) {
+				if (compStore.has_component(ent)) {
+					var comp = compStore.get_component(ent);
+					if (comp is ReplicatedComponent) {
+						var repl:ReplicatedComponent = comp;
+						if (!repl.fieldsChanged) continue;
+						repl.fieldsChanged = false;
+						final players = replToPlayers(repl.replicated,ent);
+						for (ply in players) {
+							if (repl.unreliable) {
+								addToArray(ply,repl);
+
+							} else {
+								addToReliable(ply,repl);
+							}
+						}
 					}
-				}	
+				}
 			}
+			// for (compID in arr.keys()) {
+			// 	final repl:ReplicatedComponent = deceptinfect.ecswip.ComponentManager.components_3[compID].get_component(ent);
+			// 	final players = replToPlayers(repl.replicated,ent);
+			// 	for (ply in players) {
+			// 		if (repl.unreliable) {
+			// 			addToArray(ply,repl);
+			// 		} else {
+			// 			addToReliable(ply,repl);
+			// 		}
+			// 	}	
+			// }
 			for (ply => arr in added) {
 				final replEntities = sentArray.get(ply).orGet(() -> {final x:Net_UpdateServerEnt = {replEntities : []}; sentArray.set(ply,x); x;}).replEntities;
 				replEntities.push({

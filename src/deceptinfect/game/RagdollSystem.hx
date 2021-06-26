@@ -13,7 +13,7 @@ import deceptinfect.GameManager.GAME_STATE;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ents.Di_entities;
 import deceptinfect.GEntCompat;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.game.components.RagInfo;

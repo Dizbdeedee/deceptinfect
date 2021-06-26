@@ -7,9 +7,9 @@ import gmod.helpers.net.NET_Server;
 import deceptinfect.game.components.EvacZone;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ents.Di_entities;
-import deceptinfect.infection.systems.InfectionSystem;
+import deceptinfect.infection.InfectionSystem;
 import deceptinfect.abilities.FormComponent;
-import deceptinfect.infection.InfectedComponent;
+import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 
 typedef NetData_Evac = {

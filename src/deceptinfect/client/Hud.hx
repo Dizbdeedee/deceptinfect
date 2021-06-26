@@ -34,7 +34,7 @@ class Hud {
 		}
 	}
 
-	// @:gmodHook(GMHook.HUDPaint)
+	@:gmodHook(GMHook.HUDPaint)
 	public static function paint() {
 		targetID();
 		infectionMeter();

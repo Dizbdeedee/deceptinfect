@@ -16,9 +16,25 @@ class ComponentMacro {
 			default:
 				throw "not a class";
 		}
+
 		final typ = Context.toComplexType(Context.getLocalType());
 		// trace('init $cls with $id');
 		final initexpr = macro deceptinfect.ecswip.ComponentManager.initComponent($v{id},$v{clsType.name});
+		fields.push({
+			name: "componentName",
+			access: [AFinal, APublic, AStatic, AInline],
+			kind: FVar(macro:String, macro $v{cls}),
+			pos: Context.currentPos()
+		});
+		fields.push({
+			name: "getComponentName",
+			access: [APublic],
+			kind: FFun({
+				args : [],
+				expr: macro return $v{cls}
+			}),
+			pos: Context.currentPos()
+		});
 		fields.push({
 			name: "compID",
 			access: [AFinal, APublic, AStatic, AInline],
@@ -34,7 +50,26 @@ class ComponentMacro {
 			}),
 			pos: Context.currentPos()
 		});
-
+		fields.push({
+			name: "getAddSignal",
+			access: [APublic,AStatic,AInline],
+			kind: FFun({
+				args: [],
+				expr: macro return cast ComponentManager.getAddSignal($v{id}),
+				ret: macro : tink.CoreApi.Signal<deceptinfect.ecswip.ComponentManager.CompAddSignal<$typ>>
+			}),
+			pos : Context.currentPos()
+		});
+		fields.push({
+			name: "getRemoveSignal",
+			access: [APublic,AStatic,AInline],
+			kind: FFun({
+				args: [],
+				expr: macro return cast ComponentManager.getRemoveSignal($v{id}),
+				ret: macro : tink.CoreApi.Signal<deceptinfect.ecswip.ComponentManager.CompRemoveSignal<$typ>>
+			}),
+			pos: Context.currentPos()
+		});
 		fields.push({
 			name: "__init__",
 			access: [AStatic],
