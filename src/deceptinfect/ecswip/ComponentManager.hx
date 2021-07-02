@@ -59,8 +59,6 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 
 	public var n(get,set):Int;
 
-	// var n_entities(get,set):Int;
-
 	inline function get_external() {
 		return this[1];
 	}
@@ -116,8 +114,6 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 		signalAdd = new SignalTrigger();
 		signalRemove = new SignalTrigger();
 		n = 1;
-		
-
 	}
 
 	public inline function get_active():Int {
@@ -141,8 +137,8 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 	}
 
 	public function set_component(x:DI_ID,comp:Component) {
-		signalAdd.trigger({ent: x, comp: comp});
 		components[external[x]] = comp;
+		signalAdd.trigger({ent: x, comp: comp});
 	}
 
 	public function remove_entity_comp(x:DI_ID) {
@@ -176,11 +172,8 @@ abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) {
 
 	public function new() {
 		this = new LuaArray();
-		// getByName = new Map<Int,String>();
 
 	}
-
-	// public var getByName(get,set):Map<Int,String>;
 
 	@:op([])
 	function get(x:Int):Component_<Dynamic>;
@@ -191,17 +184,8 @@ abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) {
 		return cast this[x];
 	}
 
-	// inline function get_getByName() {
-	// 	return untyped this.getByName;
-	// }
-
-	// inline function set_getByName(x) {
-	// 	return untyped this.getByName = x;
-	// }
-
 	public extern inline function initComponent(id:Int,str) {
 		this[id] = new Component_();
-		// getByName.set(id,str);
 	}
 
 	public extern inline function getName(id:Int) {
@@ -216,8 +200,7 @@ class ComponentManager {
 
 	public static var components_3(default,null):ComponentStorage;
 
-	public static var componentsName(default,null):Map<Int,String> = new Map();
-
+	public static var componentsName(default,null):Map<Int,String>;
 
 	public static var entities:Entities = 0; // default,null
 
@@ -283,26 +266,6 @@ class ComponentManager {
 
 	public static function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
 		final fam = components_3.get_component(id);
-		if (x is ReplicatedComponent) {
-			switch (getComponentForID(ReplicatedEntity.compID,to)) {
-				case Comp(replEnt):
-					trace('replcomponent added to replentity ${x.getCompID()} to $to');
-					replEnt.ids.set(x.getCompID(),true);
-				default:
-					
-			}
-		} else if (x is ReplicatedEntity) {
-			for (componentArr in components_3) {
-				if (componentArr.has_component(to)) {
-					final comp = componentArr.get_component(to);
-					if (comp is ReplicatedComponent) {
-						trace('replentity added and updated ${(comp : ReplicatedComponent).getCompID()}');
-						(cast x : ReplicatedEntity).ids.set((comp : ReplicatedComponent).getCompID(),true);
-					}
-				}
-			}
-		}
-		
 		if (!fam.has_component(id)) {
 			fam.init_entity(to,x);
 		} else {
@@ -369,7 +332,7 @@ class ComponentManager {
 	
 	@:expose("COMP_NAME")
 	static function getComponentName(id) {
-		return components_3.getName(id);
+		return componentsName.get(id);
 	}
 
 }

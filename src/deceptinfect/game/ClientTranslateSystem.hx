@@ -120,30 +120,6 @@ class ClientTranslateSystem extends System {
 
 	#if server
 
-	// public function sendOnce(target:ReplicateTargets,x:DI_ID) {
-		
-	// }
-
-	public function setReplicate(comp:ReplicatedComponent,target:ReplicatedTarget) {
-		final owner = comp.getOwner();
-		final repl = owner.getOrAdd(ReplicatedEntity);
-		if (target == NONE) {
-			repl.ids.remove(comp.getCompID());
-		} else {
-			repl.ids.set(comp.getCompID(),true);
-		}
-		
-	}
-
-	public function enqueueComponent(comp:ReplicatedComponent,target:ReplicatedTarget,?unreliable:Bool=false) {
-		if (target == NONE) throw "What's the next step of your master plan..?";
-		final owner = comp.getOwner();
-		final repl = owner.getOrAdd(ReplicateOnce);
-		comp.unreliable = unreliable;
-		repl.ids.set(comp.getCompID(),true);
-		
-	}
-
 	override function init_server() {
 		
 	}
@@ -211,7 +187,7 @@ class ClientReplicationMachine {
 	}
 
 	public function iterate():Map<Player,Net_UpdateServerEnt> {
-		IterateEnt2.iterGet([ReplicatedEntity],[{ids : arr}],
+		IterateEnt2.iterGet([ReplicatedEntity],[_],
 			function (ent) {
 				added = [];
 				for (compStore in ComponentManager.components_3) {
@@ -241,7 +217,7 @@ class ClientReplicationMachine {
 	}
 
 	public function iterateSendOnce() {
-		IterateEnt2.iterGet([ReplicateOnce],[{ids : arr}],
+		IterateEnt2.iterGet([ReplicateOnce],[_],
 		function (ent) {
 			added = [];
 			addedReliable = [];
