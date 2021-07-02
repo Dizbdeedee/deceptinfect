@@ -55,7 +55,7 @@ class ComponentMacro {
 			access: [APublic,AStatic,AInline],
 			kind: FFun({
 				args: [],
-				expr: macro return cast ComponentManager.getAddSignal($v{id}),
+				expr: macro return cast deceptinfect.ecswip.ComponentManager.getAddSignal($v{id}),
 				ret: macro : tink.CoreApi.Signal<deceptinfect.ecswip.ComponentManager.CompAddSignal<$typ>>
 			}),
 			pos : Context.currentPos()
@@ -65,7 +65,7 @@ class ComponentMacro {
 			access: [APublic,AStatic,AInline],
 			kind: FFun({
 				args: [],
-				expr: macro return cast ComponentManager.getRemoveSignal($v{id}),
+				expr: macro return cast deceptinfect.ecswip.ComponentManager.getRemoveSignal($v{id}),
 				ret: macro : tink.CoreApi.Signal<deceptinfect.ecswip.ComponentManager.CompRemoveSignal<$typ>>
 			}),
 			pos: Context.currentPos()

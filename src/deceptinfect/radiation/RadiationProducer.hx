@@ -22,14 +22,8 @@ class RadiationProducer extends Component {
 
 	public function new(options:RadiationProduceOptions) {
 		super();
-
 		maxrate = options.maxrate;
 		radius = options.radius;
-		// lifetime = options.lifetime;
-		// this.options = options;
-		// if (options.contaminate != null) {
-		//     contamProducer = Some(new ContaminationProducer(options.contaminate));
-		// }
 	}
 
 	public function copy() {}

@@ -6,11 +6,13 @@ import hxbit.Serializer;
 import deceptinfect.ecswip.Component;
 import deceptinfect.SeralizableRef;
 
+
+@:replicated(SOME(CURRENT_PLAYER))
 class InfectionComponent extends ReplicatedComponent {
 	@:s var infection(default, set):INF_STATE = NOT_INFECTED(0.0);
 
 	
-	var rate:Float = 1;
+	var rate:Float = 0;
 
 	var baseInfection:BaseInfection = USING_GLOBAL;
 	var onInfected(default, null):Signal<Noise>;
@@ -30,12 +32,6 @@ class InfectionComponent extends ReplicatedComponent {
 		return infection = x;
 	}
 
-	public function new() {
-		super();
-		#if server
-		replicated = SOME(CURRENT_PLAYER);
-		#end
-	}
 }
 
 typedef InfectionMessageInfo = {

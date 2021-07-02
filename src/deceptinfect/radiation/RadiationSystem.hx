@@ -1,5 +1,6 @@
 package deceptinfect.radiation;
 
+import haxe.ds.ArraySort;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.macros.IterateEnt2;
 
@@ -20,7 +21,9 @@ class RadiationSystem extends System {
 	#if server
 
 	override function init_server() {
+		trace(RadiationAccepter.getAddSignal());
 		RadiationAccepter.getAddSignal().handle((sig) -> {
+			trace("yo??");
 			IterateEnt2.iterGet([RadiationProducer],[_],
 			function (radProduceEnt) {
 				var c_radAffect = new RadiationAffecting();
@@ -30,6 +33,7 @@ class RadiationSystem extends System {
 				ComponentManager.addEntity().add_component(c_radAffect);
 			});
 		});
+		trace(RadiationAccepter.getAddSignal().handle);
 		RadiationProducer.getAddSignal().handle((sig) -> {
 			IterateEnt2.iterGet([RadiationAccepter],[_],
 			function (radAcceptEnt) {
@@ -58,6 +62,8 @@ class RadiationSystem extends System {
 		});
 	}
 
+	static final sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;
+
 	override function run_server() {
 		IterateEnt2.iterGet([RadiationAffecting],
 		[c_radAffect = {accepter : accepter, producer : producer}],
@@ -71,18 +77,18 @@ class RadiationSystem extends System {
 				default:
 			}
 		});
-		var sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;
 		IterateEnt2.iterGet([RadiationAccepter],
 		[c_radAccept],function (acceptEnt) {
-			var sorted = [];
+			var sorted:Array<Float> = [];
 			IterateEnt2.iterGet([RadiationAffecting],
 			[{accepter : accepter, value : val}],
 			function () {
 				if (accepter == acceptEnt) {
-					// sorted.push(val);
+					sorted.push(val);
 				}
 			});
 			sorted.sort(sortFunc);
+			// trace(sorted);
 			var total = .0;
 			for (i in 0...sorted.length) {
 				total = total + sorted[i] * Math.pow(c_radAccept.diminish, i);

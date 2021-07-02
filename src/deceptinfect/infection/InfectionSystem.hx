@@ -1,7 +1,6 @@
 package deceptinfect.infection;
 
 import deceptinfect.radiation.RadiationAccepter;
-import deceptinfect.radiation.RadiationRate;
 import deceptinfect.game.GeigerCounter;
 import deceptinfect.macros.IterateEnt2;
 import deceptinfect.game.components.AliveComponent;
@@ -20,8 +19,6 @@ class InfectionSystem extends System {
 	override function init_client() {
 
 	}
-
-	
 	#end
 
 	#if server
@@ -46,6 +43,7 @@ class InfectionSystem extends System {
 		IterateEnt2.iterGet([InfectionComponent],
 		[c_inf = {acceptingInfection : ACCEPTING, infection : NOT_INFECTED(inf)}],
 		(ent) -> {
+			c_inf.fieldsChanged = true; //we're using a proxy object
 			if (ent.has_comp(PlayerComponent) && !ent.has_comp(AliveComponent)) {
 				continue;
 			}
@@ -77,6 +75,7 @@ class InfectionSystem extends System {
 				default:
 			}
 			c_inf.rate = rate;
+			trace('cool: ' + c_inf.rate);
 			switch (c_inf.infection) {
 				case INFECTED:
 					onInfected(ent);
@@ -127,12 +126,7 @@ class InfectionSystem extends System {
 				total += c_radAccept.rate;
 			default:
 		}
-		// for (rate in rate.addRates) {
-		// 	total += rate;
-		// }
-		// for (multi in rate.multipliers) {
-		// 	totalmulti += multi;
-		// }
+		
 		return total * totalmulti;
 	}
 

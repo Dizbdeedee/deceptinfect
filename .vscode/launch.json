@@ -17,9 +17,7 @@
                 "mor_temple_v1",
                 
                 "+sv_lan",
-                "1",
-                "+sv_password",
-                "iouiou"
+                "1"
             ],
             "clientFolders": [
                 "/home/g/.local/share/Steam/steamapps/common/GarrysMod/garrysmod/"

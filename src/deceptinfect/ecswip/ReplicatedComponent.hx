@@ -17,13 +17,6 @@ abstract class ReplicatedComponent extends Component implements hxbit.Serializab
         return replicated = x;
     }
     
-    public inline extern function send(target:ReplicatedTarget,?unreliable:Bool) {
-        ClientTranslateSystem.get().enqueueComponent(this,target,unreliable);
-    }
-
-    public inline extern function replicate(target:ReplicatedTarget) {
-        ClientTranslateSystem.get().setReplicate(this,target);
-    }
     #end
 
     
@@ -31,6 +24,7 @@ abstract class ReplicatedComponent extends Component implements hxbit.Serializab
 }
 
 //custom targets, i.e people with tag?
+//follow option needed?
 enum ReplicatedTarget {
     NONE;
     SOME(target:SomeTargets);

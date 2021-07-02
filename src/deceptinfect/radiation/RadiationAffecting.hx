@@ -6,5 +6,5 @@ class RadiationAffecting extends Component {
 
     var producer:DI_ID;
 
-    var value:Float;
+    var value:Float = 0.0;
 }

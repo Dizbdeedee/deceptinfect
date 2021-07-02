@@ -17,7 +17,7 @@ class IterateEnt2 {
         }
     }
 
-    static function insert(block:haxe.macro.Expr,... exprs:Array<Expr>) {
+    public static function insert(block:haxe.macro.Expr,... exprs:Array<Expr>) {
         return switch (block) {
             case {expr: EBlock(blExp), pos : pos}:
                 {expr : EBlock(blExp.fold((curExpr,newBlock:Array<Expr>) -> 
@@ -110,6 +110,10 @@ class IterateEnt2 {
 		}
     }
     #end
+
+    public static macro function single(get:Expr,case_:Expr,func:Expr) {
+        return macro null;
+    }
     public static macro function iterGet(getArr:Expr, cases:Expr, func:Expr) {
 		var name;
 		var expr;

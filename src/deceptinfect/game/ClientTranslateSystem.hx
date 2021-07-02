@@ -62,30 +62,30 @@ class ClientTranslateSystem extends System {
 
 	//TODO make it more efficient, use move instead of copy...
 	public static function updateEnt(x:Net_UpdateServerEnt) {
-		trace("uh huh");
 		for (ent in x.replEntities) {
-			// trace(ent);
-			// trace(ent);
 			final clientID = serverIDToClientID.get(ent.serverID);
 			if (clientID != null) {
 				for (comp in ent.comp) {
+					// trace(untyped comp.getComponentName());
 					final other = components.get(comp.__uid);
 					if (!components.exists(comp.__uid)) {
 						components.set(comp.__uid,comp);
 						ComponentManager.addComponent(comp.getCompID(),comp,clientID);
+					} else {
+						var compTable:AnyTable = cast comp;
+						for (name => value in compTable) {
+							Reflect.setField(other,name,value);
+						}
 					}
-					for (field in Reflect.fields(comp)) {
-						Reflect.setField(other,field,Reflect.field(comp,field));
-						// trace(field);
-					}
-
-					trace('$comp $other');
 				}
 			} else {
+				trace("THE attatchement process begins");
 				var id = null;
 				for (comp in ent.comp) {
 					final compClass = Type.getClass(comp);
+					trace('type ${Type.getClassName(compClass)}');
 					if (compClass == PlayerComponent || compClass == GEntityComponent) {
+						trace("OBAMNA");
 						IterateEnt2.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) {
 							untyped {
 								if (comp.entity == ent) {
@@ -97,6 +97,7 @@ class ClientTranslateSystem extends System {
 							untyped {
 								if (comp.player == ply) {
 									id = c_currentPlayer.getOwner();
+									trace("Player found and attatched");
 								}
 							}
 						});
@@ -104,9 +105,7 @@ class ClientTranslateSystem extends System {
 				}
 				if (id == null) id = ComponentManager.addEntity();
 				
-				// final id = ComponentManager.addEntity();
-				// for (comp in )
-
+				
 				for (comp in ent.comp) {
 					
 					components.set(comp.__uid,comp);
@@ -183,10 +182,11 @@ class ClientReplicationMachine {
 			case SOME(PVS(ent)):
 				final filter = Gmod.RecipientFilter();
 				filter.AddPVS(ent.GetPos());
-				for (ply in filter.GetPlayers()) {
-					if (ply.IsBot()) continue;
-					arr.push(ply);
-				}
+				filter.GetPlayers().map(arr.push);
+				// for (ply in filter.GetPlayers()) {
+				// 	if (ply.IsBot()) continue;
+				// 	arr.push(ply);
+				// }
 			case SOME(PLAYERS(a)):
 				arr = a;
 			case SOME(INFECTED):
@@ -198,8 +198,9 @@ class ClientReplicationMachine {
 				if (ply != null) {
 					arr.push(ply.player);
 				} else {
-					throw "Not attatched to a player!";
+					// throw "Not attatched to a player!";
 				}
+
 			case ALL:
 				for (ply in PlayerLib.GetHumans()) {
 					arr.push(ply);
@@ -219,26 +220,15 @@ class ClientReplicationMachine {
 						if (comp is ReplicatedComponent) {
 							var repl:ReplicatedComponent = comp;
 							if (!repl.fieldsChanged) continue;
+							// trace(untyped comp.getComponentName());
 							repl.fieldsChanged = false;
 							final players = replToPlayers(repl.replicated,ent);
 							for (ply in players) {
-								trace('sending to $ply');
 								addToArray(ply,repl);
 							}
 						}
 					}
 				}
-				// for (compID in arr.keys()) {
-				// 	final repl:ReplicatedComponent = deceptinfect.ecswip.ComponentManager.components_3[compID].get_component(ent);
-				// 	if (repl == null) {trace('${ComponentManager.components_3.getName(compID)} missing on ${ent}'); continue;}
-				// 	if (!repl.fieldsChanged) continue;
-					
-				// 	repl.fieldsChanged = false;
-				// 	final players = replToPlayers(repl.replicated,ent);
-				// 	for (ply in players) {
-				// 		addToArray(ply,repl);
-				// 	}
-				// }
 				for (ply => arr in added) {
 					final replEntities = sentArray.get(ply).orGet(() -> {final x:Net_UpdateServerEnt = {replEntities : []}; sentArray.set(ply,x); x;}).replEntities;
 					replEntities.push({

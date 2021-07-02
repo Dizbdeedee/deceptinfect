@@ -104,9 +104,6 @@ class GameManager {
 		p.add_component(new AliveComponent());
 		p.add_component(vic);
 		p.add_component(contam);
-		#if server
-		infcomp.replicate(SOME(CURRENT_PLAYER));
-		#end
 		final g = new deceptinfect.game.GeigerCounter();
 		p.add_component(g);
 		
@@ -172,6 +169,9 @@ class GameManager {
 				initAllPlayers();
 				y.start(); // not this
 				hookWin();
+				for (player in PlayerLib.GetAll()) {
+					player.Spawn();
+				}
 
 			default:
 				throw "Unsupported state transition";
@@ -217,7 +217,7 @@ class GameManager {
 		// GameLib.CleanUpMap();
 		for (p in PlayerLib.GetAll()) {
 			new GPlayerCompat(new PlayerComponent(p));
-			p.Kill();
+			p.KillSilent();
 			p.Spawn();
 		}
 	}
