@@ -2,7 +2,7 @@ package deceptinfect.infection;
 
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.game.GeigerCounter;
-import deceptinfect.macros.IterateEnt2;
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.ecswip.System;
@@ -33,14 +33,14 @@ class InfectionSystem extends System {
 	}
 
 	public function getAverageInfection() {
-		IterateEnt2.iterGet([InfectionManager],[{averageInfection : avg}],() -> {return avg;});
+		IterateEnt.iterGet([InfectionManager],[{averageInfection : avg}],() -> {return avg;});
 		throw "Average infection not here...";
 	}
 
 	override function run_server() {
 		var numPlayers = 0;
 		var totalInf = 0.0;
-		IterateEnt2.iterGet([InfectionComponent],
+		IterateEnt.iterGet([InfectionComponent],
 		[c_inf = {acceptingInfection : ACCEPTING, infection : NOT_INFECTED(inf)}],
 		(ent) -> {
 			c_inf.fieldsChanged = true; //we're using a proxy object
@@ -84,7 +84,7 @@ class InfectionSystem extends System {
 
 		});
 		if (numPlayers > 0) {
-			IterateEnt2.iterGet([InfectionManager],[infMan],() -> {
+			IterateEnt.iterGet([InfectionManager],[infMan],() -> {
 				infMan.averageInfection = totalInf / numPlayers;
 			});
 		}
@@ -112,7 +112,7 @@ class InfectionSystem extends System {
 	static function calcInfectionFromRates(rate:RateAccepter,target:DI_ID):Float {
 		var total = 0.0;
 		var totalmulti = 1.0;
-		IterateEnt2.iterGet([Rate],[{affecting : affecting, value : value, multiplier : multi}],function () {
+		IterateEnt.iterGet([Rate],[{affecting : affecting, value : value, multiplier : multi}],function () {
 			if (affecting == target) {
 				if (!multi) {
 					total += value;

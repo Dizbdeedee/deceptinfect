@@ -7,6 +7,12 @@
 
 * Planned
 
+** Redo evac system
+
+** Redo game logic
+
+** Fix radiation system
+
 ** Spread logic!
 ** Spread gameplay impact on humans/infected
 

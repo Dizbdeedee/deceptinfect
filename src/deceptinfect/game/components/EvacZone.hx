@@ -1,21 +1,26 @@
 package deceptinfect.game.components;
 
-class EvacZone extends Component {
-	var touched:Map<DI_ID, Bool> = [];
+import deceptinfect.SeralizableRef;
+import deceptinfect.ecswip.ReplicatedComponent;
 
-	var in_zone:Map<DI_ID, Bool> = [];
 
-	var blocked:Map<DI_ID, Bool> = [];
+@:replicated(ALL)
+class EvacZone extends ReplicatedComponent {
 
 	var arrivetime:Float = 10.0;
 
 	var leavetime:Float = 25.0;
 
-	var state:EvacState = NOT_ACTIVE;
+	#if client
+	var prevState:EvacState = NOT_ACTIVE;
+	#end
+
+	@:s var state:EvacState = NOT_ACTIVE;
+
 }
 
 enum EvacState {
 	NOT_ACTIVE;
-	ARRIVING(time:tink.CoreApi.Ref<Float>);
-	LEAVING(time:tink.CoreApi.Ref<Float>);
+	ARRIVING(time:SeralizableRef);
+	LEAVING(time:SeralizableRef);
 }

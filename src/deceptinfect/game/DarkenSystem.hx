@@ -1,7 +1,7 @@
 package deceptinfect.game;
 
 import deceptinfect.lib.BSP;
-import deceptinfect.macros.IterateEnt2;
+import deceptinfect.macros.IterateEnt;
 
 class DarkenSystem extends System {
     
@@ -9,10 +9,10 @@ class DarkenSystem extends System {
     //TODO confusing logic, can we make this simpler?
     override function run_client() {
         var darkend = None;
-        IterateEnt2.iterGet([DarkenApplied],[dark],function () {
+        IterateEnt.iterGet([DarkenApplied],[dark],function () {
             darkend = Some(dark);
         });
-        IterateEnt2.iterGet([Darken],[dark],function () {
+        IterateEnt.iterGet([Darken],[dark],function () {
             switch (darkend) {
                 case Some(apply):
                     return;
@@ -31,7 +31,7 @@ class DarkenSystem extends System {
 
         }
     }
-	#end
+	
 
     function replace(d:DarkenApplied) {
         final open = MRBsp.OpenBSP();
@@ -79,5 +79,6 @@ class DarkenSystem extends System {
             // imat.Recompute();
         }
     }
+    #end
     
 }

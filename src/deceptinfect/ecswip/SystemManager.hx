@@ -82,8 +82,8 @@ class SystemManager {
 	public static function runAllSystems() {
 		Profiler.profile("start", true);
 		for (clsSystem in runSystems) {
-			final name = Type.getClassName(clsSystem);
-			Profiler.profile(name);
+			// final name = Type.getClassName(clsSystem);
+			// Profiler.profile(name);
 			getSystems.get(clsSystem).run();
 		}
 		Profiler.resetprofile();

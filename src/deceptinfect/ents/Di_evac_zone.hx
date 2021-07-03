@@ -30,7 +30,7 @@ class Di_evac_zone extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_BRUSH> {
 		switch (ent.has_id()) {
 			case Some(ent_id):
 				if (id.has_comp(EvacZone)) {
-					SystemManager.getSystem(EvacSystem).leave(ent_id, id.get_sure(EvacZone));
+					SystemManager.getSystem(EvacSystem).touched(ent_id, id.get_sure(EvacZone));
 				}
 			default:
 		}

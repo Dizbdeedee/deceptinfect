@@ -41,7 +41,7 @@ abstract GPlayerCompat(Player) from Player to Player {
 	}
 
 	public inline function has_id():Option<DI_ID> {
-		return switch (id) {
+		return switch (untyped this.id) {
 			case null:
 				None;
 			case x:

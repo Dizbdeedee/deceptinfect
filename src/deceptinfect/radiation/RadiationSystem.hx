@@ -2,7 +2,7 @@ package deceptinfect.radiation;
 
 import haxe.ds.ArraySort;
 import deceptinfect.macros.IterateEnt;
-import deceptinfect.macros.IterateEnt2;
+import deceptinfect.macros.IterateEnt;
 
 using deceptinfect.DistSquared;
 
@@ -24,7 +24,7 @@ class RadiationSystem extends System {
 		trace(RadiationAccepter.getAddSignal());
 		RadiationAccepter.getAddSignal().handle((sig) -> {
 			trace("yo??");
-			IterateEnt2.iterGet([RadiationProducer],[_],
+			IterateEnt.iterGet([RadiationProducer],[_],
 			function (radProduceEnt) {
 				var c_radAffect = new RadiationAffecting();
 				c_radAffect.accepter = sig.ent;
@@ -35,7 +35,7 @@ class RadiationSystem extends System {
 		});
 		trace(RadiationAccepter.getAddSignal().handle);
 		RadiationProducer.getAddSignal().handle((sig) -> {
-			IterateEnt2.iterGet([RadiationAccepter],[_],
+			IterateEnt.iterGet([RadiationAccepter],[_],
 			function (radAcceptEnt) {
 				var c_radAffect = new RadiationAffecting();
 				c_radAffect.accepter = radAcceptEnt;
@@ -45,7 +45,7 @@ class RadiationSystem extends System {
 			});
 		});
 		RadiationAccepter.getRemoveSignal().handle((sig) -> {
-			IterateEnt2.iterGet([RadiationAffecting],[{accepter : accepter}],
+			IterateEnt.iterGet([RadiationAffecting],[{accepter : accepter}],
 			function (radAffectEnt) {
 				if (accepter == sig.ent) {
 					ComponentManager.removeEntity(radAffectEnt);
@@ -53,7 +53,7 @@ class RadiationSystem extends System {
 			});
 		});
 		RadiationProducer.getRemoveSignal().handle((sig) -> {
-			IterateEnt2.iterGet([RadiationAffecting],[{producer : producer}],
+			IterateEnt.iterGet([RadiationAffecting],[{producer : producer}],
 			function (radProduceEnt) {
 				if (producer == sig.ent) {
 					ComponentManager.removeEntity(radProduceEnt);
@@ -65,7 +65,7 @@ class RadiationSystem extends System {
 	static final sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;
 
 	override function run_server() {
-		IterateEnt2.iterGet([RadiationAffecting],
+		IterateEnt.iterGet([RadiationAffecting],
 		[c_radAffect = {accepter : accepter, producer : producer}],
 		function() {
 			var producePos = producer.get_sure(VirtualPosition).pos;  
@@ -77,10 +77,10 @@ class RadiationSystem extends System {
 				default:
 			}
 		});
-		IterateEnt2.iterGet([RadiationAccepter],
+		IterateEnt.iterGet([RadiationAccepter],
 		[c_radAccept],function (acceptEnt) {
 			var sorted:Array<Float> = [];
-			IterateEnt2.iterGet([RadiationAffecting],
+			IterateEnt.iterGet([RadiationAffecting],
 			[{accepter : accepter, value : val}],
 			function () {
 				if (accepter == acceptEnt) {

@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.util.PrintTimer;
 import deceptinfect.util.Util;
@@ -12,34 +13,40 @@ import deceptinfect.abilities.FormComponent;
 import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 
-typedef NetData_Evac = {
-	state:INT_EvacState,
-	time:Float
-}
 
 class EvacSystem extends System {
-	static var evac_state = new NET_Server<"di_evac", NetData_Evac>();
 
 	#if client
-	override function init_client() {
-		evac_state.signal.handle(changeEvacState);
-	}
 
-	function changeEvacState(x:NetData_Evac) {
-		switch (x) {
-			case {state: NOT_ACTIVE}:
-			// stop showing hud
-			case {state: ARRIVING, time: t}:
-			// start showing hud
-			case {state: LEAVING, time: t}:
-				// Util.printTimer("BOOOGA",3, () -> trace('leaving!!..$t'));
-				PrintTimer.print_time(3, () -> trace('leaving!!.. $t'));
-			// Util.printTime(3,() -> trace('leaving!!..$t'));
-			default:
-				PrintTimer.print_time(5, () -> trace("Invalid state for hud...."));
-				// Util.printTime(5,() -> trace("Invalid state for hud...."));
-				// Util.printTimer("oogieboogie",5,() -> trace("Invalid state for hud..."));
-		}
+	function changeEvacState() {
+
+		IterateEnt.iterGet([EvacZone],[c_evac = {state : s, prevState : prev}],function() {
+			if (prev.getIndex() != s.getIndex()) {
+				switch (s) {
+					case ARRIVING(time):
+						PrintTimer.print_time(3, () -> trace('leaving!!.. $time'));
+					default:
+				}
+				c_evac.prevState = s;
+			}
+			// switch (s) {
+				
+			// }
+		});
+		// switch (x) {
+		// 	case {state: NOT_ACTIVE}:
+		// 	// stop showing hud
+		// 	case {state: ARRIVING, time: t}:
+		// 	// start showing hud
+		// 	case {state: LEAVING, time: t}:
+		// 		// Util.printTimer("BOOOGA",3, () -> trace('leaving!!..$t'));
+		// 		PrintTimer.print_time(3, () -> trace('leaving!!.. $t'));
+		// 	// Util.printTime(3,() -> trace('leaving!!..$t'));
+		// 	default:
+		// 		PrintTimer.print_time(5, () -> trace("Invalid state for hud...."));
+		// 		// Util.printTime(5,() -> trace("Invalid state for hud...."));
+		// 		// Util.printTimer("oogieboogie",5,() -> trace("Invalid state for hud..."));
+		// }
 	}
 	#end
 
@@ -66,18 +73,16 @@ class EvacSystem extends System {
 								checkWin(c_evac);
 								c_evac.state = NOT_ACTIVE;
 							}
-							for (id in c_evac.in_zone.keys()) {
-								switch (id.get(FormComponent)) {
-									case Comp(_.form => INFECTED):
-										c_evac.in_zone.remove(id);
-										c_evac.blocked.set(id, true);
-									default:
-								}
-							}
-							evac_state.broadcast({
-								state: c_evac.state,
-								time: time
-							}, true);
+							// IterateEnt.iterGet([EvacInZone],[])
+							// for (id in c_evac.in_zone.keys()) {
+							// 	switch (id.get(FormComponent)) {
+							// 		case Comp(_.form => INFECTED):
+							// 			c_evac.in_zone.remove(id);
+							// 			c_evac.blocked.set(id, true);
+							// 		default:
+							// 	}
+							// }
+							
 
 						case ARRIVING(time):
 							time.value -= GameManager.diffTime;
@@ -85,10 +90,7 @@ class EvacSystem extends System {
 								trace(c_evac.state);
 								c_evac.state = LEAVING(c_evac.leavetime);
 							}
-							evac_state.broadcast({
-								state: c_evac.state,
-								time: time
-							}, true);
+							
 
 						default:
 					}
@@ -99,40 +101,38 @@ class EvacSystem extends System {
 
 	public function checkWin(evac:EvacZone) {
 		var humanEscape = false;
-		for (id in evac.in_zone.keys()) {
-			switch ([id.get(InfectedComponent), id.get(PlayerComponent)]) {
-				case [Comp(_), Comp(_)]:
-					SystemManager.getSystem(WinSystem).winTrig.trigger(WIN_INF);
-					return;
-				case [NONE, Comp(_)]:
-					humanEscape = true;
+		IterateEnt.iterGet([EvacInZone],[_],function (id) {
+			switch [id.get(InfectedComponent),id.get(EvacBlocked)] {
+				case [Comp(_),NONE]:
+					WinSystem.get().winTrig.trigger(WIN_INF);
 				default:
 			}
-		}
-		if (humanEscape) {
-			SystemManager.getSystem(WinSystem).winTrig.trigger(WIN_HUMAN);
-		} else {
-			SystemManager.getSystem(WinSystem).winTrig.trigger(DRAW);
-		}
+			
+		});
+		WinSystem.get().winTrig.trigger(WIN_HUMAN);
+		// if (humanEscape) {
+		// 	SystemManager.getSystem(WinSystem).winTrig.trigger(WIN_HUMAN);
+		// } else {
+		// 	SystemManager.getSystem(WinSystem).winTrig.trigger(DRAW);
+		// }
 	}
 
 	public function touched(ent:DI_ID, evac:EvacZone) {
-		switch (ent.get(PlayerComponent)) {
-			case Comp(c_player):
-				if (evac.blocked.exists(ent)) {
-					return;
-				}
-				switch (evac.state) {
-					case LEAVING(time):
-						if (!evac.touched.exists(ent) && time.value < evac.leavetime / 2) {
-							time.value = evac.leavetime / 2;
-						}
-					default:
-				}
-				evac.touched.set(ent, true);
-				evac.in_zone.set(ent, false);
-				ent.add_component(new InEvacZone());
-			default:
+		if (ent.has_comp(PlayerComponent)) {
+			if (ent.has_comp(EvacBlocked)) {
+				return;
+			}				
+			switch [evac.state,ent.has_comp(EvacTouched)] {
+				case [LEAVING(time),false]:
+					
+					if (time.value < evac.leavetime / 2) {
+						time.value = evac.leavetime / 2;
+					}
+				default:
+			}
+			
+			ent.add_component(new EvacTouched());
+			ent.add_component(new EvacInZone());
 		}
 	}
 
@@ -152,28 +152,9 @@ class EvacSystem extends System {
 	public function leave(ent:DI_ID, evac:EvacZone) {
 		switch (ent.get(PlayerComponent)) {
 			case Comp(_):
-				evac.in_zone.remove(ent);
-				ent.remove_component(InEvacZone);
+				ent.remove_component(EvacInZone);
 			default:
 		}
 	}
 	#end
-}
-
-enum abstract INT_EvacState(Int) from Int to Int {
-	var NOT_ACTIVE;
-	var ARRIVING;
-	var LEAVING;
-
-	@:from
-	public static function from(x:EvacState):INT_EvacState {
-		return switch (x) {
-			case EvacState.NOT_ACTIVE:
-				NOT_ACTIVE;
-			case EvacState.ARRIVING(_):
-				ARRIVING;
-			case EvacState.LEAVING(_):
-				LEAVING;
-		}
-	}
 }

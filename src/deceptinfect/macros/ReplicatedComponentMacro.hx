@@ -2,6 +2,7 @@ package deceptinfect.macros;
 
 import haxe.macro.Context;
 using Lambda;
+import deceptinfect.macros.MacroUtil;
 class ReplicatedComponentMacro { 
     public static function build() {
         #if macro
@@ -27,7 +28,7 @@ class ReplicatedComponentMacro {
                 switch (fieldNew.kind) {
                     case FFun({expr : exprDef = {expr: EBlock(exprArr)}}):
                         final finalExpr = macro {@:a(0) null; replicated = $expr;}
-                        exprDef.expr = IterateEnt2.insert(finalExpr,exprArr).expr;
+                        exprDef.expr = insert(finalExpr,exprArr).expr;
                     default:
                 }
             }
@@ -62,7 +63,7 @@ class ReplicatedComponentMacro {
                         case FFun({expr: exprDef = {expr: EBlock(exprArr)}}):
                             final finalExpr = macro {fieldsChanged = true; @:a(0) null;}
                             
-                            exprDef.expr = IterateEnt2.insert(finalExpr,exprArr).expr;
+                            exprDef.expr = insert(finalExpr,exprArr).expr;
                         default:
                             trace("not a set expr");
                     }

@@ -158,31 +158,6 @@ class ClientOverrides extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> {
 
 	override function PostDrawTranslucentRenderables(bDrawingDepth:Bool, bDrawingSkybox:Bool) {
 		if (bDrawingDepth || bDrawingSkybox) return;
-		// var b:Int = cast GameLib.GetWorld().GetBrushPlaneCount();
-		// RenderLib.SetColorMaterial();
-		// for (i in 0...b) {
-		// 	var box = GameLib.GetWorld().GetBrushPlane(i);
-			
-		// 	RenderLib.DrawQuadEasy(box.a,box.b,10,10,Gmod.Color(0,0,0));
-		// }
-		// CamLib.Start3D();
-		// CamLib.IgnoreZ(true);
-		// RenderLib.SetColorMaterial();
-		// final getVec:LuaArrayFast<Vector> = getVectors();
-		// var total = getVec.length;
-		// var i = 1;
-		// var c = Gmod.Color(0,0,0,200);
-		// while (i <= total) {
-			
-		// 	RenderLib.DrawQuad(getVec[i],getVec[i + 1],getVec[i + 2],getVec[i + 3],c);
-		// 	i += 4;
-		// }
-		// // var gayness = 0;
-		// // for (i in 1...untyped getVec._len) {
-		// // 	RenderLib.DrawQuad(i)
-		// // }
-		// CamLib.IgnoreZ(false);
-		// CamLib.End3D();
 	}
 	
 	override function PostRender() {

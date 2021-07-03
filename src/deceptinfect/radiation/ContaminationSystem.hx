@@ -1,7 +1,7 @@
 package deceptinfect.radiation;
 
 import deceptinfect.ecswip.SystemManager;
-import deceptinfect.macros.IterateEnt2;
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.ecswip.VirtualPosition;
 
 using deceptinfect.DistSquared.DistSqSafe;
@@ -14,14 +14,14 @@ class ContaminationSystem extends System {
 	}
 
 	function run_server_() {
-		// IterateEnt2.iterGet([ContaminationProducer,])
+		// IterateEnt.iterGet([ContaminationProducer,])
 	}
 	override function run_server() {
 		
-		IterateEnt2.iterGet([RadVictim,ContaminationAccepter,VirtualPosition],
+		IterateEnt.iterGet([RadVictim,ContaminationAccepter,VirtualPosition],
 		[c_rv,c_contamAccept,{pos : victimPos}],
 		(vic) -> {
-			IterateEnt2.iterGet([RadSource,ContaminationProducer,VirtualPosition],
+			IterateEnt.iterGet([RadSource,ContaminationProducer,VirtualPosition],
 			[c_rs,c_contamProduce,{pos : producePos}],
 			(produce) -> {
 				if (c_rs.attatch == vic) {
@@ -43,7 +43,7 @@ class ContaminationSystem extends System {
 									}
 								case SAME_SOURCE:
 									var abort = false;
-									IterateEnt2.iterGet([RadSource],[{base : b}],() -> {
+									IterateEnt.iterGet([RadSource],[{base : b}],() -> {
 										if (b == c_rs.base) {
 											abort = true;
 											break;

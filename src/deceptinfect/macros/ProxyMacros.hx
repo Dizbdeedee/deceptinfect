@@ -25,24 +25,6 @@ class ProxyMacros {
 		final basePath = arr.copy();
 		arr.push("net_proxy");
 		arr.push("send");
-		// for (field in fields) {
-		//     if (field.meta != null && field.meta.exists((item) -> item.name == ":s")) {
-		// 	var type;
-		// 	#if server
-		// 	// field.kind = switch (field.kind) {
-		// 	//     case FVar(t, e):
-		// 	// 	type = t;
-		// 	// 	FProp("default","set",t,e);
-		// 	//     default:
-		// 	// 	throw "not supported netsend type";
-		// 	// }
-		// 	#end
-		// 	final setName = 'set_${field.name}';
-		// 	final fieldName = field.name;
-		//     }
-
-		// }
-
 		final exprArray = fields.filter((field) -> {
 			field.meta != null
 			&& field.meta.exists((item) -> item.name == ":s");

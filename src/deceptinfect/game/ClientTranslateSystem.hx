@@ -5,7 +5,7 @@ import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.ReplicatedComponent;
 import deceptinfect.ecswip.ReplicatedEntity;
-import deceptinfect.macros.IterateEnt2;
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.macros.ClassToID;
 import hxbit.StructSerializable;
 import hxbit.Schema;
@@ -86,14 +86,14 @@ class ClientTranslateSystem extends System {
 					trace('type ${Type.getClassName(compClass)}');
 					if (compClass == PlayerComponent || compClass == GEntityComponent) {
 						trace("OBAMNA");
-						IterateEnt2.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) {
+						IterateEnt.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) {
 							untyped {
 								if (comp.entity == ent) {
 									id = c_currentEnt.getOwner();
 								}
 							}
 						});
-						IterateEnt2.iterGet([PlayerComponent],[c_currentPlayer = {player : ply}],function (plyEnt) {
+						IterateEnt.iterGet([PlayerComponent],[c_currentPlayer = {player : ply}],function (plyEnt) {
 							untyped {
 								if (comp.player == ply) {
 									id = c_currentPlayer.getOwner();
@@ -166,7 +166,7 @@ class ClientReplicationMachine {
 			case SOME(PLAYERS(a)):
 				arr = a;
 			case SOME(INFECTED):
-				IterateEnt2.iterGet([InfectedComponent,PlayerComponent],[_,{player : ply}],function () {
+				IterateEnt.iterGet([InfectedComponent,PlayerComponent],[_,{player : ply}],function () {
 					arr.push(ply);
 				});
 			case SOME(CURRENT_PLAYER):
@@ -187,7 +187,7 @@ class ClientReplicationMachine {
 	}
 
 	public function iterate():Map<Player,Net_UpdateServerEnt> {
-		IterateEnt2.iterGet([ReplicatedEntity],[_],
+		IterateEnt.iterGet([ReplicatedEntity],[_],
 			function (ent) {
 				added = [];
 				for (compStore in ComponentManager.components_3) {
@@ -217,7 +217,7 @@ class ClientReplicationMachine {
 	}
 
 	public function iterateSendOnce() {
-		IterateEnt2.iterGet([ReplicateOnce],[_],
+		IterateEnt.iterGet([ReplicateOnce],[_],
 		function (ent) {
 			added = [];
 			addedReliable = [];

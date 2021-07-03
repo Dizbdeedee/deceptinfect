@@ -2,7 +2,7 @@ package deceptinfect.client;
 
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.game.GeigerCounter;
-import deceptinfect.macros.IterateEnt2;
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.infection.InfectionComponent;
@@ -23,7 +23,7 @@ class GeigerSystem extends System {
 	var playTime:Float = 0.0;
 
 	override function run_client() {
-		IterateEnt2.iterGet([GeigerCounter],[{geiger : g}],
+		IterateEnt.iterGet([GeigerCounter],[{geiger : g}],
 		function () {
 			geiger = g;
 		});
@@ -50,7 +50,7 @@ class GeigerSystem extends System {
 
 	#if server
 	override function run_server() {
-		IterateEnt2.iterGet([GeigerCounter,InfectionComponent,PlayerComponent],[geig,{rate : r},_],
+		IterateEnt.iterGet([GeigerCounter,InfectionComponent,PlayerComponent],[geig,{rate : r},_],
 		function () {
 			geig.geiger = Math.min(((r - 1) / 2),1);
 		});

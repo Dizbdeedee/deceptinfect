@@ -3,7 +3,6 @@ package deceptinfect.game;
 import deceptinfect.ecswip.PlayerComponent;
 
 class DeathInfoSystem extends System {
-	static var deathinfo = new gmod.net.NET_Server<"di_deathinfo", {}>();
 
 	#if server
 	override function run_server() {

@@ -1,6 +1,6 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.macros.IterateEnt2;
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.infection.components.GrabbableProp;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.util.Cooldown;
@@ -109,12 +109,12 @@ class GrabSystem extends System {
 	}
 
 	override function run_server() {
-		IterateEnt2.iterGet([GrabProducer,GEntityComponent],
+		IterateEnt.iterGet([GrabProducer,GEntityComponent],
 		[c_produce, {entity : g_attack}],
 		(attack) -> {
 			switch (c_produce.grabState) {
 				case READY(SEARCHING):
-					IterateEnt2.iterGet([GrabAccepter,VirtualPosition],
+					IterateEnt.iterGet([GrabAccepter,VirtualPosition],
 						[_,{pos : vicPos}],
 						(victim) -> {
 							if (victim == attack) continue;
@@ -140,7 +140,7 @@ class GrabSystem extends System {
 						break;
 					}
 					attemptSneakAttack(attack, prevVic);
-					IterateEnt2.iterGet([GrabAccepter,VirtualPosition],
+					IterateEnt.iterGet([GrabAccepter,VirtualPosition],
 					[_, {pos : vicPos}],
 					(victim) -> {
 						if (victim == prevVic || attack == victim) continue;

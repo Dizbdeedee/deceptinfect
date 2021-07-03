@@ -3,6 +3,7 @@ package deceptinfect.ecswip;
 /**
 	Misc, one off bits of data that can only ever belong to players anyway
 **/
+@:replicated(ALL)
 class PlayerComponent extends ReplicatedComponent {
 	/**
 
