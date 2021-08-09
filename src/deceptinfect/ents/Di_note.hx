@@ -5,7 +5,7 @@ import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.sent.ENT_ANIM;
 
 class Di_note extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	final properties = {
+	static final properties = {
 		Base: "base_anim"
 	}
 

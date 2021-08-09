@@ -1,0 +1,50 @@
+* Cleanup
+** TODO GameInstance
+** TODO Move classes out of ecswip
+* TODO Bugs [0%]
+** TODO Error message end of round evac zone
+** TODO Zombie model screws up as statue
+** TODO Geiger carrys over after round
+** TODO Walkthroughable fails sometimes
+
+* TODO MVP [14%]
+** TODO Items [1/4]
+*** DONE Scanner
+*** TODO Cure
+*** TODO Antirad
+*** TODO
+** TODO Upgrades
+** TODO info
+
+* TODO Hud Elements [12%]
+** TODO Admin menu
+** TODO Sabotage
+** TODO Upgrade menu
+** TODO Message/info system
+** TODO Grab target
+** TODO Grab state/cooldown
+** DONE Infection hud
+   CLOSED: [2020-05-05 Tue 21:52]
+
+** TODO Geiger hud
+* Ideas
+** Energy weapons. Do they add anything? Do they make things simpler? Do people even like energy weapons?
+*** Shared charge between all weapons. Once it runs out, screwed?
+Regenerates over time?
+* Weapon system
+** Weapon list
+ - Shotgun
+ - Assault rifle
+ - Pistol (2 kinds)
+ - Semi auto
+** Distribution
+*** Inital
+Give pistols.
+Make humans weak at start, strong at end
+*** Progression
+Options for unlock better guns
+- Percentage of infection
+- Time
+Infection gun effectiveness decreases as gun effectivness increases :)
+Possible inital values 0.9 -> 0.3
+Still has normal system, so gimpedness is always same.

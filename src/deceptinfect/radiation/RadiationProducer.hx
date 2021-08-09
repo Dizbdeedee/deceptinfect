@@ -14,12 +14,6 @@ class RadiationProducer extends Component {
 	// public var type:Null<RadTypes>;
 	public var radius:DistSquared;
 
-	// var options:RadiationProduceOptions;
-	// public static function createFromType(type:RadTypes):RadiationProducer {
-	//     // var radProduce = new RadiationProducer(RadiationTypes.types[type]);
-	//     return new RadiationProducer(RadiationTypes.types[type]);
-	// }
-
 	public function new(options:RadiationProduceOptions) {
 		super();
 		maxrate = options.maxrate;

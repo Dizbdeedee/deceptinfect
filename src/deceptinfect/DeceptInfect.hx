@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.game.GameSystem;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.util.PrintTimer;
 import haxe.io.Bytes;
@@ -56,23 +57,13 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	var lastcrc:Int = 0;
 
 	override function Think() {
-		
-		// var nethost = Main.nethost;
 		SystemManager.runAllSystems();
-		#if server
-		GameManager.think();
-		// checkPerformance();
-		#end
-		// for (c in nethost.clients) {
-		//     c.sync();
-		// }
-		// nethost.flush();
 	}
 
 	var timestart = 0;
 	var underperforming = false;
 
-	@:exposeGM function checkPerformance() {
+	@:exposeGM function checkPerformance():Void {
 		
 		if ((1 / Gmod.FrameTime()) < 66.6) {
 			PrintTimer.print_time(5, () -> trace("Server is underperforming! ${1 / Gmod.FrameTime()}"));
@@ -100,7 +91,12 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 
 	#if server
-	override function PlayerSilentDeath(ply:Player) {}
+	override function PlayerSilentDeath(ply:Player) {
+
+		if (ply.Team() == 5) {
+			
+		}
+	}
 
 	function playerDeath(victim:GPlayerCompat) {
 		victim.id.remove_component(AliveComponent);
@@ -113,12 +109,9 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 
 	override function DoPlayerDeath(ply:Player, attacker:Entity, dmg:CTakeDamageInfo) {
-		untyped GAMEMODE.PlayerSilentDeath();
-		// ply.KillSilent();
 		ply.KillSilent();
-
 		playerDeath(ply);
-		return untyped false;
+	
 	}
 
 	override function PlayerDeath(victim:GPlayerCompat, inflictor:Entity, attacker:Entity) {
@@ -138,11 +131,11 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		player.SetShouldServerRagdoll(true);
 		player.ShouldDropWeapon(true);
 		player.AllowFlashlight(true);
-		switch (GameManager.state) {
-			case WAIT | SETTING_UP(_, _):
+		switch (GameSystem.get().getGameManager().state) {
+			case WAIT | SETTING_UP(_):
 				player.Give(Misc.roundWeapons[0]); // TODO random weapons
 				player.ShouldDropWeapon(false);
-			case ENDING(_) | PLAYING(_):
+			case ENDING(_) | PLAYING:
 				player.KillSilent();
 		}
 		// player.id.
@@ -210,7 +203,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	override function PlayerInitialSpawn(player:Player, transition:Bool) {}
 
 	override function PlayerDeathSound():Bool {
-		return true;
+		return false;
 	}
 
 	override function PlayerDeathThink(ply:GPlayerCompat):Bool {
@@ -225,14 +218,14 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 				reviveTime = rev;
 				comp.deathTime;
 		}
-		if (ply.IsBot() && Gmod.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
+		if (ply.IsBot() && Gmod.CurTime() > reviveTime && GameSystem.get().shouldAllowRespawn()) {
 			revive = true;
 		}
 		if (Gmod.IsValid(ply.GetObserverTarget())) {
 			ply.SetPos(ply.GetObserverTarget().GetPos());
 		}
 		if (ply.KeyPressed(IN_ATTACK)) {
-			if (Gmod.CurTime() > reviveTime && GameManager.shouldAllowRespawn()) {
+			if (Gmod.CurTime() > reviveTime && GameSystem.get().shouldAllowRespawn()) {
 				revive = true;
 			}
 			Spectate.chooseSpectateTarget(comp, FORWARDS);
@@ -253,6 +246,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		}
 	}
 
+	//TODO broken... forever!
 	override function IsSpawnpointSuitable(ply:GPlayerCompat, spawnpoint:Entity, makeSuitable:Bool):Bool {
 		var pos = spawnpoint.GetPos();
 		var blockers = EntsLib.FindInBox(pos + new Vector(-30, -30, 0), pos + new Vector(30, 30, 72));

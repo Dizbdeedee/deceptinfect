@@ -6,7 +6,7 @@ import deceptinfect.game.EvacSystem;
 import gmod.helpers.sent.SentBuild;
 
 class Di_evac_zone extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_BRUSH> {
-	final properties:EntFields = {
+	static final properties:EntFields = {
 		Base: "base_brush"
 	}
 

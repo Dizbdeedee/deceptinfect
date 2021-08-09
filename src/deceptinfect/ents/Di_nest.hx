@@ -9,7 +9,7 @@ import deceptinfect.ecswip.PlayerComponent;
 import gmod.structs.TestCollisionData;
 
 class Di_nest extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	final properties:EntFields = {
+	static final properties:EntFields = {
 		Base: "base_entity"
 	}
 

@@ -1,5 +1,6 @@
 package deceptinfect.util;
 
+import deceptinfect.game.GameSystem;
 #if server
 class TimeKeep<T:Int> {
 	var times:Map<T, Float> = [];
@@ -11,7 +12,7 @@ class TimeKeep<T:Int> {
 
 	public function addTime(key:T):Float {
 		initTime(key);
-		var difftime = GameManager.diffTime;
+		var difftime = GameSystem.get().getGameManager().diffTime;
 		times[key] += difftime;
 		return times[key];
 	}
@@ -32,7 +33,7 @@ class TimeKeep<T:Int> {
 
 	public function removeTime(key:T):Float {
 		initTime(key);
-		var difftime = GameManager.diffTime;
+		var difftime = GameSystem.get().diffTime();
 		times[key] -= difftime;
 		managetime(key);
 		return times[key];
@@ -45,7 +46,7 @@ class TimeKeep<T:Int> {
 	}
 
 	public function removeAllTimes() {
-		var difftime = GameManager.diffTime;
+		var difftime = GameSystem.get().diffTime();
 		for (key in times.keys()) {
 			times[key] -= difftime;
 			managetime(key);

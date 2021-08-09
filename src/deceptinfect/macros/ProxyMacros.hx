@@ -99,6 +99,3 @@ class ProxyMacros {
 		#end
 	}
 }
-// class ProxyComponent extends Component {
-//     var recipients:Array<Player> = [];
-// }

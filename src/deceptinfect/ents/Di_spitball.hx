@@ -4,14 +4,17 @@ import gmod.helpers.sent.SentBuild.EntFields;
 import deceptinfect.infection.InfectionComponent;
 
 class Di_spitball extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	public final properties:EntFields = {
+	
+	static final properties:EntFields = {
 		Base: "base_anim",
 	}
 
 	static var model = Gmod.Model("models/crossbow_bolt.mdl");
 
 	#if server
+	
 	var removetime:Float;
+
 	var hit:Bool;
 
 	override function Initialize() {

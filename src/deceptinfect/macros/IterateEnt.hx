@@ -79,26 +79,45 @@ class IterateEnt {
     #end
 
     public static macro function single(get:Expr,case_:Expr,func:Expr) {
+        // var name;
+		// var expr;
+        // switch (func) {
+		// 	case {expr: EFunction(_, {args: [{name: _argName}], expr: _expr})}:
+		// 		name = _argName;
+		// 		expr = _expr;
+		// 	case {expr: EFunction(_, {args: [], expr: _expr}), pos: pos}:
+		// 		name = renameVar(Context.getLocalTVars(), pos);
+		// 		expr = _expr;
+		// 	case {pos: pos}:
+		// 		Context.error("Incorrect format", pos);
+		// 	default:
+		// 		throw "hmm";
+		// }
+        // final block = macro {
+        //     final $name = deceptinfect.ecswip.ComponentManager.components_3[ClassToID.idMacro($get)].internal[1];
+        //     // switch (deceptinfect.ecswip.ComponentManager.components_3[ClassToID.idMacro($get)].components[1])
+        // }
         return macro null;
+
     }
     public static macro function iterGet(getArr:Expr, cases:Expr, func:Expr) {
 		var name;
 		var expr;
 
 		switch (func) {
-			case {expr: EFunction(_, {args: [{name: _argName}], expr: _expr})}:
+			case {expr: EFunction(_, {args: [{name: _argName}], expr : e})}:
 				name = _argName;
-				expr = _expr;
-			case {expr: EFunction(_, {args: [], expr: _expr}), pos: pos}:
+				expr = e;
+			case {expr: EFunction(_, {args: [], expr: e}), pos: pos}:
 				name = renameVar(Context.getLocalTVars(), pos);
-				expr = _expr;
+				expr = e;
 			case {pos: pos}:
 				Context.error("Incorrect format", pos);
 			default:
 				throw "hmm";
 		}
         final comparisons = comparisons(getArr);
-        
+		
         final block = macro {
             final __compArr = deceptinfect.ecswip.ComponentManager.components_3;
             @:a(0) null;
@@ -110,13 +129,110 @@ class IterateEnt {
                         case $cases:
                             $expr;
                         default:
-                            null;
-                    }
+							null;
+                            
+                    } 
                 }
 			}
         }
         final expr:Expr = insert(block,comparisons);
 		return expr;
+	}
+    
+	//nocheckin
+	//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRRRRRGGGHHHHHH
+    public static macro function get(getArr:Expr, cases:Expr, func:Expr, ?noMatch:Expr) {
+		var name;
+		var expr;
+		var exprNone = macro null;
+		switch (func) {
+			case {expr: EFunction(_, {args: [{name: _argName}], expr: _expr =  {expr : EBlock(arr)}}), pos : pos}:
+				name = _argName;
+				expr = if (noMatch == null) {
+					_expr;
+				} else {
+					var finalArr = arr.slice(0,arr.length - 1);  
+					finalArr.push(macro finalExpr = $e{arr[arr.length - 1]});
+					{expr : EBlock(finalArr), pos: pos};
+				}
+			case {expr: EFunction(_, {args: [], expr: _expr = {expr : EBlock(arr)}}), pos: pos}:
+				name = renameVar(Context.getLocalTVars(), pos);
+				expr = if (noMatch == null) {
+					_expr;
+				} else {
+					var finalArr = arr.slice(0,arr.length - 1);  
+					finalArr.push(macro finalExpr = $e{arr[arr.length - 1]});
+					{expr : EBlock(finalArr), pos: pos};
+				}
+			case {pos: pos}:
+				Context.error("Incorrect format", pos);
+				return macro null;
+			default:
+				Context.error("Invalid func",Context.currentPos());
+				return macro null;
+		}
+		switch (noMatch) {
+			case {expr: EFunction(_, {args: [], expr: expr})}:
+				exprNone = expr;
+			case {expr : EConst(CIdent("null"))}:
+			default:
+				Context.error("Invalid noMatch",Context.currentPos());
+				return macro null;
+				
+		}
+		switch (expr.expr) {
+			case EBlock(arr):
+				arr.push(macro break);
+			default:
+				Context.error("Your're're a big boy, figure it out",Context.currentPos()); //nocheckin
+		}
+        final comparisons = comparisons(getArr);
+        final block = macro {
+            final __compArr = deceptinfect.ecswip.ComponentManager.components_3;
+            @:a(0) null;
+            final __lowestInt = __compArr[__lowest_comp].internal;
+			for (__int_id in 1...__lowest) {
+                final $name:deceptinfect.ecswip.ComponentManager.DI_ID = __lowestInt[__int_id];
+                if ($e{if_statement(getArr,name)}) {
+                    switch ($e{switch_head(getArr,name)}) {
+                        case $cases:
+                            $expr;
+                        default:
+							break;
+							
+                    } 
+                }
+			}
+        }
+		final blockNoMatch = macro {
+            final __compArr = deceptinfect.ecswip.ComponentManager.components_3;
+            @:a(0) null;
+            final __lowestInt = __compArr[__lowest_comp].internal;
+			var finalExpr = null;
+			for (__int_id in 1...__lowest) {
+                final $name:deceptinfect.ecswip.ComponentManager.DI_ID = __lowestInt[__int_id];
+                if ($e{if_statement(getArr,name)}) {
+                    switch ($e{switch_head(getArr,name)}) {
+                        case $cases:
+                            $expr;
+							break;
+                        default:
+                    }
+                }
+			}
+			if (finalExpr == null) {
+				$exprNone;
+			} else {
+				finalExpr;
+			}
+		}
+		
+		final expr:Expr = if (noMatch != null) {
+			insert(blockNoMatch,comparisons);
+		} else {
+			insert(block,comparisons);
+		}
+		return macro $expr;
 	}
     
 }

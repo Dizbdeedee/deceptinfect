@@ -6,8 +6,8 @@ class ComponentMacro {
 	#if macro
 	public static function build() {
 		final fields = Context.getBuildFields();
-		final cls = Context.getLocalClass().get().name;
-		var id = ClassToID.getIDStr(cls);
+		final cls = Context.getLocalClass().get();
+		var id = ClassToID.getIDStr(cls.name);
 		if (Context.getLocalModule() == "deceptinfect.ecswip.ReplicatedComponent") return null;
 		// trace(Context.getLocalType());
 		final clsType = switch (Context.getLocalType()) {
@@ -16,14 +16,14 @@ class ComponentMacro {
 			default:
 				throw "not a class";
 		}
-
+		// cls.meta.add(":structInit",[],Context.currentPos()); 
 		final typ = Context.toComplexType(Context.getLocalType());
 		// trace('init $cls with $id');
 		final initexpr = macro deceptinfect.ecswip.ComponentManager.initComponent($v{id},$v{clsType.name});
 		fields.push({
 			name: "componentName",
 			access: [AFinal, APublic, AStatic, AInline],
-			kind: FVar(macro:String, macro $v{cls}),
+			kind: FVar(macro:String, macro $v{cls.name}),
 			pos: Context.currentPos()
 		});
 		fields.push({
@@ -31,7 +31,7 @@ class ComponentMacro {
 			access: [APublic],
 			kind: FFun({
 				args : [],
-				expr: macro return $v{cls}
+				expr: macro return $v{cls.name}
 			}),
 			pos: Context.currentPos()
 		});
@@ -79,12 +79,6 @@ class ComponentMacro {
 				ret: null
 			}),
 			pos: Context.currentPos(),
-			// meta: [
-			// 	{
-			// 		name: ":keep",
-			// 		pos: Context.currentPos()
-			// 	}
-			// ]
 		});
 		return fields;
 	}

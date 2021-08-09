@@ -6,7 +6,7 @@ import deceptinfect.ecswip.GEntityComponent;
 import gmod.helpers.sent.SentBuild;
 
 class Di_ragdoll extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	final properties:EntFields = {Base: "base_entity"};
+	static final properties:EntFields = {Base: "base_entity"};
 
 	public var owner:Entity;
 	public var id:DI_ID;

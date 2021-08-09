@@ -1,5 +1,7 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.game.RunUntilDoneSystem;
+import deceptinfect.game.GameInProgressSystem;
 import deceptinfect.game.ClientTranslateSystem;
 import deceptinfect.game.ItemOwnerSystem;
 import deceptinfect.items.ScannerSystem;
@@ -21,6 +23,7 @@ import deceptinfect.game.SlowMotionSystem;
 import deceptinfect.infection.InfectionLookSystem;
 import deceptinfect.radiation.RadSourceSystem;
 import deceptinfect.game.LowHealthSystem;
+import deceptinfect.game.GameSystem;
 import deceptinfect.items.ScannerSystem;
 import deceptinfect.WeaponSystem;
 
@@ -28,14 +31,19 @@ class SystemManager {
 	static var getSystems(default, never):ObjectMap<Class<Dynamic>, System> = new ObjectMap();
 
 	public static var runSystems(default, null):Array<Class<Dynamic>> = [
-		InfectionSystem, GeigerSystem, RadiationSystem, GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
+		
+		GameSystem, GameInProgressSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, RadiationSystem, GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
 		EvacSystem, RagdollSystem, SlowMotionSystem, InfectionLookSystem, ContaminationSystem, // Problem!
 		RadSourceSystem, LowHealthSystem, ScannerSystem,
 		WeaponSystem, ItemOwnerSystem,DummySystem,
 		ClientTranslateSystem
+		
 	];
 
 	static function make() {
+		getSystems.set(RunUntilDoneSystem, new RunUntilDoneSystem());
+		getSystems.set(GameSystem, new GameSystem());
+		getSystems.set(GameInProgressSystem, new GameInProgressSystem());
 		getSystems.set(InfectionSystem, new InfectionSystem());
 		getSystems.set(GeigerSystem, new GeigerSystem());
 		getSystems.set(RadiationSystem, new RadiationSystem());

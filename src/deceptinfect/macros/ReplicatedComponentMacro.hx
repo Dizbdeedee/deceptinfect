@@ -37,7 +37,6 @@ class ReplicatedComponentMacro {
         for (field in fields) {
             switch [field.kind,field.meta] {
                 case [FVar(t, e),[{name: ":s"}]]:
-                    trace(field.name);
                     field.kind = FProp("default","set",t,e);
                     fields.push({
                         name: 'set_${field.name}',

@@ -5,7 +5,7 @@ import deceptinfect.game.components.BatteryAccepter;
 import deceptinfect.ecswip.ComponentManager;
 
 class Di_charger extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	final properties:EntFields = {
+	static final properties:EntFields = {
 		Base: "base_anim",
 	}
 

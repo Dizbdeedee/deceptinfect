@@ -1,17 +1,43 @@
 * Active work
 
-** Cleanup most unused code. Enforce proper commit messages
-** Redo radiation systems
-** Despaghettify Main entry points
-** Cleanup first level heirachy
+** Finish game loop/logic. All win conditions must be performable
+*** TODO Kill nest
+*** DONE Kill/infect humans
+*** DONE Kill infected
+*** DONE Evacuate with infected
+*** DONE Evacuate no infected
+*** TODO No one evacuates?
 
+* Outstanding Bugs
+
+** Gui persists between rounds
+** Obscure networking fail
+[deceptinfect] addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1533: attempt to index local 'cl' (a nil value)
+    1. createEmptyInstance - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1533
+        2. getRef - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:2481
+            3. unserialize - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:7297
+                4. getRef - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:2497
+                    5. unserialize - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:7412
+                        6. unserialize - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:2497
+                            7. func - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1050
+                                8. unknown - lua/includes/extensions/net
+
+** Walkthroughable fails sometimes, or maybe all the time
+** Infected have radidation when they really shouldn't 
 * Planned
 
-** Redo evac system
+** Infection points
+*** Pointshop
 
-** Redo game logic
+** Items as buffs for humans (+ sabotage)
+*** Global buffs that only work if someone is holding it...
+**** Dropping starts a cooldown
+
+** Link entity system for efficiency?
 
 ** Fix radiation system
+
+** Cleanup most unused code. Enforce proper commit messages
 
 ** Spread logic!
 ** Spread gameplay impact on humans/infected
@@ -20,13 +46,7 @@
 
 ** Finish weapon system
 
-** Finish game loop/logic. All win conditions must be performable
-*** TODO Kill nest
-*** DONE Kill/infect humans
-*** DONE Kill infected
-*** DONE Evacuate with infected
-*** DONE Evacuate no infected
-*** TODO No one evacuates?
+
 
 ** GUIs (so it feels like an actual gamemode)
 ** Do first playtest???
@@ -44,12 +64,14 @@
 *** Body bomb?
 *** Misc stat upgrades
 ** Initial environmental features
-*** Barrel/puddle
+** Barrel/puddle
 
 ** Nest model
 
 * Sometime in the future
 
+** Fix gmodhaxe split files
+   Idea: maybe we could split files based on a marker (a line we generate), then bring everything in..? 
 ** Message/info idea?
 ** Sabotage system
 ** >1 map supported
@@ -60,59 +82,10 @@
 ** More environmental features
 ** Customisation, admin menu, ect.
 
+======================================================================================================================
 * Recently done
 ** Spread inital visuals (kind of ugly, lag but gets the job done)
 
 
 
 //old todos
-* Cleanup
-** TODO GameInstance
-** TODO Move classes out of ecswip
-* TODO Bugs [0%]
-** TODO Error message end of round evac zone
-** TODO Zombie model screws up as statue
-** TODO Geiger carrys over after round
-** TODO Walkthroughable fails sometimes
-
-* TODO MVP [14%]
-** TODO Items [1/4]
-*** DONE Scanner
-*** TODO Cure
-*** TODO Antirad
-*** TODO
-** TODO Upgrades
-** TODO info
-
-* TODO Hud Elements [12%]
-** TODO Admin menu
-** TODO Sabotage
-** TODO Upgrade menu
-** TODO Message/info system
-** TODO Grab target
-** TODO Grab state/cooldown
-** DONE Infection hud
-   CLOSED: [2020-05-05 Tue 21:52]
-
-** TODO Geiger hud
-* Ideas
-** Energy weapons. Do they add anything? Do they make things simpler? Do people even like energy weapons?
-*** Shared charge between all weapons. Once it runs out, screwed?
-Regenerates over time?
-* Weapon system
-** Weapon list
- - Shotgun
- - Assault rifle
- - Pistol (2 kinds)
- - Semi auto
-** Distribution
-*** Inital
-Give pistols.
-Make humans weak at start, strong at end
-*** Progression
-Options for unlock better guns
-- Percentage of infection
-- Time
-Infection gun effectiveness decreases as gun effectivness increases :)
-Possible inital values 0.9 -> 0.3
-Still has normal system, so gimpedness is always same.

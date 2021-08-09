@@ -8,10 +8,9 @@ import deceptinfect.game.components.BatterySource;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.game.BatterySystem;
 
-
 @:keep
 class Di_battery extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	public final properties:EntFields = {
+	static final properties:EntFields = {
 		Base: "base_anim",
 	}
 

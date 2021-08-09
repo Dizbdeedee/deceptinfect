@@ -1,18 +1,19 @@
 package deceptinfect.client;
 
+import deceptinfect.GameManager2.GAME_STATE_2;
+import deceptinfect.game.GameSystem;
 import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.infection.InfectionComponent;
-import deceptinfect.GameManager.GAME_STATE;
 
 #if client
 class Hud {
 	static var cache:Map<Axis, Map<Int, Float>> = [Axis.X => [], Axis.Y => []];
 	static var baseReso = [X => 1920, Y => 1080];
-	static var statetext:Map<GAME_STATE, String> = [
-		WAIT => "Waiting for players...",
-		PLAYING => "Round in progress...",
-		ENDING => "Round has ended.."
+	static var statetext:Map<Int, String> = [
+		WAIT.getIndex() => "Waiting for players...",
+		PLAYING.getIndex() => "Round in progress...",
+		ENDING(null).getIndex() => "Round has ended.."
 	];
 
 	public static function CSS(axis:Axis, req:Int) {
@@ -93,7 +94,6 @@ class Hud {
 			default:
 				return;
 		}
-		trace("drawing");
 		SurfaceLib.SetDrawColor(180, 180, 180, 255);
 		SurfaceLib.DrawRect(CSS(X, 750), CSS(Y, 825), CSS(X, 300), CSS(Y, 30));
 		if (inf.getInfValue() < 70) {
@@ -114,7 +114,7 @@ class Hud {
 	}
 
 	static function stateText() {
-		var roundtxt = statetext.get(GameManager.state);
+		var roundtxt = statetext.get(GameSystem.get().getGameManager().state.getIndex());
 		SurfaceLib.SetTextColor(255, 255, 255);
 		SurfaceLib.SetTextPos(0, CSS(Y, 1000));
 		SurfaceLib.DrawText(roundtxt);

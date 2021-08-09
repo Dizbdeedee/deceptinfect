@@ -16,7 +16,7 @@ class Di_puddle extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 
 	final cooldown:Map<InfectionComponent, Float> = [];
 
-	final properties:EntFields = {
+	static final properties:EntFields = {
 		Base: "base_entity",
 	}
 
@@ -31,7 +31,9 @@ class Di_puddle extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	var rampUpTime = 120;
 
 	var sizeVector:Vector;
+
 	var collideHeightVector:Vector;
+
 	var visualHeightVector:Vector;
 
 	var puddleState:PuddleState = NOT_ACTIVE;
@@ -64,6 +66,7 @@ class Di_puddle extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 		self.DropToFloor();
 		#end
 		self.SetCollisionBounds(-sizeVector, sizeVector + collideHeightVector);
+
 		var ent = new GEntCompat(self);
 		id = ent.id;
 		final grabaccepter = id.add_component(new GrabAccepter());

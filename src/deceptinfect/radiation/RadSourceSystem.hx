@@ -2,12 +2,11 @@ package deceptinfect.radiation;
 
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import deceptinfect.radiation.RadSource.RadSourceOptions;
-import enumExtractor.EnumExtractor;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.statuses.Contaminated;
 
-class RadSourceSystem extends System implements EnumExtractor {
+class RadSourceSystem extends System {
 	#if server
 	override function run_server() {
 		for (x in 0...ComponentManager.entities) {
@@ -98,11 +97,14 @@ class RadSourceSystem extends System implements EnumExtractor {
 	public function disengage_(radsource:DI_ID, vic:DI_ID) {
 		var c_rs = radsource.get_sure(RadSource);
 		c_rs.attatch = null;
-		@as(vic.get(RadVictim) => Comp(c_rv)) {
-			c_rv.radiation.remove(radsource);
-			c_rv.affected.remove(c_rs.base);
-			c_rv.affectedtype.remove(c_rs.type);
+		switch (vic.get(RadVictim)) {
+			case Comp(c_rv):
+				c_rv.radiation.remove(radsource);
+				c_rv.affected.remove(c_rs.base);
+				c_rv.affectedtype.remove(c_rs.type);
+			default:
 		}
+
 		radsource.remove_component(VirtualPosition);
 	}
 

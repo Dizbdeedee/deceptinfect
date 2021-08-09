@@ -6,12 +6,13 @@ import deceptinfect.ecswip.SystemManager.getSystem;
 using deceptinfect.util.EntityExt;
 
 class Weapon_Di_Scan extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {
-	final properties:gmod.helpers.swep.SwepBuild.SwepFields = {
+	static final properties:gmod.helpers.swep.SwepBuild.SwepFields = {
 		Primary: {
 			Ammo: "Smg1",
 			ClipSize: -1,
 			DefaultClip: -1,
-			Automatic: true
+			Automatic: true,
+			
 		}
 	};
 

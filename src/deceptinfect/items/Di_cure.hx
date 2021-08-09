@@ -8,7 +8,7 @@ import deceptinfect.infection.InfectionComponent;
 import gmod.helpers.swep.SwepBuild;
 
 class Di_cure extends SwepBuild<gmod.swep.SWEP> {
-	final properties:SwepFields = {
+	static final properties:SwepFields = {
 		Primary: {
 			Ammo: "None",
 			ClipSize: -1,

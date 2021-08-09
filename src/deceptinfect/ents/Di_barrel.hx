@@ -5,20 +5,21 @@ import gmod.helpers.sent.SentBuild;
 using Safety;
 
 class Di_barrel extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	public final properties:EntFields = {
+	static final properties:EntFields = {
 		Base: "base_anim",
 	}
 
 	var actualBarrel:Entity;
 
 	var health:Float = 100.0;
+
 	var blasted:Bool = false;
 
 	override function Initialize() {
+		trace("Yo... it's me super");
 		#if server
 		self.SetModel("models/props_c17/oildrum001_explosive.mdl");
 		self.PhysicsInit(SOLID_VPHYSICS);
-		
 		if (Gmod.IsValid(self.GetPhysicsObject())) {
 			self.GetPhysicsObject().Wake();
 		}
@@ -53,4 +54,12 @@ class Di_barrel extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 		}
 	}
 	#end
+}
+
+class Di_barrel_boogaloo extends Di_barrel {
+	override function Initialize() {
+		super.Initialize();
+		trace("I'm the improved version");
+		
+	}
 }

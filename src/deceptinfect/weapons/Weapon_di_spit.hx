@@ -6,7 +6,7 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.GEntCompat;
 
 class Weapon_di_spit extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {
-	final properties:SwepFields = {
+	static final properties:SwepFields = {
 		Primary: {
 			Ammo: "None",
 			ClipSize: -1,

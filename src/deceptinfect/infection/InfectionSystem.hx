@@ -1,5 +1,6 @@
 package deceptinfect.infection;
 
+import deceptinfect.game.GameSystem;
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.game.GeigerCounter;
 import deceptinfect.macros.IterateEnt;
@@ -75,7 +76,6 @@ class InfectionSystem extends System {
 				default:
 			}
 			c_inf.rate = rate;
-			trace('cool: ' + c_inf.rate);
 			switch (c_inf.infection) {
 				case INFECTED:
 					onInfected(ent);
@@ -147,14 +147,16 @@ class InfectionSystem extends System {
 			case NOT_USING:
 				0;
 			case USING_GLOBAL:
-				switch (GameManager.state) {
-					case PLAYING(x):
-						x.baseInfection.value;
-					default:
-						trace("Not currently playing...");
-						inf.baseInfection = USING_STATIC(0.0);
-						0;
-				}
+				var value = null;
+				IterateEnt.iterGet([GameInProgress],[{baseInfection : bI}],function () {
+					value = bI.value;
+					break;
+				});
+				if (value == null) {
+					inf.baseInfection = USING_STATIC(0.0);
+					value = .0;
+				}	
+				value;
 			case USING_STATIC(rate):
 				rate;
 		}
@@ -178,11 +180,8 @@ class InfectionSystem extends System {
 		switch (ent.get(PlayerComponent)) {
 			case Comp({player: p}):
 				trace('INIT INFECTED PLAYER $p');
-				// net_inf.send({infection: 100.0},p);
-				// net_infected.send({}, p);
-				GameManager.initInfectedPlayer(ent);
+				GameSystem.get().beginInfected(ent); 
 				ent.remove_component(GeigerCounter);
-				// GeigerSystem.net_geiger.send({geiger: 0.0}, p);
 			default:
 		}
 		#end

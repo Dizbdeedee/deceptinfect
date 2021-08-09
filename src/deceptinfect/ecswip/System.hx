@@ -3,6 +3,9 @@ package deceptinfect.ecswip;
 using Safety;
 @:autoBuild(deceptinfect.macros.SystemMacro.build())
 class System {
+
+	var onInit:Signal<Noise> = new SignalTrigger().asSignal();
+
 	#if client
 	function init_client() {}
 
@@ -28,6 +31,7 @@ class System {
 		init_server();
 		#end
 		init_shared();
+		(cast onInit : SignalTrigger<Noise>).trigger(Noise);
 	}
 
 	public final function run() {

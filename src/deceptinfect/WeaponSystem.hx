@@ -1,9 +1,9 @@
 package deceptinfect;
 
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.Classes.Weapons;
 import deceptinfect.ecswip.PlayerComponent;
-
 using deceptinfect.util.ArrayTools;
 
 @:keep
@@ -23,23 +23,22 @@ class WeaponSystem extends System {
 	override function init_server() {}
 
 	override function run_server() {
-		switch (GameManager.state) { // replace with weapon menu
-			case PLAYING(x):
-				final timeElapsed = Gmod.CurTime() - x.gameStarted;
-				final minsElapsed = timeElapsed / 60;
-				if (minsElapsed > timevalues.get(currentStage)) { // mins, secs, conversion :)
-					for (x in 0...ComponentManager.entities) {
-						final ent:DI_ID = x;
-						switch [ent.get(PlayerComponent), ent.get(AliveComponent)] {
-							case [Comp(c_ply), Comp(_)]:
-								c_ply.player.Give(weapons_give.get(currentStage).getRandom()); // give weapon? upgrade weapon? hmmm
-							default:
-						}
+		IterateEnt.iterGet([GameInProgress],[{gameStarted : gameStarted}],function () {
+			final timeElapsed = Gmod.CurTime() - gameStarted;
+			final minsElapsed = timeElapsed / 60;
+			if (minsElapsed > timevalues.get(currentStage)) { // mins, secs, conversion :)
+				for (x in 0...ComponentManager.entities) {
+					final ent:DI_ID = x;
+					switch [ent.get(PlayerComponent), ent.get(AliveComponent)] {
+						case [Comp(c_ply), Comp(_)]:
+							c_ply.player.Give(weapons_give.get(currentStage).getRandom()); // give weapon? upgrade weapon? hmmm
+						default:
 					}
-					incrementStage();
 				}
-			default:
-		}
+				incrementStage();
+			}
+		});
+		
 	}
 
 	public function giveInitalWeapons() {

@@ -1,6 +1,7 @@
 package deceptinfect.game;
 
 // import hxbit.NetworkSerializable;
+import deceptinfect.GameManager2.GAME_STATE_2;
 import deceptinfect.util.VectorString;
 import deceptinfect.util.AngleString;
 import deceptinfect.infection.InfectionComponent;
@@ -199,7 +200,8 @@ class RagdollSystem extends System {
 	#if server
 	override function init_server() {
 		// HookLib.Add(GMHook.CreateEntityRagdoll,"di_ragdoll",playerRagdoll);
-		GameManager.stateChange.handle(stateChange);
+		GameSystem.get().getGameManager().stateChanged.handle(stateChange);
+		// GameManager.stateChange.handle(stateChange);
 		SystemManager.getSystem(SlowMotionSystem).slowMotionEnd.handle(endSlowMotion);
 	}
 
@@ -227,9 +229,9 @@ class RagdollSystem extends System {
 		// writeStatues();
 	}
 
-	function stateChange(newstate:GAME_STATE) {
-		switch [GameManager.state, newstate] {
-			case [_, ENDING(_, _)]:
+	function stateChange(newstate:GAME_STATE_2) {
+		switch [GameSystem.get().getGameManager().state, newstate] {
+			case [_, ENDING(_)]:
 				for (x in 0...ComponentManager.entities) {
 					final ent:DI_ID = x;
 					switch [ent.get(PlayerComponent), ent.get(InfectedComponent), ent.get(AliveComponent)] {
@@ -452,8 +454,8 @@ class RagdollSystem extends System {
 		var id = new GEntCompat(rag).id;
 		id.add_component(new Ragdoll());
 
-		switch (GameManager.state) {
-			case PLAYING(_):
+		switch (GameSystem.get().getGameManager().state) {
+			case PLAYING:
 				id.add_component(new Statue());
 				id.add_component(new KeepRestart());
 			default:

@@ -36,287 +36,289 @@ using deceptinfect.util.PlayerExt;
 import deceptinfect.infection.InfectionLookInfo;
 
 class GameManager {
-	public static var state(default, #if server set #else null #end):GAME_STATE = WAIT;
+	// public static var state(default, #if server set #else null #end):GAME_STATE = WAIT;
 
-	static var Game:GameInstance;
+	// static var Game:GameInstance;
 
-	public static var diffTime(default, never):Null<Float> = null;
+	// public static var diffTime(default, never):Null<Float> = null;
 
-	static var lastTick:Float = 0.0;
+	// static var lastTick:Float = 0.0;
 
-	public static var stateChange:Signal<GAME_STATE>;
+	// public static var stateChange:Signal<GAME_STATE>;
 
-	static var stateTrig:SignalTrigger<GAME_STATE> = new SignalTrigger();
-	public static final net_gamestate = new gmod.helpers.net.NET_Server<"gamestate", {state:Net_GAME_STATE_VAL, time:Float}>();
+	// static var stateTrig:SignalTrigger<GAME_STATE> = new SignalTrigger();
+	// public static final net_gamestate = new gmod.helpers.net.NET_Server<"gamestate", {state:Net_GAME_STATE_VAL, time:Float}>();
 
-	static final net_cleanup = new gmod.helpers.net.NET_Server<"di_cleanup", {}>();
+	// static final net_cleanup = new gmod.helpers.net.NET_Server<"di_cleanup", {}>();
 
-	#if server
-	public static function isPlaying() {
-		return switch (state) {
-			case PLAYING(_):
-				true;
-			default:
-				false;
-		}
-	}
+	// #if server
+	// public static function isPlaying() {
+	// 	return switch (state) {
+	// 		case PLAYING(_):
+	// 			true;
+	// 		default:
+	// 			false;
+	// 	}
+	// }
 
-	public static function shouldAllowRespawn() {
-		return switch (state) {
-			case WAIT | SETTING_UP(_, _):
-				true;
-			default:
-				false;
-		}
-	}
+	// public static function shouldAllowRespawn() {
+	// 	return switch (state) {
+	// 		case WAIT | SETTING_UP(_, _):
+	// 			true;
+	// 		default:
+	// 			false;
+	// 	}
+	// }
 
-	public static function sure():GameInstance {
-		return switch (state) {
-			case SETTING_UP(x, _) | PLAYING(x) | ENDING(x, _):
-				x;
-			case WAIT:
-				throw "Game not avaliable at sure statement!";
-		}
-	}
-	#end
+	// public static function sure():GameInstance {
+	// 	return switch (state) {
+	// 		case SETTING_UP(x, _) | PLAYING(x) | ENDING(x, _):
+	// 			x;
+	// 		case WAIT:
+	// 			throw "Game not avaliable at sure statement!";
+	// 	}
+	// }
+	// #end
 
-	public static function initPlayer(ply:GPlayerCompat) {
-		var p = ply.id;
-		final infcomp = new InfectionComponent();
-		// infcomp.replicated = SOME(CURRENT_PLAYER);
+	// public static function initPlayer(ply:GPlayerCompat) {
+	// 	var p = ply.id;
+	// 	final infcomp = new InfectionComponent();
+	// 	// infcomp.replicated = SOME(CURRENT_PLAYER);
 		
-		final spec = new SpectateComponent();
-		final rate = new RateAccepter();
-		final vic = new RadVictim();
-		final contam = new ContaminationAccepter();
-		final health = new HiddenHealthComponent();
-		final grabaccept = new GrabAccepter();
-		final radaccept = new RadiationAccepter({});
-		final virpos = new VirtualPosition(ENT(ply));
+	// 	final spec = new SpectateComponent();
+	// 	final rate = new RateAccepter();
+	// 	final vic = new RadVictim();
+	// 	final contam = new ContaminationAccepter();
+	// 	final health = new HiddenHealthComponent();
+	// 	final grabaccept = new GrabAccepter();
+	// 	final radaccept = new RadiationAccepter({});
+	// 	final virpos = new VirtualPosition(ENT(ply));
 		
-		p.add_component(infcomp);
-		p.add_component(spec);
-		p.add_component(rate);
-		p.add_component(health);
-		p.add_component(grabaccept);
-		p.add_component(radaccept);
-		p.add_component(virpos);
-		p.add_component(new AliveComponent());
-		p.add_component(vic);
-		p.add_component(contam);
-		final g = new deceptinfect.game.GeigerCounter();
-		p.add_component(g);
+	// 	p.add_component(infcomp);
+	// 	p.add_component(spec);
+	// 	p.add_component(rate);
+	// 	p.add_component(health);
+	// 	p.add_component(grabaccept);
+	// 	p.add_component(radaccept);
+	// 	p.add_component(virpos);
+	// 	p.add_component(new AliveComponent());
+	// 	p.add_component(vic);
+	// 	p.add_component(contam);
+	// 	final g = new deceptinfect.game.GeigerCounter();
+	// 	p.add_component(g);
 		
-	}
+	// }
 
-	#if server
-	static function thinkWait() {
-		var no = true;
-		if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS && !no) {
-			state = SETTING_UP(new GameInstance(), Gmod.CurTime() + GameValues.SETUP_TIME);
-		}
-	}
+	// #if server
+	// static function thinkWait() {
+	// 	var no = true;
+	// 	if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS && !no) {
+	// 		state = SETTING_UP(new GameInstance(), Gmod.CurTime() + GameValues.SETUP_TIME);
+	// 	}
+	// }
 
-	@:allow(deceptinfect.DeceptInfect.Think)
-	static function think() {
-		switch state {
-			case WAIT:
-				thinkWait();
+	// @:allow(deceptinfect.DeceptInfect.Think)
+	// static function think() {
+	// 	switch state {
+	// 		case WAIT:
+	// 			thinkWait();
 
-			case SETTING_UP(x, time):
-				if (Gmod.CurTime() > time) {
-					state = PLAYING(x);
-				}
+	// 		case SETTING_UP(x, time):
+	// 			if (Gmod.CurTime() > time) {
+	// 				state = PLAYING(x);
+	// 			}
 
-			case PLAYING(x):
-				x.think();
+	// 		case PLAYING(x):
+	// 			x.think();
 
-			case ENDING(x, time):
-				if (Gmod.CurTime() > time) {
-					state = WAIT;
-				}
-		}
-		if (untyped diffTime == null) {
-			untyped diffTime = 0.0;
-		} else {
-			untyped diffTime = Gmod.CurTime() - lastTick;
-		}
-		lastTick = Gmod.CurTime();
-	}
+	// 		case ENDING(x, time):
+	// 			if (Gmod.CurTime() > time) {
+	// 				state = WAIT;
+	// 			}
+	// 	}
+	// 	if (untyped diffTime == null) {
+	// 		untyped diffTime = 0.0;
+	// 	} else {
+	// 		untyped diffTime = Gmod.CurTime() - lastTick;
+	// 	}
+	// 	lastTick = Gmod.CurTime();
+	// }
 
-	#if server
-	static function set_state(x:GAME_STATE):GAME_STATE {
-		var time = 0.0;
-		switch [state, x] {
-			case [ENDING(_), WAIT]:
-				stateTrig.trigger(x); // will get cleaned
-				cleanup();
-			case [SETTING_UP(x, _), PLAYING(y)]:
-				initAllPlayers();
-				y.start();
+	// #if server
+	// static function set_state(x:GAME_STATE):GAME_STATE {
+	// 	var time = 0.0;
+	// 	switch [state, x] {
+	// 		case [ENDING(_), WAIT]:
+	// 			stateTrig.trigger(x); // will get cleaned
+	// 			cleanup();
+	// 		case [SETTING_UP(x, _), PLAYING(y)]:
+	// 			initAllPlayers();
+	// 			y.start();
 
-				hookWin();
-			case [WAIT, PLAYING(x)]:
-				initAllPlayers();
-				x.start();
-				hookWin();
-			case [WAIT, SETTING_UP(x, t)]:
-				time = t;
-			case [PLAYING(x), ENDING(y, t)]:
-				time = t;
-			case [PLAYING(x), PLAYING(y)]:
-				cleanup();
-				initAllPlayers();
-				y.start(); // not this
-				hookWin();
-				for (player in PlayerLib.GetAll()) {
-					player.Spawn();
-				}
+	// 			hookWin();
+	// 		case [WAIT, PLAYING(x)]:
+	// 			initAllPlayers();
+	// 			x.start();
+	// 			hookWin();
+	// 		case [WAIT, SETTING_UP(x, t)]:
+	// 			time = t;
+	// 		case [PLAYING(x), ENDING(y, t)]:
+	// 			time = t;
+	// 		case [PLAYING(x), PLAYING(y)]:
+	// 			cleanup();
+	// 			initAllPlayers();
+	// 			y.start(); // not this
+	// 			hookWin();
+	// 			for (player in PlayerLib.GetAll()) {
+	// 				player.Spawn();
+	// 			}
 
-			default:
-				throw "Unsupported state transition";
-		}
-		for (p in PlayerLib.GetAll()) {
-			net_gamestate.send({
-				state: x,
-				time: time
-			}, p);
-		}
-		trace('set state... $x');
-		stateTrig.trigger(x);
-		return state = x;
-	}
-	#end
+	// 		default:
+	// 			throw "Unsupported state transition";
+	// 	}
+	// 	for (p in PlayerLib.GetAll()) {
+	// 		net_gamestate.send({
+	// 			state: x,
+	// 			time: time
+	// 		}, p);
+	// 	}
+	// 	trace('set state... $x');
+	// 	stateTrig.trigger(x);
+	// 	return state = x;
+	// }
+	// #end
 
-	@:expose("cleanup")
-	public static function cleanup() {
-		net_cleanup.broadcast({});
-		for (x in 0...ComponentManager.entities) {
-			final ent:DI_ID = x;
-			switch [ent.get(CleanupEnt), ent.get(GEntityComponent)] {
-				case [Comp(_), Comp(c_gent)]:
-					c_gent.entity.Remove();
-				default:
-			}
-			switch ent.get(deceptinfect.game.components.KeepRestart) {
-				case Comp(_):
-				default:
-					ComponentManager.removeEntity(ent);
-			}
-		}
-		stateTrig.clear(); // get rid of stragglers
-		SystemManager.destroySystems();
-		SystemManager.initAllSystems();
-		for (ent in EntsLib.GetAll()) {
-			switch (ent.GetClass()) {
-				case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
-					ent.Remove();
-				default:
-			}
-		}
-		// GameLib.CleanUpMap();
-		for (p in PlayerLib.GetAll()) {
-			new GPlayerCompat(new PlayerComponent(p));
-			p.KillSilent();
-			p.Spawn();
-		}
-	}
+	// @:expose("cleanup")
+	// public static function cleanup() {
+	// 	net_cleanup.broadcast({});
+	// 	for (x in 0...ComponentManager.entities) {
+	// 		final ent:DI_ID = x;
+	// 		switch [ent.get(CleanupEnt), ent.get(GEntityComponent)] {
+	// 			case [Comp(_), Comp(c_gent)]:
+	// 				c_gent.entity.Remove();
+	// 			default:
+	// 		}
+	// 		switch ent.get(deceptinfect.game.components.KeepRestart) {
+	// 			case Comp(_):
+	// 			default:
+	// 				ComponentManager.removeEntity(ent);
+	// 		}
+	// 	}
+	// 	stateTrig.clear(); // get rid of stragglers
+	// 	SystemManager.destroySystems();
+	// 	SystemManager.initAllSystems();
+	// 	for (ent in EntsLib.GetAll()) {
+	// 		switch (ent.GetClass()) {
+	// 			case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
+	// 				ent.Remove();
+	// 			default:
+	// 		}
+	// 	}
+	// 	// GameLib.CleanUpMap();
+	// 	for (p in PlayerLib.GetAll()) {
+	// 		new GPlayerCompat(new PlayerComponent(p));
+	// 		p.KillSilent();
+	// 		p.Spawn();
+	// 	}
+	// }
 
-	static function hookWin() {
-		SystemManager.getSystem(WinSystem).newWinner.handle(newWin);
-	}
+	// static function hookWin() {
 
-	static function newWin(x:Win) {
-		switch (x) {
-			case WIN_HUMAN:
-				trace("Humans win");
-			case WIN_INF:
-				trace("Infected win");
-			case DRAW:
-				trace("Draw. Boring...");
-		}
-		state = ENDING(state.getParameters()[0], Gmod.CurTime() + 10);
-	}
+		
+	// 	// SystemManager.getSystem(WinSystem).newWinner.handle(newWin);
+	// }
 
-	public static function initInfectedPlayer(x:DI_ID) {
-		x.add_component(new InfectedComponent());
-		x.add_component(new GrabProducer());
-		x.add_component(new HiddenHealthComponent());
-		x.add_component(new FormComponent());
-		x.add_component(new DamagePenaltyHidden());
-		x.add_component(new InfectionLookInfo());
-		var c_inf = x.get_sure(InfectionComponent);
-		var c_accept = x.get_sure(GrabAccepter);
-		c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
-		var rad = SystemManager.getSystem(RadSourceSystem).radSourceFromType(INF, x);
-		var rv = new RadVictim();
-		rad.add_component(new VirtualPosition(ENT(x.get_sure(GEntityComponent).entity)));
-	}
+	// static function newWin(x:Win) {
+	// 	switch (x) {
+	// 		case WIN_HUMAN:
+	// 			trace("Humans win");
+	// 		case WIN_INF:
+	// 			trace("Infected win");
+	// 		case DRAW:
+	// 			trace("Draw. Boring...");
+	// 	}
+	// 	state = ENDING(state.getParameters()[0], Gmod.CurTime() + 10);
+	// }
 
-	#if server
-	public static function initAllPlayers() {
-		var choose = MathLib.random(1, PlayerLib.GetCount());
+	// public static function initInfectedPlayer(x:DI_ID) {
+	// 	x.add_component(new InfectedComponent());
+	// 	x.add_component(new GrabProducer());
+	// 	x.add_component(new HiddenHealthComponent());
+	// 	x.add_component(new FormComponent());
+	// 	x.add_component(new DamagePenaltyHidden());
+	// 	x.add_component(new InfectionLookInfo());
+	// 	var c_inf = x.get_sure(InfectionComponent);
+	// 	var c_accept = x.get_sure(GrabAccepter);
+	// 	c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
+	// 	var rad = SystemManager.getSystem(RadSourceSystem).radSourceFromType(INF, x);
+	// 	var rv = new RadVictim();
+	// 	rad.add_component(new VirtualPosition(ENT(x.get_sure(GEntityComponent).entity)));
+	// }
 
-		for (ind => player in PlayerManager.getPlayers()) {
-			initPlayer(player);
-			if (ind == choose) {
-				InfectionSystem.get().makeInfected(player.id);
-			}
-			// player.StripWeapons();
-			player.Give(Misc.startingWeapons[0]);
-			player.giveFullAmmo();
-			player.Spawn();
-		}
-	}
-	#end
+	// #if server
+	// public static function initAllPlayers() {
+	// 	var choose = MathLib.random(1, PlayerLib.GetCount());
 
-	@:expose("startGame")
-	public static function startGame(?skipintro = false) {
-		var game = new GameInstance();
-		if (skipintro) {
-			state = PLAYING(game);
-		} else {
-			state = SETTING_UP(game, Gmod.CurTime() + GameValues.SETUP_TIME);
-		}
-	}
-	#end
+	// 	for (ind => player in PlayerManager.getPlayers()) {
+	// 		initPlayer(player);
+	// 		if (ind == choose) {
+	// 			InfectionSystem.get().makeInfected(player.id);
+	// 		}
+	// 		// player.StripWeapons();
+	// 		player.Give(Misc.startingWeapons[0]);
+	// 		player.giveFullAmmo();
+	// 		player.Spawn();
+	// 	}
+	// }
+	// #end
 
-	public static function init() {
-		stateChange = stateTrig.asSignal();
-		#if client
-		net_gamestate.signal.handle(gameStateChanged);
-		net_cleanup.signal.handle(cleanup);
-		#end
-	}
+	// @:expose("startGame")
+	// public static function startGame(?skipintro = false) {
+	// 	var game = new GameInstance();
+	// 	if (skipintro) {
+	// 		state = PLAYING(game);
+	// 	} else {
+	// 		state = SETTING_UP(game, Gmod.CurTime() + GameValues.SETUP_TIME);
+	// 	}
+	// }
+	// #end
 
-	#if client
-	static function cleanup() {
-		for (x in 0...ComponentManager.entities) {
-			final ent:DI_ID = x;
-			switch ent.get(deceptinfect.game.components.KeepRestart) {
-				case Comp(_):
-				default:
-					ComponentManager.removeEntity(ent);
-			}
-		}
-		stateTrig.clear(); // get rid of stragglers
-		SystemManager.initAllSystems();
-	}
+	// public static function init() {
+	// 	stateChange = stateTrig.asSignal();
+	// 	#if client
+	// 	net_gamestate.signal.handle(gameStateChanged);
+	// 	net_cleanup.signal.handle(cleanup);
+	// 	#end
+	// }
 
-	static function gameStateChanged(x:{state:Net_GAME_STATE_VAL, time:Float}) {
-		trace('game state changed $x');
-		state = x.state;
-		switch (x.state) {
-			case PLAYING:
+	// #if client
+	// static function cleanup() {
+	// 	for (x in 0...ComponentManager.entities) {
+	// 		final ent:DI_ID = x;
+	// 		switch ent.get(deceptinfect.game.components.KeepRestart) {
+	// 			case Comp(_):
+	// 			default:
+	// 				ComponentManager.removeEntity(ent);
+	// 		}
+	// 	}
+	// 	stateTrig.clear(); // get rid of stragglers
+	// 	SystemManager.initAllSystems();
+	// }
 
-			case WAIT:
+	// static function gameStateChanged(x:{state:Net_GAME_STATE_VAL, time:Float}) {
+	// 	trace('game state changed $x');
+	// 	state = x.state;
+	// 	switch (x.state) {
+	// 		case PLAYING:
 
-			// PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
-			default:
-		}
-		stateTrig.trigger(x.state);
-	}
-	#end
+	// 		case WAIT:
+
+	// 		// PlayerManager.getLocalPlayerID().add_component(new InfectionComponent());
+	// 		default:
+	// 	}
+	// 	stateTrig.trigger(x.state);
+	// }
+	// #end
 }
 
 enum GAME_STATE {

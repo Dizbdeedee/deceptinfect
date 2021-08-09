@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.GameManager2.GAME_STATE_2;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.util.PrintTimer;
@@ -56,8 +57,15 @@ class EvacSystem extends System {
 	override function run_server() {
 		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
-			switch [ent.get(EvacZone), GameManager.state] {
-				case [Comp(c_evac), PLAYING(_)]:
+			var state:GAME_STATE_2 = null;
+			IterateEnt.iterGet([GameManager2],[{state : s}],function () {
+				state = s;
+				break;
+			});
+
+			
+			switch [ent.get(EvacZone), state] {
+				case [Comp(c_evac), PLAYING]:
 					if (InfectionSystem.get().getAverageInfection() > 80 && !flaresSpawned) {
 						var flareSpawn = SpawnSystem.obj.getRandom();
 						flareSpawn.spawn(EntsLib.Create(Di_entities.di_flare));
@@ -67,7 +75,7 @@ class EvacSystem extends System {
 					}
 					switch (c_evac.state) {
 						case LEAVING(time):
-							time.value -= GameManager.diffTime;
+							time.value -= GameSystem.get().diffTime();
 							if (time.value < 0) {
 								trace(c_evac.state);
 								checkWin(c_evac);
@@ -85,7 +93,7 @@ class EvacSystem extends System {
 							
 
 						case ARRIVING(time):
-							time.value -= GameManager.diffTime;
+							time.value -= GameSystem.get().diffTime();
 							if (time.value < 0) {
 								trace(c_evac.state);
 								c_evac.state = LEAVING(c_evac.leavetime);
@@ -100,21 +108,26 @@ class EvacSystem extends System {
 	}
 
 	public function checkWin(evac:EvacZone) {
-		var humanEscape = false;
+		// var humanEscape = false;
 		IterateEnt.iterGet([EvacInZone],[_],function (id) {
 			switch [id.get(InfectedComponent),id.get(EvacBlocked)] {
 				case [Comp(_),NONE]:
-					WinSystem.get().winTrig.trigger(WIN_INF);
+					IterateEnt.get([WinManager],[{winTrigger : wt}],function () {
+						wt.trigger(WIN_INF);
+						return;
+					}); 
+
 				default:
 			}
 			
 		});
-		WinSystem.get().winTrig.trigger(WIN_HUMAN);
-		// if (humanEscape) {
-		// 	SystemManager.getSystem(WinSystem).winTrig.trigger(WIN_HUMAN);
-		// } else {
-		// 	SystemManager.getSystem(WinSystem).winTrig.trigger(DRAW);
-		// }
+		// var ello:String;
+		IterateEnt.iterGet([WinManager],[{winTrigger : wt}],function () {
+			wt.trigger(WIN_HUMAN);
+			break;
+		}); 
+		return;
+		
 	}
 
 	public function touched(ent:DI_ID, evac:EvacZone) {

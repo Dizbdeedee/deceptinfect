@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.util.PrintTimer;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.components.InfectedComponent;
@@ -8,21 +9,29 @@ import deceptinfect.ecswip.System;
 import deceptinfect.infection.InfectionComponent;
 
 class WinSystem extends System {
-	public var newWinner(default, null):Signal<Win>;
 
-	public var winTrig(default, never):SignalTrigger<Win> = new SignalTrigger();
+	var winTrig:SignalTrigger<Win> = new SignalTrigger();
 
 	#if server
 	override function init_server() {
-		newWinner = winTrig.asSignal();
+		var ent = ComponentManager.addEntity();
+		var winMan:WinManager = {
+			winSignal : winTrig.asSignal(),
+			winTrigger : winTrig
+		};
+		ent.add_component(winMan);
 	}
 
 	override function run_server() {
-		switch (GameManager.state) {
-			case PLAYING(_):
-			default:
-				return;
-		}
+		var playing = false;
+		IterateEnt.iterGet([GameManager2],[{state : s}], function () {
+			// trace(s);
+		});
+		IterateEnt.iterGet([GameManager2],[{state : PLAYING}],function () {
+			playing = true;
+			break;
+		});
+		if (!playing) return;
 		var total = 0;
 		var infected = 0;
 		for (x in 0...ComponentManager.entities) {
@@ -38,17 +47,14 @@ class WinSystem extends System {
 		}
 		PrintTimer.print_time(15, () -> trace('Infected : $infected total : $total'));
 		if (infected == 0) {
-			trace("trigg!");
 			winTrig.trigger(WIN_HUMAN);
 			winTrig.clear();
 			return;
 		} else if (infected >= total) {
-			trace("trugg!");
 			winTrig.trigger(WIN_INF);
 			winTrig.clear();
 			return;
 		}
-
 		var aliveNests = false;
 		var deadNests = false;
 		for (x in 0...ComponentManager.entities) {
@@ -67,6 +73,10 @@ class WinSystem extends System {
 		if (!aliveNests && deadNests) {
 			winTrig.trigger(WIN_HUMAN);
 		}
+	}
+
+	public function win(x:Win) {
+		winTrig.trigger(x);
 	}
 	#end
 }

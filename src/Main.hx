@@ -1,3 +1,8 @@
+import deceptinfect.game.GameSystem;
+import haxe.macro.Compiler;
+import sys.FileSystem;
+import haxe.Resource;
+import sys.io.File;
 import deceptinfect.lib.Mri;
 import tink.CoreApi.Callback;
 import gmod.gclass.Entity;
@@ -33,32 +38,39 @@ import deceptinfect.Darken;
 
 class Main {
 
+	#if server
+	@:expose("startGame")
+	static function startGame(skipSetup:Bool) {
+		GameSystem.get().setState(PLAYING); 
+	}
+
+	#end
+
 	public static function main() {
-		
 		new DeceptInfect();
+		#if client
+		new ClientOverrides();
+		#end
+		SignalStorage.initEvents(); //nocheckin GET RID OF THIS!!!
+		SystemManager.initAllSystems();
+		#if server
+		GameSystem.get().cleanup(); //TODO improve?
+		#end
 		#if client
 		for (ply in PlayerLib.GetAll()) {
 			new GPlayerCompat(new PlayerComponent(ply));
 		}
 		#end
-
 		FileLib.CreateDir("deceptinfect");
 		GameLib.CleanUpMap();
-		SignalStorage.initEvents();
-		GameManager.init();
 		for (model in Misc.roundModels) {
 			UtilLib.PrecacheModel(model);
 		}
 		SpawnSystem.generateSpawns();
 		UtilLib.PrecacheModel(Misc.infModel);
-		#if client
-		new ClientOverrides();
-		SabotagePanel.register();
-		SystemManager.initAllSystems();
-		#end
+		
 		#if server
 		GameLib.ConsoleCommand("mp_falldamage 1\n");
-		GameManager.cleanup();
 		#end
 		MathLib.randomseed(Gmod.RealTime()); // FIXME
 		trace('Deceptinfect ${#if server "server" #else "client" #end} reinit!');

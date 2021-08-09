@@ -1,3 +1,4 @@
 args.hxml
 -D server
+-D dump=pretty
 --lua lua/server.lua

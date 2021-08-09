@@ -1,5 +1,7 @@
 package deceptinfect.game;
 
+import deceptinfect.GameManager2.GAME_STATE_2;
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.game.WinSystem.Win;
 import deceptinfect.GameManager.GAME_STATE;
 import deceptinfect.ecswip.SystemManager;
@@ -24,22 +26,39 @@ class SlowMotionSystem extends System {
 	}
 
 	override function init_server() {
-		GameManager.stateChange.handle(stateChange);
-		SystemManager.getSystem(WinSystem).newWinner.handle(winChange);
+		RunUntilDoneSystem.get().addRunner(() -> {
+			IterateEnt.iterGet([GameManager2],[{stateChanged : sc}],function () {
+				trace("Hello statechange!!!!!!!");
+				sc.handle(stateChange);
+				return true;
+			});
+			return false;
+		});
+		RunUntilDoneSystem.get().addRunner(() -> {
+			IterateEnt.iterGet([WinManager],[{winSignal : ws}],function () {
+				ws.handle(winChange);
+				return true;
+			});
+			return false;
+		});
+		
+		
+
+		//nocheckin
 	}
+
+	
 
 	function winChange(x:Win) {
 		switch (x) {
 			case WIN_HUMAN | WIN_INF:
 				GameLib.SetTimeScale(startval);
-				// GameLib.ConsoleCommand('host_timescale $startval\n');
 				slowMotion = ACTIVE(Gmod.RealTime() + finishtime, Gmod.RealTime());
-
 			default:
 		}
 	}
 
-	function stateChange(x:GAME_STATE) {
+	function stateChange(x:GAME_STATE_2) {
 		switch (x) {
 			case WAIT:
 				GameLib.ConsoleCommand("phys_timescale 1\n");
@@ -48,6 +67,7 @@ class SlowMotionSystem extends System {
 	}
 
 	override function run_server() {
+		
 		switch (slowMotion) {
 			case ACTIVE(target, start):
 				if (Gmod.RealTime() > target) {
