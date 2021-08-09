@@ -18,7 +18,7 @@ The air supply has been contaminated with the virus! There's not a lot of time l
 
 The infected have tendrils that can whip out and grab you! Avoid exposing your back to people you don't trust.
 
-- Tick tick tick
+- Not great, not terrible
 
 Some air pockets may be heavily contaminated with the virus. You should listen carefully to your trusty geiger counter to increase your chances of survival.
 
@@ -32,7 +32,7 @@ We need to know who we can trust. Find the items assigned to you and use them to
 
 - Use guns to conclude your arguments
 
-If you're sure you've got one of them, open fire immediately! Thier final alligence will be revealed in due course. Incorrect conclusions may erode the faith your fellow crewmates have in you.
+If you're sure you've got one of them, open fire immediately! Incorrect conclusions may erode the faith your fellow crewmates have in you.
 
 - Bring the AI online
 
@@ -40,6 +40,6 @@ To drive out the infection you must fully power the AI, using batteries. The AI 
 
 - Nevermind that, get the hell out of here!
 
-If all else fails, we need someone to tell us about the looming threat. Bring the flares to the evacuation pad and we'll nuke the station from orbit. I hope you trust everyone you're travelling with or it's curtains for humanity.
+If all else fails, we need someone to tell us about the threat. Bring the flares to the evacuation pad and we'll nuke the station from orbit. I hope you trust everyone you're travelling with or it's curtains for humanity.
 
 
