@@ -12,11 +12,12 @@ class BatterySystem extends System {
 			final ents:DI_ID = x;
 			switch [ents.get(BatteryAccepter)] {
 				case [Comp(c_accept)]:
-					c_accept.charge -= c_accept.decay;
+					// c_accept.charge -= c_accept.decay;
 					if (c_accept.charge < 0.0) {
 						c_accept.charge = 0.0;
 					}
 					if (c_accept.charge > c_accept.satisfy) {
+						NestSystem.get().revealNests();
 						// reveal nest ect.
 						c_accept.status = SATISIFED;
 					}

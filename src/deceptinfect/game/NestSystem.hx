@@ -19,11 +19,13 @@ class NestSystem extends System {
 		}
 	}
 
+
 	public function revealNests() {
 		for (x in 0...ComponentManager.entities) {
 			final ent:DI_ID = x;
 			switch ent.get(NestComponent) {
 				case Comp(c_nest):
+					trace("BISIBLE");
 					c_nest.nestState = VISIBLE;
 				default:
 			}
@@ -40,5 +42,7 @@ class NestSystem extends System {
 			}
 		}
 	}
+
+	
 	#end
 }

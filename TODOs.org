@@ -1,7 +1,7 @@
 * Active work
 
 ** Finish game loop/logic. All win conditions must be performable
-*** TODO Kill nest
+*** DONE Kill nest
 *** DONE Kill/infect humans
 *** DONE Kill infected
 *** DONE Evacuate with infected
@@ -10,7 +10,10 @@
 
 * Outstanding Bugs
 
+** The tpose
+** Gui sometimes does not activate :(
 ** Gui persists between rounds
+** Geiger persists between rounds
 ** Obscure networking fail
 [deceptinfect] addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1533: attempt to index local 'cl' (a nil value)
     1. createEmptyInstance - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1533
@@ -26,6 +29,7 @@
 ** Infected have radidation when they really shouldn't 
 * Planned
 
+** Remove ragdolls on death before round.
 ** Infection points
 *** Pointshop
 

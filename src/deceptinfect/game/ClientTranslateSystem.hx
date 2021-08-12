@@ -129,6 +129,7 @@ class ClientTranslateSystem extends System {
 		final unreliables = cr.iterate();
 		final reliables = cr.iterateSendOnce();
 		for (ply => result in unreliables) {
+			
 			net_updateServerEnt.send(result,ply,true);
 		}
 		for (ply => result in reliables) {
@@ -196,7 +197,6 @@ class ClientReplicationMachine {
 						if (comp is ReplicatedComponent) {
 							var repl:ReplicatedComponent = comp;
 							if (!repl.fieldsChanged) continue;
-							// trace(untyped comp.getComponentName());
 							repl.fieldsChanged = false;
 							final players = replToPlayers(repl.replicated,ent);
 							for (ply in players) {

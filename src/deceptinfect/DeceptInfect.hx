@@ -91,13 +91,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 
 	#if server
-	override function PlayerSilentDeath(ply:Player) {
-
-		if (ply.Team() == 5) {
-			
-		}
-	}
-
+	
 	function playerDeath(victim:GPlayerCompat) {
 		victim.id.remove_component(AliveComponent);
 		victim.id.remove_component(GrabAccepter);
@@ -133,7 +127,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		player.AllowFlashlight(true);
 		switch (GameSystem.get().getGameManager().state) {
 			case WAIT | SETTING_UP(_):
-				player.Give(Misc.roundWeapons[0]); // TODO random weapons
+				TimerLib.Simple(0.1, () -> player.Give(Misc.roundWeapons[0]));
 				player.ShouldDropWeapon(false);
 			case ENDING(_) | PLAYING:
 				player.KillSilent();
@@ -300,6 +294,8 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		}
 		return null;
 	}
+
+	
 
 	override function PlayerSay(sender:Player, text:String, teamChat:Bool):String {
 		return "aaaaple";

@@ -10,7 +10,6 @@ import deceptinfect.statuses.Walkthroughable;
 import deceptinfect.abilities.FormSystem;
 import deceptinfect.abilities.FormComponent;
 import deceptinfect.ecswip.PlayerComponent;
-import deceptinfect.GameManager.GAME_STATE;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ents.Di_entities;
 import deceptinfect.GEntCompat;

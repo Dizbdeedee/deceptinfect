@@ -1,6 +1,5 @@
 package deceptinfect;
 
-import deceptinfect.GameManager.GAME_STATE;
 import deceptinfect.ecswip.ReplicatedComponent;
 
 @:replicated(ALL)

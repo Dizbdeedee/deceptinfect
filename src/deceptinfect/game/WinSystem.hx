@@ -47,10 +47,12 @@ class WinSystem extends System {
 		}
 		PrintTimer.print_time(15, () -> trace('Infected : $infected total : $total'));
 		if (infected == 0) {
+			trace("Debug human");
 			winTrig.trigger(WIN_HUMAN);
 			winTrig.clear();
 			return;
 		} else if (infected >= total) {
+			trace("Debug infected");
 			winTrig.trigger(WIN_INF);
 			winTrig.clear();
 			return;
@@ -70,7 +72,9 @@ class WinSystem extends System {
 				default:
 			}
 		}
+		gmod.helpers.PrintTimer.print_time(4,() -> trace('$aliveNests $deadNests'));
 		if (!aliveNests && deadNests) {
+			trace("Nest debug");
 			winTrig.trigger(WIN_HUMAN);
 		}
 	}

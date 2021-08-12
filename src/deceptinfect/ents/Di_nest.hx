@@ -22,12 +22,30 @@ class Di_nest extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	#if server
 	var id:DI_ID;
 
+	var nestComp:NestComponent;
+
 	override function Initialize() {
+		trace("NEST CREATED");
 		self.SetModel("models/props_c17/chair02a.mdl");
 		var ent = new GEntCompat(self);
 		id = ent.id;
-		id.add_component(new NestComponent());
-		// id.add_component(RadiationProducer.createFromType(RadTypes.NEST));
+		final nestComp = new NestComponent();
+		id.add_component(nestComp);
+		this.nestComp = nestComp;
+		nestComp.nestState = INVISIBLE;
+		self.PhysicsInit(SOLID_VPHYSICS);
+		var physob = self.GetPhysicsObject();
+		physob.EnableMotion(false);
+		physob.SetContents(CONTENTS_BLOCKLOS);		
+	}
+
+	override function OnTakeDamage(damage:CTakeDamageInfo) {
+		switch (nestComp.nestState) {
+			case VISIBLE:
+				nestComp.health -= damage.GetDamage();
+				trace(damage.GetDamage());
+			default:
+		}
 	}
 
 	override function Think():Bool {

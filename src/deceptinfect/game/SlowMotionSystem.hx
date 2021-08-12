@@ -3,7 +3,6 @@ package deceptinfect.game;
 import deceptinfect.GameManager2.GAME_STATE_2;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.game.WinSystem.Win;
-import deceptinfect.GameManager.GAME_STATE;
 import deceptinfect.ecswip.SystemManager;
 
 class SlowMotionSystem extends System {

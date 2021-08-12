@@ -81,6 +81,7 @@ class GameSystem extends System {
 
     function stateTransition(x:GAME_STATE_2):GAME_STATE_2 {
         var time = 0.0;
+        trace('STATE TRANSITION: ${gameManager.state} $x');
         switch ([gameManager.state, x]) { //TODO unify gameManger.state/getGameManager(). which should we use? does it matter
             case [ENDING(_),WAIT]:
                 cleanup();
@@ -93,9 +94,13 @@ class GameSystem extends System {
             case [PLAYING,ENDING(t)]:
                 time = t;
             case [PLAYING,PLAYING]:
+                
                 playing();
                 //spawn
+            
+            
             default:
+                trace(gameManager.state,x);
                 throw "Unsupported state transition";
         }
         signalTrig.trigger(x);
@@ -124,7 +129,7 @@ class GameSystem extends System {
             if (ind == choose) {
                 InfectionSystem.get().makeInfected(player.id);
             }
-            player.Give(Misc.startingWeapons[0]);
+            TimerLib.Simple(0.1, () -> player.Give(Misc.startingWeapons[0]));
             player.giveFullAmmo();
             player.Spawn();
 
@@ -177,11 +182,13 @@ class GameSystem extends System {
     }
 
     function hookWin() {
-        IterateEnt.iterGet([WinManager],[{winSignal : sig}],function () {
-            sig.handle(newWin);
-            return;
+        RunUntilDoneSystem.get().addRunner(() -> {
+            IterateEnt.iterGet([WinManager],[{winSignal : sig}],function () {
+                sig.nextTime().handle(newWin);
+                return true;
+            });
+            return false;
         });
-        trace("No win manager found...");
     }
 
     function newWin(x:Win) {

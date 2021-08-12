@@ -5,7 +5,7 @@ import deceptinfect.ecswip.Component;
 class NestComponent extends Component {
 	public var nestState:NestState = INVISIBLE;
 
-	public var health:Float = 1000.0;
+	public var health:Float = 10; //nocheckin change back
 
 	public var rate_end = 7.0;
 

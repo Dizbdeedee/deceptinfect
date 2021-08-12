@@ -7,6 +7,8 @@ import deceptinfect.util.PrintTimer;
 import deceptinfect.util.Util;
 import gmod.helpers.net.NET_Server;
 import deceptinfect.game.components.EvacZone;
+import deceptinfect.game.components.EvacBlocked;
+import deceptinfect.game.components.EvacInZone;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ents.Di_entities;
 import deceptinfect.infection.InfectionSystem;
