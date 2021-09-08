@@ -101,12 +101,10 @@ class ClientTranslateSystem extends System {
 
 	//TODO make it more efficient, use move instead of copy...
 	static function updateEntRecv(x:Net_ReplicatedEntitiesMessage) {
-		trace(x);
 		for (ent in x.replEntities) {
 			final clientID = serverIDToClientID.get(ent.serverID);
 			if (clientID != null) {
 				for (comp in ent.comp) {
-					trace(untyped comp.getComponentName());
 					final other = components.get(comp.__uid);
 					if (!components.exists(comp.__uid)) {
 						components.set(comp.__uid,comp);
@@ -197,7 +195,7 @@ class ClientTranslateSystem extends System {
 	//FIXME . No players, not added to list, fieldsChanged never set to false, nothing ever happens again. Wuh oh
 	function onFieldsChanged(data:FieldsChangedData) {
 		
-		trace('onFieldsChanged ${Type.getClassName(Type.getClass(data.comp))}');
+		// trace('onFieldsChanged ${Type.getClassName(Type.getClass(data.comp))}');
 		final plyrs = ClientReplicationMachine.replToPlayers(data.comp.replicated,data.ent);
 		for (plyr in plyrs) {
 			queueReplComponents.get(plyr.UserID()).orGet(
@@ -228,7 +226,6 @@ class ClientTranslateSystem extends System {
 								comp: comp
 							});
 						}
-						// add.comp.compIDS.push(repl.getCompID());
 					}
 				}
 			}
