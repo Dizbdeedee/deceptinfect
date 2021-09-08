@@ -141,11 +141,18 @@ class ClientTranslateSystem extends System {
 					} else if (compClass == ClientRepresentationTarget) {
 						trace("ClientRepresentationTarget");
 						final c_crt:ClientRepresentationTarget = cast comp;
-						IterateEnt.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) { 
-							if (c_crt.target == ent) {
-								id = c_currentEnt.getOwner();
-							}
-						});
+						if (serverIDToClientID.exists(c_crt.target)) {
+							id = serverIDToClientID.get(c_crt.target);
+							trace("CRT Successful");
+						} else {
+							trace("CRT unsucessful....");
+						}
+						// IterateEnt.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) {
+
+						// 	if (c_crt.target == ent) {
+						// 		id = c_currentEnt.getOwner();
+						// 	}
+						// });
 					}
 				}
 				if (id == null) id = ComponentManager.addEntity();
@@ -189,7 +196,8 @@ class ClientTranslateSystem extends System {
 
 	//FIXME . No players, not added to list, fieldsChanged never set to false, nothing ever happens again. Wuh oh
 	function onFieldsChanged(data:FieldsChangedData) {
-		trace(Type.getClassName(Type.getClass(data.comp)));
+		
+		trace('onFieldsChanged ${Type.getClassName(Type.getClass(data.comp))}');
 		final plyrs = ClientReplicationMachine.replToPlayers(data.comp.replicated,data.ent);
 		for (plyr in plyrs) {
 			queueReplComponents.get(plyr.UserID()).orGet(
@@ -257,7 +265,6 @@ class ClientTranslateSystem extends System {
 			var entsSize = 0;
 			var entsReliableSize = 0;
 			for (comp in replComps) {
-				trace(Type.getClassName(Type.getClass(comp)));
 				final serverID:DI_ID = comp.getOwner();
 				var targetmap = if (comp.unreliable) {
 					entsSize++;
