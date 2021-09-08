@@ -7,7 +7,9 @@ class CRTSystem extends System {
     #if server
     override function init_server() {
         ComponentManager.addSignal.handle((data) -> {
-            if (data.comp is ReplicatedComponent && data.ent.has_comp(ClientRepresentationTarget)) {
+            if (data.comp is ReplicatedComponent && data.ent.has_comp(ClientRepresentationTarget)
+                && !(data.comp is ClientRepresentationTarget)) {
+
                 final crt = data.ent.get_2(ClientRepresentationTarget);
                 final replComp = cast data.comp;
                 replComp.replicated = MASTER(crt);
@@ -18,7 +20,7 @@ class CRTSystem extends System {
             for (component in ComponentManager.components_3) {
                 if (component.has_component(data.ent)) {
                     final comp = component.get_component(data.ent);
-                    if (comp is ReplicatedComponent) {
+                    if (comp is ReplicatedComponent && !(comp is ClientRepresentationTarget)) {
                         final replComp:ReplicatedComponent = comp;
                         replComp.replicated = MASTER(data.comp);
                         trace("master repl set 2");
