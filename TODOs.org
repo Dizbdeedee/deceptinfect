@@ -1,12 +1,11 @@
 * Active work
 
-** Fix clientTranslate system changes.
-** Also, port InfectionLookSystem. Dummy
+
 
 * Outstanding Bugs
 
-** Server chugging in round for no raisin. 20/s tickrate. In round, obviously.
 ** T-Pose! Yikes.
+** Sometimes crt fails to activate. Sad.
 ** Ragdoll not produced for person being killed
 ** INSTANT ROUND FAIL!! No error message...
 ** ClientTranslate system depends on players active,leaving ect.
@@ -14,16 +13,6 @@
 ** Gui persists between rounds
 ** Start game twice makes no one spawn.
 ** Geiger persists between rounds
-** Obscure networking fail (fixed?)
-[deceptinfect] addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1533: attempt to index local 'cl' (a nil value)
-    1. createEmptyInstance - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1533
-        2. getRef - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:2481
-            3. unserialize - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:7297
-                4. getRef - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:2497
-                    5. unserialize - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:7412
-                        6. unserialize - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:2497
-                            7. func - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1050
-                                8. unknown - lua/includes/extensions/net
 
 ** Walkthroughable fails sometimes, or maybe all the time
 ** Infected have radidation when they really shouldn't 
@@ -90,6 +79,9 @@
 
 ======================================================================================================================
 * Recently done
+** Fix clientTranslate system changes.
+** Also, port InfectionLookSystem. Dummy
+
 ** Spread inital visuals (kind of ugly, lag but gets the job done)
 
 ** Finish game loop/logic. All win conditions must be performable

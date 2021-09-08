@@ -192,10 +192,7 @@ class ClientTranslateSystem extends System {
 
 	var queueReplComponents:Map<Int,Array<ReplicatedComponent>> = [];
 
-	//FIXME . No players, not added to list, fieldsChanged never set to false, nothing ever happens again. Wuh oh
 	function onFieldsChanged(data:FieldsChangedData) {
-		
-		// trace('onFieldsChanged ${Type.getClassName(Type.getClass(data.comp))}');
 		final plyrs = ClientReplicationMachine.replToPlayers(data.comp.replicated,data.ent);
 		for (plyr in plyrs) {
 			queueReplComponents.get(plyr.UserID()).orGet(
