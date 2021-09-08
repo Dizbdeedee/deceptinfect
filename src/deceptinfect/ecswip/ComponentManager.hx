@@ -11,33 +11,26 @@ import deceptinfect.ecswip.SystemManager.getSystem2;
 using gmod.helpers.WeakTools;
 
 typedef ComponentArray = Array<ComponentState<Component>>;
-typedef SComponentArray<T:Component> = Array<ComponentState<T>>;
-
-typedef SCompAddSignal = {
-	ent:DI_ID,
-	comp:Component
-}
-
-typedef SCompRemoveSignal = {
-	ent:DI_ID,
-	comp:Component
-}
-
-typedef CompAddSignal<T:Component> = {
+typedef CompAddSignalData<T:Component> = {
 	ent:DI_ID,
 	comp:T
 }
 
-typedef CompRemoveSignal<T:Component> = {
+typedef CompRemoveSignalData<T:Component> = {
 	ent:DI_ID,
 	comp:T 
 }
 
+typedef RemoveSignalAll = {
+	ent:DI_ID,
+	comp:Component,
+	compID:ComponentID<Component> 
+}
+
+
+
 @:transitive
 abstract ComponentID<T:Component>(Int) from Int to Int {
-	// extern inline function new<T:Component>(int:Int,x:Class<T>) {
-	// 	this = int;
-	// }
 	@:to
 	public function toString():String {
 		return ComponentManager.components_3.getName(this);
@@ -53,9 +46,9 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 
 	public var components(get,set):LuaArray<Component>;
 
-	public var signalAdd(get,set):SignalTrigger<CompAddSignal<Component>>;
+	public var signalAdd(get,set):SignalTrigger<CompAddSignalData<Component>>;
 
-	public var signalRemove(get,set):SignalTrigger<CompRemoveSignal<Component>>;
+	public var signalRemove(get,set):SignalTrigger<CompRemoveSignalData<Component>>;
 
 	public var n(get,set):Int;
 
@@ -120,11 +113,11 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 		return n - 1;
 	}
 
-	public inline function getAddSignal():Signal<CompAddSignal<T>> {
+	public inline function getAddSignal():Signal<CompAddSignalData<T>> {
 		return cast signalAdd.asSignal();
 	}
 
-	public inline function getRemoveSignal():Signal<CompRemoveSignal<T>> {
+	public inline function getRemoveSignal():Signal<CompRemoveSignalData<T>> {
 		return cast signalRemove.asSignal();
 	}
 
@@ -168,7 +161,7 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 
 
 @:forward
-abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) {
+abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) to lua.Table<Int,Component_<Dynamic>> {
 
 	public function new() {
 		this = new LuaArray();
@@ -196,6 +189,7 @@ abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) {
 
 
 
+//TODO... why are these public again...?
 class ComponentManager {
 
 	public static var components_3(default,null):ComponentStorage;
@@ -210,6 +204,19 @@ class ComponentManager {
 
 	public static var gEntityLookup(default, null):Map<DI_ID, GEntCompat> = [];
 
+
+	//FIXME... this almost certainly keeps things around after system death... we need to clear signals when we remake systems.
+
+	static final removeSignalTrig:SignalTrigger<CompRemoveSignalData<Component>> = new SignalTrigger();
+
+	public static final removeSignal:Signal<CompRemoveSignalData<Component>> = removeSignalTrig.asSignal();
+
+	static final addSignalTrig:SignalTrigger<CompAddSignalData<Component>> = new SignalTrigger();
+
+	public static final addSignal:Signal<CompAddSignalData<Component>> = addSignalTrig.asSignal();
+
+
+	//can't this just be a component variable... ? NUMPTY
 	static function lookupEntityC() {
 		var map:Map<Component,DI_ID> = [];
 		map.setWeakKeysM();
@@ -266,7 +273,8 @@ class ComponentManager {
 
 	public static function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
 		final fam = components_3.get_component(id);
-		if (!fam.has_component(id)) {
+		if (!fam.has_component(to)) { //nocheckin check
+			addSignalTrig.trigger({ent: to, comp: x});
 			fam.init_entity(to,x);
 		} else {
 			fam.set_component(to,x);
@@ -284,12 +292,12 @@ class ComponentManager {
 
 	}
 
-	public static inline function getAddSignal<T:Component>(cls:ComponentID<T>):Signal<CompAddSignal<T>> {
+	public static inline function getAddSignal<T:Component>(cls:ComponentID<T>):Signal<CompAddSignalData<T>> {
 		return components_3.get_component(cls).getAddSignal();
 		
 	}
 
-	public static inline function getRemoveSignal<T:Component>(cls:ComponentID<T>):Signal<CompRemoveSignal<T>> {
+	public static inline function getRemoveSignal<T:Component>(cls:ComponentID<T>):Signal<CompRemoveSignalData<T>> {
 		return components_3.get_component(cls).getRemoveSignal();
 
 	}
@@ -305,7 +313,14 @@ class ComponentManager {
 		#end
 	}
 
-	public static function removeComponent<T:Component>(id:ComponentID<T>, diID:DI_ID) {	
+	public static function removeComponent<T:Component>(id:ComponentID<T>, diID:DI_ID) {
+		if (!components_3[id].has_component(diID)) {
+			return;
+		}
+		removeSignalTrig.trigger({
+			ent: diID,
+			comp: components_3[id].get_component(diID)
+		});
 		components_3[id].remove_entity_comp(diID);	
 	}
 
@@ -318,8 +333,8 @@ class ComponentManager {
 			default:
 		}
 		#end
-		for (id => component in components_3) {
-			component.remove_entity_comp(x);
+		for (id in PairTools.keys(components_3)) {
+			removeComponent(id,x);
 		}
 		activeEntities--;
 	}

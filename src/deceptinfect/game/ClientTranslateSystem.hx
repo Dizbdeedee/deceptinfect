@@ -1,5 +1,8 @@
 package deceptinfect.game;
 
+import deceptinfect.ecswip.ClientRepresentationTarget;
+import gmod.stringtypes.Hook.GMHook;
+import lua.lib.luv.Process;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.components.InfectedComponent;
@@ -27,10 +30,19 @@ class Net_ReplicatedEntity implements hxbit.Serializable {
 }
 
 @:structInit
-class Net_UpdateServerEnt implements hxbit.Serializable {
+class Net_ReplicatedEntitiesMessage implements hxbit.Serializable {
 
 	@:s public var replEntities:Array<Net_ReplicatedEntity>;
 	
+}
+
+
+//May cause problems. Take the caching approach if it does
+@:structInit
+class Net_RemoveComponentMessage implements hxbit.Serializable {
+	@:s public var serverID:Int;
+
+	@:s public var comp:Int;
 }
 
 #if client
@@ -41,12 +53,29 @@ enum ClientClasses {
 }
 #end
 
+
+typedef CacheRemove = {
+	id : DI_ID,
+	comp : Int,
+	players : Array<Player>
+}
+
+//TODO make it not static? Might cause problems
+
+/**
+Note to future self.
+Narrow replication targets only, avoid widening.
+Could have undefined effects when we want to remove ent
+i.e we have our original targets not recieving a remove message, only those we narrowed to.
+**/
+
 class ClientTranslateSystem extends System {
+	@:keep
+	static final net_replEntsMessage = new NET_Sv<Net_ReplicatedEntitiesMessage>(#if client [updateEntRecv] #end);
 
 	@:keep
-	static final net_updateServerEnt = new NET_Sv<Net_UpdateServerEnt>(#if client [updateEnt] #end);
+	static final net_RemoveComponentMessage = new NET_Sv<Net_RemoveComponentMessage>(#if client [removeEntRecv] #end);
 
-	//clear?
 
 	#if client
 
@@ -54,19 +83,30 @@ class ClientTranslateSystem extends System {
 
 	static final components:Map<Int,Component> = componentsC();
 
-	public static function componentsC() {
+	static function componentsC() {
 		final comp:Map<Int,Component> = [];
 		
 		return comp;
 	}
 
+	static function removeEntRecv(nremove:Net_RemoveComponentMessage) {
+
+		final clientID = serverIDToClientID.get(nremove.serverID);
+		if (clientID == null) {
+			trace("Attempt to remove component not linked to an ID on the client...");
+			return;
+		}
+		ComponentManager.removeComponent(nremove.comp,clientID);
+	}
+
 	//TODO make it more efficient, use move instead of copy...
-	public static function updateEnt(x:Net_UpdateServerEnt) {
+	static function updateEntRecv(x:Net_ReplicatedEntitiesMessage) {
+		trace(x);
 		for (ent in x.replEntities) {
 			final clientID = serverIDToClientID.get(ent.serverID);
 			if (clientID != null) {
 				for (comp in ent.comp) {
-					// trace(untyped comp.getComponentName());
+					trace(untyped comp.getComponentName());
 					final other = components.get(comp.__uid);
 					if (!components.exists(comp.__uid)) {
 						components.set(comp.__uid,comp);
@@ -79,13 +119,11 @@ class ClientTranslateSystem extends System {
 					}
 				}
 			} else {
-				trace("THE attatchement process begins");
 				var id = null;
 				for (comp in ent.comp) {
 					final compClass = Type.getClass(comp);
-					trace('type ${Type.getClassName(compClass)}');
+					// trace(Type.getClassName(compClass));
 					if (compClass == PlayerComponent || compClass == GEntityComponent) {
-						trace("OBAMNA");
 						IterateEnt.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) {
 							untyped {
 								if (comp.entity == ent) {
@@ -97,17 +135,21 @@ class ClientTranslateSystem extends System {
 							untyped {
 								if (comp.player == ply) {
 									id = c_currentPlayer.getOwner();
-									trace("Player found and attatched");
 								}
+							}
+						});
+					} else if (compClass == ClientRepresentationTarget) {
+						trace("ClientRepresentationTarget");
+						final c_crt:ClientRepresentationTarget = cast comp;
+						IterateEnt.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) { 
+							if (c_crt.target == ent) {
+								id = c_currentEnt.getOwner();
 							}
 						});
 					}
 				}
 				if (id == null) id = ComponentManager.addEntity();
-				
-				
 				for (comp in ent.comp) {
-					
 					components.set(comp.__uid,comp);
 					ComponentManager.addComponent(comp.getCompID(),comp,id);
 				}
@@ -120,31 +162,160 @@ class ClientTranslateSystem extends System {
 
 	#if server
 
-	override function init_server() {
+	var removeplyrs:Map<Player,Bool> = [];
+
+	var removes:Array<CacheRemove> = [];
+
+	function callback(x:CompRemoveSignalData<Component>) {
+		if (!(x.comp is ReplicatedComponent)) {
+			trace("Not a replicated component...");
+			return;
+		}
+		final repl:ReplicatedComponent = cast x.comp;
+		final compID = x.comp.getCompID();
+		final plyrs = ClientReplicationMachine.replToPlayers(repl.replicated,x.ent);
+		for (plyr in plyrs) {
+			removeplyrs.set(plyr,true);
+		}
+		removes.push({
+			id : x.ent,
+			comp: compID,
+			players: plyrs
+		});
 		
 	}
 
-	override function run_server() {
-		final cr = new ClientReplicationMachine();
-		final unreliables = cr.iterate();
-		final reliables = cr.iterateSendOnce();
-		for (ply => result in unreliables) {
-			
-			net_updateServerEnt.send(result,ply,true);
-		}
-		for (ply => result in reliables) {
-			net_updateServerEnt.send(result,ply,false);
+	var queueReplComponents:Map<Int,Array<ReplicatedComponent>> = [];
+
+	//FIXME . No players, not added to list, fieldsChanged never set to false, nothing ever happens again. Wuh oh
+	function onFieldsChanged(data:FieldsChangedData) {
+		trace(Type.getClassName(Type.getClass(data.comp)));
+		final plyrs = ClientReplicationMachine.replToPlayers(data.comp.replicated,data.ent);
+		for (plyr in plyrs) {
+			queueReplComponents.get(plyr.UserID()).orGet(
+			() -> {
+				final arr:Array<ReplicatedComponent> = [];
+				queueReplComponents.set(plyr.UserID(),arr);
+				arr;
+			}).push(data.comp);
 		}
 	}
+
+	override function init_server() {
+		ComponentManager.removeSignal.handle(callback);
+		ReplicatedEntity.getAddSignal().handle((add) -> {
+			for (compStore in ComponentManager.components_3) {
+				if (compStore.has_component(add.ent)) {
+					var comp = compStore.get_component(add.ent);
+					if (comp is ReplicatedComponent) {
+						var repl:ReplicatedComponent = comp;
+						trace("HANDLE!!");
+						repl.fieldsChangedSig.handle(onFieldsChanged);
+						if (repl.fieldsChanged) {
+							onFieldsChanged({
+								ent: add.ent,
+								comp: comp
+							});
+						}
+						// add.comp.compIDS.push(repl.getCompID());
+					}
+				}
+			}
+		});
+		ComponentManager.addSignal.handle((add) -> {
+			if (add.comp is ReplicatedComponent) {
+				if (add.ent.has_comp(ReplicatedEntity)) {
+					final c_replComp:ReplicatedComponent = cast add.comp;
+					trace("HANDLE 2");
+					c_replComp.fieldsChangedSig.handle(onFieldsChanged);
+					if (c_replComp.fieldsChanged) {
+						onFieldsChanged({
+							ent : add.ent,
+							comp: c_replComp
+						});
+					}
+				}
+			}
+		});
+		
+	}
+	static var profile:Profiler = new Profiler();
+	@:expose("profilects")
+	static function profilects() {
+		profile = new Profiler();
+		profile.beginProfiling();
+		// Profiler.beginProfiling();
+	}
+
+	function sendQueuedMessages() {
+		for (user => replComps in queueReplComponents) {
+			var ents:Map<Int,Net_ReplicatedEntity> = [];
+			var entsreliable:Map<Int,Net_ReplicatedEntity> = [];
+			var entsSize = 0;
+			var entsReliableSize = 0;
+			for (comp in replComps) {
+				trace(Type.getClassName(Type.getClass(comp)));
+				final serverID:DI_ID = comp.getOwner();
+				var targetmap = if (comp.unreliable) {
+					entsSize++;
+					ents;
+				} else {
+					entsReliableSize++;
+					entsreliable;
+				}
+				if (!targetmap.exists(serverID)) {
+					targetmap.set(serverID, {
+						comp: [comp],
+						serverID: serverID
+					});
+				} else {
+					targetmap.get(serverID).comp.push(comp);
+				}
+				comp.fieldsChanged = false;
+				
+			}
+			final player = Gmod.Player(user);
+			if (entsSize > 0) {
+				net_replEntsMessage.send({replEntities: ents.array()},player,true);
+			}
+			if (entsReliableSize > 0) {
+				net_replEntsMessage.send({replEntities: entsreliable.array()},player,false);
+			}
+		}
+		queueReplComponents.clear();
+	}
+
+	function sendQueuedRemoves() {
+		for (plyr in removeplyrs.keys()) {
+			var remove = removes.filter((r) -> r.players.contains(plyr));
+			for (remve in remove) {
+				net_RemoveComponentMessage.send({
+					comp: remve.comp, 
+					serverID: remve.id
+				},plyr);
+			}
+		}
+		removeplyrs = [];
+		removes = [];
+	}
+
+	override function run_server() {
+		sendQueuedMessages();
+		sendQueuedRemoves();
+	}
+
+	
 
 	
 	#end
 }
 #if server
-class ClientReplicationMachine {
-	final sentArray:Map<Player,Net_UpdateServerEnt> = [];
 
-	final reliables:Map<Player,Net_UpdateServerEnt> = [];
+//TODO cleanup this
+class ClientReplicationMachine {
+	final sentArray:Map<Player,Net_ReplicatedEntitiesMessage> = [];
+
+	final reliables:Map<Player,Net_ReplicatedEntitiesMessage> = [];
 
 	var added:Map<Player,Array<ReplicatedComponent>> = [];
 
@@ -152,7 +323,7 @@ class ClientReplicationMachine {
 	
 	public function new() {}
 
-	inline static function replToPlayers(x:ReplicatedTarget,diid:DI_ID):Array<Player> {
+	public static function replToPlayers(x:ReplicatedTarget,diid:DI_ID):Array<Player> {
 		var arr:Array<Player> = [];
 		switch (x) {
 			case NONE:
@@ -171,6 +342,7 @@ class ClientReplicationMachine {
 					arr.push(ply);
 				});
 			case SOME(CURRENT_PLAYER):
+				
 				final ply = diid.get_2(PlayerComponent);
 				if (ply != null) {
 					arr.push(ply.player);
@@ -182,126 +354,13 @@ class ClientReplicationMachine {
 				for (ply in PlayerLib.GetHumans()) {
 					arr.push(ply);
 				}
-
+			case MASTER(target):
+				arr = replToPlayers(target.replicated,diid);
 		}
 		return arr;
 	}
 
-	public function iterate():Map<Player,Net_UpdateServerEnt> {
-		IterateEnt.iterGet([ReplicatedEntity],[_],
-			function (ent) {
-				added = [];
-				for (compStore in ComponentManager.components_3) {
-					if (compStore.has_component(ent)) {
-						var comp = compStore.get_component(ent);
-						if (comp is ReplicatedComponent) {
-							var repl:ReplicatedComponent = comp;
-							if (!repl.fieldsChanged) continue;
-							repl.fieldsChanged = false;
-							final players = replToPlayers(repl.replicated,ent);
-							for (ply in players) {
-								addToArray(ply,repl);
-							}
-						}
-					}
-				}
-				for (ply => arr in added) {
-					final replEntities = sentArray.get(ply).orGet(() -> {final x:Net_UpdateServerEnt = {replEntities : []}; sentArray.set(ply,x); x;}).replEntities;
-					replEntities.push({
-						comp: arr,
-						serverID: ent
-					});
-				}
-			});
-		return sentArray;
-	}
-
-	public function iterateSendOnce() {
-		IterateEnt.iterGet([ReplicateOnce],[_],
-		function (ent) {
-			added = [];
-			addedReliable = [];
-			for (compStore in ComponentManager.components_3) {
-				if (compStore.has_component(ent)) {
-					var comp = compStore.get_component(ent);
-					if (comp is ReplicatedComponent) {
-						var repl:ReplicatedComponent = comp;
-						if (!repl.fieldsChanged) continue;
-						repl.fieldsChanged = false;
-						final players = replToPlayers(repl.replicated,ent);
-						for (ply in players) {
-							if (repl.unreliable) {
-								addToArray(ply,repl);
-
-							} else {
-								addToReliable(ply,repl);
-							}
-						}
-					}
-				}
-			}
-			// for (compID in arr.keys()) {
-			// 	final repl:ReplicatedComponent = deceptinfect.ecswip.ComponentManager.components_3[compID].get_component(ent);
-			// 	final players = replToPlayers(repl.replicated,ent);
-			// 	for (ply in players) {
-			// 		if (repl.unreliable) {
-			// 			addToArray(ply,repl);
-			// 		} else {
-			// 			addToReliable(ply,repl);
-			// 		}
-			// 	}	
-			// }
-			for (ply => arr in added) {
-				final replEntities = sentArray.get(ply).orGet(() -> {final x:Net_UpdateServerEnt = {replEntities : []}; sentArray.set(ply,x); x;}).replEntities;
-				replEntities.push({
-					comp: arr,
-					serverID: ent
-				});
-			}
-			for (ply => arr in addedReliable) {
-				final replEntities = reliables.get(ply).orGet(() -> {final x:Net_UpdateServerEnt = {replEntities : []}; reliables.set(ply,x); x;}).replEntities;
-				replEntities.push({
-					comp: arr,
-					serverID: ent
-				});
-			}
-			ent.remove_component(ReplicateOnce);
-		});
-		return reliables;
-	}
-
-	inline function addToArray(ply:Player,comp:ReplicatedComponent) {
-		final arr = added.get(ply);
-		if (arr != null) {
-			arr.push(comp);
-		} else {
-			added.set(ply,[comp]);
-		}
-	}
-
-	inline function addToReliable(ply:Player,comp:ReplicatedComponent) { 
-		final arr = addedReliable.get(ply);
-		if (arr != null) {
-			arr.push(comp);
-		} else {
-			addedReliable.set(ply,[comp]);
-		}
-	}
+	
+	
 }
 #end
-// abstract ServerID(DI_ID) from Int to Int {
-// 	#if client
-// 	@:to
-// 	public function toID():DI_ID {
-// 		return SystemManager.getSystem(ClientTranslateSystem).getID(cast this);
-// 	}
-// 	#end
-
-// 	#if server
-// 	public static function mapTo(id:DI_ID, player:Player):ServerID {
-// 		final arr = SystemManager.getSystem(ClientTranslateSystem).idToPlayer.get(id).or([]);
-// 		arr.set(player, true);
-// 		return cast id;
-// 	}
-// 	#end
-// }

@@ -34,19 +34,41 @@ import deceptinfect.ents.Di_spitball;
 import deceptinfect.weapons.Weapon_di_spit;
 import deceptinfect.game.SpawnSystemNav;
 import deceptinfect.Spread;
-import deceptinfect.Darken;
 
 class Main {
 
 	#if server
 	@:expose("startGame")
 	static function startGame(skipSetup:Bool) {
+		forceInfected = false;
+		forceUninfected = false;
 		GameSystem.get().setState(PLAYING); 
 	}
+
+	@:expose("startGameInf") 
+	static function startGameInf() {
+		forceUninfected = false;
+		forceInfected = true;
+		GameSystem.get().setState(PLAYING); 
+	}
+
+	@:expose("startGameUninf")
+	static function startGameUnInf() {
+		forceInfected = false;
+		forceUninfected = true;
+		GameSystem.get().setState(PLAYING); 
+	}
+
+	public static var forceInfected = false;
+
+	public static var forceUninfected = false;
 
 	#end
 
 	public static function main() {
+		for (model in Misc.roundModels) {
+			UtilLib.PrecacheModel(model);
+		}
 		new DeceptInfect();
 		#if client
 		new ClientOverrides();
@@ -54,21 +76,16 @@ class Main {
 		SignalStorage.initEvents(); //nocheckin GET RID OF THIS!!!
 		SystemManager.initAllSystems();
 		#if server
-		GameSystem.get().cleanup(); //TODO improve?
+		// GameSystem.get().cleanup(); //TODO improve?
 		#end
 		#if client
 		for (ply in PlayerLib.GetAll()) {
 			new GPlayerCompat(new PlayerComponent(ply));
 		}
 		#end
-		FileLib.CreateDir("deceptinfect");
-		GameLib.CleanUpMap();
-		for (model in Misc.roundModels) {
-			UtilLib.PrecacheModel(model);
-		}
+		FileLib.CreateDir("deceptinfect");		
 		SpawnSystem.generateSpawns();
 		UtilLib.PrecacheModel(Misc.infModel);
-		
 		#if server
 		GameLib.ConsoleCommand("mp_falldamage 1\n");
 		#end

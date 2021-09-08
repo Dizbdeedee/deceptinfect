@@ -44,7 +44,7 @@ class IterateEnt {
        
     }
 
-    static function if_statement(getArr:haxe.macro.Expr,name:String) {
+    public static function if_statement(getArr:haxe.macro.Expr,name:String) {
         return switch (getArr) {
 			case {expr: EArrayDecl(values), pos: pos}:
                 values.map((x) -> {
@@ -61,10 +61,9 @@ class IterateEnt {
 				Context.error("Not a get array", pos);
 				macro null;
 		}
-        
     }
 
-    static function switch_head(getArr:Expr,name:String) {
+    public static function switch_head(getArr:Expr,name:String) {
         return switch (getArr) {
 			case {expr: EArrayDecl(values), pos: pos}:
                 macro $a{values.map((x) -> {
@@ -100,6 +99,8 @@ class IterateEnt {
         return macro null;
 
     }
+
+	
     public static macro function iterGet(getArr:Expr, cases:Expr, func:Expr) {
 		var name;
 		var expr;
@@ -234,5 +235,7 @@ class IterateEnt {
 		}
 		return macro $expr;
 	}
+
+	
     
 }

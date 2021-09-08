@@ -1,5 +1,6 @@
 package deceptinfect.infection.components;
 
+@:structInit
 class InfectionLookTime extends Component {
 
     var looker:DI_ID;

@@ -2,19 +2,43 @@ package deceptinfect.ecswip;
 
 import deceptinfect.game.ClientTranslateSystem;
 
+
+typedef FieldsChangedData = {
+    ent : DI_ID,
+    comp : ReplicatedComponent
+}
 @:autoBuild(deceptinfect.macros.ReplicatedComponentMacro.build())
 abstract class ReplicatedComponent extends Component implements hxbit.Serializable {
 
     #if server
     var replicated(default,set):ReplicatedTarget = NONE;
 
-    var unreliable:Bool = false;
+    private var fieldsChangedTrig:SignalTrigger<FieldsChangedData> = new SignalTrigger();
 
-    var fieldsChanged = true;
+    var fieldsChangedSig:Signal<FieldsChangedData>;
+    
+    var unreliable:Bool = true;
 
-    public function set_replicated(x) {
-        fieldsChanged = true;
+    var fieldsChanged(default,set) = false;
+
+    function set_replicated(x) {
+        // fieldsChanged = true;
         return replicated = x;
+    }
+
+    function set_fieldsChanged(nfc) {
+        if (!fieldsChanged && nfc) {
+            fieldsChangedTrig.trigger({
+                ent: this.getOwner(),
+                comp: this
+            });
+        }
+        return fieldsChanged = nfc;
+    }
+
+    public function new() {
+        super();
+        fieldsChangedSig = fieldsChangedTrig.asSignal();
     }
     
     #end
@@ -29,6 +53,7 @@ enum ReplicatedTarget {
     NONE;
     SOME(target:SomeTargets);
     ALL;
+    MASTER(target:ReplicatedComponent);
 }
 enum ReplicateOnceTarget {
     NONE(unreliable:Bool);
@@ -41,4 +66,5 @@ enum SomeTargets {
     PLAYERS(arr:Array<Player>);
     CURRENT_PLAYER;
     INFECTED;
+   
 }

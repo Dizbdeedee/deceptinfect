@@ -1,5 +1,7 @@
 package deceptinfect.game.components;
 
+import deceptinfect.ecswip.ReplicatedComponent;
+
 
 typedef PreviousMaterial = {
     name : String,
@@ -7,7 +9,8 @@ typedef PreviousMaterial = {
     ?color : Vector
 }
 
-class Darken extends Component {
+@:replicated(SOME(CURRENT_PLAYER))
+class Darken extends ReplicatedComponent {
 
    
 }

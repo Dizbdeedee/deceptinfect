@@ -1,5 +1,11 @@
 package deceptinfect.infection;
 
+import deceptinfect.ecswip.ClientRepresentationTarget;
+import deceptinfect.infection.components.InfectionLookData;
+import deceptinfect.game.GameSystem;
+import deceptinfect.ecswip.GEntityComponent;
+import deceptinfect.infection.components.InfectionLookTime;
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.gclass.Entity.EntityGetHitBoxBoundsReturn;
 import deceptinfect.ecswip.PlayerComponent;
@@ -13,55 +19,88 @@ typedef ND_InfInfo = {
 class InfectionLookSystem extends System {
 	static var infectioninfo = new gmod.helpers.net.NET_Server<"di_infinfo", ND_InfInfo>();
 
-	#if client
-	override function init_client() {
-		infectioninfo.signal.handle(recvInfectionInfo);
-	}
-
-	function recvInfectionInfo(x:ND_InfInfo) {
-		var target:GPlayerCompat = cast x.target;
-		var c_inf = target.id.getOrAdd(InfectionComponent);
-		if (x.isinfected) {
-			c_inf.infection = INFECTED;
-		} else {
-			c_inf.infection = NOT_INFECTED(x.inf);
-		}
-	}
-	#end
-
 	#if server
+
+	override function init_server() {
+		InfectionLookInfoAbility.getAddSignal().map((data) -> data.ent)
+		.filter((id) -> id.has_comp(PlayerComponent)).join(
+			PlayerComponent.getAddSignal().map((data) -> data.ent)
+		.filter((id) -> id.has_comp(InfectionLookInfoAbility))).handle(
+			function (lookerEnt) {
+				final lookerPlayer = lookerEnt.get_2(PlayerComponent).player;
+				IterateEnt.iterGet([InfectionComponent,PlayerComponent],[_,_],
+				function (victimEnt) {
+					if (lookerEnt == victimEnt) continue;
+					final linkEnt = ComponentManager.addEntity();
+					linkEnt.add_component(({
+						looker : lookerEnt,
+						victim : victimEnt,
+						time : 0
+					} : InfectionLookTime));
+					final crtEnt = ComponentManager.addEntity();
+					final infLookData = new InfectionLookData();
+					infLookData.fieldsChanged = false;
+					final crt = new ClientRepresentationTarget(SOME(PLAYERS([lookerPlayer])),victimEnt);
+					crtEnt.add_component(infLookData);
+					crtEnt.add_component(crt);
+					trace('Added from looker');
+				});
+			});
+		InfectionComponent.getAddSignal().map((data) -> data.ent)
+		.filter((id) -> id.has_comp(PlayerComponent)).join(
+		PlayerComponent.getAddSignal().map((data) -> data.ent)
+		.filter((id) -> id.has_comp(InfectionComponent))).handle((victimEnt) -> {
+			IterateEnt.iterGet([InfectionLookInfoAbility,PlayerComponent],[_,{player : lookerPlayer}],
+			function (lookerEnt) {
+				if (lookerEnt == victimEnt) continue;
+				final linkEnt = ComponentManager.addEntity();
+				linkEnt.add_component(({
+					looker: lookerEnt,
+					victim: victimEnt,
+					time: 0
+				} : InfectionLookTime));
+				final ent = ComponentManager.addEntity();
+				final infLookdata = new InfectionLookData();
+				infLookdata.fieldsChanged = false;
+				final crt = new ClientRepresentationTarget(SOME(PLAYERS([lookerPlayer])),victimEnt);
+				ent.add_component(infLookdata);
+				ent.add_component(crt);
+				trace("Added from victim");
+			});
+		});
+	}
+
 	override function run_server() {
-		for (x in 0...ComponentManager.entities) {
-			final ent:DI_ID = x;
-			switch [ent.get(InfectionLookInfo), ent.get(PlayerComponent)] {
-				case [Comp(c_look), Comp({player: ply})]:
-					switch (ply.GetEyeTrace().Entity.validID()) {
-						case Some(id = _.get(InfectionComponent) => Comp(c_inf)):
-							var t = c_look.lookat.addTime(id);
-							if (t > c_look.threshold) {
-								var isinfected;
-								var inf = switch (c_inf.infection) {
-									case NOT_INFECTED(x):
-										isinfected = false;
-										x.value;
-									case INFECTED:
-										isinfected = true;
-										100.0;
-								}
-								// trace('sending... $inf');
-								infectioninfo.send({
-									target: id.get_sure(PlayerComponent).player,
-									isinfected: isinfected,
-									inf: inf
-								}, ply, true);
-								c_look.lookat.setTime(id, 2.0);
-							}
-						default:
-							c_look.lookat.removeAllTimes();
+		IterateEnt.iterGet([InfectionLookTime],[c_infLookTime = {looker : looker, victim : victim}],
+		function () {
+			looker.hasExpr([PlayerComponent,InfectionLookInfoAbility],[{player : infLookPlayer},{threshold : infAbilityThreshold}],
+			function () {
+				final hitEnt = infLookPlayer.GetEyeTrace().Entity;
+				victim.hasExpr([GEntityComponent,InfectionComponent],[{entity : victimGEnt}, {infection : victimInfection}],function () {
+					if (victimGEnt == hitEnt) {
+						c_infLookTime.time += GameSystem.get().getGameManager().diffTime;
+					} else {
+						c_infLookTime.time -= GameSystem.get().getGameManager().diffTime;
 					}
-				default:
-			}
-		}
+					if (c_infLookTime.time < 0) {
+						c_infLookTime.time = 0;
+					}
+					// trace(c_infLookTime.time);
+					if (c_infLookTime.time > infAbilityThreshold) {
+						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,{target : crt}],function () {
+							if (victim != crt) continue;
+							trace("updating");
+							c_infLookData.infection = victimInfection;
+						});
+					} else {
+						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,{target : crt}],function () {
+							if (victim != crt) continue;
+						});
+					}
+				});
+			});
+		});
 	}
 	#end
 }
+

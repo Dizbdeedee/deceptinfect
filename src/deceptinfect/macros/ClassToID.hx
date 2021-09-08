@@ -60,9 +60,6 @@ class ClassToID {
 		return retId;
 	}
 
-	public static function test(t:haxe.macro.Type) {
-	}
-
 	public static function idMacroObj(obj:Expr):Expr {
 		final ident = switch (Context.typeof(obj)) {
 			case TInst(_.get() => {name: n}, _):
@@ -84,7 +81,6 @@ class ClassToID {
 	public static function getIDStr(type:String) {
 		return if (!classMap.exists(type)) {
 			final ourid = id++;
-			// trace('init $type with $ourid');
 			classMap.set(type, ourid);
 			ourid;
 		} else {
@@ -110,13 +106,66 @@ class DI_ID_Use {
 		#end
 	}
 
-	
-	// public static macro function replicate(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>,replState) {
-	// 	#if macro
-		
-	// 	#end
-	// }
+	#if macro
+	static function if_statement(getArr:haxe.macro.Expr,name:Expr) {
+        return switch (getArr) {
+			case {expr: EArrayDecl(values), pos: pos}:
+                values.map((x) -> {
+                    final id = ClassToID.idMacro(x);
+                    macro __compArr[$id].has_component($name); 
+                }).fold((cur, prev) -> 
+                    if (prev == null) {
+                        cur;
+                    } else {
+                        macro $prev && $cur;
+                    }
+                ,null);
+			case {pos : pos}:
+				Context.error("Not a get array", pos);
+				macro null;
+		}
+        
+    }
 
+    static function switch_head(getArr:Expr,name:Expr) {
+        return switch (getArr) {
+			case {expr: EArrayDecl(values), pos: pos}:
+                macro $a{values.map((x) -> {
+                    final id = ClassToID.idMacro(x);
+                    macro __compArr.get_component($id).get_component($name);
+                })};
+			case {pos : pos}:
+				Context.error("Not a case array", pos);
+				macro null;
+		}
+    }
+	#end
+
+	public static macro function hasExpr(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>,getArr:Expr, cases:Expr, func:Expr) {
+		var name = diid;
+		var expr;
+		switch (func) {
+			case {expr: EFunction(_, {args: [{name: _argName}], expr : e})}:
+				expr = e;
+			case {expr: EFunction(_, {args: [], expr: e}), pos: pos}:
+				expr = e;
+			case {pos: pos}:
+				Context.error("Incorrect format", pos);
+			default:
+				throw "hmm";
+		}
+        final block = macro {
+			if ($e{if_statement(getArr,name)}) {
+				switch ($e{switch_head(getArr,name)}) {
+					case $cases:
+						$expr;
+					default:
+						null;
+				} 
+			}
+        }      
+		return block;
+	}
 	
 
 	public static macro function getAll(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, arr:Array<Expr>) {
@@ -125,16 +174,6 @@ class DI_ID_Use {
 			final idMacro = ClassToID.idMacro(e);
 			macro deceptinfect.ecswip.ComponentManager.getComponentForID($idMacro, $diid);
 		});
-		// switch (macro switch ([1,2,"apple"]) {
-		// 	case [1,2,"apple"]:
-		// 	default:
-		// 	}) {
-		// case {expr : ESwitch({expr : EArrayDecl(a)},_,_)}:
-		//     trace(a);
-		// case x:
-		//     trace(x);
-		//     throw "umm";
-		// }
 		final expr = {expr: EArrayDecl(actualArray), pos: Context.currentPos()}
 		return macro($a{actualArray} : Array<Dynamic>);
 		#end

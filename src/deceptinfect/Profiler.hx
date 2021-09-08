@@ -6,28 +6,32 @@ import gmod.libs.MathLib;
 using Safety;
 
 class Profiler {
-	static final inital:Array<Map<String, Float>> = [];
-	static final vinal:Array<Map<String, Float>> = [];
+	final inital:Array<Map<String, Float>> = [];
+	final vinal:Array<Map<String, Float>> = [];
 
-	static var pass = 0;
+	var pass = 0;
 
-	static var lastname = "";
+	var lastname = "";
 
-	static var profileState:ProfilingState = NOT_PROFILING;
+	var profileState:ProfilingState = NOT_PROFILING;
 
-	static var cumulativeTime = 0.0;
-	static var totalProfileTime = 0.0;
+	var cumulativeTime = 0.0;
+	var totalProfileTime = 0.0;
 
-	static final totalPasses:Int = 500;
+	final totalPasses:Int = 500;
 
-	public static function beginProfiling() {
+	public function new() {
+		
+	}
+
+	public function beginProfiling() {
 		pass = 0;
 		totalProfileTime = Gmod.SysTime();
 		cumulativeTime = 0.0;
 		profileState = PROFILING;
 	}
 
-	public static function report() {
+	public function report() {
 		if (profileState != PROFILE_FINISHED)
 			return;
 		final total:Map<String, Float> = [];
@@ -47,7 +51,7 @@ class Profiler {
 		profileState = NOT_PROFILING;
 	}
 
-	public static #if !profile inline #end function profile(zone:String, first = false) {
+	public #if !profile inline #end function profile(zone:String, first = false) {
 		#if profile
 		if (profileState != PROFILING)
 			return;
@@ -63,7 +67,7 @@ class Profiler {
 		#end
 	}
 
-	public static #if !profile inline #end function profileend() {
+	public #if !profile inline #end function profileend() {
 		#if profile
 		if (profileState != PROFILING)
 			return;
@@ -73,7 +77,7 @@ class Profiler {
 		#end
 	}
 
-	public static #if !profile inline #end function resetprofile() {
+	public #if !profile inline #end function resetprofile() {
 		#if profile
 		if (profileState != PROFILING)
 			return;

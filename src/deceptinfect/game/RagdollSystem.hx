@@ -313,7 +313,7 @@ class RagdollSystem extends System {
 			var di_ragdoll = newRagdoll(ply, ragdoll);
 			switch (ply.get(InfectedComponent)) {
 				case Comp(_):
-					di_ragdoll.id.get_sure(Ragdoll).reveal = WAIT(Gmod.CurTime() + 5);
+					di_ragdoll.id.get_sure(Ragdoll).reveal = WAIT(Gmod.CurTime() + 5); //TODO... constant hello
 				default:
 			}
 		}
@@ -325,7 +325,6 @@ class RagdollSystem extends System {
 		var ent:GEntCompat = new GEntCompat(EntsLib.Create("prop_ragdoll"));
 		ent.id.add_component(new Statue());
 		var c_stat = new StatInfo();
-
 		c_stat.name = plyr.Name();
 		c_stat.inf = switch (plyr.get(InfectionComponent)) {
 			case Comp(c_inf):
@@ -335,18 +334,9 @@ class RagdollSystem extends System {
 		}
 		c_stat.health = plyr.Health();
 		ent.id.add_component(c_stat);
-
-		// var teststr:VectorString = plyr.GetPos();
-		// var tovec:Vector = teststr;
-
 		ent.id.add_component(new KeepRestart());
-
 		ent.SetModel(plyr.GetModel());
-
 		ent.SetPos(plyr.GetPos());
-		// ent.AddEffects(EF_BONEMERGE);
-		// ent.AddEffects(EF_BONEMERGE_FASTCULL);
-		// ent.SetParent(plyr);
 		ent.Spawn();
 		for (physNum in 0...ent.GetPhysicsObjectCount() - 1) {
 			var physob = ent.GetPhysicsObjectNum(physNum);
@@ -354,17 +344,13 @@ class RagdollSystem extends System {
 			if (IsValid(physob)) {
 				physob.SetPos(result.a);
 				physob.SetAngles(result.b);
-				// TimerLib.Simple(0.1,() -> physob.EnableMotion(false));
-				// physob.SetContents(CONTENTS_HITBOX);
 				physob.EnableMotion(false);
 				physob.Sleep();
 			}
 		}
 		ent.SetCollisionGroup(COLLISION_GROUP_WORLD);
 		ent.SetTrigger(true);
-
 		ent.SetSolid(SOLID_NONE);
-
 		var plywep:Weapon = plyr.GetActiveWeapon();
 		ent.SetNWString("showwep", plywep.GetModel());
 	}
@@ -447,9 +433,6 @@ class RagdollSystem extends System {
 
 	function createProp():GEntCompat {
 		var rag:Entity = EntsLib.Create("prop_ragdoll");
-
-		// rag.SetMaterial()
-		// rag.SetSubMaterial(0,"debug/particleerror");
 		var id = new GEntCompat(rag).id;
 		id.add_component(new Ragdoll());
 
@@ -459,7 +442,6 @@ class RagdollSystem extends System {
 				id.add_component(new KeepRestart());
 			default:
 				id.add_component(new CleanupEnt());
-				// id.add_component(new StragglingRagdoll());
 		}
 		return rag;
 	}

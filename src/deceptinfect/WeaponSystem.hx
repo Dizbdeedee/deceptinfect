@@ -37,8 +37,8 @@ class WeaponSystem extends System {
 				}
 				incrementStage();
 			}
-		});
-		
+		 });
+
 	}
 
 	public function giveInitalWeapons() {

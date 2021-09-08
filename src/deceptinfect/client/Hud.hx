@@ -1,5 +1,6 @@
 package deceptinfect.client;
 
+import deceptinfect.infection.components.InfectionLookData;
 import deceptinfect.GameManager2.GAME_STATE_2;
 import deceptinfect.game.GameSystem;
 import gmod.stringtypes.Hook.GMHook;
@@ -41,6 +42,15 @@ class Hud {
 		infectionMeter();
 	}
 
+	static function intpretInfection(state:INF_STATE) {
+		return switch (state) {
+			case NOT_INFECTED(inf):
+				inf.value;
+			case INFECTED:
+				100;
+		}
+	}
+
 	static function targetID() {
 		var target:GEntCompat = Gmod.LocalPlayer().GetEyeTrace().Entity;
 		if (!Gmod.IsValid(target) || !target.IsPlayer()) {
@@ -51,12 +61,11 @@ class Hud {
 		SurfaceLib.SetFont("TargetID");
 		SurfaceLib.SetTextColor(255,255,255);
 		SurfaceLib.DrawText(player.Name());
-
 		switch (target.has_id()) {
-			case Some(_.get(InfectionComponent) => Comp(c_inf)):
+			case Some(_.get(InfectionLookData) => Comp(c_inf)):
 				SurfaceLib.SetTextPos(CSS(X,900),CSS(Y,500));
 				SurfaceLib.SetFont("TargetID");
-				SurfaceLib.DrawText(StringLib.format("Infection: %6.2f%%", c_inf.getInfValue()));
+				SurfaceLib.DrawText(StringLib.format("Infection: %6.2f%%", intpretInfection(c_inf.infection)));
 			default:
 		}
 		// isinfected, then draw infection percent ect.

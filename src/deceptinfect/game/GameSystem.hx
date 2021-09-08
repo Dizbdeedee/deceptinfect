@@ -29,6 +29,13 @@ class GameSystem extends System {
 
     var signalTrig:SignalTrigger<GAME_STATE_2> = new SignalTrigger();
 
+    public function gameManagerAvaliable() {
+        IterateEnt.iterGet([GameManager2],[gameManager],function () {
+            return true;
+        });
+        return false;
+    }
+
     public function getGameManager() {
         IterateEnt.iterGet([GameManager2],[gameManager],function () {
             return gameManager;
@@ -123,7 +130,13 @@ class GameSystem extends System {
 
     function beginRoundForAll() {
         var choose = MathLib.random(1, PlayerLib.GetCount());
+        if (Main.forceInfected) {
+            choose = 1;
+        } else if (Main.forceUninfected) {
+            choose = MathLib.random(2, PlayerLib.GetCount());
+        }
         for (ind => _ply in PlayerLib.GetAll()) {
+            trace('Player index $ind');
             var player:GPlayerCompat = _ply;
             beginPlayer(player);
             if (ind == choose) {
@@ -146,7 +159,7 @@ class GameSystem extends System {
 		ent.add_component(new HiddenHealthComponent());
 		ent.add_component(new FormComponent());
 		ent.add_component(new DamagePenaltyHidden());
-		ent.add_component(new InfectionLookInfo());
+        ent.add_component(new InfectionLookInfoAbility());
 		var c_inf = ent.get_sure(InfectionComponent);
 		var c_accept = ent.get_sure(GrabAccepter);
 		c_accept.grabState = UNAVALIABLE(UNAVALIABLE);

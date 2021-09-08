@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.game.DarkenSystem;
 import deceptinfect.game.RunUntilDoneSystem;
 import deceptinfect.game.GameInProgressSystem;
 import deceptinfect.game.ClientTranslateSystem;
@@ -16,6 +17,7 @@ import deceptinfect.game.RagdollSystem;
 import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.game.SpawnSystem;
+import deceptinfect.game.CRTSystem;
 import deceptinfect.radiation.RadiationSystem.RadiationID;
 import haxe.ds.ObjectMap;
 import deceptinfect.client.GeigerSystem;
@@ -32,9 +34,13 @@ class SystemManager {
 
 	public static var runSystems(default, null):Array<Class<Dynamic>> = [
 		
-		GameSystem, GameInProgressSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, RadiationSystem, GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
-		EvacSystem, RagdollSystem, SlowMotionSystem, InfectionLookSystem, ContaminationSystem, // Problem!
-		RadSourceSystem, LowHealthSystem, ScannerSystem,
+		GameSystem, GameInProgressSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
+		RadiationSystem, 
+		GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
+		EvacSystem, RagdollSystem, SlowMotionSystem,Spread, InfectionLookSystem, 
+		ContaminationSystem, // Problem!
+		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
+		CRTSystem,
 		WeaponSystem, ItemOwnerSystem,DummySystem,
 		ClientTranslateSystem
 		
@@ -65,7 +71,10 @@ class SystemManager {
 		getSystems.set(WeaponSystem, new WeaponSystem());
 		getSystems.set(ItemOwnerSystem, new ItemOwnerSystem());
 		getSystems.set(DummySystem, new DummySystem());
+		getSystems.set(Spread, new Spread());
 		getSystems.set(ClientTranslateSystem,new ClientTranslateSystem());
+		getSystems.set(DarkenSystem, new DarkenSystem());
+		getSystems.set(CRTSystem, new CRTSystem());
 	}
 
 	public static function getSystem<T:System>(cls:Class<T>):Null<T> {
@@ -84,23 +93,31 @@ class SystemManager {
 	@:expose("getSystem")
 	@:noCompletion
 	static function getSystemExp(name:String) {
-		return cast getSystems.get(Type.resolveClass(name));
+		final result = getSystems.get(Type.resolveClass(name));
+		return if (result == null) {
+			throw 'Can\'t find $name';
+		} else {
+			result;
+		}
 	}
 
+	static var profile:Profiler = new Profiler();
+
 	public static function runAllSystems() {
-		Profiler.profile("start", true);
+		profile.profile("start", true);
 		for (clsSystem in runSystems) {
-			// final name = Type.getClassName(clsSystem);
-			// Profiler.profile(name);
+			final name = Type.getClassName(clsSystem);
+			profile.profile(name);
 			getSystems.get(clsSystem).run();
 		}
-		Profiler.resetprofile();
-		Profiler.report();
+		profile.resetprofile();
+		profile.report();
 	}
 
 	@:expose("systemReport")
 	public static function beginReporting() {
-		Profiler.beginProfiling();
+		profile = new Profiler();
+		profile.beginProfiling();
 	}
 
 	public static function initAllSystems() {

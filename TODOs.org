@@ -1,20 +1,20 @@
 * Active work
 
-** Finish game loop/logic. All win conditions must be performable
-*** DONE Kill nest
-*** DONE Kill/infect humans
-*** DONE Kill infected
-*** DONE Evacuate with infected
-*** DONE Evacuate no infected
-*** TODO No one evacuates?
+** Fix clientTranslate system changes.
+** Also, port InfectionLookSystem. Dummy
 
 * Outstanding Bugs
 
-** The tpose
+** Server chugging in round for no raisin. 20/s tickrate. In round, obviously.
+** T-Pose! Yikes.
+** Ragdoll not produced for person being killed
+** INSTANT ROUND FAIL!! No error message...
+** ClientTranslate system depends on players active,leaving ect.
 ** Gui sometimes does not activate :(
 ** Gui persists between rounds
+** Start game twice makes no one spawn.
 ** Geiger persists between rounds
-** Obscure networking fail
+** Obscure networking fail (fixed?)
 [deceptinfect] addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1533: attempt to index local 'cl' (a nil value)
     1. createEmptyInstance - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:1533
         2. getRef - addons/deceptinfect/gamemodes/deceptinfect/gamemode/haxe_cl_init.lua:2481
@@ -74,6 +74,8 @@
 
 * Sometime in the future
 
+
+** Make componentmanager, systemmanager not static.
 ** Fix gmodhaxe split files
    Idea: maybe we could split files based on a marker (a line we generate), then bring everything in..? 
 ** Message/info idea?
@@ -90,6 +92,12 @@
 * Recently done
 ** Spread inital visuals (kind of ugly, lag but gets the job done)
 
-
+** Finish game loop/logic. All win conditions must be performable
+*** DONE Kill nest
+*** DONE Kill/infect humans
+*** DONE Kill infected
+*** DONE Evacuate with infected
+*** DONE Evacuate no infected
+*** TODO No one evacuates?
 
 //old todos

@@ -7,8 +7,8 @@ class ComponentMacro {
 	public static function build() {
 		final fields = Context.getBuildFields();
 		final cls = Context.getLocalClass().get();
-		var id = ClassToID.getIDStr(cls.name);
 		if (Context.getLocalModule() == "deceptinfect.ecswip.ReplicatedComponent") return null;
+		var id = ClassToID.getIDStr(cls.name);
 		// trace(Context.getLocalType());
 		final clsType = switch (Context.getLocalType()) {
 			case TInst(_.get() => typ, _):
@@ -56,7 +56,7 @@ class ComponentMacro {
 			kind: FFun({
 				args: [],
 				expr: macro return cast deceptinfect.ecswip.ComponentManager.getAddSignal($v{id}),
-				ret: macro : tink.CoreApi.Signal<deceptinfect.ecswip.ComponentManager.CompAddSignal<$typ>>
+				ret: macro : tink.CoreApi.Signal<deceptinfect.ecswip.ComponentManager.CompAddSignalData<$typ>>
 			}),
 			pos : Context.currentPos()
 		});
@@ -66,7 +66,7 @@ class ComponentMacro {
 			kind: FFun({
 				args: [],
 				expr: macro return cast deceptinfect.ecswip.ComponentManager.getRemoveSignal($v{id}),
-				ret: macro : tink.CoreApi.Signal<deceptinfect.ecswip.ComponentManager.CompRemoveSignal<$typ>>
+				ret: macro : tink.CoreApi.Signal<deceptinfect.ecswip.ComponentManager.CompRemoveSignalData<$typ>>
 			}),
 			pos: Context.currentPos()
 		});

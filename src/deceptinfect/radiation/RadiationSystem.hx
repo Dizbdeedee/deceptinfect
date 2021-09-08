@@ -1,5 +1,7 @@
 package deceptinfect.radiation;
 
+import deceptinfect.ecswip.LinkedComponents;
+import deceptinfect.ecswip.LinkedEntities;
 import haxe.ds.ArraySort;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.macros.IterateEnt;
@@ -24,42 +26,36 @@ class RadiationSystem extends System {
 		trace(RadiationAccepter.getAddSignal());
 		RadiationAccepter.getAddSignal().handle((sig) -> {
 			trace("yo??");
-			IterateEnt.iterGet([RadiationProducer],[_],
+			IterateEnt.iterGet([RadiationProducer],[c_radProduce],
 			function (radProduceEnt) {
 				var c_radAffect = new RadiationAffecting();
 				c_radAffect.accepter = sig.ent;
 				c_radAffect.producer = radProduceEnt;
 				trace('producer and accepter linked');
-				ComponentManager.addEntity().add_component(c_radAffect);
+				final ent = ComponentManager.addEntity();
+				ent.add_component(c_radAffect);
+				ent.add_component(({
+					comp1: c_radProduce,
+					comp2: sig.comp
+				} : LinkedComponents));
 			});
 		});
-		trace(RadiationAccepter.getAddSignal().handle);
 		RadiationProducer.getAddSignal().handle((sig) -> {
-			IterateEnt.iterGet([RadiationAccepter],[_],
+			IterateEnt.iterGet([RadiationAccepter],[c_radAccept],
 			function (radAcceptEnt) {
 				var c_radAffect = new RadiationAffecting();
 				c_radAffect.accepter = radAcceptEnt;
 				c_radAffect.producer = sig.ent;
 				trace('accepter and producer linked');
-				ComponentManager.addEntity().add_component(c_radAffect);
+				final ent = ComponentManager.addEntity();
+				ent.add_component(c_radAffect);
+				ent.add_component(({
+					comp1: c_radAccept,
+					comp2: sig.comp
+				} : LinkedComponents));
 			});
 		});
-		RadiationAccepter.getRemoveSignal().handle((sig) -> {
-			IterateEnt.iterGet([RadiationAffecting],[{accepter : accepter}],
-			function (radAffectEnt) {
-				if (accepter == sig.ent) {
-					ComponentManager.removeEntity(radAffectEnt);
-				}
-			});
-		});
-		RadiationProducer.getRemoveSignal().handle((sig) -> {
-			IterateEnt.iterGet([RadiationAffecting],[{producer : producer}],
-			function (radProduceEnt) {
-				if (producer == sig.ent) {
-					ComponentManager.removeEntity(radProduceEnt);
-				}
-			});
-		});
+	
 	}
 
 	static final sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;

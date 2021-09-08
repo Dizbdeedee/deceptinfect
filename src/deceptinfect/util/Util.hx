@@ -15,4 +15,9 @@ class Util {
 			mappy_2.set(ident, Gmod.CurTime() + time);
 		}
 	}
+
+	@:expose("tlookat")
+	public static function getTestLookat() {
+		return PlayerLib.GetByID(1).GetEyeTrace().HitPos;
+	}
 }

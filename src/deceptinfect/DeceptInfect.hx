@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import gmod.enums.TEAM;
 import deceptinfect.game.GameSystem;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.util.PrintTimer;
@@ -42,15 +43,18 @@ import deceptinfect.ecswip.SignalStorage;
 class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> implements deceptinfect.macros.SpamTracker.Spam {
 	#if client
 	override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
-		// ragdoll.Remove();
-		ragdoll.SetNoDraw(true);
-	
+		if (!GameSystem.get().gameManagerAvaliable()) return;
+		if (GameSystem.get().getGameManager().state != WAIT) {
+			ragdoll.SetNoDraw(true);
+		}
 	}
 	#end
 
 	#if server
 	override function CreateEntityRagdoll(owner:Entity, ragdoll:Entity) {
-		SystemManager.getSystem(RagdollSystem).playerRagdoll(owner, ragdoll);
+		if (GameSystem.get().getGameManager().state != WAIT) {
+			SystemManager.getSystem(RagdollSystem).playerRagdoll(owner, ragdoll);
+		}
 	}
 	#end
 
@@ -64,16 +68,15 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	var underperforming = false;
 
 	@:exposeGM function checkPerformance():Void {
-		
 		if ((1 / Gmod.FrameTime()) < 66.6) {
-			PrintTimer.print_time(5, () -> trace("Server is underperforming! ${1 / Gmod.FrameTime()}"));
+			PrintTimer.print_time(5, () -> trace('Server is underperforming! ${1 / Gmod.FrameTime()}'));
 		}
 	}
 
 	override function OnEntityCreated(entity:Entity) {
 		if (entity.IsPlayer()) {
-			var ent = new GPlayerCompat(new PlayerComponent(cast entity));
-		} else {}
+			new GPlayerCompat(new PlayerComponent(cast entity));
+		}
 	}
 
 	override function EntityRemoved(ent:GEntCompat) {
@@ -81,7 +84,6 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 			ComponentManager.removeEntity(ent.id);
 			return;
 		}
-		
 		switch (ent.has_id()) {
 			case Some(id):
 				trace('killing ent $id because gent is being removed');
@@ -91,7 +93,6 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 
 	#if server
-	
 	function playerDeath(victim:GPlayerCompat) {
 		victim.id.remove_component(AliveComponent);
 		victim.id.remove_component(GrabAccepter);
@@ -105,26 +106,22 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	override function DoPlayerDeath(ply:Player, attacker:Entity, dmg:CTakeDamageInfo) {
 		ply.KillSilent();
 		playerDeath(ply);
-	
 	}
 
 	override function PlayerDeath(victim:GPlayerCompat, inflictor:Entity, attacker:Entity) {
-		// victim.id.remove_component(InfectionComponent);
-		// victim.id.remove_component(InfectedComponent);
 		trace("Player ded!");
 	}
 
-	override function EntityKeyValue(ent:Entity, key:String, value:String):String {
-		// trace(Lua.tostring(ent),key,value);
-		return null;
-	}
-
 	override function PlayerSpawn(player:GPlayerCompat, transition:Bool) {
-		player.UnSpectate();
 		player.SetModel(Misc.roundModels[MathLib.random(0, Misc.roundModels.length - 1)]); // TODO make random models
 		player.SetShouldServerRagdoll(true);
 		player.ShouldDropWeapon(true);
 		player.AllowFlashlight(true);
+		if (GameSystem.get().getGameManager().state == WAIT) {
+			player.SetShouldServerRagdoll(false);
+		} else {
+			player.SetShouldServerRagdoll(true);
+		}
 		switch (GameSystem.get().getGameManager().state) {
 			case WAIT | SETTING_UP(_):
 				TimerLib.Simple(0.1, () -> player.Give(Misc.roundWeapons[0]));
@@ -132,10 +129,8 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 			case ENDING(_) | PLAYING:
 				player.KillSilent();
 		}
-		// player.id.
-		// setHiddenHealth
-		// lowhealthrate???
-		// kill player if round in progress
+		player.RemoveAllGestures();
+		player.AnimRestartMainSequence();
 	}
 
 	override function PlayerDisconnected(ply:GPlayerCompat) {
@@ -178,14 +173,6 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		}
 	}
 
-	// override function PlayerSwitchWeapon(player:Player, oldWeapon:Weapon, newWeapon:Weapon):Bool {
-	//     if (!IsValid(oldWeapon) || !IsValid(newWeapon)) {return null;}
-	//     if (oldWeapon.GetClass() == "weapon_infect") {
-	//         return true;
-	//     }
-	//     return null;
-	// }
-
 	override function PlayerButtonDown(ply:GPlayerCompat, button:BUTTON_CODE) {
 		switch (button) {
 			case KEY_E:
@@ -194,13 +181,21 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		}
 	}
 
-	override function PlayerInitialSpawn(player:Player, transition:Bool) {}
+	override function PlayerInitialSpawn(player:Player, transition:Bool) {
+		player.SetModel(Misc.roundModels[MathLib.random(0, Misc.roundModels.length - 1)]);
+		player.SetTeam(TEAM.TEAM_UNASSIGNED);
+		player.StripWeapons();
+		// player.Spawn();
+		// player.Kill();
+		// player.Give("weapon_base");
+	}
 
 	override function PlayerDeathSound():Bool {
 		return false;
 	}
 
 	override function PlayerDeathThink(ply:GPlayerCompat):Bool {
+		if (!ply.id.has_comp(PlayerComponent)) return null;
 		var comp = ply.id.get(PlayerComponent).sure();
 		var reviveTime;
 		var revive = false;
@@ -270,10 +265,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 
 	override function PlayerSelectSpawn(ply:Player, transition:Bool):Entity {
 		var spawns = EntsLib.FindByClass("info_player_start");
-		// trace(spawns.length());
-		// Gmod.PrintTable(spawns);
 		var random_spawn = MathLib.random(spawns.length());
-		// for (spawn in spawns) {
 		if (IsSpawnpointSuitable(ply, spawns[random_spawn], false)) {
 			return spawns[random_spawn];
 		}
@@ -294,8 +286,6 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		}
 		return null;
 	}
-
-	
 
 	override function PlayerSay(sender:Player, text:String, teamChat:Bool):String {
 		return "aaaaple";
