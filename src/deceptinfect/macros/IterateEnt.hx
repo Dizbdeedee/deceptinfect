@@ -100,6 +100,83 @@ class IterateEnt {
 
     }
 
+	#if macro
+	static function makeSignal(get:Expr) {
+		final values = switch (get.expr) {
+			case EArrayDecl(values):
+				values;
+			default:
+				Context.error("Not a arraydecl",get.pos);
+				throw "nope";
+		}
+		final hasCompExpr = values.map((e) -> {
+			macro id.has_comp($e);
+		}).fold((cur,prev) -> {
+			if (prev == null) {
+				cur;
+			} else {
+				macro $prev && $cur;
+			}
+		},null);
+		final finalExpr:Expr = 
+		values.mapi((i,e) -> {
+			macro $e.getAddSignal().map((data) -> data.ent).filter((id) -> $hasCompExpr);
+		}).fold((cur,prev) -> {
+			if (prev == null) {
+				cur;
+			} else {
+				macro $prev.join($cur);
+			}
+		},null);
+		return finalExpr;
+	}
+
+	static function signal_head(get:Expr,name:Expr) {
+		return switch (get.expr) {
+			case EArrayDecl(values):
+				macro $a{values.map((clsGet) -> 
+					macro $name.get_2($clsGet)
+				)};
+			default:
+				Context.error("Not an array decl",get.pos);
+		}
+	}
+	
+
+	#end
+	public static macro function onAdd(get:Expr,cases:Expr,func:Expr) {
+		var name;
+		var nameStr;
+		var expr;
+
+		switch (func) {
+			case {expr: EFunction(_, {args: [{name: _argName}], expr : e})}:
+				name = macro $i{_argName};
+				nameStr = _argName;
+				expr = e;
+			case {expr: EFunction(_, {args: [], expr: e}), pos: pos}:
+				nameStr = renameVar(Context.getLocalTVars(), pos);
+				name = macro $i{nameStr};
+				expr = e;
+			case {pos: pos}:
+				Context.error("Incorrect format", pos);
+			default:
+				throw "hmm";
+		}
+		
+		final bl = macro {
+			final __sig = $e{makeSignal(get)}
+			__sig.handle(function ($nameStr) {
+				switch ($e{signal_head(get,name)}) {
+					case $cases:
+						$expr;
+					default:
+				}
+			});
+		}
+		return bl;
+	}
+
 	
     public static macro function iterGet(getArr:Expr, cases:Expr, func:Expr) {
 		var name;
