@@ -1,5 +1,6 @@
 package deceptinfect.infection;
 
+import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.ecswip.ClientRepresentationTarget;
 import deceptinfect.infection.components.InfectionLookData;
 import deceptinfect.game.GameSystem;
@@ -41,8 +42,11 @@ class InfectionLookSystem extends System {
 					final infLookData = new InfectionLookData();
 					infLookData.fieldsChanged = false;
 					final crt = new ClientRepresentationTarget(SOME(PLAYERS([lookerPlayer])),victimEnt);
+					final replEnt = new ReplicatedEntity();
+
 					crtEnt.add_component(infLookData);
 					crtEnt.add_component(crt);
+					crtEnt.add_component(replEnt);
 					trace('Added from looker');
 				});
 			});
@@ -65,6 +69,7 @@ class InfectionLookSystem extends System {
 				final crt = new ClientRepresentationTarget(SOME(PLAYERS([lookerPlayer])),victimEnt);
 				ent.add_component(infLookdata);
 				ent.add_component(crt);
+				ent.add_component(new ReplicatedEntity());
 				trace("Added from victim");
 			});
 		});
@@ -85,11 +90,13 @@ class InfectionLookSystem extends System {
 					if (c_infLookTime.time < 0) {
 						c_infLookTime.time = 0;
 					}
+					if (c_infLookTime.time > 2) {{
+						c_infLookTime.time = 2;
+					}}
 					// trace(c_infLookTime.time);
 					if (c_infLookTime.time > infAbilityThreshold) {
-						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,{target : crt}],function () {
+						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,c_crt = {target : crt}],function () {
 							if (victim != crt) continue;
-							trace("updating");
 							c_infLookData.infection = victimInfection;
 						});
 					} else {
