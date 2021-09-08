@@ -199,6 +199,9 @@ class ClientTranslateSystem extends System {
 				arr;
 			}).push(data.comp);
 		}
+		if (plyrs.length == 0) {
+			data.comp.fieldsChanged = false;
+		}
 	}
 
 	override function init_server() {
