@@ -22,55 +22,43 @@ class InfectionLookSystem extends System {
 
 	#if server
 
-	override function init_server() {
-		InfectionLookInfoAbility.getAddSignal().map((data) -> data.ent)
-		.filter((id) -> id.has_comp(PlayerComponent)).join(
-			PlayerComponent.getAddSignal().map((data) -> data.ent)
-		.filter((id) -> id.has_comp(InfectionLookInfoAbility))).handle(
-			function (lookerEnt) {
-				final lookerPlayer = lookerEnt.get_2(PlayerComponent).player;
-				IterateEnt.iterGet([InfectionComponent,PlayerComponent],[_,_],
-				function (victimEnt) {
-					if (lookerEnt == victimEnt) continue;
-					final linkEnt = ComponentManager.addEntity();
-					linkEnt.add_component(({
-						looker : lookerEnt,
-						victim : victimEnt,
-						time : 0
-					} : InfectionLookTime));
-					final crtEnt = ComponentManager.addEntity();
-					final infLookData = new InfectionLookData();
-					infLookData.fieldsChanged = false;
-					final crt = new ClientRepresentationTarget(SOME(PLAYERS([lookerPlayer])),victimEnt);
-					final replEnt = new ReplicatedEntity();
+	function createLinkEntities(lookerEnt:DI_ID,victimEnt:DI_ID,lookerPlayer:Player) {
+		final linkEnt = ComponentManager.addEntity();
+		linkEnt.add_component(({
+			looker : lookerEnt,
+			victim : victimEnt,
+			time : 0
+		} : InfectionLookTime));
+		final crtEnt = ComponentManager.addEntity();
+		final inflookData = new InfectionLookData();
+		inflookData.fieldsChanged = false;
+		crtEnt.add_component(inflookData);
+		crtEnt.add_component(new ClientRepresentationTarget(SOME(PLAYERS([lookerPlayer])),victimEnt));
+		crtEnt.add_component(new ReplicatedEntity());
+		
+		trace(crtEnt);
+	}
 
-					crtEnt.add_component(infLookData);
-					crtEnt.add_component(crt);
-					crtEnt.add_component(replEnt);
-					trace('Added from looker');
-				});
+	override function init_server() {
+		
+		
+		IterateEnt.onAdd([InfectionLookInfoAbility,PlayerComponent],[_,{player : lookerPlayer}],
+		function (lookerEnt) {
+			IterateEnt.iterGet([InfectionComponent,PlayerComponent],[_,_],
+			function (victimEnt) {
+				if (lookerEnt == victimEnt) continue;
+				createLinkEntities(lookerEnt,victimEnt,lookerPlayer);
+				trace("Create linkEntities 1");
 			});
-		InfectionComponent.getAddSignal().map((data) -> data.ent)
-		.filter((id) -> id.has_comp(PlayerComponent)).join(
-		PlayerComponent.getAddSignal().map((data) -> data.ent)
-		.filter((id) -> id.has_comp(InfectionComponent))).handle((victimEnt) -> {
+		});
+		IterateEnt.onAdd([InfectionComponent,PlayerComponent],[_,_],
+		function (victimEnt) {
 			IterateEnt.iterGet([InfectionLookInfoAbility,PlayerComponent],[_,{player : lookerPlayer}],
 			function (lookerEnt) {
 				if (lookerEnt == victimEnt) continue;
-				final linkEnt = ComponentManager.addEntity();
-				linkEnt.add_component(({
-					looker: lookerEnt,
-					victim: victimEnt,
-					time: 0
-				} : InfectionLookTime));
-				final ent = ComponentManager.addEntity();
-				final infLookdata = new InfectionLookData();
-				infLookdata.fieldsChanged = false;
-				final crt = new ClientRepresentationTarget(SOME(PLAYERS([lookerPlayer])),victimEnt);
-				ent.add_component(infLookdata);
-				ent.add_component(crt);
-				ent.add_component(new ReplicatedEntity());
-				trace("Added from victim");
+				trace(lookerEnt,victimEnt,lookerPlayer);
+				createLinkEntities(lookerEnt,victimEnt,lookerPlayer);
+				trace("Create linkEntities 2");
 			});
 		});
 	}
@@ -81,7 +69,8 @@ class InfectionLookSystem extends System {
 			looker.hasExpr([PlayerComponent,InfectionLookInfoAbility],[{player : infLookPlayer},{threshold : infAbilityThreshold}],
 			function () {
 				final hitEnt = infLookPlayer.GetEyeTrace().Entity;
-				victim.hasExpr([GEntityComponent,InfectionComponent],[{entity : victimGEnt}, {infection : victimInfection}],function () {
+				victim.hasExpr([GEntityComponent,InfectionComponent],[{entity : victimGEnt}, {infection : victimInfection}],
+				function () {
 					if (victimGEnt == hitEnt) {
 						c_infLookTime.time += GameSystem.get().getGameManager().diffTime;
 					} else {
@@ -93,14 +82,18 @@ class InfectionLookSystem extends System {
 					if (c_infLookTime.time > 2) {{
 						c_infLookTime.time = 2;
 					}}
-					// trace(c_infLookTime.time);
-					if (c_infLookTime.time > infAbilityThreshold) {
-						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,c_crt = {target : crt}],function () {
+					trace(c_infLookTime.time);
+					if (c_infLookTime.time >= infAbilityThreshold) {
+						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,c_crt = {target : crt}],
+						function () {
+							trace("Attempting to find...");
 							if (victim != crt) continue;
+							trace("Updating infection...");
 							c_infLookData.infection = victimInfection;
 						});
 					} else {
-						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,{target : crt}],function () {
+						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,{target : crt}],
+						function () {
 							if (victim != crt) continue;
 						});
 					}
