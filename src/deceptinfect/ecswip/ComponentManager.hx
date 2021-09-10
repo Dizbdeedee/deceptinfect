@@ -326,13 +326,6 @@ class ComponentManager {
 
 
 	public static function removeEntity(x:DI_ID) {
-		#if server
-		switch (getSystem2(ClientTranslateSystem)) {
-			case Some(clientTranslate):
-				// clientTranslate.removeEntity(x);
-			default:
-		}
-		#end
 		for (id in PairTools.keys(components_3)) {
 			removeComponent(id,x);
 		}
