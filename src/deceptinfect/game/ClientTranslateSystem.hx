@@ -203,6 +203,7 @@ class ClientTranslateSystem extends System {
 			}).push(data.comp);
 		}
 		if (plyrs.length == 0) {
+			trace("Sent to no one...");
 			data.comp.fieldsChanged = false;
 		}
 	}
@@ -215,7 +216,6 @@ class ClientTranslateSystem extends System {
 					var comp = compStore.get_component(add.ent);
 					if (comp is ReplicatedComponent) {
 						var repl:ReplicatedComponent = comp;
-						trace("HANDLE!!");
 						repl.fieldsChangedSig.handle(onFieldsChanged);
 						if (repl.fieldsChanged) {
 							onFieldsChanged({
@@ -231,7 +231,6 @@ class ClientTranslateSystem extends System {
 			if (add.comp is ReplicatedComponent) {
 				if (add.ent.has_comp(ReplicatedEntity)) {
 					final c_replComp:ReplicatedComponent = cast add.comp;
-					trace("HANDLE 2");
 					c_replComp.fieldsChangedSig.handle(onFieldsChanged);
 					if (c_replComp.fieldsChanged) {
 						onFieldsChanged({
