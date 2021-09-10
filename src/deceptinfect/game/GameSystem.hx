@@ -17,6 +17,7 @@ import deceptinfect.ents.Di_entities;
 import deceptinfect.infection.components.*;
 import deceptinfect.abilities.*;
 import deceptinfect.infection.*;
+import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.ecswip.PlayerComponent;
 
 using deceptinfect.util.PlayerExt;
@@ -47,7 +48,9 @@ class GameSystem extends System {
     override function init_server() {
         var ent = ComponentManager.addEntity();
         gameManager = new GameManager2();
+        
         ent.add_component(gameManager);
+        ent.add_component(new ReplicatedEntity());
         gameManager.stateChanged = signalTrig.asSignal();
     }
 
@@ -89,7 +92,9 @@ class GameSystem extends System {
     function stateTransition(x:GAME_STATE_2):GAME_STATE_2 {
         var time = 0.0;
         trace('STATE TRANSITION: ${gameManager.state} $x');
-        switch ([gameManager.state, x]) { //TODO unify gameManger.state/getGameManager(). which should we use? does it matter
+        var prevState = gameManager.state;
+        gameManager.state = x;
+        switch ([prevState, x]) { //TODO unify gameManger.state/getGameManager(). which should we use? does it matter
             case [ENDING(_),WAIT]:
                 cleanup();
             case [SETTING_UP(_), PLAYING]:
@@ -99,15 +104,15 @@ class GameSystem extends System {
             case [WAIT, SETTING_UP(t)]:
                 time = t;
             case [PLAYING,ENDING(t)]:
+                
                 time = t;
             case [PLAYING,PLAYING]:
                 
+                cleanup();
                 playing();
                 //spawn
-            
-            
             default:
-                trace(gameManager.state,x);
+                trace(prevState,x);
                 throw "Unsupported state transition";
         }
         signalTrig.trigger(x);

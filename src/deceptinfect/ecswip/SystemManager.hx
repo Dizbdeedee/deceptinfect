@@ -42,8 +42,18 @@ class SystemManager {
 		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
 		CRTSystem,
 		WeaponSystem, ItemOwnerSystem,DummySystem,
-		ClientTranslateSystem
-		
+		ClientTranslateSystem	
+	];
+
+	public static var initSystems(default, null):Array<Class<Dynamic>> = [
+		ClientTranslateSystem,GameSystem, GameInProgressSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
+		RadiationSystem, 
+		GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
+		EvacSystem, RagdollSystem, SlowMotionSystem,Spread, InfectionLookSystem, 
+		ContaminationSystem, // Problem!
+		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
+		CRTSystem,
+		WeaponSystem, ItemOwnerSystem,DummySystem,
 	];
 
 	static function make() {
@@ -122,7 +132,7 @@ class SystemManager {
 
 	public static function initAllSystems() {
 		make();
-		for (clsSystem in runSystems) {
+		for (clsSystem in initSystems) {
 			getSystems.get(clsSystem).init();
 		}
 	}
