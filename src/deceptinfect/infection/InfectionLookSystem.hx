@@ -82,13 +82,10 @@ class InfectionLookSystem extends System {
 					if (c_infLookTime.time > 2) {{
 						c_infLookTime.time = 2;
 					}}
-					trace(c_infLookTime.time);
 					if (c_infLookTime.time >= infAbilityThreshold) {
 						IterateEnt.iterGet([InfectionLookData,ClientRepresentationTarget],[c_infLookData,c_crt = {target : crt}],
 						function () {
-							trace("Attempting to find...");
 							if (victim != crt) continue;
-							trace("Updating infection...");
 							c_infLookData.infection = victimInfection;
 						});
 					} else {
