@@ -307,6 +307,10 @@ class ClientTranslateSystem extends System {
 		sendQueuedRemoves();
 	}
 
+	public function flush() {
+		run_server();
+	}
+
 	
 
 	

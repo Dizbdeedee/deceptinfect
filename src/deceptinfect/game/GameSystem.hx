@@ -237,7 +237,7 @@ class GameSystem extends System {
                 ComponentManager.removeEntity(ent);
             }
         }
-        
+        ClientTranslateSystem.get().flush();
         // stateTrig.clear();
         SystemManager.destroySystems();
         SystemManager.initAllSystems();
