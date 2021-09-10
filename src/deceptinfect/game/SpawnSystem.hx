@@ -14,7 +14,7 @@ class SpawnSystem extends System {
 
 	#if server
 	override function init_server() {
-		// generateSpawns();
+		generateSpawns();
 	}
 
 	override function run_server() {
