@@ -11,7 +11,6 @@ import deceptinfect.SeralizableRef;
 class InfectionComponent extends ReplicatedComponent {
 	@:s var infection(default, set):INF_STATE = NOT_INFECTED(0.0);
 
-	
 	var rate:Float = 0;
 
 	var baseInfection:BaseInfection = USING_GLOBAL;
