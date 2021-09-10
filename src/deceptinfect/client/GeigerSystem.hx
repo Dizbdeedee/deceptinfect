@@ -23,6 +23,7 @@ class GeigerSystem extends System {
 	var playTime:Float = 0.0;
 
 	override function run_client() {
+		geiger = 0.0;
 		IterateEnt.iterGet([GeigerCounter],[{geiger : g}],
 		function () {
 			geiger = g;
