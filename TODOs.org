@@ -6,13 +6,10 @@
 
 ** T-Pose! Yikes.
 ** Sometimes crt fails to activate. Sad.
-** Ragdoll not produced for person being killed
 ** INSTANT ROUND FAIL!! No error message...
 ** ClientTranslate system depends on players active,leaving ect.
 ** Gui sometimes does not activate :(
 ** Gui persists between rounds
-** Start game twice makes no one spawn.
-** Geiger persists between rounds
 
 ** Walkthroughable fails sometimes, or maybe all the time
 ** Infected have radidation when they really shouldn't 
