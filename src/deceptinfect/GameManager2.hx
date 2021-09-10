@@ -11,6 +11,8 @@ class GameManager2 extends ReplicatedComponent {
 
     var diffTime:Float = null;
 
+    var spawnAllowed = true;
+
     var lastTick:Float = 0.0;
 
 }

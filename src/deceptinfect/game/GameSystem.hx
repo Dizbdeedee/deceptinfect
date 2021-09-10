@@ -135,6 +135,10 @@ class GameSystem extends System {
         } else if (Main.forceUninfected) {
             choose = MathLib.random(2, PlayerLib.GetCount());
         }
+        gameManager.spawnAllowed = true;
+        TimerLib.Simple(5,() -> {
+            gameManager.spawnAllowed = false;
+        });
         for (ind => _ply in PlayerLib.GetAll()) {
             trace('Player index $ind');
             var player:GPlayerCompat = _ply;

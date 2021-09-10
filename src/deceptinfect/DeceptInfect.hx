@@ -127,7 +127,9 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 				TimerLib.Simple(0.1, () -> player.Give(Misc.roundWeapons[0]));
 				player.ShouldDropWeapon(false);
 			case ENDING(_) | PLAYING:
-				player.KillSilent();
+				if (!GameSystem.get().getGameManager().spawnAllowed) {
+					player.KillSilent();
+				}
 		}
 		player.RemoveAllGestures();
 		player.AnimRestartMainSequence();
