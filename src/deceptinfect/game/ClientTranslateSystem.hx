@@ -93,9 +93,17 @@ class ClientTranslateSystem extends System {
 
 		final clientID = serverIDToClientID.get(nremove.serverID);
 		if (clientID == null) {
-			trace("Attempt to remove component not linked to an ID on the client...");
+			final compName = ComponentManager.componentsName.get(nremove.comp);
+			trace('Attempt to remove ${compName} not linked to an ID on the client...');
 			return;
 		}
+		if (!ComponentManager.has_component(nremove.comp,clientID)) {
+			final compName = ComponentManager.componentsName.get(nremove.comp);
+			trace('Attempt to remove ${compName} that\'s not there...');
+			return;
+		}
+		
+		trace('removing ${Type.getClassName(Type.getClass(ComponentManager.getComponent(nremove.comp,clientID)))}');
 		ComponentManager.removeComponent(nremove.comp,clientID);
 	}
 
