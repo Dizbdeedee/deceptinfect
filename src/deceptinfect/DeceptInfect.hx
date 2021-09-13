@@ -184,12 +184,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 
 	override function PlayerInitialSpawn(player:Player, transition:Bool) {
-		player.SetModel(Misc.roundModels[MathLib.random(0, Misc.roundModels.length - 1)]);
 		player.SetTeam(TEAM.TEAM_UNASSIGNED);
-		player.StripWeapons();
-		// player.Spawn();
-		// player.Kill();
-		// player.Give("weapon_base");
 	}
 
 	override function PlayerDeathSound():Bool {
