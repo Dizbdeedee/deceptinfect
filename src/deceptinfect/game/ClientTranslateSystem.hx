@@ -16,7 +16,7 @@ import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.ecswip.SystemManager;
 import hxbit.Serializable;
 import hxbit.Serializer;
-
+import gmod.helpers.net.NET_Client;
 using Lambda;
 using Safety;
 using gmod.helpers.WeakTools;
@@ -45,6 +45,11 @@ class Net_RemoveComponentMessage implements hxbit.Serializable {
 	@:s public var comp:Int;
 }
 
+@:structInit
+class Net_RemoveEntityMessage implements hxbit.Serializable {
+	@:s public var serverID:Int;
+}
+
 #if client
 enum ClientClasses {
 	Player;
@@ -60,6 +65,15 @@ typedef CacheRemove = {
 	players : Array<Player>
 }
 
+typedef OnRequestFullUpdate = {
+	networkid: String,
+	name: String,
+	userid: Int,
+	index: Int
+}
+
+typedef ReadyToRecv = NET_CL_Message;
+
 //TODO make it not static? Might cause problems
 
 /**
@@ -74,12 +88,19 @@ class ClientTranslateSystem extends System {
 	static final net_replEntsMessage = new NET_Sv<Net_ReplicatedEntitiesMessage>(#if client [updateEntRecv] #end);
 
 	@:keep
-	static final net_RemoveComponentMessage = new NET_Sv<Net_RemoveComponentMessage>(#if client [removeEntRecv] #end);
+	static final net_RemoveComponentMessage = new NET_Sv<Net_RemoveComponentMessage>(#if client [removeCompRecv] #end);
+
+	var clnet_SendReadyToRecv:NET_Cl<ReadyToRecv>;
+
+	@:keep
+	static final net_RemoveEntityMessage = new NET_Sv<Net_RemoveEntityMessage>(#if client [removeEntityRecv] #end);
 
 
 	#if client
 
 	static final serverIDToClientID:Map<Int,DI_ID> = [];
+
+	static final trashed:Map<Int,DI_ID> = [];
 
 	static final components:Map<Int,Component> = componentsC();
 
@@ -89,9 +110,9 @@ class ClientTranslateSystem extends System {
 		return comp;
 	}
 
-	static function removeEntRecv(nremove:Net_RemoveComponentMessage) {
+	static function removeCompRecv(nremove:Net_RemoveComponentMessage) {
 
-		final clientID = serverIDToClientID.get(nremove.serverID);
+		final clientID = serverIDToClientID.get(nremove.serverID).or(trashed.get(nremove.serverID));
 		if (clientID == null) {
 			final compName = ComponentManager.componentsName.get(nremove.comp);
 			trace('Attempt to remove ${compName} not linked to an ID on the client...');
@@ -102,9 +123,20 @@ class ClientTranslateSystem extends System {
 			trace('Attempt to remove ${compName} that\'s not there...');
 			return;
 		}
-		
 		trace('removing ${Type.getClassName(Type.getClass(ComponentManager.getComponent(nremove.comp,clientID)))}');
 		ComponentManager.removeComponent(nremove.comp,clientID);
+	}
+
+	static function removeEntityRecv(nremove:Net_RemoveEntityMessage) {
+		final clientID = serverIDToClientID.get(nremove.serverID);
+		if (clientID == null) {
+			trace('Attempt to invalidate invalid id ${nremove.serverID}');
+			return;
+		}
+		trace('Invalidated ${nremove.serverID}');
+		serverIDToClientID.remove(nremove.serverID);
+		trashed.set(nremove.serverID,clientID);
+		
 	}
 
 	//TODO make it more efficient, use move instead of copy...
@@ -116,6 +148,7 @@ class ClientTranslateSystem extends System {
 					final other = components.get(comp.__uid);
 					if (!components.exists(comp.__uid)) {
 						components.set(comp.__uid,comp);
+						trace('Added ${comp.getName()} to existing ent');
 						ComponentManager.addComponent(comp.getCompID(),comp,clientID);
 					} else {
 						var compTable:AnyTable = cast comp;
@@ -128,8 +161,7 @@ class ClientTranslateSystem extends System {
 				var id = null;
 				for (comp in ent.comp) {
 					final compClass = Type.getClass(comp);
-					// trace(Type.getClassName(compClass));
-					if (compClass == PlayerComponent || compClass == GEntityComponent) {
+					if (compClass == PlayerComponent) {
 						IterateEnt.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) {
 							untyped {
 								if (comp.entity == ent) {
@@ -153,27 +185,49 @@ class ClientTranslateSystem extends System {
 						} else {
 							trace("CRT unsucessful....");
 						}
-						// IterateEnt.iterGet([GEntityComponent],[c_currentEnt = {entity : ent}],function (ent) {
-
-						// 	if (c_crt.target == ent) {
-						// 		id = c_currentEnt.getOwner();
-						// 	}
-						// });
 					}
 				}
-				if (id == null) id = ComponentManager.addEntity();
+				if (id == null) {
+					id = ComponentManager.addEntity();
+					for (comp in ent.comp) {
+						trace('New entity ${comp.getName()}/$id');
+					}
+				}
 				for (comp in ent.comp) {
 					components.set(comp.__uid,comp);
+					if (comp is PlayerComponent) {
+						final c_ply:PlayerComponent = cast comp;
+						untyped c_ply.player.id = id;
+					}
 					ComponentManager.addComponent(comp.getCompID(),comp,id);
 				}
 				serverIDToClientID.set(ent.serverID,id);
-				
 			}
 		}
 	}
 	#end
 
+	#if client
+	override function init_client() {
+		HookLib.Add(ClientSignOnStateChanged,"di_csosc",(user,_,newState) -> {
+			switch (newState) {
+				case SIGNONSTATE_FULL:
+					clnet_SendReadyToRecv.send({});
+				default:
+			}
+		});
+	}
+	#end
+	
+	override function init_shared() {
+		clnet_SendReadyToRecv = new NET_Cl<ReadyToRecv>(#if server [readyToRecv] #end);
+	}
+
 	#if server
+
+	function readyToRecv(data:ReadyToRecv) {
+		playersReadyToRecv.set(data._sentPlayer.UserID(),true);
+	}
 
 	var removeplyrs:Map<Player,Bool> = [];
 
@@ -200,8 +254,11 @@ class ClientTranslateSystem extends System {
 
 	var queueReplComponents:Map<Int,Array<ReplicatedComponent>> = [];
 
+	var playersReadyToRecv:Map<Int,Bool> = [];
+
 	function onFieldsChanged(data:FieldsChangedData) {
 		final plyrs = ClientReplicationMachine.replToPlayers(data.comp.replicated,data.ent);
+		trace('ReplComp added to replEntity: ${Type.getClassName(Type.getClass(data.comp))} ${data.comp} ${plyrs}');
 		for (plyr in plyrs) {
 			queueReplComponents.get(plyr.UserID()).orGet(
 			() -> {
@@ -217,6 +274,9 @@ class ClientTranslateSystem extends System {
 	}
 
 	override function init_server() {
+		for (player in PlayerLib.GetAll()) {
+			playersReadyToRecv.set(player.UserID(),true);
+		}
 		ComponentManager.removeSignal.handle(callback);
 		ReplicatedEntity.getAddSignal().handle((add) -> {
 			for (compStore in ComponentManager.components_3) {
@@ -249,6 +309,47 @@ class ClientTranslateSystem extends System {
 				}
 			}
 		});
+
+		PlayerComponent.getAddSignal().handle((sig) -> {
+			for (x in 0...ComponentManager.entities) {
+				final ent:DI_ID = x;
+				for (compStore in ComponentManager.components_3) {
+					if (compStore.has_component(ent)) {
+						final comp = compStore.get_component(ent);
+						if (comp is ReplicatedComponent) {
+							final replComp:ReplicatedComponent = cast comp;
+							final plyrs = ClientReplicationMachine.replToPlayers(replComp.replicated,ent);
+							if (plyrs.contains(sig.comp.player)) {
+								onFieldsChanged({ //NOTE: this will update all the targets instead of just the one we want. Unintended concequences?
+									ent : ent,
+									comp : replComp
+								});
+							}
+						}
+					}
+				}
+			}
+		});
+
+		ComponentManager.removeEntitySignal.handle((sig) -> {
+			for (x in 0...ComponentManager.entities) {
+				final ent:DI_ID = x;
+				for (compStore in ComponentManager.components_3) {
+					if (compStore.has_component(ent)) {
+						final comp = compStore.get_component(ent);
+						if (comp is ReplicatedComponent) {
+							final replComp:ReplicatedComponent = cast comp;
+							final plyrs = ClientReplicationMachine.replToPlayers(replComp.replicated,ent);
+							for (plyr in plyrs) {
+								net_RemoveEntityMessage.send({
+									serverID: sig.ent
+								},plyr,false);
+							}
+						}
+					}
+				}
+			}
+		});
 		
 	}
 	static var profile:Profiler = new Profiler();
@@ -260,7 +361,9 @@ class ClientTranslateSystem extends System {
 	}
 
 	function sendQueuedMessages() {
+		final removes = [];
 		for (user => replComps in queueReplComponents) {
+			if (!playersReadyToRecv.exists(user)) continue;
 			var ents:Map<Int,Net_ReplicatedEntity> = [];
 			var entsreliable:Map<Int,Net_ReplicatedEntity> = [];
 			var entsSize = 0;
@@ -292,8 +395,11 @@ class ClientTranslateSystem extends System {
 			if (entsReliableSize > 0) {
 				net_replEntsMessage.send({replEntities: entsreliable.array()},player,false);
 			}
+			removes.push(user);
 		}
-		queueReplComponents.clear();
+		for (remove in removes) {
+			queueReplComponents.remove(remove);
+		}
 	}
 
 	function sendQueuedRemoves() {
