@@ -197,6 +197,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 
 	override function PlayerDeathThink(ply:GPlayerCompat):Bool {
+		if (ply.id == null) return null;
 		if (!ply.id.has_comp(PlayerComponent)) return null;
 		var comp = ply.id.get(PlayerComponent).sure();
 		var reviveTime;
