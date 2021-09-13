@@ -9,7 +9,7 @@ import deceptinfect.SeralizableRef;
 
 @:replicated(SOME(CURRENT_PLAYER))
 class InfectionComponent extends ReplicatedComponent {
-	@:s var infection(default, set):INF_STATE = NOT_INFECTED(0.0);
+	@:s var infection:INF_STATE = NOT_INFECTED(0.0);
 
 	var rate:Float = 0;
 
@@ -26,10 +26,6 @@ class InfectionComponent extends ReplicatedComponent {
 		}
 	}
 
-	public function set_infection(x:INF_STATE):INF_STATE {
-		// trace(x);
-		return infection = x;
-	}
 
 }
 

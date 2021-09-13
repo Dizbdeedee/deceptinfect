@@ -45,27 +45,17 @@ class ReplicatedComponentMacro {
                                 name: "set"
                             }],
                             expr: macro {
+                                var result = $i{field.name} = set;
                                 fieldsChanged = true;
-                                return $i{field.name} = set;
+                                return result;
                             }
                         }),
-                        access: [AInline,AExtern],
+                        // access: [AInline,AExtern],
                         pos: Context.currentPos()
                     });
                 case [FProp(_, "set", t, e),[{name : ":s"}]]:
-                    final setFun = fields.find((findField) -> findField.name == 'set_${field.name}');
-                    if (setFun == null) {
-                        trace('Could not find set function... ${field.name}');
-                        return null;
-                    }
-                    switch (setFun.kind) {
-                        case FFun({expr: exprDef = {expr: EBlock(exprArr)}}):
-                            final finalExpr = macro {fieldsChanged = true; @:a(0) null;}
-                            
-                            exprDef.expr = insert(finalExpr,exprArr).expr;
-                        default:
-                            trace("not a set expr");
-                    }
+                    Context.error("TODO, macro stuff",field.pos);
+                    throw "TODO";
                 default:
             }
         }
