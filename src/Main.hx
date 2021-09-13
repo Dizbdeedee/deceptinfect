@@ -78,11 +78,6 @@ class Main {
 		#if server
 		// GameSystem.get().cleanup(); //TODO improve?
 		#end
-		#if client
-		for (ply in PlayerLib.GetAll()) {
-			new GPlayerCompat(new PlayerComponent(ply));
-		}
-		#end
 		FileLib.CreateDir("deceptinfect");		
 		SpawnSystem.generateSpawns();
 		UtilLib.PrecacheModel(Misc.infModel);

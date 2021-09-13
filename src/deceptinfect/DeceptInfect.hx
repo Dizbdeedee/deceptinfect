@@ -74,9 +74,11 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 
 	override function OnEntityCreated(entity:Entity) {
+		#if server
 		if (entity.IsPlayer()) {
 			new GPlayerCompat(new PlayerComponent(cast entity));
 		}
+		#end
 	}
 
 	override function EntityRemoved(ent:GEntCompat) {
