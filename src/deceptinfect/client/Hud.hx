@@ -77,12 +77,12 @@ class Hud {
 			case HAS_ID(id):
 				switch id.get(StatInfo) {
 					case Comp(c_stat):
-						SurfaceLib.SetTextPos(0, 400);
+						SurfaceLib.SetTextPos(0, CSS(Y,400));
 						SurfaceLib.SetTextColor(255, 255, 255);
 						SurfaceLib.DrawText(c_stat.name);
-						SurfaceLib.SetTextPos(0, 450);
+						SurfaceLib.SetTextPos(0, CSS(Y,450));
 						SurfaceLib.DrawText(Std.string(c_stat.health));
-						SurfaceLib.SetTextPos(0, 500);
+						SurfaceLib.SetTextPos(0, CSS(Y,500));
 						SurfaceLib.DrawText(Std.string(c_stat.inf));
 					// trace(c_stat.name);
 					default:
