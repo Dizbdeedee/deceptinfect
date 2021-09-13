@@ -6,6 +6,7 @@ import deceptinfect.game.GeigerCounter;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.client.GeigerSystem;
+import deceptinfect.game.components.KeepRestart;
 import deceptinfect.ecswip.System;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
