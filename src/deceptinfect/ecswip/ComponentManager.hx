@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import lua.Lua;
 import deceptinfect.ecswip.ReplicatedComponent;
 using gmod.helpers.LuaArray;
 import deceptinfect.game.ClientTranslateSystem;
@@ -27,6 +28,9 @@ typedef RemoveSignalAll = {
 	compID:ComponentID<Component> 
 }
 
+typedef RemoveEntitySignalData = {
+	ent:DI_ID,
+}
 
 
 @:transitive
@@ -209,11 +213,15 @@ class ComponentManager {
 
 	static final removeSignalTrig:SignalTrigger<CompRemoveSignalData<Component>> = new SignalTrigger();
 
+	static final removeEntityTrig:SignalTrigger<RemoveEntitySignalData> = new SignalTrigger();
+
 	public static final removeSignal:Signal<CompRemoveSignalData<Component>> = removeSignalTrig.asSignal();
 
 	static final addSignalTrig:SignalTrigger<CompAddSignalData<Component>> = new SignalTrigger();
 
 	public static final addSignal:Signal<CompAddSignalData<Component>> = addSignalTrig.asSignal();
+
+	public static final removeEntitySignal:Signal<RemoveEntitySignalData> = removeEntityTrig.asSignal();
 
 
 	//can't this just be a component variable... ? NUMPTY
@@ -326,6 +334,9 @@ class ComponentManager {
 
 
 	public static function removeEntity(x:DI_ID) {
+		removeEntityTrig.trigger({
+			ent : x
+		});
 		for (id in PairTools.keys(components_3)) {
 			removeComponent(id,x);
 		}
@@ -341,6 +352,29 @@ class ComponentManager {
 	@:expose("COMP_NAME")
 	static function getComponentName(id) {
 		return componentsName.get(id);
+	}
+
+
+	@:expose("Trace")
+	static function traceEnts() {
+		var finalOut = new StringBuf();
+		for (id in 0...1000) {
+			var hasComp = false;
+			var output = new StringBuf();
+			output.add('ID: $id\n');
+			for (ind => comp in components_3) {
+				if (comp.has_component(id)) {
+					hasComp = true;
+					output.add('\t--- ${getComponentName(ind)}\n');
+				}
+			}
+			output.add('\n');
+			if (hasComp) {
+				Lua.print(output.toString());
+				// finalOut.add(output);
+			}
+		}
+		
 	}
 
 }
