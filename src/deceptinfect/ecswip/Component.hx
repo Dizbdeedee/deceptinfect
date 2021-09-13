@@ -13,6 +13,10 @@ abstract class Component {
 
 	abstract function getCompID():Int;
 
+	public function getName() {
+		return Type.getClassName(Type.getClass(this));
+	}
+
 }
 
 class ComponentTools {
