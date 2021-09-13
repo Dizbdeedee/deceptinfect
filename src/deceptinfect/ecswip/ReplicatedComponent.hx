@@ -19,7 +19,7 @@ abstract class ReplicatedComponent extends Component implements hxbit.Serializab
     
     var unreliable:Bool = true;
 
-    var fieldsChanged(default,set) = false;
+    var fieldsChanged(default,set) = true;
 
     function set_replicated(x) {
         // fieldsChanged = true;
