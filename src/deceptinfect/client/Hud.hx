@@ -1,5 +1,7 @@
 package deceptinfect.client;
 
+import deceptinfect.game.components.BatteryInfo;
+import deceptinfect.macros.IterateEnt;
 import deceptinfect.infection.components.InfectionLookData;
 import deceptinfect.GameManager2.GAME_STATE_2;
 import deceptinfect.game.GameSystem;
@@ -40,6 +42,8 @@ class Hud {
 	public static function paint() {
 		targetID();
 		infectionMeter();
+		stateText();
+		batteryInfo();
 	}
 
 	static function intpretInfection(state:INF_STATE) {
@@ -123,10 +127,26 @@ class Hud {
 	}
 
 	static function stateText() {
-		var roundtxt = statetext.get(GameSystem.get().getGameManager().state.getIndex());
-		SurfaceLib.SetTextColor(255, 255, 255);
-		SurfaceLib.SetTextPos(0, CSS(Y, 1000));
-		SurfaceLib.DrawText(roundtxt);
+		IterateEnt.iterGet([GameManager2],[{state : s}],function () {
+			SurfaceLib.SetFont("DermaLarge");
+			SurfaceLib.SetTextColor(255, 255, 255);
+			SurfaceLib.SetTextPos(0, CSS(Y, 800));
+			SurfaceLib.DrawText(statetext.get(s.getIndex()));
+			break;
+		});
+		// var roundtxt = statetext.get(GameSystem.get().getGameManager().state.getIndex());
+		
+	}
+
+	static function batteryInfo() {
+		IterateEnt.iterGet([BatteryInfo],[{charge : c}],
+		function () {
+			SurfaceLib.SetFont("DermaLarge");
+			SurfaceLib.SetTextColor(255, 255, 255);
+			SurfaceLib.SetTextPos(0, CSS(Y, 700));
+			SurfaceLib.DrawText("Battery: " + c);
+			break;
+		});
 	}
 }
 

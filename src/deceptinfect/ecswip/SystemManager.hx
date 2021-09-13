@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.game.BatteryInfoSystem;
 import deceptinfect.game.DarkenSystem;
 import deceptinfect.game.RunUntilDoneSystem;
 import deceptinfect.game.GameInProgressSystem;
@@ -18,7 +19,6 @@ import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.game.SpawnSystem;
 import deceptinfect.game.CRTSystem;
-import deceptinfect.radiation.RadiationSystem.RadiationID;
 import haxe.ds.ObjectMap;
 import deceptinfect.client.GeigerSystem;
 import deceptinfect.game.SlowMotionSystem;
@@ -28,6 +28,7 @@ import deceptinfect.game.LowHealthSystem;
 import deceptinfect.game.GameSystem;
 import deceptinfect.items.ScannerSystem;
 import deceptinfect.WeaponSystem;
+
 
 class SystemManager {
 	static var getSystems(default, never):ObjectMap<Class<Dynamic>, System> = new ObjectMap();
@@ -41,19 +42,21 @@ class SystemManager {
 		ContaminationSystem, // Problem!
 		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
 		CRTSystem,
+		deceptinfect.game.BatteryInfoSystem,
 		WeaponSystem, ItemOwnerSystem,DummySystem,
 		ClientTranslateSystem	
 	];
 
 	public static var initSystems(default, null):Array<Class<Dynamic>> = [
-		ClientTranslateSystem,GameSystem, GameInProgressSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
+		ClientTranslateSystem, GameInProgressSystem,GameSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
+		deceptinfect.game.BatteryInfoSystem,
 		RadiationSystem, 
 		GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
 		EvacSystem, RagdollSystem, SlowMotionSystem,Spread, InfectionLookSystem, 
 		ContaminationSystem, // Problem!
 		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
 		CRTSystem,
-		WeaponSystem, ItemOwnerSystem,DummySystem,
+		WeaponSystem, ItemOwnerSystem,DummySystem
 	];
 
 	static function make() {
@@ -85,6 +88,7 @@ class SystemManager {
 		getSystems.set(ClientTranslateSystem,new ClientTranslateSystem());
 		getSystems.set(DarkenSystem, new DarkenSystem());
 		getSystems.set(CRTSystem, new CRTSystem());
+		getSystems.set(deceptinfect.game.BatteryInfoSystem, new BatteryInfoSystem());
 	}
 
 	public static function getSystem<T:System>(cls:Class<T>):Null<T> {
