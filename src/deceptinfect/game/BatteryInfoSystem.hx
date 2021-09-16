@@ -9,6 +9,7 @@ class BatteryInfoSystem extends System {
 			data.comp.stateChanged.handle((state) -> {
 				switch (state) {
 					case PLAYING:
+						trace("ello");
 						var ent = ComponentManager.addEntity();
 						ent.add_component(new BatteryInfo());
 					default:

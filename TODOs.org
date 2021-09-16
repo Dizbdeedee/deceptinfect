@@ -7,15 +7,12 @@
 ** T-Pose! Yikes.
 ** Sometimes crt fails to activate. Sad.
 ** INSTANT ROUND FAIL!! No error message...
-** ClientTranslate system depends on players active,leaving ect.
-** Gui sometimes does not activate :(
-** Gui persists between rounds
 
 ** Walkthroughable fails sometimes, or maybe all the time
-** Infected have radidation when they really shouldn't 
+** Infected have radidation when they really shouldn't
+
 * Planned
 
-** Remove ragdolls on death before round.
 ** Infection points
 *** Pointshop
 
@@ -35,8 +32,6 @@
 ** Finish networking implementation using hxbit
 
 ** Finish weapon system
-
-
 
 ** GUIs (so it feels like an actual gamemode)
 ** Do first playtest???
@@ -63,7 +58,7 @@
 
 ** Make componentmanager, systemmanager not static.
 ** Fix gmodhaxe split files
-   Idea: maybe we could split files based on a marker (a line we generate), then bring everything in..? 
+   Idea: maybe we could split files based on a marker (a line we generate), then bring everything in..?
 ** Message/info idea?
 ** Sabotage system
 ** >1 map supported

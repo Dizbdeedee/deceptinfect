@@ -281,13 +281,13 @@ class ComponentManager {
 
 	public static function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
 		final fam = components_3.get_component(id);
+		lookupEntity.set(x, to);
 		if (!fam.has_component(to)) { //nocheckin check
 			addSignalTrig.trigger({ent: to, comp: x});
 			fam.init_entity(to,x);
 		} else {
 			fam.set_component(to,x);
 		}
-		lookupEntity.set(x, to);
 		return x;
 	}
 

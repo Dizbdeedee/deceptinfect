@@ -48,8 +48,8 @@ class SystemManager {
 	];
 
 	public static var initSystems(default, null):Array<Class<Dynamic>> = [
-		ClientTranslateSystem, GameInProgressSystem,GameSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
-		deceptinfect.game.BatteryInfoSystem,
+		ClientTranslateSystem, GameInProgressSystem,deceptinfect.game.BatteryInfoSystem,GameSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
+		
 		RadiationSystem, 
 		GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
 		EvacSystem, RagdollSystem, SlowMotionSystem,Spread, InfectionLookSystem, 
