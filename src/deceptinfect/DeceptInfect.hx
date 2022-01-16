@@ -58,16 +58,23 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 	}
 	#end
 
+	override function OnGamemodeLoaded() {
+		#if debug
+		Gmod.RunConsoleCommand("developer",1);
+		#end
+	}
+
 	var lastcrc:Int = 0;
 
 	override function Think() {
 		SystemManager.runAllSystems();
+		checkPerformance();
 	}
 
 	var timestart = 0;
 	var underperforming = false;
 
-	@:exposeGM function checkPerformance():Void {
+	function checkPerformance():Void {
 		if ((1 / Gmod.FrameTime()) < 66.6) {
 			PrintTimer.print_time(5, () -> trace('Server is underperforming! ${1 / Gmod.FrameTime()}'));
 		}
@@ -187,6 +194,9 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 
 	override function PlayerInitialSpawn(player:Player, transition:Bool) {
 		player.SetTeam(TEAM.TEAM_UNASSIGNED);
+		#if debug
+		// player.ConCommand("developer 1");
+		#end
 	}
 
 	override function PlayerDeathSound():Bool {
@@ -286,6 +296,14 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		}
 		return null;
 	}
+
+	#if debug
+	override function PlayerNoClip(ply:Player, desiredState:Bool):Bool {
+		return true;
+	}
+	#end
+
+	
 
 	override function PlayerSay(sender:Player, text:String, teamChat:Bool):String {
 		return "aaaaple";

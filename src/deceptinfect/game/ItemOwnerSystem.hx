@@ -29,27 +29,13 @@ class ItemOwnerSystem extends System {
 	function drawHalos() {
 		final table = lua.Table.create();
 		var x = 0;
-		// deceptinfect.macros.ForEntities.forEnts(switch (ent.get(ItemReveal)) {
-		// 	case Comp(c_itemreveal):
-		// 		table[x++] = c_itemreveal.clientEnt;
-		// 		trace("oogie");
-		// 	default:
-		// });
-		// HaloLib.Add(table, {
-		// 	r: 255,
-		// 	g: 255,
-		// 	b: 255,
-		// 	a: 255
-		// }, 0, 0, 1, true, true);
+
 	}
 
-	// override function run_client() {
-	// }
 	#end
 	#if server
 	override function run_server() {
-		// trace("runnin");
-		// deceptinfect.macros.ForEntities.forEnts(revealer(ent));
+
 	}
 
 	function revealer(item:DI_ID) { // itemPos:Vector,ownerPos:Vector,c_itemOwner:ItemOwner,id:DI_ID

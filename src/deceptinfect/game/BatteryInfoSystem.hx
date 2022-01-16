@@ -1,5 +1,5 @@
 package deceptinfect.game;
-
+import deceptinfect.ecswip.ReplicatedEntity;
 class BatteryInfoSystem extends System {
 
 	#if server
@@ -12,6 +12,7 @@ class BatteryInfoSystem extends System {
 						trace("ello");
 						var ent = ComponentManager.addEntity();
 						ent.add_component(new BatteryInfo());
+						ent.add_component(new ReplicatedEntity());
 					default:
 				}
 			});
@@ -32,9 +33,10 @@ class BatteryInfoSystem extends System {
 			charge = c;
 			break;
 		});
-		IterateEnt.iterGet([BatteryInfo],[{charge : c}],
+		IterateEnt.iterGet([BatteryInfo],[c_batteryInfo],
 		function () {
-			c = charge;
+			c_batteryInfo.charge = charge;
+			
 			break;
 		});
 	}

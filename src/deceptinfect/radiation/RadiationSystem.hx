@@ -113,21 +113,6 @@ class RadiationSystem extends System {
 		}
 	}
 
-	// static function getTotalRadiationRate(r:RadiationAccepter):Float {
-		// var sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;
-		// var sorted:Array<Float> = [];
-		// // TODO optimise???
-		// for (_ => rate in r.radiation) {
-		// 	sorted.push(rate);
-		// }
-		// sorted.sort(sortFunc);
-		// var total:Float = 0;
-		// for (i in 0...sorted.length) {
-		// 	total = total + sorted[i] * Math.pow(r.diminish, i);
-		// }
-
-		// return total;
-	// }
 }
 
 abstract RadiationID(Int) to Int from Int {

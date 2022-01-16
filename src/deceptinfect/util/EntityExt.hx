@@ -16,10 +16,10 @@ class EntityExt {
 		}
 	}
 
+	//TODO rename
 	public static function validID2(x:Entity) {
-		if (IsValid(x)) {
-			// return (x:GEntCompat).has_id();
-			return switch (x : GEntCompat).id {
+		return if (IsValid(x)) {
+			switch (x : GEntCompat).id {
 				case null:
 					NO_ID;
 				case x:

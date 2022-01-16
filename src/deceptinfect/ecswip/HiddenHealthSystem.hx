@@ -22,7 +22,6 @@ class HiddenHealthSystem extends System {
 		var g_attacker:GEntCompat = data.dmg.GetAttacker();
 		if (!g_attacker.IsPlayer())
 			return;
-		trace("SEPERATION");
 	}
 	#end
 }

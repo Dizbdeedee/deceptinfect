@@ -48,10 +48,9 @@ class GameSystem extends System {
     override function init_server() {
         var ent = ComponentManager.addEntity();
         gameManager = new GameManager2();
-        
+        gameManager.stateChanged = signalTrig.asSignal();
         ent.add_component(gameManager);
         ent.add_component(new ReplicatedEntity());
-        gameManager.stateChanged = signalTrig.asSignal();
     }
 
     override function run_server() {
@@ -156,6 +155,8 @@ class GameSystem extends System {
             player.Spawn();
 
         } //durr
+        
+
     }
 
     public function diffTime() {
@@ -169,6 +170,7 @@ class GameSystem extends System {
 		ent.add_component(new FormComponent());
 		ent.add_component(new DamagePenaltyHidden());
         ent.add_component(new InfectionLookInfoAbility());
+        ent.add_component(new InfectionPoints());
 		var c_inf = ent.get_sure(InfectionComponent);
 		var c_accept = ent.get_sure(GrabAccepter);
 		c_accept.grabState = UNAVALIABLE(UNAVALIABLE);

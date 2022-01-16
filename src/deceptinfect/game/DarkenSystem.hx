@@ -14,7 +14,7 @@ class DarkenSystem extends System {
         });
         IterateEnt.iterGet([Darken],[dark],function () {
             switch (darkend) {
-                case Some(apply):
+                case Some(_):
                     return;
                 default:
                     var ent = ComponentManager.addEntity();

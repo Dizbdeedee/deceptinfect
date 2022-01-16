@@ -1,5 +1,6 @@
 package deceptinfect.client;
 
+import deceptinfect.infection.components.InfectionPoints;
 import deceptinfect.game.components.BatteryInfo;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.infection.components.InfectionLookData;
@@ -44,6 +45,7 @@ class Hud {
 		infectionMeter();
 		stateText();
 		batteryInfo();
+		infectionPoints();
 	}
 
 	static function intpretInfection(state:INF_STATE) {
@@ -128,6 +130,9 @@ class Hud {
 
 	static function stateText() {
 		IterateEnt.iterGet([GameManager2],[{state : s}],function () {
+			if (!statetext.exists(s.getIndex())) {
+				break;
+			}
 			SurfaceLib.SetFont("DermaLarge");
 			SurfaceLib.SetTextColor(255, 255, 255);
 			SurfaceLib.SetTextPos(0, CSS(Y, 800));
@@ -148,6 +153,19 @@ class Hud {
 			break;
 		});
 	}
+
+	static function infectionPoints() {
+		IterateEnt.iterGet([InfectionPoints],[{points : p}],
+		function () {
+			SurfaceLib.SetFont("DermaLarge");
+			SurfaceLib.SetTextColor(255,255,255);
+			SurfaceLib.SetTextPos(0, CSS(Y, 200));
+			SurfaceLib.DrawText("Points: " + p);
+			break;
+		});
+	}
+
+	
 }
 
 private enum Axis {

@@ -1,5 +1,9 @@
 package deceptinfect;
 
+import deceptinfect.infection.InfectionSystem;
+import deceptinfect.ecswip.ReplicatedEntity;
+import deceptinfect.game.components.SpreadComponent;
+import deceptinfect.game.components.GasDraw;
 import gmod.helpers.PrintTimer;
 import deceptinfect.util.Util;
 import deceptinfect.game.components.Darken;
@@ -27,19 +31,8 @@ typedef Particle = {
 	lifeTimeMax : Float
 }
 
-@:structInit
-class NetSpread implements hxbit.Serializable {
-	@:s public var endpoints:Array<{southwest : NVector, northeast : NVector}> = [];
-
-	public function new (endpoints:Array<{southwest : Vector, northeast : Vector}>) {
-		this.endpoints = endpoints.map((str) -> {southwest : NVector.from(str.southwest), northeast : NVector.from(str.northeast)});
-	}
-}
-
 @:keep
 class Spread extends System {
-
-	static var netSpread = new NET_Sv<NetSpread>(#if client [listen] #end);
 
 	var particleTable:Array<Particle> = [{
 		particle : "particle/smokesprites_0001",
@@ -57,123 +50,149 @@ class Spread extends System {
 		lifeTimeMax : 3
 	}];
 
-	#if server
-	var markedMap:Map<Int,Bool> = [];
-
-	var marked:Array<CNavArea> = [];
-
-	var endpoints:Array<CNavArea> = [];
-
-	var mapSize = .0;
-	#end
-
 	#if client
-	static var clendpoints:Array<{southwest : Vector, northeast : Vector}> = [];
 
 	var nextGas = .0;
 
 	#end
 
+	var spreadTime = .0;
 
 	#if server
 	override function run_server() {
-		for (ply in PlayerLib.GetAll()) {
-			final navmesh = NavmeshLib.GetNearestNavArea(ply.GetPos(),false,10000,false,true);
-			if (Gmod.IsValid(navmesh)) {
-				// trace(navmesh);
-				if (markedMap.exists(navmesh.GetID())) {
-					PrintTimer.print_time(1,() -> trace("Player in zone"));
-					(ply : GPlayerCompat).id.add_component(new Darken());
-				} else {
-					PrintTimer.print_time(1,() -> trace("Player not in zone"));
-					(ply : GPlayerCompat).id.remove_component(Darken);
+		if (Gmod.CurTime() > spreadTime) {
+			spread();
+			spreadTime = Gmod.CurTime() + 10;
+		}
+		IterateEnt.iterGet([SpreadComponent],[c_spread = {markedMap : markedMap}],function () {
+			final inf = MathLib.Remap.bind(InfectionSystem.get().getAverageInfection(),0,100);
+			c_spread.percent = inf(0.2,0.7);
+			for (ply in PlayerLib.GetAll()) {
+				final navmesh = NavmeshLib.GetNearestNavArea(ply.GetPos(),false,10000,false,true);
+				if (Gmod.IsValid(navmesh)) {
+					// trace(navmesh);
+					if (markedMap.exists(navmesh.GetID())) {
+						PrintTimer.print_time(1,() -> trace("Player in zone"));
+						(ply : GPlayerCompat).id.add_component(new Darken());
+					} else {
+						PrintTimer.print_time(1,() -> trace("Player not in zone"));
+						(ply : GPlayerCompat).id.remove_component(Darken);
+					}
 				}
 			}
-		}
+		});
+		
 	}
 
-	@:expose("spreadyweady")
-	public static function spreadyweady() {
-		Spread.get().beginSpread(NavmeshLib.GetNearestNavArea(Util.getTestLookat()),0.15);
-	}
-
-	public function beginSpread(x:CNavArea,tPercent:Float) {
-		markedMap = [];
-		marked = [];
-		endpoints = [];
-		mapSize = 0;
-		for (nav in new BFS(x)) {
+	public function beginSpread(nav:CNavArea) {
+		final ent = ComponentManager.addEntity();
+		var mapSize = .0;
+		for (nav in new BFS(nav)) {
 			mapSize += nav.GetSizeX() * nav.GetSizeY();
 		}
-		final target = tPercent * mapSize;
-		var curSize = .0;
-		for (nav in new BFS(x)) {
-			curSize += nav.GetSizeX() * nav.GetSizeY();
-			marked.push(nav);
-			markedMap.set(nav.GetID(),true);
-			if (curSize > target) {
-				break;
-			}
-		}
+		final c_spread:SpreadComponent = {
+			percent: 0.3,
+			initial: nav,
+			mapSize : mapSize
+		};
+		ent.add_component(c_spread);
+		
+		
 
-		for (mark in marked) {
-			for (adjacent in mark.GetAdjacentAreas()) {
-				if (!markedMap.exists(adjacent.GetID())) {
-					endpoints.push(mark);
-				}
-			}
-		}
-		// trace(endpoints.length);
-		for (ep in endpoints) {
-			for (ep2 in ep.GetAdjacentAreasAtSide(EAST)) {
-				if (!markedMap.exists(ep2.GetID())) {
-					netSpread.broadcast({endpoints : [{southwest: ep.GetCorner(SOUTH_EAST), northeast: ep.GetCorner(NORTH_EAST)}]});
-					break;
-				}
-			}
-			for (ep2 in ep.GetAdjacentAreasAtSide(NORTH)) {
-				if (!markedMap.exists(ep2.GetID())) {
-					netSpread.broadcast({endpoints : [{southwest: ep.GetCorner(NORTH_WEST), northeast: ep.GetCorner(NORTH_EAST)}]});
-					break;
-				}
-			}
-			for (ep2 in ep.GetAdjacentAreasAtSide(SOUTH)) {
-				if (!markedMap.exists(ep2.GetID())) {
-					netSpread.broadcast({endpoints : [{southwest: ep.GetCorner(SOUTH_WEST), northeast: ep.GetCorner(SOUTH_EAST)}]});
-					break;
-				}
-			}
-			for (ep2 in ep.GetAdjacentAreasAtSide(WEST)) {
-				if (!markedMap.exists(ep2.GetID())) {
-					netSpread.broadcast({endpoints : [{southwest: ep.GetCorner(SOUTH_WEST), northeast: ep.GetCorner(NORTH_WEST)}]});
-					break;
-				}
-			}
-		}
 	}
 
+	function spread() {
+		var removed = 0;
+		IterateEnt.iterGet([GasDraw],[{ownedBy : owner}],
+		function (ent) {
+			IterateEnt.iterGet([SpreadComponent],[_],function (spread) {
+				if (owner == spread) {
+					removed++;
+					ComponentManager.removeEntity(ent);
+				}
+			});
+		});
+		trace('Gases removed : $removed');
+		IterateEnt.iterGet([SpreadComponent],[c_spread = {
+			initial : initial,
+			percent : percent,
+			marked : marked,
+			markedMap : markedMap,
+			mapSize : mapSize
+		}],
+		function (spreadEnt) {
+			markedMap.clear();
+			marked.resize(0);
+			var endpoints:Array<CNavArea> = [];
+			
+			final target = percent * mapSize;
+			var curSize = .0;
+			for (nav in new BFS(initial)) {
+				curSize += nav.GetSizeX() * nav.GetSizeY();
+				marked.push(nav);
+				markedMap.set(nav.GetID(), true);
+				if (curSize > target) {
+					break;
+				}
+			}
+			for (mark in marked){ 
+				for (adjacent in mark.GetAdjacentAreas()) {
+					if (!markedMap.exists(adjacent.GetID())) {
+						endpoints.push(mark);
+					}
+				}
+			}
+	
+			for (ep in endpoints) {
+				for (ep2 in ep.GetAdjacentAreasAtSide(EAST)) {
+					if (!markedMap.exists(ep2.GetID())) {
+						final ent = ComponentManager.addEntity();
+						ent.add_component(new GasDraw(ep.GetCorner(NORTH_EAST),ep.GetCorner(NORTH_WEST),spreadEnt));
+						ent.add_component(new ReplicatedEntity());
+						break;
+					}
+				}
+				for (ep2 in ep.GetAdjacentAreasAtSide(NORTH)) {
+					if (!markedMap.exists(ep2.GetID())) {
+						final ent = ComponentManager.addEntity();
+						ent.add_component(new GasDraw(ep.GetCorner(NORTH_EAST),ep.GetCorner(NORTH_WEST),spreadEnt));
+						ent.add_component(new ReplicatedEntity());
+						break;
+					}
+				}
+				for (ep2 in ep.GetAdjacentAreasAtSide(SOUTH)) {
+					if (!markedMap.exists(ep2.GetID())) {
+						final ent = ComponentManager.addEntity();
+						ent.add_component(new GasDraw(ep.GetCorner(SOUTH_EAST),ep.GetCorner(SOUTH_WEST),spreadEnt));
+						ent.add_component(new ReplicatedEntity());
+						break;
+					}
+				}
+				for (ep2 in ep.GetAdjacentAreasAtSide(WEST)) {
+					if (!markedMap.exists(ep2.GetID())) {
+						final ent = ComponentManager.addEntity();
+						ent.add_component(new GasDraw(ep.GetCorner(NORTH_WEST),ep.GetCorner(SOUTH_WEST),spreadEnt));
+						ent.add_component(new ReplicatedEntity());
+						break;
+					}
+				}
+			}
+		});
+	
+	}
+	//deleted
+	
 	#end
 
 	#if client
 
-	static function listen(ns:NetSpread) {
-		for (nvec in ns.endpoints) {
-			final northeast = nvec.northeast.to();
-			final southwest = nvec.southwest.to();
-			clendpoints.push({northeast : northeast, southwest : southwest});
-
-			final origin = (northeast - southwest) / 2 + southwest;
-
-			DebugoverlayLib.Box(origin,southwest - origin,northeast - origin,60,Gmod.Color(255,0,0));
-		};
-	}
-
 	override function run_client() {
 		if (Gmod.CurTime() < nextGas) return;
-		// GameValues.MIN_PLAYERS;
-		nextGas = Gmod.CurTime() + MathLib.Rand(0.3,0.5);
-		for (point in clendpoints) {
-			final origin = (point.northeast - point.southwest) / 2 + point.southwest + Gmod.Vector(0,-10,0);
+		var gases = 0;
+		IterateEnt.iterGet([GasDraw],[{northeast : ne, southwest : sw}],function () {
+			gases++;
+			final origin = (ne - sw) / 2 + sw + Gmod.Vector(0,-10,0);
+			DebugoverlayLib.Box(origin,sw - origin,ne - origin,0.1,Gmod.Color(255,0,0));
 			final vecRan = Gmod.VectorRand();
 			vecRan.Normalize();
 			final particledata = particleTable[0];
@@ -195,16 +214,16 @@ class Spread extends System {
 			particle.SetDieTime(MathLib.Rand(particledata.lifeTimeMin,particledata.lifeTimeMax));
 			particle.SetStartAlpha(particledata.startAlpha);
 			particle.SetEndAlpha(particledata.endAlpha);
-			particle.SetStartSize(point.northeast.Distance(point.southwest));
-			particle.SetEndSize(point.northeast.Distance(point.southwest));
+			particle.SetStartSize(ne.Distance(sw));
+			particle.SetEndSize(ne.Distance(sw));
 			particle.SetRollDelta(MathLib.Rand(-particledata.rotRate,particledata.rotRate));
 
 			emitter.Finish();
 			emitter = null;
 			Gmod.collectgarbage("step",64);
-			//collect ze garbage..??
-
-		}
+		});
+		trace('Gases : $gases');
+		nextGas = Gmod.CurTime() + MathLib.Rand(0.3,0.5);
 	}
 	#end
 

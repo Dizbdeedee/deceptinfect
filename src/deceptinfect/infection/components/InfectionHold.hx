@@ -3,7 +3,9 @@ package deceptinfect.infection.components;
 import deceptinfect.ecswip.ReplicatedComponent;
 
 @:replicated(SOME(CURRENT_PLAYER))
-class InfectionPoints extends ReplicatedComponent {
+class InfectionHold extends ReplicatedComponent {
 
-    @:s var points:Int = 0;
+    var timestamp:Float;
+
+    
 }

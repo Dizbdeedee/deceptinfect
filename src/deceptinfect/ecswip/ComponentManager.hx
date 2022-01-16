@@ -208,6 +208,7 @@ class ComponentManager {
 
 	public static var gEntityLookup(default, null):Map<DI_ID, GEntCompat> = [];
 
+	public static var deadEnt:Map<DI_ID,Bool> = [];
 
 	//FIXME... this almost certainly keeps things around after system death... we need to clear signals when we remake systems.
 
@@ -291,6 +292,8 @@ class ComponentManager {
 		return x;
 	}
 
+	
+
 	public static inline function getIDFromComponent(comp:Component):DI_ID {
 		return lookupEntity.get(comp);
 	}
@@ -334,6 +337,7 @@ class ComponentManager {
 
 
 	public static function removeEntity(x:DI_ID) {
+		deadEnt.set(x,true);
 		removeEntityTrig.trigger({
 			ent : x
 		});

@@ -1,5 +1,6 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.infection.InfectionPointsSystem;
 import deceptinfect.game.BatteryInfoSystem;
 import deceptinfect.game.DarkenSystem;
 import deceptinfect.game.RunUntilDoneSystem;
@@ -43,6 +44,7 @@ class SystemManager {
 		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
 		CRTSystem,
 		deceptinfect.game.BatteryInfoSystem,
+		InfectionPointsSystem,
 		WeaponSystem, ItemOwnerSystem,DummySystem,
 		ClientTranslateSystem	
 	];
@@ -56,6 +58,7 @@ class SystemManager {
 		ContaminationSystem, // Problem!
 		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
 		CRTSystem,
+		InfectionPointsSystem,
 		WeaponSystem, ItemOwnerSystem,DummySystem
 	];
 
@@ -89,6 +92,7 @@ class SystemManager {
 		getSystems.set(DarkenSystem, new DarkenSystem());
 		getSystems.set(CRTSystem, new CRTSystem());
 		getSystems.set(deceptinfect.game.BatteryInfoSystem, new BatteryInfoSystem());
+		getSystems.set(InfectionPointsSystem, new InfectionPointsSystem());
 	}
 
 	public static function getSystem<T:System>(cls:Class<T>):Null<T> {

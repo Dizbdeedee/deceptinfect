@@ -60,6 +60,7 @@ class GameInProgressSystem extends System {
         var evacZone = Di_evac_zone.create();
         var evacZoneSpawn:BoundsSpawn = cast SpawnSystem.evac.getRandom();
         evacZoneSpawn.spawn(evacZone);
+        Spread.get().beginSpread(NavmeshLib.GetNearestNavArea(nest.GetPos(),null,false,true));
         #end
     
     }
