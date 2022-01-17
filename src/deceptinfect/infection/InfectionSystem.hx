@@ -1,5 +1,6 @@
 package deceptinfect.infection;
 
+import deceptinfect.infection.components.Doomed;
 import deceptinfect.game.GameSystem;
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.game.GeigerCounter;
@@ -56,27 +57,30 @@ class InfectionSystem extends System {
 				default:
 					c_inf.rate;
 			}
-			rate += 1;
+			c_inf.rate = rate;
+			rate *= GameSystem.get().diffTime();
+			// rate += 1;
 			var vun = switch (ent.get(InfVunerability)) {
 				case Comp(c_v):
 					c_v.vun;
 				default:
 					1;
 			}
-			inf.value += base * rate * vun;
+			if (!ent.has_comp(Doomed)) {
+				inf.value += base * vun;
+			}
+
+			inf.value += rate * vun;
 			if (Gmod.CurTime() > infectionReport) {
 				trace('$base $rate $vun');
 			}
 			fixUpInfection(c_inf);
 			switch (ent.get(PlayerComponent)) {
 				case Comp(ply):
-					
-					// net_inf.send({infection: inf.value}, ply.player, true);
 					totalInf += c_inf.getInfValue();
 					numPlayers++;
 				default:
 			}
-			c_inf.rate = rate;
 			switch (c_inf.infection) {
 				case INFECTED:
 					onInfected(ent);
@@ -99,6 +103,7 @@ class InfectionSystem extends System {
 		switch (ent.get(InfectionComponent)) {
 			case Comp(inf):
 				inf.infection = switch (inf.infection) {
+					
 					case NOT_INFECTED(_):
 						onInfected(ent);
 						INFECTED;

@@ -61,26 +61,24 @@ class RadiationSystem extends System {
 	static final sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;
 
 	override function run_server() {
-		IterateEnt.iterGet([RadiationAffecting],
-		[c_radAffect = {accepter : accepter, producer : producer}],
-		function() {
-			var producePos = producer.get_sure(VirtualPosition).pos;  
-			var acceptPos = accepter.get_sure(VirtualPosition).pos;
-			var dist = producePos.Distance(acceptPos);
-			switch getTotalRadiation(dist, producer.get_sure(RadiationProducer)) {
-				case Some(rate):
-					c_radAffect.value = rate;
-				default:
-			}
-		});
+		// IterateEnt.iterGet([RadiationAffecting],
+		// [c_radAffect = {accepter : accepter, producer : producer}],
+		// function() {
+			
+		// });
 		IterateEnt.iterGet([RadiationAccepter],
 		[c_radAccept],function (acceptEnt) {
 			var sorted:Array<Float> = [];
 			IterateEnt.iterGet([RadiationAffecting],
-			[{accepter : accepter, value : val}],
+			[c_radAffect = {accepter : accepter, producer : producer, value : val}],
 			function () {
-				if (accepter == acceptEnt) {
-					sorted.push(val);
+				var producePos = producer.get_sure(VirtualPosition).pos;  
+				var acceptPos = accepter.get_sure(VirtualPosition).pos;
+				var dist = producePos.distSq(acceptPos);
+				final rads = getTotalRadiation(dist, producer.get_sure(RadiationProducer));
+				c_radAffect.value = rads;
+				if (accepter == acceptEnt && rads > 0) {
+					sorted.push(rads);
 				}
 			});
 			sorted.sort(sortFunc);
@@ -105,11 +103,11 @@ class RadiationSystem extends System {
 		// ent.add_component(RadiationProducer.createFromType(RadTypes.NEST));
 	}
 
-	static function getTotalRadiation(dist:DistSquared, rad:RadiationProducer):Option<Float> {
-		if (dist < rad.radius) {
-			return Some((rad.maxrate - 1) * ((rad.radius - dist) / rad.radius));
+	static function getTotalRadiation(dist:DistSquared, rad:RadiationProducer):Float {
+		return if (dist < rad.radius) {
+			(rad.maxrate) * ((rad.radius - dist) / rad.radius);
 		} else {
-			return None;
+			-1;
 		}
 	}
 

@@ -27,14 +27,18 @@ abstract DistSquared(Float) to Float {
 	@:op(A / B)
 	static function divide2(x:DistSquared, y:Float):Float;
 
-	@:from
 	static function convert(x:Float):DistSquared {
 		return cast MathLib.pow(x, 2);
 	}
 }
 
+
 class DistSqSafe {
 	public inline static function distSq(us:Vector, them:Vector):DistSquared {
 		return cast us.DistToSqr(them);
+	}
+
+	public inline static function safeSquare(fl:Float):DistSquared {
+		return cast MathLib.pow(fl,2);
 	}
 }

@@ -66,5 +66,6 @@ enum SomeTargets {
     PLAYERS(arr:Array<Player>);
     CURRENT_PLAYER;
     INFECTED;
+    SPECTATORS;
    
 }

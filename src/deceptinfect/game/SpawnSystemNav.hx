@@ -12,9 +12,9 @@ class SpawnSystemNav extends System {
 	#if server
 	public static var areasCovered:Map<Int, Bool> = [];
 
-	static var distanceMin:DistSquared = 500;
+	static var distanceMin:DistSquared = 500.safeSquare();
 
-	static var distMinOthers:DistSquared = 250;
+	static var distMinOthers:DistSquared = 250.safeSquare();
 
 	static var playerPos:Vector;
 
@@ -56,10 +56,10 @@ class SpawnSystemNav extends System {
 			} else {
 				ent.SetPos(point + new Vector(0, 0, 50));
 				ent.Spawn();
-				final c_itemOwner = new ItemOwner(Gmod.CurTime(), x.id);
-				trace(x.id);
-				ent.id.add_component(c_itemOwner);
-				trace("success!");
+				// final c_itemOwner = new ItemOwner(Gmod.CurTime(), x.id);
+				// trace(x.id);
+				// ent.id.add_component(c_itemOwner);
+				// trace("success!");
 				// DebugoverlayLib.Cross(ent.GetPos(),10,30,null,true);
 				// DebugoverlayLib.Box(ent.GetPos(),bounds.mins,bounds.maxs,30);
 			}

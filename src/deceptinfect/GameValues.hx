@@ -2,6 +2,18 @@ package deceptinfect;
 
 @:expose("GameValues")
 class GameValues {
+
+	public static var DOOM_THRESHOLD_MAX = 98;
+
+	public static var DOOM_THRESHOLD_MIN = 93;
+
+	public static var DOOM_WAIT_FOR_IDLE = 8;
+
+	public static var DOOM_IDLE_THRESHOLD = 0.1;
+
+	public static var DOOM_MAX = 45;
+
+	public static var DOOM_MIN = 5;
 	/**
 		Min players to start game
 	**/

@@ -7,6 +7,7 @@ import deceptinfect.game.components.NestComponent;
 import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import gmod.structs.TestCollisionData;
+import deceptinfect.ecswip.ReplicatedEntity;
 
 class Di_nest extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	static final properties:EntFields = {
@@ -31,6 +32,8 @@ class Di_nest extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 		id = ent.id;
 		final nestComp = new NestComponent();
 		id.add_component(nestComp);
+		id.add_component(new ReplicatedEntity());
+		// id.add_component(new NestPos());
 		this.nestComp = nestComp;
 		nestComp.nestState = INVISIBLE;
 		self.PhysicsInit(SOLID_VPHYSICS);
@@ -49,20 +52,18 @@ class Di_nest extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	}
 
 	override function Think():Bool {
-		var c_nest = id.get_sure(NestComponent);
-		for (x in 0...ComponentManager.entities) {
-			final ent:DI_ID = x;
-			switch [ent.get(PlayerComponent), ent.get(InfectedComponent), id.get(NestComponent)] {
-				case [Comp(ply), _, Comp({nestState: VISIBLE})]:
-					self.SetPreventTransmit(ply.player, false);
-				case [Comp(ply), Comp(_), Comp(_)]:
-					self.SetPreventTransmit(ply.player, false);
-				case [Comp(ply), NONE, Comp(_)]:
-					self.SetPreventTransmit(ply.player, true);
-
+		IterateEnt.iterGet([PlayerComponent],[{player : ply}],function (ent) {
+			switch [ent.has_comp(InfectedComponent),id.get_2(NestComponent)] {
+				case [_,{nestState : VISIBLE}]:
+					self.SetPreventTransmit(ply,false);
+				case [true,_]:
+					self.SetPreventTransmit(ply,true);
+				case [false,_]:
+					self.SetPreventTransmit(ply,false);
 				default:
+					trace("Whoops");
 			}
-		}
+		});
 		return null;
 	}
 	#end

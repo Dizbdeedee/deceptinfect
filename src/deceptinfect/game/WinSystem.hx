@@ -1,5 +1,6 @@
 package deceptinfect.game;
 
+import deceptinfect.client.LocalPlayer;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.util.PrintTimer;
 import deceptinfect.ecswip.PlayerComponent;
@@ -7,10 +8,25 @@ import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.System;
 import deceptinfect.infection.InfectionComponent;
-
+import deceptinfect.ecswip.ReplicatedEntity;
 class WinSystem extends System {
 
 	var winTrig:SignalTrigger<Win> = new SignalTrigger();
+
+	#if client
+	override function init_client() {
+		WinGame.getAddSignal().handle((win) -> {
+			switch (win.comp.win) {
+				case WIN_HUMAN:
+					SurfaceLib.PlaySound("deceptinfect/win.wav");
+				case WIN_INF:
+					SurfaceLib.PlaySound("deceptinfect/lose.wav");
+				default:
+			}
+			
+		});
+	}
+	#end
 
 	#if server
 	override function init_server() {
@@ -20,6 +36,11 @@ class WinSystem extends System {
 			winTrigger : winTrig
 		};
 		ent.add_component(winMan);
+		winTrig.asSignal().handle((win) -> {
+			final ent = ComponentManager.addEntity();
+			ent.add_component(new ReplicatedEntity());
+			ent.add_component(new WinGame(win));
+		});
 	}
 
 	override function run_server() {

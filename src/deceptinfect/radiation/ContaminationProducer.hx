@@ -4,7 +4,7 @@ import deceptinfect.radiation.RadSource.RadSourceOptions;
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import deceptinfect.radiation.RadiationProducer.RadiationProduceOptions;
 import deceptinfect.radiation.RadiationProducer.RadLifetime;
-
+using deceptinfect.DistSquared;
 class ContaminationProducer extends Component {
 	public var chance:Float;
 
@@ -21,7 +21,7 @@ class ContaminationProducer extends Component {
 	public function new(options:ContaminationProducerOptions, ?radoptions:RadiationProduceOptions) {
 		super();
 		chance = options.chance;
-		dist = options.dist;
+		dist = options.dist.safeSquare();
 		check = options.check;
 		if (options.type != null) {
 			type = options.type;

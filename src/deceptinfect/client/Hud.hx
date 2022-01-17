@@ -1,5 +1,6 @@
 package deceptinfect.client;
 
+import deceptinfect.infection.components.DoomClient;
 import deceptinfect.infection.components.InfectionPoints;
 import deceptinfect.game.components.BatteryInfo;
 import deceptinfect.macros.IterateEnt;
@@ -9,6 +10,7 @@ import deceptinfect.game.GameSystem;
 import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.infection.InfectionComponent;
+import deceptinfect.game.components.WinGame;
 
 #if client
 class Hud {
@@ -46,6 +48,8 @@ class Hud {
 		stateText();
 		batteryInfo();
 		infectionPoints();
+		doom();
+		win();
 	}
 
 	static function intpretInfection(state:INF_STATE) {
@@ -162,6 +166,31 @@ class Hud {
 			SurfaceLib.SetTextPos(0, CSS(Y, 200));
 			SurfaceLib.DrawText("Points: " + p);
 			break;
+		});
+	}
+
+	static function doom() {
+		IterateEnt.iterGet([DoomClient],[_],function () {
+			SurfaceLib.SetFont("DermaLarge");
+			SurfaceLib.SetTextColor(255,0,0);
+			SurfaceLib.SetTextPos(0, CSS(Y,300));
+			SurfaceLib.DrawText("!!");
+		});
+	}
+
+	static function win() {
+		IterateEnt.iterGet([WinGame],[{win : win}],function () {
+			SurfaceLib.SetFont("DermaLarge");
+			SurfaceLib.SetTextColor(255,255,255);
+			SurfaceLib.SetTextPos(CSS(X,800),CSS(Y,400));
+			SurfaceLib.DrawText(switch (win) {
+				case WIN_HUMAN:
+					"Humans win!";
+				case WIN_INF:
+					"Infected win!";
+				default:
+					"Nobody won...";
+			});
 		});
 	}
 

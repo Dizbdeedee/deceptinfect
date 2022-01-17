@@ -501,7 +501,8 @@ class ClientReplicationMachine {
 				} else {
 					// throw "Not attatched to a player!";
 				}
-
+			case SOME(SPECTATORS):
+				//TODO
 			case ALL:
 				for (ply in PlayerLib.GetHumans()) {
 					arr.push(ply);

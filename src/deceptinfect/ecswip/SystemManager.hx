@@ -1,12 +1,12 @@
 package deceptinfect.ecswip;
 
+import deceptinfect.infection.DoomedSystem;
 import deceptinfect.infection.InfectionPointsSystem;
 import deceptinfect.game.BatteryInfoSystem;
 import deceptinfect.game.DarkenSystem;
 import deceptinfect.game.RunUntilDoneSystem;
 import deceptinfect.game.GameInProgressSystem;
 import deceptinfect.game.ClientTranslateSystem;
-import deceptinfect.game.ItemOwnerSystem;
 import deceptinfect.items.ScannerSystem;
 import deceptinfect.radiation.ContaminationSystem;
 // import deceptinfect.radiation.ContaminationSystem;
@@ -39,14 +39,18 @@ class SystemManager {
 		GameSystem, GameInProgressSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
 		RadiationSystem, 
 		GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
-		EvacSystem, RagdollSystem, SlowMotionSystem,Spread, InfectionLookSystem, 
-		ContaminationSystem, // Problem!
+		EvacSystem, RagdollSystem, SlowMotionSystem,
+		// Spread, 
+		InfectionLookSystem, 
+		// ContaminationSystem, // Problem!
 		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
 		CRTSystem,
 		deceptinfect.game.BatteryInfoSystem,
 		InfectionPointsSystem,
-		WeaponSystem, ItemOwnerSystem,DummySystem,
-		ClientTranslateSystem	
+		DoomedSystem,
+		WeaponSystem,DummySystem,
+		ClientTranslateSystem
+		
 	];
 
 	public static var initSystems(default, null):Array<Class<Dynamic>> = [
@@ -54,12 +58,16 @@ class SystemManager {
 		
 		RadiationSystem, 
 		GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
-		EvacSystem, RagdollSystem, SlowMotionSystem,Spread, InfectionLookSystem, 
-		ContaminationSystem, // Problem!
+		EvacSystem, RagdollSystem, SlowMotionSystem,
+		// Spread, 
+		InfectionLookSystem, 
+		// ContaminationSystem, // Problem!
 		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
 		CRTSystem,
 		InfectionPointsSystem,
-		WeaponSystem, ItemOwnerSystem,DummySystem
+		DoomedSystem,
+		WeaponSystem,DummySystem,
+		DoomedSystem
 	];
 
 	static function make() {
@@ -85,7 +93,6 @@ class SystemManager {
 		getSystems.set(LowHealthSystem, new LowHealthSystem());
 		getSystems.set(ScannerSystem, new ScannerSystem());
 		getSystems.set(WeaponSystem, new WeaponSystem());
-		getSystems.set(ItemOwnerSystem, new ItemOwnerSystem());
 		getSystems.set(DummySystem, new DummySystem());
 		getSystems.set(Spread, new Spread());
 		getSystems.set(ClientTranslateSystem,new ClientTranslateSystem());
@@ -93,6 +100,8 @@ class SystemManager {
 		getSystems.set(CRTSystem, new CRTSystem());
 		getSystems.set(deceptinfect.game.BatteryInfoSystem, new BatteryInfoSystem());
 		getSystems.set(InfectionPointsSystem, new InfectionPointsSystem());
+		getSystems.set(DoomedSystem, new DoomedSystem());
+
 	}
 
 	public static function getSystem<T:System>(cls:Class<T>):Null<T> {

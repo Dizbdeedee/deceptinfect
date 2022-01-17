@@ -4,7 +4,7 @@ import deceptinfect.radiation.ContaminationProducer.ContaminationProducerOptions
 import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.ecswip.Component;
 import deceptinfect.radiation.RadiationTypes;
-
+using deceptinfect.DistSquared;
 
 
 class RadiationProducer extends Component {
@@ -17,7 +17,7 @@ class RadiationProducer extends Component {
 	public function new(options:RadiationProduceOptions) {
 		super();
 		maxrate = options.maxrate;
-		radius = options.radius;
+		radius = options.radius.safeSquare();
 	}
 
 	public function copy() {}

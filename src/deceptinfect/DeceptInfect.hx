@@ -62,6 +62,13 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 		#if debug
 		Gmod.RunConsoleCommand("developer",1);
 		#end
+		#if server
+		ResourceLib.AddFile("sound/deceptinfect/doom.wav");
+		ResourceLib.AddFile("sound/deceptinfect/win.wav");
+		ResourceLib.AddFile("sound/deceptinfect/lose.wav");
+
+
+		#end
 	}
 
 	var lastcrc:Int = 0;

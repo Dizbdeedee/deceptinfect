@@ -9,7 +9,7 @@ class RadiationTypes {
 			type: NEST,
 			lifetime: INFINITE,
 			options: BOTH({
-				maxrate: 6,
+				maxrate: 7.5,
 				radius: 500,
 			}, {
 				chance: 2 / 5,
@@ -24,7 +24,7 @@ class RadiationTypes {
 			type: NEST_CONTAM,
 			lifetime: FINITE(10),
 			options: BOTH({
-				maxrate: 4,
+				maxrate: 5,
 				radius: 300
 			}, {
 				chance: 2 / 5,
@@ -38,7 +38,7 @@ class RadiationTypes {
 			type: INF,
 			lifetime: INFINITE,
 			options: BOTH({
-				maxrate: 5,
+				maxrate: 2,
 				radius: 500
 			}, {
 				chance: 0.4,

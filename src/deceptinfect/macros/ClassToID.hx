@@ -189,7 +189,7 @@ class DI_ID_Use {
 	public static macro function get_sure(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>, cls:ExprOf<Class<Dynamic>>) {
 		#if macro
 		final idMacro = ClassToID.idMacro(cls);
-		return macro deceptinfect.ecswip.ComponentManager.getComponentForIDSure($idMacro, $diid);
+		return macro deceptinfect.ecswip.ComponentManager.getComponent($idMacro, $diid);
 		#end
 	}
 
