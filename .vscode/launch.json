@@ -9,7 +9,7 @@
             "type": "gmdebug",
             "request": "launch",
             "name": "gmdebug : Launch server",
-            "serverFolder": "/home/g/gmodDS/garrysmod/",
+            "serverFolder": "C:\\Users\\g\\Documents\\steamcmd\\steamapps\\common\\GarrysModDS\\garrysmod",
             "programArgs": [
                 "+gamemode",
                 "deceptinfect",
@@ -21,7 +21,7 @@
                 "1"
             ],
             "clientFolders": [
-                "/home/g/.local/share/Steam/steamapps/common/GarrysMod/garrysmod/"
+                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\GarrysMod"
             ],
             "programPath": "auto",
             "autoConnectLocalGmodClient": true

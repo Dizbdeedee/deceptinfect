@@ -13,10 +13,8 @@ class ContaminationSystem extends System {
 		
 	}
 
+	
 	function run_server_() {
-		// IterateEnt.iterGet([ContaminationProducer,])
-	}
-	override function run_server() {
 		
 		IterateEnt.iterGet([RadVictim,ContaminationAccepter,VirtualPosition],
 		[c_rv,c_contamAccept,{pos : victimPos}],
