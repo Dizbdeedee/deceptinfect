@@ -4,8 +4,7 @@ WIP gmod gamemode, TTT/Morbus like being created using Haxe's lua target, and is
 
 Comes with it's own entity component system for reasons that seemed very important at the time.
  
-ETA: Within the realms of possiblity - this project will guilt me until it's done
-I'm still learning how to manage all of this, patience is required
+I've got some ideas -> watch this space
 
 ## Overview
 
