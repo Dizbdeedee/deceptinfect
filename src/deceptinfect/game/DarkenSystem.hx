@@ -4,8 +4,8 @@ import deceptinfect.lib.BSP;
 import deceptinfect.macros.IterateEnt;
 
 class DarkenSystem extends System {
-    
-	#if client
+
+    #if client
     //TODO confusing logic, can we make this simpler?
     override function run_client() {
         var darkend = None;
@@ -17,7 +17,7 @@ class DarkenSystem extends System {
                 case Some(_):
                     return;
                 default:
-                    var ent = ComponentManager.addEntity();
+                    var ent = componentManager.addEntity();
                     var apply = new DarkenApplied();
                     replace(apply);
                     ent.add_component(apply);
@@ -26,39 +26,39 @@ class DarkenSystem extends System {
         switch (darkend) {
             case Some(apply):
                 revert(apply);
-                ComponentManager.removeEntity(apply.getOwner());
+                componentManager.removeEntity(componentManager.getIDFromComponent(apply));
             default:
 
         }
     }
-	
+
 
     function replace(d:DarkenApplied) {
         final open = MRBsp.OpenBSP();
-		if (open != false) {
-			final b:BSP = open;
-			for (str in b.ReadLumpTextDataStringData()) {
-				final imat = Gmod.Material(str).a;
-				if (!imat.IsError()) {
-					if (imat.GetName().indexOf("tools") == -1
-						&& imat.GetName().indexOf("lights") == -1
-					&& imat.GetName().indexOf("water") == -1) {
+        if (open != false) {
+            final b:BSP = open;
+            for (str in b.ReadLumpTextDataStringData()) {
+                final imat = Gmod.Material(str).a;
+                if (!imat.IsError()) {
+                    if (imat.GetName().indexOf("tools") == -1
+                        && imat.GetName().indexOf("lights") == -1
+                    && imat.GetName().indexOf("water") == -1) {
                         var col = imat.GetVector("$color");
                         final er = {
                             name : str,
                             baseTexture : imat.GetTexture("$basetexture"),
-                            color : col 
-                        };                        
+                            color : col
+                        };
                         d.materialsSet.push(er);
                         // final colorTex = Gmod.Material("tools/toolsblack").a.GetTexture("$basetexture");
-						imat.SetTexture("$basetexture","grey");
-						imat.SetVector("$color", new Vector(0.03,0.03,0.03));
-					}
-				}
-			}
-		}
+                        imat.SetTexture("$basetexture","grey");
+                        imat.SetVector("$color", new Vector(0.03,0.03,0.03));
+                    }
+                }
+            }
+        }
     }
-    
+
     function revert(d:DarkenApplied) {
         for (mat in d.materialsSet) {
             final imat = Gmod.Material(mat.name).a;
@@ -80,5 +80,5 @@ class DarkenSystem extends System {
         }
     }
     #end
-    
+
 }

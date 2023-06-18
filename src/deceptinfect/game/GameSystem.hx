@@ -46,7 +46,7 @@ class GameSystem extends System {
 
     #if server
     override function init_server() {
-        var ent = ComponentManager.addEntity();
+        var ent = componentManager.addEntity();
         gameManager = new GameManager2();
         gameManager.stateChanged = signalTrig.asSignal();
         ent.add_component(gameManager);
@@ -69,11 +69,11 @@ class GameSystem extends System {
             case PLAYING: //GameInProgressSystem
         }
         if (gameManager.diffTime == null) {
-			gameManager.diffTime = 0.0;
-		} else {
-			gameManager.diffTime = Gmod.CurTime() - gameManager.lastTick;
-		}
-		gameManager.lastTick = Gmod.CurTime();
+            gameManager.diffTime = 0.0;
+        } else {
+            gameManager.diffTime = Gmod.CurTime() - gameManager.lastTick;
+        }
+        gameManager.lastTick = Gmod.CurTime();
     }
 
 
@@ -85,7 +85,7 @@ class GameSystem extends System {
     public function setState(newState:GAME_STATE_2) {
         final manager = getGameManager();
         manager.state = stateTransition(newState);
-        
+
     }
 
     function stateTransition(x:GAME_STATE_2):GAME_STATE_2 {
@@ -103,10 +103,10 @@ class GameSystem extends System {
             case [WAIT, SETTING_UP(t)]:
                 time = t;
             case [PLAYING,ENDING(t)]:
-                
+
                 time = t;
             case [PLAYING,PLAYING]:
-                
+
                 cleanup();
                 playing();
                 //spawn
@@ -125,14 +125,16 @@ class GameSystem extends System {
     }
 
     function setupInfection() {
-        var ent = ComponentManager.addEntity();
+        final gameInProgressSystem = systemManager.get(GameInProgressSystem);
+        var ent = componentManager.addEntity();
         var gip = new GameInProgress();
         ent.add_component(gip);
-        GameInProgressSystem.get().setTime(gip);
-        GameInProgressSystem.get().spawns();
+        gameInProgressSystem.setTime(gip);
+        gameInProgressSystem.spawns();
     }
 
     function beginRoundForAll() {
+        final infectionSystem = systemManager.get(InfectionSystem);
         var choose = MathLib.random(1, PlayerLib.GetCount());
         if (Main.forceInfected) {
             choose = 1;
@@ -148,14 +150,14 @@ class GameSystem extends System {
             var player:GPlayerCompat = _ply;
             beginPlayer(player);
             if (ind == choose) {
-                InfectionSystem.get().makeInfected(player.id);
+                infectionSystem.makeInfected(player.id);
             }
             TimerLib.Simple(0.1, () -> player.Give(Misc.startingWeapons[0]));
             player.giveFullAmmo();
             player.Spawn();
 
         } //durr
-        
+
 
     }
 
@@ -164,49 +166,51 @@ class GameSystem extends System {
     }
 
     public function beginInfected(ent:DI_ID) {
+        final radSourceSystem = systemManager.get(RadSourceSystem);
         ent.add_component(new InfectedComponent());
-		ent.add_component(new GrabProducer());
-		ent.add_component(new HiddenHealthComponent());
-		ent.add_component(new FormComponent());
-		ent.add_component(new DamagePenaltyHidden());
+        ent.add_component(new GrabProducer());
+        ent.add_component(new HiddenHealthComponent());
+        ent.add_component(new FormComponent());
+        ent.add_component(new DamagePenaltyHidden());
         ent.add_component(new InfectionLookInfoAbility());
         ent.add_component(new InfectionPoints());
-		var c_inf = ent.get_sure(InfectionComponent);
-		var c_accept = ent.get_sure(GrabAccepter);
-		c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
-		var rad = SystemManager.getSystem(RadSourceSystem).radSourceFromType(INF, ent);
-		var rv = new RadVictim();
-		rad.add_component(new VirtualPosition(ENT(ent.get_sure(GEntityComponent).entity)));
+        var c_inf = ent.get_sure(InfectionComponent);
+        var c_accept = ent.get_sure(GrabAccepter);
+        c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
+        var rad = radSourceSystem.radSourceFromType(INF, ent);
+        var rv = new RadVictim();
+        rad.add_component(new VirtualPosition(ENT(ent.get_sure(GEntityComponent).entity)));
     }
 
     function beginPlayer(ply:GPlayerCompat) {
         var p = ply.id;
-		final infcomp = new InfectionComponent();		
-		final spec = new SpectateComponent();
-		final rate = new RateAccepter();
-		final vic = new RadVictim();
-		final contam = new ContaminationAccepter();
-		final health = new HiddenHealthComponent();
-		final grabaccept = new GrabAccepter();
-		final radaccept = new RadiationAccepter({});
-		final virpos = new VirtualPosition(ENT(ply));
-		
-		p.add_component(infcomp);
-		p.add_component(spec);
-		p.add_component(rate);
-		p.add_component(health);
-		p.add_component(grabaccept);
-		p.add_component(radaccept);
-		p.add_component(virpos);
-		p.add_component(new AliveComponent());
-		p.add_component(vic);
-		p.add_component(contam);
-		final g = new deceptinfect.game.GeigerCounter();
-		p.add_component(g);
+        final infcomp = new InfectionComponent();
+        final spec = new SpectateComponent();
+        final rate = new RateAccepter();
+        final vic = new RadVictim();
+        final contam = new ContaminationAccepter();
+        final health = new HiddenHealthComponent();
+        final grabaccept = new GrabAccepter();
+        final radaccept = new RadiationAccepter({});
+        final virpos = new VirtualPosition(ENT(ply));
+
+        p.add_component(infcomp);
+        p.add_component(spec);
+        p.add_component(rate);
+        p.add_component(health);
+        p.add_component(grabaccept);
+        p.add_component(radaccept);
+        p.add_component(virpos);
+        p.add_component(new AliveComponent());
+        p.add_component(vic);
+        p.add_component(contam);
+        final g = new deceptinfect.game.GeigerCounter();
+        p.add_component(g);
     }
 
     function hookWin() {
-        RunUntilDoneSystem.get().addRunner(() -> {
+        final runUntilDoneSystem = systemManager.get(RunUntilDoneSystem);
+        runUntilDoneSystem.addRunner(() -> {
             IterateEnt.iterGet([WinManager],[{winSignal : sig}],function () {
                 sig.nextTime().handle(newWin);
                 return true;
@@ -227,38 +231,37 @@ class GameSystem extends System {
         setState(ENDING(Gmod.CurTime() + 10));
     }
 
-    
-
     public function cleanup() {
+        final clientTranslateSystem = systemManager.get(ClientTranslateSystem);
         IterateEnt.iterGet([CleanupEnt,GEntityComponent],[_,{entity : ent}],function () {
             ent.Remove();
         });
-        for (x in 0...ComponentManager.entities) {
+        for (x in 0...componentManager.entities) {
             final ent:DI_ID = x;
             if (!ent.has_comp(KeepRestart)) {
-                ComponentManager.removeEntity(ent);
+                componentManager.removeEntity(ent);
             }
         }
-        ClientTranslateSystem.get().flush();
+        clientTranslateSystem.flush();
         // stateTrig.clear();
-        SystemManager.destroySystems();
-        SystemManager.initAllSystems();
+        systemManager.destroySystems();
+        systemManager.initAllSystems();
         for (ent in EntsLib.GetAll()) {
-			switch (ent.GetClass()) {
-				case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
-					ent.Remove();
-				default:
-			}
-		}
-		// GameLib.CleanUpMap();
-		for (p in PlayerLib.GetAll()) {
-			new GPlayerCompat(new PlayerComponent(p));
-			p.KillSilent();
-			p.Spawn();
-		}
+            switch (ent.GetClass()) {
+                case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
+                    ent.Remove();
+                default:
+            }
+        }
+        // GameLib.CleanUpMap();
+        for (p in PlayerLib.GetAll()) {
+            new GPlayerCompat(new PlayerComponent(p));
+            p.KillSilent();
+            p.Spawn();
+        }
     }
 
-   
+
     public function isPlaying() {
         return switch(gameManager.state) {
             case PLAYING:
@@ -276,13 +279,13 @@ class GameSystem extends System {
 
 
     public function shouldAllowRespawn() {
-		return switch (gameManager.state) {
-			case WAIT | SETTING_UP(_):
-				true;
-			default:
-				false;
-		}
-	}
+        return switch (gameManager.state) {
+            case WAIT | SETTING_UP(_):
+                true;
+            default:
+                false;
+        }
+    }
 
     #end
 

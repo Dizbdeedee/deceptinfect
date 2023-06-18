@@ -3,6 +3,7 @@ package deceptinfect.util;
 import deceptinfect.game.GameSystem;
 #if server
 class TimeKeep<T:Int> {
+
 	var times:Map<T, Float> = [];
 	var limitZero:Bool;
 
@@ -10,9 +11,8 @@ class TimeKeep<T:Int> {
 		this.limitZero = limitZero;
 	}
 
-	public function addTime(key:T):Float {
+	public function addTime(key:T,difftime:Float):Float {
 		initTime(key);
-		var difftime = GameSystem.get().getGameManager().diffTime;
 		times[key] += difftime;
 		return times[key];
 	}
@@ -31,9 +31,8 @@ class TimeKeep<T:Int> {
 		times[key] = 0;
 	}
 
-	public function removeTime(key:T):Float {
+	public function removeTime(key:T,difftime:Float):Float {
 		initTime(key);
-		var difftime = GameSystem.get().diffTime();
 		times[key] -= difftime;
 		managetime(key);
 		return times[key];
@@ -45,8 +44,7 @@ class TimeKeep<T:Int> {
 		}
 	}
 
-	public function removeAllTimes() {
-		var difftime = GameSystem.get().diffTime();
+	public function removeAllTimes(difftime:Float) {
 		for (key in times.keys()) {
 			times[key] -= difftime;
 			managetime(key);

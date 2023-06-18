@@ -2,11 +2,10 @@ package deceptinfect.ecswip;
 
 import deceptinfect.game.ClientTranslateSystem;
 
-
 typedef FieldsChangedData = {
-    ent : DI_ID,
     comp : ReplicatedComponent
 }
+
 @:autoBuild(deceptinfect.macros.ReplicatedComponentMacro.build())
 abstract class ReplicatedComponent extends Component implements hxbit.Serializable {
 
@@ -16,7 +15,7 @@ abstract class ReplicatedComponent extends Component implements hxbit.Serializab
     private var fieldsChangedTrig:SignalTrigger<FieldsChangedData> = new SignalTrigger();
 
     var fieldsChangedSig:Signal<FieldsChangedData>;
-    
+
     var unreliable:Bool = true;
 
     var fieldsChanged(default,set) = true;
@@ -29,7 +28,6 @@ abstract class ReplicatedComponent extends Component implements hxbit.Serializab
     function set_fieldsChanged(nfc) {
         if (!fieldsChanged && nfc) {
             fieldsChangedTrig.trigger({
-                ent: this.getOwner(),
                 comp: this
             });
         }
@@ -40,11 +38,8 @@ abstract class ReplicatedComponent extends Component implements hxbit.Serializab
         super();
         fieldsChangedSig = fieldsChangedTrig.asSignal();
     }
-    
+
     #end
-
-    
-
 }
 
 //custom targets, i.e people with tag?
@@ -67,5 +62,5 @@ enum SomeTargets {
     CURRENT_PLAYER;
     INFECTED;
     SPECTATORS;
-   
+
 }

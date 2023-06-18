@@ -10,6 +10,7 @@
             "request": "launch",
             "name": "gmdebug : Launch server",
             "serverFolder": "C:\\Users\\g\\Documents\\steamcmd\\steamapps\\common\\GarrysModDS\\garrysmod",
+            "clientFolder": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\GarrysMod\\garrysmod",
             "programArgs": [
                 "+gamemode",
                 "deceptinfect",
@@ -20,11 +21,12 @@
                 "+sv_allowcslua",
                 "1"
             ],
-            "clientFolders": [
-                "C:\\Program Files (x86)\\Steam\\steamapps\\common\\GarrysMod"
-            ],
+            "clients": 2,
+            "addonName": "deceptinfect",
+            "copyAddonBaseFolder": "generated/deceptinfect",
+            //"noCopy": true,
+          
             "programPath": "auto",
-            "autoConnectLocalGmodClient": true
             
         }
     ]

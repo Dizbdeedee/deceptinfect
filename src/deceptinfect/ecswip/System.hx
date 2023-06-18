@@ -6,6 +6,10 @@ class System {
 
 	var onInit:Signal<Noise> = new SignalTrigger().asSignal();
 
+	final systemManager:SystemManager;
+
+	final componentManager:ComponentManager;
+
 	#if client
 	function init_client() {}
 
@@ -22,7 +26,10 @@ class System {
 
 	function run_shared() {}
 
-	public function new() {}
+	public function new(_componentManager:ComponentManager,_systemManager:SystemManager) {
+		systemManager = _systemManager;
+		componentManager = _componentManager;
+	}
 
 	public final function init() {
 		#if client

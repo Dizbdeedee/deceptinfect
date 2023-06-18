@@ -2,11 +2,12 @@ package deceptinfect.game;
 
 import deceptinfect.ecswip.ReplicatedComponent;
 import deceptinfect.ecswip.ClientRepresentationTarget;
+import deceptinfect.macros.ClassToID;
 
 class CRTSystem extends System {
     #if server
     override function init_server() {
-        ComponentManager.addSignal.handle((data) -> {
+        componentManager.addSignal.handle((data) -> {
             if (data.comp is ReplicatedComponent && data.ent.has_comp(ClientRepresentationTarget)
                 && !(data.comp is ClientRepresentationTarget)) {
 
@@ -16,8 +17,8 @@ class CRTSystem extends System {
                 trace("master repl set");
             }
         });
-        ClientRepresentationTarget.getAddSignal().handle((data) -> {
-            for (component in ComponentManager.components_3) {
+        componentManager.getAddSignal(ClassToID.idc(ClientRepresentationTarget)).handle((data) -> {
+            for (component in componentManager.components_3) {
                 if (component.has_component(data.ent)) {
                     final comp = component.get_component(data.ent);
                     if (comp is ReplicatedComponent && !(comp is ClientRepresentationTarget)) {

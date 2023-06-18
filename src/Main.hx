@@ -1,3 +1,5 @@
+import deceptinfect.ecswip.SystemManager.SystemManagerDef;
+import deceptinfect.ecswip.ComponentManager.ComponentManagerDef;
 import deceptinfect.game.GameSystem;
 import haxe.macro.Compiler;
 import sys.FileSystem;
@@ -8,8 +10,6 @@ import tink.CoreApi.Callback;
 import gmod.gclass.Entity;
 import lua.Lua;
 import deceptinfect.lib.BSP;
-import deceptinfect.util.GmodNetHost;
-import deceptinfect.util.GmodNetHost;
 // import hxbit.NetworkHost;
 import gmod.stringtypes.EntityClass;
 import gmod.Gmod;
@@ -37,55 +37,67 @@ import deceptinfect.Spread;
 
 class Main {
 
-	#if server
-	@:expose("startGame")
-	static function startGame(skipSetup:Bool) {
-		forceInfected = false;
-		forceUninfected = false;
-		GameSystem.get().setState(PLAYING); 
-	}
+    public static var forceInfected = false;
 
-	@:expose("startGameInf") 
-	static function startGameInf() {
-		forceUninfected = false;
-		forceInfected = true;
-		GameSystem.get().setState(PLAYING); 
-	}
+    public static var forceUninfected = false;
 
-	@:expose("startGameUninf")
-	static function startGameUnInf() {
-		forceInfected = false;
-		forceUninfected = true;
-		GameSystem.get().setState(PLAYING); 
-	}
+    static var systemManager:SystemManager;
 
-	public static var forceInfected = false;
+    static var componentManager:ComponentManager;
 
-	public static var forceUninfected = false;
+    static var deceptinfect:DeceptInfect;
 
-	#end
+    #if server
+    @:expose("startGame")
+    static function startGame(skipSetup:Bool) {
+        final gameSystem = systemManager.get(GameSystem);
+        forceInfected = false;
+        forceUninfected = false;
+        gameSystem.setState(PLAYING);
+    }
 
-	public static function main() {
-		for (model in Misc.roundModels) {
-			UtilLib.PrecacheModel(model);
-		}
-		new DeceptInfect();
-		#if client
-		new ClientOverrides();
-		#end
-		SignalStorage.initEvents(); //nocheckin GET RID OF THIS!!!
-		SystemManager.initAllSystems();
-		#if server
-		// GameSystem.get().cleanup(); //TODO improve?
-		#end
-		FileLib.CreateDir("deceptinfect");		
-		SpawnSystem.generateSpawns();
-		UtilLib.PrecacheModel(Misc.infModel);
-		#if server
-		GameLib.ConsoleCommand("mp_falldamage 1\n");
-		#end
-		MathLib.randomseed(Gmod.RealTime()); // FIXME
-		trace('Deceptinfect ${#if server "server" #else "client" #end} reinit!');
-	}
+    @:expose("startGameInf")
+    static function startGameInf() {
+        final gameSystem = systemManager.get(GameSystem);
+        forceUninfected = false;
+        forceInfected = true;
+        gameSystem.setState(PLAYING);
+    }
+
+    @:expose("startGameUninf")
+    static function startGameUnInf() {
+        final gameSystem = systemManager.get(GameSystem);
+        forceInfected = false;
+        forceUninfected = true;
+        gameSystem.setState(PLAYING);
+    }
+    #end
+
+    static function precache() {
+        UtilLib.PrecacheModel(Misc.infModel);
+        for (model in Misc.roundModels) {
+            UtilLib.PrecacheModel(model);
+        }
+    }
+
+    public static function main() {
+        // final systemManager = new SystemManagerDef();
+        final componentManager = new ComponentManagerDef();
+        new DeceptInfect(systemManager,componentManager);
+        #if client
+        new ClientOverrides(componentManager,systemManager);
+        #end
+        SignalStorage.initEvents(); //nocheckin GET RID OF THIS!!!
+        systemManager.initAllSystems();
+        #if server
+        // GameSystem.get().cleanup(); //TODO improve?
+        #end
+        FileLib.CreateDir("deceptinfect");
+        #if server
+        GameLib.ConsoleCommand("mp_falldamage 1\n");
+        #end
+        MathLib.randomseed(Gmod.RealTime()); // FIXME
+        trace('Deceptinfect ${#if server "server" #else "client" #end} reinit!');
+    }
 
 }

@@ -5,7 +5,7 @@ import deceptinfect.macros.IterateEnt;
 class LinkedEntitySystem extends System {
 
     override function init_server() {
-        LinkedComponents.getAddSignal().handle((linkedCompData) -> {
+        componentManager.getAddSignal(LinkedComponents).handle((linkedCompData) -> {
             final comp1 = linkedCompData.comp.comp1;
             final comp2 = linkedCompData.comp.comp2;
             if (comp1 == null || comp2 == null) {
@@ -14,16 +14,16 @@ class LinkedEntitySystem extends System {
             }
             var trashCallbacks:Array<CallbackLink>;
             trashCallbacks = [
-                ComponentManager.getRemoveSignal(linkedCompData.comp.comp1.getCompID()).handle((removedData) -> {
+                componentManager.getRemoveSignal(linkedCompData.comp.comp1.getCompID()).handle((removedData) -> {
                     if (removedData.comp == linkedCompData.comp.comp1) {
                         trashCallbacks.map((c) -> c.cancel());
-                        ComponentManager.removeEntity(linkedCompData.ent);
+                        componentManager.removeEntity(linkedCompData.ent);
                     }
                 }),
-                ComponentManager.getRemoveSignal(linkedCompData.comp.comp2.getCompID()).handle((removedData) -> {
+                componentManager.getRemoveSignal(linkedCompData.comp.comp2.getCompID()).handle((removedData) -> {
                     if (removedData.comp == linkedCompData.comp.comp2) {
                         trashCallbacks.map((c) -> c.cancel());
-                        ComponentManager.removeEntity(linkedCompData.ent);
+                        componentManager.removeEntity(linkedCompData.ent);
                     }
                 })
             ];

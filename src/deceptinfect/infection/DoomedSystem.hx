@@ -6,6 +6,7 @@ import deceptinfect.game.GameSystem;
 import deceptinfect.infection.components.DoomTarget;
 import deceptinfect.infection.components.Doomed;
 import deceptinfect.ecswip.ReplicatedEntity;
+import deceptinfect.macros.ClassToID;
 
 class DoomedSystem extends System {
 
@@ -13,7 +14,7 @@ class DoomedSystem extends System {
 
     #if client
     override function init_client() {
-        DoomClient.getAddSignal().handle((doom) -> {
+        componentManager.getAddSignal(ClassToID.idc(DoomClient)).handle((doom) -> {
             SurfaceLib.PlaySound(sound);
         });
     }
@@ -26,9 +27,11 @@ class DoomedSystem extends System {
 
     #if server
     override function run_server() {
+        final infectionSystem = systemManager.get(InfectionSystem);
+        final gameSystem = systemManager.get(GameSystem);
         IterateEnt.iterGet([InfectionComponent], [{infection : inf}],function (vic) {
             if (vic.has_comp(Doomed) || vic.has_comp(DoomTarget)) continue;
-            
+
             switch (inf) {
                 case NOT_INFECTED({value : inf}):
                     if (inf > GameValues.DOOM_THRESHOLD_MIN && inf < GameValues.DOOM_THRESHOLD_MAX) {
@@ -41,10 +44,10 @@ class DoomedSystem extends System {
         IterateEnt.iterGet([DoomTarget,InfectionComponent],[c_dt,{rate: rate, infection : inf}],function (victim) {
             if (victim.has_comp(Doomed)) continue;
             c_dt.idleTime += if (rate > GameValues.DOOM_IDLE_THRESHOLD) {
-                -GameSystem.get().diffTime();
+                gameSystem.diffTime();
             } else {
                 trace("doom++");
-                GameSystem.get().diffTime();
+                gameSystem.diffTime();
             }
             if (c_dt.idleTime < 0) {
                 c_dt.idleTime = 0;
@@ -59,7 +62,7 @@ class DoomedSystem extends System {
         IterateEnt.iterGet([Doomed],[{doomTime : deth}],function (victim) {
             if (victim.has_comp(InfectedComponent)) continue;
             if (Gmod.CurTime() > deth) {
-                InfectionSystem.get().makeInfected(victim);
+                infectionSystem.makeInfected(victim);
             }
         });
     }
