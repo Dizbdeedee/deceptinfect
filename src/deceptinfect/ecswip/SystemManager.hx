@@ -39,114 +39,18 @@ interface SystemManager {
     function destroySystems():Void;
 }
 
-class SystemManagerDef {
+class SystemManagerDef implements SystemManager {
 
     var getSystems:ObjectMap<Class<Dynamic>, System> = new ObjectMap();
 
-    var runSystems(default, null):Array<Class<Dynamic>> = [
-        GameSystem,
-        GameInProgressSystem,
-        RunUntilDoneSystem,
-        InfectionSystem,
-        GeigerSystem,
-        RadiationSystem,
-        GrabSystem,
-        HiddenHealthSystem,
-        WinSystem,
-        BatterySystem,
-        SpawnSystem,
-        WalkthroughSystem,
-        NestSystem,
-        EvacSystem,
-        RagdollSystem,
-        SlowMotionSystem,
-        // Spread,
-        InfectionLookSystem,
-        // ContaminationSystem, // Problem!
-        RadSourceSystem,
-        LowHealthSystem,
-        ScannerSystem,
-        DarkenSystem,
-        CRTSystem,
-        deceptinfect.game.BatteryInfoSystem,
-        InfectionPointsSystem,
-        // DoomedSystem,
-        // WeaponSystem,
-        DummySystem,
-        ClientTranslateSystem
+    var runSystems(default, null):Array<Class<Dynamic>>;
 
-    ];
+    var initSystems(default, null):Array<Class<Dynamic>>;
 
-    var initSystems(default, null):Array<Class<Dynamic>> = [
-        ClientTranslateSystem,
-        GameInProgressSystem,
-        deceptinfect.game.BatteryInfoSystem,
-        GameSystem,
-        RunUntilDoneSystem,
-        InfectionSystem,
-        GeigerSystem,
-        RadiationSystem,
-        GrabSystem,
-        HiddenHealthSystem,
-        WinSystem,
-        BatterySystem,
-        SpawnSystem,
-        // WalkthroughSystem, needs a rework anyway
-        NestSystem,
-        EvacSystem,
-        RagdollSystem,
-        SlowMotionSystem,
-        InfectionLookSystem,
-
-        // RadSourceSystem,
-        // LowHealthSystem,
-        // ScannerSystem
-        // ,DarkenSystem,
-        CRTSystem,
-        // InfectionPointsSystem,
-        // DoomedSystem,
-        //WeaponSystem
-        DummySystem,
-        // DoomedSystem
-    ];
-
-    public function new(arr:Map<Class<System>, System>) {
-        // getSystems = arr;
-
-    }
-
-    function make() {
-        // getSystems.set(RunUntilDoneSystem, new RunUntilDoneSystem());
-        // getSystems.set(GameSystem, new GameSystem());
-        // getSystems.set(GameInProgressSystem, new GameInProgressSystem());
-        // getSystems.set(InfectionSystem, new InfectionSystem());
-        // getSystems.set(GeigerSystem, new GeigerSystem());
-        // getSystems.set(RadiationSystem, new RadiationSystem());
-        // getSystems.set(GrabSystem, new GrabSystem());
-        // getSystems.set(HiddenHealthSystem, new HiddenHealthSystem());
-        // getSystems.set(WinSystem, new WinSystem());
-        // getSystems.set(BatterySystem, new BatterySystem());
-        // getSystems.set(SpawnSystem, new SpawnSystem());
-        // getSystems.set(WalkthroughSystem, new WalkthroughSystem());
-        // getSystems.set(NestSystem, new NestSystem());
-        // getSystems.set(EvacSystem, new EvacSystem());
-        // getSystems.set(RagdollSystem, new RagdollSystem());
-        // getSystems.set(SlowMotionSystem, new SlowMotionSystem());
-        // getSystems.set(InfectionLookSystem, new InfectionLookSystem());
-        // getSystems.set(ContaminationSystem, new ContaminationSystem());
-        // getSystems.set(RadSourceSystem, new RadSourceSystem());
-        // getSystems.set(LowHealthSystem, new LowHealthSystem());
-        // getSystems.set(ScannerSystem, new ScannerSystem());
-        // getSystems.set(WeaponSystem, new WeaponSystem());
-        // getSystems.set(DummySystem, new DummySystem());
-        // getSystems.set(Spread, new Spread());
-        // getSystems.set(ClientTranslateSystem,new ClientTranslateSystem());
-        // getSystems.set(DarkenSystem, new DarkenSystem());
-        // getSystems.set(CRTSystem, new CRTSystem());
-        // getSystems.set(deceptinfect.game.BatteryInfoSystem, new BatteryInfoSystem());
-        // getSystems.set(InfectionPointsSystem, new InfectionPointsSystem());
-        // getSystems.set(DoomedSystem, new DoomedSystem());
-
+    public function new(_initSystems:Array<Class<Dynamic>>,_runSystems:Array<Class<Dynamic>>,_makeSystems:(systemManager:SystemManager) -> haxe.ds.ObjectMap<Class<Dynamic>, System>) {
+        initSystems = _initSystems;
+        runSystems = _runSystems;
+        getSystems = _makeSystems(this);
     }
 
     public function getSystem<T:System>(cls:Class<T>):T {
@@ -189,7 +93,6 @@ class SystemManagerDef {
     }
 
     public function initAllSystems() {
-        make();
         for (clsSystem in initSystems) {
             getSystems.get(clsSystem).init();
         }

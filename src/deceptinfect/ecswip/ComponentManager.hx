@@ -168,7 +168,6 @@ abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) to lua.Table<Int,C
 
     public function new() {
         this = new LuaArray();
-
     }
 
     @:op([])
@@ -252,7 +251,9 @@ class ComponentManagerDef implements ComponentManager {
     public final removeEntitySignal:Signal<RemoveEntitySignalData>;
 
     public function new() {
-        components_3 = HookLib.Run("di_createComponentsTable",new ComponentStorage());
+        var components = new ComponentStorage();
+        HookLib.Run("di_createComponentsTable",components);
+        components_3 = components;
         componentsName = new Map();
         removeSignal = removeSignalTrig.asSignal();
         addSignal = addSignalTrig.asSignal();

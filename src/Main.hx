@@ -81,17 +81,14 @@ class Main {
     }
 
     public static function main() {
-        // final systemManager = new SystemManagerDef();
         final componentManager = new ComponentManagerDef();
+        final systemManager = new SystemManagerDef(InitSystems.initSystemsArr(),InitSystems.runSystemsArr(),InitSystems.makeSystems.bind(componentManager));
         new DeceptInfect(systemManager,componentManager);
         #if client
         new ClientOverrides(componentManager,systemManager);
         #end
-        SignalStorage.initEvents(); //nocheckin GET RID OF THIS!!!
+        SignalStorage.initEvents(); //
         systemManager.initAllSystems();
-        #if server
-        // GameSystem.get().cleanup(); //TODO improve?
-        #end
         FileLib.CreateDir("deceptinfect");
         #if server
         GameLib.ConsoleCommand("mp_falldamage 1\n");

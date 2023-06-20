@@ -16,10 +16,10 @@ class ComponentMacro {
             case TInst(_.get() => typ, _):
                 typ;
             default:
-                throw "not a class";
+                Context.error("Not a class",Context.currentPos());
         }
         final typ = Context.toComplexType(Context.getLocalType());
-        final initexpr = macro gmod.libs.HookLib.Add("di_createComponentsTable",$v{hookid++},(ct:deceptinfect.ecswip.ComponentManager.ComponentStorage) -> ct.initComponent($v{id},$v{clsType.name}));
+        final initexpr = macro gmod.libs.HookLib.Add("di_createComponentsTable",$v{Std.string(hookid++)},(ct:deceptinfect.ecswip.ComponentManager.ComponentStorage) -> ct.initComponent($v{id},$v{clsType.name}));
         fields.push({
             name: "componentName",
             access: [AFinal, APublic, AStatic, AInline],

@@ -18,8 +18,8 @@ class Spectate {
             }
             specNext += dir;
             if (specNext < 1) {
-                specNext = players.length;
-            } else if (specNext > players.length) {
+                specNext = players.length();
+            } else if (specNext > players.length()) {
                 specNext = 0;
             }
         }

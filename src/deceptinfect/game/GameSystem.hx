@@ -24,20 +24,75 @@ using deceptinfect.util.PlayerExt;
 
 import deceptinfect.GameManager2.GAME_STATE_2;
 
-class GameSystem extends System {
+interface GameSystemI {
+    function gameManagerAvaliable():Bool;
+    function getGameManager():GameManager2;
+    function setState(newState:GAME_STATE_2):Void;
+    function diffTime():Float;
+    function beginInfected(ent:DI_ID):Void;
+    function cleanup():Void;
+    function isPlaying():Bool;
+    function thinkWait():Void;
+    function shouldAllowRespawn():Bool;
+}
+
+class GameSystem extends System implements GameSystemI {
+
+    public function gameManagerAvaliable() {
+        return false;
+    }
+
+    public function getGameManager() {
+        trace("getGameManager - not implemented");
+        return null;
+    }
+
+    public function setState(newState:GAME_STATE_2) {
+        trace("setState - not implemented");
+    }
+
+    public function diffTime() {
+        trace("diffTime - not implemented");
+        return 0.0;
+    }
+
+    public function beginInfected(ent:DI_ID):Void {
+        trace("beginInfected - not implemented");
+    }
+
+    public function cleanup():Void {
+        trace("cleanup - not implemented");
+    }
+
+    public function isPlaying() {
+        trace("isPlaying - not implemented");
+        return false;
+    }
+    public function thinkWait() {
+        trace("thinkWait - not implemented");
+    }
+
+    public function shouldAllowRespawn() {
+        trace("shouldAllowRespawn - not implemented");
+        return false;
+    }
+
+}
+
+class GameSystemDef extends GameSystem {
 
     var gameManager:GameManager2;
 
     var signalTrig:SignalTrigger<GAME_STATE_2> = new SignalTrigger();
 
-    public function gameManagerAvaliable() {
+    public override function gameManagerAvaliable() {
         IterateEnt.iterGet([GameManager2],[gameManager],function () {
             return true;
         });
         return false;
     }
 
-    public function getGameManager() {
+    public override function getGameManager() {
         IterateEnt.iterGet([GameManager2],[gameManager],function () {
             return gameManager;
         });
@@ -81,8 +136,7 @@ class GameSystem extends System {
         return new GameInProgress();
     }
 
-
-    public function setState(newState:GAME_STATE_2) {
+    public override function setState(newState:GAME_STATE_2) {
         final manager = getGameManager();
         manager.state = stateTransition(newState);
 
@@ -103,10 +157,8 @@ class GameSystem extends System {
             case [WAIT, SETTING_UP(t)]:
                 time = t;
             case [PLAYING,ENDING(t)]:
-
                 time = t;
             case [PLAYING,PLAYING]:
-
                 cleanup();
                 playing();
                 //spawn
@@ -155,17 +207,14 @@ class GameSystem extends System {
             TimerLib.Simple(0.1, () -> player.Give(Misc.startingWeapons[0]));
             player.giveFullAmmo();
             player.Spawn();
-
-        } //durr
-
-
+        }
     }
 
-    public function diffTime() {
+    public override function diffTime() {
         return getGameManager().diffTime;
     }
 
-    public function beginInfected(ent:DI_ID) {
+    public override function beginInfected(ent:DI_ID) {
         final radSourceSystem = systemManager.get(RadSourceSystem);
         ent.add_component(new InfectedComponent());
         ent.add_component(new GrabProducer());
@@ -231,7 +280,7 @@ class GameSystem extends System {
         setState(ENDING(Gmod.CurTime() + 10));
     }
 
-    public function cleanup() {
+    public override function cleanup() {
         final clientTranslateSystem = systemManager.get(ClientTranslateSystem);
         IterateEnt.iterGet([CleanupEnt,GEntityComponent],[_,{entity : ent}],function () {
             ent.Remove();
@@ -262,7 +311,7 @@ class GameSystem extends System {
     }
 
 
-    public function isPlaying() {
+    public override function isPlaying() {
         return switch(gameManager.state) {
             case PLAYING:
                 true;
@@ -271,14 +320,14 @@ class GameSystem extends System {
         }
     }
 
-    public function thinkWait() {
+    public override function thinkWait() {
         if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS) {
             setState(SETTING_UP(Gmod.CurTime() + GameValues.SETUP_TIME));
         }
     }
 
 
-    public function shouldAllowRespawn() {
+    public override function shouldAllowRespawn() {
         return switch (gameManager.state) {
             case WAIT | SETTING_UP(_):
                 true;
