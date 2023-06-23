@@ -41,7 +41,7 @@ function initSystemsArr():Array<Class<Dynamic>> {
         GameSystem,
         RunUntilDoneSystem,
         InfectionSystem,
-        // GeigerSystem,
+        GeigerSystem,
         // RadiationSystem,
         // GrabSystem,
         // HiddenHealthSystem,
@@ -77,7 +77,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
         GameInProgressSystem,
         RunUntilDoneSystem,
         InfectionSystem,
-        // GeigerSystem,
+        GeigerSystem,
         // RadiationSystem,
         // GrabSystem,
         // HiddenHealthSystem,
@@ -121,7 +121,8 @@ function makeSystems(componentManager:ComponentManager,systemManager:SystemManag
     #if client
     map.set(Hud, new Hud(componentManager,systemManager));
     #end
-    map.set(RagdollSystem, new RagdollSystem(componentManager, systemManager);
+    map.set(GeigerSystem, new GeigerSystem(componentManager,systemManager));
+    map.set(RagdollSystem, new RagdollSystem(componentManager, systemManager));
     // map.set(RadSourceSystem, new
     map.set(CRTSystem, new CRTSystem(componentManager,systemManager));
     map.set(ClientTranslateSystem, new ClientTranslateSystem(componentManager,systemManager));

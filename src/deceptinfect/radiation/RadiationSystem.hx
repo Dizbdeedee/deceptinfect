@@ -56,7 +56,6 @@ class RadiationSystem extends System {
                 } : LinkedComponents));
             });
         });
-
     }
 
     static final sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;

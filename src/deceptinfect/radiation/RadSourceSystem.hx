@@ -7,6 +7,7 @@ import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.statuses.Contaminated;
 
 class RadSourceSystem extends System {
+
     #if server
     override function run_server() {
         for (x in 0...componentManager.entities) {

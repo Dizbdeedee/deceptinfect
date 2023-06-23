@@ -10,6 +10,7 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 import gmod.gclass.Vector;
+
 #if client
 class ClientOverrides extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> {
 

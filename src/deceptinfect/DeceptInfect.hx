@@ -122,8 +122,10 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 
     #if server
     function playerDeath(victim:GPlayerCompat) {
-        victim.id.remove_component(AliveComponent);
+        victim.id.remove_component(AliveComponent); //deprecated
         victim.id.remove_component(GrabAccepter);
+        victim.id.remove_component(deceptinfect.game.components.Player);
+        victim.id.add_component(new deceptinfect.game.components.NotInRoundPlayer());
         var sounds = Misc.deathSounds.get(HUMAN_MALE);
         var sound = sounds[MathLib.random(0, sounds.length - 1)];
         victim.EmitSound(sound, 0, null, 0);
@@ -167,6 +169,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 
     override function PlayerDisconnected(ply:GPlayerCompat) {
         ply.id.remove_component(PlayerComponent);
+        ply.id.remove_component(deceptinfect.game.components.Player);
         ply.id.remove_component(GEntityComponent);
         //previous player component?
     }
