@@ -64,6 +64,10 @@ class RagdollSystem extends System {
     static var ranonce = false;
 
     override function init_client() {
+        HookLib.Add(NotifyShouldTransmit,"di_ragdolltransmit",() -> {
+            PVS.pvs.set(ent.EntIndex(), shouldtransmit);
+            systemManager.getSystem(RagdollSystem).pvsChange(ent, shouldtransmit);
+        });
         statue.signal.handle(newStatue);
         raginfo.signal.handle(recvraginfo);
         statueinfo.signal.handle(recvstatinfo);

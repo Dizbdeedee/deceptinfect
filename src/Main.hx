@@ -87,7 +87,8 @@ class Main {
         #if client
         new ClientOverrides(componentManager,systemManager);
         #end
-        SignalStorage.initEvents(); //
+        HookLib.Add("di_setupgplayercompat","setup",() -> {componentManager: componentManager, systemManager: systemManager});
+        HookLib.Add("di_setupgentcompat","setup",() -> {componentManager: componentManager, systemManager: systemManager});
         systemManager.initAllSystems();
         FileLib.CreateDir("deceptinfect");
         #if server

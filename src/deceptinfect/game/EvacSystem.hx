@@ -51,6 +51,7 @@ class EvacSystem extends System {
                 break;
             });
             switch [ent.get(EvacZone), state] {
+                case [_,null]:
                 case [Comp(c_evac), PLAYING]:
                     if (infectionSystem.getAverageInfection() > 80 && !flaresSpawned) {
                         var flareSpawn = spawnSystem.obj.getRandom();

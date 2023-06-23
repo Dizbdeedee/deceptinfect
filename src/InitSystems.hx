@@ -29,6 +29,9 @@ import deceptinfect.WeaponSystem;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.ecswip.System;
+#if client
+import deceptinfect.client.Hud;
+#end
 
 function initSystemsArr():Array<Class<Dynamic>> {
     return [
@@ -48,7 +51,7 @@ function initSystemsArr():Array<Class<Dynamic>> {
         // WalkthroughSystem, //needs a rework anyway
         // NestSystem,
         EvacSystem,
-        // RagdollSystem,
+        RagdollSystem,
         // SlowMotionSystem,
         InfectionLookSystem,
 
@@ -57,6 +60,9 @@ function initSystemsArr():Array<Class<Dynamic>> {
         // ScannerSystem,
         // DarkenSystem,
         CRTSystem,
+        #if client
+        Hud
+        #end
         // InfectionPointsSystem,
         // DoomedSystem,
         // WeaponSystem
@@ -81,7 +87,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
         // WalkthroughSystem,
         // NestSystem,
         EvacSystem,
-        // RagdollSystem,
+        RagdollSystem,
         // SlowMotionSystem,
         // Spread,
         InfectionLookSystem,
@@ -91,6 +97,9 @@ function runSystemsArr():Array<Class<Dynamic>> {
         // ScannerSystem,
         // DarkenSystem,
         CRTSystem,
+        #if client
+        Hud,
+        #end
         // deceptinfect.game.BatteryInfoSystem,
         // InfectionPointsSystem,
         // DoomedSystem,
@@ -102,13 +111,17 @@ function runSystemsArr():Array<Class<Dynamic>> {
 
 function makeSystems(componentManager:ComponentManager,systemManager:SystemManager) {
     var map = new haxe.ds.ObjectMap<Class<Dynamic>,System>();
-    map.set(GameSystem, new GameSystem(componentManager,systemManager));
+    map.set(GameSystem, new GameSystemDef(componentManager,systemManager));
     map.set(GameInProgressSystem, new GameInProgressSystem(componentManager,systemManager));
     map.set(RunUntilDoneSystem, new RunUntilDoneSystem(componentManager,systemManager));
     map.set(InfectionSystem, new InfectionSystem(componentManager,systemManager));
     map.set(WinSystem, new WinSystem(componentManager,systemManager));
     map.set(InfectionLookSystem, new InfectionLookSystem(componentManager,systemManager));
-    map.set(EvacSystem, new EvacSystem(componentManager,systemManager);
+    map.set(EvacSystem, new EvacSystem(componentManager,systemManager));
+    #if client
+    map.set(Hud, new Hud(componentManager,systemManager));
+    #end
+    map.set(RagdollSystem, new RagdollSystem(componentManager, systemManager);
     // map.set(RadSourceSystem, new
     map.set(CRTSystem, new CRTSystem(componentManager,systemManager));
     map.set(ClientTranslateSystem, new ClientTranslateSystem(componentManager,systemManager));

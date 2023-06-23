@@ -41,13 +41,14 @@ abstract ComponentID<T:Component>(Int) from Int to Int {
 }
 
 
-abstract Component_<T:Component>(LuaArray<Dynamic>) {
+@:forward
+abstract Component_<T:Component>(LuaArrayExt<Dynamic>) {
 
-    public var external(get,set):LuaArray<Int>;
+    public var external(get,set):LuaArrayExt<Int>;
 
-    public var internal(get,set):LuaArray<Int>;
+    public var internal(get,set):LuaArrayExt<Int>;
 
-    public var components(get,set):LuaArray<Component>;
+    public var components(get,set):LuaArrayExt<Component>;
 
     public var signalAdd(get,set):SignalTrigger<CompAddSignalData<Component>>;
 
@@ -58,15 +59,19 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
     inline function get_external() {
         return this[1];
     }
+
     inline function get_internal() {
         return this[2];
     }
+
     inline function get_components() {
         return this[3];
     }
+
     inline function get_n() {
         return this[4];
     }
+
     inline function get_n_entities() {
         return this[5];
     }
@@ -79,34 +84,39 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
         return this[7];
     }
 
-    inline function set_external(x:LuaArray<Int>) {
+    inline function set_external(x:LuaArrayExt<Int>) {
         return this[1] = x;
     }
-    inline function set_internal(x:LuaArray<Int>) {
+
+    inline function set_internal(x:LuaArrayExt<Int>) {
         return this[2] = x;
     }
-    inline function set_components(x:LuaArray<Component>) {
+
+    inline function set_components(x:LuaArrayExt<Component>) {
         return this[3] = x;
     }
+
     inline function set_n(x:Int) {
         return this[4] = x;
     }
+
     inline function set_n_entities(x:Int) {
         return this[5] = x;
     }
+
     inline function set_signalAdd(x:Signal<Dynamic>) {
         return this[6] = x;
     }
+
     inline function set_signalRemove(x:Signal<Dynamic>) {
         return this[7] = x;
     }
 
-
     public function new() {
-        this = new LuaArray();
-        external = new LuaArray();
-        internal = new LuaArray();
-        components = new LuaArray();
+        this = new LuaArrayExt();
+        external = new LuaArrayExt();
+        internal = new LuaArrayExt();
+        components = new LuaArrayExt();
         signalAdd = new SignalTrigger();
         signalRemove = new SignalTrigger();
         n = 1;
@@ -133,7 +143,10 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
     }
 
     public function set_component(x:DI_ID,comp:Component) {
+        trace(components[external[x]]);
+        trace(comp);
         components[external[x]] = comp;
+        trace(components[external[x]]);
         signalAdd.trigger({ent: x, comp: comp});
     }
 
@@ -167,7 +180,7 @@ abstract Component_<T:Component>(LuaArray<Dynamic>) {
 abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) to lua.Table<Int,Component_<Dynamic>> {
 
     public function new() {
-        this = new LuaArray();
+        this = new LuaArrayExt();
     }
 
     @:op([])
@@ -175,6 +188,7 @@ abstract ComponentStorage(lua.Table<Int,Component_<Dynamic>>) to lua.Table<Int,C
     @:op([])
     function set(x:Int,v:Component_<Dynamic>):Component_<Dynamic>;
 
+    //incorrect
     public extern inline function get_component<T:Component>(x:ComponentID<T>):Component_<T> {
         return cast this[x];
     }
