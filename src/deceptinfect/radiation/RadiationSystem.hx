@@ -87,14 +87,6 @@ class RadiationSystem extends System {
 
     #end
 
-    // :(
-    // @:expose("testRadiation")
-    // static function testRadiation(vec:Vector) {
-    //     var ent = componentManager.addEntity();
-    //     ent.add_component(new VirtualPosition(REAL(vec, new Angle(0, 0, 0))));
-    //     // ent.add_component(RadiationProducer.createFromType(RadTypes.NEST));
-    // }
-
     static function getTotalRadiation(dist:DistSquared, rad:RadiationProducer):Float {
         return if (dist < rad.radius) {
             (rad.maxrate) * ((rad.radius - dist) / rad.radius);

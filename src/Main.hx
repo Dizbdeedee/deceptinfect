@@ -81,8 +81,8 @@ class Main {
     }
 
     public static function main() {
-        final componentManager = new ComponentManagerDef();
-        final systemManager = new SystemManagerDef(InitSystems.initSystemsArr(),InitSystems.runSystemsArr(),InitSystems.makeSystems.bind(componentManager));
+        componentManager = new ComponentManagerDef();
+        systemManager = new SystemManagerDef(InitSystems.initSystemsArr(),InitSystems.runSystemsArr(),InitSystems.makeSystems.bind(componentManager));
         new DeceptInfect(systemManager,componentManager);
         #if client
         new ClientOverrides(componentManager,systemManager);

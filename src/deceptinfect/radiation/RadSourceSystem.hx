@@ -105,7 +105,6 @@ class RadSourceSystem extends System {
                 c_rv.affectedtype.remove(c_rs.type);
             default:
         }
-
         radsource.remove_component(VirtualPosition);
     }
 

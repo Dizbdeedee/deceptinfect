@@ -101,7 +101,6 @@ class GameSystemDef extends GameSystem {
 
     #if server
     override function init_server() {
-
         var ent = componentManager.addEntity();
         gameManager = new GameManager2();
         gameManager.stateChanged = signalTrig.asSignal();

@@ -47,9 +47,6 @@ class WinSystem extends System {
 
     override function run_server() {
         var playing = false;
-        IterateEnt.iterGet([GameManager2],[{state : s}], function () {
-            // trace(s);
-        });
         IterateEnt.iterGet([GameManager2],[{state : PLAYING}],function () {
             playing = true;
             break;
@@ -70,12 +67,12 @@ class WinSystem extends System {
         }
         PrintTimer.print_time(15, () -> trace('Infected : $infected total : $total'));
         if (infected == 0) {
-            trace("Debug human");
+            PrintTimer.print_time(2, () -> trace("Debug human"));
             winTrig.trigger(WIN_HUMAN);
             winTrig.clear();
             return;
         } else if (infected >= total) {
-            trace("Debug infected");
+            PrintTimer.print_time(2, () -> trace("Debug infected"));
             winTrig.trigger(WIN_INF);
             winTrig.clear();
             return;

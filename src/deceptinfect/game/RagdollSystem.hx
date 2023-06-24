@@ -17,7 +17,6 @@ import deceptinfect.infection.components.InfectedComponent;
 import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.game.components.RagInfo;
-// import deceptinfect.ecswip.ComponentManager.entities;
 
 typedef ND_Statue = {
     playerpos:Vector,
@@ -54,6 +53,7 @@ typedef ND_RagInfo = {
     cause:Int
 }
 
+//TODO rework...
 class RagdollSystem extends System {
     static var statue = new gmod.helpers.net.NET_Server<"statue", ND_Statue>(); // TODO remove
 
@@ -64,8 +64,8 @@ class RagdollSystem extends System {
     static var ranonce = false;
 
     override function init_client() {
-        HookLib.Add(NotifyShouldTransmit,"di_ragdolltransmit",() -> {
-            systemManager.getSystem(RagdollSystem).pvsChange(ent, shouldtransmit);
+        HookLib.Add(NotifyShouldTransmit,"di_ragdolltransmit",(ent, shouldTransmit) -> {
+            systemManager.getSystem(RagdollSystem).pvsChange(ent, shouldTransmit);
         });
         statue.signal.handle(newStatue);
         raginfo.signal.handle(recvraginfo);
@@ -106,7 +106,6 @@ class RagdollSystem extends System {
         c_statinfo.health = x.health;
         c_statinfo.inf = x.inf;
         c_statinfo.name = x.name;
-        // trace(x.name);
     }
 
     public function pvsChange(ent:GEntCompat, shouldTransmit:Bool) {
@@ -129,27 +128,21 @@ class RagdollSystem extends System {
         var rag = Gmod.ClientsideModel(x.playermodel);
         var wep = Gmod.ClientsideModel(x.weaponmodel);
         rag.SetPos(x.playerpos);
-        // rag.SetupBones();
         rag.AddCallback("BuildBonePositions", function(rag:Entity, numbones:Int) {
             for (boneid in 0...numbones) {
                 if (x.playerbones[boneid] == null) {
                     var bp = rag.GetBonePosition(boneid);
                     var offset = bp.a - rag.GetBonePosition(0).a;
-                    // var offset2 = bp.b - rag.GetBonePosition(0).b;
-
                     rag.SetBonePosition(boneid, x.playerbones[0] + offset, new Angle(0, 0, 0));
                 }
             }
             var done:Map<Int, Bool> = [];
             for (boneid => vec in x.playerbones) {
                 var ang = x.playerangle[boneid];
-                // trace('$boneid : $vec $ang');
                 done[boneid] = true;
-
                 rag.SetBonePosition(boneid, vec, ang);
             }
         });
-        // rag.SetupBones();
         wep.SetupBones();
         wep.AddEffects(EF_BONEMERGE);
         wep.AddEffects(EF_BONEMERGE_FASTCULL);
@@ -157,16 +150,9 @@ class RagdollSystem extends System {
     }
 
     override function run_client() {
-        // if (ranonce) return;
         for (rag in EntsLib.GetAll()) {
             var mdl:String = rag.GetNWString("showwep");
             if (mdl != null && mdl != "" && untyped rag.showwep == null) {
-                // for (physid in 0...rag.GetPhysicsObjectCount()) {
-                //     var physob = rag.GetPhysicsObjectNum(physid);
-                //     if (IsValid(physob)) {
-                //         physob.EnableMotion(false);
-                //     }
-                // }
                 var _rag = new GEntCompat(rag);
                 var c_stat = new Statue();
                 _rag.id.add_component(c_stat);
@@ -204,7 +190,7 @@ class RagdollSystem extends System {
         final gameSystem = systemManager.get(GameSystem);
         final slowMotionSystem = systemManager.get(SlowMotionSystem);
         gameSystem.getGameManager().stateChanged.handle(stateChange);
-        slowMotionSystem.slowMotionEnd.handle(endSlowMotion);
+        slowMotionSystem.slowMotionEnd.handle(endSlowMotion); //TODO
     }
 
     function endSlowMotion(x:Noise) {

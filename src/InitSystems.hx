@@ -52,10 +52,10 @@ function initSystemsArr():Array<Class<Dynamic>> {
         // NestSystem,
         EvacSystem,
         RagdollSystem,
-        // SlowMotionSystem,
+        SlowMotionSystem,
         InfectionLookSystem,
 
-        // RadSourceSystem,
+        RadSourceSystem,
         // LowHealthSystem,
         // ScannerSystem,
         // DarkenSystem,
@@ -88,11 +88,11 @@ function runSystemsArr():Array<Class<Dynamic>> {
         // NestSystem,
         EvacSystem,
         RagdollSystem,
-        // SlowMotionSystem,
+        SlowMotionSystem,
         // Spread,
         InfectionLookSystem,
         // ContaminationSystem, // Problem!
-        // RadSourceSystem,
+        RadSourceSystem,
         // LowHealthSystem,
         // ScannerSystem,
         // DarkenSystem,
@@ -121,10 +121,17 @@ function makeSystems(componentManager:ComponentManager,systemManager:SystemManag
     #if client
     map.set(Hud, new Hud(componentManager,systemManager));
     #end
+    map.set(FormSystem, new FormSystem(componentManager,systemManager));
     map.set(GeigerSystem, new GeigerSystem(componentManager,systemManager));
     map.set(RagdollSystem, new RagdollSystem(componentManager, systemManager));
-    // map.set(RadSourceSystem, new
+    map.set(SlowMotionSystem, new SlowMotionSystemDef(componentManager, systemManager));
+    map.set(RadSourceSystem, new RadSourceSystem(componentManager, systemManager));
     map.set(CRTSystem, new CRTSystem(componentManager,systemManager));
     map.set(ClientTranslateSystem, new ClientTranslateSystem(componentManager,systemManager));
+    map.set(InfectionPointsSystem, new InfectionPointsSystem(componentManager,systemManager));
+    map.set(DoomedSystem, new DoomedSystem(componentManager,systemManager));
+    map.set(RadiationSystem, new RadiationSystem(componentManager,systemManager));
+    map.set(WeaponSystem, new WeaponSystem(componentManager,systemManager));
+    map.set(BatteryInfoSystem, new BatteryInfoSystem(componentManager,systemManager));
     return map;
 }

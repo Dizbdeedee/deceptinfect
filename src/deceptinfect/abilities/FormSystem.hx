@@ -8,13 +8,13 @@ import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.PlayerComponent;
 
 class FormSystem extends System {
+
     #if server
     public function attemptChangeForm(ent:DI_ID) {
         switch [ent.get(FormComponent), ent.get(GEntityComponent)] {
             case [Comp(c_form), Comp(_.entity => g_ent)]:
                 switch (c_form.cooldown) {
                     case COOLDOWN(time) if (Gmod.CurTime() < time):
-
                     default:
                         c_form.cooldown = ACTIVE;
                 }
