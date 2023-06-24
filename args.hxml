@@ -1,22 +1,22 @@
+-lib hxbit
 -lib safety
 -lib tink_core
 -lib gmodhaxe
 -cp src
--lib hxbit
 -D lua-5.1
 -D lua-vanilla
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
 -D analyzer-optimize
 -D profile
+-D gmod_PreCopyFiles=build
 -D printBuildIdent
 --dce full
 --times
--D gmodAddonFolder="C:\Users\g\Documents\steamcmd\steamapps\common\GarrysModDS\garrysmod\addons"
+# -D gmodAddonFolder=/home/g/gmodDS/garrysmod/addons/
 -D macro-times
 --debug
 
 --macro gmod.helpers.macros.InitMacro.init()
---cmd robocopy /E build/deceptinfect generated
 --cmd haxe -lib gmodhaxe --run gmod.helpers.macros.PostCompileMacro
 -main Main

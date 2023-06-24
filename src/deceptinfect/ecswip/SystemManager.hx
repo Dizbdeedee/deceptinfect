@@ -30,131 +30,75 @@ import deceptinfect.game.GameSystem;
 import deceptinfect.items.ScannerSystem;
 import deceptinfect.WeaponSystem;
 
+//need to keep the old interface :(
+interface SystemManager {
+    function get<T:System>(cls:Class<T>):T;
+    function getSystem<T:System>(cls:Class<T>):Null<T>;
+    function runAllSystems():Void;
+    function initAllSystems():Void;
+    function destroySystems():Void;
+}
 
-class SystemManager {
-	static var getSystems(default, never):ObjectMap<Class<Dynamic>, System> = new ObjectMap();
+class SystemManagerDef implements SystemManager {
 
-	public static var runSystems(default, null):Array<Class<Dynamic>> = [
-		
-		GameSystem, GameInProgressSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
-		RadiationSystem, 
-		GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
-		EvacSystem, RagdollSystem, SlowMotionSystem,
-		// Spread, 
-		InfectionLookSystem, 
-		// ContaminationSystem, // Problem!
-		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
-		CRTSystem,
-		deceptinfect.game.BatteryInfoSystem,
-		InfectionPointsSystem,
-		DoomedSystem,
-		WeaponSystem,DummySystem,
-		ClientTranslateSystem
-		
-	];
+    var getSystems:ObjectMap<Class<Dynamic>, System> = new ObjectMap();
 
-	public static var initSystems(default, null):Array<Class<Dynamic>> = [
-		ClientTranslateSystem, GameInProgressSystem,deceptinfect.game.BatteryInfoSystem,GameSystem, RunUntilDoneSystem, InfectionSystem, GeigerSystem, 
-		
-		RadiationSystem, 
-		GrabSystem, HiddenHealthSystem, WinSystem, BatterySystem, SpawnSystem, WalkthroughSystem, NestSystem,
-		EvacSystem, RagdollSystem, SlowMotionSystem,
-		// Spread, 
-		InfectionLookSystem, 
-		// ContaminationSystem, // Problem!
-		RadSourceSystem, LowHealthSystem, ScannerSystem,DarkenSystem,
-		CRTSystem,
-		InfectionPointsSystem,
-		DoomedSystem,
-		WeaponSystem,DummySystem,
-		DoomedSystem
-	];
+    var runSystems(default, null):Array<Class<Dynamic>>;
 
-	static function make() {
-		getSystems.set(RunUntilDoneSystem, new RunUntilDoneSystem());
-		getSystems.set(GameSystem, new GameSystem());
-		getSystems.set(GameInProgressSystem, new GameInProgressSystem());
-		getSystems.set(InfectionSystem, new InfectionSystem());
-		getSystems.set(GeigerSystem, new GeigerSystem());
-		getSystems.set(RadiationSystem, new RadiationSystem());
-		getSystems.set(GrabSystem, new GrabSystem());
-		getSystems.set(HiddenHealthSystem, new HiddenHealthSystem());
-		getSystems.set(WinSystem, new WinSystem());
-		getSystems.set(BatterySystem, new BatterySystem());
-		getSystems.set(SpawnSystem, new SpawnSystem());
-		getSystems.set(WalkthroughSystem, new WalkthroughSystem());
-		getSystems.set(NestSystem, new NestSystem());
-		getSystems.set(EvacSystem, new EvacSystem());
-		getSystems.set(RagdollSystem, new RagdollSystem());
-		getSystems.set(SlowMotionSystem, new SlowMotionSystem());
-		getSystems.set(InfectionLookSystem, new InfectionLookSystem());
-		getSystems.set(ContaminationSystem, new ContaminationSystem());
-		getSystems.set(RadSourceSystem, new RadSourceSystem());
-		getSystems.set(LowHealthSystem, new LowHealthSystem());
-		getSystems.set(ScannerSystem, new ScannerSystem());
-		getSystems.set(WeaponSystem, new WeaponSystem());
-		getSystems.set(DummySystem, new DummySystem());
-		getSystems.set(Spread, new Spread());
-		getSystems.set(ClientTranslateSystem,new ClientTranslateSystem());
-		getSystems.set(DarkenSystem, new DarkenSystem());
-		getSystems.set(CRTSystem, new CRTSystem());
-		getSystems.set(deceptinfect.game.BatteryInfoSystem, new BatteryInfoSystem());
-		getSystems.set(InfectionPointsSystem, new InfectionPointsSystem());
-		getSystems.set(DoomedSystem, new DoomedSystem());
+    var initSystems(default, null):Array<Class<Dynamic>>;
 
-	}
+    public function new(_initSystems:Array<Class<Dynamic>>,_runSystems:Array<Class<Dynamic>>,_makeSystems:(systemManager:SystemManager) -> haxe.ds.ObjectMap<Class<Dynamic>, System>) {
+        initSystems = _initSystems;
+        runSystems = _runSystems;
+        getSystems = _makeSystems(this);
+    }
 
-	public static function getSystem<T:System>(cls:Class<T>):Null<T> {
-		return cast getSystems.get(cls);
-	}
+    public function getSystem<T:System>(cls:Class<T>):T {
+        return cast getSystems.get(cls);
+    }
 
-	public static function getSystem2<T:System>(cls:Class<T>):Option<T> {
-		final result = getSystems.get(cls);
-		return if (getSystems.get(cls) == null) {
-			None;
-		} else {
-			Some(cast result);
-		}
-	}
+    public function get<T:System>(cls:Class<T>):T {
+        return cast getSystems.get(cls);
+    }
 
-	@:expose("getSystem")
-	@:noCompletion
-	static function getSystemExp(name:String) {
-		final result = getSystems.get(Type.resolveClass(name));
-		return if (result == null) {
-			throw 'Can\'t find $name';
-		} else {
-			result;
-		}
-	}
+    @:expose("getSystem")
+    @:noCompletion
+    static function getSystemExt(name:String) {
+        throw "Hmmm, implement this";
+        // final result = getSystems.get(Type.resolveClass(name));
+        // return if (result == null) {
+        //     throw 'getSystemExt: Can\'t find $name';
+        // } else {
+        //     result;
+        // }
+    }
 
-	static var profile:Profiler = new Profiler();
+    static var profile:Profiler = new Profiler();
 
-	public static function runAllSystems() {
-		profile.profile("start", true);
-		for (clsSystem in runSystems) {
-			final name = Type.getClassName(clsSystem);
-			profile.profile(name);
-			getSystems.get(clsSystem).run();
-		}
-		profile.resetprofile();
-		profile.report();
-	}
+    public function runAllSystems() {
+        profile.profile("start", true);
+        for (clsSystem in runSystems) {
+            final name = Type.getClassName(clsSystem);
+            profile.profile(name);
+            getSystems.get(clsSystem).run();
+        }
+        profile.resetprofile();
+        profile.report();
+    }
 
-	@:expose("systemReport")
-	public static function beginReporting() {
-		profile = new Profiler();
-		profile.beginProfiling();
-	}
+    @:expose("systemReport")
+    public static function beginReporting() {
+        profile = new Profiler();
+        profile.beginProfiling();
+    }
 
-	public static function initAllSystems() {
-		make();
-		for (clsSystem in initSystems) {
-			getSystems.get(clsSystem).init();
-		}
-	}
+    public function initAllSystems() {
+        for (clsSystem in initSystems) {
+            getSystems.get(clsSystem).init();
+        }
+    }
 
-	public static function destroySystems() {
-		getSystems.clear();
-	}
+    public function destroySystems() {
+        getSystems.clear();
+    }
 }

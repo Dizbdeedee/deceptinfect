@@ -6,16 +6,23 @@ import deceptinfect.ecswip.GEntityComponent;
 import gmod.helpers.sent.SentBuild;
 
 class Di_ragdoll extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	static final properties:EntFields = {Base: "base_entity"};
+    static final properties:EntFields = {Base: "base_entity"};
 
-	public var owner:Entity;
-	public var id:DI_ID;
+    var componentManager:ComponentManager;
 
-	override function Initialize() {
-		self.SetModel(owner.GetModel());
-		id = new GEntCompat(self).id;
+    var systemManager:SystemManager;
 
-		id.add_component(new Ragdoll());
-		id.add_component(new CleanupEnt());
-	}
+    public var owner:Entity;
+    public var id:DI_ID;
+
+
+    override function Initialize() {
+        var setup:EntSetup = HookLib.Run("di_setupent",this);
+        systemManager = setup.systemManager;
+        componentManager = setup.componentManager;
+        self.SetModel(owner.GetModel());
+        id = new GEntCompat(self).id;
+        id.add_component(new Ragdoll());
+        id.add_component(new CleanupEnt());
+    }
 }

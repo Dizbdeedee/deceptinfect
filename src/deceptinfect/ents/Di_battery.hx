@@ -10,63 +10,69 @@ import deceptinfect.game.BatterySystem;
 
 @:keep
 class Di_battery extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
-	static final properties:EntFields = {
-		Base: "base_anim",
-	}
+    static final properties:EntFields = {
+        Base: "base_anim",
+    }
 
-	#if client
-	override function Draw(flags:Float) {
-		self.DrawModel();
-	}
-	#end
+    var componentManager:ComponentManager;
 
-	#if server
-	var lastplayer:Player = null;
+    var systemManager:SystemManager;
 
-	public var id:DI_ID = null;
+    #if client
+    override function Draw(flags:Float) {
+        self.DrawModel();
+    }
+    #end
 
-	var added = false;
+    #if server
+    var lastplayer:Player = null;
 
-	public var spawnLoc:Spawn;
+    public var id:DI_ID = null;
 
-	override function Initialize() {
-		self.SetModel("models/items/car_battery01.mdl");
-		self.PhysicsInit(SOLID_VPHYSICS);
+    var added = false;
 
-		var physob = self.GetPhysicsObject();
-		if (IsValid(physob)) {
-			physob.Wake();
-		}
-		self.SetUseType(SIMPLE_USE);
-		var ent = new GEntCompat(self);
-		id = ent.id;
-		id.add_component(new BatterySource());
-	}
+    public var spawnLoc:Spawn;
 
-	override function Use(activator:Entity, caller:Entity, useType:Float, value:Float) {
-		if (self.IsPlayerHolding() || !activator.IsPlayer()) {
-			return;
-		}
-		var _activator:Player = cast activator;
-		_activator.PickupObject(self);
-		lastplayer = _activator;
-	}
+    override function Initialize() {
+        var setup:EntSetup = HookLib.Run("di_setupent",this);
+        systemManager = setup.systemManager;
+        componentManager = setup.componentManager;
+        self.SetModel("models/items/car_battery01.mdl");
+        self.PhysicsInit(SOLID_VPHYSICS);
+        var physob = self.GetPhysicsObject();
+        if (IsValid(physob)) {
+            physob.Wake();
+        }
+        self.SetUseType(SIMPLE_USE);
+        var ent = new GEntCompat(self);
+        id = ent.id;
+        id.add_component(new BatterySource());
+    }
 
-	override function Touch(entity:GEntCompat) {
-		// trace(id);
-		if (added) {
-			return;
-		}
-		switch (entity.has_id()) {
-			case Some(otherID):
-				var result = SystemManager.getSystem(BatterySystem).addBattery(id, otherID);
-				if (result) {
-					added = true;
-					trace("Battery added :)");
-					self.Remove();
-				}
-			default:
-		}
-	}
-	#end
+    override function Use(activator:Entity, caller:Entity, useType:Float, value:Float) {
+        if (self.IsPlayerHolding() || !activator.IsPlayer()) {
+            return;
+        }
+        var _activator:Player = cast activator;
+        _activator.PickupObject(self);
+        lastplayer = _activator;
+    }
+
+    override function Touch(entity:GEntCompat) {
+        final batterySystem = systemManager.get(BatterySystem);
+        if (added) {
+            return;
+        }
+        switch (entity.has_id()) {
+            case Some(otherID):
+                var result = batterySystem.addBattery(id, otherID);
+                if (result) {
+                    added = true;
+                    trace("Battery added :)");
+                    self.Remove();
+                }
+            default:
+        }
+    }
+    #end
 }
