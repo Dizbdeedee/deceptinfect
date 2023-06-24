@@ -87,6 +87,7 @@ class RadiationSystem extends System {
 
     #end
 
+
     static function getTotalRadiation(dist:DistSquared, rad:RadiationProducer):Float {
         return if (dist < rad.radius) {
             (rad.maxrate) * ((rad.radius - dist) / rad.radius);

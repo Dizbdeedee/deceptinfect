@@ -243,7 +243,7 @@ class GameSystemDef extends GameSystem {
         final grabaccept = new GrabAccepter();
         final radaccept = new RadiationAccepter({});
         final virpos = new VirtualPosition(ENT(ply));
-        final ply = new deceptinfect.game.components.Player();
+        final ply = new deceptinfect.game.components.GamePlayer();
         p.add_component(infcomp);
         p.add_component(spec);
         p.add_component(rate);

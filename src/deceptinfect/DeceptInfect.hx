@@ -34,6 +34,8 @@ import gmod.helpers.HaxeMultiReturn;
 import gmod.libs.MathLib;
 import gmod.libs.EntsLib;
 import gmod.gclass.Player;
+import deceptinfect.game.components.GamePlayer;
+import deceptinfect.game.components.NotInGamePlayer;
 
 using deceptinfect.util.PlayerExt;
 
@@ -124,8 +126,8 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
     function playerDeath(victim:GPlayerCompat) {
         victim.id.remove_component(AliveComponent); //deprecated
         victim.id.remove_component(GrabAccepter);
-        victim.id.remove_component(deceptinfect.game.components.Player);
-        victim.id.add_component(new deceptinfect.game.components.NotInRoundPlayer());
+        victim.id.remove_component(deceptinfect.game.components.GamePlayer);
+        victim.id.add_component(new deceptinfect.game.components.NotInGamePlayer());
         var sounds = Misc.deathSounds.get(HUMAN_MALE);
         var sound = sounds[MathLib.random(0, sounds.length - 1)];
         victim.EmitSound(sound, 0, null, 0);
@@ -146,6 +148,8 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
         final gameSystem = systemManager.get(GameSystem);
         final gameManager = gameSystem.getGameManager();
         player.SetModel(Misc.roundModels[MathLib.random(0, Misc.roundModels.length - 1)]); // TODO make random models
+        player.SetWalkSpeed(190);
+        player.SetRunSpeed(190);
         player.SetShouldServerRagdoll(true);
         player.ShouldDropWeapon(true);
         player.AllowFlashlight(true);
@@ -169,7 +173,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
 
     override function PlayerDisconnected(ply:GPlayerCompat) {
         ply.id.remove_component(PlayerComponent);
-        ply.id.remove_component(deceptinfect.game.components.Player);
+        ply.id.remove_component(deceptinfect.game.components.GamePlayer);
         ply.id.remove_component(GEntityComponent);
         //previous player component?
     }
@@ -308,7 +312,6 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
         if (IsSpawnpointSuitable(ply, spawns[random_spawn], false)) {
             return spawns[random_spawn];
         }
-        // }
         trace("Could not find a spawn!");
         return null;
     }
@@ -332,17 +335,45 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM> imple
     }
     #end
 
-
-
     override function PlayerSay(sender:Player, text:String, teamChat:Bool):String {
-        return "aaaaple";
+
+        return null;
     }
 
-    override function PlayerCanHearPlayersVoice(listener:Player, talker:Player):HaxeMultiReturn<A_GmPlayerCanHearPlayersVoiceReturn> {
-        return {
-            a: false,
-            b: false
-        };
+    override function PlayerCanHearPlayersVoice(listener:GPlayerCompat, talker:GPlayerCompat):HaxeMultiReturn<A_GmPlayerCanHearPlayersVoiceReturn> {
+        var bothSpec = listener.id.has_comp(NotInGamePlayer) && listener.id.has_comp(NotInGamePlayer);
+        return switch [listener.id.has_comp(GamePlayer),talker.id.has_comp(GamePlayer),bothSpec] {
+            case [true,true,_]:
+               if (listener.GetPos().DistToSqr(talker.GetPos()) < 1210000) {
+                     {
+                        a: true,
+                        b: false
+                     };
+               } else {
+                     {
+                        a: false,
+                        b: false
+                     };
+               }
+            case [_,_,true]:
+                {a:true,b:false};
+            case [false,_,_]:
+                {a:true,b:false};
+            case [_,false,_]:
+                {a:false,b:false};
+            default:
+                {a:false,b:false};
+
+        }
+    }
+
+    override function PlayerCanSeePlayersChat(text,teamOnly,listener:GPlayerCompat,speaker:GPlayerCompat) {
+
+        return if (listener.GetPos().DistToSqr(speaker.GetPos()) > 1210000) {
+            false;
+        } else {
+            true;
+        }
     }
     #end
 }
