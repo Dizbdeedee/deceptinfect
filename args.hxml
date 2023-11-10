@@ -16,7 +16,6 @@
 # -D gmodAddonFolder=/home/g/gmodDS/garrysmod/addons/
 -D macro-times
 --debug
-
 --macro gmod.helpers.macros.InitMacro.init()
---cmd haxe -lib gmodhaxe --run gmod.helpers.macros.PostCompileMacro
+--cmd lix -lib gmodhaxe --run gmod.helpers.macros.PostCompileMacro
 -main Main

@@ -1,5 +1,5 @@
 -lib no-spoon
--cp C:\Users\g\Documents\_FOSSIL\gmodhaxe/src
+-cp ${SCOPE_DIR}/../gmodhaxe/src
 -D gmodhaxe=0.2.3
-C:\Users\g\Documents\_FOSSIL\gmodhaxe/extraParams.hxml
+${SCOPE_DIR}/../gmodhaxe/extraParams.hxml
 --macro Sys.println("haxe_libraries/gmodhaxe.hxml:3: [Warning] Using dev version of library gmodhaxe")
