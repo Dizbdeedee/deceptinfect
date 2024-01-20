@@ -62,4 +62,3 @@ enum ChooseVirPos {
 	ENT(x:Entity);
 	REAL(vec:Vector, ang:Angle);
 }
-

@@ -18,6 +18,8 @@ class Util {
 
 	@:expose("tlookat")
 	public static function getTestLookat() {
-		return PlayerLib.GetByID(1).GetEyeTrace().HitPos;
+		return PlayerLib.GetByID(1)
+			.GetEyeTrace()
+			.HitPos;
 	}
 }

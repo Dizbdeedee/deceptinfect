@@ -4,6 +4,5 @@ import deceptinfect.ecswip.ReplicatedComponent;
 
 @:replicated(SOME(CURRENT_PLAYER))
 class InfectionPoints extends ReplicatedComponent {
-
-    @:s var points:Int = 0;
+	@:s var points:Int = 0;
 }

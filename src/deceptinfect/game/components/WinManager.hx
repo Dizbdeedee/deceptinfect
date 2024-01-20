@@ -2,11 +2,9 @@ package deceptinfect.game.components;
 
 import deceptinfect.game.WinSystem.Win;
 
-@:structInit 
+@:structInit
 class WinManager extends Component {
+	var winSignal:Signal<Win>;
 
-    var winSignal:Signal<Win>;
-
-    var winTrigger:SignalTrigger<Win>;
-
+	var winTrigger:SignalTrigger<Win>;
 }

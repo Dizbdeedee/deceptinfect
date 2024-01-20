@@ -1,9 +1,9 @@
 package deceptinfect.ecswip;
 
 using Safety;
+
 @:autoBuild(deceptinfect.macros.SystemMacro.build())
 class System {
-
 	var onInit:Signal<Noise> = new SignalTrigger().asSignal();
 
 	final systemManager:SystemManager;
@@ -26,7 +26,7 @@ class System {
 
 	function run_shared() {}
 
-	public function new(_componentManager:ComponentManager,_systemManager:SystemManager) {
+	public function new(_componentManager:ComponentManager, _systemManager:SystemManager) {
 		systemManager = _systemManager;
 		componentManager = _componentManager;
 	}
@@ -49,5 +49,4 @@ class System {
 		#end
 		run_shared();
 	}
-
 }

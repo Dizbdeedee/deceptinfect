@@ -28,12 +28,13 @@ class ProxyMacros {
 		final exprArray = fields.filter((field) -> {
 			field.meta != null
 			&& field.meta.exists((item) -> item.name == ":s");
-		}).map((field) -> {
-			final name = field.name;
-			// trace(name);
-			macro comp.$name = x.item.$name;
-		});
-		final netMessage = (macro:{
+		})
+			.map((field) -> {
+				final name = field.name;
+				// trace(name);
+				macro comp.$name = x.item.$name;
+			});
+		final netMessage = (macro :{
 			proxy:deceptinfect.ecswip.ProxyComponent.NetProxy,
 			item:$complexType
 		});
@@ -73,7 +74,8 @@ class ProxyMacros {
 		final expr = macro $p{basePath};
 		final proxyCreatedExists = fields.exists((field) -> field.name == "proxyCreated");
 		// final netProxyName = (macro : "net_proxy$compID")
-		final expr = macro new gmod.helpers.net.NET_Server<"net_proxy", {proxy:deceptinfect.ecswip.ProxyComponent.NetProxy, item:$complexType}>();
+		final expr = macro new gmod.helpers.net.NET_Server<"net_proxy",
+			{proxy:deceptinfect.ecswip.ProxyComponent.NetProxy, item:$complexType}>();
 		switch (expr) {
 			case {expr: ENew({params: arr}, _)}:
 				arr[0] = TPExpr(macro $v{'net_proxy$compID'});

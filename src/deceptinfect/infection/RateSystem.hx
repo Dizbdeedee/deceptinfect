@@ -1,9 +1,5 @@
 package deceptinfect.infection.systems;
 
 class RateSystem extends System {
-
-	override function init_server() {
-		
-	}
-	
+	override function init_server() {}
 }

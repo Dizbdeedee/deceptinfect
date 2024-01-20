@@ -20,9 +20,7 @@ class Profiler {
 
 	final totalPasses:Int = 500;
 
-	public function new() {
-		
-	}
+	public function new() {}
 
 	public function beginProfiling() {
 		pass = 0;
@@ -39,7 +37,8 @@ class Profiler {
 		trace("report");
 		for (pass in vinal) {
 			for (str => time in pass) {
-				total.set(str, total.get(str).or(0.0) + time);
+				total.set(str, total.get(str)
+					.or(0.0) + time);
 			}
 		}
 		for (str => time in total) {
@@ -62,7 +61,8 @@ class Profiler {
 			inital[pass] = [];
 			vinal[pass] = [];
 		}
-		inital[pass].unsafe().set(zone, Gmod.SysTime());
+		inital[pass].unsafe()
+			.set(zone, Gmod.SysTime());
 		lastname = zone;
 		#end
 	}
@@ -71,7 +71,8 @@ class Profiler {
 		#if profile
 		if (profileState != PROFILING)
 			return;
-		final diff = Gmod.SysTime() - inital[pass].get(lastname).unsafe();
+		final diff = Gmod.SysTime() - inital[pass].get(lastname)
+			.unsafe();
 		vinal[pass].set(lastname, diff);
 		cumulativeTime += diff;
 		#end

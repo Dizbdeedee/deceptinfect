@@ -6,7 +6,6 @@ import hxbit.Serializer;
 import deceptinfect.ecswip.Component;
 import deceptinfect.SeralizableRef;
 
-
 @:replicated(SOME(CURRENT_PLAYER))
 class InfectionComponent extends ReplicatedComponent {
 	@:s var infection:INF_STATE = NOT_INFECTED(0.0);
@@ -25,8 +24,6 @@ class InfectionComponent extends ReplicatedComponent {
 				100;
 		}
 	}
-
-
 }
 
 typedef InfectionMessageInfo = {
@@ -50,7 +47,6 @@ enum BaseInfection {
 // @:forward.new
 // @:forward.variance
 // abstract BetterRef<T>(tink.core.Ref<T>) {
-
 // }
 
 enum INF_STATE {

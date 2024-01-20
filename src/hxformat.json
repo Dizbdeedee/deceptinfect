@@ -1,0 +1,37 @@
+{
+    "lineEnds": {
+        "lineEndCharacter": "LF"
+    },
+    "indentation": {
+        "character": "tab",
+        "tabWidth": 4
+    },
+    "wrapping": {
+        "callParameter": {
+            "defaultWrap": "fillLine",
+            "rules": [
+                {
+                "conditions": [
+                    {
+                    "cond": "anyItemLength >= n",
+                    "value": 60
+                    }
+                ],
+                "type": "onePerLineAfterFirst"
+                }
+            ],
+            "defaultLocation": "beforeLast"
+        },
+        "methodChain": {
+            "defaultWrap": "onePerLineAfterFirst",
+            "defaultLocation": "afterLast",
+            "rules": []
+        },
+        "opAddSubChain": {
+            "defaultWrap": "fillLine",
+            "defaultLocation": "beforeLast",
+            "rules": []
+        },
+        "maxLineLength": 110    
+    }
+}

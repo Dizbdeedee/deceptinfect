@@ -4,12 +4,14 @@ import deceptinfect.radiation.RadSource.RadSourceOptions;
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import deceptinfect.radiation.RadiationProducer.RadiationProduceOptions;
 import deceptinfect.radiation.RadiationProducer.RadLifetime;
+
 using deceptinfect.DistSquared;
+
 class ContaminationProducer extends Component {
 	public var chance:Float;
 
 	public var check:Float;
-	
+
 	public var dist:DistSquared;
 
 	public var type:ContaminationType = SAME_TYPE;

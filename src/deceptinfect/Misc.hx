@@ -2,12 +2,29 @@ package deceptinfect;
 
 class Misc {
 	public static var roundModels:Array<String> = [
-		"models/player/mossman.mdl", "models/player/alyx.mdl", "models/player/barney.mdl", "models/player/breen.mdl", "models/player/Eli.mdl",
-		"models/player/gman_high.mdl", "models/player/kleiner.mdl", "models/player/monk.mdl", "models/player/odessa.mdl",
-		"models/player/Group03/Female_01.mdl", "models/player/Group03/Female_02.mdl", "models/player/Group03/Female_03.mdl",
-		"models/player/Group03/Female_04.mdl", "models/player/Group03/Female_06.mdl", "models/player/Group03/Male_01.mdl",
-		"models/player/Group03/Male_02.mdl", "models/player/Group03/Male_03.mdl", "models/player/Group03/Male_04.mdl", "models/player/Group03/Male_05.mdl",
-		"models/player/Group03/Male_06.mdl", "models/player/Group03/Male_07.mdl", "models/player/Group03/Male_08.mdl", "models/player/Group03/Male_09.mdl",
+		"models/player/mossman.mdl",
+		"models/player/alyx.mdl",
+		"models/player/barney.mdl",
+		"models/player/breen.mdl",
+		"models/player/Eli.mdl",
+		"models/player/gman_high.mdl",
+		"models/player/kleiner.mdl",
+		"models/player/monk.mdl",
+		"models/player/odessa.mdl",
+		"models/player/Group03/Female_01.mdl",
+		"models/player/Group03/Female_02.mdl",
+		"models/player/Group03/Female_03.mdl",
+		"models/player/Group03/Female_04.mdl",
+		"models/player/Group03/Female_06.mdl",
+		"models/player/Group03/Male_01.mdl",
+		"models/player/Group03/Male_02.mdl",
+		"models/player/Group03/Male_03.mdl",
+		"models/player/Group03/Male_04.mdl",
+		"models/player/Group03/Male_05.mdl",
+		"models/player/Group03/Male_06.mdl",
+		"models/player/Group03/Male_07.mdl",
+		"models/player/Group03/Male_08.mdl",
+		"models/player/Group03/Male_09.mdl",
 	];
 
 	// TODO expand weapon system

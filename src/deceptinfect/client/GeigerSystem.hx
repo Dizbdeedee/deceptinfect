@@ -10,7 +10,6 @@ import deceptinfect.ecswip.System;
 
 @:expose("geiger")
 class GeigerSystem extends System {
-
 	#if client
 	var geiger:Float = 0.0;
 
@@ -19,13 +18,12 @@ class GeigerSystem extends System {
 		Gmod.Sound("player/geiger2.wav"),
 		Gmod.Sound("player/geiger3.wav")
 	];
-	
+
 	var playTime:Float = 0.0;
 
 	override function run_client() {
 		geiger = 0.0;
-		IterateEnt.iterGet([GeigerCounter],[{geiger : g}],
-		function () {
+		IterateEnt.iterGet([GeigerCounter], [{geiger: g}], function() {
 			geiger = g;
 		});
 		geigerThink();
@@ -51,11 +49,10 @@ class GeigerSystem extends System {
 
 	#if server
 	override function run_server() {
-		IterateEnt.iterGet([GeigerCounter,InfectionComponent,PlayerComponent],[geig,{rate : r},_],
-		function () {
-			geig.geiger = Math.min(((r - 1) / 2),1);
+		IterateEnt.iterGet([GeigerCounter, InfectionComponent, PlayerComponent], [geig, {rate: r}, _]
+			, function() {
+				geig.geiger = Math.min(((r - 1) / 2), 1);
 		});
-		
 	}
 	#end
 }

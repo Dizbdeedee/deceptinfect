@@ -1,12 +1,11 @@
 package deceptinfect.game.components;
 
-
 @:structInit
 class SpreadComponent extends Component {
-    #if server
-    var initial:CNavArea;
+	#if server
+	var initial:CNavArea;
 
-    var markedMap:Map<Int,Bool> = [];
+	var markedMap:Map<Int, Bool> = [];
 
 	var marked:Array<CNavArea> = [];
 
@@ -14,6 +13,6 @@ class SpreadComponent extends Component {
 
 	var mapSize:Float;
 
-    var percent:Float;
-    #end
+	var percent:Float;
+	#end
 }

@@ -1,5 +1,4 @@
 package deceptinfect.game.components;
 
-
-//Deprecated
+// Deprecated
 class AliveComponent extends Component {}

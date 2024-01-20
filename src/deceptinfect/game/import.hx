@@ -1,2 +1,2 @@
 import deceptinfect.game.components.*;
-import gmod.gclass.Player; //mmm
+import gmod.gclass.Player; // mmm

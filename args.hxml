@@ -2,6 +2,8 @@
 -lib safety
 -lib tink_core
 -lib gmodhaxe
+-lib assertion
+-lib tink_macro
 -cp src
 -D lua-5.1
 -D lua-vanilla
@@ -13,7 +15,7 @@
 -D printBuildIdent
 --dce full
 --times
-# -D gmodAddonFolder=/home/g/gmodDS/garrysmod/addons/
+#-D gmodAddonFolder="C:\Users\b\Documents\steamcmd\steamcmd\steamapps\common\GarrysModDS\garrysmod\addons"
 -D macro-times
 --debug
 --macro gmod.helpers.macros.InitMacro.init()

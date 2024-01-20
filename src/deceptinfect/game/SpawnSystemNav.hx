@@ -26,26 +26,28 @@ class SpawnSystemNav extends System {
 		final processing:GenericStack<CNavArea> = new GenericStack<CNavArea>();
 		if (Gmod.IsValid(navmesh)) {
 			playerPos = x.GetPos();
-			navmesh.GetAdjacentAreas().iter(processing.add);
+			navmesh.GetAdjacentAreas()
+				.iter(processing.add);
 			while (!processing.isEmpty()) {
 				final nav = processing.pop();
 				if (filterAreas(nav)) {
 					if (filterAreaResults(nav)) {
 						result.push(nav);
 					}
-					nav.GetAdjacentAreas().iter(processing.add);
+					nav.GetAdjacentAreas()
+						.iter(processing.add);
 				}
 			}
 
 			if (result.length == 0)
 				throw "bad";
-			final point = result.getRandom().GetRandomPoint();
+			final point = result.getRandom()
+				.GetRandomPoint();
 
 			final ent:GEntCompat = EntsLib.Create("di_battery");
 
 			final bounds = ent.GetCollisionBounds();
-			final traceResult = UtilLib.TraceHull({
-				ignoreworld: false,
+			final traceResult = UtilLib.TraceHull({ignoreworld: false,
 				start: point + new Vector(0, 0, 50),
 				endpos: point + new Vector(0, 0, 49),
 				mins: bounds.mins,
@@ -76,7 +78,8 @@ class SpawnSystemNav extends System {
 	}
 
 	static function filterAreaResults(nav:CNavArea) {
-		return nav.GetCorner(NORTH_EAST).distSq(playerPos) > distanceMin;
+		return nav.GetCorner(NORTH_EAST)
+			.distSq(playerPos) > distanceMin;
 	}
 	#end
 }

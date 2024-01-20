@@ -9,7 +9,6 @@ class Weapon_Di_cure extends gmod.swep.SwepBuild<gmod.swep.SWEP> {
 			ClipSize: -1,
 			DefaultClip: -1,
 			Automatic: true,
-			
 		}
 	}
 

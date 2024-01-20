@@ -9,9 +9,12 @@
             "type": "gmdebug",
             "request": "launch",
             "name": "gmdebug : Launch server",
-            "serverFolder": "C:\\Users\\g\\Documents\\steamcmd\\steamapps\\common\\GarrysModDS\\garrysmod",
+            "programPath": "C:\\Users\\b\\Documents\\steamcmd\\steamcmd\\steamapps\\common\\GarrysModDS\\gmod.exe",
+            "serverFolder": "C:\\Users\\b\\Documents\\steamcmd\\steamcmd\\steamapps\\common\\GarrysModDS\\garrysmod",
             "clientFolder": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\GarrysMod\\garrysmod",
             "programArgs": [
+                "-log",
+                "-condebug",
                 "+gamemode",
                 "deceptinfect",
                 "+map",
@@ -22,13 +25,13 @@
                 "1"
             ],
             "clients": 2,
-            "addonName": "deceptinfect",
-            "copyAddonBaseFolder": "generated/deceptinfect",
-            // "noDebug": true,
-            //"noCopy": true,
-          
-            "programPath": "auto",
+            "copyAddonName": "deceptinfect",
+            // "nodebugClient": true,
             
+            "copyAddonBaseFolder": "generated/deceptinfect",
+            "noDebug": true,
+            // "noCopy": true,
+                      
         }
     ]
 }

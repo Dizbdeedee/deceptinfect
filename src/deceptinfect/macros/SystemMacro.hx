@@ -5,7 +5,7 @@ import haxe.macro.TypeTools;
 import haxe.macro.Context;
 
 class SystemMacro {
-    #if macro
+	#if macro
 	public static function build() {
 		return null;
 		// final fields = Context.getBuildFields();
@@ -22,7 +22,7 @@ class SystemMacro {
 		// 	var typeCheck:deceptinfect.World = this;
 		// 	return systemManager.getSystem($i{clsType.name});
 		// }
-		
+
 		// var reeeturn = {
 		// 	expr: EBlock(
 		// 		[{expr: EReturn()}]
@@ -34,20 +34,20 @@ class SystemMacro {
 		// 	name: "get",
 		// 	access: [APublic,AStatic, AMacro],
 		// 	pos: Context.currentPos(),
-        //     kind: FFun({
-        //         args: [],
+		//     kind: FFun({
+		//         args: [],
 		// 		expr: reeeturn
 		// 		// expr: macro {
 		// 		// 	return macro {
 		// 		// 		var typeCheck:deceptinfect.World = this;
 		// 		// 		return systemManager.getSystem($i{clsType.name});
-		// 		// 	}	
+		// 		// 	}
 		// 		// }
-        //         // expr: macro return SystemManager.getSystem($i{clsType.name}),
-                
-        //     })
+		//         // expr: macro return SystemManager.getSystem($i{clsType.name}),
+
+		//     })
 		// });
-	
+
 		// return fields;
 	}
 	#end

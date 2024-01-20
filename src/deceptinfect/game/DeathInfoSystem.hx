@@ -3,7 +3,6 @@ package deceptinfect.game;
 import deceptinfect.ecswip.PlayerComponent;
 
 class DeathInfoSystem extends System {
-
 	#if server
 	override function run_server() {
 		for (ent in 0...entities) {

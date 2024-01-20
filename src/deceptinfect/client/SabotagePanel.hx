@@ -5,9 +5,7 @@ import gmod.gclass.Panel;
 import gmod.panels.DFrame;
 import gmod.helpers.panel.PanelBuild;
 
-
 class SabotagePanel extends PanelBuild<gmod.panels.DFrame> {
-	
 	override function Init():Void {
 		trace("Panel created");
 		self.SetPos(0, 0);
@@ -25,7 +23,6 @@ class SabotagePanel extends PanelBuild<gmod.panels.DFrame> {
 }
 
 class ExtendedSabotagePanel extends SabotagePanel {
-
 	override function Init():Void {
 		trace("Our own stuff");
 	}
@@ -34,5 +31,4 @@ class ExtendedSabotagePanel extends SabotagePanel {
 		// trace("Our own spam"); nocheckin
 		super.Think();
 	}
-
 }

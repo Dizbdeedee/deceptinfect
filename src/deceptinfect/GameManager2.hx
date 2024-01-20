@@ -4,22 +4,20 @@ import deceptinfect.ecswip.ReplicatedComponent;
 
 @:replicated(ALL)
 class GameManager2 extends ReplicatedComponent {
+	@:s var state:GAME_STATE_2 = WAIT;
 
-    @:s var state:GAME_STATE_2 = WAIT;
+	var stateChanged:Signal<GAME_STATE_2>;
 
-    var stateChanged:Signal<GAME_STATE_2>;
+	var diffTime:Float = null;
 
-    var diffTime:Float = null;
+	var spawnAllowed = true;
 
-    var spawnAllowed = true;
-
-    var lastTick:Float = 0.0;
-
+	var lastTick:Float = 0.0;
 }
 
 enum GAME_STATE_2 {
-    WAIT;
-    SETTING_UP(time:Float);
-    PLAYING;//no
-    ENDING(time:Float);
+	WAIT;
+	SETTING_UP(time:Float);
+	PLAYING; // no
+	ENDING(time:Float);
 }

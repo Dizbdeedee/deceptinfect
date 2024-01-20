@@ -21,7 +21,8 @@ class Di_barrel extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 		self.SetModel("models/props_c17/oildrum001_explosive.mdl");
 		self.PhysicsInit(SOLID_VPHYSICS);
 		if (Gmod.IsValid(self.GetPhysicsObject())) {
-			self.GetPhysicsObject().Wake();
+			self.GetPhysicsObject()
+				.Wake();
 		}
 		self.SetUseType(SIMPLE_USE);
 		#end
@@ -60,6 +61,5 @@ class Di_barrel_boogaloo extends Di_barrel {
 	override function Initialize() {
 		super.Initialize();
 		trace("I'm the improved version");
-		
 	}
 }

@@ -32,13 +32,12 @@ abstract DistSquared(Float) to Float {
 	}
 }
 
-
 class DistSqSafe {
 	public inline static function distSq(us:Vector, them:Vector):DistSquared {
 		return cast us.DistToSqr(them);
 	}
 
 	public inline static function safeSquare(fl:Float):DistSquared {
-		return cast MathLib.pow(fl,2);
+		return cast MathLib.pow(fl, 2);
 	}
 }

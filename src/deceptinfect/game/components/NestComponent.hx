@@ -2,13 +2,14 @@ package deceptinfect.game.components;
 
 import deceptinfect.ecswip.ReplicatedComponent;
 import deceptinfect.ecswip.Component;
+
 using deceptinfect.DistSquared;
 
 @:replicated(SOME(INFECTED))
 class NestComponent extends ReplicatedComponent {
 	@:s public var nestState:NestState = INVISIBLE;
 
-	@:s public var health:Float = 10; //nocheckin change back
+	@:s public var health:Float = 10; // nocheckin change back
 
 	public var rate_end = 10;
 

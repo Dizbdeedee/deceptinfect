@@ -1,5 +1,3 @@
 package deceptinfect.client;
 
-class LocalPlayer extends Component {
-    
-}
+class LocalPlayer extends Component {}

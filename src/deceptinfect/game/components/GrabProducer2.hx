@@ -3,13 +3,11 @@ package deceptinfect.game.components;
 import deceptinfect.abilities.FormComponent.Cooldown;
 
 class GrabProducer2 extends Component {
+	var producerState:GrabProduceState = READY(NOT_SEARCHING);
 
-    var producerState:GrabProduceState = READY(NOT_SEARCHING);
+	var nextCooldown:Float = 5;
 
-    var nextCooldown:Float = 5;
-
-    var grabDist:Float = 70;
-
+	var grabDist:Float = 70;
 }
 
 enum SearchingState {

@@ -4,8 +4,8 @@ import deceptinfect.radiation.ContaminationProducer.ContaminationProducerOptions
 import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.ecswip.Component;
 import deceptinfect.radiation.RadiationTypes;
-using deceptinfect.DistSquared;
 
+using deceptinfect.DistSquared;
 
 class RadiationProducer extends Component {
 	public var state:RadiationState = ENABLED;
