@@ -1,10 +1,10 @@
 # Decept/Infect
 
-WIP gmod gamemode, TTT/Morbus like being created using Haxe's lua target, and is developed alongside gmodhaxe. 
+WIP gmod gamemode, TTT/Morbus like being created using Haxe's lua target, and is developed alongside gmodhaxe.
 
 Comes with it's own entity component system for reasons that seemed very important at the time.
- 
-ETA: 6/12 months
+
+Eternal! Suffering! Nothing works here. I hate this place.
 
 ## Overview
 
