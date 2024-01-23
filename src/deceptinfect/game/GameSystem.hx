@@ -27,6 +27,7 @@ import deceptinfect.GameManager2.GAME_STATE_2;
 interface GameSystemI {
 	function gameManagerAvaliable():Bool;
 	function getGameManager():GameManager2;
+	#if server
 	function setState(newState:GAME_STATE_2):Void;
 	function diffTime():Float;
 	function beginInfected(ent:DI_ID):Void;
@@ -34,63 +35,25 @@ interface GameSystemI {
 	function isPlaying():Bool;
 	function thinkWait():Void;
 	function shouldAllowRespawn():Bool;
+	#end
 }
 
-class GameSystem extends System implements GameSystemI {
-	public function gameManagerAvaliable() {
-		return false;
-	}
-
-	public function getGameManager() {
-		trace("getGameManager - not implemented");
-		return null;
-	}
-
-	public function setState(newState:GAME_STATE_2) {
-		trace("setState - not implemented");
-	}
-
-	public function diffTime() {
-		trace("diffTime - not implemented");
-		return 0.0;
-	}
-
-	public function beginInfected(ent:DI_ID):Void {
-		trace("beginInfected - not implemented");
-	}
-
-	public function cleanup():Void {
-		trace("cleanup - not implemented");
-	}
-
-	public function isPlaying() {
-		trace("isPlaying - not implemented");
-		return false;
-	}
-
-	public function thinkWait() {
-		trace("thinkWait - not implemented");
-	}
-
-	public function shouldAllowRespawn() {
-		trace("shouldAllowRespawn - not implemented");
-		return false;
-	}
-}
+// TODO -- what do we name it? uhh it needs to exist
+abstract class GameSystem extends System implements GameSystemI {}
 
 class GameSystemDef extends GameSystem {
 	var gameManager:GameManager2;
 
 	var signalTrig:SignalTrigger<GAME_STATE_2> = new SignalTrigger();
 
-	public override function gameManagerAvaliable() {
+	public function gameManagerAvaliable() {
 		IterateEnt.iterGet([GameManager2], [gameManager], function() {
 			return true;
 		});
 		return false;
 	}
 
-	public override function getGameManager() {
+	public function getGameManager() {
 		IterateEnt.iterGet([GameManager2], [gameManager], function() {
 			return gameManager;
 		});
@@ -134,7 +97,7 @@ class GameSystemDef extends GameSystem {
 		return new GameInProgress();
 	}
 
-	public override function setState(newState:GAME_STATE_2) {
+	public function setState(newState:GAME_STATE_2) {
 		final manager = getGameManager();
 		manager.state = stateTransition(newState);
 	}
@@ -207,11 +170,11 @@ class GameSystemDef extends GameSystem {
 		}
 	}
 
-	public override function diffTime() {
+	public function diffTime() {
 		return getGameManager().diffTime;
 	}
 
-	public override function beginInfected(ent:DI_ID) {
+	public function beginInfected(ent:DI_ID) {
 		final radSourceSystem = systemManager.get(RadSourceSystem);
 		ent.add_component(new InfectedComponent());
 		ent.add_component(new GrabProducer());
@@ -279,7 +242,7 @@ class GameSystemDef extends GameSystem {
 		setState(ENDING(Gmod.CurTime() + 10));
 	}
 
-	public override function cleanup() {
+	public function cleanup() {
 		final clientTranslateSystem = systemManager.get(ClientTranslateSystem);
 		IterateEnt.iterGet([CleanupEnt, GEntityComponent], [_, {entity: ent}], function() {
 			ent.Remove();
@@ -309,7 +272,7 @@ class GameSystemDef extends GameSystem {
 		}
 	}
 
-	public override function isPlaying() {
+	public function isPlaying() {
 		return switch (gameManager.state) {
 			case PLAYING:
 				true;
@@ -318,13 +281,13 @@ class GameSystemDef extends GameSystem {
 		}
 	}
 
-	public override function thinkWait() {
+	public function thinkWait() {
 		if (PlayerLib.GetCount() > GameValues.MIN_PLAYERS) {
 			setState(SETTING_UP(Gmod.CurTime() + GameValues.SETUP_TIME));
 		}
 	}
 
-	public override function shouldAllowRespawn() {
+	public function shouldAllowRespawn() {
 		return switch (gameManager.state) {
 			case WAIT | SETTING_UP(_):
 				true;

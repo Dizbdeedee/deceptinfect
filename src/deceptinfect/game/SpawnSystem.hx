@@ -3,7 +3,7 @@ package deceptinfect.game;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.macros.CompileTime.C_square;
 
-class SpawnSystem extends System {
+abstract class SpawnSystem extends System {
 	public var obj:SpawnPointTable;
 	public var item:SpawnPointTable;
 	public var nest:SpawnPointTable;
@@ -15,11 +15,11 @@ class SpawnSystem extends System {
 class SpawnSystemDef extends SpawnSystem {
 	#if server
 	override function init_server() {
-		generateSpawns();
 		obj = new SpawnPointTable(componentManager);
 		item = new SpawnPointTable(componentManager);
 		nest = new SpawnPointTable(componentManager);
 		evac = new SpawnPointTable(componentManager);
+		generateSpawns();
 	}
 
 	override function run_server() {
@@ -249,5 +249,7 @@ class SpawnPointTable {
 		return spawns[choose];
 	}
 
-	public function new(componentManager) {}
+	public function new(_componentManager) {
+		componentManager = _componentManager;
+	}
 }

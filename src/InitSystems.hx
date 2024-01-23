@@ -13,6 +13,7 @@ import deceptinfect.statuses.Walkthroughable.WalkthroughSystem;
 import deceptinfect.game.WinSystem;
 import deceptinfect.game.BatterySystem;
 import deceptinfect.game.RagdollSystem;
+import deceptinfect.Spread;
 import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.game.SpawnSystem;
@@ -54,7 +55,7 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		RagdollSystem,
 		SlowMotionSystem,
 		InfectionLookSystem,
-
+		Spread,
 		RadSourceSystem,
 		// LowHealthSystem,
 		// ScannerSystem,
@@ -90,6 +91,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		SlowMotionSystem,
 		// Spread,
 		InfectionLookSystem,
+		Spread,
 		// ContaminationSystem, // Problem!
 		RadSourceSystem,
 		// LowHealthSystem,
@@ -116,11 +118,12 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(InfectionSystem, new InfectionSystem(componentManager, systemManager));
 	map.set(WinSystem, new WinSystem(componentManager, systemManager));
 	map.set(InfectionLookSystem, new InfectionLookSystem(componentManager, systemManager));
-	map.set(SpawnSystem, new SpawnSystem(componentManager, systemManager));
+	map.set(SpawnSystem, new SpawnSystemDef(componentManager, systemManager));
 	map.set(EvacSystem, new EvacSystem(componentManager, systemManager));
 	#if client
 	map.set(Hud, new Hud(componentManager, systemManager));
 	#end
+	map.set(Spread, new Spread(componentManager, systemManager));
 	map.set(FormSystem, new FormSystem(componentManager, systemManager));
 	map.set(GeigerSystem, new GeigerSystem(componentManager, systemManager));
 	map.set(RagdollSystem, new RagdollSystem(componentManager, systemManager));

@@ -72,6 +72,9 @@ class Main {
 		HookLib.Add("di_setupgentcompat",
 			"setup",
 			() -> {componentManager: componentManager, systemManager: systemManager});
+		HookLib.Add("di_setupent",
+			"setup",
+			() -> {componentManager: componentManager, systemManager: systemManager}); // TODO replace
 		systemManager.initAllSystems();
 		FileLib.CreateDir("deceptinfect");
 		#if server
