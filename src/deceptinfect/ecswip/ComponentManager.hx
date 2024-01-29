@@ -144,10 +144,8 @@ abstract Component_<T:Component>(LuaArrayExt<Dynamic>) {
 	}
 
 	public function set_component(x:DI_ID, comp:Component) {
-		trace(components[external[x]]);
-		trace(comp);
+		// there were traces here... suggesting there was something wrong.
 		components[external[x]] = comp;
-		trace(components[external[x]]);
 		signalAdd.trigger({ent: x, comp: comp});
 	}
 

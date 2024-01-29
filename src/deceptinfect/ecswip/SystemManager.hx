@@ -42,6 +42,8 @@ interface SystemManager {
 class SystemManagerDef implements SystemManager {
 	var getSystems:ObjectMap<Class<Dynamic>, System> = new ObjectMap();
 
+	var makeSystems:(systemManager:SystemManager) -> haxe.ds.ObjectMap<Class<Dynamic>, System>;
+
 	var runSystems(default, null):Array<Class<Dynamic>>;
 
 	var initSystems(default, null):Array<Class<Dynamic>>;
@@ -50,7 +52,8 @@ class SystemManagerDef implements SystemManager {
 			_makeSystems:(systemManager:SystemManager) -> haxe.ds.ObjectMap<Class<Dynamic>, System>) {
 		initSystems = _initSystems;
 		runSystems = _runSystems;
-		getSystems = _makeSystems(this);
+		makeSystems = _makeSystems;
+		getSystems = makeSystems(this);
 	}
 
 	public function getSystem<T:System>(cls:Class<T>):T {
@@ -60,6 +63,8 @@ class SystemManagerDef implements SystemManager {
 	public function get<T:System>(cls:Class<T>):T {
 		return cast getSystems.get(cls);
 	}
+
+	// request -- Some() None
 
 	@:expose("getSystem")
 	@:noCompletion
@@ -106,5 +111,6 @@ class SystemManagerDef implements SystemManager {
 
 	public function destroySystems() {
 		getSystems.clear();
+		getSystems = makeSystems(this);
 	}
 }

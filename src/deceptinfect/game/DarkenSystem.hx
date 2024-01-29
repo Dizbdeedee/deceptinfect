@@ -7,12 +7,12 @@ class DarkenSystem extends System {
 	#if client
 	// TODO confusing logic, can we make this simpler?
 	override function run_client() {
-		var darkend = None;
+		var curDarken = None;
 		IterateEnt.iterGet([DarkenApplied], [dark], function() {
-			darkend = Some(dark);
+			curDarken = Some(dark);
 		});
 		IterateEnt.iterGet([Darken], [dark], function() {
-			switch (darkend) {
+			switch (curDarken) {
 				case Some(_):
 					return;
 				default:
@@ -22,7 +22,7 @@ class DarkenSystem extends System {
 					ent.add_component(apply);
 			}
 		});
-		switch (darkend) {
+		switch (curDarken) {
 			case Some(apply):
 				revert(apply);
 				componentManager.removeEntity(componentManager.getIDFromComponent(apply));

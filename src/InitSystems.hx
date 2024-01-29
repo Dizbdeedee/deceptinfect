@@ -30,6 +30,7 @@ import deceptinfect.WeaponSystem;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.ecswip.System;
+import deceptinfect.grab.SearchSystem;
 import deceptinfect.abilities.FormSystem;
 #if client
 import deceptinfect.client.Hud;
@@ -51,15 +52,17 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		SpawnSystem,
 		// WalkthroughSystem, //needs a rework anyway
 		// NestSystem,
+		SearchSystem,
 		EvacSystem,
 		RagdollSystem,
 		SlowMotionSystem,
 		InfectionLookSystem,
 		Spread,
 		RadSourceSystem,
+
 		// LowHealthSystem,
 		// ScannerSystem,
-		// DarkenSystem,
+		DarkenSystem,
 		CRTSystem,
 		#if client
 		Hud
@@ -86,6 +89,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		SpawnSystem,
 		// WalkthroughSystem,
 		// NestSystem,
+		SearchSystem,
 		EvacSystem,
 		RagdollSystem,
 		SlowMotionSystem,
@@ -96,7 +100,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		RadSourceSystem,
 		// LowHealthSystem,
 		// ScannerSystem,
-		// DarkenSystem,
+		DarkenSystem,
 		CRTSystem,
 		#if client
 		Hud,
@@ -136,5 +140,7 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(RadiationSystem, new RadiationSystem(componentManager, systemManager));
 	map.set(WeaponSystem, new WeaponSystem(componentManager, systemManager));
 	map.set(BatteryInfoSystem, new BatteryInfoSystem(componentManager, systemManager));
+	map.set(DarkenSystem, new DarkenSystem(componentManager, systemManager));
+	map.set(SearchSystem, new SearchSystemDef(componentManager, systemManager));
 	return map;
 }

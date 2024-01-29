@@ -19,6 +19,8 @@ import deceptinfect.abilities.*;
 import deceptinfect.infection.*;
 import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.ecswip.PlayerComponent;
+import deceptinfect.grab.components.GrabSearcher;
+import deceptinfect.grab.components.GrabSearchVictim;
 
 using deceptinfect.util.PlayerExt;
 
@@ -178,6 +180,7 @@ class GameSystemDef extends GameSystem {
 		final radSourceSystem = systemManager.get(RadSourceSystem);
 		ent.add_component(new InfectedComponent());
 		ent.add_component(new GrabProducer());
+		ent.add_component(new GrabSearcher());
 		ent.add_component(new HiddenHealthComponent());
 		ent.add_component(new FormComponent());
 		ent.add_component(new DamagePenaltyHidden());
@@ -213,6 +216,7 @@ class GameSystemDef extends GameSystem {
 		p.add_component(virpos);
 		p.add_component(new AliveComponent());
 		p.add_component(vic);
+		p.add_component(new GrabSearchVictim());
 		p.add_component(contam);
 		final g = new deceptinfect.game.GeigerCounter();
 		p.add_component(g);

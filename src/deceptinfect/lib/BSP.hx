@@ -17,7 +17,7 @@ extern class BSP {
 
 	final m_version:Int;
 
-	final m_lumps:LuaArray<Dynamic>;
+	final m_lumps:LuaArrayExt<Dynamic>;
 
 	final m_file:gmod.gclass.File;
 
@@ -29,19 +29,19 @@ extern class BSP {
 
 	function GetLumpFacesTotal():Int;
 
-	function ReadLumpFaces():LuaArray<Faces>;
+	function ReadLumpFaces():LuaArrayExt<Faces>;
 
-	function ReadLumpDispInfo():LuaArray<DispInfo>;
+	function ReadLumpDispInfo():LuaArrayExt<DispInfo>;
 
-	function ReadLumpPlanes():LuaArray<Planes>;
+	function ReadLumpPlanes():LuaArrayExt<Planes>;
 
-	function ReadLumpBrushes():LuaArray<Brushes>;
+	function ReadLumpBrushes():LuaArrayExt<Brushes>;
 
-	function ReadLumpBrushSides():LuaArray<BrushSides>;
+	function ReadLumpBrushSides():LuaArrayExt<BrushSides>;
 
-	function ReadLumpTexData():LuaArray<TexData>;
+	function ReadLumpTexData():LuaArrayExt<TexData>;
 
-	function ReadLumpTextDataStringData():LuaArray<String>;
+	function ReadLumpTextDataStringData():LuaArrayExt<String>;
 }
 
 typedef DispInfo = Dynamic;
@@ -56,11 +56,11 @@ typedef Faces = {
 	texinfo:Int,
 	dispinfo:Int,
 	surfaceFogVolumeID:Int,
-	styles:LuaArray<Int>,
+	styles:LuaArrayExt<Int>,
 	lightofs:Int,
 	area:Float,
-	LightmapTextureMinsInLuxels:LuaArray<Int>,
-	LightmapTextureSizeInLuxels:LuaArray<Int>,
+	LightmapTextureMinsInLuxels:LuaArrayExt<Int>,
+	LightmapTextureSizeInLuxels:LuaArrayExt<Int>,
 	origFace:Int,
 	numPrims:Int,
 	firstPrimID:Int,
@@ -70,8 +70,8 @@ typedef Faces = {
 typedef Brushes = Dynamic;
 
 typedef TexInfo = {
-	textureVecs:LuaArray<LuaArray<Float>>,
-	lightmapVecs:LuaArray<LuaArray<Float>>,
+	textureVecs:LuaArrayExt<LuaArrayExt<Float>>,
+	lightmapVecs:LuaArrayExt<LuaArrayExt<Float>>,
 	flags:Int,
 	texdata:Int
 };

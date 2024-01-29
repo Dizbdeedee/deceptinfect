@@ -9,6 +9,7 @@
 -D lua-vanilla
 -D gamemode=deceptinfect
 -D addonName=deceptinfect
+-D noGenInit
 -D analyzer-optimize
 -D profile
 -D gmod_PreCopyFiles=build

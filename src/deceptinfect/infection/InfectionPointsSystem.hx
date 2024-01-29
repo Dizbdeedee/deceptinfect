@@ -9,7 +9,6 @@ class InfectionPointsSystem extends System {
 	#if server
 	override function init_server() {
 		HookLib.Add(GMHook.EntityTakeDamage, "di_infectionpoints", function(ent, dmg) {
-			trace("Damage");
 			switch (ent.validID()) {
 				case Some(id) if (id.has_comp(PlayerComponent) && !id.has_comp(InfectedComponent)):
 				default:
@@ -25,7 +24,6 @@ class InfectionPointsSystem extends System {
 					return null;
 			}
 			final points = attacker.get_2(InfectionPoints);
-			trace(points.points);
 			points.points += Math.floor(dmg.GetDamage() / 2);
 			return null;
 		});

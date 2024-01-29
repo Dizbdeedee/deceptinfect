@@ -98,10 +98,10 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
 	var underperforming = false;
 
 	function checkPerformance():Void {
-		if ((1 / Gmod.FrameTime()) < 66.6) {
-			PrintTimer.print_time(5,
-				() -> trace('Server is underperforming! ${1 / Gmod.FrameTime()}'));
-		}
+		// if ((1 / Gmod.FrameTime()) < 66.6) {
+		//	PrintTimer.print_time(5,
+		//		() -> trace('Server is underperforming! ${1 / Gmod.FrameTime()}'));
+		// }
 	}
 
 	override function OnEntityCreated(entity:Entity) {
@@ -187,6 +187,11 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
 		final formSystem = systemManager.get(FormSystem);
 		switch (button) {
 			case KEY_E:
+				switch (ply.get(deceptinfect.grab.components.GrabSearcher)) {
+					case Comp(c_gs):
+						c_gs.searchState = SEARCH_INACTIVE;
+					default:
+				}
 			// GrabSystem.requestStopSearch(ply.id);
 			// GameManager.initInfectedPlayer(ply.id);
 			// GrabSystem.attemptGrab(ply.id,(PlayerLib.GetByID(2):GPlayerCompat).id);
@@ -203,27 +208,21 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
 	}
 
 	override function KeyPress(ply:GPlayerCompat, key:IN) {
-		final grabSystem = systemManager.get(GrabSystem);
-		switch (key) {
-			case IN_USE:
-				grabSystem.requestStartSearch(ply.id);
-			default:
-		}
+		// grabsystem was here
 	}
 
 	override function KeyRelease(ply:GPlayerCompat, key:IN) {
-		final grabSystem = systemManager.get(GrabSystem);
-		switch (key) {
-			case IN_USE:
-				grabSystem.requestStopSearch(ply.id);
-			default:
-		}
+		// grabsystem was here
 	}
 
 	override function PlayerButtonDown(ply:GPlayerCompat, button:BUTTON_CODE) {
 		switch (button) {
 			case KEY_E:
-			// GrabSystem.requestStartSearch(ply.id);
+				switch (ply.get(deceptinfect.grab.components.GrabSearcher)) {
+					case Comp(c_gs):
+						c_gs.searchState = SEARCH_ACTIVE;
+					default:
+				}
 			default:
 		}
 	}
