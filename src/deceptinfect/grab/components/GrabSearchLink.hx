@@ -5,10 +5,10 @@ class GrabSearchLink extends Component {
 
 	var grabVictim:DI_ID;
 
-	var grabSearchLinkState:GrabSearchLinkState;
+	var grabSearchLinkState:GrabSearchLinkState = INVALID(.0);
 }
 
 enum GrabSearchLinkState {
-	VALID(timeInvalid:Float);
-	INVALID(timeValid:Float);
+	VALID(timeInvalid:Ref<Float>);
+	INVALID(timeValid:Ref<Float>);
 }

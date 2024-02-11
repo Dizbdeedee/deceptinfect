@@ -19,16 +19,14 @@ class Di_flare extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	#if server
 	var id:DI_ID;
 
-	static var systemManager:SystemManager;
+	var systemManager:SystemManager;
 
-	static var componentManager:ComponentManager;
-
-	static function factoryInitialize(_systemManager:SystemManager, _componentManager:ComponentManager) {
-		systemManager = _systemManager;
-		componentManager = _componentManager;
-	}
+	var componentManager:ComponentManager;
 
 	override function Initialize() {
+		var setup:EntSetup = HookLib.Run("di_setupent", this);
+		systemManager = setup.systemManager;
+		componentManager = setup.componentManager;
 		self.SetModel("models/props_c17/chair02a.mdl");
 		self.PhysicsInit(SOLID_VPHYSICS);
 		var physob = self.GetPhysicsObject();

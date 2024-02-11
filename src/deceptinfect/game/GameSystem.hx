@@ -207,6 +207,7 @@ class GameSystemDef extends GameSystem {
 		final radaccept = new RadiationAccepter({});
 		final virpos = new VirtualPosition(ENT(ply));
 		final ply = new deceptinfect.game.components.GamePlayer();
+		final futuredoom = new deceptinfect.infection.doom.components.FutureDoom();
 		p.add_component(infcomp);
 		p.add_component(spec);
 		p.add_component(rate);
@@ -220,6 +221,7 @@ class GameSystemDef extends GameSystem {
 		p.add_component(contam);
 		final g = new deceptinfect.game.GeigerCounter();
 		p.add_component(g);
+		p.add_component(futuredoom);
 	}
 
 	function hookWin() {

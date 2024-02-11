@@ -13,6 +13,8 @@ import gmod.libs.FileLib;
 import gmod.libs.GameLib;
 import gmod.libs.MathLib;
 import gmod.Gmod;
+import deceptinfect.macros.IterateEnt;
+import deceptinfect.infection.InfectionComponent;
 
 class Main {
 	public static var forceInfected = false;
@@ -32,6 +34,17 @@ class Main {
 		forceInfected = false;
 		forceUninfected = false;
 		gameSystem.setState(PLAYING);
+	}
+
+	@:expose("setInfection")
+	static function setInfection(infectionGiven:Float) {
+		IterateEnt.iterGet([InfectionComponent], [c_inf], function(ent) {
+			switch (c_inf.infection) {
+				case NOT_INFECTED(val):
+					val.value = infectionGiven;
+				case INFECTED:
+			}
+		});
 	}
 
 	@:expose("startGameInf")

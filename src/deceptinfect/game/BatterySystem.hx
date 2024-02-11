@@ -18,8 +18,6 @@ class BatterySystem extends System {
 						c_accept.charge = 0.0;
 					}
 					if (c_accept.charge > c_accept.satisfy) {
-						nestSystem.revealNests();
-						// reveal nest ect.
 						c_accept.status = SATISIFED;
 					}
 					switch (c_accept.status) {

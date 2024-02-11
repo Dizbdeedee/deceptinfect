@@ -35,6 +35,8 @@ import deceptinfect.abilities.FormSystem;
 #if client
 import deceptinfect.client.Hud;
 #end
+import deceptinfect.infection.doom.DoomedSystem2;
+import deceptinfect.infection.doom.ActiveDoomSystem;
 
 function initSystemsArr():Array<Class<Dynamic>> {
 	return [
@@ -65,8 +67,11 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		DarkenSystem,
 		CRTSystem,
 		#if client
-		Hud
+		Hud,
 		#end
+		deceptinfect.infection.doom.DoomedSystem2,
+		deceptinfect.infection.doom.ActiveDoomSystem,
+
 		// InfectionPointsSystem,
 		// DoomedSystem,
 		// WeaponSystem
@@ -105,6 +110,8 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		#if client
 		Hud,
 		#end
+		deceptinfect.infection.doom.DoomedSystem2,
+		deceptinfect.infection.doom.ActiveDoomSystem,
 		// deceptinfect.game.BatteryInfoSystem,
 		// InfectionPointsSystem,
 		// DoomedSystem,
@@ -142,5 +149,7 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(BatteryInfoSystem, new BatteryInfoSystem(componentManager, systemManager));
 	map.set(DarkenSystem, new DarkenSystem(componentManager, systemManager));
 	map.set(SearchSystem, new SearchSystemDef(componentManager, systemManager));
+	map.set(DoomedSystem2, new DoomedSystemDef(componentManager, systemManager));
+	map.set(ActiveDoomSystem, new ActiveDoomSystemDef(componentManager, systemManager));
 	return map;
 }

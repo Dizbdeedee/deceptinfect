@@ -31,7 +31,6 @@ class DoomedSystem extends System {
 		IterateEnt.iterGet([InfectionComponent], [{infection: inf}], function(vic) {
 			if (vic.has_comp(Doomed) || vic.has_comp(DoomTarget))
 				continue;
-
 			switch (inf) {
 				case NOT_INFECTED({value: inf}):
 					if (inf > GameValues.DOOM_THRESHOLD_MIN && inf < GameValues.DOOM_THRESHOLD_MAX) {

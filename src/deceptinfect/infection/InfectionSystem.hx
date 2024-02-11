@@ -13,6 +13,7 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.components.InfectionManager;
+import deceptinfect.infection.doom.components.ActiveDoom;
 
 @:allow(InfectionComponent)
 class InfectionSystem extends System {
@@ -59,10 +60,9 @@ class InfectionSystem extends System {
 					default:
 						1;
 				}
-				if (!ent.has_comp(Doomed)) {
+				if (!ent.has_comp(Doomed) && !ent.has_comp(ActiveDoom)) {
 					inf.value += base * vun;
 				}
-
 				inf.value += rate * vun;
 				if (Gmod.CurTime() > infectionReport) {
 					trace('$base $rate $vun');

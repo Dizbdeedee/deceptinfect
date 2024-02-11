@@ -11,6 +11,8 @@ import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.game.components.WinGame;
+import deceptinfect.infection.doom.components.ActiveDoom.DoomPower;
+import deceptinfect.infection.doom.components.ActiveDoomClient;
 
 #if client
 class Hud extends System {
@@ -176,12 +178,20 @@ class Hud extends System {
 	}
 
 	function doom() {
-		IterateEnt.iterGet([DoomClient], [_], function() {
+		IterateEnt.iterGet([ActiveDoomClient], [{doomPower: dp}], function() {
 			SurfaceLib.SetFont("DermaLarge");
 			SurfaceLib.SetTextColor(255, 0, 0);
+
 			SurfaceLib.SetTextPos(0, CSS(Y, 300));
-			SurfaceLib.DrawText("!!");
+			SurfaceLib.DrawText("DOOM: " + lookupDoomPower(dp));
 		});
+	}
+
+	static var doompowerl:Map<DoomPower,
+		String> = [LOW_DOOM => "green", MEDIUM_DOOM => "yellow", HIGH_DOOM => "red"];
+
+	function lookupDoomPower(doompower:DoomPower) {
+		return doompowerl.get(doompower);
 	}
 
 	function win() {

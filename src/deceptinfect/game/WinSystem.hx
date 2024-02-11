@@ -14,6 +14,8 @@ import deceptinfect.macros.ClassToID;
 class WinSystem extends System {
 	var winTrig:SignalTrigger<Win> = new SignalTrigger();
 
+	var won = false;
+
 	#if client
 	override function init_client() {
 		componentManager.getAddSignal(ClassToID.idc(WinGame))
@@ -39,6 +41,7 @@ class WinSystem extends System {
 		ent.add_component(winMan);
 		winTrig.asSignal()
 			.handle((win) -> {
+				won = true;
 				final ent = componentManager.addEntity();
 				ent.add_component(new ReplicatedEntity());
 				ent.add_component(new WinGame(win));
@@ -52,6 +55,8 @@ class WinSystem extends System {
 			break;
 		});
 		if (!playing)
+			return;
+		if (won)
 			return;
 		var total = 0;
 		var infected = 0;
@@ -77,26 +82,6 @@ class WinSystem extends System {
 			winTrig.trigger(WIN_INF);
 			winTrig.clear();
 			return;
-		}
-		var aliveNests = false;
-		var deadNests = false;
-		for (x in 0...componentManager.entities) {
-			final ent:DI_ID = x;
-			switch ent.get(NestComponent) {
-				case Comp(c_nest):
-					if (c_nest.health > 0) {
-						aliveNests = true;
-						break;
-					} else {
-						deadNests = true;
-					}
-				default:
-			}
-		}
-		gmod.helpers.PrintTimer.print_time(4, () -> trace('$aliveNests $deadNests'));
-		if (!aliveNests && deadNests) {
-			trace("Nest debug");
-			winTrig.trigger(WIN_HUMAN);
 		}
 	}
 
