@@ -37,12 +37,13 @@ import deceptinfect.client.Hud;
 #end
 import deceptinfect.infection.doom.DoomedSystem2;
 import deceptinfect.infection.doom.ActiveDoomSystem;
+import deceptinfect.infection.doom.ActiveDoomClientSystem;
 
 function initSystemsArr():Array<Class<Dynamic>> {
 	return [
 		ClientTranslateSystem,
 		GameInProgressSystem,
-		// deceptinfect.game.BatteryInfoSystem,
+		deceptinfect.game.BatteryInfoSystem,
 		GameSystem,
 		RunUntilDoneSystem,
 		InfectionSystem,
@@ -50,7 +51,7 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		// RadiationSystem,
 		// GrabSystem,
 		WinSystem,
-		// BatterySystem,
+		BatterySystem,
 		SpawnSystem,
 		// WalkthroughSystem, //needs a rework anyway
 		// NestSystem,
@@ -71,6 +72,7 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		#end
 		deceptinfect.infection.doom.DoomedSystem2,
 		deceptinfect.infection.doom.ActiveDoomSystem,
+		deceptinfect.infection.doom.ActiveDoomClientSystem
 
 		// InfectionPointsSystem,
 		// DoomedSystem,
@@ -90,7 +92,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		// RadiationSystem,
 		// GrabSystem,
 		WinSystem,
-		// BatterySystem,
+		BatterySystem,
 		SpawnSystem,
 		// WalkthroughSystem,
 		// NestSystem,
@@ -112,7 +114,8 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		#end
 		deceptinfect.infection.doom.DoomedSystem2,
 		deceptinfect.infection.doom.ActiveDoomSystem,
-		// deceptinfect.game.BatteryInfoSystem,
+		deceptinfect.infection.doom.ActiveDoomClientSystem,
+		deceptinfect.game.BatteryInfoSystem,
 		// InfectionPointsSystem,
 		// DoomedSystem,
 		// WeaponSystem,
@@ -147,9 +150,11 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(RadiationSystem, new RadiationSystem(componentManager, systemManager));
 	map.set(WeaponSystem, new WeaponSystem(componentManager, systemManager));
 	map.set(BatteryInfoSystem, new BatteryInfoSystem(componentManager, systemManager));
+	map.set(BatterySystem, new BatterySystem(componentManager, systemManager));
 	map.set(DarkenSystem, new DarkenSystem(componentManager, systemManager));
 	map.set(SearchSystem, new SearchSystemDef(componentManager, systemManager));
 	map.set(DoomedSystem2, new DoomedSystemDef(componentManager, systemManager));
 	map.set(ActiveDoomSystem, new ActiveDoomSystemDef(componentManager, systemManager));
+	map.set(ActiveDoomClientSystem, new ActiveDoomClientSystemDef(componentManager, systemManager));
 	return map;
 }
