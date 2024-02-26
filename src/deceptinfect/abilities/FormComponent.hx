@@ -10,6 +10,7 @@ class FormComponent extends Component {
 	public var formMaxHealth:Float = 60.0;
 
 	public var formModel:String = Misc.infModel;
+
 }
 
 enum CurrentForm {
@@ -20,4 +21,5 @@ enum CurrentForm {
 enum Cooldown {
 	ACTIVE;
 	COOLDOWN(time:Float);
+	CANT_CHANGE(until:Float);
 }

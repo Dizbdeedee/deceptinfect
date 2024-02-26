@@ -14,6 +14,7 @@ class FormSystem extends System {
 			case [Comp(c_form), Comp(_.entity => g_ent)]:
 				switch (c_form.cooldown) {
 					case COOLDOWN(time) if (Gmod.CurTime() < time):
+					case CANT_CHANGE(time) if (Gmod.CurTime() < time):
 					default:
 						c_form.cooldown = ACTIVE;
 				}

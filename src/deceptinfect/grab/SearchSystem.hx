@@ -33,16 +33,12 @@ class SearchSystemDef extends SearchSystem {
 		], function(entGSL) {
 			var c_gs = entSearch.get_2(GrabSearcher);
 			assert(c_gs != null);
-			switch (c_gs.searchState) {
-				case SEARCH_ACTIVE:
-				default:
-					continue;
-			}
 			var c_gv = entVictim.get_2(GrabSearchVictim);
 			var c_vicPos = entSearch.get_2(VirtualPosition);
 			var c_searchPos = entVictim.get_2(VirtualPosition);
 			assert(c_gs != null && c_gv != null && c_vicPos != null && c_searchPos != null);
-			if (c_vicPos.pos.Distance(c_searchPos.pos) < 150) {
+			if (c_vicPos.pos.Distance(c_searchPos.pos) < 150
+				&& c_gs.searchState == SEARCH_ACTIVE) {
 				increaseGrabTime(linkstate);
 			} else {
 				decreaseGrabTime(linkstate);
@@ -92,11 +88,13 @@ class SearchSystemDef extends SearchSystem {
 		switch (link.grabSearchLinkState) {
 			case VALID(timeInvalid):
 				if (timeInvalid.value > searcher.searchInactiveTime) {
+					trace("Changing grab to invalid");
 					link.grabSearchLinkState = INVALID(.0);
 					searchVictim.targetting -= 1;
 				}
 			case INVALID(timeValid):
 				if (timeValid.value > searcher.searchTime) {
+					trace("Changing grab to valid");
 					link.grabSearchLinkState = VALID(.0);
 					searchVictim.targetting += 1;
 					return NEW_VALID_GRAB(searchVictim);

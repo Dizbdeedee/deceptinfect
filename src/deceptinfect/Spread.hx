@@ -73,10 +73,8 @@ class Spread extends System {
 				if (Gmod.IsValid(navmesh)) {
 					// trace(navmesh);
 					if (markedMap.exists(navmesh.GetID())) {
-						PrintTimer.print_time(1, () -> trace("Player in zone"));
 						(ply : GPlayerCompat).id.add_component(new Darken());
 					} else {
-						PrintTimer.print_time(1, () -> trace("Player not in zone"));
 						(ply : GPlayerCompat).id.remove_component(Darken);
 					}
 				}
@@ -108,7 +106,6 @@ class Spread extends System {
 				}
 			});
 		});
-		trace('Gases removed : $removed');
 		IterateEnt.iterGet([SpreadComponent], [
 			c_spread = {
 				initial: initial,
@@ -188,40 +185,49 @@ class Spread extends System {
 		if (Gmod.CurTime() < nextGas)
 			return;
 		var gases = 0;
+		var minWidth = 50;
 		IterateEnt.iterGet([GasDraw], [{northeast: ne, southwest: sw}], function() {
 			gases++;
 			final origin = (ne - sw) / 2 + sw + Gmod.Vector(0, -10, 0);
 			DebugoverlayLib.Box(origin, sw - origin, ne - origin, 0.1, Gmod.Color(255, 0, 0));
-			var vecRan = Gmod.VectorRand();
-			vecRan.Normalize();
-			var particledata = particleTable[0];
-			vecRan *= MathLib.Rand(20, 40);
-			vecRan.z = MathLib.Rand(10, 60);
-			var emitter = Gmod.ParticleEmitter(origin);
-			emitter.SetNearClip(5, 10);
-			var radiusmul = 400 / 170;
-
-			final particle = emitter.Add(particledata.particle, origin + vecRan);
-			particle.SetVelocity(Gmod.Vector(MathLib.Rand(-particledata.randXY
-				, particledata.randXY) * radiusmul * 2,
-				MathLib.Rand(-particledata.randXY, particledata.randXY) * radiusmul * 2,
-				MathLib.Rand(particledata.randZMin, particledata.randZMax) * radiusmul));
-			particle.SetColor(particledata.color.r, particledata.color.g, particledata.color.b);
-			particle.SetAirResistance(particledata.airRecis);
-			particle.SetCollide(false);
-			particle.SetDieTime(MathLib.Rand(particledata.lifeTimeMin, particledata.lifeTimeMax));
-			particle.SetStartAlpha(particledata.startAlpha);
-			particle.SetEndAlpha(particledata.endAlpha);
-			particle.SetStartSize(ne.Distance(sw));
-			particle.SetEndSize(ne.Distance(sw));
-			particle.SetRollDelta(MathLib.Rand(-particledata.rotRate, particledata.rotRate));
-
-			emitter.Finish();
-			emitter = null;
-			Gmod.collectgarbage("step", 64);
+			var vecDiff = ne - sw;
+			if (vecDiff / minWidth > 1) {
+				ne - sw / (
+			} else {
+				createEmitForPoint(origin,lineDist);
+			}
 		});
-		trace('Gases : $gases');
 		nextGas = Gmod.CurTime() + MathLib.Rand(0.3, 0.5);
+	}
+
+	function createEmitForPoint(origin,lineDist) {
+		var vecRan = Gmod.VectorRand();
+		vecRan.Normalize();
+		var particledata = particleTable[0];
+		vecRan *= MathLib.Rand(20, 40);
+		vecRan.z = MathLib.Rand(10, 60);
+		var emitter = Gmod.ParticleEmitter(origin);
+		emitter.SetNearClip(5, 10);
+		var radiusmul = 400 / 170;
+
+		final particle = emitter.Add(particledata.particle, origin + vecRan);
+		particle.SetVelocity(Gmod.Vector(MathLib.Rand(-particledata.randXY
+			, particledata.randXY) * radiusmul * 2,
+			MathLib.Rand(-particledata.randXY, particledata.randXY) * radiusmul * 2,
+			MathLib.Rand(particledata.randZMin, particledata.randZMax) * radiusmul));
+		particle.SetColor(particledata.color.r, particledata.color.g, particledata.color.b);
+		particle.SetAirResistance(particledata.airRecis);
+		particle.SetCollide(false);
+		particle.SetDieTime(MathLib.Rand(particledata.lifeTimeMin, particledata.lifeTimeMax));
+		particle.SetStartAlpha(particledata.startAlpha);
+		particle.SetEndAlpha(particledata.endAlpha);
+		particle.SetStartSize(lineDist);
+		particle.SetEndSize(lineDist);
+		particle.SetRollDelta(MathLib.Rand(-particledata.rotRate, particledata.rotRate));
+
+		emitter.Finish();
+		emitter = null;
+		Gmod.collectgarbage("step", 64);
 	}
 	#end
 }

@@ -73,7 +73,6 @@ class GameSystemDef extends GameSystem {
 	}
 
 	override function run_server() {
-		PrintTimer.print_time(2, () -> trace(gameManager.state));
 		switch (gameManager.state) {
 			case WAIT:
 				thinkWait();

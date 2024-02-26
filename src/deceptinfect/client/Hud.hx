@@ -117,9 +117,6 @@ class Hud extends System {
 		var inf = switch [PlayerManager.getLocalPlayer()
 			.has_id()] {
 			case [Some(_.get(InfectionComponent) => Comp(c_i))]:
-				trace("We have a infection component??");
-				trace(c_i);
-				// trace(id);
 				c_i;
 			default:
 				return;
