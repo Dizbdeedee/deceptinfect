@@ -16,7 +16,6 @@ class ActiveDoomClientSystemDef extends ActiveDoomClientSystem {
 			});
 	}
 
-	override function run_client() {
-	}
+	override function run_client() {}
 	#end
 }

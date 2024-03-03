@@ -190,17 +190,17 @@ class Spread extends System {
 			gases++;
 			final origin = (ne - sw) / 2 + sw + Gmod.Vector(0, -10, 0);
 			DebugoverlayLib.Box(origin, sw - origin, ne - origin, 0.1, Gmod.Color(255, 0, 0));
-			var vecDiff = ne - sw;
-			if (vecDiff / minWidth > 1) {
-				ne - sw / (
+			// var vecDiff = ne - sw;
+			var lineDist = ne.Distance(sw);
+			if (false) { // vecDiff / minWidth > 1
 			} else {
-				createEmitForPoint(origin,lineDist);
+				createEmitForPoint(origin, lineDist);
 			}
 		});
 		nextGas = Gmod.CurTime() + MathLib.Rand(0.3, 0.5);
 	}
 
-	function createEmitForPoint(origin,lineDist) {
+	function createEmitForPoint(origin, lineDist) {
 		var vecRan = Gmod.VectorRand();
 		vecRan.Normalize();
 		var particledata = particleTable[0];

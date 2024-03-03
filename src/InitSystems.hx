@@ -72,9 +72,8 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		#end
 		deceptinfect.infection.doom.DoomedSystem2,
 		deceptinfect.infection.doom.ActiveDoomSystem,
-		deceptinfect.infection.doom.ActiveDoomClientSystem
+		deceptinfect.infection.doom.ActiveDoomClientSystem // InfectionPointsSystem,
 
-		// InfectionPointsSystem,
 		// DoomedSystem,
 		// WeaponSystem
 		// DummySystem,
@@ -155,6 +154,7 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(SearchSystem, new SearchSystemDef(componentManager, systemManager));
 	map.set(DoomedSystem2, new DoomedSystemDef(componentManager, systemManager));
 	map.set(ActiveDoomSystem, new ActiveDoomSystemDef(componentManager, systemManager));
-	map.set(ActiveDoomClientSystem, new ActiveDoomClientSystemDef(componentManager, systemManager));
+	map.set(ActiveDoomClientSystem,
+		new ActiveDoomClientSystemDef(componentManager, systemManager));
 	return map;
 }

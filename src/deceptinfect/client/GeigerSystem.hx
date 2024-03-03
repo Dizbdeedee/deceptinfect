@@ -49,16 +49,15 @@ class GeigerSystem extends System {
 
 	#if server
 	override function run_server() {
-		IterateEnt.iterGet([GeigerCounter, InfectionComponent, PlayerComponent],
-						   [geig, {infection: i, rate: r}, _]
-			, function() {
+		IterateEnt.iterGet([GeigerCounter, InfectionComponent, PlayerComponent]
+			, [geig, {infection: i, rate: r}, _], function() {
 				var baserate = switch (i) {
 					case NOT_INFECTED({value: v}) if (v < 50):
 						0;
 					case NOT_INFECTED({value: v}) if (v < 70):
-						MathLib.Remap(v, 50, 70, 0,0.2);
+						MathLib.Remap(v, 50, 70, 0, 0.2);
 					case NOT_INFECTED({value: v}) if (v < 90):
-						MathLib.Remap(v, 70, 90, 0.2,0.9);
+						MathLib.Remap(v, 70, 90, 0.2, 0.9);
 					case INFECTED:
 						0;
 					default:

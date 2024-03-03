@@ -3,9 +3,15 @@ package deceptinfect.grab.components;
 class GrabSearcher extends Component {
 	var searchState:SearchState = SEARCH_INACTIVE;
 
-	var searchTime:Float = 1;
+	var attackTime:Float = 0.75;
 
-	var searchInactiveTime:Float = .5;
+	var contributeTime:Float = 2;
+
+	var contributeToAttackLimit = 0.45;
+
+	var lagTime = .1;
+
+	var canSolo = false;
 }
 
 enum SearchState {

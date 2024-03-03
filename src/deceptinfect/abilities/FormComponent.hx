@@ -10,7 +10,6 @@ class FormComponent extends Component {
 	public var formMaxHealth:Float = 60.0;
 
 	public var formModel:String = Misc.infModel;
-
 }
 
 enum CurrentForm {
