@@ -30,6 +30,6 @@ class ComponentTools {
 
 @:using(deceptinfect.ecswip.Component.ComponentTools)
 enum ComponentState<T:Component> {
-	NONE;
+	NONE; // i'm going to shove my own pasts head down the toilet
 	Comp(comp:T);
 }

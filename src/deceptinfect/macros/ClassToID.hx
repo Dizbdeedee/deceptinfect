@@ -281,6 +281,12 @@ class DI_ID_Use {
 		return macro componentManager.addComponent($idMacro, $obj, $diid);
 		#end
 	}
+
+	public static macro function implode(diid:ExprOf<deceptinfect.ecswip.ComponentManager.DI_ID>) {
+		#if macro
+		return macro componentManager.removeEntity($diid);
+		#end
+	}
 }
 
 class Component_Use {

@@ -30,7 +30,7 @@ class GeigerSystem extends System {
 	}
 
 	public function geigerThink() {
-		if (Gmod.CurTime() > playTime && geiger > 0.016) {
+		if (Gmod.RealTime() > playTime && geiger > 0.016) {
 			var choice = switch (geiger) {
 				case x if (x < 0.2):
 					sounds[0];
@@ -42,7 +42,7 @@ class GeigerSystem extends System {
 			var exponent = 0.5 * (Math.pow(geiger, -0.5)) - 0.5;
 			var random = untyped __lua__("math.random(0.5,1.1)");
 			var maxtime = 3;
-			playTime = MathLib.min(Gmod.CurTime() + mintime + exponent * random, Gmod.CurTime() + maxtime);
+			playTime = MathLib.min(Gmod.RealTime() + mintime + exponent * random, Gmod.RealTime() + maxtime);
 		}
 	}
 	#end
@@ -63,7 +63,7 @@ class GeigerSystem extends System {
 					default:
 						0.8;
 				}
-				geig.geiger = Math.max(baserate, Math.min(((r - 1) / 2), 1));
+				geig.geiger = MathLib.Remap(r, geig.geigerLow, geig.geigerHigh, baserate, 1);
 		});
 	}
 	#end

@@ -13,6 +13,7 @@ import deceptinfect.radiation.RadiationTypes.RadTypes;
 **/
 class RadSource extends Component {
 	var base:DI_ID;
+
 	var type:RadTypes;
 
 	var attatch:DI_ID;

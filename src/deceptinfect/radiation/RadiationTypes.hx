@@ -38,7 +38,7 @@ class RadiationTypes {
 			type: INF,
 			lifetime: INFINITE,
 			options: BOTH({
-				maxrate: 2,
+				maxrate: 3,
 				radius: 500
 			}, {
 				chance: 0.4,

@@ -84,6 +84,15 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
 		ResourceLib.AddFile("sound/deceptinfect/doom.wav");
 		ResourceLib.AddFile("sound/deceptinfect/win.wav");
 		ResourceLib.AddFile("sound/deceptinfect/lose.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/1.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/2.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/3.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/4.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/5.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/6.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/7.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/8.wav");
+		ResourceLib.AddFile("sound/deceptinfect/beats/adrenalin/9.wav");
 		#end
 	}
 

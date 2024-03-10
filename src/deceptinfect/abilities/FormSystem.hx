@@ -6,7 +6,11 @@ import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.DI_ID;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.PlayerComponent;
+import deceptinfect.infection.components.InfectionRadiation;
+import deceptinfect.radiation.RadSourceSystem;
 
+// abstract class FormSystem extends System
+// }
 class FormSystem extends System {
 	#if server
 	public function attemptChangeForm(ent:DI_ID) {
@@ -51,6 +55,30 @@ class FormSystem extends System {
 		}
 	}
 
+	// blah blah temporary
+	function onInfectedForm(ent:DI_ID) {
+		var rss = systemManager.get(RadSourceSystem);
+		var c_infrad = new InfectionRadiation();
+		switch (ent.get(InfectionRadiation)) {
+			case Comp({radSource: radSourceEnt}):
+				radSourceEnt.implode();
+				ent.remove_component(InfectionRadiation);
+			default:
+		}
+		c_infrad.radSource = rss.radSourceFromType(INF, ent);
+		ent.add_component(c_infrad);
+	}
+
+	function onHumanForm(ent:DI_ID) {
+		var rss = systemManager.get(RadSourceSystem);
+		switch (ent.get(InfectionRadiation)) {
+			case Comp({radSource: radSourceEnt}):
+				radSourceEnt.implode();
+				ent.remove_component(InfectionRadiation);
+			default:
+		}
+	}
+
 	public function changeForm(ent:DI_ID) {
 		var c_form = ent.get_sure(FormComponent);
 		var g_ent = ent.get_sure(GEntityComponent)
@@ -63,8 +91,10 @@ class FormSystem extends System {
 		g_ent.SetModel(c_form.formModel);
 		c_form.form = switch (c_form.form) {
 			case HUMAN:
+				onInfectedForm(ent);
 				INFECTED;
 			case INFECTED:
+				onHumanForm(ent);
 				HUMAN;
 		}
 		switch [ent.get(PlayerComponent), c_form.form] {

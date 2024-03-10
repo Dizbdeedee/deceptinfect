@@ -188,10 +188,9 @@ class GameSystemDef extends GameSystem {
 		var c_inf = ent.get_sure(InfectionComponent);
 		var c_accept = ent.get_sure(GrabAccepter);
 		c_accept.grabState = UNAVALIABLE(UNAVALIABLE);
-		var rad = radSourceSystem.radSourceFromType(INF, ent);
-		var rv = new RadVictim();
-		rad.add_component(new VirtualPosition(ENT(ent.get_sure(GEntityComponent)
-			.entity)));
+		// var rad = radSourceSystem.radSourceFromType(INF, ent);
+		// rad.add_component(new VirtualPosition(ENT(ent.get_sure(GEntityComponent)
+		// .entity)));
 	}
 
 	function beginPlayer(ply:GPlayerCompat) {
@@ -204,6 +203,7 @@ class GameSystemDef extends GameSystem {
 		final health = new HiddenHealthComponent();
 		final grabaccept = new GrabAccepter();
 		final radaccept = new RadiationAccepter({});
+		final terror = new TerrorComponent();
 		final virpos = new VirtualPosition(ENT(ply));
 		final ply = new deceptinfect.game.components.GamePlayer();
 		final futuredoom = new deceptinfect.infection.doom.components.FutureDoom();
@@ -211,6 +211,7 @@ class GameSystemDef extends GameSystem {
 		p.add_component(spec);
 		p.add_component(rate);
 		p.add_component(health);
+		p.add_component(terror);
 		p.add_component(grabaccept);
 		p.add_component(radaccept);
 		p.add_component(virpos);

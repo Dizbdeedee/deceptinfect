@@ -13,7 +13,9 @@ class InfectionComponent extends ReplicatedComponent {
 	var rate:Float = 0;
 
 	var baseInfection:BaseInfection = USING_GLOBAL;
+
 	var onInfected(default, null):Signal<Noise>;
+
 	var acceptingInfection:AcceptingInfection = ACCEPTING;
 
 	public function getInfValue():Float {
@@ -40,14 +42,6 @@ enum BaseInfection {
 	USING_GLOBAL;
 	USING_STATIC(rate:Float);
 }
-
-// @:forward
-// @:transitive
-// @:forwardStatics
-// @:forward.new
-// @:forward.variance
-// abstract BetterRef<T>(tink.core.Ref<T>) {
-// }
 
 enum INF_STATE {
 	NOT_INFECTED(inf:SeralizableRef);

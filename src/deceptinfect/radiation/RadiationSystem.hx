@@ -5,9 +5,6 @@ import deceptinfect.ecswip.LinkedEntities;
 import haxe.ds.ArraySort;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.macros.IterateEnt;
-
-using deceptinfect.DistSquared;
-
 import deceptinfect.util.Util;
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import haxe.iterators.StringKeyValueIteratorUnicode;
@@ -16,10 +13,15 @@ import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.macros.ClassToID;
+import gmod.helpers.PrintTimer;
 
+using deceptinfect.DistSquared;
 using gmod.helpers.LuaArray;
+using deceptinfect.util.Mappy;
 
-class RadiationSystem extends System {
+abstract class RadiationSystem extends System {}
+
+class RadiationSystemDef extends System {
 	#if server
 	override function init_server() {
 		// :(
@@ -59,28 +61,37 @@ class RadiationSystem extends System {
 	static final sortFunc = (x:Float, y:Float) -> if (x == y) 0; else if (x < y) -1; else 1;
 
 	override function run_server() {
-		IterateEnt.iterGet([RadiationAccepter], [c_radAccept], function(acceptEnt) {
-			var sorted:Array<Float> = [];
-			IterateEnt.iterGet([RadiationAffecting],
-				[c_radAffect = {accepter: accepter, producer: producer, value: val}],
-				function() {
-					var producePos = producer.get_sure(VirtualPosition)
-						.pos;
-					var acceptPos = accepter.get_sure(VirtualPosition)
-						.pos;
-					var dist = producePos.distSq(acceptPos);
-					final rads = getTotalRadiation(dist, producer.get_sure(RadiationProducer));
-					c_radAffect.value = rads;
-					if (accepter == acceptEnt && rads > 0) {
-						sorted.push(rads);
-					}
-				});
-			sorted.sort(sortFunc);
+		var acceptersToProcess:Map<RadiationAccepter, Array<Float>> = [];
+		var accepters = 0;
+		var radOverallTotal = .0;
+		IterateEnt.iterGet([RadiationAffecting], [{accepter: acceptEnt, producer: produceEnt}]
+			, function(radAffectEnt) {
+				var acceptPos = acceptEnt.get_sure(VirtualPosition)
+					.pos;
+				var producePos = produceEnt.get_sure(VirtualPosition)
+					.pos;
+				var dist = producePos.distSq(acceptPos);
+				final rads = getTotalRadiation(dist, produceEnt.get_sure(RadiationProducer));
+				if (rads < 0)
+					continue;
+				var c_radAccept = acceptEnt.get_sure(RadiationAccepter);
+				var addToAcceptersArr = acceptersToProcess.getOrDefArr(c_radAccept);
+				addToAcceptersArr.push(rads);
+				acceptersToProcess.set(c_radAccept, addToAcceptersArr);
+		});
+		for (c_radAccept => radArr in acceptersToProcess) {
+			radArr.sort(sortFunc);
 			var total = .0;
-			for (i in 0...sorted.length) {
-				total = total + sorted[i] * Math.pow(c_radAccept.diminish, i);
+			for (i in 0...radArr.length) {
+				total = total + radArr[i] * Math.pow(c_radAccept.diminish, i);
 			}
 			c_radAccept.rate = total;
+			radOverallTotal += total;
+			accepters++;
+		}
+		PrintTimer.print_time(1, () -> {
+			trace(radOverallTotal);
+			trace(accepters);
 		});
 	}
 	#end

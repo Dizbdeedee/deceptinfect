@@ -9,6 +9,7 @@ using deceptinfect.DistSquared;
 
 class RadiationProducer extends Component {
 	public var state:RadiationState = ENABLED;
+
 	public var maxrate:Float;
 
 	// public var type:Null<RadTypes>;
@@ -36,5 +37,6 @@ enum RadLifetime {
 
 typedef RadiationProduceOptions = {
 	var maxrate:Float;
+
 	var radius:Float;
 }

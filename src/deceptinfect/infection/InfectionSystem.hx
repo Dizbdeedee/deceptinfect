@@ -51,8 +51,8 @@ class InfectionSystem extends System {
 					default:
 						c_inf.rate;
 				}
-				c_inf.rate = rate;
-				rate *= gameSystem.diffTime();
+				c_inf.rate = MathLib.max(0, rate);
+				rate *= gameSystem.diffTime(); // what? shouldn't this be base?? read: NO!!!
 				// rate += 1;
 				var vun = switch (ent.get(InfVunerability)) {
 					case Comp(c_v):
@@ -62,6 +62,9 @@ class InfectionSystem extends System {
 				}
 				if (!ent.has_comp(Doomed) && !ent.has_comp(ActiveDoom)) {
 					inf.value += base * vun;
+				}
+				if (ent.has_comp(ActiveDoom)) {
+					vun = MathLib.min(0.3, vun);
 				}
 				inf.value += rate * vun;
 				if (Gmod.CurTime() > infectionReport) {
@@ -82,7 +85,7 @@ class InfectionSystem extends System {
 			});
 		if (numPlayers > 0) {
 			IterateEnt.iterGet([InfectionManager], [infMan], () -> {
-				infMan.averageInfection = totalInf / numPlayers;
+				infMan.averageInfection = totalInf / numPlayers; // not actually average infection
 			});
 		}
 		if (Gmod.CurTime() > infectionReport) {

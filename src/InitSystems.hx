@@ -38,6 +38,7 @@ import deceptinfect.client.Hud;
 import deceptinfect.infection.doom.DoomedSystem2;
 import deceptinfect.infection.doom.ActiveDoomSystem;
 import deceptinfect.infection.doom.ActiveDoomClientSystem;
+import deceptinfect.game.TerrorSystem;
 
 function initSystemsArr():Array<Class<Dynamic>> {
 	return [
@@ -48,7 +49,7 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		RunUntilDoneSystem,
 		InfectionSystem,
 		GeigerSystem,
-		// RadiationSystem,
+		RadiationSystem,
 		// GrabSystem,
 		WinSystem,
 		BatterySystem,
@@ -72,9 +73,8 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		#end
 		deceptinfect.infection.doom.DoomedSystem2,
 		deceptinfect.infection.doom.ActiveDoomSystem,
-		deceptinfect.infection.doom.ActiveDoomClientSystem // InfectionPointsSystem,
-
-		// DoomedSystem,
+		deceptinfect.infection.doom.ActiveDoomClientSystem, // InfectionPointsSystem,
+		deceptinfect.game.TerrorSystem // DoomedSystem,
 		// WeaponSystem
 		// DummySystem,
 		// DoomedSystem
@@ -88,7 +88,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		RunUntilDoneSystem,
 		InfectionSystem,
 		GeigerSystem,
-		// RadiationSystem,
+		RadiationSystem,
 		// GrabSystem,
 		WinSystem,
 		BatterySystem,
@@ -115,6 +115,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		deceptinfect.infection.doom.ActiveDoomSystem,
 		deceptinfect.infection.doom.ActiveDoomClientSystem,
 		deceptinfect.game.BatteryInfoSystem,
+		deceptinfect.game.TerrorSystem,
 		// InfectionPointsSystem,
 		// DoomedSystem,
 		// WeaponSystem,
@@ -141,12 +142,12 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(GeigerSystem, new GeigerSystem(componentManager, systemManager));
 	map.set(RagdollSystem, new RagdollSystem(componentManager, systemManager));
 	map.set(SlowMotionSystem, new SlowMotionSystemDef(componentManager, systemManager));
-	map.set(RadSourceSystem, new RadSourceSystem(componentManager, systemManager));
+	map.set(RadSourceSystem, new RadSourceSystemDef(componentManager, systemManager));
 	map.set(CRTSystem, new CRTSystem(componentManager, systemManager));
 	map.set(ClientTranslateSystem, new ClientTranslateSystem(componentManager, systemManager));
 	map.set(InfectionPointsSystem, new InfectionPointsSystem(componentManager, systemManager));
 	map.set(DoomedSystem, new DoomedSystem(componentManager, systemManager));
-	map.set(RadiationSystem, new RadiationSystem(componentManager, systemManager));
+	map.set(RadiationSystem, new RadiationSystemDef(componentManager, systemManager));
 	map.set(WeaponSystem, new WeaponSystem(componentManager, systemManager));
 	map.set(BatteryInfoSystem, new BatteryInfoSystem(componentManager, systemManager));
 	map.set(BatterySystem, new BatterySystem(componentManager, systemManager));
@@ -156,5 +157,6 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(ActiveDoomSystem, new ActiveDoomSystemDef(componentManager, systemManager));
 	map.set(ActiveDoomClientSystem,
 		new ActiveDoomClientSystemDef(componentManager, systemManager));
+	map.set(TerrorSystem, new TerrorSystemDef(componentManager, systemManager));
 	return map;
 }

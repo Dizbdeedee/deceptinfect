@@ -6,7 +6,17 @@ import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.statuses.Contaminated;
 
-class RadSourceSystem extends System {
+abstract class RadSourceSystem extends System {
+	#if server
+	public abstract function newRadSource(rso:RadSourceOptions, attatch:DI_ID, ?base:DI_ID):DI_ID;
+
+	public abstract function radSourceFromType(x:RadTypes, attatch:DI_ID, ?base:DI_ID):DI_ID;
+
+	public abstract function refreshTime(x:RadSource):Void;
+	#end
+}
+
+class RadSourceSystemDef extends RadSourceSystem {
 	#if server
 	override function run_server() {
 		for (x in 0...componentManager.entities) {
