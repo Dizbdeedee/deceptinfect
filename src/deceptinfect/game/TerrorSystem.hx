@@ -30,7 +30,7 @@ class TerrorSystemDef extends TerrorSystem {
 					return;
 				}
 				var chosenSound = sounds[cast MathLib.floor(t)];
-				Gmod.EmitSound(chosenSound, new Vector(0, 0, 0), -2, CHAN_STATIC, 0.5);
+				Gmod.EmitSound(chosenSound, new Vector(0, 0, 0), -2, CHAN_STATIC, 1);
 				var duration = Gmod.SoundDuration(chosenSound) - 0.025;
 				playTime = Gmod.RealTime() + duration;
 			}

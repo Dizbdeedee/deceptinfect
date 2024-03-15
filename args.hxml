@@ -13,6 +13,7 @@
 -D analyzer-optimize
 -D profile
 -D gmod_PreCopyFiles=build
+-D debug
 -D printBuildIdent
 --dce full
 --times

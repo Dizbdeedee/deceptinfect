@@ -21,6 +21,7 @@ import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.grab.components.GrabSearcher;
 import deceptinfect.grab.components.GrabSearchVictim;
+import deceptinfect.macros.ClassToID;
 
 using deceptinfect.util.PlayerExt;
 
@@ -61,6 +62,14 @@ class GameSystemDef extends GameSystem {
 		});
 		throw new Exception("Cannot find game manager");
 	}
+
+	#if client
+	override function init_client() {
+	}
+
+	override function run_client() {
+	}
+	#end
 
 	#if server
 	override function init_server() {
@@ -253,16 +262,24 @@ class GameSystemDef extends GameSystem {
 		IterateEnt.iterGet([CleanupEnt, GEntityComponent], [_, {entity: ent}], function() {
 			ent.Remove();
 		});
-		for (x in 0...componentManager.entities) {
-			final ent:DI_ID = x;
-			if (!ent.has_comp(KeepRestart)) {
-				componentManager.removeEntity(ent);
+		for (compID => compStorage in componentManager.components_3) {
+			for (id => comp in compStorage.components) {
+				if (comp.get_componentLifetime() != NEVER_DELETE) {
+					componentManager.removeComponent(compID, compStorage.internal[id]);
+					// compStorage.remove_entity_comp(compStorage.external[id]);
+				}
 			}
 		}
+		// for (x in 0...componentManager.entities) {
+		// 	final ent:DI_ID = x;
+		// 	if (!ent.has_comp(KeepRestart)) {
+		// 		componentManager.removeEntity(ent);
+		// 	}
+		// }
 		clientTranslateSystem.flush();
 		// stateTrig.clear();
-		systemManager.destroySystems();
-		systemManager.initAllSystems();
+		// systemManager.destroySystems();
+		// systemManager.initAllSystems();
 		for (ent in EntsLib.GetAll()) {
 			switch (ent.GetClass()) {
 				case Di_entities.di_charger | Di_entities.di_battery | Di_entities.di_nest | Di_entities.di_evac_zone | Di_entities.di_flare:
@@ -272,7 +289,7 @@ class GameSystemDef extends GameSystem {
 		}
 		// GameLib.CleanUpMap();
 		for (p in PlayerLib.GetAll()) {
-			new GPlayerCompat(new PlayerComponent(p));
+			// new GPlayerCompat(new PlayerComponent(p));
 			p.KillSilent();
 			p.Spawn();
 		}

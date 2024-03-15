@@ -24,6 +24,13 @@ using Lambda;
 using Safety;
 using gmod.helpers.WeakTools;
 
+typedef FullUpdate = {
+	var networkid:String;
+	var name:String;
+	var userid:Int;
+	var index:Int;
+}
+
 @:structInit
 class Net_ReplicatedEntity implements hxbit.Serializable {
 	@:s public var comp:Array<ReplicatedComponent> = [];
@@ -272,11 +279,48 @@ class ClientTranslateSystem extends System {
 		}
 	}
 
+	function onFieldsChangedTarget(data:FieldsChangedData, playerTarget:Player) {
+		final ent = componentManager.getIDFromComponent(data.comp);
+		final plyrs = clientReplicationMachine.replToPlayers(data.comp.replicated, ent);
+		for (plyr in plyrs) {
+			if (plyr != playerTarget)
+				continue;
+			queueReplComponents.get(plyr.UserID())
+				.orGet(() -> {
+					final arr:Array<ReplicatedComponent> = [];
+					queueReplComponents.set(plyr.UserID(), arr);
+					arr;
+				})
+				.push(data.comp);
+		}
+		if (plyrs.length == 0) {
+			trace("Sent to no one...");
+			data.comp.fieldsChanged = false;
+		}
+	}
+
 	override function init_server() {
 		clientReplicationMachine = new ClientReplicationMachine(componentManager);
 		for (player in PlayerLib.GetAll()) {
-			playersReadyToRecv.set(player.UserID(), true);
+			playersReadyToRecv.set(player.UserID(), true); // TODO what?
 		}
+		GameeventLib.Listen("OnRequestFullUpdate");
+		HookLib.Add("OnRequestFullUpdate", "di_cts_fullupdate", (data:FullUpdate) -> {
+			var player = Gmod.Player(data.userid);
+			if (player == null) {
+				trace("Request full update has a null player...");
+				return;
+			}
+			for (compStore in componentManager.components_3) {
+				for (comp in compStore.components) {
+					if (comp is ReplicatedComponent) {
+						onFieldsChangedTarget({
+							comp: cast comp
+						}, player);
+					}
+				}
+			}
+		});
 		componentManager.removeSignal.handle((x) -> {
 			if (componentManager.deadEnt.exists(x.ent)) {
 				return;
@@ -383,8 +427,10 @@ class ClientTranslateSystem extends System {
 	function sendQueuedMessages() {
 		final removes = [];
 		for (user => replComps in queueReplComponents) {
-			if (!playersReadyToRecv.exists(user))
+			if (!playersReadyToRecv.exists(user)) {
+				//not replicating
 				continue;
+			}
 			var ents:Map<Int, Net_ReplicatedEntity> = [];
 			var entsreliable:Map<Int, Net_ReplicatedEntity> = [];
 			var entsSize = 0;

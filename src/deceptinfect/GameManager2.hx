@@ -13,6 +13,10 @@ class GameManager2 extends ReplicatedComponent {
 	var spawnAllowed = true;
 
 	var lastTick:Float = 0.0;
+
+	override function get_componentLifetime():ComponentLifetime {
+		return NEVER_DELETE;
+	}
 }
 
 enum GAME_STATE_2 {

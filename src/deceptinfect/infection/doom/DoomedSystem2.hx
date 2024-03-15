@@ -12,7 +12,7 @@ class DoomedSystemDef extends DoomedSystem2 {
 			switch (c_future.checkStatus) {
 				case SCHEDULED_CHECK(roll) if (Gmod.CurTime() > roll):
 					var shouldGo = MathLib.random() < c_future.baseChanceToGo;
-					if (shouldGo) {
+					if (checkCanRoll(entFuture, c_future) && shouldGo) {
 						c_future.curRollBase = c_future.rollTimeBase;
 						c_future.checkStatus = NONE;
 						var c_active = new ActiveDoom();
@@ -92,6 +92,14 @@ class DoomedSystemDef extends DoomedSystem2 {
 				case COOLDOWN(_):
 			}
 		});
+	}
+
+	function checkCanRoll(ent:DI_ID, fd:FutureDoom) {
+		return switch (lookupInfectionThresholds(ent, fd)) {
+			case NONE: ent.has_comp(CloseToInfected) || ent.has_comp(InDark);
+			default:
+				true;
+		}
 	}
 
 	function lookupInfectionThresholds(ent:DI_ID, fd:FutureDoom) {

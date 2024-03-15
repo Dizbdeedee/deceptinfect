@@ -29,7 +29,7 @@
             // "nodebugClient": true,
             
             "copyAddonBaseFolder": "generated/deceptinfect",
-            "noDebug": true,
+            // "noDebug": true,
             // "noCopy": true,
                       
         }

@@ -1,5 +1,6 @@
 package deceptinfect;
 
+import deceptinfect.weapons.Weapon_di_spit;
 import gmod.enums.TEAM;
 import deceptinfect.game.GameSystem;
 import deceptinfect.ecswip.GEntityComponent;
@@ -56,7 +57,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
 	#if client
 	override function CreateClientsideRagdoll(entity:Entity, ragdoll:Entity) {
 		final gameSystem = systemManager.get(GameSystem);
-		if (gameSystem.gameManagerAvaliable())
+		if (!gameSystem.gameManagerAvaliable())
 			return;
 		if (gameSystem.getGameManager()
 			.state != WAIT) {

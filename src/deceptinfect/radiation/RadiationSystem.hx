@@ -89,10 +89,6 @@ class RadiationSystemDef extends System {
 			radOverallTotal += total;
 			accepters++;
 		}
-		PrintTimer.print_time(1, () -> {
-			trace(radOverallTotal);
-			trace(accepters);
-		});
 	}
 	#end
 

@@ -322,7 +322,7 @@ class ComponentManagerDef implements ComponentManager {
 	public function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
 		final fam = components_3.get_component(id);
 		lookupEntity.set(x, to);
-		if (!fam.has_component(to)) { // nocheckin check
+		if (!fam.has_component(to)) { // check
 			addSignalTrig.trigger({ent: to, comp: x});
 			fam.init_entity(to, x);
 		} else {
@@ -372,6 +372,10 @@ class ComponentManagerDef implements ComponentManager {
 	}
 
 	public function removeEntity(x:DI_ID) {
+		if (x == null) {
+			trace("Attempt to remove entity with null id...");
+			return;
+		}
 		deadEnt.set(x, true);
 		removeEntityTrig.trigger({
 			ent: x
@@ -386,186 +390,6 @@ class ComponentManagerDef implements ComponentManager {
 		final id = entities++;
 		activeEntities++;
 		return id;
-	}
-}
-
-// TODO... why are these public again...?
-class ComponentManagerOld {
-	public static var components_3(default, null):ComponentStorage;
-
-	public static var componentsName(default, null):Map<Int, String>;
-
-	public static var entities:Entities = 0; // default,null
-
-	public static var activeEntities(default, null):Int = 0;
-
-	public static var lookupEntity(default, null):Map<Component, DI_ID> = lookupEntityC();
-
-	public static var gEntityLookup(default, null):Map<DI_ID, GEntCompat> = [];
-
-	public static var deadEnt:Map<DI_ID, Bool> = [];
-
-	// FIXME... this almost certainly keeps things around after system death... we need to clear signals when we remake systems.
-	static final removeSignalTrig:SignalTrigger<CompRemoveSignalData<Component>> = new SignalTrigger();
-
-	static final removeEntityTrig:SignalTrigger<RemoveEntitySignalData> = new SignalTrigger();
-
-	public static final removeSignal:Signal<CompRemoveSignalData<Component>> = removeSignalTrig.asSignal();
-
-	static final addSignalTrig:SignalTrigger<CompAddSignalData<Component>> = new SignalTrigger();
-
-	public static final addSignal:Signal<CompAddSignalData<Component>> = addSignalTrig.asSignal();
-
-	public static final removeEntitySignal:Signal<RemoveEntitySignalData> = removeEntityTrig.asSignal();
-
-	// can't this just be a component variable... ? NUMPTY
-	static function lookupEntityC() {
-		var map:Map<Component, DI_ID> = [];
-		map.setWeakKeysM();
-		return map;
-	}
-
-	// TODO move
-	public static function addGEnt(x:GEntCompat):DI_ID {
-		var id = addEntity();
-		addComponent(GEntityComponent.compID, new GEntityComponent(x), id);
-		addComponent(VirtualPosition.compID, new VirtualPosition(ENT(x)), id);
-		return id;
-	}
-
-	public static function addPlayer(x:GPlayerCompat):DI_ID {
-		var id = addGEnt(cast x);
-		addComponent(PlayerComponent.compID, new PlayerComponent(x), id);
-		PlayerManager.addID(x, id);
-		return id;
-	}
-
-	public static function initComponent(id:Int, str:String) {
-		if (components_3 == null) {
-			components_3 = new ComponentStorage();
-		}
-		if (componentsName == null)
-			componentsName = new Map();
-		componentsName.set(id, str);
-		components_3.initComponent(id, str);
-	}
-
-	/**
-		. **Deprecated**
-	**/
-	public static inline function getComponentForID<T:Component>(id:ComponentID<T>,
-			diID:DI_ID):ComponentState<T> {
-		return switch (components_3[id].has_component(diID)) {
-			case false:
-				NONE;
-			case true:
-				Comp(components_3[id].get_component(diID));
-		}
-	}
-
-	/**
-		Updated
-	**/
-	public static inline function getComponent<T:Component>(id:ComponentID<T>, diid:DI_ID):T {
-		final fam = components_3.get_component(id);
-		return if (!fam.has_component(diid)) null; else {
-			fam.get_component(diid);
-		}
-	}
-
-	public static function addComponent<T:Component>(id:ComponentID<T>, x:T, to:DI_ID) {
-		final fam = components_3.get_component(id);
-		lookupEntity.set(x, to);
-		if (!fam.has_component(to)) { // nocheckin check
-			addSignalTrig.trigger({ent: to, comp: x});
-			fam.init_entity(to, x);
-		} else {
-			fam.set_component(to, x);
-		}
-		return x;
-	}
-
-	public static inline function getIDFromComponent(comp:Component):DI_ID {
-		return lookupEntity.get(comp);
-	}
-
-	public static inline function has_component(id:ComponentID<Dynamic>, diID:DI_ID):Bool {
-		return components_3[id].external[diID] != null;
-	}
-
-	public static inline function getAddSignal<T:Component>(cls:ComponentID<T>):Signal<CompAddSignalData<T>> {
-		return components_3.get_component(cls)
-			.getAddSignal();
-	}
-
-	public static inline function getRemoveSignal<T:Component>(cls:ComponentID<T>):Signal<CompRemoveSignalData<T>> {
-		return components_3.get_component(cls)
-			.getRemoveSignal();
-	}
-
-	public static function getComponentForIDSure<T:Component>(id:ComponentID<T>, diID:DI_ID):T {
-		#if !final
-		final fam = components_3.get_component(id);
-		if (!fam.has_component(diID))
-			throw "Component did not exist at sure statement!";
-		return fam.get_component(diID);
-		#else
-		return fam.get_component(diID);
-		#end
-	}
-
-	public static function removeComponent<T:Component>(id:ComponentID<T>, diID:DI_ID) {
-		if (!components_3[id].has_component(diID)) {
-			return;
-		}
-		removeSignalTrig.trigger({
-			ent: diID,
-			comp: components_3[id].get_component(diID)
-		});
-		components_3[id].remove_entity_comp(diID);
-	}
-
-	public static function removeEntity(x:DI_ID) {
-		deadEnt.set(x, true);
-		removeEntityTrig.trigger({
-			ent: x
-		});
-		for (id in PairTools.keys(components_3)) {
-			removeComponent(id, x);
-		}
-		activeEntities--;
-	}
-
-	public static function addEntity():DI_ID {
-		final id = entities++;
-		activeEntities++;
-		return id;
-	}
-
-	@:expose("COMP_NAME")
-	static function getComponentName(id) {
-		return componentsName.get(id);
-	}
-
-	@:expose("Trace")
-	static function traceEnts() {
-		var finalOut = new StringBuf();
-		for (id in 0...1000) {
-			var hasComp = false;
-			var output = new StringBuf();
-			output.add('ID: $id\n');
-			for (ind => comp in components_3) {
-				if (comp.has_component(id)) {
-					hasComp = true;
-					output.add('\t--- ${getComponentName(ind)}\n');
-				}
-			}
-			output.add('\n');
-			if (hasComp) {
-				Lua.print(output.toString());
-				// finalOut.add(output);
-			}
-		}
 	}
 }
 

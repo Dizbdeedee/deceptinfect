@@ -56,6 +56,10 @@ class VirtualPosition extends Component {
 				this.ang = ang;
 		}
 	}
+
+	override function get_componentLifetime():ComponentLifetime {
+		return NEVER_DELETE;
+	}
 }
 
 enum ChooseVirPos {

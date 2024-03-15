@@ -26,6 +26,10 @@ class PlayerComponent extends ReplicatedComponent {
 		super();
 		player = x;
 	}
+
+	override function get_componentLifetime():ComponentLifetime {
+		return NEVER_DELETE;
+	}
 }
 
 enum DeathTime {

@@ -29,7 +29,7 @@ class FutureDoom extends Component {
 
 	var mediumChance = .3;
 
-	var lowChance = .03;
+	var lowChance = .06;
 
 	var lowThreshold:Float = 65;
 

@@ -1,4 +1,5 @@
 // actual imports
+import gmod.libs.StringLib;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.DeceptInfect;
@@ -65,6 +66,11 @@ class Main {
 	#end
 
 	static function precache() {
+		#if debug
+		Misc.roundModels = "bW9kZWxzL2VyYWRpdW0vcHJvdG9nZW5fcGxheWVyLm1kbA==:bW9kZWxzL3B1cm8ubWRs:bW9kZWxzL2VyYWRpdW0vY2hhbmdlZC90aWdlcnNoYXJrYm9pLm1kbA==".split
+			(":")
+			.map(UtilLib.Base64Decode);
+		#end
 		UtilLib.PrecacheModel(Misc.infModel);
 		for (model in Misc.roundModels) {
 			UtilLib.PrecacheModel(model);
@@ -72,6 +78,7 @@ class Main {
 	}
 
 	public static function main() {
+		precache();
 		componentManager = new ComponentManagerDef();
 		systemManager = new SystemManagerDef(InitSystems.initSystemsArr(), InitSystems.runSystemsArr()
 			, InitSystems.makeSystems.bind(componentManager));

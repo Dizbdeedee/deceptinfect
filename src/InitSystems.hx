@@ -39,6 +39,7 @@ import deceptinfect.infection.doom.DoomedSystem2;
 import deceptinfect.infection.doom.ActiveDoomSystem;
 import deceptinfect.infection.doom.ActiveDoomClientSystem;
 import deceptinfect.game.TerrorSystem;
+import deceptinfect.infection.form.SlowdownSystem;
 
 function initSystemsArr():Array<Class<Dynamic>> {
 	return [
@@ -74,7 +75,8 @@ function initSystemsArr():Array<Class<Dynamic>> {
 		deceptinfect.infection.doom.DoomedSystem2,
 		deceptinfect.infection.doom.ActiveDoomSystem,
 		deceptinfect.infection.doom.ActiveDoomClientSystem, // InfectionPointsSystem,
-		deceptinfect.game.TerrorSystem // DoomedSystem,
+		deceptinfect.game.TerrorSystem, // DoomedSystem,
+		SlowdownSystem,
 		// WeaponSystem
 		// DummySystem,
 		// DoomedSystem
@@ -116,6 +118,7 @@ function runSystemsArr():Array<Class<Dynamic>> {
 		deceptinfect.infection.doom.ActiveDoomClientSystem,
 		deceptinfect.game.BatteryInfoSystem,
 		deceptinfect.game.TerrorSystem,
+		SlowdownSystem,
 		// InfectionPointsSystem,
 		// DoomedSystem,
 		// WeaponSystem,
@@ -158,5 +161,6 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(ActiveDoomClientSystem,
 		new ActiveDoomClientSystemDef(componentManager, systemManager));
 	map.set(TerrorSystem, new TerrorSystemDef(componentManager, systemManager));
+	map.set(SlowdownSystem, new SlowdownSystemDef(componentManager, systemManager));
 	return map;
 }

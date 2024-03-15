@@ -66,6 +66,9 @@ class Spread extends System {
 			spreadTime = Gmod.CurTime() + 10;
 		}
 		IterateEnt.iterGet([SpreadComponent], [c_spread = {markedMap: markedMap}], function() {
+			var average = infectionSystem.getAverageInfection();
+			if (average == null)
+				return;
 			final inf = MathLib.Remap.bind(infectionSystem.getAverageInfection(), 0, 100);
 			c_spread.percent = inf(0.2, 0.7);
 			for (ply in PlayerLib.GetAll()) {

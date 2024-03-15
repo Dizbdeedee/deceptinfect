@@ -7,4 +7,8 @@ class GEntityComponent extends Component {
 		super();
 		entity = e;
 	}
+
+	override function get_componentLifetime():ComponentLifetime {
+		return NEVER_DELETE;
+	}
 }

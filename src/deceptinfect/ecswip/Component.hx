@@ -15,6 +15,12 @@ abstract class Component {
 	public function getName() {
 		return Type.getClassName(Type.getClass(this));
 	}
+
+	var componentLifetime(get, never):ComponentLifetime;
+
+	function get_componentLifetime():ComponentLifetime {
+		return ROUND;
+	}
 }
 
 class ComponentTools {
@@ -32,4 +38,10 @@ class ComponentTools {
 enum ComponentState<T:Component> {
 	NONE; // i'm going to shove my own pasts head down the toilet
 	Comp(comp:T);
+}
+
+enum ComponentLifetime {
+	NEVER_DELETE;
+	GAME;
+	ROUND;
 }
