@@ -1,8 +1,5 @@
 package deceptinfect.radiation;
 
-import deceptinfect.ecswip.VirtualPosition;
-import deceptinfect.radiation.RadiationProducer;
-import deceptinfect.radiation.ContaminationProducer;
 import deceptinfect.radiation.RadiationProducer.RadiationProduceOptions;
 import deceptinfect.radiation.ContaminationProducer.ContaminationProducerOptions;
 import deceptinfect.radiation.RadiationProducer.RadLifetime;

@@ -1,5 +1,4 @@
 // actual imports
-import gmod.libs.StringLib;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.DeceptInfect;

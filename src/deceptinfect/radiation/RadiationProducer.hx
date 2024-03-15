@@ -1,9 +1,6 @@
 package deceptinfect.radiation;
 
-import deceptinfect.radiation.ContaminationProducer.ContaminationProducerOptions;
-import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.ecswip.Component;
-import deceptinfect.radiation.RadiationTypes;
 
 using deceptinfect.DistSquared;
 
@@ -12,7 +9,6 @@ class RadiationProducer extends Component {
 
 	public var maxrate:Float;
 
-	// public var type:Null<RadTypes>;
 	public var radius:DistSquared;
 
 	public function new(options:RadiationProduceOptions) {

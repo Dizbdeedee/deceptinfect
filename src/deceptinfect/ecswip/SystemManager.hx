@@ -1,34 +1,6 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.infection.DoomedSystem;
-import deceptinfect.infection.InfectionPointsSystem;
-import deceptinfect.game.BatteryInfoSystem;
-import deceptinfect.game.DarkenSystem;
-import deceptinfect.game.RunUntilDoneSystem;
-import deceptinfect.game.GameInProgressSystem;
-import deceptinfect.game.ClientTranslateSystem;
-import deceptinfect.items.ScannerSystem;
-import deceptinfect.radiation.ContaminationSystem;
-// import deceptinfect.radiation.ContaminationSystem;
-import deceptinfect.game.EvacSystem;
-import deceptinfect.game.NestSystem;
-import deceptinfect.statuses.Walkthroughable.WalkthroughSystem;
-import deceptinfect.game.WinSystem;
-import deceptinfect.game.BatterySystem;
-import deceptinfect.game.RagdollSystem;
-import deceptinfect.radiation.RadiationSystem;
-import deceptinfect.infection.InfectionSystem;
-import deceptinfect.game.SpawnSystem;
-import deceptinfect.game.CRTSystem;
 import haxe.ds.ObjectMap;
-import deceptinfect.client.GeigerSystem;
-import deceptinfect.game.SlowMotionSystem;
-import deceptinfect.infection.InfectionLookSystem;
-import deceptinfect.radiation.RadSourceSystem;
-import deceptinfect.game.LowHealthSystem;
-import deceptinfect.game.GameSystem;
-import deceptinfect.items.ScannerSystem;
-import deceptinfect.WeaponSystem;
 
 // need to keep the old interface :(
 interface SystemManager {

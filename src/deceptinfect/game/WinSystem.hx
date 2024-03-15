@@ -1,15 +1,15 @@
 package deceptinfect.game;
 
-import deceptinfect.client.LocalPlayer;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.util.PrintTimer;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.components.InfectedComponent;
-import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.System;
-import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.macros.ClassToID;
+import deceptinfect.game.components.WinGame;
+import deceptinfect.game.components.AliveComponent;
+import deceptinfect.game.components.WinManager;
 
 class WinSystem extends System {
 	var winTrig:SignalTrigger<Win> = new SignalTrigger();

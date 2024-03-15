@@ -1,6 +1,5 @@
 package deceptinfect.radiation;
 
-import deceptinfect.radiation.RadSource.RadSourceOptions;
 import deceptinfect.radiation.RadiationTypes.RadTypes;
 import deceptinfect.radiation.RadiationProducer.RadiationProduceOptions;
 import deceptinfect.radiation.RadiationProducer.RadLifetime;

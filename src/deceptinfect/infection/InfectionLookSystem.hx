@@ -7,8 +7,6 @@ import deceptinfect.game.GameSystem;
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.infection.components.InfectionLookTime;
 import deceptinfect.macros.IterateEnt;
-import deceptinfect.GEntCompat.GPlayerCompat;
-import gmod.gclass.Entity.EntityGetHitBoxBoundsReturn;
 import deceptinfect.ecswip.PlayerComponent;
 
 typedef ND_InfInfo = {

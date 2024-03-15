@@ -1,6 +1,7 @@
 package deceptinfect.grab;
 
-import deceptinfect.grab.components.*;
+import deceptinfect.grab.components.GrabSearchVictim;
+import deceptinfect.grab.components.GrabSearcher;
 import deceptinfect.macros.ClassToID;
 import deceptinfect.grab.components.GrabSearchLink;
 import deceptinfect.ecswip.VirtualPosition;

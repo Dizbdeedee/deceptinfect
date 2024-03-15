@@ -1,16 +1,12 @@
 package deceptinfect.infection;
 
-import deceptinfect.infection.components.Doomed;
 import deceptinfect.game.GameSystem;
 import deceptinfect.radiation.RadiationAccepter;
 import deceptinfect.game.GeigerCounter;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.game.components.AliveComponent;
-import deceptinfect.client.GeigerSystem;
 import deceptinfect.game.components.KeepRestart;
 import deceptinfect.ecswip.System;
-import deceptinfect.infection.InfectionComponent;
-import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.components.InfectionManager;
 import deceptinfect.infection.doom.components.ActiveDoom;
@@ -60,7 +56,7 @@ class InfectionSystem extends System {
 					default:
 						1;
 				}
-				if (!ent.has_comp(Doomed) && !ent.has_comp(ActiveDoom)) {
+				if (!ent.has_comp(ActiveDoom)) {
 					inf.value += base * vun;
 				}
 				if (ent.has_comp(ActiveDoom)) {

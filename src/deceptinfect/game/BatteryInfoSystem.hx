@@ -2,6 +2,8 @@ package deceptinfect.game;
 
 import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.macros.ClassToID;
+import deceptinfect.game.components.BatteryInfo;
+import deceptinfect.game.components.BatteryAccepter;
 
 class BatteryInfoSystem extends System {
 	#if server

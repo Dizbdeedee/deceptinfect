@@ -2,7 +2,6 @@ package deceptinfect.items;
 
 import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.infection.InfVunerability;
-import deceptinfect.infection.InfectionSystem;
 import deceptinfect.abilities.FormComponent;
 import deceptinfect.infection.InfectionComponent;
 import gmod.helpers.swep.SwepBuild;

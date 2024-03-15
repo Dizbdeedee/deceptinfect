@@ -1,8 +1,6 @@
 package deceptinfect.radiation;
 
-import deceptinfect.radiation.RadiationSystem;
 import deceptinfect.ecswip.Component;
-import deceptinfect.radiation.ContaminationAccepter;
 
 class RadiationAccepter extends Component {
 	public var diminish:Float = 0.75;

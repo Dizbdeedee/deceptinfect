@@ -1,9 +1,7 @@
 package deceptinfect.game;
 
-import gmod.helpers.LuaArray;
 import deceptinfect.ecswip.ClientRepresentationTarget;
-import gmod.stringtypes.Hook.GMHook;
-import lua.lib.luv.Process;
+import gmod.stringtypes.Hook.GMHook; // keep
 import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.components.InfectedComponent;
@@ -11,14 +9,8 @@ import deceptinfect.ecswip.ReplicatedComponent;
 import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.macros.ClassToID;
-import hxbit.StructSerializable;
-import hxbit.Schema;
-import deceptinfect.radiation.RadiationAccepter;
-import deceptinfect.ecswip.SystemManager;
-import hxbit.Serializable;
-import hxbit.Serializer;
-import gmod.helpers.net.NET_Client;
-import deceptinfect.macros.ClassToID;
+import gmod.helpers.net.NET_Client.NET_CL_Message;
+import gmod.helpers.net.NET_Client.NET_Cl;
 
 using Lambda;
 using Safety;
@@ -428,7 +420,7 @@ class ClientTranslateSystem extends System {
 		final removes = [];
 		for (user => replComps in queueReplComponents) {
 			if (!playersReadyToRecv.exists(user)) {
-				//not replicating
+				// not replicating
 				continue;
 			}
 			var ents:Map<Int, Net_ReplicatedEntity> = [];

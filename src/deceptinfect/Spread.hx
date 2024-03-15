@@ -4,17 +4,10 @@ import deceptinfect.infection.InfectionSystem;
 import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.game.components.SpreadComponent;
 import deceptinfect.game.components.GasDraw;
-import gmod.helpers.PrintTimer;
-import deceptinfect.util.Util;
 import deceptinfect.game.components.Darken;
 import deceptinfect.GEntCompat.GPlayerCompat;
-import gmod.stringtypes.Hook.GMHook;
-import gmod.helpers.net.NVector;
-import deceptinfect.game.EvacSystem;
 
 using Lambda;
-
-import gmod.helpers.net.NET_Server;
 
 typedef Particle = {
 	particle:String,

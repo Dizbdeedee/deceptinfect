@@ -4,6 +4,7 @@ import deceptinfect.GameManager2.GAME_STATE_2;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.game.WinSystem.Win;
 import deceptinfect.ecswip.SystemManager;
+import deceptinfect.game.components.WinManager;
 
 class SlowMotionSystem extends System {
 	public var slowMotionEnd(default, never):Signal<Noise>;

@@ -1,12 +1,9 @@
 package deceptinfect.ents;
 
 import deceptinfect.infection.components.GrabbableProp;
-import deceptinfect.infection.components.GrabAccepter;
 import deceptinfect.ecswip.PlayerComponent;
-import gmod.structs.MeshVertex;
 import gmod.helpers.sent.SentBuild.EntFields;
 import gmod.gclass.IMesh;
-import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.infection.InfectionComponent;
 
 @:keep
@@ -77,11 +74,11 @@ class Di_puddle extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
 		self.SetCollisionBounds(-sizeVector, sizeVector + collideHeightVector);
 		var ent = new GEntCompat(self);
 		id = ent.id;
-		final grabaccepter = id.add_component(new GrabAccepter());
-		grabaccepter.canGrabBack = false;
-		grabaccepter.overwhelm = 1;
-		id.add_component(new GrabbableProp());
-		id.add_component(new InfectionComponent());
+		// final grabaccepter = id.add_component(new GrabAccepter());
+		// grabaccepter.canGrabBack = false;
+		// grabaccepter.overwhelm = 1;
+		// id.add_component(new GrabbableProp());
+		// id.add_component(new InfectionComponent());
 		#if client
 		#end
 	}

@@ -1,7 +1,10 @@
 package deceptinfect.infection.doom;
 
 import gmod.libs.MathLib;
-import deceptinfect.infection.doom.components.*;
+import deceptinfect.infection.doom.components.FutureDoom;
+import deceptinfect.infection.doom.components.CloseToInfected;
+import deceptinfect.infection.doom.components.InDark;
+import deceptinfect.infection.doom.components.ActiveDoom;
 
 abstract class DoomedSystem2 extends System {}
 

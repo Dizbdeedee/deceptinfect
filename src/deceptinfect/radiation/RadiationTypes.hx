@@ -1,7 +1,6 @@
 package deceptinfect.radiation;
 
 import deceptinfect.radiation.RadSource.RadSourceOptions;
-import deceptinfect.radiation.RadiationProducer.RadiationProduceOptions;
 
 class RadiationTypes {
 	public static var types:Map<RadTypes, RadSourceOptions> = [

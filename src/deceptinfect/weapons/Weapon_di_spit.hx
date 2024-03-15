@@ -2,8 +2,7 @@ package deceptinfect.weapons;
 
 import deceptinfect.abilities.FormComponent;
 import gmod.helpers.swep.SwepBuild.SwepFields;
-import deceptinfect.infection.InfectionComponent;
-import deceptinfect.GEntCompat;
+import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.ents.EntSetup;
 
 class Weapon_di_spit extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {

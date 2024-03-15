@@ -2,6 +2,7 @@ package deceptinfect.game;
 
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.macros.CompileTime.C_square;
+import deceptinfect.game.components.Spawned;
 
 abstract class SpawnSystem extends System {
 	public var obj:SpawnPointTable;

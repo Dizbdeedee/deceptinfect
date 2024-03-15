@@ -1,9 +1,6 @@
 package deceptinfect;
 
-import deceptinfect.ecswip.Component;
-import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
-import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ents.EntSetup;
 
 @:forward

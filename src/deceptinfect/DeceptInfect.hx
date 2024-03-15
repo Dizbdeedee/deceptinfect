@@ -1,46 +1,30 @@
 package deceptinfect;
 
-import deceptinfect.weapons.Weapon_di_spit;
 import gmod.enums.TEAM;
 import deceptinfect.game.GameSystem;
 import deceptinfect.ecswip.GEntityComponent;
-import deceptinfect.util.PrintTimer;
-import haxe.io.Bytes;
-import haxe.crypto.Crc32;
-import gmod.enums.SNDLVL;
-import gmod.enums.SND;
-import gmod.enums.CHAN;
-import deceptinfect.infection.components.GrabAccepter;
-import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.game.RagdollSystem;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.statuses.Walkthroughable;
-import gmod.gamemode.GM.GmPlayerCanHearPlayersVoiceReturn;
 import gmod.enums.IN;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.abilities.FormSystem;
-import deceptinfect.ecswip.GrabSystem;
-import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.Spectate;
 import deceptinfect.ecswip.SystemManager;
-import deceptinfect.GEntCompat;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.GEntCompat.GPlayerCompat;
 import gmod.enums.BUTTON_CODE;
 import deceptinfect.ecswip.ComponentManager;
-import gmod.stringtypes.Hook;
-import lua.Lua;
-import tink.core.Annex;
 import gmod.helpers.HaxeMultiReturn;
 import gmod.libs.MathLib;
 import gmod.libs.EntsLib;
 import gmod.gclass.Player;
 import deceptinfect.game.components.GamePlayer;
 import deceptinfect.game.components.NotInGamePlayer;
+import deceptinfect.ecswip.SignalStorage;
+import deceptinfect.weapons.WeaponImport;
 
 using deceptinfect.util.PlayerExt;
-
-import deceptinfect.ecswip.SignalStorage;
 
 @:keep
 class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
@@ -78,6 +62,7 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
 	#end
 
 	override function OnGamemodeLoaded() {
+		WeaponImport.spit;
 		#if debug
 		Gmod.RunConsoleCommand("developer", 1);
 		#end
@@ -138,7 +123,6 @@ class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
 	#if server
 	function playerDeath(victim:GPlayerCompat) {
 		victim.id.remove_component(AliveComponent); // deprecated
-		victim.id.remove_component(GrabAccepter);
 		victim.id.remove_component(deceptinfect.game.components.GamePlayer);
 		victim.id.add_component(new deceptinfect.game.components.NotInGamePlayer());
 		var sounds = Misc.deathSounds.get(HUMAN_MALE);

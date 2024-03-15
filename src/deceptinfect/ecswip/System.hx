@@ -2,7 +2,6 @@ package deceptinfect.ecswip;
 
 using Safety;
 
-@:autoBuild(deceptinfect.macros.SystemMacro.build())
 class System {
 	var onInit:Signal<Noise> = new SignalTrigger().asSignal();
 

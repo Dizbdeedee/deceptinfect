@@ -1,9 +1,6 @@
 package deceptinfect.infection;
 
-import gmod.helpers.net.NVector;
 import deceptinfect.ecswip.ReplicatedComponent;
-import hxbit.Serializer;
-import deceptinfect.ecswip.Component;
 import deceptinfect.SeralizableRef;
 
 @:replicated(SOME(CURRENT_PLAYER))

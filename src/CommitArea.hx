@@ -1,7 +1,4 @@
 #if macro
-import haxe.macro.Type.ClassField;
-import haxe.macro.Expr;
-import haxe.macro.Type;
 import haxe.macro.Context;
 
 using tink.MacroApi;

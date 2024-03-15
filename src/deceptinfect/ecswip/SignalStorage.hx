@@ -1,7 +1,5 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.ecswip.ComponentManager;
-
 class SignalStorage {
 	public static var onInfected(default, null):Signal<InfectedSig>;
 	public static var onInfectedTrigger(default, null):SignalTrigger<InfectedSig>;

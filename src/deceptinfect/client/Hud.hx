@@ -1,6 +1,5 @@
 package deceptinfect.client;
 
-import deceptinfect.infection.components.DoomClient;
 import deceptinfect.infection.components.InfectionPoints;
 import deceptinfect.game.components.BatteryInfo;
 import deceptinfect.macros.IterateEnt;

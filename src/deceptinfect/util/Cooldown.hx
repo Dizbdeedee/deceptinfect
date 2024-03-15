@@ -7,6 +7,7 @@ enum Cooldown {
 	UNAVALIABLE;
 }
 
+// TODO... uhh...
 class CooldownTools {
 	public static function check(x:Cooldown):Cooldown {
 		return switch (x) {

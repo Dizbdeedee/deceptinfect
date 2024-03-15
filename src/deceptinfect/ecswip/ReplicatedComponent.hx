@@ -1,7 +1,5 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.game.ClientTranslateSystem;
-
 typedef FieldsChangedData = {
 	comp:ReplicatedComponent
 }

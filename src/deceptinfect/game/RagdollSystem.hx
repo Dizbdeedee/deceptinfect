@@ -1,22 +1,23 @@
 package deceptinfect.game;
 
-// import hxbit.NetworkSerializable;
 import deceptinfect.GameManager2.GAME_STATE_2;
 import deceptinfect.util.VectorString;
 import deceptinfect.util.AngleString;
 import deceptinfect.infection.InfectionComponent;
 import haxe.Json;
-import deceptinfect.statuses.Walkthroughable;
-import deceptinfect.abilities.FormSystem;
-import deceptinfect.abilities.FormComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.GEntityComponent;
-import deceptinfect.ents.Di_entities;
 import deceptinfect.GEntCompat;
 import deceptinfect.infection.components.InfectedComponent;
-import gmod.stringtypes.Hook.GMHook;
+import gmod.stringtypes.Hook.GMHook; // keep. i guess
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.game.components.RagInfo;
+import deceptinfect.game.components.Ragdoll;
+import deceptinfect.game.components.AliveComponent;
+import deceptinfect.game.components.Statue;
+import deceptinfect.game.components.KeepRestart;
+import deceptinfect.game.components.CleanupEnt;
+import deceptinfect.game.components.ClientWeaponStatue;
 
 typedef ND_Statue = {
 	playerpos:Vector,

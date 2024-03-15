@@ -1,6 +1,5 @@
 package deceptinfect;
 
-import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.GEntCompat.GPlayerCompat;
 
 class PlayerManager {

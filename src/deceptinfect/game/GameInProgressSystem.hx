@@ -1,12 +1,11 @@
 package deceptinfect.game;
 
-import Assertion.*;
 import deceptinfect.game.SpawnSystem.BoundsSpawn;
-import deceptinfect.ents.Di_nest;
 import deceptinfect.ents.Di_evac_zone;
 import deceptinfect.ents.Di_charger;
 import deceptinfect.ents.Di_battery;
 import deceptinfect.macros.IterateEnt;
+import Assertion.assert;
 
 class GameInProgressSystem extends System {
 	#if server
@@ -52,13 +51,12 @@ class GameInProgressSystem extends System {
 		trace(untyped spawns[1].claimed);
 		spawns[0].spawn(bat1);
 		spawns[1].spawn(bat2);
-		var nestSpawn = spawnSystem.nest.getRandom();
-		var nest = Di_nest.create();
-		nestSpawn.spawn(nest);
+		var nestSpawn = spawnSystem.nest.getRandom(); // woo woo
+		// nestSpawn.spawn(nest);
 		var evacZone = Di_evac_zone.create();
 		var evacZoneSpawn:BoundsSpawn = cast spawnSystem.evac.getRandom();
 		evacZoneSpawn.spawn(evacZone);
-		spread.beginSpread(NavmeshLib.GetNearestNavArea(nest.GetPos(), null, false, true));
+		// spread.beginSpread(NavmeshLib.GetNearestNavArea(nest.GetPos(), null, false, true)); //um
 		#end
 	}
 }

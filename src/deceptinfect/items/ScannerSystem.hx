@@ -4,29 +4,31 @@ import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.game.GameSystem;
 
+// FIXME find alternative to timekeep
 class ScannerSystem extends System {
 	#if server
 	public function scan_target(scan:DI_ID, target:DI_ID) {
-		final c_scan = scan.get_sure(ScannerComponent);
-		final gameSystem = systemManager.get(GameSystem);
-		switch (target.get(PlayerComponent)) {
-			case Comp(_):
-				c_scan.scanProgress.addTime(target, gameSystem.diffTime());
-			default:
-		}
+		// final c_scan = scan.get_sure(ScannerComponent);
+		// final gameSystem = systemManager.get(GameSystem);
+		// switch (target.get(PlayerComponent)) {
+		// 	case Comp(_):
+		// 		c_scan.scanProgress.addTime(target, gameSystem.diffTime());
+		// 	default:
+		// }
 	}
 
 	public function get_reliability(scan:DI_ID, target:DI_ID):Option<Float> {
 		var c_scan = scan.get_sure(ScannerComponent);
-		switch (target.get(PlayerComponent)) {
-			case Comp(_):
-				var time = c_scan.scanProgress.getTime(target);
-				final time = MathLib.Clamp(time, 0, c_scan.time);
-				return Some(MathLib.Remap(time, 0, c_scan.time, c_scan.reliability_min
-					, c_scan.reliability_max));
-			default:
-				return None;
-		}
+		return null;
+		// switch (target.get(PlayerComponent)) {
+		// 	case Comp(_):
+		// 		var time = c_scan.scanProgress.getTime(target);
+		// 		final time = MathLib.Clamp(time, 0, c_scan.time);
+		// 		return Some(MathLib.Remap(time, 0, c_scan.time, c_scan.reliability_min
+		// 			, c_scan.reliability_max));
+		// 	default:
+		// 		return None;
+		// }
 	}
 
 	public function final_scan(scan:DI_ID, target:DI_ID):ScanResult {

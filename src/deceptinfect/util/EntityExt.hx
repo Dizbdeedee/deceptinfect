@@ -1,7 +1,7 @@
 package deceptinfect.util;
 
 class EntityExt {
-	public static function facingBehind(me:Entity, target:Entity) {
+	public static function facingBehind(me:Entity, target:Entity):Bool {
 		var vec1 = new Angle(0, me.EyeAngles()
 			.y, 0).Forward();
 		var vec2 = new Angle(0, target.EyeAngles()
@@ -19,7 +19,7 @@ class EntityExt {
 	}
 
 	// TODO rename
-	public static function validID2(x:Entity) {
+	public static function validID2(x:Entity):ValidID {
 		return if (IsValid(x)) {
 			switch (x : GEntCompat).id {
 				case null:

@@ -2,6 +2,8 @@ package deceptinfect.game;
 
 import deceptinfect.lib.BSP;
 import deceptinfect.macros.IterateEnt;
+import deceptinfect.game.components.DarkenApplied;
+import deceptinfect.game.components.Darken;
 
 class DarkenSystem extends System {
 	#if client
