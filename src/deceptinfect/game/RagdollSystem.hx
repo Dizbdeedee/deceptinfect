@@ -10,6 +10,7 @@ import deceptinfect.ecswip.GEntityComponent;
 import deceptinfect.GEntCompat;
 import deceptinfect.infection.components.InfectedComponent;
 import gmod.stringtypes.Hook.GMHook; // keep. i guess
+import gmod.Gmod.IsValid;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.game.components.RagInfo;
 import deceptinfect.game.components.Ragdoll;
@@ -461,7 +462,7 @@ class RagdollSystem extends System {
 		rag.SetCollisionGroup(COLLISION_GROUP_WORLD);
 		for (i in 0...rag.GetPhysicsObjectCount() - 1) {
 			var oldphysob = rag.GetPhysicsObjectNum(i);
-			if (IsValid(oldphysob)) {
+			if (Gmod.IsValid(oldphysob)) {
 				oldphysob.EnableCollisions(false);
 			}
 		}

@@ -5,7 +5,9 @@ using Lambda;
 #if macro
 import haxe.macro.Context;
 import haxe.macro.Expr;
-import deceptinfect.macros.MacroUtil;
+import deceptinfect.macros.MacroUtil.blockToExprArr;
+import deceptinfect.macros.MacroUtil.insert;
+import deceptinfect.macros.MacroUtil.renameVar;
 #end
 
 class IterateEnt {

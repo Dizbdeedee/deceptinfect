@@ -1,10 +1,10 @@
 package deceptinfect.macros;
 
+#if macro
 import haxe.macro.Context;
-
+import deceptinfect.macros.MacroUtil.insert;
+#end
 using Lambda;
-
-import deceptinfect.macros.MacroUtil;
 
 class ReplicatedComponentMacro {
 	public static function build() {
@@ -57,7 +57,6 @@ class ReplicatedComponentMacro {
 								return result;
 							}
 						}),
-						// access: [AInline,AExtern],
 						pos: Context.currentPos()
 					});
 				case [FProp(_, "set", t, e), [{name: ":s"}]]:

@@ -5,9 +5,6 @@ import haxe.macro.Context;
 import haxe.macro.Expr;
 
 using haxe.macro.ExprTools;
-
-import haxe.macro.Type;
-
 using Lambda;
 #end
 

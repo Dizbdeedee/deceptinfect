@@ -6,6 +6,7 @@ import gmod.helpers.sent.SentBuild;
 import deceptinfect.game.components.BatterySource;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.game.BatterySystem;
+import gmod.Gmod.IsValid;
 
 @:keep
 class Di_battery extends SentBuild<gmod.sent.ENT_ANIM> {
