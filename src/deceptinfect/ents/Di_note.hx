@@ -2,7 +2,6 @@ package deceptinfect.ents;
 
 import deceptinfect.game.components.InfoStorage;
 import deceptinfect.GEntCompat.GPlayerCompat;
-import gmod.sent.ENT_ANIM;
 
 class Di_note extends gmod.sent.SentBuild<gmod.sent.ENT_ANIM> {
 	static final properties = {

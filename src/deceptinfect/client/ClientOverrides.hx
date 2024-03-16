@@ -2,11 +2,6 @@ package deceptinfect.client;
 
 import gmod.helpers.LuaArray;
 import gmod.enums.BUTTON_CODE;
-import deceptinfect.game.RagdollSystem;
-import deceptinfect.ecswip.PlayerComponent;
-import deceptinfect.GEntCompat.GPlayerCompat;
-import deceptinfect.infection.InfectionComponent;
-import deceptinfect.infection.components.InfectedComponent;
 import deceptinfect.ecswip.ComponentManager;
 import gmod.gclass.Vector;
 

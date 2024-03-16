@@ -2,12 +2,12 @@ package deceptinfect.ents;
 
 import deceptinfect.infection.components.GrabbableProp;
 import deceptinfect.ecswip.PlayerComponent;
-import gmod.helpers.sent.SentBuild.EntFields;
+import gmod.helpers.sent.SentBuild;
 import gmod.gclass.IMesh;
 import deceptinfect.infection.InfectionComponent;
 
 @:keep
-class Di_puddle extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
+class Di_puddle extends SentBuild<gmod.sent.ENT_ANIM> {
 	static final material = Gmod.Material("nature/water_coast01")
 		.a;
 

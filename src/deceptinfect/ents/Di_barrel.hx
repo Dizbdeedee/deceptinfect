@@ -4,7 +4,7 @@ import gmod.helpers.sent.SentBuild;
 
 using Safety;
 
-class Di_barrel extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
+class Di_barrel extends SentBuild<gmod.sent.ENT_ANIM> {
 	static final properties:EntFields = {
 		Base: "base_anim",
 	}

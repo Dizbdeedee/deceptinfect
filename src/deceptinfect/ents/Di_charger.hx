@@ -4,7 +4,7 @@ import gmod.helpers.sent.SentBuild;
 import deceptinfect.game.components.BatteryAccepter;
 import deceptinfect.ecswip.ComponentManager;
 
-class Di_charger extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
+class Di_charger extends SentBuild<gmod.sent.ENT_ANIM> {
 	var componentManager:ComponentManager;
 
 	var systemManager:SystemManager;

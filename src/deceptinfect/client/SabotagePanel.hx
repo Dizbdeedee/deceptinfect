@@ -1,8 +1,5 @@
 package deceptinfect.client;
 
-import gmod.gclass.Panel;
-import gmod.gclass.Panel;
-import gmod.panels.DFrame;
 import gmod.helpers.panel.PanelBuild;
 
 class SabotagePanel extends PanelBuild<gmod.panels.DFrame> {

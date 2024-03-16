@@ -9,8 +9,6 @@ import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.infection.components.InfectionRadiation;
 import deceptinfect.radiation.RadSourceSystem;
 
-// abstract class FormSystem extends System
-// }
 class FormSystem extends System {
 	#if server
 	public function attemptChangeForm(ent:DI_ID) {

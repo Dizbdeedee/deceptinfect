@@ -1,7 +1,5 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.macros.IterateEnt;
-
 class LinkedEntitySystem extends System {
 	override function init_server() {
 		componentManager.getAddSignal(LinkedComponents)

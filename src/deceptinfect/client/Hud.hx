@@ -5,8 +5,6 @@ import deceptinfect.game.components.BatteryInfo;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.infection.components.InfectionLookData;
 import deceptinfect.GameManager2.GAME_STATE_2;
-import deceptinfect.game.GameSystem;
-import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.game.components.WinGame;

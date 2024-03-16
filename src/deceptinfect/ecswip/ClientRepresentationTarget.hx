@@ -1,8 +1,6 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.hxbit.NPlayer;
 import deceptinfect.ecswip.ReplicatedComponent.ReplicatedTarget;
-import deceptinfect.hxbit.NEntity;
 
 class ClientRepresentationTarget extends ReplicatedComponent {
 	@:s var target:DI_ID;

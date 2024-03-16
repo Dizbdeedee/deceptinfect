@@ -1,10 +1,8 @@
 package deceptinfect.client;
 
-import deceptinfect.GEntCompat.GPlayerCompat;
 import deceptinfect.game.GeigerCounter;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.ecswip.PlayerComponent;
-import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.ecswip.System;
 

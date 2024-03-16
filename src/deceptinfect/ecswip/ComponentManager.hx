@@ -1,17 +1,9 @@
 package deceptinfect.ecswip;
 
-import lua.Lua;
-import deceptinfect.ecswip.ReplicatedComponent;
-
-using gmod.helpers.LuaArray;
-
-import deceptinfect.game.ClientTranslateSystem;
-import deceptinfect.macros.ClassToID;
-import haxe.ds.ObjectMap;
 import deceptinfect.GEntCompat.GPlayerCompat;
-import deceptinfect.ecswip.Component;
 
 using gmod.helpers.WeakTools;
+using gmod.helpers.LuaArray;
 
 typedef ComponentArray = Array<ComponentState<Component>>;
 

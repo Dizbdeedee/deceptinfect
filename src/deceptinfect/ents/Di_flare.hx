@@ -5,7 +5,7 @@ import gmod.helpers.sent.SentBuild;
 import deceptinfect.game.components.FlareComponent;
 import deceptinfect.ecswip.SystemManager;
 
-class Di_flare extends gmod.helpers.sent.SentBuild<gmod.sent.ENT_ANIM> {
+class Di_flare extends SentBuild<gmod.sent.ENT_ANIM> {
 	static final properties:EntFields = {
 		Base: "base_entity"
 	}
