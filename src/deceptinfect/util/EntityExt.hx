@@ -1,5 +1,7 @@
 package deceptinfect.util;
 
+import gmod.Gmod.IsValid;
+
 class EntityExt {
 	public static function facingBehind(me:Entity, target:Entity):Bool {
 		var vec1 = new Angle(0, me.EyeAngles()
