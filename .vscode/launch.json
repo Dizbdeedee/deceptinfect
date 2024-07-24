@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "preLaunchTask": "custom buildall",
+            // "preLaunchTask": "custom buildall",
             "type": "gmdebug",
             "request": "launch",
             "name": "gmdebug : Launch server",
@@ -29,7 +29,7 @@
             // "nodebugClient": true,
             
             "copyAddonBaseFolder": "generated/deceptinfect",
-            // "noDebug": true,
+            "noDebug": true,
             // "noCopy": true,
                       
         }

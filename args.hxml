@@ -11,6 +11,7 @@
 -D addonName=deceptinfect
 -D noGenInit
 -D analyzer-optimize
+-D message.reporting=pretty
 -D profile
 -D gmod_PreCopyFiles=build
 -D debug
