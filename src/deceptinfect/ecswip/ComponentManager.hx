@@ -1,6 +1,7 @@
 package deceptinfect.ecswip;
 
-import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GEntCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 
 using gmod.helpers.WeakTools;
 using gmod.helpers.LuaArray;
@@ -275,7 +276,6 @@ class ComponentManagerDef implements ComponentManager {
 	public function addPlayer(x:GPlayerCompat):DI_ID {
 		var id = addGEnt(cast x);
 		addComponent(PlayerComponent.compID, new PlayerComponent(x), id);
-		PlayerManager.addID(x, id);
 		return id;
 	}
 

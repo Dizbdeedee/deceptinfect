@@ -1,6 +1,6 @@
 package deceptinfect.items;
 
-import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 import deceptinfect.infection.InfVunerability;
 import deceptinfect.abilities.FormComponent;
 import deceptinfect.infection.InfectionComponent;
@@ -28,7 +28,7 @@ class Di_cure extends SwepBuild<gmod.swep.SWEP> {
 		var setup:EntSetup = HookLib.Run("di_setupent", this);
 		systemManager = setup.systemManager;
 		componentManager = setup.componentManager;
-		var owner:GPlayerCompat = untyped self.Owner;
+		var owner:GPlayerCompat = self.Owner.cmpPly();
 		self.SetNextPrimaryFire(Gmod.CurTime() + 999);
 		switch (owner.get(InfectionComponent)) {
 			case Comp(c_inf):

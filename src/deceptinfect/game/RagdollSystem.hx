@@ -1,13 +1,14 @@
 package deceptinfect.game;
 
-import deceptinfect.GameManager2.GAME_STATE_2;
+import deceptinfect.GameManager.GAME_STATE_2;
 import deceptinfect.util.VectorString;
 import deceptinfect.util.AngleString;
 import deceptinfect.infection.InfectionComponent;
 import haxe.Json;
 import deceptinfect.ecswip.PlayerComponent;
 import deceptinfect.ecswip.GEntityComponent;
-import deceptinfect.GEntCompat;
+import deceptinfect.ecswip.compat.GEntCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 import deceptinfect.infection.components.InfectedComponent;
 import gmod.stringtypes.Hook.GMHook; // keep. i guess
 import gmod.Gmod.IsValid;
@@ -19,6 +20,8 @@ import deceptinfect.game.components.Statue;
 import deceptinfect.game.components.KeepRestart;
 import deceptinfect.game.components.CleanupEnt;
 import deceptinfect.game.components.ClientWeaponStatue;
+
+using deceptinfect.util.EntityExt;
 
 typedef ND_Statue = {
 	playerpos:Vector,
@@ -81,7 +84,7 @@ class RagdollSystem extends System {
 				id.getOrAdd(RagInfo);
 			default:
 				if (IsValid(x.rag)) {
-					var rag = new GEntCompat(x.rag);
+					var rag = x.rag.createCompat();
 					var c_rag = new RagInfo();
 					rag.id.add_component(c_rag);
 					c_rag;
@@ -99,7 +102,7 @@ class RagdollSystem extends System {
 			case HAS_ID(id):
 				id.getOrAdd(StatInfo);
 			case NO_ID:
-				var stat = new GEntCompat(x.stat);
+				var stat = x.stat.createCompat();
 				var c_stat = new StatInfo();
 				stat.id.add_component(c_stat);
 				c_stat;
@@ -157,13 +160,14 @@ class RagdollSystem extends System {
 		for (rag in EntsLib.GetAll()) {
 			var mdl:String = rag.GetNWString("showwep");
 			if (mdl != null && mdl != "" && untyped rag.showwep == null) {
-				var _rag = new GEntCompat(rag);
+				var _rag = rag.createCompat();
 				var c_stat = new Statue();
 				_rag.id.add_component(c_stat);
 				_rag.id.add_component(new KeepRestart());
 				trace(mdl);
 				untyped rag.showwep = true;
-				var ent = new GEntCompat(Gmod.ClientsideModel(mdl));
+				var clModel = Gmod.ClientsideModel(mdl);
+				var ent = clModel.createCompat();
 				var c_wep = new ClientWeaponStatue();
 				c_wep.parent = rag;
 
@@ -219,7 +223,6 @@ class RagdollSystem extends System {
 				default:
 			}
 		}
-		// writeStatues();
 	}
 
 	function stateChange(newstate:GAME_STATE_2) {
@@ -319,7 +322,9 @@ class RagdollSystem extends System {
 	}
 
 	public function playerStatue(plyr:GPlayerCompat, ?inf = false) {
-		var ent:GEntCompat = new GEntCompat(EntsLib.Create("prop_ragdoll"));
+		var propRagdoll:Entity = EntsLib.Create("prop_ragdoll");
+		
+		var ent:GEntCompat = propRagdoll.createCompat();
 		ent.id.add_component(new Statue());
 		var c_stat = new StatInfo();
 		c_stat.name = plyr.Name();
@@ -432,7 +437,7 @@ class RagdollSystem extends System {
 	function createProp():GEntCompat {
 		final gameSystem = systemManager.get(GameSystem);
 		var rag:Entity = EntsLib.Create("prop_ragdoll");
-		var id = new GEntCompat(rag).id;
+		var id = rag.createCompat().id;
 		id.add_component(new Ragdoll());
 
 		switch (gameSystem.getGameManager()

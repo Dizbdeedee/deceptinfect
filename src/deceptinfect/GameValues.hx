@@ -1,5 +1,6 @@
 package deceptinfect;
 
+// -> game
 @:expose("GameValues")
 class GameValues {
 	public static var DOOM_THRESHOLD_MAX = 98;

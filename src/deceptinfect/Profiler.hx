@@ -5,6 +5,7 @@ import gmod.libs.MathLib;
 
 using Safety;
 
+//-> util
 class Profiler {
 	final inital:Array<Map<String, Float>> = [];
 	final vinal:Array<Map<String, Float>> = [];

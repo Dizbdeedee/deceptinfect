@@ -7,6 +7,7 @@ using deceptinfect.util.PlayerExt;
 
 class Walkthroughable extends Component {}
 
+//seething
 class WalkthroughSystem extends System {
 	#if server
 	var runtime = 0;

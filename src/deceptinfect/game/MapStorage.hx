@@ -1,4 +1,4 @@
-package deceptinfect;
+package deceptinfect.game;
 
 enum abstract MapNames(String) from String to String {
 	var mor_temple_v1;

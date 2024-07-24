@@ -1,6 +1,6 @@
 package deceptinfect.game;
 
-import deceptinfect.GameManager2.GAME_STATE_2;
+import deceptinfect.GameManager.GAME_STATE_2;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.game.WinSystem.Win;
 import deceptinfect.ecswip.SystemManager;
@@ -30,7 +30,7 @@ class SlowMotionSystemDef extends SlowMotionSystem {
 	override function init_server() {
 		final runUntilDoneSystem = systemManager.get(RunUntilDoneSystem);
 		runUntilDoneSystem.addRunner(() -> {
-			IterateEnt.iterGet([GameManager2], [{stateChanged: sc}], function() {
+			IterateEnt.iterGet([GameManager], [{stateChanged: sc}], function() {
 				trace("Hello statechange!!!!!!!");
 				sc.handle(stateChange);
 				return true;

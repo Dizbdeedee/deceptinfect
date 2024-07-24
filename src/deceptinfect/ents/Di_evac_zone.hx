@@ -2,6 +2,7 @@ package deceptinfect.ents;
 
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.game.components.EvacZone;
+import deceptinfect.ecswip.compat.GEntCompat;
 import deceptinfect.game.EvacSystem;
 import gmod.helpers.sent.SentBuild;
 
@@ -25,7 +26,7 @@ class Di_evac_zone extends SentBuild<gmod.sent.ENT_BRUSH> {
 		self.SetTrigger(true);
 		self.SetCollisionGroup(COLLISION_GROUP_PLAYER);
 		self.UseTriggerBounds(true, 0);
-		id = new GEntCompat(self).id;
+		id = self.createCompat().id;
 		id.add_component(new EvacZone());
 	}
 

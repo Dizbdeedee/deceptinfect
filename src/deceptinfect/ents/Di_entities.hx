@@ -2,7 +2,8 @@ package deceptinfect.ents;
 
 import gmod.stringtypes.EntityClass;
 import gmod.helpers.GLinked;
-import deceptinfect.GEntCompat;
+import deceptinfect.ecswip.compat.GEntCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 
 enum abstract Di_entities<T:Entity>(EntityClass<T>) to String to EntityClass<T> {
 	var di_battery:Di_entities<GLinked<GEntCompat, Di_battery>>;

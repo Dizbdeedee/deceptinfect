@@ -1,5 +1,6 @@
 package deceptinfect;
 
+//-> game
 class GameInProgress extends Component {
 	var totalGameTime:Int = 0;
 

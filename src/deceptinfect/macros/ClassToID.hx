@@ -298,24 +298,21 @@ class Component_Use {
 }
 
 class GEntCompat_Use {
-	public static macro function get(gentCompat:ExprOf<deceptinfect.GEntCompat>, cls:ExprOf<Class<Dynamic>>) {
+	public static macro function get(gentCompat:ExprOf<deceptinfect.ecswip.compat.GEntCompat>, cls:ExprOf<Class<Dynamic>>) {
 		#if macro
 		final idMacro = ClassToID.idMacro(cls);
-
 		final mac = macro $e{gentCompat}.id;
-		// trace(mac);
 		return macro componentManager.getComponentForID($idMacro, $mac);
 		#end
 	}
 }
 
 class GPlayerCompat_Use {
-	public static macro function get(gentCompat:ExprOf<deceptinfect.GEntCompat.GPlayerCompat>,
+	public static macro function get(gentCompat:ExprOf<deceptinfect.ecswip.compat.GPlayerCompat>,
 			cls:ExprOf<Class<Dynamic>>) {
 		#if macro
 		final idMacro = ClassToID.idMacro(cls);
 		final mac = macro $e{gentCompat}.id;
-		// trace(mac);
 		return macro componentManager.getComponentForID($idMacro, $mac);
 		#end
 	}

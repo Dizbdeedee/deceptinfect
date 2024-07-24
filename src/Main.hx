@@ -1,7 +1,7 @@
 // actual imports
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.ecswip.ComponentManager;
-import deceptinfect.DeceptInfect;
+import deceptinfect.DeceptInfectGM;
 import deceptinfect.Misc;
 import deceptinfect.game.GameSystem;
 #if client
@@ -25,7 +25,7 @@ class Main {
 
 	static var componentManager:ComponentManager;
 
-	static var deceptinfect:DeceptInfect;
+	static var deceptinfect:DeceptInfectGM;
 
 	#if (server && debug)
 	@:expose("startGame")
@@ -81,7 +81,7 @@ class Main {
 		componentManager = new ComponentManagerDef();
 		systemManager = new SystemManagerDef(InitSystems.initSystemsArr(), InitSystems.runSystemsArr()
 			, InitSystems.makeSystems.bind(componentManager));
-		new DeceptInfect(systemManager, componentManager);
+		new DeceptInfectGM(systemManager, componentManager);
 		#if client
 		new ClientOverrides(componentManager, systemManager);
 		#end

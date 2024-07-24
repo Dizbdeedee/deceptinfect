@@ -2,6 +2,7 @@ package deceptinfect.ents;
 
 import deceptinfect.game.EvacSystem;
 import gmod.helpers.sent.SentBuild;
+import deceptinfect.ecswip.compat.GEntCompat;
 import deceptinfect.game.components.FlareComponent;
 import deceptinfect.ecswip.SystemManager;
 
@@ -33,7 +34,7 @@ class Di_flare extends SentBuild<gmod.sent.ENT_ANIM> {
 		if (Gmod.IsValid(physob)) {
 			physob.Wake();
 		}
-		id = new GEntCompat(self).id;
+		id = self.createCompat().id;
 		id.add_component(new FlareComponent());
 	}
 

@@ -5,7 +5,7 @@ import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.game.components.SpreadComponent;
 import deceptinfect.game.components.GasDraw;
 import deceptinfect.game.components.Darken;
-import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 
 using Lambda;
 
@@ -67,11 +67,10 @@ class Spread extends System {
 			for (ply in PlayerLib.GetAll()) {
 				final navmesh = NavmeshLib.GetNearestNavArea(ply.GetPos(), false, 10000, false, true);
 				if (Gmod.IsValid(navmesh)) {
-					// trace(navmesh);
 					if (markedMap.exists(navmesh.GetID())) {
-						(ply : GPlayerCompat).id.add_component(new Darken());
+						ply.cmp().id.add_component(new Darken());
 					} else {
-						(ply : GPlayerCompat).id.remove_component(Darken);
+						ply.cmp().id.remove_component(Darken);
 					}
 				}
 			}

@@ -8,7 +8,7 @@ import deceptinfect.game.components.BatteryAccepter;
 class BatteryInfoSystem extends System {
 	#if server
 	override function init_server() {
-		componentManager.getAddSignal(ClassToID.idc(GameManager2))
+		componentManager.getAddSignal(ClassToID.idc(GameManager))
 			.handle((data) -> {
 				data.comp.stateChanged.handle((state) -> {
 					switch (state) {
@@ -24,7 +24,7 @@ class BatteryInfoSystem extends System {
 	}
 
 	override function run_server() {
-		IterateEnt.iterGet([GameManager2], [{state: s}], function() {
+		IterateEnt.iterGet([GameManager], [{state: s}], function() {
 			if (s != PLAYING) {
 				break;
 			}

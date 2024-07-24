@@ -1,6 +1,6 @@
 package deceptinfect.game;
 
-import deceptinfect.GameManager2.GAME_STATE_2;
+import deceptinfect.GameManager.GAME_STATE_2;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.util.PrintTimer;
 import deceptinfect.game.components.EvacZone;
@@ -41,7 +41,7 @@ class EvacSystem extends System {
 		for (x in 0...componentManager.entities) {
 			final ent:DI_ID = x;
 			var state:GAME_STATE_2 = null;
-			IterateEnt.iterGet([GameManager2], [{state: s}], function() {
+			IterateEnt.iterGet([GameManager], [{state: s}], function() {
 				state = s;
 				break;
 			});

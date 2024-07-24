@@ -20,7 +20,7 @@ class Di_ragdoll extends SentBuild<gmod.sent.ENT_ANIM> {
 		systemManager = setup.systemManager;
 		componentManager = setup.componentManager;
 		self.SetModel(owner.GetModel());
-		id = new GEntCompat(self).id;
+		id = self.createCompat().id;
 		id.add_component(new Ragdoll());
 		id.add_component(new CleanupEnt());
 	}

@@ -1,5 +1,7 @@
 package deceptinfect.util;
 
+import deceptinfect.ecswip.compat.GEntCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 import gmod.Gmod.IsValid;
 
 class EntityExt {
@@ -14,7 +16,7 @@ class EntityExt {
 
 	public static inline function validID(x:Entity):Option<DI_ID> {
 		if (IsValid(x)) {
-			return (x : GEntCompat).has_id();
+			return cmp(x).has_id();
 		} else {
 			return None;
 		}
@@ -23,7 +25,7 @@ class EntityExt {
 	// TODO rename
 	public static function validID2(x:Entity):ValidID {
 		return if (IsValid(x)) {
-			switch (x : GEntCompat).id {
+			switch cmp(x).id {
 				case null:
 					NO_ID;
 				case x:
@@ -33,6 +35,19 @@ class EntityExt {
 			return INVALID;
 		}
 	}
+
+	public static inline function cmp(x:Entity):GEntCompat {
+		return cast x;
+	}
+
+	public static inline function cmpPly(x:Entity):GPlayerCompat {
+		return cast x;
+	}
+
+	public static inline function createCompat(x:Entity):GEntCompat {
+		return new GEntCompat(x);
+	}
+
 }
 
 enum ValidID {

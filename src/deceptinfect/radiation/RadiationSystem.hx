@@ -27,7 +27,6 @@ class RadiationSystemDef extends System {
 		// :(
 		componentManager.getAddSignal(ClassToID.idc(RadiationAccepter))
 			.handle((sig) -> {
-				trace("yo??");
 				IterateEnt.iterGet([RadiationProducer], [c_radProduce], function(radProduceEnt) {
 					var c_radAffect = new RadiationAffecting();
 					c_radAffect.accepter = sig.ent;

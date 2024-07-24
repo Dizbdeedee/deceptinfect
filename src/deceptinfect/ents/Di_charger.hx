@@ -1,6 +1,7 @@
 package deceptinfect.ents;
 
 import gmod.helpers.sent.SentBuild;
+import deceptinfect.ecswip.compat.GEntCompat;
 import deceptinfect.game.components.BatteryAccepter;
 import deceptinfect.ecswip.ComponentManager;
 
@@ -33,7 +34,7 @@ class Di_charger extends SentBuild<gmod.sent.ENT_ANIM> {
 			physob.Wake();
 		}
 		physob.EnableMotion(false);
-		var ent = new GEntCompat(self);
+		var ent = self.createCompat();
 		id = ent.id;
 
 		id.add_component(new BatteryAccepter());

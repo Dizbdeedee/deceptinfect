@@ -1,6 +1,6 @@
 package deceptinfect.abilities;
 
-import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 import gmod.stringtypes.Hook.GMHook;
 import deceptinfect.ecswip.System;
 import deceptinfect.ecswip.ComponentManager.DI_ID;

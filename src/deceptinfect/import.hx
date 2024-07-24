@@ -1,5 +1,5 @@
 package deceptinfect;
-
+//ugh.
 #if !macro
 import lua.Table.AnyTable;
 import haxe.extern.Rest;

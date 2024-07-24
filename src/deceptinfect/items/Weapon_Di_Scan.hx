@@ -1,6 +1,6 @@
 package deceptinfect.items;
 
-import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 import deceptinfect.ents.EntSetup;
 
 using deceptinfect.util.EntityExt;
@@ -26,7 +26,7 @@ class Weapon_Di_Scan extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {
 		var setup:EntSetup = HookLib.Run("di_setupent", this);
 		systemManager = setup.systemManager;
 		componentManager = setup.componentManager;
-		id = new GEntCompat(self).id;
+		id = self.createCompat().id;
 		id.add_component(new ScannerComponent());
 		if (systemManager == null) {
 			trace("WEAPON DI SCAN: NO SYSTEM MANAGER ON CREATION");
@@ -37,7 +37,7 @@ class Weapon_Di_Scan extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {
 	}
 
 	override function PrimaryAttack() {
-		final owner:GPlayerCompat = untyped self.Owner;
+		final owner:GPlayerCompat = self.Owner.cmpPly();
 		final tr = owner.GetEyeTrace();
 		switch (tr.Entity.validID()) {
 			case Some(ent_id):
@@ -48,7 +48,7 @@ class Weapon_Di_Scan extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {
 	}
 
 	override function SecondaryAttack() {
-		final owner:GPlayerCompat = untyped self.Owner;
+		final owner:GPlayerCompat = self.Owner.cmpPly();
 		final tr = owner.GetEyeTrace();
 		switch (tr.Entity.validID()) {
 			case Some(ent_id):

@@ -72,7 +72,7 @@ class Di_puddle extends SentBuild<gmod.sent.ENT_ANIM> {
 		self.DropToFloor();
 		#end
 		self.SetCollisionBounds(-sizeVector, sizeVector + collideHeightVector);
-		var ent = new GEntCompat(self);
+		var ent = self.createCompat();
 		id = ent.id;
 		// final grabaccepter = id.add_component(new GrabAccepter());
 		// grabaccepter.canGrabBack = false;

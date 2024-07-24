@@ -3,7 +3,7 @@ package deceptinfect.game;
 import deceptinfect.ecswip.VirtualPosition;
 import deceptinfect.macros.CompileTime.C_square;
 import deceptinfect.game.components.Spawned;
-
+import deceptinfect.ecswip.compat.GEntCompat;
 abstract class SpawnSystem extends System {
 	public var obj:SpawnPointTable;
 	public var item:SpawnPointTable;
@@ -180,7 +180,6 @@ class Spawn {
 		distOrder[insert] = other.id;
 	}
 
-	// @:allow(SpawnPointTable.generateSpawns)
 	public function new(parent:SpawnPointTable, vec:Vector) {
 		this.vec = vec;
 		this.parent = parent;
@@ -222,7 +221,6 @@ class SpawnPointTable {
 		spawns = [];
 		for (point in points) {
 			spawns.push(new Spawn(this, point));
-			// trace(spawns[0]);
 		}
 		for (spawn in spawns) {
 			for (spawn2 in spawns) {

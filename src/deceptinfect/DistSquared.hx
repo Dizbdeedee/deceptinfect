@@ -1,5 +1,6 @@
 package deceptinfect;
 
+//-> util
 abstract DistSquared(Float) to Float {
 	@:op(A < B)
 	static function less(x:DistSquared, y:DistSquared):Bool;

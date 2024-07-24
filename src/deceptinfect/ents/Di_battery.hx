@@ -3,6 +3,7 @@ package deceptinfect.ents;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.game.SpawnSystem.Spawn;
 import gmod.helpers.sent.SentBuild;
+import deceptinfect.ecswip.compat.GEntCompat;
 import deceptinfect.game.components.BatterySource;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.game.BatterySystem;
@@ -44,7 +45,7 @@ class Di_battery extends SentBuild<gmod.sent.ENT_ANIM> {
 			physob.Wake();
 		}
 		self.SetUseType(SIMPLE_USE);
-		var ent = new GEntCompat(self);
+		var ent = self.createCompat();
 		id = ent.id;
 		id.add_component(new BatterySource());
 	}

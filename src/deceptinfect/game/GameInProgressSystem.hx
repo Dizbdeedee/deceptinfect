@@ -10,7 +10,7 @@ import Assertion.assert;
 class GameInProgressSystem extends System {
 	#if server
 	override function run_server() {
-		IterateEnt.iterGet([GameManager2], [{diffTime: dt}], function() {
+		IterateEnt.iterGet([GameManager], [{diffTime: dt}], function() {
 			IterateEnt.iterGet([GameInProgress], [c_gamePro], function() {
 				c_gamePro.baseInfection.value = calcBaseInfection(c_gamePro, dt);
 				return;

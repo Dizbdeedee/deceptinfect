@@ -2,8 +2,9 @@ package deceptinfect;
 
 import deceptinfect.ecswip.ReplicatedComponent;
 
+// -> game
 @:replicated(ALL)
-class GameManager2 extends ReplicatedComponent {
+class GameManager extends ReplicatedComponent {
 	@:s var state:GAME_STATE_2 = WAIT;
 
 	var stateChanged:Signal<GAME_STATE_2>;

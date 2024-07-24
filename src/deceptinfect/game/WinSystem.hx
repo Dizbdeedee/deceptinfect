@@ -50,7 +50,7 @@ class WinSystem extends System {
 
 	override function run_server() {
 		var playing = false;
-		IterateEnt.iterGet([GameManager2], [{state: PLAYING}], function() {
+		IterateEnt.iterGet([GameManager], [{state: PLAYING}], function() {
 			playing = true;
 			break;
 		});

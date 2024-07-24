@@ -9,7 +9,7 @@ import deceptinfect.infection.InfectionComponent;
 import deceptinfect.infection.InfectionSystem;
 import deceptinfect.radiation.RadSourceSystem;
 import deceptinfect.ecswip.VirtualPosition;
-import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 import deceptinfect.game.components.TerrorComponent;
 import deceptinfect.game.components.AliveComponent;
 import deceptinfect.game.components.WinManager;
@@ -27,13 +27,13 @@ import deceptinfect.infection.RateAccepter;
 import deceptinfect.ecswip.ReplicatedEntity;
 import deceptinfect.grab.components.GrabSearcher;
 import deceptinfect.grab.components.GrabSearchVictim;
-import deceptinfect.GameManager2.GAME_STATE_2;
+import deceptinfect.GameManager.GAME_STATE_2;
 
 using deceptinfect.util.PlayerExt;
 
 interface GameSystemI {
 	function gameManagerAvaliable():Bool;
-	function getGameManager():GameManager2;
+	function getGameManager():GameManager;
 	#if server
 	function setState(newState:GAME_STATE_2):Void;
 	function diffTime():Float;
@@ -49,19 +49,19 @@ interface GameSystemI {
 abstract class GameSystem extends System implements GameSystemI {}
 
 class GameSystemDef extends GameSystem {
-	var gameManager:GameManager2;
+	var gameManager:GameManager;
 
 	var signalTrig:SignalTrigger<GAME_STATE_2> = new SignalTrigger();
 
 	public function gameManagerAvaliable() {
-		IterateEnt.iterGet([GameManager2], [gameManager], function() {
+		IterateEnt.iterGet([GameManager], [gameManager], function() {
 			return true;
 		});
 		return false;
 	}
 
 	public function getGameManager() {
-		IterateEnt.iterGet([GameManager2], [gameManager], function() {
+		IterateEnt.iterGet([GameManager], [gameManager], function() {
 			return gameManager;
 		});
 		throw new Exception("Cannot find game manager");
@@ -76,7 +76,7 @@ class GameSystemDef extends GameSystem {
 	#if server
 	override function init_server() {
 		var ent = componentManager.addEntity();
-		gameManager = new GameManager2();
+		gameManager = new GameManager();
 		gameManager.stateChanged = signalTrig.asSignal();
 		ent.add_component(gameManager);
 		ent.add_component(new ReplicatedEntity());

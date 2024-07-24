@@ -1,6 +1,7 @@
 package deceptinfect.util;
 
-import deceptinfect.GEntCompat;
+import deceptinfect.ecswip.compat.GEntCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 
 class PlayerExt {
 	public static function setWalkthroughable(p:Player, b:Bool) {
@@ -56,4 +57,9 @@ class PlayerExt {
 		}
 	}
 	#end
+
+	public static inline function cmp(p:Player):GPlayerCompat {
+		return cast p;
+	}
+
 }

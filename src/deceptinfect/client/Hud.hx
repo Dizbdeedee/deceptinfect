@@ -1,10 +1,12 @@
 package deceptinfect.client;
 
+import deceptinfect.ecswip.compat.GEntCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 import deceptinfect.infection.components.InfectionPoints;
 import deceptinfect.game.components.BatteryInfo;
 import deceptinfect.macros.IterateEnt;
 import deceptinfect.infection.components.InfectionLookData;
-import deceptinfect.GameManager2.GAME_STATE_2;
+import deceptinfect.GameManager.GAME_STATE_2;
 import deceptinfect.game.components.StatInfo;
 import deceptinfect.infection.InfectionComponent;
 import deceptinfect.game.components.WinGame;
@@ -38,10 +40,6 @@ class Hud extends System {
 				Gmod.ScrH();
 		}
 	}
-
-	// public override function init_client() {
-	//     // HookLib.Add(GMHook.HUDPaint,"di_hudpaint",paint);
-	// }
 
 	public function paint() {
 		targetID();
@@ -86,7 +84,7 @@ class Hud extends System {
 	}
 
 	function statueInfo() {
-		var tr = PlayerManager.getLocalPlayer()
+		var tr = Gmod.LocalPlayer()
 			.GetEyeTrace();
 		switch (tr.Entity.validID2()) {
 			case HAS_ID(id):
@@ -111,7 +109,7 @@ class Hud extends System {
 	}
 
 	function infectionMeter() {
-		var inf = switch [PlayerManager.getLocalPlayer()
+		var inf = switch [( Gmod.LocalPlayer() : GPlayerCompat)
 			.has_id()] {
 			case [Some(_.get(InfectionComponent) => Comp(c_i))]:
 				c_i;
@@ -138,7 +136,7 @@ class Hud extends System {
 	}
 
 	function stateText() {
-		IterateEnt.iterGet([GameManager2], [{state: s}], function() {
+		IterateEnt.iterGet([GameManager], [{state: s}], function() {
 			if (!statetext.exists(s.getIndex())) {
 				break;
 			}

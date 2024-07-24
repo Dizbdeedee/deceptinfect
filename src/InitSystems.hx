@@ -18,7 +18,6 @@ import deceptinfect.game.SlowMotionSystem;
 import deceptinfect.infection.InfectionLookSystem;
 import deceptinfect.radiation.RadSourceSystem;
 import deceptinfect.game.GameSystem;
-import deceptinfect.WeaponSystem;
 import deceptinfect.ecswip.ComponentManager;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.ecswip.System;
@@ -142,7 +141,6 @@ function makeSystems(componentManager:ComponentManager, systemManager:SystemMana
 	map.set(ClientTranslateSystem, new ClientTranslateSystem(componentManager, systemManager));
 	map.set(InfectionPointsSystem, new InfectionPointsSystem(componentManager, systemManager));
 	map.set(RadiationSystem, new RadiationSystemDef(componentManager, systemManager));
-	map.set(WeaponSystem, new WeaponSystem(componentManager, systemManager));
 	map.set(BatteryInfoSystem, new BatteryInfoSystem(componentManager, systemManager));
 	map.set(BatterySystem, new BatterySystem(componentManager, systemManager));
 	map.set(DarkenSystem, new DarkenSystem(componentManager, systemManager));

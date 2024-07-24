@@ -2,7 +2,7 @@ package deceptinfect.weapons;
 
 import deceptinfect.abilities.FormComponent;
 import gmod.helpers.swep.SwepBuild.SwepFields;
-import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 import deceptinfect.ents.EntSetup;
 
 class Weapon_di_spit extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {
@@ -34,7 +34,7 @@ class Weapon_di_spit extends gmod.helpers.swep.SwepBuild<gmod.swep.SWEP> {
 
 	#if server
 	override function PrimaryAttack() {
-		var owner:GPlayerCompat = untyped self.Owner;
+		var owner:GPlayerCompat = self.Owner.cmpPly();
 		switch (owner.get(FormComponent)) {
 			case Comp({form: INFECTED}):
 				final spitball:Entity = EntsLib.Create("di_spitball");

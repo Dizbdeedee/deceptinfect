@@ -6,7 +6,8 @@ using Lambda;
 using deceptinfect.util.ArrayTools;
 using deceptinfect.DistSquared;
 
-import deceptinfect.GEntCompat;
+import deceptinfect.ecswip.compat.GEntCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
 
 class SpawnSystemNav extends System {
 	#if server

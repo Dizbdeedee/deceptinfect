@@ -12,7 +12,9 @@ import deceptinfect.abilities.FormSystem;
 import deceptinfect.ecswip.Spectate;
 import deceptinfect.ecswip.SystemManager;
 import deceptinfect.ecswip.PlayerComponent;
-import deceptinfect.GEntCompat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GPlayerCompat;
+import deceptinfect.ecswip.compat.GEntCompat;
+
 import gmod.enums.BUTTON_CODE;
 import deceptinfect.ecswip.ComponentManager;
 import gmod.helpers.HaxeMultiReturn;
@@ -26,8 +28,9 @@ import deceptinfect.weapons.WeaponImport;
 
 using deceptinfect.util.PlayerExt;
 
+//yay. rename DeceptInfectGm
 @:keep
-class DeceptInfect extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
+class DeceptInfectGM extends gmod.helpers.gamemode.GMBuild<gmod.gamemode.GM>
 		implements deceptinfect.macros.SpamTracker.Spam {
 	final systemManager:SystemManager;
 

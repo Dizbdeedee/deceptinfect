@@ -4,6 +4,7 @@ import deceptinfect.ecswip.ReplicatedComponent;
 import deceptinfect.ecswip.ClientRepresentationTarget;
 import deceptinfect.macros.ClassToID;
 
+//not game
 class CRTSystem extends System {
 	#if server
 	override function init_server() {
